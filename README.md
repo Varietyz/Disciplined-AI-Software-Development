@@ -8,8 +8,6 @@
 
 ---
 
-# NEW: Pattern Abstract Grammar
-
 > **📘 Using CLI-based AI models?** (Claude Code, Cursor, Windsurf, etc.)
 >
 > This documentation covers web browser AI collaboration. For CLI agents with tool access, **[PAG (Pattern Abstract Grammar)](https://banes-lab.com/pag)** is an AI first language with explicit validation gates, phase sequencing, and constraint enforcement designed for agentic workflows.
