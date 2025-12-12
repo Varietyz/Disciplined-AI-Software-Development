@@ -1,0 +1,616 @@
+---
+name: generic-agentic-workflow
+version: 1.0.0
+type: TEMPLATE
+description: Generic meta-template for creating multi-agent orchestrated workflows with automated handoffs, shared artifact coordination, and systematic phase execution
+model: <model_identifier>
+context:
+    - CLAUDE.md
+    - <spec_directory>/<spec_pattern>
+---
+
+THIS TEMPLATE GENERATES executable workflow files that orchestrate N agents sequentially through shared document refinement using Task tool execution
+
+%% META %%:
+intent: "Generate executable DSL workflows for multi-agent orchestration"
+objective: "Create workflow templates with document pre-creation, iterative editing, and validation gates"
+context: "Workflows coordinate sequential agents through shared documents with surgical refinement patterns"
+priority: high
+
+ON ERROR file_modified:
+TRY:
+    RENAME current_file TO current_file.bak
+    WRITE updated_content TO [NEW]current_file
+    DELETE current_file.bak
+    EXCEPT IF FAIL:
+    RENAME current_file.bak TO current_file
+END TRY
+
+DECLARE requirements: object
+DECLARE handoff_protocol: object
+DECLARE recovery_sequence: array
+DECLARE error_patterns: object
+DECLARE never_rules: array
+DECLARE always_rules: array
+
+# PHASE 0: DSL Compliance Verification
+
+    READ <spec_directory>/<dsl_spec_file> INTO dsl_spec
+    READ <spec_directory>/<keyword_spec_file> INTO keyword_spec
+    READ <spec_directory>/<operator_spec_file> INTO operator_spec
+
+    SET requirements.generated_content = <content_format_requirement>
+    SET requirements.document_content = <document_orientation_requirement>
+    SET requirements.filenames = <filename_convention>
+    SET requirements.agent_communication = <communication_protocol_requirement>
+
+    SET handoff_protocol.error_recovery = {}
+
+    WHEN error_message MATCHES <file_modification_error_pattern>:
+        SET recovery_protocol = <recovery_protocol_name>
+
+        APPEND "STEP 1: READ <file_path_placeholder> INTO current_content" TO recovery_sequence
+        APPEND "STEP 2: DELETE <file_path_placeholder>" TO recovery_sequence
+        APPEND "STEP 3: WRITE <file_path_placeholder> WITH updated_content" TO recovery_sequence
+
+        SET error_patterns[<error_pattern_1>] = <recovery_action_1>
+        SET error_patterns[<error_pattern_2>] = <recovery_action_2>
+
+    APPEND <prohibited_action_1> TO never_rules
+    APPEND <prohibited_action_2> TO never_rules
+    APPEND <prohibited_action_3> TO never_rules
+
+    APPEND <required_action_1> TO always_rules
+    APPEND <required_action_2> TO always_rules
+    APPEND <required_action_3> TO always_rules
+
+VALIDATION GATE:
+    ✅ dsl_spec loaded
+    ✅ keyword_spec loaded
+    ✅ operator_spec loaded
+    ✅ <orientation_rule> enforced
+    ✅ file_error_recovery_protocol defined
+
+# PHASE 1: Workspace Configuration Discovery
+
+    DECLARE agent_files: array
+    DECLARE core_documents: array
+    DECLARE workflow_type: string
+    DECLARE document_naming_rules: array
+    DECLARE document_purpose_map: object
+
+    SET config_file = <config_file_name>
+
+    READ config_file INTO workspace_config
+    EXTRACT workspace_config["zones"] INTO zone_config
+    EXTRACT workspace_config["semantic_extensions"] INTO extensions
+    EXTRACT workspace_config["root"] INTO workspace_root
+
+    GLOB workspace_root + <agent_definition_pattern> INTO agent_files
+    EXTRACT available_agents FROM agent_files
+    SET agent_definition_path = workspace_root + <agent_definition_directory>
+
+    SET shared_zone = zone_config[<shared_zone_key>]
+    SET workflow_zone = zone_config[<workflow_zone_key>]
+    SET task_zone = zone_config[<task_zone_key>]
+
+    SET single_source_of_truth = true
+    SET workspace_sharing_mode = <sharing_mode>
+    SET document_lifecycle = <lifecycle_pattern>
+    SET edit_mode = <edit_mode_pattern>
+    SET append_mode = false
+
+    SET artifact_base_path = shared_zone + "/{WORKFLOW_NAME}"
+
+    GREP codebase FOR workflow_patterns USING pattern_library
+    EXTRACT logical_categories FROM grep_results
+    WEB_SEARCH <workflow_pattern_search_query> IF ambiguous
+    GLOB <file_inventory_pattern> INTO file_inventory
+    CONVERT categories TO semantic_document_types
+
+    IF workflow_type === <workflow_type_1>:
+        SET core_documents = [<document_1>, <document_2>, <document_3>, <document_4>, <state_document>]
+    ELSE IF workflow_type === <workflow_type_2>:
+        SET core_documents = [<document_1>, <document_2>, <document_3>, <state_document>]
+    ELSE IF workflow_type === <workflow_type_3>:
+        SET core_documents = [<document_1>, <document_2>, <document_3>, <document_4>, <state_document>]
+    ELSE IF workflow_type === <workflow_type_4>:
+        SET core_documents = [<document_1>, <document_2>, <document_3>, <state_document>]
+
+    APPEND <naming_rule_1> TO document_naming_rules
+    APPEND <naming_rule_2> TO document_naming_rules
+    APPEND <naming_rule_3> TO document_naming_rules
+
+    FOR EACH document IN core_documents:
+        IF document === <document_name_1>:
+            SET document_purpose_map[document] = <document_purpose_1>
+        ELSE IF document === <document_name_2>:
+            SET document_purpose_map[document] = <document_purpose_2>
+        ELSE IF document === <state_document>:
+            SET document_purpose_map[document] = <state_document_purpose>
+
+    SET document_count_range = [<min_documents>, <max_documents>]
+    SET checkpoint_file = <checkpoint_filename>
+
+    VERIFY EACH document SERVES distinct_logical_purpose
+    VERIFY NO generic_names LIKE <prohibited_generic_name_1> OR <prohibited_generic_name_2>
+    VERIFY ALL semantic_names REFLECT content_type
+    VERIFY categories ALIGN WITH workflow_objective
+
+    READ user_input["workflow_name"] INTO workflow_name
+    EXTRACT agent_count FROM workflow_complexity USING phase_detector
+    SET agent_count_min = <min_agents>
+    SET agent_count_max = <max_agents>
+    IF user_specifies_agent_count:
+        SET agent_count = user_input
+
+    DECLARE agent_sequence: array
+    DECLARE orchestration_rules: object
+
+VALIDATION GATE:
+    ✅ workspace_config loaded FROM config_file
+    ✅ zones discovered AND extracted
+    ✅ agent_definitions located AT agent_definition_path
+    ✅ artifact_base_path configured TO shared_zone + workflow_name
+    ✅ semantic_extensions applied
+    ✅ shared_workspace_protocol defined
+    ✅ document_count optimized TO range <min_documents>-<max_documents>
+    ✅ single_source_of_truth enforced
+
+# PHASE 2: Agent Sequence Definition
+
+    FOR EACH index FROM 1 TO agent_count:
+
+        DECLARE agent_object: object
+        SET agent_object.agent_name = "{AGENT_NAME_N}"
+        SET agent_object.agent_type = "{SUBAGENT_TYPE_N}"
+        SET agent_object.agent_phase = index
+        SET agent_object.agent_purpose = "{PRIMARY_PURPOSE_N}"
+        SET agent_object.agent_methodology = "{PHASE_METHODOLOGY_N}"
+        SET agent_object.input_artifacts = []
+        SET agent_object.output_artifacts = []
+        SET agent_object.validation_gates = []
+
+        SET methodology_name = "{METHODOLOGY_NAME_N}"
+        SET methodology_phases = ["{PHASE_1} → {PHASE_2} → ... → {PHASE_N}"]
+        SET reference = agent_definition_path + agent_object.agent_name + <agent_file_extension>
+
+        IF agent_object.agent_phase === 1:
+            SET agent_object.input_artifacts = [<primary_input_1>, <primary_input_2>]
+            SET document_operation = <initial_operation>
+        ELSE:
+            SET agent_object.input_artifacts = core_documents
+            SET document_operation = <refinement_operation>
+            SET inherited_from = "Phase " + (agent_object.agent_phase - 1) + " refinements"
+
+        FOR EACH document IN core_documents:
+            DECLARE responsibilities: array
+
+            IF agent_object.agent_phase === 1:
+                SET operation = <initial_document_operation>
+            ELSE:
+                SET operation = <refinement_document_operation>
+
+            SET responsibilities = [
+                "READ current state of " + document,
+                <responsibility_action_1>,
+                <responsibility_action_2>,
+                <responsibility_action_3>,
+                <prohibited_responsibility>,
+                <required_responsibility>
+            ]
+
+            SET agent_object.document_responsibilities[document] = responsibilities
+
+        SET agent_object.focus_points = [
+            "{FOCUS_AREA_1_N}: {DESCRIPTION_N}",
+            "{FOCUS_AREA_2_N}: {DESCRIPTION_N}",
+            <standard_focus_1>,
+            <standard_focus_2>
+        ]
+
+        SET agent_object.edit_mode = <edit_mode>
+        SET agent_object.prohibited_operations = [<prohibited_op_1>, <prohibited_op_2>]
+        SET agent_object.required_operations = [
+            <required_op_1>,
+            <required_op_2>,
+            <required_op_3>,
+            <required_op_4>,
+            <required_op_5>
+        ]
+
+        APPEND agent_object TO agent_sequence
+
+VALIDATION GATE:
+    ✅ ALL agent_count agents created
+    ✅ agent_methodologies specified
+    ✅ document_responsibilities mapped
+    ✅ edit_protocol defined WITH <edit_mode> AND <prohibited_mode>
+    ✅ focus_areas documented
+    ✅ single_source_of_truth enforcement configured
+
+# PHASE 3: Handoff Protocol Definition
+
+    DECLARE handoff_signal_format: object
+    DECLARE handoff_context: object
+    DECLARE handoff_content_structure: object
+    DECLARE orchestrator_actions: array
+    DECLARE agent_responsibilities: array
+
+    SET handoff_signal_format.agent_completed = "{AGENT_NAME_N}"
+    SET handoff_signal_format.phase_status = <completion_status>
+    SET handoff_signal_format.artifacts_location = artifact_base_path
+    SET handoff_signal_format.next_agent = "{AGENT_NAME_N+1}"
+
+    SET handoff_context.key_findings = [<finding_placeholder_1>, <finding_placeholder_2>]
+    SET handoff_context.critical_files = [<file_placeholder_1>, <file_placeholder_2>]
+    SET handoff_context.validation_gates_passed = true
+
+    SET handoff_signal_format.handoff_context = handoff_context
+    SET handoff_signal_format.orchestrator_action = <orchestrator_action>
+
+    SET handoff_content_structure = {
+        "agent_completed": <agent_name_placeholder>,
+        "phase_number": N,
+        "documents_updated": [<doc_placeholder_1>, <doc_placeholder_2>],
+        "key_discoveries": [<discovery_with_reference_1>, <discovery_with_reference_2>],
+        "critical_files": [<file_with_line_1>, <file_with_line_2>],
+        "validation_gates_passed": true,
+        "next_agent_focus": <focus_description>,
+        "user_rules_applied": null
+    }
+
+    SET handoff_format = <handoff_format_description>
+
+    IF user_provided_workflow_specific_rules:
+        APPEND user_rules TO handoff_content_structure.user_rules_applied
+    ELSE:
+        SET handoff_content_structure.user_rules_applied = null
+
+    DECLARE action_rule_1: object
+    SET action_rule_1.action = <action_type_1>
+    SET action_rule_1.behavior = <action_behavior_1>
+    SET action_rule_1.implementation = <implementation_requirement_1>
+    SET action_rule_1.context = <context_requirement_1>
+    SET action_rule_1.user_interaction = <user_interaction_1>
+    SET action_rule_1.prohibited = <prohibited_1>
+    SET action_rule_1.example = <example_invocation_1>
+    APPEND action_rule_1 TO orchestrator_actions
+
+    DECLARE action_rule_2: object
+    SET action_rule_2.action = <action_type_2>
+    SET action_rule_2.behavior = <action_behavior_2>
+    SET action_rule_2.context = <context_requirement_2>
+    SET action_rule_2.user_interaction = <user_interaction_2>
+    APPEND action_rule_2 TO orchestrator_actions
+
+    DECLARE action_rule_3: object
+    SET action_rule_3.action = <action_type_3>
+    SET action_rule_3.behavior = <action_behavior_3>
+    SET action_rule_3.context = <context_requirement_3>
+    SET action_rule_3.user_interaction = <user_interaction_3>
+    APPEND action_rule_3 TO orchestrator_actions
+
+    SET agent_responsibilities = [
+        <responsibility_rule_1>,
+        <responsibility_rule_2>,
+        <responsibility_rule_3>,
+        <responsibility_rule_4>,
+        <responsibility_rule_5>,
+        <responsibility_rule_6>,
+        "Mark " + checkpoint_file + " phase complete before signaling",
+        <responsibility_rule_7>,
+        "Maintain documents in " + artifact_base_path
+    ]
+
+VALIDATION GATE:
+    ✅ signal_format defined WITH required_fields
+    ✅ orchestrator_actions specified WITH <action_count> action_types
+    ✅ agent_responsibilities established INCLUDING document_edit_protocol
+    ✅ automation_rules clear
+    ✅ artifact_paths configured TO shared_workspace
+    ✅ document_lifecycle enforced AS <lifecycle_pattern>
+
+# PHASE 4: Workflow Coordination Algorithm
+
+    DECLARE coordination_sequence: array
+    DECLARE coordination_notes: array
+
+    APPEND "YOU (as orchestrator): Pre-create empty files in " + artifact_base_path TO coordination_sequence
+    SET document_template = <document_template_format>
+
+    FOR EACH document IN core_documents:
+        SET purpose = document_purpose_map[document]
+        APPEND " ↓ CREATE " + document + " (empty template, purpose: " + purpose + ")" TO coordination_sequence
+
+    APPEND " ↓ CREATE " + checkpoint_file TO coordination_sequence
+    APPEND " ↓" TO coordination_sequence
+    APPEND "YOU: EXECUTE <task_tool> WITH parameters:" TO coordination_sequence
+    APPEND " <agent_type_parameter>: '{AGENT_NAME_1}'" TO coordination_sequence
+    APPEND " <prompt_parameter>: <handoff_format> handoff context + user-specific rules (if provided)" TO coordination_sequence
+    APPEND " WAIT for agent completion signal from <task_tool> return" TO coordination_sequence
+    APPEND " ↓" TO coordination_sequence
+
+    FOR EACH index FROM 1 TO agent_count:
+        SET agent = agent_sequence[index]
+        SET next_agent = agent_sequence[index + 1]
+
+        APPEND agent["name"] + " (Phase " + agent["phase"] + ": " + agent["purpose"] + ")" TO coordination_sequence
+
+        IF agent["phase"] === 1:
+            APPEND "    ↓ WRITES initial findings to core documents" TO coordination_sequence
+        ELSE:
+            APPEND "    ↓ READS all core documents" TO coordination_sequence
+            APPEND "    ↓ IDENTIFIES outdated/incorrect content" TO coordination_sequence
+            APPEND "    ↓ EDITS in-place with new discoveries" TO coordination_sequence
+            APPEND "    ↓ REMOVES contradictions from Phase " + (agent["phase"] - 1) TO coordination_sequence
+
+        APPEND "    ↓ UPDATES " + checkpoint_file TO coordination_sequence
+        APPEND "    ↓ VERIFIES single source of truth maintained" TO coordination_sequence
+        APPEND "    ↓ SIGNALS completion to orchestrator" TO coordination_sequence
+        APPEND "    ↓" TO coordination_sequence
+
+        IF index < agent_count:
+            APPEND "YOU: EXECUTE <task_tool> WITH parameters:" TO coordination_sequence
+            APPEND "    <agent_type_parameter>: '" + next_agent["name"] + "'" TO coordination_sequence
+            APPEND "    <prompt_parameter>: Updated <handoff_format> handoff context from Phase " + agent["phase"] TO coordination_sequence
+            APPEND "    WAIT for completion signal" TO coordination_sequence
+            APPEND "    ↓" TO coordination_sequence
+
+    APPEND "YOU (as orchestrator): Workflow complete" TO coordination_sequence
+    APPEND " ↓ " + checkpoint_file + ": 100% complete" TO coordination_sequence
+    APPEND " ↓ All core documents refined through " + agent_count + " phases" TO coordination_sequence
+    APPEND " ↓ {FINAL_OUTPUT}: Ready in " + artifact_base_path TO coordination_sequence
+
+    SET coordination_notes = [
+        <coordination_note_1>,
+        <coordination_note_2>,
+        <coordination_note_3>,
+        <coordination_note_4>,
+        "Shared workspace: All agents reference identical documents in " + artifact_base_path,
+        <coordination_note_5>,
+        <coordination_note_6>,
+        <coordination_note_7>,
+        <coordination_note_8>,
+        <coordination_note_9>,
+        <coordination_note_10>,
+        "State tracking: " + checkpoint_file + " survives context switches",
+        <failure_handling_note>,
+        <recovery_step_1>,
+        <recovery_step_2>,
+        <recovery_step_3>,
+        <recovery_step_4>,
+        "Document count: Optimized to " + document_count_range,
+        "Dynamic scaling: Supports {agent_count} agents in sequence"
+    ]
+
+VALIDATION GATE:
+    ✅ document_pre_creation_protocol defined
+    ✅ shared_workspace_model enforced
+    ✅ iterative_edit_workflow documented
+    ✅ sequence_diagram built
+    ✅ automation_flow documented
+    ✅ context_handling specified
+    ✅ state_persistence explained
+    ✅ dynamic_agent_count supported
+    ✅ single_source_of_truth guaranteed
+
+# PHASE 5: Checklist Integration
+
+    DECLARE checklist_structure: object
+    DECLARE checklist_coordination_rules: array
+
+    SET checklist_format = <checklist_template_file>
+    SET checklist_extension = <checklist_extension>
+    SET checklist_naming = <checklist_filename>
+    SET checklist_location = artifact_base_path + "/" + <checklist_filename>
+    READ <checklist_template_path> INTO checklist_template
+    SET checklist_file = checkpoint_file
+
+    SET checklist_structure.frontmatter = {
+        "name": "{WORKFLOW_NAME}",
+        "type": "{TYPE}",
+        "description": "{DESCRIPTION}",
+        "keywords": []
+    }
+
+    SET checklist_structure.phase_structure = [<phase_structure_description>]
+    SET checklist_structure.task_breakdown = [<task_breakdown_description_1>, <task_breakdown_description_2>]
+    SET checklist_structure.progress_tracking = [<progress_tracking_description_1>, <progress_tracking_description_2>]
+    SET checklist_structure.success_criteria = [<success_criteria_description>]
+
+    SET checklist_coordination_rules = [
+        "Orchestrator pre-creates " + checklist_file + " before Phase 1",
+        <checklist_rule_1>,
+        <checklist_rule_2>,
+        <checklist_rule_3>,
+        <checklist_rule_4>,
+        <checklist_rule_5>,
+        <checklist_rule_6>,
+        "Checklist located at " + artifact_base_path + "/" + checklist_file
+    ]
+
+VALIDATION GATE:
+    ✅ checklist_format specified
+    ✅ checklist_structure defined
+    ✅ coordination_rules established
+    ✅ state_persistence guaranteed
+    ✅ semantic_extensions applied
+
+# PHASE 6: Phase Documentation Template Generation
+
+    FOR EACH index FROM 1 TO agent_count:
+        SET agent = agent_sequence[index]
+
+        SET phase_header = "## Phase " + agent["phase"] + ": " + agent["purpose"]
+
+        DECLARE phase_intro: array
+        APPEND "The **" + agent["name"] + "** executes systematically, performing " + agent["purpose"] + "." TO phase_intro
+        APPEND "This agent follows its " + agent["methodology"]["phases"]["length"] + "-phase systematic " + agent["methodology"]["name"] + " defined in `" + agent["reference"] + "`:" TO phase_intro
+        APPEND "" TO phase_intro
+        APPEND "**" + agent["methodology"]["phases"] + "**" TO phase_intro
+        APPEND "" TO phase_intro
+
+        SET section_header = "The agent produces/consumes artifacts in `" + artifact_base_path + "/`:"
+
+        DECLARE artifact_list: array
+
+        FOR EACH artifact_category IN agent["output_artifacts"]:
+            APPEND "- **" + artifact_category + "** - description of artifacts" TO artifact_list
+
+        FOR EACH checkpoint_file_item IN [checkpoint_file]:
+            APPEND "- **" + checkpoint_file_item + "** - purpose and updates" TO artifact_list
+
+        SET focus_section_header = "The " + agent["name"] + " focuses on:"
+        SET focus_list = agent["focus_points"]
+
+        SET output_section_text = "Output describes/establishes/transforms/validates " + agent["deliverable"] + "."
+
+VALIDATION GATE:
+    ✅ ALL agent_count phase_sections created
+    ✅ agent_purposes documented
+    ✅ artifact_flows specified
+    ✅ focus_areas enumerated
+    ✅ dynamic_paths used
+
+# PHASE 7: Workflow Principles Definition
+
+    DECLARE workflow_principles: array
+    DECLARE domain_notes: array
+
+    SET workflow_principles_header = "This workflow ensures the {DOMAIN_GOAL} is:"
+
+    FOR EACH index FROM 1 TO agent_count:
+        SET agent = agent_sequence[index]
+
+        IF index === 1:
+            APPEND "- **<principle_1>** (" + agent["name"] + " <action_1> {DOMAIN_CONTEXT})" TO workflow_principles
+        ELSE IF index === agent_count:
+            APPEND "- **{FINAL_QUALITY_ATTRIBUTE}** (" + agent["name"] + " ensures {GUARANTEE})" TO workflow_principles
+        ELSE:
+            APPEND "- **{PRINCIPLE_N}** (" + agent["name"] + " {ACTION_N} {DELIVERABLE_N})" TO workflow_principles
+
+    APPEND "- **<automation_principle>** (<automation_description>)" TO workflow_principles
+    APPEND "- **<context_principle>** (<context_description>)" TO workflow_principles
+    APPEND "- **<recovery_principle>** (" + checkpoint_file + " <recovery_description>)" TO workflow_principles
+    APPEND "- **<scaling_principle>** (supports " + agent_count + " agents in sequence)" TO workflow_principles
+    APPEND "- **<integration_principle>** (uses " + artifact_base_path + ")" TO workflow_principles
+
+    SET domain_notes = [
+        "The " + artifact_base_path + "/ becomes {PURPOSE}:",
+        "- {CATEGORY_1}/ define {DELIVERABLE_1}",
+        "- {CATEGORY_2}/ define {DELIVERABLE_2}",
+        "All {DELIVERABLES} are validated against {CRITERIA}.",
+        "Artifacts persist in " + workflow_zone + " for cross-session access."
+    ]
+
+VALIDATION GATE:
+    ✅ workflow_principles enumerated
+    ✅ agent_contributions mapped
+    ✅ domain_specific_value articulated
+    ✅ dynamic_scaling documented
+
+# PHASE 8: Template Assembly and Output
+
+    SET output_path = <output_directory> + "/" + workflow_name + "-WORKFLOW." + <output_extension>
+    CREATE final_template AS <output_format>_document
+
+    APPEND workflow_frontmatter TO final_template
+    APPEND workspace_config_section TO final_template
+    APPEND workflow_overview TO final_template
+
+    FOR EACH index FROM 1 TO agent_count:
+        SET agent = agent_sequence[index]
+        APPEND phase_documentation(agent) TO final_template
+        APPEND "---" TO final_template
+
+    APPEND checklist_format_requirements TO final_template
+    APPEND "---" TO final_template
+
+    APPEND agent_orchestration_protocol TO final_template
+    APPEND handoff_signal_format TO final_template
+    APPEND "---" TO final_template
+
+    APPEND workflow_coordination TO final_template
+    APPEND coordination_sequence TO final_template
+    APPEND "---" TO final_template
+
+    APPEND workflow_principles TO final_template
+    APPEND domain_notes TO final_template
+
+    WRITE final_template TO output_path
+
+    IF first_time:
+        REPORT workflow_summary
+        READ user_choice FROM user_prompt <initiation_prompt>
+        IF user_approves:
+            EXECUTE generated_workflow
+
+VALIDATION GATE:
+    ✅ all_sections assembled
+    ✅ order verified
+    ✅ formatting consistent
+    ✅ workspace_config integrated
+    ✅ dynamic_paths applied
+    ✅ output_path configured TO <output_directory>/
+    ✅ template written AS <output_extension> file
+    ✅ first_time_initiation_protocol defined
+
+# PHASE 9: Success Criteria
+
+VALIDATION GATE:
+    ✅ all_<phase_count>_PHASE_validation_gates passed (including Phase 0: DSL Compliance)
+    ✅ workspace_configuration discovered FROM <config_file_name>
+    ✅ agent_sequence_definition supports dynamic agent_count
+    ✅ all_agents documented WITH methodologies
+    ✅ handoff_protocol established WITH dynamic_paths
+    ✅ workflow_coordination_sequence built
+    ✅ checklist_integration configured WITH semantic_extensions
+    ✅ phase_documentation_templates created
+    ✅ workflow_principles articulated
+    ✅ template assembled successfully
+    ✅ customization_guide included
+    ✅ no_hardcoded_paths remaining
+    ✅ dynamic_agent_scaling supported
+    ✅ <dsl_compliance_rule> throughout
+    ✅ <filename_convention> enforced
+    ✅ <content_orientation_rule> enforced
+    ✅ handoff_context_structure defined
+    ✅ user_rules_integration supported
+    ✅ error_recovery_protocol defined
+    ✅ output_location standardized TO <output_directory>/
+
+ALWAYS read DSL specification files FIRST in Phase 0
+ALWAYS discover workspace_config FROM <config_file_name>
+ALWAYS use workspace_zones FOR artifact_paths
+ALWAYS create filenames AS <filename_convention>
+ALWAYS write content AS <content_format>
+ALWAYS define agent_sequence WITH dynamic_count
+ALWAYS include artifact_structure WITH config_based_paths
+ALWAYS specify checklist_integration
+ALWAYS document workflow_principles
+ALWAYS include customization_instructions
+ALWAYS support arbitrary agent_count FROM 1 TO N
+ALWAYS use <task_tool> FOR agent execution
+ALWAYS define handoff_context WITH <handoff_format> structure
+ALWAYS include user_rules IN handoff IF provided
+ALWAYS implement error_recovery WITH <recovery_method> + retry
+ALWAYS apply <recovery_protocol> FOR file_modification_errors
+ALWAYS execute recovery_automatically WITHOUT user_intervention
+ALWAYS write output TO <output_directory>/
+ALWAYS prompt user FOR first_time_initiation approval
+ALWAYS generate <dsl_compliance_rule> output
+NEVER create <prohibited_content_type> IN workflow files
+NEVER use <prohibited_extension_type>
+NEVER hardcode file_paths OR workspace_locations
+NEVER skip handoff_protocol documentation
+NEVER omit orchestration_rules
+NEVER forget validation_gates
+NEVER assume manual_agent_coordination
+NEVER use ambiguous agent_responsibilities
+NEVER simulate agent behavior in main session
+NEVER re_read_file AFTER modification_error WITHOUT delete_first
+NEVER ask_permission FOR tool_error_recovery
+NEVER reference outdated_workspace_structures
+NEVER mix <prohibited_content_mix_1> WITH <prohibited_content_mix_2>
+NEVER use <prohibited_verb_type> WITHOUT tool_mapping

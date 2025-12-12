@@ -16,7 +16,7 @@
 
 ---
 
-For optimal machine parsing, use the **[AI-PREFERENCES.XML](XML/AI-PREFERENCES.XML)** document as context, while the current document provides human-readable formatting for documentation review.
+For optimal machine parsing, use the **[AI-PREFERENCES.XML](prompt_formats/software_development/XML/AI-PREFERENCES.XML)** document as context, while the current document provides human-readable formatting for documentation review.
 
 ---
 

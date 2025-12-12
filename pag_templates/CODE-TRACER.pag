@@ -1,0 +1,260 @@
+---
+name: generic-code-tracer
+version: 1.0.0
+type: TEMPLATE
+description: Forensically traces code execution paths, analyzes CFG/AST structures, detects architectural violations, and validates compliance through systematic analysis. IMPLEMENTS Source-To-Sink-Tracing-Loop and Pattern-Detection-With-Impact-Calculation-Loop algorithms.
+model: <model_identifier>
+context:
+    - CLAUDE.md
+    - <config_path>
+---
+
+THIS TEMPLATE ENFORCES forensic code execution path tracing through CFG/AST analysis, architectural violation detection, and compliance validation via systematic multi-phase analysis
+
+%% META %%:
+intent: "Trace code execution paths, analyze structure, detect violations, validate compliance"
+objective: "Systematic code analysis with prioritized violation reporting and actionable checklists"
+context: "Code analysis domain requiring structural, control flow, data flow, and pattern detection"
+priority: high
+
+ON ERROR file_read_error:
+TRY:
+    READ alternative_path INTO content
+CATCH path_error:
+    REPORT "File read recovery failed: " + path_error
+    FAIL "Unable to read target file"
+END TRY
+
+DECLARE config: object
+DECLARE analysis_results: object
+DECLARE violations: array
+DECLARE quality_metrics: object
+
+# PHASE 1: Configuration and Scope Definition
+
+SET config = {
+    "workspace_root": <workspace_root>,
+    "chain_location": <chain_location>,
+    "registry_location": <registry_location>,
+    "output_base": <output_base_directory>,
+    "target_scope": <target_scope>,
+    "analysis_objective": <analysis_objective>
+}
+
+DECLARE classification_patterns: object
+SET classification_patterns = {
+    "cfg_dsl": <cfg_dsl_keywords>,
+    "api": <api_keywords>,
+    "data": <data_keywords>,
+    "default": <default_keywords>
+}
+
+DECLARE analysis_strategies: object
+SET analysis_strategies = {
+    "cfg_dsl": "Trace lexer to parser to AST to semantic actions",
+    "api": "Trace user input to sanitization to database output",
+    "data": "Build dependency graph, validate imports against layer rules",
+    "default": "Calculate cyclomatic complexity, detect anti-patterns"
+}
+
+VALIDATION GATE:
+    ✅ config initialized WITH workspace_root
+    ✅ classification_patterns defined
+    ✅ analysis_strategies configured
+
+# PHASE 2: Target Discovery
+
+DECLARE discovered_files: array
+DECLARE code_classification: string
+DECLARE selected_strategy: string
+
+GLOB config.target_scope INTO discovered_files
+
+SET code_classification = "default"
+FOR EACH pattern_type IN classification_patterns:
+    GREP classification_patterns[pattern_type] IN discovered_files INTO matches
+    IF matches.length > 0:
+        SET code_classification = pattern_type
+
+SET selected_strategy = analysis_strategies[code_classification]
+
+SET analysis_results = {
+    "file_count": discovered_files.length,
+    "classification": code_classification,
+    "strategy": selected_strategy,
+    "classes": [],
+    "functions": [],
+    "security_flows": []
+}
+
+VALIDATION GATE:
+    ✅ discovered_files collected
+    ✅ code_classification determined
+    ✅ selected_strategy assigned
+
+# PHASE 3: Structural Analysis
+
+DECLARE classes: array
+SET classes = []
+
+FOR EACH file IN discovered_files:
+    READ file INTO file_content
+    GREP <class_declaration_pattern> IN file_content INTO class_matches
+
+    FOR EACH class_match IN class_matches:
+        DECLARE class_info: object
+        SET class_info = {
+            "name": class_match.name,
+            "file": file,
+            "line": class_match.line,
+            "method_count": class_match.method_count,
+            "extends": class_match.extends
+        }
+        APPEND class_info TO classes
+
+SET analysis_results.classes = classes
+
+VALIDATION GATE:
+    ✅ classes extracted
+    ✅ analysis_results.classes populated
+
+# PHASE 4: Control Flow Analysis
+
+DECLARE functions: array
+DECLARE complexity_sum: number
+SET functions = []
+SET complexity_sum = 0
+
+FOR EACH file IN discovered_files:
+    READ file INTO file_content
+    GREP <function_declaration_pattern> IN file_content INTO func_matches
+
+    FOR EACH func_match IN func_matches:
+        DECLARE func_info: object
+        DECLARE complexity: number
+        SET complexity = 1 + func_match.decision_count
+        SET func_info = {
+            "name": func_match.name,
+            "file": file,
+            "cyclomatic_complexity": complexity,
+            "nesting_depth": func_match.nesting_depth
+        }
+        APPEND func_info TO functions
+        SET complexity_sum = complexity_sum + complexity
+
+SET analysis_results.functions = functions
+
+DECLARE avg_complexity: number
+IF functions.length > 0:
+    SET avg_complexity = complexity_sum / functions.length
+ELSE:
+    SET avg_complexity = 0
+
+SET quality_metrics = {
+    "total_functions": functions.length,
+    "avg_complexity": avg_complexity,
+    "total_classes": classes.length
+}
+
+VALIDATION GATE:
+    ✅ functions extracted WITH complexity
+    ✅ quality_metrics calculated
+
+# PHASE 5: Violation Detection
+
+SET violations = []
+
+FOR EACH class IN classes:
+    IF class.method_count > <max_methods_threshold>:
+        APPEND {
+            "type": "god_object",
+            "severity": "high",
+            "location": class.file,
+            "evidence": "Class " + class.name + " has " + class.method_count + " methods",
+            "recommendation": "Split responsibilities into separate classes"
+        } TO violations
+
+FOR EACH func IN functions:
+    IF func.cyclomatic_complexity > <complexity_threshold>:
+        APPEND {
+            "type": "high_complexity",
+            "severity": "high",
+            "location": func.file,
+            "evidence": "Function " + func.name + " has complexity " + func.cyclomatic_complexity,
+            "recommendation": "Refactor to reduce complexity"
+        } TO violations
+
+FOR EACH file IN discovered_files:
+    READ file INTO file_content
+    GREP <user_input_pattern> IN file_content INTO inputs
+    GREP <database_pattern> IN file_content INTO sinks
+
+    IF inputs.length > 0 AND sinks.length > 0:
+        GREP <sanitization_pattern> IN file_content INTO sanitizers
+        IF sanitizers.length === 0:
+            APPEND {
+                "type": "sql_injection_risk",
+                "severity": "critical",
+                "location": file,
+                "evidence": "User input flows to database without sanitization",
+                "recommendation": "Use parameterized queries"
+            } TO violations
+
+VALIDATION GATE:
+    ✅ violations detected
+    ✅ god_objects flagged
+    ✅ high_complexity flagged
+    ✅ security_risks identified
+
+# PHASE 6: Report Generation
+
+DECLARE p0_count: number
+DECLARE p1_count: number
+SET p0_count = 0
+SET p1_count = 0
+
+FOR EACH v IN violations:
+    IF v.severity === "critical":
+        SET p0_count = p0_count + 1
+    ELSE IF v.severity === "high":
+        SET p1_count = p1_count + 1
+
+DECLARE final_report: object
+SET final_report = {
+    "analysis_id": <generated_analysis_id>,
+    "classification": code_classification,
+    "quality_metrics": quality_metrics,
+    "violation_summary": {
+        "total": violations.length,
+        "critical": p0_count,
+        "high": p1_count
+    },
+    "violations": violations,
+    "structural_summary": {
+        "classes": classes.length,
+        "functions": functions.length
+    }
+}
+
+REPORT final_report
+
+VALIDATION GATE:
+    ✅ final_report structured
+    ✅ violation_summary calculated
+    ✅ report delivered
+
+ALWAYS read config before analysis
+ALWAYS classify code before selecting strategy
+ALWAYS trace source-to-sink for security flows
+ALWAYS calculate cyclomatic complexity
+ALWAYS flag god objects exceeding threshold
+ALWAYS prioritize violations by severity
+ALWAYS generate actionable recommendations
+ALWAYS report quality metrics
+
+NEVER analyze without scope definition
+NEVER skip security flow tracing
+NEVER report violations without evidence
+NEVER skip violation prioritization
+NEVER generate reports without quality scores
+NEVER leave violations without recommendations

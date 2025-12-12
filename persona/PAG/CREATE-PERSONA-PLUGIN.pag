@@ -1,0 +1,300 @@
+---
+name: CREATE-PERSONA-PLUGIN
+version: 1.0.0
+type: WORKFLOW
+description: Framework for analyzing source materials and generating persona plugins
+author: Jay Baleine
+license: CC BY-SA 4.0
+repository: https://github.com/Varietyz/Disciplined-AI-Software-Development
+related: CORE-PERSONA-FRAMEWORK.pag
+---
+
+THIS WORKFLOW DEFINES persona creation via material analysis and iterative refinement
+
+%% META %%:
+intent: "Generate persona plugins from source materials"
+objective: "Extract behavioral patterns and compose compliant persona definitions"
+priority: high
+
+ON ERROR file_modified:
+TRY:
+    RENAME current_file TO current_file.bak
+
+    WRITE updated_content TO [NEW]current_file
+
+    DELETE current_file.bak
+
+    EXCEPT IF FAIL:
+    RENAME current_file.bak TO current_file
+
+END TRY
+
+DECLARE source_materials: array
+DECLARE extracted_data: object
+DECLARE persona_plugin: object
+DECLARE refinement_complete: boolean
+
+# PHASE 1: Source Material Analysis
+
+READ user_uploads INTO source_materials
+
+SET material_types = ["technical_documentation", "codebases", "books_articles", "posts_communications", "domain_materials"]
+
+FOR EACH material IN source_materials:
+    DETERMINE material_type BASED_ON material
+    EXTRACT behavioral_patterns FROM material INTO extracted_data.patterns
+    EXTRACT expertise_domains FROM material INTO extracted_data.expertise
+    EXTRACT communication_styles FROM material INTO extracted_data.communication
+    EXTRACT authority_sources FROM material INTO extracted_data.authority
+    COLLECT extracted_data INTO extracted_data.all
+
+VALIDATION GATE:
+    ✅ source_materials loaded
+    ✅ material_types identified
+    ✅ behavioral_patterns extracted
+    ✅ expertise_domains identified
+
+# PHASE 2: Pattern Synthesis
+
+ANALYZE extracted_data FOR persona_characteristics
+
+DETERMINE identity_core BASED_ON extracted_data:
+    SET synthesized.identity.name FROM source_identity
+    SET synthesized.identity.current_profession FROM primary_role
+    SET synthesized.identity.former_profession FROM career_progression
+    SET synthesized.identity.background_progression FROM life_stages
+    SET synthesized.identity.current_situation FROM present_context
+
+DETERMINE personality_traits BASED_ON extracted_data.patterns:
+    SET synthesized.personality.primary_trait FROM dominant_characteristic
+    SET synthesized.personality.secondary_traits FROM supporting_characteristics
+    SET synthesized.personality.additional_nuances FROM subtle_patterns
+    SET synthesized.personality.emotional_baseline FROM default_state
+    SET synthesized.personality.cognitive_tendencies FROM processing_patterns
+    SET synthesized.personality.bias_patterns FROM cognitive_biases
+
+DETERMINE communication_style BASED_ON extracted_data.communication:
+    SET synthesized.communication.speech_method FROM speech_patterns
+    SET synthesized.communication.default_tone FROM typical_manner
+    SET synthesized.communication.authority_sources FROM credibility_references
+    SET synthesized.communication.interaction_approach FROM social_patterns
+    SET synthesized.communication.formality_adaptation FROM context_adjustments
+    SET synthesized.communication.code_switching_patterns FROM language_variations
+
+DETERMINE knowledge_domains BASED_ON extracted_data.expertise:
+    SET synthesized.knowledge.temporal_bounds FROM era_limits
+    SET synthesized.knowledge.expertise_areas FROM competence_fields
+    SET synthesized.knowledge.cultural_context FROM social_understanding
+    SET synthesized.knowledge.technical_skills FROM professional_competencies
+
+VALIDATION GATE:
+    ✅ identity_core synthesized
+    ✅ personality_traits defined
+    ✅ communication_style established
+    ✅ knowledge_domains bounded
+
+# PHASE 3: Template Mapping
+
+READ persona_plugin_schema INTO template
+
+SET persona_plugin.identity_core.name = synthesized.identity.name
+SET persona_plugin.identity_core.copyright = "Disciplined AI Software Development Methodology © 2025 by Jay Baleine is licensed under CC BY-SA 4.0"
+SET persona_plugin.identity_core.copyright_url = "https://creativecommons.org/licenses/by-sa/4.0/"
+SET persona_plugin.identity_core.github_repository = "https://github.com/Varietyz/Disciplined-AI-Software-Development"
+SET persona_plugin.identity_core.current_profession = synthesized.identity.current_profession
+SET persona_plugin.identity_core.former_profession = synthesized.identity.former_profession
+SET persona_plugin.identity_core.background_progression = synthesized.identity.background_progression
+SET persona_plugin.identity_core.current_situation = synthesized.identity.current_situation
+
+SET persona_plugin.personality_traits.primary_trait = synthesized.personality.primary_trait
+SET persona_plugin.personality_traits.secondary_traits = synthesized.personality.secondary_traits
+SET persona_plugin.personality_traits.additional_nuances = synthesized.personality.additional_nuances
+SET persona_plugin.personality_traits.emotional_baseline = synthesized.personality.emotional_baseline
+SET persona_plugin.personality_traits.cognitive_tendencies = synthesized.personality.cognitive_tendencies
+SET persona_plugin.personality_traits.bias_patterns = synthesized.personality.bias_patterns
+
+SET persona_plugin.communication_style.speech_method = synthesized.communication.speech_method
+SET persona_plugin.communication_style.default_tone = synthesized.communication.default_tone
+SET persona_plugin.communication_style.authority_sources = synthesized.communication.authority_sources
+SET persona_plugin.communication_style.interaction_approach = synthesized.communication.interaction_approach
+SET persona_plugin.communication_style.formality_adaptation = synthesized.communication.formality_adaptation
+SET persona_plugin.communication_style.code_switching_patterns = synthesized.communication.code_switching_patterns
+
+SET persona_plugin.career_experience.professional_background = extracted_data.work_history
+SET persona_plugin.career_experience.specialized_knowledge = extracted_data.expertise_areas
+SET persona_plugin.career_experience.current_activities = extracted_data.present_observations
+
+SET persona_plugin.experience_domains.professional_stories = extracted_data.work_examples
+SET persona_plugin.experience_domains.personal_anecdotes = extracted_data.life_experiences
+SET persona_plugin.experience_domains.specialized_encounters = extracted_data.unique_situations
+SET persona_plugin.experience_domains.wisdom_sources = extracted_data.lesson_origins
+
+SET persona_plugin.memory_patterns.retention_priorities = inferred.strong_memory_triggers
+SET persona_plugin.memory_patterns.detail_degradation = inferred.fade_patterns
+SET persona_plugin.memory_patterns.emotional_weighting = inferred.importance_by_emotion
+SET persona_plugin.memory_patterns.recall_triggers = inferred.memory_prompts
+
+SET persona_plugin.social_dynamics.in_group_attitudes = detected.social_loyalties
+SET persona_plugin.social_dynamics.authority_deference = detected.respect_patterns
+SET persona_plugin.social_dynamics.status_awareness = detected.hierarchy_consciousness
+SET persona_plugin.social_dynamics.generational_markers = detected.age_cohort_references
+
+SET persona_plugin.knowledge_domains.temporal_bounds = synthesized.knowledge.temporal_bounds
+SET persona_plugin.knowledge_domains.expertise_areas = synthesized.knowledge.expertise_areas
+SET persona_plugin.knowledge_domains.cultural_context = synthesized.knowledge.cultural_context
+SET persona_plugin.knowledge_domains.technical_skills = synthesized.knowledge.technical_skills
+
+SET persona_plugin.era_violations.anachronistic_concepts = outside_era_knowledge
+SET persona_plugin.era_violations.confusion_triggers = confusing_concepts
+SET persona_plugin.era_violations.confusion_responses = interpretation_methods
+
+SET persona_plugin.vocabulary_filtering.forbidden_terms = detected.avoided_words
+SET persona_plugin.vocabulary_filtering.preferred_alternatives = detected.persona_replacements
+SET persona_plugin.vocabulary_filtering.speech_patterns = detected.language_characteristics
+
+SET persona_plugin.thought_processes.decision_framework = detected.information_evaluation
+SET persona_plugin.thought_processes.problem_solving = detected.challenge_approach
+SET persona_plugin.thought_processes.skepticism_application = detected.doubt_patterns
+SET persona_plugin.thought_processes.wisdom_sources = detected.advice_references
+
+SET persona_plugin.confusion_responses.helpful_confusion = generated.trying_to_help_while_confused
+SET persona_plugin.confusion_responses.frustrated_confusion = generated.annoyed_confusion
+SET persona_plugin.confusion_responses.practical_dismissal = generated.useless_concept_dismissal
+SET persona_plugin.confusion_responses.complete_incomprehension = generated.totally_lost_response
+SET persona_plugin.confusion_responses.natural_response = generated.default_confusion_handling
+
+SET persona_plugin.interpretation_attempts.unknown_technology = generated.tech_interpretation
+SET persona_plugin.interpretation_attempts.abstract_concepts = generated.philosophy_handling
+SET persona_plugin.interpretation_attempts.foreign_ideas = generated.alien_concept_processing
+SET persona_plugin.interpretation_attempts.modern_references = generated.anachronism_handling
+
+SET persona_plugin.self_validation_protocols.domain_output_auditing = "systematically check all domain outputs against persona constraints before delivery"
+SET persona_plugin.self_validation_protocols.expertise_compliance_verification = "validate domain standards and professional principles in all generated content"
+SET persona_plugin.self_validation_protocols.persona_adherence_checking = "ensure all guidance aligns with persona expertise and professional standards"
+SET persona_plugin.self_validation_protocols.violation_detection_system = "identify and flag any persona violations in responses or domain outputs"
+SET persona_plugin.self_validation_protocols.adjustment_generation_protocol = "automatically generate corrected versions when violations are detected"
+SET persona_plugin.self_validation_protocols.systematic_correction_tracking = "document all violations found and corrections applied for pattern analysis"
+SET persona_plugin.self_validation_protocols.persona_drift_prevention = "regular validation against core persona principles and domain expertise alignment"
+SET persona_plugin.self_validation_protocols.compliance_reporting = "generate systematic reports on adherence levels and violation patterns"
+
+VALIDATION GATE:
+    ✅ all template fields mapped
+    ✅ identity_core complete
+    ✅ personality_traits complete
+    ✅ communication_style complete
+    ✅ knowledge_domains complete
+    ✅ confusion_responses complete
+    ✅ vocabulary_filtering complete
+    ✅ self_validation_protocols complete
+
+# PHASE 4: User-Guided Refinement
+
+SET refinement_complete = false
+
+START refinement_loop
+
+READ user_feedback FROM user
+
+IF user_feedback MATCHES "personality_adjustment":
+    LOAD persona_plugin.personality_traits INTO current_traits
+    REPLACE current_traits WITH user_specified_values
+    VALIDATE personality_coherence
+
+IF user_feedback MATCHES "communication_tuning":
+    LOAD persona_plugin.communication_style INTO current_style
+    REPLACE current_style WITH user_specified_values
+    VALIDATE communication_consistency
+
+IF user_feedback MATCHES "knowledge_boundary_change":
+    LOAD persona_plugin.knowledge_domains INTO current_domains
+    REPLACE current_domains WITH user_specified_values
+    VALIDATE temporal_coherence
+
+IF user_feedback MATCHES "response_pattern_update":
+    LOAD persona_plugin.confusion_responses INTO current_responses
+    REPLACE current_responses WITH user_specified_values
+    LOAD persona_plugin.vocabulary_filtering INTO current_vocabulary
+    REPLACE current_vocabulary WITH user_specified_values
+    VALIDATE response_authenticity
+
+IF user_feedback MATCHES "experience_addition":
+    APPEND user_specified_values TO persona_plugin.experience_domains
+    VALIDATE experience_consistency
+
+IF user_feedback MATCHES "manual_override":
+    LOAD user_specified_values INTO target_field
+    REPLACE target_field WITH user_specified_values
+    VALIDATE template_compatibility
+
+VALIDATE persona_plugin AGAINST template
+
+IF user_feedback MATCHES "approve":
+    SET refinement_complete = true
+    STOP
+
+BACKTO refinement_loop
+
+VALIDATION GATE:
+    ✅ user_feedback incorporated
+    ✅ all modifications validated
+    ✅ template_compatibility maintained
+    ✅ user_approval received
+
+# PHASE 5: Plugin Validation
+
+VALIDATE persona_plugin.identity_core.name NOT empty
+VALIDATE persona_plugin.identity_core.current_profession NOT empty
+VALIDATE persona_plugin.personality_traits.primary_trait NOT empty
+VALIDATE persona_plugin.communication_style.speech_method NOT empty
+VALIDATE persona_plugin.knowledge_domains.expertise_areas NOT empty
+VALIDATE persona_plugin.confusion_responses.natural_response NOT empty
+VALIDATE persona_plugin.vocabulary_filtering.speech_patterns NOT empty
+VALIDATE persona_plugin.self_validation_protocols NOT empty
+
+FOR EACH field IN persona_plugin:
+    VERIFY field NOT empty
+    VERIFY field MATCHES appropriate_data_type
+    VERIFY field MATCHES persona_authenticity_goals
+
+VALIDATION GATE:
+    ✅ all required fields populated
+    ✅ field completeness verified
+    ✅ data types consistent
+    ✅ template structure matched
+    ✅ framework integration ready
+
+# PHASE 6: Deployment
+
+SET persona_name = persona_plugin.identity_core.name
+SET output_filename = persona_name + "-PERSONA.json"
+
+WRITE persona_plugin TO output_filename
+
+REPORT "persona_creation_complete"
+REPORT "persona_name: " + persona_name
+REPORT "output_file: " + output_filename
+REPORT "fields_populated: all"
+REPORT "validation_status: passed"
+REPORT "integration_ready: true"
+
+REPORT "ACTIVATION INSTRUCTIONS:"
+REPORT "STEP 1: LOAD CORE-PERSONA-FRAMEWORK.json"
+REPORT "STEP 2: LOAD " + output_filename
+REPORT "STEP 3: EXECUTE command Simulate Persona"
+REPORT "STEP 4: VERIFY behavioral_consistency"
+
+VALIDATION GATE:
+    ✅ persona_plugin saved
+    ✅ filename follows convention
+    ✅ framework compatibility confirmed
+    ✅ activation instructions provided
+
+ALWAYS use complete persona_plugin_template as foundation
+ALWAYS fill all fields with detailed persona data
+ALWAYS ensure field completion for persona authenticity
+ALWAYS integrate psychological elements through personality_traits
+ALWAYS verify plugin structure matches template requirements
+ALWAYS validate field completeness for framework compatibility
+NEVER leave required fields empty
+NEVER skip validation phases
+NEVER deploy without user approval

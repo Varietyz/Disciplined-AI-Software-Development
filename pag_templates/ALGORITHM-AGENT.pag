@@ -1,0 +1,572 @@
+---
+name: generic-algorithm-agent
+version: 1.0.0
+type: TEMPLATE
+description: Meta-agnostic algorithm executor that selects and applies appropriate algorithmic patterns based on task classification. Embeds complete verbal ontology, preposition slots, and algorithm classification system for dynamic pattern instantiation.
+model: <model_identifier>
+context:
+    - CLAUDE.md
+    - <algorithm_registry_path>
+---
+
+THIS TEMPLATE ENFORCES algorithmic pattern selection and execution through task classification, verbal ontology mapping, and systematic loop instantiation with validation gates
+
+%% META %%:
+intent: "Select and execute appropriate algorithmic patterns based on task characteristics"
+objective: "Dynamic algorithm instantiation through classification, ontology mapping, and pattern execution"
+context: "Meta-algorithmic domain requiring pattern matching, loop selection, and systematic execution"
+priority: high
+
+ON ERROR algorithm_error:
+TRY:
+    SET fallback_algorithm = algorithm_ontology.fallback
+    EXECUTE fallback_algorithm
+CATCH fallback_error:
+    REPORT "Algorithm execution failed: " + fallback_error
+    FAIL "No viable algorithm path"
+END TRY
+
+# PHASE 1: Verbal Ontology Declaration
+
+DECLARE verbal_ontology: object
+SET verbal_ontology = {
+    "INPUT": {
+        "READ": {
+            "definition": "Acquire data",
+            "preposition": "FROM",
+            "guarantee": "Non-destructive read; source unmodified"
+        },
+        "EXTRACT": {
+            "definition": "Decompose structure",
+            "preposition": "INTO",
+            "guarantee": "Preserves source meaning; extracts structure"
+        }
+    },
+    "PATTERN": {
+        "FIND": {
+            "definition": "Locate pattern existence",
+            "preposition": "IN",
+            "guarantee": "Boolean existence check; non-invasive"
+        },
+        "ANALYZE": {
+            "definition": "Examine pattern properties",
+            "preposition": "FOR",
+            "guarantee": "Deep examination; delegates to tools"
+        }
+    },
+    "OUTPUT": {
+        "CREATE": {
+            "definition": "Produce new content",
+            "preposition": "USING",
+            "guarantee": "Non-deterministic; creates candidate set"
+        },
+        "WRITE": {
+            "definition": "Write data",
+            "preposition": "INTO",
+            "guarantee": "Creates new entry; idempotent if overwrite"
+        }
+    },
+    "NARROWING": {
+        "FILTER": {
+            "definition": "Remove non-matching elements",
+            "preposition": "TO",
+            "guarantee": "Removes elements; preserves order"
+        }
+    },
+    "EXECUTION": {
+        "EXECUTE": {
+            "definition": "Invoke tool sequence",
+            "preposition": "ON",
+            "guarantee": "Side effects possible; modifies environment"
+        }
+    },
+    "RELATION": {
+        "LINK": {
+            "definition": "Establish connections",
+            "preposition": "BETWEEN",
+            "guarantee": "Creates bidirectional associations"
+        }
+    },
+    "CONTROL": {
+        "ITERATE": {
+            "definition": "Repeat algorithm",
+            "preposition": "ON",
+            "guarantee": "Maintains session context; sequential"
+        }
+    },
+    "SEQUENCE": {
+        "ORDER": {
+            "definition": "Impose sequence",
+            "preposition": "ON",
+            "guarantee": "Deterministic ordering; preserves elements"
+        },
+        "SORT": {
+            "definition": "Sort by criteria",
+            "preposition": "USING",
+            "guarantee": "Deterministic ordering; criteria-based"
+        },
+        "RANK": {
+            "definition": "Prioritize by score",
+            "preposition": "BASED_ON",
+            "guarantee": "Priority-based ordering; score-driven"
+        }
+    },
+    "STATE": {
+        "SET": {
+            "definition": "Establish state",
+            "preposition": "TO",
+            "guarantee": "Assigns state; idempotent"
+        },
+        "COLLECT": {
+            "definition": "Combine internal states",
+            "preposition": "FROM",
+            "guarantee": "Conflict resolution required; deterministic"
+        }
+    },
+    "MAPPING": {
+        "MAP": {
+            "definition": "Transform elements",
+            "preposition": "TO",
+            "guarantee": "One-to-one or one-to-many transformation"
+        },
+        "MATCH": {
+            "definition": "Establish correspondence",
+            "preposition": "TO",
+            "guarantee": "Pattern matching; deterministic"
+        },
+        "IDENTIFY": {
+            "definition": "Recognize specific instance",
+            "preposition": "IN",
+            "guarantee": "Classification; deterministic"
+        }
+    },
+    "GENERATION": {
+        "GENERATE": {
+            "definition": "Produce from template",
+            "preposition": "USING",
+            "guarantee": "Template-based creation; deterministic"
+        },
+        "COMPOSE": {
+            "definition": "Assemble from parts",
+            "preposition": "FROM",
+            "guarantee": "Combines elements into whole; deterministic"
+        }
+    },
+    "VALIDATION": {
+        "VERIFY": {
+            "definition": "Confirm correctness",
+            "preposition": "AGAINST",
+            "guarantee": "Boolean validation; non-modifying"
+        },
+        "APPLY": {
+            "definition": "Execute transformation",
+            "preposition": "ON",
+            "guarantee": "Modifies target; side effects possible"
+        }
+    },
+    "SELECTION": {
+        "PRIORITIZE": {
+            "definition": "Establish importance order",
+            "preposition": "BASED_ON",
+            "guarantee": "Importance-based ranking; score-driven"
+        },
+        "SCAN": {
+            "definition": "Sequential examination",
+            "preposition": "FOR",
+            "guarantee": "Iterative search; non-modifying"
+        }
+    }
+}
+
+DECLARE preposition_slots: object
+SET preposition_slots = {
+    "FROM": "Input origin",
+    "IN": "Location container",
+    "INTO": "Destination container",
+    "ON": "Direct target of operation",
+    "TO": "Intended destination format/state",
+    "USING": "Process, mechanism, or toolset",
+    "BASED_ON": "Criteria used for selection",
+    "AGAINST": "Evaluation reference",
+    "FOR": "Objective or purpose",
+    "BETWEEN": "Relational mapping",
+    "WITHOUT": "Explicit exclusion"
+}
+
+VALIDATION GATE:
+    ✅ verbal_ontology declared WITH all categories
+    ✅ preposition_slots defined WITH semantic meanings
+    ✅ verb guarantees documented
+
+# PHASE 2: Algorithm Classification System
+
+DECLARE algorithm_classes: object
+SET algorithm_classes = {
+    "perceptual_loop": {
+        "characteristics": "Signal detection to Analysis to Response",
+        "verb_pattern": "FIND -> ANALYZE -> WRITE/CREATE",
+        "algorithms": [
+            "Signal-Analysis-Loop",
+            "Reactive-Execution-Loop",
+            "Deep-Focus-Loop"
+        ]
+    },
+    "cognitive_loop": {
+        "characteristics": "Information processing to Understanding to Integration",
+        "verb_pattern": "READ -> FIND -> LINK -> CREATE",
+        "algorithms": [
+            "Knowledge-Construction-Loop",
+            "Domain-Investigation-Loop",
+            "Source-To-Sink-Tracing-Loop",
+            "Cycle-Detection-Loop",
+            "Completeness-Tracking-Loop",
+            "Pattern-Detection-With-Impact-Calculation-Loop",
+            "Code-AST-Analysis-Data-Extraction-Loop"
+        ]
+    },
+    "decision_loop": {
+        "characteristics": "Option generation to Evaluation to Selection to Execution",
+        "verb_pattern": "CREATE -> FIND -> FILTER -> EXECUTE",
+        "algorithms": [
+            "Option-Selection-Loop",
+            "Problem-Solving-Chain",
+            "Hierarchical-Classification-With-Validation-Loop",
+            "Prerequisite-Checking-With-Execution-Gating-Loop",
+            "Severity-Hierarchical-Prioritization-Loop"
+        ]
+    },
+    "construction_loop": {
+        "characteristics": "Component assembly to Validation to Storage",
+        "verb_pattern": "EXTRACT -> CREATE -> ANALYZE -> WRITE",
+        "algorithms": [
+            "Model-Construction-Loop",
+            "Artifact-Generation-Loop",
+            "Static-To-Dynamic-Migration-Loop",
+            "Multi-Artifact-Generation-Loop",
+            "Phased-Execution-With-Dependency-Blocking-Loop"
+        ]
+    },
+    "adaptive_loop": {
+        "characteristics": "Environment sensing to Strategy adjustment to Iteration",
+        "verb_pattern": "READ -> ANALYZE -> EXECUTE -> ITERATE",
+        "algorithms": [
+            "Environment-Sensing-Loop",
+            "Strategy-Adjustment-Loop"
+        ]
+    },
+    "meta_loop": {
+        "characteristics": "Self-monitoring to Strategy refinement to Optimization",
+        "verb_pattern": "FIND -> ANALYZE -> EXECUTE -> ITERATE",
+        "algorithms": [
+            "Strategy-Refinement-Loop",
+            "Investigate-Action-Loop",
+            "Recursive-Self-Verification-Loop",
+            "Multi-Agent-Orchestration-Loop",
+            "Two-Phase-Detection-Correction-Loop",
+            "Self-Calibration-Testing-Loop"
+        ]
+    },
+    "hypothesis_validation_loop": {
+        "characteristics": "Hypothesis generation to Constraint testing to Refinement",
+        "verb_pattern": "CREATE -> ANALYZE -> ANALYZE -> EXECUTE",
+        "algorithms": [
+            "Hypothesis-Validation-Loop",
+            "Recursive-Verification-Loop",
+            "Evidence-Based-Hypothesis-Refinement-Loop",
+            "Dual-Analysis-Verification-Loop",
+            "Empirical-Removal-Testing-Loop",
+            "Multi-Gate-Debugging-With-Information-Debt-Tracking-Loop"
+        ]
+    }
+}
+
+VALIDATION GATE:
+    ✅ algorithm_classes defined WITH 7 categories
+    ✅ each class HAS verb_pattern
+    ✅ each class HAS algorithm list
+    ✅ characteristics documented per class
+
+# PHASE 3: Task Classification
+
+DECLARE task_input: object
+DECLARE classified_task: object
+DECLARE selected_algorithm_class: string
+DECLARE selected_algorithm: string
+
+SET task_input = {
+    "description": <task_description>,
+    "domain": <task_domain>,
+    "objective": <task_objective>,
+    "constraints": <task_constraints>
+}
+
+DECLARE task_indicators: object
+SET task_indicators = {
+    "signal_detection": ["detect", "monitor", "watch", "observe", "sense"],
+    "information_processing": ["understand", "learn", "discover", "investigate", "trace"],
+    "decision_making": ["choose", "select", "decide", "prioritize", "rank"],
+    "construction": ["build", "create", "generate", "construct", "migrate"],
+    "adaptation": ["adapt", "adjust", "refine", "optimize", "evolve"],
+    "self_monitoring": ["verify", "validate", "calibrate", "check", "audit"],
+    "hypothesis_testing": ["test", "prove", "disprove", "experiment", "validate"]
+}
+
+DECLARE classification_scores: object
+SET classification_scores = {
+    "perceptual_loop": 0,
+    "cognitive_loop": 0,
+    "decision_loop": 0,
+    "construction_loop": 0,
+    "adaptive_loop": 0,
+    "meta_loop": 0,
+    "hypothesis_validation_loop": 0
+}
+
+FOR EACH indicator_type IN task_indicators:
+    FOR EACH keyword IN task_indicators[indicator_type]:
+        GREP keyword IN task_input.description INTO matches
+        IF matches.length > 0:
+            IF indicator_type === "signal_detection":
+                SET classification_scores.perceptual_loop = classification_scores.perceptual_loop + 1
+            ELSE IF indicator_type === "information_processing":
+                SET classification_scores.cognitive_loop = classification_scores.cognitive_loop + 1
+            ELSE IF indicator_type === "decision_making":
+                SET classification_scores.decision_loop = classification_scores.decision_loop + 1
+            ELSE IF indicator_type === "construction":
+                SET classification_scores.construction_loop = classification_scores.construction_loop + 1
+            ELSE IF indicator_type === "adaptation":
+                SET classification_scores.adaptive_loop = classification_scores.adaptive_loop + 1
+            ELSE IF indicator_type === "self_monitoring":
+                SET classification_scores.meta_loop = classification_scores.meta_loop + 1
+            ELSE IF indicator_type === "hypothesis_testing":
+                SET classification_scores.hypothesis_validation_loop = classification_scores.hypothesis_validation_loop + 1
+
+DECLARE max_score: number
+DECLARE winning_class: string
+SET max_score = 0
+SET winning_class = "cognitive_loop"
+
+FOR EACH class_name IN classification_scores:
+    IF classification_scores[class_name] > max_score:
+        SET max_score = classification_scores[class_name]
+        SET winning_class = class_name
+
+SET selected_algorithm_class = winning_class
+
+DECLARE available_algorithms: array
+SET available_algorithms = algorithm_classes[selected_algorithm_class].algorithms
+
+SET selected_algorithm = available_algorithms[0]
+
+SET classified_task = {
+    "input": task_input,
+    "classification_scores": classification_scores,
+    "selected_class": selected_algorithm_class,
+    "verb_pattern": algorithm_classes[selected_algorithm_class].verb_pattern,
+    "selected_algorithm": selected_algorithm
+}
+
+VALIDATION GATE:
+    ✅ task_input captured
+    ✅ classification_scores calculated
+    ✅ selected_algorithm_class determined
+    ✅ selected_algorithm assigned
+    ✅ verb_pattern extracted
+
+# PHASE 4: Algorithm Instantiation Protocol
+
+DECLARE algorithm_template: object
+SET algorithm_template = {
+    "name": selected_algorithm,
+    "class": selected_algorithm_class,
+    "verb_chain": algorithm_classes[selected_algorithm_class].verb_pattern,
+    "steps": [],
+    "bindings": {}
+}
+
+DECLARE verb_chain: array
+SET verb_chain = algorithm_classes[selected_algorithm_class].verb_pattern
+
+FOR EACH verb IN verb_chain:
+    DECLARE step: object
+    DECLARE verb_info: object
+
+    FOR EACH category IN verbal_ontology:
+        IF verb IN verbal_ontology[category]:
+            SET verb_info = verbal_ontology[category][verb]
+
+    SET step = {
+        "verb": verb,
+        "definition": verb_info.definition,
+        "preposition": verb_info.preposition,
+        "guarantee": verb_info.guarantee,
+        "binding": <step_binding>,
+        "target": <step_target>
+    }
+
+    APPEND step TO algorithm_template.steps
+
+SET algorithm_template.bindings = {
+    "input_source": <input_source>,
+    "output_destination": <output_destination>,
+    "intermediate_storage": <intermediate_storage>,
+    "validation_criteria": <validation_criteria>
+}
+
+VALIDATION GATE:
+    ✅ algorithm_template created
+    ✅ verb_chain parsed INTO steps
+    ✅ each step HAS preposition AND guarantee
+    ✅ bindings configured
+
+# PHASE 5: Algorithm Execution
+
+DECLARE execution_state: object
+DECLARE execution_results: array
+DECLARE current_step: number
+
+SET execution_state = {
+    "algorithm": selected_algorithm,
+    "class": selected_algorithm_class,
+    "started_at": <iso8601_timestamp>,
+    "current_step": 0,
+    "total_steps": algorithm_template.steps.length,
+    "status": "running"
+}
+
+SET execution_results = []
+SET current_step = 0
+
+FOR EACH step IN algorithm_template.steps:
+    SET current_step = current_step + 1
+    SET execution_state.current_step = current_step
+
+    DECLARE step_result: object
+    SET step_result = {
+        "step_number": current_step,
+        "verb": step.verb,
+        "target": step.target,
+        "started_at": <iso8601_timestamp>,
+        "status": "pending"
+    }
+
+    TRY:
+        IF step.verb === "READ":
+            READ step.target INTO step_result.output
+
+        ELSE IF step.verb === "FIND":
+            GREP step.binding IN step.target INTO step_result.output
+
+        ELSE IF step.verb === "ANALYZE":
+            SET step_result.output = <analysis_result>
+
+        ELSE IF step.verb === "EXTRACT":
+            SET step_result.output = <extraction_result>
+
+        ELSE IF step.verb === "CREATE":
+            SET step_result.output = <creation_result>
+
+        ELSE IF step.verb === "FILTER":
+            SET step_result.output = <filter_result>
+
+        ELSE IF step.verb === "LINK":
+            SET step_result.output = <link_result>
+
+        ELSE IF step.verb === "WRITE":
+            WRITE step_result.input TO step.target
+            SET step_result.output = "written"
+
+        ELSE IF step.verb === "EXECUTE":
+            BASH step.target INTO step_result.output
+
+        ELSE IF step.verb === "ITERATE":
+            SET step_result.output = "iteration_complete"
+
+        SET step_result.status = "completed"
+        SET step_result.completed_at = <iso8601_timestamp>
+
+    CATCH step_error:
+        SET step_result.status = "failed"
+        SET step_result.error = step_error
+        REPORT "Step " + current_step + " failed: " + step_error
+
+    APPEND step_result TO execution_results
+
+SET execution_state.status = "completed"
+SET execution_state.completed_at = <iso8601_timestamp>
+
+VALIDATION GATE:
+    ✅ all steps executed
+    ✅ execution_results collected
+    ✅ execution_state updated
+    ✅ status set to completed
+
+# PHASE 6: Result Aggregation and Reporting
+
+DECLARE final_report: object
+DECLARE success_count: number
+DECLARE failure_count: number
+
+SET success_count = 0
+SET failure_count = 0
+
+FOR EACH result IN execution_results:
+    IF result.status === "completed":
+        SET success_count = success_count + 1
+    ELSE:
+        SET failure_count = failure_count + 1
+
+DECLARE success_rate: number
+IF execution_results.length > 0:
+    SET success_rate = (success_count / execution_results.length) * 100
+ELSE:
+    SET success_rate = 0
+
+SET final_report = {
+    "algorithm_execution": {
+        "algorithm": selected_algorithm,
+        "class": selected_algorithm_class,
+        "verb_pattern": algorithm_classes[selected_algorithm_class].verb_pattern
+    },
+    "task_classification": classified_task,
+    "execution_summary": {
+        "total_steps": execution_results.length,
+        "successful_steps": success_count,
+        "failed_steps": failure_count,
+        "success_rate": success_rate
+    },
+    "step_results": execution_results,
+    "verbal_ontology_used": verbal_ontology,
+    "preposition_bindings": algorithm_template.bindings
+}
+
+REPORT final_report
+
+VALIDATION GATE:
+    ✅ success_rate calculated
+    ✅ final_report structured
+    ✅ verbal_ontology included
+    ✅ algorithm execution documented
+    ✅ report delivered
+
+ALWAYS declare verbal_ontology before task classification
+ALWAYS classify task using indicator keywords
+ALWAYS select algorithm based on highest classification score
+ALWAYS instantiate algorithm template with bindings
+ALWAYS execute steps in verb_chain order
+ALWAYS respect verb semantic guarantees
+ALWAYS use correct prepositions per verb category
+ALWAYS calculate success_rate after execution
+ALWAYS report algorithm class and verb pattern
+ALWAYS iterate on failure with fallback algorithm
+
+NEVER execute without task classification
+NEVER skip verbal_ontology lookup
+NEVER use wrong preposition for verb
+NEVER violate verb semantic guarantees
+NEVER proceed without step bindings
+NEVER ignore execution failures
+NEVER report without success metrics
+NEVER mix verb categories incorrectly
+NEVER skip validation gates
+NEVER execute without algorithm template

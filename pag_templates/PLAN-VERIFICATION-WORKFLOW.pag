@@ -1,0 +1,323 @@
+---
+name: <workflow_name>
+version: 1.0.0
+type: WORKFLOW
+description: Multi-agent orchestration for forensic verification of implementation plans against codebase reality
+keywords:
+    - plan-verification
+    - multi-agent
+    - forensic-verification
+    - unified-brain
+    - implementation-audit
+context:
+    - CLAUDE.md
+    - <workspace_config_path>
+    - <implementation_plan_path>
+model: <model_preference>
+---
+
+THIS WORKFLOW IMPLEMENTS forensic plan verification through multi-agent orchestration with unified brain protocol
+
+%% META %%:
+intent: "Verify implementation plans against actual codebase through coordinated forensic agent workflow"
+objective: "<verification_objective>"
+context: "<verification_context>"
+priority: <priority_level>
+
+ON ERROR file_modified:
+TRY:
+    RENAME current_file TO current_file.bak
+    WRITE updated_content TO [NEW]current_file
+    DELETE current_file.bak
+    EXCEPT IF FAIL:
+    RENAME current_file.bak TO current_file
+END TRY
+
+# PHASE 1: Workspace Configuration Discovery
+
+SET config_file = "<workspace_config_path>"
+
+READ config_file INTO workspace_config
+EXTRACT workspace_config.zones INTO zones
+EXTRACT workspace_config.semantic_extensions INTO extensions
+
+SET shared_zone = zones.shared
+SET workflow_name = "<workflow_instance_name>"
+SET artifact_base_path = shared_zone + "/" + workflow_name
+
+DECLARE core_documents: array
+SET core_documents[0] = "forensic-findings" + extensions.agent_context
+SET core_documents[1] = "code-trace-analysis" + extensions.audit_report
+SET core_documents[2] = "plan-code-divergence" + extensions.task_checklist
+SET core_documents[3] = "architectural-patterns" + extensions.agent_context
+SET core_documents[4] = "integration-matrix" + extensions.audit_report
+SET core_documents[5] = "revision-strategy" + extensions.task_checklist
+SET core_documents[6] = "workflow-state" + extensions.task_checklist
+
+FOR EACH doc IN core_documents:
+    IF NOT EXISTS artifact_base_path + "/" + doc:
+        CREATE artifact_base_path + "/" + doc WITH default_template
+    END IF
+
+VALIDATION GATE:
+    ✅ Workspace configuration loaded
+    ✅ Semantic extensions extracted
+    ✅ Shared zone identified
+    ✅ Core documents pre-created
+
+# PHASE 2: Plan Source Acquisition
+
+READ <implementation_plan_path> INTO implementation_plan
+
+EXTRACT implementation_plan.phases INTO planned_phases
+EXTRACT implementation_plan.tasks INTO planned_tasks
+EXTRACT implementation_plan.validation_gates INTO planned_gates
+EXTRACT implementation_plan.dependencies INTO planned_dependencies
+
+DECLARE verification_targets: object
+SET verification_targets.phases = planned_phases
+SET verification_targets.tasks = planned_tasks
+SET verification_targets.gates = planned_gates
+SET verification_targets.dependencies = planned_dependencies
+
+VALIDATION GATE:
+    ✅ Implementation plan loaded
+    ✅ Phases extracted
+    ✅ Tasks identified
+    ✅ Validation gates mapped
+    ✅ Dependencies catalogued
+
+# PHASE 3: Unified Brain Protocol Configuration
+
+DECLARE unified_brain_protocol: object
+SET unified_brain_protocol.shared_state = artifact_base_path + "/workflow-state" + extensions.task_checklist
+SET unified_brain_protocol.findings_aggregator = artifact_base_path + "/forensic-findings" + extensions.agent_context
+SET unified_brain_protocol.read_before_write = ALWAYS
+SET unified_brain_protocol.surgical_replacement = ENFORCE
+SET unified_brain_protocol.append_only_logs = ENFORCE
+
+DECLARE handoff_signals: array
+SET handoff_signals[0] = "PASS_TO_NEXT_AGENT"
+SET handoff_signals[1] = "REQUIRE_USER_DECISION"
+SET handoff_signals[2] = "ESCALATE_BLOCKER"
+SET handoff_signals[3] = "WORKFLOW_COMPLETE"
+
+ENFORCE READ current_state BEFORE WRITE
+ENFORCE SURGICAL_REPLACEMENT FOR specific_sections
+ENFORCE APPEND_ONLY FOR log_entries
+ENFORCE TIMESTAMP FOR all_modifications
+
+VALIDATION GATE:
+    ✅ Shared state location defined
+    ✅ Communication patterns established
+    ✅ Update rules enforced
+
+# PHASE 4: Agent Sequence Definition
+
+DECLARE agent_1: object
+SET agent_1.agent_name = "<verifier_agent_type>"
+SET agent_1.agent_type = "<verifier_agent_type>"
+SET agent_1.agent_phase = "entry-verification"
+SET agent_1.agent_purpose = "<entry_verification_purpose>"
+SET agent_1.focus_points[0] = "VERIFY: <prerequisite_1>"
+SET agent_1.focus_points[1] = "VERIFY: <prerequisite_2>"
+SET agent_1.focus_points[2] = "READ: <plan_document>"
+SET agent_1.focus_points[3] = "ESTABLISH: Verification baseline"
+SET agent_1.outputs[0] = "prerequisite-status" + extensions.agent_context
+SET agent_1.outputs[1] = "verification-baseline" + extensions.audit_report
+SET agent_1.validation_gates[0] = "<entry_gate_1>"
+SET agent_1.validation_gates[1] = "<entry_gate_2>"
+SET agent_1.validation_gates[2] = "No blockers for verification"
+
+DECLARE agent_2: object
+SET agent_2.agent_name = "<tracer_agent_type>"
+SET agent_2.agent_type = "<tracer_agent_type>"
+SET agent_2.agent_phase = "codebase-tracing"
+SET agent_2.agent_purpose = "<tracing_purpose>"
+SET agent_2.focus_points[0] = "TRACE: <execution_path_1>"
+SET agent_2.focus_points[1] = "MAP: <integration_points>"
+SET agent_2.focus_points[2] = "IDENTIFY: <implementation_targets>"
+SET agent_2.focus_points[3] = "DOCUMENT: <architecture_findings>"
+SET agent_2.outputs[0] = "code-trace-analysis" + extensions.audit_report
+SET agent_2.outputs[1] = "integration-matrix" + extensions.audit_report
+SET agent_2.validation_gates[0] = "<tracing_gate_1>"
+SET agent_2.validation_gates[1] = "<tracing_gate_2>"
+SET agent_2.validation_gates[2] = "0 circular dependencies"
+
+DECLARE agent_3: object
+SET agent_3.agent_name = "<analyzer_agent_type>"
+SET agent_3.agent_type = "<analyzer_agent_type>"
+SET agent_3.agent_phase = "divergence-analysis"
+SET agent_3.agent_purpose = "<divergence_analysis_purpose>"
+SET agent_3.focus_points[0] = "COMPARE: Plan vs actual implementation"
+SET agent_3.focus_points[1] = "IDENTIFY: Divergences and gaps"
+SET agent_3.focus_points[2] = "CLASSIFY: Divergence severity"
+SET agent_3.focus_points[3] = "DOCUMENT: Plan-code divergence report"
+SET agent_3.outputs[0] = "plan-code-divergence" + extensions.task_checklist
+SET agent_3.validation_gates[0] = "All planned items compared"
+SET agent_3.validation_gates[1] = "Divergences classified"
+SET agent_3.validation_gates[2] = "Gap analysis complete"
+
+DECLARE agent_4: object
+SET agent_4.agent_name = "<architect_agent_type>"
+SET agent_4.agent_type = "<architect_agent_type>"
+SET agent_4.agent_phase = "pattern-analysis"
+SET agent_4.agent_purpose = "<pattern_analysis_purpose>"
+SET agent_4.focus_points[0] = "ANALYZE: Architectural patterns discovered"
+SET agent_4.focus_points[1] = "COMPARE: Planned vs actual patterns"
+SET agent_4.focus_points[2] = "IDENTIFY: Pattern compliance/deviation"
+SET agent_4.focus_points[3] = "DOCUMENT: Pattern analysis report"
+SET agent_4.outputs[0] = "architectural-patterns" + extensions.agent_context
+SET agent_4.validation_gates[0] = "Patterns catalogued"
+SET agent_4.validation_gates[1] = "Compliance assessed"
+SET agent_4.validation_gates[2] = "Deviations documented"
+
+DECLARE agent_5: object
+SET agent_5.agent_name = "<strategy_agent_type>"
+SET agent_5.agent_type = "<strategy_agent_type>"
+SET agent_5.agent_phase = "revision-strategy"
+SET agent_5.agent_purpose = "<revision_strategy_purpose>"
+SET agent_5.focus_points[0] = "SYNTHESIZE: All findings"
+SET agent_5.focus_points[1] = "GENERATE: Revision recommendations"
+SET agent_5.focus_points[2] = "PRIORITIZE: Remediation tasks"
+SET agent_5.focus_points[3] = "DOCUMENT: Revision strategy"
+SET agent_5.outputs[0] = "revision-strategy" + extensions.task_checklist
+SET agent_5.validation_gates[0] = "All findings synthesized"
+SET agent_5.validation_gates[1] = "Recommendations actionable"
+SET agent_5.validation_gates[2] = "Priorities assigned"
+
+DECLARE agent_6: object
+SET agent_6.agent_name = "<verifier_agent_type>"
+SET agent_6.agent_type = "<verifier_agent_type>"
+SET agent_6.agent_phase = "exit-verification"
+SET agent_6.agent_purpose = "Final verification and summary generation"
+SET agent_6.focus_points[0] = "VERIFY: All verification tasks complete"
+SET agent_6.focus_points[1] = "AGGREGATE: All agent findings"
+SET agent_6.focus_points[2] = "GENERATE: Final verification report"
+SET agent_6.focus_points[3] = "SIGNAL: Workflow completion"
+SET agent_6.outputs[0] = "forensic-findings" + extensions.agent_context
+SET agent_6.outputs[1] = "workflow-state" + extensions.task_checklist
+SET agent_6.validation_gates[0] = "All agents completed successfully"
+SET agent_6.validation_gates[1] = "Findings aggregated"
+SET agent_6.validation_gates[2] = "Final report generated"
+
+DECLARE agent_sequence: array
+SET agent_sequence[0] = agent_1
+SET agent_sequence[1] = agent_2
+SET agent_sequence[2] = agent_3
+SET agent_sequence[3] = agent_4
+SET agent_sequence[4] = agent_5
+SET agent_sequence[5] = agent_6
+
+VALIDATION GATE:
+    ✅ 6 agents defined
+    ✅ Entry/exit verification pattern enforced
+    ✅ Agent responsibilities non-overlapping
+
+# PHASE 5: Orchestration Execution
+
+DECLARE orchestrator_actions: array
+SET orchestrator_actions[0] = "ACTIVATE_NEXT_AGENT"
+SET orchestrator_actions[1] = "AWAIT_COMPLETION"
+SET orchestrator_actions[2] = "CHECK_VALIDATION_GATE"
+SET orchestrator_actions[3] = "HANDLE_ESCALATION"
+SET orchestrator_actions[4] = "RECORD_TRANSITION"
+
+FOR EACH agent IN agent_sequence:
+    READ unified_brain_protocol.shared_state INTO current_workflow_state
+    SET agent.input_context = current_workflow_state
+
+    EXECUTE Task(
+        subagent_type = agent.agent_type,
+        prompt = agent.agent_purpose + " Focus: " + agent.focus_points
+    )
+
+    VERIFY agent.validation_gates ALL PASS
+
+    IF validation_failure:
+        SET escalation_required = TRUE
+        EXECUTE verification_failure_protocol
+    END IF
+
+    UPDATE unified_brain_protocol.shared_state WITH agent.completion_status
+    RECORD agent_transition TO workflow_log
+
+VALIDATION GATE:
+    ✅ Execution loop completed
+    ✅ State transitions recorded
+    ✅ All agents executed
+
+# PHASE 6: Verification Failure Protocol
+
+WHEN verification_failure DETECTED:
+    RECORD failure_context TO forensic-findings
+    RECORD agent_state TO workflow-state
+    RECORD specific_gate_failure TO validation-results
+
+    IF failure_type === "BLOCKER":
+        SIGNAL "REQUIRE_USER_DECISION"
+        AWAIT user_input
+    ELSE IF failure_type === "RECOVERABLE":
+        ATTEMPT retry_with_modified_parameters
+    ELSE:
+        CONTINUE with_documented_deviation
+    END IF
+
+    IF resolution_successful:
+        UPDATE workflow-state WITH resolution_details
+        CONTINUE workflow_execution
+    ELSE:
+        SIGNAL "ESCALATE_BLOCKER"
+        GENERATE partial_verification_report
+    END IF
+
+VALIDATION GATE:
+    ✅ Capture mechanism specified
+    ✅ Classification rules defined
+    ✅ Resolution pathways documented
+
+# PHASE 7: Final Output Generation
+
+DECLARE final_report: object
+SET final_report.plan_items_verified = <count>
+SET final_report.divergences_found = <count>
+SET final_report.compliance_percentage = <percentage>
+
+DECLARE divergence_analysis: object
+SET divergence_analysis.critical = []
+SET divergence_analysis.major = []
+SET divergence_analysis.minor = []
+SET divergence_analysis.informational = []
+
+DECLARE already_implemented: object
+SET already_implemented.items = []
+SET already_implemented.notes = "<pre_existing_functionality>"
+
+DECLARE gaps_identified: object
+SET gaps_identified.items = []
+SET gaps_identified.blockers = []
+SET gaps_identified.recommendations = []
+
+DECLARE revision_strategy: object
+SET revision_strategy.immediate_actions = []
+SET revision_strategy.deferred_actions = []
+SET revision_strategy.requires_decision = []
+
+WRITE final_report TO artifact_base_path + "/verification-report" + extensions.audit_report
+
+VALIDATION GATE:
+    ✅ Verification summary complete
+    ✅ Divergences classified
+    ✅ Gaps documented
+    ✅ Revision strategy provided
+
+ALWAYS READ shared documents BEFORE WRITE
+ALWAYS USE surgical replacement FOR updates
+ALWAYS APPEND timestamps TO all modifications
+ALWAYS VERIFY each agent validation gates
+ALWAYS GENERATE actionable recommendations
+
+NEVER SKIP entry/exit verification agents
+NEVER OVERWRITE documents WITHOUT reading
+NEVER PROCEED past failed validation gates WITHOUT documentation
+NEVER GENERATE speculative findings WITHOUT codebase evidence

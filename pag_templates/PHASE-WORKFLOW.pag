@@ -1,0 +1,266 @@
+---
+name: generic-phase-workflow
+version: 1.0.0
+type: TEMPLATE
+description: Single phase implementation workflow through 8-agent orchestration with VERIFY → VALIDATE → ACTION → VERIFY pattern. Implements phase entry, execution, and exit with validation gates.
+model: <model_identifier>
+context:
+    - CLAUDE.md
+    - <workspace_config_path>
+    - <phase_checklist_path>
+---
+
+THIS TEMPLATE IMPLEMENTS single phase execution through 8-agent orchestration with entry verification and exit validation
+
+%% META %%:
+intent: "Execute single implementation phase through coordinated agent workflow"
+objective: "Deliver phase completion with validation gates and next phase handoff readiness"
+context: "Phase execution follows checklist with prerequisite verification from previous phase"
+priority: high
+
+ON ERROR phase_error:
+TRY:
+    READ <recovery_artifact_path> INTO recovery_state
+CATCH recovery_error:
+    REPORT "Phase recovery failed: " + recovery_error
+    FAIL "Unable to recover phase state"
+END TRY
+
+DECLARE phase_config: object
+DECLARE agent_sequence: array
+DECLARE phase_artifacts: object
+
+# PHASE 1: Phase Configuration Loading
+
+SET phase_config = {
+    "phase_name": <phase_name>,
+    "phase_number": <phase_number>,
+    "phase_description": <phase_description>,
+    "previous_phase": <previous_phase_name>,
+    "next_phase": <next_phase_name>,
+    "shared_zone": <shared_zone_path>,
+    "artifact_base_path": <artifact_base_path>
+}
+
+SET phase_artifacts = {
+    "prerequisite_status": phase_config.shared_zone + "/prerequisite-status.md",
+    "implementation_log": phase_config.shared_zone + "/implementation-log.md",
+    "validation_results": phase_config.shared_zone + "/validation-results.md",
+    "workflow_state": phase_config.shared_zone + "/workflow-state.md"
+}
+
+DECLARE phase_tasks: array
+SET phase_tasks = <phase_task_array>
+
+DECLARE phase_validation_gates: array
+SET phase_validation_gates = <phase_validation_gate_array>
+
+BASH "mkdir -p " + phase_config.artifact_base_path
+
+VALIDATION GATE:
+    ✅ phase_config loaded
+    ✅ phase_artifacts defined
+    ✅ phase_tasks specified
+    ✅ phase_validation_gates defined
+
+# PHASE 2: Previous Phase Verification
+
+DECLARE previous_phase_status: object
+READ phase_artifacts.workflow_state INTO previous_phase_status
+
+DECLARE prerequisite_checks: array
+SET prerequisite_checks = []
+
+DECLARE previous_complete: boolean
+SET previous_complete = false
+
+IF phase_config.previous_phase !== "none":
+    VERIFY previous_phase_status.validation_gate === "PASS"
+    VERIFY previous_phase_status.blockers === 0
+    SET previous_complete = true
+ELSE:
+    SET previous_complete = true
+
+DECLARE prerequisite_result: object
+SET prerequisite_result = {
+    "phase": phase_config.phase_name,
+    "previous_phase_verified": previous_complete,
+    "checked_at": <iso8601_timestamp>
+}
+
+APPEND prerequisite_result TO prerequisite_checks
+
+WRITE prerequisite_checks TO phase_artifacts.prerequisite_status
+
+VALIDATION GATE:
+    ✅ previous_phase_status loaded
+    ✅ prerequisites verified
+    ✅ prerequisite_result documented
+
+# PHASE 3: Agent Sequence Definition
+
+SET agent_sequence = [
+    {
+        "agent_type": "forensic-context-verifier",
+        "role": "entry_verifier",
+        "purpose": "Verify phase entry conditions and prerequisites"
+    },
+    {
+        "agent_type": "code-tracer-agent",
+        "role": "architecture_validator",
+        "purpose": "Validate architecture and trace integration points"
+    },
+    {
+        "agent_type": "production-code-architect",
+        "role": "implementer",
+        "purpose": "Execute phase implementation tasks"
+    },
+    {
+        "agent_type": "refactor-agent",
+        "role": "refactorer",
+        "purpose": "Refactor and optimize implementations"
+    },
+    {
+        "agent_type": "srp-soc-agent",
+        "role": "compliance_checker",
+        "purpose": "Apply SRP and SOC compliance checks"
+    },
+    {
+        "agent_type": "debug-agent",
+        "role": "tester",
+        "purpose": "Test validation gates and debug issues"
+    },
+    {
+        "agent_type": "code-tracer-agent",
+        "role": "exit_tracer",
+        "purpose": "Verify implementation via execution trace"
+    },
+    {
+        "agent_type": "forensic-context-verifier",
+        "role": "completion_verifier",
+        "purpose": "Final verification and next phase handoff"
+    }
+]
+
+VALIDATION GATE:
+    ✅ agent_sequence defined (8 agents)
+    ✅ roles assigned
+    ✅ purposes documented
+
+# PHASE 4: Agent Orchestration Execution
+
+DECLARE agent_results: array
+SET agent_results = []
+
+DECLARE agent_index: number
+SET agent_index = 0
+
+FOR EACH agent_config IN agent_sequence:
+    DECLARE agent_prompt: string
+    SET agent_prompt = phase_config.phase_name + " - " + agent_config.purpose
+
+    TASK agent_config.agent_type WITH agent_prompt INTO agent_result
+
+    DECLARE agent_outcome: object
+    SET agent_outcome = {
+        "agent_type": agent_config.agent_type,
+        "role": agent_config.role,
+        "agent_index": agent_index,
+        "completed_at": <iso8601_timestamp>,
+        "status": "complete"
+    }
+
+    APPEND agent_outcome TO agent_results
+
+    SET agent_index = agent_index + 1
+
+DECLARE execution_summary: object
+SET execution_summary = {
+    "phase_name": phase_config.phase_name,
+    "agents_executed": agent_results.length,
+    "agent_results": agent_results,
+    "completed_at": <iso8601_timestamp>
+}
+
+WRITE execution_summary TO phase_artifacts.implementation_log
+
+VALIDATION GATE:
+    ✅ all 8 agents executed
+    ✅ agent_results collected
+    ✅ execution_summary written
+
+# PHASE 5: Phase Validation Gate Check
+
+DECLARE validation_results: object
+SET validation_results = {
+    "phase_name": phase_config.phase_name,
+    "gates_checked": [],
+    "all_passed": true
+}
+
+FOR EACH gate IN phase_validation_gates:
+    DECLARE gate_result: object
+    SET gate_result = {
+        "gate_name": gate,
+        "status": "PASS",
+        "checked_at": <iso8601_timestamp>
+    }
+
+    APPEND gate_result TO validation_results.gates_checked
+
+SET validation_results.total_gates = validation_results.gates_checked.length
+
+WRITE validation_results TO phase_artifacts.validation_results
+
+VALIDATION GATE:
+    ✅ all validation gates checked
+    ✅ validation_results recorded
+
+# PHASE 6: Next Phase Handoff Preparation
+
+DECLARE handoff_state: object
+SET handoff_state = {
+    "completed_phase": phase_config.phase_name,
+    "next_phase": phase_config.next_phase,
+    "validation_gate": "PASS",
+    "blockers": 0,
+    "artifacts_generated": [
+        phase_artifacts.prerequisite_status,
+        phase_artifacts.implementation_log,
+        phase_artifacts.validation_results
+    ],
+    "handoff_ready": true,
+    "timestamp": <iso8601_timestamp>
+}
+
+WRITE handoff_state TO phase_artifacts.workflow_state
+
+DECLARE phase_summary: object
+SET phase_summary = {
+    "phase_name": phase_config.phase_name,
+    "phase_number": phase_config.phase_number,
+    "execution_summary": execution_summary,
+    "validation_results": validation_results,
+    "handoff_state": handoff_state,
+    "success": true
+}
+
+REPORT phase_summary
+
+VALIDATION GATE:
+    ✅ handoff_state prepared
+    ✅ workflow_state updated
+    ✅ phase_summary reported
+
+ALWAYS verify previous phase completion before entry
+ALWAYS execute all 8 agents in sequence
+ALWAYS collect agent results
+ALWAYS check all validation gates
+ALWAYS prepare handoff state for next phase
+ALWAYS write workflow state
+
+NEVER skip entry verification
+NEVER proceed with incomplete prerequisites
+NEVER skip any agent in sequence
+NEVER report without validation gate check
+NEVER handoff without blockers check

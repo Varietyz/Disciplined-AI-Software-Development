@@ -1,2 +1,0 @@
-anthropic
-python-dotenv

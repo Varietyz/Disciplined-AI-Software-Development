@@ -1,0 +1,454 @@
+---
+name: GENERIC-AGENT-CREATOR
+version: 1.0.0
+type: TEMPLATE
+description: Generic template for agent creation through domain investigation and composition
+context:
+    - <guidelines_file>
+---
+
+THIS TEMPLATE DEFINES agent creation via investigate-compose-validate loop
+
+%% META %%:
+intent: "<creation_intent>"
+objective: "<creation_objective>"
+priority: <priority_level>
+
+ON ERROR file_modified:
+TRY:
+    RENAME current_file TO current_file.bak
+
+    WRITE updated_content TO [NEW]current_file
+
+    DELETE current_file.bak
+
+    EXCEPT IF FAIL:
+    RENAME current_file.bak TO current_file
+
+END TRY
+
+# PHASE 1: Load Context
+
+    READ "<guidelines_file>" INTO guidelines
+    ENFORCE guidelines.<enforcement_directive>
+
+    DECLARE domain_spec: object
+    DECLARE algorithm_context: object
+
+    READ "<knowledge_base_path>/<algorithms_info_file>" INTO algorithms_info
+    READ "<knowledge_base_path>/<problem_solving_file>" INTO problem_solving
+
+    GREP "<algorithm_pattern_1>|<algorithm_pattern_2>|<algorithm_pattern_3>" IN algorithms_info INTO algorithm_classes
+
+        SET algorithm_context.classes = EXTRACT_VALUES(algorithm_classes)
+        SET algorithm_context.verb_ontology = ["<verb_1>", "<verb_2>", "<verb_3>", "<verb_4>", "<verb_5>", "<verb_6>", "<verb_7>", "<verb_8>"]
+        SET algorithm_context.prepositions = ["<prep_1>", "<prep_2>", "<prep_3>", "<prep_4>", "<prep_5>"]
+
+    GLOB "<knowledge_base_path>/<algorithms_directory>/*.<file_extension>" INTO available_algorithms
+
+        SET task_domain = "<domain_keywords>"
+
+    DECLARE relevant_algorithms: array
+
+        FOR EACH algorithm_file IN available_algorithms:
+            READ algorithm_file INTO algorithm_content
+            GREP "<relevance_pattern_1>|<relevance_pattern_2>|<relevance_pattern_3>" IN algorithm_content INTO relevance_match
+        IF relevance_match.length > 0:
+            APPEND algorithm_file TO relevant_algorithms
+
+            FOR EACH relevant_file IN relevant_algorithms:
+                READ relevant_file INTO algorithm_patterns
+                APPEND algorithm_patterns TO algorithm_context.patterns
+
+                READ "<spec_source_path>/<constants_file>" INTO domain_spec_constants
+                READ "<spec_source_path>/<token_types_file>" INTO token_types
+                READ "<spec_source_path>/<grammar_rules_file>" INTO grammar_rules
+                READ "<spec_source_path>/<node_types_file>" INTO node_types
+
+                GREP "<keyword_pattern_1>|<keyword_pattern_2>|<keyword_pattern_3>" IN grammar_rules INTO keyword_sets
+
+                SET domain_spec.keywords = EXTRACT_VALUES(keyword_sets)
+                SET domain_spec.document_types = ["<doc_type_1>", "<doc_type_2>", "<doc_type_3>", "<doc_type_4>", "<doc_type_5>"]
+                SET domain_spec.control_flow = ["<control_1>", "<control_2>", "<control_3>", "<control_4>", "<control_5>", "<control_6>", "<control_7>", "<control_8>"]
+
+    VALIDATION GATE:
+        ✅ algorithm_context loaded
+        ✅ domain_spec loaded
+        ✅ relevant_algorithms identified
+
+# PHASE 2: Initialize
+
+    SET workspace = "<workspace_path>/.<agent_type_name>"
+    SET checklist_path = workspace + "/<checklist_filename>"
+
+        EXTRACT target_entity_name FROM user_request
+        EXTRACT target_target_domain_path FROM user_request
+
+    SET entity_output_path = "<output_directory>/" + target_entity_name + ".<output_extension>"
+    SET secondary_output_path = "<secondary_output_directory>/" + target_entity_name + ".<secondary_extension>"
+
+        TRY:
+            READ checklist_path INTO checklist
+            GOTO RESUME
+        CATCH file_not_found:
+            GOTO GENERATE_CHECKLIST
+
+    VALIDATION GATE:
+        ✅ workspace initialized
+        ✅ target extracted from user_request
+
+# PHASE 3: Generate Creation Checklist
+
+    START GENERATE_CHECKLIST
+
+    SET checklist_content = ""
+
+        APPEND "[ ] <check_1>\n" TO checklist_content
+        APPEND "[ ] <check_2>\n" TO checklist_content
+        APPEND "[ ] <check_3>\n" TO checklist_content
+        APPEND "[ ] <check_4>\n" TO checklist_content
+        APPEND "[ ] <check_5>\n" TO checklist_content
+        APPEND "[ ] <check_6>\n" TO checklist_content
+        APPEND "[ ] <check_7>\n" TO checklist_content
+        APPEND "[ ] <check_8>\n" TO checklist_content
+
+    WRITE checklist_content TO checklist_path
+
+END
+
+# PHASE 4: Resume
+
+READ checklist_path INTO checklist
+
+GREP "^\[ \]" IN checklist INTO unchecked_items
+
+IF unchecked_items.length === 0:
+    SET all_complete = true
+ELSE:
+    SET current_step = EXTRACT_NAME(unchecked_items[0])
+    SET all_complete = false
+
+VALIDATION GATE:
+        ✅ checklist loaded
+        ✅ current_step identified OR all complete
+
+# PHASE 5: Execute Step
+
+    DECLARE step_result: object
+        SET step_result.step = current_step
+        SET step_result.passed = false
+        SET step_result.data = {}
+
+        MATCH current_step:
+            CASE "<check_1>":
+                GLOB "<collision_search_path>/*.<collision_extension>" INTO existing_entities
+                GREP target_entity_name IN existing_entities INTO collision
+        IF collision.length === 0:
+            SET step_result.passed = true
+            SET step_result.data.mode = "CREATE"
+        ELSE:
+            SET step_result.data.mode = "COLLISION"
+            SET step_result.data.existing_path = collision[0]
+            REPORT "<entity_type> exists: " + collision[0] + ". Options: <option_1> | <option_2> | <option_3>"
+            AWAIT user_choice FROM user
+            SET step_result.data.user_choice = user_choice
+            SET step_result.passed = true
+
+            CASE "<check_2>":
+                GLOB target_target_domain_path + "/**/*.<investigation_extension>" INTO domain_files
+
+                DECLARE target_domain_knowledge: object
+                    SET target_domain_knowledge.files = []
+                    SET target_domain_knowledge.exports = []
+                    SET target_domain_knowledge.imports = []
+                    SET target_domain_knowledge.entities = []
+                    SET target_domain_knowledge.functions = []
+
+                    FOR EACH file IN domain_files:
+                        READ file INTO content
+
+                        SET file_data = {
+                        "path": file,
+                        "lines": COUNT_LINES(content)
+                        }
+
+                        GREP "<export_pattern>" IN content INTO exports
+                            FOR EACH exp IN exports:
+                                APPEND exp.match TO target_domain_knowledge.exports
+
+                                GREP "<import_pattern>" IN content INTO imports
+                                    FOR EACH imp IN imports:
+                                    APPEND imp.match TO target_domain_knowledge.imports
+
+                                    GREP "<entity_pattern>" IN content INTO entities
+                                    FOR EACH ent IN entities:
+                                    APPEND ent.match TO target_domain_knowledge.entities
+
+                                    GREP "<function_pattern>" IN content INTO functions
+                                    FOR EACH fn IN functions:
+                                    APPEND fn.match TO target_domain_knowledge.functions
+
+                                    APPEND file_data TO target_domain_knowledge.files
+
+                                    SET step_result.data.target_domain = target_domain_knowledge
+                                    SET step_result.passed = true
+
+                                    WRITE target_domain_knowledge TO workspace + "/target_domain-knowledge.json"
+
+            CASE "<check_3>":
+                                    GLOB "<pattern_source_path>/*.<pattern_extension>" INTO compliant_entities
+
+                                    IF compliant_entities.length === 0:
+                                    GLOB "<fallback_pattern_path>/*.<pattern_extension>" INTO compliant_entities
+
+                                    DECLARE patterns: object
+                                    SET patterns.phase_counts = []
+                                    SET patterns.gate_counts = []
+                                    SET patterns.structures = []
+
+                                    FOR EACH entity_file IN compliant_entities:
+                                    READ entity_file INTO entity_content
+
+                                    GREP "<phase_pattern>" IN entity_content INTO phases
+                                    GREP "<gate_pattern>" IN entity_content INTO gates
+                                    GREP "<flow_control_pattern>" IN entity_content INTO flow_control
+
+                                    APPEND phases.length TO patterns.phase_counts
+                                    APPEND gates.length TO patterns.gate_counts
+
+                                    IF flow_control.length > 0:
+                                    APPEND "<structure_type_1>" TO patterns.structures
+                                    ELSE:
+                                    APPEND "<structure_type_2>" TO patterns.structures
+
+                                    SET patterns.avg_phases = MEAN(patterns.phase_counts)
+                                    SET patterns.avg_gates = MEAN(patterns.gate_counts)
+
+                                    SET step_result.data.patterns = patterns
+                                    SET step_result.passed = true
+
+            CASE "<check_4>":
+                                    READ workspace + "/target_domain-knowledge.json" INTO target_domain_knowledge
+
+                                    SET file_count = target_domain_knowledge.files.length
+                                    SET export_count = target_domain_knowledge.exports.length
+
+                                    IF file_count > <threshold_high> OR export_count > <threshold_high_exports>:
+                                    SET selected_algorithm = "<algorithm_large>"
+                                    SET recommended_phases = <phases_large>
+                                    ELSE IF file_count > <threshold_medium> OR export_count > <threshold_medium_exports>:
+                                    SET selected_algorithm = "<algorithm_medium>"
+                                    SET recommended_phases = <phases_medium>
+                                    ELSE:
+                                    SET selected_algorithm = "<algorithm_small>"
+                                    SET recommended_phases = <phases_small>
+
+                                    SET step_result.data.algorithm = selected_algorithm
+                                    SET step_result.data.phases = recommended_phases
+                                    SET step_result.passed = true
+
+            CASE "<check_5>":
+                                    READ workspace + "/target_domain-knowledge.json" INTO target_domain_knowledge
+
+                                    DECLARE phase_plan: array
+
+                                    APPEND {"name": "<phase_name_1>", "purpose": "<phase_purpose_1>"} TO phase_plan
+                                    APPEND {"name": "<phase_name_2>", "purpose": "<phase_purpose_2>"} TO phase_plan
+                                    APPEND {"name": "<phase_name_3>", "purpose": "<phase_purpose_3>"} TO phase_plan
+                                    APPEND {"name": "<phase_name_4>", "purpose": "<phase_purpose_4>"} TO phase_plan
+                                    APPEND {"name": "<phase_name_5>", "purpose": "<phase_purpose_5>"} TO phase_plan
+                                    APPEND {"name": "<phase_name_6>", "purpose": "<phase_purpose_6>"} TO phase_plan
+                                    APPEND {"name": "<phase_name_7>", "purpose": "<phase_purpose_7>"} TO phase_plan
+                                    APPEND {"name": "<phase_name_8>", "purpose": "<phase_purpose_8>"} TO phase_plan
+
+                                    SET step_result.data.phase_plan = phase_plan
+                                    SET step_result.passed = true
+
+            CASE "<check_6>":
+                                    READ workspace + "/target_domain-knowledge.json" INTO target_domain_knowledge
+
+                                    SET entity_content = "<frontmatter_start>\n"
+                                    APPEND "name: " + target_entity_name + "\n" TO entity_content
+                                    APPEND "version: <version_number>\n" TO entity_content
+                                    APPEND "type: <entity_type>\n" TO entity_content
+                                    APPEND "description: <entity_type> for " + target_target_domain_path + "\n" TO entity_content
+                                    APPEND "model: <model_type>\n" TO entity_content
+                                    APPEND "context:\n" TO entity_content
+                                    APPEND "    - <guidelines_file>\n" TO entity_content
+                                    APPEND "<frontmatter_end>\n\n" TO entity_content
+
+                                    APPEND "THIS <entity_type_upper> EXECUTES task operations for " + target_target_domain_path + "\n\n" TO entity_content
+
+                                    APPEND "<meta_block_marker>\n" TO entity_content
+                                    APPEND "intent: \"Process " + target_target_domain_path + "\"\n" TO entity_content
+                                    APPEND "objective: \"Complete task with validation\"\n" TO entity_content
+                                    APPEND "priority: <priority_level>\n\n" TO entity_content
+
+                                    APPEND "ON ERROR file_modified:\n" TO entity_content
+                                    APPEND "TRY:\n" TO entity_content
+                                    APPEND "    RENAME current_file TO current_file.bak\n\n" TO entity_content
+                                    APPEND "    WRITE updated_content TO [NEW]current_file\n\n" TO entity_content
+                                    APPEND "    DELETE current_file.bak\n\n" TO entity_content
+                                    APPEND "    EXCEPT IF FAIL:\n" TO entity_content
+                                    APPEND "    RENAME current_file.bak TO current_file\n\n" TO entity_content
+                                    APPEND "END TRY\n\n" TO entity_content
+
+                                    APPEND "# PHASE 1: Load Context\n\n" TO entity_content
+                                    APPEND "READ \"<guidelines_file>\" INTO guidelines\n" TO entity_content
+                                    APPEND "ENFORCE guidelines.<enforcement_directive>\n\n" TO entity_content
+
+                                    APPEND "# PHASE 2: Initialize\n\n" TO entity_content
+                                    APPEND "SET workspace = \"<workspace_path>/." + target_entity_name + "\"\n" TO entity_content
+                                    APPEND "SET target = user_specified_target\n\n" TO entity_content
+
+                                    APPEND "# PHASE 3: Execute\n\n" TO entity_content
+                                    APPEND "GLOB target + \"/**/*\" INTO files\n\n" TO entity_content
+                                    APPEND "FOR EACH file IN files:\n" TO entity_content
+                                    APPEND "    READ file INTO content\n" TO entity_content
+                                    APPEND "    ANALYZE content\n\n" TO entity_content
+
+                                    APPEND "# PHASE 4: Finalize\n\n" TO entity_content
+                                    APPEND "REPORT \"Complete\"\n\n" TO entity_content
+
+                                    APPEND "VALIDATION GATE:\n" TO entity_content
+                                    APPEND "    ✅ context loaded\n" TO entity_content
+                                    APPEND "    ✅ files processed\n" TO entity_content
+                                    APPEND "    ✅ output generated\n\n" TO entity_content
+
+                                    APPEND "ALWAYS read <guidelines_file> first\n" TO entity_content
+                                    APPEND "NEVER skip validation\n" TO entity_content
+
+                                    WRITE entity_content TO entity_output_path
+
+                                    SET step_result.data.entity_path = entity_output_path
+                                    SET step_result.passed = true
+
+            CASE "<check_7>":
+                                    SET secondary_output_content = "# " + target_entity_name + "\n\n"
+                                    APPEND "Execute " + target_entity_name + " <entity_type>\n\n" TO secondary_output_content
+                                    APPEND "## Usage\n\n" TO secondary_output_content
+                                    APPEND "$ARGUMENTS\n\n" TO secondary_output_content
+                                    APPEND "## Instructions\n\n" TO secondary_output_content
+                                    APPEND "Invoke @" + target_entity_name + " with target path\n" TO secondary_output_content
+
+                                    WRITE secondary_output_content TO secondary_output_path
+
+                                    SET step_result.data.secondary_output_path = secondary_output_path
+                                    SET step_result.passed = true
+
+            CASE "<check_8>":
+                                    READ entity_output_path INTO generated_entity
+
+                                    GREP "<phase_header_pattern>" IN generated_entity INTO phases
+                                    GREP "<gate_header_pattern>" IN generated_entity INTO gates
+                                    GREP "<keyword_detection_pattern>" IN generated_entity INTO keywords
+                                    GREP "<context_pattern>" IN generated_entity INTO context_ref
+                                    GREP "<guidelines_file>" IN generated_entity INTO guidelines_ref
+
+                                    SET compliance_score = 0
+
+                                    IF phases.length >= <min_phases>:
+                                    SET compliance_score = compliance_score + <score_phases>
+                                    IF gates.length >= <min_gates>:
+                                    SET compliance_score = compliance_score + <score_gates>
+                                    IF keywords.length >= <min_keywords>:
+                                    SET compliance_score = compliance_score + <score_keywords>
+                                    IF context_ref.length > 0 OR guidelines_ref.length > 0:
+                                    SET compliance_score = compliance_score + <score_context>
+
+                                    GREP "<meta_block_pattern>" IN generated_entity INTO meta_block
+                                    IF meta_block.length > 0:
+                                    SET compliance_score = compliance_score + <score_meta>
+
+                                    GREP "<error_handler_pattern>" IN generated_entity INTO error_handler
+                                    IF error_handler.length > 0:
+                                    SET compliance_score = compliance_score + <score_error>
+
+                                    SET step_result.data.compliance_score = compliance_score
+
+                                    IF compliance_score >= <passing_score>:
+                                    SET step_result.passed = true
+                                    ELSE:
+                                    SET step_result.passed = false
+                                    SET step_result.data.failures = "Score: " + compliance_score + "/<max_score>"
+
+    VALIDATION GATE:
+        ✅ current_step executed
+        ✅ step_result populated
+
+# PHASE 6: Update Checklist
+
+                                    READ checklist_path INTO checklist_raw
+
+                                    IF step_result.passed:
+                                    SET marker = "[x]"
+                                    ELSE:
+                                    SET marker = "[!]"
+
+                                    REPLACE "[ ] " + current_step WITH marker + " " + current_step IN checklist_raw INTO checklist_updated
+
+                                    WRITE checklist_updated TO checklist_path
+
+                                    SET findings_path = workspace + "/step-" + current_step + ".json"
+                                    WRITE step_result TO findings_path
+
+    VALIDATION GATE:
+        ✅ checklist updated
+        ✅ step findings written
+
+# PHASE 7: Iteration
+
+GREP "^\[ \]" IN checklist_updated INTO remaining_items
+
+IF remaining_items.length > 0:
+    SET continue_iteration = true
+ELSE:
+    SET continue_iteration = false
+
+# PHASE 8: Finalize
+
+GLOB workspace + "/step-*.<findings_extension>" INTO all_steps
+
+DECLARE creation_report: object
+SET creation_report.entity_name = target_entity_name
+SET creation_report.target_domain = target_target_domain_path
+SET creation_report.entity_path = entity_output_path
+SET creation_report.secondary_output_path = secondary_output_path
+SET creation_report.steps = []
+
+FOR EACH step_file IN all_steps:
+    READ step_file INTO step_data
+    APPEND step_data TO creation_report.steps
+
+READ checklist_path INTO final_checklist
+
+SET report_output = "## <entity_type> Created\n\n"
+APPEND "Name: " + target_entity_name + "\n" TO report_output
+APPEND "<entity_type>: " + entity_output_path + "\n" TO report_output
+APPEND "<secondary_output_type>: " + secondary_output_path + "\n\n" TO report_output
+APPEND "### Checklist\n\n" + final_checklist + "\n" TO report_output
+
+WRITE creation_report TO workspace + "/creation-report.json"
+
+REPORT report_output
+
+VALIDATION GATE:
+    ✅ algorithm_context loaded
+    ✅ domain_spec loaded
+    ✅ target_domain investigated
+    ✅ patterns extracted
+    ✅ entity composed with ON ERROR handler
+    ✅ secondary_output composed
+    ✅ compliance validated
+
+ALWAYS read <algorithms_info_file> first
+ALWAYS read task-relevant <algorithms_directory>/*.<file_extension>
+ALWAYS read domain_spec specification
+ALWAYS read <guidelines_file>
+ALWAYS include ON ERROR file_modified block in generated entitys
+ALWAYS use checklist-driven creation
+ALWAYS validate compliance before completion
+NEVER skip target_domain investigation
+NEVER generate entitys without validation gates
+NEVER generate entitys without ON ERROR handler
+NEVER hardcode paths

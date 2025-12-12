@@ -6,3 +6,4 @@ README-TEMPLATE.md
 __pycache__
 node_modules
 package-lock.json
+scripts/check_paths.py

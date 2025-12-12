@@ -1,0 +1,307 @@
+---
+name: <workflow_name>
+version: 1.0.0
+type: WORKFLOW
+description: N-agent orchestration through sequential phases with VERIFY-VALIDATE-ACTION-VERIFY pattern
+keywords:
+    - multi-agent
+    - orchestration
+    - sequential-phases
+    - verify-validate-action
+    - implementation
+context:
+    - CLAUDE.md
+    - <workspace_config_path>
+    - <implementation_index_path>
+model: <model_preference>
+---
+
+THIS WORKFLOW IMPLEMENTS multi-phase orchestration through N-agent sequences with VERIFY-VALIDATE-ACTION-VERIFY pattern
+
+%% META %%:
+intent: "Execute multi-phase implementation through coordinated agent orchestration"
+objective: "<implementation_objective>"
+context: "<implementation_context>"
+priority: <priority_level>
+
+ON ERROR file_modified:
+TRY:
+    RENAME current_file TO current_file.bak
+    WRITE updated_content TO [NEW]current_file
+    DELETE current_file.bak
+    EXCEPT IF FAIL:
+    RENAME current_file.bak TO current_file
+END TRY
+
+# PHASE 1: Orchestration Configuration
+
+SET config_file = "<workspace_config_path>"
+
+READ config_file INTO workspace_config
+EXTRACT workspace_config.zones INTO zones
+EXTRACT workspace_config.semantic_extensions INTO extensions
+
+SET shared_zone = zones.shared
+SET master_workflow_name = "<master_workflow_name>"
+SET artifact_base_path = shared_zone + "/" + master_workflow_name
+
+DECLARE semantic_extensions: object
+SET semantic_extensions.agent_context = "<context_extension>"
+SET semantic_extensions.audit_report = "<audit_extension>"
+SET semantic_extensions.task_checklist = "<checklist_extension>"
+
+DECLARE core_documents: array
+SET core_documents[0] = "prerequisite-status" + semantic_extensions.agent_context
+SET core_documents[1] = "implementation-log" + semantic_extensions.agent_context
+SET core_documents[2] = "architecture-decisions" + semantic_extensions.audit_report
+SET core_documents[3] = "integration-points" + semantic_extensions.task_checklist
+SET core_documents[4] = "validation-results" + semantic_extensions.audit_report
+SET core_documents[5] = "workflow-state" + semantic_extensions.task_checklist
+
+VALIDATION GATE:
+    ✅ Workspace configuration loaded
+    ✅ Semantic extensions defined
+    ✅ Core documents registry established
+
+# PHASE 2: Phase Definition
+
+DECLARE phase_0: object
+SET phase_0.name = "<phase_0_name>"
+SET phase_0.agents_start = 1
+SET phase_0.agents_end = <agents_per_phase>
+SET phase_0.workflow_file = "<phase_0_workflow_path>"
+SET phase_0.checklist_file = "<phase_0_checklist_path>"
+SET phase_0.prerequisites[0] = "<phase_0_prereq_1>"
+SET phase_0.success_criteria[0] = "<phase_0_success_1>"
+
+DECLARE phase_1: object
+SET phase_1.name = "<phase_1_name>"
+SET phase_1.agents_start = <agents_per_phase> + 1
+SET phase_1.agents_end = <agents_per_phase> * 2
+SET phase_1.workflow_file = "<phase_1_workflow_path>"
+SET phase_1.checklist_file = "<phase_1_checklist_path>"
+SET phase_1.prerequisites[0] = "Phase 0 complete"
+SET phase_1.success_criteria[0] = "<phase_1_success_1>"
+
+DECLARE phase_2: object
+SET phase_2.name = "<phase_2_name>"
+SET phase_2.agents_start = <agents_per_phase> * 2 + 1
+SET phase_2.agents_end = <agents_per_phase> * 3
+SET phase_2.workflow_file = "<phase_2_workflow_path>"
+SET phase_2.checklist_file = "<phase_2_checklist_path>"
+SET phase_2.prerequisites[0] = "Phase 1 complete"
+SET phase_2.success_criteria[0] = "<phase_2_success_1>"
+
+DECLARE phase_3: object
+SET phase_3.name = "<phase_3_name>"
+SET phase_3.agents_start = <agents_per_phase> * 3 + 1
+SET phase_3.agents_end = <agents_per_phase> * 4
+SET phase_3.workflow_file = "<phase_3_workflow_path>"
+SET phase_3.checklist_file = "<phase_3_checklist_path>"
+SET phase_3.prerequisites[0] = "Phase 2 complete"
+SET phase_3.success_criteria[0] = "<phase_3_success_1>"
+
+DECLARE phases: array
+SET phases[0] = phase_0
+SET phases[1] = phase_1
+SET phases[2] = phase_2
+SET phases[3] = phase_3
+
+SET total_agents = <total_agent_count>
+
+VALIDATION GATE:
+    ✅ All phases defined
+    ✅ Agent ranges assigned
+    ✅ Prerequisites chained
+
+# PHASE 3: Agent Type Registry
+
+DECLARE agent_types: object
+SET agent_types.entry_verifier = "<entry_verifier_type>"
+SET agent_types.architecture_validator = "<architecture_validator_type>"
+SET agent_types.implementation_architect = "<implementation_architect_type>"
+SET agent_types.refactor_specialist = "<refactor_specialist_type>"
+SET agent_types.compliance_auditor = "<compliance_auditor_type>"
+SET agent_types.testing_agent = "<testing_agent_type>"
+SET agent_types.exit_validator = "<exit_validator_type>"
+SET agent_types.completion_verifier = "<completion_verifier_type>"
+
+DECLARE agent_sequence_pattern: array
+SET agent_sequence_pattern[0] = agent_types.entry_verifier
+SET agent_sequence_pattern[1] = agent_types.architecture_validator
+SET agent_sequence_pattern[2] = agent_types.implementation_architect
+SET agent_sequence_pattern[3] = agent_types.refactor_specialist
+SET agent_sequence_pattern[4] = agent_types.compliance_auditor
+SET agent_sequence_pattern[5] = agent_types.testing_agent
+SET agent_sequence_pattern[6] = agent_types.exit_validator
+SET agent_sequence_pattern[7] = agent_types.completion_verifier
+
+VALIDATION GATE:
+    ✅ All agent types registered
+    ✅ Sequence pattern defined
+    ✅ VERIFY-VALIDATE-ACTION-VERIFY pattern enforced
+
+# PHASE 4: Shared Workspace Protocol
+
+DECLARE workspace_protocol: object
+SET workspace_protocol.single_source_of_truth = ENFORCE
+SET workspace_protocol.surgical_replacement = ENFORCE
+SET workspace_protocol.append_only_logs = ENFORCE
+SET workspace_protocol.read_before_write = ALWAYS
+
+SET workspace_protocol.lifecycle_create = "Pre-create empty with template"
+SET workspace_protocol.lifecycle_update = "Surgical replacement of sections"
+SET workspace_protocol.lifecycle_read = "Full document read before any write"
+SET workspace_protocol.lifecycle_delete = "NEVER during workflow"
+
+DECLARE handoff_signals: array
+SET handoff_signals[0] = "ACTIVATE_NEXT_AGENT"
+SET handoff_signals[1] = "PAUSE_FOR_USER"
+SET handoff_signals[2] = "ESCALATE_BLOCKER"
+SET handoff_signals[3] = "PHASE_COMPLETE"
+SET handoff_signals[4] = "WORKFLOW_COMPLETE"
+
+WHEN agent_writes_to_shared_document:
+    READ entire_document INTO local_copy
+    LOCATE section_to_update IN local_copy
+    APPLY surgical_changes TO section
+    VERIFY no_unintended_modifications
+    WRITE updated_document
+    RECORD modification_timestamp
+
+VALIDATION GATE:
+    ✅ Single source of truth enforced
+    ✅ Document lifecycle defined
+    ✅ Handoff signals registered
+
+# PHASE 5: Phase Execution Loop
+
+FOR EACH phase IN phases:
+    SET phase_artifacts_path = shared_zone + "/" + phase.name + "-implementation"
+    SET phase_agent_count = phase.agents_end - phase.agents_start + 1
+
+    REPORT "═══════════════════════════════════════════════════════════════"
+    REPORT phase.name
+    REPORT "═══════════════════════════════════════════════════════════════"
+
+    VERIFY phase.prerequisites ALL SATISFIED
+
+    IF prerequisites_not_met:
+        SIGNAL "ESCALATE_BLOCKER"
+        REPORT "Phase prerequisites not satisfied"
+        STOP
+    END IF
+
+    READ phase.checklist_file INTO phase_checklist
+
+    FOR agent_index FROM 0 TO phase_agent_count - 1:
+        SET current_agent_number = phase.agents_start + agent_index
+        SET current_agent_type = agent_sequence_pattern[agent_index]
+
+        DECLARE agent_config: object
+        SET agent_config.number = current_agent_number
+        SET agent_config.type = current_agent_type
+        SET agent_config.phase = phase.name
+        SET agent_config.focus_points = phase_checklist[agent_index]
+
+        REPORT "Agent " + current_agent_number + ": " + current_agent_type
+
+        EXECUTE Task(
+            subagent_type = current_agent_type,
+            prompt = agent_config.focus_points
+        )
+
+        VERIFY agent_validation_gates PASS
+
+        IF validation_failure:
+            EXECUTE verification_failure_protocol
+        END IF
+
+        IF agent_index < phase_agent_count - 1:
+            SIGNAL "ACTIVATE_NEXT_AGENT"
+        ELSE:
+            SIGNAL "PHASE_COMPLETE"
+        END IF
+
+    VERIFY phase.success_criteria ALL MET
+    UPDATE workflow-state WITH phase.completion_status
+
+    REPORT "═══════════════════════════════════════════════════════════════"
+    REPORT phase.name + " COMPLETE"
+    REPORT "═══════════════════════════════════════════════════════════════"
+
+VALIDATION GATE:
+    ✅ All phases executed
+    ✅ Agent sequences completed
+    ✅ Validation gates passed
+
+# PHASE 6: Final Summary Generation
+
+DECLARE final_summary: object
+SET final_summary.gap_analysis[0] = "List functionality planned but not implemented"
+SET final_summary.gap_analysis[1] = "Document blockers preventing implementation"
+SET final_summary.gap_analysis[2] = "Identify architectural gaps requiring attention"
+
+SET final_summary.delivered[0] = "List successfully implemented components"
+SET final_summary.delivered[1] = "Document validation gate pass/fail status"
+SET final_summary.delivered[2] = "Quantify implementation completeness"
+
+SET final_summary.already_implemented[0] = "List pre-existing functionality discovered"
+SET final_summary.already_implemented[1] = "Document components not requiring implementation"
+SET final_summary.already_implemented[2] = "Identify plan-codebase divergences"
+
+SET final_summary.recommendations[0] = "Next steps for completing gaps"
+SET final_summary.recommendations[1] = "Known issues requiring attention"
+SET final_summary.recommendations[2] = "Future enhancement opportunities"
+SET final_summary.recommendations[3] = "Architectural improvements suggested"
+
+WRITE final_summary TO artifact_base_path + "/final-summary" + semantic_extensions.audit_report
+
+VALIDATION GATE:
+    ✅ Gap analysis complete
+    ✅ Delivered components documented
+    ✅ Already-implemented items catalogued
+    ✅ Recommendations provided
+
+# PHASE 7: Verification Failure Protocol
+
+WHEN verification_failure DETECTED:
+    RECORD failure_context TO workflow-state
+    RECORD agent_state TO implementation-log
+    RECORD specific_gate_failure TO validation-results
+
+    IF failure_severity === "BLOCKER":
+        SIGNAL "PAUSE_FOR_USER"
+        AWAIT user_decision
+    ELSE IF failure_severity === "RECOVERABLE":
+        ATTEMPT agent_retry WITH modified_parameters
+        SET max_retry_attempts = 2
+    ELSE:
+        DOCUMENT deviation
+        CONTINUE workflow_execution
+    END IF
+
+    IF resolution_successful:
+        UPDATE workflow-state WITH resolution_details
+        CONTINUE phase_execution
+    ELSE:
+        SIGNAL "ESCALATE_BLOCKER"
+        GENERATE partial_implementation_report
+    END IF
+
+VALIDATION GATE:
+    ✅ Capture mechanism specified
+    ✅ Classification rules defined
+    ✅ Resolution pathways documented
+
+ALWAYS EXECUTE agents in defined sequence pattern
+ALWAYS VERIFY prerequisites before each phase
+ALWAYS READ shared documents before writing
+ALWAYS RECORD all state transitions
+ALWAYS GENERATE comprehensive final summary
+
+NEVER SKIP entry or exit verification agents
+NEVER PROCEED past failed validation gates silently
+NEVER MODIFY documents without read-first protocol
+NEVER DELETE shared documents during workflow
+NEVER EXECUTE phases out of order

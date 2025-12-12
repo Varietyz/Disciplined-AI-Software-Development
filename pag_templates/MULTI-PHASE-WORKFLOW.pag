@@ -1,0 +1,473 @@
+---
+name: generic-multi-phase-workflow
+version: 1.0.0
+type: TEMPLATE
+description: Systematic execution of multi-phase implementation through N-agent orchestration with VERIFY → VALIDATE → ACTION → VERIFY pattern. Implements coordinated agent workflow with handoff protocol and verification gates.
+model: <model_identifier>
+context:
+    - <workspace_config_path>
+    - <chain_index_path>
+    - <implementation_checklist_path>
+---
+
+THIS WORKFLOW IMPLEMENTS complete multi-phase implementation through systematic agent orchestration with verified VALIDATE → ACTION → VERIFY gates per phase
+
+%% META %%:
+intent: "Execute multi-phase implementation through coordinated agent workflow"
+objective: "Deliver working implementation through systematic agent execution with validation gates"
+context: "Implementation follows checklists with zero tech debt, zero fallback, zero dual-path policy"
+priority: high
+
+# PHASE 1: Workspace Configuration Discovery
+
+SET config_file = <workspace_config_path>
+
+READ config_file INTO workspace_config
+
+EXTRACT workspace_config.zones INTO zones
+EXTRACT workspace_config.semantic_extensions INTO extensions
+EXTRACT workspace_config.root INTO workspace_root
+
+DECLARE agent_files: array
+GLOB workspace_root + <agent_definition_pattern> INTO agent_files
+EXTRACT available_agents FROM agent_files
+SET agent_definition_path = workspace_root + <agent_folder_path>
+
+SET shared_zone = zones.shared
+SET workflow_zone = zones.workflow
+SET task_zone = zones.tasks
+
+SET single_source_of_truth = true
+SET workspace_sharing_mode = "all-agents-same-documents"
+SET document_lifecycle = "orchestrator-creates-agents-refine"
+SET edit_mode = "iterative-improvement"
+
+SET workflow_name = <workflow_identifier>
+SET artifact_base_path = shared_zone + "/" + workflow_name
+
+DECLARE core_documents: array
+SET core_documents = [
+    "prerequisite-status" + extensions.agent_context,
+    "implementation-log" + extensions.agent_context,
+    "architecture-decisions" + extensions.audit_report,
+    "integration-points" + extensions.task_checklist,
+    "validation-results" + extensions.audit_report,
+    "workflow-state" + extensions.task_checklist
+]
+
+DECLARE document_purpose_map: object
+SET document_purpose_map["prerequisite-status"] = "Track prerequisite completion status and baseline verification"
+SET document_purpose_map["implementation-log"] = "Chronological implementation actions and file modifications"
+SET document_purpose_map["architecture-decisions"] = "Key architectural choices, rationale, trade-offs, compliance metrics"
+SET document_purpose_map["integration-points"] = "Traced relationships, import paths, dependencies, integration verification"
+SET document_purpose_map["validation-results"] = "Validation gate results, test outcomes, failure analysis"
+SET document_purpose_map["workflow-state"] = "Current phase, current agent, blockers, handoff context, next steps"
+
+SET checkpoint_file = "workflow-state" + extensions.task_checklist
+
+VERIFY EACH document SERVES distinct_logical_purpose
+VERIFY NO generic_names LIKE "output.md" OR "results.md"
+VERIFY ALL semantic_names REFLECT content_type
+VERIFY document_count = 6
+
+VALIDATION GATE:
+    ✅ workspace_config loaded FROM config_file
+    ✅ zones discovered AND extracted
+    ✅ agent_definitions located AT agent_definition_path
+    ✅ artifact_base_path configured
+    ✅ semantic_extensions applied
+    ✅ shared_workspace_protocol defined
+    ✅ document_count = 6 documents
+    ✅ single_source_of_truth enforced
+
+# PHASE 2: Agent Sequence Definition
+
+DECLARE agent_sequence: array
+SET total_agent_invocations = <total_agents>
+SET agents_per_phase = <agents_per_phase_count>
+SET unique_agent_types = <unique_agent_count>
+SET phase_count = <phase_count>
+
+DECLARE agent_types: object
+
+SET agent_types["forensic-context-verifier"] = {
+    "type": "forensic-context-verifier",
+    "role": "VERIFICATION + DOCUMENTATION",
+    "positions": [1, 8],
+    "methodology": "INVESTIGATE → ACTION algorithmic pattern with phase-aware mode switching",
+    "responsibilities": [
+        "Verify baseline state and prerequisites",
+        "Document current state in shared documents",
+        "Generate handoff context for next phase or final summary"
+    ]
+}
+
+SET agent_types["code-tracer-agent"] = {
+    "type": "code-tracer-agent",
+    "role": "VALIDATION + DOCUMENTATION",
+    "positions": [2, 7],
+    "methodology": "7-phase CFG/AST forensic execution trace",
+    "responsibilities": [
+        "Validate architecture and integration points",
+        "Map execution flows and dependencies",
+        "Document trace findings and verification results"
+    ]
+}
+
+SET agent_types["production-code-architect"] = {
+    "type": "production-code-architect",
+    "role": "ACTION (no documentation)",
+    "positions": [3],
+    "methodology": "Evidence-based compliance checking with surgical implementation",
+    "responsibilities": [
+        "Implement core functionality",
+        "Execute primary implementation tasks",
+        "Signal completion only (no documentation)"
+    ]
+}
+
+SET agent_types["refactor-agent"] = {
+    "type": "refactor-agent",
+    "role": "ACTION (no documentation)",
+    "positions": [4],
+    "methodology": "Autonomous architectural optimization through systematic analysis",
+    "responsibilities": [
+        "Refactor and migrate code",
+        "Execute transformation tasks",
+        "Signal completion only (no documentation)"
+    ]
+}
+
+SET agent_types["srp-soc-agent"] = {
+    "type": "srp-soc-agent",
+    "role": "ACTION (no documentation)",
+    "positions": [5],
+    "methodology": "Systematic responsibility mapping and cohesion measurement",
+    "responsibilities": [
+        "Apply architectural compliance patterns",
+        "Execute structural improvements",
+        "Signal completion only (no documentation)"
+    ]
+}
+
+SET agent_types["debug-agent"] = {
+    "type": "debug-agent",
+    "role": "ACTION (no documentation)",
+    "positions": [6],
+    "methodology": "5-gate debugging methodology with loop detection",
+    "responsibilities": [
+        "Debug and test implementation",
+        "Execute validation gates",
+        "Signal completion only (no documentation)"
+    ]
+}
+
+DECLARE active_phases: array
+DECLARE completed_phases: array
+
+READ artifact_base_path + "/workflow-state" + extensions.task_checklist INTO workflow_state
+EXTRACT workflow_state.completed_phases INTO completed_phases
+EXTRACT workflow_state.current_phase INTO current_phase
+
+DECLARE phase_workflows: array
+SET phase_workflows = <phase_workflow_definitions>
+
+FOR EACH phase_workflow IN phase_workflows:
+    IF phase_workflow.phase_id NOT IN completed_phases:
+        IF phase_workflow.prerequisite !== null:
+            VERIFY phase_workflow.prerequisite IN completed_phases
+        DELEGATE phase_workflow.phase_id TO phase_workflow.workflow_file
+    ELSE:
+        MARK phase_workflow.phase_id AS COMPLETED
+
+VALIDATION GATE:
+    ✅ agent_invocations defined (agents_per_phase × phase_count)
+    ✅ unique_agent_types specified
+    ✅ fcv → cta → pca → ra → ssa → da → cta → fcv pattern per phase
+    ✅ VERIFICATION + DOCUMENTATION agents: positions 1, 2, 7, 8
+    ✅ ACTION ONLY agents: positions 3, 4, 5, 6
+    ✅ Final agent produces comprehensive summary
+    ✅ All validation gates defined per agent
+
+# PHASE 3: Handoff Protocol Definition
+
+DECLARE handoff_signal_format: object
+SET handoff_signal_format.agent_completed = "{agent_name}"
+SET handoff_signal_format.agent_phase = "{phase-role}"
+SET handoff_signal_format.artifacts_location = artifact_base_path
+SET handoff_signal_format.next_agent = "{next_agent_name}"
+SET handoff_signal_format.orchestrator_action = "ACTIVATE_NEXT_AGENT"
+
+DECLARE handoff_context: object
+SET handoff_context.phase_status = "complete | incomplete | failed"
+SET handoff_context.validation_gates_passed = "true | false"
+SET handoff_context.critical_files = ["file1:line", "file2:line"]
+SET handoff_context.key_findings = ["finding1", "finding2"]
+SET handoff_context.blockers = []
+SET handoff_context.issues_noted = []
+
+SET handoff_signal_format.handoff_context = handoff_context
+
+DECLARE verification_failure_protocol: object
+SET verification_failure_protocol.trigger = "validation_gates_passed = false"
+
+SET verification_failure_protocol.actions = [
+    "STEP 1: Agent documents failure in validation-results",
+    "STEP 2: Agent notes specific issues in workflow-state",
+    "STEP 3: Agent signals completion WITH failure flag",
+    "STEP 4: Next agent (verification) reads failure context",
+    "STEP 5: Verification agent documents root cause analysis",
+    "STEP 6: Final verification agent assesses phase completion",
+    "STEP 7: Handoff includes noted issues for next phase (or halt if critical)"
+]
+
+SET verification_failure_protocol.example = {
+    "scenario": "Action agent detects test failures",
+    "step_1": "Agent WRITES failure details to validation-results",
+    "step_2": "Agent WRITES blocker to workflow-state",
+    "step_3": "Agent SIGNALS completion WITH validation_gates_passed = false",
+    "step_4": "Next verification agent READS validation-results",
+    "step_5": "Verification agent TRACES execution to identify root cause",
+    "step_6": "Final verifier READS failure + analysis",
+    "step_7": "Final verifier DOCUMENTS incomplete phase state WITH handoff notes"
+}
+
+DECLARE agent_responsibilities: array
+SET agent_responsibilities = [
+    "VERIFICATION + DOCUMENTATION agents (1, 2, 7, 8): Document findings in shared documents",
+    "ACTION ONLY agents (3, 4, 5, 6): Execute tasks, signal completion, NO documentation",
+    "Every agent MUST read workflow-state before starting",
+    "Every agent MUST signal completion via handoff format",
+    "NEVER ask user 'should I continue?' - use orchestrator_action",
+    "READ all relevant core_documents before executing",
+    "EDIT documents in-place (NEVER create new versions)",
+    "VERIFY no duplicate findings across documents",
+    "Maintain documents in artifact_base_path",
+    "Include validation_gates_passed boolean in signal"
+]
+
+DECLARE orchestrator_actions: array
+
+DECLARE action_rule_1: object
+SET action_rule_1.action = "ACTIVATE_NEXT_AGENT"
+SET action_rule_1.behavior = "EXECUTE Task(subagent_type=next_agent, prompt=investigation_instructions)"
+SET action_rule_1.implementation = "MUST use Task tool - NOT simulate agent execution"
+SET action_rule_1.context = "Pass handoff_context as prompt context"
+SET action_rule_1.user_interaction = "None - automatic continuation"
+SET action_rule_1.prohibited = "NEVER simulate agent behavior in main session"
+APPEND action_rule_1 TO orchestrator_actions
+
+DECLARE action_rule_2: object
+SET action_rule_2.action = "PAUSE_FOR_USER"
+SET action_rule_2.behavior = "Present findings to user"
+SET action_rule_2.context = "Wait for explicit approval"
+SET action_rule_2.user_interaction = "Required - critical decision needed"
+SET action_rule_2.trigger = "Critical blocker detected that workflow cannot resolve"
+APPEND action_rule_2 TO orchestrator_actions
+
+DECLARE action_rule_3: object
+SET action_rule_3.action = "WORKFLOW_COMPLETE"
+SET action_rule_3.behavior = "Present final summary from final agent"
+SET action_rule_3.context = "No further agent activation"
+SET action_rule_3.user_interaction = "None - workflow finished"
+SET action_rule_3.trigger = "Final agent signals completion"
+APPEND action_rule_3 TO orchestrator_actions
+
+VALIDATION GATE:
+    ✅ signal_format defined WITH required_fields
+    ✅ handoff_context structure specified
+    ✅ verification_failure_protocol defined WITH 7-step process
+    ✅ orchestrator_actions specified WITH 3 action_types
+    ✅ agent_responsibilities established
+    ✅ automation_rules clear
+    ✅ artifact_paths configured TO shared_workspace
+
+# PHASE 4: Workflow Coordination Algorithm
+
+DECLARE coordination_sequence: array
+
+APPEND "ORCHESTRATOR: Pre-create 6 shared documents in " + artifact_base_path TO coordination_sequence
+
+FOR EACH document IN core_documents:
+    SET purpose = document_purpose_map[document]
+    APPEND "CREATE " + document + " (purpose: " + purpose + ")" TO coordination_sequence
+
+DECLARE phase_names: array
+SET phase_names = <phase_name_array>
+
+FOR EACH phase_name IN phase_names:
+    APPEND "═══════════════════════════════════════════════════════════════" TO coordination_sequence
+    APPEND phase_name TO coordination_sequence
+    APPEND "═══════════════════════════════════════════════════════════════" TO coordination_sequence
+
+    DECLARE agent_number: number
+    SET agent_number = 1
+
+    APPEND "ORCHESTRATOR: EXECUTE Task(subagent_type='forensic-context-verifier', prompt='" + phase_name + " Entry Verification')" TO coordination_sequence
+    APPEND "Agent " + agent_number + ": forensic-context-verifier (Entry Verification)" TO coordination_sequence
+    APPEND " ↓ VERIFIES previous phase validation gate passed" TO coordination_sequence
+    APPEND " ↓ VERIFIES prerequisites available" TO coordination_sequence
+    APPEND " ↓ WRITES baseline to prerequisite-status" TO coordination_sequence
+    APPEND " ↓ UPDATES workflow-state to current phase" TO coordination_sequence
+    APPEND " ↓ SIGNALS completion to orchestrator" TO coordination_sequence
+    SET agent_number = agent_number + 1
+
+    APPEND "ORCHESTRATOR: EXECUTE Task(subagent_type='code-tracer-agent', prompt='" + phase_name + " Architecture Validation')" TO coordination_sequence
+    APPEND "Agent " + agent_number + ": code-tracer-agent (Architecture Validation)" TO coordination_sequence
+    APPEND " ↓ TRACES execution flow through components" TO coordination_sequence
+    APPEND " ↓ MAPS integration points and relationships" TO coordination_sequence
+    APPEND " ↓ VERIFIES 0 circular dependencies" TO coordination_sequence
+    APPEND " ↓ WRITES integration points to shared documents" TO coordination_sequence
+    APPEND " ↓ SIGNALS completion to orchestrator" TO coordination_sequence
+    SET agent_number = agent_number + 1
+
+    APPEND "ORCHESTRATOR: EXECUTE Task(subagent_type='production-code-architect', prompt='" + phase_name + " Implementation')" TO coordination_sequence
+    APPEND "Agent " + agent_number + ": production-code-architect (Implementation)" TO coordination_sequence
+    APPEND " ↓ IMPLEMENTS core functionality for phase" TO coordination_sequence
+    APPEND " ↓ CREATES unit tests for components" TO coordination_sequence
+    APPEND " ↓ VERIFIES tests pass" TO coordination_sequence
+    APPEND " ↓ SIGNALS completion to orchestrator (NO DOCUMENTATION)" TO coordination_sequence
+    SET agent_number = agent_number + 1
+
+    APPEND "ORCHESTRATOR: EXECUTE Task(subagent_type='refactor-agent', prompt='" + phase_name + " Refactoring')" TO coordination_sequence
+    APPEND "Agent " + agent_number + ": refactor-agent (Refactoring)" TO coordination_sequence
+    APPEND " ↓ REFACTORS components for optimization" TO coordination_sequence
+    APPEND " ↓ MIGRATES legacy patterns to new architecture" TO coordination_sequence
+    APPEND " ↓ SIGNALS completion to orchestrator (NO DOCUMENTATION)" TO coordination_sequence
+    SET agent_number = agent_number + 1
+
+    APPEND "ORCHESTRATOR: EXECUTE Task(subagent_type='srp-soc-agent', prompt='" + phase_name + " Architectural Compliance')" TO coordination_sequence
+    APPEND "Agent " + agent_number + ": srp-soc-agent (Architectural Compliance)" TO coordination_sequence
+    APPEND " ↓ APPLIES SRP to components" TO coordination_sequence
+    APPEND " ↓ VERIFIES clean layer boundaries" TO coordination_sequence
+    APPEND " ↓ MEASURES cohesion of modules" TO coordination_sequence
+    APPEND " ↓ SIGNALS completion to orchestrator (NO DOCUMENTATION)" TO coordination_sequence
+    SET agent_number = agent_number + 1
+
+    APPEND "ORCHESTRATOR: EXECUTE Task(subagent_type='debug-agent', prompt='" + phase_name + " Testing')" TO coordination_sequence
+    APPEND "Agent " + agent_number + ": debug-agent (Testing)" TO coordination_sequence
+    APPEND " ↓ GATE 1: Tests primary functionality" TO coordination_sequence
+    APPEND " ↓ GATE 2: Tests integration points" TO coordination_sequence
+    APPEND " ↓ GATE 3: Validates output correctness" TO coordination_sequence
+    APPEND " ↓ GATE 4: Debugs edge cases" TO coordination_sequence
+    APPEND " ↓ GATE 5: Executes final validation tests" TO coordination_sequence
+    APPEND " ↓ SIGNALS completion to orchestrator (NO DOCUMENTATION)" TO coordination_sequence
+    APPEND " ↓ IF validation_gates_passed = false: Notes issues in workflow-state" TO coordination_sequence
+    SET agent_number = agent_number + 1
+
+    APPEND "ORCHESTRATOR: EXECUTE Task(subagent_type='code-tracer-agent', prompt='" + phase_name + " Verification')" TO coordination_sequence
+    APPEND "Agent " + agent_number + ": code-tracer-agent (Verification)" TO coordination_sequence
+    APPEND " ↓ TRACES implementation flow end-to-end" TO coordination_sequence
+    APPEND " ↓ VERIFIES components integrated correctly" TO coordination_sequence
+    APPEND " ↓ READS previous agent results, documents root cause if failures" TO coordination_sequence
+    APPEND " ↓ WRITES verification results to validation-results" TO coordination_sequence
+    APPEND " ↓ SIGNALS completion to orchestrator" TO coordination_sequence
+    SET agent_number = agent_number + 1
+
+    APPEND "ORCHESTRATOR: EXECUTE Task(subagent_type='forensic-context-verifier', prompt='" + phase_name + " Completion')" TO coordination_sequence
+    APPEND "Agent " + agent_number + ": forensic-context-verifier (Completion)" TO coordination_sequence
+    APPEND " ↓ VERIFIES all phase tasks complete" TO coordination_sequence
+    APPEND " ↓ VERIFIES phase validation gate 100% complete" TO coordination_sequence
+    APPEND " ↓ READS all shared documents for assessment" TO coordination_sequence
+    APPEND " ↓ WRITES phase completion status to workflow-state" TO coordination_sequence
+    APPEND " ↓ GENERATES handoff context for next phase" TO coordination_sequence
+    APPEND " ↓ SIGNALS completion to orchestrator" TO coordination_sequence
+
+APPEND "═══════════════════════════════════════════════════════════════" TO coordination_sequence
+APPEND "WORKFLOW COMPLETE" TO coordination_sequence
+APPEND "═══════════════════════════════════════════════════════════════" TO coordination_sequence
+
+VALIDATION GATE:
+    ✅ document_pre_creation_protocol defined
+    ✅ agent coordination blocks created (agents_per_phase × phase_count)
+    ✅ fcv → cta → pca → ra → ssa → da → cta → fcv pattern per phase
+    ✅ orchestrator_action explicit (EXECUTE Task tool)
+    ✅ verification_failure_protocol embedded in coordination
+    ✅ final_summary_structure defined for final agent
+    ✅ phase_boundaries clearly marked
+
+# PHASE 5: Workflow Principles
+
+DECLARE workflow_principles: array
+
+SET workflow_principles_header = "This workflow ensures the implementation is:"
+
+APPEND "- **Grounded in codebase reality** (forensic-context-verifier discovers actual baseline state)" TO workflow_principles
+APPEND "- **Architecturally validated** (code-tracer-agent validates architecture pre/post implementation)" TO workflow_principles
+APPEND "- **Systematically implemented** (production-code-architect implements with evidence-based compliance)" TO workflow_principles
+APPEND "- **Incrementally refactored** (refactor-agent applies systematic optimization and cleanup)" TO workflow_principles
+APPEND "- **Architecturally compliant** (srp-soc-agent enforces SRP/SOC throughout)" TO workflow_principles
+APPEND "- **Thoroughly tested** (debug-agent applies 5-gate debugging methodology)" TO workflow_principles
+APPEND "- **Comprehensively verified** (code-tracer-agent traces execution post-implementation)" TO workflow_principles
+APPEND "- **Rigorously assessed** (forensic-context-verifier provides phase completion verification)" TO workflow_principles
+APPEND "- **Fully automated** (orchestrator handles handoffs via Task tool without user intervention)" TO workflow_principles
+APPEND "- **Context-aware** (handoff signals preserve findings, blockers, validation results)" TO workflow_principles
+APPEND "- **Self-documenting** (verification agents document in shared documents, action agents execute only)" TO workflow_principles
+APPEND "- **Failure-resilient** (verification failure protocol: document → note → handoff with issues)" TO workflow_principles
+APPEND "- **Workspace-integrated** (uses artifact_base_path with semantic extensions)" TO workflow_principles
+
+DECLARE workflow_guarantees: array
+
+APPEND "The artifact_base_path becomes comprehensive implementation record:" TO workflow_guarantees
+APPEND "- prerequisite-status: Phase prerequisites and baseline state" TO workflow_guarantees
+APPEND "- implementation-log: Chronological implementation actions and results" TO workflow_guarantees
+APPEND "- architecture-decisions: Architectural choices, compliance metrics, pre/post states" TO workflow_guarantees
+APPEND "- integration-points: Traced relationships, dependencies, integration verification" TO workflow_guarantees
+APPEND "- validation-results: Validation gate results, test outcomes, failure analysis" TO workflow_guarantees
+APPEND "- workflow-state: Current phase/agent, blockers, handoff context, final summary" TO workflow_guarantees
+
+APPEND "All deliverables validated against phase-specific validation gates" TO workflow_guarantees
+APPEND "Artifacts persist in workflow_zone for cross-session access and audit trail" TO workflow_guarantees
+
+VALIDATION GATE:
+    ✅ workflow_principles enumerated (13 principles)
+    ✅ agent_contributions mapped per principle
+    ✅ workflow_guarantees articulated
+    ✅ domain_agnostic_value clear
+
+# SUCCESS CRITERIA
+
+VALIDATION GATE:
+    ✅ workspace_configuration discovered FROM config_file
+    ✅ agent_invocations defined (agents_per_phase × phase_count)
+    ✅ unique_agent_types specified
+    ✅ fcv → cta → pca → ra → ssa → da → cta → fcv pattern enforced per phase
+    ✅ handoff_protocol established WITH verification_failure_handling
+    ✅ workflow_coordination_sequence built
+    ✅ agent_definitions complete WITH roles and methodologies
+    ✅ phase_boundaries clearly marked
+    ✅ workflow_principles articulated (13 principles)
+    ✅ final_summary_structure defined (gap analysis, delivered, already-implemented, recommendations)
+    ✅ document_pre_creation specified (6 shared documents)
+    ✅ semantic_extensions applied
+    ✅ Task_tool_execution mandatory (NEVER simulate agent behavior)
+    ✅ verification_agents_document (positions 1, 2, 7, 8)
+    ✅ action_agents_execute_only (positions 3, 4, 5, 6)
+
+ALWAYS read workspace_config FROM config_file
+ALWAYS use workspace_zones FOR artifact_paths
+ALWAYS create 6 shared documents BEFORE first phase
+ALWAYS execute agents via Task tool (NEVER simulate)
+ALWAYS follow fcv → cta → pca → ra → ssa → da → cta → fcv pattern per phase
+ALWAYS allow verification agents (1, 2, 7, 8) to document
+ALWAYS prohibit action agents (3, 4, 5, 6) from documenting
+ALWAYS include handoff_context in agent signals
+ALWAYS document failures in workflow-state BEFORE handoff
+ALWAYS generate final summary from final agent (gap analysis, delivered, already-implemented, recommendations)
+ALWAYS maintain single source of truth in shared documents
+ALWAYS apply semantic extensions
+ALWAYS enforce zero tech debt, zero fallback, zero dual-path policy
+ALWAYS trace execution with code-tracer-agent post-implementation
+ALWAYS verify with forensic-context-verifier at phase boundaries
+ALWAYS test with debug-agent using 5-gate methodology
+ALWAYS refactor with refactor-agent for optimization
+ALWAYS apply SRP/SOC with srp-soc-agent
+ALWAYS implement with production-code-architect using evidence-based approach
+ALWAYS persist artifacts in workflow_zone for cross-session access
+
+NEVER skip validation gates
+NEVER simulate agent execution in orchestrator session
+NEVER ask user for continuation (use orchestrator_action)
+NEVER create new document versions (edit in-place)
+NEVER allow duplicate findings across documents
+NEVER proceed to next phase WITHOUT phase completion verification

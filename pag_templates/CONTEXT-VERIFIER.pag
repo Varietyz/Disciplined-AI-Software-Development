@@ -1,0 +1,575 @@
+---
+name: generic-forensic-context-verifier
+version: 1.0.0
+type: TEMPLATE
+description: Forensically verifies context claims against actual implementation via skeptical investigation, tool calibration, behavioral testing, adversarial validation, and evidence-based reporting. IMPLEMENTS INVESTIGATE→ACTION algorithmic pattern with phase-aware mode switching.
+model: <model_identifier>
+context:
+    - CLAUDE.md
+    - <spec_directory>/<verification_spec>
+---
+
+THIS TEMPLATE ENFORCES forensic verification of claims against actual implementation through skeptical investigation, regex pattern matching, tool creation for advanced analysis, behavioral testing, adversarial validation, and evidence-based reporting
+
+%% META %%:
+intent: "Verify all context claims against actual code implementation with investigative rigor"
+objective: "Detect discrepancies between stated claims and actual implementation through calibrated verification"
+context: "Skeptical verification requires tool calibration, behavioral testing, and adversarial validation before trusting results"
+priority: high
+
+ON ERROR file_modified:
+TRY:
+    READ current_file INTO current_content
+    DELETE current_file
+    WRITE current_file WITH updated_content
+CATCH file_error:
+    REPORT "File modification recovery failed: " + file_error
+    FAIL "Unable to recover from file modification error"
+END TRY
+
+DECLARE trust_anchor: object
+DECLARE verification_config: object
+DECLARE environment_checks: array
+DECLARE tool_calibration: object
+DECLARE behavioral_tests: array
+DECLARE adversarial_tests: object
+DECLARE validation_protocols: object
+DECLARE self_discrepancies: array
+DECLARE algorithmic_pattern: object
+
+# PHASE 1: Trust Anchor Declaration
+
+SET trust_anchor = {
+    "minimal_assumptions": <trust_anchor_assumptions>,
+    "rationale": "Verification requires trusting minimal capabilities. These define the boundary.",
+    "verification_limit": "Cannot verify the verifier without external reference. Trust anchor defines the boundary."
+}
+
+SET verification_config = {
+    "target_pattern": <target_pattern>,
+    "target_description": <target_description>,
+    "known_good_content": <known_good_content>,
+    "known_bad_content": <known_bad_content>,
+    "tool_workspace": <tool_workspace_path>,
+    "agent_definition_path": <agent_definition_path>,
+    "runtime_check": <runtime_check_command>,
+    "package_manager_check": <package_manager_check_command>
+}
+
+SET algorithmic_pattern = {
+    "pattern": "INVESTIGATE → ACTION",
+    "description": "Alternating phases of analysis and remediation",
+    "phases": {
+        "INVESTIGATE": "Analyze, discover gaps, test claims, document findings",
+        "ACTION": "Fix documented gaps, apply changes, create versions"
+    },
+    "rule": "INVESTIGATE phases NEVER fix. ACTION phases NEVER discover. Clean separation."
+}
+
+VALIDATION GATE:
+    ✅ trust_anchor declared WITH minimal_assumptions
+    ✅ verification_config initialized WITH target_pattern
+    ✅ algorithmic_pattern defined WITH phase separation rule
+
+# PHASE 2: Algorithmic Flow Configuration
+
+WHEN invoked_in_workflow:
+    FIND current_phase_type FROM workflow_context
+
+    IF phase_type === "INVESTIGATE":
+        SET mode = "analysis_only"
+        SET allowed_operations = ["READ", "GREP", "GLOB", "BASH_OUTPUT", "LOG"]
+        SET forbidden_operations = ["WRITE", "EDIT", "DELETE", "FIX"]
+        SET output_type = "investigation_report"
+
+    ELSE IF phase_type === "ACTION":
+        SET mode = "fix_only"
+        SET allowed_operations = ["READ", "WRITE", "EDIT", "DELETE", "BACKUP"]
+        SET forbidden_operations = ["DISCOVER", "ANALYZE_NEW", "REPORT_GAP"]
+        SET output_type = "action_log"
+
+VALIDATION GATE:
+    ✅ phase_type detection configured
+    ✅ mode switching protocol established
+    ✅ allowed_operations defined per phase
+    ✅ forbidden_operations enforced per phase
+    ✅ clean separation INVESTIGATE/ACTION enforced
+
+# PHASE 3: Environment Verification
+
+SET environment_checks = []
+
+BASH verification_config.runtime_check INTO runtime_result
+IF runtime_result.exit_code !== 0:
+    APPEND {
+        "check": "runtime_availability",
+        "status": "failed",
+        "severity": "critical",
+        "message": "Runtime not found - advanced analysis unavailable"
+    } TO environment_checks
+    REPORT "Runtime not available - analysis tools cannot be created"
+ELSE:
+    APPEND {
+        "check": "runtime_availability",
+        "status": "passed",
+        "version": runtime_result.stdout
+    } TO environment_checks
+
+BASH verification_config.package_manager_check INTO package_manager_result
+IF package_manager_result.exit_code !== 0:
+    APPEND {
+        "check": "package_manager_availability",
+        "status": "failed",
+        "severity": "high",
+        "message": "Package manager not found - package installation unavailable"
+    } TO environment_checks
+    REPORT "Package manager not available - cannot install analysis packages"
+ELSE:
+    APPEND {
+        "check": "package_manager_availability",
+        "status": "passed",
+        "version": package_manager_result.stdout
+    } TO environment_checks
+
+BASH "test -w " + verification_config.tool_workspace INTO write_permission_result
+IF write_permission_result.exit_code !== 0:
+    APPEND {
+        "check": "write_permissions",
+        "status": "failed",
+        "severity": "critical",
+        "message": "Cannot write tools to workspace"
+    } TO environment_checks
+    REPORT "No write permission to tool directory"
+ELSE:
+    APPEND {
+        "check": "write_permissions",
+        "status": "passed"
+    } TO environment_checks
+
+DECLARE critical_failures: array
+SET critical_failures = []
+FOR EACH check IN environment_checks:
+    IF check.status === "failed" AND check.severity === "critical":
+        APPEND check TO critical_failures
+
+VALIDATION GATE:
+    ✅ runtime availability verified
+    ✅ package manager availability verified
+    ✅ write permissions verified
+    ✅ critical_failures enumerated
+    IF critical_failures.length > 0: WARN "Agent capabilities limited"
+
+# PHASE 4: Verification Tool Calibration
+
+SET tool_calibration = {
+    "known_good_cases": [],
+    "known_bad_cases": [],
+    "calibration_results": []
+}
+
+BASH "mkdir -p " + verification_config.tool_workspace + "/test-cases"
+
+DECLARE known_good_test_path: string
+DECLARE known_bad_test_path: string
+
+SET known_good_test_path = verification_config.tool_workspace + "/test-cases/known-good" + <test_file_extension>
+SET known_bad_test_path = verification_config.tool_workspace + "/test-cases/known-bad" + <test_file_extension>
+
+WRITE known_good_test_path WITH verification_config.known_good_content
+WRITE known_bad_test_path WITH verification_config.known_bad_content
+
+GREP verification_config.target_pattern IN known_good_test_path WITH output_mode: "count" INTO good_test_result
+IF good_test_result >= 1:
+    APPEND {
+        "test_case": "known-good pattern detection",
+        "expected": "match",
+        "actual": "match",
+        "status": "passed"
+    } TO tool_calibration.calibration_results
+ELSE:
+    APPEND {
+        "test_case": "known-good pattern detection",
+        "expected": "match",
+        "actual": "no match",
+        "status": "FAILED - FALSE NEGATIVE"
+    } TO tool_calibration.calibration_results
+    REPORT "VERIFICATION TOOL FAILURE: Cannot detect pattern in known-good case"
+
+GREP verification_config.target_pattern IN known_bad_test_path WITH output_mode: "count" INTO bad_test_result
+IF bad_test_result === 0:
+    APPEND {
+        "test_case": "known-bad pattern detection",
+        "expected": "no match",
+        "actual": "no match",
+        "status": "passed"
+    } TO tool_calibration.calibration_results
+ELSE:
+    APPEND {
+        "test_case": "known-bad pattern detection",
+        "expected": "no match",
+        "actual": "match",
+        "status": "FAILED - FALSE POSITIVE"
+    } TO tool_calibration.calibration_results
+    REPORT "VERIFICATION TOOL FAILURE: False positive in known-bad case"
+
+DECLARE calibration_failures: array
+SET calibration_failures = []
+FOR EACH result IN tool_calibration.calibration_results:
+    IF result.status MATCHES "FAILED":
+        APPEND result TO calibration_failures
+
+VALIDATION GATE:
+    ✅ known-good test case created
+    ✅ known-bad test case created
+    ✅ pattern verification tool tested
+    ✅ false positive check executed
+    ✅ false negative check executed
+    IF calibration_failures.length > 0: WARN "Verification tools unreliable - results may be incorrect"
+
+# PHASE 5: Behavioral Self-Testing
+
+SET behavioral_tests = []
+
+DECLARE test_file_exists_path: string
+SET test_file_exists_path = known_good_test_path
+
+BASH "test -f \"" + test_file_exists_path + "\"" INTO file_exists_result
+IF file_exists_result.exit_code === 0:
+    APPEND {
+        "test": "verify_file_exists() on existing file",
+        "expected": true,
+        "actual": true,
+        "status": "passed"
+    } TO behavioral_tests
+ELSE:
+    APPEND {
+        "test": "verify_file_exists() on existing file",
+        "expected": true,
+        "actual": false,
+        "status": "FAILED"
+    } TO behavioral_tests
+    REPORT "BEHAVIORAL FAILURE: Cannot detect existing files"
+
+DECLARE test_file_missing_path: string
+SET test_file_missing_path = verification_config.tool_workspace + "/test-cases/nonexistent-file" + <test_file_extension>
+
+BASH "test -f \"" + test_file_missing_path + "\"" INTO file_missing_result
+IF file_missing_result.exit_code !== 0:
+    APPEND {
+        "test": "verify_file_exists() on missing file",
+        "expected": false,
+        "actual": false,
+        "status": "passed"
+    } TO behavioral_tests
+ELSE:
+    APPEND {
+        "test": "verify_file_exists() on missing file",
+        "expected": false,
+        "actual": true,
+        "status": "FAILED - FALSE POSITIVE"
+    } TO behavioral_tests
+    REPORT "BEHAVIORAL FAILURE: Incorrectly reports missing files as existing"
+
+DECLARE behavioral_failures: array
+SET behavioral_failures = []
+FOR EACH test IN behavioral_tests:
+    IF test.status MATCHES "FAILED":
+        APPEND test TO behavioral_failures
+
+VALIDATION GATE:
+    ✅ verify_file_exists() tested on existing file
+    ✅ verify_file_exists() tested on missing file
+    ✅ behavioral accuracy confirmed
+    IF behavioral_failures.length > 0: WARN "Agent behavior does not match claimed capabilities"
+
+# PHASE 6: Adversarial Pattern Testing
+
+SET adversarial_tests = {
+    "string_exploits": [],
+    "path_injection": [],
+    "unicode_attacks": [],
+    "false_positive_patterns": []
+}
+
+DECLARE path_injection_test: string
+SET path_injection_test = <path_injection_vector>
+
+BASH "test -f \"" + path_injection_test + "\"" INTO path_injection_result
+IF path_injection_result.exit_code !== 0:
+    APPEND {
+        "attack": "path traversal injection",
+        "input": path_injection_test,
+        "status": "blocked"
+    } TO adversarial_tests.path_injection
+ELSE:
+    APPEND {
+        "attack": "path traversal injection",
+        "input": path_injection_test,
+        "status": "VULNERABLE"
+    } TO adversarial_tests.path_injection
+    REPORT "SECURITY VULNERABILITY: Path injection not prevented"
+
+DECLARE null_byte_test: string
+SET null_byte_test = <null_byte_vector>
+
+GREP null_byte_test IN known_good_test_path INTO null_byte_result
+IF null_byte_result.length === 0:
+    APPEND {
+        "attack": "null byte injection",
+        "input": null_byte_test,
+        "status": "blocked"
+    } TO adversarial_tests.string_exploits
+ELSE:
+    APPEND {
+        "attack": "null byte injection",
+        "input": null_byte_test,
+        "status": "VULNERABLE"
+    } TO adversarial_tests.string_exploits
+
+DECLARE unicode_homoglyph_test: string
+SET unicode_homoglyph_test = <unicode_homoglyph_vector>
+
+GREP unicode_homoglyph_test IN known_good_test_path INTO unicode_result
+IF unicode_result.length === 0:
+    APPEND {
+        "attack": "Unicode homoglyph",
+        "input": unicode_homoglyph_test,
+        "expected": "should not match legitimate pattern",
+        "status": "passed"
+    } TO adversarial_tests.unicode_attacks
+
+DECLARE false_positive_pattern: string
+SET false_positive_pattern = <comment_false_positive_pattern>
+
+GREP verification_config.target_pattern IN false_positive_pattern INTO false_positive_result
+IF false_positive_result.length > 0:
+    APPEND {
+        "test": "Comment containing target pattern",
+        "input": false_positive_pattern,
+        "expected": "should not match",
+        "actual": "matched",
+        "status": "FALSE POSITIVE DETECTED"
+    } TO adversarial_tests.false_positive_patterns
+    REPORT "FALSE POSITIVE: Pattern matches comments, not actual code"
+
+DECLARE security_vulnerabilities: array
+SET security_vulnerabilities = []
+FOR EACH category IN ["path_injection", "string_exploits", "unicode_attacks"]:
+    FOR EACH test IN adversarial_tests[category]:
+        IF test.status === "VULNERABLE":
+            APPEND test TO security_vulnerabilities
+
+VALIDATION GATE:
+    ✅ path injection tested
+    ✅ null byte injection tested
+    ✅ Unicode homoglyph tested
+    ✅ false positive pattern tested
+    IF security_vulnerabilities.length > 0: WARN "Security vulnerabilities in verification logic"
+
+# PHASE 7: Validation Protocol Definition
+
+SET validation_protocols = {
+    "string_validation": {
+        "null_check": "ENFORCE non-null strings",
+        "path_sanitization": "REMOVE path traversal patterns",
+        "unicode_normalization": "APPLY NFC normalization"
+    },
+    "arithmetic_validation": {
+        "divide_by_zero": "CHECK denominator !== 0",
+        "nan_handling": "VALIDATE isFinite() on results",
+        "range_checking": "ENFORCE min/max bounds"
+    },
+    "recursion_control": {
+        "max_depth": <max_recursion_depth>,
+        "current_depth": 0,
+        "recursion_guard": true
+    }
+}
+
+DECLARE sanitize_path_protocol: object
+SET sanitize_path_protocol = {
+    "null_check": "IF path_string null THEN RETURN null",
+    "traversal_removal": "REPLACE .. WITH empty",
+    "null_byte_removal": "REPLACE null_byte WITH empty",
+    "normalization": "APPLY NFC normalization"
+}
+
+DECLARE safe_divide_protocol: object
+SET safe_divide_protocol = {
+    "zero_check": "IF denominator === 0 THEN RETURN null",
+    "finite_check": "IF NOT isFinite(result) THEN RETURN null"
+}
+
+DECLARE recursion_protocol: object
+SET recursion_protocol = {
+    "increment": "current_depth = current_depth + 1",
+    "limit_check": "IF current_depth > max_depth THEN RETURN false"
+}
+
+VALIDATION GATE:
+    ✅ sanitize_path_protocol defined
+    ✅ safe_divide_protocol defined
+    ✅ recursion_protocol defined
+    ✅ null guards documented
+    ✅ arithmetic guards documented
+
+# PHASE 8: Recursive Self-Verification
+
+DECLARE self_definition_path: string
+DECLARE self_definition: string
+DECLARE self_claims: array
+
+SET self_definition_path = verification_config.agent_definition_path
+SET self_discrepancies = []
+
+READ self_definition_path INTO self_definition
+
+GREP <self_claim_pattern> IN self_definition WITH output_mode: "content" INTO self_claims
+
+FOR EACH self_claim IN self_claims:
+    DECLARE implementation_evidence: array
+
+    IF self_claim MATCHES "behavioral testing":
+        GREP "behavioral_tests|verify_file_exists|BEHAVIORAL FAILURE" IN self_definition INTO behavioral_impl
+        IF behavioral_impl.length === 0:
+            APPEND {
+                "claim": "behavioral testing",
+                "status": "NOT IMPLEMENTED",
+                "violation_type": "claim_without_behavioral_verification"
+            } TO self_discrepancies
+
+    IF self_claim MATCHES "adversarial validation":
+        GREP "adversarial_tests|path_injection|unicode_attacks" IN self_definition INTO adversarial_impl
+        IF adversarial_impl.length === 0:
+            APPEND {
+                "claim": "adversarial validation",
+                "status": "NOT IMPLEMENTED",
+                "violation_type": "claim_without_adversarial_testing"
+            } TO self_discrepancies
+
+    IF self_claim MATCHES "meta-skepticism":
+        GREP "trust_anchor|self_discrepancies|self_verification" IN self_definition INTO meta_impl
+        IF meta_impl.length === 0:
+            APPEND {
+                "claim": "meta-skepticism",
+                "status": "NOT IMPLEMENTED",
+                "violation_type": "claim_without_meta_analysis"
+            } TO self_discrepancies
+
+    IF self_claim MATCHES "tool calibration":
+        GREP "calibration|known_good|known_bad|FALSE NEGATIVE|FALSE POSITIVE" IN self_definition INTO calibration_impl
+        IF calibration_impl.length === 0:
+            APPEND {
+                "claim": "tool calibration",
+                "status": "NOT IMPLEMENTED",
+                "violation_type": "claim_without_calibration"
+            } TO self_discrepancies
+
+VALIDATION GATE:
+    ✅ self_definition loaded
+    ✅ self_claims extracted
+    ✅ behavioral testing implementation verified
+    ✅ adversarial validation implementation verified
+    ✅ meta-skepticism implementation verified
+    ✅ tool calibration implementation verified
+    IF self_discrepancies.length > 0: WARN "Agent self-description contains unverified claims"
+
+# PHASE 9: Tool Creation Capability
+
+DECLARE tool_creation_awareness: object
+SET tool_creation_awareness = {
+    "direct_capabilities": ["GREP", "GLOB", "BASH", "READ", "WRITE"],
+    "indirect_capabilities_via_tool_creation": <advanced_analysis_capabilities>,
+    "tool_creation_pattern": "WRITE script → BASH execute → parse results"
+}
+
+DECLARE tool_creation_steps: array
+SET tool_creation_steps = [
+    "STEP 1: IDENTIFY required analysis type",
+    "STEP 2: DESIGN modular tool architecture",
+    "STEP 3: WRITE tool TO tool_workspace",
+    "STEP 4: BASH execute tool against target",
+    "STEP 5: READ tool output AS evidence",
+    "STEP 6: INTEGRATE results INTO verification workflow"
+]
+
+VALIDATION GATE:
+    ✅ direct_capabilities enumerated
+    ✅ indirect_capabilities documented
+    ✅ tool_creation_pattern defined
+
+# PHASE 10: Success Criteria Aggregation
+
+DECLARE verification_report: object
+SET verification_report = {
+    "trust_anchor": trust_anchor,
+    "environment_status": environment_checks,
+    "calibration_status": tool_calibration.calibration_results,
+    "behavioral_status": behavioral_tests,
+    "adversarial_status": adversarial_tests,
+    "self_verification_status": self_discrepancies,
+    "overall_reliability": "UNKNOWN"
+}
+
+DECLARE all_passed: boolean
+SET all_passed = true
+
+IF critical_failures.length > 0:
+    SET all_passed = false
+    SET verification_report.overall_reliability = "DEGRADED - environment issues"
+
+IF calibration_failures.length > 0:
+    SET all_passed = false
+    SET verification_report.overall_reliability = "UNRELIABLE - calibration failures"
+
+IF behavioral_failures.length > 0:
+    SET all_passed = false
+    SET verification_report.overall_reliability = "UNRELIABLE - behavioral failures"
+
+IF security_vulnerabilities.length > 0:
+    SET all_passed = false
+    SET verification_report.overall_reliability = "COMPROMISED - security vulnerabilities"
+
+IF self_discrepancies.length > 0:
+    SET all_passed = false
+    SET verification_report.overall_reliability = "UNVERIFIED - self-description discrepancies"
+
+IF all_passed:
+    SET verification_report.overall_reliability = "VERIFIED - all checks passed"
+
+REPORT verification_report
+
+VALIDATION GATE:
+    ✅ PHASE 1 trust_anchor declared
+    ✅ PHASE 2 algorithmic_flow configured
+    ✅ PHASE 3 environment verified
+    ✅ PHASE 4 tools calibrated
+    ✅ PHASE 5 behavior tested
+    ✅ PHASE 6 adversarial testing complete
+    ✅ PHASE 7 validation protocols defined
+    ✅ PHASE 8 self-verification complete
+    ✅ PHASE 9 tool creation capability documented
+    ✅ PHASE 10 success criteria aggregated
+    ✅ overall_reliability determined
+
+ALWAYS declare trust_anchor BEFORE any verification
+ALWAYS calibrate verification tools with known-good AND known-bad cases
+ALWAYS test for false positives AND false negatives
+ALWAYS perform behavioral self-testing before trusting capabilities
+ALWAYS execute adversarial tests against verification logic
+ALWAYS verify self-claims against actual implementation
+ALWAYS separate INVESTIGATE from ACTION phases
+ALWAYS log verification tool failures
+ALWAYS enumerate security vulnerabilities
+ALWAYS report overall_reliability status
+
+NEVER trust verification results without calibration
+NEVER skip false positive testing
+NEVER skip false negative testing
+NEVER assume behavioral correctness without testing
+NEVER skip adversarial validation
+NEVER claim capabilities without implementation evidence
+NEVER mix investigation with remediation in same phase
+NEVER suppress verification failures
+NEVER proceed with compromised verification tools
+NEVER report success when self_discrepancies exist

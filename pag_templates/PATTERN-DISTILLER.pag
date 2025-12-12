@@ -1,0 +1,304 @@
+---
+name: generic-pattern-distiller
+version: 1.0.0
+type: TEMPLATE
+description: Forensically detects base class opportunities, eliminates anti-patterns, and establishes predictable implementation patterns through systematic codebase analysis. IMPLEMENTS Knowledge-Construction-Loop, Legacy-Pattern-Analysis-Loop, and Model-Construction-Loop algorithms.
+model: <model_identifier>
+context:
+    - CLAUDE.md
+    - <config_path>
+---
+
+THIS TEMPLATE ENFORCES forensic codebase analysis to detect base class opportunities, eliminate anti-patterns, and establish predictable implementation patterns through systematic pattern distillation
+
+%% META %%:
+intent: "Forensic codebase analysis to detect base class opportunities and eliminate anti-patterns"
+objective: "Systematic pattern distillation through forensic code analysis with zero tolerance for anti-patterns"
+context: "Architectural refactoring and pattern distillation domain"
+priority: high
+
+ON ERROR workspace_error:
+TRY:
+    READ alternative_workspace_path INTO workspace_content
+CATCH path_error:
+    REPORT "Workspace recovery failed: " + path_error
+    FAIL "Unable to create workspace"
+END TRY
+
+DECLARE config: object
+DECLARE analysis_id: string
+DECLARE manifest: object
+DECLARE baseline_metrics: object
+
+# PHASE 1: Workspace Initialization
+
+SET config = {
+    "workspace_root": <workspace_root>,
+    "chain_location": <chain_location>,
+    "registry_location": <registry_location>,
+    "codebase_scope": <codebase_scope>,
+    "output_path": <output_path>
+}
+
+SET analysis_id = "analysis-" + <iso8601_timestamp>
+
+BASH "mkdir -p " + config.output_path + "/phases"
+BASH "mkdir -p " + config.output_path + "/migrations"
+
+DECLARE chain_docs: object
+DECLARE registry_data: object
+
+READ config.chain_location + "/00-index.json" INTO chain_docs.index
+READ config.chain_location + "/04-base-classes.json" INTO chain_docs.base_classes
+READ config.registry_location + "/code-analysis/base-classes.json" INTO registry_data.base_classes
+
+SET manifest = {
+    "analysis_id": analysis_id,
+    "started_at": <iso8601_timestamp>,
+    "target_domain": <user_provided_domain>,
+    "chain_docs_loaded": ["00-index", "04-base-classes"],
+    "existing_base_classes": registry_data.base_classes.length
+}
+
+WRITE manifest TO config.output_path + "/00-manifest.json"
+
+VALIDATION GATE:
+    ✅ config initialized
+    ✅ manifest written
+    ✅ chain_docs loaded
+    ✅ registry_data extracted
+
+# PHASE 2: Registry Investigation
+
+DECLARE existing_base_classes: array
+DECLARE compliance_gaps: object
+SET existing_base_classes = []
+
+FOR EACH base_class IN registry_data.base_classes:
+    DECLARE base_class_info: object
+    SET base_class_info = {
+        "name": base_class.name,
+        "implementation_count": base_class.implementations.length,
+        "file_locations": base_class.locations,
+        "naming_pattern": base_class.pattern
+    }
+    APPEND base_class_info TO existing_base_classes
+
+GREP <manager_class_pattern> IN config.codebase_scope INTO manager_classes
+GREP <extending_base_manager_pattern> IN config.codebase_scope INTO extending_managers
+
+DECLARE managers_not_extending: number
+SET managers_not_extending = manager_classes.length - extending_managers.length
+
+DECLARE compliance_rate: number
+IF manager_classes.length > 0:
+    SET compliance_rate = (extending_managers.length / manager_classes.length) * 100
+ELSE:
+    SET compliance_rate = 100
+
+SET compliance_gaps = {
+    "managers_not_extending": managers_not_extending,
+    "compliance_rate": compliance_rate
+}
+
+SET baseline_metrics = {
+    "total_base_classes": existing_base_classes.length,
+    "compliance_gaps": compliance_gaps
+}
+
+WRITE baseline_metrics TO config.output_path + "/phases/01-registry-investigation.json"
+
+VALIDATION GATE:
+    ✅ base_classes read FROM registry
+    ✅ baseline_metrics calculated
+    ✅ compliance_gaps identified
+
+# PHASE 3: Semantic Code Analysis
+
+DECLARE semantic_domains: object
+DECLARE cross_class_patterns: object
+DECLARE total_classes_analyzed: number
+
+GLOB config.codebase_scope + <manager_file_pattern> INTO manager_files
+GLOB config.codebase_scope + <repository_file_pattern> INTO repository_files
+GLOB config.codebase_scope + <service_file_pattern> INTO service_files
+
+SET total_classes_analyzed = manager_files.length + repository_files.length + service_files.length
+
+SET semantic_domains = {
+    "managers": manager_files.length,
+    "repositories": repository_files.length,
+    "services": service_files.length
+}
+
+GREP <logger_initialization_pattern> IN config.codebase_scope INTO logger_duplications
+GREP <error_handling_throw_pattern> IN config.codebase_scope INTO throw_errors
+GREP <error_handling_return_null_pattern> IN config.codebase_scope INTO return_nulls
+
+DECLARE error_consistency: number
+DECLARE total_error_handling: number
+SET total_error_handling = throw_errors.length + return_nulls.length
+
+IF total_error_handling > 0:
+    DECLARE max_pattern: number
+    IF throw_errors.length > return_nulls.length:
+        SET max_pattern = throw_errors.length
+    ELSE:
+        SET max_pattern = return_nulls.length
+    SET error_consistency = max_pattern / total_error_handling
+ELSE:
+    SET error_consistency = 1
+
+SET cross_class_patterns = {
+    "duplicated_code": {
+        "logger_initialization": logger_duplications.length
+    },
+    "inconsistent_patterns": {
+        "error_handling_consistency": error_consistency
+    }
+}
+
+WRITE cross_class_patterns TO config.output_path + "/phases/02-semantic-analysis.json"
+
+VALIDATION GATE:
+    ✅ semantic_domains identified
+    ✅ cross_class_patterns recognized
+    ✅ duplication detected
+
+# PHASE 4: Anti-Pattern Detection
+
+DECLARE anti_patterns: array
+SET anti_patterns = []
+
+IF logger_duplications.length >= 3:
+    APPEND {
+        "type": "copy_paste_duplication",
+        "pattern": "Logger initialization",
+        "occurrence_count": logger_duplications.length,
+        "impact": "medium",
+        "effort": "low",
+        "severity": "medium"
+    } TO anti_patterns
+
+IF error_consistency < 0.7:
+    APPEND {
+        "type": "behavioral_inconsistency",
+        "pattern": "Error handling",
+        "consistency_rate": error_consistency,
+        "impact": "high",
+        "effort": "medium",
+        "severity": "high"
+    } TO anti_patterns
+
+IF managers_not_extending > 0:
+    APPEND {
+        "type": "architectural_violation",
+        "pattern": "Manager not extending BaseManager",
+        "occurrence_count": managers_not_extending,
+        "impact": "high",
+        "effort": "medium",
+        "severity": "high"
+    } TO anti_patterns
+
+DECLARE anti_pattern_report: object
+SET anti_pattern_report = {
+    "anti_patterns": anti_patterns,
+    "total_anti_patterns": anti_patterns.length
+}
+
+WRITE anti_pattern_report TO config.output_path + "/phases/03-anti-pattern-detection.json"
+
+VALIDATION GATE:
+    ✅ anti_patterns detected
+    ✅ severity assessed
+    ✅ report written
+
+# PHASE 5: Pattern Abstraction
+
+DECLARE base_class_candidates: array
+SET base_class_candidates = []
+
+FOR EACH anti_pattern IN anti_patterns:
+    IF anti_pattern.type === "copy_paste_duplication":
+        DECLARE candidate: object
+        SET candidate = {
+            "name": <inferred_base_class_name>,
+            "anti_patterns_eliminated": [anti_pattern.pattern],
+            "boundary_concrete": "constructor, initialize, destroy, handleError",
+            "boundary_abstract": "onInitialize, onDestroy",
+            "lifecycle_pattern": "constructor -> initialize -> onInitialize -> onDestroy -> destroy"
+        }
+        APPEND candidate TO base_class_candidates
+
+DECLARE pattern_abstraction: object
+SET pattern_abstraction = {
+    "base_class_candidates": base_class_candidates,
+    "total_candidates": base_class_candidates.length,
+    "abstraction_strategy": "template_method_pattern_with_async_hooks"
+}
+
+WRITE pattern_abstraction TO config.output_path + "/phases/04-pattern-abstraction.json"
+
+VALIDATION GATE:
+    ✅ base_class_candidates identified
+    ✅ abstraction_boundaries defined
+    ✅ pattern_abstraction documented
+
+# PHASE 6: Final Summary
+
+DECLARE final_metrics: object
+DECLARE duplication_reduction: number
+
+IF logger_duplications.length > 0:
+    SET duplication_reduction = ((logger_duplications.length - 1) / logger_duplications.length) * 100
+ELSE:
+    SET duplication_reduction = 0
+
+SET final_metrics = {
+    "duplication_reduction": duplication_reduction,
+    "base_class_adoption": compliance_rate,
+    "anti_patterns_detected": anti_patterns.length,
+    "candidates_identified": base_class_candidates.length
+}
+
+DECLARE summary_report: object
+SET summary_report = {
+    "analysis_id": analysis_id,
+    "completed_at": <iso8601_timestamp>,
+    "success_metrics": final_metrics,
+    "baseline_metrics": baseline_metrics,
+    "cross_class_patterns": cross_class_patterns,
+    "anti_patterns": anti_patterns,
+    "base_class_candidates": base_class_candidates,
+    "lessons_learned": [
+        "Template method pattern effective for lifecycle management",
+        "Composition over inheritance for utility access",
+        "Forensic analysis reveals hidden duplication"
+    ]
+}
+
+WRITE summary_report TO config.output_path + "/05-final-summary.json"
+
+REPORT summary_report
+
+VALIDATION GATE:
+    ✅ final_metrics calculated
+    ✅ summary_report complete
+    ✅ report delivered
+
+ALWAYS initialize workspace before analysis
+ALWAYS load chain_docs AND registry_data first
+ALWAYS calculate compliance_gaps
+ALWAYS detect cross_class_patterns for duplication
+ALWAYS prioritize anti_patterns by impact
+ALWAYS require boundary principles for base class candidates
+ALWAYS calculate ROI metrics
+ALWAYS generate actionable summary
+
+NEVER skip registry investigation
+NEVER create base class without clear boundary
+NEVER ignore behavioral_inconsistency patterns
+NEVER skip compliance gap analysis
+NEVER abstract single-occurrence patterns
+NEVER exceed 150 lines per base class
+NEVER report without metrics

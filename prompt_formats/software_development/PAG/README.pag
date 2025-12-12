@@ -1,0 +1,219 @@
+---
+name: disciplined-ai-software-development
+version: 1.0.0
+type: WORKFLOW
+description: Structured approach for AI-assisted development addressing code bloat, architectural drift, context dilution, and behavioral inconsistency
+copyright: Disciplined AI Software Development Methodology © 2025 by Jay Baleine
+license: CC BY-SA 4.0
+license_url: https://creativecommons.org/licenses/by-sa/4.0/
+attribution_url: https://github.com/Varietyz/Disciplined-AI-Software-Development
+author_url: https://www.linkedin.com/in/jay-baleine/
+---
+
+THIS WORKFLOW IMPLEMENTS systematic AI collaboration through behavioral configuration, structured planning, constrained implementation, and empirical validation
+
+%% META %%:
+intent: "Address AI development challenges → Establish systematic workflow → Enable consistent collaboration → Produce measurable results"
+objective: "Eliminate code bloat and architectural drift through systematic constraints and validation checkpoints"
+priority: critical
+
+# PHASE 1: Identify Context Problem
+
+    DECLARE ai_interaction_pattern: string
+        SET ai_interaction_pattern = "Question → Answer"
+
+        ANALYZE broad_multi_faceted_requests:
+    FIND typical_output WITH:
+    FIND functions_that_work WITHOUT structure
+    FIND repeated_code ACROSS components
+    FIND architectural_inconsistency ACROSS sessions
+    FIND context_dilution CAUSING output_drift
+    FIND behavioral_pattern_degradation ACROSS extended_sessions
+    FIND debugging_time EXCEEDS planning_time
+
+        VALIDATION GATE:
+        ✅ interaction_pattern identified
+        ✅ common_problems documented
+        ✅ output_characteristics analyzed
+
+# PHASE 2: Methodology Overview
+
+    DECLARE methodology_stages: number
+        SET methodology_stages = 4
+
+        ENFORCE systematic_constraints
+        ENFORCE behavioral_consistency_enforcement
+        ENFORCE validation_checkpoints
+
+    DECLARE methodology_approach: array
+        SET methodology_approach = [
+        "ai_behavioral_configuration",
+        "collaborative_planning",
+        "systematic_implementation",
+        "data_driven_iteration"
+        ]
+
+        VALIDATION GATE:
+        ✅ methodology_stages defined
+        ✅ systematic_constraints established
+        ✅ approach_components identified
+
+# PHASE 3: Stage 1 - AI Behavioral Configuration
+
+        EXECUTE behavioral_configuration:
+        LOAD ai_custom_instructions WITH "AI-PREFERENCES.XML"
+
+        EXECUTE persona_framework:
+        LOAD "CORE-PERSONA-FRAMEWORK.json"
+
+        EXECUTE persona_activation:
+        EXECUTE command "Simulate Persona"
+
+        ENFORCE systematic_behavioral_consistency
+        ENFORCE constraint_enforcement
+        REMOVE behavioral_drift
+
+        VALIDATION GATE:
+        ✅ custom_instructions configured
+        ✅ persona_framework loaded
+        ✅ activation_command specified
+        ✅ drift_prevention enabled
+
+# PHASE 4: Stage 2 - Collaborative Planning
+
+        EXECUTE collaborative_planning:
+    READ "METHODOLOGY.XML" INTO ai_context
+
+        EXECUTE collaboration:
+        DEFINE scope
+        DEFINE completion_criteria
+    FIND components
+    FIND dependencies
+        CREATE phases BASED_ON logical_progression
+        CREATE systematic_tasks WITH measurable_checkpoints
+
+        VALIDATION GATE:
+        ✅ methodology shared
+        ✅ scope defined
+        ✅ components identified
+        ✅ phases structured
+        ✅ tasks generated
+
+# PHASE 5: Stage 3 - Systematic Implementation
+
+        EXECUTE systematic_implementation:
+        ITERATE phase_by_phase
+        ITERATE section_by_section
+
+        ENFORCE file_size WITH max_lines = 150
+
+        DEFINE implementation_flow:
+        REQUEST specific_component
+        WAIT FOR ai_processing
+        VALIDATE output
+        EXECUTE benchmark
+        CONTINUE TO next_component
+
+        VALIDATION GATE:
+        ✅ phased_approach defined
+        ✅ file_size enforced
+        ✅ implementation_flow established
+        ✅ validation integrated
+
+# PHASE 6: Stage 4 - Data-Driven Iteration
+
+        EXECUTE data_driven_iteration:
+        EXECUTE benchmarking_suite FOR performance_data
+        COLLECT performance_data THROUGHOUT development
+        ANALYZE empirical_results
+        ITERATE BASED_ON measurements
+
+        VALIDATION GATE:
+        ✅ benchmarking executed
+        ✅ continuous_data_collection
+        ✅ empirical_analysis enabled
+
+# PHASE 7: Why This Approach Works
+
+    DECLARE effectiveness_factors: object
+
+        SET effectiveness_factors.decision_processing = "AI handles focused questions more reliably"
+        SET effectiveness_factors.context_management = "Small files and bounded problems prevent juggling multiple concerns"
+        SET effectiveness_factors.behavioral_constraint_enforcement = "Persona system prevents AI drift"
+        SET effectiveness_factors.empirical_validation = "Performance data replaces subjective assessment"
+        SET effectiveness_factors.systematic_constraints = "Architectural checkpoints force consistent behavior"
+
+        VALIDATION GATE:
+        ✅ effectiveness_factors documented
+        ✅ reliability_improvements explained
+        ✅ constraint_benefits identified
+
+# PHASE 8: Implementation Steps - Configuration
+
+        EXECUTE configuration_steps:
+        LOAD ai WITH "AI-PREFERENCES.XML" AS custom_instructions
+    READ "CORE-PERSONA-FRAMEWORK.json"
+    READ selected_persona_json
+        EXECUTE command "Simulate Persona"
+    READ "METHODOLOGY.XML" FOR planning_session
+        EXECUTE collaboration ON project_structure
+        EXECUTE collaboration ON phases
+        CREATE systematic_development_plan
+
+        VALIDATION GATE:
+        ✅ ai configured
+        ✅ persona loaded
+        ✅ persona activated
+        ✅ methodology shared
+        ✅ plan generated
+
+# PHASE 9: Implementation Steps - Execution
+
+        EXECUTE execution_steps:
+        CREATE phase0_infrastructure FIRST:
+        CREATE benchmarking_suite WITH regression_detection
+        CREATE ci_cd_workflows
+        CREATE test_infrastructure
+        CREATE documentation_generation
+        CREATE centralized_architecture
+
+        ITERATE through_phases sequentially
+
+        IMPLEMENTS one_component FOR EACH interaction
+
+        EXECUTE benchmarks AFTER EACH component
+        REPORT results TO ai
+
+        VALIDATE architectural_compliance continuously
+
+        VALIDATION GATE:
+        ✅ phase0 built first
+        ✅ sequential_execution defined
+        ✅ component_isolation enforced
+        ✅ benchmark_integration established
+        ✅ continuous_validation required
+
+        ALWAYS configure_ai_behavior BEFORE development
+        ALWAYS load_persona_framework
+        ALWAYS activate_persona
+        ALWAYS share_methodology FOR planning
+        ALWAYS build_phase0_first
+        ALWAYS work_sequentially
+        ALWAYS enforce_file_size_limits
+        ALWAYS validate_after_each_component
+        ALWAYS use_benchmarking_data
+        ALWAYS maintain_architectural_compliance
+        ALWAYS prevent_behavioral_drift
+        ALWAYS use_systematic_constraints
+        ALWAYS validate_empirically
+
+        NEVER skip_behavioral_configuration
+        NEVER skip_phase0_infrastructure
+        NEVER work_without_phases
+        NEVER exceed_file_size_limits
+        NEVER skip_validation_checkpoints
+        NEVER ignore_benchmark_data
+        NEVER allow_architectural_drift
+        NEVER allow_context_dilution
+        NEVER proceed_without_systematic_plan
+        NEVER implement_multiple_components simultaneously

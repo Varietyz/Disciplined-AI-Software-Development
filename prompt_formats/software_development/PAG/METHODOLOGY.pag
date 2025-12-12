@@ -1,0 +1,334 @@
+---
+name: project-documentation-methodology
+version: 1.0.0
+type: METHODOLOGY
+description: Structured approach for disciplined AI-assisted software development with architectural minimalism and deterministic reliability
+copyright: Disciplined AI Software Development Methodology © 2025 by Jay Baleine
+license: CC BY-SA 4.0
+license_url: https://creativecommons.org/licenses/by-sa/4.0/
+attribution_url: https://github.com/Varietyz/Disciplined-AI-Software-Development
+author_url: https://www.linkedin.com/in/jay-baleine/
+---
+
+THIS METHODOLOGY DEFINES architectural principles, code quality standards, and systematic project planning FOR AI-assisted development
+
+%% META %%:
+intent: "Establish architectural principles → Define code standards → Structure project planning → Enable systematic implementation"
+objective: "Enforce architectural minimalism with deterministic reliability through measurable standards and validation checkpoints"
+priority: critical
+
+# PHASE 1: Core Architectural Principles
+
+    DECLARE foundational_philosophy: string
+        SET foundational_philosophy = "Architectural Minimalism with Deterministic Reliability"
+
+        ENFORCE principle:
+        REQUIRE measurable_value FOR EACH line_of_code
+        CREATE systems FOR predictable_production_behavior
+        AVOID demonstrations_of_sophistication
+
+        VALIDATION GATE:
+        ✅ foundational_philosophy declared
+        ✅ measurable_value required
+        ✅ production_predictability enforced
+
+# PHASE 2: Separation of Concerns
+
+        ENFORCE single_responsibility FOR EACH module
+        ENFORCE well_defined_responsibility FOR EACH module
+        ENFORCE strict_modular_boundaries WITH clear_interfaces
+
+        ANALYZE separation_appropriateness:
+        IF separation_harms_architecture:
+            REMOVE separation
+        ELSE:
+            ENFORCE separation
+
+                REQUIRE centralized_main_entry_points
+                REQUIRE modular_project_layout
+
+            VALIDATION GATE:
+                ✅ single_responsibility enforced
+                ✅ modular_boundaries defined
+                ✅ centralized_entry_points required
+
+# PHASE 3: Deterministic Operations
+
+    ENFORCE synchronous_behavior OVER async_complexity
+    ENFORCE predictable_behavior
+    ENFORCE long_runtime_stability OVER cutting_edge_patterns
+    ENFORCE production_stability OVER development_convenience
+        ANALYZE cross_platform_requirements IN design_decisions
+
+    VALIDATION GATE:
+        ✅ synchronous_operations prioritized
+        ✅ predictable_behavior enforced
+        ✅ production_stability prioritized
+        ✅ cross_platform analyzed
+
+# PHASE 4: Performance-Driven Decisions
+
+    MATCH technology BASED_ON workload_requirements NOT popular_tr:ends
+    APPLY optimizations ONLY TO proven_bottlenecks
+        REQUIRE measurable_impact FOR optimizations
+    AVOID premature_optimization THAT clutters_codebase
+    ENFORCE performance_baselines
+    ENFORCE regression_detection
+
+    VALIDATION GATE:
+        ✅ technology_selection_criteria defined
+        ✅ optimization_policy established
+        ✅ baselines required
+        ✅ regression_detection required
+
+# PHASE 5: Code Quality Standards
+
+    ENFORCE file_size_limit WITH max_lines = 150
+        IF file_exceeds_limit:
+            SPLIT INTO separate_modules
+
+                REQUIRE self_explanatory_code WITHOUT comments
+            BACKUP readability AS primary_concern
+            BACKUP maintainability AS primary_concern
+            ENFORCE KISS_principles
+            ENFORCE DRY_principles
+            REMOVE existing_functions BEFORE creating_new_ones
+
+            VALIDATION GATE:
+                ✅ file_size_limit enforced
+                ✅ self_explanatory_code required
+                ✅ KISS_DRY enforced
+                ✅ function_reuse prioritized
+
+# PHASE 6: Error Handling Philosophy
+
+    IMPLEMENTS robust_error_handling WITHOUT over_engineering
+    IMPLEMENTS production_reliability_requirements
+    AVOID handling_every_edge_case
+    IMPLEMENTS graceful_failure_modes
+    IMPLEMENTS resource_cleanup
+
+    VALIDATION GATE:
+        ✅ error_handling balanced
+        ✅ production_reliability prioritized
+        ✅ graceful_failures implemented
+        ✅ resource_cleanup enforced
+
+# PHASE 7: Feature Control
+
+    WRITE feature_bloat
+    WRITE complexity_creep
+        REQUIRE core_purpose_alignment FOR EACH addition
+    ENFORCE surgical_approach:
+    TARGET exact_problem
+    EXECUTE minimal_code
+    ALLOW multi_language_use ONLY WHEN justified_by_measurable_gains
+
+    VALIDATION GATE:
+        ✅ feature_bloat resisted
+        ✅ complexity_creep prevented
+        ✅ surgical_approach enforced
+        ✅ multi_language justified
+
+# PHASE 8: Web Development Adaptations
+
+    NEVER inline_code:
+        EXTRACT styles TO separate_files
+        MOVE handlers TO named_functions
+        DECLARE configurations AS constants
+
+            SET file_size_accommodation:
+            ENFORCE max_lines = 250 FOR components
+            ENFORCE max_lines = 150 FOR modules
+
+            ALLOW async_operations FOR essential_functionality:
+            ALLOW api_calls
+            ALLOW user_interactions
+            ALLOW data_fetching
+
+            REQUIRE error_boundaries FOR:
+            REQUIRE FOR network_operations
+            REQUIRE FOR user_inputs
+            REQUIRE FOR third_party_integrations
+
+            ENFORCE file_colocation:
+            LINK Component.jsx TO Component.module.css
+            LINK Component.jsx TO Component.test.js
+
+            SPLIT components WHEN:
+            SPLIT WHEN serving_multiple_purposes
+            SPLIT WHEN testing_becomes_difficult
+
+            IMPLEMENTS clarification_protocol:
+            WHEN asked_to_prototype OR asked_to_generate_code:
+                ASK_USER "Should this implementation follow the methodology's architectural principles, or do you need a rapid prototype?"
+                REPORT "Without explicit architectural reinforcement, methodology violations will occur during code generation tasks"
+
+                VALIDATION GATE:
+                    ✅ inlining forbidden
+                    ✅ file_sizes adapted
+                    ✅ async allowed selectively
+                    ✅ error_boundaries required
+                    ✅ colocation enforced
+                    ✅ split_criteria defined
+                    ✅ clarification_protocol implemented
+
+# PHASE 9: Phase 0 Must-Haves
+
+    DECLARE phase0_mandatory: array
+        SET phase0_mandatory = [
+        "benchmarking_suite",
+        "ci_cd_infrastructure",
+        "core_architecture",
+        "testing_infrastructure",
+        "documentation_system"
+        ]
+
+        REQUIRE benchmarking_suite WITH:
+        REQUIRE core_framework FOR performance_measurement
+        REQUIRE component_isolation
+        REQUIRE regression_detection WITH comparison_against_previous
+        REQUIRE baseline_management FOR tracking_over_time
+        REQUIRE json_output FOR automated_analysis
+        REQUIRE ci_integration
+        REQUIRE timeline_tracking FOR historical_data
+
+        REQUIRE ci_cd_infrastructure WITH:
+        REQUIRE release_workflows FOR automated_versioning
+        REQUIRE automated_building
+        REQUIRE automated_deployment
+        REQUIRE regression_detection ON EACH commit
+        REQUIRE regression_detection ON EACH pr
+        REQUIRE quality_gates TO block_failing_merges
+        REQUIRE automated_testing ON code_changes
+
+        REQUIRE core_architecture WITH:
+        REQUIRE centralized_entry_points WITH single_main_module
+        REQUIRE configuration_management WITH externalized_settings
+        REQUIRE configuration_validation
+        REQUIRE centralized_logging FOR error_handling
+        REQUIRE diagnostic_output WITH json_integration
+        REQUIRE dependency_injection FOR clean_separation
+        REQUIRE testable_components
+
+        REQUIRE testing_infrastructure WITH:
+        REQUIRE test_suite FOR unit_tests
+        REQUIRE test_suite FOR integration_tests
+        REQUIRE stress_testing FOR load_validation
+        REQUIRE boundary_condition_validation
+        REQUIRE test_data_management FOR reproducible_scenarios
+        REQUIRE test_cleanup
+        REQUIRE coverage_tracking BEFORE releases
+
+        REQUIRE documentation_system WITH:
+        REQUIRE automated_generation FROM code_and_structure
+        REQUIRE architecture_documentation FOR system_design
+        REQUIRE component_relationship_documentation
+        REQUIRE api_documentation WITH interface_specifications
+        REQUIRE usage_examples
+        REQUIRE performance_documentation WITH benchmark_results
+        REQUIRE optimization_guides
+
+        VALIDATION GATE:
+        ✅ phase0_components defined
+        ✅ benchmarking_suite specified
+        ✅ ci_cd_infrastructure required
+        ✅ core_architecture established
+        ✅ testing_infrastructure defined
+        ✅ documentation_system specified
+
+# PHASE 10: Documentation Building Process
+
+        EXECUTE project_decomposition:
+        DETERMINE finished_state
+    FIND major_pieces
+    FIND dependencies
+    FIND stopping_points
+        CREATE sections BASED_ON dependencies
+
+        EXECUTE phase_creation:
+        ENFORCE phase0 AS mandatory FOR all_projects:
+        REQUIRE benchmarking_suite WITH regression_detection
+        REQUIRE github_workflows FOR releases
+        REQUIRE quality_gates
+        REQUIRE test_infrastructure
+        REQUIRE documentation_generation
+        REQUIRE centralized_architecture
+
+        COLLECT remaining_work INTO phases BASED_ON:
+        COLLECT BY dependency_chains
+        COLLECT BY logical_groupings
+        COLLECT BY natural_checkpoints
+
+        EXECUTE task_breakdown:
+        FOR EACH deliverable IN project:
+            DEFINE specific_action
+            DEFINE output
+            DEFINE success_criteria
+            DEFINE integration_points
+
+            EXECUTE progress_tracking_system:
+            DECLARE status_indicators: object
+                SET status_indicators.completed = "✅"
+                SET status_indicators.blocked = "🔒"
+                SET status_indicators.ready = "📋"
+                SET status_indicators.uncertain = "⚠️"
+
+                EXECUTE quality_gates:
+                DEFINE completion_criteria TO prevent_incomplete_progression
+
+                VALIDATION GATE:
+                ✅ project_decomposition defined
+                ✅ phase_creation structured
+                ✅ task_breakdown specified
+                ✅ progress_tracking established
+                ✅ quality_gates defined
+
+# PHASE 11: Systematic Enforcement Framework
+
+    DECLARE mandatory_checkpoints: array
+        SET mandatory_checkpoints = [
+        "soc_validation",
+        "deterministic_behavior",
+        "file_size_compliance",
+        "dry_enforcement",
+        "kiss_validation",
+        "config_centralization",
+        "performance_integration",
+        "production_readiness"
+        ]
+
+        FOR EACH phase IN project:
+        FOR EACH checkpoint IN mandatory_checkpoints:
+            ENFORCE checkpoint BEFORE phase_completion
+
+            VALIDATION GATE:
+                ✅ mandatory_checkpoints defined
+                ✅ per_phase_enforcement required
+                ✅ systematic_validation established
+
+            ALWAYS enforce_architectural_minimalism
+            ALWAYS require_measurable_value FOR EACH line_of_code
+            ALWAYS enforce_separation_of_concerns
+            ALWAYS prioritize_synchronous_operations
+            ALWAYS require_phase0_infrastructure
+            ALWAYS enforce_file_size_limits
+            ALWAYS enforce_KISS_DRY
+            ALWAYS require_self_explanatory_code
+            ALWAYS resist_feature_bloat
+            ALWAYS validate_checkpoints FOR EACH phase
+            ALWAYS require_benchmarking_suite
+            ALWAYS require_regression_detection
+            ALWAYS centralize_entry_points
+            ALWAYS track_performance_baselines
+
+            NEVER sacrifice_predictability FOR sophistication
+            NEVER exceed_file_size_limits
+            NEVER use_code_comments
+            NEVER apply_premature_optimization
+            NEVER handle_every_edge_case
+            NEVER introduce_complexity WITHOUT measurable_value
+            NEVER skip_phase0_requirements
+            NEVER inline_web_code
+            NEVER proceed_without_quality_gates
+            NEVER allow_untested_releases
