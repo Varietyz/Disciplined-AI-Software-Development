@@ -1,9 +1,5 @@
-.tones
-EXAMPLE_PROJECT.md
-/scripts/src/__pycache__
-README-TEMPLATE.md
 .env
-__pycache__
 node_modules
 package-lock.json
-scripts/check_paths.py
+/_archived.versions
+.wiki
