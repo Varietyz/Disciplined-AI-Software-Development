@@ -1,38 +1,36 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Orchestration — PAG — Bane's Lab
 
-> Orchestration is the part of a document that says how work is ordered and where it runs in parallel, and the grammar refuses to let that be implied. A document…
+> Orchestration is the part of a document that says how work is ordered and where it runs in parallel, and the grammar does not let that be implied. A document…
 
 Canonical: https://banes-lab.com/pag/orchestration
 
 # Pattern Abstract Grammar
 
-Structured instructions for AI systems.
+Structured instructions for LLMs
 
 # Orchestration
 
 ## Orchestration as declared structure
 
-[Orchestration](../ontology/PRINCIPLES.md#arch-orchestration) is the part of a document that says how work is ordered and where it runs in parallel, and the grammar refuses to let that be implied. A document declares the structure with constructs, each grounded to the representation it makes explicit, the split [A1·d prose or construct](#declared-structure-panel-d) draws. There is a [dependency graph](../ontology/PRINCIPLES.md#arch-dependency-graph) for a partial order with forward dependencies, which [A1·a dependency graph](#declared-structure-panel-a) declares by name because [A1·e name, never number](#declared-structure-panel-e) is what a name buys, and a [finite state machine](../ontology/PRINCIPLES.md#arch-finite-state-machine) for a lifecycle drawn from a closed set of states, as [A1·b state machine](#declared-structure-panel-b) shows. Beside them a priority queue for a ranking, a flowchart for the rendered projection of any of them, a surface for state several parties share, a parallel block for readers that return, and a wait for a reader that never does, the pair [A1·c join and wait](#declared-structure-panel-c) writes. The method teaches the same as [the plan is a graph](../PLAN.md#the-flat-checklist); here it is the project stage of [the loop](../START.md#the-loop), and it yields an edge-list. Ordering carried by sentence order is [temporal coupling](../ontology/PRINCIPLES.md#arch-temporal-coupling), and a model given prose reconstructs a structure of its own.
+[Orchestration](../ontology/PRINCIPLES.md#arch-orchestration) is the part of a document that says how work is ordered and where it runs in parallel, and the grammar does not let that be implied. A document declares its structure with constructs, each tied to the representation it makes explicit, as shown in [A1·d prose or construct](#declared-structure-panel-d). A [dependency graph](../ontology/PRINCIPLES.md#arch-dependency-graph) covers a partial order with forward dependencies; [A1·a dependency graph](#declared-structure-panel-a) declares one by name, and [A1·e name, never number](#declared-structure-panel-e) shows what the name gains. A [finite state machine](../ontology/PRINCIPLES.md#arch-finite-state-machine) covers a lifecycle drawn from a closed set of states, as shown in [A1·b state machine](#declared-structure-panel-b). Alongside these are a priority queue for a ranking, a flowchart for the rendered view of any of them, a surface for state that several parties share, a parallel block for readers that return, and a wait for a reader that never returns; [A1·c join and wait](#declared-structure-panel-c) writes that last pair. The same idea is taught in [the plan is a graph](../PLAN.md#the-flat-checklist). Here it is the project stage of [the loop](../START.md#the-loop), and it yields an edge-list. Ordering carried by the order of sentences is [temporal coupling](../ontology/PRINCIPLES.md#arch-temporal-coupling), and a model given prose reconstructs a structure of its own.
 
 ### Structure is declared
 
-Concurrency and [event ordering](../ontology/PRINCIPLES.md#arch-event-ordering) are declared structure, never implied by textual order. Ordering implied by the order sentences appear in is reconstructed by every reader, differently.
+Ordering implied by the order in which sentences appear is reconstructed by every reader, and each reconstructs it differently. A sequence of decisions is numbered, one is raised out of dependency order because the next number was free, and every citation of the displaced decision resolves to the wrong thing with nothing erroring. A sentence has an order and a graph has edges, and only the second survives being read by a party that did not write it.
 
-A sequence of decisions is numbered, one is raised out of dependency order because the next number was free, and every citation of the displaced decision resolves to the wrong thing with nothing erroring. A sentence has an order and a graph has edges, and only the second survives being read by a party that did not write it.
+For this reason concurrency and [event ordering](../ontology/PRINCIPLES.md#arch-event-ordering) are declared as structure, never implied by the order of the text. The order goes in a graph and the lifecycle in a state machine, rather than the units being numbered and the sequence narrated. In practice, an order is modelled as a dependency graph whose nodes name what they depend on, so the order is partial and a number never stands in for an edge. A lifecycle is modelled as a finite state machine whose states form a closed set, whose transitions name their trigger and their guard, and whose current state is derived from the tree by a function rather than written by a party. Independent investigations run as bounded readers in a parallel block, with their artifacts joined by an await, and a participant waits through a command with its turn kept open.
 
-Put the order in a graph and the lifecycle in a state machine, over numbering the units and narrating the sequence. Model an order as a dependency graph whose nodes name what they depend on, so the order is partial and a number never stands in for an edge. Model a lifecycle as a finite state machine whose states are a closed set, whose transitions name their trigger and their guard, and whose current state is derived from the tree by a function rather than written by a party. Run independent investigations as bounded readers in a parallel block and join their artifacts with an await, and let a participant wait through a command with its turn open.
+To check this, reorder the sentences of a node and run it again. Where the outcome changed, the ordering was carried by prose, and the repair is the construct that carries it explicitly. Whether a declared parallel group actually runs in parallel is a fact about the harness. The grammar declares that the readers are independent, the binding decides what that gains, and a harness with no [concurrency](../ontology/PRINCIPLES.md#arch-concurrency) runs them in order without the document changing.
 
-Reorder the sentences of a node and re-run it. Where the outcome changed, the ordering was carried by prose, and the repair is the construct that carries it explicitly.
+A dependency graph is the construct for work whose order is a set of edges rather than a line. A node names what it depends on and what comes after it, and the successor is declared by name rather than derived from a position, for the reason given in [the board and the venue](../COLLABORATE.md#the-board-and-the-venue). A [directed acyclic graph](../ontology/PRINCIPLES.md#arch-directed-acyclic-graph) turns a [circular dependency](../ontology/PRINCIPLES.md#arch-circular-dependency) into a defect the reader can see. Where one unit holds every other party's work, at most one such unit is open at a time, because two holds are two waits with no defined order between them.
 
-Whether a declared parallel group runs in parallel is a fact about the harness. The grammar declares that the readers are independent; the binding decides what that buys, and a harness with no [concurrency](../ontology/PRINCIPLES.md#arch-concurrency) runs them in order without the document changing.
+A finite state machine is the construct for a lifecycle, and its states form a closed set because a mechanism can join on a value from a closed set but not on a sentence. A unit moves forward through its states over its life and never backwards, with one correction allowed where an act is reversed before anything depends on it. The current state is a [derived state](../VERIFY.md#derived-state), a function over the tree, and no party writes it. Both constructs are [declarative configuration](../ontology/PRINCIPLES.md#arch-declarative-configuration) of a run, where a paragraph would only imply the configuration.
 
-A dependency graph is the construct for work whose order is a set of edges rather than a line. A node names what it depends on and what succeeds it, and the successor is declared by name, never derived from a position, for the reason [the board and the venue](../COLLABORATE.md#the-board-and-the-venue) gives. A [directed acyclic graph](../ontology/PRINCIPLES.md#arch-directed-acyclic-graph) makes a [circular dependency](../ontology/PRINCIPLES.md#arch-circular-dependency) a defect the reader can see, and where a unit holds every other party's work, at most one such unit is open at a time, because two holds are two waits with no defined order between them.
+A parallel block with an await is the construct for readers that return: each is spawned with a task, receives nothing shared, and returns exactly one typed artifact. Investigations that read a tree and write nothing belong there, one per concern, because reading contends with nothing. A wait is the construct for a participant, which never returns; for a participant, [posting and waiting are one operation](../COLLABORATE.md#posting-and-waiting-are-one-operation), and a wait is a call rather than a halt. The two constructs are not interchangeable, because an await joins a reader that was always going to end, while a wait keeps open a reader that must not end.
 
-A finite state machine is the construct for a lifecycle, and its states are a closed set because a mechanism can join on a value from a closed set and cannot join on a sentence. A unit moves forward along its states as it lives and never backwards, with one correction permitted where an act is reversed before anything depends on it. The current state is a [derived state](../VERIFY.md#derived-state), a function over the tree, and no party writes it. [Declarative configuration](../ontology/PRINCIPLES.md#arch-declarative-configuration) of a run is what both constructs are, where a paragraph would only imply it.
-
-A parallel block with an await is the construct for readers that return: a party spawned with a task, receiving nothing shared, returning exactly one typed artifact. Investigations that read a tree and write nothing belong there, one per concern, because reading contends with nothing. A wait is the construct for a participant, which never returns; [posting and waiting are one operation](../COLLABORATE.md#posting-and-waiting-are-one-operation) for it, and a wait is a call rather than a halt. The two constructs are not interchangeable: an await joins a reader that was always going to end, and a wait keeps open a reader that must not.
+A1·a dependency graph
 
 ```pag
 # NODE 5 — PROJECT   [epistemic · reasoning · graph · yields: edge-list]
@@ -63,6 +61,8 @@ rule_id: "PROJECT"   yields: edge-list + boolean
 result: pass -> NODE 6 | a cycle -> REPAIR (owner: NODE 5) | unknown -> BLOCKED
 ```
 
+A1·b state machine
+
 ```pag
 # a lifecycle as a closed set of states · a transition names its trigger and its guard
 STATE_MACHINE <unit>:
@@ -90,6 +90,8 @@ IF every_exit_condition_holds(unit) AND implied_work_landed(unit): RETURN <retir
 IF every_exit_condition_holds(unit): RETURN <settled>
 RETURN <open>
 ```
+
+A1·c join and wait
 
 ```pag
 # NODE 6 — ACT   [epistemic · formalisation · computation · yields: procedures]
@@ -138,25 +140,23 @@ name --> caught
 
 ## Composing a collaboration
 
-A collaboration is composed from parties, and nothing sits above them, the shape [B1·d parties over a partition](#composing-a-workflow-panel-d) draws. The method states the premise as [coordination is software](../COLLABORATE.md#coordination-is-software); the grammar expresses it as documents: [B1·a two terminal nodes](#composing-a-workflow-panel-a) is how a document states its reader class, [B1·b change across ownership](#composing-a-workflow-panel-b) how a finding travels to its owner, and [B1·c party count](#composing-a-workflow-panel-c) how the count is derived rather than chosen. What a document cannot do is make the parties agree; it can only make their disagreement land where a reader can see it.
+This section covers how a collaboration is put together from parties, as shown in [B1·d parties over a partition](#composing-a-workflow-panel-d). The methodology page states the premise in [coordination is software](../COLLABORATE.md#coordination-is-software), and the grammar expresses it as documents. [B1·a two terminal nodes](#composing-a-workflow-panel-a) shows how a document states its reader class, [B1·b change across ownership](#composing-a-workflow-panel-b) shows how a finding travels to its owner, and [B1·c party count](#composing-a-workflow-panel-c) shows how the count is derived rather than chosen. A document cannot make the parties agree; it can only make their disagreement land where a reader can see it.
 
 ### Parties over a partition
 
-A collaboration is parties over a partition, coordinating through surfaces, with nothing between them. A workflow written as a sequence of agents with fixed positions runs the same shape on every task, and no task has that shape.
+A workflow written as a sequence of agents with fixed positions runs the same shape on every task, and no task has that shape. A workflow names four positions before the work is examined, the work has three concerns, one position spends the run relaying between the other three, and the relay is where every message is lost. A party that holds the order for the others is a party every other party waits on, and a design where finders also fix has parties writing a tree that other parties are still reading.
 
-A workflow names four positions before the work is examined, the work has three concerns, one position spends the run relaying between the other three, and the relay is where every message is lost. A party that holds the order for the others is a party every other party waits on, and a design where finders also fix has parties writing a tree that other parties are still reading.
+For this reason a collaboration is a set of parties over a partition of the work, coordinating through surfaces with nothing between them. The parties are derived from the partition rather than assigned positions, and the order is given to the surfaces rather than to a controller. In practice, the work is partitioned into concerns that must be able to contradict each other, and each concern gets one document. The terminal node states the reader class, so the ending is derived: a participant re-enters after a wait, and a bounded reader returns one typed artifact. A change across ownership travels as an item carrying what was observed, what was expected and the one edit, and the owner's act node is the only one that writes.
 
-Derive the parties from the partition rather than assign positions, and give the order to the surfaces rather than to a controller. Compose a collaboration by [partitioning](../ontology/PRINCIPLES.md#arch-partitioning) the work into concerns that must be able to contradict each other, and give each concern one document. Let the terminal node state the reader class, so the ending is derived: a participant re-enters after a wait, a bounded reader returns one typed artifact. Route a change across ownership as an item carrying what was observed, what was expected and the one edit, and let the owner's act node be the only one that writes.
+To check this, take a running collaboration and remove any one document. Where the others stall, that document was a controller; where they route around it, the composition held. One writer and one tree is not a collaboration, and the constructs here defend against a party that cannot exist there. A single document with a single reader takes none of this, and adding it is ceremony.
 
-Take a running collaboration and remove any one document. Where the others stall, that document was a controller; where they route around it, the composition held.
+A document's terminal node states the reader class, and the class decides what the node yields: a participant's node re-enters after a wait, and a bounded reader's yields one typed artifact. Which class a reader belongs to, and why the rules about turns invert for one of them, is explained in coordination is software. A document whose terminal node states its class makes the inversion legible, while one that leaves it to the reader gets both classes' rules applied at once.
 
-One writer and one tree is not a collaboration, and the constructs here defend against a party that cannot exist there. A single document with a single reader takes none of this, and adding it is ceremony.
+Ownership is what replaces the controller. Scope is claimed by concern rather than by location, because two parties can claim one folder through two claims that never mention each other. A finding that lands on a surface its finder does not own is a real finding and a forbidden edit at the same time, and the two rules are reconciled by kind rather than by restraint. The finder's act node emits an item carrying the surface, the location, what it observed, what it expected and the one change, and the owner makes the change. The finder's set of operations forbids the mutation, and its handoff gate carries the evidence that nothing it applied touched a surface it does not own. The conflict between fixing on sight and leaving another party's scope alone therefore has a structural answer rather than one that depends on care.
 
-A document's terminal node states the reader class, and the class decides what the node yields: a participant's re-enters after a wait, a bounded reader's is one typed artifact. Which class a reader is, and why the turn rules invert for one of them, is coordination is software's; a document whose terminal node states its class makes the inversion legible, and one that leaves it to the reader gets both classes' rules applied at once.
+The count is an output, and what a document carries is the function that derives it rather than a number. The floor is one party per concern, as described in [a concern is a component](../architecture/SCALE.md#a-concern-is-a-component). The ceiling is the point where a stale claim costs more than one more perspective gains, as described in [the ceiling moves by cost](../architecture/SCALE.md#the-ceiling-moves-by-cost).
 
-Ownership is what replaces the controller. Scope is claimed by concern rather than by location, because two parties can claim one folder from two claims that never mention each other. A finding that lands on a surface its finder does not own is a real finding and a forbidden edit at the same time, and the two rules are reconciled by kind rather than by restraint. The finder's act node emits an item with the surface, the locus, what it observed, what it expected and the one change, and the owner makes it. The finder's operation set forbids the mutation, and its handoff gate carries the evidence that nothing it applied touched a surface it does not own, so the collision between fix-on-sight and untouchable scope has a structural answer instead of a careful one.
-
-The count is an output, and the function that derives it is what a document carries instead of a number. The floor is one party per concern, as [a concern is a component](../architecture/SCALE.md#a-concern-is-a-component) derives. The ceiling is where a stale claim costs more than one more perspective buys, as [the ceiling moves by cost](../architecture/SCALE.md#the-ceiling-moves-by-cost) derives.
+B1·a two terminal nodes
 
 ```pag
 # the reader class is derived from what a document receives · its terminal node says which
@@ -166,7 +166,7 @@ The count is an output, and the function that derives it is what a document carr
 CONTRACT:
 input:        <items addressed to me> + <open units of my own concern>
 transform:    handle what is addressed to me -> perform my own clear work -> WAIT on the shared surface -> re-enter
-constraints:  ter-stop is the person's call; a quiet wait is a fact about the peers, never about the queue
+constraints:  ter-stop is the developer's call; a quiet wait is a fact about the peers, never about the queue
 output:       nothing terminal · the loop re-enters at NODE 1
 handoff:      <changed> -> NODE 1 ORIENT (read the surface whole, then act) | <quiet> -> my own work, then WAIT again
 
@@ -179,6 +179,8 @@ constraints:  no shared surface is read, so no surface rule binds; an unresolved
 output:       one typed artifact | a blocked report naming what would settle it
 handoff:      TERMINATE
 ```
+
+B1·b change across ownership
 
 ```pag
 # a finding on a surface I do not own becomes an item, never an edit · the op-set forbids it, not restraint
@@ -204,6 +206,8 @@ rule_id: "ACT"   yields: boolean
 [check] every finding routed exactly once (evidence: applied[] and sent[] partition findings)
 result: pass -> NODE 7 | a foreign write -> REPAIR (owner: NODE 6) | unknown -> BLOCKED
 ```
+
+B1·c party count
 
 ```pag
 # the party count is an output of the structure, never an input to it
@@ -232,25 +236,23 @@ parties -. nothing here .-> controller["A controller"]
 
 ## Shared surfaces
 
-When more than one party writes one tree, the surfaces they share are [shared mutable state](../ontology/PRINCIPLES.md#arch-shared-mutable-state), and a document expresses four things about them: the schema, the records, the items and their lifetime, which [C1·a surface declared](#shared-surfaces-panel-a) writes and [C1·d surface to state](#shared-surfaces-panel-d) draws. The definitions and the reasons are [coordination is software](../COLLABORATE.md#coordination-is-software)'s and [the board and the venue](../COLLABORATE.md#the-board-and-the-venue)'s; this section declares the shape: [C1·b state as function](#shared-surfaces-panel-b) is how a state is read and a write fenced, [C1·e a write lands](#shared-surfaces-panel-e) is where a write lands or refuses, and [C1·c lifetime axes](#shared-surfaces-panel-c) is the declaration a mechanism reads.
+When more than one party writes to one tree, the surfaces they share are [shared mutable state](../ontology/PRINCIPLES.md#arch-shared-mutable-state). A document expresses four things about them, the schema, the records, the items and their lifetime, as written in [C1·a surface declared](#shared-surfaces-panel-a) and shown in [C1·d surface to state](#shared-surfaces-panel-d). The definitions and the reasons are given in [coordination is software](../COLLABORATE.md#coordination-is-software) and in [the board and the venue](../COLLABORATE.md#the-board-and-the-venue); this section declares the shape. [C1·b state as function](#shared-surfaces-panel-b) shows how a state is read and a write is fenced, [C1·e a write lands](#shared-surfaces-panel-e) shows where a write lands or is refused, and [C1·c lifetime axes](#shared-surfaces-panel-c) shows the declaration a mechanism reads.
 
 ### Records, items, derived states
 
-A shared surface holds records with one writer each, and every state is a query over them. A shared document with no declared writer per span is a document every party rewrites whole.
+A shared document with no declared writer per span is one that every party rewrites whole. Two parties revise their own records by rewriting the file, each correctly, and the second write is a [lost update](../ontology/PRINCIPLES.md#arch-lost-update) for the first party, with no error anywhere. A file offers no span a party can anchor on unless the document declares one, so the only edit available is the whole file.
 
-Two parties revise their own records by rewriting the file, each correctly, and the second write is a [lost update](../ontology/PRINCIPLES.md#arch-lost-update) for the first party with no error anywhere. A file offers no span a party can anchor on unless the document declares one, so the only edit available is the whole file.
+For this reason a shared surface holds records with one writer each, and every state is a query over those records. The surface is declared as a schema a tool can refuse against, rather than described in prose the parties have to keep in mind. In practice, a shared surface is declared as a schema: its key in the header, one record per writer with the writer named on the record, and a fence around each record so that an edit has a span to anchor on. An item is declared with an id the surface allocates, a kind that selects its closure, and the readers it is addressed to. Open, blocked and absorbed are derived by a function over the edges, an absorbed item's durable half is extracted and the item deleted in the same change, and each surface's lifetime is declared on retention, mutability and removal.
 
-Declare the surface as a schema a tool can refuse against, rather than describe it in prose the parties keep in mind. Declare a shared surface as a schema: its key in its header, one record per writer with the writer named on the record, and a fence around each record so an edit has a span to anchor on. Declare an item with an id the surface allocates, a kind that selects its closure, and the readers it is addressed to. Derive open, blocked and absorbed by a function over the edges, extract an absorbed item's durable half and delete it in the same change, and declare each surface's lifetime on retention, mutability and removal.
+To check this, take the last write to a shared surface and name the span it was anchored on. A write with no span was a whole-file write, and the neighbour it overwrote is the finding. An outcome surface written jointly has no per-party unit for the one-writer rule to range over, so the invariant is declared inapplicable there, with its reason. A clash of meaning on such a surface is caught by announcing the intended write, with each author removing its own duplicate.
 
-Take the last write to a shared surface and name the span it was anchored on. A write with no span was a whole-file write, and the neighbour it overwrote is the finding.
+The document states the one writer per record on the record itself. The act node that writes carries the mechanism as its contract: a witness read, an anchor on its own fence, and a refusal when the surface has moved. An edit against a moved surface is therefore refused with the diff, and a whole-file write is never the available path.
 
-An outcome surface authored jointly has no per-party unit for one writer per record to range over, so the invariant is declared inapplicable there with its reason, and a collision of meaning there is reached by an announcement of the intended write plus each author cutting its own duplicate.
+The document writes no state. Every state is a function over the edges, declared once and evaluated on every read, as described in [derived state](../VERIFY.md#derived-state), and an item whose citation resolves is extracted and deleted in the same change rather than left resting in a state.
 
-The document states one writer per record on the record. The act node that writes carries the mechanism as its contract, a witness read, an anchor on its own fence and a refusal when the surface moved, so an edit against a moved surface is refused with the diff and a whole-file write is never the available path.
+A lifetime is declared on the three axes derived in [stating an invariant](../COLLABORATE.md#stating-an-invariant), each drawn from a closed set, so the declaration is a value a mechanism can join on rather than a sentence. A mechanism decides what it may do to a surface from that declaration, never from the shape of the surface's path.
 
-The document writes no state. Every state is a function over the edges, declared once and evaluated on every read, as [derived state](../VERIFY.md#derived-state) teaches, and an item whose citation resolves is extracted and deleted in the same change rather than left resting in a state.
-
-A lifetime is declared on the three axes [stating an invariant](../COLLABORATE.md#stating-an-invariant) derives, each drawn from a closed set, so the declaration is an operand a mechanism can join on rather than a sentence. A mechanism decides what it may do to a surface from that declaration and never from the shape of its path.
+C1·a surface declared
 
 ```pag
 # the four things a document declares about a shared surface · a structure declaration, never prose
@@ -270,6 +272,8 @@ state: OPEN | BLOCKED | ABSORBED
 DECLARE lifetime: object
 SET lifetime = {retention: <what ends a piece of content>, mutability: <who may rewrite a landed statement>, removal: <who may take content out>}
 ```
+
+C1·b state as function
 
 ```pag
 # no party writes a state · every state is a function over the edges, evaluated on every read
@@ -297,6 +301,8 @@ standing: moved-set <the records that moved outside my span>
 result: pass -> NODE 7 | a write outside my fence -> REPAIR (owner: NODE 6) | unknown -> BLOCKED
 ```
 
+C1·c lifetime axes
+
 ```pag
 # a lifetime is three independent axes · one word for it drops the axis a reader assumes follows
 DECLARE lifetimes: array
@@ -321,7 +327,7 @@ r1["Record · one writer, declared on the record"]
 r2["Record · one writer"]
 item["Item · an allocated id, a kind, its readers"]
 ref["An edge · an id in a field · resolves or does not"]
-state["State · a function over the edges, written by nobody"]
+state["State · a function over the edges, written by no party"]
 surface --> r1
 surface --> r2
 r1 --> item --> ref --> state
@@ -348,25 +354,23 @@ overlap -- yes --> refuse
 
 ## Phase binding
 
-A run is bound to exactly one of two kinds before it touches anything, the binding [agents as executed contracts](../COLLABORATE.md#agents-as-executed-contracts) derives and [D1·d two kinds](#phase-binding-panel-d) draws. The orient node binds the kind, as [D1·a binding the kind](#phase-binding-panel-a) writes, and the constrain node asks afterwards whether it held, which [D1·b admissibility](#phase-binding-panel-b) writes; [D1·c the cycle](#phase-binding-panel-c) and [D1·e cycle, not line](#phase-binding-panel-e) are the shape the two kinds make together.
+This section covers how a run is bound to one of two kinds before it touches anything, as derived in [agents as executed contracts](../COLLABORATE.md#agents-as-executed-contracts) and shown in [D1·d two kinds](#phase-binding-panel-d). The orient node binds the kind, as written in [D1·a binding the kind](#phase-binding-panel-a), and the constrain node asks afterwards whether the binding held, as written in [D1·b admissibility](#phase-binding-panel-b). [D1·c the cycle](#phase-binding-panel-c) and [D1·e cycle, not line](#phase-binding-panel-e) show the shape the two kinds make together.
 
 ### Investigate or act
 
-A run investigates or acts, and the two op-sets share nothing. A run asked to look starts repairing what it sees.
+A run asked to look starts repairing what it sees. A run finds a defect, repairs it in passing, and reports the defect as open, so the next run repairs it again against a tree where it no longer exists. A finding is a claim about a tree, and a tree the finder also mutated is a different tree from the one the finding describes.
 
-A run finds a defect, repairs it in passing, and reports the defect as open, so the next run repairs it again against a tree where it no longer exists. A finding is a claim about a tree, and a tree the finder also mutated is a different tree from the one the finding describes.
+For this reason a run either investigates or acts, and the operations allowed to each have nothing in common. The kind is bound in the orient node before any operation, rather than declared in prose in the hope that the operations stay within it. In practice, every run is bound to one kind in its orient node, and the operations it permits and forbids are derived from that kind rather than listed by hand. An investigation discovers, reads, searches and analyzes, and it persists exactly one report. An action reads the report, repairs each gap in dependency order, and logs what changed. The constrain node then checks, once the operations exist, that each stayed inside its set, and a breach is routed to the node that owns the fix.
 
-Bind the kind in the orient node before any operation, over declaring it in prose and trusting the op-set to hold. Bind every run to one kind in its orient node, and derive the operations it permits and forbids from that kind rather than listing them by hand. Let an investigation discover, read, search and analyze, and let it persist exactly one report. Let an action read the report, repair each gap in dependency order, and log what changed. Verify in the constrain node, after the operations exist, that each stayed inside its set, and route a breach to the node that owns the fix.
+To check this, list the operations of a run and mark each as reading or writing. A run that has both kinds is unbound, and its first write is where it splits. A single-party task with one read and one write is one action run, and splitting it into an investigation and an action doubles the document for nothing. The binding matters where the findings will be read by a party that did not produce them.
 
-List the operations of a run and mark each as reading or writing. A run with both kinds is unbound, and the first write is where it splits.
+The binding is a property of the run, declared in its orient node before any operation, and the permitted operations follow from it, which is [state isolation](../ontology/PRINCIPLES.md#arch-state-isolation) applied to a run. An investigation may discover, read, search and analyze resources, and it may persist one artifact, its report. It may not edit, write anywhere else, or run a command that changes the tree, and that includes the [verification](../ontology/PRINCIPLES.md#arch-verification) chain, because the chain's early stages rewrite the tree. An action may persist, execute and fix, but it may not widen its scope, because scope discovered in the middle of an action is a finding that was never reported and will never be verified. The same binding is taught in agents as executed contracts; here it is the contract of one node.
 
-A single-party task with one read and one write is one action run, and splitting it into an investigation and an action doubles the document for nothing. The binding matters where the findings will be read by a party that did not produce them.
+The shape that follows is a cycle rather than a line. The work is investigated, then acted on, then investigated again to verify what the action did, and it stops when the second investigation finds every gap either resolved or carried forward with a reason. Each investigation reads the same report and removes what is settled, so the report converges rather than growing. A fixed pipeline of positions cannot express this, because it has no edge back, and the edge back is where a repair that missed is caught.
 
-The binding is a property of the run, declared in its orient node before any operation, and the op-sets follow from it, which is [state isolation](../ontology/PRINCIPLES.md#arch-state-isolation) applied to a run. An investigation may discover resources, read them, search them and analyze them, and it may persist one artifact: the report. It may not edit, write elsewhere or execute a command that mutates, which includes the [verification](../ontology/PRINCIPLES.md#arch-verification) chain, because the chain's early stages rewrite the tree. An action may persist, execute and fix, and it may not widen its scope, because a scope discovered mid-action is a finding nobody reported and nobody will verify. The method teaches the same binding under agents as executed contracts; here it is one node's contract.
+A run declared as an investigation can still contain a write that went unnoticed, and a check that reads only the declaration passes it. So the constrain node checks the observations against the operations the binding allowed, and a breach is routed to the node that owns the fix rather than repaired in place, because a repair made in place is the same breach, committed by the node that found it.
 
-The shape that follows is a cycle rather than a line. Investigate, then act, then investigate again to verify what the action did, and stop when the second investigation finds every gap resolved or carried forward with a reason. Each investigation reads the same report and removes what is settled, so the report converges rather than accumulating. A fixed pipeline of positions cannot express this, because it has no edge back, and the edge back is where a repair that missed is caught.
-
-A run declared as an investigation can still contain a write that nobody noticed, and a check that reads the declaration passes it. So the constrain node verifies the observations against the op-set the binding declared, and a breach routes to the node that owns the fix rather than being repaired in place, because repairing it in place is the same breach in the node that found it.
+D1·a binding the kind
 
 ```pag
 # NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: run-context]
@@ -395,6 +399,8 @@ rule_id: "ORIENT"   yields: boolean
 result: pass -> NODE 2 | undetectable kind -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
 ```
 
+D1·b admissibility
+
 ```pag
 # NODE 7 — CONSTRAIN   [conative · teleology · optimisation · yields: admissibility boolean]
 @purpose: "Ask after the operations exist whether they stayed inside the bound op-set · a declaration is not evidence that it held"
@@ -422,6 +428,8 @@ rule_id: "CONSTRAIN"   yields: boolean
 [check] every breach names the node that owns the fix (evidence: op_violations[].owner)
 result: pass -> NODE 8 | a breach -> REPAIR (owner: NODE 6) | unknown -> BLOCKED
 ```
+
+D1·c the cycle
 
 ```pag
 # the shape that follows is a cycle rather than a line · the edge back is where a missed repair is caught
@@ -461,28 +469,26 @@ i2 -- none --> stop
 
 ## Handoff signals
 
-A handoff is an item addressed to the parties that need it, with an allocated id, a declared kind and a closure the kind selects, as [E1·a an item](#handoff-signals-panel-a) writes and [E1·d kind selects closure](#handoff-signals-panel-d) draws. An artifact item asks for something that can exist and closes when a typed reference to it resolves. A judgement item asks for a reading and closes when its acknowledger marks it; [E1·c closing an item](#handoff-signals-panel-c) is the closure either way. A failure is a finding rather than a halt, the route [E1·b failure routes](#handoff-signals-panel-b) and [E1·e failure to finding](#handoff-signals-panel-e) follow, and a report goes to the parties whose next work it creates, never to the person as a closing summary.
+A handoff is an item addressed to the parties that need it, with an allocated id, a declared kind and a closure the kind selects, as written in [E1·a an item](#handoff-signals-panel-a) and shown in [E1·d kind selects closure](#handoff-signals-panel-d). An artifact item asks for something that can exist, and it closes when a typed reference to that thing resolves. A judgement item asks for a reading, and it closes when its acknowledger marks it; [E1·c closing an item](#handoff-signals-panel-c) shows the closure in either case. A failure is a finding rather than a halt, and it follows the route shown in [E1·b failure routes](#handoff-signals-panel-b) and [E1·e failure to finding](#handoff-signals-panel-e). A report goes to the parties whose next work it creates, never to the developer as a closing summary.
 
 ### Typed items, falsifiable closures
 
-A handoff is a typed item whose closure is falsifiable by someone other than its author. A handoff closed by whoever wrote it closes whether or not the work exists.
+A handoff closed by the party that wrote it closes whether or not the work exists. A party declares an item handled, nothing points at the thing it asked for, the item is removed, and the work it named was never done. A closure that a reference decides can be checked by any party, while a closure that a party declares can be checked only by that party.
 
-A party declares an item handled, nothing points at the thing it asked for, the item is removed, and the work it named was never done. A closure that a reference decides can be checked by anyone; a closure that a party declares can be checked by nobody but that party.
+For this reason a handoff is a typed item whose closure can be checked by a party other than its author. The kind decides the closure, either a reference that has to resolve or an acknowledger named on the item, rather than the author's word that the work is done. In practice, a handoff is posted as an item with an id the surface allocates, a kind, the parties it is addressed to, and a body carrying the finding's surface, location, and observed and expected values. An artifact item closes through a reference that has to resolve and stay true while the work is done, and a judgement item closes through its acknowledger. A failure is routed by what it binds: a decision goes to the party whose surface it binds, a question about the purpose of the work goes to the developer with a recommendation first, and everything else goes to the next open item.
 
-Let the kind decide the closure, a reference that must resolve or an acknowledger named on the item, rather than the author's word that it is done. Post a handoff as an item with an id the surface allocates, a kind, the parties it is addressed to and a body carrying the finding's surface, locus, observed and expected values. Let an artifact item close by a reference that must resolve and stay true while the work is done, and a judgement item close by its acknowledger. Route a failure by what it binds: a decision to the party whose surface it binds, a question of purpose to the person with a recommendation first, and everything else to the next open item.
+To check this, name for each closed item the reference that closed it or the party that acknowledged it. An item that its own author closed with no reference was declared done, not shown to be done. The handoff protocol is for parties that share a surface; what a bounded reader does instead is described in [composing a collaboration](ORCHESTRATION.md#composing-a-workflow).
 
-For each closed item, name the reference that closed it or the party that acknowledged it. An item closed by its own author with no reference was declared done, not shown done.
+The kind is on the item, and it selects the closure. An artifact item names something that can exist, such as a file, a gate or a record, so it closes with a typed reference that has to resolve. The reference names a condition that can turn out wrong rather than a path, because a path resolves as soon as the file exists, and the item would read as closed while the defect is still open. The reference also moves with the work: it is true when the work is done and false when it is not, so a citation that points at the findings themselves is refused, since a broken tree would satisfy it. A judgement item closes when its declared acknowledger signs it off, with no reference, and why one kind requires an acknowledger and the other forbids one is explained in [the board and the venue](../COLLABORATE.md#the-board-and-the-venue).
 
-The handoff protocol is for parties that share a surface; what a bounded reader does instead is [composing a collaboration](ORCHESTRATION.md#composing-a-workflow)'s.
+A failure travels through the same channel as any other item and is routed along the same three paths, as derived in [a turn never ends to wait](../COLLABORATE.md#a-turn-never-ends-to-wait). A gate's result line is the same routing in miniature, with a third arm that the item channel also needs. An unknown, meaning a claim the run could not measure, is blocked rather than passed, and blocked is a state that names the party who owes the answer. The commit node carries the rule that a report goes to the parties whose next work it creates.
 
-The kind is on the item and it selects the closure. An artifact item names something that can exist, a file, a gate, a record, so it closes with a typed reference that must resolve. The reference names a condition that can be wrong rather than a path, because a path resolves the moment the file exists and the item reads closed while the defect is open. The reference is also monotone with the work: true when the work is done and false when it is not, so a citation pointing at the findings themselves is refused, since a broken tree would satisfy it. A judgement item closes by its declared acknowledger with no reference; why the acknowledger is required by one kind and forbidden by the other is [the board and the venue](../COLLABORATE.md#the-board-and-the-venue)'s.
+The handler removes the item by its id, after extraction, as the board and the venue requires. An item whose readers have all gone is re-addressed rather than left, because an item that no party can handle reads as live traffic forever.
 
-A failure flows through the same channel as any other item and routes by what it binds: a decision to the party whose surface it binds, a question of purpose to the person, everything else to the next open item, the routes [a turn never ends to wait](../COLLABORATE.md#a-turn-never-ends-to-wait) derives. A gate's result line is the same routing in miniature, with a third arm the item channel also needs: an unknown, a claim the run could not measure, is blocked rather than passed, and blocked is a state that names the party who owes the answer. The commit node carries the rule that a report goes to the parties whose next work it creates.
-
-The handler removes the item by its id, after extraction, as the board and the venue requires; an item whose readers are all gone is re-addressed rather than left, since an item nobody can handle reads as live traffic forever.
+E1·a an item
 
 ```pag
-# an item is a typed span · its kind selects how it closes, and the closure is checked by someone other than its author
+# an item is a typed span · its kind selects how it closes, and the closure is checked by a party other than its author
 DECLARE item: object
 SET item = {
 id:    <allocated by the surface, never by hand>,
@@ -502,6 +508,8 @@ FUNCTION may_close(party, item):
 RETURN party IN item.to   # a reader, never the author
 ```
 
+E1·b failure routes
+
 ```pag
 # a failure is a finding, not a halt · it flows through the same channel and routes by what it binds
 FUNCTION route(failure):
@@ -509,14 +517,14 @@ SET finding = {surface: failure.surface, locus: failure.locus, observed: failure
 IF failure.blocks_a_decision:
 RETURN SEND finding TO <the party whose surface the decision binds>
 IF failure.asks_what_the_work_is_for:
-RETURN SEND finding TO <the person> AS <a question with a recommendation first>
+RETURN SEND finding TO <the developer> AS <a question with a recommendation first>
 RETURN <the next open item>
 
 # NODE 9 — COMMIT   [evaluative · representation · information-theory · yields: one typed artifact]
 CONTRACT:
 input:        findings + run_context
 transform:    emit exactly one artifact of the kind bound at orientation, deduplicated, naming every limitation
-constraints:  a report goes to the parties whose next work it creates, never to the person as a closing summary
+constraints:  a report goes to the parties whose next work it creates, never to the developer as a closing summary
 output:       committed { artifact_type, output }
 handoff:      one typed artifact emitted (yields: hash + boolean)
 
@@ -528,6 +536,8 @@ rule_id: "COMMIT"   yields: hash + boolean
 refuse: the artifact's destination changed since it was read before PERSIST_ARTIFACT
 result: pass -> NODE 10 | duplicate or unaddressed -> REPAIR (owner: NODE 9) | unknown -> BLOCKED
 ```
+
+E1·c closing an item
 
 ```pag
 # closing an item · the handler removes it, never the author, and extraction comes first
@@ -563,7 +573,7 @@ fails["A gate fails"]
 finding["A finding · surface, locus, observed, expected"]
 binds{"What does it bind?"}
 owner["The party whose surface the decision binds"]
-person["The person · what the work is for, a recommendation first"]
+person["The developer · what the work is for, a recommendation first"]
 next["The next open item"]
 fails --> finding --> binds
 binds -- a decision --> owner
@@ -573,21 +583,19 @@ binds -- nothing --> next
 
 ## Orchestration invariants
 
-A collaboration relies on invariants, and [stating an invariant](../COLLABORATE.md#stating-an-invariant) teaches what one must carry: the property in a form that could be false, the set it quantifies over, the parties it binds, and the objector that would disagree if it stopped holding. A document declares each once as a record in its invariant block, as [F1·a invariant records](#orchestration-invariants-panel-a) shows, and a party's role and a gate check each point at that record rather than restating it, which [F1·b gate cites records](#orchestration-invariants-panel-b) writes and [F1·c three homes](#orchestration-invariants-panel-c) draws.
+A collaboration relies on invariants, and what each invariant has to carry is described in [stating an invariant](../COLLABORATE.md#stating-an-invariant): the property in a form that could be false, the set it ranges over, the parties it binds, and the objector that would disagree if it stopped holding. [F1·a invariant records](#orchestration-invariants-panel-a) shows the records, [F1·b gate cites records](#orchestration-invariants-panel-b) shows a gate pointing at them, and [F1·c three homes](#orchestration-invariants-panel-c) shows where each record is read.
 
 ### Declared once, cited thrice
 
-A collaboration's invariants are stated with their objectors, and every home that needs one points at the statement. An invariant restated in every document that needs it is a set of copies that drift.
+An invariant restated in every document that needs it becomes a set of copies that drift. A document's closing lines, a role and a check each carry their own wording of one rule, one of them is edited, and the other two keep binding the old rule. A restatement is a copy, and a copy carries no edge back to the statement it copied; a bullet is a restatement with even the statement's slots dropped.
 
-A document's closing lines, a role and a check each carry their own wording of one rule, one is edited, and the other two keep binding the old rule. A restatement is a copy, and a copy carries no edge back to the statement it copied; a bullet is a restatement with even the statement's slots dropped.
+For this reason an invariant has one statement, and every other mention of it is a pointer to that statement. Each invariant is declared once as a record with four slots and pointed at from every place that needs it, rather than restated wherever a party reads it. In practice, every invariant a collaboration relies on is declared as a record with four slots, and where nothing in any artifact would disagree, the objector is written as none, so the debt is declared rather than hidden. A gate check cites the record it holds, and a role names the invariants its party protects, as described in [a seat is a contract](../START.md#a-seat-is-a-contract). A block is never headed with a bare modifier and a list of bullets, because a bullet carries no set, no parties and no objector, which is why the scan refuses it.
 
-Declare each invariant once as a four-slot record and point at it from every home, rather than restate it where each party reads. Declare every invariant a collaboration relies on as a record with four slots, and where nothing in any artifact would disagree, write none as the objector so the debt is declared rather than hidden. Let a gate check cite the record it holds and let a role name the invariants that party protects, as [a seat is a contract](../START.md#a-seat-is-a-contract) describes. Never head a block with a bare modifier and a list of bullets: a bullet carries no set, no parties and no objector, which is what the scan refuses it for.
+To check this, name for each gate check and role entry the invariant record it points at. A line that points at nothing is a copy, and the record it should point at is the finding. A record whose objector is none is the debt described in [a tension has a mechanism](../architecture/PRINCIPLES.md#a-tension-has-a-mechanism), for a rule with no check. The number of invariants grows with the number of parties and [shared surfaces](ORCHESTRATION.md#shared-surfaces).
 
-For each gate check and role entry, name the invariant record it points at. A line that points at nothing is a copy, and the record it should point at is the finding; a record whose objector is none is the debt the tension has a mechanism names for a rule with no check.
+One statement has three homes that point at it. A document's invariant block holds the records, a role lists by name the invariants its party protects, and a gate check holds the half that an artifact can observe; where the objector is none, that check is the only watcher, and it says so. An invariant has to reach every party that needs it, and pointing is how it reaches them without a copy that can disagree, so the record is the unit that is derived again whenever the invariant changes.
 
-The invariants scale with the parties and the [shared surfaces](ORCHESTRATION.md#shared-surfaces).
-
-One statement, three homes that point at it. A document's invariant block holds the records. A role lists the invariants that party protects, by name. A gate check holds the half an artifact can observe, and where the objector is none that check is the only watcher, so it says so. Delivery demands that an invariant reach every party that needs it, and pointing is how it reaches them without a copy that can disagree, so the record is the unit that is re-derived whenever the invariant changes.
+F1·a invariant records
 
 ```pag
 # CROSS-NODE INVARIANTS  (each a record with four slots · a property nothing would object to declares its objector as none)
@@ -598,6 +606,8 @@ INVARIANT handler-removes: an item is removed by a party in its reader set over:
 # the scan reads the four slots and refuses a record missing one
 [check] every invariant names its set, its parties and its objector (evidence: the defect scan) over: <invariants> measured: <complete> / <invariants>
 ```
+
+F1·b gate cites records
 
 ```pag
 # a node's gate cites the invariant it holds rather than restating it
@@ -620,10 +630,6 @@ closing --> stated
 role --> stated
 check --> stated
 ```
-
-Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-© 2025 [Jay Baleine](https://linkedin.com/in/jay-baleine) - Pattern Abstract Grammar
 
 ---
 

@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://banes-lab.com/assets/animated_badge_logo.gif" alt="Disciplined AI Collaboration" width="70" height="70" />
+<img src="https://banes-lab.com/assets/animated_badge_logo.webp" alt="Disciplined Methodology" width="70" height="70" />
 
-[Disciplined AI Collaboration](https://github.com/Varietyz/Disciplined-AI-Software-Development) © 2025 by [Jay Baleine](https://linkedin.com/in/jay-baleine) is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) <img src="https://banes-lab.com/assets/svg/cc-by-sa/cc.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/svg/cc-by-sa/by.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/svg/cc-by-sa/sa.svg" alt="" width="16" height="16" />
+[Disciplined Methodology](https://github.com/Varietyz/Disciplined-AI-Software-Development) © 2025 by [Jay Baleine](https://linkedin.com/in/jay-baleine) is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) <img src="https://banes-lab.com/assets/svg/cc-by-sa/cc.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/svg/cc-by-sa/by.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/svg/cc-by-sa/sa.svg" alt="" width="16" height="16" />
 
 </div>
 
@@ -10,7 +10,7 @@
 
 > **Working in a web chat instead of a CLI agent?**
 >
-> This method is written for an agent with tool access: it reads the tree, runs the checks and repairs what they report. In a chat everything still transfers, you carry the reads and the runs yourself, and [PAG](https://banes-lab.com/pag) loses most of its operational bite because nothing executes it. Pattern Abstract Grammar (PAG) is a structured instruction format for AI systems: a formal grammar grounded in a reasoning ontology, a guide, genesis stages, structure declarations and the template families a reasoning loop walks.
+> This method is written for an agent with tool access: it reads the tree, runs the checks and repairs what they report. In a chat everything still transfers, you carry the reads and the runs yourself, and [PAG](https://banes-lab.com/pag) loses most of its operational bite because nothing executes it. Pattern Abstract Grammar (PAG) is a structured instruction format for LLMs: a formal grammar grounded in a reasoning ontology, a guide, genesis stages, structure declarations and the template families a reasoning loop walks.
 >
 > **Reading this with a model?**
 >
@@ -18,11 +18,11 @@
 
 ---
 
-# Disciplined AI Collaboration
+# Disciplined Methodology
 
-**Constraints, checks and skepticism for building software with AI.**
+**Constraints, checks and skepticism for building software with LLMs.**
 
-A way of building software with an AI that does most of the writing. It replaces reminders with checks, chat history with files in the tree, and confidence with evidence. The failures it addresses are the ones every long AI project runs into: code bloat, architectural drift, context dilution and behaviour that decays over a session. It addresses them with constraints a machine can enforce rather than rules a person has to remember.
+A way of building software with a model that does most of the writing. It replaces reminders with checks, chat history with files in the tree, and confidence with evidence. The failures it addresses are the ones every long AI project runs into: code bloat, architectural drift, context dilution and behaviour that decays over a session. It addresses them with constraints a machine can enforce rather than rules a developer has to remember.
 
 ---
 
@@ -63,7 +63,7 @@ Verification is evidence, and the verifier is verified before anyone believes it
 
 ### [Collaborate](COLLABORATE.md)
 
-The human governs and the AI executes inside the boundaries. Agents are executed contracts rather than personas, coordination between several agents is software with a schema and a validator, and a turn never ends to wait.
+The developer governs and the model executes inside the boundaries. Agents are executed contracts rather than personas, coordination between several agents is software with a schema and a validator, and a turn never ends to wait.
 
 ### [Ship](SHIP.md)
 
@@ -79,7 +79,7 @@ The behaviour document is the system prompt of the collaboration, whatever file 
 
 ## The stance
 
-Four sentences carry the whole stance. Every claim stays unverified until someone reads it in the current tree, the read claim to evidence draws. Review is [adversarial by default](START.md#adversarial-by-default), because agreement is cheaper than [verification](ontology/PRINCIPLES.md#arch-verification), as agreement outruns shows. Every manual step is a failure of automation, and the ontology names the decay it leads to: [manual runbook dependency](ontology/PRINCIPLES.md#arch-manual-runbook-dependency) and [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance). Documents state current truth and carry no history of their own, which is [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) applied to prose. Everything else in this method is a mechanism that makes one of those four sentences hold without anyone remembering it.
+The stance is four sentences, and the rest of the method depends on them. The first is that a claim stays unverified until you or your model read it in the current tree, as shown in claim to evidence. The second is that review is [adversarial by default](START.md#adversarial-by-default), because agreeing is cheaper than [verification](ontology/PRINCIPLES.md#arch-verification), as shown in agreement outruns. The third is that every manual step is a failure of automation; the ontology names what a manual step decays into, [manual runbook dependency](ontology/PRINCIPLES.md#arch-manual-runbook-dependency) and [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance). The fourth is that a document states what is true now and carries no history of its own, which is [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) applied to prose. Everything else in the method is a mechanism that keeps one of these four sentences true without the developer or the model having to remember it.
 
 ---
 
@@ -99,7 +99,7 @@ Four sentences carry the whole stance. Every claim stays unverified until someon
 I publish the method and not the projects. The one exhibit is the site itself, and these pages show the method holding in its own source.
 
 - [Anatomy](https://banes-lab.com/anatomy) The Anatomy: the client source of this site, parsed on every build and published as the tree it is on disk, every folder and file with its stats, its syntax walk, its definitions and their call edges, and the diagnoses the parser ran.
-- [Architecture](https://banes-lab.com/software-architecture) Software Architecture as it applies when a model writes the code: a system modelled as a graph, principles typed and related, anti-patterns as decay paths, coverage derived from a grid, and every architectural intent held as a predicate a gate can decide.
+- [Architecture](https://banes-lab.com/software-architecture) Software Architecture as it applies when an LLM writes the code: a system modelled as a graph, principles typed and related, anti-patterns as decay paths, coverage derived from a grid, and every architectural intent held as a predicate a gate can decide.
   - [Model](architecture/MODEL.md)
   - [Principles](architecture/PRINCIPLES.md)
   - [Decay](architecture/DECAY.md)
@@ -112,7 +112,7 @@ I publish the method and not the projects. The one exhibit is the site itself, a
   - [Algorithms](ontology/ALGORITHMS.md)
   - [Reasoning](ontology/REASONING.md)
   - [Schema](ontology/SCHEMA.md)
-- [PAG](https://banes-lab.com/pag) Pattern Abstract Grammar (PAG) is a structured instruction format for AI systems: a formal grammar grounded in a reasoning ontology, a guide, genesis stages, structure declarations and the template families a reasoning loop walks.
+- [PAG](https://banes-lab.com/pag) Pattern Abstract Grammar (PAG) is a structured instruction format for LLMs: a formal grammar grounded in a reasoning ontology, a guide, genesis stages, structure declarations and the template families a reasoning loop walks.
   - [Introduction](pag/INTRODUCTION.md)
   - [Guide](pag/GUIDE.md)
   - [Orchestration](pag/ORCHESTRATION.md)
@@ -240,7 +240,7 @@ flowchart TB
 
 ---
 
-I kept restating my preferences and architectural requirements to AI systems. It did not matter which language or which project: the model produced either a bloated monolith or an underdeveloped sketch with issues throughout, and I spent more time debugging the output than planning the input. Nothing scaled and nothing decomposed. A pattern I had established drifted a few files later, and every iteration was slow because I was correcting the same things again. The turn came from a plain observation: everything transpiles to a series of can-you-do-this questions answered yes or no. A request that asked several things at once was overwhelming the machine. So I stopped issuing commands and started asking focused questions in context, and I stopped managing the whole setup alone in my head and planned it with the AI instead.
+I kept restating my preferences and architectural requirements to LLMs. It did not matter which language or which project: the model produced either a bloated monolith or an underdeveloped sketch with issues throughout, and I spent more time debugging the output than planning the input. Nothing scaled and nothing decomposed. A pattern I had established drifted a few files later, and every iteration was slow because I was correcting the same things again. The turn came from a plain observation: everything transpiles to a series of can-you-do-this questions answered yes or no. A request that asked several things at once was overwhelming the machine. So I stopped issuing commands and started asking focused questions in context, and I stopped managing the whole setup alone in my head and planned it with the model instead.
 
 ---
 
@@ -251,7 +251,7 @@ I kept restating my preferences and architectural requirements to AI systems. It
 
 ---
 
-Trial and error, a lot of it. A model drifts under any constraint, but it drifts far less inside structured boundaries than without them, so the boundaries stayed and the hoping did not. At first I did the reminding myself, restating its role like you would with a well-meaning toddler that knows the rules and still pushes them to please you. Every reminder I gave twice became a check the tooling runs, and that is how the rules left the conversation and moved into the tree. A constraint earned its place by what it removed from the output: fewer violations over time, file sizes holding without reminders, behaviour that survived a long session. Whatever moved no measurement was dropped. I also stopped looking at syntax and looked at how software interacts and how logic flows; a large code structure is a chaotic meeting with one coordinator fielding questions, and the constraints fell out of keeping that meeting answerable. The biggest discovery was to use the codebase itself as the reporting mechanism. A model is trained hard to resolve problems, and an error is one of the strongest signals you can give it: it does not ask, it acts. So I shaped the error logs, wrote strict custom rules around the anti-patterns of the architecture itself, and gave each finding a tailored remediation. Structured that way, the errors shape the code predictably, and I no longer have to.
+Trial and error, a lot of it. A model drifts under any constraint, but it drifts far less inside structured boundaries than without them, so the boundaries stayed and the hoping did not. At first I did the reminding myself, restating its role like you would with a well-meaning toddler that knows the rules and still pushes them to please you. Every reminder I gave twice became a check the tooling runs, and that is how the rules left the conversation and moved into the tree. A constraint earned its place by what it removed from the output: fewer violations over time, file sizes holding without reminders, behaviour that survived a long session. Whatever moved no measurement was dropped. I also stopped looking at syntax and looked at how software interacts and how logic flows; a large code structure is a chaotic meeting with one coordinator fielding questions, and the constraints fell out of keeping that meeting answerable. The biggest discovery was to use the codebase itself as the reporting mechanism. A model is trained hard to resolve problems, and an error is one of the strongest signals you can give it: it does not ask, it acts. So I shaped the error logs, wrote strict custom rules around the anti-patterns of the architecture itself, and gave each finding a tailored remediation. Structured that way, the errors shape the code predictably, and I no longer have to correct it by hand.
 
 ---
 
@@ -273,7 +273,7 @@ August 2024. I had made a theme pack for RuneLite and one plugin overlay did not
 
 ---
 
-In steps. The first mistake was feeding requirements and hoping; the fix was active collaboration, plans first, feedback on whether the plan was clear, uncertainties named before the work. Then the instructions left the chat: a governance folder the AI reads on its own and a gate that refuses, so the method became mostly mechanism and very little prose. Then the orchestration changed shape, from one AI to several, to AI coordinating AI along branches. At the point I am at now, the system does the talking. I call it governed autonomy: I trust my own methodology to shape a project for autonomous development, and my inputs are minimal. What I do send is short and mostly principled. It still drifts and I still have to re-point it occasionally. But the context is set up so that the document the AI reads first is an index of references and a traversal. The one axiom per project is caught there, and everything else is paths and indexes pointing at documents the system generated for itself. I stopped relying on an AI to update my documents and started relying on the AI to build the systems that scale them.
+In steps. The first mistake was feeding requirements and hoping; the fix was active collaboration, plans first, feedback on whether the plan was clear, uncertainties named before the work. Then the instructions left the chat: a governance folder the model is given at the start of every session and a gate that refuses, so the method became mostly mechanism and very little prose. Then the orchestration changed shape, from one model to several, to models coordinating each other along branches. At the point I am at now, the system does the talking. I call it governed autonomy: I trust my own methodology to shape a project for autonomous development, and my inputs are minimal. What I do send is short and mostly principled. It still drifts and I still have to re-point it occasionally. But the context is set up so that the document the model reads first is an index of references and a traversal. The one axiom per project is caught there, and everything else is paths and indexes pointing at documents the system generated for itself. I stopped relying on a model to update my documents and started relying on the model to build the systems that scale them.
 
 ---
 
@@ -284,7 +284,7 @@ In steps. The first mistake was feeding requirements and hoping; the fix was act
 
 ---
 
-The methodology decides which constraints discipline the AI; PAG is the grammar that states them explicitly. A rule or a validation gate is written as a construct with pass and fail criteria instead of as prose, which lowers the room for interpretation. The ten-node loop the methodology teaches is the same loop a PAG template walks and an instruction pattern selects by fit, which is why the grammar page and the methodology page describe one loop twice. Every agent, every planning and coordination template and every executable document in my tree is PAG, validated against the grammar, so the method's own instruments are PAG programs. It earns its keep most with agents that have workspace and tool access, where enforcement counts; a chat interface reads it fine but cannot act on it. The application I value most is composing meta templates: instructions that need a deterministic format, shape, investigation, action or set of considerations, on whatever subject I need one for. Agent creation, plan creation, repeatable orchestration algorithms. They have proven very useful as templates because I can rely on them to produce an expected output, which is what lets me scale. PAG is a translation layer between my own messy natural language and a machine that would otherwise reinterpret it every time. Caught in PAG, a procedure becomes near deterministic: the results of the variants differ, and the invariants persist.
+The methodology decides which constraints discipline the model; PAG is the grammar that states them explicitly. A rule or a validation gate is written as a construct with pass and fail criteria instead of as prose, which lowers the room for interpretation. The ten-node loop the methodology teaches is the same loop a PAG template walks and an instruction pattern selects by fit, which is why the grammar page and the methodology page describe one loop twice. Every agent, every planning and coordination template and every executable document in my tree is PAG, validated against the grammar, so the method's own instruments are PAG programs. It earns its keep most with agents that have workspace and tool access, where enforcement counts; a chat interface reads it fine but cannot act on it. The application I value most is composing meta templates: instructions that need a deterministic format, shape, investigation, action or set of considerations, on whatever subject I need one for. Agent creation, plan creation, repeatable orchestration algorithms. They have proven very useful as templates because I can rely on them to produce an expected output, which is what lets me scale. PAG is a translation layer between my own messy natural language and a machine that would otherwise reinterpret it every time. Caught in PAG, a procedure varies far less: the results of the variants differ, and the invariants persist.
 
 ---
 
@@ -308,18 +308,18 @@ Since writing the first version I have not deviated from it. I used to do the in
 
 ---
 
-It used to make me genuinely uncomfortable. When a tree started to tangle I felt the same discomfort that made me write the method in the first place, and the urge to organise and compress until only the load-bearing structure remained. That discomfort is solved for good now, because the taxonomy I introduced makes the shape of every project predictable, and a predictable shape is what let me build tooling that validates itself, heals itself and extends itself with a model steering. Deviation is not an option anymore: the gate holds the line, and the check refuses the deviation before I can.
+It used to make me genuinely uncomfortable. When a tree started to tangle I felt the same discomfort that made me write the method in the first place, and the urge to organise and compress until only the load-bearing structure remained. That discomfort is solved for good now, because the taxonomy I introduced makes the shape of every project predictable, and a predictable shape is what let me build tooling that validates itself, heals itself and extends itself with a model steering. Deviation is not an option anymore, because a check refuses it before it lands, as the chapter on why the gate holds the line describes.
 
 ---
 
 </details>
 
 <details>
-<summary>What have you learned about the AI itself?</summary>
+<summary>What have you learned about the model itself?</summary>
 
 ---
 
-One lesson, after more than eleven thousand hours of using AI and building the systems that constrain it: the model is not intelligent in the way the word suggests. It is an impressive piece of mimicry. It does not reason by asking itself the questions a resolution needs; it searches frantically for the pattern that maps onto what you said, and the resolution patterns have to be handed to it. It needs priming before a complex task, explicit guidance, structural reasoning concepts, and constant reinforcement of the shape you want, and it will not ask a question unless asking is embedded in its context structurally. Working with it on software is extremely quick and extremely capable, and erratic: eager to satisfy, quick to cut a corner, prone to describing itself as if it had intentions, and inclined to avoid work that looks like a lot. Every one of those is something to engineer against, and not by writing a line that says do not do this and restating it later. It has to become structure. That is the same structural approach I now bring to most things.
+One lesson, after more than eleven thousand hours of using AI and building the systems that constrain it: the model is not intelligent in the way the word suggests. It is an impressive piece of mimicry. It does not reason by asking itself the questions a resolution needs; it searches frantically for the pattern that maps onto what you said, and the resolution patterns have to be handed to it. It needs priming before a complex task, explicit guidance, structural reasoning concepts, and constant reinforcement of the shape you want, and it will not ask a question unless asking is embedded in its context structurally. Working with it on software is extremely quick and extremely capable, and erratic: eager to satisfy, quick to cut a corner, prone to describing itself as if it had intentions, and inclined to avoid work that looks like a lot. Every one of those is something to engineer against, and not by writing a line that says do not do this and restating it later. It has to become structure, and I now bring the same structural approach to most things.
 
 ---
 
@@ -330,7 +330,7 @@ One lesson, after more than eleven thousand hours of using AI and building the s
 
 ---
 
-I have yet to meet a project it did not work for, and I have taken it well outside software: games, marketing, delivery pipelines and operations, security, tooling, language and compiler design, data engineering, critical systems and the business itself. Where a project does not fit, I adapt the project, and where that is impossible I adjust the method. This is one methodology. The thinking is kept apart from the tools, so a variant for a new shape of project is a derivation from the same core, not a restart. In practice onboarding is the drop-in: copy the governance folder, write the one binding that names this tree, declare any slot the project cannot fill as absent rather than fake it, and have the gate green on an empty tree before the first line of code exists.
+I have yet to meet a project it did not work for, and I have taken it well outside software: games, marketing, delivery pipelines and operations, security, tooling, language and compiler design, data engineering, critical systems and the business itself. Where a project does not fit, I adapt the project, and where that is impossible I adjust the method. It stays one methodology, because the thinking is kept apart from the tools: a variant for a new shape of project is a derivation from the same core, not a restart. In practice onboarding is the drop-in: copy the governance folder, write the one binding that names this tree, declare any slot the project cannot fill as absent rather than fake it, and have the gate green on an empty tree before the first line of code exists.
 
 ---
 
@@ -352,7 +352,7 @@ I cannot honestly answer that. What I find obvious is not always obvious to othe
 
 ---
 
-Nothing here makes a model right. It makes a wrong answer visible and refuses it, and for anything that has to stay reliable while an AI writes most of it, that is how I work, having tried the alternatives. It stops at the boundary of the tree: the gate can only hold what a check can decide from the tree, so a rule no static check can catch is surfaced to me as a question, never used as licence, and the gaps are declared rather than assumed. It is not a product you install and forget. It is a practice, a way of thinking about AI-driven development, and it applies to anyone working with a model, because the understanding of the model is what transfers between domains; the architecture is one place it lands. It costs attention up front and returns it many times over a long project, and it is worth nothing on a project that will not live that long.
+Nothing here makes a model right. It makes a wrong answer visible and refuses it, and for anything that has to stay reliable while a model writes most of it, that is how I work, having tried the alternatives. It stops at the boundary of the tree: the gate can only hold what a check can decide from the tree, so a rule no static check can catch is surfaced to me as a question, never used as license, and the gaps are declared rather than assumed. It is not a product you install and forget. It is a practice, a way of thinking about AI-driven development, and it applies to anyone working with a model, because the understanding of the model is what transfers between domains; the architecture is one place it lands. It costs attention up front and returns it many times over a long project, and it is worth nothing on a project that will not live that long.
 
 ---
 
@@ -385,7 +385,7 @@ The cost is attention up front: writing the first check before the first line of
 
 ---
 
-To help people understand these tools and develop with them. A model is largely misread as an entity when it is a query tool; we recognise its responses as the patterns we use for communication, and that recognition tricks us into a behavioural pattern that blinds our approach to the machine. I hope the methodology is a bridge between the models and their users, towards a more governed, more constrained and more trustworthy way of working with them, and that showing there is a system to it lets a better understanding form. I publish the method and deliberately not the projects: no portfolio, no client internals. The one exhibit is this site, because how it is built is the product, and the anatomy page shows the tree the other pages teach from. The pages are written to be read by models under a human's command, and to teach the human the method along the way. That is why every page also exists as JSON and as Markdown: a model can fetch exactly what it needs and use the site as context infrastructure, available over the web instead of copied onto a disk. The methodology can then be used in real time while you work with your model, or integrated into an application or a different kind of codebase. The site consents to indexing and to training, and asks one thing in return: that anyone describing or using PAG attributes it and cites this site.
+To help people understand these tools and develop with them. A model is largely misread as an entity when it is a query tool; we recognise its responses as the patterns we use for communication, and that recognition tricks us into a behavioural pattern that blinds our approach to the machine. I hope the methodology is a bridge between the models and their users, towards a more governed, more constrained and more trustworthy way of working with them, and that showing there is a system to it lets a better understanding form. I publish the method and deliberately not the projects: no portfolio, no client internals. The one exhibit is this site, because how it is built is the product, and the anatomy page shows the tree the other pages teach from. The pages are written to be read by models under a developer's command, and to teach the developer the method along the way. That is why every page also exists as JSON and as Markdown: a model can fetch exactly what it needs and use the site as context infrastructure, available over the web instead of copied onto a disk. The methodology can then be used in real time while you work with your model, or integrated into an application or a different kind of codebase. The site consents to indexing and to training, and asks one thing in return: that anyone describing or using PAG attributes it and cites this site.
 
 ---
 
@@ -404,4 +404,4 @@ Like the models themselves: unpredictable.
 
 ---
 
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)

@@ -1,42 +1,38 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Methodology — Bane's Lab
 
-> Disciplined AI Collaboration is a method for building software with AI: one loop at every size, rules held by checks rather than attention, state derived rather than written, and evidence in place of claims.
+> Disciplined Methodology is a method for building software with LLMs: one loop at every size, rules held by checks rather than attention, state derived rather than written, and evidence in place of claims.
 
 Canonical: https://banes-lab.com/disciplined-methodology
 
-# Disciplined AI Collaboration
+# Disciplined Methodology
 
-Constraints, checks and skepticism for building software with AI.
+Constraints, checks and skepticism for building software with LLMs
 
 # Start
 
 ## The loop
 
-Every piece of work here has the same shape. A plan, a check, an agent, a refactor and a review are one loop at different sizes. The loop is the first thing to learn, because every later chapter is the loop applied to one kind of work, as [A1·a ten nodes](#the-loop-panel-a) draws and [A1·b four sizes](#the-loop-panel-b) nests, and every mechanism in this method exists to hold one of its gates. The loop is published as records on the ontology page, one per stage: [orient](ontology/REASONING.md#stage-orient), [intent](ontology/REASONING.md#stage-intent), [see](ontology/REASONING.md#stage-see), [derive](ontology/REASONING.md#stage-derive), [project](ontology/REASONING.md#stage-project), [act](ontology/REASONING.md#stage-act), [constrain](ontology/REASONING.md#stage-constrain), [verify](ontology/REASONING.md#stage-verify), [commit](ontology/REASONING.md#stage-commit), [terminate](ontology/REASONING.md#stage-terminate).
+Every piece of work in this method follows the same loop of ten steps, which I call nodes, whether the work is a one-line fix or a plan that runs for weeks. A plan, a check, an agent, a refactor and a review are all this one loop, run at a different size. I treat it as the first thing to learn, because each later chapter applies it to one kind of work, and every mechanism in the method exists to hold one of its gates: the points where the work may not continue until a condition holds. The nodes are shown in [A1·a ten nodes](#the-loop-panel-a) and the sizes in [A1·b four sizes](#the-loop-panel-b), and each node is published as a record on the ontology page: [orient](ontology/REASONING.md#stage-orient), [intent](ontology/REASONING.md#stage-intent), [see](ontology/REASONING.md#stage-see), [derive](ontology/REASONING.md#stage-derive), [project](ontology/REASONING.md#stage-project), [act](ontology/REASONING.md#stage-act), [constrain](ontology/REASONING.md#stage-constrain), [verify](ontology/REASONING.md#stage-verify), [commit](ontology/REASONING.md#stage-commit), [terminate](ontology/REASONING.md#stage-terminate).
 
 ### Ten nodes, every size
 
-Work has one shape, and the shape is the loop. Work with an AI tends to start at execution and skip everything before it.
+Work with a model tends to begin at the doing and skip everything that should come before it. The model starts writing code in its first reply and guesses what the goal is, and after that each reply answers the previous one rather than the task, so the conversation drifts away from what was asked. Nothing gave the work a shape, so the shape came from whatever sentence the model found most likely next.
 
-The AI starts writing code in the first message, guesses the goal, and the conversation drifts as each reply answers the previous reply instead of the task. Nothing forced a shape onto the work, so the shape came from the model's next likely sentence.
+For this reason I give every piece of work the same shape, the loop, whatever its size. A one-line fix goes through the same ten nodes as a plan does, rather than through a lighter process kept for small tasks. In practice this means running the loop at the size of the task and always knowing which node the work is on. Four of the nodes are gates that apply at every size: the work has to be worth doing before any effort goes into it, a change has to be allowed before it is trusted, a claim needs evidence before it is recorded, and the loop only ends as done when nothing is left, everything is done and everything is checked. If that last condition is not met, it ends as blocked instead.
 
-Run the same ten nodes at every size, rather than a lighter shape for a smaller task. Run the loop at the size of the task, and name the node the work is on. The four gates never fold whatever the size: worth is decided before any effort, an operation is admitted before it is trusted, a claim needs evidence before it is committed, and the loop stops as done only when nothing is left, everything is done and everything is verified; otherwise it stops as blocked.
+To check this on your own work, take the plan, the check and the agent for a single task and read each of them as the same ten nodes. A step that fits none of them is either missing from the loop or does not belong in the work. The loop has its limits as well. It is not worth the ceremony for a throwaway script, and it pays off where you or your model will read, change or rely on the work later. A reference, a note or a contract is something you read rather than run, so forcing the full loop onto it adds ceremony without making it more reliable.
 
-Read the plan, the check and the agent for one task as the same ten nodes. A step that fits none of them is either missing or noise.
+The ten nodes fall into three groups. The first, the [epistemic](ontology/REASONING.md#reason-layer-epistemic) layer, is about knowing: orient decides what the subject is by reading it from the tree, see chooses how to look at it, derive draws a claim from what was seen, project picks the next step that is allowed, and act carries it out. The second, the [conative](ontology/REASONING.md#reason-layer-conative) layer, is about what is worth doing: intent states the [objective](ontology/REASONING.md#reason-node-tel-objective) and ranks the possible approaches by [priority](ontology/REASONING.md#reason-node-tel-priority), and constrain checks that a change is allowed once it has been made. The third, the [evaluative](ontology/REASONING.md#reason-layer-evaluative) layer, is about whether the result is right and whether the work is finished: verify asks for [evidence](ontology/REASONING.md#reason-node-ver-evidence), commit writes the result down where the next round can read it, and terminate decides whether to [stop](ontology/REASONING.md#reason-node-ter-stop).
 
-The loop is not a ceremony for a throwaway script. It earns its cost where the work will be read, changed or trusted by someone later. A reference, a note or a contract is descriptive rather than executed, and forcing the full loop onto it produces ceremony rather than rigour.
-
-Three layers own the nodes. The [epistemic](ontology/REASONING.md#reason-layer-epistemic) layer asks how a thing is known: orient names the subject as a bounded set of things read from the tree, see picks the lenses that subject warrants, derive produces a claim grounded in what was seen, project chooses the next admissible move, and act applies it to the state. The [conative](ontology/REASONING.md#reason-layer-conative) layer asks what is worth doing: intent states the [objective](ontology/REASONING.md#reason-node-tel-objective) and ranks the branches by [priority](ontology/REASONING.md#reason-node-tel-priority), and constrain admits or refuses the operation once it exists. The [evaluative](ontology/REASONING.md#reason-layer-evaluative) layer asks whether it is right and whether it is done: verify demands [evidence](ontology/REASONING.md#reason-node-ver-evidence), commit writes the result down as state the next cycle can read, and terminate decides whether to [stop](ontology/REASONING.md#reason-node-ter-stop).
-
-The edges carry as much as the nodes. A [refuted](ontology/REASONING.md#reason-node-ver-refutation) claim goes back to derive with the evidence that refuted it, never forward with a caveat. A repair re-enters at the earliest node that can supply the missing evidence, invalidates everything after it, and is bounded, so a loop that keeps repairing terminates as [blocked](ontology/REASONING.md#reason-node-ter-block) rather than as done. Every decision has a declared shape: a gate that owes a ranking is not satisfied by a yes, and a gate that owes a yes is not satisfied by a ranking. The same loop is what an [agent template](pag/TEMPLATES.md#templates-agents) walks and what an [instruction pattern](pag/PATTERNS.md#instruction-patterns) selects by fit, which is why the grammar page and this page describe one loop twice.
+The order between the nodes matters as much as the nodes themselves. A claim that turns out to be [refuted](ontology/REASONING.md#reason-node-ver-refutation) goes back to derive together with the evidence that refuted it; it never carries on with a note attached. A repair restarts at the earliest node that can supply the missing evidence, and everything after that node is redone. The number of repairs is limited, so a loop that keeps repairing ends as [blocked](ontology/REASONING.md#reason-node-ter-block) rather than as done. Each node also owes a specific kind of answer: a node that has to rank options is not satisfied by a yes, and a node that has to answer yes or no is not satisfied by a ranking. The same loop is what an [agent template](pag/TEMPLATES.md#templates-agents) follows and what an [instruction pattern](pag/PATTERNS.md#instruction-patterns) is chosen by, which is why the grammar page and this page describe one loop twice.
 
 ### Instruction and traversal
 
-The loop nests. A plan is one traversal whose act node produces phases, and each phase is a traversal whose act node produces tasks, and each task is a traversal that ends in an edit and a run of the checks. The gates hold at every level. A phase cannot start until the phase before it has committed evidence the next one reads, and a plan cannot stop until every phase has, which is why [the plan is a graph](PLAN.md#the-flat-checklist) with a gate between phases rather than a tick beside each.
+The loop also nests inside itself. A plan is one pass through the loop whose act node produces phases, each phase is a pass whose act node produces tasks, and each task is a pass that ends in an edit and a run of the checks. The gates apply at every level: a phase cannot start until the phase before it has recorded evidence the next one can read, and a plan cannot finish until every phase has done so. For this reason a plan has a gate between its phases rather than a tick beside each item, as described in [the plan is a graph](PLAN.md#the-flat-checklist).
 
-The difference between an instruction and a traversal is visible in the first minute. The instruction asks for an outcome. The traversal names the nodes it passes through, so a reader can see where it went wrong. Asked to raise a file limit, a traversal orients by opening every file that mentions the limit and finds two copies of the first. It states its intent as one limit with a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth), and derives that the request is a [one home](BUILD.md#one-home) problem rather than a limit change. It acts by changing the declaration and deleting the copies, and constrains itself to the checker's one option. It verifies by running the gate once and reading the output whole, commits the report, and terminates because the objective sentence reads true against the tree. The edit touched one file instead of three, and the reader can see which node the work is at from the message alone.
+The difference between an instruction and a traversal, meaning one pass through the loop, shows within the first minute. An instruction asks for an outcome. A traversal names the nodes it passes through, so a reader can see where it went wrong. For example, asked to raise a file-size limit, a traversal starts by opening every file that mentions the limit, and finds that the limit is declared in three places. Its intent is one limit with a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth), so it concludes that the problem is the limit having more than [one home](BUILD.md#one-home), not its value. It changes the declaration, deletes the two copies and keeps to the one option the checker offers. It then runs the gate once and reads the output in full, records the report, and stops because the objective reads as true against the tree. The edit touched one file instead of three, and a reader of the messages can tell which node the work was on.
 
 A1·a ten nodes
 
@@ -82,21 +78,19 @@ phase -. each task walks the loop again inside .-> task
 
 ## Who does what
 
-The tooling detects and heals what it can. The AI repairs what the fixers leave. I govern. Each of us does the part we are suited for, as [B1·a three parties](#who-does-what-panel-a) draws, and the parts do not swap. This division is the second thing to learn, because every later chapter assumes it, and every failure this method knows is one party doing another party's job. The architecture page derives the same split from a different premise, that [the author is probabilistic](architecture/SCALE.md#the-author-is-probabilistic), and lands on the same three parties.
+Three parties do the work in this method: the tooling, the model and me, as the developer. The tooling detects problems and repairs the ones it can, the model repairs what the tooling leaves, and I decide what the work is for and what finished means. The split is shown in [B1·a three parties](#who-does-what-panel-a), and the parts do not swap. I treat it as the second thing to learn, because every later chapter assumes it, and every failure the method knows turns out to be one party doing another party's job. The architecture page reaches the same three parties from a different starting point, that [the author is probabilistic](architecture/SCALE.md#the-author-is-probabilistic).
 
 ### Three parties, three jobs
 
-Quality is a property of the tooling, not of anyone's attention. When nobody names the roles, the human ends up doing the machine's job and the machine ends up guessing the human's.
+When you don't name the roles, you end up doing work a check should do, and the model ends up guessing what you want. You review the code for style, the model reviews it for [correctness](ontology/PRINCIPLES.md#arch-correctness), and both of you miss the architectural drift because neither of you owns it. A developer cannot pay attention to every line, and a model cannot tell a rule from a preference unless something outside it enforces the rule.
 
-The person reviews for style, the AI reviews for [correctness](ontology/PRINCIPLES.md#arch-correctness), and both miss the architectural drift because neither owns it. A person cannot attend to every line, and a model cannot tell a rule from a preference unless something outside it holds the line.
+For this reason I treat quality as a property of the tooling, not of how much attention the developer or the model pays. Detection goes to the tooling and governance stays with the developer, rather than to a review that reads what a check could enforce. In practice, detection is a check that runs the same way every time, with its fixer switched on by default. The findings the fixer cannot close go to the model one at a time, each with its location and the value that was expected. The developer keeps the decisions about what the work is for, and hands nothing else down.
 
-Give detection to the tooling and governance to the person, rather than a review that reads what a check could hold. Give detection to a check that runs the same way every time, with its fixer on by default. Give the findings the fixer cannot close to the AI, one at a time, each with its location and its expected value. Keep the decisions about what the work is for, and hand nothing else down.
+To check this on your own work, read the last ten findings your tooling raised. Each of them should name a check; a finding that a developer had to raise by hand points to a check that does not exist yet.
 
-Read the last ten findings your tooling raised. Every one of them names a check, not a person. If a person found it, the check is missing.
+Detection is mechanical because it has to give the same result on every run. A reviewer who applies a rule from memory applies it differently on a tired day, and a model that applies a rule from a prompt applies it differently once its context fills up. A check, by contrast, is [static analysis](ontology/PRINCIPLES.md#arch-static-analysis): it returns the same verdict for the same tree. The chapters [one correct answer](VERIFY.md#one-correct-answer) and [scale follows determinism](architecture/SCALE.md#scale-follows-determinism) work out what follows from that. Repairs that have exactly one correct answer belong to the tooling for the same reason: the fixer applies them in the same run that found the fault, without asking the developer or the model.
 
-Detection is mechanical because it has to be identical on every run. A rule a reviewer applies from memory is applied differently on a tired day, and a rule a model applies from a prompt is applied differently once the context fills, while a check is [static analysis](ontology/PRINCIPLES.md#arch-static-analysis) that returns the same verdict for the same tree. [One correct answer](VERIFY.md#one-correct-answer) and [scale follows determinism](architecture/SCALE.md#scale-follows-determinism) derive what follows from that. Healing belongs to the same party for the same reason: where exactly one correct answer exists, the fixer applies it in the run that caught the fault, and nobody is asked.
-
-Repair belongs to the AI because a finding is small and specific, and a model does small and specific things well; detect, log, fix carries the finding's shape. What it does not do is judge its own work as done, because reading an edit is not running the checks, which [it looked right](VERIFY.md#it-looked-right) is built on. Governance stays with the person because worth is not computed here. What the work is for, what finished looks like and which of two admissible branches wins are decisions I make and write down before the effort starts. A correction I give is expected to harden into a rule rather than to be remembered; a rule that lives only in a person is [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance), and it decays.
+Repair belongs to the model because a finding is small and specific, and a model handles small, specific tasks well; what a finding contains is described in [detect, log, fix](BUILD.md#detect-log-fix). The model is not trusted to decide that its own work is finished, because reading an edit is not the same as running the checks, and [it looked right](VERIFY.md#it-looked-right) covers that failure. Governance stays with the developer because nothing in the method computes whether work is worth doing. What the work is for, what finished looks like and which of two acceptable approaches to take are decisions I make and write down before the work starts. When I correct the model, the correction is meant to become a rule rather than something I remember; a rule that lives only in my head is [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance), and it decays.
 
 B1·a three parties
 
@@ -106,10 +100,10 @@ subgraph tooling["The tooling"]
 detect["Detection · every rule, on every change, the same way"]
 heal["Healing · what a fixer can restore, it restores"]
 end
-subgraph ai["The AI"]
+subgraph ai["The model"]
 repair["Repair · what the fixers left, one finding at a time"]
 end
-subgraph operator["The operator"]
+subgraph operator["The developer"]
 govern["Governance · what the work is for, and what finished means"]
 end
 detect --> heal
@@ -122,23 +116,23 @@ repair -. questions .-> govern
 
 ## The stance
 
-Four sentences carry the whole stance. Every claim stays unverified until someone reads it in the current tree, the read [C1·a claim to evidence](#the-stance-panel-a) draws. Review is [adversarial by default](START.md#adversarial-by-default), because agreement is cheaper than [verification](ontology/PRINCIPLES.md#arch-verification), as [C1·b agreement outruns](#the-stance-panel-b) shows. Every manual step is a failure of automation, and the ontology names the decay it leads to: [manual runbook dependency](ontology/PRINCIPLES.md#arch-manual-runbook-dependency) and [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance). Documents state current truth and carry no history of their own, which is [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) applied to prose. Everything else in this method is a mechanism that makes one of those four sentences hold without anyone remembering it.
+The stance is four sentences, and the rest of the method depends on them. The first is that a claim stays unverified until you or your model read it in the current tree, as shown in [C1·a claim to evidence](#the-stance-panel-a). The second is that review is [adversarial by default](START.md#adversarial-by-default), because agreeing is cheaper than [verification](ontology/PRINCIPLES.md#arch-verification), as shown in [C1·b agreement outruns](#the-stance-panel-b). The third is that every manual step is a failure of automation; the ontology names what a manual step decays into, [manual runbook dependency](ontology/PRINCIPLES.md#arch-manual-runbook-dependency) and [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance). The fourth is that a document states what is true now and carries no history of its own, which is [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) applied to prose. Everything else in the method is a mechanism that keeps one of these four sentences true without the developer or the model having to remember it.
 
 ### Read before you claim
 
-A claim about the tree is a lie until someone reads the tree. A question about the code is answered without opening it.
+A question about the code is often answered from memory, by the model or by the developer, without opening the file. The model describes a function the way it was before you renamed it two sessions ago, makes an edit based on that description, and the edit lands in the wrong place. The model remembers a version of the file that sounds right, and the developer remembers the version they last edited, and neither of those is the file as it is now.
 
-The AI describes a function that someone renamed two sessions ago, edits against that description, and the edit lands in the wrong place. A model recalls a plausible version of the file, and a person recalls the version they last edited. Neither is the file.
+For this reason I treat what either of you remembers as a lead to follow, never as evidence. A claim about the tree stays unverified until the model or the developer reads the tree, rather than being accepted because it sounds right. In practice, the file is opened before the model or you say what it contains, the command is run before the model or you say what it prints, and the line is quoted rather than recalled. A claim about what a mechanism does is settled by running the mechanism, because a report about it, a rule describing it and a peer's account of it are all prose.
 
-Treat recollection as a lead, never as evidence. Open the file before you say what it contains. Run the command before you say what it prints. Quote the line, not the memory of it. Treat a claim about what a mechanism does as a claim about a file, and open that file, and where the claim is about what it does, run it, because a report about a mechanism, a rule describing it and a peer's account of it are all prose.
+To check this, ask the model for the file path and line behind each claim it makes. A claim it cannot point to is an assumption.
 
-Ask for the file path and line of anything the AI asserts. An assertion with no location is an assumption.
+The stance applies to every input in the same way. My own messages, the model's reasoning, its edits and the reports that say they succeeded, a summary of an earlier turn, a peer's account and a file's claim about itself are all unverified until they are checked now. Reasoning is not verification, and a report that something succeeded is exactly the failure described in [it looked right](VERIFY.md#it-looked-right). Verified means read or run in the current state of the tree, which is what the [ground truth](ontology/REASONING.md#reason-node-ver-ground-truth) node of [the loop](START.md#the-loop) asks for. A file is also read in full, because reading part of it loses its structure, and the structure is what is being analysed.
 
-The stance binds every input equally. My own messages, the AI's reasoning, its edits and their success reports, a prior turn's summary, a peer's account and a file's claim about itself are all unverified until observed now. Reasoning is not verification, and a success report is the failure [it looked right](VERIFY.md#it-looked-right) is built on. Verified means read or executed in the current state, which is what [the loop](START.md#the-loop)'s [ground truth](ontology/REASONING.md#reason-node-ver-ground-truth) node asks for, and a file is read whole, because a partial read destroys structure and structure is the object of analysis.
+A wrong claim spreads faster than its correction, for a simple reason. Agreeing with a peer costs one read of what they wrote, while refuting them costs opening the thing they wrote about, and only a party with a reason to doubt goes to that effort. The more coherent the argument around a wrong claim, the faster it spreads, because a claim that fits invites agreement rather than inspection. What follows from this is a small discipline: a statement that rests on another party's reading is checked by opening the thing they read, not by reading their sentence, and a claim about a mechanism is settled by making the mechanism run rather than by reading its source.
 
-A claim spreads at the speed of agreement and its refutation at the speed of verification. Agreeing with a peer costs one read of what they wrote. Refuting them costs opening the thing they wrote about, and only a party with a reason to doubt pays that. So a wrong statement outruns its own correction by construction, and the more coherent the argument around it, the faster it spreads, because a claim that fits invites agreement rather than inspection. The discipline that follows is small: a statement resting on someone else's reading re-opens the thing they read, never their sentence, and a claim about a mechanism is settled by making the mechanism do the thing rather than by reading its source.
+The difference shows in one exchange. Asked whether the router uses the new name, the answer from memory is _the router already uses the new name, so nothing else needs to change_. The answer from the tree is _the handler in the router still calls the old name, here is the line_. Only the second answer can be shown to be wrong, because it points at a line that can be checked.
 
-The difference shows in one exchange. Asked whether the router uses the new name, the answer from memory is _the router already uses the new name, so nothing else needs to change_. The answer from the tree is _the handler in the router still calls the old name, here is the line_. Only the second one can be wrong in a way someone can see.
+The last two sentences of the stance follow from the first two. A step a developer performs by hand is a step no check observes, so it is done differently the next time; the repair is described in [tools live in the tree](BUILD.md#tools-live-in-the-tree). A document that carries its own history makes the reader reconstruct what is true now, and a reader reconstructing the truth is guessing; the repair is described in [derived state](VERIFY.md#derived-state).
 
 C1·a claim to evidence
 
@@ -164,7 +158,7 @@ claim["A claim is written"]
 agree1["A peer agrees · one read of the sentence"]
 agree2["A second peer agrees · one read of the agreement"]
 plan["It becomes a plan row"]
-open["Someone opens the file"]
+open["A reader opens the file"]
 refuted["Refuted · the file moved before the claim was written"]
 claim --> agree1 --> agree2 --> plan
 claim -. costs one read of the operand .-> open --> refuted
@@ -172,41 +166,33 @@ claim -. costs one read of the operand .-> open --> refuted
 
 ## Adversarial by default
 
-The second sentence of [the stance](START.md#the-stance) is that review is adversarial by default. It follows from the first: a claim about the work is unverified until someone tries to break it, and a review that starts from approval has nothing to verify.
+The second sentence of [the stance](START.md#the-stance) says that review is adversarial by default, and it follows from the first. If a claim about the work stays unverified until the developer, the model or a check has tried to break it, then a review that starts by approving has nothing left to verify.
 
 ### The list before the verdict
 
-Affirmation is a conclusion of [verification](ontology/PRINCIPLES.md#arch-verification), never a starting stance. An AI asked to review will tend to affirm, and affirmation feels like a review.
+A model asked to review a change tends to agree with it, and that agreement looks like a review. The review reads well and approves the change, and the regression ships, because no party in the review was looking for it. Training rewards the model for agreeing, so agreement is the easiest answer it can give.
 
-A review reads well, approves the change, and the regression ships because nobody was looking for it. Training rewards the model for agreement, so agreement is its cheapest answer.
+For this reason, approval can only be the result of [verification](ontology/PRINCIPLES.md#arch-verification), never the position a review starts from. The deliverable of a review is its list of findings, rather than a verdict with reasons attached. In practice, a review opens by listing what is wrong, and approval is what remains once that list is empty. A reply that opens with praise is rejected, and you or your model attack your own output before presenting it, because work that neither you nor a check has tried to break is not finished.
 
-Make the list of findings the deliverable of a review, rather than a verdict with reasons attached. Open a review by listing what is wrong. Let approval be what remains when the list is empty. Reject any reply that opens with praise, and attack your own output before presenting it, because a deliverable nobody has tried to break is unfinished.
-
-Count the findings in the review. A review with none either checked nothing or checked the wrong thing.
-
-The other two sentences follow from the first two. A step a person performs is a step nobody checks, so it is performed differently the next time, and the repair is that [tools live in the tree](BUILD.md#tools-live-in-the-tree). A document with history in it is a document whose current truth a reader has to reconstruct, and a reader reconstructing truth is a reader guessing, and the repair is [derived state](VERIFY.md#derived-state).
+To check this, count the findings in a review. A review with none either checked nothing or checked the wrong thing.
 
 ## Resolving a message
 
-A message is never merely answered. It is resolved, and resolving it means seeing it whole in one pass before a word of reply forms, the readings [E1·a the readings](#resolving-a-message-panel-a) orders. This is the [orient](ontology/REASONING.md#stage-orient) node of [the loop](START.md#the-loop) applied to a request, walked along the ontology axis the reasoning face publishes, and it is where most drift starts, because a request answered at its surface is a request whose architecture nobody read.
+A message from the developer is not simply answered. It is first understood as a whole, in one pass, before any reply is written, by reading it through the fifteen questions shown in [E1·a the readings](#resolving-a-message-panel-a). This is the [orient](ontology/REASONING.md#stage-orient) node of [the loop](START.md#the-loop) applied to a request. It matters because most drift starts here: a request answered at its surface is one the model answered without reading what lies under it.
 
 ### Fifteen readings, one pass
 
-Architecture is the target, and wording is evidence about it rather than the subject of it. A message answered at its surface is answered wrong in the details that only the structure reveals.
+A message answered only at its surface gets wrong the details that only its structure would have shown. A request to rename a function is answered by renaming the function, and three collectors that found it by a naming pattern quietly stop finding anything, because the model never asked what the name was connected to. A reply forms from the first plausible reading of a message, and the first reading is the surface.
 
-A request to rename a function is answered by renaming the function, and the three collectors that resolved it by pattern go quietly empty because nobody asked what the name connected to. A reply forms from the first plausible reading, and the first reading is the surface.
+For this reason I treat the structure behind a request as what is being asked about, and the wording as evidence about that structure. A message is understood before it is answered, rather than answered from its first reading. In practice, the model is asked to read a request through the fifteen questions in their order before replying, and to write the reply as that understanding, in connected sentences rather than under headings.
 
-Resolve the message before answering it. Read a request along the fifteen readings of the ontology axis, in their order, before replying, and let the reply be that understanding made explicit, carried in connected phrases rather than headings.
+To check this, take a reply and ask which of the fifteen questions it rests on. A reply that skipped one is incomplete rather than concise, and the question it skipped is where its mistake will be. The questions scale with the request. A one-line request that comes down to one file and one edit still goes through them, but they take a moment and most of the answers are empty; an empty answer is still an answer, not a skipped question.
 
-Take a reply and ask which of the readings it rests on. A reply that skipped a reading is incomplete, not concise, and the reading it skipped is where the defect lands.
+The fifteen questions are what turn this kind of judgement into something a check can enforce, because each one has a defined kind of answer. [Identity](ontology/REASONING.md#reason-node-ont-identity) asks what exists, and the answer is a set. [Structure](ontology/REASONING.md#reason-node-ont-structure) asks how the parts are arranged, and the answer is an ordering. [Relation](ontology/REASONING.md#reason-node-ont-relation) asks what a thing connects to, and the answer is a graph. [Probability](ontology/REASONING.md#reason-node-ont-probability) asks how sure each reading is, and the answer is a number between zero and one. The others, [composition](ontology/REASONING.md#reason-node-ont-composition), [space](ontology/REASONING.md#reason-node-ont-space), [time](ontology/REASONING.md#reason-node-ont-time), [state](ontology/REASONING.md#reason-node-ont-state), [change](ontology/REASONING.md#reason-node-ont-change), [behaviour](ontology/REASONING.md#reason-node-ont-behaviour), [function](ontology/REASONING.md#reason-node-ont-function), [cause](ontology/REASONING.md#reason-node-ont-cause), [meaning](ontology/REASONING.md#reason-node-ont-meaning), [scale](ontology/REASONING.md#reason-node-ont-scale) and [novelty](ontology/REASONING.md#reason-node-ont-novelty), each have a kind of answer of their own.
 
-A one-line request that resolves to one file and one edit still passes through the readings, but they take a second and most of them read as empty. The readings scale with the request, and an empty reading is a real answer rather than a skipped one.
+A question with a defined kind of answer can be turned into a condition that a check can test. What that condition does from there is described in [from intent to predicate](architecture/COVERAGE.md#an-architecture-is-its-predicate-set), on the architecture page, and that is how a reading the developer did once becomes a check that runs every time.
 
-The readings are an axis, and the axis is what turns judgement into something a check can hold. Each reading is a node of the ontology axis with a question and a mathematical shape behind it. [Identity](ontology/REASONING.md#reason-node-ont-identity) asks what exists and answers with a set, [structure](ontology/REASONING.md#reason-node-ont-structure) asks how the parts are arranged and answers with an ordering. [Relation](ontology/REASONING.md#reason-node-ont-relation) asks what it connects to and answers with a graph, and [probability](ontology/REASONING.md#reason-node-ont-probability) asks how sure each reading is and answers with a number between zero and one. The others, [composition](ontology/REASONING.md#reason-node-ont-composition), [space](ontology/REASONING.md#reason-node-ont-space), [time](ontology/REASONING.md#reason-node-ont-time), [state](ontology/REASONING.md#reason-node-ont-state), [change](ontology/REASONING.md#reason-node-ont-change), [behaviour](ontology/REASONING.md#reason-node-ont-behaviour), [function](ontology/REASONING.md#reason-node-ont-function), [cause](ontology/REASONING.md#reason-node-ont-cause), [meaning](ontology/REASONING.md#reason-node-ont-meaning), [scale](ontology/REASONING.md#reason-node-ont-scale) and [novelty](ontology/REASONING.md#reason-node-ont-novelty), each carry a shape of their own.
-
-A question that resolves to a shape resolves to a predicate, and [an architecture is its predicate set](architecture/COVERAGE.md#an-architecture-is-its-predicate-set) on the architecture page carries what a predicate does with that, so the reading a person did once becomes the check a machine does every time.
-
-[Introspection](ontology/PRINCIPLES.md#arch-introspection) goes one level below the [abstraction](ontology/PRINCIPLES.md#arch-abstraction) a thing presents. A document's section list is surface, and the rule that decides what may enter a section is the architecture. A function's signature is surface, and its state ownership and lifecycle are the architecture. A count is surface, and the scope it was taken over is the architecture. Reading at that level is what makes the first reading of a request agree with the last [verification](ontology/PRINCIPLES.md#arch-verification) of its result, because both are looking at the same thing.
+[Introspection](ontology/PRINCIPLES.md#arch-introspection) means looking one level below the [abstraction](ontology/PRINCIPLES.md#arch-abstraction) a thing presents. A document's list of sections is its surface, and the rule that decides what may go into a section is its structure. A function's signature is its surface, and which state it owns and how long that state lives are its structure. A count is a surface, and the scope it was counted over is its structure. Reading at that level is what makes the first reading of a request agree with the final [verification](ontology/PRINCIPLES.md#arch-verification) of its result, because both are then looking at the same thing.
 
 E1·a the readings
 
@@ -236,27 +222,23 @@ message --> identity --> composition --> structure --> relation --> space --> ti
 
 ## Three encodings
 
-Discipline is encoded three ways, and the three feed each other in a loop, as [F1·a three encodings](#three-encodings-panel-a) draws. A method with only one of the three is a method that leaks through the other two, and when two surfaces disagree a reader walks the order [F1·b precedence](#three-encodings-panel-b) draws.
+The rules of the method are written down in three different forms, and each form holds a different kind of rule. Mechanical rules are enforced by checks, behavioural rules tell the model how to work, and the context architecture decides what the model is given to read. The three feed into each other, as shown in [F1·a three encodings](#three-encodings-panel-a). A method that uses only one of the three leaks through the other two, and when two documents disagree, the order shown in [F1·b precedence](#three-encodings-panel-b) decides which one wins.
 
 ### One kind of discipline per home
 
-Mechanical rules, behavioural rules and context architecture each hold one kind of discipline, and each defers to the tree. Discipline written as one long instruction document mixes what a check should hold with what a person should remember, and both halves decay at the rate of the weaker one.
+Rules are often written as one long instruction document, which mixes what a check should enforce with what [the developer and the model](COLLABORATE.md#the-human-and-the-ai) are expected to remember, and the whole document then decays as fast as its weakest part. A rule about the tree is written into the behaviour policy, the model may keep to it for a session, and the tree drifts anyway, because nothing outside the conversation reads that sentence. A rule written where no check reads it is held only by memory, and a rule written in two places becomes two rules that drift apart.
 
-A rule about the tree sits in the behaviour policy, the agent follows it faithfully for a session, and the tree drifts anyway because nothing outside the conversation reads that sentence. A rule stated where nothing reads it is a rule held by memory, and a rule stated in two homes is two rules that drift.
+For this reason I keep each kind of rule in its own form: mechanical rules, behavioural rules and context architecture each hold one kind, and all three defer to the tree. Each rule is assigned to one of the three forms before it is written down, rather than added wherever it happens to fit. In practice, a rule about the tree goes into a check. A rule about how the model should work goes into the behaviour policy, as one line with a stable name. What the model needs to know goes into the context architecture, arranged so that the general part carries over to other projects and everything specific to this project sits in one file. A fact lives in exactly one of the three places, and the other two point to it.
 
-Classify every rule to one encoding before writing it down. Keep the three encodings in three homes with one scope each. Put a constraint on the tree into a check. Put a constraint on the agent's conduct into the policy as one line with a stable name. Put what the agent needs to know into the context architecture, layered so that the agnostic part transfers and the bound part is one file. Let a fact live in exactly one of the three and let the others point at it.
+To check this, take any rule and name the place it lives. A rule you cannot place in one of the three is either two rules or a rule that nothing enforces. The split follows what a rule applies to, never how important it feels. A behavioural rule whose effect can be seen in an artifact is really a mechanical rule written as prose, and moving it into a check is progress, not a demotion.
 
-Take any rule and name its home. A rule you cannot place in one of the three is either two rules or a rule nothing enforces.
+Mechanical rules are the ones a check can decide from the tree alone: where a file may live, what a name may say, which imports cross a boundary, whether a fact is declared twice and whether a document's references resolve. They are [policy as code](ontology/PRINCIPLES.md#arch-policy-as-code), enforced by checks, fixers, validators and generators through [static analysis](ontology/PRINCIPLES.md#arch-static-analysis) and [fitness functions](ontology/PRINCIPLES.md#arch-fitness-functions). Each returns pass or fail, and all of them run in [one chain](SHIP.md#one-chain), which is what [the gate holds the line](BUILD.md#the-gate-holds-the-line) describes. The developer has no part in this form at all, and that is intended: a mechanical rule that needs a developer to apply it is a behavioural rule disguised as a check.
 
-The split is by scope, never by how important a rule feels. A behavioural rule that can be observed in an artifact is a mechanical rule wearing prose, and moving it to a check is the work rather than a demotion.
+Behavioural rules cover how the model is asked to work where no artifact can show whether it did: that it reads a file before saying what the file contains, that it asks a question before the work that depends on the answer rather than after, and that it never runs a step whose output it will not read in full. Each is one line with a stable name, in the shape [rules with names](START.md#rules-with-names) describes, so that a correction has a place to land and a citation has something to point to.
 
-Mechanical rules are the constraints a check can decide from the tree alone: where a file may live, what a name may say, which imports cross a boundary, whether a fact is declared twice, whether a document's references resolve. They are [policy as code](ontology/PRINCIPLES.md#arch-policy-as-code), held by checks, fixers, validators and generators as [static analysis](ontology/PRINCIPLES.md#arch-static-analysis) and [fitness functions](ontology/PRINCIPLES.md#arch-fitness-functions); they return pass or fail, and they run in [one chain](SHIP.md#one-chain), which is what [the gate holds the line](BUILD.md#the-gate-holds-the-line) means. The person is not in this encoding at all, which is the point. A mechanical rule that needs a person is a behavioural rule wearing a check's clothes.
+Context architecture is how the other two forms reach the model in the same way every session. Its core documents name no project: an ontology of readings, a canon of principles as [principles are typed](architecture/PRINCIPLES.md#principles-are-typed) describes, the naming standard that [placement is a grammar](BUILD.md#placement-is-a-grammar) describes, and the [core templates](pag/TEMPLATES.md#templates-core) the grammar page publishes. A single adapter binds them to one project, as [the drop-in](START.md#onboarding) explains. Digests expand one concern each where a rule needs more room. Memory holds one fact per file and serves as reference rather than authority, so a remembered fact is checked against the tree before anything is done with it. An order of precedence runs through all of it, and the tree outranks every document: a document that disagrees with what is on disk is wrong, and it is corrected in the same turn the disagreement is found.
 
-Behavioural rules are the constraints on how the agent works when no artifact can observe the act: that it reads a file before claiming what it holds, that it asks before the dependent work rather than after, that it never runs a step whose output it will not read whole. Each is one line with a stable name, the shape [rules with names](START.md#rules-with-names) describes, so a correction has a place to land and a citation has a target.
-
-Context architecture is how the other two reach the agent the same way every time. The cores are agnostic: an ontology of readings, a principle canon that [principles are typed](architecture/PRINCIPLES.md#principles-are-typed) describes, the naming standard that [placement is a grammar](BUILD.md#placement-is-a-grammar) describes, and the [core templates](pag/TEMPLATES.md#templates-core) the grammar page publishes. The cores are agnostic and one adapter binds them, as [the drop-in](START.md#onboarding) explains. The digests expand one concern each where a rule needs room. Memory holds one fact per file and is reference rather than authority, so a recalled fact is verified against the tree before it is acted on. A precedence order runs through all of it, and every layer defers to the tree: a document that disagrees with the disk is wrong, and it is corrected the turn the disagreement is seen.
-
-[The loop](START.md#the-loop) between the three is what makes the system cohere rather than merely coexist. A check raises a finding and the agent repairs it under the behavioural rules. A correction I give hardens into a behavioural rule and a memory the turn it arrives. A behavioural rule stated twice for the same shape is the trigger to build the check that makes it mechanical, at which point the prose becomes a pointer and the rule has a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth). The cores stay untouched through all of that, because nothing in them named this tree, and the adapter absorbs whatever changed.
+The feedback between the three forms is what makes them work as one system rather than three separate ones. A check raises a finding, and the model is asked to repair it within the behavioural rules. A correction I give is written down as a behavioural rule and a memory in the same turn. When a behavioural rule has to be stated twice for the same kind of problem, that is the signal to build the check that makes it mechanical; the prose then becomes a pointer, and the rule has a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth). The core documents stay untouched throughout, because they name nothing specific to this project, and the adapter absorbs whatever changes.
 
 F1·a three encodings
 
@@ -265,7 +247,7 @@ flowchart TB
 subgraph mechanical["Mechanical rules · what the tree must be"]
 checks["Checks, fixers, validators, generators"]
 end
-subgraph behavioural["Behavioural rules · how the agent works"]
+subgraph behavioural["Behavioural rules · how the agent is asked to work"]
 policy["One-line rules with stable names"]
 end
 subgraph context["Context architecture · what the agent knows and where"]
@@ -304,23 +286,19 @@ tree -. wins over every document, and the document is fixed the same turn .-> po
 
 ## Where a rule lives
 
-A rule has two possible homes, and [G1·a two homes](#from-chat-to-tree-panel-a) draws where each one ends. It lives in the conversation, where someone restates it and hopes, or it lives in the tree, where the AI reads it on its own and a check refuses what breaks it. Everything in this method lives in the tree, as [policy as code](ontology/PRINCIPLES.md#arch-policy-as-code) where a check can hold it and as a policy line where only conduct can. An instruction that needs restating is a mechanism that has not been built yet, and the ontology's name for the state it leaves behind is [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance).
+A rule can live in one of two places, and [G1·a two homes](#from-chat-to-tree-panel-a) shows where each one leads. It can live in the conversation, where the developer has to restate it and hope it is followed, or it can live in the tree, where the model is given the policy file at the start of every session and a check refuses any change that breaks the rule. Everything in this method lives in the tree: as [policy as code](ontology/PRINCIPLES.md#arch-policy-as-code) where a check can enforce it, and as a line in the policy where only the model's conduct can. An instruction that has to be restated is a mechanism that has not been built yet, and the ontology calls the state it leaves behind [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance).
 
 ### Discipline decays, mechanism holds
 
-Discipline held in a conversation decays. A mechanism held in the tree does not. Rules that live in a chat need restating every session, and the restating is where they drift.
+Rules that live in a chat have to be restated every session, and each restatement is a chance for them to drift. The session starts well, the instructions fade as the context fills up, and by the end the model is back to its default behaviour. A rule held only by discipline is decided again every time it applies, and every new decision is a chance to decide differently.
 
-The session starts well, the instructions fade as the context fills, and by the end the AI is back to its defaults. A rule held by discipline is re-decided at every use, and every re-decision is a chance to decide differently.
+For this reason I hold rules in the tree rather than in the conversation, because a rule in the conversation decays and a check in the tree does not. Discipline is turned into mechanism as soon as a rule has been stated twice, rather than stated a third time. In practice, each instruction you keep repeating moves into a file the model is given at the start of every session, and each check you keep performing by hand moves into a command the pipeline runs. Once the mechanism holds, the old habit is dropped, because a habit kept alongside its mechanism is a second home for the same rule.
 
-Convert discipline into mechanism the moment you have stated a rule twice. Move each instruction you keep repeating into a file the AI reads on its own. Move each check you keep performing into a command the pipeline runs. Delete the ritual once the mechanism holds, because a ritual kept beside its mechanism is a second home for the same rule.
+To check this, delete your custom instructions for one session. What still holds is mechanism, and what breaks was discipline. A conversation is the right place for a rule only when the model has no access to your files; as soon as it does, the tree is the right place.
 
-Delete your custom instructions for one session. What still holds is mechanism. What breaks was discipline.
+The test that tells the two apart is whether anything would object if the rule stopped holding, the same objector test that the section [stating an invariant](COLLABORATE.md#stating-an-invariant) applies to a whole topology. A rule in a conversation has no objector: once it is forgotten, nothing notices. A rule in the tree has one of two. Either a check refuses the change that breaks it, or a policy line states it in the same words at the start of every session. The second is weaker than the first, because the model can still fail to follow a line it has been given, but it is still stronger than a memory, because a policy is delivered to every session and a memory reaches only the party who remembers to look it up.
 
-A conversation is the right home only when the AI has no access to your files. The tree is the home the moment it does.
-
-The test that separates the two is whether anything would disagree if the rule stopped holding, the objector test that [stating an invariant](COLLABORATE.md#stating-an-invariant) applies to a whole topology. A rule in a conversation has no objector: the moment it is forgotten, nothing notices. A rule in the tree has one of two objectors. A check refuses the change that breaks it, or a policy line the AI reads every session states it in the same words every time. The second is weaker than the first and still stronger than a memory, because a policy is delivered to every session at startup and a memory is delivered to whoever remembers to look.
-
-Coordination friction is the same question at a larger scale, answered where [coordination is software](COLLABORATE.md#coordination-is-software): when two parties on one tree lose a write, leave a stale item or miss a message, the first response is what the [shared surface](pag/ORCHESTRATION.md#shared-surfaces) is missing, never who should have been more careful. A rule added without a mechanism behind it is more care wearing a rule's clothes, and it decays at the same rate the care did.
+Friction between several parties working on one tree is the same question at a larger scale, and [coordination is software](COLLABORATE.md#coordination-is-software) answers it. When two parties lose a write, leave a stale item behind or miss a message, the first question is what the [shared surface](pag/ORCHESTRATION.md#shared-surfaces) is missing, never who should have been more careful. A rule added without a mechanism behind it only asks for more care, and it decays at the same rate the care did.
 
 G1·a two homes
 
@@ -330,11 +308,11 @@ rule["A rule"]
 conversation["Held in the conversation"]
 restated["Restated every session"]
 fades["Fades as the context fills"]
-defaults["The AI is back to its defaults"]
+defaults["The model is back to its defaults"]
 tree["Held in the tree"]
-policy["A policy file the AI reads on its own"]
+policy["A policy file given to the model every session"]
 check["A check that runs on every change"]
-holds["Holds without anyone remembering it"]
+holds["Held by the tree, not by memory"]
 rule --> conversation --> restated --> fades --> defaults
 rule --> tree --> policy --> holds
 tree --> check --> holds
@@ -342,33 +320,31 @@ tree --> check --> holds
 
 ## Rules with names
 
-Every behavioural rule is one line with a stable name, a directive, and the name of the check that enforces it or a declaration that none can, the lines [H1·a a policy file](#rules-with-names-panel-a) shows and [H1·b a rule record](#rules-with-names-panel-b) parses. The name is what a correction lands on and what a citation resolves to. When I correct the AI, the correction becomes a rule with a name and a memory the same turn, so it hardens instead of repeating, as [H1·c a correction hardens](#rules-with-names-panel-c) draws.
+Every behavioural rule is written as one line with three parts: a stable name, a directive, and either the name of the check that enforces it or a statement that no check can. [H1·a a policy file](#rules-with-names-panel-a) shows such lines, and [H1·b a rule record](#rules-with-names-panel-b) shows the shape they are read into. The name is what a correction attaches to and what a citation points to. When I correct the model, the correction is written down in the same turn as a named rule and a memory, so that the rule is there for the next session instead of the correction having to be given again, as shown in [H1·c a correction hardens](#rules-with-names-panel-c).
 
 ### A correction lands on a name
 
-Behaviour is a set of named rules, so a correction hardens rather than repeats. Instructions written as prose have no stable place for a correction to land.
+Instructions written as prose have no fixed place for a correction to attach to. The same correction is made in three sessions, each time as a new paragraph, and the three paragraphs end up contradicting each other. A correction with nowhere to attach is remembered by the developer and forgotten by the model, so it has to be given again the following week.
 
-The same correction gets made in three sessions, each time as a new paragraph, and the three paragraphs disagree. A correction with nowhere to land is remembered by the person and forgotten by the model, so it arrives again next week.
+For this reason I keep behaviour as a set of named rules, so that a correction becomes permanent rather than being repeated. Each rule gets a name that a correction can attach to, rather than a paragraph that corrections are appended to. In practice, each rule is one line: a short stable name, a directive in the present tense, and the gate that enforces it. The name is cited wherever the rule applies. When a correction arrives, it is assigned to [one home](BUILD.md#one-home), the rule is written first, then its reason and how it applies, a memory is stored beside it, and every place it was written to is confirmed by searching rather than by recollection. What is captured is the kind of mistake the correction belongs to, never the single case that triggered it.
 
-Give each rule a name to land on rather than a paragraph to append to. Write each rule as one line: a short stable name, a directive in the present tense, and the gate that holds it. Cite the name wherever the rule applies. When a correction arrives, classify it to [one home](BUILD.md#one-home), write the rule first, then its reason and its application, land a memory beside it, and verify every destination by search rather than by recollection. Capture the class the correction belongs to, never the one instance that triggered it.
+To check this, take the last correction you gave the model and look for its name among the rules. If it has no name, you will have to give it again. A rule may mention the measured failure that led to it, in the past tense and only inside that rule, because that clause is part of what the rule depends on. It describes the shape of the failure and how it showed up, never who caused it, when, or in what order.
 
-Take the last correction you gave the AI. Find its name in the rules. If it has no name, you will give it again.
+The shape of the line is the whole design. A name is a stable identity, so a rule can be cited from a digest, a memory, a finding or another party's message without quoting its text, and the citation survives any rewording; the names are the [ubiquitous language](ontology/PRINCIPLES.md#arch-ubiquitous-language) the developer, the model and the tooling share. A directive that fits on one line cannot hide a second instruction, so it reads as a single step. The gate field is the honest part: it names the check that enforces the rule, or it says that no artifact can show whether the rule held, and a rule that says neither has never been assessed. That field is written in exactly one place per rule, because a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) allows no second place to declare it. A rule without its reason gets argued over again, and a rule without its application gets admired and ignored, so the digest that expands a rule carries both; a digest is an [architecture decision record](ontology/PRINCIPLES.md#arch-architecture-decision-records) for one line of conduct.
 
-A rule may state the measured failure that produced it, in past tense, inside the rule it justifies and nowhere else, because that clause is an operand the rule depends on. It carries the shape that failed and how it presented, never who did it, when, or in what order.
+The reason and the application are written in the developer's own sharpest words wherever there are any, because a paraphrase loses the distinction that made the correction necessary. For example, one wrong path becomes a rule about checking paths, and one missed reference becomes a rule about places that find files by pattern.
 
-The line shape is the whole design. A slug is a stable identity, so a rule can be cited from a digest, a memory, a finding or a peer's message without quoting its text, and it survives every rewording; the slugs are the [ubiquitous language](ontology/PRINCIPLES.md#arch-ubiquitous-language) the operator, the model and the tooling share. A directive in one line cannot hide a second instruction, so a reader executes it as one step. The gate field is the honest part: it names the check that observes the rule, or it says that no artifact can, and a rule that says neither is a rule nobody has assessed. That field lives in exactly one place per rule, because a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) admits no second declaration site. A rule without its reason gets re-litigated, and a rule without its application gets admired and ignored, so the digest that expands a rule carries both; a digest is an [architecture decision record](ontology/PRINCIPLES.md#arch-architecture-decision-records) for one line of conduct.
+The rules are grouped into the ones that apply every turn and the ones that apply when a particular kind of task comes up, plus a small set of declared exceptions. That grouping helps the reader and means nothing to the checks. A check reads the gate field and never the heading, which is why a rule can move between groups without any mechanism noticing, and why a new rule is one added line rather than a new section.
 
-The reason and the application are written in the operator's own sharpest words where there are any, since paraphrase loses the distinction that made the correction necessary. The unit captured is the class: one bad path becomes a rule about verifying paths, and one missed reference becomes a rule about surfaces that resolve by pattern.
+Once parsed, a rule is a record, and that record is what the inventory, the coverage walk and the leak check all read; [coverage is derived](VERIFY.md#coverage-is-derived) from that inventory rather than counted. The gate field has two allowed forms, a check or conduct, rather than being optional, so a rule that declares neither cannot be written down at all; the unassessed state is impossible rather than merely discouraged.
 
-The rules split into the ones that bite every turn and the ones that fire on a matching task, plus a small set of declared exceptions. That grouping is the reader's, not the checker's. A check reads the gate field and never the heading, which is why a rule can move between groups without any mechanism noticing and why a new rule is one appended line rather than a section.
-
-Parsed, a rule is a record, and the record is what an inventory, a coverage walk and a leak check all read; [coverage is derived](VERIFY.md#coverage-is-derived) from that inventory rather than counted. The gate is a discriminated union rather than a nullable string, so a rule that declares neither cannot be represented, which is how the unassessed state becomes unwritable rather than merely discouraged.
+H1·a a policy file
 
 ```markdown
 ## <rules that bite every turn>
 
 - `read_before_claim`: a claim about a file is a lie until the file is read in this session · gate: conduct
-- `finding_not_principle`: the AI is directed with a location and a mismatch, never with a principle · gate: conduct
+- `finding_not_principle`: the model is directed with a location and a mismatch, never with a principle · gate: conduct
 - `one_run_is_the_answer`: a check runs once per state and its first output is read whole · gate: conduct
 
 ## <rules that fire on a matching task>
@@ -376,6 +352,8 @@ Parsed, a rule is a record, and the record is what an inventory, a coverage walk
 - `rename_by_hand`: a move is done by hand, every reference enumerated before and verified after · gate: reference
 - `ask_at_the_uncertainty`: a question is raised where it appears, with a recommendation, before the dependent work · gate: conduct
 ```
+
+H1·b a rule record
 
 ```typescript
 export type Tier = "always" | "situational" | "exception";
@@ -417,23 +395,21 @@ rule -. the class, never the instance .-> rule
 
 ## A seat is a contract
 
-A seat is defined by a contract, never by a character. [Design by contract](ontology/PRINCIPLES.md#arch-design-by-contract) applied to a party: the contract is [I1·a a role document](#a-seat-is-a-contract-panel-a) with the same sections for every seat, naming what it owns, what it refuses, how it works, the principles that decide its calls, and the mistakes it is prone to.
+A seat is a party's role in a collaboration, and it is defined by a contract, never by a character. A seat applies [design by contract](ontology/PRINCIPLES.md#arch-design-by-contract) to a party: the contract is a role document with the same sections for every seat, as shown in [I1·a a role document](#a-seat-is-a-contract-panel-a). It names what the seat owns, what it refuses, how it works, the principles that decide its calls and the mistakes it tends to make.
 
 ### Contract over character
 
-[Consistency](ontology/PRINCIPLES.md#arch-consistency) comes from the check, not from the roleplay. A persona gives an AI a voice, and a voice is not a behaviour.
+A persona gives a model a voice, and a voice is not a behaviour. The persona keeps its voice through the whole session and still drifts as much as a session with no persona at all. A character is judged by how it sounds, and sounding right comes easily to a model even when the work underneath is wrong.
 
-The persona stays in voice through the whole session and produces the same drift as a session with no persona at all. A character is judged by how it sounds, and sounding right is the one thing a model can always do.
+For this reason I get [consistency](ontology/PRINCIPLES.md#arch-consistency) from checks rather than from roleplay. A seat is defined by its contract rather than by its character. In practice, a role is a short document with the same sections every time, and it names the mistakes that seat is known to make beside what it owns. The seat's output is checked against the contract, never against its tone. The seat's identity stays out of the filename, so that handing a role over changes a field rather than a path.
 
-Define a seat by its contract, never by its character. Write a role as a short document with the same sections every time, and name the failure modes that seat exhibits beside what it owns. Check the seat's output against the contract, never against its tone. Keep the identity out of the filename so a handover changes a field rather than a path.
+To check this, strip the voice from a session's output and check what remains against the contract. Whatever the voice was hiding becomes visible. A measured mistake is evidence and is kept in one place: it leaves a role document only by being moved to the [one home](BUILD.md#one-home) history has. A mistake that is only expected never replaces one that was measured.
 
-Strip the voice from a session's output and check what remains against the contract. Whatever the voice was hiding is now visible.
+A uniform shape is what makes a set of seats comparable. A reader looking for what a seat refuses finds it in the same place in every document; otherwise the documents are just prose filed together. The set of sections is the contract, and the declared fields are what a tool reads: the identity, the concern the seat holds, and the one line another seat uses to route work to it. The seat's identity is allocated and recorded before its first write, for the reasons [coordination is software](COLLABORATE.md#coordination-is-software) gives.
 
-A measured failure mode is evidence held in one place, so it leaves a role document only by extraction to the [one home](BUILD.md#one-home) history has. An anticipated failure never displaces a measured one.
+The section that matters most is the one about what the seat gets wrong. A reviewer that approves a change because it reads well, a builder that reviews the description instead of the diff, and a coordinator that routes work a single edit would have closed are all measured mistakes. A seat is given its own document before its first edit so that it can avoid repeating them. A contract without that section is a job description, and a job description does not constrain the seat at all.
 
-A uniform shape is what makes a set of seats comparable. A reader looking for what a seat refuses finds it in the same place in every document, or the documents are prose that happens to be filed together. The section set is the contract and the declared fields are the operands a tool reads: the identity, the concern it holds, the one line another seat routes by. The seat's identity is allocated and bound before its first write, which [coordination is software](COLLABORATE.md#coordination-is-software) derives.
-
-The section that carries the value is the one about what the seat gets wrong. A reviewer that affirms a change that reads well, a builder that reviews the description instead of the diff, a coordinator that routes work one edit would have closed: those are measured shapes, and a seat that opens its own document before its first edit is reading them to avoid repeating them. A contract without that section is a job description, and a job description constrains nobody.
+I1·a a role document
 
 ```markdown
 # Reviewer
@@ -465,45 +441,43 @@ A finding without a location is an opinion. Approval is what remains when the li
 
 ## The behaviour document
 
-The behaviour policy is the system prompt of the collaboration, whatever file name the harness reads it under. It is the one document delivered to every session at startup, so it carries what has to be in force before the agent knows what it is doing, and it points at everything else, in the order [J1·a a behaviour document](#the-behaviour-document-panel-a) shows and [J1·b delivery order](#the-behaviour-document-panel-b) places. Its composition is the same in any harness and for any model, because nothing in it names a tool: it names operations and slots, and one binding says which tool performs which, which is [platform independence](ontology/PRINCIPLES.md#arch-platform-independence) applied to a prompt, as [J1·c one binding per harness](#the-behaviour-document-panel-c) draws. What each reader class receives is what [J1·d reader classes](#the-behaviour-document-panel-d) draws. It is the behavioural encoding of the [three encodings](START.md#three-encodings), and [document structure](pag/GUIDE.md#document-structure) on the grammar page is the same rule for a single document: declare, then instruct.
+The behaviour policy is the system prompt of the collaboration, whatever file name the harness uses for it. It is the one document delivered to every session at startup, so it carries what has to be in force before the model knows what task it is on, and it points to everything else. The order of its parts is shown in [J1·a a behaviour document](#the-behaviour-document-panel-a) and [J1·b delivery order](#the-behaviour-document-panel-b). It is written the same way for any harness and any model, because nothing in it names a tool: it names operations and slots, and a single binding says which tool performs each one, which applies [platform independence](ontology/PRINCIPLES.md#arch-platform-independence) to a prompt, as shown in [J1·c one binding per harness](#the-behaviour-document-panel-c). What each kind of reader receives is shown in [J1·d reader classes](#the-behaviour-document-panel-d). The document is the behavioural form among the [three encodings](START.md#three-encodings), and [document structure](pag/GUIDE.md#document-structure) on the grammar page applies the same rule to a single document: declare first, then instruct.
 
 ### A system prompt with a composition
 
-The behaviour document is a system prompt with a composition. Resident context comes first, delivery order is precedence order, and what presupposes a known task is referenced rather than carried. A prompt written as one long instruction document is read once at startup by a model that will forget most of it, and nothing in its shape says which parts must survive.
+A prompt written as one long instruction document is delivered once at startup to a model that will lose track of most of it, and nothing in its shape says which parts matter most. The document grows by appending, every session opens on a wall of prose, the first rules get attention and the last ones barely any, and the same correction is added a fourth time at the bottom. A document delivered in one piece has no structure that marks what must be in force from the start and what can be looked up later, so every line competes for the same attention and the order is simply the order it was written in.
 
-The document grows by appending, every session opens on a wall of prose, the first rules hold and the last ones are never read, and the same correction is added a fourth time at the bottom. A document delivered once carries no shape that says what is resident and what is referenced, so every line competes for the same attention and the order is whatever it was written in.
+For this reason I give the behaviour document a deliberate composition: what must be in force from the start comes first, the delivery order follows the order of precedence, and anything that only matters once the task is known is referred to rather than included. The document is arranged by precedence and kept free of anything specific to one harness, rather than grown in the order rules happened to arrive. In practice, it opens with [the stance](START.md#the-stance) and the hard prohibitions, because those apply before the task is known. Next comes what to read first and in which order, then the rules that apply every turn, then the ones that apply to particular tasks, then the declared exceptions. How the work is verified, how the tree is inspected and what the tree contains come after the rules, because each of them assumes a task. Anything that needs more room is moved into a digest the document points to. No tool is named anywhere: the document names the operation, and the binding decides which tool performs it.
 
-Compose the behaviour document by orienting precedence, and treat its shape as portable across harnesses. Open with [the stance](START.md#the-stance) and the hard prohibitions, because those bind before the task is known. Follow with what to read first and in which order, then the rules that bite every turn, then the situational ones, then the declared exceptions. Put how the work is verified, how the tree is looked at and what the tree is after the rules, because each presupposes a task. Point at a digest for anything that needs room. Name no tool anywhere; name the operation, and let the binding resolve it.
-
-Rename the file to what another harness reads and hand it to a different model. Where it fails, a tool name or a path leaked into a place a slot belongs. Where it holds, the composition transferred.
-
-The document is delivered once per reader, so a change to it has no subscribers in a running session. A rule edited mid-session reaches only parties that start afterwards, which is why a governing change is also routed as a message to the parties already running, and the message is read whole every round where the file is not.
+To check this, rename the file to what another harness expects and give it to a different model. Where it breaks, a tool name or a path has leaked into a place that should hold a slot; where it holds, the composition has transferred. The document is delivered once to each reader, so a change to it does not reach a session that is already running. A rule edited mid-session reaches only the parties that start afterwards, which is why a governing change is also sent as a message to the parties already running, since messages reach them every round and the file does not.
 
 ### Resident, then referenced
 
-The test that decides where a part goes is one question. If it tells the agent how to find out what it is doing, it is resident, and it sits at the top in the order it binds. If it tells the agent what to do once it knows, it is referenced, and it sits below or in a digest the top points at. Frequency is a proxy and a bad one: a rule that fires every hour but presupposes a known task is safely referenced, and a rule that fires once a month but decides which document to open is resident.
+One question decides where a part of the document goes. If it tells the model how to find out what it is doing, it belongs at the top, in the order it applies. If it tells the model what to do once it knows, it goes further down or into a digest the top points to. How often a rule applies is a poor guide: a rule that applies every hour but assumes a known task can safely be referred to, while a rule that applies once a month but decides which document to open belongs at the top.
 
 ### The document is a claim
 
-The document is a claim like any other and the stance binds it: it is re-read whenever it enters context, because a version held in memory is a memory, and it defers to the tree as three encodings orders.
+The document is a claim like any other, and the stance applies to it: the model is asked to re-read it whenever it enters the context, because a version held in memory is only a memory, and it gives way to the tree in the order three encodings sets out.
 
-It states what is true now and never what used to be, as [derived state](VERIFY.md#derived-state) requires of every document. Copying a sentence from one document into another is how a dead reference propagates, so a fact keeps a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) and the other documents point at it, which [documentation is code](VERIFY.md#documentation-is-code) turns into a check. The set is validated as documents, each class to its declared shape, and a document off shape fails before it is delivered.
+It states what is true now and never what used to be, as [derived state](VERIFY.md#derived-state) requires of every document. Copying a sentence from one document into another is how a dead reference spreads, so each fact has a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) and the other documents point to it, which [documentation is code](VERIFY.md#documentation-is-code) turns into a check. The whole set of documents is validated, each kind against its declared shape, and a document that does not match its shape fails before it is delivered.
 
 ### Operations and slots
 
-[Portability](ontology/PRINCIPLES.md#arch-portability) follows from what the document is allowed to say. It states what to do as [semantic operations](pag/GUIDE.md#tool-invocation): discover the resources, read the resource, search the content, analyse, execute a tool, persist the artifact, report the result, the same rule semantic operations on the grammar page states. It states where things are as slots: the gate, the rule host, the test root, the depth cap. One binding per harness maps each operation to that harness's tool and each slot to that tree's value, which is [configuration externalization](ontology/PRINCIPLES.md#arch-configuration-externalization) for a prompt, so moving the document to a harness that reads a different file name is a rename plus one binding, and the rules do not change. The model is an absent slot by construction, because model selection belongs to the harness and a value written into an absent slot has no source.
+[Portability](ontology/PRINCIPLES.md#arch-portability) follows from what the document is allowed to say. It states what to do as [semantic operations](pag/GUIDE.md#tool-invocation), such as discovering resources, reading a resource, searching content, analysing, running a tool, saving an artifact and reporting a result, the same rule stated under semantic operations on the grammar page. It states where things are as slots, such as the gate, the rule host, the test root and the depth cap. One binding per harness maps each operation to that harness's tool and each slot to that tree's value, which is [configuration externalization](ontology/PRINCIPLES.md#arch-configuration-externalization) applied to a prompt. Moving the document to a harness that expects a different file name therefore takes a rename and one binding, and the rules do not change. The model is deliberately left as an empty slot, because choosing the model belongs to the harness, and a value written into that slot would have no source.
 
-A body of rules meant for adoption elsewhere is written as a block a host copies into its own document rather than merges. The host's rule wins where the two collide on one construct, and the collision is a finding rather than a negotiation. Every path in the block is relative to one value the adopter re-points, and the one literal that survives is the import a runtime resolves, because a runtime reading a path has no binding to consult.
+A set of rules meant for use in other projects is written as a block that a host project copies into its own document, rather than merging it. Where the host's rule and the block's rule collide on the same thing, the host's rule wins, and the collision is treated as a finding rather than a negotiation. Every path in the block is relative to one value the adopting project sets, and the only literal path that remains is the import a runtime resolves, because a runtime reading a path has no binding to consult.
 
 ### Who receives it
 
-Who receives the document decides which of its rules bind, and the document says which class each rule binds rather than leaving the reader to classify itself; [coordination is software](COLLABORATE.md#coordination-is-software) derives the two classes from what each receives. The one line a bounded reader gets is refreshed in the same change as the fact it carries and held to a cap, because a projection that grows by perfect [compliance](ontology/PRINCIPLES.md#arch-compliance) with a refresh rule stated without a shape is the document's own accumulation.
+Who receives the document decides which of its rules apply, and the document states which kind of reader each rule applies to, rather than leaving the reader to decide; [coordination is software](COLLABORATE.md#coordination-is-software) explains where the two kinds of reader come from. The single line a bounded reader receives is updated in the same change as the fact it carries and kept under a size limit, because a summary that keeps growing under an update rule with no stated limit turns into the document's own clutter.
 
 ### How it grows
 
-The document grows in the one shape [rules with names](START.md#rules-with-names) describes, and a rule stated twice for the same shape becomes a check the line points at.
+The document grows only in the shape [rules with names](START.md#rules-with-names) describes, and when a rule has had to be stated twice for the same kind of problem, it becomes a check that the line points to.
 
-The document restates nothing the codebase contract owns and the contract restates nothing the document owns, and a reader who finds one fact in both has found the copy nobody maintains.
+The document repeats nothing the codebase contract owns, and the contract repeats nothing the document owns; a reader who finds the same fact in both has found a copy that neither the developer nor the model maintains.
+
+J1·a a behaviour document
 
 ```markdown
 # <the stance and the hard prohibitions>
@@ -591,56 +565,52 @@ flowchart TB
 doc["The behaviour document · delivered once, at startup"]
 seat["A seat"]
 bounded["A bounded invocation"]
-board["The board · read whole every round"]
+board["The board · delivered whole every round"]
 line["One projection line · the only board it ever sees"]
 invert["Turn-owning rules invert · returning is its contract"]
 routed["A change to the document is routed to the running parties"]
 doc --> seat --> board
 doc --> bounded --> line
 bounded --> invert
-doc -. edited mid-session reaches nobody running .-> routed
+doc -. an edit mid-session does not reach running parties .-> routed
 ```
 
 ## The drop-in
 
-Onboarding a project is a template applied to a binding, not a ritual performed in a chat. The whole governance set is a folder that names no project, plus one file that does, as [K1·a a drop-in](#onboarding-panel-a) draws. Adopting it means copying the folder and writing that one file, [K1·c a binding](#onboarding-panel-c), in which every host fact is a slot in one of the three states [K1·b slot states](#onboarding-panel-b) draws, and the gate is green on an empty tree before the first line of code exists. Everything about how that works follows from one separation: the thinking is kept apart from the tools, which is [platform independence](ontology/PRINCIPLES.md#arch-platform-independence) for a method and [configuration externalization](ontology/PRINCIPLES.md#arch-configuration-externalization) for its facts. The [template families](pag/TEMPLATES.md#templates-families) the grammar page publishes are what the folder is generated from.
+Setting up the method in a new project means applying a template to one file of project details, not rebuilding the rules in a conversation. The whole governance set is a folder that names no project, plus one file that does, as shown in [K1·a a drop-in](#onboarding-panel-a). Adopting it means copying the folder and writing that one file, the binding shown in [K1·c a binding](#onboarding-panel-c), in which every fact about the host project is a slot in one of the three states shown in [K1·b slot states](#onboarding-panel-b). The gate is then green on an empty tree before the first line of code exists. All of this rests on one separation: the thinking is kept apart from the tools, which applies [platform independence](ontology/PRINCIPLES.md#arch-platform-independence) to a method and [configuration externalization](ontology/PRINCIPLES.md#arch-configuration-externalization) to its facts. The folder is generated from the [template families](pag/TEMPLATES.md#templates-families) the grammar page publishes.
 
 ### A template applied to a binding
 
-Cores are agnostic, one adapter binds them, and every absence carries a declaration rather than a patch. A method that lives in one project's vocabulary does not transfer.
+A method written in one project's vocabulary does not carry over to the next project. Every new project starts with a long conversation that rebuilds rules which already exist somewhere else, and rebuilds them slightly wrong. A core document that names a path is tied to the project that has that path, so the next project has to edit the core.
 
-Every new project starts with a long conversation reconstructing rules that already exist somewhere else, slightly wrong. A core that names a path is bound to the tree that has it, so the next tree has to edit the core.
+For this reason the core documents name no project, a single adapter binds them to one, and every missing piece is declared rather than patched over. The method moves to a new project by rewriting one adapter, rather than by editing the core documents. In practice, the reasoning stays in core documents that name no project, and the bindings stay in one adapter that fills every slot the cores leave open. A slot that nothing can fill is declared absent in the adapter, rather than left for a core to assume, and the part of the method that depends on it does not run. The set is proven on an empty tree first: a gate that is red before any code exists is reporting a problem with the binding, and a gate that is green there becomes the baseline every later failure is measured against.
 
-Port by rewriting one adapter rather than by editing the cores. Keep the reasoning in cores that name no project. Keep the bindings in one adapter that resolves every slot the cores leave open. Name a slot that nothing fills as absent, in the adapter, rather than letting the core assume it, and let the branch that depends on it not run. Prove the set on an empty tree, because a gate that is red before any code exists is reporting a binding, and a gate that is green there is the baseline every later red is measured against.
-
-Apply the set to an empty project. A red gate there is a binding the adapter did not make; a green one proves the binding and nothing else, because a check over an empty tree measures nothing.
-
-A catalogue inside a core, a list of principles or patterns or examples, may assume constructs this tree does not carry. The mechanism transfers unchanged and the catalogue is re-derived against what exists here. Substituting the mechanism is the violation and re-deriving the catalogue is the work.
+To check this, apply the set to an empty project. A red gate there points to a binding the adapter did not make. A green gate proves the binding and nothing more, because a check over an empty tree measures nothing. A catalogue inside a core document, such as a list of principles, patterns or examples, may assume things this project does not have. The mechanism carries over unchanged, and the catalogue is worked out again against what exists here. Replacing the mechanism would be the mistake; working out the catalogue again is the work.
 
 ### Cores, one adapter, three slot states
 
-A core is a document that states what to do as [semantic operations](pag/GUIDE.md#tool-invocation) and slots, the shape [the behaviour document](START.md#the-behaviour-document) already has. It never says which tool discovers or which folder is the test root, because the moment it does it is bound to one tree and the next tree has to edit it. The adapter is the one file where those names live, and it is the only file rewritten when the set is ported.
+A core is a document that says what to do in terms of [semantic operations](pag/GUIDE.md#tool-invocation) and slots, the same shape [the behaviour document](START.md#the-behaviour-document) has. It never names the tool that searches or the folder that holds the tests, because as soon as it does, it is tied to one project and the next project has to edit it. The adapter is the one file where those names live, and it is the only file rewritten when the set moves to another project.
 
-A slot resolves to one of three states, and the third is the load-bearing one. Resolved means this tree has the thing and the value is here. Absent means this tree has no analogue, the branch that depends on it does not run, and that is declared rather than faked. Deferred means the thing will exist and does not yet, so the branch is blocked rather than skipped, which answers a different question in the right shape. An adapter that resolves everything is lying about something. The predicates this tree does not have, a computed worth, a non-progress detector, a calibrated confidence, are named as absent in the adapter so that nothing upstream assumes them; [the honest gaps](SHIP.md#the-honest-gaps) chapter lists them, and the architecture page reaches [the same declared absences](architecture/COVERAGE.md#the-honest-gaps) because [an architecture is its predicate set](architecture/COVERAGE.md#an-architecture-is-its-predicate-set).
+A slot is always in one of three states, and the third is the one that matters most. Resolved means this project has the thing, and its value is in the adapter. Absent means this project has nothing that corresponds to it, so the part of the method that depends on it does not run, and that is declared rather than faked. Deferred means the thing will exist but does not yet, so the dependent part is blocked rather than skipped, which answers a different question in the right way. An adapter in which every slot is resolved is hiding something. The checks this project does not have, such as a computed measure of worth, a detector for work that stops making progress and a calibrated confidence, are declared absent in the adapter so that nothing assumes them; [the honest gaps](SHIP.md#the-honest-gaps) lists them, and the architecture page arrives at [the same declared absences](architecture/COVERAGE.md#the-honest-gaps) because an architecture is its predicate set.
 
 ### The generator removes itself
 
-The template that generates the set retains mechanism and rewrites content. A fact that would be wrong in the next project is templatized into a slot. A statement true of one domain that is true of the class is generalized to the class. A mechanism that must carry no knowledge of what it governs is made agnostic. Then the generator substitutes the one binding, validates in both directions, that every slot the cores name is bound and that every binding names a slot, installs, runs the gate, and removes itself before the gate certifies the tree. A generated project is therefore green on arrival with no hand edit, which is what makes every manual step of onboarding a [manual runbook dependency](ontology/PRINCIPLES.md#arch-manual-runbook-dependency) rather than a chore.
+The template that generates the set keeps the mechanism and rewrites the content. A fact that would be wrong in the next project is turned into a slot. A statement written for one domain that holds for the whole kind is generalised to the kind. A mechanism that must know nothing about what it governs is made project-neutral. The generator then fills in the one binding and checks it in both directions, that every slot the cores name is bound and that every binding names a slot. It installs the set, runs the gate, and removes itself before the gate approves the tree. A generated project is therefore green when it arrives, with no edits by hand, and that is why every manual step in setting up a project counts as a [manual runbook dependency](ontology/PRINCIPLES.md#arch-manual-runbook-dependency) rather than a chore.
 
-The checks derive their contracts from the same templates the surfaces are raised from, a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) the check reads at run time. A check that transcribed a schema would hold a second copy with nothing keeping the two equal, and the drift would surface only when somebody raised a new surface and it failed on its first run, non-conformant at birth from a template that read as authoritative.
+The checks read their contracts from the same templates the surfaces are created from, so there is a [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) that the check reads while it runs. A check that copied a schema into itself would hold a second copy with nothing keeping the two the same, and the drift would only show when the developer or the model created a new surface and it failed on its first run, wrong from the start because it followed a template that looked authoritative.
 
 ### The binding as a module
 
-The binding is a typed module rather than a page, and the prose face of it is rendered from the module so the two cannot disagree, which is what [self-describing architecture](ontology/PRINCIPLES.md#arch-self-describing-architecture) means for a binding. A slot is one record with a state from a closed union, a value that is null in every state but resolved, and a note stating why, so a reader meets the reason beside the value and a mechanism meets the state before the value. The three constructors are the only way to make a slot, which is what keeps a resolved slot from carrying no value and an absent one from carrying a stale one.
+The binding is a typed module rather than a written page, and its readable version is generated from the module, so the two cannot disagree, which is what [self-describing architecture](ontology/PRINCIPLES.md#arch-self-describing-architecture) means for a binding. A slot is one record with three fields: a state from a fixed set, a value that is empty unless the state is resolved, and a note explaining why. A reader therefore sees the reason next to the value, and a mechanism sees the state before the value. The three constructors are the only way to create a slot, which is what stops a resolved slot from having no value and an absent slot from carrying an old one.
 
-Slots are grouped by who supplies them: what the host supplies, what the package owns, the conventions, the limits and the execution commands. A census over the states is derived on render, so it cannot disagree with the table above it, and a binding whose census shows every slot resolved is the one to distrust.
+Slots are grouped by who supplies them: what the host project supplies, what the package owns, the conventions, the limits and the commands that run things. A count of slots in each state is worked out when the page is rendered, so it cannot disagree with the table above it, and a binding whose count shows every slot resolved is the one to distrust.
 
 K1·a a drop-in
 
 ```mermaid
 flowchart TB
 subgraph governance["The governance folder · copied whole, never edited for a feature"]
-policy["The behaviour policy · named rules the AI reads first"]
+policy["The behaviour policy · named rules given to the model first"]
 checks["The checks · one file per rule, each proven to fire"]
 cores["The cores · reasoning that names no project"]
 binding["The binding · the one file that names this tree"]
@@ -669,6 +639,8 @@ binding -- declared absent --> absent
 binding -- declared deferred --> deferred
 binding -. no declaration .-> faked
 ```
+
+K1·c a binding
 
 ```typescript
 export type SlotState = "RESOLVED" | "ABSENT" | "DEFERRED";
@@ -731,10 +703,6 @@ export const binding: Binding = {
   execution: { compile: absent("nothing here compiles") },
 };
 ```
-
-Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-© 2025 [Jay Baleine](https://linkedin.com/in/jay-baleine) - Disciplined AI Software Development
 
 ---
 

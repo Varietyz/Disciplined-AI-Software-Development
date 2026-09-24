@@ -1,36 +1,34 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Validation — PAG — Bane's Lab
 
-> A handoff gate closes a node with three to five checks, each checkable against the node's output, each carrying the evidence that decided it and the set it was…
+> This section covers the handoff gate that closes every node. A gate holds three to five checks, each compared against the node's output and each carrying the…
 
 Canonical: https://banes-lab.com/pag/validation
 
 # Pattern Abstract Grammar
 
-Structured instructions for AI systems.
+Structured instructions for LLMs
 
 # Validation
 
 ## Validation gates
 
-A handoff gate closes a node with three to five checks, each checkable against the node's output, each carrying the evidence that decided it and the set it was measured over, the whole of [A1·a a gate](#validation-gates-panel-a) and what [A1·d at the boundary](#validation-gates-panel-d) draws. Its result line has three arms: the next node on pass, the node that owns the repair on failure, and blocked on unknown, the third verdict [A1·b verdict and domain](#validation-gates-panel-b) shows. A check is a comparison and never a judgement, as [A1·c judgement or check](#validation-gates-panel-c) rewrites one and [A1·e who decides](#validation-gates-panel-e) draws the difference. The gate is the verify stage of [the loop](../START.md#the-loop), and the methodology's [unknown is not pass](../VERIFY.md#unknown-is-not-pass) is its third arm. A node boundary is trusted only when its checks are specific, its verdict carries its domain, and its writes are refused before they land.
+This section covers the handoff gate that closes every node. A gate holds three to five checks, each compared against the node's output and each carrying the evidence that decided it and the set it was measured over, as shown in [A1·a a gate](#validation-gates-panel-a) and [A1·d at the boundary](#validation-gates-panel-d). Its result line has three arms, which send a pass to the next node, a failure to the node that owns the repair, and an unknown to blocked, as shown in [A1·b verdict and domain](#validation-gates-panel-b). A judgement is rewritten as a comparison in [A1·c judgement or check](#validation-gates-panel-c), and [A1·e who decides](#validation-gates-panel-e) shows the difference between the two. The gate is the verify stage of [the loop](../START.md#the-loop), and its third arm is the rule described in [unknown is not pass](../VERIFY.md#unknown-is-not-pass).
 
 ### Checkable, with evidence
 
-A check is specific and checkable, with its evidence, its population and its repair owner beside it, and unknown is its own verdict. A vague check passes whatever the reader is inclined to pass, and a check with no domain passes over nothing.
+A vague check passes whatever the reader is inclined to pass, and a check with no domain passes over nothing. A gate reads that the data looks good, the model reports the gate passed because the data looked good to it, and the next node consumes records that never matched the schema. A condition that compares an artifact to a value gives the model, the developer and a script the same answer, while a condition that asks whether something looks right can give each of them a different one, and a verdict with no domain cannot say what it was true of.
 
-A gate reads that the data looks good, the model reports the gate passed because the data looked good to it, and the next node consumes records that never matched the schema; or the check ran over an empty set and passed over nothing. A condition that compares an artifact to a value can be evaluated by anyone, and a condition that asks whether something looks right can be evaluated only by whoever is looking; a verdict with no domain cannot say what it was true of.
+For this reason a check is a comparison against the node's output, with its evidence, its population and its repair owner beside it, and unknown is a verdict of its own. The evidence is written beside each check, together with the set and the count measured over it wherever a check ranges over a set, rather than the verdict standing alone, so a green reads as coverage and not as silence. In practice, every node closes on a gate of three to five checks, each written as a comparison against the node's output. A hard assertion and a prerequisite are marked as such, and where the node writes, the condition under which it refuses is named before the write. The result line carries all three arms, so a failed check names what was found and routes to the earliest node that can supply the missing evidence, and an unmeasured claim routes to blocked rather than reading as pass. The next node's contract reads exactly the output the gate confirmed.
 
-Put the evidence and the population beside the check rather than trust the verdict, so a green reads as coverage and not as silence. Close every node with a gate of three to five checks. Write each as a comparison against the node's output, with the evidence that settles it beside it and, wherever the check ranges over a set, that set and the count measured over it. Mark a hard assertion and a prerequisite as such. Where the node writes, name the condition under which it refuses before the write. Write the result line with all three arms, so a failed check names what was found and routes to the earliest node that can supply the missing evidence, and an unmeasured claim routes to blocked rather than reading as pass. Let the next node's contract read exactly the output the gate confirmed.
+To check this, rewrite each check as a comparison and name the artifact on each side and the set it ranged over. A check with no artifact on one side is a judgement and a check with no set is a verdict about nothing, so in either case the gate's green does not say whether the node closed. A gate checks outcomes, never confidence. How sure the model is, or whether it understood, is not observable from outside, so a check about either belongs under [limits](VALIDATION.md#limitations) rather than in a gate.
 
-Rewrite each check as a comparison and name the artifact on each side and the set it ranged over. A check with no artifact on one side is a judgement, a check with no set is a verdict about nothing, and the node either closes is open however the gate reads.
+The count is bounded on both sides. With fewer than three checks the gate shows that something ran rather than that a unit closed, and with more than five the node holds several decisions and is several nodes. A gate that passes and a gate that was never evaluated produce the same silence, and the evidence beside each check tells them apart. A gate that passed over an empty set produces the same silence with a number attached, and the population beside the verdict exposes it. The result line applies [fail fast](../ontology/PRINCIPLES.md#arch-fail-fast) at the node boundary, as described for a whole system in [fail at the boundary](../BUILD.md#fail-at-the-boundary), and its owner is the earliest node that can supply what the check lacked, so a repair invalidates forward from there and nothing earlier is redone.
 
-A gate checks outcomes and never confidence. A check about how sure the model is, or whether it understood, is not observable from outside and belongs under limits rather than in a gate.
+The refusal line stops the node before an irreversible write, because that is the only moment a refusal costs nothing. The standing line names the surfaces that moved beneath the verdict, and a non-empty moved set withdraws the verdict's standing to be quoted without touching the verdict itself, as derived in [a report, not a checkbox](../VERIFY.md#a-report-not-a-checkbox). The markers form a closed set with one meaning each, marking a check, a hard assertion, or a prerequisite that a prior node must have yielded. Severity is not a marker, because severity orders repairs among failures and never softens a verdict, and there is no tier between fail and pass.
 
-The count is bounded on both sides: fewer than three and the gate checks that something ran rather than that a unit closed; more than five and the node has several decisions and is several nodes. A gate that passes and a gate that was never evaluated produce the same silence, which is what the evidence beside each check breaks. A gate that passed over an empty set is the same silence wearing a number, which is what the population beside the verdict breaks. The result line is [fail fast](../ontology/PRINCIPLES.md#arch-fail-fast) at the boundary, the rule [fail at the boundary](../BUILD.md#fail-at-the-boundary) states for a system, and its owner is the earliest node that can supply what the check lacked, so a repair invalidates forward from there and nothing earlier is redone.
-
-The refusal line is where the node declines to continue before an irreversible write, which is the only moment a refusal costs nothing. The standing line names the surfaces that moved beneath the verdict, and a non-empty moved set withdraws the verdict's standing to be quoted without touching the verdict itself, which is what a report, not a checkbox derives. The markers are a closed set with one meaning each: a check, a hard assertion, a prerequisite a prior node must have yielded. Severity is not a marker, because severity orders repairs among failures and never softens a verdict; there is no tier between fail and pass.
+A1·a a gate
 
 ```pag
 HANDOFF GATE (evidence-bearing):
@@ -45,6 +43,8 @@ standing: moved-set <the surfaces re-read since the node began>
 result: pass -> NODE <n+1> | <which check failed, what was found> -> REPAIR (owner: <the earliest node that can supply the evidence>) | unknown -> BLOCKED
 ```
 
+A1·b verdict and domain
+
 ```pag
 # a verdict with no domain · passed over what?
 [check] every settings file conforms                (evidence: the validator's report)
@@ -57,8 +57,10 @@ result: pass -> NODE <n+1> | <which check failed, what was found> -> REPAIR (own
 result: pass -> NODE 4 | schema mismatch -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
 ```
 
+A1·c judgement or check
+
 ```pag
-# a judgement · true for whoever reads it
+# a judgement · its truth depends on the reader
 [check] the email looks valid
 [check] the data is good
 [check] everything worked
@@ -81,7 +83,7 @@ refuse["A write is refused before it lands when its condition holds"]
 verdict{"pass · fail · unknown"}
 next["The next node's contract reads exactly that output"]
 action["The result line · which check, what was found, which node owns the repair"]
-blocked["BLOCKED · the answer is owed by someone outside the run"]
+blocked["BLOCKED · the answer is owed from outside the run"]
 node --> conditions --> evidence --> refuse --> verdict
 verdict -- pass --> next
 verdict -- fail --> action
@@ -93,7 +95,7 @@ A1·e who decides
 ```mermaid
 flowchart LR
 judgement["looks valid · a judgement"]
-who["True for whoever reads it"]
+who["Its truth depends on the reader"]
 condition["matches the pattern · a condition"]
 what["True or false against the artifact"]
 domain["Over a declared set · n of N"]
@@ -103,23 +105,21 @@ condition --> what --> domain
 
 ## Limits
 
-A document's limits are stated where a reader would otherwise assume the opposite, as [B1·a declared limits](#limitations-panel-a) writes and [B1·d what it never reaches](#limitations-panel-d) draws, and each is a limit to design for rather than a flaw to route around. A slot resolves to one of the three states [B1·b slot states](#limitations-panel-b) names and [B1·e three states](#limitations-panel-e) draws, and a reading larger than one session is split as [B1·c size and time](#limitations-panel-c) shows.
+This section covers what a document cannot do and how it says so. The limits a document declares are written in [B1·a declared limits](#limitations-panel-a), and [B1·d what it never reaches](#limitations-panel-d) shows what lies beyond a document's reach. A slot resolves to one of three states, as written in [B1·b slot states](#limitations-panel-b) and shown in [B1·e three states](#limitations-panel-e), and a reading larger than one session is split as shown in [B1·c size and time](#limitations-panel-c). Each limit is one to design for rather than a flaw to route around.
 
 ### Declared, never assumed
 
-An absence is declared where it would otherwise be assumed, and a slot with no analogue is absent rather than faked. A directive names a capability the harness may not have.
+A directive names a capability the harness may not have. A workflow declares a parallel group and a watch on a surface, the harness has neither, both branches run against a guess, and the workflow reports every gate green over work that never happened. A branch runs against a value unless the adapter declares there is none, so a missing declaration reads as a value.
 
-A workflow declares a parallel group and a watch on a surface, the harness has neither, both branches run against a guess, and the workflow reports every gate green over work that never happened. A branch runs against a value unless something says there is none, so a missing declaration reads as a value.
+For this reason an absence is declared where it would otherwise be assumed, and a slot with no analogue is marked absent rather than faked. An adapter that resolves everything is refused, and each branch is routed by the slot's declared state rather than by whether a value happens to exist. In practice, each limit is declared beside the mechanism a reader would otherwise expect to cover it. A document that exceeds one reading is split into nodes the reader takes one at a time, and only what a directive persists to a surface is carried across sessions.
 
-Refuse an adapter that resolves everything, and route each branch by the slot's declared state rather than by whether a value happens to exist. Declare each limit beside the mechanism a reader would otherwise expect to cover it. Split a document that exceeds one reading into nodes the reader takes one at a time, and carry across sessions only what a directive persists to a surface.
+To check this, find the state of each slot a document names in its adapter. A slot with no state is a branch running against a guess, and the repair is a declaration rather than a value. Declaring a limit does not remove it. Stating that output is probabilistic is the reason the gates exist, so the declaration is not a disclaimer.
 
-For each slot a document names, find its state in the adapter. A slot with no state is a branch running against a guess, and the fix is a declaration rather than a value.
+The limits divide by what a document can and cannot reach. A document reaches the input a reasoning loop reads, and nothing past that. Output is a sample from a distribution on every run, so [reproducibility](../ontology/PRINCIPLES.md#arch-reproducibility) is not on offer, and the model's confidence is not observable from outside, so a gate cannot condition on it. A document that names its model has written a claim into a slot the harness owns.
 
-A limit declared is not a limit removed. Stating that output is probabilistic is what makes the gates necessary, and a reader who treats the declaration as a disclaimer has read the page backwards.
+The states other than resolved keep a document from running against a guess. An adapter is a [capability declaration](../ontology/PRINCIPLES.md#arch-capability-declaration), and one that resolves every slot is claiming at least one capability its harness does not have. Size and time are facts about the model reading the document. Its context is bounded, so what crosses a node boundary is the output the next contract reads rather than the whole history, and its session ends, so what the next session needs is persisted rather than remembered.
 
-The limits partition by what a document can and cannot reach. It reaches the input a reasoning loop reads, and nothing past that. Output is a sample from a distribution every run, so [reproducibility](../ontology/PRINCIPLES.md#arch-reproducibility) is not on offer, and the model's confidence is not observable from outside, so a gate cannot condition on it. A document that names its model has written a claim into a slot the harness owns.
-
-The third slot state is what keeps a document honest. An adapter is a [capability declaration](../ontology/PRINCIPLES.md#arch-capability-declaration), and one that resolves everything is lying about something. Size and time are facts about the party reading the document: a context is bounded, so what crosses a node boundary is the output the next contract reads rather than the whole history, and a session ends, so what the next one needs is persisted rather than remembered.
+B1·a declared limits
 
 ```pag
 # what a document cannot do · declared where a reader would otherwise assume it
@@ -133,6 +133,8 @@ LIMIT <availability>:   "an operation assumes the adapter resolves it · an abse
 LIMIT <feedback>:       "a document describes a linear or branching flow · watching for change needs a tool"
 ```
 
+B1·b slot states
+
 ```pag
 # a slot resolves to one of three states, and the third is the load-bearing one
 SLOT {toolchain.watch}:    ABSENT    "this harness cannot block on a surface · the branch does not run"
@@ -144,6 +146,8 @@ IF <slot> is ABSENT:   DECLARE the absence · SKIP the branch
 IF <slot> is DEFERRED: DECLARE the deferral · BLOCK the branch
 IF <slot> is RESOLVED: RUN the branch
 ```
+
+B1·c size and time
 
 ```pag
 # a bounded context is a limit, not a surprise
@@ -191,10 +195,6 @@ adapter -- absent --> absent
 adapter -- deferred --> deferred
 adapter -. no declaration .-> faked
 ```
-
-Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-© 2025 [Jay Baleine](https://linkedin.com/in/jay-baleine) - Pattern Abstract Grammar
 
 ---
 

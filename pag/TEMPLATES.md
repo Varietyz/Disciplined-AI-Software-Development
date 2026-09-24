@@ -1,36 +1,34 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Templates — PAG — Bane's Lab
 
-> A template is a record with four parts, as template record shows: a declared document type, the slots an instance fills, the constraints every instance must…
+> This section covers the template and how an instance is raised from it. A template record has four parts, a declared document type, the slots an instance fills,…
 
 Canonical: https://banes-lab.com/pag/templates
 
 # Pattern Abstract Grammar
 
-Structured instructions for AI systems.
+Structured instructions for LLMs
 
 # Templates
 
 ## Core templates
 
-A template is a record with four parts, as [A1·a template record](#templates-core-panel-a) shows: a declared document type, the slots an instance fills, the constraints every instance must satisfy, and a body in which every slot appears by name. It carries the contract of a shape and never one instance's content, which is what [A1·d template and sibling](#templates-core-panel-d) contrasts. Raising an instance is a resolution: each slot is substituted, a slot left unresolved is reported rather than guessed, and a value outside a slot's declared set is a violation, the three outcomes [A1·c resolution](#templates-core-panel-c) lists. The record and [A1·b workflow body](#templates-core-panel-b) are the grammar's own workflow template, read from its records rather than restated here.
+This section covers the template and how an instance is raised from it. A template record has four parts, a declared document type, the slots an instance fills, the constraints every instance must satisfy, and a body in which every slot appears by name, as shown in [A1·a template record](#templates-core-panel-a). [A1·d template and sibling](#templates-core-panel-d) shows how a template differs from a sibling instance. Raising an instance is a resolution in which each slot is substituted, a slot left unresolved is reported rather than guessed, and a value outside a slot's declared set is a violation. [A1·c resolution](#templates-core-panel-c) lists the three outcomes. The record and [A1·b workflow body](#templates-core-panel-b) are the grammar's own workflow template, read from its records rather than restated here.
 
 ### Contract, not content
 
-A template carries the contract, an instance resolves its slots, and a check reads the template. An instance derived from a sibling inherits that sibling's accidents as a contract.
+An instance derived from a sibling inherits that sibling's accidents as a contract. Four parties produce four formats for one surface, each derived from a different sibling, and the check that later reads them derives its schema from a fifth. A sibling carries one instance's choices and a template carries the constraint, and a reader copying a sibling cannot tell which is which.
 
-Four parties produce four formats for one surface, each derived from a different sibling, and the check that later reads them derives its schema from a fifth. A sibling carries one instance's choices and a template carries the constraint, and a reader copying a sibling cannot tell which is which.
+For this reason a template carries the contract, an instance resolves its slots, and a check reads the template. The second instance is raised from a template written for it, rather than from the first instance. In practice, a template is written the second time a shape occurs, before the second instance is written, in the order shown in [A1·e second instance](#templates-core-panel-e). It declares its type, names every slot with whether it is required and, where the values form a closed set, that set, and it names the constraints every instance must satisfy so a check can read them. The body keeps only what every instance shares, with every varying value as a slot. Each new instance is raised by resolving the slots, and an instance whose resolution reports an unresolved slot or a violation is refused.
 
-Raise the second instance from a template written for it, rather than from the first instance. Write a template the second time a shape occurs, before the second instance is written, as [A1·e second instance](#templates-core-panel-e) orders it. Declare its type, name every slot with whether it is required and, where the values form a closed set, that set. Name the constraints every instance must satisfy so a check can read them. Keep in the body only what every instance shares, with every varying value as a slot. Raise each new instance by resolving the slots, and refuse an instance whose resolution reports an unresolved slot or a violation.
+To check this, take a template and find a value in it that would be wrong for the next instance. That value is content rather than contract, and a slot is the repair. Then resolve the template with one slot missing, and a resolution that raises the instance anyway has guessed. A shape seen once has no template, because one instance cannot show which of its parts are invariant. A template raised from one instance is [premature abstraction](../ontology/PRINCIPLES.md#arch-premature-abstraction).
 
-Take a template and find a value in it that would be wrong for the next instance. That value is content rather than contract, and a slot is the repair. Then resolve it with one slot missing: a resolution that raises the instance anyway has guessed.
+The slots fall into two kinds by who supplies the value. An instance slot is what this document is for, supplied when it is raised. A host slot is a fact about the tree the document will be walked in, namespaced by what it is a fact about, and resolved by the adapter rather than typed into an instance, so one template can be raised in any tree.
 
-A shape seen once has no template, because one instance cannot show which of its parts are invariant. A template raised from one instance is [premature abstraction](../ontology/PRINCIPLES.md#arch-premature-abstraction).
+The constraints are the family's acceptance criteria, and a check over an instance reads them from the template, as [the drop-in](../START.md#onboarding) describes. What the template excludes is as deliberate as what it carries, so it names no model, no path and no tool, for the reasons described in [semantic operations](GUIDE.md#tool-invocation). A correction lands in the template and reaches every later instance, never in the instance where only its author would see it.
 
-The slots fall into two kinds by who supplies the value. An instance slot is what this document is for, supplied when it is raised. A host slot is a fact about the tree the document will be walked in, namespaced by what it is a fact about, and resolved by the adapter rather than typed into an instance, which is what keeps one template raisable in any tree.
-
-The constraints are the family's acceptance criteria, and a check over an instance reads them from the template, as [the drop-in](../START.md#onboarding) describes. What the template excludes is as deliberate as what it carries: no model, no path, no tool, for the reasons [semantic operations](GUIDE.md#tool-invocation) gives. A correction lands in the template and reaches every later instance, never in the instance where only its author would see it.
+A1·a template record
 
 ```text
 template:
@@ -60,6 +58,8 @@ constraints:                                  # what every instance must satisfy
 body: |
 <the document, with every slot as {name}>
 ```
+
+A1·b workflow body
 
 ```pag
 ---
@@ -132,6 +132,8 @@ completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
+A1·c resolution
+
 ```text
 resolve <template> WITH <the values an instance supplies>
 
@@ -170,23 +172,21 @@ one --> two --> template --> later
 
 ## Coordination templates
 
-Two templates cover coordination between parties, [B1·a surface protocol](#templates-coordination-panel-a) and [B1·b decision protocol](#templates-coordination-panel-b), and they share one transport with opposite lifetimes, the pair [the board and the venue](../COLLABORATE.md#the-board-and-the-venue) teaches and [B1·d one transport](#templates-coordination-panel-d) draws. Each is a template record with slots drawn from closed sets, raised into an instance by resolving them, and [B1·c two lifetimes](#templates-coordination-panel-c) shows why the fields of one never transfer to the other.
+This section covers the two templates for coordination between parties, [B1·a surface protocol](#templates-coordination-panel-a) and [B1·b decision protocol](#templates-coordination-panel-b). They share one transport and have opposite lifetimes, as described in [the board and the venue](../COLLABORATE.md#the-board-and-the-venue) and shown in [B1·d one transport](#templates-coordination-panel-d). Each is a template record whose slots are drawn from closed sets, and it is raised into an instance by resolving them. [B1·c two lifetimes](#templates-coordination-panel-c) shows why the fields of one never transfer to the other.
 
 ### Surface and decision
 
-Coordination is raised from templates whose slots are the surfaces, their lifetimes and their closures. Each collaboration describes its [shared surfaces](ORCHESTRATION.md#shared-surfaces) in its own words.
+Each collaboration describes its [shared surfaces](ORCHESTRATION.md#shared-surfaces) in its own words. A surface is described as append-only, a mechanism implements the word faithfully, and a settled argument is deleted rather than archived because no removal axis was ever declared. A description in words has no closed set a mechanism can join on, so each party implements the words it read.
 
-A surface is described as append-only, a mechanism implements the word faithfully, and a settled argument is deleted rather than archived because no removal axis was ever declared. A description in words has no closed set a mechanism can join on, so each party implements the words it read.
+For this reason coordination is raised from templates whose slots are the surfaces, their lifetimes and their closures. The protocol is raised from a template whose values come from closed sets, rather than from a description each collaboration writes fresh. In practice, a surface protocol is raised by resolving its key and its three lifetime values from their closed sets, and its rules are kept as written, so every party reads the surface whole, writes inside its own record, derives every state and extracts before removal. A decision protocol is raised by stating the question and an exit condition the tree can decide, a successor is declared by name where one exists, and the closure is absorption rather than agreement. Where the adapter cannot resolve a named slot, the absence is declared rather than filled.
 
-Raise the protocol from a template whose values come from closed sets, over a description each collaboration writes fresh. Raise a surface protocol by resolving its key and its three lifetime values from their closed sets, and keep its rules as written: read whole, write inside your own record, derive every state, extract before removal. Raise a decision protocol by stating the question and an exit condition the tree can decide, declare a successor by name where one exists, and let the closure be absorption rather than agreement. Where a slot the adapter cannot resolve is named, declare the absence rather than filling it.
+To check this, name for each shared surface its three lifetime values and the party that may remove from it. A surface with a one-word lifetime has an undeclared axis, and the mechanism that implements the word acts on the axis it never saw. A decision protocol needs more than one party, because a decision with one party is a choice.
 
-For each shared surface, name its three lifetime values and the party that may remove from it. A surface with a one-word lifetime has an undeclared axis, and the mechanism that implements the word will act on the axis it never saw.
+The surface protocol puts the lifetime first, because every later rule depends on it, and its three axes are the ones described in shared surfaces. The rules that follow are one writer per record, a state that is a function over the edges, and a removal that refuses without a reference naming where the extraction landed. The check decides presence and never fidelity, because an extraction is a compression and a text comparison would fail every correct one.
 
-A decision with one party is a choice.
+The decision protocol declares its own exit condition, because without one the decision halts indefinitely. A position without evidence is an opinion, so every position carries evidence, and its author states what the proposal makes worse, because a position that cannot be attacked converges by exhaustion rather than by agreement. What convergence is, and why the archive follows absorption, is described in the board and the venue.
 
-The surface protocol puts the lifetime first, because every later rule depends on it, and the three axes are shared surfaces'. Then one writer per record, then a state that is a function over the edges, then a removal that refuses without a reference naming where the extraction landed. The check decides presence and never fidelity, because an extraction is a compression and a text comparison would fail every correct one.
-
-The decision protocol declares its own exit condition or it is an indefinite halt. A position carries evidence or it is an opinion, and its author states what its own proposal makes worse, because a position nobody can attack converges by exhaustion rather than by agreement. What convergence is, and why the archive follows absorption, is the board and the venue's.
+B1·a surface protocol
 
 ```text
 template:
@@ -222,6 +222,8 @@ EXTRACT_FACTS <item>.<durable half> INTO <the one home history has>
 REMOVE <item> BY <item>.<id>
 ```
 
+B1·b decision protocol
+
 ```text
 template:
 type:        PROTOCOL
@@ -240,7 +242,7 @@ THIS PROTOCOL DEFINES how {QUESTION} is decided
 
 # a position carries evidence or it is an opinion · it stands until read and signed
 DECLARE position: object
-SET position = {claim: <one line>, axis: <the design question>, evidence: <an observation anyone can reproduce>, proposes: <the mechanism>, costs: <what it makes harder, by its own author>, contradicts: <a position id, or nothing>, signed: <the author, or nothing>}
+SET position = {claim: <one line>, axis: <the design question>, evidence: <an observation the other parties can reproduce>, proposes: <the mechanism>, costs: <what it makes harder, by its own author>, contradicts: <a position id, or nothing>, signed: <the author, or nothing>}
 
 FUNCTION converged(venue):
 RETURN every_party_stated_its_needs(venue) AND every_need_is_empty(venue) AND every_position_signed(venue) AND {EXIT_CONDITION}
@@ -253,6 +255,8 @@ constraints:  convergence certifies agreement and nothing about the tree; leavin
 output:       the outcome in the surviving documents, the argument in the archive
 handoff:      absorbed (yields: boolean)
 ```
+
+B1·c two lifetimes
 
 ```pag
 # the same transport, opposite lifetimes · the fields belong to the concern and never transfer
@@ -276,23 +280,21 @@ venue -.-> transport
 
 ## Planning templates
 
-A checklist is produced, never written: the ten nodes of [the loop](../START.md#the-loop) produce it, each owning one kind of decision and each closed by a gate, with the repair edge between them, as [C1·d the ten nodes](#templates-planning-panel-d) draws. The [C1·a checklist generator](#templates-planning-panel-a) is the grammar's own checklist template record, and [C1·b rendered checklist](#templates-planning-panel-b) is the surface it emits. That surface carries what is true now and what remains, as [derived state](../VERIFY.md#derived-state) teaches, so a closed task is deleted rather than ticked, and [C1·c verification report](#templates-planning-panel-c) is the verdict that travels with it.
+This section covers the checklist template and the ten nodes of [the loop](../START.md#the-loop) that produce a checklist, each owning one kind of decision and closed by a gate, with the repair edge running between them, as shown in [C1·d the ten nodes](#templates-planning-panel-d). [C1·a checklist generator](#templates-planning-panel-a) is the grammar's own checklist template record, and [C1·b rendered checklist](#templates-planning-panel-b) is the surface it emits. That surface carries what is true now and what remains, as described in [derived state](../VERIFY.md#derived-state), and [C1·c verification report](#templates-planning-panel-c) is the verdict that travels with it.
 
 ### Produced by nodes, derived by deletion
 
-A checklist is produced by owned, gated nodes, and a state is derived rather than typed. A checklist written in one sitting records the plan its author imagined.
+A checklist written in one sitting records the plan its author imagined. A checklist says most of the units are done, two were undone by a later change, the bar still reads the same, and the next reader re-implements finished work while skipping the undone. A decision made by the wrong node is made without the evidence the owning node would have gathered.
 
-A checklist says most of the units are done, two were undone by a later change, the bar still reads the same, and the next reader re-implements finished work while skipping the undone. A decision made by the wrong node is made without the evidence the owning node would have gathered.
+For this reason a checklist is produced by owned, gated nodes, and its state is derived rather than typed. A closed task is deleted rather than ticked, so the remaining set is the work and never a count. In practice, the nodes are walked in order and no node makes a decision another node owns. A task leaves the surface only once it is both done and verified, and the walk stops when the objective sentence reads true against the tree.
 
-Delete a closed task rather than tick it, so the remaining set is the work and never a count. Walk the nodes in order and let no node make a decision another node owns; delete a task when it is done and verified, and stop when the objective sentence reads true against the tree.
+To check this, name for each unit of a rendered checklist the node that decided it and the evidence that node read. A unit that cannot be traced to a node was authored, and a status marker on the surface stopped being true the first time the tree changed. A one-task change still walks every node, because a one-line fix can be a fix the project did not need, and orientation is what finds that out. What scales down is the size of each node's output, never the node set.
 
-For each unit of a rendered checklist, name the node that decided it and the evidence that node read. A unit nobody can trace to a node was authored, and a status marker on the surface was already lying the first time the tree changed.
+The nodes are the derivation loop applied to a plan. [Verification](../ontology/PRINCIPLES.md#arch-verification) judges the reasoning, not the implementation, and its result line routes findings to the repair edge rather than forward, and an unknown to blocked. The commit node numbers the tasks only once the order is stable, and every phase it renders carries the [genesis stage](PATTERNS.md#genesis-stages) its node derived rather than a role label written beside it.
 
-A one-task change still walks every node, because a one-line fix can be a fix nobody needed and orientation is what finds that out. What scales down is the size of each node's output, never the node set.
+A task's contract has five fields, and none of them is inferred. They are the change, the file, the evidence that proves it landed, the verifier that reads the evidence, and the non-goal, which lets the next reader refuse the addition that would have widened the task. A report carries the verdict with its standing, the domain it was measured over, and the reach it covered. The standing is derived in [verify the verifier](../VERIFY.md#verify-the-verifier), and the reach is read as coverage, as described in [a report, not a checkbox](../VERIFY.md#a-report-not-a-checkbox). A pass rate is a count no step derived, and the template has no field for one.
 
-The nodes are the derivation loop applied to a plan. [Verification](../ontology/PRINCIPLES.md#arch-verification) judges the reasoning, not the implementation, and its result line routes findings to the repair edge rather than forward, unknown to blocked. Commit numbers only once the order is stable, and every phase it renders carries the [genesis stage](PATTERNS.md#genesis-stages) its node derived rather than a role label written beside it.
-
-A task's contract has five fields and none is inferred: the change, the file, the evidence that proves it landed, the verifier that reads the evidence, and the non-goal, which is what lets the next reader refuse the addition that would have widened it. A report carries the verdict with the standing [verify the verifier](../VERIFY.md#verify-the-verifier) derives, the domain it was measured over, and the reach a report, not a checkbox reads as coverage. A pass rate is a count nobody derived, and the template has no field for one.
+C1·a checklist generator
 
 ```pag
 ---
@@ -458,7 +460,7 @@ HANDOFF GATE (ver-stop gate):
 rule_id: "VERIFY"   yields: boolean
 [check] every finding names what it examined (evidence: findings carry evidence and a rule id)
 [check] every material claim has non-empty evidence and a named refuter (evidence: claims) over: claims measured: <supported> / <claims>
-[check] confidence at or above threshold (evidence: validation_report.confidence)
+[check] confidence is at or above the threshold (evidence: validation_report.confidence)
 [check] status is pass with zero blocking findings (evidence: validation_report.findings)
 standing: moved-set <the surfaces re-read since NODE 1>
 result: pass -> NODE 9 | repair_required -> REPAIR (owner: <the earliest node named by a finding>) | unknown -> BLOCKED
@@ -491,7 +493,7 @@ result: pass -> NODE 10 | integrity defect -> REPAIR (owner: NODE 9) | unknown -
 
 # NODE 10 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "stop only on saturation and completion and verification; otherwise block on external input, never a self-assessed stop"
-@axis_question: "Are we done?"   @mandatory
+@axis_question: "Is it done?"   @mandatory
 @genesis: emergence
 @cue: "TERMINATE_EXPLICITLY"
 CONTRACT:
@@ -534,6 +536,8 @@ completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
+C1·b rendered checklist
+
 ```markdown
 # <the rendered checklist · what the generator emits, every box unchecked>
 
@@ -568,6 +572,8 @@ Gate: <the evidence PHASE 3 reads, over what set>
 
 The run stops when the objective sentence reads true against the tree, not when the boxes are ticked.
 ```
+
+C1·c verification report
 
 ```markdown
 # a verification report · a verdict with its standing, its domain and its reach
@@ -612,25 +618,23 @@ verify -. the repair edge · back to the earliest owning node, bounded .-> deriv
 
 ## Template families
 
-A template family is a document type whose nodes are the nodes of the reasoning loop, and [D1·d the families](#templates-families-panel-d) lists them with the genesis question each answers. The document has no runtime; what walks it is the reasoning model its type declares, on the axis its type names, and an adapter performs the effects, the walk [D1·e type to artifact](#templates-families-panel-e) draws. Every node states its layer, its axis, the shape its decision yields, the contract it transforms, and one evidence-bearing gate, as [D1·b one node](#templates-families-panel-b) shows beneath [D1·a family header](#templates-families-panel-a). The transitions are declared once in [D1·c loop spine](#templates-families-panel-c) and every node cites it. A template is used by walking its nodes as the spine declares, which is what [execute the template](../PLAN.md#execute-the-template) means, and [D1·f walk or read](#templates-families-panel-f) is the difference that decides whether its guarantees hold.
+This section covers the template families, which [D1·d the families](#templates-families-panel-d) lists with the genesis question each answers. A family document has no runtime, so it is walked by the reasoning model its type declares, on the axis its type names, and an adapter performs the effects, as shown in [D1·e type to artifact](#templates-families-panel-e). Every node states its layer, its axis, the shape its decision yields, the contract it transforms and one evidence-bearing gate, as shown in [D1·b one node](#templates-families-panel-b) beneath [D1·a family header](#templates-families-panel-a). The transitions are declared once in [D1·c loop spine](#templates-families-panel-c), and every node cites it. A template is used by walking its nodes as the spine declares, as described in [execute the template](../PLAN.md#execute-the-template), and [D1·f walk or read](#templates-families-panel-f) shows the difference that decides whether its guarantees hold.
 
 ### Typed nodes, one gate each
 
-A template family is a document type whose nodes are typed contracts, walked by the reasoning model its type declares. A family document that does not say who walks it and on which axis leaves the reader to pick.
+A family document that does not say who walks it and on which axis leaves the reader to pick. A debugging document is walked as a plan, the ranking of candidate lines is skipped, and the first hypothesis is traced to the end. A node that reads only the prior node's output cannot skip a decision, and a gate that owes a shape cannot be satisfied by a different one.
 
-A debugging document is walked as a plan, the ranking of candidate lines is skipped, and the first hypothesis is traced to the end. A node that reads only the prior node's output cannot skip a decision, and a gate that owes a shape cannot be satisfied by a different one.
+For this reason a template family is a document type whose nodes are typed contracts, walked by the reasoning model its type declares. The family is selected by the genesis question the artifact answers, and the type declares who walks it and on which axis, rather than the reader picking. In practice, a family document opens by declaring its type, its trust anchor, its recursion limit and the slots every host fact resolves through. It states the four layers with the question each answers about this document, and the shape legend every decision is typed by. Each node has a purpose, an axis question, a cue and a contract, its decisions are typed, and it closes on a gate whose checks carry their evidence. The spine is declared once, and every handoff cites it.
 
-Select the family by the genesis question the artifact answers, and let the type declare who walks it and on which axis. Open a family document by declaring its type, its trust anchor, its recursion limit and the slots every host fact resolves through. State the four layers and the question each answers about this document, and the shape legend every decision is typed by. Give each node a purpose, an axis question, a cue and a contract, type its decisions, and close it on a gate whose checks carry their evidence. Declare the spine once and let every handoff cite it. Select the family by the genesis question the artifact answers.
-
-For each node, name the layer, the axis and the shape its header declares, and the gate that carries evidence. A node missing any of the four is prose in a family's clothes.
-
-A template family fits an artifact that will be walked; what is read rather than walked is stated under [from intent to structure](PATTERNS.md#intent-to-structure).
+To check this, name for each node the layer, the axis and the shape its header declares, and the gate that carries evidence. A node missing any of the four is prose written in the family's format. A template family fits only an artifact that will be walked, and an artifact that is read rather than walked is described in [from intent to structure](PATTERNS.md#intent-to-structure).
 
 The trust anchor says which inputs are evidence and which are claims, so a hypothesis is untrusted until it is scored and prior knowledge is untrusted throughout.
 
-A node is [design by contract](../ontology/PRINCIPLES.md#arch-design-by-contract) at the scale of one decision. The repair edge is the one a fixed pipeline lacks, and [validation gates](VALIDATION.md#validation-gates) says what it does.
+A node is [design by contract](../ontology/PRINCIPLES.md#arch-design-by-contract) at the scale of one decision. The repair edge is the one a fixed pipeline lacks, and what it does is described in [validation gates](VALIDATION.md#validation-gates).
 
-Families are selected by the genesis question, and each inlines its whole structure rather than importing a shared spine. That is the one place duplication is deliberate: [independence](../ontology/PRINCIPLES.md#arch-independence) is what makes each family walkable on its own. Its loop, its typing and its gates are domain-neutral and transfer to any tree unchanged. Its catalogues, the taxonomies it cites and the thresholds it names, are slots the adapter resolves, as limits states.
+Families are selected by the genesis question, and each inlines its whole structure rather than importing a shared spine. Duplication is deliberate here and nowhere else, because [independence](../ontology/PRINCIPLES.md#arch-independence) is what makes each family walkable on its own. A family's loop, its typing and its gates are domain-neutral and transfer to any tree unchanged. Its catalogues, the taxonomies it cites and the thresholds it names, are slots the adapter resolves, as described in [limits](VALIDATION.md#limitations).
+
+D1·a family header
 
 ```pag
 ---
@@ -658,6 +662,8 @@ YIELDS-SHAPE LEGEND · every decision resolves to a typed shape
 set-theory -> set or boolean   logic -> boolean   graph -> edge-list   optimisation -> boolean or ranking
 analysis -> operation   computation -> procedure   probability -> a number in zero to one   dynamical-systems -> boolean or counter
 ```
+
+D1·b one node
 
 ```pag
 # NODE 2 — INTENT   [conative · teleology · optimisation · yields: ranking]
@@ -692,6 +698,8 @@ rule_id: "INTENT"   yields: ranking
 result: pass -> NODE 3 | one admissible line -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
 ```
 
+D1·c loop spine
+
 ```pag
 # THE LOOP SPINE · declared once, every node cites it
 # node        layer       axis            yields                     transition out
@@ -709,6 +717,8 @@ result: pass -> NODE 3 | one admissible line -> REPAIR (owner: NODE 1) | unknown
 # REPAIR EDGE · verify fails backward to the earliest node that can supply the missing evidence, bounded by {recursion_limit}
 # a repair invalidates every dependent record forward · nothing downstream is restored
 ```
+
+D1·d the families
 
 ```pag
 # the families · each a document type, each walked by the model and axis its type declares
@@ -758,21 +768,19 @@ walk --> artifact
 
 ## Agent templates
 
-An agent is a document of the agent type, a cognition walked on the reasoning axis, the shape [E1·a an agent](#templates-agents-panel-a) shows; a verifier is a document of the [verification](../ontology/PRINCIPLES.md#arch-verification) type, an epistemology on the verification axis, as [E1·b a verifier](#templates-agents-panel-b) walks it. A creator is a template that generates an agent, the one [E1·c a creator](#templates-agents-panel-c) carries. What an agent is, why it is a walked loop and never a persona, and how a verifier earns trust, is [agents as executed contracts](../COLLABORATE.md#agents-as-executed-contracts) and [verify the verifier](../VERIFY.md#verify-the-verifier). This section is how a document expresses each, [E1·d where guarantees live](#templates-agents-panel-d) maps the expression, and the first two bodies are the grammar's own template records.
+This section covers how a document expresses an agent, a verifier and a creator. An agent is a document of the agent type, a cognition walked on the reasoning axis, as shown in [E1·a an agent](#templates-agents-panel-a), and a verifier is a document of the [verification](../ontology/PRINCIPLES.md#arch-verification) type, an epistemology walked on the verification axis, as shown in [E1·b a verifier](#templates-agents-panel-b). A creator is a template that generates an agent, as shown in [E1·c a creator](#templates-agents-panel-c), and the first two bodies are the grammar's own template records. What an agent is, why it is a walked loop and never a persona, and how a verifier earns trust are described in [agents as executed contracts](../COLLABORATE.md#agents-as-executed-contracts) and [verify the verifier](../VERIFY.md#verify-the-verifier), and [E1·d where guarantees live](#templates-agents-panel-d) maps where each guarantee is expressed.
 
 ### Walked, not adopted
 
-An agent document carries its guarantees as nodes and gates, so each one can be walked and can fail. An agent's guarantees stated in its description are read, never walked.
+An agent's guarantees stated in its description are read, never walked. An agent's description says it calibrates its detectors, no node reads a fixture, and the description is the only place calibration ever happened. A capability stated in prose has no node that exercises it, so nothing in the document can show the claim false.
 
-An agent's description says it calibrates its detectors, no node reads a fixture, and the description is the only place calibration ever happened. A capability stated in prose has no node that exercises it, so nothing in the document can show the claim false.
+For this reason an agent document carries its guarantees as nodes and gates, so each one can be walked and can fail. Each guarantee of the agent is expressed as a node with a gate, rather than as a sentence about the agent in its description. In practice, the trust anchor is the trust line of the meta block, the jurisdiction sits beneath it, and the phase kind is bound in the orient node. The self-audit is a node whose contract reads the agent's own definition and tests every capability it claims on a positive and a negative case. A decision request resolves absent for a bounded reader, so the terminal node yields the artifact and never a question. The creator's proof is a gate that runs the rendered agent on a planted contradiction and on a clean case before the persist line, and it refuses the persist while either run is missing.
 
-Express each guarantee of the agent as a node with a gate, rather than as a sentence about the agent in its description. Write the trust anchor as the trust line of the meta block, the jurisdiction beneath it, and bind the phase kind in the orient node. Write the self-audit as a node whose contract reads the agent's own definition and tests every capability it claims on a positive and a negative case. Let a decision request resolve absent for a bounded reader, so its terminal node yields the artifact and never a question. Write the creator's proof as a gate that runs the rendered agent on a planted contradiction and on a clean case before the persist line, and refuses the persist while either run is missing.
+To check this, name for each capability the agent's description claims the node whose gate exercises it. A capability with no node was adopted from the description, and the document has not shown it. An agent written for a bounded invocation returns instead of asking, which is the inversion derived in [composing a collaboration](ORCHESTRATION.md#composing-a-workflow).
 
-For each capability the agent's description claims, name the node whose gate exercises it. A capability with no node was adopted from the description, and the document has not shown it.
+A claim's kind decides the evidence that can settle it, because a claim of existence needs a presence search and a claim of behaviour needs an execution, so the orient node assigns each claim its kind and the evidence shape that kind requires before anything is probed. The identity the agent writes under is declared in the body the runtime delivers, for the reason described in agents as executed contracts.
 
-An agent written for a bounded invocation returns instead of asking, the inversion [composing a collaboration](ORCHESTRATION.md#composing-a-workflow) derives; its terminal node yields the artifact, never a question.
-
-A claim's kind decides the evidence that can settle it, because a claim of existence needs a presence search and a claim of behaviour needs an execution, so the orient node assigns each claim its kind and the evidence shape that kind requires before anything is probed. The identity the agent writes under is declared in the body the runtime delivers, for the reason agents as executed contracts gives.
+E1·a an agent
 
 ```pag
 ---
@@ -843,6 +851,8 @@ domain: declared <outcomes> measured <validated>
 completion: saturated <bool> complete <bool> verified <bool>
 
 ```
+
+E1·b a verifier
 
 ```pag
 ---
@@ -990,6 +1000,8 @@ completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
+E1·c a creator
+
 ```pag
 ---
 name: {creator_name}
@@ -1071,10 +1083,6 @@ proof["The creator's proof gate · fails on purpose, passes for the right reason
 artifact["The terminal node · one typed artifact with its report, never a question"]
 meta --> self --> decision --> proof --> artifact
 ```
-
-Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-© 2025 [Jay Baleine](https://linkedin.com/in/jay-baleine) - Pattern Abstract Grammar
 
 ---
 

@@ -1,14 +1,14 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Algorithms — Ontology — Bane's Lab
 
-> Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it…
+> Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a…
 
 Canonical: https://banes-lab.com/ontology/algorithms
 
 # The Ontology
 
-A canon of software architecture you can query: every principle with its relations and its repair, every term with its definition, every algorithm with its contract, the reasoning that derives them, the layers they live in and the resolution of every tension between them. Every reference one record makes to another is a link, so any record is a starting point.
+The ontology is a queryable canon of software architecture. It holds every principle with its relations and its repair, every term with its definition, every algorithm with its contract, the reasoning that derives them, the layers they live in and how every tension between them is resolved, and every reference from one record to another is a link.
 
 # Algorithms
 
@@ -40,7 +40,7 @@ A canon of software architecture you can query: every principle with its relatio
 
 ## agent-creation
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -101,12 +101,17 @@ Details
 
 Intent
 Discover available context, inspect target-domain resources, extract concrete facts, construct a knowledge base, and generate only from verified evidence.
+
 Invariant
 Agent generation must be grounded in inspected domain structure, not assumptions.
+
+Flow
 
 ```text
 Request → Discover → Inspect → ExtractFacts → KnowledgeBase → Generate
 ```
+
+Productions
 
 ```bnf
 EvidenceBeforeGeneration ::= <UserRequest> "->" <ResourceDiscovery> "->" <DomainInspection> "->" <FactExtraction> "->" <KnowledgeBase> "->" <GeneratedAgent>
@@ -115,16 +120,23 @@ GeneratedAgent ::= "allowed_only_if_evidence_grounded"
 
 Composes
 none
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
-[runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [ai_governance](SCHEMA.md#force-ai-governance), [domain_boundary](SCHEMA.md#force-domain-boundary)
+[runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [model_governance](SCHEMA.md#force-model-governance), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 An agent generated from the request text and prior model knowledge, never inspecting the target.
 ```
+
+After
 
 ```text
 request -> discover resources -> inspect domain -> extract facts -> knowledge base -> generate only from verified evidence
@@ -141,12 +153,17 @@ Details
 
 Intent
 Define required work as semantic operations, defer runtime execution details to adapters, and reject runtime-specific primitives from the portable core contract.
+
 Invariant
 The core agent contract describes what must happen; the adapter decides how it happens.
+
+Flow
 
 ```text
 SemanticVerb → AdapterMapping → RuntimeAction → Result
 ```
+
+Productions
 
 ```bnf
 SemanticBoundary ::= <SemanticOperation> "->" <AdapterMapping> "->" <RuntimeExecution> "->" <EvidenceResult>
@@ -156,14 +173,20 @@ CoreConstraint ::= "no_runtime_specific_paths_or_commands"
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 The agent core hardcodes a specific search command and an absolute path, so it only runs on one runtime.
 ```
+
+After
 
 ```text
 semantic op{DISCOVER/READ/SEARCH/ANALYZE} -> adapter maps to the runtime -> the core carries no runtime path or command
@@ -180,12 +203,17 @@ Details
 
 Intent
 Detect filesystem, search, execution, persistence, validation, and user-interaction capabilities; mark unsupported capabilities; substitute where safe; block where required capability is non-substitutable.
+
 Invariant
-Generated workflows must know what their runtime can actually do.
+Generated workflows must know what their runtime can do.
+
+Flow
 
 ```text
 CapabilitySet → Probe → Available|Unavailable|Substituted → RuntimeMode
 ```
+
+Productions
 
 ```bnf
 CapabilityProfile ::= <RequiredCapabilitySet> "->" <CapabilityProbeSet> "->" <CapabilityVerdict>
@@ -195,16 +223,23 @@ Capability ::= "filesystem" | "search" | "execution" | "persistence" | "validati
 
 Composes
 none
+
 Composed by
 [Audit Artifact](ALGORITHMS.md#algo-audit-artifact), [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 The agent assumes it can execute and write, then fails when it cannot.
 ```
+
+After
 
 ```text
 required capabilities{filesystem, search, execution, persistence, validation} -> probe each -> mode{full | degraded | blocked}
@@ -220,13 +255,18 @@ required capabilities{filesystem, search, execution, persistence, validation} ->
 Details
 
 Intent
-Load existing agent and invocation registries, map existing identities, compare target name and domain, and require user decision before refinement, renaming, replacement, or cancellation.
+Load existing agent and invocation registries, map existing identities, compare target name and domain, and require the developer's decision before refinement, renaming, replacement, or cancellation.
+
 Invariant
 Agent creation must not silently duplicate or overwrite prior work.
+
+Flow
 
 ```text
 TargetAgent → ExistingRegistry → NameCollision? → DomainCollision? → Decision
 ```
+
+Productions
 
 ```bnf
 CreationCollision ::= <TargetAgentName> "->" <ExistingAgentMap> "->" <CollisionCheck> "->" <AgentOperationMode>
@@ -236,19 +276,26 @@ CollisionCheck ::= "name_collision" | "domain_collision" | "none"
 
 Composes
 none
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 A new agent silently overwrites an existing one of the same name.
 ```
 
+After
+
 ```text
-target name -> existing registry -> name/domain collision? -> user decision{CREATE|REFINE|RENAME|REPLACE|CANCEL}
+target name -> existing registry -> name/domain collision? -> developer decision{CREATE|REFINE|RENAME|REPLACE|CANCEL}
 ```
 
 ### Domain Cache Validation
@@ -262,12 +309,17 @@ Details
 
 Intent
 Normalize the domain path, compute a domain hash, search cache entries, calculate cache age, and reuse cached knowledge only when cache identity and TTL are valid.
+
 Invariant
 Prior domain intelligence can be reused only when freshness and identity are verified.
+
+Flow
 
 ```text
 DomainPath → Normalize → Hash → CacheLookup → AgeCheck → UseCache|Investigate
 ```
+
+Productions
 
 ```bnf
 DomainCache ::= <DomainPath> "->" <DomainHash> "->" <CacheEntry> "->" <CacheAge> "->" <CacheDecision>
@@ -276,14 +328,20 @@ CacheDecision ::= "use_cached_domain" | "reject_stale_cache" | "no_cache_investi
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 Stale cached domain intelligence reused as if it were current.
 ```
+
+After
 
 ```text
 domain path -> normalize + hash -> cache lookup -> age vs TTL -> {use cached | reject stale | investigate}
@@ -300,12 +358,17 @@ Details
 
 Intent
 Determine whether the target is a resource, directory, module, repository, or unknown scope; then extract interfaces, declarations, dependencies, systems, or boundaries appropriate to that scope.
+
 Invariant
 Investigation depth must match target-domain shape.
+
+Flow
 
 ```text
 TargetPath → InvestigationType → ScopeModel → ResourceSet → InterfaceFacts
 ```
+
+Productions
 
 ```bnf
 ScopeExtraction ::= <TargetPath> "->" <InvestigationDepth> "->" <DomainScope>
@@ -315,16 +378,23 @@ DomainScope ::= <ResourceScope> | <DirectoryScope> | <ModuleScope> | <Repository
 
 Composes
 none
+
 Composed by
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 A repository investigated at single-file depth, missing every boundary.
 ```
+
+After
 
 ```text
 target -> investigation depth{single-resource|directory|module|repository} -> scope-matched facts{interfaces, deps, boundaries}
@@ -341,12 +411,17 @@ Details
 
 Intent
 Prepare static investigation, optionally prepare safe executable analysis, prohibit source mutation, execute or emulate analysis, and merge observable outputs into domain intelligence.
+
 Invariant
 Domain discovery may inspect and analyze, but must not mutate the source domain.
+
+Flow
 
 ```text
 StaticPlan + OptionalExecutablePlan → Analyze → ExtractStructure → CacheResults
 ```
+
+Productions
 
 ```bnf
 DomainInvestigation ::= <InvestigationPlan> "->" <AnalysisExecution> "->" <DomainKnowledge>
@@ -356,14 +431,20 @@ ExecutionConstraint ::= "non_destructive" "," "observable_output_required" "," "
 
 Composes
 none
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [observability_traceability](SCHEMA.md#force-observability-traceability), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 Investigation runs a script that mutates the source it is inspecting.
 ```
+
+After
 
 ```text
 static plan (+ optional safe executable) -> analyze, never mutate the source -> observable output -> domain knowledge
@@ -380,12 +461,17 @@ Details
 
 Intent
 Store target scope, discovered structure, purposes, dependencies, interfaces, patterns, statistics, timestamp, and evidence sources in a reusable knowledge object.
+
 Invariant
 Agent generation needs an explicit evidence substrate.
+
+Flow
 
 ```text
 DomainFacts → Statistics → EvidenceSources → KnowledgeBase
 ```
+
+Productions
 
 ```bnf
 DomainKnowledgeBase ::= <DomainScope> "," <DomainStructure> "," <PurposeSet> "," <DependencyMap> "," <InterfaceSet> "," <PatternSet> "," <Statistics> "," <EvidenceSourceSet>
@@ -394,16 +480,23 @@ Statistics ::= "resource_count" "," "interface_count" "," "dependency_count" ","
 
 Composes
 none
+
 Composed by
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 Generation proceeds with no explicit evidence substrate to cite.
 ```
+
+After
 
 ```text
 domain facts + structure + purposes + deps + interfaces + patterns + statistics + evidence sources -> reusable knowledge base
@@ -420,12 +513,17 @@ Details
 
 Intent
 Analyze domain dependencies, side effects, resource count, interface count, dependency patterns, and uncertainty factors to assign risk, complexity, reversibility, and uncertainty.
+
 Invariant
 Phase rigor should be proportional to domain risk and complexity.
+
+Flow
 
 ```text
 KnowledgeBase → RiskFactors → ComplexityScore → Reversibility → Uncertainty
 ```
+
+Productions
 
 ```bnf
 DomainCharacteristics ::= <RiskLevel> "," <ComplexityScore> "," <Reversibility> "," <UncertaintyLevel>
@@ -436,16 +534,23 @@ UncertaintyLevel ::= "low" | "medium" | "high"
 
 Composes
 none
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 Every agent given the same phase count regardless of how risky its domain is.
 ```
+
+After
 
 ```text
 knowledge base -> risk{low|medium|high} + complexity + reversibility{reversible|partial|irreversible} + uncertainty
@@ -462,12 +567,17 @@ Details
 
 Intent
 Inspect existing agent specifications, count phase markers, validation gates, and semantic operations, extract reusable structures, and derive baseline design conventions.
+
 Invariant
 New agents should conform to proven local agent grammar where evidence exists.
+
+Flow
 
 ```text
 ExistingSpecs → PhaseCount → GateCount → OperationUsage → ReusablePatterns
 ```
+
+Productions
 
 ```bnf
 ExistingPatternExtraction ::= <ExistingAgentSpecSet> "->" <StructuralMetricSet> "->" <ReusablePatternSet>
@@ -476,14 +586,20 @@ StructuralMetricSet ::= "phase_count" "," "validation_gate_count" "," "semantic_
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A new agent invented in a shape that ignores the local agent grammar.
 ```
+
+After
 
 ```text
 existing specs -> count{phases, gates, semantic ops} -> reusable structures -> baseline conventions
@@ -500,12 +616,17 @@ Details
 
 Intent
 Discover knowledge documents, read descriptions, compare them against domain characteristics, score relevance, and exclude irrelevant documents from core reasoning.
+
 Invariant
 Supporting documents should influence generation only when relevant to the target domain.
+
+Flow
 
 ```text
 KnowledgeDocs → RelevanceAnalysis → RelevantDocs → PrincipleInput
 ```
+
+Productions
 
 ```bnf
 KnowledgeRelevance ::= <KnowledgeDocumentSet> "->" <RelevanceScoreSet> "->" <RelevantKnowledgeSet>
@@ -514,14 +635,20 @@ RelevanceDecision ::= "include" | "exclude"
 
 Composes
 none
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 Every knowledge doc fed into reasoning, relevant or not.
 ```
+
+After
 
 ```text
 knowledge docs -> read descriptions -> score relevance vs domain -> include relevant, exclude the rest
@@ -538,12 +665,17 @@ Details
 
 Intent
 Start from structural principles, test applicability against domain characteristics, add domain-specific principles from relevant documents, and exclude runtime-specific principles from the core.
+
 Invariant
 Generated agents should embody portable design principles selected from evidence.
+
+Flow
 
 ```text
 StructuralPrinciples + DomainDocs → Applicability → CorePrinciples
 ```
+
+Productions
 
 ```bnf
 PrincipleExtraction ::= <CandidatePrincipleSet> "->" <ApplicabilityAnalysis> "->" <CorePrincipleSet>
@@ -552,18 +684,26 @@ CorePrinciple ::= "phase_gated_execution" | "validation_boundaries" | "declarati
 
 Composes
 none
+
 Composed by
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 Runtime-specific principles baked into the portable core.
 ```
+
+After
 
 ```text
 structural candidates + domain docs -> test applicability -> core principles{phase-gated, validation-boundaries, declaration-before-use, evidence-before-composition, adapter-separation, auditability}; runtime-specific excluded
@@ -580,12 +720,17 @@ Details
 
 Intent
 Select phase count from risk and complexity, assign phase boundaries, and strengthen validation density for high-risk or high-complexity domains.
+
 Invariant
 Agent structure should scale with domain difficulty.
+
+Flow
 
 ```text
 Risk + Complexity + Uncertainty → PhaseCount → PhaseBoundaries
 ```
+
+Productions
 
 ```bnf
 PhaseBoundarySelection ::= <RiskLevel> "," <ComplexityScore> "," <UncertaintyLevel> "->" <PhaseStructure>
@@ -597,16 +742,23 @@ SevenPhase ::= "Discovery" "," "Analysis" "," "Planning" "," "Validation" "," "G
 
 Composes
 none
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [performance_scaling](SCHEMA.md#force-performance-scaling), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 A high-risk irreversible domain given a 3-phase agent.
 ```
+
+After
 
 ```text
 risk + complexity + uncertainty -> phase count{3 | 5 | 7} -> validation density proportional to difficulty
@@ -623,12 +775,17 @@ Details
 
 Intent
 For every phase boundary, generate explicit validation requirements from the phase purpose, adapter-separation needs, evidence-grounding needs, and safety constraints.
+
 Invariant
 Every phase must end with verifiable exit conditions.
+
+Flow
 
 ```text
 PhaseSet → RequirementDerivation → ValidationGateSet
 ```
+
+Productions
 
 ```bnf
 PhaseValidation ::= <PhaseSet> "->" <ValidationRequirementSet> "->" <ValidationGateSet>
@@ -638,16 +795,23 @@ RequirementSet ::= <Requirement> | <Requirement> "," <RequirementSet>
 
 Composes
 none
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 A phase ends with no verifiable exit condition.
 ```
+
+After
 
 ```text
 phase -> derive requirements{purpose, adapter-separation, evidence-grounding, safety} -> a validation gate per phase
@@ -664,12 +828,17 @@ Details
 
 Intent
 Compose identity, purpose, methodology, domain scope, characteristics, capabilities, phases, validation strategy, constraints, and required outputs into a runtime-neutral agent contract.
+
 Invariant
 The portable contract is the canonical artifact; adapter outputs are renderings.
+
+Flow
 
 ```text
 KnowledgeBase + Principles + Phases → PortableContract
 ```
+
+Productions
 
 ```bnf
 PortableAgentContract ::= <Identity> "," <Purpose> "," <DomainModel> "," <CapabilityRequirements> "," <PhaseSpecifications> "," <ValidationStrategy> "," <SafetyConstraints> "," <OutputContract>
@@ -678,14 +847,20 @@ OutputContract ::= "portable_agent_contract" | "invocation_contract" | "audit_re
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 The agent authored directly as a runtime artifact, welded to one runtime.
 ```
+
+After
 
 ```text
 knowledge base + principles + phases -> runtime-neutral contract{identity, purpose, domain model, capabilities, phase specs, validation strategy, constraints, outputs} = the canonical artifact
@@ -702,12 +877,17 @@ Details
 
 Intent
 Define pre-generation, during-generation, and post-generation checks that enforce capabilities, creation history, evidence grounding, adapter separation, schema validity, and absence of unsupported assumptions.
+
 Invariant
 Generated artifacts must be validated throughout composition, not only afterward.
+
+Flow
 
 ```text
 PreChecks → DuringChecks → PostChecks → ValidationStrategy
 ```
+
+Productions
 
 ```bnf
 GenerationValidationStrategy ::= <PreGenerationChecks> "," <DuringGenerationChecks> "," <PostGenerationChecks>
@@ -718,14 +898,20 @@ PostGenerationChecks ::= "schema_valid" "," "audit_complete" "," "unsupported_as
 
 Composes
 none
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 The artifact validated only after it is written, never during.
 ```
+
+After
 
 ```text
 pre{capabilities detected, history checked, knowledge available} + during{phase gates, evidence-grounded, adapter-separated} + post{schema valid, audit complete, no unsupported assumptions}
@@ -742,12 +928,17 @@ Details
 
 Intent
 If replacing an existing artifact, require prior approval, archive existing artifacts, verify archive persistence, and block new persistence if archival cannot be confirmed.
+
 Invariant
 Destructive generation requires recoverability before mutation.
+
+Flow
 
 ```text
 ReplaceIntent → Approval → ArchiveExisting → VerifyArchive → Persist|Block
 ```
+
+Productions
 
 ```bnf
 ReplacementSafety ::= <AgentOperationMode> "->" <ArchivePolicy> "->" <SafetyCheck> "->" <PersistenceDecision>
@@ -757,14 +948,20 @@ PersistenceDecision ::= "safe_to_persist" | "blocked"
 
 Composes
 none
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 An existing agent overwritten with no archive — the original is lost.
 ```
+
+After
 
 ```text
 REPLACE -> require approval -> archive existing -> verify the archive -> persist only if recoverable, else block
@@ -781,12 +978,17 @@ Details
 
 Intent
 Render the portable contract into runtime-specific agent specification, invocation contract, and audit artifacts only through adapter-defined schemas and destinations.
+
 Invariant
 Runtime-specific artifacts are projections of the portable contract, not replacements for it.
+
+Flow
 
 ```text
 PortableContract → AdapterSchema → RenderedArtifact → Validate → Persist
 ```
+
+Productions
 
 ```bnf
 AdapterRendering ::= <PortableContract> "->" <AdapterConfig> "->" <ArtifactSet> "->" <AdapterValidation> "->" <Persistence>
@@ -796,18 +998,26 @@ AdapterConstraint ::= "adapter_may_add_metadata_but_not_alter_core_intent"
 
 Composes
 none
+
 Composed by
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 The runtime artifact edited directly, diverging from the portable contract.
 ```
+
+After
 
 ```text
 portable contract -> adapter schema -> artifacts{agent spec, invocation contract, audit} -> adapter may add metadata, never alter core intent
@@ -824,12 +1034,17 @@ Details
 
 Intent
 Record agent name, domain, operation mode, runtime environment, risk, complexity, reversibility, uncertainty, phase count, validation gates, evidence sources, capability profile, adapter identity, portability status, and timestamp.
+
 Invariant
 Generated agents require an inspectable provenance trail.
+
+Flow
 
 ```text
 GenerationState → AuditFields → AuditReport
 ```
+
+Productions
 
 ```bnf
 AuditReport ::= <AgentIdentity> "," <DomainReference> "," <AgentOperationMode> "," <RuntimeEnvironment> "," <RiskMetrics> "," <ValidationGateSet> "," <EvidenceSourceSet> "," <CapabilityProfile> "," <AdapterIdentity> "," <PortabilityStatus>
@@ -837,14 +1052,20 @@ AuditReport ::= <AgentIdentity> "," <DomainReference> "," <AgentOperationMode> "
 
 Composes
 [Capability Profile](ALGORITHMS.md#algo-capability-profile)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 A generated agent with no provenance — no record of how or from what it was built.
 ```
+
+After
 
 ```text
 generation state -> audit{identity, domain, mode, risk metrics, gates, evidence sources, capability profile, adapter identity, portability status}
@@ -861,12 +1082,17 @@ Details
 
 Intent
 Re-read the persisted agent specification, search for semantic operations, phase markers, validation gates, and runtime-specific leakage, then mark compliant only when required counts pass and leakage is absent.
+
 Invariant
 Persistence is not enough; the stored artifact must still satisfy semantic structure.
+
+Flow
 
 ```text
 PersistedSpec → MarkerSearch → CountMetrics → LeakageCheck → ComplianceVerdict
 ```
+
+Productions
 
 ```bnf
 SemanticCompliance ::= <PersistedArtifact> "->" <SemanticMarkerSet> "->" <MetricCheck> "->" <RuntimeLeakageCheck> "->" <ComplianceVerdict>
@@ -875,14 +1101,20 @@ ComplianceVerdict ::= "compliant" | "non_compliant"
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
+Before
+
 ```text
-The in-memory plan judged compliant, but the STORED artifact never re-checked.
+The in-memory plan judged compliant, but the stored artifact never re-checked.
 ```
+
+After
 
 ```text
 re-read persisted spec -> search{semantic ops, phase markers, gates} + leakage check -> compliant only if counts pass and zero runtime leakage
@@ -899,12 +1131,17 @@ Details
 
 Intent
 Search generated output for unsupported claims and evidence references, compare generated claims against the knowledge base, calculate grounding score, and reject artifacts below threshold.
+
 Invariant
 Generated architecture claims must trace back to evidence.
+
+Flow
 
 ```text
 GeneratedSpec → UnsupportedClaimSearch → EvidenceReferenceCheck → GroundingScore → Accept|Reject
 ```
+
+Productions
 
 ```bnf
 EvidenceGrounding ::= <GeneratedArtifact> "->" <ClaimAnalysis> "->" <KnowledgeBaseComparison> "->" <GroundingVerdict>
@@ -913,16 +1150,23 @@ GroundingVerdict ::= "grounded" | "unsupported_claims_present" | "insufficient_e
 
 Composes
 none
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [ai_governance](SCHEMA.md#force-ai-governance)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 The generated agent asserts architecture claims that trace to nothing.
 ```
+
+After
 
 ```text
 generated spec -> find claims -> compare against the knowledge base -> grounding score -> reject below threshold
@@ -939,12 +1183,17 @@ Details
 
 Intent
 Verify that generated agents contain phase gates, declaration-before-use structure, calculated metrics, exact thresholds or comparisons, and iterative discovery patterns.
+
 Invariant
 The generated agent must embody the intended reasoning architecture, not merely describe it.
+
+Flow
 
 ```text
 GeneratedSpec → EmbodimentMarkers → Score → Pass|Fail
 ```
+
+Productions
 
 ```bnf
 AlgorithmicEmbodiment ::= <GeneratedArtifact> "->" <EmbodimentMarkerSet> "->" <EmbodimentScore> "->" <EmbodimentVerdict>
@@ -954,14 +1203,20 @@ EmbodimentVerdict ::= "embodied" | "insufficiently_embodied"
 
 Composes
 none
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 The agent describes phase gates in prose but does not embody them.
 ```
+
+After
 
 ```text
 generated spec -> markers{phase gates, declaration-before-use, calculated metrics, thresholds, iterative discovery} -> embodied | insufficiently-embodied
@@ -978,12 +1233,17 @@ Details
 
 Intent
 Summarize generated agent, target domain, operation mode, adapter, risk, complexity, reversibility, uncertainty, phase count, validation-gate count, compliance results, artifact references, degraded mode, and unsupported capabilities.
+
 Invariant
 The final report must distinguish generated artifacts, validation status, and limitations.
+
+Flow
 
 ```text
 ValidationResults + ArtifactRefs + Limitations → FinalReport
 ```
+
+Productions
 
 ```bnf
 FinalGenerationReport ::= <GenerationSummary> "," <RiskSummary> "," <ComplianceSummary> "," <ArtifactReferences> "," <LimitationSet>
@@ -992,18 +1252,26 @@ ComplianceSummary ::= "semantic_operations" "," "adapter" "," "evidence_groundin
 
 Composes
 none
+
 Composed by
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 A report that conflates the artifact, its validation status, and its limitations.
 ```
+
+After
 
 ```text
 validation results + artifact refs + limitations{degraded mode, unsupported capabilities} -> report distinguishing all three
@@ -1020,12 +1288,17 @@ Details
 
 Intent
 Accept the generated agent as complete only when semantic-compliance, evidence-grounding above threshold, and algorithmic-embodiment all pass and the audit trail is recorded; otherwise route to regeneration or a blocked report.
+
 Invariant
 Agent generation terminates as accepted only on a full validation pass — never a claim while any compliance, grounding, or embodiment gate is unmet.
+
+Flow
 
 ```text
 ValidationVerdicts → AuditPresence → Accept|Regenerate|Blocked
 ```
+
+Productions
 
 ```bnf
 AgentGenerationCompletion ::= <ValidationVerdictSet> "->" <AuditCheck> "->" <AcceptanceVerdict>
@@ -1034,18 +1307,26 @@ AcceptanceVerdict ::= "agent_accepted" | "regenerate_required" | "blocked"
 
 Composes
 none
+
 Composed by
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Named in the derivation of
 [Agent Creator Kernel](ALGORITHMS.md#algo-agent-creator-kernel)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 A generated agent declared ready while its evidence-grounding failed and its algorithmic embodiment was insufficient.
 ```
+
+After
 
 ```text
 semantic compliance passed + evidence grounded above threshold + algorithmically embodied + audit recorded -> agent_accepted; else regenerate | blocked
@@ -1060,12 +1341,17 @@ Details
 
 Intent
 Load configuration, detect capabilities, check creation history, validate cache, discover domain evidence, build knowledge base, analyze characteristics, extract principles, define phases, compose portable contract, render adapter artifacts, validate outputs, audit, and report.
+
 Invariant
 Agent creation is an evidence-gated compiler from target-domain structure into portable agent contracts.
+
+Flow
 
 ```text
 Config → Capabilities → History → Cache → Discovery → Knowledge → Analysis → Principles → Phases → Contract → AdapterRender → Validate → Audit → Report
 ```
+
+Productions
 
 ```bnf
 AgentCreatorKernel ::= <ConfigurationLoad> "->" <CapabilityProfile> "->" <CreationCollision> "->" <DomainCache> "->" <ScopeExtraction> "->" <DomainInvestigation> "->" <DomainKnowledgeBase> "->" <DomainCharacteristics> "->" <PrincipleExtraction> "->" <PhaseBoundarySelection> "->" <PortableAgentContract> "->" <AdapterRendering> "->" <SemanticCompliance> "->" <EvidenceGrounding> "->" <AlgorithmicEmbodiment> "->" <AuditReport> "->" <FinalGenerationReport>
@@ -1073,8 +1359,10 @@ AgentCreatorKernel ::= <ConfigurationLoad> "->" <CapabilityProfile> "->" <Creati
 
 Composes
 [Capability Profile](ALGORITHMS.md#algo-capability-profile), [Scope Extraction](ALGORITHMS.md#algo-scope-extraction), [Domain Knowledge Base](ALGORITHMS.md#algo-domain-knowledge-base), [Principle Extraction](ALGORITHMS.md#algo-principle-extraction), [Adapter Rendering](ALGORITHMS.md#algo-adapter-rendering), [Final Generation Report](ALGORITHMS.md#algo-final-generation-report), [Agent Generation Completion](ALGORITHMS.md#algo-agent-generation-completion)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -1082,28 +1370,41 @@ Derivation map
 
 orient
 [Evidence-Before-Generation](ALGORITHMS.md#algo-evidence-before-generation)
+
 see
 [Risk Complexity Reversibility](ALGORITHMS.md#algo-risk-complexity-reversibility)
+
 derive
 [Principle Extraction](ALGORITHMS.md#algo-principle-extraction)
+
 intent
 [Adaptive Phase Boundary](ALGORITHMS.md#algo-adaptive-phase-boundary)
+
 constrain
 [Creation History Collision](ALGORITHMS.md#algo-creation-history-collision)
+
 project
 [Phase Validation Requirement](ALGORITHMS.md#algo-phase-validation-requirement)
+
 act
 [Adapter Rendering](ALGORITHMS.md#algo-adapter-rendering)
+
 verify
 [Evidence Grounding Validation](ALGORITHMS.md#algo-evidence-grounding-validation)
+
 commit
 [Final Generation Report](ALGORITHMS.md#algo-final-generation-report)
+
 terminate
 [Agent Generation Completion](ALGORITHMS.md#algo-agent-generation-completion)
+
+Before
 
 ```text
 A target domain turned straight into an agent by assumption, ungated.
 ```
+
+After
 
 ```text
 config -> capabilities -> history -> cache -> discover evidence -> knowledge -> risk analysis -> principles -> phases -> portable contract -> adapter render -> validate{semantic/grounding/embodiment} -> audit -> report
@@ -1117,12 +1418,17 @@ Details
 
 Intent
 <Load context> -> <Detect capabilities> -> <Check collisions> -> <Discover domain evidence> -> <Build knowledge> -> <Analyze risk> -> <Design phases> -> <Compose portable contract> -> <Render adapters> -> <Validate grounding> -> <Audit> -> <Report>
+
 Invariant
 Any generated agent should be treated as a compiled artifact whose source is inspected domain evidence and whose target is a portable, adapter-renderable contract.
+
+Flow
 
 ```text
 Context → Capability → History → Evidence → Knowledge → Risk → Phases → Contract → Adapter → Validation → Audit → Report
 ```
+
+Productions
 
 ```bnf
 AgentGenerationConcern ::= <ContextContract> "->" <CapabilityContract> "->" <CollisionPolicy> "->" <EvidenceModel> "->" <KnowledgeBase> "->" <PhaseDesign> "->" <PortableContract> "->" <AdapterArtifactSet> "->" <ValidationSet> "->" <AuditTrail> "->" <FinalReport>
@@ -1131,14 +1437,16 @@ ValidationSet ::= "semantic_compliance" "," "adapter_compliance" "," "evidence_g
 
 Composes
 none
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [domain_boundary](SCHEMA.md#force-domain-boundary)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
 
 ## agent-workflow
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -1204,12 +1512,17 @@ Details
 
 Intent
 Classify workflow phases by execution verb, run discovery and investigation agents in parallel forked contexts, run action and mutation agents sequentially, and coordinate all agents through shared artifacts and handoff signals.
+
 Invariant
 Multi-agent workflows should parallelize independent knowledge gathering while serializing state-changing work.
+
+Flow
 
 ```text
 WorkflowObjective → AgentPhases → ExecutionClassification → ParallelDiscovery → SequentialAction → Handoff
 ```
+
+Productions
 
 ```bnf
 HybridWorkflowOrchestration ::= <WorkflowObjective> "->" <AgentSequence> "->" <ExecutionModeClassification> "->" <ParallelBatchSet> "->" <SequentialActionSet> "->" <WorkflowCompletion>
@@ -1220,14 +1533,20 @@ SequentialPhase ::= "CREATE" | "WRITE" | "EXECUTE" | "VERIFY" | "IMPLEMENT" | "R
 
 Composes
 none
+
 Forces
-[runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+[runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Every agent runs sequentially, even independent discovery — the workflow crawls.
 ```
+
+After
 
 ```text
 objective -> agent sequence -> classify by verb -> parallel discovery (forked context) + sequential action (normal context) -> handoff
@@ -1244,12 +1563,17 @@ Details
 
 Intent
 Load grammar, keyword, operator, workflow, and checklist references before workflow generation, then require generated content to follow the declared DSL, naming, handoff, execution, forking, spawning, and capability rules.
+
 Invariant
 Workflow generation must begin by loading the language and orchestration contracts that constrain output.
+
+Flow
 
 ```text
 DSLSources → Requirements → ComplianceGate → Proceed|Block
 ```
+
+Productions
 
 ```bnf
 DSLComplianceLoading ::= <DSLSpecSet> "->" <WorkflowRequirementSet> "->" <ComplianceValidationGate>
@@ -1258,18 +1582,26 @@ WorkflowRequirementSet ::= "agent_dsl_syntax" "," "agent_oriented_content" "," "
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Named in the derivation of
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Workflow generated free-form, ignoring the DSL and handoff contracts.
 ```
+
+After
 
 ```text
 load DSL + keyword + workflow + checklist specs -> require{agent-DSL syntax, handoff protocol, hybrid execution, context isolation, agent spawn} -> compliance gate
@@ -1285,13 +1617,18 @@ load DSL + keyword + workflow + checklist specs -> require{agent-DSL syntax, han
 Details
 
 Intent
-When a file modification conflict occurs, detect the error, re-read the current file, merge the intended delta into the current content, write the complete new version, verify persistence, and log recovery automatically without asking the user.
+When a file modification conflict occurs, detect the error, re-read the current file, merge the intended delta into the current content, write the complete new version, verify persistence, and log recovery automatically without asking the developer.
+
 Invariant
-State-mutation conflicts are synchronization failures and should trigger deterministic recovery, not a user prompt.
+State-mutation conflicts are synchronization failures and should trigger deterministic recovery, not a prompt to the developer.
+
+Flow
 
 ```text
 ModificationError → RereadMerge → CompleteRewrite → Verify
 ```
+
+Productions
 
 ```bnf
 FileModificationRecovery ::= <FileModificationError> "->" <RecoveryProtocolSelection> "->" <RereadAndMerge> "->" <CompleteRewrite> "->" <RecoveryLog>
@@ -1301,16 +1638,23 @@ ForbiddenRecovery ::= "retry_edit_without_recovery" | "ask_user_for_tool_error_r
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
 
+Before
+
 ```text
-A stale-write conflict re-reads the file and retries the same edit, or stops to ask the user.
+A stale-write conflict re-reads the file and retries the same edit, or stops to ask the developer.
 ```
+
+After
 
 ```text
 modification error -> re-read current -> merge the delta into full state -> write complete version -> verify -> log; never retry-without-recovery, never ask for a tool error
@@ -1327,12 +1671,17 @@ Details
 
 Intent
 Assign forked context to discovery, investigation, and documentation agents; assign normal context to action and validation agents; preserve model and parallel eligibility metadata per agent class.
+
 Invariant
 Context isolation improves independent analysis, while normal context preserves continuity for mutation and validation.
+
+Flow
 
 ```text
 AgentClass → ContextMode → ParallelEligibility → ExecutionPolicy
 ```
+
+Productions
 
 ```bnf
 ContextForkingConfiguration ::= <AgentClass> "->" <ContextMode> "->" <ParallelPolicy> "->" <ExecutionConfiguration>
@@ -1343,16 +1692,23 @@ ParallelPolicy ::= "parallel_true" | "parallel_false"
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+[runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Every agent shares one context — discovery pollutes the action agent's state.
 ```
+
+After
 
 ```text
 agent class -> discovery/investigation/documentation -> fork ; action/validation -> normal -> per-class parallel eligibility preserved
@@ -1369,12 +1725,17 @@ Details
 
 Intent
 Extract the primary verb from each agent purpose, classify it against parallel or sequential verb sets, and bind execution mode, context, and parallel eligibility.
+
 Invariant
 Execution mode should be derived from action semantics, not arbitrary phase numbering.
+
+Flow
 
 ```text
 AgentPurpose → PrimaryVerb → VerbClass → ExecutionMode
 ```
+
+Productions
 
 ```bnf
 VerbExecutionClassification ::= <AgentPurpose> "->" <PrimaryVerb> "->" <VerbSetMatch> "->" <AgentExecutionMode>
@@ -1384,14 +1745,20 @@ SequentialVerb ::= "CREATE" | "WRITE" | "EXECUTE" | "VERIFY" | "IMPLEMENT" | "LI
 
 Composes
 none
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+[model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Execution mode assigned by phase number, not by what the agent does.
 ```
+
+After
 
 ```text
 agent purpose -> primary verb -> {ANALYZE/FIND/DISCOVER -> PARALLEL(fork)} | {CREATE/WRITE/VERIFY -> SEQUENTIAL(normal)}
@@ -1408,12 +1775,17 @@ Details
 
 Intent
 Read workspace configuration, extract zones, semantic extensions, root path, agent definitions, shared zone, workflow zone, and task zone before generating any workflow artifacts.
+
 Invariant
 Workflow artifacts must be placed by discovered workspace configuration, not hardcoded paths.
+
+Flow
 
 ```text
 WorkspaceConfig → Zones → AgentDefinitions → ArtifactBasePath
 ```
+
+Productions
 
 ```bnf
 WorkspaceConfigurationDiscovery ::= <WorkspaceConfigFile> "->" <WorkspaceConfig> "->" <ZoneConfig> "->" <AgentDefinitionSet> "->" <ArtifactPathPolicy>
@@ -1422,16 +1794,23 @@ ArtifactPathPolicy ::= "shared_zone/workflow_name" "," "workflow_zone" "," "task
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [ai_governance](SCHEMA.md#force-ai-governance)
+[semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Artifact paths hardcoded — the workflow only runs in one layout.
 ```
+
+After
 
 ```text
 workspace-config -> zones + root + agent defs -> artifact base = shared_zone/workflow_name; no hardcoded paths
@@ -1448,12 +1827,17 @@ Details
 
 Intent
 Pre-create workflow documents once, require every agent to read and edit the same documents, prohibit duplicate versions, and enforce single source of truth across phases.
+
 Invariant
 Multi-agent coordination should refine shared artifacts rather than create divergent outputs.
+
+Flow
 
 ```text
 CoreDocuments → PreCreate → AgentReadEdit → SingleSourceValidation
 ```
+
+Productions
 
 ```bnf
 SharedDocumentWorkspace ::= <CoreDocumentSet> "->" <PreCreation> "->" <SharedAccessProtocol> "->" <IterativeRefinement> "->" <SingleSourceOfTruthGate>
@@ -1462,16 +1846,23 @@ SharedAccessProtocol ::= "all_agents_same_documents" "," "orchestrator_creates" 
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[semantic_consistency](SCHEMA.md#force-semantic-consistency), [ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+[semantic_consistency](SCHEMA.md#force-semantic-consistency), [model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Each agent writes its own output file; findings diverge across N versions.
 ```
+
+After
 
 ```text
 pre-create core documents once -> every agent reads + edits the same set -> no duplicate versions -> single source of truth
@@ -1488,12 +1879,17 @@ Details
 
 Intent
 Analyze workflow objective, classify workflow type, select five to eight semantically distinct core documents, and map each document to a non-overlapping purpose.
+
 Invariant
 Workflow coordination needs the right shared document set for the work type.
+
+Flow
 
 ```text
 WorkflowObjective → WorkflowType → CoreDocuments → PurposeMap
 ```
+
+Productions
 
 ```bnf
 WorkflowDocumentSelection ::= <WorkflowObjective> "->" <WorkflowType> "->" <CoreDocumentSet> "->" <DocumentPurposeMap>
@@ -1503,16 +1899,23 @@ CoreDocumentConstraint ::= "document_count_between_5_and_8" "," "distinct_logica
 
 Composes
 none
+
 Named in the derivation of
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+[model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Generic output.md / results.md documents with overlapping purpose.
 ```
+
+After
 
 ```text
 objective -> workflow_type{cleanup|analysis|refactoring|security|migration} -> 5-8 distinct-purpose documents -> one non-overlapping purpose each
@@ -1529,12 +1932,17 @@ Details
 
 Intent
 For each agent slot, create an agent object with name, type, phase, purpose, methodology, inputs, outputs, validation gates, document responsibilities, focus areas, edit protocol, agent activation, and 4D graph.
+
 Invariant
 An orchestration plan requires agent objects with executable metadata, not just agent names.
+
+Flow
 
 ```text
 AgentCount → AgentObjectSet → AgentSequence
 ```
+
+Productions
 
 ```bnf
 AgentSequenceDefinition ::= <AgentCount> "->" <AgentObjectSet> "->" <AgentSequence>
@@ -1543,18 +1951,26 @@ AgentObject ::= <AgentName> "," <AgentType> "," <PhaseNumber> "," <Purpose> "," 
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Named in the derivation of
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 A plan that is just a list of agent names, no executable metadata.
 ```
+
+After
 
 ```text
 agent_count -> agent objects{name, type, phase, purpose, inputs, outputs, validation gates, doc responsibilities, execution mode, 4D graph}
@@ -1571,12 +1987,17 @@ Details
 
 Intent
 For each core document, require every agent to read current state, identify outdated or incorrect content, remove stale sections, replace with new discoveries, avoid duplicate findings, and maintain single source of truth.
+
 Invariant
 Shared-document workflows should use surgical refinement rather than additive accumulation.
+
+Flow
 
 ```text
 Document → Read → DetectStale → Remove → Replace → Deduplicate
 ```
+
+Productions
 
 ```bnf
 AgentDocumentResponsibility ::= <CoreDocument> "->" <ReadCurrentState> "->" <ContradictionDetection> "->" <StaleContentRemoval> "->" <AccurateReplacement> "->" <SingleSourceValidation>
@@ -1585,14 +2006,20 @@ ProhibitedDocumentOperation ::= "append_only" | "duplicate_findings" | "new_vers
 
 Composes
 none
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [ai_governance](SCHEMA.md#force-ai-governance)
+[modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Agents append findings, accumulating duplicates and contradictions.
 ```
+
+After
 
 ```text
 document -> read current state -> detect contradictions -> remove stale -> replace with new -> single source of truth (never append, never a new version file)
@@ -1609,12 +2036,17 @@ Details
 
 Intent
 For every agent activation, construct a spawn invocation with agent type, prompt, description, model, and context; use forked context for parallel agents and normal context for sequential agents.
+
 Invariant
 Orchestrators must execute agents through the runtime spawn primitive, not simulate agent behavior in the main session.
+
+Flow
 
 ```text
 AgentObject → SpawnInvocation → AgentExecution
 ```
+
+Productions
 
 ```bnf
 AgentActivationInvocation ::= <AgentObject> "->" <SpawnCall> "->" <ExecutionResult>
@@ -1624,16 +2056,23 @@ ForbiddenOrchestration ::= "simulate_agent_execution_in_orchestrator"
 
 Composes
 none
+
 Named in the derivation of
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+[model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 The orchestrator simulates the agent's work in its own session.
 ```
+
+After
 
 ```text
 agent object -> spawn primitive{agent_type, prompt, model, context-if-parallel} -> real activation; never simulate in the orchestrator
@@ -1650,12 +2089,17 @@ Details
 
 Intent
 Accumulate adjacent parallel agents into a batch, invoke all spawns in a single concurrent batch, wait for all completions, and merge findings through shared documents.
+
 Invariant
 Parallel agents should execute concurrently only when their work is investigation-safe and state-isolated.
+
+Flow
 
 ```text
 ParallelAgents → ConcurrentSpawnBatch → WaitAll → MergeFindings
 ```
+
+Productions
 
 ```bnf
 ParallelBatchExecution ::= <ParallelAgentSet> "->" <ConcurrentSpawnBatch> "->" <CompletionWait> "->" <SharedDocumentMerge>
@@ -1665,17 +2109,23 @@ ParallelSafety ::= "context_fork" "," "discovery_or_investigation_only" "," "sha
 
 Composes
 none
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+[model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Parallel agents launched in separate messages, so they run one after another anyway.
 ```
 
+After
+
 ```text
-adjacent parallel agents -> ONE concurrent batch of forked-context spawns -> wait for all -> merge via shared documents
+adjacent parallel agents -> one concurrent batch of forked-context spawns -> wait for all -> merge via shared documents
 ```
 
 ### Sequential Agent Execution
@@ -1689,12 +2139,17 @@ Details
 
 Intent
 Execute state-changing or validation agents one at a time in normal context, pass handoff context from the previous phase, wait for completion signal, then activate the next agent.
+
 Invariant
 Mutating workflow phases must serialize to prevent conflicting edits and ambiguous state.
+
+Flow
 
 ```text
 PreviousHandoff → SpawnCall → WaitCompletion → NextHandoff
 ```
+
+Productions
 
 ```bnf
 SequentialAgentExecution ::= <HandoffContext> "->" <SequentialSpawnInvocation> "->" <CompletionSignal> "->" <NextAgentActivation>
@@ -1703,14 +2158,20 @@ SequentialConstraint ::= "one_spawn_at_a_time" "," "wait_for_completion" "," "co
 
 Composes
 none
+
 Forces
-[state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+[state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Two mutating agents launched at once, producing conflicting edits.
 ```
+
+After
 
 ```text
 prior handoff -> one normal-context spawn at a time -> wait for completion -> activate the next
@@ -1727,12 +2188,17 @@ Details
 
 Intent
 For each agent, build sequential dependencies, lateral parallel peers, diagonal artifact/data dependencies, and propagation effects including superseded state, propagated contracts, and breakage risks.
+
 Invariant
 Multi-agent workflows need topology, not only order.
+
+Flow
 
 ```text
 Agent → Z + X + Y + W Graph
 ```
+
+Productions
 
 ```bnf
 FourDAgentGraph ::= <AgentObject> "->" <SequentialAxis> "," <LateralAxis> "," <DiagonalAxis> "," <PropagationAxis>
@@ -1744,14 +2210,20 @@ PropagationAxis ::= "W: superseded_state, propagated_contracts, breaks_if_change
 
 Composes
 none
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 An agent records only its order, not its cross-phase data or downstream ripple.
 ```
+
+After
 
 ```text
 agent -> Z{prior required agents} + X{peer parallel} + Y{cross-phase artifact deps} + W{superseded state, propagated contracts, breaks-if-changed}
@@ -1768,12 +2240,17 @@ Details
 
 Intent
 Require every agent to end with a structured handoff signal containing completed agent, phase status, artifact location, next agent, execution mode, context used, findings, files, validation status, parallel results, 4D graph, and orchestrator action.
+
 Invariant
 Handoffs are control messages that preserve workflow state across agent boundaries.
+
+Flow
 
 ```text
 AgentCompletion → HandoffContext → OrchestratorAction
 ```
+
+Productions
 
 ```bnf
 HandoffSignal ::= <AgentCompleted> "," <PhaseStatus> "," <ArtifactsLocation> "," <NextAgent> "," <ExecutionMode> "," <ContextUsed> "," <KeyFindings> "," <CriticalFiles> "," <ValidationGatesPassed> "," <ParallelResults> "," <Graph4D> "," <OrchestratorAction>
@@ -1782,16 +2259,23 @@ OrchestratorAction ::= "ACTIVATE_NEXT_AGENT" | "PAUSE_FOR_USER" | "WORKFLOW_COMP
 
 Composes
 [Orchestrator Action](ALGORITHMS.md#algo-orchestrator-action)
+
 Composed by
 [Orchestrator Action](ALGORITHMS.md#algo-orchestrator-action), [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 An agent finishes with a prose summary the orchestrator cannot route on.
 ```
+
+After
 
 ```text
 agent completion -> handoff{completed, phase status, artifacts, next agent, execution mode, context, findings, validation, 4D graph, orchestrator_action}
@@ -1807,13 +2291,18 @@ agent completion -> handoff{completed, phase status, artifacts, next agent, exec
 Details
 
 Intent
-Interpret handoff action as activate next agent, pause for user, or complete workflow; automatically continue unless a critical decision or repeated recovery failure requires user involvement.
+Interpret handoff action as activate next agent, pause for the developer, or complete workflow; automatically continue unless a critical decision or repeated recovery failure requires the developer's involvement.
+
 Invariant
 The orchestrator is a control loop driven by structured handoff actions.
+
+Flow
 
 ```text
 HandoffSignal → ActionType → Execute|Pause|Complete
 ```
+
+Productions
 
 ```bnf
 OrchestratorActionHandling ::= <HandoffSignal> "->" <ActionType> "->" <OrchestrationDecision>
@@ -1823,16 +2312,23 @@ ContinuationRule ::= "never_ask_should_I_continue" "," "use_orchestrator_action"
 
 Composes
 [Handoff Signal](ALGORITHMS.md#algo-handoff-signal)
+
 Composed by
 [Handoff Signal](ALGORITHMS.md#algo-handoff-signal)
+
 Forces
-[state_transaction](SCHEMA.md#force-state-transaction), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+[state_transaction](SCHEMA.md#force-state-transaction), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
 
+Before
+
 ```text
-The orchestrator asks the user 'should I continue?' after every agent.
+The orchestrator asks the developer 'should I continue?' after every agent.
 ```
+
+After
 
 ```text
 handoff -> orchestrator_action{ACTIVATE_NEXT_AGENT | PAUSE_FOR_USER | WORKFLOW_COMPLETE} -> auto-continue unless a critical decision or repeated recovery failure
@@ -1849,12 +2345,17 @@ Details
 
 Intent
 Pre-create documents, execute parallel batches where eligible, execute sequential agents one at a time, update checkpoints, validate single source of truth, and mark workflow completion.
+
 Invariant
 Coordination is the explicit execution trace for the whole workflow.
+
+Flow
 
 ```text
 PreCreateDocs → ParallelBatch|SequentialTask → Handoff → Checkpoint → Complete
 ```
+
+Productions
 
 ```bnf
 WorkflowCoordinationSequence ::= <DocumentPreCreation> "->" <AgentExecutionStepSet> "->" <CheckpointUpdateSet> "->" <WorkflowCompletionState>
@@ -1863,16 +2364,23 @@ WorkflowCompletionState ::= "WORKFLOW_PROGRESS_100_percent" "," "core_documents_
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+[semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
 
+Before
+
 ```text
-Coordination left implicit — no one knows the exact spawn order.
+Coordination left implicit — no record states the spawn order.
 ```
+
+After
 
 ```text
 pre-create docs -> parallel batches where eligible + sequential tasks one at a time -> handoffs -> checkpoint updates -> 100% complete
@@ -1888,13 +2396,18 @@ pre-create docs -> parallel batches where eligible + sequential tasks one at a t
 Details
 
 Intent
-If an agent fails validation, read shared documents, identify unmet expectation, research the error pattern, relaunch the agent with adapted context, and pause for user after bounded recovery attempts.
+If an agent fails validation, read shared documents, identify unmet expectation, research the error pattern, relaunch the agent with adapted context, and pause for the developer after bounded recovery attempts.
+
 Invariant
 Agent failure should trigger bounded evidence-based recovery, not silent continuation.
+
+Flow
 
 ```text
 ValidationFail → Diagnose → Research → Relaunch → RetryLimit|Recover
 ```
+
+Productions
 
 ```bnf
 WorkflowRecoveryLoop ::= <FailedAgentResult> "->" <SharedDocumentRead> "->" <UnmetExpectationAnalysis> "->" <ResolutionResearch> "->" <AgentRelaunch> "->" <RecoveryDecision>
@@ -1903,17 +2416,23 @@ RecoveryDecision ::= "continue_after_recovery" | "pause_for_user_after_limit"
 
 Composes
 none
+
 Forces
-[state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [ai_governance](SCHEMA.md#force-ai-governance)
+[state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 A failed agent is silently skipped and the workflow continues.
 ```
 
+After
+
 ```text
-validation fail -> read shared docs -> diagnose unmet expectation -> research the error -> relaunch with adapted context -> pause for user after the bound
+validation fail -> read shared docs -> diagnose unmet expectation -> research the error -> relaunch with adapted context -> pause for the developer after the bound
 ```
 
 ### Checklist Integration
@@ -1927,12 +2446,17 @@ Details
 
 Intent
 Create a workflow progress checklist in the artifact workspace, include execution model metadata, phases in linear dependency order with severity metadata, task checkboxes, progress bars, success criteria, and agent-edit coordination rules.
+
 Invariant
 Workflow state must persist independently of any one agent context.
+
+Flow
 
 ```text
 Workflow → Checklist → AgentUpdates → ResumableProgress
 ```
+
+Productions
 
 ```bnf
 ChecklistIntegration ::= <WorkflowName> "->" <ChecklistFrontmatter> "->" <PhaseStructure> "->" <TaskBreakdown> "->" <ProgressTracking> "->" <SuccessCriteria>
@@ -1941,16 +2465,23 @@ ChecklistCoordinationRule ::= "orchestrator_precreates" "," "all_agents_edit_sam
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Workflow state lives only in the orchestrator context; a restart loses it.
 ```
+
+After
 
 ```text
 workflow -> progress checklist{execution model, linear phases + severity metadata, task checkboxes, success criteria} -> any agent resumes by reading it
@@ -1967,12 +2498,17 @@ Details
 
 Intent
 For each agent phase, render phase header, execution mode, context mode, methodology, 4D graph, artifact flow, focus areas, deliverable, and agent activation example.
+
 Invariant
 Workflow templates must document how each agent is activated and what it contributes.
+
+Flow
 
 ```text
 AgentPhase → DocumentationSection → InvocationExample
 ```
+
+Productions
 
 ```bnf
 PhaseDocumentationTemplate ::= <AgentObject> "->" <PhaseHeader> "->" <ExecutionModeDescription> "->" <MethodologySummary> "->" <Graph4DRendering> "->" <ArtifactSection> "->" <FocusSection> "->" <OutputSection> "->" <AgentActivationExample>
@@ -1980,16 +2516,23 @@ PhaseDocumentationTemplate ::= <AgentObject> "->" <PhaseHeader> "->" <ExecutionM
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination)
+[model_governance](SCHEMA.md#force-model-governance), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 A phase documented with no execution mode, graph, or invocation example.
 ```
+
+After
 
 ```text
 agent phase -> header + execution mode + context + methodology + 4D graph + artifacts + focus + deliverable + agent activation example
@@ -2006,12 +2549,17 @@ Details
 
 Intent
 Derive workflow principles from the agent sequence, first agent grounding role, final agent quality guarantee, intermediate agent contributions, automation, context awareness, recovery, scalability, hybrid execution, context forking, and workspace integration.
+
 Invariant
 A workflow should state the qualities guaranteed by its orchestration structure.
+
+Flow
 
 ```text
 AgentSequence → PrincipleSet → WorkflowValueStatement
 ```
+
+Productions
 
 ```bnf
 WorkflowPrinciplesMapping ::= <AgentSequence> "->" <AgentContributionSet> "->" <WorkflowPrincipleSet>
@@ -2020,14 +2568,20 @@ WorkflowPrinciple ::= "grounded_in_codebase_reality" | "fully_automated" | "cont
 
 Composes
 none
+
 Forces
-[state_transaction](SCHEMA.md#force-state-transaction), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [ai_governance](SCHEMA.md#force-ai-governance)
+[state_transaction](SCHEMA.md#force-state-transaction), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 A workflow that never states what its structure guarantees.
 ```
+
+After
 
 ```text
 agent sequence -> per-agent contribution{first grounds, final guarantees quality} -> principles{grounded, automated, context-aware, self-recovering, scalable}
@@ -2044,12 +2598,17 @@ Details
 
 Intent
 Define specialized capability invocation patterns, classify which capabilities run forked or normal, include examples, and allow workflows to call capabilities for research, validation, calculation, and specialized subroutines.
+
 Invariant
 Workflows should support specialized capabilities without embedding every capability into every agent.
+
+Flow
 
 ```text
 CapabilityNeed → CapabilityPattern → ContextMode → Invocation
 ```
+
+Productions
 
 ```bnf
 CapabilityInvocationProtocol ::= <CapabilityNeed> "->" <CapabilitySelection> "->" <CapabilityInvocation> "->" <CapabilityResultIntegration>
@@ -2059,16 +2618,23 @@ CapabilityContextRule ::= "discovery_capability_context_fork" | "validation_capa
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Every capability baked into every agent instead of a shared, invocable one.
 ```
+
+After
 
 ```text
 capability need -> select -> invoke(capability, args){discovery -> forked, validation -> normal} -> integrate result
@@ -2085,12 +2651,17 @@ Details
 
 Intent
 Assemble frontmatter, workspace config, overview, phase documentation, checklist requirements, orchestration protocol, handoff format, coordination sequence, capability integration, workflow principles, and domain notes into one workflow artifact.
+
 Invariant
 The workflow template is a compiled orchestration contract.
+
+Flow
 
 ```text
 Sections → FinalTemplate → OutputPath → Write
 ```
+
+Productions
 
 ```bnf
 TemplateAssembly ::= <WorkflowFrontmatter> "->" <WorkspaceConfigSection> "->" <WorkflowOverview> "->" <PhaseDocumentationSet> "->" <ChecklistRequirements> "->" <AgentOrchestrationProtocol> "->" <HandoffSignalFormat> "->" <WorkflowCoordination> "->" <CapabilityIntegrationProtocol> "->" <WorkflowPrinciples> "->" <OutputArtifact>
@@ -2099,18 +2670,26 @@ OutputArtifact ::= "{workflow_output_dir}/{workflow_name}-WORKFLOW.{workflow_ext
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Named in the derivation of
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Workflow sections written ad hoc, missing the handoff format or coordination.
 ```
+
+After
 
 ```text
 assemble{frontmatter, workspace config, overview, phase docs, checklist, orchestration protocol, handoff format, coordination, capabilities, principles} -> {name}-WORKFLOW file
@@ -2127,12 +2706,17 @@ Details
 
 Intent
 After generating the workflow template, present a summary and request explicit first-run action: execute workflow, edit template, or cancel.
+
 Invariant
 Generation and first execution are separate approval states.
+
+Flow
 
 ```text
 GeneratedWorkflow → UserChoice → Execute|Edit|Cancel
 ```
+
+Productions
 
 ```bnf
 FirstTimeInitiation ::= <GeneratedWorkflow> "->" <WorkflowSummary> "->" <UserChoice> "->" <InitialAction>
@@ -2141,19 +2725,26 @@ UserChoice ::= "Execute Workflow" | "Edit Template" | "Cancel"
 
 Composes
 none
+
 Named in the derivation of
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling)
+[model_governance](SCHEMA.md#force-model-governance), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
 
-```text
-The generated workflow auto-executes without the user's go-ahead.
-```
+Before
 
 ```text
-generated workflow -> summary -> user choice{Execute | Edit Template | Cancel} -> generation and first execution are separate approvals
+The generated workflow auto-executes without the developer's go-ahead.
+```
+
+After
+
+```text
+generated workflow -> summary -> developer choice{Execute | Edit Template | Cancel} -> generation and first execution are separate approvals
 ```
 
 ### Workflow Validation Gate
@@ -2167,12 +2758,17 @@ Details
 
 Intent
 Validate DSL compliance, workspace discovery, dynamic agent count, execution classification, context configuration, 4D graphs, handoff protocol, hybrid execution, checklist integration, capability integration, template assembly, dynamic paths, uppercase filenames, and agent-oriented content.
+
 Invariant
 A workflow template is complete only when orchestration, artifact, context, and validation contracts all pass.
+
+Flow
 
 ```text
 WorkflowTemplate → GateSet → Valid|Invalid
 ```
+
+Productions
 
 ```bnf
 WorkflowValidationGate ::= <GeneratedWorkflow> "->" <DSLComplianceCheck> "->" <WorkspaceConfigCheck> "->" <AgentSequenceCheck> "->" <ExecutionModeCheck> "->" <Graph4DCheck> "->" <HandoffProtocolCheck> "->" <ChecklistIntegrationCheck> "->" <CapabilityIntegrationCheck> "->" <ArtifactPathCheck> "->" <CompletionVerdict>
@@ -2181,18 +2777,26 @@ CompletionVerdict ::= "workflow_template_valid" | "workflow_template_invalid"
 
 Composes
 none
+
 Composed by
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Named in the derivation of
 [Workflow Creation Kernel](ALGORITHMS.md#algo-workflow-creation-kernel)
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 A workflow shipped without checking its handoff, 4D graphs, or dynamic paths.
 ```
+
+After
 
 ```text
 template -> checks{DSL, workspace, agent sequence, execution mode, 4D graph, handoff, checklist, capabilities, artifact paths} -> valid | invalid
@@ -2207,12 +2811,17 @@ Details
 
 Intent
 Load DSL and orchestration references, configure file recovery and context forking, discover workspace zones and agents, select shared documents, define dynamic agent sequence, classify execution mode, build 4D graphs, define handoff protocol, assemble coordination sequence, integrate checklist and capabilities, generate phase documentation, assemble template, and validate success criteria.
+
 Invariant
 Workflow creation is a compiler from objective and workspace configuration into an executable multi-agent orchestration contract.
+
+Flow
 
 ```text
 Specs → Workspace → Documents → Agents → Graphs → Handoffs → Coordination → Checklist → Capabilities → Template → Validation
 ```
+
+Productions
 
 ```bnf
 WorkflowCreationKernel ::= <DSLComplianceLoading> "->" <FileModificationRecovery> "->" <ContextForkingConfiguration> "->" <WorkspaceConfigurationDiscovery> "->" <WorkflowDocumentSelection> "->" <SharedDocumentWorkspace> "->" <AgentSequenceDefinition> "->" <VerbExecutionClassification> "->" <FourDAgentGraph> "->" <HandoffSignal> "->" <WorkflowCoordinationSequence> "->" <ChecklistIntegration> "->" <PhaseDocumentationTemplate> "->" <CapabilityInvocationProtocol> "->" <TemplateAssembly> "->" <WorkflowValidationGate>
@@ -2220,8 +2829,10 @@ WorkflowCreationKernel ::= <DSLComplianceLoading> "->" <FileModificationRecovery
 
 Composes
 [DSL Compliance Loading](ALGORITHMS.md#algo-dsl-compliance-loading), [File Modification Recovery](ALGORITHMS.md#algo-agent-workflow-file-modification-recovery), [Context Forking Configuration](ALGORITHMS.md#algo-context-forking-configuration), [Workspace Configuration Discovery](ALGORITHMS.md#algo-workspace-configuration-discovery), [Shared Document Workspace](ALGORITHMS.md#algo-shared-document-workspace), [Agent Sequence Definition](ALGORITHMS.md#algo-agent-sequence-definition), [Handoff Signal](ALGORITHMS.md#algo-handoff-signal), [Workflow Coordination Sequence](ALGORITHMS.md#algo-workflow-coordination-sequence), [Checklist Integration](ALGORITHMS.md#algo-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algo-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algo-capability-invocation-protocol), [Template Assembly](ALGORITHMS.md#algo-template-assembly), [Workflow Validation Gate](ALGORITHMS.md#algo-workflow-validation-gate)
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -2229,22 +2840,32 @@ Derivation map
 
 orient
 [DSL Compliance Loading](ALGORITHMS.md#algo-dsl-compliance-loading)
+
 derive
 [Workflow Type Document Selection](ALGORITHMS.md#algo-workflow-type-document-selection)
+
 project
 [Agent Sequence Definition](ALGORITHMS.md#algo-agent-sequence-definition)
+
 act
 [Agent Activation Invocation](ALGORITHMS.md#algo-agent-activation-invocation)
+
 verify
 [Workflow Validation Gate](ALGORITHMS.md#algo-workflow-validation-gate)
+
 commit
 [Template Assembly](ALGORITHMS.md#algo-template-assembly)
+
 terminate
 [First-Time Initiation](ALGORITHMS.md#algo-first-time-initiation)
+
+Before
 
 ```text
 An objective turned straight into a hardcoded, single-threaded agent script.
 ```
+
+After
 
 ```text
 load specs -> discover workspace -> select docs -> define agents -> classify execution -> 4D graphs -> handoffs -> coordinate -> checklist + capabilities -> assemble -> validate
@@ -2258,12 +2879,17 @@ Details
 
 Intent
 <Load orchestration grammar> -> <Discover workspace config> -> <Select shared documents> -> <Define agents> -> <Classify parallel vs sequential> -> <Fork discovery contexts> -> <Serialize action phases> -> <Build 4D graphs> -> <Create handoff protocol> -> <Coordinate shared-document refinement> -> <Integrate checklist and capabilities> -> <Validate template>
+
 Invariant
 Any multi-agent workflow should be generated as an executable orchestration contract where discovery is parallel, mutation is sequential, state is shared through documents, and handoffs preserve graph-aware context.
+
+Flow
 
 ```text
 Grammar → Workspace → Documents → Agents → ExecutionMode → Context → Graph → Handoff → Coordination → Validation
 ```
+
+Productions
 
 ```bnf
 WorkflowOrchestrationConcern ::= <GrammarContract> "->" <WorkspaceContract> "->" <SharedArtifactContract> "->" <AgentSequenceContract> "->" <HybridExecutionContract> "->" <ContextForkingContract> "->" <Graph4DContract> "->" <HandoffContract> "->" <ChecklistContract> "->" <CapabilityContract> "->" <ValidationGate>
@@ -2272,14 +2898,16 @@ HybridExecutionContract ::= "parallel_discovery" "," "sequential_actions" "," "s
 
 Composes
 [Validation Gate](ALGORITHMS.md#algo-validation-gate)
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
 
 ## anti-patterns
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -2306,12 +2934,17 @@ Details
 
 Intent
 Take any desired architectural principle, invert its invariants, identify the recurring violation shape, model its propagation mechanism, define detection signals, and derive its remediation inverse.
+
 Invariant
 Every anti-pattern is a stable failure algorithm created by repeated violation of an architectural contract.
+
+Flow
 
 ```text
 Principle → Invariant → Violation → Propagation → Detection → Remediation
 ```
+
+Productions
 
 ```bnf
 AntiPatternInversion ::= <HealthyPrinciple> "->" <RequiredInvariant> "->" <InvariantViolation> "->" <FailurePropagation> "->" <DetectionSignalSet> "->" <RemediationInverse>
@@ -2320,14 +2953,20 @@ AntiPatternRecord ::= <Name> "," <TriggerCondition> "," <DegenerationPath> "," <
 
 Composes
 none
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Principle: Low Coupling — stated as a goal only; its violations are noticed ad hoc, named inconsistently, and caught late, with no derived failure algorithm.
 ```
+
+After
 
 ```text
 Low Coupling -> invariant{no bidirectional dependency} -> violation{Cyclic Dependency} -> propagation{a convenience import closes a cycle, then spreads across modules} -> detection{dependency-cycle scan} -> remediation{invert the dependency / introduce a port}
@@ -2342,12 +2981,17 @@ Details
 
 Intent
 Start with a local shortcut, repeat it under delivery pressure, normalize it as convention, allow dependent code to form around it, then make remediation expensive through coupling and hidden assumptions.
+
 Invariant
 Most architecture anti-patterns become dangerous when a shortcut becomes infrastructure.
+
+Flow
 
 ```text
 Shortcut → Repetition → Normalization → DependencyFormation → Institutionalization → HighCostRepair
 ```
+
+Productions
 
 ```bnf
 AntiPatternPropagation ::= <LocalShortcut> "->" <RepeatedUse> "->" <ImplicitConvention> "->" <DependentCodeFormation> "->" <ArchitecturalDebt> "->" <RemediationCostIncrease>
@@ -2356,14 +3000,20 @@ DebtAmplifier ::= "copy_paste" | "missing_contract" | "missing_owner" | "missing
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A one-off shortcut — inline a secret to ship a fix — treated as an isolated, cheap, local choice.
 ```
+
+After
 
 ```text
 Shortcut{inline secret} -> repetition{reused under deadline} -> normalization{becomes the team convention} -> dependency-formation{configs read it directly} -> institutionalization{deploy scripts assume it} -> high-cost-repair{rotate the secret and rewire every dependent}
@@ -2378,12 +3028,17 @@ Details
 
 Intent
 For each anti-pattern, identify the missing architectural control, introduce the inverse control, migrate existing dependents, verify absence of the old failure shape, and enforce recurrence prevention.
+
 Invariant
 Anti-pattern repair is not complete until the propagation path is blocked.
+
+Flow
 
 ```text
 AntiPattern → MissingControl → InverseControl → Migration → AbsenceCheck → PreventionGate
 ```
+
+Productions
 
 ```bnf
 AntiPatternRemediationAlgebra ::= <AntiPatternRecord> "->" <MissingControl> "->" <InverseArchitecturalControl> "->" <MigrationPlan> "->" <EliminationVerification> "->" <RecurrencePrevention>
@@ -2393,14 +3048,20 @@ RecurrencePrevention ::= "static_check" | "contract_test" | "schema_gate" | "arc
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 The anti-pattern is deleted at one call site; the propagation path stays open, so it reappears elsewhere next sprint.
 ```
+
+After
 
 ```text
 Secret Sprawl -> missing-control{no secret authority} -> inverse-control{central store + injected access} -> migration{repoint every reader} -> absence-check{scan finds zero inline secrets} -> prevention-gate{lint rule rejects new inline secrets}
@@ -2415,12 +3076,17 @@ Details
 
 Intent
 Model every smell as a recurring degeneration path with trigger conditions, enabling conditions, detection signals, damage model, remediation inverse, and prevention gate.
+
 Invariant
 A smell becomes enforceable when it is represented as a measurable failure contract.
+
+Flow
 
 ```text
 Smell → Trigger → Degeneration → Detection → Measurement → Remediation → Prevention
 ```
+
+Productions
 
 ```bnf
 ArchitectureSmellRecord ::= <SmellName> "," <TriggerCondition> "," <EnablingConditionSet> "," <DegenerationPath> "," <DetectionSignalSet> "," <MetricSet> "," <DamageModel> "," <RemediationInverse> "," <PreventionGate>
@@ -2429,14 +3095,20 @@ PreventionGate ::= "static_check" | "architecture_test" | "contract_test" | "sch
 
 Composes
 none
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Smell described in prose ('this class is too big') — unmeasurable, unenforceable, re-argued case by case.
 ```
+
+After
 
 ```text
 God Object : trigger{unrelated methods accrete} -> degeneration{fan-in/out grows} -> detection{LCOM + responsibility count} -> measurement{cohesion score below threshold} -> remediation{Extract Class} -> prevention{architecture test on cohesion}
@@ -2451,12 +3123,17 @@ Details
 
 Intent
 Convert each smell record into detection checks, measurable thresholds, severity policy, remediation hints, and recurrence-prevention gates.
+
 Invariant
-Smell catalogs become valuable when they compile into rules.
+A smell catalog is enforced only once it compiles into rules.
+
+Flow
 
 ```text
 SmellRecord → DetectionRule → MetricThreshold → Severity → RefactorHint → Gate
 ```
+
+Productions
 
 ```bnf
 AntiPatternRuleCompiler ::= <ArchitectureSmellRecordSet> "->" <DetectionRuleSet> "->" <MetricThresholdSet> "->" <SeverityPolicy> "->" <RemediationPlaybookSet> "->" <PreventionGateSet>
@@ -2465,14 +3142,20 @@ CompiledRule ::= <RuleName> "," <Scope> "," <Detector> "," <Threshold> "," <Prio
 
 Composes
 [Severity Policy](ALGORITHMS.md#algo-severity-policy)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
+Before
+
 ```text
-A smell catalog read by humans — each entry is advice that nothing executes.
+A smell catalog read by the developer — each entry is advice that nothing executes.
 ```
+
+After
 
 ```text
 SmellRecord{God Object} -> detection-rule{find unrelated method clusters} -> metric-threshold{LCOM > 0.7} -> severity{error} -> refactor-hint{Extract Class} -> gate{fails the build}
@@ -2487,12 +3170,17 @@ Details
 
 Intent
 Group smells by missing control so detection and remediation can be generalized.
+
 Invariant
 Most bad practices are symptoms of a missing architectural control.
+
+Flow
 
 ```text
 Smell → MissingControl → RuleFamily → RemediationFamily
 ```
+
+Productions
 
 ```bnf
 SmellTaxonomy ::= <SmellSet> "->" <MissingControlClassification> "->" <RuleFamilySet> "->" <RemediationFamilySet>
@@ -2501,14 +3189,20 @@ MissingControlClassification ::= "missing_boundary" | "missing_contract" | "miss
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Dozens of smells listed flat, each handed its own bespoke, unrelated fix.
 ```
+
+After
 
 ```text
 smell-set{Magic Value, Secret Sprawl, Hardcoded Path} -> missing-control{single source of truth} -> rule-family{no-inline-authority checks} -> remediation-family{centralize then inject}
@@ -2523,8 +3217,11 @@ Details
 
 Intent
 Model every anti-pattern as a typed relationship record: name, scope, causal links, conflicts, degradations, enabled failures, detection signals, measurement, remediation inverse, prevention, and severity.
+
 Invariant
 An anti-pattern is enforceable only when it is represented as a typed relationship record.
+
+Productions
 
 ```bnf
 AntiPatternRelationshipRecord ::= <AntiPatternName> ":" "Anti-Pattern" "," <scope> "," <caused_by> "," <conflicts_with> "," <degrades> "," <enables_failure> "," <detected_by> "," <measured_by> "," <refactored_by> "," <prevented_by> "," <severity>
@@ -2532,14 +3229,20 @@ AntiPatternRelationshipRecord ::= <AntiPatternName> ":" "Anti-Pattern" "," <scop
 
 Composes
 none
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 An anti-pattern named as free text with no typed edges — not resolvable, not gate-checkable, not linkable to the principle it violates.
 ```
+
+After
 
 ```text
 Cyclic Dependency : Anti-Pattern, scope{module}, caused_by{convenience import}, conflicts_with{Low Coupling}, degrades{modularity}, enables_failure{build deadlock}, detected_by{cycle scan}, refactored_by{invert dependency}, prevented_by{dependency rule}, severity{mandatory}
@@ -2553,12 +3256,17 @@ Details
 
 Intent
 <Local shortcut> -> <Missing control> -> <Repeated usage> -> <Implicit dependency> -> <Boundary/contract erosion> -> <Systemic fragility> -> <Expensive remediation>
+
 Invariant
 Every architecture anti-pattern is a reproducible decay path caused by the absence of a specific control: boundary, contract, ownership, versioning, observability, state isolation, or enforcement.
+
+Flow
 
 ```text
 Shortcut → Drift → Coupling → Fragility → Detection → Inversion
 ```
+
+Productions
 
 ```bnf
 ArchitectureAntiPattern ::= <TriggerCondition> "->" <MissingControl> "->" <DegenerationPath> "->" <DamageModel> "->" <DetectionSignalSet> "->" <RemediationInverse> "->" <PreventionGate>
@@ -2567,14 +3275,16 @@ RemediationInverse ::= "introduce_boundary" | "declare_contract" | "centralize_a
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Grounds
 none
 
 ## arch-relationships
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -2615,7 +3325,7 @@ n_architecture_evolution_governance["Architecture Evolution Governance"]
 n_control_plane_coordination["Control Plane Coordination"]
 n_metaprogramming_safety["Metaprogramming Safety"]
 n_streaming_dataflow["Streaming Dataflow"]
-n_ai_model_architecture_governance["AI Model Architecture Governance"]
+n_model_lifecycle_governance["Model Architecture Governance"]
 n_architectural_recommendation["Architectural Recommendation"]
 n_architecture_fitness_function_generation["Architecture Fitness Function Generation"]
 n_architecture_refactoring_roadmap["Architecture Refactoring Roadmap"]
@@ -2657,12 +3367,17 @@ Details
 
 Intent
 Represent every architectural concept as a typed relationship record containing scope, dependencies, reinforcing effects, enabled capabilities, conflicts, tensions, violations, detection signals, metrics, refactor actions, enforcement mechanisms, and severity.
+
 Invariant
 An architecture principle becomes operational when it is converted from a name into a measurable, enforceable relationship contract.
+
+Flow
 
 ```text
 Concept → Type → Scope → Requires → Violations → Detection → Measurement → Refactor → Enforcement → Severity
 ```
+
+Productions
 
 ```bnf
 ArchitecturalRelationshipRecord ::= <ConceptName> ":" <RecordType> "," <ScopeSet> "," <RequiresSet> "," <ReinforcesSet> "," <EnablesSet> "," <ConflictSet> "," <TensionSet> "," <ViolationSet> "," <DetectionSet> "," <MetricSet> "," <RefactorSet> "," <EnforcementSet> "," <EnforcementSeverity>
@@ -2672,16 +3387,23 @@ EnforcementSeverity ::= "mandatory" | "recommended" | "contextual" | "discourage
 
 Composes
 none
+
 Composed by
 [Architecture Fitness Function Generation](ALGORITHMS.md#algo-architecture-fitness-function-generation)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 'Low Coupling' as a bare name in a list — not measurable, not enforceable.
 ```
+
+After
 
 ```text
 Low Coupling : Quality-Attribute, scope{module}, requires{Abstraction}, conflicts_with{Tight Coupling}, detected_by{cycle scan}, measured_by{coupling metric}, refactored_by{invert dependency}, enforced_by{dependency rule}, severity{mandatory}
@@ -2696,12 +3418,17 @@ Details
 
 Intent
 Parse all relationship records into a directed multigraph where concepts are nodes and fields such as requires, reinforces, enables, conflicts, tensions, detects, measures, refactors, and enforces are typed edges.
+
 Invariant
 The architecture catalog becomes reusable when its relationships can be traversed as a graph.
+
+Flow
 
 ```text
 Records → Nodes → TypedEdges → Graph → QueryableArchitectureModel
 ```
+
+Productions
 
 ```bnf
 ArchitectureGraph ::= <ConceptNodeSet> "," <RelationshipEdgeSet>
@@ -2712,14 +3439,20 @@ RelationType ::= "requires" | "reinforces" | "enables" | "conflicts_with" | "ten
 
 Composes
 none
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A flat list of relationship records — no way to ask 'what does Foo require, transitively?'
 ```
+
+After
 
 ```text
 records -> nodes{concepts} + typed-edges{requires, reinforces, enables, conflicts_with} -> traversable graph
@@ -2734,28 +3467,39 @@ Details
 
 Intent
 Given a design issue or desired quality, classify it into a force family, then select all concepts whose scope, type, violation signals, and enabled capabilities match that force.
+
 Invariant
 Architectural decisions should be selected by force and evidence, not by pattern name recognition.
+
+Flow
 
 ```text
 Issue → ForceFamily → CandidateConcepts → ApplicableContracts
 ```
 
+Productions
+
 ```bnf
 ForceClassification ::= <DesignIssue> "->" <ForceFamily> "->" <ConceptQuery> "->" <ApplicableConceptSet>
-ForceFamily ::= "modularity" | "contract_compatibility" | "semantic_consistency" | "domain_boundary" | "runtime_extensibility" | "object_creation" | "structural_mediation" | "behavioral_variation" | "event_messaging" | "state_transaction" | "correctness_verification" | "resilience_recovery" | "observability_traceability" | "causality_ordering" | "performance_scaling" | "security_governance" | "architecture_evolution" | "control_coordination" | "metaprogramming_modeling" | "streaming_dataflow" | "ai_governance"
+ForceFamily ::= "modularity" | "contract_compatibility" | "semantic_consistency" | "domain_boundary" | "runtime_extensibility" | "object_creation" | "structural_mediation" | "behavioral_variation" | "event_messaging" | "state_transaction" | "correctness_verification" | "resilience_recovery" | "observability_traceability" | "causality_ordering" | "performance_scaling" | "security_governance" | "architecture_evolution" | "control_coordination" | "metaprogramming_modeling" | "streaming_dataflow" | "model_governance"
 ```
 
 Composes
 none
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A design issue answered by pattern-name recall ('use a Factory').
 ```
+
+After
 
 ```text
 issue{concrete constructor everywhere} -> force{object_creation} -> concept-query -> applicable{Construction Boundary}
@@ -2770,12 +3514,17 @@ Details
 
 Intent
 For any target architectural concept, recursively collect its required concepts until no new requirements remain, then order the closure by dependency depth before implementation.
+
 Invariant
 A principle cannot be adopted safely unless its prerequisites are also satisfied.
+
+Flow
 
 ```text
 TargetConcept → RequiresEdges → TransitiveClosure → DependencyOrder
 ```
+
+Productions
 
 ```bnf
 DependencyClosure ::= <TargetConcept> "->" <RequiresTraversal> "->" <RequiredConceptSet> "->" <TopologicalOrder>
@@ -2785,16 +3534,23 @@ TopologicalOrder ::= "prerequisites_before_dependents"
 
 Composes
 none
+
 Composed by
 [Architecture Assessment](ALGORITHMS.md#algo-architecture-assessment), [Architectural Recommendation](ALGORITHMS.md#algo-architectural-recommendation), [Master Architecture Governance Kernel](ALGORITHMS.md#algo-master-architecture-governance-kernel), [Architectural Relationship Algebra](ALGORITHMS.md#algo-architectural-relationship-algebra)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Adopt Foo without checking what Foo needs — its prerequisites are silently unmet.
 ```
+
+After
 
 ```text
 target{Foo} -> follow requires-edges to fixed point -> {Bar, Baz} -> topological order{Baz, Bar, Foo}
@@ -2809,12 +3565,17 @@ Details
 
 Intent
 When a concept is implemented or strengthened, traverse its reinforces and enables edges to identify secondary quality gains and architecture capabilities unlocked.
+
 Invariant
 Architecture improvements produce second-order effects through reinforcing relationships.
+
+Flow
 
 ```text
 ImplementedConcept → Reinforces + Enables → CapabilityImpact
 ```
+
+Productions
 
 ```bnf
 ReinforcementPropagation ::= <SatisfiedConcept> "->" <ReinforcesTraversal> "->" <EnablesTraversal> "->" <ImpactSet>
@@ -2824,14 +3585,20 @@ QualityGain ::= <ReinforcedConcept> "," <Confidence> "," <EvidenceRequired>
 
 Composes
 none
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Foo implemented; its second-order gains go unnoticed and unclaimed.
 ```
+
+After
 
 ```text
 satisfied{Foo} -> reinforces -> {Bar quality} -> enables -> {Baz capability} -> impact set with confidence
@@ -2846,12 +3613,17 @@ Details
 
 Intent
 For each selected concept, collect conflicts and tensions, classify conflicts as prohibitive or resolvable, classify tensions as trade-offs, and require an explicit decision when severity or impact is high.
+
 Invariant
 Architecture is not only principle application; it is trade-off governance.
+
+Flow
 
 ```text
 CandidateConcept → Conflicts + Tensions → TradeoffAnalysis → Decision
 ```
+
+Productions
 
 ```bnf
 ConflictTensionResolution ::= <CandidateConceptSet> "->" <ConflictSet> "->" <TensionSet> "->" <ResolutionPolicy>
@@ -2860,14 +3632,20 @@ ResolutionPolicy ::= "reject_combination" | "accept_with_mitigation" | "document
 
 Composes
 none
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
 
+Before
+
 ```text
-Two chosen concepts silently conflict at runtime; nobody decided the trade-off.
+Two chosen concepts silently conflict at runtime; the developer never decided the trade-off.
 ```
+
+After
 
 ```text
 candidates{Foo, Bar} -> conflict{prohibitive} -> tension{trade-off} -> policy{require architecture decision}
@@ -2882,12 +3660,17 @@ Details
 
 Intent
 Interpret severity as an enforcement policy: mandatory concepts become gates, recommended concepts become review findings, contextual concepts require scope justification, and discouraged concepts require explicit exception approval.
+
 Invariant
 Severity converts architecture knowledge into governance behavior.
+
+Flow
 
 ```text
 Severity → EnforcementMode → GateBehavior
 ```
+
+Productions
 
 ```bnf
 SeverityPolicy ::= <EnforcementSeverity> "->" <EnforcementMode>
@@ -2897,16 +3680,23 @@ SeverityMapping ::= "mandatory -> blocking_gate" | "recommended -> review_warnin
 
 Composes
 none
+
 Composed by
 [Anti-Pattern Rule Compiler](ALGORITHMS.md#algo-anti-pattern-rule-compiler), [Architecture Fitness Function Generation](ALGORITHMS.md#algo-architecture-fitness-function-generation)
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Every finding treated the same — a style nit blocks like a critical flaw.
 ```
+
+After
 
 ```text
 severity{mandatory} -> blocking-gate ; severity{recommended} -> review-warning ; severity{contextual} -> context-required
@@ -2921,12 +3711,17 @@ Details
 
 Intent
 For each concept applicable to the current scope, execute its detected_by signals against the implementation, map observations to violated_by patterns, and produce evidence-backed violation records.
+
 Invariant
 A principle violation must be grounded in observable implementation signals.
+
+Flow
 
 ```text
 ApplicableConcept → DetectionSignals → Observations → ViolationRecords
 ```
+
+Productions
 
 ```bnf
 ViolationDetection ::= <ApplicableConceptSet> "->" <DetectionSignalSet> "->" <ObservedEvidenceSet> "->" <ViolationRecordSet>
@@ -2935,16 +3730,23 @@ ViolationRecord ::= <Concept> "," <ViolationPattern> "," <EvidenceLocationSet> "
 
 Composes
 none
+
 Composed by
 [Architecture Assessment](ALGORITHMS.md#algo-architecture-assessment), [Master Architecture Governance Kernel](ALGORITHMS.md#algo-master-architecture-governance-kernel), [Architectural Relationship Algebra](ALGORITHMS.md#algo-architectural-relationship-algebra)
+
 Forces
-[observability_traceability](SCHEMA.md#force-observability-traceability), [ai_governance](SCHEMA.md#force-ai-governance)
+[observability_traceability](SCHEMA.md#force-observability-traceability), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 'Foo is violated' asserted from opinion, with no observable signal.
 ```
+
+After
 
 ```text
 concept{Foo} -> detected_by signals run on code -> observations -> violation-record{concept, pattern, evidence, severity}
@@ -2959,12 +3761,17 @@ Details
 
 Intent
 Convert each concept’s measured_by field into executable or reviewable metrics, collect metric values, normalize them to comparable scores, and attach confidence based on measurement quality.
+
 Invariant
 Architectural assessment requires metrics with provenance, not free-form judgment.
+
+Flow
 
 ```text
 MeasuredBy → MetricDefinition → Measurement → NormalizedScore → Confidence
 ```
+
+Productions
 
 ```bnf
 MeasurementNormalization ::= <MetricDescriptorSet> "->" <MetricDefinitionSet> "->" <MetricValueSet> "->" <NormalizedScoreSet>
@@ -2973,16 +3780,23 @@ MetricDefinition ::= <MetricName> "," <Scope> "," <CollectionMethod> "," <Thresh
 
 Composes
 none
+
 Composed by
 [Architecture Assessment](ALGORITHMS.md#algo-architecture-assessment), [Master Architecture Governance Kernel](ALGORITHMS.md#algo-master-architecture-governance-kernel), [Architectural Relationship Algebra](ALGORITHMS.md#algo-architectural-relationship-algebra)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 Architecture judged by free-form opinion, no comparable numbers.
 ```
+
+After
 
 ```text
 measured_by{coupling} -> metric-definition{scope, method, threshold} -> values -> normalized score + confidence
@@ -2997,12 +3811,17 @@ Details
 
 Intent
 Given a violation record, select refactor actions from the concept’s refactored_by field, rank actions by severity, dependency closure, blast radius, and expected reinforcement gain.
+
 Invariant
 Refactoring should be selected from the violated concept’s remediation contract.
+
+Flow
 
 ```text
 Violation → RefactorCandidates → RiskRank → SelectedPlan
 ```
+
+Productions
 
 ```bnf
 RefactorSelection ::= <ViolationRecord> "->" <RefactorActionSet> "->" <RefactorRanking> "->" <RefactorPlan>
@@ -3011,16 +3830,23 @@ RefactorRanking ::= "severity" "," "required_dependency_count" "," "blast_radius
 
 Composes
 none
+
 Composed by
 [Master Architecture Governance Kernel](ALGORITHMS.md#algo-master-architecture-governance-kernel), [Architectural Relationship Algebra](ALGORITHMS.md#algo-architectural-relationship-algebra)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A fix chosen ad hoc, unrelated to the violated concept's remediation contract.
 ```
+
+After
 
 ```text
 violation{Foo} -> refactored_by candidates -> rank{severity, blast-radius, reinforcement-gain} -> refactor plan
@@ -3035,12 +3861,17 @@ Details
 
 Intent
 Translate each concept’s enforced_by field into static checks, contract tests, schema validation, CI gates, policy rules, runtime monitors, review gates, or architecture fitness functions.
+
 Invariant
 Enforcement converts architectural intent into repeatable control.
+
+Flow
 
 ```text
 EnforcementDescriptor → GateType → ValidationProcedure → Pass|Fail
 ```
+
+Productions
 
 ```bnf
 EnforcementGate ::= <Concept> "->" <EnforcementDescriptorSet> "->" <GateSet> "->" <GateResultSet>
@@ -3049,16 +3880,23 @@ GateType ::= "static_analysis" | "architecture_test" | "schema_validation" | "co
 
 Composes
 none
+
 Composed by
 [Architecture Fitness Function Generation](ALGORITHMS.md#algo-architecture-fitness-function-generation), [Master Architecture Governance Kernel](ALGORITHMS.md#algo-master-architecture-governance-kernel), [Architectural Relationship Algebra](ALGORITHMS.md#algo-architectural-relationship-algebra)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
 
+Before
+
 ```text
-'enforced_by: review' — a human promise that erodes under deadline.
+'enforced_by: review' — a reviewer's promise that erodes under deadline.
 ```
+
+After
 
 ```text
 enforced_by{Foo} -> gate-type{static-analysis | contract-test | fitness-function} -> pass/fail in CI
@@ -3073,12 +3911,17 @@ Details
 
 Intent
 Select concepts relevant to a target scope, compute dependency closure, detect violations, measure evidence, rank findings by severity, and emit a prioritized architecture assessment.
+
 Invariant
 Assessment is graph query plus evidence collection plus severity policy.
+
+Flow
 
 ```text
 Scope → RelevantConcepts → DependencyClosure → Detection → Measurement → Findings
 ```
+
+Productions
 
 ```bnf
 ArchitectureAssessment ::= <TargetScope> "->" <RelevantConceptSelection> "->" <DependencyClosure> "->" <ViolationDetection> "->" <MeasurementNormalization> "->" <FindingPrioritization> "->" <AssessmentReport>
@@ -3087,16 +3930,23 @@ FindingPrioritization ::= "mandatory_first" "," "high_blast_radius" "," "high_re
 
 Composes
 [Dependency Closure](ALGORITHMS.md#algo-dependency-closure), [Violation Detection](ALGORITHMS.md#algo-violation-detection), [Measurement Normalization](ALGORITHMS.md#algo-measurement-normalization)
+
 Composed by
 [Governance Evolution](ALGORITHMS.md#algo-governance-evolution)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 'The architecture is fine' — an unscoped, evidence-free claim.
 ```
+
+After
 
 ```text
 scope -> relevant concepts -> dependency-closure -> violation-detection -> measurement -> prioritized findings
@@ -3111,12 +3961,17 @@ Details
 
 Intent
 Evaluate SRP, separation of concerns, cohesion, coupling, encapsulation, information hiding, abstraction, modularity, composability, replaceability, and autonomy as a connected boundary cluster.
+
 Invariant
 Modular design is not one principle; it is a mutually reinforcing cluster around responsibility, dependency, and visibility.
+
+Flow
 
 ```text
 Module → Responsibility → Cohesion → Coupling → Visibility → BoundaryHealth
 ```
+
+Productions
 
 ```bnf
 ModularBoundaryCompliance ::= <ModuleSet> "->" <ResponsibilityAnalysis> "->" <CohesionMetric> "->" <CouplingMetric> "->" <VisibilityLeakCheck> "->" <BoundaryScore>
@@ -3125,14 +3980,20 @@ BoundaryScore ::= <ResponsibilityScore> "," <CohesionScore> "," <CouplingScore> 
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
+Before
+
 ```text
-Modularity checked as one vague vibe.
+Modularity judged as one vague impression.
 ```
+
+After
 
 ```text
 modules -> responsibility + cohesion + coupling + visibility-leak -> boundary score{per-dimension}
@@ -3147,12 +4008,17 @@ Details
 
 Intent
 For APIs, services, data, schemas, and protocols, validate explicit contracts, preconditions, postconditions, invariants, versioning, backward compatibility, forward compatibility, and interoperability.
+
 Invariant
 Compatibility is the contract cluster that allows independent evolution.
+
+Flow
 
 ```text
 Boundary → Contract → Version → CompatibilityMatrix → Gate
 ```
+
+Productions
 
 ```bnf
 ContractCompatibility ::= <BoundaryContract> "->" <SchemaOrInterfaceValidation> "->" <SemanticValidation> "->" <VersionPolicy> "->" <CompatibilityMatrix> "->" <CompatibilityVerdict>
@@ -3161,16 +4027,23 @@ CompatibilityMatrix ::= "producer_current_consumer_current" | "producer_new_cons
 
 Composes
 none
+
 Composed by
 [Loop-Owned Mode Selection](ALGORITHMS.md#algo-loop-owned-mode-selection), [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A schema changed and downstreams broke — compatibility was never checked.
 ```
+
+After
 
 ```text
 boundary-contract -> schema/semantic validation -> version-policy -> compatibility-matrix{new-producer/old-consumer} -> verdict
@@ -3185,12 +4058,17 @@ Details
 
 Intent
 Detect duplicated or conflicting models, schemas, terms, rules, and data definitions; select or create canonical authority; normalize variants; enforce single source of truth.
+
 Invariant
 Semantic consistency requires canonical authority and explicit translation where contexts differ.
+
+Flow
 
 ```text
 Concepts → Conflicts → CanonicalAuthority → Normalization → Enforcement
 ```
+
+Productions
 
 ```bnf
 CanonicalSemantics ::= <SemanticArtifactSet> "->" <ConflictDetection> "->" <CanonicalAuthoritySelection> "->" <NormalizationPolicy> "->" <TranslationBoundary> "->" <GovernanceGate>
@@ -3199,16 +4077,23 @@ SemanticArtifact ::= "schema" | "domain_model" | "field" | "term" | "rule" | "co
 
 Composes
 none
+
 Composed by
 [Composed Turn Contract](ALGORITHMS.md#algo-composed-turn-contract)
+
 Forces
-[semantic_consistency](SCHEMA.md#force-semantic-consistency), [ai_governance](SCHEMA.md#force-ai-governance)
+[semantic_consistency](SCHEMA.md#force-semantic-consistency), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Three models of 'Foo' drift apart; no single authority.
 ```
+
+After
 
 ```text
 artifacts{Foo-a, Foo-b} -> conflict-detection -> canonical authority -> normalize variants -> SSOT gate
@@ -3223,12 +4108,17 @@ Details
 
 Intent
 Identify bounded contexts, ubiquitous language, context relationships, domain model ownership, anti-corruption layers, and explicit boundary rules.
+
 Invariant
 Domain architecture preserves meaning through ownership and translation boundaries.
+
+Flow
 
 ```text
 Domain → Contexts → Language → Ownership → ContextMap → ACL
 ```
+
+Productions
 
 ```bnf
 DomainBoundaryGovernance ::= <DomainScope> "->" <BoundedContextSet> "->" <UbiquitousLanguageSet> "->" <OwnershipMap> "->" <ContextMap> "->" <AntiCorruptionBoundarySet>
@@ -3237,14 +4127,20 @@ ContextRelationship ::= "upstream" | "downstream" | "shared_kernel" | "customer_
 
 Composes
 none
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [security_governance](SCHEMA.md#force-security-governance), [ai_governance](SCHEMA.md#force-ai-governance), [domain_boundary](SCHEMA.md#force-domain-boundary)
+[modularity](SCHEMA.md#force-modularity), [security_governance](SCHEMA.md#force-security-governance), [model_governance](SCHEMA.md#force-model-governance), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 One shared model spans every context; a change for Foo breaks Bar.
 ```
+
+After
 
 ```text
 domain -> bounded-contexts -> ubiquitous-language -> ownership-map -> context-map -> anti-corruption boundaries
@@ -3259,12 +4155,17 @@ Details
 
 Intent
 Require components, services, APIs, plugins, and runtime structures to declare metadata, capabilities, contracts, dependencies, configuration, and health so they can be discovered and validated.
+
 Invariant
 Dynamic architecture requires self-description before runtime binding.
+
+Flow
 
 ```text
 Component → Manifest → CapabilityDeclaration → Discovery → ContractValidation → Binding
 ```
+
+Productions
 
 ```bnf
 SelfDescribingDiscovery ::= <RuntimeEntity> "->" <Manifest> "->" <CapabilityDeclaration> "->" <DiscoveryMechanism> "->" <ConformanceValidation> "->" <BindingDecision>
@@ -3273,14 +4174,20 @@ Manifest ::= "identity" "," "version" "," "capabilities" "," "dependencies" "," 
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 A runtime component's capabilities are unknowable without reading its source.
 ```
+
+After
 
 ```text
 entity -> manifest{identity, capabilities, contracts} -> discovery -> conformance-validation -> bind only if it matches
@@ -3295,12 +4202,17 @@ Details
 
 Intent
 Detect repeated core modification for variants, define extension points, create plugin contracts, register implementations, discover them dynamically, and isolate failures.
+
 Invariant
 Extensibility is controlled variation behind stable runtime contracts.
+
+Flow
 
 ```text
 VariantPressure → ExtensionPoint → PluginContract → Registry → Discovery → Isolation
 ```
+
+Productions
 
 ```bnf
 RuntimeExtensibility ::= <VariantPressure> "->" <ExtensionPointDesign> "->" <PluginContract> "->" <RegistrationPolicy> "->" <RuntimeDiscovery> "->" <FailureIsolation>
@@ -3309,16 +4221,23 @@ RegistrationPolicy ::= "manual_registration" | "manifest_based" | "service_regis
 
 Composes
 [Runtime Discovery](ALGORITHMS.md#algo-runtime-discovery)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Principle
 [Runtime Extensibility](PRINCIPLES.md#arch-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 Every new variant edits the core switch statement.
 ```
+
+After
 
 ```text
 variant-pressure -> extension-point -> plugin-contract -> registry -> runtime-discovery -> failure-isolation
@@ -3333,12 +4252,17 @@ Details
 
 Intent
 Select creational, structural, or behavioral patterns based on the problem force: creation variation, interface mismatch, access control, behavior variation, notification, workflow reuse, or coordination complexity.
+
 Invariant
 Design patterns are remedies for specific force shapes, not generic decorations.
+
+Flow
 
 ```text
 ProblemForce → PatternFamily → CandidatePattern → ApplicabilityCheck
 ```
+
+Productions
 
 ```bnf
 PatternSelection ::= <ProblemForce> "->" <PatternFamily> "->" <CandidatePatternSet> "->" <ApplicabilityVerdict>
@@ -3348,14 +4272,20 @@ CandidatePattern ::= "factory" | "factory_method" | "abstract_factory" | "builde
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 A pattern applied as decoration ('let's add a Facade') with no force to justify it.
 ```
+
+After
 
 ```text
 force{interface mismatch} -> family{structural} -> candidate{Adapter} -> applicability verdict
@@ -3370,12 +4300,17 @@ Details
 
 Intent
 Select monolith, modular monolith, layered, component-based, package-by-feature, clean, hexagonal, ports-and-adapters, or microservices architecture based on deployment autonomy, domain complexity, operational maturity, consistency needs, and coupling tolerance.
+
 Invariant
 Architecture style is a macro-constraint over dependency direction, ownership, deployment, and integration.
+
+Flow
 
 ```text
 SystemForces → StyleCandidates → TradeoffMatrix → SelectedStyle → FitnessFunctions
 ```
+
+Productions
 
 ```bnf
 ArchitectureStyleSelection ::= <SystemForces> "->" <ArchitectureStyleSet> "->" <TradeoffMatrix> "->" <SelectedStyle> "->" <StyleFitnessFunctionSet>
@@ -3384,14 +4319,20 @@ SystemForces ::= "domain_complexity" "," "team_topology" "," "deployment_autonom
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
 
+Before
+
 ```text
-'We'll do microservices' chosen before the system's forces are known.
+Microservices chosen before the system's forces are known.
 ```
+
+After
 
 ```text
 forces{domain-complexity, team-topology, deployment-autonomy} -> style-candidates -> trade-off matrix -> selected style + fitness functions
@@ -3406,12 +4347,17 @@ Details
 
 Intent
 For asynchronous systems, validate event contracts, message schemas, idempotent consumers, outbox publication, correlation metadata, ordering guarantees, retry behavior, and dead-letter handling.
+
 Invariant
 Event-driven architecture is safe only when messages are contracts and consumers are replay-safe.
+
+Flow
 
 ```text
 StateChange → EventContract → Outbox → Broker → IdempotentConsumer → Trace
 ```
+
+Productions
 
 ```bnf
 EventMessagingConsistency ::= <StateChange> "->" <EventClassification> "->" <MessageContract> "->" <PublicationReliability> "->" <ConsumerIdempotency> "->" <OrderingPolicy> "->" <ObservabilityTrace>
@@ -3421,14 +4367,20 @@ PublicationReliability ::= "transactional_outbox" | "append_only_log" | "broker_
 
 Composes
 [Observability Trace](ALGORITHMS.md#algo-observability-trace)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [observability_traceability](SCHEMA.md#force-observability-traceability), [event_messaging](SCHEMA.md#force-event-messaging), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```text
 Events published ad hoc; a consumer replays and double-applies.
 ```
+
+After
 
 ```text
 state-change -> event-contract -> transactional-outbox -> broker -> idempotent-consumer -> ordering + trace
@@ -3443,12 +4395,17 @@ Details
 
 Intent
 Identify state mutation boundaries, enforce unit-of-work scope, validate invariants, apply concurrency control, guarantee idempotency where retries exist, and isolate side effects.
+
 Invariant
 State correctness depends on explicit mutation boundaries and repeat-safe effects.
+
+Flow
 
 ```text
 Command → TransactionBoundary → Invariants → Concurrency → Commit|Rollback → Idempotency
 ```
+
+Productions
 
 ```bnf
 StateTransactionSafety ::= <Command> "->" <TransactionBoundary> "->" <InvariantCheck> "->" <ConcurrencyControl> "->" <CommitDecision> "->" <SideEffectPolicy>
@@ -3458,14 +4415,20 @@ SideEffectPolicy ::= "idempotent" | "outbox_published" | "compensatable" | "cont
 
 Composes
 [Transaction Boundary](ALGORITHMS.md#algo-transaction-boundary)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```text
 Two mutations with no boundary; a crash between them corrupts state.
 ```
+
+After
 
 ```text
 command -> transaction-boundary -> invariant-check -> concurrency-control -> commit/rollback -> idempotent side-effect
@@ -3480,12 +4443,17 @@ Details
 
 Intent
 Push nondeterminism to boundaries, prefer pure deterministic core logic, validate specifications with static analysis, type checks, property tests, contract tests, formal methods where useful, and reproducible test environments.
+
 Invariant
 Correctness is achieved by deterministic design plus evidence-based verification.
+
+Flow
 
 ```text
 Input → Canonicalize → DeterministicCore → Spec → Verification → Evidence
 ```
+
+Productions
 
 ```bnf
 CorrectnessVerification ::= <InputSet> "->" <Canonicalization> "->" <DeterministicCore> "->" <SpecificationSet> "->" <VerificationMethodSet> "->" <CorrectnessEvidence>
@@ -3494,14 +4462,20 @@ VerificationMethod ::= "type_check" | "static_analysis" | "schema_validation" | 
 
 Composes
 [Deterministic Core](ALGORITHMS.md#algo-deterministic-core)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Correctness asserted by 'it worked on my machine'.
 ```
+
+After
 
 ```text
 input -> canonicalize -> deterministic-core -> spec -> {type-check, property-test, contract-test} -> evidence
@@ -3516,12 +4490,17 @@ Details
 
 Intent
 Classify failure modes, apply fail-fast, fail-safe, fail-secure, retry, timeout, circuit breaker, fallback, bulkhead, backpressure, health check, failover, and rollback policies according to dependency criticality.
+
 Invariant
 Resilience is controlled degradation under known failure modes.
+
+Flow
 
 ```text
 FailureMode → Criticality → PolicySet → RuntimeGuard → Recovery
 ```
+
+Productions
 
 ```bnf
 ResiliencePolicy ::= <FailureModeSet> "->" <CriticalityClassification> "->" <ResiliencePatternSet> "->" <RuntimeGuardSet> "->" <RecoveryActionSet>
@@ -3530,14 +4509,20 @@ ResiliencePattern ::= "timeout" | "retry" | "circuit_breaker" | "fallback" | "bu
 
 Composes
 none
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```text
 A remote call with no failure policy takes the whole system down.
 ```
+
+After
 
 ```text
 failure-modes -> criticality -> {timeout, retry, circuit-breaker, bulkhead} -> runtime-guard -> recovery
@@ -3552,12 +4537,17 @@ Details
 
 Intent
 Attach correlation and causation identifiers, emit logs, metrics, traces, alerts, audit records, and runtime health signals, then reconstruct behavior as a causal execution graph.
+
 Invariant
 Operability requires reconstructable evidence across runtime boundaries.
+
+Flow
 
 ```text
 Operation → Correlation → Telemetry → Audit → TraceGraph → Diagnosis
 ```
+
+Productions
 
 ```bnf
 ObservabilityAuditability ::= <Operation> "->" <CorrelationId> "->" <CausationId> "->" <TelemetryEventSet> "->" <AuditRecordSet> "->" <TraceGraph>
@@ -3566,14 +4556,20 @@ TelemetryEvent ::= "structured_log" | "metric" | "trace_span" | "alert" | "audit
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [observability_traceability](SCHEMA.md#force-observability-traceability), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```text
 An incident with no correlation ids — behavior can't be reconstructed.
 ```
+
+After
 
 ```text
 operation -> correlation-id + causation-id -> {logs, metrics, traces, audit} -> trace-graph -> diagnosis
@@ -3588,12 +4584,17 @@ Details
 
 Intent
 Model distributed events as a dependency graph, attach causation metadata, validate happens-before relationships, and use sequence numbers, Lamport clocks, or vector clocks when physical timestamps are insufficient.
+
 Invariant
 Distributed ordering must follow causality, not wall-clock coincidence.
+
+Flow
 
 ```text
 EventSet → CausalMetadata → DependencyGraph → OrderingPolicy → ConsistencyVerdict
 ```
+
+Productions
 
 ```bnf
 CausalityOrdering ::= <EventSet> "->" <CausalMetadataSet> "->" <DependencyGraph> "->" <OrderingValidation> "->" <ConsistencyVerdict>
@@ -3603,14 +4604,20 @@ DependencyGraph ::= "DAG"
 
 Composes
 none
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [causality_ordering](SCHEMA.md#force-causality-ordering)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```text
 Distributed events ordered by wall-clock; skew corrupts the sequence.
 ```
+
+After
 
 ```text
 events -> causal-metadata{vector-clock} -> dependency-graph{DAG} -> happens-before validation -> consistency verdict
@@ -3625,12 +4632,17 @@ Details
 
 Intent
 Establish workload model, profile runtime behavior, benchmark repeatably, identify bottlenecks, analyze time and space complexity, select scaling strategy, optimize only measured bottlenecks, and enforce SLO gates.
+
 Invariant
 Performance engineering is evidence-driven bottleneck control, not speculative optimization.
+
+Flow
 
 ```text
 Workload → Profile → Benchmark → Bottleneck → Complexity → Scale|Optimize → SLO
 ```
+
+Productions
 
 ```bnf
 PerformanceScalability ::= <WorkloadModel> "->" <ProfilingEvidence> "->" <BenchmarkResultSet> "->" <BottleneckAnalysis> "->" <ComplexityAnalysis> "->" <ScalingOrOptimizationPlan> "->" <PerformanceGate>
@@ -3639,14 +4651,20 @@ ScalingOrOptimizationPlan ::= "vertical_scale" | "horizontal_scale" | "load_bala
 
 Composes
 none
+
 Forces
-[performance_scaling](SCHEMA.md#force-performance-scaling), [ai_governance](SCHEMA.md#force-ai-governance)
+[performance_scaling](SCHEMA.md#force-performance-scaling), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Optimize by guesswork; add capacity and hope.
 ```
+
+After
 
 ```text
 workload -> profile -> benchmark -> bottleneck -> complexity -> scale/optimize the measured bottleneck -> SLO gate
@@ -3661,12 +4679,17 @@ Details
 
 Intent
 Externalize configuration, abstract platform dependencies, enforce standards compliance, containerize or package runtimes, validate environment parity, and isolate infrastructure-specific behavior behind adapters.
+
 Invariant
 Portability requires platform assumptions to be explicit and replaceable.
+
+Flow
 
 ```text
 RuntimeAssumption → Abstraction → ExternalConfig → Packaging → EnvironmentParity
 ```
+
+Productions
 
 ```bnf
 PortabilityDeployment ::= <ApplicationCore> "->" <PlatformAssumptionScan> "->" <PlatformAbstraction> "->" <ConfigurationExternalization> "->" <DeploymentPackaging> "->" <EnvironmentParityValidation>
@@ -3675,14 +4698,20 @@ Environment ::= "local" | "test" | "staging" | "production"
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Platform assumptions baked in; the app only runs on one host.
 ```
+
+After
 
 ```text
 core -> platform-assumption scan -> abstraction -> externalized-config -> packaging -> environment-parity
@@ -3697,12 +4726,17 @@ Details
 
 Intent
 Threat-model the system, reduce attack surface, authenticate identity, authorize actions, validate input, encode output, encrypt data, manage secrets, enforce policy as code, and continuously audit compliance.
+
 Invariant
 Security is an enforced policy graph over identity, data, operations, and infrastructure.
+
+Flow
 
 ```text
 ThreatModel → ControlSet → Policy → Enforcement → Audit
 ```
+
+Productions
 
 ```bnf
 SecurityGovernance ::= <ThreatModel> "->" <SecurityControlSet> "->" <PolicySet> "->" <PolicyEnforcement> "->" <ContinuousCompliance> "->" <RiskReview>
@@ -3711,14 +4745,20 @@ SecurityControl ::= "authentication" | "authorization" | "least_privilege" | "ze
 
 Composes
 none
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [ai_governance](SCHEMA.md#force-ai-governance)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Security added as a late checklist, not a policy graph.
 ```
+
+After
 
 ```text
 threat-model -> controls{authn, authz, validation, encryption, secrets} -> policy-as-code -> enforcement -> continuous audit
@@ -3733,12 +4773,17 @@ Details
 
 Intent
 Assess architecture against quality attributes, document decisions, analyze impact, track gaps, define fitness functions, standardize patterns, and evolve through ADR-backed controlled change.
+
 Invariant
 Evolutionary architecture requires decision memory and continuous fitness validation.
+
+Flow
 
 ```text
 Assessment → GapAnalysis → DecisionRecord → FitnessFunction → ChangePlan → Review
 ```
+
+Productions
 
 ```bnf
 ArchitectureEvolutionGovernance ::= <Assessment> "->" <GapAnalysis> "->" <ImpactAnalysis> "->" <DecisionRecord> "->" <FitnessFunctionSet> "->" <EvolutionPlan> "->" <ReviewGate>
@@ -3747,16 +4792,23 @@ DecisionRecord ::= "ADR" "," "context" "," "decision" "," "consequences" "," "st
 
 Composes
 none
+
 Composed by
 [Architectural Relationship Algebra](ALGORITHMS.md#algo-architectural-relationship-algebra)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Architecture drifts; no decision memory, no fitness checks.
 ```
+
+After
 
 ```text
 assessment -> gap-analysis -> ADR -> fitness-functions -> change-plan -> review gate
@@ -3771,12 +4823,17 @@ Details
 
 Intent
 Separate control-plane policy from data-plane execution, centralize configuration, authentication, logging, or orchestration only where shared governance is beneficial, and preserve local autonomy where decentralization is required.
+
 Invariant
 Control centralization should govern policy without collapsing execution autonomy.
+
+Flow
 
 ```text
 Policy → ControlPlane → DataPlane → Telemetry → PolicyAdjustment
 ```
+
+Productions
 
 ```bnf
 ControlPlaneCoordination ::= <PolicySet> "->" <ControlPlane> "->" <DataPlaneSet> "->" <TelemetryFeedback> "->" <GovernanceAdjustment>
@@ -3785,14 +4842,20 @@ ControlConcern ::= "configuration" | "authentication" | "authorization" | "loggi
 
 Composes
 [Control Plane](ALGORITHMS.md#algo-control-plane)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [security_governance](SCHEMA.md#force-security-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Every service does its own config + auth; policy scatters and drifts.
 ```
+
+After
 
 ```text
 policy -> control-plane{config, authn, orchestration} -> data-planes execute -> telemetry -> governance adjustment
@@ -3807,12 +4870,17 @@ Details
 
 Intent
 Treat code as data only through schemas, manifests, DSL grammars, reflection contracts, compile-time checks, runtime guards, and generated artifact validation.
+
 Invariant
 Metaprogramming is safe when generated behavior is bounded by a validated model.
+
+Flow
 
 ```text
 Model → Schema → Transform → Generate|Interpret → Validate → Execute
 ```
+
+Productions
 
 ```bnf
 MetaprogrammingSafety ::= <ProgramModel> "->" <ModelSchema> "->" <TransformationEngine> "->" <GeneratedOrInterpretedArtifact> "->" <SafetyValidation> "->" <ExecutionBoundary>
@@ -3821,14 +4889,20 @@ TransformationEngine ::= "reflection" | "introspection" | "compile_time_evaluati
 
 Composes
 none
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling)
+
 Grounds
 none
+
+Before
 
 ```text
 Code-as-string eval'd with no schema or bound.
 ```
+
+After
 
 ```text
 model -> schema -> transform{reflection | DSL} -> generated artifact -> safety-validation -> bounded execution
@@ -3843,12 +4917,17 @@ Details
 
 Intent
 Process data through forward-only stages, preserve bounded memory, apply backpressure, checkpoint state where needed, and prefer stateless processing unless state is explicitly modeled.
+
 Invariant
 Streaming architecture is a contract over flow, ordering, pressure, and bounded memory.
+
+Flow
 
 ```text
 Source → Stage → Stage → Backpressure → Checkpoint → Sink
 ```
+
+Productions
 
 ```bnf
 StreamingDataflow ::= <Source> "->" <PipelineStageSet> "->" <ProcessingMode> "->" <BackpressurePolicy> "->" <CheckpointPolicy> "->" <Sink>
@@ -3857,20 +4936,26 @@ ProcessingMode ::= "single_pass" | "lazy_evaluation" | "sequential_access" | "fo
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [streaming_dataflow](SCHEMA.md#force-streaming-dataflow), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```text
 Load everything into memory, then map/filter — unbounded.
 ```
 
+After
+
 ```text
 source -> forward-only stages -> backpressure -> checkpoint -> sink (bounded memory)
 ```
 
-### AI Model Architecture Governance
+### Model Architecture Governance
 
 - Math type: [logic](REASONING.md#reason-math-type-logic)
 - Yields: boolean
@@ -3879,12 +4964,17 @@ Details
 
 Intent
 Register models, prompts, datasets, embeddings, retrieval sources, knowledge graphs, inference contracts, evaluation suites, explainability traces, safety gates, and monitoring policies.
+
 Invariant
-AI architecture requires governance over evidence, model behavior, inference, evaluation, and safety.
+Model-backed architecture requires governance over evidence, model behavior, inference, evaluation, and safety.
+
+Flow
 
 ```text
 ModelArtifact → Registry → Evaluation → Safety → InferenceTrace → Monitoring
 ```
+
+Productions
 
 ```bnf
 AIModelArchitectureGovernance ::= <AIArtifactSet> "->" <GovernanceRegistry> "->" <EvaluationSuite> "->" <InferenceContract> "->" <ExplainabilityTrace> "->" <SafetyPolicy> "->" <RuntimeMonitoring>
@@ -3893,14 +4983,20 @@ AIArtifact ::= "model" | "prompt" | "embedding_index" | "retrieval_source" | "kn
 
 Composes
 none
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [security_governance](SCHEMA.md#force-security-governance), [ai_governance](SCHEMA.md#force-ai-governance)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [security_governance](SCHEMA.md#force-security-governance), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 A model shipped with no registry, eval, trace, or safety gate.
 ```
+
+After
 
 ```text
 artifacts{model, prompt, index} -> governance-registry -> evaluation -> inference-contract -> explainability-trace -> safety + monitoring
@@ -3915,12 +5011,17 @@ Details
 
 Intent
 Given a target problem, query the graph for matching violated_by and detected_by signals, collect candidate concepts, compute required dependencies, remove conflicting concepts, rank by severity and reinforcement gain, then recommend an ordered implementation path.
+
 Invariant
 Recommendations are graph-derived paths from evidence to enforceable architecture change.
+
+Flow
 
 ```text
 ProblemEvidence → CandidateConcepts → DependencyClosure → ConflictPrune → Rank → Roadmap
 ```
+
+Productions
 
 ```bnf
 ArchitecturalRecommendation ::= <ProblemEvidenceSet> "->" <ConceptMatchSet> "->" <DependencyClosure> "->" <ConflictTensionResolution> "->" <SeverityRanking> "->" <ImplementationRoadmap>
@@ -3929,14 +5030,20 @@ SeverityRanking ::= "mandatory_before_recommended" "," "contextual_when_scope_ma
 
 Composes
 [Dependency Closure](ALGORITHMS.md#algo-dependency-closure)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Advice given from intuition, not from the graph or the evidence.
 ```
+
+After
 
 ```text
 problem-evidence -> concept-match -> dependency-closure -> conflict-prune -> severity rank -> ordered roadmap
@@ -3951,12 +5058,17 @@ Details
 
 Intent
 Convert mandatory and high-impact recommended records into executable fitness functions by binding detected_by signals to checks, measured_by fields to thresholds, and enforced_by fields to pipeline gates.
+
 Invariant
 The catalog becomes self-enforcing when records compile into fitness functions.
+
+Flow
 
 ```text
 RelationshipRecord → DetectionCheck → MetricThreshold → EnforcementGate → FitnessFunction
 ```
+
+Productions
 
 ```bnf
 FitnessFunctionGeneration ::= <ArchitecturalRelationshipRecord> "->" <DetectionCheck> "->" <MetricThreshold> "->" <EnforcementGate> "->" <FitnessFunction>
@@ -3965,14 +5077,20 @@ FitnessFunction ::= <Name> "," <Scope> "," <CheckProcedure> "," <Threshold> "," 
 
 Composes
 [Architectural Relationship Record](ALGORITHMS.md#algo-architectural-relationship-record), [Enforcement Gate](ALGORITHMS.md#algo-enforcement-gate), [Severity Policy](ALGORITHMS.md#algo-severity-policy)
+
 Forces
 [streaming_dataflow](SCHEMA.md#force-streaming-dataflow), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
 
+Before
+
 ```text
-Mandatory records sit as prose nobody executes.
+Mandatory records sit as prose no check executes.
 ```
+
+After
 
 ```text
 record -> detection-check + metric-threshold + enforcement-gate -> executable fitness function
@@ -3987,12 +5105,17 @@ Details
 
 Intent
 Group violations by shared refactor actions, order remediation by prerequisite concepts, apply low-risk structural fixes first, then enforce newly satisfied concepts through gates.
+
 Invariant
 Architecture repair is more efficient when refactors are grouped by shared conceptual cause.
+
+Flow
 
 ```text
 Violations → SharedCause → RefactorGroup → DependencyOrder → Apply → Enforce
 ```
+
+Productions
 
 ```bnf
 RefactoringRoadmap ::= <ViolationRecordSet> "->" <SharedCauseClustering> "->" <RefactorGroupSet> "->" <DependencyOrderedPlan> "->" <ExecutionGateSet>
@@ -4001,14 +5124,20 @@ SharedCause ::= "missing_boundary" | "missing_contract" | "semantic_drift" | "co
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Violations fixed one-by-one in random order; shared causes re-fixed repeatedly.
 ```
+
+After
 
 ```text
 violations -> cluster by shared-cause{missing-boundary} -> refactor-groups -> dependency-ordered plan -> enforce
@@ -4023,12 +5152,17 @@ Details
 
 Intent
 Group concepts into clusters by mutual requires, reinforces, enables, and shared scope; treat clusters as higher-order architectural concerns.
+
 Invariant
 Large principle catalogs become usable when concepts are clustered by relationship density.
+
+Flow
 
 ```text
 Graph → EdgeDensity → Cluster → ConcernFamily
 ```
+
+Productions
 
 ```bnf
 ConceptClusterExtraction ::= <ArchitectureGraph> "->" <RelationshipDensityAnalysis> "->" <ClusterSet> "->" <ConcernFamilySet>
@@ -4037,16 +5171,23 @@ ConcernFamily ::= <ClusterName> "," <CoreConceptSet> "," <SupportingConceptSet> 
 
 Composes
 none
+
 Composed by
 [Master Architecture Governance Kernel](ALGORITHMS.md#algo-master-architecture-governance-kernel)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A flat catalog of hundreds of concepts, unusable at scale.
 ```
+
+After
 
 ```text
 graph -> relationship-density analysis -> clusters -> concern-families{core + supporting + conflict concepts}
@@ -4061,12 +5202,17 @@ Details
 
 Intent
 For each proposed design decision, compute satisfied concepts, violated concepts, tensions introduced, conflicts triggered, enabled capabilities, and enforcement cost; require ADR when trade-offs are nontrivial.
+
 Invariant
 A design decision should be evaluated as a graph delta.
+
+Flow
 
 ```text
 Decision → GraphDelta → BenefitSet + RiskSet → ADRRequired?
 ```
+
+Productions
 
 ```bnf
 ArchitectureDecisionSupport ::= <ProposedDecision> "->" <SatisfiedConceptSet> "->" <ViolatedConceptSet> "->" <TensionSet> "->" <EnabledCapabilitySet> "->" <EnforcementCost> "->" <DecisionGovernance>
@@ -4075,16 +5221,23 @@ DecisionGovernance ::= "approve" | "approve_with_ADR" | "revise" | "reject"
 
 Composes
 none
+
 Composed by
 [Master Architecture Governance Kernel](ALGORITHMS.md#algo-master-architecture-governance-kernel)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A design decision judged by gut feel, not by its effect on the graph.
 ```
+
+After
 
 ```text
 decision -> graph-delta{satisfied, violated, tensions, enabled} -> enforcement-cost -> approve / approve-with-ADR / revise / reject
@@ -4099,12 +5252,17 @@ Details
 
 Intent
 Validate every concept record for required fields, known relation names, parseable scope, valid severity, nonempty detection and enforcement metadata, and resolvable references where possible.
+
 Invariant
 The architectural catalog itself must be governed as a schema-bearing artifact.
+
+Flow
 
 ```text
 Record → SchemaCheck → ReferenceCheck → CompletenessCheck → Valid|Invalid
 ```
+
+Productions
 
 ```bnf
 RelationshipSchemaValidation ::= <ArchitecturalRelationshipRecordSet> "->" <RequiredFieldValidation> "->" <ReferenceResolution> "->" <SeverityValidation> "->" <CompletenessScore> "->" <CatalogValidity>
@@ -4113,16 +5271,23 @@ RequiredFieldSet ::= "type" "," "scope" "," "requires" "," "reinforces" "," "ena
 
 Composes
 none
+
 Composed by
 [Master Architecture Governance Kernel](ALGORITHMS.md#algo-master-architecture-governance-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Catalog records with missing fields and dangling references ship unchecked.
 ```
+
+After
 
 ```text
 records -> required-field validation -> reference-resolution -> severity validation -> completeness score -> catalog validity
@@ -4137,12 +5302,17 @@ Details
 
 Intent
 Compile the relationship catalog into four executable artifacts: assessment rules, refactor playbooks, decision-support graphs, and governance gates.
+
 Invariant
 A comprehensive architecture catalog should compile into operational tooling.
+
+Flow
 
 ```text
 Catalog → Rules + Playbooks + DecisionGraph + Gates
 ```
+
+Productions
 
 ```bnf
 ArchitectureCatalogCompiler ::= <ArchitectureGraph> "->" <AssessmentRuleSet> "->" <RefactorPlaybookSet> "->" <DecisionSupportModel> "->" <GovernanceGateSet>
@@ -4152,14 +5322,20 @@ RefactorPlaybook ::= <ViolationPattern> "," <RefactoredBy> "," <EnforcedBy>
 
 Composes
 none
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
 
+Before
+
 ```text
-The catalog read only by humans — no operational output.
+The catalog read only by the developer — no operational output.
 ```
+
+After
 
 ```text
 graph -> {assessment-rules, refactor-playbooks, decision-support-model, governance-gates}
@@ -4174,12 +5350,17 @@ Details
 
 Intent
 Parse the catalog, validate records, build the graph, classify target scope, select relevant concept clusters, compute dependency closure, detect violations, measure evidence, resolve conflicts, generate refactor plans, enforce gates, and record decisions.
+
 Invariant
-The entire file can be executed as a governance kernel for architecture assessment, remediation, and evolution.
+The catalog can be executed as a governance kernel for architecture assessment, remediation, and evolution.
+
+Flow
 
 ```text
 Catalog → Graph → Scope → Concepts → Detection → Metrics → Refactor → Enforcement → ADR
 ```
+
+Productions
 
 ```bnf
 MasterArchitectureGovernanceKernel ::= <RelationshipSchemaValidation> "->" <ArchitectureGraph> "->" <TargetScopeClassification> "->" <ConceptClusterExtraction> "->" <DependencyClosure> "->" <ViolationDetection> "->" <MeasurementNormalization> "->" <ConflictTensionResolution> "->" <RefactorSelection> "->" <EnforcementGate> "->" <ArchitectureDecisionSupport> "->" <GovernanceReport>
@@ -4188,14 +5369,20 @@ GovernanceReport ::= <SatisfiedConceptSet> "," <ViolationRecordSet> "," <MetricE
 
 Composes
 [Relationship Schema Validation](ALGORITHMS.md#algo-relationship-schema-validation), [Concept Cluster Extraction](ALGORITHMS.md#algo-concept-cluster-extraction), [Dependency Closure](ALGORITHMS.md#algo-dependency-closure), [Violation Detection](ALGORITHMS.md#algo-violation-detection), [Measurement Normalization](ALGORITHMS.md#algo-measurement-normalization), [Refactor Selection](ALGORITHMS.md#algo-refactor-selection), [Enforcement Gate](ALGORITHMS.md#algo-enforcement-gate), [Architecture Decision Support](ALGORITHMS.md#algo-architecture-decision-support)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Assessment, remediation, and evolution done by disconnected manual steps.
 ```
+
+After
 
 ```text
 validate -> graph -> scope -> clusters -> closure -> detect -> measure -> resolve -> refactor -> enforce -> ADR -> governance report
@@ -4209,12 +5396,17 @@ Details
 
 Intent
 <Parse concept records> -> <Build relationship graph> -> <Classify design force> -> <Select applicable concepts> -> <Resolve prerequisites> -> <Detect violations> -> <Measure evidence> -> <Choose refactors> -> <Enforce gates> -> <Govern evolution>
+
 Invariant
 Every architectural principle, pattern, mechanism, metric, and quality attribute can be treated as a relationship contract whose operational lifecycle is detection, measurement, remediation, enforcement, and evolution.
+
+Flow
 
 ```text
 Record → Graph → Force → Concept → Evidence → Refactor → Gate → Governance
 ```
+
+Productions
 
 ```bnf
 ArchitecturalRelationshipAlgebra ::= <ArchitecturalRelationshipRecordSet> "->" <ArchitectureGraph> "->" <ForceClassification> "->" <ApplicableConceptSet> "->" <DependencyClosure> "->" <ViolationDetection> "->" <MeasurementNormalization> "->" <RefactorSelection> "->" <EnforcementGate> "->" <ArchitectureEvolutionGovernance>
@@ -4225,14 +5417,16 @@ CompletionCondition ::= "all_mandatory_concepts_satisfied" "," "contextual_conce
 
 Composes
 [Dependency Closure](ALGORITHMS.md#algo-dependency-closure), [Violation Detection](ALGORITHMS.md#algo-violation-detection), [Measurement Normalization](ALGORITHMS.md#algo-measurement-normalization), [Refactor Selection](ALGORITHMS.md#algo-refactor-selection), [Enforcement Gate](ALGORITHMS.md#algo-enforcement-gate), [Architecture Evolution Governance](ALGORITHMS.md#algo-architecture-evolution-governance)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
 
 ## Architectural Clusters
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -4273,8 +5467,11 @@ Details
 
 Intent
 The architectural rules that preserve structural integrity — a single authoritative source, no shortcuts, no fallbacks, no duplication, no orphaned artifacts.
+
 Invariant
 Structure stays sound only when every element has one authoritative home and no debt-incurring escape hatch exists.
+
+Flow
 
 ```text
 SingleSource → NoShortcut → NoFallback → NoOrphan
@@ -4282,10 +5479,13 @@ SingleSource → NoShortcut → NoFallback → NoOrphan
 
 Composes
 none
+
 Composed by
 [Constraints Over Shortcuts](ALGORITHMS.md#algo-no-shortcuts), [Forward Compatibility Over Backward Compatibility](ALGORITHMS.md#algo-no-backward-compat), [Fail-Fast Over Fallback](ALGORITHMS.md#algo-no-fallback), [Explicit Removal Over Deprecation](ALGORITHMS.md#algo-no-deprecation), [Greenfield Over Legacy](ALGORITHMS.md#algo-no-legacy), [Single-Path Determinism Over Dual-Path](ALGORITHMS.md#algo-no-dual-path), [Compression Over Repetition](ALGORITHMS.md#algo-no-uncompressed), [Semantic Addressing Over Location Addressing](ALGORITHMS.md#algo-no-location), [Homoiconicity Over Separation](ALGORITHMS.md#algo-no-separation), [Bounded Complexity Over Unlimited](ALGORITHMS.md#algo-no-unlimited), [Rule As Code Over Convention](ALGORITHMS.md#algo-no-convention-enforcement), [Injected Dependency Over Hidden](ALGORITHMS.md#algo-no-hidden-dependency), [Convention Discovery Over Hardcoded Wiring](ALGORITHMS.md#algo-no-hardcoded-wiring), [Finite State Machine](ALGORITHMS.md#algo-finite-state-machine)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4298,8 +5498,11 @@ Details
 
 Intent
 The rules ensuring behavioral correctness and validity — no silent failures, no hidden invalidity, feedback acted on, results observed.
+
 Invariant
 Correctness holds only when every failure is surfaced and every invalid state is unrepresentable.
+
+Flow
 
 ```text
 SurfaceFailure → RejectInvalid → ActOnFeedback
@@ -4307,10 +5510,13 @@ SurfaceFailure → RejectInvalid → ActOnFeedback
 
 Composes
 none
+
 Composed by
 [Enforced Feedback Over Ignored](ALGORITHMS.md#algo-no-ignored-feedback), [Errors As Language Over Silent Errors](ALGORITHMS.md#algo-no-silent), [Explicit Invalidity Over Hidden](ALGORITHMS.md#algo-no-hidden-invalidity), [Computed Health Over Metric Health](ALGORITHMS.md#algo-no-metrics), [Boundary Validation Over Unvalidated Input](ALGORITHMS.md#algo-no-unvalidated-input), [Design By Contract Over Implicit Contract](ALGORITHMS.md#algo-no-implicit-contract), [Schema-Validated Boundary Over Untyped](ALGORITHMS.md#algo-no-untyped-boundary), [Injected Nondeterminism Over Hidden](ALGORITHMS.md#algo-no-hidden-nondeterminism), [Petri Nets](ALGORITHMS.md#algo-petri-nets)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4323,8 +5529,11 @@ Details
 
 Intent
 The rules governing how a system changes over time — no backward-compat cruft, no deprecation debt, no legacy retention, no 'for now'.
+
 Invariant
 The system evolves cleanly only by deleting the superseded rather than accreting compatibility layers.
+
+Flow
 
 ```text
 Supersede → Delete → NoLegacy
@@ -4332,10 +5541,13 @@ Supersede → Delete → NoLegacy
 
 Composes
 none
+
 Composed by
 [Forward Compatibility Over Backward Compatibility](ALGORITHMS.md#algo-no-backward-compat), [Explicit Removal Over Deprecation](ALGORITHMS.md#algo-no-deprecation), [Greenfield Over Legacy](ALGORITHMS.md#algo-no-legacy), [Now Over For-Now](ALGORITHMS.md#algo-no-for-now), [Compression Over Repetition](ALGORITHMS.md#algo-no-uncompressed), [Approved Evolution Over Unapproved](ALGORITHMS.md#algo-no-unapproved), [Versioned Evolution Over Breaking Change](ALGORITHMS.md#algo-no-breaking-change), [Pattern By Fit Over Speculative Pattern](ALGORITHMS.md#algo-no-speculative-pattern)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4348,8 +5560,11 @@ Details
 
 Intent
 The rules governing resource lifecycle and ownership — bounded lifetime, single ownership, no leaks, no implicit retention.
+
 Invariant
 Every resource has one owner and a bounded lifetime; nothing is retained implicitly.
+
+Flow
 
 ```text
 Acquire → Own → Bound → Release
@@ -4357,10 +5572,13 @@ Acquire → Own → Bound → Release
 
 Composes
 none
+
 Composed by
 [Fail-Fast Over Fallback](ALGORITHMS.md#algo-no-fallback), [Mandatory Over Optional](ALGORITHMS.md#algo-no-optional), [Now Over For-Now](ALGORITHMS.md#algo-no-for-now), [Single Owner Over Shared Ownership](ALGORITHMS.md#algo-no-shared-ownership), [Bounded Lifetime Over Unbounded](ALGORITHMS.md#algo-no-unbounded), [Enforced Symmetry Over Asymmetric Lifecycle](ALGORITHMS.md#algo-no-asymmetric), [Explicit Retention Over Implicit](ALGORITHMS.md#algo-no-implicit-retention), [Structural Release Over Discipline](ALGORITHMS.md#algo-no-discipline-release), [Config Externalization Over Env Fallback](ALGORITHMS.md#algo-no-env-fallback), [Atomic Boundary Over Partial Commit](ALGORITHMS.md#algo-no-partial-commit)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4373,8 +5591,11 @@ Details
 
 Intent
 The rules governing execution flow — a single observable path, no deferring, no dual-path branching, nothing unobserved.
+
 Invariant
 Execution follows one observable path; nothing runs unobserved or deferred indefinitely.
+
+Flow
 
 ```text
 SinglePath → Observe → NoDefer
@@ -4382,10 +5603,13 @@ SinglePath → Observe → NoDefer
 
 Composes
 none
+
 Composed by
 [Single-Path Determinism Over Dual-Path](ALGORITHMS.md#algo-no-dual-path), [Immediacy Over Deferring](ALGORITHMS.md#algo-no-deferring), [Observed Execution Over Unobserved](ALGORITHMS.md#algo-no-unobserved), [Single Owner Over Shared Ownership](ALGORITHMS.md#algo-no-shared-ownership), [Event Emission Over Parent Callbacks](ALGORITHMS.md#algo-no-callbacks), [Monotonic Growth Over Retraction](ALGORITHMS.md#algo-no-retraction), [Ordinal Time Over Timestamps](ALGORITHMS.md#algo-no-timestamps), [Saga Compensation Over Distributed 2PC](ALGORITHMS.md#algo-no-distributed-2pc), [Async Events Over Synchronous Cross-Boundary](ALGORITHMS.md#algo-no-sync-cross-boundary), [Observable Signals Over Opaque Runtime](ALGORITHMS.md#algo-no-opaque-runtime)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4398,8 +5622,11 @@ Details
 
 Intent
 The rules governing computation determinism and purity — no mutable shared state, no hidden nondeterminism, reproducible results.
+
 Invariant
 A computation is reproducible only when it has no hidden mutable or nondeterministic input.
+
+Flow
 
 ```text
 Immutable → Deterministic → Reproducible
@@ -4407,10 +5634,13 @@ Immutable → Deterministic → Reproducible
 
 Composes
 none
+
 Composed by
 [Immutable Data Over Mutable State](ALGORITHMS.md#algo-no-mutable), [Errors As Language Over Silent Errors](ALGORITHMS.md#algo-no-silent), [Explicit Invalidity Over Hidden](ALGORITHMS.md#algo-no-hidden-invalidity), [Injected Nondeterminism Over Hidden](ALGORITHMS.md#algo-no-hidden-nondeterminism)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4423,8 +5653,11 @@ Details
 
 Intent
 The rules governing security posture — no hardcoded secrets, validated input, least privilege, no insecure fallbacks.
+
 Invariant
 The system is secure only when every input is validated and every privilege is least and explicit.
+
+Flow
 
 ```text
 ValidateInput → LeastPrivilege → NoSecretLeak
@@ -4432,10 +5665,13 @@ ValidateInput → LeastPrivilege → NoSecretLeak
 
 Composes
 none
+
 Composed by
 [Secret Store Over Hardcoded Secrets](ALGORITHMS.md#algo-no-hardcoded-secrets), [Boundary Validation Over Unvalidated Input](ALGORITHMS.md#algo-no-unvalidated-input), [Least Privilege Over Broad Privilege](ALGORITHMS.md#algo-no-broad-privilege), [Config Externalization Over Env Fallback](ALGORITHMS.md#algo-no-env-fallback)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4448,8 +5684,11 @@ Details
 
 Intent
 The rules governing performance discipline — measured optimization, planned capacity, no guesswork.
+
 Invariant
 Performance is improved only by measuring first; no optimization is applied unmeasured.
+
+Flow
 
 ```text
 Measure → Optimize → Verify
@@ -4457,10 +5696,13 @@ Measure → Optimize → Verify
 
 Composes
 none
+
 Composed by
 [Profile-First Over Unmeasured Optimization](ALGORITHMS.md#algo-no-unmeasured-optimization), [Queuing Theory](ALGORITHMS.md#algo-queuing-theory)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4473,8 +5715,11 @@ Details
 
 Intent
 The rules governing interfaces and contracts — explicit typed boundaries, versioned change, no implicit or breaking contracts.
+
 Invariant
 A boundary is safe only when its contract is explicit, typed, and versioned.
+
+Flow
 
 ```text
 ExplicitContract → TypedBoundary → VersionChange
@@ -4482,10 +5727,13 @@ ExplicitContract → TypedBoundary → VersionChange
 
 Composes
 none
+
 Composed by
 [Design By Contract Over Implicit Contract](ALGORITHMS.md#algo-no-implicit-contract), [Versioned Evolution Over Breaking Change](ALGORITHMS.md#algo-no-breaking-change), [Schema-Validated Boundary Over Untyped](ALGORITHMS.md#algo-no-untyped-boundary)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4498,8 +5746,11 @@ Details
 
 Intent
 The rules governing causal ordering and time — logical ordering, retractable state, no wall-clock dependence.
+
 Invariant
 Order is well-defined only through logical causality, never wall-clock assumptions.
+
+Flow
 
 ```text
 LogicalOrder → Retract → NoWallClock
@@ -4507,10 +5758,13 @@ LogicalOrder → Retract → NoWallClock
 
 Composes
 none
+
 Composed by
 [Monotonic Growth Over Retraction](ALGORITHMS.md#algo-no-retraction), [Ordinal Time Over Timestamps](ALGORITHMS.md#algo-no-timestamps)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4523,8 +5777,11 @@ Details
 
 Intent
 The rules favoring declarative over imperative — declared configuration, separated concerns, no imperative wiring.
+
 Invariant
 Behavior is declared as data, not encoded imperatively.
+
+Flow
 
 ```text
 Declare → Separate → NoImperativeConfig
@@ -4532,10 +5789,13 @@ Declare → Separate → NoImperativeConfig
 
 Composes
 none
+
 Composed by
 [Homoiconicity Over Separation](ALGORITHMS.md#algo-no-separation), [Declarative Config Over Imperative](ALGORITHMS.md#algo-no-imperative-config)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4548,8 +5808,11 @@ Details
 
 Intent
 The rules governing extension — declarative discovered wiring over hardcoded, no imperative hardcoded registration.
+
 Invariant
 The system extends without modification only when wiring is declarative and discovered, not hardcoded.
+
+Flow
 
 ```text
 DeclareWiring → Discover → Extend
@@ -4557,10 +5820,13 @@ DeclareWiring → Discover → Extend
 
 Composes
 none
+
 Composed by
 [Convention Discovery Over Hardcoded Wiring](ALGORITHMS.md#algo-no-hardcoded-wiring), [Declarative Config Over Imperative](ALGORITHMS.md#algo-no-imperative-config)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4573,8 +5839,11 @@ Details
 
 Intent
 The rules ensuring a system is observable — emitted metrics and signals, no unobserved execution, no opaque runtime.
+
 Invariant
 A system is operable only when its behavior is observable through emitted signals.
+
+Flow
 
 ```text
 Emit → Trace → NoOpaque
@@ -4582,10 +5851,13 @@ Emit → Trace → NoOpaque
 
 Composes
 none
+
 Composed by
 [Observed Execution Over Unobserved](ALGORITHMS.md#algo-no-unobserved), [Computed Health Over Metric Health](ALGORITHMS.md#algo-no-metrics), [Observable Signals Over Opaque Runtime](ALGORITHMS.md#algo-no-opaque-runtime)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4598,8 +5870,11 @@ Details
 
 Intent
 The rules ensuring discipline is enforced programmatically — automated gates over convention, no discipline-only reliance.
+
 Invariant
-A rule holds only when a gate enforces it; convention alone is drift.
+A rule holds only when a gate enforces it; a rule kept by convention alone drifts.
+
+Flow
 
 ```text
 Gate → Automate → NoConventionOnly
@@ -4607,10 +5882,13 @@ Gate → Automate → NoConventionOnly
 
 Composes
 none
+
 Composed by
 [Structural Release Over Discipline](ALGORITHMS.md#algo-no-discipline-release), [Rule As Code Over Convention](ALGORITHMS.md#algo-no-convention-enforcement)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4623,8 +5901,11 @@ Details
 
 Intent
 The rules governing atomicity — a transactional boundary that fully commits or fully rolls back, no partial commit, no deferring within.
+
 Invariant
 A boundary either fully commits or fully rolls back; no partial state escapes.
+
+Flow
 
 ```text
 Begin → AllOrNothing → Commit
@@ -4632,10 +5913,13 @@ Begin → AllOrNothing → Commit
 
 Composes
 none
+
 Composed by
 [Immediacy Over Deferring](ALGORITHMS.md#algo-no-deferring), [Atomic Boundary Over Partial Commit](ALGORITHMS.md#algo-no-partial-commit)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4648,8 +5932,11 @@ Details
 
 Intent
 The rules governing human ergonomics — bounded cognitive complexity, acted-on feedback, explicit approval, no unlimited options.
+
 Invariant
 A system is usable only when its cognitive load is bounded and its decisions are approved and reversible.
+
+Flow
 
 ```text
 BoundComplexity → Approve → ActOnFeedback
@@ -4657,10 +5944,13 @@ BoundComplexity → Approve → ActOnFeedback
 
 Composes
 none
+
 Composed by
 [Mandatory Over Optional](ALGORITHMS.md#algo-no-optional), [Approved Evolution Over Unapproved](ALGORITHMS.md#algo-no-unapproved), [Enforced Feedback Over Ignored](ALGORITHMS.md#algo-no-ignored-feedback), [Bounded Complexity Over Unlimited](ALGORITHMS.md#algo-no-unlimited)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4673,8 +5963,11 @@ Details
 
 Intent
 The rules governing domain boundaries — bounded contexts, ubiquitous language, no leaky context.
+
 Invariant
 A domain model stays coherent only when its context boundaries do not leak.
+
+Flow
 
 ```text
 BoundContext → NoLeak → UbiquitousLanguage
@@ -4682,10 +5975,13 @@ BoundContext → NoLeak → UbiquitousLanguage
 
 Composes
 none
+
 Composed by
 [Anti-Corruption Layer Over Cross-Context Leak](ALGORITHMS.md#algo-no-leaky-context)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4698,8 +5994,11 @@ Details
 
 Intent
 The rules governing design-pattern use — patterns applied only to demonstrated recurrence, no speculative pattern application.
+
 Invariant
 A pattern is warranted only by demonstrated recurrence, never speculation.
+
+Flow
 
 ```text
 ObserveRecurrence → ApplyPattern → NoSpeculation
@@ -4707,10 +6006,13 @@ ObserveRecurrence → ApplyPattern → NoSpeculation
 
 Composes
 none
+
 Composed by
 [Pattern By Fit Over Speculative Pattern](ALGORITHMS.md#algo-no-speculative-pattern)
+
 Forces
 none
+
 Grounds
 none
 
@@ -4720,8 +6022,11 @@ Details
 
 Intent
 The State design pattern — encapsulate state-dependent behavior in distinct state objects so transitions replace conditional branching.
+
 Invariant
 State-dependent behavior is expressed by delegating to a current-state object, not by scattered conditionals.
+
+Flow
 
 ```text
 DefineStates → DelegateBehavior → Transition
@@ -4729,16 +6034,23 @@ DefineStates → DelegateBehavior → Transition
 
 Composes
 none
+
 Composed by
 [Finite State Machine](ALGORITHMS.md#algo-finite-state-machine)
+
 Forces
 none
+
 Grounds
 none
+
+Before
 
 ```text
 State-dependent behavior scattered as if/else conditionals on a status flag.
 ```
+
+After
 
 ```text
 define state objects -> delegate behavior to the current-state object -> transition replaces the conditional branching
@@ -4750,8 +6062,11 @@ Details
 
 Intent
 The principle of separating a system into distinct concerns so each is addressed and changed independently.
+
 Invariant
 Each concern is localized to one place and changes independently of the others.
+
+Flow
 
 ```text
 IdentifyConcerns → Separate → IsolateChange
@@ -4759,16 +6074,23 @@ IdentifyConcerns → Separate → IsolateChange
 
 Composes
 none
+
 Composed by
 [Statecharts](ALGORITHMS.md#algo-statecharts)
+
 Forces
 none
+
 Grounds
 none
+
+Before
 
 ```text
 One module mixes parsing, persistence, and rendering — a change in one ripples through all.
 ```
+
+After
 
 ```text
 identify concerns -> separate each into one place -> each concern changes independently
@@ -4780,8 +6102,11 @@ Details
 
 Intent
 The rules ensuring correct concurrent behavior — no data races, well-defined interleavings, verified with models such as Petri nets.
+
 Invariant
 Concurrent correctness holds only when every interleaving preserves the invariants.
+
+Flow
 
 ```text
 ModelInterleavings → PreventRaces → Verify
@@ -4789,16 +6114,23 @@ ModelInterleavings → PreventRaces → Verify
 
 Composes
 none
+
 Composed by
 [Petri Nets](ALGORITHMS.md#algo-petri-nets)
+
 Forces
 none
+
 Grounds
 none
+
+Before
 
 ```text
 Concurrent access with a data race; some interleaving violates the invariant.
 ```
+
+After
 
 ```text
 model interleavings -> prevent races -> verify every interleaving preserves the invariants
@@ -4810,8 +6142,11 @@ Details
 
 Intent
 The activity of forecasting resource demand and provisioning capacity to meet it, informed by queuing theory.
+
 Invariant
 Capacity meets demand only when provisioning is derived from measured or modeled load, not guessed.
+
+Flow
 
 ```text
 ModelLoad → Forecast → Provision
@@ -4819,16 +6154,23 @@ ModelLoad → Forecast → Provision
 
 Composes
 none
+
 Composed by
 [Queuing Theory](ALGORITHMS.md#algo-queuing-theory)
+
 Forces
 none
+
 Grounds
 none
 
+Before
+
 ```text
-Capacity guessed, then saturates under real load.
+Capacity guessed, then saturates under production load.
 ```
+
+After
 
 ```text
 model load -> forecast demand -> provision from measured/modeled load, not a guess
@@ -4836,7 +6178,7 @@ model load -> forecast demand -> provision from measured/modeled load, not a gue
 
 ## Architectural Rules
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -4901,13 +6243,18 @@ n_no_speculative_pattern["Pattern By Fit Over Speculative Pattern"]
 Details
 
 Intent
-Replace a debt-incurring shortcut with an encoded constraint that makes the invalid state unrepresentable and turns discipline into leverage.
+Replace a debt-incurring shortcut with an encoded constraint that makes the invalid state unrepresentable, so the rule holds without relying on discipline.
+
 Invariant
 A value that could be constructed invalidly is instead constructed only through a validating boundary.
+
+Flow
 
 ```text
 ShortcutTaken → IdentifyInvariant → EncodeConstraint → RouteThroughBoundary → LeverageGained
 ```
+
+Productions
 
 ```bnf
 NoShortcuts ::= <ShortcutTaken> "->" <IdentifyInvariant> "->" <EncodeConstraint> "->" <RouteThroughBoundary> "->" <LeverageGained>
@@ -4915,10 +6262,14 @@ NoShortcuts ::= <ShortcutTaken> "->" <IdentifyInvariant> "->" <EncodeConstraint>
 
 Composes
 [Structural Core](ALGORITHMS.md#algo-structural-core), [Coupling Control](ALGORITHMS.md#algo-coupling-control)
+
 Forces
 shortcuts (debt)
+
 Grounds
 none
+
+Before
 
 ```typescript
 type FooId = string;
@@ -4927,6 +6278,8 @@ function loadFoo(raw: string) {
   return fooStore.get(raw as FooId);
 }
 ```
+
+After
 
 ```typescript
 type FooId = string & { readonly __brand: "FooId" };
@@ -4951,12 +6304,17 @@ Details
 
 Intent
 Replace accreted legacy input shapes with one forward-compatible envelope that carries extensions, so evolution compounds instead of branching.
+
 Invariant
 One canonical shape with an open extension slot subsumes every prior variant; no shape-discriminating branch remains.
+
+Flow
 
 ```text
 ManyVariants → DefineEnvelope → MapToCanonical → OpenExtensionSlot → RemoveVariantBranches
 ```
+
+Productions
 
 ```bnf
 NoBackwardCompat ::= <ManyVariants> "->" <DefineEnvelope> "->" <MapToCanonical> "->" <OpenExtensionSlot> "->" <RemoveVariantBranches>
@@ -4964,10 +6322,14 @@ NoBackwardCompat ::= <ManyVariants> "->" <DefineEnvelope> "->" <MapToCanonical> 
 
 Composes
 [Evolution Principles](ALGORITHMS.md#algo-evolution-principles), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 backward_compatibility (debt)
+
 Grounds
 none
+
+Before
 
 ```typescript
 type FooInput = string | { name: string } | { label: string; flags?: string[] };
@@ -4978,6 +6340,8 @@ function readFoo(input: FooInput) {
   return { label: input.label, flags: input.flags ?? [] };
 }
 ```
+
+After
 
 ```typescript
 type FooEnvelope = {
@@ -5000,12 +6364,17 @@ Details
 
 Intent
 Replace a silent fallback default with a required input that halts loudly when absent, so missing configuration surfaces at the boundary.
+
 Invariant
 Every required input is present and validated before use; absence throws rather than defaulting.
+
+Flow
 
 ```text
 OptionalInput → MarkRequired → ValidateAtBoundary → HaltOnAbsence → ClarityGained
 ```
+
+Productions
 
 ```bnf
 NoFallback ::= <OptionalInput> "->" <MarkRequired> "->" <ValidateAtBoundary> "->" <HaltOnAbsence> "->" <ClarityGained>
@@ -5013,10 +6382,14 @@ NoFallback ::= <OptionalInput> "->" <MarkRequired> "->" <ValidateAtBoundary> "->
 
 Composes
 [Resource Core](ALGORITHMS.md#algo-resource-core), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 fallback (debt)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function makeFoo(config: { mode?: "foo" | "bar" }) {
@@ -5024,6 +6397,8 @@ function makeFoo(config: { mode?: "foo" | "bar" }) {
   return mode === "foo" ? new Foo() : new Bar();
 }
 ```
+
+After
 
 ```typescript
 type FooConfig = { mode: "foo" | "bar" };
@@ -5043,12 +6418,17 @@ Details
 
 Intent
 Replace a deprecated alias kept for compatibility with outright removal, so the single current name is the only path.
+
 Invariant
 No symbol exists solely to forward to another; every callsite targets the canonical name.
+
+Flow
 
 ```text
 DeprecatedAlias → MigrateCallsites → DeleteAlias → SinglePathRemains
 ```
+
+Productions
 
 ```bnf
 NoDeprecation ::= <DeprecatedAlias> "->" <MigrateCallsites> "->" <DeleteAlias> "->" <SinglePathRemains>
@@ -5056,10 +6436,14 @@ NoDeprecation ::= <DeprecatedAlias> "->" <MigrateCallsites> "->" <DeleteAlias> "
 
 Composes
 [Evolution Principles](ALGORITHMS.md#algo-evolution-principles), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 deprecation (debt)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooService {
@@ -5071,6 +6455,8 @@ class FooService {
   }
 }
 ```
+
+After
 
 ```typescript
 class FooService {
@@ -5089,12 +6475,17 @@ Details
 
 Intent
 Replace a legacy-mode branch with one current algorithm, deleting the old path rather than gating it behind a flag.
+
 Invariant
 A single implementation serves the concern; no legacy-mode conditional selects behavior.
+
+Flow
 
 ```text
 LegacyBranch → ExtractCurrentPath → DeleteLegacyPath → RemoveFlag
 ```
+
+Productions
 
 ```bnf
 NoLegacy ::= <LegacyBranch> "->" <ExtractCurrentPath> "->" <DeleteLegacyPath> "->" <RemoveFlag>
@@ -5102,10 +6493,14 @@ NoLegacy ::= <LegacyBranch> "->" <ExtractCurrentPath> "->" <DeleteLegacyPath> "-
 
 Composes
 [Evolution Principles](ALGORITHMS.md#algo-evolution-principles), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 legacy (debt)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function calculateFoo(input: FooInput, legacyMode: boolean) {
@@ -5113,6 +6508,8 @@ function calculateFoo(input: FooInput, legacyMode: boolean) {
   return newFooAlgorithm(input);
 }
 ```
+
+After
 
 ```typescript
 function calculateFoo(input: FooInput) {
@@ -5129,12 +6526,17 @@ Details
 
 Intent
 Collapse a flag-selected dual path into one deterministic path, removing the branch and the flag that caused ambiguity.
+
 Invariant
 Exactly one code path handles the operation; no runtime flag chooses between equivalent implementations.
+
+Flow
 
 ```text
 DualPath → ChooseCanonical → MigrateConsumers → DeleteAlternate → DeterminismGained
 ```
+
+Productions
 
 ```bnf
 NoDualPath ::= <DualPath> "->" <ChooseCanonical> "->" <MigrateConsumers> "->" <DeleteAlternate> "->" <DeterminismGained>
@@ -5142,16 +6544,22 @@ NoDualPath ::= <DualPath> "->" <ChooseCanonical> "->" <MigrateConsumers> "->" <D
 
 Composes
 [Structural Core](ALGORITHMS.md#algo-structural-core), [Execution Core](ALGORITHMS.md#algo-execution-core)
+
 Forces
 dual-path (confusion)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function saveFoo(foo: Foo, flags: { useNewStore: boolean }) {
   return flags.useNewStore ? newFooStore.save(foo) : oldFooStore.save(foo);
 }
 ```
+
+After
 
 ```typescript
 function saveFoo(foo: Foo) {
@@ -5168,12 +6576,17 @@ Details
 
 Intent
 Replace a deferred follow-up with an atomic action that completes every coupled effect now, so nothing is forgotten.
+
 Invariant
 Coupled effects commit together within one boundary; no effect is left as an implicit later step.
+
+Flow
 
 ```text
 PartialAction → IdentifyCoupledEffects → WrapInTransaction → CommitTogether
 ```
+
+Productions
 
 ```bnf
 NoDeferring ::= <PartialAction> "->" <IdentifyCoupledEffects> "->" <WrapInTransaction> "->" <CommitTogether>
@@ -5181,16 +6594,22 @@ NoDeferring ::= <PartialAction> "->" <IdentifyCoupledEffects> "->" <WrapInTransa
 
 Composes
 [Execution Core](ALGORITHMS.md#algo-execution-core), [Atomic Boundary](ALGORITHMS.md#algo-atomic-boundary)
+
 Forces
 deferring (forgetting)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function renameFoo(id: FooId, name: string) {
   await fooStore.rename(id, name);
 }
 ```
+
+After
 
 ```typescript
 async function renameFoo(id: FooId, name: string) {
@@ -5210,12 +6629,17 @@ Details
 
 Intent
 Replace an optional dependency with a mandatory one, removing the null-guarded branch so behavior is system-defined not caller-defined.
+
 Invariant
 A dependency the behavior relies on is always supplied; no optional-chaining guards its use.
+
+Flow
 
 ```text
 OptionalDependency → MakeRequired → InjectAlways → RemoveGuards
 ```
+
+Productions
 
 ```bnf
 NoOptional ::= <OptionalDependency> "->" <MakeRequired> "->" <InjectAlways> "->" <RemoveGuards>
@@ -5223,10 +6647,14 @@ NoOptional ::= <OptionalDependency> "->" <MakeRequired> "->" <InjectAlways> "->"
 
 Composes
 [Human Factors](ALGORITHMS.md#algo-human-factors), [Resource Core](ALGORITHMS.md#algo-resource-core)
+
 Forces
 optional (user-orientation)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooService {
@@ -5238,6 +6666,8 @@ class FooService {
   }
 }
 ```
+
+After
 
 ```typescript
 class FooService {
@@ -5259,12 +6689,17 @@ Details
 
 Intent
 Replace a temporary in-memory placeholder with the real durable implementation immediately, so the stopgap never ossifies.
+
 Invariant
 State that must survive restarts is persisted through the real store, not a transient map.
+
+Flow
 
 ```text
 TemporaryStub → IdentifyDurabilityNeed → WireRealStore → DeleteStub
 ```
+
+Productions
 
 ```bnf
 NoForNow ::= <TemporaryStub> "->" <IdentifyDurabilityNeed> "->" <WireRealStore> "->" <DeleteStub>
@@ -5272,10 +6707,14 @@ NoForNow ::= <TemporaryStub> "->" <IdentifyDurabilityNeed> "->" <WireRealStore> 
 
 Composes
 [Resource Core](ALGORITHMS.md#algo-resource-core), [Evolution Principles](ALGORITHMS.md#algo-evolution-principles)
+
 Forces
 for_now (deferring)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooRepository {
@@ -5285,6 +6724,8 @@ class FooRepository {
   }
 }
 ```
+
+After
 
 ```typescript
 class FooRepository {
@@ -5309,12 +6750,17 @@ Details
 
 Intent
 Wrap an unobserved effect in structured telemetry so every execution emits a learnable signal on success and failure.
+
 Invariant
 Every significant effect opens and closes a span carrying its outcome; no path executes blind.
+
+Flow
 
 ```text
 BlindEffect → OpenSpan → ExecuteWithinSpan → RecordOutcome
 ```
+
+Productions
 
 ```bnf
 NoUnobserved ::= <BlindEffect> "->" <OpenSpan> "->" <ExecuteWithinSpan> "->" <RecordOutcome>
@@ -5322,16 +6768,22 @@ NoUnobserved ::= <BlindEffect> "->" <OpenSpan> "->" <ExecuteWithinSpan> "->" <Re
 
 Composes
 [Observability](ALGORITHMS.md#algo-observability), [Execution Core](ALGORITHMS.md#algo-execution-core)
+
 Forces
 unobserved-execution (missed-learning)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function publishFoo(foo: Foo) {
   sendFoo(foo);
 }
 ```
+
+After
 
 ```typescript
 async function publishFoo(foo: Foo, telemetry: Telemetry) {
@@ -5355,12 +6807,17 @@ Details
 
 Intent
 Extract a repeated pattern into one parameterized form, so the behavior lives once and duplication cannot drift.
+
 Invariant
 A behavior expressed more than once is factored to a single definition parameterized over its variation.
+
+Flow
 
 ```text
 DuplicatedPattern → IdentifyVariation → ExtractParameterized → RedirectCallsites
 ```
+
+Productions
 
 ```bnf
 NoUncompressed ::= <DuplicatedPattern> "->" <IdentifyVariation> "->" <ExtractParameterized> "->" <RedirectCallsites>
@@ -5368,10 +6825,14 @@ NoUncompressed ::= <DuplicatedPattern> "->" <IdentifyVariation> "->" <ExtractPar
 
 Composes
 [Structural Core](ALGORITHMS.md#algo-structural-core), [Evolution Principles](ALGORITHMS.md#algo-evolution-principles)
+
 Forces
 pattern-without-compression (inefficiency)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function validateFoo(foo: Foo) {
@@ -5383,6 +6844,8 @@ function validateBar(bar: Bar) {
   if (bar.name.length > 40) throw new Error("bar.name too long");
 }
 ```
+
+After
 
 ```typescript
 function requiredName(value: { name: string }, kind: string) {
@@ -5403,12 +6866,17 @@ Details
 
 Intent
 Gate a structural dependency behind a recorded architecture decision, so evolution proceeds only through approved boundaries.
+
 Invariant
 Every cross-boundary dependency traces to an approved decision record naming the allowed gateway.
+
+Flow
 
 ```text
 UnapprovedDependency → RaiseDecision → RecordApproval → WireApprovedGateway
 ```
+
+Productions
 
 ```bnf
 NoUnapproved ::= <UnapprovedDependency> "->" <RaiseDecision> "->" <RecordApproval> "->" <WireApprovedGateway>
@@ -5416,16 +6884,22 @@ NoUnapproved ::= <UnapprovedDependency> "->" <RaiseDecision> "->" <RecordApprova
 
 Composes
 [Evolution Principles](ALGORITHMS.md#algo-evolution-principles), [Human Factors](ALGORITHMS.md#algo-human-factors)
+
 Forces
 evolution-without-approval (architectural-drift)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooService {
   private readonly barDb = connectDirectlyToBarDatabase();
 }
 ```
+
+After
 
 ```typescript
 type ArchitectureDecision = {
@@ -5453,12 +6927,17 @@ Details
 
 Intent
 Turn a logged-and-ignored warning into an enforced result, so negative feedback changes control flow instead of scrolling past.
+
 Invariant
 A detected invalid condition returns a typed failure; it is never merely logged and continued.
+
+Flow
 
 ```text
 WarnAndContinue → ModelFailureResult → ReturnTypedError → HaltHappyPath
 ```
+
+Productions
 
 ```bnf
 NoIgnoredFeedback ::= <WarnAndContinue> "->" <ModelFailureResult> "->" <ReturnTypedError> "->" <HaltHappyPath>
@@ -5466,10 +6945,14 @@ NoIgnoredFeedback ::= <WarnAndContinue> "->" <ModelFailureResult> "->" <ReturnTy
 
 Composes
 [Human Factors](ALGORITHMS.md#algo-human-factors), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 feedback-ignored (stagnation)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function ingestFoo(foo: Foo) {
@@ -5477,6 +6960,8 @@ function ingestFoo(foo: Foo) {
   return fooStore.save(foo);
 }
 ```
+
+After
 
 ```typescript
 function ingestFoo(foo: Foo) {
@@ -5500,12 +6985,17 @@ Details
 
 Intent
 Give one service authority over a piece of state and propagate to others by event, removing multi-writer ambiguity.
+
 Invariant
 Exactly one service mutates a given entity; peers react to its events rather than co-writing it.
+
+Flow
 
 ```text
 MultiWriter → AssignOwner → EmitEvent → ProjectDownstream
 ```
+
+Productions
 
 ```bnf
 NoSharedOwnership ::= <MultiWriter> "->" <AssignOwner> "->" <EmitEvent> "->" <ProjectDownstream>
@@ -5513,10 +7003,14 @@ NoSharedOwnership ::= <MultiWriter> "->" <AssignOwner> "->" <EmitEvent> "->" <Pr
 
 Composes
 [Resource Core](ALGORITHMS.md#algo-resource-core), [Execution Core](ALGORITHMS.md#algo-execution-core)
+
 Forces
 shared-ownership (ambiguity)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function renameFoo(id: FooId, name: string) {
@@ -5524,6 +7018,8 @@ async function renameFoo(id: FooId, name: string) {
   await barService.patchFooName(id, name);
 }
 ```
+
+After
 
 ```typescript
 async function renameFoo(id: FooId, name: string) {
@@ -5544,12 +7040,17 @@ Details
 
 Intent
 Replace an unbounded cache with a capacity-bounded structure that evicts and clears, so memory release is deterministic.
+
 Invariant
 Every retained collection has an explicit bound and an eviction policy; growth cannot be unlimited.
+
+Flow
 
 ```text
 UnboundedStore → SetCapacity → AddEviction → ExposeClear
 ```
+
+Productions
 
 ```bnf
 NoUnbounded ::= <UnboundedStore> "->" <SetCapacity> "->" <AddEviction> "->" <ExposeClear>
@@ -5557,10 +7058,14 @@ NoUnbounded ::= <UnboundedStore> "->" <SetCapacity> "->" <AddEviction> "->" <Exp
 
 Composes
 [Resource Core](ALGORITHMS.md#algo-resource-core)
+
 Forces
 unbounded-lifetime (leaks)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const fooCache = new Map<string, Foo>();
@@ -5569,6 +7074,8 @@ function rememberFoo(foo: Foo) {
   fooCache.set(foo.id, foo);
 }
 ```
+
+After
 
 ```typescript
 class FooCache {
@@ -5598,12 +7105,17 @@ Details
 
 Intent
 Pair every acquire with a guaranteed release via try/finally, so a fault mid-use cannot leak the resource.
+
 Invariant
 Acquisition and release are structurally symmetric; release runs on every exit path.
+
+Flow
 
 ```text
 UnbalancedAcquire → WrapTryFinally → ReleaseInFinally → GuaranteedCleanup
 ```
+
+Productions
 
 ```bnf
 NoAsymmetric ::= <UnbalancedAcquire> "->" <WrapTryFinally> "->" <ReleaseInFinally> "->" <GuaranteedCleanup>
@@ -5611,10 +7123,14 @@ NoAsymmetric ::= <UnbalancedAcquire> "->" <WrapTryFinally> "->" <ReleaseInFinall
 
 Composes
 [Resource Core](ALGORITHMS.md#algo-resource-core)
+
 Forces
 asymmetric-lifecycle (resource-leaks)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function readFoo() {
@@ -5624,6 +7140,8 @@ async function readFoo() {
   return foo;
 }
 ```
+
+After
 
 ```typescript
 async function readFoo() {
@@ -5645,12 +7163,17 @@ Details
 
 Intent
 Replace an anonymous listener push with an explicit retention token that names its owner and exposes release.
+
 Invariant
 Every retained reference is held through an ownership token that can be observed and released.
+
+Flow
 
 ```text
 AnonymousRetention → MintToken → NameOwner → ExposeRelease
 ```
+
+Productions
 
 ```bnf
 NoImplicitRetention ::= <AnonymousRetention> "->" <MintToken> "->" <NameOwner> "->" <ExposeRelease>
@@ -5658,10 +7181,14 @@ NoImplicitRetention ::= <AnonymousRetention> "->" <MintToken> "->" <NameOwner> "
 
 Composes
 [Resource Core](ALGORITHMS.md#algo-resource-core)
+
 Forces
 implicit-retention (hidden-leaks)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const listeners: Array<() => void> = [];
@@ -5670,6 +7197,8 @@ function watchFoo(foo: Foo) {
   listeners.push(() => console.log(foo.id));
 }
 ```
+
+After
 
 ```typescript
 type Retention = { owner: string; release(): void };
@@ -5691,13 +7220,18 @@ function retainFoo(foo: Foo, owner: string): Retention {
 Details
 
 Intent
-Replace manual release calls with a language disposal scope, so cleanup is enforced structurally not by human memory.
+Replace manual release calls with a language disposal scope, so cleanup is enforced structurally, not by the developer's memory.
+
 Invariant
 Resource cleanup is bound to scope exit by the language, not to a manually written release call.
+
+Flow
 
 ```text
 ManualRelease → ImplementDisposable → UseScopedBinding → AutomaticCleanup
 ```
+
+Productions
 
 ```bnf
 NoDisciplineRelease ::= <ManualRelease> "->" <ImplementDisposable> "->" <UseScopedBinding> "->" <AutomaticCleanup>
@@ -5705,10 +7239,14 @@ NoDisciplineRelease ::= <ManualRelease> "->" <ImplementDisposable> "->" <UseScop
 
 Composes
 [Resource Core](ALGORITHMS.md#algo-resource-core), [Enforcement Core](ALGORITHMS.md#algo-enforcement-core)
+
 Forces
 discipline-release (human-error)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function useFoo() {
@@ -5717,6 +7255,8 @@ async function useFoo() {
   await foo.release();
 }
 ```
+
+After
 
 ```typescript
 class FooLease implements Disposable {
@@ -5740,12 +7280,17 @@ Details
 
 Intent
 Replace in-place mutation with a pure transform returning new data, so state transitions are reproducible.
+
 Invariant
 Data is readonly; a change produces a new value rather than mutating the existing one.
+
+Flow
 
 ```text
 InPlaceMutation → MarkReadonly → ReturnNewValue → ReproducibilityGained
 ```
+
+Productions
 
 ```bnf
 NoMutable ::= <InPlaceMutation> "->" <MarkReadonly> "->" <ReturnNewValue> "->" <ReproducibilityGained>
@@ -5753,10 +7298,14 @@ NoMutable ::= <InPlaceMutation> "->" <MarkReadonly> "->" <ReturnNewValue> "->" <
 
 Composes
 [Computation Core](ALGORITHMS.md#algo-computation-core)
+
 Forces
 mutable-state (unpredictability)
+
 Grounds
 none
+
+Before
 
 ```typescript
 type Foo = { name: string; tags: string[] };
@@ -5766,6 +7315,8 @@ function addTag(foo: Foo, tag: string) {
   return foo;
 }
 ```
+
+After
 
 ```typescript
 type Foo = Readonly<{ name: string; tags: readonly string[] }>;
@@ -5784,12 +7335,17 @@ Details
 
 Intent
 Replace a null-on-failure return with a typed result union, so failure is machine-processable rather than swallowed.
+
 Invariant
 A fallible operation returns a discriminated ok/error result; failure carries a typed code.
+
+Flow
 
 ```text
 NullOnFailure → DefineResultUnion → ReturnTypedError → ForceHandling
 ```
+
+Productions
 
 ```bnf
 NoSilent ::= <NullOnFailure> "->" <DefineResultUnion> "->" <ReturnTypedError> "->" <ForceHandling>
@@ -5797,10 +7353,14 @@ NoSilent ::= <NullOnFailure> "->" <DefineResultUnion> "->" <ReturnTypedError> "-
 
 Composes
 [Computation Core](ALGORITHMS.md#algo-computation-core), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 silent-errors (unknown-failure)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function parseFoo(raw: string): Foo | null {
@@ -5811,6 +7371,8 @@ function parseFoo(raw: string): Foo | null {
   }
 }
 ```
+
+After
 
 ```typescript
 type ParseFooResult =
@@ -5847,12 +7409,17 @@ Details
 
 Intent
 Model invalid state as an explicit variant rather than coercing to a plausible default that hides uncertainty.
+
 Invariant
 Validity is a represented state; invalid inputs map to an invalid variant, never a silent valid default.
+
+Flow
 
 ```text
 CoercedDefault → AddInvalidVariant → MapInvalidInputs → HonestUncertainty
 ```
+
+Productions
 
 ```bnf
 NoHiddenInvalidity ::= <CoercedDefault> "->" <AddInvalidVariant> "->" <MapInvalidInputs> "->" <HonestUncertainty>
@@ -5860,10 +7427,14 @@ NoHiddenInvalidity ::= <CoercedDefault> "->" <AddInvalidVariant> "->" <MapInvali
 
 Composes
 [Computation Core](ALGORITHMS.md#algo-computation-core), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 hidden-invalidity (false-consistency)
+
 Grounds
 none
+
+Before
 
 ```typescript
 type FooState = { count: number };
@@ -5872,6 +7443,8 @@ function readFooCount(raw: unknown): FooState {
   return { count: typeof raw === "number" ? raw : 0 };
 }
 ```
+
+After
 
 ```typescript
 type FooState =
@@ -5894,12 +7467,17 @@ Details
 
 Intent
 Replace a parent-supplied callback with an emitted event, decoupling the producer from its consumers.
+
 Invariant
 A component announces facts via events; it holds no reference to who reacts.
+
+Flow
 
 ```text
 ParentCallback → DefineEvent → EmitFact → SubscribeExternally
 ```
+
+Productions
 
 ```bnf
 NoCallbacks ::= <ParentCallback> "->" <DefineEvent> "->" <EmitFact> "->" <SubscribeExternally>
@@ -5907,10 +7485,14 @@ NoCallbacks ::= <ParentCallback> "->" <DefineEvent> "->" <EmitFact> "->" <Subscr
 
 Composes
 [Execution Core](ALGORITHMS.md#algo-execution-core), [Coupling Control](ALGORITHMS.md#algo-coupling-control)
+
 Forces
 parent-callbacks (tight-coupling)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooEditor {
@@ -5922,6 +7504,8 @@ class FooEditor {
   }
 }
 ```
+
+After
 
 ```typescript
 class FooEditor {
@@ -5945,12 +7529,17 @@ Details
 
 Intent
 Replace destructive deletion with an append-only removal event, so history is monotonic and projectable.
+
 Invariant
 State changes append events; nothing is deleted in place, and current state is a projection.
+
+Flow
 
 ```text
 DestructiveDelete → DefineEventLog → AppendRemoval → ProjectCurrent
 ```
+
+Productions
 
 ```bnf
 NoRetraction ::= <DestructiveDelete> "->" <DefineEventLog> "->" <AppendRemoval> "->" <ProjectCurrent>
@@ -5958,10 +7547,14 @@ NoRetraction ::= <DestructiveDelete> "->" <DefineEventLog> "->" <AppendRemoval> 
 
 Composes
 [Execution Core](ALGORITHMS.md#algo-execution-core), [Causality Core](ALGORITHMS.md#algo-causality-core)
+
 Forces
 retraction (complexity)
+
 Grounds
 none
+
+Before
 
 ```typescript
 type FooIndex = Map<FooId, Foo>;
@@ -5970,6 +7563,8 @@ function deleteFoo(index: FooIndex, id: FooId) {
   index.delete(id);
 }
 ```
+
+After
 
 ```typescript
 type FooEvent =
@@ -5992,12 +7587,17 @@ Details
 
 Intent
 Replace positional path addressing with a semantic identity reference, so references survive structural change.
+
 Invariant
 An entity is referenced by stable identity, never by its position within a container.
+
+Flow
 
 ```text
 PositionalRef → AssignIdentity → ReferenceById → ResolveByLookup
 ```
+
+Productions
 
 ```bnf
 NoLocation ::= <PositionalRef> "->" <AssignIdentity> "->" <ReferenceById> "->" <ResolveByLookup>
@@ -6005,15 +7605,21 @@ NoLocation ::= <PositionalRef> "->" <AssignIdentity> "->" <ReferenceById> "->" <
 
 Composes
 [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 location-addressing (brittleness)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const foo = document.sections[2].items[4];
 const reference = "sections[2].items[4]";
 ```
+
+After
 
 ```typescript
 type FooRef = { kind: "foo"; id: FooId };
@@ -6031,12 +7637,17 @@ Details
 
 Intent
 Replace wall-clock ordering with an ordinal sequence, so event order is logical and clock-independent.
+
 Invariant
 Ordering derives from a monotonic ordinal, not a physical timestamp subject to skew.
+
+Flow
 
 ```text
 WallClockOrder → AssignOrdinal → AppendWithOrdinal → SortByOrdinal
 ```
+
+Productions
 
 ```bnf
 NoTimestamps ::= <WallClockOrder> "->" <AssignOrdinal> "->" <AppendWithOrdinal> "->" <SortByOrdinal>
@@ -6044,10 +7655,14 @@ NoTimestamps ::= <WallClockOrder> "->" <AssignOrdinal> "->" <AppendWithOrdinal> 
 
 Composes
 [Causality Core](ALGORITHMS.md#algo-causality-core), [Execution Core](ALGORITHMS.md#algo-execution-core)
+
 Forces
 timestamp-ordering (wall-clock-dependency)
+
 Grounds
 none
+
+Before
 
 ```typescript
 type FooEvent = { at: number; value: string };
@@ -6055,6 +7670,8 @@ type FooEvent = { at: number; value: string };
 const events = received.map((value) => ({ at: Date.now(), value }));
 events.sort((a, b) => a.at - b.at);
 ```
+
+After
 
 ```typescript
 type FooEvent = { ordinal: bigint; value: string };
@@ -6075,12 +7692,17 @@ Details
 
 Intent
 Fuse behavior and its separate metadata into one homoiconic data structure that is both the rule and its description.
+
 Invariant
 A rule is represented as data that is directly evaluated; no parallel metadata can drift from it.
+
+Flow
 
 ```text
 CodeAndMetadata → DefineExprData → EvaluateData → SingleSource
 ```
+
+Productions
 
 ```bnf
 NoSeparation ::= <CodeAndMetadata> "->" <DefineExprData> "->" <EvaluateData> "->" <SingleSource>
@@ -6088,10 +7710,14 @@ NoSeparation ::= <CodeAndMetadata> "->" <DefineExprData> "->" <EvaluateData> "->
 
 Composes
 [Structural Core](ALGORITHMS.md#algo-structural-core), [Declarative Core](ALGORITHMS.md#algo-declarative-core)
+
 Forces
 separation (duplication)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function calculateFoo(foo: Foo) {
@@ -6103,6 +7729,8 @@ const fooRuleMetadata = {
   operand: 2,
 };
 ```
+
+After
 
 ```typescript
 type Expr =
@@ -6128,12 +7756,17 @@ Details
 
 Intent
 Constrain an open-ended rule surface to a bounded grammar with depth and fan-out limits, capping cognitive load.
+
 Invariant
 A rule structure has enforced maximum depth and breadth; unbounded nesting is rejected.
+
+Flow
 
 ```text
 OpenEndedRule → DefineBoundedGrammar → ValidateDepth → ValidateFanOut
 ```
+
+Productions
 
 ```bnf
 NoUnlimited ::= <OpenEndedRule> "->" <DefineBoundedGrammar> "->" <ValidateDepth> "->" <ValidateFanOut>
@@ -6141,10 +7774,14 @@ NoUnlimited ::= <OpenEndedRule> "->" <DefineBoundedGrammar> "->" <ValidateDepth>
 
 Composes
 [Human Factors](ALGORITHMS.md#algo-human-factors), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 unlimited-complexity (cognitive-overload)
+
 Grounds
 none
+
+Before
 
 ```typescript
 type FooRule = {
@@ -6155,6 +7792,8 @@ function execute(rule: FooRule) {
   return rule.run(globalThis);
 }
 ```
+
+After
 
 ```typescript
 type FooRule =
@@ -6179,12 +7818,17 @@ Details
 
 Intent
 Replace threshold-on-metrics health with a symbolic diagnosis that names the causes of an unready state.
+
 Invariant
 Health is a computed state naming concrete blocking causes, not a boolean over numeric thresholds.
+
+Flow
 
 ```text
 MetricThreshold → EnumerateCauses → ComputeState → NameBlockers
 ```
+
+Productions
 
 ```bnf
 NoMetrics ::= <MetricThreshold> "->" <EnumerateCauses> "->" <ComputeState> "->" <NameBlockers>
@@ -6192,10 +7836,14 @@ NoMetrics ::= <MetricThreshold> "->" <EnumerateCauses> "->" <ComputeState> "->" 
 
 Composes
 [Observability](ALGORITHMS.md#algo-observability), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 metric-health (symptom-tracking)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function fooHealth(metrics: { errorRate: number; latencyMs: number }) {
@@ -6204,6 +7852,8 @@ function fooHealth(metrics: { errorRate: number; latencyMs: number }) {
     : "unhealthy";
 }
 ```
+
+After
 
 ```typescript
 type FooHealth =
@@ -6234,12 +7884,17 @@ Details
 
 Intent
 Replace an inline secret with a resolved read from a secret store that fails fast when the secret is absent.
+
 Invariant
 No secret literal appears in source; secrets are read at runtime from a store and validated present.
+
+Flow
 
 ```text
 InlineSecret → MoveToStore → ResolveAtRuntime → FailIfMissing
 ```
+
+Productions
 
 ```bnf
 NoHardcodedSecrets ::= <InlineSecret> "->" <MoveToStore> "->" <ResolveAtRuntime> "->" <FailIfMissing>
@@ -6247,18 +7902,25 @@ NoHardcodedSecrets ::= <InlineSecret> "->" <MoveToStore> "->" <ResolveAtRuntime>
 
 Composes
 [Security Core](ALGORITHMS.md#algo-security-core)
+
 Forces
 hardcoded-secrets (exposure)
+
 Principle
 [Secrets Management](PRINCIPLES.md#arch-secrets-management)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const fooClient = new FooClient({
   apiKey: "foo_live_abc123",
 });
 ```
+
+After
 
 ```typescript
 async function makeFooClient(secrets: SecretStore) {
@@ -6277,12 +7939,17 @@ Details
 
 Intent
 Parse and validate untrusted input at the boundary into a typed shape, failing fast on malformed data.
+
 Invariant
 Input crosses the boundary only after schema validation; no raw external value reaches the core.
+
+Flow
 
 ```text
 RawInput → ParseAtBoundary → ValidateSchema → PassTypedValue
 ```
+
+Productions
 
 ```bnf
 NoUnvalidatedInput ::= <RawInput> "->" <ParseAtBoundary> "->" <ValidateSchema> "->" <PassTypedValue>
@@ -6290,12 +7957,17 @@ NoUnvalidatedInput ::= <RawInput> "->" <ParseAtBoundary> "->" <ValidateSchema> "
 
 Composes
 [Security Core](ALGORITHMS.md#algo-security-core), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 unvalidated-input (injection)
+
 Principle
 [Input Validation](PRINCIPLES.md#arch-input-validation)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function createFoo(request: Request) {
@@ -6303,6 +7975,8 @@ async function createFoo(request: Request) {
   return fooDb.query(`insert into foo(name) values ('${body.name}')`);
 }
 ```
+
+After
 
 ```typescript
 type CreateFoo = { name: string };
@@ -6332,12 +8006,17 @@ Details
 
 Intent
 Narrow a broad capability to the minimal typed interface a task needs, shrinking the blast radius.
+
 Invariant
 A component receives only the narrow capability its task requires, never an ambient broad authority.
+
+Flow
 
 ```text
 BroadCapability → DefineNarrowInterface → InjectMinimal → DenyRest
 ```
+
+Productions
 
 ```bnf
 NoBroadPrivilege ::= <BroadCapability> "->" <DefineNarrowInterface> "->" <InjectMinimal> "->" <DenyRest>
@@ -6345,12 +8024,17 @@ NoBroadPrivilege ::= <BroadCapability> "->" <DefineNarrowInterface> "->" <Inject
 
 Composes
 [Security Core](ALGORITHMS.md#algo-security-core), [Coupling Control](ALGORITHMS.md#algo-coupling-control)
+
 Forces
 broad-privilege (blast-radius)
+
 Principle
 [Least Privilege](PRINCIPLES.md#arch-least-privilege)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooJob {
@@ -6364,6 +8048,8 @@ class FooJob {
   }
 }
 ```
+
+After
 
 ```typescript
 interface FooWriter {
@@ -6388,12 +8074,17 @@ Details
 
 Intent
 Replace env-var-or-default reads with a validated config loaded at boot that fails fast on missing values.
+
 Invariant
 Configuration is parsed and validated once at startup; a missing required var halts boot.
+
+Flow
 
 ```text
 EnvOrDefault → DefineConfigSchema → LoadAtBoot → FailIfIncomplete
 ```
+
+Productions
 
 ```bnf
 NoEnvFallback ::= <EnvOrDefault> "->" <DefineConfigSchema> "->" <LoadAtBoot> "->" <FailIfIncomplete>
@@ -6401,15 +8092,21 @@ NoEnvFallback ::= <EnvOrDefault> "->" <DefineConfigSchema> "->" <LoadAtBoot> "->
 
 Composes
 [Security Core](ALGORITHMS.md#algo-security-core), [Resource Core](ALGORITHMS.md#algo-resource-core)
+
 Forces
 env-fallback-default (silent-misconfig)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const fooUrl = process.env.FOO_URL || "http://localhost:3000";
 const retryCount = Number(process.env.FOO_RETRIES || "3");
 ```
+
+After
 
 ```typescript
 type AppConfig = Readonly<{ fooUrl: URL; retryCount: number }>;
@@ -6435,12 +8132,17 @@ Details
 
 Intent
 Gate any optimization behind a measured profile, so effort is evidence-driven rather than speculative.
+
 Invariant
 A performance change is justified by a before/after measurement of the actual bottleneck.
+
+Flow
 
 ```text
 SuspectedHotspot → Profile → IdentifyBottleneck → OptimizeMeasured → Verify
 ```
+
+Productions
 
 ```bnf
 NoUnmeasuredOptimization ::= <SuspectedHotspot> "->" <Profile> "->" <IdentifyBottleneck> "->" <OptimizeMeasured> "->" <Verify>
@@ -6448,10 +8150,14 @@ NoUnmeasuredOptimization ::= <SuspectedHotspot> "->" <Profile> "->" <IdentifyBot
 
 Composes
 [Performance Core](ALGORITHMS.md#algo-performance-core)
+
 Forces
 unmeasured-optimization (guesswork)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const fooCache = new Map<string, Foo>();
@@ -6461,6 +8167,8 @@ function getFoo(id: string) {
   return fooCache.get(id)!;
 }
 ```
+
+After
 
 ```typescript
 const profile = profiler.measure("foo.batch", () => {
@@ -6482,12 +8190,17 @@ Details
 
 Intent
 Replace a written convention with an automated gate, so the invariant is enforced by code not by memory.
+
 Invariant
 Every stated invariant has an executable check that fails the build on violation.
+
+Flow
 
 ```text
 WrittenConvention → EncodeCheck → WireGate → FailOnViolation
 ```
+
+Productions
 
 ```bnf
 NoConventionEnforcement ::= <WrittenConvention> "->" <EncodeCheck> "->" <WireGate> "->" <FailOnViolation>
@@ -6495,10 +8208,14 @@ NoConventionEnforcement ::= <WrittenConvention> "->" <EncodeCheck> "->" <WireGat
 
 Composes
 [Enforcement Core](ALGORITHMS.md#algo-enforcement-core), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 convention-only-enforcement (drift)
+
 Grounds
 none
+
+Before
 
 ```typescript
 import { sql } from "../infrastructure/database";
@@ -6507,6 +8224,8 @@ export function makeFoo() {
   return sql("select * from foo");
 }
 ```
+
+After
 
 ```typescript
 const architectureRule = forbidImports({
@@ -6528,12 +8247,17 @@ Details
 
 Intent
 State pre-conditions, post-conditions, and invariants explicitly, so a boundary's contract is checkable not assumed.
+
 Invariant
 A boundary declares and enforces its pre/post/invariant conditions; callers are not left to guess.
+
+Flow
 
 ```text
 ImplicitAssumption → StatePreconditions → StatePostconditions → EnforceInvariants
 ```
+
+Productions
 
 ```bnf
 NoImplicitContract ::= <ImplicitAssumption> "->" <StatePreconditions> "->" <StatePostconditions> "->" <EnforceInvariants>
@@ -6541,16 +8265,22 @@ NoImplicitContract ::= <ImplicitAssumption> "->" <StatePreconditions> "->" <Stat
 
 Composes
 [Contracts Core](ALGORITHMS.md#algo-contracts-core), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 implicit-contract (silent-breakage)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function divideFoo(total: number, count: number) {
   return total / count;
 }
 ```
+
+After
 
 ```typescript
 function divideFoo(total: number, count: number): number {
@@ -6574,12 +8304,17 @@ Details
 
 Intent
 Introduce change behind a version so existing consumers keep a stable contract while new ones adopt the new shape.
+
 Invariant
 A contract change is additive or versioned; no in-place change breaks an existing consumer silently.
+
+Flow
 
 ```text
 InPlaceChange → IntroduceVersion → RunBothContracts → MigrateConsumers
 ```
+
+Productions
 
 ```bnf
 NoBreakingChange ::= <InPlaceChange> "->" <IntroduceVersion> "->" <RunBothContracts> "->" <MigrateConsumers>
@@ -6587,16 +8322,23 @@ NoBreakingChange ::= <InPlaceChange> "->" <IntroduceVersion> "->" <RunBothContra
 
 Composes
 [Contracts Core](ALGORITHMS.md#algo-contracts-core), [Evolution Principles](ALGORITHMS.md#algo-evolution-principles)
+
 Forces
 unversioned-breaking-change (consumer-breakage)
+
 Principle
 [Versioning](PRINCIPLES.md#arch-versioning)
+
 Grounds
 none
+
+Before
 
 ```typescript
 app.get("/foo", () => ({ label: "Foo", tags: [] }));
 ```
+
+After
 
 ```typescript
 app.get("/v1/foo", () => ({ name: "Foo" }));
@@ -6612,12 +8354,17 @@ Details
 
 Intent
 Type and schema-validate every boundary crossing, so invalid state cannot enter the typed core.
+
 Invariant
 Data entering the system is validated against a schema; untyped values never propagate inward.
+
+Flow
 
 ```text
 UntypedBoundary → DefineSchema → ValidateOnEntry → PropagateTyped
 ```
+
+Productions
 
 ```bnf
 NoUntypedBoundary ::= <UntypedBoundary> "->" <DefineSchema> "->" <ValidateOnEntry> "->" <PropagateTyped>
@@ -6625,16 +8372,22 @@ NoUntypedBoundary ::= <UntypedBoundary> "->" <DefineSchema> "->" <ValidateOnEntr
 
 Composes
 [Contracts Core](ALGORITHMS.md#algo-contracts-core), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 untyped-boundary (invalid-state)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function loadFoo(response: Response): Promise<Foo> {
   return (await response.json()) as Foo;
 }
 ```
+
+After
 
 ```typescript
 type Foo = Readonly<{ id: string; count: number }>;
@@ -6663,12 +8416,17 @@ Details
 
 Intent
 Wrap coupled writes in an all-or-nothing boundary, so a fault cannot leave state half-applied.
+
 Invariant
 Coupled state changes either all commit or all roll back; no partial application persists.
+
+Flow
 
 ```text
 CoupledWrites → OpenTransaction → ApplyAll → CommitOrRollback
 ```
+
+Productions
 
 ```bnf
 NoPartialCommit ::= <CoupledWrites> "->" <OpenTransaction> "->" <ApplyAll> "->" <CommitOrRollback>
@@ -6676,10 +8434,14 @@ NoPartialCommit ::= <CoupledWrites> "->" <OpenTransaction> "->" <ApplyAll> "->" 
 
 Composes
 [Atomic Boundary](ALGORITHMS.md#algo-atomic-boundary), [Resource Core](ALGORITHMS.md#algo-resource-core)
+
 Forces
 partial-commit (corruption)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function moveFoo(id: FooId, from: BarId, to: BarId) {
@@ -6687,6 +8449,8 @@ async function moveFoo(id: FooId, from: BarId, to: BarId) {
   await barStore.addFoo(to, id);
 }
 ```
+
+After
 
 ```typescript
 async function moveFoo(id: FooId, from: BarId, to: BarId) {
@@ -6707,12 +8471,17 @@ Details
 
 Intent
 Replace a cross-service two-phase commit with a saga of compensable steps, preserving service autonomy.
+
 Invariant
 Cross-service consistency is achieved by compensating actions, not a distributed lock across services.
+
+Flow
 
 ```text
 CrossServiceLock → DefineSteps → DefineCompensations → RunSaga
 ```
+
+Productions
 
 ```bnf
 NoDistributed2pc ::= <CrossServiceLock> "->" <DefineSteps> "->" <DefineCompensations> "->" <RunSaga>
@@ -6720,10 +8489,14 @@ NoDistributed2pc ::= <CrossServiceLock> "->" <DefineSteps> "->" <DefineCompensat
 
 Composes
 [Execution Core](ALGORITHMS.md#algo-execution-core), [Coupling Control](ALGORITHMS.md#algo-coupling-control)
+
 Forces
 cross-service-2PC (coupling)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function createFooAndBar(foo: Foo, bar: Bar) {
@@ -6733,6 +8506,8 @@ async function createFooAndBar(foo: Foo, bar: Bar) {
   await coordinator.commit(tx.id);
 }
 ```
+
+After
 
 ```typescript
 async function createFooAndBar(foo: Foo, bar: Bar) {
@@ -6755,12 +8530,17 @@ Details
 
 Intent
 Replace a synchronous call across an autonomy boundary with an asynchronous event, decoupling in time.
+
 Invariant
 Calls across autonomy boundaries are asynchronous; no boundary blocks on another's synchronous response.
+
+Flow
 
 ```text
 SyncCrossCall → DefineEvent → EmitAsync → ConsumeIndependently
 ```
+
+Productions
 
 ```bnf
 NoSyncCrossBoundary ::= <SyncCrossCall> "->" <DefineEvent> "->" <EmitAsync> "->" <ConsumeIndependently>
@@ -6768,10 +8548,14 @@ NoSyncCrossBoundary ::= <SyncCrossCall> "->" <DefineEvent> "->" <EmitAsync> "->"
 
 Composes
 [Execution Core](ALGORITHMS.md#algo-execution-core), [Coupling Control](ALGORITHMS.md#algo-coupling-control)
+
 Forces
 synchronous-cross-autonomy-boundary (fragility)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function createFoo(foo: Foo) {
@@ -6780,6 +8564,8 @@ async function createFoo(foo: Foo) {
   return fooStore.save(foo);
 }
 ```
+
+After
 
 ```typescript
 async function createFoo(foo: Foo) {
@@ -6805,12 +8591,17 @@ Details
 
 Intent
 Emit structured signals around runtime behavior, so operation is observable rather than blind.
+
 Invariant
 Runtime paths emit structured telemetry sufficient to reconstruct what happened.
+
+Flow
 
 ```text
 OpaqueRuntime → InstrumentSignals → EmitStructured → EnableReconstruction
 ```
+
+Productions
 
 ```bnf
 NoOpaqueRuntime ::= <OpaqueRuntime> "->" <InstrumentSignals> "->" <EmitStructured> "->" <EnableReconstruction>
@@ -6818,10 +8609,14 @@ NoOpaqueRuntime ::= <OpaqueRuntime> "->" <InstrumentSignals> "->" <EmitStructure
 
 Composes
 [Observability](ALGORITHMS.md#algo-observability), [Execution Core](ALGORITHMS.md#algo-execution-core)
+
 Forces
 opaque-runtime (blind-operation)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function processFoo(foo: Foo) {
@@ -6830,6 +8625,8 @@ async function processFoo(foo: Foo) {
   console.log("done");
 }
 ```
+
+After
 
 ```typescript
 async function processFoo(foo: Foo, telemetry: Telemetry) {
@@ -6857,12 +8654,17 @@ Details
 
 Intent
 Surface a concealed dependency as a constructor parameter, inverting control and revealing coupling.
+
 Invariant
 Every dependency is injected and visible in the signature; none is reached for ambiently.
+
+Flow
 
 ```text
 HiddenDependency → LiftToParameter → InjectAtComposition → RevealCoupling
 ```
+
+Productions
 
 ```bnf
 NoHiddenDependency ::= <HiddenDependency> "->" <LiftToParameter> "->" <InjectAtComposition> "->" <RevealCoupling>
@@ -6870,10 +8672,14 @@ NoHiddenDependency ::= <HiddenDependency> "->" <LiftToParameter> "->" <InjectAtC
 
 Composes
 [Coupling Control](ALGORITHMS.md#algo-coupling-control), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 hidden-dependency (concealed-coupling)
+
 Grounds
 none
+
+Before
 
 ```typescript
 import { globalFooStore } from "./globals";
@@ -6884,6 +8690,8 @@ class FooService {
   }
 }
 ```
+
+After
 
 ```typescript
 interface FooStore {
@@ -6908,12 +8716,17 @@ Details
 
 Intent
 Replace enumerated wiring with convention-based discovery, so new components register without editing a central list.
+
 Invariant
 Components are discovered by convention at runtime; no central switch enumerates each one.
+
+Flow
 
 ```text
 HardcodedList → DefineConvention → DiscoverAtRuntime → SelfRegister
 ```
+
+Productions
 
 ```bnf
 NoHardcodedWiring ::= <HardcodedList> "->" <DefineConvention> "->" <DiscoverAtRuntime> "->" <SelfRegister>
@@ -6921,10 +8734,14 @@ NoHardcodedWiring ::= <HardcodedList> "->" <DefineConvention> "->" <DiscoverAtRu
 
 Composes
 [Extensibility Core](ALGORITHMS.md#algo-extensibility-core), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Forces
 hardcoded-wiring (rigidity)
+
 Grounds
 none
+
+Before
 
 ```typescript
 import { FooHandler } from "./foo-handler";
@@ -6933,6 +8750,8 @@ import { BazHandler } from "./baz-handler";
 
 const handlers = [new FooHandler(), new BarHandler(), new BazHandler()];
 ```
+
+After
 
 ```typescript
 interface HandlerModule {
@@ -6955,12 +8774,17 @@ Details
 
 Intent
 Replace imperative setup steps with declarative configuration describing the desired state.
+
 Invariant
 Configuration declares the target state; it is not a sequence of mutation calls.
+
+Flow
 
 ```text
 ImperativeSetup → DescribeDesiredState → ApplyDeclaratively → ConvergeToState
 ```
+
+Productions
 
 ```bnf
 NoImperativeConfig ::= <ImperativeSetup> "->" <DescribeDesiredState> "->" <ApplyDeclaratively> "->" <ConvergeToState>
@@ -6968,10 +8792,14 @@ NoImperativeConfig ::= <ImperativeSetup> "->" <DescribeDesiredState> "->" <Apply
 
 Composes
 [Declarative Core](ALGORITHMS.md#algo-declarative-core), [Extensibility Core](ALGORITHMS.md#algo-extensibility-core)
+
 Forces
 imperative-config (drift)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const app = new FooApp();
@@ -6980,6 +8808,8 @@ app.setRetries(3);
 if (process.env.DEBUG) app.enableDebug();
 app.register(new BarPlugin());
 ```
+
+After
 
 ```typescript
 type FooConfig = Readonly<{
@@ -7008,12 +8838,17 @@ Details
 
 Intent
 Insert an anti-corruption layer at a context boundary, so a foreign model cannot corrupt the local one.
+
 Invariant
 A foreign model is translated at the boundary; its shape never leaks into the local bounded context.
+
+Flow
 
 ```text
 ForeignModelLeak → DefineTranslation → TranslateAtBoundary → ProtectLocalModel
 ```
+
+Productions
 
 ```bnf
 NoLeakyContext ::= <ForeignModelLeak> "->" <DefineTranslation> "->" <TranslateAtBoundary> "->" <ProtectLocalModel>
@@ -7021,18 +8856,25 @@ NoLeakyContext ::= <ForeignModelLeak> "->" <DefineTranslation> "->" <TranslateAt
 
 Composes
 [Domain Modeling](ALGORITHMS.md#algo-domain-modeling), [Coupling Control](ALGORITHMS.md#algo-coupling-control)
+
 Forces
 cross-context-leak (model-corruption)
+
 Principle
 [Anti-Corruption Layer](PRINCIPLES.md#arch-anti-corruption-layer)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function priceBar(foo: FooDatabaseRow) {
   return foo.status === "A" ? 10 : 0;
 }
 ```
+
+After
 
 ```typescript
 type FooDatabaseRow = { id: string; status: "A" | "D" };
@@ -7056,12 +8898,17 @@ Details
 
 Intent
 Inject clocks, randomness, and IO so the core is deterministic and testable, isolating nondeterminism at the edge.
+
 Invariant
 Sources of nondeterminism are injected; the core computes deterministically given its inputs.
+
+Flow
 
 ```text
 HiddenClockOrRandom → DefinePort → InjectSource → DeterministicCore
 ```
+
+Productions
 
 ```bnf
 NoHiddenNondeterminism ::= <HiddenClockOrRandom> "->" <DefinePort> "->" <InjectSource> "->" <DeterministicCore>
@@ -7069,10 +8916,14 @@ NoHiddenNondeterminism ::= <HiddenClockOrRandom> "->" <DefinePort> "->" <InjectS
 
 Composes
 [Computation Core](ALGORITHMS.md#algo-computation-core), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 hidden-nondeterminism (unreproducible)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function makeFoo(name: string): Foo {
@@ -7083,6 +8934,8 @@ function makeFoo(name: string): Foo {
   };
 }
 ```
+
+After
 
 ```typescript
 interface Clock {
@@ -7110,12 +8963,17 @@ Details
 
 Intent
 Introduce a pattern only when a present force demands it, avoiding accidental complexity from anticipated needs.
+
 Invariant
 Every abstraction traces to a current force; none exists solely for a hypothesized future.
+
+Flow
 
 ```text
 SpeculativeAbstraction → IdentifyPresentForces → MatchPatternToForce → RemoveUnforced
 ```
+
+Productions
 
 ```bnf
 NoSpeculativePattern ::= <SpeculativeAbstraction> "->" <IdentifyPresentForces> "->" <MatchPatternToForce> "->" <RemoveUnforced>
@@ -7123,10 +8981,14 @@ NoSpeculativePattern ::= <SpeculativeAbstraction> "->" <IdentifyPresentForces> "
 
 Composes
 [Evolution Principles](ALGORITHMS.md#algo-evolution-principles), [Design Patterns Core](ALGORITHMS.md#algo-design-patterns-core)
+
 Forces
 speculative-pattern (accidental-complexity)
+
 Grounds
 none
+
+Before
 
 ```typescript
 interface FooFactoryStrategy {
@@ -7140,6 +9002,8 @@ class DefaultFooFactoryStrategy implements FooFactoryStrategy {
 }
 ```
 
+After
+
 ```typescript
 function makeFoo(name: string): Foo {
   return { name };
@@ -7148,7 +9012,7 @@ function makeFoo(name: string): Foo {
 
 ## architecture
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -7191,7 +9055,7 @@ n_governance_evolution["Governance Evolution"]
 n_control_plane["Control Plane"]
 n_declarative_metaprogramming["Declarative Metaprogramming"]
 n_architecture_streaming_dataflow["Streaming Dataflow"]
-n_ai_model_governance["AI Model Governance"]
+n_ai_model_governance["Model Lifecycle Governance"]
 n_rag_knowledge_boundary["RAG Knowledge Boundary"]
 n_architecture_selection_meta_algorithm["Architecture Selection Meta-Algorithm"]
 n_universal_architectural_concern_template["Universal Architectural Concern Template"]
@@ -7221,12 +9085,17 @@ Details
 
 Intent
 For any document that states facts about a codebase, separate invariant facts (counts, paths, names, and the doc-type's structural schema) from variant prose, bind each invariant to a code-derived value through a stable key, compile the document from a template, and gate the output so a stated fact can never drift from the code it describes.
+
 Invariant
 A document is well-formed iff every rendered invariant equals its resolved code-truth and every doc-type-required meta-concern is present in order; prose is free.
+
+Flow
 
 ```text
 Concern → Variant → Invariant → TruthKey → Deriver → Template → Compilation → DriftGate
 ```
+
+Productions
 
 ```bnf
 DocumentTruth ::= <VariantProse> "+" <InvariantSet> "->" <TruthKeyBinding> "->" <DeriverResolution> "->" <TemplateCompilation> "->" <DriftGate>
@@ -7235,16 +9104,23 @@ InvariantBinding ::= <TruthKey> "," <TokenSlot> "," <DerivedValue> "," <DocTypeS
 
 Composes
 none
+
 Composed by
 [Manifest-Driven Documentation](ALGORITHMS.md#algo-manifest-driven-documentation)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
+
+Before
 
 ```text
 A doc states 'the system has 12 modules' — a hand-typed count that drifts the moment a module is added.
 ```
+
+After
 
 ```text
 invariant{moduleCount} -> truth-key{modules.length} -> deriver{scan workspaces} -> template{'... has {moduleCount} modules'} -> drift-gate{rendered == derived, else fail}
@@ -7259,12 +9135,17 @@ Details
 
 Intent
 For any programmatic system, identify architectural concerns, define explicit contracts for each concern, bind implementations to those contracts, validate invariants, observe behavior, and evolve through versioned change.
+
 Invariant
 Architecture is a graph of bounded contracts whose nodes expose stable intent and whose edges preserve compatibility, causality, and governance.
+
+Flow
 
 ```text
 Concern → Boundary → Contract → Implementation → Verification → Observation → Evolution
 ```
+
+Productions
 
 ```bnf
 ArchitectureKernel ::= <ConcernSet> "->" <BoundarySet> "->" <ContractSet> "->" <ImplementationGraph> "->" <VerificationSet> "->" <ObservationSet> "->" <EvolutionPolicy>
@@ -7273,12 +9154,17 @@ ConcernContract ::= <Intent> "," <Responsibility> "," <InputContract> "," <Outpu
 
 Composes
 none
+
 Composed by
 [Consumer Config SSOT](ALGORITHMS.md#algo-consumer-config-ssot)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooService {
@@ -7289,6 +9175,8 @@ class FooService {
   }
 }
 ```
+
+After
 
 ```typescript
 interface FooPort {
@@ -7315,12 +9203,17 @@ Details
 
 Intent
 Partition behavior into cohesive units, assign each unit one reason to change, hide internal details, expose only intentional interfaces, and reject cross-boundary leakage.
+
 Invariant
 Modularity is achieved when responsibility, knowledge, and change pressure are localized.
+
+Flow
 
 ```text
 Behavior → Responsibility → Boundary → Interface → Encapsulation → Replaceability
 ```
+
+Productions
 
 ```bnf
 ResponsibilityBoundary ::= <BehaviorSet> "->" <ResponsibilityPartition> "->" <ModuleBoundary> "->" <PublicInterface> "->" <PrivateImplementation>
@@ -7329,12 +9222,17 @@ ModuleBoundary ::= "single_responsibility" "," "high_cohesion" "," "low_coupling
 
 Composes
 none
+
 Composed by
 [Consumer Config SSOT](ALGORITHMS.md#algo-consumer-config-ssot), [Cascade Layer Partition](ALGORITHMS.md#algo-cascade-layer-partition), [Placement Isolation](ALGORITHMS.md#algo-placement-isolation), [Assembly Composition](ALGORITHMS.md#algo-assembly-composition)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooUtil {
@@ -7344,6 +9242,8 @@ class FooUtil {
   notify() {}
 }
 ```
+
+After
 
 ```typescript
 class FooParser {
@@ -7366,12 +9266,17 @@ Details
 
 Intent
 Detect dependency directions, invert dependencies toward abstractions, restrict imports to approved boundaries, and preserve autonomy between modules.
+
 Invariant
 Low coupling is enforced by making dependencies point at contracts instead of concrete implementations.
+
+Flow
 
 ```text
 ConcreteDependency → AbstractionBoundary → DependencyRule → ImportValidation
 ```
+
+Productions
 
 ```bnf
 CouplingControl ::= <DependencyGraph> "->" <AbstractionNodeSet> "->" <AllowedEdgeSet> "->" <ForbiddenEdgeSet> "->" <DependencyValidation>
@@ -7380,12 +9285,17 @@ DependencyRule ::= "depend_on_interface" | "depend_on_port" | "same_boundary_onl
 
 Composes
 none
+
 Composed by
 [Constraints Over Shortcuts](ALGORITHMS.md#algo-no-shortcuts), [Event Emission Over Parent Callbacks](ALGORITHMS.md#algo-no-callbacks), [Least Privilege Over Broad Privilege](ALGORITHMS.md#algo-no-broad-privilege), [Saga Compensation Over Distributed 2PC](ALGORITHMS.md#algo-no-distributed-2pc), [Async Events Over Synchronous Cross-Boundary](ALGORITHMS.md#algo-no-sync-cross-boundary), [Injected Dependency Over Hidden](ALGORITHMS.md#algo-no-hidden-dependency), [Anti-Corruption Layer Over Cross-Context Leak](ALGORITHMS.md#algo-no-leaky-context), [Placement Isolation](ALGORITHMS.md#algo-placement-isolation)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```typescript
 import { SqlFooStore } from "./infra/sql";
@@ -7393,6 +9303,8 @@ class FooService {
   store = new SqlFooStore();
 }
 ```
+
+After
 
 ```typescript
 interface FooStore {
@@ -7412,12 +9324,17 @@ Details
 
 Intent
 Define explicit interfaces with preconditions, postconditions, invariants, error semantics, version rules, and compatibility guarantees before implementation.
+
 Invariant
 Interfaces are executable promises between independently changeable parts.
+
+Flow
 
 ```text
 Intent → Interface → Preconditions → Postconditions → Compatibility → Implementation
 ```
+
+Productions
 
 ```bnf
 InterfaceContract ::= <InterfaceName> "," <OperationSet> "," <PreconditionSet> "," <PostconditionSet> "," <InvariantSet> "," <ErrorContract> "," <VersionContract>
@@ -7426,16 +9343,23 @@ CompatibilityRule ::= "backward_compatible" | "forward_compatible" | "breaking_c
 
 Composes
 none
+
 Composed by
 [Composed Turn Contract](ALGORITHMS.md#algo-composed-turn-contract), [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function doFoo(a, b, n) {}
 ```
+
+After
 
 ```typescript
 interface FooOp {
@@ -7452,12 +9376,17 @@ Details
 
 Intent
 Validate that every implementation of an abstraction preserves the abstraction’s behavior, accepts valid parent inputs, returns valid parent outputs, and does not strengthen forbidden constraints.
+
 Invariant
 Polymorphism is safe only when behavioral subtyping holds.
+
+Flow
 
 ```text
 Interface → Implementation → ContractCheck → Substitute|Reject
 ```
+
+Productions
 
 ```bnf
 Substitutability ::= <BaseContract> "->" <CandidateImplementation> "->" <BehavioralCompatibilityCheck> "->" <SubstitutionVerdict>
@@ -7466,10 +9395,14 @@ BehavioralCompatibilityCheck ::= "preconditions_not_stronger" "," "postcondition
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class ReadOnlyFooStore extends FooStore {
@@ -7478,6 +9411,8 @@ class ReadOnlyFooStore extends FooStore {
   }
 }
 ```
+
+After
 
 ```typescript
 interface FooReader {
@@ -7502,12 +9437,17 @@ Details
 
 Intent
 Normalize incoming data into a canonical schema, validate types and semantics, preserve one source of truth, and translate at system boundaries only.
+
 Invariant
 Semantic consistency requires one canonical model and controlled translation at edges.
+
+Flow
 
 ```text
 RawData → Validate → Normalize → CanonicalModel → BoundaryTranslation
 ```
+
+Productions
 
 ```bnf
 CanonicalDataFlow ::= <ExternalData> "->" <SchemaValidation> "->" <Canonicalization> "->" <CanonicalModel> "->" <BoundaryAdapter>
@@ -7516,18 +9456,25 @@ CanonicalModel ::= <Schema> "," <TypeRules> "," <SemanticRules> "," <Normalizati
 
 Composes
 none
+
 Composed by
 [Token Source-of-Truth](ALGORITHMS.md#algo-token-source-of-truth), [Type-Keyed Appearance](ALGORITHMS.md#algo-type-keyed-appearance), [Seed Composition](ALGORITHMS.md#algo-seed-composition), [Composed Turn Contract](ALGORITHMS.md#algo-composed-turn-contract), [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema), [Canonical Config Resolution](ALGORITHMS.md#algo-canonical-config-resolution)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function useFoo(raw) {
   const name = raw.name ?? raw.Name ?? raw.title;
 }
 ```
+
+After
 
 ```typescript
 function toCanonicalFoo(raw: unknown): Foo {
@@ -7544,12 +9491,17 @@ Details
 
 Intent
 Identify bounded contexts, define ubiquitous language inside each context, map relationships between contexts, and use anti-corruption layers when semantics differ.
+
 Invariant
 Domain architecture protects meaning by making semantic boundaries explicit.
+
+Flow
 
 ```text
 Domain → BoundedContext → Language → ContextMap → TranslationBoundary
 ```
+
+Productions
 
 ```bnf
 DomainBoundary ::= <DomainModel> "->" <BoundedContextSet> "->" <UbiquitousLanguageSet> "->" <ContextMap> "->" <IntegrationPolicy>
@@ -7558,17 +9510,24 @@ IntegrationPolicy ::= "shared_kernel" | "customer_supplier" | "anti_corruption_l
 
 Composes
 none
+
 Composed by
 [Architectural Contract Algebra](ALGORITHMS.md#algo-architectural-contract-algebra), [Type-Keyed Appearance](ALGORITHMS.md#algo-type-keyed-appearance)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```typescript
 fooContext.use(sharedBaz);
 barContext.use(sharedBaz);
 ```
+
+After
 
 ```typescript
 function toBarBaz(f: FooBaz): BarBaz {
@@ -7585,12 +9544,17 @@ Details
 
 Intent
 Require every component to declare identity, capabilities, contracts, dependencies, configuration, health model, and version metadata in a machine-readable manifest.
+
 Invariant
 Runtime systems become discoverable and governable when components describe themselves.
+
+Flow
 
 ```text
 Component → Manifest → CapabilityDeclaration → Discovery → Validation
 ```
+
+Productions
 
 ```bnf
 SelfDescription ::= <Component> "->" <Manifest> "->" <CapabilitySet> "->" <ContractReferenceSet> "->" <RuntimeRegistration>
@@ -7599,12 +9563,17 @@ Manifest ::= "identity" "," "version" "," "capabilities" "," "dependencies" "," 
 
 Composes
 none
+
 Composed by
 [Manifest-Driven Documentation](ALGORITHMS.md#algo-manifest-driven-documentation), [Custom Type Registration](ALGORITHMS.md#algo-custom-type-registration), [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema)
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [ai_governance](SCHEMA.md#force-ai-governance)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```typescript
 export class FooPlugin {
@@ -7613,6 +9582,8 @@ export class FooPlugin {
   }
 }
 ```
+
+After
 
 ```typescript
 export const manifest = {
@@ -7633,12 +9604,17 @@ Details
 
 Intent
 Discover available components by manifest, convention, registry, or service endpoint; validate discovered candidates against contracts; bind dynamically only after compatibility checks.
+
 Invariant
 Dynamic binding is safe only when discovery is filtered by explicit contracts.
+
+Flow
 
 ```text
 DiscoverySource → CandidateSet → ContractValidation → Binding → RuntimeUse
 ```
+
+Productions
 
 ```bnf
 RuntimeDiscovery ::= <DiscoveryMechanism> "->" <CandidateComponentSet> "->" <CapabilityMatch> "->" <ContractValidation> "->" <BindingDecision>
@@ -7647,18 +9623,26 @@ DiscoveryMechanism ::= "manifest" | "registry" | "service_discovery" | "conventi
 
 Composes
 none
+
 Composed by
 [Runtime Extensibility](ALGORITHMS.md#algo-runtime-extensibility), [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Principle
 [Runtime Discovery](PRINCIPLES.md#arch-runtime-discovery)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const plugin = new KnownFooPlugin();
 ```
+
+After
 
 ```typescript
 const candidates = registry.discover({ capability: "transform" });
@@ -7674,12 +9658,17 @@ Details
 
 Intent
 Define stable extension contracts, register implementations through IoC or plugin registries, isolate plugin failures, and expose deterministic loading order.
+
 Invariant
 Extensibility requires stable hooks, controlled registration, and observable binding.
+
+Flow
 
 ```text
 ExtensionContract → PluginRegistration → DependencyInjection → Isolation → Dispatch
 ```
+
+Productions
 
 ```bnf
 ExtensionArchitecture ::= <ExtensionPoint> "->" <PluginContract> "->" <PluginRegistry> "->" <BindingPolicy> "->" <FailureIsolation>
@@ -7688,12 +9677,17 @@ BindingPolicy ::= "dependency_injection" | "service_registry" | "service_locator
 
 Composes
 none
+
 Composed by
 [Manifest-Driven Documentation](ALGORITHMS.md#algo-manifest-driven-documentation), [Custom Type Registration](ALGORITHMS.md#algo-custom-type-registration), [Composed Turn Contract](ALGORITHMS.md#algo-composed-turn-contract), [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Grounds
 none
+
+Before
 
 ```typescript
 switch (kind) {
@@ -7705,6 +9699,8 @@ switch (kind) {
     break;
 }
 ```
+
+After
 
 ```typescript
 registry.register("foo", fooHandler);
@@ -7721,12 +9717,17 @@ Details
 
 Intent
 Hide object creation behind factories, builders, prototypes, or abstract factories so callers depend on creation contracts rather than concrete constructors.
+
 Invariant
 Creation logic is a boundary and should be replaceable independently from usage logic.
+
+Flow
 
 ```text
 CreationRequest → ConstructionContract → Factory|Builder|Prototype → Instance
 ```
+
+Productions
 
 ```bnf
 ConstructionBoundary ::= <CreationIntent> "->" <ConstructionStrategy> "->" <InstanceContract> "->" <ConstructedObject>
@@ -7735,16 +9736,23 @@ ConstructionStrategy ::= "factory" | "factory_method" | "abstract_factory" | "bu
 
 Composes
 none
+
 Composed by
 [Governed Construction Boundary](ALGORITHMS.md#algo-governed-construction-boundary)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [object_creation](SCHEMA.md#force-object-creation)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const c = new FooConnection(host, port, user, pw);
 ```
+
+After
 
 ```typescript
 const c = fooConnectionFactory.create(config);
@@ -7759,12 +9767,17 @@ Details
 
 Intent
 Insert adapters, facades, proxies, bridges, or decorators where incompatible structure, access control, abstraction separation, or behavior layering is required.
+
 Invariant
 Structural patterns reshape access without corrupting the core contract.
+
+Flow
 
 ```text
 ClientNeed → StructuralMismatch → MediatingPattern → CompatibleInterface
 ```
+
+Productions
 
 ```bnf
 StructuralMediation ::= <ClientContract> "->" <MismatchType> "->" <StructuralPattern> "->" <CompatibleBoundary>
@@ -7773,14 +9786,20 @@ StructuralPattern ::= "adapter" | "facade" | "proxy" | "bridge" | "decorator"
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```typescript
 legacyFooApi.call(new FooXmlPayload(foo));
 ```
+
+After
 
 ```typescript
 class FooAdapter implements FooPort {
@@ -7800,12 +9819,17 @@ Details
 
 Intent
 Externalize variable behavior into strategies, template hooks, observers, or mediators while preserving stable orchestration contracts.
+
 Invariant
 Behavioral variation belongs behind dispatch contracts, not scattered conditionals.
+
+Flow
 
 ```text
 StableFlow → VariationPoint → DispatchPattern → RuntimeBehavior
 ```
+
+Productions
 
 ```bnf
 BehavioralDispatch ::= <StableOperation> "->" <VariationPoint> "->" <BehaviorPattern> "->" <SelectedBehavior>
@@ -7814,10 +9838,14 @@ BehaviorPattern ::= "strategy" | "template_method" | "observer" | "mediator" | "
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function handleFoo(f) {
@@ -7828,6 +9856,8 @@ function handleFoo(f) {
   }
 }
 ```
+
+After
 
 ```typescript
 const strategies: Record<FooKind, FooStrategy> = {
@@ -7848,12 +9878,17 @@ Details
 
 Intent
 Select an architectural style by dependency direction, deployment needs, domain size, team topology, and change isolation requirements; enforce style through boundary rules.
+
 Invariant
 Architecture style is a macro-contract for dependency flow and deployment shape.
+
+Flow
 
 ```text
 SystemForces → StyleSelection → BoundaryRules → FitnessValidation
 ```
+
+Productions
 
 ```bnf
 ArchitectureStyle ::= <SystemForces> "->" <Style> "->" <BoundaryRuleSet> "->" <FitnessFunctionSet>
@@ -7862,16 +9897,23 @@ Style ::= "hexagonal" | "ports_and_adapters" | "clean_architecture" | "layered" 
 
 Composes
 none
+
 Composed by
 [Cascade Layer Partition](ALGORITHMS.md#algo-cascade-layer-partition)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```typescript
 import { SqlDriver } from "../infra/sql";
 ```
+
+After
 
 ```typescript
 export const boundaries = { ui: ["app"], app: ["domain"], domain: [] };
@@ -7886,12 +9928,17 @@ Details
 
 Intent
 Place domain logic behind inbound and outbound ports, implement external technology through adapters, and forbid domain dependence on infrastructure.
+
 Invariant
 The domain remains stable by depending on ports, not delivery or persistence mechanisms.
+
+Flow
 
 ```text
 UseCase → InboundPort → DomainLogic → OutboundPort → Adapter
 ```
+
+Productions
 
 ```bnf
 PortAdapterFlow ::= <ExternalDriver> "->" <InboundAdapter> "->" <InboundPort> "->" <UseCase> "->" <OutboundPort> "->" <OutboundAdapter>
@@ -7900,12 +9947,17 @@ DependencyDirection ::= "adapter_depends_on_port" "," "domain_depends_on_abstrac
 
 Composes
 none
+
 Composed by
 [Persistence Fork](ALGORITHMS.md#algo-persistence-fork)
+
 Forces
 [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```typescript
 class FooUseCase {
@@ -7914,6 +9966,8 @@ class FooUseCase {
   }
 }
 ```
+
+After
 
 ```typescript
 interface FooOutPort {
@@ -7933,12 +9987,17 @@ Details
 
 Intent
 Convert state changes into events, classify domain versus integration events, publish through durable channels, consume idempotently, and preserve ordering where required.
+
 Invariant
 Event-driven systems trade immediate consistency for decoupled causal propagation.
+
+Flow
 
 ```text
 StateChange → Event → Publish → Consume → IdempotentEffect → Consistency
 ```
+
+Productions
 
 ```bnf
 EventMessaging ::= <StateChange> "->" <EventClassification> "->" <MessageEnvelope> "->" <BrokerOrBus> "->" <Consumer> "->" <EffectPolicy>
@@ -7948,10 +10007,14 @@ EffectPolicy ::= "idempotent" "," "retryable" "," "observable" "," "ordered_if_r
 
 Composes
 none
+
 Forces
 [event_messaging](SCHEMA.md#force-event-messaging), [domain_boundary](SCHEMA.md#force-domain-boundary), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function doFoo(f) {
@@ -7960,6 +10023,8 @@ async function doFoo(f) {
   await stepQux(f);
 }
 ```
+
+After
 
 ```typescript
 async function doFoo(f) {
@@ -7977,12 +10042,17 @@ Details
 
 Intent
 For long-running distributed workflows, split work into steps, persist progress, define compensating actions, and recover from partial failure through forward or backward correction.
+
 Invariant
 Distributed transactions require explicit process state and compensation.
+
+Flow
 
 ```text
 Workflow → StepGraph → LocalTransaction → Event → Compensation|Continue
 ```
+
+Productions
 
 ```bnf
 Saga ::= <SagaState> "->" <Step> "->" <LocalTransaction> "->" <ProgressEvent> "->" (<NextStep> | <CompensatingTransaction>)
@@ -7991,15 +10061,21 @@ SagaStep ::= <Command> "," <SuccessEvent> "," <FailureEvent> "," <CompensationCo
 
 Composes
 none
+
 Forces
 [event_messaging](SCHEMA.md#force-event-messaging)
+
 Grounds
 none
+
+Before
 
 ```typescript
 await reserveFoo(x);
 await reserveBar(x);
 ```
+
+After
 
 ```typescript
 const saga = [
@@ -8018,12 +10094,17 @@ Details
 
 Intent
 Define atomic state-change boundaries, isolate concurrent mutation, enforce consistency rules, and commit or roll back as a unit.
+
 Invariant
 Correct state change requires explicit transaction scope and isolation semantics.
+
+Flow
 
 ```text
 Command → UnitOfWork → Invariants → Commit|Rollback
 ```
+
+Productions
 
 ```bnf
 TransactionBoundary ::= <Command> "->" <TransactionScope> "->" <InvariantCheck> "->" <ConcurrencyControl> "->" <CommitDecision>
@@ -8032,19 +10113,27 @@ ConcurrencyControl ::= "optimistic_locking" | "pessimistic_locking" | "serial_ex
 
 Composes
 none
+
 Composed by
 [State and Transaction Safety](ALGORITHMS.md#algo-state-and-transaction-safety), [Architectural Contract Algebra](ALGORITHMS.md#algo-architectural-contract-algebra)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [state_transaction](SCHEMA.md#force-state-transaction)
+
 Principle
 [Transaction Boundary](PRINCIPLES.md#arch-transaction-boundary)
+
 Grounds
 none
+
+Before
 
 ```typescript
 decFoo(a, n);
 incBar(b, n);
 ```
+
+After
 
 ```typescript
 await unitOfWork(async (tx) => {
@@ -8062,12 +10151,17 @@ Details
 
 Intent
 Assign a stable operation identity, check whether the effect was already applied, execute only once, and return the same semantic result for repeated requests.
+
 Invariant
 External side effects must be repeat-safe under retries.
+
+Flow
 
 ```text
 Request → IdempotencyKey → PriorResultCheck → ExecuteOnce → PersistOutcome
 ```
+
+Productions
 
 ```bnf
 Idempotency ::= <Request> "->" <IdempotencyKey> "->" <DeduplicationStore> "->" (<PriorResult> | <SideEffectExecution>) "->" <StableResponse>
@@ -8076,18 +10170,25 @@ StableResponse ::= "same_key_same_effect_same_semantic_result"
 
 Composes
 none
+
 Composed by
 [Idempotent Merge](ALGORITHMS.md#algo-idempotent-merge)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [state_transaction](SCHEMA.md#force-state-transaction), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```typescript
 async function applyFoo(req) {
   await external.apply(req.value);
 }
 ```
+
+After
 
 ```typescript
 async function applyFoo(req) {
@@ -8107,12 +10208,17 @@ Details
 
 Intent
 Push nondeterminism to system edges, keep core logic pure where possible, use immutable inputs, and make outputs reproducible under identical inputs.
+
 Invariant
 Correctness improves when the core is deterministic and side effects are controlled.
+
+Flow
 
 ```text
 ExternalInput → Normalize → PureCore → DeterministicOutput → ControlledEffect
 ```
+
+Productions
 
 ```bnf
 DeterministicCore ::= <Input> "->" <Canonicalization> "->" <PureFunctionSet> "->" <Output> "->" <EffectBoundary>
@@ -8121,18 +10227,25 @@ PurityConstraint ::= "no_hidden_state" "," "no_hidden_time" "," "no_hidden_rando
 
 Composes
 none
+
 Composed by
 [Correctness Verification](ALGORITHMS.md#algo-correctness-verification), [Deterministic Merge Core](ALGORITHMS.md#algo-deterministic-merge-core)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```typescript
 function scoreFoo(f) {
   return f.base * (Date.now() % 2 ? 1.1 : 1);
 }
 ```
+
+After
 
 ```typescript
 function scoreFoo(f: Foo, now: Date) {
@@ -8149,12 +10262,17 @@ Details
 
 Intent
 Define executable architecture rules, validate with static analysis, specification tests, property tests, and runtime checks, then block release when critical rules fail.
+
 Invariant
 Architecture must be continuously verified by fitness functions.
+
+Flow
 
 ```text
 Rule → Test → Evidence → Pass|Fail → Gate
 ```
+
+Productions
 
 ```bnf
 VerificationFitness ::= <SpecificationSet> "->" <VerificationMethodSet> "->" <EvidenceSet> "->" <FitnessVerdict>
@@ -8163,16 +10281,23 @@ VerificationMethod ::= "type_check" | "static_analysis" | "schema_validation" | 
 
 Composes
 none
+
 Composed by
 [Layer Fitness Enforcement](ALGORITHMS.md#algo-layer-fitness-enforcement)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```typescript
 reviewChecklist.push("domain must not import infra");
 ```
+
+After
 
 ```typescript
 test("domain imports no infra", () =>
@@ -8188,12 +10313,17 @@ Details
 
 Intent
 Detect invalid state early, fail fast for programmer errors, fail safe for recoverable runtime faults, fail secure for security-sensitive failures, and return typed errors.
+
 Invariant
 Error handling is a contract for containment, disclosure, and recovery.
+
+Flow
 
 ```text
 Operation → Guard → ErrorClass → BoundaryPolicy → RecoveryOrAbort
 ```
+
+Productions
 
 ```bnf
 ErrorBoundary ::= <Operation> "->" <PreconditionCheck> "->" <ErrorClassification> "->" <FailurePolicy> "->" <ResultContract>
@@ -8202,12 +10332,17 @@ FailurePolicy ::= "fail_fast" | "fail_safe" | "fail_secure" | "graceful_degradat
 
 Composes
 none
+
 Composed by
 [Governed Construction Boundary](ALGORITHMS.md#algo-governed-construction-boundary)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
+
+Before
 
 ```typescript
 try {
@@ -8216,6 +10351,8 @@ try {
   return null;
 }
 ```
+
+After
 
 ```typescript
 try {
@@ -8236,12 +10373,17 @@ Details
 
 Intent
 Wrap remote or unreliable calls with timeout, retry, circuit breaker, bulkhead isolation, fallback, and backpressure policies.
+
 Invariant
 Resilience is controlled failure under resource and dependency stress.
+
+Flow
 
 ```text
 Call → Timeout → RetryPolicy → CircuitBreaker → Bulkhead → Fallback
 ```
+
+Productions
 
 ```bnf
 ResilienceControl ::= <ExternalCall> "->" <TimeoutPolicy> "->" <RetryPolicy> "->" <CircuitBreaker> "->" <Bulkhead> "->" <FallbackPolicy> "->" <BackpressurePolicy>
@@ -8250,16 +10392,23 @@ RetryPolicy ::= "bounded_attempts" "," "jittered_backoff" "," "idempotency_requi
 
 Composes
 none
+
 Composed by
 [Quality Governance Loop](ALGORITHMS.md#algo-quality-governance-loop)
+
 Forces
 [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const r = await callFoo(url);
 ```
+
+After
 
 ```typescript
 const r = await breaker.run(() => withTimeout(callFoo(url), 2000), {
@@ -8277,12 +10426,17 @@ Details
 
 Intent
 Continuously health-check services, isolate failed instances, fail over to redundancy, roll back unsafe releases, and use canary or blue-green deployment for controlled exposure.
+
 Invariant
 Deployment safety requires observable health and reversible rollout.
+
+Flow
 
 ```text
 Deploy → HealthCheck → TrafficShift → DetectFailure → Rollback|Promote
 ```
+
+Productions
 
 ```bnf
 RecoveryDeployment ::= <ReleaseCandidate> "->" <DeploymentStrategy> "->" <HealthSignalSet> "->" <PromotionDecision>
@@ -8291,14 +10445,20 @@ DeploymentStrategy ::= "blue_green" | "canary" | "rolling" | "rollback" | "auto_
 
 Composes
 none
+
 Forces
 [resilience_recovery](SCHEMA.md#force-resilience-recovery), [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Grounds
 none
+
+Before
 
 ```typescript
 deployAll(fooV2);
 ```
+
+After
 
 ```typescript
 canary(fooV2, { percent: 5, healthCheck });
@@ -8313,12 +10473,17 @@ Details
 
 Intent
 Attach correlation and causation identifiers to every operation, emit structured logs, metrics, traces, and audit records, then connect them into an explainable execution graph.
+
 Invariant
 A system is operable only when behavior can be reconstructed from evidence.
+
+Flow
 
 ```text
 Request → CorrelationID → Logs/Metrics/Traces → Audit → CausalGraph
 ```
+
+Productions
 
 ```bnf
 ObservabilityTrace ::= <Operation> "->" <CorrelationId> "->" <CausationId> "->" <TelemetryEventSet> "->" <TraceGraph> "->" <AuditRecord>
@@ -8327,16 +10492,23 @@ TelemetryEvent ::= "log" | "metric" | "trace_span" | "alert" | "audit_log"
 
 Composes
 none
+
 Composed by
 [Event and Messaging Consistency](ALGORITHMS.md#algo-event-and-messaging-consistency)
+
 Forces
 [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Grounds
 none
+
+Before
 
 ```typescript
 console.log("processing foo");
 ```
+
+After
 
 ```typescript
 logger.info("foo.process", {
@@ -8355,12 +10527,17 @@ Details
 
 Intent
 Model events as a dependency graph, assign causal metadata, preserve happens-before relationships, and reject or compensate for invalid ordering.
+
 Invariant
 Distributed correctness depends on causal ordering, not just timestamps.
+
+Flow
 
 ```text
 Event → CausalMetadata → DependencyGraph → OrderingValidation
 ```
+
+Productions
 
 ```bnf
 CausalityOrdering ::= <EventSet> "->" <CausalMetadataSet> "->" <DependencyGraph> "->" <OrderingPolicy>
@@ -8370,14 +10547,20 @@ DependencyGraph ::= "DAG"
 
 Composes
 none
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging), [causality_ordering](SCHEMA.md#force-causality-ordering)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```typescript
 events.sort((a, b) => a.timestamp - b.timestamp);
 ```
+
+After
 
 ```typescript
 events.sort(byVectorClock);
@@ -8392,12 +10575,17 @@ Details
 
 Intent
 Measure workload, identify bottlenecks, choose vertical or horizontal scaling, partition load, cache safe data, enforce rate limits, and benchmark continuously.
+
 Invariant
 Scalability is achieved by measured bottleneck removal, not speculative optimization.
+
+Flow
 
 ```text
 Workload → Profile → Bottleneck → ScaleStrategy → Benchmark → Feedback
 ```
+
+Productions
 
 ```bnf
 PerformanceScaling ::= <WorkloadModel> "->" <ProfilingResult> "->" <BottleneckAnalysis> "->" <ScalingStrategy> "->" <OptimizationPolicy> "->" <BenchmarkResult>
@@ -8406,14 +10594,20 @@ ScalingStrategy ::= "vertical_scaling" | "horizontal_scaling" | "load_balancing"
 
 Composes
 none
+
 Forces
 [performance_scaling](SCHEMA.md#force-performance-scaling)
+
 Grounds
 none
+
+Before
 
 ```typescript
 optimizeEverywhere(app);
 ```
+
+After
 
 ```typescript
 const hot = profile(load).topBottleneck();
@@ -8430,12 +10624,17 @@ Details
 
 Intent
 Cache only data with defined freshness, key identity, invalidation triggers, consistency expectations, and fallback behavior.
+
 Invariant
 Caching is safe only when staleness and invalidation are explicit.
+
+Flow
 
 ```text
 Data → CacheKey → FreshnessPolicy → Invalidation → ReadThrough|Bypass
 ```
+
+Productions
 
 ```bnf
 CacheContract ::= <CacheableData> "->" <CacheKey> "->" <FreshnessPolicy> "->" <InvalidationPolicy> "->" <ConsistencyPolicy>
@@ -8444,14 +10643,20 @@ ConsistencyPolicy ::= "strong" | "eventual" | "read_your_writes" | "bounded_stal
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```typescript
 cache.set(key, value);
 ```
+
+After
 
 ```typescript
 cache.set(key, value, {
@@ -8470,12 +10675,17 @@ Details
 
 Intent
 Externalize configuration, standardize protocols, isolate platform assumptions, package runtime dependencies, and validate parity across environments.
+
 Invariant
 Portable systems separate behavior from deployment substrate.
+
+Flow
 
 ```text
 Code → ExternalConfig → StandardProtocol → Container|Package → EnvironmentParity
 ```
+
+Productions
 
 ```bnf
 PortabilityContract ::= <ApplicationCore> "->" <ConfigurationExternalization> "->" <ProtocolBoundary> "->" <InfrastructureAdapter> "->" <EnvironmentValidation>
@@ -8484,14 +10694,20 @@ EnvironmentValidation ::= "dev" "," "test" "," "staging" "," "production" "," "p
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const db = connect("driver://prod-host:5432");
 ```
+
+After
 
 ```typescript
 const db = connect(config.databaseUrl);
@@ -8506,12 +10722,17 @@ Details
 
 Intent
 Threat-model the system, reduce attack surface, authenticate identity, authorize actions, validate input, encode output, encrypt data, protect secrets, and enforce policy continuously.
+
 Invariant
 Security is a default-deny contract over identity, data, and operations.
+
+Flow
 
 ```text
 ThreatModel → Identity → Authorization → Validation → Protection → Audit
 ```
+
+Productions
 
 ```bnf
 SecurityPolicy ::= <ThreatModel> "->" <IdentityProof> "->" <AccessDecision> "->" <InputOutputGuard> "->" <DataProtection> "->" <PolicyEnforcement> "->" <SecurityAudit>
@@ -8521,16 +10742,23 @@ DataProtection ::= "encryption_at_rest" "," "encryption_in_transit" "," "secrets
 
 Composes
 none
+
 Composed by
 [Governed Construction Boundary](ALGORITHMS.md#algo-governed-construction-boundary)
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [ai_governance](SCHEMA.md#force-ai-governance)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```typescript
 if (user) allowFoo();
 ```
+
+After
 
 ```typescript
 if (!policy.can(user, "foo:write", resource)) throw forbidden();
@@ -8546,12 +10774,17 @@ Details
 
 Intent
 Assess architecture against quality attributes, record decisions, analyze impact, enforce standards with fitness functions, and evolve through documented change.
+
 Invariant
 Architecture governance preserves intentionality while allowing controlled evolution.
+
+Flow
 
 ```text
 Assessment → Decision → Impact → FitnessFunction → Evolution
 ```
+
+Productions
 
 ```bnf
 GovernanceEvolution ::= <ArchitectureAssessment> "->" <ReviewProcess> "->" <DecisionRecord> "->" <ImpactAnalysis> "->" <FitnessFunctionSet> "->" <EvolutionPlan>
@@ -8560,16 +10793,23 @@ DecisionRecord ::= "ADR" "," "context" "," "decision" "," "consequences" "," "st
 
 Composes
 [Architecture Assessment](ALGORITHMS.md#algo-architecture-assessment)
+
 Composed by
 [Type-Migration Centralization](ALGORITHMS.md#algo-type-migration-centralization), [Version Provenance](ALGORITHMS.md#algo-version-provenance)
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
 
+Before
+
 ```text
-Architectural decisions live in someone's memory; nothing records why Foo was chosen over Bar.
+Architectural decisions live in the developer's memory; nothing records why Foo was chosen over Bar.
 ```
+
+After
 
 ```text
 assessment{Foo vs Bar} -> ADR{context, decision, consequences, status} -> impact-analysis -> fitness-function{enforces it} -> evolution{revisit via a new ADR}
@@ -8584,12 +10824,17 @@ Details
 
 Intent
 Separate control concerns from data execution, centralize policy/configuration/authentication/logging where beneficial, and decentralize runtime execution where autonomy is required.
+
 Invariant
 A control plane coordinates policy while data planes execute work.
+
+Flow
 
 ```text
 Policy → ControlPlane → DistributedExecution → Feedback
 ```
+
+Productions
 
 ```bnf
 ControlPlane ::= <PolicySet> "->" <CentralizedCoordination> "->" <DataPlaneSet> "->" <TelemetryFeedback> "->" <PolicyAdjustment>
@@ -8598,18 +10843,26 @@ CentralizedCoordination ::= "configuration" | "authentication" | "authorization"
 
 Composes
 none
+
 Composed by
 [Control Plane Coordination](ALGORITHMS.md#algo-control-plane-coordination)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [security_governance](SCHEMA.md#force-security-governance), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Principle
 [Control Plane](PRINCIPLES.md#arch-control-plane)
+
 Grounds
 none
+
+Before
 
 ```text
 Every service reads its own ad-hoc config and does its own auth — policy is scattered and drifts.
 ```
+
+After
 
 ```text
 policy{central} -> control-plane{config, auth, orchestration} -> data-planes{Foo, Bar execute work} -> telemetry-feedback -> policy-adjustment
@@ -8624,12 +10877,17 @@ Details
 
 Intent
 Represent behavior as data, validate the model or DSL, compile or interpret it into runtime behavior, and restrict reflection or code generation behind safety contracts.
+
 Invariant
 Metaprogramming is safe when code-as-data has schema, validation, and bounded execution.
+
+Flow
 
 ```text
 Model → Schema → Compile|Interpret → RuntimeBehavior → SafetyCheck
 ```
+
+Productions
 
 ```bnf
 DeclarativeMetaprogramming ::= <ProgramModel> "->" <ModelSchema> "->" <TransformationEngine> "->" <GeneratedOrInterpretedBehavior> "->" <SafetyBoundary>
@@ -8638,14 +10896,20 @@ TransformationEngine ::= "reflection" | "introspection" | "compile_time_evaluati
 
 Composes
 none
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling)
+
 Grounds
 none
+
+Before
 
 ```typescript
 eval(fooExpression);
 ```
+
+After
 
 ```typescript
 const ast = parse(fooDsl, GRAMMAR);
@@ -8662,12 +10926,17 @@ Details
 
 Intent
 Process data sequentially through bounded pipeline stages, preserve forward-only semantics where required, apply backpressure, and keep stages stateless unless state is explicitly modeled.
+
 Invariant
 Streaming systems are contracts over flow, order, pressure, and bounded memory.
+
+Flow
 
 ```text
 Source → Stage → Stage → Sink → Checkpoint
 ```
+
+Productions
 
 ```bnf
 StreamingDataflow ::= <Source> "->" <PipelineStageSet> "->" <BackpressurePolicy> "->" <CheckpointPolicy> "->" <Sink>
@@ -8677,15 +10946,21 @@ ProcessingMode ::= "single_pass" | "lazy_evaluation" | "sequential_access" | "fo
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [streaming_dataflow](SCHEMA.md#force-streaming-dataflow)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const all = await loadAllFoo();
 return all.map(toBar).filter(isBaz);
 ```
+
+After
 
 ```typescript
 fooSource
@@ -8694,7 +10969,7 @@ fooSource
   .pipe(sink, { backpressure: true });
 ```
 
-### AI Model Governance
+### Model Lifecycle Governance
 
 - Math type: [logic](REASONING.md#reason-math-type-logic)
 - Yields: boolean
@@ -8703,12 +10978,17 @@ Details
 
 Intent
 Register models and datasets, version prompts and artifacts, evaluate behavior against benchmarks, validate safety constraints, trace inference inputs, and monitor drift after deployment.
+
 Invariant
-AI systems require governance over data, model, inference, evaluation, and explanation.
+Model-backed systems require governance over data, model, inference, evaluation, and explanation.
+
+Flow
 
 ```text
 ModelArtifact → Registry → Evaluation → SafetyCheck → InferenceTrace → Monitoring
 ```
+
+Productions
 
 ```bnf
 AIModelGovernance ::= <ModelArtifact> "->" <ModelRegistry> "->" <EvaluationSuite> "->" <SafetyPolicy> "->" <InferenceContract> "->" <MonitoringPolicy>
@@ -8717,14 +10997,20 @@ InferenceContract ::= "input_schema" "," "retrieval_context" "," "model_version"
 
 Composes
 none
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [security_governance](SCHEMA.md#force-security-governance), [ai_governance](SCHEMA.md#force-ai-governance)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [security_governance](SCHEMA.md#force-security-governance), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const out = model.run(prompt);
 ```
+
+After
 
 ```typescript
 const out = registry.model("foo@2.1").run({ input, promptVersion: "p7" });
@@ -8741,12 +11027,17 @@ Details
 
 Intent
 Retrieve knowledge from indexed sources, validate relevance and freshness, ground generation in retrieved evidence, and distinguish known, inferred, and unsupported output.
+
 Invariant
 Retrieval-augmented systems must separate source evidence from generated synthesis.
+
+Flow
 
 ```text
 Query → Retrieve → Rank → Ground → Generate → Cite|Reject
 ```
+
+Productions
 
 ```bnf
 RAGBoundary ::= <UserQuery> "->" <Retriever> "->" <CandidateEvidenceSet> "->" <RelevanceValidation> "->" <GroundedGeneration> "->" <EvidenceDisclosure>
@@ -8755,16 +11046,23 @@ EvidenceDisclosure ::= "supported" | "partially_supported" | "unsupported_reject
 
 Composes
 none
+
 Composed by
 [Profile Compose](ALGORITHMS.md#algo-profile-compose), [Delta Capture](ALGORITHMS.md#algo-delta-capture)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const answer = model.generate(query);
 ```
+
+After
 
 ```typescript
 const ev = retrieve(query);
@@ -8781,12 +11079,17 @@ Details
 
 Intent
 Given a concern, classify its force type, select the corresponding contract family, compose required invariants, bind implementation patterns, and attach validation gates.
+
 Invariant
 Architectural patterns are reusable only when selected by force, not by name.
+
+Flow
 
 ```text
 Concern → ForceType → ContractFamily → PatternSet → ValidationGate
 ```
+
+Productions
 
 ```bnf
 ArchitectureSelection ::= <Concern> "->" <ForceFamily> "->" <ContractFamily> "->" <ImplementationPatternSet> "->" <ValidationGateSet>
@@ -8795,14 +11098,20 @@ ForceFamily ::= "modularity" | "compatibility" | "semantics" | "extension" | "st
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
+Before
+
 ```text
-A pattern chosen by name ('let's use Foo') before the force it must resolve is even known.
+A pattern chosen by name ('let's use Foo') before the force it must resolve is known.
 ```
+
+After
 
 ```text
 concern -> force{change-isolation} -> contract-family{deployment-boundary} -> pattern{selected by force, not by name} -> validation-gate
@@ -8817,12 +11126,17 @@ Details
 
 Intent
 For any architectural concern, define its intent, boundary, contract, invariants, allowed variation, forbidden leakage, validation strategy, observability model, and evolution policy.
+
 Invariant
 Every architecture principle can be operationalized as a bounded contract with verification and change rules.
+
+Flow
 
 ```text
 Intent → Boundary → Contract → Invariants → Variation → Validation → Evolution
 ```
+
+Productions
 
 ```bnf
 UniversalConcern ::= <Intent> "->" <Boundary> "->" <Contract> "->" <InvariantSet> "->" <AllowedVariationSet> "->" <ForbiddenLeakageSet> "->" <ValidationStrategy> "->" <ObservabilityModel> "->" <EvolutionPolicy>
@@ -8831,14 +11145,20 @@ Contract ::= <Input> "," <Output> "," <Preconditions> "," <Postconditions> "," <
 
 Composes
 none
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [ai_governance](SCHEMA.md#force-ai-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [model_governance](SCHEMA.md#force-model-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A principle stated as prose ('be modular') with no operational contract.
 ```
+
+After
 
 ```text
 intent -> boundary -> contract{in, out, pre, post} -> invariants -> allowed-variation -> forbidden-leakage -> validation -> observability -> evolution
@@ -8852,12 +11172,17 @@ Details
 
 Intent
 <Classify architectural force> -> <Declare boundary> -> <Define contract> -> <Choose pattern> -> <Bind implementation> -> <Verify invariant> -> <Observe runtime> -> <Govern evolution>
+
 Invariant
 Architecture becomes reproducible when every named principle is reduced to a force, every force becomes a contract, every contract has invariants, and every invariant has validation.
+
+Flow
 
 ```text
 Force → Contract → Pattern → Implementation → Verification → Operation → Evolution
 ```
+
+Productions
 
 ```bnf
 ArchitecturalContractAlgebra ::= <Force> "->" <Boundary> "->" <Contract> "->" <Pattern> "->" <Implementation> "->" <Verification> "->" <Observation> "->" <Evolution>
@@ -8870,8 +11195,10 @@ Evolution ::= <VersioningPolicy> | <CompatibilityPolicy> | <MigrationPolicy> | <
 
 Composes
 [Domain Boundary](ALGORITHMS.md#algo-domain-boundary), [Transaction Boundary](ALGORITHMS.md#algo-transaction-boundary)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
 
@@ -8884,12 +11211,17 @@ Details
 
 Intent
 For a module whose public surface is machine-derivable, make its metadata manifest the single documentation source of truth: authored narrative lives in mandated, shape-validated manifest fields (with self-expanding custom fields), the API surface is collected deterministically from the built type-declarations, one marker-layered document is compiled per module from both, and a governance router runs the context-detection rules on the manifest strings where a manifest governs (rendering each field to its markdown fragment first) and on the document itself where none exists. Beyond the module document, a manifest may declare typed documents — each a form plus concern that routes through the pure location function to a computed path — generated and drift-checked the same way, so the manifest is the single content generator with no separate template mechanism.
+
 Invariant
 A module's document is well-formed iff it recompiles byte-identical from its manifest docs-block plus its derived surface, its docs-block satisfies the mandated schema with every custom field a renderable shape, and every governed string passes the context rules reported at its manifest field; the manifest, where present, is the governed surface and the document is exempt and drift-checked.
+
+Flow
 
 ```text
 Manifest → AuthoredField → DerivedSurface → SectionDeriver → MarkerLayer → Compilation → GovernanceRouter → DriftGate
 ```
+
+Productions
 
 ```bnf
 ModuleDocument ::= <ManifestAuthoredFields> "+" <DerivedSurface> "->" <SectionDeriverResolution> "->" <MarkerLayerTemplate> "->" <Compilation> "->" <DriftGate>
@@ -8899,14 +11231,20 @@ TypedDocument ::= <FormConcernName> "->" <LocationRouter> "->" <BodySections> "-
 
 Composes
 [Document Truth Alignment](ALGORITHMS.md#algo-document-truth-alignment), [Self-Description Manifest](ALGORITHMS.md#algo-self-description-manifest), [Extension Point](ALGORITHMS.md#algo-extension-point)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
+
+Before
 
 ```text
 A README hand-authored as prose that drifts from the exports it claims to document.
 ```
+
+After
 
 ```text
 manifest.docs{authored} + derivedSurface{from .d.ts} -> section-derivers -> marker-template -> compile -> drift-gate{recompiles byte-identical, else fail}
@@ -8920,13 +11258,18 @@ manifest.docs{authored} + derivedSurface{from .d.ts} -> section-derivers -> mark
 Details
 
 Intent
-For any reusable package that must stay agnostic of the applications consuming it, hardcode zero consumer-specific truths in package source; declare every consumer-specific value in ONE consumer-owned config of typed sections, load it through a framework the leaf packages never import, and hand each package only the section it needs through an injection surface — so a package drops into any consumer without a literal about that consumer leaking through its source.
+For any reusable package that must stay agnostic of the applications consuming it, hardcode zero consumer-specific truths in package source; declare every consumer-specific value in one consumer-owned config of typed sections, load it through a framework the leaf packages never import, and hand each package only the section it needs through an injection surface — so a package drops into any consumer without a literal about that consumer leaking through its source.
+
 Invariant
 A package is consumer-agnostic iff every consumer-specific value it depends on arrives by injection at wiring time and no consumer token, path, or config-location appears in its source; the one consumer config is the single reader-visible source of those values and a static gate rejects any re-hardcoding.
+
+Flow
 
 ```text
 ConsumerValue → ConfigSection → FrameworkLoad → InjectionSurface → PackageConsumption → CouplingGate
 ```
+
+Productions
 
 ```bnf
 ConsumerConfigSSOT ::= <ConsumerValueSet> "->" <ConfigSectionSet> "->" <FrameworkLoad> "->" <InjectionSurface> "->" <PackageConsumption> "+" <CouplingGate>
@@ -8935,15 +11278,21 @@ InjectionSurface ::= <SettingsChannel> "|" <OptionsChannel> "|" <ArgvEnvChannel>
 
 Composes
 [Architectural Contract Kernel](ALGORITHMS.md#algo-architectural-contract-kernel), [Responsibility Boundary](ALGORITHMS.md#algo-responsibility-boundary)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const ROOT = "my-app";
 const cfg = read("../config/app.json");
 ```
+
+After
 
 ```typescript
 export function createFoo(opts: { root: string; store: FooStore }) {
@@ -8960,12 +11309,17 @@ Details
 
 Intent
 Model behavior as a finite set of states with explicit legal transitions, so illegal state combinations are unrepresentable.
+
 Invariant
 Every runtime state is one of the declared states and every transition is a declared edge.
+
+Flow
 
 ```text
 EnumerateStates → DefineEvents → DeclareTransitions → RejectUndeclared
 ```
+
+Productions
 
 ```bnf
 FiniteStateMachine ::= <EnumerateStates> "->" <DefineEvents> "->" <DeclareTransitions> "->" <RejectUndeclared>
@@ -8973,14 +11327,20 @@ FiniteStateMachine ::= <EnumerateStates> "->" <DefineEvents> "->" <DeclareTransi
 
 Composes
 [State Pattern](ALGORITHMS.md#algo-state-pattern), [Structural Core](ALGORITHMS.md#algo-structural-core)
+
 Composed by
 [Statecharts](ALGORITHMS.md#algo-statecharts)
+
 Forces
 boolean-flag-soup (illegal-states)
+
 Principle
 [Finite State Machine](PRINCIPLES.md#arch-finite-state-machine)
+
 Grounds
 none
+
+Before
 
 ```typescript
 let isOpen = false,
@@ -8991,6 +11351,8 @@ function onClick() {
   if (isOpen) isOpen = false;
 }
 ```
+
+After
 
 ```typescript
 type FooState = "closed" | "loading" | "open" | "error";
@@ -9014,12 +11376,17 @@ Details
 
 Intent
 Extend a flat state machine with hierarchy and parallel regions, so independent concerns compose without state explosion.
+
 Invariant
 Independent behavioral concerns live in separate parallel regions rather than a cross product of flat states.
+
+Flow
 
 ```text
 IdentifyIndependentConcerns → NestRelatedStates → SeparateParallelRegions → GuardTransitions
 ```
+
+Productions
 
 ```bnf
 Statecharts ::= <IdentifyIndependentConcerns> "->" <NestRelatedStates> "->" <SeparateParallelRegions> "->" <GuardTransitions>
@@ -9027,16 +11394,23 @@ Statecharts ::= <IdentifyIndependentConcerns> "->" <NestRelatedStates> "->" <Sep
 
 Composes
 [Finite State Machine](ALGORITHMS.md#algo-finite-state-machine), [Separation of Concerns](ALGORITHMS.md#algo-separation-of-concerns)
+
 Forces
 flat-state-explosion (combinatorial-growth)
+
 Principle
 [Statecharts](PRINCIPLES.md#arch-statecharts)
+
 Grounds
 none
+
+Before
 
 ```typescript
 type S = "idleMuted" | "idleLoud" | "playingMuted" | "playingLoud";
 ```
+
+After
 
 ```typescript
 const fooChart = {
@@ -9055,12 +11429,17 @@ Details
 
 Intent
 Model concurrent flow as places, tokens, and transitions, so reachability and deadlock are analyzable before runtime.
+
 Invariant
 Concurrent progress is expressed as token flow through transitions whose enabling conditions are explicit.
+
+Flow
 
 ```text
 DefinePlaces → PlaceTokens → DefineTransitions → AnalyzeReachability → AssertNoDeadlock
 ```
+
+Productions
 
 ```bnf
 PetriNet ::= <DefinePlaces> "->" <PlaceTokens> "->" <DefineTransitions> "->" <AnalyzeReachability> "->" <AssertNoDeadlock>
@@ -9068,12 +11447,17 @@ PetriNet ::= <DefinePlaces> "->" <PlaceTokens> "->" <DefineTransitions> "->" <An
 
 Composes
 [Concurrency Correctness](ALGORITHMS.md#algo-concurrency-correctness), [Correctness Core](ALGORITHMS.md#algo-correctness-core)
+
 Forces
 ad-hoc-lock-ordering (deadlock)
+
 Principle
 [Petri Nets](PRINCIPLES.md#arch-petri-nets)
+
 Grounds
 none
+
+Before
 
 ```typescript
 acquire(a);
@@ -9082,6 +11466,8 @@ work();
 release(b);
 release(a);
 ```
+
+After
 
 ```typescript
 const net = petriNet({
@@ -9103,12 +11489,17 @@ Details
 
 Intent
 Size a system from arrival and service rates, so capacity and wait time are predicted rather than guessed.
+
 Invariant
 Utilization stays below one and predicted wait time is derived from the arrival/service-rate model.
+
+Flow
 
 ```text
 MeasureArrivalRate → MeasureServiceRate → ComputeUtilization → PredictWaitTime → SizeServers
 ```
+
+Productions
 
 ```bnf
 QueuingModel ::= <MeasureArrivalRate> "->" <MeasureServiceRate> "->" <ComputeUtilization> "->" <PredictWaitTime> "->" <SizeServers>
@@ -9116,16 +11507,23 @@ QueuingModel ::= <MeasureArrivalRate> "->" <MeasureServiceRate> "->" <ComputeUti
 
 Composes
 [Capacity Planning](ALGORITHMS.md#algo-capacity-planning), [Performance Core](ALGORITHMS.md#algo-performance-core)
+
 Forces
 guess-based-capacity (saturation)
+
 Principle
 [Queuing Theory](PRINCIPLES.md#arch-queuing-theory)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const workers = 4;
 ```
+
+After
 
 ```typescript
 const rho = arrivalRate / (workers * serviceRate);
@@ -9135,7 +11533,7 @@ const avgWaitMs = mm1WaitTime({ arrivalRate, serviceRate, servers: workers });
 
 ## automation
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -9194,12 +11592,17 @@ Details
 
 Intent
 Detect static implementation patterns, classify whether they are intentional or problematic, measure maintainability pressure, verify convention strength, and automate only when stability or fallback exists.
+
 Invariant
 Static code is not debt by default; automation requires evidence that dynamism reduces maintenance risk without increasing fragility.
+
+Flow
 
 ```text
 StaticPattern → Classification → PressureMetric → ConventionStrength → Automate|RetainStatic|DesignFallback
 ```
+
+Productions
 
 ```bnf
 AutomationReadiness ::= <StaticPattern> "->" <OpportunityClassification> "->" <MaintainabilityAssessment> "->" <ConventionAssessment> "->" <AutomationDecision>
@@ -9208,14 +11611,20 @@ AutomationDecision ::= "automate" | "retain_static" | "formalize_convention_firs
 
 Composes
 none
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```text
 A static list rewritten as dynamic discovery on sight, adding fragility for no gain.
 ```
+
+After
 
 ```text
 static pattern -> classify intentional vs problematic -> maintainability pressure + convention strength -> {automate | retain static | formalize convention first}
@@ -9232,12 +11641,17 @@ Details
 
 Intent
 Express discovery, reading, searching, validation, persistence, and reporting as semantic operations, then delegate concrete mechanics to runtime adapters.
+
 Invariant
 Dynamic architecture must be portable across runtimes by separating automation intent from platform execution.
+
+Flow
 
 ```text
 SemanticVerb → AdapterCapability → RuntimeAction → Evidence
 ```
+
+Productions
 
 ```bnf
 RuntimeNeutralBoundary ::= <SemanticOperation> "->" <AdapterMapping> "->" <RuntimeExecution> "->" <EvidenceResult>
@@ -9247,14 +11661,20 @@ AdapterMapping ::= <CapabilityStatus> "," <RuntimeConstraint> "," <FallbackPolic
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Automation logic hardcodes a runtime's glob and path, so it runs on one platform only.
 ```
+
+After
 
 ```text
 semantic op{DISCOVER/READ/SEARCH/VALIDATE/PERSIST} -> adapter maps to the runtime -> portable core, no platform mechanics inside
@@ -9271,12 +11691,17 @@ Details
 
 Intent
 Detect operation mode, bind allowed actions, prohibit source mutation outside implementation mode, and emit analysis, design, implementation, or validation artifacts accordingly.
+
 Invariant
 Automation design and automation execution are separate contracts.
+
+Flow
 
 ```text
 DetectMode → BindPermissions → EnforceMutationGate → ExecuteAllowedScope → EmitArtifact
 ```
+
+Productions
 
 ```bnf
 AutomationMode ::= "analysis_only" | "analysis_and_design" | "implementation" | "validation_only"
@@ -9286,16 +11711,23 @@ PermissionSet ::= "read_only" | "design_only" | "write_authorized" | "validate_o
 
 Composes
 none
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Analysis silently mutates source; a design run also implements.
 ```
+
+After
 
 ```text
 detect mode{analysis | design | implementation | validation} -> bind permissions -> mutation only in implementation mode -> mode-legal artifact
@@ -9312,12 +11744,17 @@ Details
 
 Intent
 Declare required capabilities, probe availability, emulate missing behavior where safe, disclose unavailable capability, and downgrade confidence or block dependent operations.
+
 Invariant
 Automation systems must not silently assume filesystem, execution, persistence, validation, or search capabilities.
+
+Flow
 
 ```text
 CapabilityRequirement → Probe → Available|Emulated|Unavailable → ConfidencePolicy
 ```
+
+Productions
 
 ```bnf
 CapabilityDegradation ::= <RequiredCapabilitySet> "->" <CapabilityProbeSet> "->" <CapabilityVerdict> "->" <ExecutionPolicy>
@@ -9327,16 +11764,23 @@ ExecutionPolicy ::= "execute" | "emulate" | "skip_with_disclosure" | "block"
 
 Composes
 none
+
 Composed by
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```text
 Automation assumes it can execute and persist, then fails silently when it can't.
 ```
+
+After
 
 ```text
 required capabilities -> probe -> {full | degraded | blocked} -> execute | emulate | skip-with-disclosure | block
@@ -9353,12 +11797,17 @@ Details
 
 Intent
 Search target scope for manual registries, hardcoded references, static lists, and duplicated discovery logic; then classify each finding with count, location, role, and maintenance signal.
+
 Invariant
 Automation candidates emerge from repeated manual coordination points.
+
+Flow
 
 ```text
 TargetScope → DetectionProcedures → PatternGroups → ClassificationRegistry
 ```
+
+Productions
 
 ```bnf
 OpportunityDetection ::= <TargetScope> "->" <DetectionProcedureSet> "->" <PatternClassificationSet>
@@ -9368,16 +11817,23 @@ OpportunityClassification ::= <Location> "," <PatternType> "," <Count> "," <Main
 
 Composes
 none
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
 
+Before
+
 ```text
-Automation targets guessed, not found from real coordination points.
+Automation targets guessed instead of found from repeated manual coordination points.
 ```
+
+After
 
 ```text
 scope -> detect{manual registration, hardcoded reference, static list, duplicated discovery} -> classify{location, type, count, maintenance signal}
@@ -9394,12 +11850,17 @@ Details
 
 Intent
 For each static pattern, compare size, frequency, stability, and risk; classify small or stable patterns as intentionally static candidates instead of automation debt.
+
 Invariant
 Keeping a static list may be correct when the domain is bounded and explicitness improves safety.
+
+Flow
 
 ```text
 StaticFinding → ScaleCheck → ChangeFrequencyCheck → RiskCheck → IntentionalStatic|AutomationCandidate
 ```
+
+Productions
 
 ```bnf
 StaticSeparation ::= <StaticFinding> "->" <ScaleMetric> "->" <MutationEvidence> "->" <RiskAssessment> "->" <StaticVerdict>
@@ -9408,16 +11869,23 @@ StaticVerdict ::= "intentionally_static_candidate" | "automation_candidate" | "n
 
 Composes
 none
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 A small, stable, bounded static list flagged as debt and automated away.
 ```
+
+After
 
 ```text
 static finding -> scale + change-frequency + risk -> {intentionally-static candidate | automation candidate | needs more evidence}
@@ -9434,12 +11902,17 @@ Details
 
 Intent
 Measure current item count, estimate growth rate, compare against cognitive and maintenance limits, compute time or units until threshold breach, and assign severity.
+
 Invariant
 Automation priority should be driven by scale pressure, not aesthetic preference.
+
+Flow
 
 ```text
 CurrentScale + GrowthRate + Limits → BreakingPoint → Severity
 ```
+
+Productions
 
 ```bnf
 BreakingPoint ::= <CurrentCount> "," <GrowthRate> "," <LimitSet> "->" <ThresholdProjection> "->" <PriorityRank>
@@ -9449,14 +11922,20 @@ PriorityRank ::= "critical" | "high" | "medium" | "low"
 
 Composes
 none
+
 Forces
 [performance_scaling](SCHEMA.md#force-performance-scaling)
+
 Grounds
 none
+
+Before
 
 ```text
 Automation prioritized by aesthetic preference, not scale pressure.
 ```
+
+After
 
 ```text
 current count + growth rate + limits{cognitive, maintenance, duplication} -> time until breach -> severity
@@ -9473,12 +11952,17 @@ Details
 
 Intent
 Convert breaking points into urgency scores using severity, projected time-to-break, affected scope, and expected maintenance cost, then sort candidate migrations.
+
 Invariant
 Automation work should be sequenced by operational impact.
+
+Flow
 
 ```text
 BreakingPoints → UrgencyMetric → ImpactMetric → PriorityOrder
 ```
+
+Productions
 
 ```bnf
 PriorityOrdering ::= <BreakingPointSet> "->" <PriorityScoreSet> "->" <SortedAutomationBacklog>
@@ -9487,16 +11971,23 @@ PriorityScore ::= <PriorityRank> "+" <TimeToBreak> "+" <AffectedScope> "+" <Main
 
 Composes
 none
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 Migrations tackled in arbitrary order, low-impact first.
 ```
+
+After
 
 ```text
 breaking points -> urgency{severity + time-to-break + scope + maintenance cost} -> sorted backlog
@@ -9513,12 +12004,17 @@ Details
 
 Intent
 Discover related resources, extract naming tokens and organization patterns, calculate consistency percentages, and mark auto-discovery readiness only when convention strength passes threshold.
+
 Invariant
 Convention-based discovery is safe only when conventions are measurable.
+
+Flow
 
 ```text
 RelatedResources → TokenExtraction → ConsistencyMetric → Strength → Readiness
 ```
+
+Productions
 
 ```bnf
 ConventionStrength ::= <ResourceSet> "->" <ConventionSignalSet> "->" <ConsistencyScore> "->" <StrengthVerdict>
@@ -9528,16 +12024,23 @@ ReadinessRule ::= "strong -> auto_discovery_ready" | "moderate -> formalize_firs
 
 Composes
 none
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 Auto-discovery built on a naming convention only 60% of files follow.
 ```
+
+After
 
 ```text
 related resources -> naming tokens + organization -> consistency % -> {strong -> auto-ready | moderate -> formalize | weak -> establish convention first}
@@ -9554,12 +12057,17 @@ Details
 
 Intent
 Search for inheritance, composition, shared method contracts, and shared schema contracts; group similar implementations; infer interface candidates when implementation count exceeds threshold.
+
 Invariant
 Dynamic discovery requires an explicit or inferable contract boundary.
+
+Flow
 
 ```text
 ImplementationSet → ContractSignals → InterfaceCandidate → ExtensionContract
 ```
+
+Productions
 
 ```bnf
 ExtensionInterfaceDiscovery ::= <ImplementationPatternSet> "->" <ContractEvidence> "->" <InterfaceCandidateSet>
@@ -9569,14 +12077,20 @@ InterfaceCandidate ::= <InterfaceName> "," <ImplementationCount> "," <RequiredCo
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 Dynamic discovery attempted with no contract boundary to validate against.
 ```
+
+After
 
 ```text
 implementations -> contract signals{inheritance, composition, common methods, common schema} -> interface candidate when count exceeds threshold
@@ -9593,12 +12107,17 @@ Details
 
 Intent
 Measure current resource counts, project tenfold and hundredfold growth, assess manual maintenance feasibility, and identify where dynamic discovery becomes necessary.
+
 Invariant
 Automation architecture should be evaluated against future scale, not only current scale.
+
+Flow
 
 ```text
 CurrentScale → 10xProjection → 100xProjection → ManualFeasibility → DiscoveryNeed
 ```
+
+Productions
 
 ```bnf
 ScalabilityProjection ::= <CurrentScale> "->" <GrowthScenarioSet> "->" <MaintenanceFeasibilitySet> "->" <AutomationNeed>
@@ -9608,16 +12127,23 @@ AutomationNeed ::= "manual_ok" | "dynamic_recommended" | "dynamic_required"
 
 Composes
 none
+
 Composed by
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [performance_scaling](SCHEMA.md#force-performance-scaling)
+
 Grounds
 none
+
+Before
 
 ```text
 Automation judged against today's 5 items, not tomorrow's 500.
 ```
+
+After
 
 ```text
 current scale -> 10x + 100x projection -> manual feasibility -> {manual ok | dynamic recommended | dynamic required}
@@ -9634,12 +12160,17 @@ Details
 
 Intent
 Estimate discovery and loading cost, compare large-scale cost against performance targets, introduce caching only when justified, and record failure modes.
+
 Invariant
 Dynamic discovery must not hide runtime performance debt.
+
+Flow
 
 ```text
 ItemCount → DiscoveryCost → LoadingCost → CacheNeed → PerformanceVerdict
 ```
+
+Productions
 
 ```bnf
 DiscoveryPerformanceDesign ::= <ScaleMetric> "->" <CostEstimateSet> "->" <CacheDecision> "->" <FailureModeSet>
@@ -9649,14 +12180,20 @@ CacheDecision ::= "cache_required" | "cache_not_required"
 
 Composes
 none
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [performance_scaling](SCHEMA.md#force-performance-scaling)
+
 Grounds
 none
+
+Before
 
 ```text
 Dynamic discovery ships, hiding a per-startup scan cost that grows with scale.
 ```
+
+After
 
 ```text
 item count -> {discovery cost, loading cost, memory} vs targets -> cache only when justified -> failure modes recorded
@@ -9673,12 +12210,17 @@ Details
 
 Intent
 Infer extension contracts, define discovery conventions, validate discovered implementations against the contract, preserve manual registration fallback, and report discovered, skipped, failed, and manual items.
+
 Invariant
 Dynamic loading must be contract-validated and observable.
+
+Flow
 
 ```text
 Contract → Discovery → Filter → Validate → Load|Skip → Report
 ```
+
+Productions
 
 ```bnf
 DynamicExtensionArchitecture ::= <ExtensionContract> "->" <DiscoveryMechanism> "->" <ContractValidation> "->" <LoadingPolicy> "->" <ObservabilityReport>
@@ -9688,18 +12230,26 @@ ObservabilityReport ::= "discovered_count" "," "manual_count" "," "skipped_count
 
 Composes
 none
+
 Composed by
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Grounds
 none
+
+Before
 
 ```text
 Implementations loaded dynamically with no contract validation, unobservable.
 ```
+
+After
 
 ```text
 contract -> discovery -> contract-validate -> {load valid | skip invalid | manual override | isolate failure} -> report{discovered, manual, skipped, failed}
@@ -9716,12 +12266,17 @@ Details
 
 Intent
 Group duplicated hardcoded references, derive resolver names, define scope-safe resolution rules, provide configuration override fallback, and map each old reference to a resolver migration.
+
 Invariant
 Hardcoded resource access should be centralized only through validated resolution boundaries.
+
+Flow
 
 ```text
 HardcodedReferenceGroup → Resolver → ScopeValidation → OverrideFallback → MigrationMap
 ```
+
+Productions
 
 ```bnf
 ReferenceResolver ::= <ReferenceGroup> "->" <ResolverDefinition> "->" <ScopePolicy> "->" <FallbackOverride> "->" <ReplacementMap>
@@ -9731,14 +12286,20 @@ FallbackOverride ::= "configuration_override"
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 The same hardcoded path duplicated at a dozen call sites.
 ```
+
+After
 
 ```text
 reference group -> resolver -> scope-safe rule -> config override fallback -> map each old reference to the resolver
@@ -9755,12 +12316,17 @@ Details
 
 Intent
 Define cache keys by scope, convention, adapter version, and implementation identity; invalidate by resource change, explicit request, time expiry, or implementation version change.
+
 Invariant
 Caching dynamic discovery is safe only when invalidation semantics are explicit.
+
+Flow
 
 ```text
 CacheSubject → CacheKey → Duration → InvalidationTrigger → Refresh
 ```
+
+Productions
 
 ```bnf
 CacheStrategy ::= <CacheSubject> "->" <CacheKey> "->" <CacheDuration> "->" <InvalidationPolicy>
@@ -9770,14 +12336,20 @@ InvalidationPolicy ::= "resource_change" | "explicit_invalidation" | "time_expir
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 Discovery results cached with no invalidation, serving stale data forever.
 ```
+
+After
 
 ```text
 cache subject -> key{scope, convention, adapter version, identity} -> invalidate on{resource change, explicit, time, implementation change}
@@ -9794,12 +12366,17 @@ Details
 
 Intent
 Keep explicit registration paths for non-conforming or exceptional implementations, order manual entries deterministically, and report manual items separately from auto-discovered items.
+
 Invariant
 Automation should reduce manual maintenance, not remove escape hatches.
+
+Flow
 
 ```text
 AutoDiscovery → NonConformingItem → ManualRegistration → DeterministicMerge → Observability
 ```
+
+Productions
 
 ```bnf
 ManualFallback ::= <DiscoveredSet> "," <ManualSet> "->" <Validation> "->" <DeterministicMerge> "->" <FallbackReport>
@@ -9809,14 +12386,20 @@ FallbackReport ::= "manual_items_listed_separately"
 
 Composes
 none
+
 Forces
 [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```text
 Auto-discovery removes the escape hatch — a non-conforming item can't be registered.
 ```
+
+After
 
 ```text
 auto-discovery + manual registration for exceptions -> deterministic merge -> manual items reported separately
@@ -9833,12 +12416,17 @@ Details
 
 Intent
 On individual discovery, loading, or validation failure, isolate the failing item, continue with valid items where safe, and report the failed item with reason.
+
 Invariant
 One bad extension must not collapse the whole dynamic system unless marked critical.
+
+Flow
 
 ```text
 ItemFailure → Isolate → ContinueSafeSubset → ReportFailure
 ```
+
+Productions
 
 ```bnf
 FailureIsolation ::= <ExtensionItem> "->" <FailureType> "->" <IsolationPolicy> "->" <ContinuationPolicy> "->" <FailureReport>
@@ -9848,14 +12436,20 @@ ContinuationPolicy ::= "continue" | "continue_with_warning" | "halt_if_systemic_
 
 Composes
 none
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 One bad extension crashes the whole dynamic system.
 ```
+
+After
 
 ```text
 item failure{discovery | loading | validation} -> isolate the item -> continue with valid ones -> report the failure; halt only if systemic or critical
@@ -9872,12 +12466,17 @@ Details
 
 Intent
 Locate composition roots, identify manual registrations and hardcoded references, compose updates that use discovery registries and centralized resolvers, and apply only in implementation mode.
+
 Invariant
-Dynamic architecture becomes real at composition boundaries.
+Dynamic architecture takes effect at composition boundaries.
+
+Flow
 
 ```text
 CompositionRoot → StaticPatternScan → UpdatePlan → Validate → ApplyOrPlan
 ```
+
+Productions
 
 ```bnf
 EntryPointMigration ::= <CompositionRootSet> "->" <StaticPatternSet> "->" <EntryPointUpdate> "->" <Validation> "->" <PersistencePolicy>
@@ -9886,18 +12485,26 @@ PersistencePolicy ::= "persist_only_in_implementation_mode" | "emit_plan_only"
 
 Composes
 none
+
 Composed by
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Discovery registries built but the composition root still hardcodes registrations.
 ```
+
+After
 
 ```text
 composition roots -> scan static patterns -> update to discovery + resolver -> validate -> persist only in implementation mode
@@ -9914,12 +12521,17 @@ Details
 
 Intent
 Run validation when execution is available; otherwise estimate from static evidence, label the result as estimated, and never report estimated performance as measured.
+
 Invariant
 Validation truthfulness requires provenance on every metric.
+
+Flow
 
 ```text
 ValidationNeed → CanMeasure? → MeasuredResult|EstimatedResult → ProvenanceLabel
 ```
+
+Productions
 
 ```bnf
 ValidationProvenance ::= <ValidationCheck> "->" <CapabilityCheck> "->" <ValidationResult> "->" <Provenance>
@@ -9929,14 +12541,20 @@ Rule ::= "estimated != measured"
 
 Composes
 none
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [performance_scaling](SCHEMA.md#force-performance-scaling)
+
 Grounds
 none
+
+Before
 
 ```text
 An estimated performance number reported as if it were measured.
 ```
+
+After
 
 ```text
 validation need -> can measure? -> {measured | estimated (labeled)} -> estimated is never reported as measured
@@ -9953,12 +12571,17 @@ Details
 
 Intent
 Validate generated contracts, registries, resolvers, plans, and entry point updates against schemas and architectural rules before saving or modifying any artifact.
+
 Invariant
 Generated architecture must satisfy structure before it becomes state.
+
+Flow
 
 ```text
 GeneratedArtifact → SchemaValidation → ArchitectureValidation → Persist|Reject
 ```
+
+Productions
 
 ```bnf
 PrePersistenceValidation ::= <GeneratedArtifact> "->" <SchemaCheck> "->" <ArchitectureCheck> "->" <PersistenceDecision>
@@ -9967,16 +12590,23 @@ PersistenceDecision ::= "persist" | "reject" | "emit_unpersisted_artifact"
 
 Composes
 none
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A generated resolver saved before it is checked against the architecture rules.
 ```
+
+After
 
 ```text
 generated artifact -> schema check -> architecture check -> {persist | reject | emit unpersisted}
@@ -9993,12 +12623,17 @@ Details
 
 Intent
 Load or initialize the automation knowledge base, merge new detections, conventions, scalability concerns, architecture designs, migration history, and validation outcomes, then persist when capability exists.
+
 Invariant
 Automation systems improve when each session updates durable architectural memory.
+
+Flow
 
 ```text
 SessionFindings → KnowledgeMerge → PersistenceCheck → Store|ReportPreparedUpdate
 ```
+
+Productions
 
 ```bnf
 KnowledgeCapture ::= <KnowledgeBase> "," <SessionFindings> "->" <MergedKnowledge> "->" <KnowledgePersistenceStatus>
@@ -10008,16 +12643,23 @@ KnowledgePersistenceStatus ::= "persisted" | "prepared_not_persisted"
 
 Composes
 none
+
 Composed by
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [performance_scaling](SCHEMA.md#force-performance-scaling), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Each automation session forgets the last — the same analysis re-run.
 ```
+
+After
 
 ```text
 knowledge base + session findings -> merge{detections, conventions, scale, designs, migration, validation} -> persist when capability exists
@@ -10034,12 +12676,17 @@ Details
 
 Intent
 Summarize detected patterns, convention readiness, scalability pressure, dynamic architecture, generated artifacts, implementation status, measured versus estimated validation, and limitations.
+
 Invariant
 Automation reports must separate design intent from applied implementation and disclose degraded capability.
+
+Flow
 
 ```text
 SessionArtifacts → Metrics → ValidationProvenance → Limitations → UserReport
 ```
+
+Productions
 
 ```bnf
 AutomationReport ::= <DetectionSummary> "," <ConventionSummary> "," <ScalabilitySummary> "," <ArchitectureSummary> "," <ImplementationSummary> "," <PerformanceValidationSummary> "," <KnowledgeUpdateSummary> "," <Limitations>
@@ -10047,16 +12694,23 @@ AutomationReport ::= <DetectionSummary> "," <ConventionSummary> "," <Scalability
 
 Composes
 none
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [performance_scaling](SCHEMA.md#force-performance-scaling)
+
 Grounds
 none
 
+Before
+
 ```text
-A report that conflates the design intent with what was actually applied.
+A report that conflates the design intent with what was applied.
 ```
+
+After
 
 ```text
 session -> {detection, convention, scale, architecture, implementation, measured-vs-estimated validation, limitations} -> report separating design from applied
@@ -10073,12 +12727,17 @@ Details
 
 Intent
 Mark the static-to-dynamic automation complete only when convention strength passed, a manual fallback is preserved, performance and architecture validation passed with measured provenance, and any degraded capability is disclosed; otherwise report planned-only or blocked.
+
 Invariant
 Automation completion is a verified terminal state — never a claim while convention, fallback, validation, or capability evidence is absent.
+
+Flow
 
 ```text
 CompletionCriteria → EvidenceCheck → CapabilityDisclosure → Complete|PlannedOnly|Blocked
 ```
+
+Productions
 
 ```bnf
 AutomationCompletionStatus ::= <CompletionCriteriaSet> "->" <EvidenceSet> "->" <CompletionVerdict>
@@ -10087,18 +12746,26 @@ CompletionVerdict ::= "automation_complete" | "planned_only" | "blocked"
 
 Composes
 none
+
 Composed by
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Named in the derivation of
 [Automation Kernel](ALGORITHMS.md#algo-automation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 'Automated' declared while the convention was never formalized, no fallback was preserved, and the validation was estimated not measured.
 ```
+
+After
 
 ```text
 convention strong + fallback preserved + performance validated + architecture validated + capability disclosed -> complete; else planned_only | blocked
@@ -10113,12 +12780,17 @@ Details
 
 Intent
 Load configuration, verify capabilities, initialize knowledge, detect static patterns, classify automation opportunity, analyze conventions, assess scale and performance, design dynamic architecture, optionally implement, validate, update knowledge, and report.
+
 Invariant
 Static-to-dynamic refactoring is a gated evidence pipeline that only automates when convention, fallback, performance, and validation contracts are satisfied.
+
+Flow
 
 ```text
 Init → Capabilities → Detect → Classify → Conventions → Scale → Design → Implement? → Validate → Knowledge → Report
 ```
+
+Productions
 
 ```bnf
 AutomationKernel ::= <Initialization> "->" <CapabilityDegradation> "->" <OpportunityDetection> "->" <StaticSeparation> "->" <BreakingPoint> "->" <ConventionStrength> "->" <ScalabilityProjection> "->" <DynamicExtensionArchitecture> "->" <ReferenceResolver> "->" <OptionalImplementation> "->" <ValidationProvenance> "->" <KnowledgeCapture> "->" <AutomationReport>
@@ -10127,8 +12799,10 @@ OptionalImplementation ::= "skip_unless_implementation_mode" | <EntryPointMigrat
 
 Composes
 [Capability Degradation](ALGORITHMS.md#algo-capability-degradation), [Scalability Projection](ALGORITHMS.md#algo-scalability-projection), [Dynamic Extension Architecture](ALGORITHMS.md#algo-dynamic-extension-architecture), [Knowledge Capture](ALGORITHMS.md#algo-knowledge-capture), [Entry Point Migration](ALGORITHMS.md#algo-entry-point-migration), [Automation Completion Status](ALGORITHMS.md#algo-automation-completion-status)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [performance_scaling](SCHEMA.md#force-performance-scaling), [streaming_dataflow](SCHEMA.md#force-streaming-dataflow)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -10136,28 +12810,41 @@ Derivation map
 
 orient
 [Automation Opportunity Detection](ALGORITHMS.md#algo-automation-opportunity-detection)
+
 see
 [Convention Strength Analysis](ALGORITHMS.md#algo-convention-strength-analysis)
+
 derive
 [Intentional Static Separation](ALGORITHMS.md#algo-intentional-static-separation)
+
 intent
 [Automation Priority Ordering](ALGORITHMS.md#algo-automation-priority-ordering)
+
 constrain
 [Automation Operation Mode](ALGORITHMS.md#algo-automation-operation-mode)
+
 project
 [Dynamic Extension Architecture](ALGORITHMS.md#algo-dynamic-extension-architecture)
+
 act
 [Entry Point Migration](ALGORITHMS.md#algo-entry-point-migration)
+
 verify
 [Architecture Validation Before Persistence](ALGORITHMS.md#algo-architecture-validation-before-persistence)
+
 commit
 [Automation Session Report](ALGORITHMS.md#algo-automation-session-report)
+
 terminate
 [Automation Completion Status](ALGORITHMS.md#algo-automation-completion-status)
+
+Before
 
 ```text
 A static pattern rewritten dynamic by intuition, with no convention, fallback, or validation.
 ```
+
+After
 
 ```text
 init -> capabilities -> detect -> classify -> conventions -> scale -> design -> optional implement -> validate -> knowledge -> report
@@ -10171,12 +12858,17 @@ Details
 
 Intent
 <Detect static coordination point> -> <Classify intentional vs problematic> -> <Measure scale pressure> -> <Verify convention strength> -> <Design dynamic contract> -> <Preserve fallback> -> <Validate performance and architecture> -> <Capture knowledge>
+
 Invariant
 Any static implementation should become dynamic only when the domain has stable conventions, bounded failure modes, observable discovery, and safe manual fallback.
+
+Flow
 
 ```text
 Static → Evidence → Convention → Contract → Discovery → Fallback → Validation → Memory
 ```
+
+Productions
 
 ```bnf
 AutomationConcern ::= <StaticPattern> "->" <EvidenceClassification> "->" <ConventionReadiness> "->" <DynamicArchitecture> "->" <FallbackPolicy> "->" <PerformanceValidation> "->" <KnowledgeUpdate> "->" <Report>
@@ -10185,14 +12877,16 @@ DynamicArchitecture ::= <ExtensionContract> "," <DiscoveryMechanism> "," <Centra
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [observability_traceability](SCHEMA.md#force-observability-traceability), [performance_scaling](SCHEMA.md#force-performance-scaling), [domain_boundary](SCHEMA.md#force-domain-boundary), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
 
 ## centralization
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -10219,7 +12913,7 @@ n_rollback_centered_execution["Rollback-Centered Execution"]
 n_pattern_specific_validation["Pattern-Specific Validation"]
 n_zero_duplication_verification["Zero-Duplication Verification"]
 n_validation_score["Validation Score"]
-n_user_decision_gate["User Decision Gate"]
+n_developer_decision_gate["Developer Decision Gate"]
 n_completion_truthfulness["Completion Truthfulness"]
 n_centralization_report["Centralization Report"]
 n_centralization_kernel["Centralization Kernel"]
@@ -10249,12 +12943,17 @@ Details
 
 Intent
 Express all workflow operations as semantic verbs, delegate runtime-specific mechanics to adapters, and prohibit repository-, shell-, framework-, model-, or path-specific logic from entering the core contract.
+
 Invariant
 Portable architecture separates intent from execution substrate.
+
+Flow
 
 ```text
 SemanticOperation → AdapterMapping → ConcreteExecution → EvidenceResult
 ```
+
+Productions
 
 ```bnf
 AdapterBoundary ::= <SemanticOperation> "->" <AdapterMapping> "->" <RuntimeAction> "->" <Result>
@@ -10264,16 +12963,23 @@ AdapterMapping ::= <CapabilityStatus> "," <RuntimeConstraint> "," <FallbackPolic
 
 Composes
 none
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [ai_governance](SCHEMA.md#force-ai-governance)
+[modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Centralization logic hardcodes a repo path and shell command, so it runs on one setup only.
 ```
+
+After
 
 ```text
 semantic op{DISCOVER/READ/SEARCH/APPLY_MIGRATION/VALIDATE} -> adapter maps to the runtime -> core carries no repo/shell/path/model
@@ -10290,12 +12996,17 @@ Details
 
 Intent
 Detect the requested operation mode, bind permitted capabilities, reject source mutation outside execution mode, and emit only artifacts valid for the current mode.
+
 Invariant
 Analysis, planning, execution, and validation are distinct contracts.
+
+Flow
 
 ```text
 DetectMode → BindPermissions → EnforceMutationPolicy → ExecuteModeScope → EmitModeArtifact
 ```
+
+Productions
 
 ```bnf
 MutationMode ::= "analysis_only" | "analysis_and_plan" | "execute_migration" | "validation_only"
@@ -10305,16 +13016,23 @@ ForbiddenActionSet ::= "NoSourceMutationUnlessExecuteMigration"
 
 Composes
 none
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 An analysis run silently migrates source; a plan run also executes.
 ```
+
+After
 
 ```text
 detect mode{analysis | plan | execute-migration | validation} -> bind permissions -> source mutation only in execute mode -> mode-legal artifact
@@ -10331,12 +13049,17 @@ Details
 
 Intent
 Declare required capabilities, probe or emulate each capability, mark unavailable capabilities explicitly, and downgrade confidence where capability gaps affect evidence quality.
+
 Invariant
 A workflow cannot silently rely on unavailable infrastructure.
+
+Flow
 
 ```text
 RequiredCapability → Probe → Available|Unavailable|Emulated → ConfidenceImpact
 ```
+
+Productions
 
 ```bnf
 CapabilityModel ::= <CapabilitySet> "->" <CapabilityStatusSet> "->" <CapabilityVerdict>
@@ -10346,14 +13069,20 @@ CapabilityVerdict ::= "full" | "degraded" | "blocked"
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 Centralization assumes it can search and write, failing silently when it can't.
 ```
+
+After
 
 ```text
 required capabilities -> probe/emulate -> {available | unavailable | emulated} -> confidence downgraded on a gap
@@ -10369,13 +13098,18 @@ required capabilities -> probe/emulate -> {available | unavailable | emulated} -
 Details
 
 Intent
-Extract the target pattern description, classify it into a known centralization category, select a search strategy, select a validation strategy, and request user decision only when classification remains ambiguous.
+Extract the target pattern description, classify it into a known centralization category, select a search strategy, select a validation strategy, and request the developer's decision only when classification remains ambiguous.
+
 Invariant
 Search must be shaped by pattern type before broad discovery begins.
+
+Flow
 
 ```text
 PatternDescription → ClassificationEvidence → PatternType → StrategySet
 ```
+
+Productions
 
 ```bnf
 PatternClassification ::= <PatternDescription> "->" <PatternType> "->" <SearchStrategy> "->" <ValidationStrategy>
@@ -10385,18 +13119,26 @@ StrategySet ::= <SearchStrategy> "," <RefactorApproach> "," <ValidationStrategy>
 
 Composes
 none
+
 Composed by
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Broad discovery launched before knowing what kind of pattern it is.
 ```
+
+After
 
 ```text
 pattern description -> type{style | utility | constant | config | structural | cross-resource} -> search strategy + validation strategy
@@ -10413,12 +13155,17 @@ Details
 
 Intent
 Determine whether the scattered pattern represents a duplication problem, default multiple-occurrence problems to replacement refactor, and require explicit debt justification for additive enhancement.
+
 Invariant
 Centralization is replacement, not merely abstraction creation.
+
+Flow
 
 ```text
 OccurrenceCount + PatternIntent → RefactorType → DebtPolicy
 ```
+
+Productions
 
 ```bnf
 RefactorIntent ::= <DuplicationEvidence> "->" <RefactorType> "->" <DebtPolicy>
@@ -10428,14 +13175,20 @@ DebtPolicy ::= "zero_duplication_required" | "explicit_retained_debt_required" |
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 A scattered pattern 'centralized' by adding an abstraction beside the old copies.
 ```
+
+After
 
 ```text
 occurrences + intent -> refactor type{replacement | additive | config | doc} -> replacement default; additive needs explicit debt justification
@@ -10452,12 +13205,17 @@ Details
 
 Intent
 Query available external or local guidance, extract best practices and anti-patterns, score research quality, and disclose reduced confidence when current external research is unavailable.
+
 Invariant
 Architectural plans must distinguish evidence-backed guidance from local-only inference.
+
+Flow
 
 ```text
 GuidanceNeed → ExternalOrLocalResearch → ExtractPrinciples → ScoreConfidence → ReportLimitations
 ```
+
+Productions
 
 ```bnf
 ResearchGuidance ::= <ResearchQuerySet> "->" <SourceSet> "->" <BestPracticeSet> "->" <AntiPatternSet> "->" <ConfidenceScore>
@@ -10467,18 +13225,26 @@ ConfidenceScore ::= <SourceCount> "+" <SourceQuality> "+" <Recency> "+" <Archite
 
 Composes
 none
+
 Composed by
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance)
+[model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 A plan built on local inference presented as best practice.
 ```
+
+After
 
 ```text
 guidance need -> external or local research -> best practices + anti-patterns -> confidence score -> disclose local-only limitation
@@ -10495,12 +13261,17 @@ Details
 
 Intent
 Search for the primary pattern, inspect match context, infer variants, add new variants to the search set, and repeat until no new variations appear or the iteration cap is reached.
+
 Invariant
 Duplicates rarely appear in one exact form; centralization must discover variation families.
+
+Flow
 
 ```text
 PrimaryPattern → Search → ContextRead → VariationExtract → ExpandedSearch → FixedPoint
 ```
+
+Productions
 
 ```bnf
 VariationDiscovery ::= <SearchPatternSet> "->" <MatchSet> "->" <ContextSet> "->" <VariationSet> "->" <SearchPatternSet>
@@ -10510,14 +13281,20 @@ VariationSet ::= <PrimaryVariation> | <PrimaryVariation> "," <DerivedVariationSe
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 One exact form of the duplicate found; its variants missed.
 ```
+
+After
 
 ```text
 primary pattern -> search -> read context -> infer variants -> expand the search set -> repeat until no new variations (or cap)
@@ -10534,12 +13311,17 @@ Details
 
 Intent
 For every discovered occurrence, record resource, location, local context, matched pattern, extracted value, occurrence role, variation type, and discovery iteration.
+
 Invariant
 Migration correctness depends on a complete occurrence ledger.
+
+Flow
 
 ```text
 Match → Context → OccurrenceRecord → Registry
 ```
+
+Productions
 
 ```bnf
 DetectionRegistry ::= <OccurrenceRecord> | <OccurrenceRecord> "," <DetectionRegistry>
@@ -10549,16 +13331,23 @@ VariationType ::= "primary" | "variant"
 
 Composes
 none
+
 Composed by
 [Canonical Variation Selection](ALGORITHMS.md#algo-canonical-variation-selection), [Migration Action Mapping](ALGORITHMS.md#algo-migration-action-mapping)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Occurrences half-tracked, so migration misses sites.
 ```
+
+After
 
 ```text
 each match + context -> occurrence record{resource, location, matched pattern, value, role, variation type, iteration} -> complete ledger
@@ -10575,12 +13364,17 @@ Details
 
 Intent
 Compare all detected variations by frequency, completeness, architectural fitness, and semantic coverage, then select the canonical implementation from evidence rather than preference.
+
 Invariant
 The centralized form must be derived from observed project semantics.
+
+Flow
 
 ```text
 DetectionRegistry → VariationMetrics → CanonicalCandidate → CanonicalVariation
 ```
+
+Productions
 
 ```bnf
 CanonicalSelection ::= <DetectionRegistry> "->" <VariationMetricSet> "->" <CanonicalVariation>
@@ -10590,16 +13384,23 @@ CanonicalVariation ::= <EvidenceDerivedImplementationForm>
 
 Composes
 [Detection Registry](ALGORITHMS.md#algo-detection-registry)
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 The centralized form chosen by preference, not by observed project semantics.
 ```
+
+After
 
 ```text
 detection registry -> metrics{frequency, completeness, semantic coverage, architecture fit} -> canonical form derived from evidence
@@ -10616,12 +13417,17 @@ Details
 
 Intent
 Load relevant architecture and validation guidance, inspect existing centralized patterns, check naming and capacity constraints, detect conflicts, and select a justified centralization target.
+
 Invariant
 A single source of truth must live in the correct architectural boundary.
+
+Flow
 
 ```text
 PatternType → ArchitectureRules → ExistingPatternScan → ConflictCheck → TargetSelection
 ```
+
+Productions
 
 ```bnf
 ArchitectureTargeting ::= <PatternType> "->" <GuidanceSet> "->" <ExistingCentralizationSet> "->" <ComplianceCheckSet> "->" <CentralizationTarget>
@@ -10631,14 +13437,20 @@ CentralizationTarget ::= <Category> "," <LocationPolicy> "," <NamingConvention> 
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A single source of truth placed in the wrong architectural boundary.
 ```
+
+After
 
 ```text
 pattern type -> guidance -> existing centralized patterns -> checks{naming, size, capacity, dependency direction, SRP} -> justified target
@@ -10654,13 +13466,18 @@ pattern type -> guidance -> existing centralized patterns -> checks{naming, size
 Details
 
 Intent
-Search existing centralized locations for the same or overlapping pattern, classify whether to reuse, extend, create a distinct target, or cancel, and require user decision when conflict resolution is not mechanically safe.
+Search existing centralized locations for the same or overlapping pattern, classify whether to reuse, extend, create a distinct target, or cancel, and require the developer's decision when conflict resolution is not mechanically safe.
+
 Invariant
 Avoid creating a second source of truth while attempting centralization.
+
+Flow
 
 ```text
 ExistingPatternSearch → ConflictDetected → ResolutionOptions → Decision
 ```
+
+Productions
 
 ```bnf
 ConflictResolution ::= <DuplicateCheck> "->" <ConflictState> "->" <Resolution>
@@ -10670,14 +13487,20 @@ Resolution ::= "reuse_existing" | "extend_existing" | "create_distinct_target" |
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 A second source of truth created because an existing one was never searched.
 ```
+
+After
 
 ```text
 search existing centralized locations -> conflict{none | overlap | duplicate | ambiguous} -> {reuse | extend | distinct | cancel}
@@ -10694,12 +13517,17 @@ Details
 
 Intent
 Convert every detection-registry occurrence into an explicit migration action, including old content, replacement strategy, skip policy, and justification requirement.
+
 Invariant
 Every occurrence must be migrated or explicitly justified.
+
+Flow
 
 ```text
 DetectionRegistry → MigrationActionSet → CoverageCheck
 ```
+
+Productions
 
 ```bnf
 MigrationMapping ::= <DetectionRegistry> "->" <MigrationActionSet>
@@ -10709,16 +13537,23 @@ MigrationStatus ::= "pending" | "migrated" | "skipped_with_justification"
 
 Composes
 [Detection Registry](ALGORITHMS.md#algo-detection-registry)
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Some occurrences migrated, others silently left behind.
 ```
+
+After
 
 ```text
 detection registry -> a migration action per occurrence{old content, replacement strategy, skip policy + justification} -> every occurrence migrated or justified
@@ -10735,12 +13570,17 @@ Details
 
 Intent
 Divide the refactor into ordered phases, attach actions, attach verification criteria, attach rollback behavior, and prevent progression until the phase verification passes.
+
 Invariant
 Refactoring should advance through verified checkpoints, not broad unverified edits.
+
+Flow
 
 ```text
 Phase → Actions → Verification → Pass|Rollback → NextPhase
 ```
+
+Productions
 
 ```bnf
 RefactorPhase ::= <PhaseNumber> "," <PhaseName> "," <ActionSet> "," <VerificationSet> "," <RollbackStrategy>
@@ -10750,14 +13590,20 @@ VerificationSet ::= <Check> | <Check> "," <VerificationSet>
 
 Composes
 none
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A broad unverified edit across all sites at once.
 ```
+
+After
 
 ```text
 phases -> actions + verification + rollback per phase -> no progression until the phase verification passes
@@ -10774,12 +13620,17 @@ Details
 
 Intent
 Create the centralized implementation, establish reference infrastructure, migrate all occurrences, delete old definitions, verify zero duplication, and run final validation.
+
 Invariant
 Zero-debt centralization requires replacement plus deletion plus verification.
+
+Flow
 
 ```text
 Centralize → Reference → Migrate → DeleteOld → VerifyZeroDuplication → Validate
 ```
+
+Productions
 
 ```bnf
 ReplacementRefactor ::= <CreateCentralImplementation> "->" <UpdateReferenceInfrastructure> "->" <MigrateOccurrences> "->" <DeleteOldDefinitions> "->" <ZeroDuplicationCheck> "->" <FinalValidation>
@@ -10788,16 +13639,23 @@ CompletionCondition ::= "all_occurrences_migrated_or_justified" "," "no_unapprov
 
 Composes
 none
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 An abstraction created but the old copies remain — two sources of truth.
 ```
+
+After
 
 ```text
 centralize -> reference infra -> migrate all -> delete old definitions -> verify zero duplication -> final validation
@@ -10814,12 +13672,17 @@ Details
 
 Intent
 When a proposed abstraction leaves old patterns in place, require explicit approval, document retained debt, define deprecation conditions, and prohibit calling the result complete centralization.
+
 Invariant
 Additive enhancement is not centralization unless debt is acknowledged and bounded.
+
+Flow
 
 ```text
 AdditivePlan → DebtDisclosure → Approval → DeprecationPlan → IncompleteOrDebtAcceptedStatus
 ```
+
+Productions
 
 ```bnf
 AdditiveDebtGate ::= <AdditiveEnhancement> "->" <DebtRecord> "->" <UserApproval> "->" <DeprecationPlan>
@@ -10829,14 +13692,20 @@ CentralizationStatus ::= "not_zero_debt" | "approved_debt" | "cancelled"
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 'Centralized' declared while the old patterns are still live and unowned.
 ```
+
+After
 
 ```text
 additive enhancement -> disclose retained debt -> approval -> deprecation plan -> never called complete centralization
@@ -10853,12 +13722,17 @@ Details
 
 Intent
 Before each destructive or high-risk phase, create a checkpoint, execute actions, verify results, and roll back immediately on critical action or verification failure.
+
 Invariant
 Migration safety requires a recovery path at every phase boundary.
+
+Flow
 
 ```text
 Checkpoint → ExecutePhase → VerifyPhase → Commit|Rollback
 ```
+
+Productions
 
 ```bnf
 RollbackExecution ::= <Checkpoint> "->" <ActionExecution> "->" <Verification> "->" <PhaseOutcome>
@@ -10868,14 +13742,20 @@ RollbackTrigger ::= "action_failure" | "verification_failure" | "critical_invari
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [streaming_dataflow](SCHEMA.md#force-streaming-dataflow), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A destructive migration phase runs with no recovery path.
 ```
+
+After
 
 ```text
 before each risky phase -> checkpoint -> execute -> verify -> commit | rollback on{action | verification | critical-invariant} failure
@@ -10892,12 +13772,17 @@ Details
 
 Intent
 Select validation checks by pattern type, execute or mark each unavailable, verify architecture compliance, check all known variations for orphaned duplicates, and compute validation score.
+
 Invariant
 Validation must match what was centralized.
+
+Flow
 
 ```text
 PatternType → ValidationSet → ExecuteChecks → DuplicationScan → Score → Status
 ```
+
+Productions
 
 ```bnf
 PatternValidation ::= <PatternType> "->" <ValidationCheckSet> "->" <ValidationResultSet> "->" <RemainingIssueSet> "->" <FinalStatus>
@@ -10907,14 +13792,20 @@ FinalStatus ::= "complete" | "incomplete"
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Validation runs generic checks unrelated to what was centralized.
 ```
+
+After
 
 ```text
 pattern type -> matched validation set -> execute -> scan every known variation for orphans -> validation score
@@ -10931,12 +13822,17 @@ Details
 
 Intent
 Search every known primary and variant pattern outside the approved centralized location, classify remaining matches as approved or orphaned, and require zero unapproved matches for replacement refactors.
+
 Invariant
 A single source of truth is invalid if old sources still exist.
+
+Flow
 
 ```text
 SearchPatterns → ExcludeCentralTarget → RemainingMatches → Approved?|Issue
 ```
+
+Productions
 
 ```bnf
 ZeroDuplication ::= <KnownVariationSet> "->" <ProjectSearch> "->" <RemainingMatchSet> "->" <DuplicationVerdict>
@@ -10946,16 +13842,23 @@ DuplicationVerdict ::= "zero_unapproved_duplication" | "remaining_duplicate_or_o
 
 Composes
 none
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 A single source of truth declared while old sources still exist elsewhere.
 ```
+
+After
 
 ```text
 known primary + variant patterns -> search all modules except the approved central location -> zero unapproved matches required
@@ -10972,12 +13875,17 @@ Details
 
 Intent
 Count total validation checks, count passed checks, divide safely, and mark complete only when the score is perfect and no remaining issues exist.
+
 Invariant
 Numerical validation is useful only when combined with issue absence.
+
+Flow
 
 ```text
 Checks → PassedChecks → SafeDivide → Score → Complete|Incomplete
 ```
+
+Productions
 
 ```bnf
 ValidationScore ::= <TotalChecks> "," <PassedChecks> "->" <SafeDivide> "->" <ScorePercent>
@@ -10987,20 +13895,26 @@ Status ::= "complete" | "incomplete"
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A 90% score reported as complete while issues remain.
 ```
 
+After
+
 ```text
 total checks + passed -> safe divide -> score; complete only when score == 100 AND remaining issues == 0
 ```
 
-### User Decision Gate
+### Developer Decision Gate
 
 - Stage: [intent](REASONING.md#stage-intent)
 - Axis: [teleology](REASONING.md#reason-axis-teleology)
@@ -11010,33 +13924,44 @@ total checks + passed -> safe divide -> score; complete only when score == 100 A
 Details
 
 Intent
-Request user decision before destructive, ambiguous, conflict-prone, additive-with-debt, or high-risk actions, then bind the selected decision into subsequent plan state.
+Request the developer's decision before destructive, ambiguous, conflict-prone, additive-with-debt, or high-risk actions, then bind the selected decision into subsequent plan state.
+
 Invariant
 Ambiguity and risk require explicit governance.
 
+Flow
+
 ```text
-RiskCondition → DecisionOptions → UserDecision → BoundPlanState
+RiskCondition → DecisionOptions → DeveloperDecision → BoundPlanState
 ```
 
+Productions
+
 ```bnf
-UserDecisionGate ::= <DecisionTrigger> "->" <OptionSet> "->" <SelectedOption> "->" <PlanUpdate>
+DeveloperDecisionGate ::= <DecisionTrigger> "->" <OptionSet> "->" <SelectedOption> "->" <PlanUpdate>
 DecisionTrigger ::= "ambiguous_classification" | "existing_solution_conflict" | "additive_debt" | "destructive_action" | "high_risk_refactor"
 OptionSet ::= <Option> | <Option> "," <OptionSet>
 ```
 
 Composes
 none
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 A destructive or ambiguous action taken without governance.
 ```
 
+After
+
 ```text
-risk{ambiguous | conflict | additive-debt | destructive | high-risk} -> options -> user decision -> bound into plan state
+risk{ambiguous | conflict | additive-debt | destructive | high-risk} -> options -> developer decision -> bound into plan state
 ```
 
 ### Completion Truthfulness
@@ -11050,12 +13975,17 @@ Details
 
 Intent
 Mark centralization complete only if all critical criteria pass, all old patterns are removed or justified, zero duplication is verified, validation evidence is recorded, and remaining issues are empty.
+
 Invariant
 Completion is a verified state, not a narrative claim.
+
+Flow
 
 ```text
 CriteriaSet → EvidenceSet → RemainingIssuesCheck → Complete|Incomplete
 ```
+
+Productions
 
 ```bnf
 CompletionContract ::= <CriticalCriteriaSet> "->" <EvidenceSet> "->" <RemainingIssueSet> "->" <CompletionVerdict>
@@ -11065,16 +13995,23 @@ CentralizationComplete ::= "single_source_of_truth_verified" "," "zero_unapprove
 
 Composes
 none
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 'Done' asserted while duplication and validation evidence are missing.
 ```
+
+After
 
 ```text
 critical criteria + old patterns removed/justified + zero duplication + validation evidence + no remaining issues -> complete; else planned/incomplete/blocked
@@ -11091,12 +14028,17 @@ Details
 
 Intent
 Compose a final report containing classification, research confidence, detection metrics, architecture decision, plan, execution status, validation score, remaining issues, artifact references, and unavailable capabilities.
+
 Invariant
 Reporting must preserve the evidence trail and distinguish planned work from executed work.
+
+Flow
 
 ```text
 WorkflowArtifacts → Metrics → Limitations → Status → UserReport
 ```
+
+Productions
 
 ```bnf
 UserReport ::= <ClassificationSummary> "," <ResearchSummary> "," <DetectionSummary> "," <ArchitectureSummary> "," <PlanSummary> "," <ExecutionSummary> "," <ValidationSummary> "," <ArtifactReferences> "," <Limitations>
@@ -11105,16 +14047,23 @@ ExecutionSummary ::= "executed" | "not_executed_planned_only"
 
 Composes
 none
+
 Named in the derivation of
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A report that conflates planned work with executed work.
 ```
+
+After
 
 ```text
 artifacts -> {classification, research confidence, detection metrics, architecture decision, plan, execution status, validation score, limitations} -> planned vs executed distinguished
@@ -11129,12 +14078,17 @@ Details
 
 Intent
 Initialize runtime context, classify the target pattern, gather research, discover all variations, analyze architecture, build a refactor plan, optionally execute migration, validate zero duplication, and report status.
+
 Invariant
 Centralization is a gated evidence machine that transforms scattered implementation into verified single-source-of-truth architecture.
+
+Flow
 
 ```text
 Init → Classify → Research → DetectVariations → AnalyzeArchitecture → Plan → Execute? → Validate → Report
 ```
+
+Productions
 
 ```bnf
 CentralizationKernel ::= <Initialization> "->" <PatternClassification> "->" <ResearchGuidance> "->" <VariationDiscovery> "->" <ArchitectureTargeting> "->" <MigrationMapping> "->" <RefactorPlan> "->" <OptionalExecution> "->" <PatternValidation> "->" <UserReport>
@@ -11144,10 +14098,13 @@ RefactorPlan ::= <RefactorPhaseSet> "," <MigrationActionSet> "," <VerificationCh
 
 Composes
 [Pattern Classification](ALGORITHMS.md#algo-pattern-classification), [Research Guidance](ALGORITHMS.md#algo-research-guidance)
+
 Composed by
 [Type-Migration Centralization](ALGORITHMS.md#algo-type-migration-centralization), [Canonical Config Resolution](ALGORITHMS.md#algo-canonical-config-resolution)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -11155,28 +14112,41 @@ Derivation map
 
 orient
 [Runtime-Agnostic Adapter Boundary](ALGORITHMS.md#algo-runtime-agnostic-adapter-boundary)
+
 see
 [Research Guidance](ALGORITHMS.md#algo-research-guidance)
+
 derive
 [Pattern Classification](ALGORITHMS.md#algo-pattern-classification)
+
 intent
 [Canonical Variation Selection](ALGORITHMS.md#algo-canonical-variation-selection)
+
 constrain
 [Operation Mode Gating](ALGORITHMS.md#algo-operation-mode-gating)
+
 project
 [Migration Action Mapping](ALGORITHMS.md#algo-migration-action-mapping)
+
 act
 [Replacement Refactor](ALGORITHMS.md#algo-replacement-refactor)
+
 verify
 [Zero-Duplication Verification](ALGORITHMS.md#algo-zero-duplication-verification)
+
 commit
 [Centralization Report](ALGORITHMS.md#algo-centralization-report)
+
 terminate
 [Completion Truthfulness](ALGORITHMS.md#algo-completion-truthfulness)
+
+Before
 
 ```text
 Scattered code merged by intuition, old copies left, never verified.
 ```
+
+After
 
 ```text
 init -> classify -> research -> discover variations -> analyze architecture -> plan -> optional execute -> validate zero duplication -> report
@@ -11190,12 +14160,17 @@ Details
 
 Intent
 <Detect context> -> <Classify pattern> -> <Discover all occurrences and variants> -> <Choose canonical source> -> <Map migration> -> <Gate execution> -> <Validate zero debt> -> <Report evidence>
+
 Invariant
 Any scattered implementation pattern can be centralized only by converting every occurrence into an accounted-for migration unit and proving no unapproved duplicate remains.
+
+Flow
 
 ```text
 Context → Pattern → Registry → Canonical → Plan → ExecutionGate → Validation → Report
 ```
+
+Productions
 
 ```bnf
 CentralizationConcern ::= <ContextContract> "->" <PatternContract> "->" <OccurrenceRegistry> "->" <CanonicalSource> "->" <MigrationPlan> "->" <ExecutionPolicy> "->" <ZeroDebtValidation> "->" <EvidenceReport>
@@ -11204,14 +14179,16 @@ ZeroDebtValidation ::= "all_variants_checked" "," "old_patterns_removed_or_justi
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
 
 ## checklist-creation
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -11315,12 +14292,17 @@ Details
 
 Intent
 Establish authority, trust, intent, and change-directionality, and gather current-system evidence before any planning, emitting a context bundle that is the sole artifact the planning stage reads.
+
 Invariant
 Prior knowledge is untrusted; discover before assume; read authority before analysis; a resolved change-direction and a non-empty evidence inventory are the handoff precondition.
+
+Flow
 
 ```text
 RawTask + GoverningDocs → AuthorityLoad → ContextDiscovery → IntentNormalization → ContextBundle|RepairRoute
 ```
+
+Productions
 
 ```bnf
 OrientationStage ::= <RawTaskText> "," <HostGoverningDocs> "->" <AuthorityLoad> "->" <CurrentSystemDiscovery> "->" <IntentDirectionalityNormalization> "->" <ContextBundle>
@@ -11330,18 +14312,26 @@ OrientationHandoff ::= "authority_loaded" "," "intent_and_change_direction_resol
 
 Composes
 [Authoritative Source Loading](ALGORITHMS.md#algo-authoritative-source-loading), [Trust Anchor](ALGORITHMS.md#algo-trust-anchor), [Intent & Directionality Normalization](ALGORITHMS.md#algo-intent-directionality-normalization), [Skeptical Context Acquisition](ALGORITHMS.md#algo-skeptical-context-acquisition), [Dynamic Discovery Pattern Generation](ALGORITHMS.md#algo-dynamic-discovery-pattern-generation)
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [correctness_verification](SCHEMA.md#force-correctness-verification), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Planning starts from the task text alone — prior model knowledge treated as current system truth.
 ```
+
+After
 
 ```text
 raw task + governing docs -> load authority -> discover current system -> normalize intent + change_relation -> context_bundle{evidence_inventory non-empty}
@@ -11358,12 +14348,17 @@ Details
 
 Intent
 Resolve the always-read core sources plus the conditional sources whose triggers appear in the task, read them before analysis, and block with a blocker finding if any required source is missing.
+
 Invariant
 Task decomposition is grounded in authoritative host rules read before analysis; a missing required source blocks at the orientation owner.
+
+Flow
 
 ```text
 TaskDescription → CoreSources + TriggeredSources → SourceRead → LoadedContext|BlockMissing
 ```
+
+Productions
 
 ```bnf
 AuthoritativeSourceLoading ::= <TaskDescription> "->" <CoreSourceSet> "," <TriggeredSourceSet> "->" <SourceReadSet> "->" <SourceValidationGate>
@@ -11373,16 +14368,23 @@ SourceValidationGate ::= "all_required_sources_loaded" | "blocked_missing_source
 
 Composes
 none
+
 Composed by
 [Orientation Stage](ALGORITHMS.md#algo-orientation-stage)
+
 Forces
 [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Decomposition grounded in memory, not the host's rules; a missing source is discovered too late.
 ```
+
+After
 
 ```text
 task -> always-read core{governance, principle-ontology} + triggered{architecture, design, component} -> read before analysis -> block on a missing required source
@@ -11399,12 +14401,17 @@ Details
 
 Intent
 Classify every input by trust level — source files, schema/config/data, build and validator output, tool output, and structured logs are trusted; narrative docs, comments, prior codebase knowledge, and unverified claims are untrusted and require verification before use.
+
 Invariant
 Planning reliability depends on explicit source trust; untrusted input cannot ground a task until it is verified.
+
+Flow
 
 ```text
 InputSource → TrustClassification → UsagePolicy
 ```
+
+Productions
 
 ```bnf
 TrustAnchor ::= <InputSourceSet> "->" <TrustedSourceSet> "," <UntrustedSourceSet> "->" <UsagePolicy>
@@ -11413,16 +14420,23 @@ UsagePolicy ::= "trusted_can_ground_tasks" | "untrusted_requires_verification"
 
 Composes
 none
+
 Composed by
 [Orientation Stage](ALGORITHMS.md#algo-orientation-stage)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 Every input trusted equally — a narrative doc grounds a task the same as a build result.
 ```
+
+After
 
 ```text
 inputs -> trusted{source files, schema/config, build/validator output, tool output} vs untrusted{narrative docs, comments, prior knowledge} -> untrusted requires verification before it grounds a task
@@ -11439,12 +14453,17 @@ Details
 
 Intent
 Normalize the task into a requested outcome, actions, and entities, and resolve the change relation — introduce, retain, remove, analyze, or mention — that later stages key their semantic policy on; an unresolved direction is recorded as ambiguity, never silently assumed.
+
 Invariant
 The change relation is explicit before planning; an unknown direction is surfaced as an unresolved question.
+
+Flow
 
 ```text
 TaskDescription → IntentExtraction → DirectionalityAnalysis → NormalizedIntent + Ambiguity
 ```
+
+Productions
 
 ```bnf
 IntentDirectionalityNormalization ::= <TaskDescription> "," <ExplicitConstraints> "->" <RequestedOutcome> "," <RequestedActions> "," <Entities> "->" <ChangeRelation> "," <AmbiguitySet>
@@ -11453,16 +14472,23 @@ ChangeRelation ::= "introduce" | "retain" | "remove" | "analyze" | "mention" | "
 
 Composes
 none
+
 Composed by
 [Orientation Stage](ALGORITHMS.md#algo-orientation-stage)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 'update Foo' planned without resolving whether Foo is introduced, retained, or removed.
 ```
+
+After
 
 ```text
 task -> outcome + actions + entities -> change_relation{introduce|retain|remove|analyze|mention} -> unknown direction recorded as an unresolved question, never assumed
@@ -11479,12 +14505,17 @@ Details
 
 Intent
 Extract task keywords, generate discovery probes dynamically, inspect the existing implementation, and prevent new work from redefining architecture that already exists.
+
 Invariant
 Planning discovers current artifacts before making architecture assumptions.
+
+Flow
 
 ```text
 NormalizedIntent → Keywords → DiscoveryProbes → DiscoveredArtifacts + Evidence
 ```
+
+Productions
 
 ```bnf
 SkepticalContextAcquisition ::= <NormalizedIntent> "->" <KeywordExtraction> "->" <DiscoveryPatternGeneration> "->" <ContextDiscovery> "->" <EvidenceInventory>
@@ -11494,16 +14525,23 @@ DiscoveredArtifacts ::= "base_classes" "," "implementations" "," "registrations"
 
 Composes
 [Dynamic Discovery Pattern Generation](ALGORITHMS.md#algo-dynamic-discovery-pattern-generation)
+
 Composed by
 [Orientation Stage](ALGORITHMS.md#algo-orientation-stage)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 New work redefines a Foo abstraction that already exists, unseen.
 ```
+
+After
 
 ```text
 normalized intent -> keywords -> dynamic discovery probes -> discovered artifacts{base classes, implementations, registrations} + evidence, before any architecture assumption
@@ -11520,12 +14558,17 @@ Details
 
 Intent
 Convert extracted nouns, verbs, folders, and file references into glob, grep, and target-file probes generated from the task's own language rather than a fixed enumeration.
+
 Invariant
 Discovery probes are generated from task keywords, never from a fixed assumption list.
+
+Flow
 
 ```text
 Keywords → Globs + Greps + Targets → ProbeExecution
 ```
+
+Productions
 
 ```bnf
 DynamicDiscoveryPatternGeneration ::= <KeywordSet> "->" <GlobPatternSet> "," <GrepPatternSet> "," <TargetFileSet>
@@ -11535,16 +14578,23 @@ ProbeTool ::= "Glob" | "Grep" | "Read"
 
 Composes
 none
+
 Composed by
 [Orientation Stage](ALGORITHMS.md#algo-orientation-stage), [Skeptical Context Acquisition](ALGORITHMS.md#algo-skeptical-context-acquisition)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling)
+
 Grounds
 none
+
+Before
 
 ```text
 Discovery runs a fixed checklist of globs, blind to the task's own nouns.
 ```
+
+After
 
 ```text
 keywords{nouns, verbs, folders, file-refs} -> generated globs + greps + target-files from the task's own language, not a fixed enumeration
@@ -11560,13 +14610,18 @@ keywords{nouns, verbs, folders, file-refs} -> generated globs + greps + target-f
 Details
 
 Intent
-Resolve what the checklist is FOR before planning it: enumerate the admissible decomposition branches, score each by utility minus cost against the normalized intent and change relation, and gate on the highest-worth admissible branch before any seeing or deriving.
+Resolve what the checklist is for before planning it: enumerate the admissible decomposition branches, score each by utility minus cost against the normalized intent and change relation, and gate on the highest-worth admissible branch before any seeing or deriving.
+
 Invariant
 Teleology is mandatory-always: planning never proceeds on a branch that is not the argmax(utility - cost) over admissible branches; no admissible branch routes to a blocked report, never a guess.
+
+Flow
 
 ```text
 ContextBundle → AdmissibleBranchEnumeration → UtilityCostScoring → ArgmaxSelection|Blocked
 ```
+
+Productions
 
 ```bnf
 TeleologicalIntentGate ::= <ContextBundle> "->" <AdmissibleBranchSet> "->" <UtilityCostScoring> "->" <SelectedBranch> | <BlockedNoAdmissibleBranch>
@@ -11575,18 +14630,26 @@ BranchSelection ::= "argmax_utility_minus_cost_over_admissible" | "blocked_no_ad
 
 Composes
 none
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
 
+Before
+
 ```text
-Decomposition begins on the first approach that comes to mind — no worth comparison, so effort is spent before the objective is even ranked.
+Decomposition begins on the first approach that comes to mind — no worth comparison, so effort is spent before the objective is ranked.
 ```
+
+After
 
 ```text
 context_bundle -> enumerate admissible decomposition branches -> score utility - cost -> select the argmax -> WORTH_BEFORE_WORK gate before any planning
@@ -11603,12 +14666,17 @@ Details
 
 Intent
 Activate the principles that govern the current decision surfaces, select protocols by semantic fit against the requested transition, decompose them into phases, build the four-dimensional graph, and linearize the phases by dependency.
+
 Invariant
 Order is by dependency, never by severity; every active principle binds a decision test and a validator; a protocol is never selected from a trigger word alone.
+
+Flow
 
 ```text
 ContextBundle → ActivePrinciples → SelectedProtocols → PhaseGraph → LinearizedPhases|CycleRepair
 ```
+
+Productions
 
 ```bnf
 PlanningStage ::= <ContextBundle> "->" <PrincipleActivation> "->" <ProtocolSemanticSelection> "->" <PhaseDecomposition> "->" <FourDPhaseGraph> "->" <DependencyLinearization>
@@ -11617,18 +14685,26 @@ PlanningHandoff ::= "z_graph_acyclic" "," "every_phase_has_inputs_outputs_four_a
 
 Composes
 [Principle Activation](ALGORITHMS.md#algo-principle-activation), [Protocol Semantic Selection](ALGORITHMS.md#algo-protocol-semantic-selection), [Phase Decomposition](ALGORITHMS.md#algo-phase-decomposition), [Four-Dimensional Phase Graph](ALGORITHMS.md#algo-four-dimensional-phase-graph), [Dependency Linearization](ALGORITHMS.md#algo-dependency-linearization), [Severity Assignment](ALGORITHMS.md#algo-severity-assignment), [Loop Class Labeling](ALGORITHMS.md#algo-loop-class-labeling)
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [control_coordination](SCHEMA.md#force-control-coordination), [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
+
+Before
 
 ```text
 Phases grouped under SPRINT: CRITICAL headers; a protocol picked from a trigger word.
 ```
+
+After
 
 ```text
 context_bundle -> activate principles (each binds a decision-test + validator) -> select protocols by semantic fit -> decompose -> 4D graph -> linearize by dependency (severity is metadata)
@@ -11645,12 +14721,17 @@ Details
 
 Intent
 Test each principle in the ontology catalog against the current decision surfaces, mark it applies, uncertain, or not-applicable with a reason, and bind every applied principle to a decision test, a validator, and a severity that later routes its repair.
+
 Invariant
 A principle is activated only with an explicit applicability decision and a bound validator; a label alone is never proof that local reasoning occurred.
+
+Flow
 
 ```text
 ContextBundle → DecisionSurfaces → PrincipleFit → ActivePrincipleSet
 ```
+
+Productions
 
 ```bnf
 PrincipleActivation ::= <DecisionSurfaceSet> "->" <PrincipleCatalogTest> "->" <ApplicabilityDisposition> "," <ValidatorBinding> "," <Severity>
@@ -11660,16 +14741,23 @@ Severity ::= "mandatory" | "recommended" | "contextual" | "discouraged"
 
 Composes
 none
+
 Composed by
 [Planning Stage](ALGORITHMS.md#algo-planning-stage)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 'SRP applies' asserted as a label, with no decision-test and nothing that enforces it.
 ```
+
+After
 
 ```text
 decision surfaces -> test each principle{applies|uncertain|not-applicable + reason} -> bind validator + severity -> a label alone is never proof reasoning occurred
@@ -11685,13 +14773,18 @@ decision surfaces -> test each principle{applies|uncertain|not-applicable + reas
 Details
 
 Intent
-Match the requested state transition and architecture surfaces semantically against the protocol library, select every protocol whose use-condition genuinely fits, and always inject the mandatory verification protocol.
+Match the requested state transition and architecture surfaces semantically against the protocol library, select every protocol whose use-condition fits, and always inject the mandatory verification protocol.
+
 Invariant
 Protocols are selected by semantic fit against the requested transition, never from a trigger word; the verification protocol is always included.
+
+Flow
 
 ```text
 ContextBundle + ActivePrinciples → SemanticMatch → SelectedProtocols → VerificationInjected
 ```
+
+Productions
 
 ```bnf
 ProtocolSemanticSelection ::= <RequestedTransition> "," <ArchitectureSurfaceSet> "," <ActivePrincipleSet> "->" <SemanticFitMatch> "->" <SelectedProtocolSet> "->" <MandatoryVerificationInjection>
@@ -11700,16 +14793,23 @@ Protocol ::= "module-separation" | "extension-no-modify" | "dependency-inversion
 
 Composes
 none
+
 Composed by
 [Planning Stage](ALGORITHMS.md#algo-planning-stage)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 The word 'secure' in the task auto-selects the security protocol.
 ```
+
+After
 
 ```text
 requested transition + surfaces -> semantic-fit match against the protocol library -> selected set -> the mandatory verification protocol always injected
@@ -11726,12 +14826,17 @@ Details
 
 Intent
 Expand each selected protocol's verb chain into phases, and annotate every phase with an id, verb, objective, preconditions, inputs, outputs, affected artifacts, local principles, severity, loop class, and a four-dimensional graph.
+
 Invariant
 A phase is a protocol step enriched with inputs, outputs, validation, severity, and dependency metadata, ordered by dependency and never by severity.
+
+Flow
 
 ```text
 SelectedProtocols → VerbChains → PhaseSet → AnnotatedPhases
 ```
+
+Productions
 
 ```bnf
 PhaseDecomposition ::= <SelectedProtocolSet> "->" <VerbChainSet> "->" <PhaseSet> "->" <PhaseAnnotationSet>
@@ -11740,18 +14845,26 @@ PhaseAnnotation ::= "id" "," "verb" "," "objective" "," "inputs" "," "outputs" "
 
 Composes
 [Four-Dimensional Phase Graph](ALGORITHMS.md#algo-four-dimensional-phase-graph), [Severity Assignment](ALGORITHMS.md#algo-severity-assignment), [Loop Class Labeling](ALGORITHMS.md#algo-loop-class-labeling)
+
 Composed by
 [Planning Stage](ALGORITHMS.md#algo-planning-stage)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A protocol's steps emitted as a flat task list with no inputs, outputs, or dependency metadata.
 ```
+
+After
 
 ```text
 selected protocols -> verb chains -> phases annotated{id, verb, objective, inputs, outputs, principles, severity, loop_class, 4D graph}
@@ -11768,12 +14881,17 @@ Details
 
 Intent
 For every phase, model the sequential dependency axis, the lateral independent-peer axis, the diagonal shared-data axis, and the propagation axis carrying superseded state, propagated contracts, and what breaks if the edge is omitted.
+
 Invariant
 A phase exposes not only order but ripple; an empty propagation axis carries explicit no-downstream-consumer evidence.
+
+Flow
 
 ```text
 Phase → Z + X + Y + W Graph
 ```
+
+Productions
 
 ```bnf
 FourDPhaseGraph ::= <Phase> "->" <SequentialAxis> "," <LateralAxis> "," <DiagonalAxis> "," <PropagationAxis>
@@ -11785,16 +14903,23 @@ PropagationAxis ::= "W: superseded_state, propagated_contracts, breaks_if_omitte
 
 Composes
 none
+
 Composed by
 [Planning Stage](ALGORITHMS.md#algo-planning-stage), [Phase Decomposition](ALGORITHMS.md#algo-phase-decomposition)
+
 Forces
-[contract_compatibility](SCHEMA.md#force-contract-compatibility), [ai_governance](SCHEMA.md#force-ai-governance), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[contract_compatibility](SCHEMA.md#force-contract-compatibility), [model_governance](SCHEMA.md#force-model-governance), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A phase records only its order — its downstream ripple is invisible.
 ```
+
+After
 
 ```text
 phase -> Z{prior required phases} + X{independent peers} + Y{shared-data} + W{superseded state, propagated contracts, breaks-if-omitted}; empty W carries no-consumer evidence
@@ -11811,12 +14936,17 @@ Details
 
 Intent
 Detect cycles in the sequential Z-graph, block if any exist, and otherwise order the phases in topological Z-order with a stable tie-breaker so execution order is fixed by dependency alone.
+
 Invariant
 Phases are linearized by topological dependency order; severity never controls order; a cycle blocks and routes to planning repair.
+
+Flow
 
 ```text
 PhaseGraph → CycleCheck → TopologicalOrder|BlockedCycle
 ```
+
+Productions
 
 ```bnf
 DependencyLinearization ::= <PhaseGraph> "->" <CycleDetection> "->" <TopologicalOrder> | <BlockedCycleSet>
@@ -11825,16 +14955,23 @@ LinearizationResult ::= "pass_topological_order" | "blocked_cycle"
 
 Composes
 none
+
 Composed by
 [Planning Stage](ALGORITHMS.md#algo-planning-stage)
+
 Forces
 [causality_ordering](SCHEMA.md#force-causality-ordering), [control_coordination](SCHEMA.md#force-control-coordination), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Phases ordered by priority label; a hidden cycle ships undetected.
 ```
+
+After
 
 ```text
 phase graph -> detect Z-cycles (block on any) -> topological Z-order with a stable tie-breaker; severity never controls order
@@ -11851,12 +14988,17 @@ Details
 
 Intent
 Derive each phase's severity from the worst severity of its governing principles; severity is per-phase metadata that selects the repair route, while execution order stays linear by dependency.
+
 Invariant
 Severity reflects principle risk and is metadata that routes failure; it is never a grouping or ordering axis.
+
+Flow
 
 ```text
 Phase → LocalPrinciples → WorstSeverity
 ```
+
+Productions
 
 ```bnf
 SeverityAssignment ::= <Phase> "->" <LocalPrincipleSet> "->" <WorstSeverityResolution> "->" <Severity>
@@ -11864,19 +15006,26 @@ SeverityAssignment ::= <Phase> "->" <LocalPrincipleSet> "->" <WorstSeverityResol
 
 Composes
 none
+
 Composed by
 [Planning Stage](ALGORITHMS.md#algo-planning-stage), [Phase Decomposition](ALGORITHMS.md#algo-phase-decomposition)
+
 Forces
 [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 Severity used as a section header that groups the phases.
 ```
 
+After
+
 ```text
-phase -> worst severity of its governing principles -> per-phase metadata that ROUTES the repair, never a grouping or ordering axis
+phase -> worst severity of its governing principles -> per-phase metadata that routes the repair, never a grouping or ordering axis
 ```
 
 ### Loop Class Labeling
@@ -11890,12 +15039,17 @@ Details
 
 Intent
 Classify each phase by its verb into a construction, perceptual, cognitive, executive, or linking loop class so the phase's cognitive role is explicit.
+
 Invariant
 Every phase carries an explicit cognitive loop class derived from its verb.
+
+Flow
 
 ```text
 Verb → LoopClass → LoopPattern
 ```
+
+Productions
 
 ```bnf
 LoopClassLabeling ::= <Verb> "->" <LoopClass> "->" <LoopPattern>
@@ -11904,16 +15058,23 @@ LoopClass ::= "Construction" | "Perceptual" | "Cognitive" | "Executive" | "Linki
 
 Composes
 none
+
 Composed by
 [Planning Stage](ALGORITHMS.md#algo-planning-stage), [Phase Decomposition](ALGORITHMS.md#algo-phase-decomposition)
+
 Forces
 [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 A phase's cognitive role is implicit in its verb.
 ```
+
+After
 
 ```text
 verb -> loop class{Construction|Perceptual|Cognitive|Executive|Linking} -> the phase's cognitive role made explicit
@@ -11930,12 +15091,17 @@ Details
 
 Intent
 Compile each phase into atomic, target-specific tasks under binding codebase-pattern execution constraints, attach a full nine-dimension named ripple chain to every task, and number the hierarchy N.N.N.
+
 Invariant
 Every emitted task is atomic and target-specific with an evidence contract, and carries all nine ripple dimensions expressed as names, never counts.
+
+Flow
 
 ```text
 PhaseRecords → TaskTemplates + PatternConstraints → AtomicTasks → RippleChains + Numbering
 ```
+
+Productions
 
 ```bnf
 CompilationStage ::= <PhaseRecordSet> "->" <VerbTemplateBinding> "," <CodebasePatternEnforcement> "->" <TaskAtomization> "->" <RippleChainAnalysis> "->" <HierarchicalNumbering>
@@ -11944,21 +15110,29 @@ CompilationHandoff ::= "every_task_atomic_and_target_specific" "," "every_task_h
 
 Composes
 [Verb Template Binding](ALGORITHMS.md#algo-verb-template-binding), [Codebase Pattern Enforcement](ALGORITHMS.md#algo-codebase-pattern-enforcement), [Task Atomization](ALGORITHMS.md#algo-task-atomization), [Ripple Chain Analysis](ALGORITHMS.md#algo-ripple-chain-analysis), [Validator Coverage](ALGORITHMS.md#algo-validator-coverage), [Structured Observability Context](ALGORITHMS.md#algo-structured-observability-context), [Cross-Cutting Surface Coverage](ALGORITHMS.md#algo-cross-cutting-surface-coverage), [Legacy Elimination](ALGORITHMS.md#algo-legacy-elimination), [Hierarchical Numbering](ALGORITHMS.md#algo-hierarchical-numbering)
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [object_creation](SCHEMA.md#force-object-creation)
+
 Grounds
 none
+
+Before
 
 ```text
 Phases emitted as vague tasks with count-only ripple ('touches 3 consumers').
 ```
 
+After
+
 ```text
-phase records -> bind verb templates + codebase-pattern constraints -> atomize -> attach 9-dimension NAMED ripple chain -> number N.N.N
+phase records -> bind verb templates + codebase-pattern constraints -> atomize -> attach 9-dimension named ripple chain -> number N.N.N
 ```
 
 ### Codebase Pattern Enforcement
@@ -11972,12 +15146,17 @@ Details
 
 Intent
 Bind every emitted step to the required architecture pattern for its concern — factory construction, dependency injection, registry discovery, event emission, ports and adapters, contract-first boundaries, encapsulation, structured observability, bounded complexity, secrets management, input validation, least privilege, config externalization, fail-fast, legacy elimination, and enforcement authoring — rewriting each forbidden form into its required form.
+
 Invariant
 Codebase patterns are binding execution constraints; a forbidden form is rewritten to its required form before the task is emitted.
+
+Flow
 
 ```text
 Task → PatternViolationScan → RequiredRewrite → CompliantTask
 ```
+
+Productions
 
 ```bnf
 CodebasePatternEnforcement ::= <Task> "->" <ForbiddenPatternSet> "->" <ViolationSet> "->" <CompliantRewrite>
@@ -11986,16 +15165,23 @@ PatternDomain ::= "factory_creation" | "dependency_injection" | "registry_discov
 
 Composes
 none
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage), [Task Atomization](ALGORITHMS.md#algo-task-atomization)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution), [object_creation](SCHEMA.md#force-object-creation), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A task says 'construct Foo' with no required pattern — direct instantiation slips through.
 ```
+
+After
 
 ```text
 task -> scan forbidden forms -> rewrite each to its required form{factory, DI, registry, events, ports, contract-first, fail-fast, secrets} before emit
@@ -12012,12 +15198,17 @@ Details
 
 Intent
 Map each execution verb to a task pattern, a tool set, and a blocking validation command, so a verb becomes a checklist task only through a validated template.
+
 Invariant
 An execution verb becomes a task only through a template that binds its tools and a blocking validation command.
+
+Flow
 
 ```text
 Verb → TaskPattern → Tools → ValidationCommand
 ```
+
+Productions
 
 ```bnf
 VerbTemplateBinding ::= <Verb> "->" <TaskPattern> "," <ToolSet> "," <ValidationCommand>
@@ -12026,19 +15217,26 @@ Verb ::= "ANALYZE" | "FIND" | "EXTRACT" | "CREATE" | "VERIFY" | "FILTER" | "EXEC
 
 Composes
 none
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 'CREATE Foo' becomes a task with no tools and no way to validate it.
 ```
 
+After
+
 ```text
-verb -> task pattern + tool set + BLOCKING validation command -> a verb becomes a task only through a validated template
+verb -> task pattern + tool set + blocking validation command -> a verb becomes a task only through a validated template
 ```
 
 ### Task Atomization
@@ -12052,12 +15250,17 @@ Details
 
 Intent
 Extract atomic, target-specific actions from each phase group, gate every action through the codebase-pattern constraints, and attach an evidence contract, local principle checks, a validation method, and a done-condition to each.
+
 Invariant
 A task is small enough to execute and strict enough to validate, carrying its own evidence contract and done-condition.
+
+Flow
 
 ```text
 Phase → TaskGroups → AtomicActions + Gates → AtomicTasks
 ```
+
+Productions
 
 ```bnf
 TaskAtomization ::= <Phase> "->" <TaskGroupSet> "->" <AtomicActionSet> "->" <CodebasePatternEnforcement> "->" <AtomicTaskSet>
@@ -12066,16 +15269,23 @@ AtomicTask ::= <Action> "," <Target> "," <ExpectedEvidence> "," <ValidationMetho
 
 Composes
 [Codebase Pattern Enforcement](ALGORITHMS.md#algo-codebase-pattern-enforcement)
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [control_coordination](SCHEMA.md#force-control-coordination), [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
+
+Before
 
 ```text
 One coarse task 'refactor the Foo module' — too big to execute or validate.
 ```
+
+After
 
 ```text
 phase -> task groups -> atomic actions (gated by codebase patterns) -> each carries an evidence contract + validation method + done-condition
@@ -12092,12 +15302,17 @@ Details
 
 Intent
 Analyze each task across nine impact dimensions — registry, contracts, persistence, security, infrastructure, performance, observability, enforcement, and consumers — and record every named downstream effect with its consequence-if-omitted rather than a count, retaining an empty dimension with explicit applicability evidence.
+
 Invariant
 Every task exposes all nine downstream dimensions as named impacts; ripple is never count-only and never filtered to the first match.
+
+Flow
 
 ```text
 Task → RippleDimensions → NamedImpacts → DownstreamChain
 ```
+
+Productions
 
 ```bnf
 RippleChainAnalysis ::= <Task> "->" <RippleDimensionSet> "->" <ImpactSet> "->" <DownstreamEffectSet>
@@ -12107,16 +15322,23 @@ ImpactSet ::= <NamedImpact> | "none_with_applicability_evidence"
 
 Composes
 none
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Impact recorded as a count ('affects 4 things'), filtered to the first match.
 ```
+
+After
 
 ```text
 task -> 9 dims{registry, contracts, persistence, security, infrastructure, performance, observability, enforcement, consumers} -> every named downstream impact + consequence-if-omitted; empty dim carries applicability evidence
@@ -12133,12 +15355,17 @@ Details
 
 Intent
 For every architectural pattern introduced or referenced, discover an existing detector or author a new one, register it, and regenerate the catalog so the rule becomes an active enforcement gate rather than a convention.
+
 Invariant
 A new or changed architectural invariant is protected by an automated detector that is registered and active — never convention-only.
+
+Flow
 
 ```text
 Pattern → DetectorDiscovery → AuthorOrUpdate → RegisterAndRegenerate → EnforcementActive
 ```
+
+Productions
 
 ```bnf
 ValidatorCoverage ::= <ArchitecturalPattern> "->" <DetectorDiscovery> "->" <CoverageDecision> "->" <RegisterAndRegenerate> "->" <EnforcementActive>
@@ -12147,16 +15374,23 @@ CoverageDecision ::= "update_existing_detector" | "author_new_detector"
 
 Composes
 none
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
 
+Before
+
 ```text
-A new Foo invariant protected by a convention nobody enforces.
+A new Foo invariant protected by a convention no check enforces.
 ```
+
+After
 
 ```text
 pattern -> discover a detector or author one -> register + regenerate the catalog -> the rule becomes an active gate, not a convention
@@ -12173,12 +15407,17 @@ Details
 
 Intent
 Detect whether a task touches errors, contract or invariant violations, events, or resource lifecycle, and require the matching structured, machine-queryable observability context instead of a free-form message.
+
 Invariant
 An observability task carries schema-complete, queryable context matched to its concern, never a stringified blob.
+
+Flow
 
 ```text
 Task → ObservabilityTrigger → RequiredContext → SchemaValidation
 ```
+
+Productions
 
 ```bnf
 StructuredObservabilityContext ::= <Task> "->" <ObservabilityTriggerSet> "->" <RequiredContextSet> "->" <ObservabilitySchema>
@@ -12187,16 +15426,23 @@ RequiredContext ::= "error" | "violation" | "event" | "lifecycle" | "contract"
 
 Composes
 none
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 Forces
 [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Grounds
 none
+
+Before
 
 ```text
 An error task emits a stringified blob instead of queryable context.
 ```
+
+After
 
 ```text
 task -> observability trigger{error|violation|event|lifecycle|contract} -> required schema-complete, machine-queryable context matched to the concern
@@ -12213,12 +15459,17 @@ Details
 
 Intent
 Gate the software surface beyond structure — security, performance, infrastructure and deployment, and resilience — so a change's threat, budget, config, and failure consequences are covered, not only its structural ones.
+
 Invariant
 A change is not covered until its security, performance, infrastructure, and resilience consequences are gated, not only its structural ones.
+
+Flow
 
 ```text
 Task → SurfaceDetection → SurfaceGates → CoverageVerification
 ```
+
+Productions
 
 ```bnf
 CrossCuttingSurfaceCoverage ::= <Task> "->" <SurfaceSet> "->" <SurfaceGateSet> "->" <CoverageGate>
@@ -12227,16 +15478,23 @@ SurfaceSet ::= "security" | "performance" | "infrastructure" | "resilience"
 
 Composes
 none
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance), [performance_scaling](SCHEMA.md#force-performance-scaling), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A change gated only on structure; its threat, budget, and failure consequences uncovered.
 ```
+
+After
 
 ```text
 task -> surfaces{security, performance, infrastructure, resilience} -> a gate per surface -> coverage beyond structure verified
@@ -12253,12 +15511,17 @@ Details
 
 Intent
 For any change that touches a replaced, deprecated, dual-path, or fallback code path, delete the superseded path and its orphaned exports in the same completed change so exactly one forward path remains.
+
 Invariant
 There is exactly one live path; dead, dual, deprecated, and fallback code is removed in the same change, never deferred.
+
+Flow
 
 ```text
 Change → SupersededDetection → SamePassRemoval → SinglePathGate
 ```
+
+Productions
 
 ```bnf
 LegacyElimination ::= <Change> "->" <SupersededPathSet> "->" <SamePassDeletion> "->" <SinglePathGate>
@@ -12267,19 +15530,26 @@ SupersededPathSet ::= "dual_path" | "fallback" | "deprecated" | "dead_code" | "o
 
 Composes
 none
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A replaced Foo path left behind beside its successor as a dual path 'for now'.
 ```
 
+After
+
 ```text
-change -> detect superseded{dual-path, fallback, deprecated, dead code, orphaned export} -> delete in the SAME change -> exactly one live path remains
+change -> detect superseded{dual-path, fallback, deprecated, dead code, orphaned export} -> delete in the same change -> exactly one live path remains
 ```
 
 ### Hierarchical Numbering
@@ -12293,12 +15563,17 @@ Details
 
 Intent
 Render addressable coordinates — Phase N, Task N.N, Subtask N.N.N — assigned only after the phase order is stable.
+
 Invariant
 Checklist execution requires stable, addressable task coordinates numbered after order is fixed.
+
+Flow
 
 ```text
 Phases → Tasks → Subtasks → N.N.N Coordinates
 ```
+
+Productions
 
 ```bnf
 HierarchicalNumbering ::= <PhaseIndex> "->" <TaskIndex> "->" <SubtaskIndex> "->" <HierarchicalId>
@@ -12307,16 +15582,23 @@ HierarchicalId ::= "N" | "N.N" | "N.N.N"
 
 Composes
 none
+
 Composed by
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 Forces
 [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Tasks numbered before the phase order is stable, so ids churn.
 ```
+
+After
 
 ```text
 stable order -> Phase N -> Task N.N -> Subtask N.N.N -> addressable coordinates assigned only after order is fixed
@@ -12333,12 +15615,17 @@ Details
 
 Intent
 Gate the formalised plan on teleological admissibility before verification: sum the realised cost, compare it to the selected branch's budget and hard limits, and confirm every task traces to the selected branch — an over-budget, limit-breaching, or off-branch plan is inadmissible and routes back rather than being silently accepted.
+
 Invariant
 Teleology is mandatory-always: a plan is verified only after realised cost is within budget, every hard limit holds, and every task traces to the selected branch; the cost is never silently accepted.
+
+Flow
 
 ```text
 TaskRecords + PhaseRecords + SelectedBranch → RealisedCostSum → BudgetAndLimitCheck → Admissible|RouteBack
 ```
+
+Productions
 
 ```bnf
 AdmissibilityConstraintGate ::= <TaskRecordSet> "," <PhaseRecordSet> "," <SelectedBranch> "->" <RealisedCostSum> "->" <BudgetAndLimitCheck> "->" <AdmissibilityVerdict>
@@ -12347,18 +15634,26 @@ AdmissibilityVerdict ::= "admissible_within_budget_and_limits" | "inadmissible_r
 
 Composes
 none
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 The compiled plan goes straight to verification — its realised cost is never checked against the selected branch's budget, so an over-budget or off-branch plan is verified and shipped anyway.
 ```
+
+After
 
 ```text
 task_records + phase_records -> sum realised cost -> compare to branch budget + hard limits -> every task traces to the selected branch -> ADMISSIBLE_BEFORE_VERIFY gate | route back to intent/act
@@ -12375,12 +15670,17 @@ Details
 
 Intent
 Judge the generated reasoning — not the future implementation — against evidence and semantic policy: run the governance validation suites, verify every material claim by evidence, and apply the semantic-debt rubric before rendering.
+
 Invariant
 A claim is supported only with evidence, never because no contradiction was found; policy is semantic on the relation to a concept, never a substring ban.
+
+Flow
 
 ```text
 ContextBundle + Phases + Tasks → ValidationSuites → ClaimVerification → SemanticPolicy → ValidationReport
 ```
+
+Productions
 
 ```bnf
 ValidationStage ::= <ContextBundle> "," <PhaseRecordSet> "," <TaskRecordSet> "->" <ValidationSuiteBattery> "," <EvidenceBasedClaimVerification> "," <SemanticDebtPolicy> "->" <ValidationReport>
@@ -12389,18 +15689,26 @@ ValidationReport ::= "pass" | "repair_required" | "blocked"
 
 Composes
 [Validation Suite Battery](ALGORITHMS.md#algo-validation-suite-battery), [Evidence-Based Claim Verification](ALGORITHMS.md#algo-evidence-based-claim-verification), [Semantic Debt Policy](ALGORITHMS.md#algo-semantic-debt-policy)
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 A claim marked supported because no contradiction was found; policy enforced by banning a word.
 ```
+
+After
 
 ```text
 context + phases + tasks -> GV-* suites -> verify every claim by evidence -> semantic-debt rubric (relation to a concept) -> validation report
@@ -12417,12 +15725,17 @@ Details
 
 Intent
 Classify the relation a task holds to each controlled debt concept — backward-compatibility path, failure-masking fallback, deprecated or dual production path, deferred required work, shortcut debt, and unsupported superlative claim — blocking only the introduce and retain relations while allowing mention, analysis, quotation, and removal.
+
 Invariant
 Policy keys on the relation to a concept, so a prohibited design cannot pass by renaming and legitimately mentioning, analyzing, or removing debt is never blocked.
+
+Flow
 
 ```text
 Content → ConceptMatch → RelationClassification → Allowed|Violation|Investigate
 ```
+
+Productions
 
 ```bnf
 SemanticDebtPolicy ::= <Content> "->" <ControlledConceptMatch> "->" <ConceptRelation> "->" <PolicyDecision>
@@ -12432,19 +15745,26 @@ PolicyDecision ::= "allowed" | "violation" | "investigate"
 
 Composes
 none
+
 Composed by
 [Validation Stage](ALGORITHMS.md#algo-validation-stage)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A substring ban blocks the word 'fallback' but the fallback design passes by renaming.
 ```
 
+After
+
 ```text
-content -> match a controlled concept -> classify the RELATION{introduce|retain -> violation; mention|analyze|remove -> allowed} -> a renamed prohibited design still fails
+content -> match a controlled concept -> classify the relation{introduce|retain -> violation; mention|analyze|remove -> allowed} -> a renamed prohibited design still fails
 ```
 
 ### Evidence-Based Claim Verification
@@ -12458,12 +15778,17 @@ Details
 
 Intent
 Extract every material claim from the generated records, weigh supporting against contradicting evidence in the inventory, and classify each as supported, contradicted, not-applicable, or unsupported — recording the searched scope for a zero-result claim.
+
 Invariant
 A material claim is supported only with evidence whose scope matches it; absence of contradiction is never treated as support.
+
+Flow
 
 ```text
 Records → MaterialClaims → EvidenceWeighing → ClaimVerdicts
 ```
+
+Productions
 
 ```bnf
 EvidenceBasedClaimVerification ::= <RecordSet> "->" <MaterialClaimSet> "->" <EvidenceWeighing> "->" <ClaimVerdictSet>
@@ -12472,16 +15797,23 @@ ClaimVerdict ::= "supported" | "contradicted" | "not_applicable" | "unsupported"
 
 Composes
 none
+
 Composed by
 [Validation Stage](ALGORITHMS.md#algo-validation-stage)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 'Foo has no other consumers' asserted with no search recorded.
 ```
+
+After
 
 ```text
 records -> material claims -> weigh supporting vs contradicting evidence -> verdict{supported|contradicted|not-applicable|unsupported}; a zero-result claim records its searched scope
@@ -12498,12 +15830,17 @@ Details
 
 Intent
 Run the governance validation suites over the generated context, phases, tasks, and claims — state integrity, authority, principle activation, plan graph, tasks, ripple, semantic policy, evidence, and output serializability — and emit findings that each name what was examined and carry an owner stage.
+
 Invariant
 Every gate names the evidence it examined and carries an owner stage; zero blocker or error findings is the sole pass condition.
+
+Flow
 
 ```text
 GeneratedRecords → SuiteChecks → OwnedFindings → Pass|RepairRequired
 ```
+
+Productions
 
 ```bnf
 ValidationSuiteBattery ::= <GeneratedRecordSet> "->" <SuiteCheckSet> "->" <OwnedFindingSet> "->" <SuiteVerdict>
@@ -12513,16 +15850,23 @@ SuiteVerdict ::= "pass" | "repair_required"
 
 Composes
 none
+
 Composed by
 [Validation Stage](ALGORITHMS.md#algo-validation-stage)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A validation gate is a bare checkmark that names no evidence.
 ```
+
+After
 
 ```text
 records -> GV-STATE/AUTHORITY/ACTIVATION/PLAN/TASKS/RIPPLE/SEMANTIC/EVIDENCE/OUTPUT -> each finding names what it examined + an owner stage -> zero blocker/error is the only pass
@@ -12539,12 +15883,17 @@ Details
 
 Intent
 Route every finding to its earliest responsible owner stage, apply the fix, invalidate every dependent record downstream, and re-run from that stage — bounded to a fixed number of cycles, after which the run terminates as blocked with the remaining findings.
+
 Invariant
 Repair originates at the earliest invalid stage, cascades invalidation forward only, and is bounded; a downstream record is never restored after an upstream repair.
+
+Flow
 
 ```text
 Findings → EarliestOwner → Invalidate + Rerun → Repaired|Blocked
 ```
+
+Productions
 
 ```bnf
 RepairStage ::= <FindingSet> "->" <EarliestOwnerStage> "->" <SeverityFailureRouting> "->" <DependentInvalidation> "->" <RerunFromOwner>
@@ -12553,16 +15902,23 @@ RepairTermination ::= "status_pass_to_rendering" | "cycle_exceeds_max_blocked"
 
 Composes
 [Severity Failure Routing](ALGORITHMS.md#algo-severity-failure-routing), [Bounded Repair Loop](ALGORITHMS.md#algo-bounded-repair-loop)
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [resilience_recovery](SCHEMA.md#force-resilience-recovery), [control_coordination](SCHEMA.md#force-control-coordination), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A finding patched at the last stage; upstream cause left intact, downstream records stale.
 ```
+
+After
 
 ```text
 findings -> earliest responsible owner stage -> apply fix -> invalidate every dependent downstream -> re-run from that stage (bounded to 3 cycles)
@@ -12579,12 +15935,17 @@ Details
 
 Intent
 Cap the repair loop at a fixed cycle limit, and on each cycle repair from the earliest invalid stage, invalidate all downstream records, and regenerate them; exceeding the limit sets the run blocked with the remaining findings.
+
 Invariant
 The repair loop is bounded by a fixed cycle limit; exceeding it terminates as blocked rather than looping unbounded.
+
+Flow
 
 ```text
 RepairRequired → CycleGuard → InvalidateAndRegenerate → Pass|Blocked
 ```
+
+Productions
 
 ```bnf
 BoundedRepairLoop ::= <RepairRequired> "->" <CycleGuard> "->" <InvalidateDependents> "," <RegenerateDownstream> "->" <BoundedTermination>
@@ -12593,16 +15954,23 @@ BoundedTermination ::= "repaired_pass" | "repair_limit_exceeded_blocked"
 
 Composes
 none
+
 Composed by
 [Repair Stage](ALGORITHMS.md#algo-repair-stage)
+
 Forces
 [resilience_recovery](SCHEMA.md#force-resilience-recovery), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Repair loops unbounded, re-deriving forever on an unfixable finding.
 ```
+
+After
 
 ```text
 repair-required -> cycle guard -> invalidate + regenerate downstream -> exceeding max_cycles terminates as blocked with the remaining findings
@@ -12619,12 +15987,17 @@ Details
 
 Intent
 Use each finding's severity to choose its repair route — a blocker blocks and repairs, an error repairs, a warning requires a disposition, and anything lower is investigated.
+
 Invariant
 Severity governs the failure route, not the phase order; each severity maps to exactly one route.
+
+Flow
 
 ```text
 Finding → Severity → RepairRoute
 ```
+
+Productions
 
 ```bnf
 SeverityFailureRouting ::= <Finding> "->" <Severity> "->" <RepairRoute>
@@ -12633,16 +16006,23 @@ RepairRoute ::= "block_and_repair" | "repair" | "disposition_required" | "invest
 
 Composes
 none
+
 Composed by
 [Repair Stage](ALGORITHMS.md#algo-repair-stage)
+
 Forces
 [resilience_recovery](SCHEMA.md#force-resilience-recovery), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 Every finding blocks the same way, regardless of severity.
 ```
+
+After
 
 ```text
 finding -> severity -> route{blocker -> block+repair; error -> repair; warning -> disposition; lower -> investigate} -> severity routes failure, never phase order
@@ -12658,13 +16038,18 @@ finding -> severity -> route{blocker -> block+repair; error -> repair; warning -
 Details
 
 Intent
-Serialize only validated records into the checklist deterministically, or render the blocked report, emitting exactly one terminal — success or blocked — with future execution checkboxes left unchecked and stopping guaranteed bounded.
+Serialize only validated records into the checklist deterministically, or render the blocked report, emitting exactly one terminal — success or blocked — with future execution checkboxes left unchecked, and stop within the cycle bound.
+
 Invariant
 Rendering adds no new architecture decision, leaves future execution gates unchecked, and terminates exactly once; it never stops prematurely while repairable nor loops beyond the cycle bound.
+
+Flow
 
 ```text
 ValidatedRecords|BlockedReport → DeterministicRender → SuccessArtifact|BlockedArtifact
 ```
+
+Productions
 
 ```bnf
 RenderingStage ::= <ValidatedRecordSet> | <BlockedValidationReport> "->" <DeterministicRender> "->" <GenerationResult>
@@ -12673,18 +16058,26 @@ GenerationResult ::= "success_output_file" | "blocked_output_file"
 
 Composes
 [Checklist Output Rendering](ALGORITHMS.md#algo-checklist-output-rendering), [Explicit Termination](ALGORITHMS.md#algo-explicit-termination)
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Rendering invents a new architecture decision and pre-checks future execution boxes.
 ```
+
+After
 
 ```text
 validated records | blocked report -> deterministic render -> exactly one terminal{success artifact | blocked report}; future execution checkboxes left unchecked
@@ -12701,12 +16094,17 @@ Details
 
 Intent
 Emit the markdown checklist — governing context, principle disposition, phases in Z-topological order with loop class, severity, four-dimensional graph, and named ripple chains, hierarchically numbered tasks with evidence contracts, per-phase execution gates, appendices, and a final blocking execution gate — all left unchecked for future execution.
+
 Invariant
 The rendered artifact preserves linear execution order, dependency topology, and every ripple impact by name, and leaves every future execution checkbox unchecked.
+
+Flow
 
 ```text
 Context + Phases + Graphs + Ripples + Gates → ChecklistMarkdown
 ```
+
+Productions
 
 ```bnf
 ChecklistOutputRendering ::= <GoverningContext> "->" <PrincipleDisposition> "->" <LinearOrderedPhaseSet> "->" <PerPhaseGraphAndRipple> "->" <TaskHierarchy> "->" <AppendixSet> "->" <FinalExecutionGate>
@@ -12715,16 +16113,23 @@ AppendixSet ::= "file_organization" "," "evidence_inventory" "," "registry_contr
 
 Composes
 none
+
 Composed by
 [Rendering Stage](ALGORITHMS.md#algo-rendering-stage)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 The checklist drops ripple impacts to counts and renders inactive principles as mandatory.
 ```
+
+After
 
 ```text
 context -> principle disposition -> phases in Z-order{loop class, severity, 4D graph, named ripple} -> N.N.N tasks with evidence contracts -> per-phase gate -> appendices -> final blocking gate (all unchecked)
@@ -12741,12 +16146,17 @@ Details
 
 Intent
 Guarantee the generator stops with exactly one terminal — a written success artifact whose rendering integrity is verified, or a written blocked report — never a premature stop while the status is repairable and never a loop beyond the cycle bound.
+
 Invariant
 Termination is explicit and bounded: one of success or blocked, no premature stop, no unbounded loop.
+
+Flow
 
 ```text
 ValidationStatus → TerminalSelection → WrittenArtifact
 ```
+
+Productions
 
 ```bnf
 ExplicitTermination ::= <ValidationStatus> "->" <TerminalSelection> "->" <RenderIntegrityCheck> "->" <WrittenArtifact>
@@ -12755,18 +16165,26 @@ TerminalSelection ::= "write_success_artifact" | "write_blocked_report"
 
 Composes
 none
+
 Composed by
 [Rendering Stage](ALGORITHMS.md#algo-rendering-stage)
+
 Named in the derivation of
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
 [resilience_recovery](SCHEMA.md#force-resilience-recovery), [control_coordination](SCHEMA.md#force-control-coordination), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 The generator stops while the status is still repairable, or loops past its bound.
 ```
+
+After
 
 ```text
 validation status -> terminal selection{write success artifact | write blocked report} -> render-integrity check -> exactly one written artifact, no premature stop, no unbounded loop
@@ -12780,12 +16198,17 @@ Details
 
 Intent
 Bind every stage to the always-and-never rules of the generator — resolve authority and directionality before planning, discover before assuming, activate principles with a bound validator, order by dependency with severity as routing metadata, read only the prior stage's output contract through one evidence-bearing handoff, represent all four graph axes, require evidence for every claim, separate generation gates from future execution gates, repair from the earliest invalid stage, and render deterministically.
+
 Invariant
-The generator's cross-stage guarantees hold in every stage simultaneously; violating any one invalidates the run regardless of local stage success.
+The generator's cross-stage guarantees hold in every stage; violating any one invalidates the run regardless of local stage success.
+
+Flow
 
 ```text
 EveryStage → AlwaysRules + NeverRules → BoundGenerator
 ```
+
+Productions
 
 ```bnf
 CrossStageInvariants ::= <AlwaysRuleSet> "," <NeverRuleSet> "->" <BoundGeneratorContract>
@@ -12794,16 +16217,23 @@ InvariantClass ::= "authority_and_directionality_first" | "discover_before_assum
 
 Composes
 none
+
 Composed by
 [Checklist Creation Kernel](ALGORITHMS.md#algo-checklist-creation-kernel)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [control_coordination](SCHEMA.md#force-control-coordination)
+[model_governance](SCHEMA.md#force-model-governance), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Each stage guards its own rules; a global always/never guarantee is nowhere enforced.
 ```
+
+After
 
 ```text
 every stage bound by ALWAYS{authority-first, discover-before-assume, principle-bound-to-validator, dependency-order, single-output handoff, 4D + ripple, evidence-for-claims, repair-from-earliest} + NEVER{prior-knowledge-as-evidence, protocol-from-trigger-word, substring-ban, severity-grouping}
@@ -12818,12 +16248,17 @@ Details
 
 Intent
 Run the six-stage generator in order — orientation, planning, compilation, validation, repair, and rendering — bound by the cross-stage invariants, compiling a task description into a validated, dependency-aware execution checklist or an evidence-bearing blocked report.
+
 Invariant
 Checklist creation is a governance compiler: each of framing, decomposition, tasks, gates, repair, and termination is produced and gated by the stage that owns that decision, under one set of cross-stage invariants.
+
+Flow
 
 ```text
 Orientation → Planning → Compilation → Validation → Repair → Rendering
 ```
+
+Productions
 
 ```bnf
 ChecklistCreationKernel ::= <OrientationStage> "->" <PlanningStage> "->" <CompilationStage> "->" <ValidationStage> "->" <RepairStage> "->" <RenderingStage>
@@ -12831,10 +16266,13 @@ ChecklistCreationKernel ::= <OrientationStage> "->" <PlanningStage> "->" <Compil
 
 Composes
 [Orientation Stage](ALGORITHMS.md#algo-orientation-stage), [Teleological Intent Gate](ALGORITHMS.md#algo-teleological-intent-gate), [Planning Stage](ALGORITHMS.md#algo-planning-stage), [Compilation Stage](ALGORITHMS.md#algo-compilation-stage), [Admissibility Constraint Gate](ALGORITHMS.md#algo-admissibility-constraint-stage), [Validation Stage](ALGORITHMS.md#algo-validation-stage), [Repair Stage](ALGORITHMS.md#algo-repair-stage), [Rendering Stage](ALGORITHMS.md#algo-rendering-stage), [Cross-Stage Invariants](ALGORITHMS.md#algo-cross-stage-invariants)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
+
 Grounded by
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -12842,29 +16280,41 @@ Derivation map
 
 orient
 [Orientation Stage](ALGORITHMS.md#algo-orientation-stage)
+
 intent
 [Teleological Intent Gate](ALGORITHMS.md#algo-teleological-intent-gate)
+
 derive
 [Planning Stage](ALGORITHMS.md#algo-planning-stage)
+
 project
 [Phase Decomposition](ALGORITHMS.md#algo-phase-decomposition)
+
 act
 [Compilation Stage](ALGORITHMS.md#algo-compilation-stage)
+
 constrain
 [Admissibility Constraint Gate](ALGORITHMS.md#algo-admissibility-constraint-stage)
+
 verify
 [Validation Stage](ALGORITHMS.md#algo-validation-stage)
+
 commit
 [Rendering Stage](ALGORITHMS.md#algo-rendering-stage)
+
 terminate
 [Explicit Termination](ALGORITHMS.md#algo-explicit-termination)
+
+Before
 
 ```text
 A task compiled straight into a flat checklist, ungated and unordered.
 ```
 
+After
+
 ```text
-orientation -> planning -> compilation -> validation -> repair -> rendering, bound by cross-stage invariants -> a validated dependency-ordered checklist OR an evidence-bearing blocked report
+orientation -> planning -> compilation -> validation -> repair -> rendering, bound by cross-stage invariants -> a validated dependency-ordered checklist or an evidence-bearing blocked report
 ```
 
 ### <Checklist Governance Concern>
@@ -12875,12 +16325,17 @@ Details
 
 Intent
 <Orient on authority + evidence> -> <Plan principles + protocols + dependency graph> -> <Compile atomic tasks + ripple chains> -> <Validate reasoning by evidence + semantic policy> -> <Repair from the earliest invalid stage> -> <Render one bounded terminal>
+
 Invariant
 Any implementation checklist is generated as a validated, dependency-ordered execution graph whose every decision is owned and gated by a stage, not as a flat task list.
+
+Flow
 
 ```text
 Authority → Evidence → Principles → Phases → Graph → Ripples → Validation → Repair → Terminal
 ```
+
+Productions
 
 ```bnf
 ChecklistGovernanceConcern ::= <OrientationContext> "->" <PlanningGraph> "->" <CompiledTaskSet> "->" <ValidationVerdict> "->" <BoundedRepair> "->" <RenderedTerminal>
@@ -12889,14 +16344,16 @@ CompletionCondition ::= "authority_and_directionality_resolved" "," "phases_depe
 
 Composes
 none
+
 Forces
-[runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [ai_governance](SCHEMA.md#force-ai-governance)
+[runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
 
 ## codebase-verification
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -12950,12 +16407,17 @@ Details
 
 Intent
 Initialize verification context, execute the verification suite, classify failures, remediate violations, and repeat until pass or iteration limit.
+
 Invariant
 Architectural compliance is achieved through bounded verify-classify-fix cycles, not one-shot remediation.
+
+Flow
 
 ```text
 Init → Verify → Classify → Fix → Reverify → Pass|Limit
 ```
+
+Productions
 
 ```bnf
 VerificationLoop ::= <Initialization> "->" <VerificationRun> "->" (<PassReport> | <ViolationClassification> "->" <RemediationCycle> "->" <VerificationLoop>)
@@ -12964,14 +16426,20 @@ LoopExit ::= "passed" | "max_iterations_reached"
 
 Composes
 [Violation Classification](ALGORITHMS.md#algo-violation-classification)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
+Before
+
 ```text
-A one-shot fix attempt, unverified — some violations remain and no one knows.
+A one-shot fix attempt, unverified — some violations remain, and neither the developer nor the model notices.
 ```
+
+After
 
 ```text
 init -> verify -> classify failures -> fix -> re-verify -> repeat until pass or iteration limit
@@ -12988,12 +16456,17 @@ Details
 
 Intent
 Discover architecture documents, load design guidance, initialize result containers, set iteration counters, and define maximum remediation attempts.
+
 Invariant
 Verification requires a known rule context before failures can be interpreted.
+
+Flow
 
 ```text
 DiscoverRules → LoadGuidance → InitializeState → SetBounds
 ```
+
+Productions
 
 ```bnf
 ContextInitialization ::= <RuleDiscovery> "->" <GuidanceLoad> "->" <VerificationState> "->" <IterationBound>
@@ -13002,18 +16475,26 @@ VerificationState ::= "verification_results" "," "iteration_count" "," "max_iter
 
 Composes
 [Iteration Bound](ALGORITHMS.md#algo-iteration-bound)
+
 Composed by
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Named in the derivation of
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Failures interpreted with no known rule context, so fixes miss the point.
 ```
+
+After
 
 ```text
 discover architecture docs + design guidance -> init result containers + iteration counter + max attempts
@@ -13030,12 +16511,17 @@ Details
 
 Intent
 Run the configured verification procedure, capture raw output, parse errors and warnings, and derive pass status from zero-error condition.
+
 Invariant
 Compliance status must be based on executable verification output, not inferred confidence.
+
+Flow
 
 ```text
 ExecuteSuite → CaptureOutput → ParseErrors → ParseWarnings → PassBoolean
 ```
+
+Productions
 
 ```bnf
 VerificationExecution ::= <VerificationCommand> "->" <RawOutput> "->" <ParsedResult>
@@ -13045,18 +16531,26 @@ PassStatus ::= "errors.length == 0"
 
 Composes
 none
+
 Composed by
 [Reverification Gate](ALGORITHMS.md#algo-reverification-gate), [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Named in the derivation of
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 Compliance asserted from confidence, not from the verifier's output.
 ```
+
+After
 
 ```text
 run verification suite -> capture raw output -> parse errors + warnings -> pass = errors.length == 0
@@ -13073,12 +16567,17 @@ Details
 
 Intent
 If verification has no errors, report successful compliance and terminate without remediation.
+
 Invariant
 A clean verification result is terminal and must not trigger unnecessary mutation.
+
+Flow
 
 ```text
 VerificationResult → IsPass? → ReportSuccess|Continue
 ```
+
+Productions
 
 ```bnf
 EarlyExit ::= <ParsedResult> "->" <PassCheck> "->" <SuccessReport>
@@ -13088,14 +16587,20 @@ SuccessReport ::= "zero_violations"
 
 Composes
 none
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A clean verification result still triggers unnecessary remediation.
 ```
+
+After
 
 ```text
 parsed result -> is pass? -> report zero-violations success and terminate, no mutation
@@ -13112,12 +16617,17 @@ Details
 
 Intent
 For each verification error, classify the violation into a known remediation category and attach the matching strategy.
+
 Invariant
 Fixes must be selected by violation semantics, not by ad hoc text editing.
+
+Flow
 
 ```text
 Error → Category → Strategy
 ```
+
+Productions
 
 ```bnf
 ViolationClassification ::= <ErrorSet> "->" <CategorizedViolationSet>
@@ -13127,18 +16637,26 @@ CategorizedViolation ::= <Error> "," <Category> "," <RemediationStrategy>
 
 Composes
 none
+
 Composed by
 [Verification Loop](ALGORITHMS.md#algo-verification-loop), [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Named in the derivation of
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Errors fixed by ad hoc text editing, not by their semantics.
 ```
+
+After
 
 ```text
 each error -> category{file_limit | import | naming | base_class | css_token | dom_factory | console | lifecycle} -> matching strategy
@@ -13155,12 +16673,17 @@ Details
 
 Intent
 Group classified violations by category, order groups by severity, and apply fixes from highest architectural risk to lowest.
+
 Invariant
 Remediation should resolve structural blockers before cosmetic or secondary violations.
+
+Flow
 
 ```text
 CategorizedViolations → SeveritySort → OrderedFixQueue
 ```
+
+Productions
 
 ```bnf
 SeverityOrdering ::= <ViolationCategorySet> "->" <SeverityRank> "->" <OrderedViolationQueue>
@@ -13169,16 +16692,23 @@ SeverityRank ::= "critical" | "high" | "medium" | "low"
 
 Composes
 none
+
 Named in the derivation of
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 A cosmetic warning fixed before a structural blocker.
 ```
+
+After
 
 ```text
 classified violations -> group by category -> order by severity -> fix highest architectural risk first
@@ -13195,12 +16725,17 @@ Details
 
 Intent
 Increment iteration count before remediation, compare it to the maximum allowed attempts, and stop with partial success when the bound is exceeded.
+
 Invariant
 Automated remediation must be bounded to avoid infinite repair loops.
+
+Flow
 
 ```text
 Increment → CompareLimit → Continue|PartialExit
 ```
+
+Productions
 
 ```bnf
 IterationBound ::= <IterationCount> "->" <Increment> "->" <LimitCheck> "->" <LoopDecision>
@@ -13209,18 +16744,26 @@ LoopDecision ::= "continue_remediation" | "stop_manual_review_required"
 
 Composes
 none
+
 Composed by
 [Context Initialization](ALGORITHMS.md#algo-context-initialization), [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Named in the derivation of
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 Automated remediation loops forever on an unfixable violation.
 ```
+
+After
 
 ```text
 increment iteration -> compare to max -> {continue | stop, manual review required}
@@ -13237,12 +16780,17 @@ Details
 
 Intent
 Read the violating file, analyze the violation type, transform content according to design guidance, write the updated content, and preserve compatibility with verification rules.
+
 Invariant
 Each fix is a localized transformation constrained by architectural guidance.
+
+Flow
 
 ```text
 ReadFile → AnalyzeViolation → Transform → WriteFile
 ```
+
+Productions
 
 ```bnf
 FileScopedFix ::= <Violation> "->" <FileRead> "->" <ViolationAnalysis> "->" <DesignGuidedTransformation> "->" <FileWrite>
@@ -13251,18 +16799,26 @@ DesignGuidedTransformation ::= <CurrentContent> "," <ViolationType> "," <DesignG
 
 Composes
 none
+
 Composed by
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Named in the derivation of
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A fix edits broadly, breaking things the verifier didn't flag.
 ```
+
+After
 
 ```text
 violation -> read file -> analyze -> transform per design guidance -> write updated content
@@ -13279,12 +16835,17 @@ Details
 
 Intent
 When a file exceeds the allowed size, split responsibilities into smaller compliant artifacts, preserve imports and exports, and rewire references.
+
 Invariant
 Size violations usually indicate excessive responsibility concentration.
+
+Flow
 
 ```text
 OversizedFile → ResponsibilitySplit → NewArtifacts → ReferenceUpdate → SizeCheck
 ```
+
+Productions
 
 ```bnf
 FileLimitFix ::= <OversizedArtifact> "->" <ResponsibilityPartition> "->" <ArtifactSplit> "->" <ReferenceRewrite> "->" <LineLimitValidation>
@@ -13293,14 +16854,20 @@ LineLimitValidation ::= "line_count <= configured_limit"
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 An oversized file trimmed by deleting code instead of splitting responsibility.
 ```
+
+After
 
 ```text
 oversized file -> split responsibilities into compliant artifacts -> preserve imports/exports -> rewire references -> size <= limit
@@ -13317,12 +16884,17 @@ Details
 
 Intent
 Detect invalid cross-boundary imports, locate the approved dependency path or shared abstraction, rewrite imports, and verify dependency direction.
+
 Invariant
 Import fixes must restore architectural boundaries rather than merely silence errors.
+
+Flow
 
 ```text
 InvalidImport → BoundaryRule → ApprovedPath → RewriteImport → DependencyCheck
 ```
+
+Productions
 
 ```bnf
 ImportBoundaryFix ::= <ImportViolation> "->" <BoundaryPolicy> "->" <AllowedReference> "->" <ImportRewrite> "->" <DependencyValidation>
@@ -13331,14 +16903,20 @@ BoundaryPolicy ::= "same_module_only" | "shared_boundary_required" | "adapter_bo
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A cross-boundary import error silenced without restoring the boundary.
 ```
+
+After
 
 ```text
 invalid import -> boundary rule{same-module | shared | adapter} -> approved path -> rewrite -> verify dependency direction
@@ -13355,12 +16933,17 @@ Details
 
 Intent
 Compare file, folder, class, or symbol names against naming rules, derive compliant names, rename artifacts, and update all references.
+
 Invariant
 Naming remediation requires identity migration, not isolated renaming.
+
+Flow
 
 ```text
 InvalidName → NamingRule → NewName → Rename → ReferenceUpdate
 ```
+
+Productions
 
 ```bnf
 NamingFix ::= <NamingViolation> "->" <NamingConvention> "->" <CompliantIdentifier> "->" <RenameOperation> "->" <ReferenceConsistencyCheck>
@@ -13368,14 +16951,20 @@ NamingFix ::= <NamingViolation> "->" <NamingConvention> "->" <CompliantIdentifie
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A file renamed but its references left dangling.
 ```
+
+After
 
 ```text
 invalid name -> naming rule -> compliant identifier -> rename -> update all references (identity migration)
@@ -13392,12 +16981,17 @@ Details
 
 Intent
 Detect classes missing required base abstraction, refactor inheritance or composition according to role rules, migrate duplicated lifecycle logic into hooks, and verify behavior remains represented.
+
 Invariant
 Base-class violations are architectural adoption failures.
+
+Flow
 
 ```text
 NonCompliantClass → ExpectedBase → RefactorExtension → HookMigration → Verify
 ```
+
+Productions
 
 ```bnf
 BaseClassFix ::= <ClassRole> "->" <ExpectedBaseAbstraction> "->" <InheritanceOrCompositionUpdate> "->" <LifecycleHookMigration> "->" <ComplianceCheck>
@@ -13406,14 +17000,20 @@ ComplianceCheck ::= "class_extends_expected_base" | "uses_required_composition_b
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A class missing its required base 'fixed' by silencing the rule.
 ```
+
+After
 
 ```text
 class role -> expected base -> refactor inheritance/composition -> migrate duplicated lifecycle into hooks -> verify behavior represented
@@ -13430,12 +17030,17 @@ Details
 
 Intent
 Replace hardcoded style values with approved design tokens, verify token availability, and run style validation.
+
 Invariant
 Presentation constants should resolve through design-system tokens.
+
+Flow
 
 ```text
 HardcodedStyle → TokenLookup → Replacement → StyleValidation
 ```
+
+Productions
 
 ```bnf
 CssTokenFix ::= <HardcodedStyleValue> "->" <DesignTokenResolution> "->" <TokenReplacement> "->" <StyleValidation>
@@ -13444,14 +17049,20 @@ DesignTokenResolution ::= "existing_token" | "new_token_required" | "manual_revi
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A hardcoded color left in place, the rule disabled instead.
 ```
+
+After
 
 ```text
 hardcoded style value -> resolve design token{existing | new | manual review} -> replace -> style validation
@@ -13468,12 +17079,17 @@ Details
 
 Intent
 Replace direct DOM manipulation with the approved DOM factory, component factory, or rendering abstraction.
+
 Invariant
 DOM creation must flow through the sanctioned construction boundary.
+
+Flow
 
 ```text
 DirectDOM → FactoryBoundary → Rewrite → BehaviorCheck
 ```
+
+Productions
 
 ```bnf
 DomFactoryFix ::= <DirectDomUsage> "->" <ApprovedCreationBoundary> "->" <FactoryRewrite> "->" <LifecycleCompatibilityCheck>
@@ -13482,14 +17098,20 @@ DirectDomUsage ::= "document.querySelector" | "document.createElement" | "innerH
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification), [object_creation](SCHEMA.md#force-object-creation)
+
 Grounds
 none
+
+Before
 
 ```text
 Direct document.createElement kept, the rule ignored.
 ```
+
+After
 
 ```text
 direct DOM{querySelector, createElement, innerHTML, direct event} -> approved creation boundary -> factory rewrite -> lifecycle check
@@ -13506,12 +17128,17 @@ Details
 
 Intent
 Replace direct console calls with the approved logging abstraction, preserve severity and message context, and verify no direct console usage remains.
+
 Invariant
 Observability should be centralized behind a logging contract.
+
+Flow
 
 ```text
 ConsoleCall → LoggerMapping → Replacement → SearchNoConsole
 ```
+
+Productions
 
 ```bnf
 ConsoleFix ::= <ConsoleUsage> "->" <LoggerSeverityMapping> "->" <LoggerReplacement> "->" <ConsoleAbsenceCheck>
@@ -13520,14 +17147,20 @@ LoggerSeverityMapping ::= "console.log->info" | "console.warn->warn" | "console.
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability), [event_messaging](SCHEMA.md#force-event-messaging)
+
 Grounds
 none
+
+Before
 
 ```text
 A console.log left in and the rule bypassed.
 ```
+
+After
 
 ```text
 console call -> logger severity mapping{log->info, warn->warn, error->error} -> replace -> verify no direct console remains
@@ -13544,12 +17177,17 @@ Details
 
 Intent
 Detect resources created without corresponding cleanup, add destroy or teardown paths, and verify create/destroy symmetry.
+
 Invariant
 Lifecycle compliance requires every acquired resource to have a release path.
+
+Flow
 
 ```text
 AcquireResource → MissingRelease? → AddCleanup → SymmetryCheck
 ```
+
+Productions
 
 ```bnf
 LifecycleFix ::= <LifecycleViolation> "->" <AcquiredResourceSet> "->" <CleanupRequirementSet> "->" <DestroyPathUpdate> "->" <SymmetryValidation>
@@ -13558,14 +17196,20 @@ SymmetryValidation ::= "created_resources == destroyed_resources"
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A resource acquired with no release path, leaking.
 ```
+
+After
 
 ```text
 lifecycle violation -> acquired resources -> add destroy/teardown -> verify created == destroyed
@@ -13582,12 +17226,17 @@ Details
 
 Intent
 After remediation, run style validation, parse style errors, apply style-specific corrections, and block re-verification until style checks pass or are reported.
+
 Invariant
 Syntax and style conformance must be restored before the next architectural verification cycle.
+
+Flow
 
 ```text
 Remediation → Stylelint → StyleErrors? → FixStyle → Continue
 ```
+
+Productions
 
 ```bnf
 StylePostValidation ::= <RemediatedArtifacts> "->" <StyleValidationRun> "->" (<StylePass> | <StyleFixCycle>)
@@ -13596,14 +17245,20 @@ StyleFixCycle ::= <StyleErrorSet> "->" <StyleCorrectionSet> "->" <StyleValidatio
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 The next architectural cycle runs on style-broken code.
 ```
+
+After
 
 ```text
 remediation -> run style validation -> fix style errors -> block re-verification until style passes
@@ -13620,12 +17275,17 @@ Details
 
 Intent
 After fixes and style validation, rerun the full verification suite rather than trusting local corrections.
+
 Invariant
 Only the authoritative verification suite can confirm global compliance.
+
+Flow
 
 ```text
 FixesApplied → LocalValidation → FullVerification
 ```
+
+Productions
 
 ```bnf
 ReverificationGate ::= <RemediationResult> "->" <PostFixValidation> "->" <VerificationExecution>
@@ -13633,19 +17293,26 @@ ReverificationGate ::= <RemediationResult> "->" <PostFixValidation> "->" <Verifi
 
 Composes
 [Verification Execution](ALGORITHMS.md#algo-verification-execution)
+
 Composed by
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 Local corrections trusted as global compliance.
 ```
 
+After
+
 ```text
-fixes applied -> local validation -> rerun the FULL authoritative verification suite
+fixes applied -> local validation -> rerun the full authoritative verification suite
 ```
 
 ### Partial Success Reporting
@@ -13659,12 +17326,17 @@ Details
 
 Intent
 When iteration bounds are exhausted, report remaining violations, categorize unresolved issues, and mark the result as requiring manual review.
+
 Invariant
 Bounded automation should fail visibly with actionable residue.
+
+Flow
 
 ```text
 MaxIterations → RemainingViolations → ManualReviewReport
 ```
+
+Productions
 
 ```bnf
 PartialSuccessReport ::= <IterationLimitReached> "->" <RemainingViolationSet> "->" <ManualReviewRequired>
@@ -13673,14 +17345,20 @@ ManualReviewRequired ::= "remaining_errors" "," "remaining_warnings" "," "blocke
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Iteration bound hit and the run silently reports success.
 ```
+
+After
 
 ```text
 max iterations -> remaining violations categorized -> mark result manual-review-required (visible, actionable residue)
@@ -13697,12 +17375,17 @@ Details
 
 Intent
 Report total iterations, fixed error count, remaining warnings, and final verification status.
+
 Invariant
 Completion output should separate fixed violations from tolerated or remaining warnings.
+
+Flow
 
 ```text
 FinalState → Iterations → FixedCount → WarningCount → Report
 ```
+
+Productions
 
 ```bnf
 CompletionReport ::= <FinalVerificationState> "," <IterationCount> "," <FixedCount> "," <RemainingWarningCount>
@@ -13711,18 +17394,26 @@ FinalVerificationState ::= "passed" | "partial_success" | "failed"
 
 Composes
 none
+
 Composed by
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Named in the derivation of
 [Codebase Verification Kernel](ALGORITHMS.md#algo-codebase-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A report that mixes fixed violations with tolerated warnings.
 ```
+
+After
 
 ```text
 final state -> {total iterations, fixed count, remaining warnings, final status{passed | partial | failed}}
@@ -13737,12 +17428,17 @@ Details
 
 Intent
 Load compliance context, run verification, parse results, exit on pass, classify violations on failure, remediate by severity, run post-fix style validation, and repeat until zero errors or iteration limit.
+
 Invariant
 Codebase verification is a bounded remediation state machine driven by authoritative compliance output.
+
+Flow
 
 ```text
 Context → Verify → Parse → Pass? → Classify → Fix → StyleValidate → Reverify → Report
 ```
+
+Productions
 
 ```bnf
 CodebaseVerificationKernel ::= <ContextInitialization> "->" <VerificationExecution> "->" (<EarlyExit> | <ViolationClassification> "->" <IterationBound> "->" <SeverityOrdering> "->" <FileScopedFix> "->" <StylePostValidation> "->" <ReverificationGate>) "->" <CompletionReport>
@@ -13752,8 +17448,10 @@ FailureBound ::= "iteration_count > max_iterations"
 
 Composes
 [Context Initialization](ALGORITHMS.md#algo-context-initialization), [Verification Execution](ALGORITHMS.md#algo-verification-execution), [Violation Classification](ALGORITHMS.md#algo-violation-classification), [Iteration Bound](ALGORITHMS.md#algo-iteration-bound), [File-Scoped Fix](ALGORITHMS.md#algo-file-scoped-fix), [Reverification Gate](ALGORITHMS.md#algo-reverification-gate), [Completion Report](ALGORITHMS.md#algo-completion-report)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -13761,22 +17459,32 @@ Derivation map
 
 orient
 [Context Initialization](ALGORITHMS.md#algo-context-initialization)
+
 derive
 [Violation Classification](ALGORITHMS.md#algo-violation-classification)
+
 intent
 [Severity-Ordered Remediation](ALGORITHMS.md#algo-severity-ordered-remediation)
+
 act
 [File-Scoped Fix](ALGORITHMS.md#algo-file-scoped-fix)
+
 verify
 [Verification Execution](ALGORITHMS.md#algo-verification-execution)
+
 commit
 [Completion Report](ALGORITHMS.md#algo-completion-report)
+
 terminate
 [Iteration Bound](ALGORITHMS.md#algo-iteration-bound)
+
+Before
 
 ```text
 Compliance claimed after one edit, never re-verified.
 ```
+
+After
 
 ```text
 context -> verify -> parse -> pass? -> classify -> severity-order fix -> style validate -> reverify -> repeat until zero errors or bound
@@ -13790,12 +17498,17 @@ Details
 
 Intent
 <Load rules> -> <Run authoritative verifier> -> <Parse failures> -> <Classify by violation type> -> <Apply bounded fixes> -> <Run local post-fix validation> -> <Rerun verifier> -> <Exit on pass or bound>
+
 Invariant
 Any programmatic compliance workflow should be treated as a bounded verification-remediation loop whose only completion signal is the authoritative verifier passing.
+
+Flow
 
 ```text
 Rules → Verify → Errors → Categories → Fixes → LocalValidation → Reverify → Report
 ```
+
+Productions
 
 ```bnf
 ComplianceConcern ::= <RuleContext> "->" <AuthoritativeVerification> "->" <ViolationRegistry> "->" <RemediationQueue> "->" <BoundedMutationCycle> "->" <Reverification> "->" <FinalStatus>
@@ -13804,14 +17517,16 @@ FinalStatus ::= "passed" | "partial_success_manual_review" | "failed"
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
 ## context-verification
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -13859,12 +17574,17 @@ Details
 
 Intent
 Detect the current workflow phase, bind allowed operations to that phase, reject operations outside the phase contract, and emit only the artifact valid for that phase.
+
 Invariant
 A system must separate discovery from mutation so that analysis cannot accidentally remediate and remediation cannot silently expand scope.
+
+Flow
 
 ```text
 DetectPhase → BindCapabilities → EnforceMode → ExecuteAllowedOnly → EmitPhaseArtifact
 ```
+
+Productions
 
 ```bnf
 PhaseExecution ::= <PhaseDetect> "->" <CapabilityBinding> "->" <ModeEnforcement> "->" <AllowedExecution> "->" <PhaseOutput>
@@ -13876,18 +17596,26 @@ ActionOnly ::= "FixKnownGap" "Modify" "Version" "NoDiscovery"
 
 Composes
 none
+
 Composed by
 [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop)
+
 Named in the derivation of
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
+Before
+
 ```text
-An investigation quietly starts fixing gaps; a fix quietly expands its scope.
+An investigation starts fixing gaps and a fix expands its scope, with neither reported.
 ```
+
+After
 
 ```text
 detect phase{INVESTIGATE | ACTION} -> bind allowed ops -> INVESTIGATE{discover, test, document, no-modify} | ACTION{fix known gap, version, no-discovery}
@@ -13904,12 +17632,17 @@ Details
 
 Intent
 Extract claims, resolve each claim into observable evidence requirements, collect direct implementation evidence, classify each claim as verified, contradicted, or unverified, and report discrepancies.
+
 Invariant
 No architectural claim is trusted until mapped to implementation evidence.
+
+Flow
 
 ```text
 Claim → EvidenceRequirement → Observation → Classification → Report
 ```
+
+Productions
 
 ```bnf
 ClaimVerification ::= <ClaimSet> "->" <EvidenceMap> "->" <ObservationSet> "->" <VerdictSet> "->" <Report>
@@ -13919,18 +17652,26 @@ VerdictSet ::= "verified" | "contradicted" | "unverified"
 
 Composes
 none
+
 Composed by
 [Plan Phase Verification](ALGORITHMS.md#algo-plan-phase-verification)
+
 Named in the derivation of
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 'The core has no infra imports' trusted because it sounds right.
 ```
+
+After
 
 ```text
 claims -> map each to an observable evidence requirement -> collect implementation evidence -> verdict{verified | contradicted | unverified}
@@ -13947,12 +17688,17 @@ Details
 
 Intent
 After each critical stage, evaluate declared success criteria, block downstream progression when critical criteria fail, and carry warning-state forward when noncritical criteria fail.
+
 Invariant
 Complex workflows require explicit checkpoints that convert hidden uncertainty into visible control flow.
+
+Flow
 
 ```text
 Stage → Criteria → Evaluate → Pass|Warn|Block → Continue|Abort
 ```
+
+Productions
 
 ```bnf
 ValidationGate ::= <Stage> "->" <CriteriaSet> "->" <GateResult>
@@ -13964,18 +17710,26 @@ PriorityRank ::= "critical" | "high" | "medium" | "low"
 
 Composes
 none
+
 Composed by
 [<Workflow Orchestration Concern>](ALGORITHMS.md#algo-workflow-orchestration-concern), [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel), [<Context Verification Concern>](ALGORITHMS.md#algo-context-verification-concern), [Phase Close Gate](ALGORITHMS.md#algo-phase-close-gate)
+
 Named in the derivation of
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 A stage's uncertainty stays hidden and flows silently downstream.
 ```
+
+After
 
 ```text
 stage -> criteria{critical | noncritical} -> {PASS | WARN | BLOCK} -> block downstream on a critical failure
@@ -13992,12 +17746,17 @@ Details
 
 Intent
 When a file mutation fails because state changed between read and edit, reread the current file, merge the intended delta into the current content, write the complete new version, and verify persistence.
+
 Invariant
 Treat stale-write failures as state synchronization failures, not as patch failures.
+
+Flow
 
 ```text
 EditFail → ReRead → MergeDelta → WriteFullState → Verify
 ```
+
+Productions
 
 ```bnf
 FileRecovery ::= "ModificationError" "->" <ReadCurrent> "->" <Merge> "->" <WriteComplete> "->" <VerifyWrite>
@@ -14007,14 +17766,20 @@ VerifyWrite ::= "Exists" "&" "ContentMatches"
 
 Composes
 none
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```text
 A stale-write failure re-patches the old content, corrupting state.
 ```
+
+After
 
 ```text
 edit fail -> re-read current -> merge the delta into full state -> write complete version -> verify{exists & content matches}
@@ -14031,12 +17796,17 @@ Details
 
 Intent
 Declare the minimum assumptions required for the system to verify anything, bind all verification logic to those assumptions, and disclose the verification boundary.
+
 Invariant
-Every verifier needs axioms; robust systems make them explicit.
+Every axiom a verifier rests on is declared explicitly.
+
+Flow
 
 ```text
 MinimalAssumptions → Boundary → VerificationScope → Disclosure
 ```
+
+Productions
 
 ```bnf
 TrustAnchor ::= <AssumptionSet> "->" <TrustBoundary> "->" <Scope>
@@ -14047,16 +17817,23 @@ TrustBoundary ::= "CannotVerifyVerifierWithoutExternalReference"
 
 Composes
 none
+
 Named in the derivation of
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 The verifier's own axioms are hidden, so its boundary is unknowable.
 ```
+
+After
 
 ```text
 declare minimal assumptions{runtime, filesystem, execution, tool IO} -> boundary{cannot verify the verifier} -> disclosed, not verified
@@ -14073,12 +17850,17 @@ Details
 
 Intent
 Before executing advanced behavior, probe required runtime dependencies, classify each dependency failure by severity, and degrade or block capability based on criticality.
+
 Invariant
 Runtime capability must be measured before the workflow relies on it.
+
+Flow
 
 ```text
 Requirement → Probe → Status → Severity → CapabilityMode
 ```
+
+Productions
 
 ```bnf
 EnvironmentVerification ::= <RequirementSet> "->" <ProbeSet> "->" <StatusSet> "->" <CapabilityVerdict>
@@ -14089,14 +17871,20 @@ Requirement ::= "runtime" | "packageManager" | "writePermission" | "filesystem"
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 Advanced analysis relied on before checking the runtime can run it.
 ```
+
+After
 
 ```text
 requirements{runtime, package manager, write, filesystem} -> probe each -> classify by severity -> mode{full | degraded | blocked}
@@ -14113,12 +17901,17 @@ Details
 
 Intent
 Create known-good and known-bad fixtures, run the verification tool against both, detect false positives and false negatives, and mark the tool reliable only if both controls pass.
+
 Invariant
 Verification tools must be tested against controls before their results are trusted.
+
+Flow
 
 ```text
 KnownGood + KnownBad → RunTool → CompareExpected → CalibrateReliability
 ```
+
+Productions
 
 ```bnf
 ToolCalibration ::= <FixtureSet> "->" <ToolRun> "->" <ExpectedComparison> "->" <ReliabilityVerdict>
@@ -14128,18 +17921,26 @@ ReliabilityVerdict ::= "reliable" | "false_positive_risk" | "false_negative_risk
 
 Composes
 none
+
 Composed by
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Named in the derivation of
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A detector's match trusted with no control test.
 ```
+
+After
 
 ```text
 known-good + known-bad fixtures -> run tool -> detect false-positive AND false-negative -> reliable only if both controls pass
@@ -14156,12 +17957,17 @@ Details
 
 Intent
 Execute the system’s claimed behaviors against simple positive and negative cases, compare actual output to expected output, and treat mismatch as implementation evidence failure.
+
 Invariant
-A capability is not real until its behavior matches a testable contract.
+A capability counts only once its behavior matches a testable contract.
+
+Flow
 
 ```text
 ClaimedBehavior → PositiveCase + NegativeCase → Execute → Compare → Verdict
 ```
+
+Productions
 
 ```bnf
 BehavioralSelfTest ::= <BehaviorClaim> "->" <TestCasePair> "->" <ExecutionResult> "->" <BehaviorVerdict>
@@ -14171,16 +17977,23 @@ BehaviorVerdict ::= "matches_contract" | "false_positive" | "false_negative" | "
 
 Composes
 none
+
 Composed by
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 A claimed capability trusted without ever running it on a case.
 ```
+
+After
 
 ```text
 claimed behavior -> positive + negative case -> execute -> compare -> {matches contract | false-positive | false-negative | failed}
@@ -14197,12 +18010,17 @@ Details
 
 Intent
 Generate malicious, malformed, ambiguous, and deceptive inputs, execute the detection logic against them, and classify whether the system resists or accepts invalid patterns.
+
 Invariant
 Verification logic must be tested against hostile inputs, not only ordinary examples.
+
+Flow
 
 ```text
 AttackInput → ExecuteDetector → ExpectedReject|ExpectedIgnore → VulnerabilityVerdict
 ```
+
+Productions
 
 ```bnf
 AdversarialTesting ::= <AttackSet> "->" <DetectorExecution> "->" <SecurityVerdict>
@@ -14213,14 +18031,20 @@ SecurityVerdict ::= "blocked" | "ignored" | "vulnerable"
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A detector accepted after ordinary examples pass, never tested hostilely.
 ```
+
+After
 
 ```text
 attacks{pathTraversal, nullByte, unicodeHomoglyph, commentFalsePositive, patternSpoof} -> run detector -> {blocked | ignored | vulnerable}
@@ -14237,12 +18061,17 @@ Details
 
 Intent
 Reject null input, remove dangerous path/control patterns, normalize Unicode representation, and only pass sanitized strings to filesystem, parser, or command boundaries.
+
 Invariant
 All external strings must be converted from hostile representation into bounded representation before use.
+
+Flow
 
 ```text
 RawString → NullGuard → StripDanger → Normalize → SafeString
 ```
+
+Productions
 
 ```bnf
 StringNormalization ::= <RawString> "->" <NullGuard> "->" <DangerRemoval> "->" <UnicodeNormalize> "->" <SafeString>
@@ -14253,14 +18082,20 @@ UnicodeNormalize ::= "NFC"
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 A raw external string passed straight to a filesystem or command boundary.
 ```
+
+After
 
 ```text
 raw string -> null-guard -> strip{'../', null byte} -> Unicode NFC -> only the sanitized string crosses a boundary
@@ -14277,12 +18112,17 @@ Details
 
 Intent
 Check operands before calculation, reject division by zero, reject non-finite results, enforce bounds, and return nullable or typed failure instead of unsafe numeric state.
+
 Invariant
 Arithmetic output is only valid if the operation and result both satisfy the numeric contract.
+
+Flow
 
 ```text
 Operands → PreconditionCheck → Compute → FiniteCheck → BoundsCheck → Result|Failure
 ```
+
+Productions
 
 ```bnf
 SafeArithmetic ::= <Operands> "->" <Preconditions> "->" <Computation> "->" <Postconditions> "->" <NumericOutput>
@@ -14293,14 +18133,20 @@ NumericOutput ::= <Number> | "null" | <TypedFailure>
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 A division runs unchecked and returns NaN or Infinity into a decision.
 ```
+
+After
 
 ```text
 operands -> preconditions{denominator != 0, finite} -> compute -> postconditions{isFinite, within bounds} -> number | null | typed failure
@@ -14317,12 +18163,17 @@ Details
 
 Intent
 Increment depth on recursive entry, compare against maximum depth, reject excessive recursion, and unwind depth on completion.
+
 Invariant
 Recursive systems require explicit depth governance to prevent runaway self-reference.
+
+Flow
 
 ```text
 Enter → IncrementDepth → CheckLimit → Continue|Reject → Exit
 ```
+
+Productions
 
 ```bnf
 RecursionControl ::= <EnterRecursiveCall> "->" <DepthIncrement> "->" <LimitCheck> "->" <Decision> "->" <Exit>
@@ -14332,16 +18183,23 @@ LimitCheck ::= "currentDepth <= maxDepth"
 
 Composes
 none
+
 Composed by
 [Boundary Reconciliation](ALGORITHMS.md#algo-boundary-reconciliation), [Plan Phase Verification](ALGORITHMS.md#algo-plan-phase-verification), [Quality Governance Loop](ALGORITHMS.md#algo-quality-governance-loop)
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 A recursive self-reference runs away with no depth bound.
 ```
+
+After
 
 ```text
 enter -> increment depth -> depth <= max? -> {continue | reject max-depth} -> unwind on exit
@@ -14358,12 +18216,17 @@ Details
 
 Intent
 Load the system’s own definition, extract self-claims, search for implementation evidence of each claim, classify discrepancies, and downgrade confidence when self-description exceeds implemented behavior.
+
 Invariant
 A verifier should apply its verification rules to itself.
+
+Flow
 
 ```text
 SelfDefinition → ExtractClaims → VerifyClaims → DetectDiscrepancies → ConfidenceAdjustment
 ```
+
+Productions
 
 ```bnf
 SelfVerification ::= <SelfDefinition> "->" <SelfClaimSet> "->" <EvidenceSearch> "->" <DiscrepancySet> "->" <ConfidenceState>
@@ -14372,14 +18235,20 @@ ConfidenceState ::= "confirmed" | "partially_confirmed" | "overclaimed" | "inval
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 The verifier exempts itself from its own rules and overclaims.
 ```
+
+After
 
 ```text
 self definition -> extract self-claims -> search implementation evidence -> discrepancies -> confidence{confirmed | overclaimed | invalid}
@@ -14396,12 +18265,17 @@ Details
 
 Intent
 When direct tools cannot answer a verification question, synthesize a specialized analyzer, execute it against the target, parse its output, and integrate the result as evidence.
+
 Invariant
 Missing capability should trigger controlled tool construction rather than unsupported inference.
+
+Flow
 
 ```text
 Need → CapabilityGap → GenerateTool → ExecuteTool → ParseEvidence → Integrate
 ```
+
+Productions
 
 ```bnf
 ToolEscalation ::= <AnalysisNeed> "->" <CapabilityCheck> "->" <ToolConstruction> "->" <ToolExecution> "->" <EvidenceIntegration>
@@ -14411,16 +18285,23 @@ ToolConstruction ::= "write_script" "->" "execute_script" "->" "parse_results"
 
 Composes
 none
+
 Named in the derivation of
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [object_creation](SCHEMA.md#force-object-creation)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [object_creation](SCHEMA.md#force-object-creation)
+
 Grounds
 none
+
+Before
 
 ```text
 A capability gap filled by inference instead of evidence.
 ```
+
+After
 
 ```text
 analysis need -> capability gap -> write script -> execute -> parse -> integrate the result as evidence
@@ -14437,12 +18318,17 @@ Details
 
 Intent
 Collect verified findings, failed checks, warnings, discrepancies, environmental limits, adversarial results, and confidence level into a structured report without performing remediation.
+
 Invariant
 Investigation produces evidence, not fixes.
+
+Flow
 
 ```text
 EvidenceSet → FindingSet → RiskSet → Confidence → Report
 ```
+
+Productions
 
 ```bnf
 InvestigationReport ::= <EvidenceSet> "->" <Findings> "->" <Risks> "->" <Confidence> "->" <Report>
@@ -14452,16 +18338,23 @@ Report ::= "investigation_report"
 
 Composes
 none
+
 Named in the derivation of
 [Contract-Based Verification Kernel](ALGORITHMS.md#algo-contract-based-verification-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 An investigation that also 'quickly fixes' what it found.
 ```
+
+After
 
 ```text
 evidence -> findings + risks + adversarial results + confidence -> one investigation report, no remediation
@@ -14478,12 +18371,17 @@ Details
 
 Intent
 Accept only documented gaps as input, apply bounded changes, version the modified artifact, verify the write, and emit an action log without discovering new scope.
+
 Invariant
 Remediation operates only on known evidence.
+
+Flow
 
 ```text
 DocumentedGap → BoundedFix → Version → Verify → ActionLog
 ```
+
+Productions
 
 ```bnf
 ActionLog ::= <DocumentedGapSet> "->" <FixSet> "->" <VersionedArtifact> "->" <Verification> "->" <Log>
@@ -14494,14 +18392,20 @@ Log ::= "action_log"
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A fix run against a gap that was never documented, discovering new scope mid-flight.
 ```
+
+After
 
 ```text
 documented gaps only -> bounded fix -> version -> verify write -> action log; discovers nothing new
@@ -14516,12 +18420,17 @@ Details
 
 Intent
 Declare assumptions, detect phase, verify environment, calibrate tools, execute phase-legal behavior, test adversarially, enforce validation gates, self-verify claims, and emit a typed artifact.
+
 Invariant
 A reusable verification kernel is a gated state machine whose transitions are evidence-bound and phase-constrained.
+
+Flow
 
 ```text
 Assumptions → Phase → Environment → Calibration → Execution → AdversarialTest → SelfVerify → TypedOutput
 ```
+
+Productions
 
 ```bnf
 VerificationKernel ::= <TrustAnchor> "->" <PhaseExecution> "->" <EnvironmentVerification> "->" <ToolCalibration> "->" <BehavioralSelfTest> "->" <AdversarialTesting> "->" <ValidationGate> "->" <SelfVerification> "->" <TypedOutput>
@@ -14530,8 +18439,10 @@ TypedOutput ::= "investigation_report" | "action_log" | "blocked_execution_repor
 
 Composes
 [Tool Calibration](ALGORITHMS.md#algo-tool-calibration), [Behavioral Self-Test](ALGORITHMS.md#algo-behavioral-self-test), [Validation Gate](ALGORITHMS.md#algo-validation-gate)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -14539,22 +18450,32 @@ Derivation map
 
 orient
 [Trust Anchor Declaration](ALGORITHMS.md#algo-trust-anchor-declaration)
+
 see
 [Tool Calibration](ALGORITHMS.md#algo-tool-calibration)
+
 act
 [Advanced Tool Escalation](ALGORITHMS.md#algo-advanced-tool-escalation)
+
 constrain
 [Phase-Separated Execution](ALGORITHMS.md#algo-phase-separated-execution)
+
 verify
 [Evidence-Gated Claim Verification](ALGORITHMS.md#algo-evidence-gated-claim-verification)
+
 commit
 [Investigation Report](ALGORITHMS.md#algo-investigation-report)
+
 terminate
 [Validation Gate](ALGORITHMS.md#algo-validation-gate)
+
+Before
 
 ```text
 Behavior trusted because it looks right, with no phase, calibration, or self-check.
 ```
+
+After
 
 ```text
 declare assumptions -> detect phase -> verify environment -> calibrate tools -> phase-legal execution -> adversarial test -> validation gate -> self-verify -> typed artifact
@@ -14568,12 +18489,17 @@ Details
 
 Intent
 <Detect required contract> -> <Bind allowed capability> -> <Execute bounded operation> -> <Validate evidence> -> <Emit typed result>
+
 Invariant
 <Any system behavior should be treated as a contract-bound transition whose legitimacy depends on phase, evidence, and postcondition verification.>
+
+Flow
 
 ```text
 Contract → Capability → Operation → Gate → Artifact
 ```
+
+Productions
 
 ```bnf
 ConcernAlgorithm ::= <PhaseContract> "->" <CapabilityBinding> "->" <Operation> "->" <ValidationGate> "->" <TypedArtifact>
@@ -14583,14 +18509,16 @@ TypedArtifact ::= <Report> | <Log> | <Failure>
 
 Composes
 [Validation Gate](ALGORITHMS.md#algo-validation-gate)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
 ## css-cascade
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -14626,12 +18554,17 @@ Details
 
 Intent
 Declare one ordered set of named cascade layers once at the stylesheet root, assign every rule to exactly one layer, and let layer order — not selector specificity nor source order — decide precedence, so values, appearance, placement, and assembly can never fight for the same declaration.
+
 Invariant
 Style precedence must be a property of the layer a rule lives in, not of how specific its selector is; an unlayered rule silently outranks every layer and is therefore forbidden.
+
+Flow
 
 ```text
 Root → LayerOrderDeclaration → PerFileLayerBinding → LayerPrecedence → DeterministicCascade
 ```
+
+Productions
 
 ```bnf
 CascadeLayerPartition ::= <LayerOrderDeclaration> "->" <LayeredBindingSet> "->" <PrecedencePolicy>
@@ -14642,17 +18575,24 @@ PrecedencePolicy ::= "app_over_components_over_shell_over_globals_over_tokens" "
 
 Composes
 [Architectural Style Boundary](ALGORITHMS.md#algo-architectural-style-boundary), [Responsibility Boundary](ALGORITHMS.md#algo-responsibility-boundary)
+
 Composed by
 [CSS Type-Cascade Kernel](ALGORITHMS.md#algo-css-type-cascade-concern)
+
 Forces
 [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
+
+Before
 
 ```text
 .foo { color: red; }
 #page .foo { color: blue; }
 ```
+
+After
 
 ```text
 @layer tokens, globals, components, app;
@@ -14669,12 +18609,17 @@ Details
 
 Intent
 Define every design primitive — color, space, radius, the type scale, size, duration, z-index — exactly once as a custom property in the tokens layer, and forbid any downstream literal where a token exists.
+
 Invariant
 Values are canonical data with a single source; a literal in globals, components, or app where a token exists is duplication, not styling.
+
+Flow
 
 ```text
 Primitive → TokenDeclaration → DownstreamReference → NoLiteralWhereTokenExists
 ```
+
+Productions
 
 ```bnf
 TokenSourceOfTruth ::= <PrimitiveSet> "->" <TokenDeclarationSet> "->" <ReferenceOnlyDownstream>
@@ -14684,17 +18629,24 @@ LiteralPolicy ::= "reference_token" | "zero_value_exempt"
 
 Composes
 [Canonical Data](ALGORITHMS.md#algo-canonical-data)
+
 Composed by
 [CSS Type-Cascade Kernel](ALGORITHMS.md#algo-css-type-cascade-concern)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [performance_scaling](SCHEMA.md#force-performance-scaling)
+
 Grounds
 none
+
+Before
 
 ```text
 .foo { color: #33bb55; }
 .bar { color: #33bb55; }
 ```
+
+After
 
 ```text
 @layer tokens { :root { --foo: #33bb55; } }
@@ -14709,13 +18661,18 @@ none
 Details
 
 Intent
-In the globals layer, define how every element and component TYPE looks, its size, and its spacing exactly once, keyed only by element tag, `data-el` custom type, and the orthogonal `data-*` axes (`data-variant` paint, `data-size` scale, `data-gap` child rhythm, `data-tone` palette, `data-measure` width); never key appearance by a purpose-class, and let every value be a token.
+In the globals layer, define how every element and component type looks, its size, and its spacing exactly once, keyed only by element tag, `data-el` custom type, and the orthogonal `data-*` axes (`data-variant` paint, `data-size` scale, `data-gap` child rhythm, `data-tone` palette, `data-measure` width); never key appearance by a purpose-class, and let every value be a token.
+
 Invariant
 Appearance is a contract owned by a type, not by a use-site; a purpose-class in globals fragments one type's look across many call-sites and is forbidden.
+
+Flow
 
 ```text
 Type → GlobalAppearanceRule → DefinedOncePerType → TokenizedValues
 ```
+
+Productions
 
 ```bnf
 TypeKeyedAppearance ::= <TypeSelector> "->" <AppearanceRule> "->" <DefinedOncePerType>
@@ -14726,16 +18683,23 @@ ForbiddenKey ::= "purpose_class"
 
 Composes
 [Canonical Data](ALGORITHMS.md#algo-canonical-data), [Domain Boundary](ALGORITHMS.md#algo-domain-boundary)
+
 Composed by
 [CSS Type-Cascade Kernel](ALGORITHMS.md#algo-css-type-cascade-concern)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 .foo-label { font-size: 12px; color: gray; }
 ```
+
+After
 
 ```text
 @layer globals { [data-el="foo"] { font-size: var(--text-sm); color: var(--fg-muted); } }
@@ -14750,12 +18714,17 @@ Details
 
 Intent
 Extend the stylable element vocabulary beyond the native HTML tag set by registering each semantic type against a base tag and a `data-el` stamp; the registered type becomes a first-class node the globals layer binds one appearance contract to, so a concept no native tag can express — a field-label, an icon, a toast, an entry — is styled by its type, never by a class.
+
 Invariant
 The set of stylable types is open and self-registered, not limited to the HTML tag set; a new appearance contract is a newly registered type plus one global rule, never a new purpose-class.
+
+Flow
 
 ```text
 SemanticConcept → DefineElement(type, baseTag, dataEl) → TypeRegistry → DataElStamp → GlobalAppearanceContract
 ```
+
+Productions
 
 ```bnf
 CustomTypeRegistration ::= <SemanticConcept> "->" <ElementDefinition> "->" <TypeRegistryEntry> "->" <RenderedTypeStamp> "->" <AppearanceBinding>
@@ -14766,17 +18735,24 @@ AppearanceBinding ::= "[data-el=" <DataElToken> "]" "owns_exactly_one_global_app
 
 Composes
 [Extension Point](ALGORITHMS.md#algo-extension-point), [Self-Description Manifest](ALGORITHMS.md#algo-self-description-manifest)
+
 Composed by
 [CSS Type-Cascade Kernel](ALGORITHMS.md#algo-css-type-cascade-concern)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```typescript
 <span class="foo">…</span>
 .foo { color: gray; }
 ```
+
+After
 
 ```typescript
 defineElement({ type: "foo", baseTag: "output", dataEl: "foo" });
@@ -14791,13 +18767,18 @@ defineElement({ type: "foo", baseTag: "output", dataEl: "foo" });
 Details
 
 Intent
-Route all DOM creation through one governed factory that resolves a node spec of shape `{ el, variant, size, gap, tone, measure, layout, class, on, children }` against the type, handler, and component registries, maps each axis key to its `data-*` attribute, treats `class` as a gated hook (icon-font glyph, `u-*` utility, or `c-*` component — never bespoke, never appearance), throws on any unknown type, handler, or component, and refuses an inline `style` attribute outright.
+Route all DOM creation through one governed factory that resolves a node spec of shape `{ el, variant, size, gap, tone, measure, layout, class, on, children }` against the type, handler, and component registries, maps each axis key to its `data-*` attribute, treats `class` as a gated hook (icon-font glyph, `u-*` utility, or `c-*` component — never bespoke, never appearance), throws on any unknown type, handler, or component, and refuses an inline `style` attribute.
+
 Invariant
 The construction surface must be structurally incapable of producing a node that is unstyled-by-type or carries an inline style; the illegal state is unrepresentable, not merely linted after the fact.
+
+Flow
 
 ```text
 NodeSpec → RegistryResolution → ScalarMapping → UnknownReject|InlineStyleReject → GovernedNode
 ```
+
+Productions
 
 ```bnf
 GovernedConstruction ::= <NodeSpec> "->" <RegistryLookup> "->" <ScalarApplication> "->" <GuardSet> "->" <RenderedNode>
@@ -14808,16 +18789,22 @@ GuardSet ::= "throw_on_unknown_element" "," "throw_on_unknown_handler" "," "thro
 
 Composes
 [Construction Boundary](ALGORITHMS.md#algo-construction-boundary), [Error Boundary](ALGORITHMS.md#algo-error-boundary), [Security Policy](ALGORITHMS.md#algo-security-policy)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [object_creation](SCHEMA.md#force-object-creation)
+
 Grounds
 none
+
+Before
 
 ```typescript
 const n = document.createElement("div");
 n.className = "foo";
 n.style.color = "red";
 ```
+
+After
 
 ```typescript
 const n = dom({ el: "foo", tone: "bar", children: [text] });
@@ -14832,12 +18819,17 @@ Details
 
 Intent
 In the components layer, set only where a component sits — position, offsets, stacking, overlay — keyed by its type, and never its look, size, or spacing, which remain owned by globals.
+
 Invariant
 Placement and appearance are separate contracts; a placement rule that also sets a look re-opens a type's appearance outside its single global definition and breaks the layer partition.
+
+Flow
 
 ```text
 ComponentType → PlacementRule → PositionStackingOverlayOnly → NoAppearanceLeak
 ```
+
+Productions
 
 ```bnf
 PlacementIsolation ::= <ComponentType> "->" <PlacementRule> "->" <ForbiddenAppearanceSet>
@@ -14847,16 +18839,23 @@ ForbiddenInComponents ::= "color" | "font" | "size" | "spacing" | "border" | "ra
 
 Composes
 [Responsibility Boundary](ALGORITHMS.md#algo-responsibility-boundary), [Coupling Control](ALGORITHMS.md#algo-coupling-control)
+
 Composed by
 [CSS Type-Cascade Kernel](ALGORITHMS.md#algo-css-type-cascade-concern)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 @layer components { [data-el="foo"] { position: fixed; inset-block-end: 1rem; color: white; } }
 ```
+
+After
 
 ```text
 @layer components { [data-el="foo"] { position: fixed; inset-block-end: var(--space-4); z-index: var(--z-overlay); } }
@@ -14871,12 +18870,17 @@ Details
 
 Intent
 In the app layer, compose views from structural containers and arrange their children with flex or grid and token-valued gaps, pad each container once so its children are full-width and fill the padded box, forbid horizontal margins, and never set or override any element's or component's look.
+
 Invariant
 Assembly arranges typed parts and owns child layout plus gutter discipline, but holds zero appearance authority, so a view can be recomposed without restyling a single type.
+
+Flow
 
 ```text
 View → ContainerSet → ChildArrangement → GutterConvention → NoAppearanceOverride
 ```
+
+Productions
 
 ```bnf
 AssemblyComposition ::= <View> "->" <StructuralContainerSet> "->" <ChildArrangement> "->" <GutterConvention>
@@ -14887,16 +18891,23 @@ AppearanceAuthority ::= "none"
 
 Composes
 [Responsibility Boundary](ALGORITHMS.md#algo-responsibility-boundary)
+
 Composed by
 [CSS Type-Cascade Kernel](ALGORITHMS.md#algo-css-type-cascade-concern)
+
 Forces
 [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
+
+Before
 
 ```text
 @layer app { .foo-view .bar { margin: 0 12px; box-shadow: 0 1px 2px; } }
 ```
+
+After
 
 ```text
 @layer app { .foo-view { display: grid; gap: var(--space-4); padding-inline: var(--space-4); } }
@@ -14911,12 +18922,17 @@ Details
 
 Intent
 Bind each layer invariant to a machine check — layer order declared once, placement properties barred from globals, class selectors barred from globals, literals barred where a token exists, no horizontal margin, all DOM through the factory, no inline style — run them as hard errors with no warn tier and no inline disables, and gate the push on a clean verdict.
+
 Invariant
-A layer contract is only real if a fitness function fails the build when it is broken; the factory makes appearance-by-type unrepresentable and the linters make any residue unshippable.
+A layer contract holds only if a fitness function fails the build when it is broken; the factory makes appearance-by-type unrepresentable and the linters make any residue unshippable.
+
+Flow
 
 ```text
 LayerInvariant → FitnessFunction → StaticCheck → HardErrorNoWarn → PushGate
 ```
+
+Productions
 
 ```bnf
 LayerFitnessEnforcement ::= <InvariantSet> "->" <FitnessFunctionSet> "->" <VerdictGate>
@@ -14927,16 +18943,23 @@ GatePolicy ::= "hard_error_no_warn_tier" "," "no_inline_disable" "," "block_push
 
 Composes
 [Verification Fitness](ALGORITHMS.md#algo-verification-fitness)
+
 Composed by
 [CSS Type-Cascade Kernel](ALGORITHMS.md#algo-css-type-cascade-concern)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [object_creation](SCHEMA.md#force-object-creation), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```typescript
 reviewChecklist.push("no appearance in the app layer");
 ```
+
+After
 
 ```typescript
 export const rules = {
@@ -14953,13 +18976,18 @@ export const rules = {
 Details
 
 Intent
-To move an existing purpose-class or page-scoped stylesheet into this model, treat every appearance-bearing class rule as a migration unit, derive the element TYPE it decorates, register a custom `data-el` type when no tag or variant expresses it, move its look, size, and spacing into one global rule keyed by that type, demote any residual position into components and any residual layout into app, and verify that zero appearance rule keyed by a purpose-class remains outside the globals layer.
+To move an existing purpose-class or page-scoped stylesheet into this model, treat every appearance-bearing class rule as a migration unit, derive the element type it decorates, register a custom `data-el` type when no tag or variant expresses it, move its look, size, and spacing into one global rule keyed by that type, demote any residual position into components and any residual layout into app, and verify that zero appearance rule keyed by a purpose-class remains outside the globals layer.
+
 Invariant
 Migration is centralization by type: each scattered purpose-class appearance collapses into one type-keyed global rule, and completion is proven by the absence of appearance outside globals, not by a narrative claim.
+
+Flow
 
 ```text
 PurposeClassRule → DeriveType → RegisterTypeIfNeeded → MoveAppearanceToGlobals → DemoteResidue → ZeroAppearanceClassOutsideGlobals
 ```
+
+Productions
 
 ```bnf
 TypeMigration ::= <LegacyAppearanceRuleSet> "->" <TypeDerivation> "->" <GlobalCentralization> "->" <ResidueDemotion> "->" <ZeroDuplicationVerdict>
@@ -14970,14 +18998,20 @@ ZeroDuplicationVerdict ::= "no_appearance_keyed_by_purpose_class_outside_globals
 
 Composes
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel), [Governance Evolution](ALGORITHMS.md#algo-governance-evolution)
+
 Forces
-[semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+[semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 .foo { color: white; background: blue; position: sticky; top: 0; }
 ```
+
+After
 
 ```text
 @layer globals { [data-el="foo"] { color: var(--fg-on-accent); background: var(--bg-accent); } }
@@ -14992,12 +19026,17 @@ Details
 
 Intent
 Declare one layer order, hold every value in tokens, key every appearance on a type — native or custom-registered — exactly once in globals, hold placement in components and assembly in app, create all DOM through a factory that stamps types and refuses inline style, and gate the whole contract behind machine fitness functions.
+
 Invariant
 Styling is reproducible when precedence is layer-decided, appearance is a per-type contract, the type vocabulary is open and factory-stamped, and every invariant has a build-failing check.
+
+Flow
 
 ```text
 LayerOrder → Tokens → TypeKeyedGlobals → Placement → Assembly → GovernedFactory → Fitness
 ```
+
+Productions
 
 ```bnf
 CssTypeCascadeKernel ::= <CascadeLayerPartition> "->" <TokenSourceOfTruth> "->" <TypeKeyedAppearance> "->" <CustomTypeRegistration> "->" <GovernedConstruction> "->" <PlacementIsolation> "->" <AssemblyComposition> "->" <LayerFitnessEnforcement>
@@ -15008,14 +19047,16 @@ CascadeContract ::= "layer_decides_precedence" "," "one_definition_per_property_
 
 Composes
 [Cascade Layer Partition](ALGORITHMS.md#algo-cascade-layer-partition), [Token Source-of-Truth](ALGORITHMS.md#algo-token-source-of-truth), [Type-Keyed Appearance](ALGORITHMS.md#algo-type-keyed-appearance), [Custom Type Registration](ALGORITHMS.md#algo-custom-type-registration), [Placement Isolation](ALGORITHMS.md#algo-placement-isolation), [Assembly Composition](ALGORITHMS.md#algo-assembly-composition), [Layer Fitness Enforcement](ALGORITHMS.md#algo-layer-fitness-enforcement)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [object_creation](SCHEMA.md#force-object-creation), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
 
 ## governed-plan-loop
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -15050,12 +19091,17 @@ Details
 
 Intent
 Treat the plan as durable append/update-only state — tasks carrying status and grounding, a considerations backlog, and a dismissed-key set — maintained every turn and re-delivered on restart, so anything discovered mid-pass is retained instead of falling out of scope.
+
 Invariant
 Plan progress is authoritative persisted state, never inferred from transient conversation, and a completion is recorded only with evidence.
+
+Flow
 
 ```text
 EmitDelta → GuardTransition → AppendOnly → Persist → RenderFromState
 ```
+
+Productions
 
 ```bnf
 LivingPlanState ::= <PlanDelta> "->" <TransitionGuard> "->" <DurableMerge> "->" <StateRender>
@@ -15066,18 +19112,26 @@ DoneTransition ::= "requires" <GroundingCitation>
 
 Composes
 none
+
 Composed by
 [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop), [<Governed Plan Concern>](ALGORITHMS.md#algo-governed-plan-concern)
+
 Named in the derivation of
 [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop)
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [causality_ordering](SCHEMA.md#force-causality-ordering), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Plan progress inferred from the conversation, so a discovery mid-pass falls out of scope on restart.
 ```
+
+After
 
 ```text
 plan delta -> transition guard{done requires grounding} -> append/update-only durable state{tasks, considerations, dismissed keys} -> render from state, restart-survivable
@@ -15094,12 +19148,17 @@ Details
 
 Intent
 Capture considerations during a phase but act on them only at the phase boundary — triage each open consideration against code and canon into a confirmed task or a dismissed resolved-false key, deduping new opens against the confirmed and dismissed sets before triage.
+
 Invariant
 A dismissed consideration never resurfaces and the backlog converges monotonically, so the loop cannot oscillate.
+
+Flow
 
 ```text
 Capture → DeferToBoundary → DedupBeforeTriage → Triage → DryPassOrBound
 ```
+
+Productions
 
 ```bnf
 BoundaryReconciliation ::= <Backlog> "->" <Dedup> "->" <Triage> "->" <Termination>
@@ -15110,18 +19169,26 @@ Termination ::= "dryPass" | "maxReconcileRounds"
 
 Composes
 [Recursion Control](ALGORITHMS.md#algo-recursion-control)
+
 Composed by
 [Phase Close Gate](ALGORITHMS.md#algo-phase-close-gate), [Plan Phase Verification](ALGORITHMS.md#algo-plan-phase-verification), [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop)
+
 Named in the derivation of
 [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop)
+
 Forces
 [causality_ordering](SCHEMA.md#force-causality-ordering), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Considerations acted on mid-phase, and a dismissed one resurfaces — the loop oscillates.
 ```
+
+After
 
 ```text
 capture during phase -> act only at the boundary -> dedup new opens vs (confirmed | dismissed) -> triage{confirm -> task | dismiss -> resolved-false} -> dry pass or bound
@@ -15138,12 +19205,17 @@ Details
 
 Intent
 Make completion a gated state of the plan rather than a judgment call — a phase closes only when all tasks are done, a dry reconciliation pass holds, verify is clean for the chosen scope, and the coverage graph confirms the ripple set; otherwise the loop returns to execution.
+
 Invariant
 Completion can never be self-declared; closure is a composed evidence-bound gate whose failure routes back to execution, never to done.
+
+Flow
 
 ```text
 AllTasksDone → DryPass → VerifyClean → CoverageConfirmed → CloseOrExecute
 ```
+
+Productions
 
 ```bnf
 PhaseCloseGate ::= <TaskCompletion> "&" <DryPass> "&" <VerifyResult> "&" <CoverageResult> "->" <Decision>
@@ -15153,18 +19225,26 @@ VerifyResult ::= "scope:full" | "scope:work"
 
 Composes
 [Validation Gate](ALGORITHMS.md#algo-validation-gate), [Boundary Reconciliation](ALGORITHMS.md#algo-boundary-reconciliation)
+
 Composed by
 [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop), [<Governed Plan Concern>](ALGORITHMS.md#algo-governed-plan-concern)
+
 Named in the derivation of
 [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop)
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance), [correctness_verification](SCHEMA.md#force-correctness-verification), [state_transaction](SCHEMA.md#force-state-transaction)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 The phase is self-declared done.
 ```
+
+After
 
 ```text
 all tasks done & dry reconciliation holds & verify clean (scope) & coverage graph confirms ripple -> close | return to execute; never self-declared
@@ -15180,13 +19260,18 @@ all tasks done & dry reconciliation holds & verify clean (scope) & coverage grap
 Details
 
 Intent
-Before a composed plan reaches the user, the engine loops it back through evidence, completeness, and adversarial-skepticism passes, reconciles the findings into the plan, and increments a loop-owned pass counter the model cannot forge; a render boundary blocks an unverified plan.
+Before a composed plan reaches the developer, the engine loops it back through evidence, completeness, and adversarial-skepticism passes, reconciles the findings into the plan, and increments a loop-owned pass counter the model cannot forge; a render boundary blocks an unverified plan.
+
 Invariant
 A plan is never presented un-reviewed, and the verification flag is written only by deterministic engine code, never by model tokens.
+
+Flow
 
 ```text
 AutoLoopback → ThreePassVerify → ReconcileFindings → LoopOwnedIncrement → PresentGate
 ```
+
+Productions
 
 ```bnf
 PlanPhaseVerification ::= <AutoLoopback> "->" <VerifyPasses> "->" <Reconcile> "->" <CounterIncrement> "->" <PresentGate>
@@ -15197,18 +19282,26 @@ Counter ::= "loop_owned" "not_model_emitted"
 
 Composes
 [Evidence-Gated Claim Verification](ALGORITHMS.md#algo-evidence-gated-claim-verification), [Boundary Reconciliation](ALGORITHMS.md#algo-boundary-reconciliation), [Recursion Control](ALGORITHMS.md#algo-recursion-control)
+
 Composed by
 [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop)
+
 Named in the derivation of
 [Governed Autonomous Plan Loop](ALGORITHMS.md#algo-governed-autonomous-plan-loop)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
 
+Before
+
 ```text
-A plan presented to the user un-reviewed, its verified flag set by model tokens.
+A plan presented to the developer un-reviewed, its verified flag set by model tokens.
 ```
+
+After
 
 ```text
 auto loopback -> 3 passes{evidence, completeness, adversarial} -> reconcile findings -> loop-owned counter (not model-emitted) -> render blocked until verified
@@ -15223,12 +19316,17 @@ Details
 
 Intent
 Drive a large task to completion under gates — seed per phase, investigate, execute, self-inform from canon and self-audit, capture considerations, reconcile at the boundary, and close only when the plan is a mechanically resolved state, then re-seed the next phase.
+
 Invariant
 Autonomy is bounded by gates rather than disposition — the plan can only grow with code-verified work, completion is a gated state and not a judgment call, and every step is restart-survivable.
+
+Flow
 
 ```text
 SeedPhase → Investigate → Execute → GatedSelfAuditAndInform → CaptureConsiderations → BoundaryReconcile → CloseGate → ReSeedNextPhase
 ```
+
+Productions
 
 ```bnf
 GovernedPlanLoop ::= <PhaseSeed> "->" <ActivityCycle> "->" <BoundaryReconciliation> "->" <PhaseCloseGate> "->" <ReSeed>
@@ -15239,10 +19337,13 @@ Completion ::= "gated_state" "not_judgment_call"
 
 Composes
 [Living Plan State](ALGORITHMS.md#algo-living-plan-state), [Boundary Reconciliation](ALGORITHMS.md#algo-boundary-reconciliation), [Phase Close Gate](ALGORITHMS.md#algo-phase-close-gate), [Plan Phase Verification](ALGORITHMS.md#algo-plan-phase-verification), [Phase-Separated Execution](ALGORITHMS.md#algo-phase-separated-execution)
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [security_governance](SCHEMA.md#force-security-governance), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
+
 Grounded by
 [constrain](REASONING.md#stage-constrain)
 
@@ -15250,19 +19351,26 @@ Derivation map
 
 commit
 [Living Plan State](ALGORITHMS.md#algo-living-plan-state)
+
 constrain
 [Boundary Reconciliation](ALGORITHMS.md#algo-boundary-reconciliation)
+
 verify
 [Plan Phase Verification](ALGORITHMS.md#algo-plan-phase-verification)
+
 terminate
 [Phase Close Gate](ALGORITHMS.md#algo-phase-close-gate)
+
+Before
 
 ```text
 A long task driven from conversation memory, self-declared done, losing mid-pass discoveries on restart.
 ```
 
+After
+
 ```text
-seed phase -> investigate -> execute -> gated self-audit + canon self-inform -> capture + reconcile at boundary -> close only on a mechanically-resolved gated state -> re-seed next phase
+seed phase -> investigate -> execute -> gated self-audit + canon self-inform -> capture + reconcile at boundary -> close only on a mechanically resolved gated state -> re-seed next phase
 ```
 
 ### <Governed Plan Concern>
@@ -15272,13 +19380,18 @@ seed phase -> investigate -> execute -> gated self-audit + canon self-inform -> 
 Details
 
 Intent
-<Seed the phase> -> <Investigate and execute under gates> -> <Self-inform from canon and self-audit> -> <Capture and reconcile considerations at the boundary> -> <Close only on a mechanically-resolved gated state> -> <Re-seed the next phase>
+<Seed the phase> -> <Investigate and execute under gates> -> <Self-inform from canon and self-audit> -> <Capture and reconcile considerations at the boundary> -> <Close only on a mechanically resolved gated state> -> <Re-seed the next phase>
+
 Invariant
 A large task reaches completion only under gates, never by disposition: the plan grows solely from code-verified work, completion is a gated state rather than a judgment call, and every step is restart-survivable.
+
+Flow
 
 ```text
 SeedPhase → GatedActivity → BoundaryReconcile → CloseGate → ReSeed
 ```
+
+Productions
 
 ```bnf
 GovernedPlanConcern ::= <PhaseSeed> "->" <GatedActivityCycle> "->" <BoundaryReconciliation> "->" <PhaseCloseGate> "->" <ReSeed>
@@ -15287,14 +19400,16 @@ GatedActivityCycle ::= "investigate" "->" "execute" "->" "gated_self_audit"
 
 Composes
 [Living Plan State](ALGORITHMS.md#algo-living-plan-state), [Phase Close Gate](ALGORITHMS.md#algo-phase-close-gate)
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
 
 ## living-profile
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -15332,12 +19447,17 @@ Details
 
 Intent
 Specializing the RAG Knowledge Boundary, read the durable profile document (or an empty one), strip volatile metadata, and project a compact view injected into reasoning as retrieved memory rather than ground truth.
+
 Invariant
 Accumulated knowledge is disclosed as supported evidence, not authority; the consumer still grounds every use against live source.
+
+Flow
 
 ```text
 Store → ReadDoc|Empty → StripVolatileMetadata → CompactView → ContextInjection
 ```
+
+Productions
 
 ```bnf
 ProfileCompose ::= <ProfileStore> "->" (<StoredDocument> | <EmptyDocument>) "->" <MetadataStrip> "->" <CompactKnowledgeView> "->" <ContextEvidence>
@@ -15347,16 +19467,23 @@ ContextEvidence ::= "disclosed_as_memory" "," "not_ground_truth" "," "reverifiab
 
 Composes
 [RAG Knowledge Boundary](ALGORITHMS.md#algo-rag-knowledge-boundary)
+
 Composed by
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging)
+[modularity](SCHEMA.md#force-modularity), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging)
+
 Grounds
 none
+
+Before
 
 ```text
 Accumulated profile knowledge treated as ground truth, never re-verified.
 ```
+
+After
 
 ```text
 profile store -> read doc (or empty) -> strip volatile metadata -> compact view -> injected as disclosed memory, reverifiable against source
@@ -15373,12 +19500,17 @@ Details
 
 Intent
 Specializing the RAG Knowledge Boundary, accept a structured knowledge delta the reasoning turn self-reports inline, admit only facts verified within that same turn, and reject speculation without a separate extraction pass.
+
 Invariant
 A durable fact enters the profile only from evidence produced in the same turn; unsupported claims are rejected, never guessed into memory.
+
+Flow
 
 ```text
 StructuredTurn → KnowledgeDelta|Null → VerifiedThisTurnFilter → AdmissibleDelta
 ```
+
+Productions
 
 ```bnf
 DeltaCapture ::= <StructuredTurn> "->" (<KnowledgeDelta> | <NullDelta>) "->" <EvidenceFilter> "->" <AdmissibleDelta>
@@ -15388,18 +19520,26 @@ AdmissibleDelta ::= <AxisDeltaSet>
 
 Composes
 [RAG Knowledge Boundary](ALGORITHMS.md#algo-rag-knowledge-boundary)
+
 Composed by
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel)
+
 Named in the derivation of
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [ai_governance](SCHEMA.md#force-ai-governance)
+[modularity](SCHEMA.md#force-modularity), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 A speculative claim written into durable memory without same-turn evidence.
 ```
+
+After
 
 ```text
 structured turn -> knowledge delta -> keep only facts verified this turn -> admissible delta; unverified rejected
@@ -15416,12 +19556,17 @@ Details
 
 Intent
 Specializing the Idempotent Side Effect, assign each fact a stable identity, apply the delta per field kind, deduplicate and cap, and guarantee that re-applying the same delta yields the same document.
+
 Invariant
 Merge is idempotent and bounded — the same delta applied twice is a no-op, and no axis grows without limit.
+
+Flow
 
 ```text
 Doc + Delta → StableFactIdentity → PerFieldKindMerge → DedupeAndCap → MergedDoc
 ```
+
+Productions
 
 ```bnf
 IdempotentMerge ::= <Document> "," <AdmissibleDelta> "->" <FactIdentitySet> "->" <PerFieldKindApplication> "->" <DedupeAndCap> "->" <MergedDocument>
@@ -15431,18 +19576,26 @@ DedupeAndCap ::= "dedupe_by_stable_identity" "," "cap_list_axis_to_limit"
 
 Composes
 [Idempotent Side Effect](ALGORITHMS.md#algo-idempotent-side-effect)
+
 Composed by
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel)
+
 Named in the derivation of
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel)
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction)
+
 Grounds
 none
+
+Before
 
 ```text
 Re-applying the same delta grows an axis and changes the document.
 ```
+
+After
 
 ```text
 doc + delta -> stable fact identity -> per-field-kind merge{overwrite | union | append-dedupe-cap} -> double-apply is a no-op
@@ -15459,12 +19612,17 @@ Details
 
 Intent
 Specializing Governance Evolution, detect whether the merge changed state, and only on real change bump the version, timestamp it, and append a modification record — leaving a no-op untouched.
+
 Invariant
 A no-op delta bumps nothing; every real change is auditable and reversible, and a version is never mutated in place without a provenance record.
+
+Flow
 
 ```text
 MergedDoc → ChangeDetect → (NoOp | VersionBump + Timestamp + ModificationRecord) → VersionedDoc
 ```
+
+Productions
 
 ```bnf
 VersionProvenance ::= <MergedDocument> "->" <ChangeDetection> "->" (<NoOpOutcome> | <VersionedOutcome>)
@@ -15475,18 +19633,26 @@ ModificationRecord ::= "at" "," "changed_axes" "," "prior_version"
 
 Composes
 [Governance Evolution](ALGORITHMS.md#algo-governance-evolution)
+
 Composed by
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel), [<Living Accumulation Concern>](ALGORITHMS.md#algo-living-accumulation-concern), [Versioned Turn Provenance](ALGORITHMS.md#algo-versioned-turn-provenance)
+
 Named in the derivation of
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel)
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A version bumped and mutated in place even on a no-op merge.
 ```
+
+After
 
 ```text
 merged doc -> change detect -> {no-op: untouched | real change: bump + timestamp + modification record}
@@ -15503,12 +19669,17 @@ Details
 
 Intent
 Specializing the Deterministic Core, keep compose and merge pure functions over immutable inputs with the clock injected, so identical inputs reproduce identical outputs.
+
 Invariant
 No hidden time, state, or randomness — the clock is a parameter, and merge is referentially transparent.
+
+Flow
 
 ```text
 (Doc, Delta, Clock) → PureMerge → (Doc', Modification|Null)
 ```
+
+Productions
 
 ```bnf
 ProfileMergeCore ::= <Document> "," <AdmissibleDelta> "," <InjectedClock> "->" <PureMerge> "->" (<NextDocument> "," <ModificationOrNull>)
@@ -15518,14 +19689,20 @@ InjectedClock ::= "now_supplied_by_adapter"
 
 Composes
 [Deterministic Core](ALGORITHMS.md#algo-deterministic-core)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Merge reads the wall clock internally, so identical inputs differ.
 ```
+
+After
 
 ```text
 (doc, delta, injected clock) -> pure merge -> (doc', modification|null); no hidden time/state/randomness
@@ -15542,12 +19719,17 @@ Details
 
 Intent
 Specializing the Port Adapter, resolve the durable store by connection mode — an authoritative per-owner store when the trusted arm is connected, a read-only mirror otherwise — and write back only where accumulation is trusted.
+
 Invariant
 Authoritative accumulation happens only against the trusted store; the fallback is a read mirror, never a divergent source of truth.
+
+Flow
 
 ```text
 ConnectionMode → AuthoritativeStore|LimitedMirror → ScopedKey → Persist|MirrorReadOnly
 ```
+
+Productions
 
 ```bnf
 PersistenceFork ::= <ConnectionMode> "->" (<AuthoritativeStore> | <LimitedMirror>) "->" <ScopedOwnerKey> "->" <PersistenceOutcome>
@@ -15558,16 +19740,23 @@ ScopedOwnerKey ::= "stable_owner_identity" "," "sanitized"
 
 Composes
 [Port Adapter](ALGORITHMS.md#algo-port-adapter)
+
 Composed by
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel), [<Living Accumulation Concern>](ALGORITHMS.md#algo-living-accumulation-concern)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 none
+
+Before
 
 ```text
 Accumulation written to a fallback mirror, creating a divergent source of truth.
 ```
+
+After
 
 ```text
 connection mode -> {trusted arm connected: authoritative per-owner store, write back | disconnected: read-only mirror}
@@ -15584,12 +19773,17 @@ Details
 
 Intent
 Specializing Canonical Data, overlay the accumulated knowledge onto the frozen baseline scope as additive context without mutating the baseline.
+
 Invariant
 The frozen baseline is an immutable source of truth; accumulated knowledge is additive context, never a rewrite of scope.
+
+Flow
 
 ```text
 FrozenBaseline + ComposedKnowledge → AdditiveOverlay → TurnSeed
 ```
+
+Productions
 
 ```bnf
 SeedComposition ::= <FrozenBaseline> "," <ComposedKnowledgeView> "->" <AdditiveOverlay> "->" <TurnSeed>
@@ -15599,18 +19793,26 @@ TurnSeed ::= <BaselineScope> "," <AccumulatedKnowledge>
 
 Composes
 [Canonical Data](ALGORITHMS.md#algo-canonical-data)
+
 Composed by
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel)
+
 Named in the derivation of
 [Living Profile Kernel](ALGORITHMS.md#algo-living-profile-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 Accumulated knowledge merged into the baseline, rewriting frozen scope.
 ```
+
+After
 
 ```text
 frozen baseline + composed knowledge -> additive overlay (baseline immutable) -> turn seed
@@ -15625,12 +19827,17 @@ Details
 
 Intent
 Compose the accumulated knowledge onto the frozen baseline into a seed, run the reasoning turn, capture the inline verified delta, merge it idempotently under an injected clock, version only real change, and persist against the fork — looping per turn.
+
 Invariant
-A living profile is a versioned, idempotently-accumulated, provenance-logged memory that grows only from verified per-turn evidence and never overrides frozen scope or live source.
+A living profile is a versioned, idempotently accumulated, provenance-logged memory that grows only from verified per-turn evidence and never overrides frozen scope or live source.
+
+Flow
 
 ```text
 Baseline → Compose → Seed → Turn → Delta → Merge(Clock) → Version → Persist → (next turn)
 ```
+
+Productions
 
 ```bnf
 LivingProfileKernel ::= <SeedComposition> "->" <ReasoningTurn> "->" <DeltaCapture> "->" <IdempotentMerge> "->" <ProfileMergeCore> "->" <VersionProvenance> "->" <PersistenceFork> "->" <ProfileCompose>
@@ -15639,8 +19846,10 @@ KernelInvariant ::= "grows_only_from_verified_evidence" "," "never_overrides_fro
 
 Composes
 [Seed Composition](ALGORITHMS.md#algo-seed-composition), [Delta Capture](ALGORITHMS.md#algo-delta-capture), [Idempotent Merge](ALGORITHMS.md#algo-idempotent-merge), [Version Provenance](ALGORITHMS.md#algo-version-provenance), [Persistence Fork](ALGORITHMS.md#algo-persistence-fork), [Profile Compose](ALGORITHMS.md#algo-profile-compose)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance)
+[model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -15648,16 +19857,23 @@ Derivation map
 
 orient
 [Seed Composition](ALGORITHMS.md#algo-seed-composition)
+
 verify
 [Delta Capture](ALGORITHMS.md#algo-delta-capture)
+
 act
 [Idempotent Merge](ALGORITHMS.md#algo-idempotent-merge)
+
 commit
 [Version Provenance](ALGORITHMS.md#algo-version-provenance)
+
+Before
 
 ```text
 Per-turn evidence written to memory ungated, unbounded, unversioned.
 ```
+
+After
 
 ```text
 compose -> seed -> turn -> capture verified delta -> idempotent merge (injected clock) -> version only real change -> persist against the fork -> loop
@@ -15671,12 +19887,17 @@ Details
 
 Intent
 <Compose prior memory as disclosed evidence> -> <Capture only same-turn verified deltas> -> <Merge idempotently by stable identity, bounded> -> <Version and log only real change> -> <Persist against the connection fork> -> <Overlay onto the immutable baseline>
+
 Invariant
 Any per-turn evidence stream becomes durable memory only when accumulation is idempotent, bounded, provenance-logged, deterministic at its core, and additive to an immutable baseline it may never rewrite.
+
+Flow
 
 ```text
 Evidence → Admissibility → IdempotentMerge → Provenance → Persistence → AdditiveOverlay
 ```
+
+Productions
 
 ```bnf
 LivingAccumulationConcern ::= <DisclosedMemory> "->" <AdmissibleDelta> "->" <IdempotentBoundedMerge> "->" <VersionProvenance> "->" <PersistenceFork> "->" <AdditiveBaselineOverlay>
@@ -15685,14 +19906,16 @@ IdempotentBoundedMerge ::= "stable_identity" "," "dedupe" "," "cap" "," "double_
 
 Composes
 [Version Provenance](ALGORITHMS.md#algo-version-provenance), [Persistence Fork](ALGORITHMS.md#algo-persistence-fork)
+
 Forces
 [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [streaming_dataflow](SCHEMA.md#force-streaming-dataflow)
+
 Grounds
 none
 
 ## mode-driven-response-schema
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -15723,13 +19946,18 @@ n_mode_driven_response_schema --> n_versioned_turn_provenance
 Details
 
 Intent
-Compose an AI turn's validation schema and its instruction from ONE self-registering field registry, projected per mode, so the schema the response is graded against and the instruction the model is given can never drift — both are computed from the same source, never hand-maintained twice.
+Compose a model turn's validation schema and its instruction from one self-registering field registry, projected per mode, so the schema the response is graded against and the instruction the model is given can never drift.
+
 Invariant
 The per-mode validation schema and the per-mode instruction are projections of a single field registry; there is no second hand-authored contract surface, and adding or changing a field changes both at once.
+
+Flow
 
 ```text
 RegisterField → SelectByMode → ProjectSchema → ProjectInstruction → StampVersion
 ```
+
+Productions
 
 ```bnf
 ComposedTurnContract ::= <FieldRegistry> "->" <ModeProjection> "->" <SchemaAndInstruction>
@@ -15740,21 +19968,29 @@ Determinism ::= "same_mode" "->" "byte_identical" "(" <Schema> "," <Instruction>
 
 Composes
 [Interface Contract](ALGORITHMS.md#algo-interface-contract), [Canonical Data](ALGORITHMS.md#algo-canonical-data), [Canonical Semantics](ALGORITHMS.md#algo-canonical-semantics), [Extension Point](ALGORITHMS.md#algo-extension-point)
+
 Composed by
 [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema)
+
 Named in the derivation of
 [Loop-Owned Mode Selection](ALGORITHMS.md#algo-loop-owned-mode-selection)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 The validation schema and the model's instruction hand-maintained twice, so they drift.
 ```
 
+After
+
 ```text
-field registry -> project per (phase, activity) mode -> schema + instruction from ONE source -> same mode = byte-identical, changing a field changes both
+field registry -> project per (phase, activity) mode -> schema + instruction from one source -> same mode = byte-identical, changing a field changes both
 ```
 
 ### Loop-Owned Mode Selection
@@ -15766,12 +20002,17 @@ Details
 
 Intent
 The loop assigns the (phase, activity) mode that selects which contract a response is validated against; the model's output carries no contract-selecting field, so a model can never grade itself against a contract it chose.
+
 Invariant
 The mode that selects the response contract is loop-assigned; the model has no field that selects the contract it is graded against.
+
+Flow
 
 ```text
 LoopAssignMode → ComposeContract → ValidateAgainstContract
 ```
+
+Productions
 
 ```bnf
 LoopOwnedModeSelection ::= <LoopAssignedMode> "->" <ComposeContract> "->" <ValidateResponse>
@@ -15780,10 +20021,13 @@ ModeAuthority ::= "loop_owned" "not_model_selected"
 
 Composes
 [Contract Compatibility](ALGORITHMS.md#algo-contract-compatibility)
+
 Composed by
 [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema)
+
 Forces
 [security_governance](SCHEMA.md#force-security-governance), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -15791,14 +20035,20 @@ Derivation map
 
 act
 [Composed Turn Contract](ALGORITHMS.md#algo-composed-turn-contract)
+
 verify
 [Mode Contract Validation](ALGORITHMS.md#algo-mode-contract-validation)
+
 commit
 [Versioned Turn Provenance](ALGORITHMS.md#algo-versioned-turn-provenance)
+
+Before
 
 ```text
 The model's output carries the field that selects which contract it's graded against.
 ```
+
+After
 
 ```text
 loop assigns (phase, activity) mode -> compose contract -> validate; the model can never grade itself against a contract it chose
@@ -15814,13 +20064,18 @@ loop assigns (phase, activity) mode -> compose contract -> validate; the model c
 Details
 
 Intent
-Persist each accepted AI turn as an append-only, mode-tagged, schema-versioned, causally-ordered record with change-only provenance, so the turn history is a queryable, auditable log and a turn is never graded against a schema version its stored state never saw.
+Persist each accepted model turn as an append-only, mode-tagged, schema-versioned, causally ordered record with change-only provenance, so the turn history is a queryable, auditable log and a turn is never graded against a schema version its stored state never saw.
+
 Invariant
 Turn records are append-only and single-writer causally ordered; a version is stamped by content and never mutated in place; a no-op change appends nothing.
+
+Flow
 
 ```text
 StampVersion → AssignCausalOrder → AppendOnly → BumpOnChange → Query
 ```
+
+Productions
 
 ```bnf
 VersionedTurnProvenance ::= <SchemaVersion> "->" <CausalOrder> "->" <AppendOnlyRecord>
@@ -15830,18 +20085,26 @@ Provenance ::= "bump_on_real_change" "no_op_appends_nothing"
 
 Composes
 [Version Provenance](ALGORITHMS.md#algo-version-provenance)
+
 Composed by
 [<Mode-Driven Response Schema>](ALGORITHMS.md#algo-mode-driven-response-schema)
+
 Named in the derivation of
 [Loop-Owned Mode Selection](ALGORITHMS.md#algo-loop-owned-mode-selection)
+
 Forces
 [observability_traceability](SCHEMA.md#force-observability-traceability), [state_transaction](SCHEMA.md#force-state-transaction), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```text
 A turn graded against a schema version its stored state never saw.
 ```
+
+After
 
 ```text
 accepted turn -> stamp version by content -> single-writer causal order -> append-only, mode-tagged record; a no-op appends nothing
@@ -15857,13 +20120,18 @@ accepted turn -> stamp version by content -> single-writer causal order -> appen
 Details
 
 Intent
-Validate the AI response against the loop-selected mode contract and, on a validation miss, drive an error-specific self-healing retry bounded by the contract, so a response is accepted only when it satisfies the schema it is graded against.
+Validate the model's response against the loop-selected mode contract and, on a validation miss, drive an error-specific self-healing retry bounded by the contract, so a response is accepted only when it satisfies the schema it is graded against.
+
 Invariant
 A response is accepted only against the mode contract the loop selected; a validation miss self-heals with error-specific remediation, never against a relaxed contract.
+
+Flow
 
 ```text
 Response → ValidateAgainstContract → Valid|SelfHealRetry → Accepted|Rejected
 ```
+
+Productions
 
 ```bnf
 ModeContractValidation ::= <Response> "," <ModeContract> "->" <Validation> "->" (<Accepted> | <SelfHealRetry> "->" <ModeContractValidation>)
@@ -15872,16 +20140,23 @@ SelfHealRetry ::= "error_specific_remediation" "(" <ValidationIssues> ")" "bound
 
 Composes
 none
+
 Named in the derivation of
 [Loop-Owned Mode Selection](ALGORITHMS.md#algo-loop-owned-mode-selection)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 A response accepted because it looked right, not because it satisfied the mode's schema.
 ```
+
+After
 
 ```text
 response + mode contract -> validate -> {valid | error-specific self-heal retry, bounded} -> accepted | rejected
@@ -15894,13 +20169,18 @@ response + mode contract -> validate -> {valid | error-specific self-heal retry,
 Details
 
 Intent
-Make the AI's structured output a mode-driven composed contract — the output mirror of composed input context: per loop-owned mode the schema and instruction are projected from one field registry, the response is validated and self-heals against it, the typed fields are governed, and every turn is persisted as a versioned queryable record — so output is single-source, drift-proof, per-mode reliable, and auditable.
+Make the model's structured output a mode-driven composed contract — the output mirror of composed input context: per loop-owned mode the schema and instruction are projected from one field registry, the response is validated and self-heals against it, the typed fields are governed, and every turn is persisted as a versioned queryable record — so the output has one source, cannot drift from its instruction, and can be audited.
+
 Invariant
 The response contract is composed per loop-owned mode from a single field registry; instruction and validation are the same source; a validation miss self-heals with error-specific remediation; output governance is advisory and never blocks the hard verify gate; and every accepted turn is a versioned, append-only record.
+
+Flow
 
 ```text
 ComposeContract → ValidateByMode → SelfRemediate → GovernFields → PersistVersioned
 ```
+
+Productions
 
 ```bnf
 ModeDrivenResponseSchema ::= <ComposedTurnContract> "->" <LoopOwnedModeSelection> "->" <SelfRemediation> "->" <GroundingAdvisory> "->" <VersionedTurnProvenance>
@@ -15911,14 +20191,16 @@ GroundingAdvisory ::= "typed_field" "->" "validator" "(" "advisory_not_blocking"
 
 Composes
 [Composed Turn Contract](ALGORITHMS.md#algo-composed-turn-contract), [Loop-Owned Mode Selection](ALGORITHMS.md#algo-loop-owned-mode-selection), [Versioned Turn Provenance](ALGORITHMS.md#algo-versioned-turn-provenance), [Interface Contract](ALGORITHMS.md#algo-interface-contract), [Canonical Data](ALGORITHMS.md#algo-canonical-data), [Contract Compatibility](ALGORITHMS.md#algo-contract-compatibility), [Self-Description Manifest](ALGORITHMS.md#algo-self-description-manifest), [Runtime Discovery](ALGORITHMS.md#algo-runtime-discovery), [Extension Point](ALGORITHMS.md#algo-extension-point)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
 
 ## pag
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -15930,7 +20212,7 @@ n_pag_document_declaration["PAG Document Declaration"]
 n_pag_keyword_ontology["PAG Keyword Ontology"]
 n_pag_node_decomposition["PAG Node Decomposition"]
 n_pag_validation_gate["PAG Handoff Gate"]
-n_pag_control_flow_determinism["PAG Control-Flow Determinism"]
+n_pag_explicit_control_flow["PAG Explicit Control Flow"]
 n_pag_constraint_boundary["PAG Invariant Record"]
 n_pag_tool_invocation["PAG Semantic Operation"]
 n_pag_coordination_construct["PAG Structure Declaration"]
@@ -15942,13 +20224,13 @@ n_pag_authoring_kernel --> n_pag_document_declaration
 n_pag_authoring_kernel --> n_pag_keyword_ontology
 n_pag_authoring_kernel --> n_pag_node_decomposition
 n_pag_authoring_kernel --> n_pag_validation_gate
-n_pag_authoring_kernel --> n_pag_control_flow_determinism
+n_pag_authoring_kernel --> n_pag_explicit_control_flow
 n_pag_authoring_kernel --> n_pag_tool_invocation
 n_pag_authoring_kernel --> n_pag_coordination_construct
 n_pag_authoring_kernel --> n_pag_constraint_boundary
 n_pag_authoring_kernel --> n_pag_well_formedness_validation
 n_pag_well_formedness_validation --> n_pag_validation_gate
-n_pag_well_formedness_validation --> n_pag_control_flow_determinism
+n_pag_well_formedness_validation --> n_pag_explicit_control_flow
 ```
 
 ### PAG Document Declaration
@@ -15962,12 +20244,17 @@ Details
 
 Intent
 Bind a document to a declared type and its default verb (THIS <TYPE> <VERB> <description>) after the YAML frontmatter and before any node, then declare in the meta block what the document is for, which sources ground which, what it trusts, what it may touch and what it declares outside itself, and how far repair may recurse.
+
 Invariant
 A PAG document announces what kind of instruction it is, and what it may touch, before it instructs.
+
+Flow
 
 ```text
 Frontmatter → TypeDeclaration → DefaultVerb → MetaBlock → Jurisdiction → DeclaredContract
 ```
+
+Productions
 
 ```bnf
 PagDocumentDeclaration ::= <Frontmatter> "->" <TypeDeclaration> "->" <MetaBlock> "->" <DeclaredContract>
@@ -15978,18 +20265,26 @@ PagMetaField ::= "objective" | "priority" | "trust" | "jurisdiction" | "recursio
 
 Composes
 none
+
 Composed by
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Named in the derivation of
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling)
+
 Grounds
 none
+
+Before
 
 ```text
 A document instructs with no declared type — its semantic contract, its authority and its jurisdiction are implicit.
 ```
+
+After
 
 ```text
 frontmatter -> THIS {AGENT|WORKFLOW|CHECKLIST} {IS|EXECUTES|ENFORCES} description -> META block{objective, priority, trust, jurisdiction, recursion_limit} -> declared contract
@@ -16006,12 +20301,17 @@ Details
 
 Intent
 Draw every operative token from a fixed, uppercase, code-frequent vocabulary partitioned into semantic categories, each token grounded to a record in the reasoning ontology, and bind targets to sources through explicit prepositions, so the model completes recognised structured patterns rather than interpreting prose.
+
 Invariant
 Explicit high-frequency uppercase tokens, each grounded to a reasoning record, reduce interpretive variance; prose does not.
+
+Flow
 
 ```text
 ProseIntent → KeywordCategory → UppercaseToken → ReasoningGround → PrepositionBinding → StructuredDirective
 ```
+
+Productions
 
 ```bnf
 PagKeywordOntology ::= <KeywordCategory> "->" <KeywordToken> "->" <ReasoningGround> "->" <PrepositionBinding> "->" <StructuredDirective>
@@ -16021,18 +20321,26 @@ PagPreposition ::= "FROM" | "TO" | "INTO" | "WITH" | "USING" | "AGAINST" | "IN" 
 
 Composes
 none
+
 Composed by
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Named in the derivation of
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Forces
 [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 'Get the data and check it' — prose the model must interpret.
 ```
+
+After
 
 ```text
 prose intent -> uppercase token{READ_RESOURCE|ANALYZE_CONTENT|VALIDATE_ARTIFACT} + preposition{FROM|INTO|AGAINST} -> structured directive, low interpretive variance
@@ -16049,12 +20357,17 @@ Details
 
 Intent
 Group directives into nodes, each one decision on one reasoning axis, headed by its layer, axis, math type and the shape its decision yields, tagged with the substrate stage its artifact comes to be at, and contracted so that its input names the prior node's output or a declared slot, its transform is stated in semantic operations, and its output is the one record the next node reads.
+
 Invariant
 Each node is one bounded decision whose data flow from the prior node is declared by identity, never inferred from a name.
+
+Flow
 
 ```text
 DirectiveSet → NodeHeader → GenesisStage → Contract → DeclaredInput → NodeOutput
 ```
+
+Productions
 
 ```bnf
 PagNodeDecomposition ::= <DirectiveSet> "->" <NodeSet> "->" <DataFlowGraph>
@@ -16065,18 +20378,26 @@ PagScopeRule ::= "declare_before_use" "," "document_wide_scope" "," "prior_outpu
 
 Composes
 none
+
 Composed by
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Named in the derivation of
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [domain_boundary](SCHEMA.md#force-domain-boundary), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 Directives poured in one flat block, forward-referencing later work, with no statement of what each block decides or what shape its decision takes.
 ```
+
+After
 
 ```text
 directives -> nodes{# NODE n — NAME [layer · axis · math type · yields: shape], @genesis, CONTRACT input/transform/output, one gate} -> a node reads only the prior node's output -> explicit data flow
@@ -16093,12 +20414,17 @@ Details
 
 Intent
 Close every node with a handoff gate of three-to-five checks, each a claim about the output with the evidence that settles it and the population it was measured over, a refusal condition named before any irreversible write, the standing of the read set beside the verdict, and a result line that routes pass to the next node, each failure to the earliest node that owns its repair, and unknown to blocked.
+
 Invariant
 A node boundary is trusted only when its checks carry evidence and a population, its writes are refused before they land, and its unknown is routed; unknown is not pass.
+
+Flow
 
 ```text
 NodeOutput → CheckWithEvidence → Population → Refusal → Standing → ThreeVerdicts → ResultLine
 ```
+
+Productions
 
 ```bnf
 PagHandoffGate ::= <NodeOutput> "->" <CheckLineSet> "->" <OptionalRefusal> "->" <OptionalStanding> "->" <ResultLine>
@@ -16110,24 +20436,32 @@ PagGateConstraint ::= "evidence_per_check" "," "population_declared" "," "three_
 
 Composes
 none
+
 Composed by
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel), [PAG Well-Formedness Validation](ALGORITHMS.md#algo-pag-well-formedness-validation)
+
 Named in the derivation of
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance), [modularity](SCHEMA.md#force-modularity)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance), [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence), [ver-population](REASONING.md#reason-node-ver-population), [ver-refusal](REASONING.md#reason-node-ver-refusal), [ver-standing](REASONING.md#reason-node-ver-standing), [ter-block](REASONING.md#reason-node-ter-block)
+
+Before
 
 ```text
 A node ends with 'looks good' — a vague assertion with no evidence, no population, no refusal, and only two verdicts.
 ```
 
+After
+
 ```text
 node output -> 3-5 checks{[check] claim (evidence: what settles it) over: set measured: n / N} + refuse: condition before write + standing: moved-set + result: pass -> next | failure -> REPAIR (owner) | unknown -> BLOCKED
 ```
 
-### PAG Control-Flow Determinism
+### PAG Explicit Control Flow
 
 - Stage: [act](REASONING.md#stage-act)
 - Axis: [formalisation](REASONING.md#reason-axis-formalisation)
@@ -16138,12 +20472,17 @@ Details
 
 Intent
 Express branching with IF / ELSE IF / ELSE, iteration with FOR EACH over a collection (never a bare FOR), and failure handling with TRY / CATCH, every conditional colon-terminated and every branch a complete directive sequence.
+
 Invariant
 Control flow is explicit and colon-delimited so the model does not infer structure from prose sequence.
+
+Flow
 
 ```text
 Condition → BranchSet → IterationForm → FailureForm → DeterministicPath
 ```
+
+Productions
 
 ```bnf
 PagControlFlow ::= <Conditional> | <Iteration> | <FailureHandling>
@@ -16153,16 +20492,23 @@ PagControlConstraint ::= "colon_terminated" "," "for_each_not_for" "," "complete
 
 Composes
 none
+
 Composed by
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel), [PAG Well-Formedness Validation](ALGORITHMS.md#algo-pag-well-formedness-validation)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
+Before
 
 ```text
 Branching and iteration inferred from prose order; a bare FOR, a missing colon.
 ```
+
+After
 
 ```text
 IF/ELSE IF/ELSE + FOR EACH x IN collection + TRY/CATCH -> every conditional colon-terminated, complete branch directives
@@ -16179,12 +20525,17 @@ Details
 
 Intent
 State every behavioural invariant as a record with four slots: the property in a form that could be false, the set it quantifies over, the parties it binds, and the objector, the check that would disagree if the property stopped holding or none as declared debt, so an unwatched invariant is visible rather than assumed.
+
 Invariant
 An invariant is stated with its property, its set, its parties and its objector, or it is indistinguishable from a property a reader happened to infer.
+
+Flow
 
 ```text
 BehaviorPolicy → Property → Set → Parties → Objector → InvariantRecord
 ```
+
+Productions
 
 ```bnf
 PagInvariantBlock ::= "#" "CROSS-NODE" "INVARIANTS" <InvariantRecord>+
@@ -16194,18 +20545,26 @@ PagInvariantQuality ::= "falsifiable" "," "quantified" "," "delivered" "," "watc
 
 Composes
 none
+
 Composed by
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Named in the derivation of
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [security_governance](SCHEMA.md#force-security-governance), [correctness_verification](SCHEMA.md#force-correctness-verification)
+[model_governance](SCHEMA.md#force-model-governance), [security_governance](SCHEMA.md#force-security-governance), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Behavioural rules as a bullet list under ALWAYS and NEVER — no set the rule ranges over, no party it binds, nothing that would disagree if it stopped holding.
 ```
+
+After
 
 ```text
 INVARIANT name: property over: set binds: parties objector: check | none -> each invariant stated in a form that could be false, with what watches it
@@ -16222,12 +20581,17 @@ Details
 
 Intent
 Name every external effect as one of the semantic operations (discover, read, search, analyze, extract, calculate, compose, validate, persist, execute, request a decision, report) with a uniform WITH / USING parameter clause and an INTO / arrow result binding, so the document names what it does and an adapter binding resolves how, and no host's tool name enters the document.
+
 Invariant
 Every external effect is a semantic operation with explicit parameters and an explicit result binding, and the host's tools are the adapter's data.
+
+Flow
 
 ```text
 SemanticOperation → OperationTarget → ParameterClause → ResultBinding → AdapterBinding
 ```
+
+Productions
 
 ```bnf
 PagToolInvocation ::= <SemanticOperation> <OperationTarget> <OptionalParamClause> <OptionalResultClause>
@@ -16237,18 +20601,26 @@ PagResultBinding ::= "INTO" <Identifier> | "->" <Identifier> | "AS" <Identifier>
 
 Composes
 none
+
 Composed by
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Named in the derivation of
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 An external effect described in prose, or named by one host's tool, so the document runs in one place only.
 ```
+
+After
 
 ```text
 semantic operation{READ_RESOURCE|PERSIST_ARTIFACT|EXECUTE_TOOL|REQUEST_DECISION} + WITH/USING params + INTO/-> result -> a named effect the adapter binds to a host's tool
@@ -16265,12 +20637,17 @@ Details
 
 Intent
 Make a document's structure explicit with the declaration that names it: a DAG for a dependency graph, a STATE_MACHINE for a lifetime or a set of derived states, a PRIORITY_QUEUE for a ranking, a FLOWCHART for the rendered projection of a declared structure, and for a shared surface the coordination model's SURFACE, RECORD and ITEM with their typed edges, derived states and the one post-and-wait operation, so ordering, ownership and state are declared as structure rather than narrated as prose.
+
 Invariant
 Ordering, ownership and state are declared through explicit structure constructs a check can read, never implied by textual order.
+
+Flow
 
 ```text
 StructureNeed → StructureDeclaration → DeclaredEdges → DerivedState → ReadableStructure
 ```
+
+Productions
 
 ```bnf
 PagStructure ::= <Dag> | <StateMachine> | <PriorityQueue> | <Flowchart> | <Surface>
@@ -16281,16 +20658,23 @@ PagEdgeKind ::= "PARENT" | "SATISFIED_BY" | "BLOCKS" | "ANSWERS" | "REFUTES" | "
 
 Composes
 none
+
 Composed by
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Forces
 [control_coordination](SCHEMA.md#force-control-coordination), [event_messaging](SCHEMA.md#force-event-messaging), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```text
 Concurrency, ordering, lifetimes and ownership implied by the order sentences appear in.
 ```
+
+After
 
 ```text
 a declared structure -> DAG{dependency graph} | STATE_MACHINE{lifetime, derived states} | PRIORITY_QUEUE{ranking} | FLOWCHART{rendered projection} | SURFACE{RECORD, ITEM, typed edges, WAIT} -> the structure is explicit and a check can read it
@@ -16307,12 +20691,17 @@ Details
 
 Intent
 Replace interpretive prose with explicit structured tokens so the model completes recognized patterns, while accepting that output stays probabilistic: the grammar reduces input ambiguity, it does not constrain output tokens or guarantee determinism.
+
 Invariant
-PAG shapes the input toward consistent completion and is not always applicable; tends-toward-deterministic is the honest claim, not guaranteed determinism.
+PAG shapes the input toward consistent completion and does not always apply; it reduces the variance of the output without making it deterministic.
+
+Flow
 
 ```text
 ProseAmbiguity → TokenStructure → PatternRecognition → ReducedVariance
 ```
+
+Productions
 
 ```bnf
 PagAmbiguityReduction ::= <ProseIntent> "->" <StructuredPattern> "->" <ReducedInterpretationLoad>
@@ -16321,17 +20710,23 @@ PagApplicabilityBound ::= "input_shaping_only" "," "probabilistic_output" "," "n
 
 Composes
 none
+
 Forces
-[ai_governance](SCHEMA.md#force-ai-governance), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+[model_governance](SCHEMA.md#force-model-governance), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Prose intent claimed to guarantee deterministic model output.
 ```
 
+After
+
 ```text
-prose -> structured tokens -> reduced interpretation load; input-shaping only, output stays probabilistic (tends-toward-deterministic, not guaranteed)
+prose -> structured tokens -> reduced interpretation load; input-shaping only, output stays probabilistic (less variance, never deterministic)
 ```
 
 ### PAG Authoring Kernel
@@ -16343,21 +20738,28 @@ Details
 
 Intent
 Compose a PAG document as frontmatter and typed declaration, then a meta block with jurisdiction, then nodes each headed by its layer, axis, math type and yields, contracted to read the prior node's output, and closed by a handoff gate with evidence, population, refusal and the three verdicts, drawing directives from the semantic operations, control flow and structure declarations, and closing with invariant records and a report.
+
 Invariant
 A well-formed PAG document is a node-gated, keyword-typed, invariant-bounded instruction contract whose every verdict carries its population.
+
+Flow
 
 ```text
 Declaration → MetaBlock → Nodes → Gates → Directives → Invariants → Report → PagDocument
 ```
+
+Productions
 
 ```bnf
 PagAuthoringKernel ::= <PagDocumentDeclaration> "->" <PagKeywordOntology> "->" <PagNodeDecomposition> "->" <PagHandoffGate> "->" <PagControlFlow> "->" <PagToolInvocation> "->" <PagStructure> "->" <PagInvariantBlock>
 ```
 
 Composes
-[PAG Document Declaration](ALGORITHMS.md#algo-pag-document-declaration), [PAG Keyword Ontology](ALGORITHMS.md#algo-pag-keyword-ontology), [PAG Node Decomposition](ALGORITHMS.md#algo-pag-node-decomposition), [PAG Handoff Gate](ALGORITHMS.md#algo-pag-validation-gate), [PAG Control-Flow Determinism](ALGORITHMS.md#algo-pag-control-flow-determinism), [PAG Semantic Operation](ALGORITHMS.md#algo-pag-tool-invocation), [PAG Structure Declaration](ALGORITHMS.md#algo-pag-coordination-construct), [PAG Invariant Record](ALGORITHMS.md#algo-pag-constraint-boundary)
+[PAG Document Declaration](ALGORITHMS.md#algo-pag-document-declaration), [PAG Keyword Ontology](ALGORITHMS.md#algo-pag-keyword-ontology), [PAG Node Decomposition](ALGORITHMS.md#algo-pag-node-decomposition), [PAG Handoff Gate](ALGORITHMS.md#algo-pag-validation-gate), [PAG Explicit Control Flow](ALGORITHMS.md#algo-pag-explicit-control-flow), [PAG Semantic Operation](ALGORITHMS.md#algo-pag-tool-invocation), [PAG Structure Declaration](ALGORITHMS.md#algo-pag-coordination-construct), [PAG Invariant Record](ALGORITHMS.md#algo-pag-constraint-boundary)
+
 Forces
-[metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [ai_governance](SCHEMA.md#force-ai-governance), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+[metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [model_governance](SCHEMA.md#force-model-governance), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -16365,22 +20767,32 @@ Derivation map
 
 orient
 [PAG Document Declaration](ALGORITHMS.md#algo-pag-document-declaration)
+
 see
 [PAG Keyword Ontology](ALGORITHMS.md#algo-pag-keyword-ontology)
+
 project
 [PAG Node Decomposition](ALGORITHMS.md#algo-pag-node-decomposition)
+
 constrain
 [PAG Invariant Record](ALGORITHMS.md#algo-pag-constraint-boundary)
+
 act
 [PAG Semantic Operation](ALGORITHMS.md#algo-pag-tool-invocation)
+
 verify
 [PAG Handoff Gate](ALGORITHMS.md#algo-pag-validation-gate)
+
 terminate
 [PAG Well-Formedness Validation](ALGORITHMS.md#algo-pag-well-formedness-validation)
+
+Before
 
 ```text
 An instruction written as prose, ungated, untyped and unwatched.
 ```
+
+After
 
 ```text
 frontmatter + typed declaration -> meta block with jurisdiction -> nodes each headed, contracted and closed by a handoff gate -> directives{semantic operations, control flow, structure declarations} -> INVARIANT records -> REPORT
@@ -16397,12 +20809,17 @@ Details
 
 Intent
 Scan a PAG document for structural and epistemic defects, each named for the shape it catches — a retired unit head, a node without a gate, a check without evidence, a gate without a population or with an empty one, an unknown left unrouted, a write without a refusal, an artifact without freshness, a node declared twice, an input naming no source, an invariant missing its set, parties or objector, a bare invariant block, a lowercase keyword, a bare FOR, a missing colon, a vague condition — and emit a token-based, regex-free verdict.
+
 Invariant
 A PAG document is trusted only after a deterministic well-formedness scan whose defect set is the epistemology's failure taxonomy, never because it reads fluently.
+
+Flow
 
 ```text
 PagDocument → DefectScan → DefectSet → WellFormednessVerdict
 ```
+
+Productions
 
 ```bnf
 PagWellFormedness ::= <PagDocument> "->" <DefectScanSet> "->" <WellFormednessVerdict>
@@ -16411,17 +20828,24 @@ PagWellFormednessVerdict ::= "well_formed" | "ill_formed"
 ```
 
 Composes
-[PAG Handoff Gate](ALGORITHMS.md#algo-pag-validation-gate), [PAG Control-Flow Determinism](ALGORITHMS.md#algo-pag-control-flow-determinism)
+[PAG Handoff Gate](ALGORITHMS.md#algo-pag-validation-gate), [PAG Explicit Control Flow](ALGORITHMS.md#algo-pag-explicit-control-flow)
+
 Named in the derivation of
 [PAG Authoring Kernel](ALGORITHMS.md#algo-pag-authoring-kernel)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 A PAG document trusted because it reads fluently.
 ```
+
+After
 
 ```text
 document -> defect scan{retired unit head, node without gate, check without evidence, gate without population, empty population, unknown unrouted, write without refusal, artifact without freshness, node declared twice, input without source, invariant without set/parties/objector, bare invariant block, lowercase keyword, for without each, missing colon, vague condition} -> well-formed | ill-formed
@@ -16435,12 +20859,17 @@ Details
 
 Intent
 <Declare document type and jurisdiction> -> <Draw grounded uppercase directives> -> <Decompose into headed, contracted, gated nodes> -> <Bind semantic operations and structure declarations> -> <Bound with invariant records> -> <Validate well-formedness against the failure taxonomy>
+
 Invariant
 Any PAG artifact should be treated as a structured instruction contract whose tokens are drawn from a fixed ontology grounded in the reasoning face, whose nodes are closed by evidence-bearing gates that carry their population and route unknown to blocked, and whose invariants name their objector, reducing interpretive ambiguity without guaranteeing deterministic output.
+
+Flow
 
 ```text
 DocumentType → Keywords → Nodes → Gates → OperationsAndStructure → Invariants → WellFormedness
 ```
+
+Productions
 
 ```bnf
 PagInstructionConcern ::= <PagDocumentDeclaration> "->" <PagKeywordOntology> "->" <PagNodeDecomposition> "->" <PagHandoffGate> "->" <PagToolInvocation> "->" <PagStructure> "->" <PagInvariantBlock> "->" <PagWellFormedness>
@@ -16448,14 +20877,16 @@ PagInstructionConcern ::= <PagDocumentDeclaration> "->" <PagKeywordOntology> "->
 
 Composes
 none
+
 Forces
-[metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [ai_governance](SCHEMA.md#force-ai-governance), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+[metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [model_governance](SCHEMA.md#force-model-governance), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
 ## pattern-distillation
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -16524,12 +20955,17 @@ Details
 
 Intent
 Create a unique analysis session, allocate phase/metric/migration artifact locations, load baseline documentation and registries, write a manifest, and block continuation if required context is unavailable.
+
 Invariant
 Architectural refactoring must begin from an auditable workspace with explicit input provenance.
+
+Flow
 
 ```text
 Session → Workspace → ContextLoad → Manifest → Gate
 ```
+
+Productions
 
 ```bnf
 AnalysisWorkspace ::= <SessionId> "->" <WorkspacePath> "->" <ContextResourceSet> "->" <Manifest> "->" <InitializationGate>
@@ -16538,18 +20974,26 @@ InitializationGate ::= "workspace_exists" "," "manifest_written" "," "baseline_d
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Refactoring begins ad hoc, with no auditable record of what it started from.
 ```
+
+After
 
 ```text
 session -> workspace{phase/metric/migration locations} -> load baseline + registries -> manifest -> block if required context missing
@@ -16566,12 +21010,17 @@ Details
 
 Intent
 Read existing architectural registries, extract known base abstractions, count implementations, measure hierarchy depth, and record the current abstraction state before proposing changes.
+
 Invariant
 New abstractions must be compared against existing architecture before being created.
+
+Flow
 
 ```text
 Registry → ExistingAbstractions → ImplementationCounts → HierarchyMetrics → Baseline
 ```
+
+Productions
 
 ```bnf
 RegistryBaseline ::= <RegistryData> "->" <BaseAbstractionSet> "->" <ImplementationMetricSet> "->" <HierarchyMetricSet> "->" <BaselineReport>
@@ -16580,16 +21029,23 @@ ImplementationMetricSet ::= "total_base_classes" "," "total_implementations" ","
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 A new base abstraction created without measuring what already exists.
 ```
+
+After
 
 ```text
 registry -> existing bases + implementation counts + hierarchy depth -> current abstraction state, before proposing a change
@@ -16606,12 +21062,17 @@ Details
 
 Intent
 Discover implementation classes by role, detect which ones conform to expected base abstractions, calculate noncompliance counts, and compute architectural compliance rate.
+
 Invariant
 Pattern distillation must distinguish missing adoption from missing abstraction.
+
+Flow
 
 ```text
 RoleClasses → ExpectedBaseRule → ConformingSet + NonconformingSet → ComplianceRate
 ```
+
+Productions
 
 ```bnf
 ComplianceGap ::= <RoleClassSet> "->" <BaseExpectation> "->" <ConformanceScan> "->" <GapReport>
@@ -16621,16 +21082,23 @@ GapReport ::= "noncompliant_count" "," "compliant_count" "," "compliance_rate"
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 'The Foos don't extend a base' — but is the base missing, or just its adoption?
 ```
+
+After
 
 ```text
 role classes -> expected base rule -> conforming vs nonconforming -> compliance rate distinguishing missing adoption from missing abstraction
@@ -16647,12 +21115,17 @@ Details
 
 Intent
 Group implementation resources by semantic role, such as manager, repository, handler, service, controller, adapter, or worker, then analyze each family separately.
+
 Invariant
 Reusable abstractions emerge from families of similar responsibility, not arbitrary files.
+
+Flow
 
 ```text
 ResourceSet → RoleClassifier → SemanticDomains → DomainMetrics
 ```
+
+Productions
 
 ```bnf
 SemanticDomainPartitioning ::= <ResourceSet> "->" <RoleClassification> "->" <SemanticDomainSet>
@@ -16662,16 +21135,23 @@ RoleClassification ::= "manager" | "repository" | "handler" | "service" | "contr
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [performance_scaling](SCHEMA.md#force-performance-scaling), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 Abstractions drawn from arbitrary files instead of families of like responsibility.
 ```
+
+After
 
 ```text
 resources -> classify by role{manager|repository|handler|service|adapter} -> per-family analysis
@@ -16688,12 +21168,17 @@ Details
 
 Intent
 For each class in a semantic domain, inspect constructor behavior, lifecycle hooks, error handling, state management, dependency acquisition, and public orchestration methods.
+
 Invariant
 Base-class candidates require behavioral evidence, not just naming similarity.
+
+Flow
 
 ```text
 ClassResource → BehaviorScan → Signature → DomainSignatureSet
 ```
+
+Productions
 
 ```bnf
 BehavioralSignature ::= <InitializationBehavior> "," <LifecycleBehavior> "," <ErrorHandlingBehavior> "," <StateManagementBehavior> "," <DependencyManagementBehavior> "," <PublicMethodPatternSet>
@@ -16702,18 +21187,26 @@ LifecycleBehavior ::= "initialize" "," "destroy" "," "onInitialize" "," "onDestr
 
 Composes
 none
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [domain_boundary](SCHEMA.md#force-domain-boundary), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 none
+
 Detector for
 [structural](REASONING.md#reason-lens-structural), [behavioural](REASONING.md#reason-lens-behavioural)
+
+Before
 
 ```text
 A base-class candidate proposed on naming similarity alone.
 ```
+
+After
 
 ```text
 class -> scan{constructor, lifecycle hooks, error handling, state, dependencies, public methods} -> behavioral signature (evidence, not names)
@@ -16730,12 +21223,17 @@ Details
 
 Intent
 Search across semantic domains for repeated imports, repeated initialization, repeated lifecycle code, repeated error handling, repeated state setup, and repeated dependency wiring.
+
 Invariant
 Duplication becomes an abstraction candidate when it appears across multiple implementations with the same role.
+
+Flow
 
 ```text
 DomainSignatures → CrossClassSearch → DuplicatePatternSet
 ```
+
+Productions
 
 ```bnf
 CrossClassPatternDetection ::= <BehavioralSignatureSet> "->" <RepeatedStructureSearch> "->" <CrossClassPatternSet>
@@ -16745,18 +21243,26 @@ PatternRole ::= "initialization" | "lifecycle" | "error_handling" | "state_manag
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
 Detector for
 [structural](REASONING.md#reason-lens-structural), [frequency](REASONING.md#reason-lens-frequency)
+
+Before
 
 ```text
 One duplicated block noticed; the family-wide repetition stays invisible.
 ```
+
+After
 
 ```text
 signatures -> search repeated{imports, init, lifecycle, error, state, deps} across the role family -> cross-class pattern + occurrence count
@@ -16773,12 +21279,17 @@ Details
 
 Intent
 Detect multiple competing implementations of the same behavior, count each variation, compute dominant-pattern consistency, and flag low-consistency behavior for normalization.
+
 Invariant
 Inconsistent behavior is an architectural smell even when code is not textually duplicated.
+
+Flow
 
 ```text
 BehaviorFamily → VariationCounts → ConsistencyRate → NormalizeCandidate
 ```
+
+Productions
 
 ```bnf
 BehavioralInconsistency ::= <BehaviorFamily> "->" <VariationSet> "->" <ConsistencyMetric> "->" <InconsistencyVerdict>
@@ -16788,16 +21299,23 @@ InconsistencyVerdict ::= "consistent" | "weakly_consistent" | "inconsistent"
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
 Detector for
 [behavioural](REASONING.md#reason-lens-behavioural)
+
+Before
 
 ```text
 Three competing implementations of one behavior, none textually duplicated, so nothing flags.
 ```
+
+After
 
 ```text
 behavior family -> variation counts -> consistency = dominant/total -> {consistent | weakly | inconsistent} -> normalize the inconsistent
@@ -16814,12 +21332,17 @@ Details
 
 Intent
 For each class in the role family, extract the ordered sequence of orchestration steps, align sequences across the family, and surface repeated ordered chains that no textual-duplication scan would catch.
+
 Invariant
 Order-sensitive repetition is duplication even when no contiguous block is textually identical.
+
+Flow
 
 ```text
 RoleFamily → OrderedCallSequence → SequenceAlignment → RepeatedChainSet
 ```
+
+Productions
 
 ```bnf
 SequentialChainDuplication ::= <CallSequenceSet> "->" <SequenceAlignment> "->" <RepeatedOrderedChainSet>
@@ -16828,16 +21351,23 @@ RepeatedOrderedChain ::= <OrderedStepList> "," <OccurrenceCount> "," <AffectedRe
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 [ana-sequential](REASONING.md#reason-node-ana-sequential)
+
 Detector for
 [sequential](REASONING.md#reason-lens-sequential)
+
+Before
 
 ```text
 Two classes call the same steps in the same order, but no single block is textually identical, so frequency scanning finds nothing.
 ```
+
+After
 
 ```text
 role family -> extract ordered call-sequence per class -> align sequences -> repeated ordered chain + occurrence count
@@ -16854,12 +21384,17 @@ Details
 
 Intent
 Detect must-precede and must-follow ordering constraints between operations in each class, intersect them across the role family, and surface the shared temporal-coupling contract that a base lifecycle would centralize.
+
 Invariant
 A lifecycle ordering constraint re-encoded across a family is a shared contract, not a per-class detail.
+
+Flow
 
 ```text
 RoleFamily → OrderingConstraintSet → CrossFamilyIntersection → SharedCouplingContract
 ```
+
+Productions
 
 ```bnf
 TemporalCouplingDetection ::= <OrderingConstraintSet> "->" <ConstraintIntersection> "->" <SharedTemporalContractSet>
@@ -16868,16 +21403,23 @@ OrderingConstraint ::= <Operation> "must_precede" <Operation> | <Operation> "mus
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 [ana-temporal](REASONING.md#reason-node-ana-temporal)
+
 Detector for
 [temporal](REASONING.md#reason-lens-temporal)
+
+Before
 
 ```text
 Every class re-encodes 'call setup before use, teardown after' as scattered ad-hoc ordering, and the shared lifecycle contract stays invisible.
 ```
+
+After
 
 ```text
 role family -> must-precede/must-follow constraints per class -> intersect across family -> shared temporal-coupling contract
@@ -16894,12 +21436,17 @@ Details
 
 Intent
 Build the dependency-acquisition subgraph for each class, test for isomorphic subgraphs across the role family, and surface repeated object-graph wiring that a base or factory would assemble once.
+
 Invariant
 A dependency subgraph reassembled across a family is duplicated structure, distinct from duplicated statements.
+
+Flow
 
 ```text
 RoleFamily → DependencySubgraph → SubgraphIsomorphism → RepeatedWiringSet
 ```
+
+Productions
 
 ```bnf
 RelationalGraphDuplication ::= <DependencySubgraphSet> "->" <IsomorphismScan> "->" <RepeatedWiringSubgraphSet>
@@ -16908,16 +21455,23 @@ RepeatedWiringSubgraph ::= <NodeSet> "," <EdgeSet> "," <OccurrenceCount> "," <Af
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 [ana-relational](REASONING.md#reason-node-ana-relational)
+
 Detector for
 [relational](REASONING.md#reason-lens-relational)
+
+Before
 
 ```text
 The same object graph — acquire A, wire B onto A, hand both to C — is reassembled by hand in every class.
 ```
+
+After
 
 ```text
 role family -> dependency-acquisition subgraph per class -> subgraph isomorphism across family -> repeated wiring subgraph
@@ -16934,12 +21488,17 @@ Details
 
 Intent
 Extract cause-to-effect edges (event to handler, failure to recovery, state change to reaction) per class, match trigger/reaction pairs across the role family, and surface repeated causal wiring that a base policy would centralize.
+
 Invariant
 Repeated trigger-to-reaction wiring is duplicated causal policy even when the surrounding code differs.
+
+Flow
 
 ```text
 RoleFamily → CausalEdgeSet → TriggerReactionMatch → RepeatedCausalWiringSet
 ```
+
+Productions
 
 ```bnf
 CausalWiringDuplication ::= <CausalEdgeSet> "->" <TriggerReactionMatch> "->" <RepeatedCausalWiringSet>
@@ -16948,16 +21507,23 @@ CausalEdge ::= <Trigger> "causes" <Reaction> "," <OccurrenceCount>
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 [ana-causal](REASONING.md#reason-node-ana-causal)
+
 Detector for
 [causal](REASONING.md#reason-lens-causal)
+
+Before
 
 ```text
 The same trigger-to-reaction wiring — this event runs that handler, that failure invokes this recovery — is duplicated across the family.
 ```
+
+After
 
 ```text
 role family -> cause->effect edges per class -> match trigger/reaction pairs across family -> repeated causal-wiring set
@@ -16974,12 +21540,17 @@ Details
 
 Intent
 Score each class's deviation from the dominant behavioral signature, identify the outliers, and name why each deviates, so inconsistency is localized to the deviant implementation rather than reported as an aggregate rate.
+
 Invariant
 Inconsistency is an anomaly to be localized to a deviant implementation, not merely a family-level ratio.
+
+Flow
 
 ```text
 BehaviorFamily → DominantSignature → DeviationScore → OutlierSet
 ```
+
+Productions
 
 ```bnf
 AnomalyOutlierDetection ::= <BehaviorFamily> "->" <DominantSignature> "->" <DeviationScoreSet> "->" <OutlierSet>
@@ -16988,16 +21559,23 @@ Outlier ::= <Resource> "," <DeviationScore> "," <DeviationReason>
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ana-anomaly](REASONING.md#reason-node-ana-anomaly)
+
 Detector for
 [anomaly](REASONING.md#reason-lens-anomaly)
+
+Before
 
 ```text
 A family shares one behavior — except the one class that does it differently, and a consistency ratio only reports 'weakly consistent' without naming the deviant.
 ```
+
+After
 
 ```text
 behavior family -> per-class deviation score against the dominant signature -> outlier set + why each deviates -> normalize or justify
@@ -17014,12 +21592,17 @@ Details
 
 Intent
 Derive a name-independent semantic signature for each behavior (intent, input-to-output shape, effects), cluster behaviors by meaning rather than identifier, and surface same-meaning/different-name clusters that only the semantic lens can detect.
+
 Invariant
 Same meaning under different names is duplication that textual, structural, and frequency lenses are blind to.
+
+Flow
 
 ```text
 RoleFamily → SemanticSignature → MeaningCluster → ConceptualDuplicateSet
 ```
+
+Productions
 
 ```bnf
 ConceptualDuplicationDetection ::= <SemanticSignatureSet> "->" <MeaningClustering> "->" <ConceptualDuplicateSet>
@@ -17028,16 +21611,23 @@ SemanticSignature ::= <Intent> "," <InputOutputShape> "," <EffectSet>
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 [ana-semantic](REASONING.md#reason-node-ana-semantic)
+
 Detector for
 [semantic](REASONING.md#reason-lens-semantic)
+
+Before
 
 ```text
 Two implementations mean the same thing under different names, so no textual, structural, or frequency scan flags them.
 ```
+
+After
 
 ```text
 role family -> semantic signature per behavior (intent, inputs->outputs, effects) -> cluster by meaning not name -> same-meaning/different-name set + novelty score
@@ -17054,12 +21644,17 @@ Details
 
 Intent
 Test whether a duplication shape recurs at more than one scale (method, class, module), and determine the scale at which the abstraction belongs, so single-scale scanning does not abstract at the wrong level.
+
 Invariant
 A shape that recurs across scales must be abstracted at the scale where it is invariant, not only where it was first noticed.
+
+Flow
 
 ```text
 CandidateShape → MultiScaleRecurrence → ScaleInvariance → AbstractionScale
 ```
+
+Productions
 
 ```bnf
 FractalScaleDuplication ::= <CandidateShape> "->" <MultiScaleRecurrenceScan> "->" <ScaleInvarianceVerdict>
@@ -17068,16 +21663,23 @@ ScaleInvarianceVerdict ::= "method_scale" | "class_scale" | "module_scale" | "sc
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [ana-fractal](REASONING.md#reason-node-ana-fractal)
+
 Detector for
 [fractal](REASONING.md#reason-lens-fractal)
+
+Before
 
 ```text
 The distiller scans one scale — the class family — and misses that the same shape repeats at the method level and again at the module level.
 ```
+
+After
 
 ```text
 candidate shape -> test recurrence at method / class / module scale -> scale-invariant duplication + the scale the abstraction belongs at
@@ -17094,12 +21696,17 @@ Details
 
 Intent
 Convert duplicated, inconsistent, and architecture-violating findings into anti-pattern records with type, occurrence count, impact, effort, severity, and affected resources.
+
 Invariant
 Refactoring targets should be normalized into comparable anti-pattern contracts.
+
+Flow
 
 ```text
 Finding → AntiPatternRecord → PriorityInput
 ```
+
+Productions
 
 ```bnf
 AntiPatternClassification ::= <FindingSet> "->" <AntiPatternSet>
@@ -17110,18 +21717,26 @@ PriorityRank ::= "critical" | "high" | "medium" | "low"
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel), [Custom-Rule Derivation](ALGORITHMS.md#algo-custom-rule-derivation)
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 Findings kept as loose notes, not comparable across the backlog.
 ```
+
+After
 
 ```text
 findings -> anti-pattern records{type, occurrence, impact, effort, severity, affected resources}
@@ -17138,12 +21753,17 @@ Details
 
 Intent
 Assign numeric impact and effort scores, calculate priority, sort anti-patterns, and group them into remediation bands.
+
 Invariant
 Distillation should address high-value anti-patterns first.
+
+Flow
 
 ```text
 AntiPattern → ImpactScore + EffortScore → Priority → SortedBacklog
 ```
+
+Productions
 
 ```bnf
 PriorityMatrix ::= <AntiPatternSet> "->" <ScoredAntiPatternSet> "->" <PriorityBandSet>
@@ -17154,16 +21774,23 @@ PriorityBand ::= "priority_1" | "priority_2" | "priority_3"
 
 Composes
 none
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 Refactoring picks a target by gut feel, not value.
 ```
+
+After
 
 ```text
 anti-patterns -> impact * effort -> priority -> sorted into remediation bands
@@ -17180,12 +21807,17 @@ Details
 
 Intent
 Evaluate each high-priority anti-pattern against boundary principles: universal, invariant, foundational, enforcing, and cognitive-load-reducing.
+
 Invariant
 A base abstraction is justified only when the behavior belongs below the subclass boundary.
+
+Flow
 
 ```text
 AntiPattern → BoundaryPrinciples → PrinciplesMet → AbstractionEligible
 ```
+
+Productions
 
 ```bnf
 BoundaryPrincipleEvaluation ::= <AntiPattern> "->" <BoundaryPrincipleSet> "->" <EligibilityVerdict>
@@ -17195,14 +21827,20 @@ EligibilityVerdict ::= "base_candidate" | "utility_candidate" | "composition_can
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 Duplication abstracted into a base whether or not the behavior belongs below the subclass boundary.
 ```
+
+After
 
 ```text
 anti-pattern -> boundary principles{universal, invariant, foundational, enforcing, load-reducing} -> {base | utility | composition | local-refactor}
@@ -17219,12 +21857,17 @@ Details
 
 Intent
 Promote an anti-pattern to a base-class candidate only when it satisfies enough boundary principles and applies across a meaningful portion of the semantic domain.
+
 Invariant
 Inheritance should encode stable lifecycle or invariant behavior, not incidental reuse.
+
+Flow
 
 ```text
 AntiPattern + DomainCoverage + BoundaryScore → Candidate|Reject
 ```
+
+Productions
 
 ```bnf
 BaseClassCandidateSelection ::= <AntiPattern> "," <DomainCoverage> "," <BoundaryScore> "->" <CandidateVerdict>
@@ -17234,16 +21877,23 @@ DomainCoverage ::= "occurrence_count / total_domain_classes"
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Grounds
 none
+
+Before
 
 ```text
 Incidental reuse promoted to inheritance.
 ```
+
+After
 
 ```text
 anti-pattern + domain coverage + boundary score -> verdict{create_base | prefer_composition | prefer_utility | reject}
@@ -17259,13 +21909,18 @@ anti-pattern + domain coverage + boundary score -> verdict{create_base | prefer_
 Details
 
 Intent
-Partition the family's behavior into what is INVARIANT across every member (the topology preserved under substitution) and what VARIES per member (the novelty); the invariant set becomes the concrete base, the variant set becomes the abstract seam. The concrete/abstract boundary is DERIVED from the evidence, not read off a fixed lifecycle vocabulary — so the split holds for any paradigm, not only OOP class lifecycles.
+Partition the family's behavior into what is invariant across every member (the topology preserved under substitution) and what varies per member (the novelty); the invariant set becomes the concrete base, the variant set becomes the abstract seam. The concrete/abstract boundary is derived from the evidence, not read off a fixed lifecycle vocabulary — so the split holds for any paradigm, not only OOP class lifecycles.
+
 Invariant
-The concrete/abstract boundary is the invariant/variant boundary of the actual family, discovered from evidence — never a pre-assumed lifecycle template.
+The concrete/abstract boundary is the invariant/variant boundary of the family, discovered from evidence — never a pre-assumed lifecycle template.
+
+Flow
 
 ```text
 FamilyBehaviorSet → InvariantPartition + VariantPartition → ConcreteBase + AbstractSeam
 ```
+
+Productions
 
 ```bnf
 ResponsibilitySplit ::= <FamilyBehaviorSet> "->" <InvariantSet> "," <VariantSet> "->" <ConcreteBase> "," <AbstractSeamSet>
@@ -17277,14 +21932,20 @@ SeamKind ::= "hook" | "abstract_method" | "injected_strategy" | "parameter"
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [control_coordination](SCHEMA.md#force-control-coordination)
+
 Grounds
 [invariant](REASONING.md#reason-substrate-node-invariant), [ont-novelty](REASONING.md#reason-node-ont-novelty)
+
+Before
 
 ```text
 The split is drawn from a fixed OOP lifecycle vocabulary (constructor/initialize/destroy/onInitialize/executeCore), which pre-decides the shape whether or not the family's behavior matches it.
 ```
+
+After
 
 ```text
 family behavior -> partition INVARIANT (identical across every member) from VARIANT (differs per member) -> invariant set = concrete base, variant set = the abstract seam; the hook names are read from the variant behavior, not assumed
@@ -17301,12 +21962,17 @@ Details
 
 Intent
 Define public lifecycle methods that enforce guard checks, call shared setup or cleanup, invoke subclass hooks, and centralize error handling.
+
 Invariant
 Template method converts repeated lifecycle code into one predictable behavioral contract.
+
+Flow
 
 ```text
 PublicMethod → Guard → SharedBehavior → Hook → ErrorPolicy → Result
 ```
+
+Productions
 
 ```bnf
 TemplateLifecycle ::= <LifecycleMethod> "->" <GuardCheck> "->" <SharedOperation> "->" <SubclassHook> "->" <ErrorHandlingPolicy>
@@ -17316,14 +21982,20 @@ SubclassHook ::= "onInitialize" | "onDestroy" | "onExecute" | "onProcess"
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
+
+Before
 
 ```text
 Each subclass re-implements the same guard-setup-cleanup lifecycle.
 ```
+
+After
 
 ```text
 public lifecycle method -> guard -> shared setup/cleanup -> subclass hook -> centralized error handling -> one predictable contract
@@ -17340,12 +22012,17 @@ Details
 
 Intent
 Generate the base abstraction from the selected candidate, enforce size constraints, split if oversized, and record which anti-patterns the abstraction eliminates.
+
 Invariant
 Generated abstractions must remain small enough to be maintainable.
+
+Flow
 
 ```text
 Candidate → GenerateBase → SizeCheck → SplitIfNeeded → BaseArtifact
 ```
+
+Productions
 
 ```bnf
 BaseSchematicComposition ::= <BaseClassCandidate> "->" <GeneratedBaseArtifact> "->" <ConstraintCheck> "->" <PersistableBaseArtifact>
@@ -17354,16 +22031,23 @@ ConstraintCheck ::= "line_count <= max_allowed_lines" "," "name_matches_conventi
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
+
+Before
 
 ```text
 A base generated so large it becomes the new god object.
 ```
+
+After
 
 ```text
 candidate -> generate base -> size <= max (split if oversized) + name + location conventions -> persistable base
@@ -17380,12 +22064,17 @@ Details
 
 Intent
 Sort target classes by complexity from lowest to highest, migrate simpler implementations first, and use early migrations to validate the abstraction before complex adoption.
+
 Invariant
 Migration risk decreases when the base pattern is proven on low-complexity cases first.
+
+Flow
 
 ```text
 TargetClasses → ComplexityMetric → SortedMigrationOrder
 ```
+
+Productions
 
 ```bnf
 MigrationOrdering ::= <TargetClassSet> "->" <ComplexityScoreSet> "->" <MigrationQueue>
@@ -17395,16 +22084,23 @@ MigrationQueue ::= "ascending_complexity"
 
 Composes
 none
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [causality_ordering](SCHEMA.md#force-causality-ordering), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 The most complex implementation migrated first, and the base is wrong before it's proven.
 ```
+
+After
 
 ```text
 target classes -> complexity score -> migrate ascending complexity -> prove the base on simple cases first
@@ -17421,12 +22117,17 @@ Details
 
 Intent
 For each target class, create a recoverable checkpoint, refactor it to extend or use the abstraction, verify the removed anti-pattern no longer exists, and restore from backup on failure.
+
 Invariant
 Structural migration must be reversible per target artifact.
+
+Flow
 
 ```text
 Backup → Refactor → Verify → Commit|Restore
 ```
+
+Productions
 
 ```bnf
 MigrationExecution ::= <TargetClass> "->" <Checkpoint> "->" <RefactorToBase> "->" <Verification> "->" <MigrationOutcome>
@@ -17435,18 +22136,26 @@ MigrationOutcome ::= "committed" | "restored_from_checkpoint" | "failed_with_log
 
 Composes
 none
+
 Composed by
 [Custom-Rule Derivation](ALGORITHMS.md#algo-custom-rule-derivation)
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [streaming_dataflow](SCHEMA.md#force-streaming-dataflow), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 A refactor breaks a target and there is no way back.
 ```
+
+After
 
 ```text
 per target -> checkpoint -> refactor to the base -> verify the anti-pattern is gone -> commit | restore from checkpoint
@@ -17463,12 +22172,17 @@ Details
 
 Intent
 After migration, search the entire target scope for old duplicate patterns, allow only approved base-location occurrences, and fail completion if unapproved duplicates remain.
+
 Invariant
-Refactoring is incomplete until the old pattern is actually gone.
+Refactoring is incomplete until the old pattern is gone.
+
+Flow
 
 ```text
 KnownAntiPattern → ScopeSearch → RemainingOccurrences → Pass|Fail
 ```
+
+Productions
 
 ```bnf
 AntiPatternElimination ::= <AntiPatternPatternSet> "->" <WholeScopeSearch> "->" <RemainingOccurrenceSet> "->" <EliminationVerdict>
@@ -17477,16 +22191,23 @@ EliminationVerdict ::= "eliminated" | "remaining_unapproved_occurrences" | "base
 
 Composes
 none
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 Distillation declared done while the old pattern still lives at three sites.
 ```
+
+After
 
 ```text
 known anti-pattern -> search the whole scope -> allow only approved base-location occurrences -> fail completion on unapproved duplicates
@@ -17503,12 +22224,17 @@ Details
 
 Intent
 After creating or migrating abstractions, regenerate or update the architecture registry, reread it, and confirm the new base and migrated implementations are represented.
+
 Invariant
 Architecture metadata must reflect the new implementation truth.
+
+Flow
 
 ```text
 RefactorResult → RegistryRegeneration → RegistryReadback → RepresentationCheck
 ```
+
+Productions
 
 ```bnf
 RegistryRegeneration ::= <MigrationResult> "->" <RegistryUpdate> "->" <UpdatedRegistry> "->" <RegistryVerification>
@@ -17517,16 +22243,23 @@ RegistryVerification ::= "new_base_present" "," "implementation_count_updated" "
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [runtime_extensibility](SCHEMA.md#force-runtime-extensibility)
+
 Grounds
 none
+
+Before
 
 ```text
 The registry still reflects the pre-refactor architecture.
 ```
+
+After
 
 ```text
 migration result -> regenerate registry -> reread -> confirm new base + migrated implementations represented
@@ -17543,12 +22276,17 @@ Details
 
 Intent
 After eliminating an anti-pattern, author or strengthen the custom lint rule that statically forbids its reintroduction and any bypass of the new base, build the rule plugin, and regenerate the rule catalog, so the distilled boundary is enforced by a gate rather than by discipline.
+
 Invariant
 A distilled pattern is incomplete until a gate forbids its reintroduction — the gate holds the line, not discipline.
+
+Flow
 
 ```text
 DistilledBoundary → LintRuleAuthored → PluginBuilt → CatalogRegenerated → EnforcedBoundary
 ```
+
+Productions
 
 ```bnf
 AntiReintroductionGate ::= <DistilledBoundary> "->" <CustomLintRule> "->" <PluginBuild> "->" <CatalogRegeneration> "->" <EnforcementVerdict>
@@ -17557,14 +22295,20 @@ EnforcementVerdict ::= "gate_active" | "gate_absent"
 
 Composes
 none
+
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [constraint](REASONING.md#reason-substrate-node-constraint)
 
+Before
+
 ```text
-The distilled base eliminates the duplication today, but nothing stops the next author re-introducing the same anti-pattern — the gate held only for this run, by discipline.
+The distilled base eliminates the duplication today, but nothing stops the developer or the model from reintroducing the same anti-pattern — the gate held only for this run, by discipline.
 ```
+
+After
 
 ```text
 distilled boundary -> author/strengthen a custom lint rule forbidding the anti-pattern + the base-bypass -> build the plugin -> regenerate the rule catalog -> the boundary is enforced structurally
@@ -17581,12 +22325,17 @@ Details
 
 Intent
 Calculate duplication reduction, code reduction, adoption rate, lines saved, maintenance burden reduction, and cognitive-load reduction after migration.
+
 Invariant
 Refactoring should produce measurable architectural ROI.
+
+Flow
 
 ```text
 BeforeMetrics + AfterMetrics → ReductionMetrics → ROISummary
 ```
+
+Productions
 
 ```bnf
 DistillationMetrics ::= <BaselineMetricSet> "," <PostMigrationMetricSet> "->" <FinalMetricSet>
@@ -17595,16 +22344,23 @@ FinalMetricSet ::= "duplication_reduction" "," "code_reduction" "," "base_class_
 
 Composes
 none
+
 Composed by
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 ROI asserted ('much cleaner now') with no numbers.
 ```
+
+After
 
 ```text
 before + after -> {duplication reduction, code reduction, adoption rate, lines saved, maintenance + cognitive-load reduction}
@@ -17621,12 +22377,17 @@ Details
 
 Intent
 Append the completed analysis summary to a durable history log, store metric snapshots, and preserve lessons learned for future abstraction decisions.
+
 Invariant
 Refactoring intelligence improves when outcomes become reusable historical evidence.
+
+Flow
 
 ```text
 Summary → HistoryAppend → MetricSnapshot → LessonsLearned
 ```
+
+Productions
 
 ```bnf
 DistillationHistory ::= <SummaryReport> "->" <HistoryLog> "->" <MetricStore> "->" <ReusableLearningSet>
@@ -17635,16 +22396,23 @@ ReusableLearning ::= <Lesson> "," <Evidence> "," <ApplicabilityContext>
 
 Composes
 none
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
+
+Before
 
 ```text
 Each distillation forgets the last — the same lessons re-learned.
 ```
+
+After
 
 ```text
 summary -> durable history log + metric snapshots + lessons -> reusable evidence for future abstraction decisions
@@ -17661,12 +22429,17 @@ Details
 
 Intent
 Mark pattern distillation complete only if workspace, baseline, semantic analysis, anti-pattern classification, abstraction selection, migration, verification, registry update, anti-reintroduction gate, and metrics logging all pass.
+
 Invariant
 Completion is an evidence state, not an assertion — and it includes a gate that forbids the anti-pattern's return.
+
+Flow
 
 ```text
 PhaseGates → VerificationResults → Metrics → Complete|Incomplete
 ```
+
+Productions
 
 ```bnf
 DistillationCompletion ::= <InitializationGate> "," <RegistryGate> "," <SemanticAnalysisGate> "," <AntiPatternGate> "," <AbstractionGate> "," <MigrationGate> "," <EnforcementGate> "," <MetricsGate> "->" <CompletionVerdict>
@@ -17675,16 +22448,23 @@ CompletionVerdict ::= "pattern_distillation_complete" | "pattern_distillation_in
 
 Composes
 none
+
 Named in the derivation of
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 'Done' asserted while verification, registry-update, and the anti-reintroduction gate never ran.
 ```
+
+After
 
 ```text
 gates{workspace, baseline, semantic, anti-pattern, abstraction, migration, verification, registry, enforcement, metrics} all pass -> complete; else incomplete
@@ -17699,12 +22479,17 @@ Details
 
 Intent
 Initialize an analysis workspace, read registry baselines, partition semantic domains, extract behavioral signatures, detect anti-patterns, prioritize them, evaluate abstraction boundaries, compose base schematics, migrate targets, verify elimination, update registries, calculate ROI, and persist history.
+
 Invariant
 Pattern distillation is a forensic compiler from repeated behavioral evidence into predictable implementation architecture.
+
+Flow
 
 ```text
 Workspace → Registry → Semantics → AntiPatterns → Abstraction → Migration → Verification → Metrics → History
 ```
+
+Productions
 
 ```bnf
 PatternDistillerKernel ::= <AnalysisWorkspace> "->" <RegistryBaseline> "->" <ComplianceGap> "->" <SemanticDomainPartitioning> "->" <BehavioralSignature> "->" <CrossClassPatternDetection> "->" <AntiPatternClassification> "->" <PriorityMatrix> "->" <BoundaryPrincipleEvaluation> "->" <BaseClassCandidateSelection> "->" <ResponsibilitySplit> "->" <BaseSchematicComposition> "->" <MigrationExecution> "->" <AntiPatternElimination> "->" <RegistryRegeneration> "->" <DistillationMetrics> "->" <DistillationHistory>
@@ -17712,10 +22497,13 @@ PatternDistillerKernel ::= <AnalysisWorkspace> "->" <RegistryBaseline> "->" <Com
 
 Composes
 [Analysis Workspace](ALGORITHMS.md#algo-analysis-workspace), [Registry Baseline](ALGORITHMS.md#algo-registry-baseline), [Compliance Gap](ALGORITHMS.md#algo-compliance-gap), [Semantic Domain Partitioning](ALGORITHMS.md#algo-semantic-domain-partitioning), [Cross-Class Pattern Detection](ALGORITHMS.md#algo-cross-class-pattern-detection), [Anti-Pattern Classification](ALGORITHMS.md#algo-anti-pattern-classification), [Base-Class Candidate Selection](ALGORITHMS.md#algo-base-class-candidate-selection), [Base Schematic Composition](ALGORITHMS.md#algo-base-schematic-composition), [Registry Regeneration](ALGORITHMS.md#algo-registry-regeneration), [Distillation Metrics](ALGORITHMS.md#algo-distillation-metrics)
+
 Composed by
 [Custom-Rule Derivation](ALGORITHMS.md#algo-custom-rule-derivation)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -17723,26 +22511,38 @@ Derivation map
 
 orient
 [Analysis Workspace](ALGORITHMS.md#algo-analysis-workspace)
+
 see
 [Behavioral Signature Extraction](ALGORITHMS.md#algo-behavioral-signature-extraction)
+
 derive
 [Anti-Pattern Classification](ALGORITHMS.md#algo-anti-pattern-classification)
+
 intent
 [Anti-Pattern Priority Matrix](ALGORITHMS.md#algo-anti-pattern-priority-matrix)
+
 project
 [Migration Ordering](ALGORITHMS.md#algo-migration-ordering)
+
 act
 [Backup-Verified Migration](ALGORITHMS.md#algo-backup-verified-migration)
+
 verify
 [Anti-Pattern Elimination Verification](ALGORITHMS.md#algo-anti-pattern-elimination-verification)
+
 commit
 [Pattern Distillation History](ALGORITHMS.md#algo-pattern-distillation-history)
+
 terminate
 [Completion Truthfulness](ALGORITHMS.md#algo-pattern-distillation-completion-truthfulness)
+
+Before
 
 ```text
 Repeated behavior abstracted by intuition, migrated irreversibly, never verified.
 ```
+
+After
 
 ```text
 workspace -> baseline -> semantics -> anti-patterns -> abstraction boundary -> base schematic -> reversible migration -> elimination proof -> registry regenerate -> ROI -> history
@@ -17756,12 +22556,17 @@ Details
 
 Intent
 <Initialize evidence workspace> -> <Measure current architecture> -> <Group semantic families> -> <Extract behavioral signatures> -> <Detect duplicate/inconsistent behavior> -> <Score anti-patterns> -> <Evaluate abstraction boundary> -> <Compose reusable schematic> -> <Migrate with rollback> -> <Verify old-pattern elimination> -> <Record ROI>
+
 Invariant
 Any repeated implementation behavior should become a shared abstraction only when evidence proves it is universal, invariant, foundational, enforceable, and cognitively load-reducing.
+
+Flow
 
 ```text
 Evidence → Semantics → AntiPattern → Boundary → Abstraction → Migration → Verification → Metrics
 ```
+
+Productions
 
 ```bnf
 PatternDistillationConcern ::= <EvidenceWorkspace> "->" <ArchitecturalBaseline> "->" <SemanticDomainSet> "->" <BehavioralSignatureSet> "->" <AntiPatternSet> "->" <AbstractionBoundary> "->" <ReusableSchematic> "->" <MigrationPlan> "->" <EliminationVerification> "->" <ROIMetrics>
@@ -17770,14 +22575,16 @@ AbstractionBoundary ::= "universal" "," "invariant" "," "foundational" "," "enfo
 
 Composes
 none
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
 ## quality-engine
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -17812,12 +22619,17 @@ Details
 
 Intent
 On each update (an apply), normalize the proposal, resolve a CheckPlan, verify it, and on failure fix-then-reverify the downstream set until the verdict is clean or the pass bound is reached, then escalate.
+
 Invariant
 Every code update is a bounded verify-remediate loop keyed to the apply event, not the turn; the machine verdict — never the model's read — is its only completion signal.
+
+Flow
 
 ```text
 Update → Normalize → Resolve → Verify → Clean? → Fix → Reverify → Clean|Escalate
 ```
+
+Productions
 
 ```bnf
 QualityGovernanceLoop ::= <Update> "->" <NormalizationPrefix> "->" <CheckPlanResolution> "->" <Verification> "->" (<CleanVerdict> | <DownstreamFixCycle> "->" <QualityGovernanceLoop>)
@@ -17827,10 +22639,13 @@ BoundedReverify ::= "passCount <= MAX_CASCADE_PASSES" "AND" "in_scope_findings_s
 
 Composes
 [Recursion Control](ALGORITHMS.md#algo-recursion-control), [Resilience Control](ALGORITHMS.md#algo-resilience-control)
+
 Composed by
 [Quality-Engine Kernel](ALGORITHMS.md#algo-quality-engine-concern)
+
 Forces
-[semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [ai_governance](SCHEMA.md#force-ai-governance), [event_messaging](SCHEMA.md#force-event-messaging)
+[semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification), [security_governance](SCHEMA.md#force-security-governance), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -17838,18 +22653,26 @@ Derivation map
 
 derive
 [Canonical Config Resolution](ALGORITHMS.md#algo-canonical-config-resolution)
+
 project
 [Stage Ordering](ALGORITHMS.md#algo-stage-ordering)
+
 act
 [Comment Normalization Remediation](ALGORITHMS.md#algo-comment-normalization-remediation)
+
 verify
 [Machine Verdict Derivation](ALGORITHMS.md#algo-machine-verdict-derivation)
+
 terminate
 [Bounded Cascade Termination](ALGORITHMS.md#algo-bounded-cascade-termination)
+
+Before
 
 ```text
 A code edit judged clean by the model's read, not the machine verdict.
 ```
+
+After
 
 ```text
 apply -> normalize -> resolve CheckPlan -> verify -> {clean | fix in-scope + reverify, bounded, findings strictly decrease} -> clean | escalate
@@ -17865,13 +22688,18 @@ apply -> normalize -> resolve CheckPlan -> verify -> {clean | fix in-scope + rev
 Details
 
 Intent
-Expand one canonical config across selected profiles and native rules into per-tool config, resolve exactly one owner per contested surface, detect the four conflict kinds fail-closed, route loosening or self-certification to the human gate, and emit a resolved plan.
+Expand one canonical config across selected profiles and native rules into per-tool config, resolve exactly one owner per contested surface, detect the four conflict kinds fail-closed, route loosening or self-certification to the developer's gate, and emit a resolved plan.
+
 Invariant
 A single canonical model expands to many tools without contradiction only when every contested surface has one owner and every conflict is caught before runtime.
+
+Flow
 
 ```text
 CanonicalConfig → Expand → OwnershipResolution → ConflictDetection → HumanAuthorityRouting → ResolvedPlan|ConflictReport
 ```
+
+Productions
 
 ```bnf
 CanonicalConfigResolution ::= <CanonicalConfig> "->" <PerToolExpansion> "->" <SingleOwnerPerSurface> "->" <ConflictDetection> "->" (<ResolvedPlan> | <ConflictReport>)
@@ -17881,18 +22709,26 @@ Resolution ::= "single_owner_enabled" | "route_to_human_authority_gate"
 
 Composes
 [Centralization Kernel](ALGORITHMS.md#algo-centralization-kernel), [Canonical Data](ALGORITHMS.md#algo-canonical-data)
+
 Composed by
 [Quality-Engine Kernel](ALGORITHMS.md#algo-quality-engine-concern)
+
 Named in the derivation of
 [Quality Governance Loop](ALGORITHMS.md#algo-quality-governance-loop)
+
 Forces
-[semantic_consistency](SCHEMA.md#force-semantic-consistency), [ai_governance](SCHEMA.md#force-ai-governance)
+[semantic_consistency](SCHEMA.md#force-semantic-consistency), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
+
+Before
 
 ```text
 One config expanded to many tools with contradictory, unowned rules.
 ```
+
+After
 
 ```text
 canonical config -> per-tool expansion -> one owner per contested surface -> detect conflicts{ownership overlap, unsatisfiable, out-of-range, known-bad-pair} fail-closed -> resolved plan | conflict report
@@ -17909,12 +22745,17 @@ Details
 
 Intent
 Build the runnability DAG from dependsOn, topologically order the cascade by the invalidates relation so fixes point forward, partition into normalization prefix, structural band, and semantic suffix, and permit back-edges only inside the suffix.
+
 Invariant
 The order determines the total work scope; a forward-pointing order makes each fix dirty only later stages, so the prefix converges once and the suffix is bounded.
+
+Flow
 
 ```text
 Stages → RunnabilityDAG → InvalidatesTopoSort → BandPartition → OrderedStages
 ```
+
+Productions
 
 ```bnf
 StageOrdering ::= <StageSet> "->" <DependsOnDAG> "->" <InvalidatesOrder> "->" <BandPartition> "->" <OrderedStages>
@@ -17924,18 +22765,26 @@ BackEdgePolicy ::= "allowed_only_in_semantic_suffix_resolved_at_runtime"
 
 Composes
 none
+
 Composed by
 [Quality-Engine Kernel](ALGORITHMS.md#algo-quality-engine-concern)
+
 Named in the derivation of
 [Quality Governance Loop](ALGORITHMS.md#algo-quality-governance-loop)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [causality_ordering](SCHEMA.md#force-causality-ordering)
+
 Grounds
 none
+
+Before
 
 ```text
 Checks run in arbitrary order, so a fix re-dirties an already-passed stage forever.
 ```
+
+After
 
 ```text
 stages -> runnability DAG (dependsOn) -> topo-order by invalidates (fixes point forward) -> bands{normalization prefix, structural, semantic suffix}; back-edges only in the suffix
@@ -17952,12 +22801,17 @@ Details
 
 Intent
 Express the comment-strip rule once as canonical behavior, bind it per language from a comment-grammar descriptor, run the toolchain-free token-scan backing on the in-memory proposal and the real-AST backing in the sandbox, preserve directive comments, and trust a backing only after calibration and adversarial testing.
+
 Invariant
 An agnostic auto-fix is behavior-as-data compiled per language behind a safety boundary — adding a language is adding a descriptor, not code.
+
+Flow
 
 ```text
 CanonicalRule + GrammarDescriptor → Compile → TokenScan|ASTBacking → DirectivePreservingStrip → CalibratedFix
 ```
+
+Productions
 
 ```bnf
 CommentNormalization ::= <CanonicalCommentRule> "->" <PerLanguageDescriptor> "->" <CompiledBacking> "->" <DirectivePreservingStrip> "->" <SafetyBoundary>
@@ -17967,16 +22821,23 @@ SafetyBoundary ::= "tool_calibration" "," "adversarial_input_testing"
 
 Composes
 none
+
 Named in the derivation of
 [Quality Governance Loop](ALGORITHMS.md#algo-quality-governance-loop)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 A comment-strip auto-fix hardcoded per language, so adding a language means new code.
 ```
+
+After
 
 ```text
 canonical rule + comment-grammar descriptor -> compile per language -> token-scan (in-memory) | real-AST (sandbox) -> preserve directive comments -> trust only after calibration + adversarial test
@@ -17992,13 +22853,18 @@ canonical rule + comment-grammar descriptor -> compile per language -> token-sca
 Details
 
 Intent
-Derive a candidate rule from repeated evidence through anti-pattern classification, boundary-principle evaluation, and candidate selection, migrate with rollback, verify elimination, and admit a tightening rule while routing a self-certifying or loosening rule through the human-authority gate.
+Derive a candidate rule from repeated evidence through anti-pattern classification, boundary-principle evaluation, and candidate selection, migrate with rollback, verify elimination, and admit a tightening rule while routing a self-certifying or loosening rule through the developer's gate.
+
 Invariant
-A rule that governs the AI's own output cannot be authored or loosened by the AI; tightening is admitted, self-certification is gated.
+A rule that governs the model's own output cannot be authored or loosened by the model; tightening is admitted, self-certification is gated.
+
+Flow
 
 ```text
 Evidence → AntiPattern → BoundaryPrinciple → Candidate → Migrate → Verify → Admit|HumanGate
 ```
+
+Productions
 
 ```bnf
 CustomRuleDerivation ::= <RepeatedEvidence> "->" <AntiPatternClassification> "->" <BoundaryPrincipleEvaluation> "->" <CandidateSelection> "->" <BackupVerifiedMigration> "->" <SelfCertGate>
@@ -18007,17 +22873,23 @@ SelfCertGate ::= "tightening_admitted" | "self_certifying_or_loosening_routes_to
 
 Composes
 [Pattern Distiller Kernel](ALGORITHMS.md#algo-pattern-distiller-kernel), [Anti-Pattern Classification](ALGORITHMS.md#algo-anti-pattern-classification), [Backup-Verified Migration](ALGORITHMS.md#algo-backup-verified-migration)
+
 Forces
-[modularity](SCHEMA.md#force-modularity), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[modularity](SCHEMA.md#force-modularity), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 none
 
-```text
-The AI authors and loosens a rule that governs its own output.
-```
+Before
 
 ```text
-repeated evidence -> anti-pattern classify -> boundary principle -> candidate -> migrate with rollback -> verify elimination -> {tightening admitted | self-certify/loosen routes to the human gate}
+The model authors and loosens a rule that governs its own output.
+```
+
+After
+
+```text
+repeated evidence -> anti-pattern classify -> boundary principle -> candidate -> migrate with rollback -> verify elimination -> {tightening admitted | self-certify/loosen routes to the developer's gate}
 ```
 
 ### Machine Verdict Derivation
@@ -18031,12 +22903,17 @@ Details
 
 Intent
 Derive the verify-stage verdict from the toolchain's machine output — exit codes and parsed findings — never from the model's reading, so a clean verdict is an observed machine fact.
+
 Invariant
 The verify verdict is machine-derived from exit codes and parsed findings; a model's judgement is never the completion signal.
+
+Flow
 
 ```text
 CheckResults → ExitCodesAndFindings → MachineVerdict
 ```
+
+Productions
 
 ```bnf
 MachineVerdictDerivation ::= <CheckResults> "->" <ExitCodeAndFindingParse> "->" <MachineVerdict>
@@ -18045,16 +22922,23 @@ MachineVerdict ::= "clean" | "violations"
 
 Composes
 none
+
 Named in the derivation of
 [Quality Governance Loop](ALGORITHMS.md#algo-quality-governance-loop)
+
 Forces
-[correctness_verification](SCHEMA.md#force-correctness-verification), [ai_governance](SCHEMA.md#force-ai-governance)
+[correctness_verification](SCHEMA.md#force-correctness-verification), [model_governance](SCHEMA.md#force-model-governance)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 A pass declared from the model's reading of the diff, not the tool's exit.
 ```
+
+After
 
 ```text
 check results -> exit codes + parsed findings -> machine verdict{clean | violations}; the model's read is never the signal
@@ -18071,12 +22955,17 @@ Details
 
 Intent
 Terminate the verify-remediate cascade on the completion AND-gate — a clean verdict, or bounded progress where findings strictly decrease within the pass bound — escalating when neither holds.
+
 Invariant
 The cascade terminates on a clean machine verdict or a violated progress bound; it never loops unbounded and never stops on an unclean state without escalating.
+
+Flow
 
 ```text
 PassResult → CompletionGate → Stop|Continue|Escalate
 ```
+
+Productions
 
 ```bnf
 BoundedCascadeTermination ::= <PassResult> "->" <CompletionGate> "->" (<Clean> | <BoundedContinue> | <Escalate>)
@@ -18085,16 +22974,23 @@ CompletionGate ::= "clean" | "findings_strictly_decrease" "AND" "passCount <= MA
 
 Composes
 none
+
 Named in the derivation of
 [Quality Governance Loop](ALGORITHMS.md#algo-quality-governance-loop)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 A remediation cascade that loops until it happens to pass, or forever.
 ```
+
+After
 
 ```text
 each pass -> {clean: stop | findings strictly decrease AND passCount <= MAX: continue | else: escalate}
@@ -18108,12 +23004,17 @@ Details
 
 Intent
 Resolve a canonical policy into a per-ecosystem CheckPlan, order its stages by the invalidates relation, normalize the proposal, run generation checks on the server and project tools via the relay, derive a machine verdict, and drive a bounded downstream cascade to clean — holding no runtime execution in the engine itself.
+
 Invariant
 Language-agnostic code governance is a pure planner-plus-judge behind a port; execution lives in the relay and the loop, the verdict is machine-derived, and the config gate has already removed every runtime contradiction.
+
+Flow
 
 ```text
 Policy → Resolve → Order → Normalize → Execute(G+P) → Verdict → Cascade → Clean|Escalate
 ```
+
+Productions
 
 ```bnf
 QualityEngineKernel ::= <QualityPolicy> "->" <CanonicalConfigResolution> "->" <StageOrdering> "->" <CommentNormalization> "->" <CheckPlanExecution> "->" <VerdictDerivation> "->" <QualityGovernanceLoop>
@@ -18124,14 +23025,16 @@ EngineBoundary ::= "pure_core_no_runtime_execution_behind_port_adapter"
 
 Composes
 [Canonical Config Resolution](ALGORITHMS.md#algo-canonical-config-resolution), [Stage Ordering](ALGORITHMS.md#algo-stage-ordering), [Quality Governance Loop](ALGORITHMS.md#algo-quality-governance-loop)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [security_governance](SCHEMA.md#force-security-governance)
+
 Grounds
 none
 
 ## taxonomy
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -18174,12 +23077,17 @@ Details
 
 Intent
 Read the registry's root, container, bucket and ignore declarations, enumerate every file under a declared root, and separate the governed set from the ignored set and from the folders declared as neither, so jurisdiction is read rather than inferred.
+
 Invariant
 No declaration, no enforcement: a file is governed only under a declared root, and a root folder in neither the container nor the bucket declaration is a finding rather than a new container.
+
+Flow
 
 ```text
 Registry → GovernedRootSet → ContainerSet → GovernedFileSet → FlaggedFolderSet
 ```
+
+Productions
 
 ```bnf
 TaxonomyJurisdiction ::= <Registry> "->" <GovernedRootSet> "->" <JurisdictionPartition>
@@ -18189,20 +23097,29 @@ GovernedRootSet ::= <ContainerSet> "," <BucketSet> "," <IgnoreSet>
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Principle
 [Declared Jurisdiction](PRINCIPLES.md#arch-declared-jurisdiction)
+
 Grounds
 none
+
+Before
 
 ```text
 Whether a file is governed is decided per file as it comes up, so an undeclared tree is silently exempt and a stray root-level folder reads as legitimate.
 ```
+
+After
 
 ```text
 registry -> governed roots -> containers + buckets + ignore entries -> the governed file set, and the flagged set of root folders declared as neither
@@ -18218,13 +23135,18 @@ registry -> governed roots -> containers + buckets + ignore entries -> the gover
 Details
 
 Intent
-Score each governed container by how much reference surface a rename disturbs — importer count and the number of surfaces that resolve by pattern rather than by literal path — and rank ascending, so the pilot is the smallest honest container and the highest-risk one lands last.
+Score each governed container by how much reference surface a rename disturbs — importer count and the number of surfaces that resolve by pattern rather than by literal path — and rank ascending, so the pilot is the lowest-risk container and the highest-risk one lands last.
+
 Invariant
 The container converted first is the one whose failure is cheapest to detect, not the one whose naming is worst.
+
+Flow
 
 ```text
 ContainerSet → ReferenceSurfaceCount → RiskScore → OrderedContainerQueue
 ```
+
+Productions
 
 ```bnf
 ReshapeRiskPriority ::= <ContainerSet> "->" <RiskScoreSet> "->" <OrderedContainerQueue>
@@ -18233,20 +23155,29 @@ RiskScore ::= <ImporterCount> "*" <ShapeDiscoveredSurfaceCount>
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Principle
 [Manual Identity Migration](PRINCIPLES.md#arch-manual-identity-migration)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 Conversion starts wherever the tree looks worst, so the first container is the one with the most importers and the most pattern-resolved aggregators.
 ```
+
+After
 
 ```text
 containers -> score(importer count x shape-discovered surface count) -> ascending rank -> pilot the lowest-risk container end to end first
@@ -18263,12 +23194,17 @@ Details
 
 Intent
 Walk every governed path from its root, assign each folder depth a role from the declared grammar in the ordered sequence container then subject then concern, and emit the depth-to-role edge list together with the depths that repeat a role, revisit an earlier one, or exceed the cap.
+
 Invariant
 Each depth consumes a role strictly later than the depth before it, a role may be skipped but never repeated or revisited, and the file's parent always resolves to the concern role.
+
+Flow
 
 ```text
 GovernedPath → DepthSequence → RoleAssignment → RoleEdgeList → DepthViolationSet
 ```
+
+Productions
 
 ```bnf
 PathRoleWalk ::= <GovernedPath> "->" <RoleAssignment> "->" <RoleEdgeList> "," <DepthViolationSet>
@@ -18278,20 +23214,29 @@ DepthViolation ::= "over_cap" | "role_repeated" | "role_revisited" | "file_outsi
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Principle
 [Bounded Nesting Depth](PRINCIPLES.md#arch-bounded-nesting-depth)
+
 Grounds
 none
+
+Before
 
 ```text
 A path is judged by whether it looks tidy, so a concern folder nested under a concern folder and a subject folder below its concern both read as ordinary nesting.
 ```
+
+After
 
 ```text
 path -> assign each depth a role in the order container < subject < concern -> depth<=cap and no role repeated or revisited -> the role-assignment edge list plus the violating depths
@@ -18307,13 +23252,18 @@ path -> assign each depth a role in the order container < subject < concern -> d
 Details
 
 Intent
-Read each governed file, assign the narrowest accurate concern from the declared vocabulary by its primary responsibility, record a file that genuinely fits two concerns as a split candidate, and break an irreducible overlap by the domain-ward layer, so classification is judgement against the file rather than pattern-matching against its path.
+Read each governed file, assign the narrowest accurate concern from the declared vocabulary by its primary responsibility, record a file that fits two concerns as a split candidate, and break an irreducible overlap by the domain-ward layer, so classification is judgement against the file rather than pattern-matching against its path.
+
 Invariant
 A concern is assigned by reading the file, never by its current location; a file that fits two concerns is a split candidate, not a tie to be broken arbitrarily.
+
+Flow
 
 ```text
 GovernedFile → PrimaryResponsibility → CandidateConcernSet → AssignedConcern → SplitCandidateSet
 ```
+
+Productions
 
 ```bnf
 ConcernClassification ::= <GovernedFile> "->" <CandidateConcernSet> "->" <AssignedConcern> "|" <SplitCandidate>
@@ -18323,20 +23273,29 @@ AssignedConcern ::= <NarrowestAccurateConcern> "|" <DomainWardTieBreak>
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [domain_boundary](SCHEMA.md#force-domain-boundary)
+
 Principle
 [Narrowest Concern](PRINCIPLES.md#arch-narrowest-concern)
+
 Grounds
 [semantic-correctness](REASONING.md#reason-test-surface-semantic-correctness)
+
+Before
 
 ```text
 A file is tagged from where it currently sits, so a saturated label absorbs several distinct roles and a two-role file is hidden under whichever word came first.
 ```
+
+After
 
 ```text
 read the file -> narrowest accurate declared concern -> one concern: classified; two concerns: split candidate; irreducible overlap: domain-ward layer wins
@@ -18353,12 +23312,17 @@ Details
 
 Intent
 Compose the target name from the assigned concern, the subject, and a variant taken only where a collision or a facet requires one, and derive the folder chain from that same concern, so the filename and its placement are one projection rather than two decisions.
+
 Invariant
 The concern tag terminates the filename and names the parent folder, so the name determines the placement and one unanchored pattern resolves either level.
+
+Flow
 
 ```text
 AssignedConcern → SubjectSelection → VariantTrigger → TargetName → TargetFolderChain
 ```
+
+Productions
 
 ```bnf
 NameProjection ::= <AssignedConcern> "," <Subject> "," <VariantTrigger> "->" <TargetName> "," <TargetFolderChain>
@@ -18369,20 +23333,29 @@ VariantTrigger ::= "collision" | "facet" | "none"
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Principle
 [Positional Slot Resolution](PRINCIPLES.md#arch-positional-slot-resolution)
+
 Grounds
 none
+
+Before
 
 ```text
 The new name is written by hand, so the tag lands mid-name, a compound swallows the concern, and the folder chain is chosen separately from the filename.
 ```
+
+After
 
 ```text
 (subject, variant?, concern, ext) -> foo.<variant>.<concern>.<ext> with the tag terminating -> the folder chain container/[subject]/<concern-folder> that the tag itself determines
@@ -18399,12 +23372,17 @@ Details
 
 Intent
 Convert one container at a time: split the multi-role files first, move and rename each remaining file to its projected name and folder, update every importer in the same pass, move the mirrored tests to match the new concern folders, and re-point every surface whose pattern encoded the old form.
+
 Invariant
 A rename is one identity migration completed within a single container, references included; the gate is green before the next container starts.
+
+Flow
 
 ```text
 OrderedContainerQueue → SplitExecution → MoveRename → ImporterUpdate → TestMirrorMove → SurfaceRepoint
 ```
+
+Productions
 
 ```bnf
 ContainerReshape ::= <Container> "->" <SplitExecution> "->" <MoveRename> "->" <ReferenceUpdate> "->" <SurfaceRepoint>
@@ -18413,20 +23391,29 @@ ReferenceUpdate ::= <ImporterUpdate> "," <TestMirrorMove>
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [architecture_evolution](SCHEMA.md#force-architecture-evolution), [modularity](SCHEMA.md#force-modularity)
+
 Principle
 [Manual Identity Migration](PRINCIPLES.md#arch-manual-identity-migration)
+
 Grounds
 none
+
+Before
 
 ```text
 A rename tool rewrites every literal path across the whole tree at once, and the surfaces that resolve by pattern are never re-pointed.
 ```
+
+After
 
 ```text
 one container -> split candidates first -> move and rename -> update every importer -> move the mirrored tests -> re-point every shape-discovered surface -> gate green before the next container
@@ -18442,13 +23429,18 @@ one container -> split candidates first -> move and rename -> update every impor
 Details
 
 Intent
-Hold every proposed word against the declared vocabularies and the rejection table, resolve and name the declared word that covers it where one does, refuse a word that names a process, an adjective, a grouping label, or a measurement, sort a surviving word by the is-a test into concerns or subjects, and admit it only by maintainer-approved registry edit.
+Hold every proposed word against the declared vocabularies and the rejection table, resolve and name the declared word that covers it where one does, refuse a word that names a process, an adjective, a grouping label, or a measurement, sort a surviving word by the is-a test into concerns or subjects, and admit it only by developer-approved registry edit.
+
 Invariant
-An undeclared word is a finding, never a licence to add one, and a refusal names the covering word wherever the table resolves one; coverage is decided by the role a file plays, never by general-language synonymy.
+An undeclared word is a finding, never a license to add one, and a refusal names the covering word wherever the table resolves one; coverage is decided by the role a file plays, never by general-language synonymy.
+
+Flow
 
 ```text
 ProposedWord → CoverageCheck → CoveringConcern → IsATest → AdmissionVerdict
 ```
+
+Productions
 
 ```bnf
 VocabularyAdmissionGate ::= <ProposedWord> "->" <CoverageCheck> "->" <IsATest> "->" <AdmissionVerdict>
@@ -18459,23 +23451,32 @@ AdmissionVerdict ::= "admit_concern" | "admit_subject" | "refuse_rename_file" | 
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
-[semantic_consistency](SCHEMA.md#force-semantic-consistency), [ai_governance](SCHEMA.md#force-ai-governance)
+[semantic_consistency](SCHEMA.md#force-semantic-consistency), [model_governance](SCHEMA.md#force-model-governance)
+
 Principle
 [Closed Vocabulary](PRINCIPLES.md#arch-closed-vocabulary)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
+
+Before
 
 ```text
 An unclassifiable file is answered by adding its word to the vocabulary, or by an ignore entry, and the check goes green either way; where a word is refused, the refusal names only what is wrong.
 ```
 
+After
+
 ```text
-proposed word -> rejection-table index resolves the covering concern: refuse naming it, and rename the file -> uncovered: is-a a role: concerns; has-a a thing: subjects -> otherwise refuse; admission is a maintainer-approved registry edit
+proposed word -> rejection-table index resolves the covering concern: refuse naming it, and rename the file -> uncovered: is-a a role: concerns; has-a a thing: subjects -> otherwise refuse; admission is a developer-approved registry edit
 ```
 
 ### Discovery Verification
@@ -18489,12 +23490,17 @@ Details
 
 Intent
 For every shape-discovered surface touched by the reshape, compare the member set it collects against what it collected before, and issue the verdict from that comparison, so a collection that silently emptied is caught rather than read as a clean pass.
+
 Invariant
 A green gate is not evidence for a pattern-resolved surface; the verdict comes from the collected member set, and an unexplained drop is a failure.
+
+Flow
 
 ```text
 ShapeDiscoveredSurfaceSet → CollectedSetBefore → CollectedSetAfter → DiscoveryVerdict
 ```
+
+Productions
 
 ```bnf
 DiscoveryVerification ::= <ShapeDiscoveredSurfaceSet> "->" <CollectedSetDelta> "->" <DiscoveryVerdict>
@@ -18504,20 +23510,29 @@ DiscoveryVerdict ::= "preserved" | "intended_change" | "silently_emptied"
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [observability_traceability](SCHEMA.md#force-observability-traceability)
+
 Principle
 [Glob-Resolvable Tree](PRINCIPLES.md#arch-glob-resolvable-tree)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 The gate is green after the rename, so the reshape is called done; the aggregator that collected by suffix now collects nothing and there is nothing left to check.
 ```
+
+After
 
 ```text
 per aggregator -> collected member set before vs after -> equal or intentionally changed: pass; silently emptied or shrunk: fail, and a green gate is not evidence
@@ -18534,12 +23549,17 @@ Details
 
 Intent
 Record the registry version, the conversion state of each container, and every admitted and refused word with its reasoning, so the taxonomy's history is durable evidence rather than a fact re-derived from the tree on each pass.
+
 Invariant
 A refusal is recorded with its reason, so the answer to why a word is absent is retrievable rather than lost.
+
+Flow
 
 ```text
 RegistryVersion → ContainerConversionState → AdmissionRecordSet → TaxonomyLedger
 ```
+
+Productions
 
 ```bnf
 TaxonomyLedger ::= <RegistryVersion> "," <ContainerConversionState> "," <AdmissionRecordSet>
@@ -18548,20 +23568,29 @@ AdmissionRecord ::= <ProposedWord> "," <AdmissionVerdict> "," <Reasoning>
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [observability_traceability](SCHEMA.md#force-observability-traceability), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Principle
 [Derived Naming Registry](PRINCIPLES.md#arch-derived-naming-registry)
+
 Grounds
 none
+
+Before
 
 ```text
 Which containers are converted and which words were refused is remembered rather than recorded, so the same rejected word is proposed again and the vocabulary drifts from the document.
 ```
+
+After
 
 ```text
 registry version + per-container conversion state + admitted and refused words -> a durable ledger the next reshape and the next proposal both read
@@ -18578,12 +23607,17 @@ Details
 
 Intent
 Mark the taxonomy complete only when every governed file resolves against the grammar at both levels, no split candidate is outstanding, and every shape-discovered surface has a preserved verdict, leaving it incomplete while any residual remains.
+
 Invariant
 Completion is the absence of residual findings, never a converted-container count, and never a finding removed by an ignore entry.
+
+Flow
 
 ```text
 TaxonomyLedger → ResidualFindingSet → CompletionVerdict
 ```
+
+Productions
 
 ```bnf
 TaxonomyCompletion ::= <TaxonomyLedger> "->" <ResidualFindingSet> "->" <CompletionVerdict>
@@ -18593,20 +23627,29 @@ CompletionVerdict ::= "taxonomy_complete" | "taxonomy_incomplete"
 
 Composes
 none
+
 Composed by
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Named in the derivation of
 [Taxonomy Kernel](ALGORITHMS.md#algo-taxonomy-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Principle
 [Concern-Folder Correspondence](PRINCIPLES.md#arch-concern-folder-correspondence)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 Conversion is declared done on the container count, while unclassified files sit under an ignore entry and one aggregator still collects nothing.
 ```
+
+After
 
 ```text
 every governed file placed and named to the grammar AND every split candidate resolved AND every surface verified preserved -> complete; any residual -> incomplete
@@ -18621,12 +23664,17 @@ Details
 
 Intent
 Resolve jurisdiction from the registry, order the containers by reshape risk, walk each path into its ordered roles, classify each file to its narrowest concern, project the name and the folder chain together, reshape one container at a time, hold every proposed word at the admission gate, verify that pattern-resolved surfaces still collect what they collected, ledger the state, and terminate only when no residual finding remains.
+
 Invariant
 Placement and naming are one derivation from a declared vocabulary to a verified tree, in which every folder and every filename slot resolves to a declared word and one unanchored pattern resolves a concern at either level.
+
+Flow
 
 ```text
 Jurisdiction → RiskPriority → RoleWalk → Classification → NameProjection → Reshape → AdmissionGate → DiscoveryVerification → Ledger → Completion
 ```
+
+Productions
 
 ```bnf
 TaxonomyKernel ::= <TaxonomyJurisdiction> "->" <ReshapeRiskPriority> "->" <PathRoleWalk> "->" <ConcernClassification> "->" <NameProjection> "->" <ContainerReshape> "->" <VocabularyAdmissionGate> "->" <DiscoveryVerification> "->" <TaxonomyLedger> "->" <TaxonomyCompletion>
@@ -18634,10 +23682,13 @@ TaxonomyKernel ::= <TaxonomyJurisdiction> "->" <ReshapeRiskPriority> "->" <PathR
 
 Composes
 [Taxonomy Jurisdiction](ALGORITHMS.md#algo-taxonomy-jurisdiction), [Reshape Risk Priority](ALGORITHMS.md#algo-reshape-risk-priority), [Path Role Walk](ALGORITHMS.md#algo-path-role-walk), [Concern Classification](ALGORITHMS.md#algo-concern-classification), [Name Projection](ALGORITHMS.md#algo-name-projection), [Container Reshape](ALGORITHMS.md#algo-container-reshape), [Vocabulary Admission Gate](ALGORITHMS.md#algo-vocabulary-admission-gate), [Discovery Verification](ALGORITHMS.md#algo-discovery-verification), [Taxonomy Ledger](ALGORITHMS.md#algo-taxonomy-ledger), [Taxonomy Completion](ALGORITHMS.md#algo-taxonomy-completion)
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [modularity](SCHEMA.md#force-modularity), [architecture_evolution](SCHEMA.md#force-architecture-evolution), [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Principle
 [Closed Vocabulary](PRINCIPLES.md#arch-closed-vocabulary)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -18645,28 +23696,41 @@ Derivation map
 
 orient
 [Taxonomy Jurisdiction](ALGORITHMS.md#algo-taxonomy-jurisdiction)
+
 intent
 [Reshape Risk Priority](ALGORITHMS.md#algo-reshape-risk-priority)
+
 see
 [Path Role Walk](ALGORITHMS.md#algo-path-role-walk)
+
 derive
 [Concern Classification](ALGORITHMS.md#algo-concern-classification)
+
 project
 [Name Projection](ALGORITHMS.md#algo-name-projection)
+
 act
 [Container Reshape](ALGORITHMS.md#algo-container-reshape)
+
 constrain
 [Vocabulary Admission Gate](ALGORITHMS.md#algo-vocabulary-admission-gate)
+
 verify
 [Discovery Verification](ALGORITHMS.md#algo-discovery-verification)
+
 commit
 [Taxonomy Ledger](ALGORITHMS.md#algo-taxonomy-ledger)
+
 terminate
 [Taxonomy Completion](ALGORITHMS.md#algo-taxonomy-completion)
+
+Before
 
 ```text
 Naming and placement are conventions carried in reviewers' heads, so a path has more than one right answer, an undeclared word enters whenever a file resists classification, and no pattern resolves a concern tree-wide.
 ```
+
+After
 
 ```text
 jurisdiction -> risk priority -> role walk -> classification -> name projection -> container reshape -> admission gate -> discovery verification -> ledger -> completion
@@ -18680,12 +23744,17 @@ Details
 
 Intent
 <Resolve jurisdiction from the declared roots> -> <Order containers by reshape risk> -> <Walk each path into ordered roles> -> <Classify each file to its narrowest concern> -> <Project the name and its folder chain together> -> <Reshape one container at a time> -> <Hold every proposed word at the admission gate> -> <Verify pattern-resolved discovery survived> -> <Ledger the state> -> <Terminate on no residual finding>
+
 Invariant
 Every governed folder and every filename slot resolves to a word from a closed declared vocabulary, the concern tag terminates the filename and names its parent folder, and no path exceeds the declared depth cap.
+
+Flow
 
 ```text
 Jurisdiction → RoleWalk → Classification → NameProjection → Reshape → AdmissionGate → Verification → Ledger
 ```
+
+Productions
 
 ```bnf
 TaxonomyConcern ::= <GovernedRootSet> "->" <RoleEdgeList> "->" <AssignedConcern> "->" <TargetName> "," <TargetFolderChain> "->" <DiscoveryVerdict> "->" <TaxonomyLedger>
@@ -18693,14 +23762,16 @@ TaxonomyConcern ::= <GovernedRootSet> "->" <RoleEdgeList> "->" <AssignedConcern>
 
 Composes
 none
+
 Forces
 [semantic_consistency](SCHEMA.md#force-semantic-consistency), [modularity](SCHEMA.md#force-modularity)
+
 Grounds
 none
 
 ## test-coverage
 
-Every algorithm contract in this domain: its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and, where the record carries one, an exemplar. The diagram shows what composes what inside the domain.
+Every algorithm contract in this domain is listed with its position on the derivation loop, its intent and invariant, the flow it walks, its productions as a grammar, what it composes and is composed by, which forces and principles it answers to, what grounds it and what it grounds, and an exemplar where the record carries one. The diagram shows what composes what inside the domain.
 
 Relations diagram
 
@@ -18741,12 +23812,17 @@ Details
 
 Intent
 Establish the unit under test, load the test-surface catalog as the space of what can be wrong, and enumerate every surface the unit can carry, so coverage is measured against the full derivable space rather than an ad-hoc list.
+
 Invariant
 Coverage must be measured against the derivable surface space, not a remembered subset.
+
+Flow
 
 ```text
 UnitUnderTest → SurfaceCatalog → CandidateSurfaceSet → CoverageWorkspace
 ```
+
+Productions
 
 ```bnf
 CoverageWorkspace ::= <UnitUnderTest> "->" <SurfaceCatalog> "->" <CandidateSurfaceSet>
@@ -18754,21 +23830,29 @@ CoverageWorkspace ::= <UnitUnderTest> "->" <SurfaceCatalog> "->" <CandidateSurfa
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 Testing starts from whatever surfaces come to mind, with no record of the full space a system can fail in.
 ```
 
+After
+
 ```text
-unit under test -> load the test-surface catalog{dimension x lens -> invariant, technique} -> a coverage workspace enumerating every surface the unit CAN carry
+unit under test -> load the test-surface catalog{dimension x lens -> invariant, technique} -> a coverage workspace enumerating every surface the unit can carry
 ```
 
 ### Surface Grid Walk
@@ -18782,12 +23866,17 @@ Details
 
 Intent
 Walk the dimension-by-lens grid across the catalog, mark every cell that carries a surface, and surface the empty cells as candidate gaps using the anomaly lens, so a missing aspect is detected structurally rather than by recollection.
+
 Invariant
 An empty (dimension x lens) cell that can fail is an untested aspect until a surface is derived for it.
+
+Flow
 
 ```text
 SurfaceCatalog → GridWalk → PresentCellSet → CandidateGapSet
 ```
+
+Productions
 
 ```bnf
 SurfaceGridWalk ::= <CandidateSurfaceSet> "->" <DimensionLensGrid> "->" <PresentCellSet> "," <CandidateGapSet>
@@ -18796,18 +23885,26 @@ DimensionLensGrid ::= <OntologyDimension> "x" <AnalysisLens>
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 [anomaly](REASONING.md#reason-lens-anomaly), [semantic-correctness](REASONING.md#reason-test-surface-semantic-correctness)
+
+Before
 
 ```text
 Coverage is asserted from the surfaces already tested, so the empty cells of the dimension x lens grid stay invisible.
 ```
+
+After
 
 ```text
 catalog -> walk (dimension x lens) grid -> present cells (a surface exists) vs empty cells (no surface) -> the candidate-gap set the anomaly lens surfaces
@@ -18823,13 +23920,18 @@ catalog -> walk (dimension x lens) grid -> present cells (a surface exists) vs e
 Details
 
 Intent
-Reduce the candidate-gap set to the cells this unit can actually fail in, yielding the required-but-uncovered surfaces that still owe a test, so effort is spent on real gaps rather than the full cartesian complement.
+Reduce the candidate-gap set to the cells this unit can fail in, yielding the required-but-uncovered surfaces that still owe a test, so effort is spent on gaps that can fail rather than the full cartesian complement.
+
 Invariant
 A gap counts only where the unit can fail; the coverage obligation is the required set, not the whole grid.
+
+Flow
 
 ```text
 CandidateGapSet → FailabilityFilter → RequiredUncoveredSet
 ```
+
+Productions
 
 ```bnf
 UncoveredGapDerivation ::= <CandidateGapSet> "->" <FailabilityFilter> "->" <RequiredUncoveredSet>
@@ -18837,21 +23939,29 @@ UncoveredGapDerivation ::= <CandidateGapSet> "->" <FailabilityFilter> "->" <Requ
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
 
-```text
-The gap set is treated as final, so cells that cannot fail for this unit are chased and real gaps are diluted.
-```
+Before
 
 ```text
-candidate gaps -> keep only cells this unit CAN fail in -> required-but-uncovered set = the surfaces still owed a test
+The gap set is treated as final, so cells that cannot fail for this unit are chased and the gaps that can fail are diluted.
+```
+
+After
+
+```text
+candidate gaps -> keep only cells this unit can fail in -> required-but-uncovered set = the surfaces still owed a test
 ```
 
 ### Coverage Risk Prioritisation
@@ -18864,13 +23974,18 @@ candidate gaps -> keep only cells this unit CAN fail in -> required-but-uncovere
 Details
 
 Intent
-Score each required-uncovered surface by failure impact and reachability, rank the surfaces, and address the highest-risk gaps first, so limited testing effort maximizes reduced risk.
+Score each required-uncovered surface by failure impact and reachability, rank the surfaces, and address the highest-risk gaps first, so limited testing effort removes the most risk.
+
 Invariant
 The highest-risk uncovered surface is tested first.
+
+Flow
 
 ```text
 RequiredUncoveredSet → RiskScore → PrioritisedSurfaceQueue
 ```
+
+Productions
 
 ```bnf
 CoverageRiskPrioritisation ::= <RequiredUncoveredSet> "->" <RiskScoreSet> "->" <PrioritisedSurfaceQueue>
@@ -18879,18 +23994,26 @@ RiskScore ::= <FailureImpact> "*" <Reachability>
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [tel-priority](REASONING.md#reason-node-tel-priority)
 
+Before
+
 ```text
-Every uncovered surface is treated as equally urgent, so a rarely-hit cosmetic gap competes with an unguarded security boundary.
+Every uncovered surface is treated as equally urgent, so a rarely hit cosmetic gap competes with an unguarded security boundary.
 ```
+
+After
 
 ```text
 required-uncovered surfaces -> failure-impact x reachability -> priority -> the highest-risk surfaces first
@@ -18907,12 +24030,17 @@ Details
 
 Intent
 For each prioritised surface, state the invariant that must hold and select the technique whose reasoning mode matches how that surface is observed, so the test asserts the right property by the right method.
+
 Invariant
 The technique is chosen by matching its reasoning mode to the surface, and the assertion is the surface's invariant.
+
+Flow
 
 ```text
 Surface → InvariantStatement → ModeMatchedTechnique → SurfacePlan
 ```
+
+Productions
 
 ```bnf
 TechniqueInvariantSelection ::= <Surface> "->" <Invariant> "," <ModeMatchedTechnique> "->" <SurfacePlan>
@@ -18920,18 +24048,26 @@ TechniqueInvariantSelection ::= <Surface> "->" <Invariant> "," <ModeMatchedTechn
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [contract_compatibility](SCHEMA.md#force-contract-compatibility)
+
 Grounds
 none
+
+Before
 
 ```text
 A test is written before deciding what must hold or how to obtain evidence, so it asserts an accidental condition with the wrong technique.
 ```
+
+After
 
 ```text
 surface -> state its invariant (the assertion) -> pick the technique whose reasoning mode matches how the surface is observed -> a matched (invariant, technique) plan
@@ -18948,12 +24084,17 @@ Details
 
 Intent
 Realize each surface plan as an executable test: encode the predicate as an assertion and wire the evidence source the technique requires, producing a runnable test that covers the surface.
+
 Invariant
 A covered surface has an executable test whose predicate is checkable and whose evidence source is wired.
+
+Flow
 
 ```text
 SurfacePlan → PredicateAssertion → EvidenceWiring → RunnableTest
 ```
+
+Productions
 
 ```bnf
 TestAuthoring ::= <SurfacePlan> "->" <PredicateAssertion> "," <EvidenceWiring> "->" <RunnableTest>
@@ -18961,18 +24102,26 @@ TestAuthoring ::= <SurfacePlan> "->" <PredicateAssertion> "," <EvidenceWiring> "
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 none
+
+Before
 
 ```text
 The plan stays a note; the predicate is never realized as an executable check that gathers evidence.
 ```
+
+After
 
 ```text
 surface plan -> realize the predicate as an executable assertion -> wire the evidence source the technique requires -> a runnable test for the surface
@@ -18989,12 +24138,17 @@ Details
 
 Intent
 Run each test, gather its evidence, and issue the verdict: pass or fail when the evidence set is non-empty, unknown when it is empty, so an untested or unrun surface reads as unknown rather than as a silent pass.
+
 Invariant
 A verdict is pass or fail only against a non-empty evidence set; no evidence yields unknown, never pass.
+
+Flow
 
 ```text
 RunnableTest → EvidenceSet → Verdict
 ```
+
+Productions
 
 ```bnf
 EvidenceVerdict ::= <RunnableTest> "->" <EvidenceSet> "->" <Verdict>
@@ -19003,18 +24157,26 @@ Verdict ::= "pass" | "fail" | "unknown"
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ver-evidence](REASONING.md#reason-node-ver-evidence)
+
+Before
 
 ```text
 A surface with no run is silently treated as passing, so absence of evidence reads as evidence of correctness.
 ```
+
+After
 
 ```text
 run the test -> gather evidence -> non-empty evidence set: pass or fail; empty evidence set: unknown (the coverage-gap state), never pass
@@ -19031,12 +24193,17 @@ Details
 
 Intent
 Record each surface's verdict in a durable coverage ledger together with the residual uncovered and unknown set, so coverage state is reusable evidence rather than a fact re-derived on every run.
+
 Invariant
 Coverage state is durable ledger evidence, not a per-run recomputation.
+
+Flow
 
 ```text
 VerdictSet → CoverageLedger → ResidualGapSet
 ```
+
+Productions
 
 ```bnf
 CoverageLedger ::= <VerdictSet> "->" <SurfaceLedger> "->" <ResidualGapSet>
@@ -19044,18 +24211,26 @@ CoverageLedger ::= <VerdictSet> "->" <SurfaceLedger> "->" <ResidualGapSet>
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 none
+
+Before
 
 ```text
 Each run forgets the last, so which surfaces are covered, uncovered, or unknown must be re-derived every time.
 ```
+
+After
 
 ```text
 verdicts -> a durable coverage ledger{surface -> verdict} + the residual uncovered/unknown set -> reusable coverage state
@@ -19072,12 +24247,17 @@ Details
 
 Intent
 Mark coverage complete only when every required surface carries a surface, a technique, and an invariant, and its verdict is non-unknown; any required surface still unknown leaves coverage incomplete.
+
 Invariant
 Completion is the absence of required-unknown surfaces, not an aggregate percentage.
+
+Flow
 
 ```text
 CoverageLedger → RequiredSurfaceCheck → CompletionVerdict
 ```
+
+Productions
 
 ```bnf
 CoverageCompletion ::= <CoverageLedger> "->" <RequiredSurfaceCheck> "->" <CompletionVerdict>
@@ -19086,18 +24266,26 @@ CompletionVerdict ::= "coverage_complete" | "coverage_incomplete"
 
 Composes
 none
+
 Composed by
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Named in the derivation of
 [Test Coverage Kernel](ALGORITHMS.md#algo-test-coverage-kernel)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification)
+
 Grounds
 [ter-stop](REASONING.md#reason-node-ter-stop)
+
+Before
 
 ```text
 Coverage is declared done while required surfaces remain unknown, so the untested cells hide behind an aggregate percentage.
 ```
+
+After
 
 ```text
 ledger -> every required surface carries a surface + technique + invariant AND a non-unknown verdict -> complete; any required-unknown remains -> incomplete
@@ -19112,12 +24300,17 @@ Details
 
 Intent
 Load the surface catalog for a unit, walk the dimension-by-lens grid, derive the required-uncovered surfaces, prioritise them by risk, select a mode-matched technique and invariant per surface, author the test, issue an evidence verdict, ledger the state, and terminate only when no required surface remains unknown.
+
 Invariant
 Test coverage is a derivation from the surface space to a durable verdict ledger, complete only when no required surface is unknown.
+
+Flow
 
 ```text
 Workspace → GridWalk → GapDerivation → RiskPriority → TechniqueInvariant → TestAuthoring → EvidenceVerdict → Ledger → Completion
 ```
+
+Productions
 
 ```bnf
 TestCoverageKernel ::= <CoverageWorkspace> "->" <SurfaceGridWalk> "->" <UncoveredGapDerivation> "->" <CoverageRiskPrioritisation> "->" <TechniqueInvariantSelection> "->" <TestAuthoring> "->" <EvidenceVerdict> "->" <CoverageLedger> "->" <CoverageCompletion>
@@ -19125,8 +24318,10 @@ TestCoverageKernel ::= <CoverageWorkspace> "->" <SurfaceGridWalk> "->" <Uncovere
 
 Composes
 [Coverage Workspace](ALGORITHMS.md#algo-coverage-workspace), [Surface Grid Walk](ALGORITHMS.md#algo-surface-grid-walk), [Uncovered Gap Derivation](ALGORITHMS.md#algo-uncovered-gap-derivation), [Coverage Risk Prioritisation](ALGORITHMS.md#algo-coverage-risk-prioritisation), [Technique and Invariant Selection](ALGORITHMS.md#algo-technique-invariant-selection), [Test Authoring](ALGORITHMS.md#algo-test-authoring), [Evidence Verdict](ALGORITHMS.md#algo-evidence-verdict), [Coverage Ledger](ALGORITHMS.md#algo-coverage-ledger), [Coverage Completion](ALGORITHMS.md#algo-coverage-completion)
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+
 Grounds
 [derivation-loop](REASONING.md#reason-loop-derivation-loop)
 
@@ -19134,26 +24329,38 @@ Derivation map
 
 orient
 [Coverage Workspace](ALGORITHMS.md#algo-coverage-workspace)
+
 see
 [Surface Grid Walk](ALGORITHMS.md#algo-surface-grid-walk)
+
 derive
 [Uncovered Gap Derivation](ALGORITHMS.md#algo-uncovered-gap-derivation)
+
 intent
 [Coverage Risk Prioritisation](ALGORITHMS.md#algo-coverage-risk-prioritisation)
+
 project
 [Technique and Invariant Selection](ALGORITHMS.md#algo-technique-invariant-selection)
+
 act
 [Test Authoring](ALGORITHMS.md#algo-test-authoring)
+
 verify
 [Evidence Verdict](ALGORITHMS.md#algo-evidence-verdict)
+
 commit
 [Coverage Ledger](ALGORITHMS.md#algo-coverage-ledger)
+
 terminate
 [Coverage Completion](ALGORITHMS.md#algo-coverage-completion)
+
+Before
 
 ```text
 Coverage is pursued by intuition and reported as a percentage, so the space a system can fail in is never walked and unknown surfaces pass silently.
 ```
+
+After
 
 ```text
 workspace -> grid walk -> gap derivation -> risk priority -> technique+invariant -> authored test -> evidence verdict -> ledger -> completion
@@ -19167,12 +24374,17 @@ Details
 
 Intent
 <Load the surface catalog for a unit> -> <Walk the dimension x lens grid> -> <Derive the required-uncovered surfaces> -> <Prioritise by risk> -> <Select a mode-matched technique and its invariant> -> <Author the test> -> <Issue an evidence verdict> -> <Ledger the coverage state> -> <Terminate when no required surface is unknown>
+
 Invariant
 Coverage is complete when every (dimension x lens) surface the unit can fail in carries a surface, a technique, and an invariant with a non-unknown verdict.
+
+Flow
 
 ```text
 SurfaceSpace → GridWalk → RequiredGaps → Priority → TechniqueInvariant → AuthoredTest → Verdict → Ledger
 ```
+
+Productions
 
 ```bnf
 TestCoverageConcern ::= <SurfaceCatalog> "->" <DimensionLensGrid> "->" <RequiredUncoveredSet> "->" <PrioritisedSurfaceQueue> "->" <SurfacePlanSet> "->" <RunnableTestSet> "->" <VerdictSet> "->" <CoverageLedger>
@@ -19180,14 +24392,12 @@ TestCoverageConcern ::= <SurfaceCatalog> "->" <DimensionLensGrid> "->" <Required
 
 Composes
 none
+
 Forces
 [correctness_verification](SCHEMA.md#force-correctness-verification), [semantic_consistency](SCHEMA.md#force-semantic-consistency)
+
 Grounds
 none
-
-Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-© 2025 [Jay Baleine](https://linkedin.com/in/jay-baleine)The ontology is authored and maintained by Bane's Lab as one canon and published here in full.
 
 ---
 

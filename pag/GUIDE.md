@@ -1,36 +1,34 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Guide — PAG — Bane's Lab
 
-> A document is written after five questions are answered, in the order five questions draws, and the answers become its parts: the objective, each node's purpose…
+> This section covers how a first document is written. The work starts with five questions, answered in the order shown in five questions, and the answers become…
 
 Canonical: https://banes-lab.com/pag/guide
 
 # Pattern Abstract Grammar
 
-Structured instructions for AI systems.
+Structured instructions for LLMs
 
 # Guide
 
 ## Writing a first document
 
-A document is written after five questions are answered, in the order [A1·d five questions](#getting-started-panel-d) draws, and the answers become its parts: the objective, each node's purpose and yield, each node's contract, each gate's result line and each gate's checks with their evidence. Those parts are [A1·a node shape](#getting-started-panel-a); inside a node each line is [A1·b directive shape](#getting-started-panel-b), whose slots [A1·e directive slots](#getting-started-panel-e) names, and [A1·c catalogue and flow](#getting-started-panel-c) is what a node declares before it reads. A document written before those answers exist is prose in uppercase.
+This section covers how a first document is written. The work starts with five questions, answered in the order shown in [A1·d five questions](#getting-started-panel-d), and the answers become the document's parts: the objective, each node's purpose and yield, each node's contract, each gate's result line, and each gate's checks with their evidence. Those parts make up [A1·a node shape](#getting-started-panel-a). Inside a node, each line follows [A1·b directive shape](#getting-started-panel-b), whose slots are named in [A1·e directive slots](#getting-started-panel-e), and [A1·c catalogue and flow](#getting-started-panel-c) shows what a node declares before it reads. A document written before those answers exist is prose in uppercase.
 
 ### Five questions, then the slots
 
-A node has a shape and a directive has a shape, and the shapes carry the meaning. A line that leaves an operand out reads complete to its author.
+A line that leaves an operand out reads complete to its author. A node says analyze the data and never says into what, so the result exists in the model's reply and nowhere the next node can read it. The grammar gives every part of a node and every part of a directive a slot, and a slot left empty is a decision the model makes in the author's place.
 
-A node says analyze the data and never says into what, so the result exists in the model's reply and nowhere the next node can read it. The grammar gives every part of a node and every part of a directive a slot, and a slot left empty is a decision the model makes in the author's place.
+For this reason a node and a directive each have a fixed shape, and the shape carries the meaning. Meaning is resolved by position rather than by wording: every operand gets a slot, rather than a fuller sentence being written around a missing one. In practice, the five questions are answered before the first line is written. Each node has its header, its purpose, its contract, its output and one gate carrying evidence, whose result names the next node and a repair owner. Inside a node, each directive is written as an operation, a target, a relation and a destination, with the destination explicit wherever a result has to survive the line. A catalogue is declared before a node reads it, and a transform is named as a function before a node calls it.
 
-Resolve meaning by position rather than by wording: a slot for every operand, over a fuller sentence around a missing one. Answer the five questions before the first line. Write each node with its header, its purpose, its contract, its output and one evidence-bearing gate whose result names the next node and a repair owner. Inside a node, write each directive as an operation, a target, a relation and a destination, with the destination explicit wherever a result must survive the line. Declare a catalogue before a node reads it and name a transform as a function before a node calls it.
+To check this, read each node and name what it reads, what it yields and who repairs its failure, then read each directive and name its operation, target, relation, source and destination. A slot with no name is where the model will improvise, and the next node will read nothing. A one-line task with one input and one output needs one directive and no node. The structure grows with the work, and a document that carries a gate for a single read is ceremony.
 
-Read each node and name what it reads, what it yields and who repairs its failure; read each directive and name its operation, target, relation, source and destination. A slot with no name is where the model will improvise, and the next node will read nothing.
+Meaning is carried by [positional slot resolution](../ontology/PRINCIPLES.md#arch-positional-slot-resolution): a word is read by the slot it lands in. The yield slot in a node's header types the decision the gate owes. The contract's input slot carries the discipline, because a node reads only the previous node's output, and that is what makes the chain checkable. A line that fills every slot leaves the model one completion and the reviewer one reading.
 
-A one-line task with one input and one output needs one directive and no node. The structure grows with the work, and a document that carries a gate for a single read is ceremony.
+Declaration comes before use because a node reads data by name, so a transform is a walk over a catalogue rather than prose, and a function reads the same in every node that calls it. Control flow is written out because the model should not have to infer structure from the order in which sentences appear, and iteration always takes the two-word form FOR EACH. Where the recovery from a failure is the document's own repair edge, the gate's result line routes the failure there, rather than the branch improvising a recovery.
 
-Meaning is carried by [positional slot resolution](../ontology/PRINCIPLES.md#arch-positional-slot-resolution): a word is read by the slot it lands in. The header's yield slot types the decision the gate owes. The contract's input slot is the discipline: a node reads only the prior node's output, which is what makes the chain checkable. A line that fills every slot leaves the model one completion and the reviewer one reading.
-
-Declaration precedes use because a node reads data by name, so a transform is a walk over a catalogue rather than prose, and a function reads identically in every node that calls it. Control flow is explicit because the model must not infer structure from the order sentences appear in. Iteration always takes the two-word form. Where a failure's recovery is the document's own repair edge, the gate's result line routes it there rather than the branch improvising one.
+A1·a node shape
 
 ```pag
 # a node is the unit · every field is load-bearing, and the gate is what makes it a unit
@@ -59,6 +57,8 @@ refuse: <the condition that stops it> before <the irreversible write>   # on a n
 result: pass -> NODE <n+1> | <named failure> -> REPAIR (owner: <the earliest node that can supply the evidence>) | unknown -> BLOCKED
 ```
 
+A1·b directive shape
+
 ```pag
 # inside a node, a directive is an operation, a target, a relation and a destination · every slot filled
 OPERATION <target> PREPOSITION <source> INTO <destination>
@@ -70,6 +70,8 @@ FILTER <values> TO <kept> WHERE <condition>
 COMPOSE_ARTIFACT <report> FROM <kept> USING <template>
 PERSIST_ARTIFACT <report> TO <destination>
 ```
+
+A1·c catalogue and flow
 
 ```pag
 # declaration precedes use · a catalogue is data a node reads, a function is a transform it names
@@ -123,23 +125,21 @@ op --> target --> prep --> source --> into
 
 ## Document structure
 
-A document announces what kind of instruction it is before it instructs, which is the orient stage of [the loop](../START.md#the-loop) written down: what exists is declared before anything is done with it. A document is a [self-describing structure](../ontology/PRINCIPLES.md#arch-self-describing-structures), laid out as [B1·a skeleton](#document-structure-panel-a) and ordered as [B1·c parts in order](#document-structure-panel-c) draws, and one that opens with a directive has left its own contract implicit. The type it declares is one of [B1·b the types](#document-structure-panel-b), and [B1·d what a type fixes](#document-structure-panel-d) is what that one line settles before any node is walked.
+A document says what kind of instruction it is before it gives any instruction, which is the orient stage of [the loop](../START.md#the-loop) written down: what exists is declared before anything is done with it. That makes a document a [self-describing structure](../ontology/PRINCIPLES.md#arch-self-describing-structures), laid out as shown in [B1·a skeleton](#document-structure-panel-a) and ordered as shown in [B1·c parts in order](#document-structure-panel-c). A document that opens with a directive has left its own contract unstated. The type it declares is one of those listed in [B1·b the types](#document-structure-panel-b), and [B1·d what a type fixes](#document-structure-panel-d) shows what that one line settles before any node is walked.
 
 ### Declare, then instruct
 
-A document declares what it is before it says what to do. A document with no declared type has a contract nobody stated, so every reader supplies their own.
+A document with no declared type has an unstated contract, so each reader, the developer or the model, supplies its own. A reader cannot tell whether a document is a standing policy or a one-time task, walks a policy once and then drops it, and the rules it carried end up applying to nothing. A reader classifies a document from its first lines and reads everything after against that guess.
 
-A reader cannot tell whether a document is a standing policy or a one-time task, walks a policy once and drops it, and the rules it carried apply to nothing. A reader classifies a document from its first lines and reads everything after against that guess.
+For this reason the type comes first, and everything after it is read against that type. The contract is fixed on the first line with a type, rather than left for the reader to infer from the directives below. In practice, a document runs in this order: the header, the declaration, the meta block and the frame the nodes cite, and it closes with the repair edge and the invariants.
 
-Fix the contract on the first line with a type, rather than leaving the reader to infer it from the directives below. Declare before instructing: the header, the declaration, the meta block, then the frame the nodes cite, and close with the repair edge and the invariants.
+To check this, cover everything below the declaration and ask what the document is for, what will walk it and how it will be used. A declaration that cannot answer all three is missing a type or an intent. A fragment reused inside other documents carries no header of its own, because the enclosing document already declared the contract. A fragment that declares a second type is two documents.
 
-Cover everything below the declaration and ask what the document is for, what will walk it and how it will be used. A declaration that cannot answer all three is missing a type or an intent.
+The meta block settles four things before any node runs. The priority between sources decides a disagreement before it arises. The trust anchor ensures that a claim from an untrusted source is never promoted to evidence just by being read. The jurisdiction states what the document may touch and what it declares outside itself, rather than leaving that assumed; it is the same boundary [the honest gaps](../SHIP.md#the-honest-gaps) draws for a system. The recursion limit makes a repair loop terminate. Choosing the type chooses the contract, the reasoning model and the axis at once, and the verb makes that choice legible on the first line.
 
-A fragment reused inside other documents carries no header of its own, because the enclosing document already declared the contract. A fragment that declares a second type is two documents.
+The substrate and the spine are declared once and cited by every node. The substrate orders the nodes, as described in [node design](GUIDE.md#node-design), and each node names its stage on it. The spine declares every transition: which node leads to which, where a failed [verification](../ontology/PRINCIPLES.md#arch-verification) sends the work back, and where the loop terminates. A node names its place on both and inherits the rest, which is why a document reads as one structure rather than ten separate documents. The document closes with its invariant records and a report, which states the verdict in a form a later checker can challenge, as described in [a report, not a checkbox](../VERIFY.md#a-report-not-a-checkbox).
 
-The meta block settles four things before any node runs. The priority between sources, so a disagreement is decided before it arises, and the trust anchor, so a claim from an untrusted source is never promoted to evidence by being read. The jurisdiction, so what the document may touch and what it declares outside itself are stated rather than assumed, which is the boundary [the honest gaps](../SHIP.md#the-honest-gaps) draws for a system, and a recursion limit, so a repair loop terminates. Choosing the type is choosing the contract, the reasoning model and the axis at once, and the verb makes the choice legible on the first line.
-
-The substrate and the spine are declared once and cited by every node. The substrate orders the nodes, as [node design](GUIDE.md#node-design) derives, and each node names its stage on it. The spine declares every transition: which node sequences to which, where a failed [verification](../ontology/PRINCIPLES.md#arch-verification) refutes back, and where the loop terminates. A node names its place on both and inherits the rest, which is why a document reads as one structure rather than ten documents. The document closes with its invariant records and a report, the verdict written as a representation a later checker can challenge, which is what a report, not a checkbox asks of a run.
+B1·a skeleton
 
 ```pag
 ---
@@ -184,6 +184,8 @@ verdict: pass | fail | unknown
 domain: declared <N> measured <n>
 completion: saturated <bool> complete <bool> verified <bool>
 ```
+
+B1·b the types
 
 ```pag
 # a type binds a document to a reasoning model and to the axis of the loop it sits on
@@ -245,23 +247,21 @@ type --> axis --> reader
 
 ## Semantic operations
 
-Every external effect in a document is a named semantic operation with explicit parameters and an explicit result binding, the parts [C1·e invocation parts](#tool-invocation-panel-e) names and [C1·c invocation forms](#tool-invocation-panel-c) writes four ways. The operation says what happens, and [C1·a the operations](#tool-invocation-panel-a) groups them by the kind of effect. An adapter, one per harness and outside the document, decides how, the split [C1·b document and adapter](#tool-invocation-panel-b) shows and [C1·d one adapter per harness](#tool-invocation-panel-d) draws. An invocation is the act stage of [the loop](../START.md#the-loop) and yields a procedure.
+Every external effect in a document is a named semantic operation, with explicit parameters and an explicit binding for its result; [C1·e invocation parts](#tool-invocation-panel-e) names those parts, and [C1·c invocation forms](#tool-invocation-panel-c) writes them four ways. The operation says what happens, and [C1·a the operations](#tool-invocation-panel-a) groups the operations by the kind of effect. An adapter outside the document, one per harness, decides how the effect is carried out, which is the split shown in [C1·b document and adapter](#tool-invocation-panel-b) and [C1·d one adapter per harness](#tool-invocation-panel-d). An invocation is the act stage of [the loop](../START.md#the-loop), and it yields a procedure.
 
 ### Operations, not tools
 
-A document names semantic operations, and one adapter resolves them to tools by [late binding](../ontology/PRINCIPLES.md#arch-late-binding). An effect described in prose is not addressable by any adapter, and an effect named by one harness's tool is [hardcoded configuration](../ontology/PRINCIPLES.md#arch-hardcoded-configuration) addressable by only that harness.
+An effect described in prose is not addressable by any adapter, and an effect named by one harness's tool is [hardcoded configuration](../ontology/PRINCIPLES.md#arch-hardcoded-configuration) that only that harness can address. A library of documents names one harness's tools throughout, the harness changes its tool set, and every document breaks at once, which is [vendor lock-in leakage](../ontology/PRINCIPLES.md#arch-vendor-lock-in-leakage) with nothing in any document to explain it. A tool name is a fact about one harness, and a document that carries it is bound to that harness by the first line that does.
 
-A library of documents names one harness's tools throughout, the harness changes its tool set, and every document breaks at once. That is [vendor lock-in leakage](../ontology/PRINCIPLES.md#arch-vendor-lock-in-leakage), with nothing in any document explaining why. A tool name is a fact about one harness, and a document that carries it is bound to that harness by the first line that does.
+For this reason a document names semantic operations, and one adapter resolves them to tools by [late binding](../ontology/PRINCIPLES.md#arch-late-binding). The document is separated from the harness at the operation, with one adapter per harness, rather than one document being written per harness. In practice, every effect is named with a semantic operation and given a target, its parameters are passed through a named clause, and its result is bound to a name the next line can read. A location or a command is referred to through a slot the adapter resolves, never through a literal path, and the harness's own tool names, configuration files and features stay out of the document.
 
-Split the document from the harness at the operation, one adapter per harness, rather than one document per harness. Name every effect with a semantic operation, give it a target, pass parameters through a named clause and bind the result to a name the next line can read. Refer to a location or a command through a slot the adapter resolves, never a literal path. Keep the harness's own tool names, configuration files and features out of the document.
+To check this, rename the harness under the document and hand it to a different model. Where a line fails, it carried a tool name or a path where an operation or a slot belonged, and the fix belongs in the adapter. A document written for exactly one throwaway session may name whatever it likes, because nothing will port it. The discipline is for a document that will be walked again, by another party, or under another harness.
 
-Rename the harness under the document and hand it to a different model. Where a line fails, it carried a tool name or a path where an operation or a slot belonged, and the adapter is where the fix lands.
+The operations fall into three groups by the kind of effect: those that act on a tree and produce values, those that leave an artifact in it, and those that reach outside it or address another party. Each operation carries a [semantic contract](../ontology/PRINCIPLES.md#arch-semantic-contracts), so a document relies on the contract rather than on what a particular tool happens to do.
 
-A document written for exactly one throwaway session may name whatever it likes, because nothing will port it. The discipline is for a document that will be walked again, by another party, or under another harness.
+[Portability](../ontology/PRINCIPLES.md#arch-portability) follows from this boundary. Operations and slots in the document are [configuration externalization](../ontology/PRINCIPLES.md#arch-configuration-externalization) applied to an instruction, and one adapter per harness is the [adapter pattern](../ontology/PRINCIPLES.md#arch-adapter-pattern). A slot with no counterpart in a harness resolves as absent, as described under [limits](VALIDATION.md#limitations). A decision request is the clearest case: a participant has a question surface and a bounded reader does not, so the same operation resolves for one and is absent for the other, while the document stays unchanged. The model a document runs under is always a slot, because choosing the model belongs to the harness.
 
-The operations partition by the kind of effect: those that act on a tree and produce values, those that leave an artifact in it, and those that reach outside it or address another party. Each carries a [semantic contract](../ontology/PRINCIPLES.md#arch-semantic-contracts), so a document relies on the contract rather than on what a particular tool happens to do.
-
-[Portability](../ontology/PRINCIPLES.md#arch-portability) follows from the boundary. Operations and slots in the document are [configuration externalization](../ontology/PRINCIPLES.md#arch-configuration-externalization) applied to an instruction; one adapter per harness is the [adapter pattern](../ontology/PRINCIPLES.md#arch-adapter-pattern). A slot with no analogue resolves as absent, as limits states, and a decision request is the clearest case: a participant has a question surface and a bounded reader does not, so the same operation resolves for one and is absent for the other, and the document is unchanged. The model a document walks under is a slot by construction, because model selection belongs to the harness.
+C1·a the operations
 
 ```pag
 # SEMANTIC OPERATION BOUNDARY · a node states WHAT as an operation; an adapter decides HOW
@@ -285,6 +285,8 @@ REQUEST_DECISION <party> WITH options: [<a>, <b>] INTO <choice>
 REPORT_RESULT <artifact> TO <the parties whose next work it creates>
 ```
 
+C1·b document and adapter
+
 ```pag
 # the document names an operation and a slot · one adapter per harness resolves both, outside the document
 READ_RESOURCE {project.governance_policy} INTO <policy>
@@ -300,6 +302,8 @@ REQUEST_DECISION   -> <the harness's question surface, or ABSENT for a bounded r
 {project.governance_policy} -> <the path in this tree>
 {toolchain.verify_command}  -> <the command in this tree, or ABSENT>
 ```
+
+C1·c invocation forms
 
 ```pag
 READ_RESOURCE <resource>                                 # the operation and its target
@@ -337,23 +341,21 @@ op --> target --> params --> result --> addressable
 
 ## Node design
 
-A node is one bounded [unit of work](../ontology/PRINCIPLES.md#arch-unit-of-work-pattern) with one decision, a declared input, a declared output and a gate at its end; [D1·a three granularities](#node-design-panel-a) shows the bounded form against the two that fail. Data moves between nodes by name, a value is declared before its first use, its scope reaches every later node, and no node reads an output a later node produces, the flow [D1·b contracts in order](#node-design-panel-b) writes and [D1·e forward flow](#node-design-panel-e) draws. Node decomposition is the project stage of [the loop](../START.md#the-loop): it yields the edges between units, and the order of the nodes is how the artifact comes to be, never a count chosen in advance, the stages [D1·c verb to stage](#node-design-panel-c) lists; [D1·d split or combine](#node-design-panel-d) is where a boundary goes.
+A node is one bounded [unit of work](../ontology/PRINCIPLES.md#arch-unit-of-work-pattern) with one decision, a declared input, a declared output and a gate at its end; [D1·a three granularities](#node-design-panel-a) shows this bounded form beside the two forms that fail. Data moves between nodes by name. A value is declared before its first use, its scope reaches every later node, and no node reads an output that a later node produces, which is the flow written out in [D1·b contracts in order](#node-design-panel-b) and shown in [D1·e forward flow](#node-design-panel-e). Dividing work into nodes is the project stage of [the loop](../START.md#the-loop). It yields the edges between units, and the order of the nodes follows how the artifact comes to be, as listed in [D1·c verb to stage](#node-design-panel-c), rather than a count chosen in advance. [D1·d split or combine](#node-design-panel-d) shows where a boundary belongs.
 
 ### Boundaries, data flow, genesis
 
-Each node is one bounded unit whose data flow to the next is a contract and whose order is a genesis. Directives poured into one flat block have no repair point and no place a gate can hold.
+Directives poured into one flat block have no repair point and no place a gate can hold. A node halfway through a long document fails, neither you nor the model can say which earlier output it needed, and the repair restarts from the top because no boundary was a real checkpoint. A gate can only check what a node produced, so a node that produces several unrelated things has a gate that checks a list rather than a unit.
 
-A node halfway through a long document fails, nobody can say which earlier output it needed, and the repair restarts from the top because no boundary was a real checkpoint. A gate can only check what a node produced, so a node that produces several unrelated things has a gate that checks a list rather than a unit.
+For this reason the data flow from one node to the next is a contract, and the order of the nodes follows the genesis of the artifact. The boundaries decide the number of nodes, rather than a number deciding the boundaries. In practice, each node has one decision and ends with the gate that shows the decision was made. A node is split at a repair point, a persistence, a decision, or a condition the next node needs, and steps that succeed or fail together are combined. The nodes are ordered by dependency and by genesis, and every contract names the one prior output it reads and the one output it yields.
 
-Let the boundaries decide the node count, rather than a count decide the boundaries. Give each node one decision and end it with the gate that proves the decision made. Split at a repair point, a persistence, a decision, or a condition the next node needs; combine what succeeds or fails together. Order the nodes by dependency and by genesis, and name in every contract the one prior output it reads and the one output it yields.
+To check this, read each contract's input slot and name the earlier node that yields it. A node whose input names nothing from its predecessor is in the wrong place, an input that no node produces is a forward reference, and a node that builds before its input is found is a genesis inversion. A document with one decision has one node, and a gate at the end of it is still worth writing.
 
-Read each contract's input slot and name the prior node that yields it. A node whose input names nothing from its predecessor is in the wrong place, an input with no producing node is a forward reference, and a node that builds before its input is found is a genesis inversion.
+Granularity can fail in two directions, and both look tidy. If the nodes are too fine, each gate only checks that one line ran. If they are too coarse, the only gate is at the end, where it can no longer say which step failed. The bounded form has [high cohesion](../ontology/PRINCIPLES.md#arch-high-cohesion) inside a node and [low coupling](../ontology/PRINCIPLES.md#arch-low-coupling) across the boundary, so the boundary is a repair point and the result line can name its owner.
 
-A document with one decision has one node, and a gate at the end of it is still worth writing.
+Node order follows the genesis of the artifact, which is what makes it derivable rather than chosen. A node never depends on an output from a later stage than the one it realises, because a thing cannot be built before it is found, or checked before it is built. The same rule makes a document orderable as a [directed acyclic graph](../ontology/PRINCIPLES.md#arch-directed-acyclic-graph), in which a genesis inversion and a forward reference are one defect seen from two sides.
 
-Granularity fails in two directions and both look tidy. Too fine, and each gate checks that one line ran. Too coarse, and the only gate is at the end, where it can no longer say which step failed. The bounded form has [high cohesion](../ontology/PRINCIPLES.md#arch-high-cohesion) inside a node and [low coupling](../ontology/PRINCIPLES.md#arch-low-coupling) across the boundary, so the boundary is a repair point and the result line can name its owner.
-
-Node order is a genesis, which is what makes it derivable rather than chosen. A node never depends on an output from a later stage than the one it realises, because a thing cannot be built before it is found or checked before it is built. The same rule makes a document orderable as a [directed acyclic graph](../ontology/PRINCIPLES.md#arch-directed-acyclic-graph): a genesis inversion and a forward reference are one defect seen from two sides.
+D1·a three granularities
 
 ```pag
 # too fine · a node per directive, a gate that checks one line ran
@@ -391,6 +393,8 @@ HANDOFF GATE:
 [check] <records> unchanged (evidence: a witness read after the transform)
 result: pass -> NODE 3 | count mismatch -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
 ```
+
+D1·b contracts in order
 
 ```pag
 # NODE 1 — DISCOVERY   [epistemic · analysis · set-theory · yields: set]
@@ -432,6 +436,8 @@ refuse: <destination> changed since it was read before PERSIST_ARTIFACT
 result: pass -> TERMINATE | missing entry -> REPAIR (owner: NODE 3) | unknown -> BLOCKED
 ```
 
+D1·c verb to stage
+
 ```pag
 # a verb realises one stage of how an artifact comes to be
 # and a node never depends on a later stage than the one it realises
@@ -454,7 +460,7 @@ flowchart TB
 split{"Split here?"}
 output["The next node needs this node's output"]
 retry["This part is repaired on its own"]
-human["A person decides before it continues"]
+human["The developer decides before it continues"]
 persist["The result is persisted before it continues"]
 verify["A condition must hold before the next node"]
 combine{"Combine here?"}
@@ -486,23 +492,21 @@ n3 -. never a forward reference, never an earlier genesis .-> n1
 
 ## Writing constraints
 
-A constraint states a boundary in a form the model can quote back and a reviewer can check against a line: a property that could be false, the set it ranges over, the parties it binds, and the objector that would disagree if it stopped holding. Those are the four slots [E1·e four slots](#writing-constraints-panel-e) draws and [E1·a invariant records](#writing-constraints-panel-a) fills. A rule that holds everywhere names every node as its set; a rule that holds inside a context names that context. The invariant block is the constrain stage of [the loop](../START.md#the-loop): it decides what is admissible, and it yields a boolean over the work rather than an opinion about it, closing the document as [E1·c worked document](#writing-constraints-panel-c) shows. A rule written as encouragement is judged rather than checked, the fate [E1·d exhortation or record](#writing-constraints-panel-d) traces. A rule written as a bullet under a head carries no set and no objector, so nothing can say when it was broken, and [E1·b exhortation rewritten](#writing-constraints-panel-b) is the repair.
+A constraint states a boundary in a form the model can quote back and a reviewer can check against a line. It has four parts: a property that could be false, the set it ranges over, the parties it binds, and the objector that would disagree if it stopped holding; [E1·e four slots](#writing-constraints-panel-e) shows these parts, and [E1·a invariant records](#writing-constraints-panel-a) fills them in. A rule that holds everywhere names every node as its set, and a rule that holds inside a context names that context. The invariant block is the constrain stage of [the loop](../START.md#the-loop). It decides what is admissible and yields a boolean over the work rather than an opinion about it, and it closes the document, as shown in [E1·c worked document](#writing-constraints-panel-c). A rule written as encouragement is judged rather than checked, as traced in [E1·d exhortation or record](#writing-constraints-panel-d). A rule written as a bullet under a heading carries no set and no objector, so nothing can say when it was broken, and [E1·b exhortation rewritten](#writing-constraints-panel-b) shows the repair.
 
 ### Rules the model can quote
 
-A behavioural boundary is a checkable record with its objector, not guidance. A rule stated as an exhortation binds nothing, because nobody can say when it was broken.
+A rule stated as an exhortation binds nothing, because neither you nor a check can say when it was broken. A document says handle errors properly, the model wraps some operations and not others, and the reviewer cannot say the rule was broken because the rule never said what handling was. A model completes an exhortation with whatever careful looks like in its training, and a specific prohibition with the thing it names; a record with a named objector is the only form in which a reviewer and a check read the same rule.
 
-A document says handle errors properly, the model wraps some operations and not others, and the reviewer cannot say the rule was broken because the rule never said what handling was. A model completes an exhortation with whatever careful looks like in its training, and a specific prohibition with the thing it names; a record with a named objector is the only form in which a reviewer and a check read the same rule.
+For this reason a behavioural boundary is written as a checkable record with its objector, not as guidance. The reach of a broad exhortation is traded for the checkability of a narrow record, with one violating directive per rule and one objector per record. In practice, each constraint is stated as an invariant record: a name, a property with a verb and its operand, the set it ranges over, the parties it binds, and the objector, which is either a gate check or none. A rule that holds only in a context is scoped by naming the context in its set, rather than by nesting a block. Each record is written so that a reviewer can point at a directive and say it broke this one, and the block sits after the last node.
 
-Trade the reach of a broad exhortation for the checkability of a narrow record, one violating directive per rule and one objector per record. State each constraint as an invariant record: a name, a property with a verb and its operand, the set it quantifies over, the parties it binds, and the objector, a gate check or none. Scope a rule that holds only in a context by naming the context in its set rather than nesting a block. Write each so a reviewer can point at a directive and say it broke this one, and place the block after the last node.
+To check this, write for each constraint the one directive that would violate it, and name the check that would notice. A constraint with no violating directive is an exhortation, and one with no objector is declared debt, which the record states with none. A constraint the model cannot observe from inside the document, such as a rule about its own confidence, cannot be checked by anything and belongs under [limits](VALIDATION.md#limitations) rather than in an invariant record.
 
-For each constraint, write the one directive that would violate it and name the check that would notice. A constraint with no violating directive is an exhortation; one with no objector is declared debt, and the record says so with none.
+Scope is what keeps a constraint set small: a rule that holds everywhere is stated once, with every node as its set, and a rule that holds somewhere names where. The rewrite from exhortation to record is the same move every time. The operation and the operand are named, the adverb is dropped, and the objector is stated. Writing rules this way is [policy as code](../ontology/PRINCIPLES.md#arch-policy-as-code), and it lets a gate's check cite an invariant by name rather than restating it, as described in [orchestration invariants](ORCHESTRATION.md#orchestration-invariants).
 
-A constraint the model cannot observe from inside the document, such as a rule about its own confidence, is not checkable by anyone and belongs under limits rather than in an invariant record.
+Invariants close a document rather than open it, because they are read against the work they bind. A recovery block sits near the top, because recovery is a mechanism rather than a rule.
 
-Scope is what keeps a constraint set small: a rule that holds everywhere is stated once with every node as its set, and a rule that holds somewhere names where. The rewrite from exhortation to record is the same move every time: name the operation, name the operand, drop the adverb, and say what would object. That is [policy as code](../ontology/PRINCIPLES.md#arch-policy-as-code), and it is what lets a gate's check cite an invariant by name rather than restate it, as [orchestration invariants](ORCHESTRATION.md#orchestration-invariants) derives.
-
-Invariants close a document rather than open it because they are read against the work they bind. A recovery block sits near the top because recovery is a mechanism rather than a rule.
+E1·a invariant records
 
 ```pag
 # CROSS-NODE INVARIANTS · hold for every node, read after the nodes they bind · each a record with four slots
@@ -518,6 +522,8 @@ INVARIANT audit-access: every access to <sensitive-data> is recorded over: nodes
 INVARIANT bounded-retention: <data> is not retained past <retention-period> over: persisted <data> binds: the reader objector: none
 ```
 
+E1·b exhortation rewritten
+
 ```pag
 # a rule the model can quote back · and a reviewer can check against a line
 ALWAYS handle errors properly
@@ -532,6 +538,8 @@ INVARIANT validated-first: <data> is validated against <schema> before it is pro
 NEVER modify anything
 INVARIANT read-only-zone: no file in <read-only-zone> is modified over: <read-only-zone> binds: the reader objector: [check] a witness read of the zone after the run
 ```
+
+E1·c worked document
 
 ```pag
 ---
@@ -636,23 +644,21 @@ property --> set --> parties --> objector
 
 ## Well-formedness
 
-A document is trusted after [static analysis](../ontology/PRINCIPLES.md#arch-static-analysis) for defects, never because it reads fluently, the two routes [F1·e two routes to trust](#well-formedness-panel-e) contrasts and [F1·d the scan](#well-formedness-panel-d) draws. The defects are named for the shape each catches, and each has one fix, paired as [F1·a defect set](#well-formedness-panel-a) lists them and reported as [F1·b scan result](#well-formedness-panel-b) shows. The syntactic ones: a missing declaration, a bare iteration, a lowercase [keyword](KEYWORDS.md#keyword-ontology), a conditional with no colon, a malformed node tag, a node declared twice. The epistemic ones: a node with no gate, a gate outside three to five checks, a check that is a judgement, a check with no evidence, a gate with no population or an empty one, an unknown left unrouted. Then a write with no refusal, an artifact with no freshness, an input naming no source, an invariant missing its set, its parties or its objector, and a bare invariant block. The scan is the terminate stage applied to the document itself: it yields one boolean, and it reads tokens rather than patterns, so its verdict has [repeatability](../ontology/PRINCIPLES.md#arch-repeatability).
+This section covers the [static analysis](../ontology/PRINCIPLES.md#arch-static-analysis) that decides whether a document can be trusted; [F1·e two routes to trust](#well-formedness-panel-e) contrasts it with trusting a document because it reads fluently, and [F1·d the scan](#well-formedness-panel-d) shows the scan. Each defect is named for the shape it catches and has one fix, as paired in [F1·a defect set](#well-formedness-panel-a) and reported in [F1·b scan result](#well-formedness-panel-b). The syntactic defects are a missing declaration, a bare iteration, a lowercase [keyword](KEYWORDS.md#keyword-ontology), a conditional with no colon, a malformed node tag, and a node declared twice. The epistemic defects are a node with no gate, a gate with fewer than three or more than five checks, a check that is a judgement, a check with no evidence, a gate with no population or an empty one, and an unknown left unrouted. The remaining defects are a write with no refusal, an artifact with no freshness, an input that names no source, an invariant missing its set, its parties or its objector, and a bare invariant block. The scan is the terminate stage applied to the document itself: it yields one boolean, and because it reads tokens rather than patterns, its verdict has [repeatability](../ontology/PRINCIPLES.md#arch-repeatability).
 
 ### The defect set and the scan
 
-A document is trusted after a deterministic scan, not because it reads well. A document that reads well is walked as if it had been checked.
+A document that reads well is walked as if it had been checked. A document reads well, but a bare iteration completes as a count, the node produces one result instead of many, and the gate that would have caught it was never written. Fluency is a property of prose, and the defects that break a document are properties of tokens the prose reader does not see.
 
-A document reads well, a bare iteration completes as a count, the node produces one result instead of many, and the gate that would have caught it was never written. Fluency is a property of prose, and the defects that break a document are properties of tokens the prose reader does not see.
+For this reason a document is trusted after a deterministic scan, not because it reads well. The tokens are scanned rather than matched against a pattern or read for fluency, because only a token scan reports a location a reader can go to. In practice, a document is scanned for the defect set before it is walked and after every edit. Each defect is reported with its location, what was found, what was expected and the one fix, so a reader repairs the line rather than re-reading the whole document. A document is trusted only when the defect set is empty, and a fluent document that fails the scan counts as ill-formed, however well it reads.
 
-Scan the tokens rather than match a pattern or read for fluency, because only a token scan reports a locus a reader can go to. Scan a document for the defect set before it is walked and after every edit. Report each defect with its locus, what was found, what was expected and the one fix, so a reader repairs the line rather than re-reading the document. Trust a document only on an empty defect set, and treat a fluent document that fails the scan as ill-formed however well it reads.
+To check this, plant one defect from the set in a passing document and scan it. A scan that stays green cannot catch that class of defect, and a scan that reports it at the wrong location is matching a pattern rather than reading tokens. Well-formedness is structure, not meaning. A document can pass every scan and still ask for the wrong thing, and that is what the gates, the review and the method exist to catch.
 
-Plant one defect from the set in a passing document and scan it. A scan that stays green cannot catch that class, and a scan that reports it with the wrong locus is matching a pattern rather than reading tokens.
+The defect set is the grammar's taxonomy of failures, and it is derived rather than collected. Each epistemic defect is one of the ways a representation escapes its check, which the methodology page names from the other side in [the honest gaps](../SHIP.md#the-honest-gaps) and [coverage is derived](../VERIFY.md#coverage-is-derived). A check with no population is the gate that passed over nothing, and an unknown left unrouted is the verdict that folded a third value into pass. A write with no refusal is an irreversible act with nothing to stop it, an input that names no source is a dependency inferred from a name, and an invariant with no objector is a property nothing would disagree with. Each defect has one repair, which is what lets a scanner state it. The scan works on tokens and uses no pattern language; that is a fact about the scanner rather than the grammar, whose conditions may still carry a pattern literal.
 
-Well-formedness is structure, not meaning. A document can pass every scan and still ask for the wrong thing, and that is what the gates, the review and the method exist to catch.
+Three defects that the scan does not catch show up as gate failures instead, as shown in [F1·c gate failures](#well-formedness-panel-c), and all three are found by tracing a value from the node that yields it to the node that reads it. One of them, a contract whose input names a later node's output, is repaired in the decomposition rather than in the line, because the node is in the wrong place.
 
-The defect set is the grammar's failure taxonomy, and it is derived rather than collected: each epistemic defect is one of the ways a representation escapes its check, which the architecture page's [the honest gaps](../SHIP.md#the-honest-gaps) and the methodology's [coverage is derived](../VERIFY.md#coverage-is-derived) name from the other side. A check with no population is the gate that passed over nothing, and an unknown left unrouted is the verdict that absorbed a third value into pass. A write with no refusal is the irreversible act with no condition to stop it, an input naming no source is a dependency inferred from a name, and an invariant with no objector is a property nothing would disagree with. Each defect has one repair, which is what lets a scanner state it, and the scan is token-based and free of pattern languages, a fact about the scanner and not about the grammar, whose conditions may carry a pattern literal.
-
-Three defects the scan does not catch present as gate failures, [F1·c gate failures](#well-formedness-panel-c) shows them, and all three are found by tracing a value from the node that yields it to the node that reads it. A contract whose input names a later node's output is the one whose repair is the decomposition rather than the line, because the node is in the wrong place.
+F1·a defect set
 
 ```pag
 # no declaration · a document with no stated kind
@@ -713,6 +719,8 @@ READ_RESOURCE <records> INTO <held>
 VALIDATE_ARTIFACT <held> AGAINST <schema>
 ```
 
+F1·b scan result
+
 ```text
 document: <name>
 defect      for_without_each
@@ -741,6 +749,8 @@ fix         name the objector
 
 verdict: ill_formed
 ```
+
+F1·c gate failures
 
 ```pag
 # a value undefined in a later node
@@ -792,16 +802,12 @@ F1·e two routes to trust
 ```mermaid
 flowchart LR
 fluent["Reads fluently"]
-trusted1["Trusted · and wrong in the details nobody read"]
+trusted1["Trusted · and wrong in the details that went unread"]
 scanned["Passes the scan"]
 trusted2["Trusted · because a mechanism said so"]
 fluent -. the tempting path .-> trusted1
 scanned --> trusted2
 ```
-
-Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-© 2025 [Jay Baleine](https://linkedin.com/in/jay-baleine) - Pattern Abstract Grammar
 
 ---
 

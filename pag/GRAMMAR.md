@@ -1,22 +1,24 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Grammar — PAG — Bane's Lab
 
-> PAG is defined by a context-free grammar expressed in BNF notation, organised into five rule categories. The planning and coordination productions are the…
+> PAG is defined by a context-free grammar written in Backus–Naur form (BNF), and its rules fall into five categories. The planning and coordination productions…
 
 Canonical: https://banes-lab.com/pag/grammar
 
 # Pattern Abstract Grammar
 
-Structured instructions for AI systems.
+Structured instructions for LLMs
 
 ## BNF grammar
 
-PAG is defined by a context-free grammar expressed in BNF notation, organised into five rule categories. The planning and coordination productions are the grammar's own records, each grounded to a reasoning record; the statement, expression and flowchart rules expand the terminals those records leave open. The scan under [well-formedness](GUIDE.md#well-formedness) reads tokens rather than patterns; the grammar itself admits a pattern literal in a condition.
+PAG is defined by a context-free grammar written in Backus–Naur form (BNF), and its rules fall into five categories. The planning and coordination productions are the grammar's own records, each grounded to a reasoning record, and the statement, expression and flowchart rules expand the terminals those records leave open. The scan described in [well-formedness](GUIDE.md#well-formedness) reads tokens rather than patterns, although the grammar itself admits a pattern literal in a condition.
 
 ### Planning rules
 
-Grammar for [document structure](GUIDE.md#document-structure), the meta block, nodes, contracts, handoff gates, invariant records and the report.
+These rules cover [document structure](GUIDE.md#document-structure), the meta block, nodes, contracts, handoff gates, invariant records and the report.
+
+BNF grammar
 
 ```bnf
 # Instruction
@@ -133,7 +135,9 @@ Grammar for [document structure](GUIDE.md#document-structure), the meta block, n
 
 ### Statement rules
 
-Grammar for directives, actions, control flow and declarations.
+These rules cover directives, actions, control flow and declarations.
+
+BNF grammar
 
 ```bnf
 # Directive
@@ -256,7 +260,9 @@ Grammar for directives, actions, control flow and declarations.
 
 ### Expression rules
 
-Grammar for expressions, operators, literals and lexical elements.
+These rules cover expressions, operators, literals and lexical elements.
+
+BNF grammar
 
 ```bnf
 # Expressions
@@ -369,7 +375,9 @@ Grammar for expressions, operators, literals and lexical elements.
 
 ### Coordination rules
 
-Grammar for the structure declarations, the [shared surface](ORCHESTRATION.md#shared-surfaces) and the [semantic operations](GUIDE.md#tool-invocation).
+These rules cover the structure declarations, the [shared surface](ORCHESTRATION.md#shared-surfaces) and the [semantic operations](GUIDE.md#tool-invocation).
+
+BNF grammar
 
 ```bnf
 # Await
@@ -508,7 +516,9 @@ Grammar for the structure declarations, the [shared surface](ORCHESTRATION.md#sh
 
 ### Flowchart rules
 
-Grammar for visual flow definitions in various formats.
+These rules cover flowcharts written in PAG's own form, in ASCII and in Mermaid.
+
+BNF grammar
 
 ```bnf
 # Flowchart
@@ -617,10 +627,6 @@ Grammar for visual flow definitions in various formats.
 <style_properties> ::= <style_property> ("," <style_property>)*
 <style_property> ::= <identifier> ":" <string>
 ```
-
-Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-© 2025 [Jay Baleine](https://linkedin.com/in/jay-baleine) - Pattern Abstract Grammar
 
 ---
 

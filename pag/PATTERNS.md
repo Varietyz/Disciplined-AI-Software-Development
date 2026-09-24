@@ -1,36 +1,34 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Patterns — PAG — Bane's Lab
 
-> Each verb carries a semantic contract, and the contract is what a document relies on rather than what any particular tool happens to do: a read leaves its…
+> This section covers the verbs and prepositions a document is written with. Each verb carries a semantic contract, and a document relies on that contract rather…
 
 Canonical: https://banes-lab.com/pag/patterns
 
 # Pattern Abstract Grammar
 
-Structured instructions for AI systems.
+Structured instructions for LLMs
 
 # Patterns
 
 ## Instruction patterns
 
-Each verb carries a [semantic contract](../ontology/PRINCIPLES.md#arch-semantic-contracts), and the contract is what a document relies on rather than what any particular tool happens to do: a read leaves its source unchanged whatever tool performs it. The contracts are listed by what each verb promises, [A1·a input verbs](#instruction-patterns-panel-a) about the source, [A1·b output verbs](#instruction-patterns-panel-b) about the result, [A1·c control verbs](#instruction-patterns-panel-c) about effects, and [A1·d three readers](#instruction-patterns-panel-d) is who a contract serves. The prepositions carry the relations between the operands, as [A1·e the prepositions](#instruction-patterns-panel-e) declares them, and a verb's contract plus its preposition is the whole meaning of a line.
+This section covers the verbs and prepositions a document is written with. Each verb carries a [semantic contract](../ontology/PRINCIPLES.md#arch-semantic-contracts), and a document relies on that contract rather than on what a particular tool happens to do; a read, for example, leaves its source unchanged whichever tool performs it. [A1·a input verbs](#instruction-patterns-panel-a) lists what each input verb promises about its source, [A1·b output verbs](#instruction-patterns-panel-b) what each output verb promises about its result, and [A1·c control verbs](#instruction-patterns-panel-c) what each control verb promises about its effects. [A1·d three readers](#instruction-patterns-panel-d) shows who a contract serves, and [A1·e the prepositions](#instruction-patterns-panel-e) declares the relations the prepositions carry between the operands. A verb's contract together with its preposition is the whole meaning of a line.
 
 ### Verbs and their contracts
 
-A verb is a semantic contract, and a preposition is a declared relation. A verb with no stated guarantee means whatever the model completes it as.
+A verb with no stated guarantee means whatever the model completes it as. A document says process the items, the model reads, filters, writes and deletes under that one word, and the reviewer cannot say which of those the author meant. A verb the model has seen carry one guarantee across many contexts is likely to carry it into the completion; a verb used loosely carries every meaning it has ever had.
 
-A document says process the items, the model reads, filters, writes and deletes under one word, and the reviewer cannot say which of those the author meant. A verb the model has seen carry one guarantee across many contexts carries it into the completion; a verb used loosely carries every meaning it has ever had.
+For this reason every line relies on its verb's contract and its preposition's relation, and a line whose behaviour breaks them is a defect in the line. The verb is chosen by the guarantee the line needs, rather than by the tool that will perform it. In practice, a read is used when the source must survive, an extract when its meaning must, a find when only existence matters, a filter when order must hold, and an execute when a side effect is the point. The operands are bound with the preposition that names their relation, and the guarantee is relied on downstream.
 
-Choose the verb by the guarantee the line needs rather than by the tool that will perform it. Read when the source must survive, extract when meaning must, find when only existence matters, filter when order must hold, execute when a side effect is the point. Bind the operands with the preposition that names their relation. Rely on the guarantee downstream, and treat a line whose behaviour breaks it as a defect in the line.
+To check this, read a line and state what it promises about its source and its result. A line whose promise you cannot state uses its verb loosely, and the repair is the verb whose guarantee matches the intent. A contract is a promise the grammar makes about the intent; whether the model or the tool executing the line keeps it is what [verification](../ontology/PRINCIPLES.md#arch-verification) is for.
 
-Read a line and state what it promises about its source and its result. A line whose promise you cannot state uses a verb loosely, and the repair is the verb whose guarantee matches the intent.
+A contract promises one of three things: what happens to the source, what the result is, or what effects the line may have. Two contracts carry the most weight. An execute may have side effects, and saying so is what keeps each of them from being a [hidden side effect](../ontology/PRINCIPLES.md#arch-hidden-side-effect). A report is a statement to a reader, never a state that anything later reads as the truth.
 
-A contract is a promise the grammar makes about the intent; whether the party executing the line honours it is what [verification](../ontology/PRINCIPLES.md#arch-verification) is for.
+A line with the wrong preposition puts its operands in the wrong relation, and the model is asked to complete the relation it was given.
 
-A contract promises one of three things: what happens to the source, what the result is, or what effects the line may have. Two carry the most weight. An execute may have side effects, and saying so is what keeps each one from being a [hidden side effect](../ontology/PRINCIPLES.md#arch-hidden-side-effect). A report is a statement to a reader and never a state anything later reads as the truth.
-
-A line with the wrong preposition is a line whose operands are in the wrong relation, and the model completes the relation it was given.
+A1·a input verbs
 
 ```pag
 READ <file> FROM <path> INTO <content>        # non-destructive · the source is unchanged
@@ -40,6 +38,8 @@ FIND <pattern> IN <scope> INTO <found>          # existence · boolean, non-inva
 GLOB "<pattern>" INTO <files>                  # discovery by shape
 GREP "<term>" IN <path> INTO <matches>          # discovery by content
 ```
+
+A1·b output verbs
 
 ```pag
 WRITE <content> TO <file>                       # idempotent where it overwrites
@@ -52,6 +52,8 @@ FILTER <items> TO <kept> WHERE <condition>       # removes, preserves order
 MERGE <sources> INTO <target>
 SPLIT <data> BY <delimiter> INTO <segments>
 ```
+
+A1·c control verbs
 
 ```pag
 VALIDATE <data> AGAINST <schema>                 # conformance
@@ -75,7 +77,7 @@ flowchart TB
 verb["A verb"]
 guarantee["Its semantic contract · what it promises about the source and the result"]
 reader["A reader relies on the contract"]
-model["The model completes the pattern the contract names"]
+model["The model is asked to complete the pattern the contract names"]
 check["A scan can hold the contract · a READ that mutates is a defect"]
 verb --> guarantee
 guarantee --> reader
@@ -101,23 +103,21 @@ using ~~~ against ~~~ for ~~~ with
 
 ## From intent to structure
 
-A request is turned into structure by walking [the loop](../START.md#the-loop), not by matching a word, the two routes [B1·e fit, not word](#intent-to-structure-panel-e) draws and [B1·b selection by fit](#intent-to-structure-panel-b) writes. Each of the loop's nodes yields a decision of a declared shape: intent a ranking, never a yes; verify a boolean over evidence; terminate a stop only when the work is saturated, complete and verified, the three gates [B1·c typed gates](#intent-to-structure-panel-c) writes. A document that walks the loop writes each node with its contract and a gate wherever the node owes one, which is the whole of [B1·a ten nodes](#intent-to-structure-panel-a), and [B1·d the loop](#intent-to-structure-panel-d) draws the edge a refutation takes back.
+This section covers how a request is turned into structure: by walking [the loop](../START.md#the-loop) rather than by matching a word, as shown in [B1·e fit, not word](#intent-to-structure-panel-e) and written in [B1·b selection by fit](#intent-to-structure-panel-b). Each of the loop's nodes yields a decision of a declared shape. Intent yields a ranking, never a yes; verify yields a boolean over evidence; and terminate yields a stop only when the work is saturated, complete and verified, which are the three gates written in [B1·c typed gates](#intent-to-structure-panel-c). A document that walks the loop writes each node with its contract, and with a gate wherever the node owes one, as shown in full in [B1·a ten nodes](#intent-to-structure-panel-a), and [B1·d the loop](#intent-to-structure-panel-d) shows the edge a refutation takes back.
 
 ### Walk the loop, select by fit
 
-Intent yields a ranking, protocols are selected by fit, and every decision is typed to its shape. A structure chosen from a trigger word answers the word rather than the request.
+A structure chosen from a trigger word answers the word rather than the request. A request to analyze a plan is routed to the analysis protocol because it said analyze, but the plan needed a decision between two designs, and the output is a thorough analysis of the wrong question. A trigger word is the cheapest possible match and the least reliable one, because the same word appears in requests that have nothing else in common.
 
-A request to analyze a plan is routed to the analysis protocol because it said analyze, the plan needed a decision between two designs, and the output is a thorough analysis of the wrong question. A word in a request is evidence about the request and never its subject, and a protocol chosen from the word answers the word.
+For this reason I treat the words of a request as evidence about it, never as its subject. The structure is derived from the transition the request asks for, rather than from the words it uses. In practice, a request is turned into nodes by walking the loop in order and closing each node on the gate it owes. The objective is stated before anything is examined, and the admissible ways of reaching it are ranked, so intent yields a ranking with more than one entry. A protocol is selected by comparing the transition the request asks for with what each protocol is for, and the reason is recorded. Every gate is typed to the shape its decision yields, and a refuted claim goes back to derive with its evidence, rather than forward with a caveat.
 
-Derive the structure from the transition the request asks for rather than from the words it uses. Turn a request into nodes by walking the loop in order and closing each node on the gate it owes. State the objective before any seeing and rank the admissible ways of reaching it, so intent yields a ranking with more than one entry. Select a protocol by comparing the transition the request asks for against what each protocol is for, and record the reason. Type every gate to the shape its decision yields, and let a refuted claim go back to derive with the evidence rather than forward with a caveat.
+To check this, name for each node the stage it realises and the shape its gate yields. A gate that owes a ranking and returns a yes has folded, and a protocol whose selection cites a word rather than a reason was matched, not chosen. A descriptive artifact, such as a reference, a note or a contract, is read rather than walked, and forcing the full loop onto it fits it to a shape it does not have. Only an artifact that will be walked takes every node.
 
-For each node, name the stage it realises and the shape its gate yields. A gate that owes a ranking and returns a yes has folded, and a protocol whose selection cites a word rather than a reason was matched, not chosen.
+The four gates the loop names never fold, whatever the size of the task, and a document writes each as a typed gate. Worth is a ranking with more than one entry, as described in [worth before work](../PLAN.md#worth-before-work). Admissibility is asked after the operations exist. Evidence is a non-empty set, and finding no contradiction is not evidence. Termination requires saturation, completion and [verification](../ontology/PRINCIPLES.md#arch-verification) together. Every other node runs when the subject calls for it.
 
-A descriptive artifact, a reference, a note, a contract, is read rather than walked, and forcing the full loop onto it is fitting a thing to a shape it does not have. Only an artifact that will be walked takes every node.
+The reason for a selection travels with it, so a reader can contest it.
 
-The four gates the loop names never fold whatever the size of the task, and a document writes each as a typed gate. Worth is a ranking with more than one entry, as [worth before work](../PLAN.md#worth-before-work) states. Admissibility is asked after the operations exist. Evidence is a non-empty set, where no contradiction found is not evidence. Termination is saturation and completion and [verification](../ontology/PRINCIPLES.md#arch-verification) together. Every other node runs when the subject warrants it.
-
-Protocol selection is by fit because a trigger word is the cheapest possible match and the least reliable: the same word appears in requests with nothing in common but the word. The reason travels with the selection so a reader can contest it.
+B1·a ten nodes
 
 ```pag
 # the ten nodes · each closes on the gate it owes, and each reads only the prior node's output
@@ -235,6 +235,8 @@ HANDOFF GATE:
 result: pass -> TERMINATE | not saturated -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
 ```
 
+B1·b selection by fit
+
 ```pag
 # selection by semantic fit · never by a word in the request
 ANALYZE <request> AGAINST <each protocol's use-when> INTO <fit>
@@ -245,6 +247,8 @@ APPEND <protocol> TO <selected> WITH reason: <fit>[<protocol>].<reason>
 # what a trigger word would have done
 # "analyze" in the request -> the analysis protocol, whatever the request was for
 ```
+
+B1·c typed gates
 
 ```pag
 # a decision typed to its shape · a gate owing a ranking is not satisfied by a yes
@@ -304,23 +308,21 @@ request --> fit --> right
 
 ## Genesis stages
 
-Every node carries a genesis stage, and the stage is derived from the node's verb rather than chosen, as [C1·d verb to stage](#genesis-stages-panel-d) draws: the verb names where in the substrate cycle the node's artifact comes to be, the table [C1·a genesis stages](#genesis-stages-panel-a) lists, so one word decides the node's legal position. A protocol is a chain of such verbs, [C1·b protocols](#genesis-stages-panel-b) shows four, selected the way [from intent to structure](PATTERNS.md#intent-to-structure) selects and [C1·e request to nodes](#genesis-stages-panel-e) draws, and a document instantiates the chain as tagged, gated nodes in genesis order, as [C1·c chain expanded](#genesis-stages-panel-c) does.
+This section covers the genesis stage every node carries. The stage is derived from the node's verb rather than chosen, as shown in [C1·d verb to stage](#genesis-stages-panel-d), because the verb names where in the substrate cycle the node's artifact comes to be; [C1·a genesis stages](#genesis-stages-panel-a) lists the stages, so one word decides the node's legal position. A protocol is a chain of such verbs, and [C1·b protocols](#genesis-stages-panel-b) shows four. A protocol is selected as described in [from intent to structure](PATTERNS.md#intent-to-structure) and shown in [C1·e request to nodes](#genesis-stages-panel-e), and a document instantiates its chain as tagged, gated nodes in genesis order, as shown in [C1·c chain expanded](#genesis-stages-panel-c).
 
 ### Derived from the verb
 
-A node's genesis stage derives from its verb, and the header carries one dialect. A node labelled by hand carries a role its verb does not derive.
+A node labelled by hand carries a role its verb does not derive. A node's tag says structure while its only directive reads a file, and the reviewer approves a build step that builds nothing. A verb is a contract about what a node does, so a stage written beside it is a second declaration of the same fact, and a catalogue of roles beside the verbs is a second vocabulary that the ontology does not carry.
 
-A node's tag says structure, its only directive reads a file, and the reviewer approves a build step that builds nothing. A verb is a contract about what a node does, so a stage written beside it is a second declaration of the same fact, and a catalog of roles beside the verbs is a second vocabulary the ontology does not carry.
+For this reason the header carries one dialect, and nothing is written beside the verb that the verb already says. The stage is derived from the verb's grounding in the substrate cycle, rather than written as a role label beside the verb. In practice, every node is tagged with the stage its verb derives, and a chosen chain is expanded into nodes in genesis order, each with a contract that reads the previous output and a gate of its own, and the [verification](../ontology/PRINCIPLES.md#arch-verification) gate protocol closes the chain. Where a node's stage disagrees with its verb, the node is mislabelled, and where a node depends on a later genesis than it produces, the order is wrong.
 
-Derive the stage from the verb's grounding in the substrate cycle rather than write a role label beside the verb. Tag every node with the stage its verb derives, and expand a chosen chain into nodes in genesis order, each with a contract that reads the prior output and a gate of its own. Append the [verification](../ontology/PRINCIPLES.md#arch-verification) gate protocol to every plan. Where a node's stage disagrees with its verb, the node is misnamed; where a node depends on a later genesis than it produces, the order is wrong.
+To check this, read each node's verb and state the stage it implies. A stage that does not follow from the verb was written by hand, and a header whose bracket carries anything other than the layer, the axis, the math type and the yields is a second dialect. A one-step task has no chain to instantiate. A single read with a single gate is a directive, and tagging it adds a name to nothing.
 
-Read each node's verb and state the stage it implies. A stage that does not follow from the verb was written by hand, and a header whose bracket carries anything but the layer, the axis, the math type and the yields is a second dialect.
-
-A one-step task has no chain to instantiate. A single read with a single gate is a directive, and tagging it adds a name to nothing.
-
-The stage is a tag beneath the header, derived from the verb, so a reader sees a document's construction order from its tags alone. The header's four slots are [the loop](../START.md#the-loop)'s, the layer, the axis, the math type and the yields, and the same verb names the genesis stage [node design](GUIDE.md#node-design) orders by, so the chain's order is derived from one word and the header stays one shape. Every action verb grounds to a reasoning record, and the stage follows from that record: a verb grounded in observation realises existence, one grounded in construction realises structure, one grounded in a verification node realises constraint, which is what makes the derivation a lookup rather than a judgement.
+The stage is a tag beneath the header, so a reader can see a document's construction order from its tags alone while the header keeps one shape. The header's four slots, the layer, the axis, the math type and the yields, come from [the loop](../START.md#the-loop), and the same verb names the genesis stage used to order the nodes, as described in [node design](GUIDE.md#node-design). Every action verb grounds to a reasoning record and the stage follows from that record, so a verb grounded in observation realises existence, one grounded in construction realises structure, and one grounded in a verification node realises constraint, which makes the derivation a lookup rather than a judgement.
 
 A protocol is a chain with a use-when and the principles it serves. The use-when names the transition the chain is for, from one state of the tree to another, and the principles name what the chain must leave true, so a selected protocol carries its own acceptance criteria into the nodes it expands to. The verification gate protocol is appended to every plan, because every plan ends by checking its own reasoning against the tree.
+
+C1·a genesis stages
 
 ```pag
 # a genesis stage · where in the substrate cycle a node's artifact comes to be, derived from its verb
@@ -336,6 +338,8 @@ emergence       FINALIZE, REPORT, PERSIST_ARTIFACT, REPORT_RESULT does it integr
 # NODE <n> — <NAME>   [<layer> · <axis> · <math type> · yields: <shape>]
 @genesis: <existence | difference | relation | structure | transformation | constraint | emergence>
 ```
+
+C1·b protocols
 
 ```pag
 # a protocol · a verb chain with the transition it is for and the principles it serves
@@ -364,6 +368,8 @@ use_when:   "every plan requires a final reasoning and checklist validation"
 chain:      ANALYZE -> VERIFY -> REPORT
 principles: [<every active principle>]
 ```
+
+C1·c chain expanded
 
 ```pag
 # a chain expanded into nodes · each header carries its layer, axis, math type and yields, and each node its genesis stage
@@ -409,25 +415,23 @@ request --> transition --> fit --> chain --> nodes --> gate
 
 ## Algorithm examples
 
-An algorithm is a protocol instantiated: the chain expanded into nodes, each headed by its layer, axis, math type and yields and tagged with its [genesis stage](PATTERNS.md#genesis-stages), each contracted to the prior node's output and closed by an evidence-bearing gate, and every placeholder bound to the task's own nouns. Three instances follow, [D1·a separate a unit](#algorithm-examples-panel-a), [D1·b author an enforcement](#algorithm-examples-panel-b) and [D1·c verification gate](#algorithm-examples-panel-c), and the diagrams say what every instance carries beyond its chain, [D1·d beyond the chain](#algorithm-examples-panel-d), and what transfers between them and what is bound per task, [D1·e transfers or bound](#algorithm-examples-panel-e).
+This section shows three algorithms, each a protocol instantiated: [D1·a separate a unit](#algorithm-examples-panel-a), [D1·b author an enforcement](#algorithm-examples-panel-b) and [D1·c verification gate](#algorithm-examples-panel-c). In each, the chain is expanded into nodes, every node is headed by its layer, axis, math type and yields and tagged with its [genesis stage](PATTERNS.md#genesis-stages), every contract reads the previous node's output and ends on a gate that carries evidence, and every placeholder is bound to the task's own nouns. [D1·d beyond the chain](#algorithm-examples-panel-d) shows what every instance carries beyond its chain, and [D1·e transfers or bound](#algorithm-examples-panel-e) shows what transfers between instances and what is bound per task.
 
 ### Three instances
 
-An algorithm is a protocol with its chain expanded, its nodes tagged and its steps gated. An algorithm copied from an example keeps the example's nouns and loses the task's.
+An algorithm copied from an example keeps the example's nouns and loses the task's. A seam search returns nothing, the node is skipped without an entry, the extraction runs over an empty set, and the count that would have exposed the gap is taken over the wrong population. The chain is the protocol's contract and the gates are how the contract is checked, so the two transfer together and the nouns do not.
 
-A seam search returns nothing, the node is skipped without an entry, the extraction runs over an empty set, and the count that would have exposed the gap is taken over the wrong population. The chain is the protocol's contract and the gates are how the contract is checked, so the two transfer together and the nouns do not.
+For this reason an algorithm is treated as an instance of a protocol, never as a copy of another algorithm. The task's nouns are bound into the protocol's shape, rather than an example being edited until it fits. In practice, the chain is written above the nodes with the reason it was chosen, so a reader sees the protocol before the instance. The chain is expanded into one node per verb, each node is tagged with the stage its verb derives, and each placeholder is bound to a noun from the task, so no placeholder survives into the document. Each node has a contract whose input names the previous output, and it closes on three to five checks that name its output, the evidence that settles each check and the set that at least one check ranged over. A failure is routed to the earliest node that can supply the missing evidence and an unknown to blocked, every write is preceded by a refusal, an empty result is a finding rather than a silent skip, and every command and location is named as a slot the adapter resolves.
 
-Bind the task's nouns into the protocol's shape, rather than edit an example until it fits. Write the chain above the nodes, with the reason it was chosen, so a reader sees the protocol before the instance. Expand one node per verb, tag it with the stage the verb derives, and bind each placeholder to a noun from the task so no placeholder survives into the document. Give each node a contract whose input names the prior output, and close it on three to five checks that name its output, the evidence that settles each and the set at least one ranged over. Route a failure to the earliest node that can supply the missing evidence and an unknown to blocked, refuse before every write, make an empty result a finding rather than a silent skip, and name every command and location as a slot the adapter resolves.
+To check this, look for a placeholder that survived into the document, a node whose stage disagrees with its verb, a contract whose input names nothing from its predecessor, or a gate whose count is taken over a set smaller than the one it claims. Any of the four marks an instance that was copied rather than bound. A node with two decisions is two nodes, and the examples are not a license to collapse them.
 
-Find a placeholder that survived into the document, a node whose stage disagrees with its verb, a contract whose input names nothing from its predecessor, or a gate whose count is taken over a set smaller than the one it claims. Any of the four is an instance that was copied rather than bound.
+In the first instance, the seam gate reports an empty set of seams as a unit that does not split, because a pass over an empty population measures nothing, and the population shown beside the verdict is what makes that visible. The repair owner on the extraction gate is the seam node, because a bad extraction usually comes from a bad seam.
 
-A node with two decisions is two nodes, and the examples are not a licence to collapse them.
+The second instance is the shape every rule held by attention takes before it can be trusted. The analysis names a shape rather than an instance, because a check that names an instance fails on the next case. The check is proven to fire as described in [the check comes first](../BUILD.md#the-check-comes-first), and a failure there routes back to the node that composed the check, not to the probe; the probe's own write is refused wherever it would land on a real file.
 
-In the first instance two checks carry the honesty. An empty seam set is a unit that does not split and is reported as such, because a green over an empty population measures nothing, and the population beside the verdict is what makes that visible. The repair owner on the extraction gate is the seam node, because a bad extraction is usually a bad seam.
+The third instance is appended to every plan rather than chosen. Its gate is the evidence gate described in [from intent to structure](PATTERNS.md#intent-to-structure), applied to the plan's own reasoning, and its standing line names what moved beneath the plan while it was being checked.
 
-The second instance is the shape every rule held by attention takes before it is trusted. The analysis names a shape rather than an instance, because a check that names an instance dies on the next case. The check is proven to fire the way [the check comes first](../BUILD.md#the-check-comes-first) describes, and that failure routes back to the node that composed the check, not to the probe; the probe's own write is refused where it would land on a real file.
-
-The third instance is appended to every plan rather than chosen; its gate is the evidence gate of [from intent to structure](PATTERNS.md#intent-to-structure), applied to the plan's own reasoning, and its standing line names what moved beneath the plan while it was checked.
+D1·a separate a unit
 
 ```pag
 # <separate-a-unit> · ANALYZE -> FIND -> EXTRACT -> CREATE -> VERIFY
@@ -499,6 +503,8 @@ standing: moved-set <the files changed since NODE 4>
 result: pass -> TERMINATE | red -> REPAIR (owner: NODE 3) | unknown -> BLOCKED
 ```
 
+D1·b author an enforcement
+
 ```pag
 # <author-an-enforcement> · ANALYZE -> CREATE -> LINK -> EXECUTE -> VERIFY
 # chosen because a rule held by attention needs a check that holds it
@@ -569,6 +575,8 @@ standing: moved-set <the files changed since NODE 2>
 result: pass -> TERMINATE | occurrence remains -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
 ```
 
+D1·c verification gate
+
 ```pag
 # <verification-gate> · ANALYZE -> VERIFY -> REPORT · appended to every plan
 
@@ -608,7 +616,7 @@ flowchart LR
 transfers["Transfers to any task of the shape · the chain, the tags, the contract and gate shape"]
 bound["Bound per task · the nouns, the sources, the thresholds"]
 instance["An instance"]
-example["An example · someone else's nouns still inside"]
+example["An example · another task's nouns still inside"]
 transfers --> instance
 bound --> instance
 transfers -. nouns not rebound .-> example
@@ -616,23 +624,21 @@ transfers -. nouns not rebound .-> example
 
 ## Integrating algorithms
 
-Two movements connect protocols to work. Instantiation takes a request to a node chain, in the order [E1·d instantiation order](#algorithm-integration-panel-d) draws and [E1·a instantiation](#algorithm-integration-panel-a) writes: name the transition the request asks for, choose the protocol by fit, bind its placeholders to the task's nouns, and expand its chain into tagged nodes, each with a contract and a gate. Distillation takes repeated behaviour to one shared base, and it is a document type of its own: an epistemology walked on the reasoning axis, gated on evidence that the base is universal, invariant, foundational, enforceable and load-reducing, the five [E1·c boundary principles](#algorithm-integration-panel-c) names. It is incomplete until the old pattern is proven gone, as [E1·e distillation order](#algorithm-integration-panel-e) draws. [E1·b distillation](#algorithm-integration-panel-b) is the grammar's own template record.
+This section covers the two ways protocols connect to work. Instantiation takes a request to a chain of nodes, in the order shown in [E1·d instantiation order](#algorithm-integration-panel-d) and written in [E1·a instantiation](#algorithm-integration-panel-a): the transition the request asks for is named, the protocol is chosen by fit, its placeholders are bound to the task's nouns, and its chain is expanded into tagged nodes, each with a contract and a gate. Distillation takes repeated behaviour to one shared base, and it is a document type of its own. It is an epistemology walked on the reasoning axis, gated on evidence that the base is universal, invariant, foundational, enforceable and load-reducing, the five properties named in [E1·c boundary principles](#algorithm-integration-panel-c). A distillation is incomplete until the old pattern is proven gone, as shown in [E1·e distillation order](#algorithm-integration-panel-e), and [E1·b distillation](#algorithm-integration-panel-b) is the grammar's own template for it.
 
 ### Instantiate and distil
 
-A protocol is instantiated by transition and a base is distilled by behavioural evidence, never copied from one case or a resemblance. A base promoted from one instance or a resemblance is that instance's accidents wearing a template's clothes.
+A base promoted from one instance, or from a resemblance, carries that instance's accidents into everything that extends it. A base is raised from two classes whose names rhyme, three later classes are forced to extend it, and each one overrides most of what it inherited because the shared half was the name. A base is a promise that every future instance shares one behaviour, and a promise made from one instance or from a naming resemblance has nothing to be checked against.
 
-A base is raised from two classes whose names rhyme, three later classes are forced to extend it, and each one overrides most of what it inherited because the shared half was the name. A base is a promise that every future instance shares one behaviour, and a promise made from one instance or from a naming resemblance has nothing to be checked against.
+For this reason a shared base has to be earned by behaviour shown in more than one place, and a resemblance between names earns nothing. The classes are signed from their behaviour and the five principles decide, rather than a base being raised from what the names have in common. In practice, instantiation names the transition first, chooses the protocol whose use-when fits it and records the reason, binds each placeholder to a noun the task owns, and expands the chain into nodes whose contracts read the previous output and whose gates carry three to five checks with evidence. Distillation starts only after what exists has been measured and the candidates ranked by worth. Every class is signed from its behaviour, each of the five boundary principles is proven with the evidence that shows it, the base is composed within its size limit, each target is migrated reversibly starting from the simplest, and the whole scope is scanned for the old pattern before anything is declared complete.
 
-Sign the classes from their behaviour and let the five principles decide, rather than raise a base from what the names have in common. Instantiate by naming the transition first, choosing the protocol whose use-when fits it and recording the reason, binding each placeholder to a noun the task owns, and expanding the chain into nodes whose contracts read the prior output and whose gates carry three to five checks with evidence. Distil only after measuring what exists and ranking the candidates by worth. Sign every class from its behaviour, prove the five boundary principles with the evidence that shows each, compose the base within its size limit, migrate each target reversibly from the simplest up, and scan the whole scope for the old pattern before declaring anything complete.
+To check this, name for a base the second instance that justified it, the behavioural signature each class was signed with, and the evidence behind each of the five principles. A base with one instance, a signature based on names, or an unproven principle is a base its next class overrides more than it inherits. Distillation decides whether a shared base is justified, and when a shape earns a template at all is described in [core templates](TEMPLATES.md#templates-core).
 
-For a base, name the second instance that justified it, the behavioural signature each class was signed with, and the evidence behind each of the five principles. A base with one instance, a name-based signature or an unproven principle is a template that will fight its next user.
+The transition comes first because the protocol is selected by it, as described in [from intent to structure](PATTERNS.md#intent-to-structure), and instantiation ends when no placeholder survives.
 
-A base is justified by behaviour, never by names that look alike; when a shape earns a template is [core templates](TEMPLATES.md#templates-core)'.
+Distillation measures before it proposes, because a missing adoption of an existing base looks like a missing [abstraction](../ontology/PRINCIPLES.md#arch-abstraction) until the registry has been read. A class's signature covers initialisation, lifecycle, [error handling](../ontology/PRINCIPLES.md#arch-error-handling), state and dependencies. The base consists of concrete responsibilities plus abstract hooks, which is the [template method pattern](../ontology/PRINCIPLES.md#arch-template-method-pattern), and a single stray occurrence outside the approved locations is a refutation whose result line routes back to composition. The last gate measures the reduction rather than asserting it, so the [single source of truth](../ontology/PRINCIPLES.md#arch-single-source-of-truth) for which bases exist is the registry, never the memory of the model or the developer that did the distilling.
 
-Instantiation names the transition first, because [from intent to structure](PATTERNS.md#intent-to-structure) selects the protocol by it, and it ends when no placeholder survives.
-
-Distillation measures before it proposes, because a missing adoption of an existing base looks like a missing [abstraction](../ontology/PRINCIPLES.md#arch-abstraction) until the registry is read. It signs every class from behaviour rather than names: initialisation, lifecycle, [error handling](../ontology/PRINCIPLES.md#arch-error-handling), state, dependencies. The base is concrete responsibilities plus abstract hooks, a [template method pattern](../ontology/PRINCIPLES.md#arch-template-method-pattern), and a single stray occurrence outside the approved locations is a refutation whose result line routes back to composition. The last gate measures the reduction rather than asserting it, so the [single source of truth](../ontology/PRINCIPLES.md#arch-single-source-of-truth) for what bases exist is the registry and never the memory of the party that distilled.
+E1·a instantiation
 
 ```pag
 # instantiation · from a request to a gated node chain
@@ -713,6 +719,8 @@ refuse: <outbox> changed since it was read before PERSIST_ARTIFACT
 standing: moved-set <the files changed since NODE 4>
 result: pass -> TERMINATE | wrong handler -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
 ```
+
+E1·b distillation
 
 ```pag
 ---
@@ -859,6 +867,8 @@ completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
+E1·c boundary principles
+
 ```pag
 # the boundary principles · a base is justified only when every one holds, with the evidence that shows it
 universal       every instance in the family is an instance of the shared behaviour
@@ -900,10 +910,6 @@ boundary -- any fails --> other
 gone -- no --> base
 gone -- yes --> registry
 ```
-
-Documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-
-© 2025 [Jay Baleine](https://linkedin.com/in/jay-baleine) - Pattern Abstract Grammar
 
 ---
 
