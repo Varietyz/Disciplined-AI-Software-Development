@@ -1,8 +1,8 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Ship — Methodology — Bane's Lab
 
-> One command runs every tool in this method as a single gate, in stages typed as shown in a stage array. The stages form a pipeline architecture ordered by…
+> One command runs every tool in this method as a single gate, in stages typed as shown in a stage array.
 
 Canonical: https://banes-lab.com/disciplined-methodology/ship
 
@@ -14,7 +14,7 @@ Constraints, checks and skepticism for building software with LLMs
 
 ## One chain
 
-One command runs every tool in this method as a single gate, in stages typed as shown in [A1·a a stage array](#one-chain-panel-a). The stages form a [pipeline architecture](ontology/PRINCIPLES.md#arch-pipeline-architecture) ordered by [causal dependency](ontology/PRINCIPLES.md#arch-causal-dependency), as shown in [A1·b the stages](#one-chain-panel-b), and each stage runs the checks, fixers, generators and validators it owns. A check that runs only when you or the model remember its command is a convention rather than a check. Arguments can narrow the chain while you iterate, but only the whole run supports a claim that the work is done, as shown in [A1·c narrowing](#one-chain-panel-c). The chain is what turns a collection of tools into a verdict, and the rule it serves is described in [the gate holds the line](BUILD.md#the-gate-holds-the-line).
+One command runs every tool in this method as a single gate, in stages typed as shown in [A1·a a stage array](#one-chain-panel-a). The stages form a [pipeline architecture](ontology/PRINCIPLES.md#architecture-pipeline-architecture) ordered by [causal dependency](ontology/PRINCIPLES.md#architecture-causal-dependency), as shown in [A1·b the stages](#one-chain-panel-b), and each stage runs the checks, fixers, generators and validators it owns. A check that runs only when you or the model remember its command is a convention rather than a check. Arguments can narrow the chain while you iterate, but only the whole run supports a claim that the work is done, as shown in [A1·c narrowing](#one-chain-panel-c). The chain is what turns a collection of tools into a verdict, and the rule it serves is described in [the gate holds the line](BUILD.md#the-gate-holds-the-line).
 
 ### Everything through one chain
 
@@ -24,11 +24,11 @@ For this reason every tool runs through one chain, because a tool reached only b
 
 To check this, list every check the project claims to have and run the one command. Each check should appear in its output; one that does not is not a check the project has. Narrowing is only for speed while iterating locally. A member, a step or a bypass answers a question faster, but a claim that the work is done needs one whole-scope run with nothing bypassed. A narrowed run never overwrites the one aggregate, because a report about a narrower subject under the aggregate's name would describe a different subject under the same name.
 
-The stage order encodes real dependencies, [event ordering](ontology/PRINCIPLES.md#arch-event-ordering) in the ontology's sense, so it carries weight rather than being tidy. A cleaning step runs before anything measures a file, and a type check runs before any structural check reads a tree that may not compile. The fixer stage writes the closure graph that the graph-aware rules read when they load, so it comes before linting, and a graph-aware rule fails closed when the graph is missing rather than passing over nothing. Several stages change the working tree, which is why an investigation never runs the gate, as described in [agents as executed contracts](COLLABORATE.md#agents-as-executed-contracts).
+The stage order encodes real dependencies, [event ordering](ontology/PRINCIPLES.md#architecture-event-ordering) in the ontology's sense, so it carries weight rather than being tidy. A cleaning step runs before anything measures a file, and a type check runs before any structural check reads a tree that may not compile. The fixer stage writes the closure graph that the graph-aware rules read when they load, so it comes before linting, and a graph-aware rule fails closed when the graph is missing rather than passing over nothing. Several stages change the working tree, which is why an investigation never runs the gate, as described in [agents as executed contracts](COLLABORATE.md#agents-as-executed-contracts).
 
 A registry the run consumes at load is derived again before anything loads it, so deleting a member cannot break the run that would have removed its entry. Deleting a rule is then one step, just as adding one is one dropped file. The chain also checks its own registration contract and the shape of every finding.
 
-Where a host project already has a toolchain, the chain hands off rather than duplicating it. The host chooses which concerns to hand over, its tools stay its own, and there is one chain instead of two. A [verification](ontology/PRINCIPLES.md#arch-verification) slot the host cannot fill, such as a build, a runtime probe or a size cap, resolves as absent. The step that reads it does not run, and the claim it would have settled is carried as observed by the developer rather than as verified.
+Where a host project already has a toolchain, the chain hands off rather than duplicating it. The host chooses which concerns to hand over, its tools stay its own, and there is one chain instead of two. A [verification](ontology/PRINCIPLES.md#architecture-verification) slot the host cannot fill, such as a build, a runtime probe or a size cap, resolves as absent. The step that reads it does not run, and the claim it would have settled is carried as observed by the developer rather than as verified.
 
 The chain is data before it is a run. A pure planner takes the resolved scope, meaning which members, which step and which bypasses, and returns the stage array, and the runner walks that array in order, with any order that carries weight stated on the step rather than remembered. A member with no tests declares null rather than an empty string, because the two are different claims. Everything a stage-control flag can do is a function over this data, and no flag can add a step that the array does not hold.
 
@@ -112,7 +112,7 @@ How many parties a body of work needs is not a matter of choice. The count follo
 
 The number of agents or people on a task comes from a preference, and a preferred number is wrong in one of two directions. Five agents work on a task that has two concerns, three of them wait, and the surface they all write to becomes the bottleneck. A count chosen independently of the partition either leaves a concern with no owner or gives one surface more claims than it can hold.
 
-For this reason the number of parties follows from the structure of the work rather than from a preference. The work is partitioned first and counted second. In practice, the work is first divided into concerns, and counting them gives the floor. The fan-in on each [shared surface](pag/ORCHESTRATION.md#shared-surfaces) is measured from the traffic the surface already records, which gives the ceiling. A count is then chosen inside that range, and the partition it came from is written down.
+For this reason the number of parties follows from the structure of the work rather than from a preference. The work is partitioned first and counted second. In practice, the work is first divided into concerns, and counting them gives the floor. The fan-in on each [shared surface](pag/ORCHESTRATION.md#shared-surfaces) is measured from the traffic the surface already records, which gives the [fan-in ceiling](ontology/PRINCIPLES.md#architecture-fan-in-ceiling). A count is then chosen inside that range, and the partition it came from is written down.
 
 To check this, ask what partition the current count came from. A count with no partition behind it is a preference, and the fan-in will expose it. Volume is the wrong input, as described in a concern is a component; the fan-in caps a small task and a large one alike.
 
@@ -138,13 +138,13 @@ ceiling --> count
 
 ## The deploy is a file operation
 
-The deployable is derived from the routes the site serves, as shown in [C1·a routes to site](#the-deploy-is-a-file-operation-panel-a). The deploy is a file operation with a [rollback](ontology/PRINCIPLES.md#arch-rollback), and it never touches a process it does not own, which is [least privilege](ontology/PRINCIPLES.md#arch-least-privilege) applied to a deploy. [Secrets management](ontology/PRINCIPLES.md#arch-secrets-management) keeps every secret outside the tree. Every served surface uses [encryption in transit](ontology/PRINCIPLES.md#arch-encryption-in-transit), including the local development server, because [environment parity](ontology/PRINCIPLES.md#arch-environment-parity) means development exercises the same transport as production; otherwise it exercises something else.
+The deployable is derived from the routes the site serves, as shown in [C1·a routes to site](#the-deploy-is-a-file-operation-panel-a). The deploy is a file operation with a [rollback](ontology/PRINCIPLES.md#architecture-rollback), and it never touches a process it does not own, which is [least privilege](ontology/PRINCIPLES.md#architecture-least-privilege) applied to a deploy. [Secrets management](ontology/PRINCIPLES.md#architecture-secrets-management) keeps every secret outside the tree. Every served surface uses [encryption in transit](ontology/PRINCIPLES.md#architecture-encryption-in-transit), including the local development server, because [environment parity](ontology/PRINCIPLES.md#architecture-environment-parity) means development exercises the same transport as production; otherwise it exercises something else.
 
 ### Derived from the routes
 
 A deploy that ships a build folder ships whatever happened to be in it. A page fails to pre-render, and nothing reports it because the old file is still in the build folder, so the stale page ships. Nothing between the build and the upload asks whether a file is reachable.
 
-For this reason the deployable is whatever a page can reach. The deployable is pruned from the routes rather than taken from the build folder on trust, and a file operation is chosen over a process operation for its rollback. In practice, the deploy starts from the served routes and follows every path a text artefact names. Every file that nothing reaches is deleted, and the whole of what is left is uploaded. One backup is kept of what is replaced, and it is restored on any failure. A command that touches a shared machine is handed to the developer who owns that machine rather than run, and every secret stays in the one artifact declared to hold it.
+For this reason the deployable is whatever a page can reach. The deployable is pruned from the routes rather than taken from the build folder on trust, and a file operation is chosen over a process operation for its rollback. In practice, the deploy starts from the served routes and follows every path a text artifact names. Every file that nothing reaches is deleted, and the whole of what is left is uploaded. One backup is kept of what is replaced, and it is restored on any failure. A command that touches a shared machine is handed to the developer who owns that machine rather than run, and every secret stays in the one artifact declared to hold it.
 
 To check this, list every file in the deployable and the route that reaches it. A file that no route reaches is one the discovery check should have refused. On a machine that hosts other people's processes, nothing beyond your own files is touched. The deploy is a file operation because a file operation can be rolled back, while a process operation has a blast radius.
 
@@ -155,7 +155,7 @@ C1·a routes to site
 ```mermaid
 flowchart TB
 routes["The served routes"]
-follow["Follow every path a text artefact names"]
+follow["Follow every path a text artifact names"]
 reached["What a page can reach"]
 prune["Delete everything else"]
 backup["Back up what is live"]
@@ -170,7 +170,7 @@ check -- no --> restore
 
 ## Proxies give way
 
-A rule that stands in for a property is a proxy. A proxy is easy to state and easy to enforce for its own sake, and it ends up guarding the wrong thing; the ontology's names for the habit are [pattern cargo cult](ontology/PRINCIPLES.md#arch-pattern-cargo-cult) and [golden hammer](ontology/PRINCIPLES.md#arch-golden-hammer). Two proxies come up often enough to name here, and [D1·a two proxies](#when-not-panel-a) shows each one with the property it stands for and what holds that property instead. Two others are retired elsewhere in the method: a fixed line count repeated in every document is retired in [one home](BUILD.md#one-home), and a voice the model keeps up all session is retired in [a seat is a contract](START.md#a-seat-is-a-contract).
+A rule that stands in for a property is a proxy. A proxy is easy to state and easy to enforce for its own sake, and it ends up guarding the wrong thing; the ontology's names for the habit are [pattern cargo cult](ontology/PRINCIPLES.md#architecture-pattern-cargo-cult) and [golden hammer](ontology/PRINCIPLES.md#architecture-golden-hammer). Two proxies come up often enough to name here, and [D1·a two proxies](#when-not-panel-a) shows each one with the property it stands for and what holds that property instead. Two others are retired elsewhere in the method: a fixed line count repeated in every document is retired in [one home](BUILD.md#one-home), and a voice the model keeps up all session is retired in [a seat is a contract](START.md#a-seat-is-a-contract).
 
 ### The property behind the rule
 
@@ -189,7 +189,7 @@ r1["Benchmark everything before any application logic"]
 r2["Synchronous over asynchronous, always"]
 end
 subgraph properties["The property it stands for"]
-p1["A measurement precedes an optimisation"]
+p1["A measurement precedes an optimization"]
 p2["One correct answer exists"]
 end
 subgraph holds["What holds the property"]
@@ -202,7 +202,7 @@ r2 --> p2 --> h2
 
 ## The honest gaps
 
-Some things this method does not do. Nothing computes worth: the [utility](ontology/REASONING.md#reason-node-tel-utility) and [cost](ontology/REASONING.md#reason-node-tel-cost) nodes of the ontology's teleology axis are empty slots here, and I make that decision myself. Nothing detects a lack of progress; [diminishing returns](ontology/REASONING.md#reason-node-ter-diminishing-returns) is a node I notice rather than a detector that fires. [Confidence](ontology/REASONING.md#reason-node-ver-confidence) is a threshold rather than a distribution, and several conduct rules have no artifact behind them yet. I state these gaps because a method that claims to be complete is one whose gaps you find in production. The architecture page keeps its own list of the same kind, where each gap is declared absent and never assumed.
+Some things this method does not do. Nothing computes worth: the [utility](ontology/REASONING.md#reasoning-node-tel-utility) and [cost](ontology/REASONING.md#reasoning-node-tel-cost) nodes of the ontology's teleology axis are empty slots here, and I make that decision myself. Nothing detects a lack of progress; [diminishing returns](ontology/REASONING.md#reasoning-node-ter-diminishing-returns) is a node I notice rather than a detector that fires. [Confidence](ontology/REASONING.md#reasoning-node-ver-confidence) is a threshold rather than a distribution, and several conduct rules have no artifact behind them yet. I state these gaps because a method that claims to be complete is one whose gaps you find in production. The architecture page keeps its own list of the same kind, where each gap is declared absent and never assumed.
 
 ### Declared absences
 

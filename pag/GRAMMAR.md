@@ -1,8 +1,8 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Grammar — PAG — Bane's Lab
 
-> PAG is defined by a context-free grammar written in Backus–Naur form (BNF), and its rules fall into five categories. The planning and coordination productions…
+> PAG is defined by a context-free grammar written in Backus–Naur form (BNF), and its rules fall into five categories.
 
 Canonical: https://banes-lab.com/pag/grammar
 
@@ -53,8 +53,8 @@ BNF grammar
 <node_number> ::= <digit>+
 <node_title> ::= <text>
 <layer> ::= "epistemic" | "conative" | "evaluative"
-<axis> ::= "ontology" | "teleology" | "analysis" | "reasoning" | "formalisation" | "verification" | "representation" | "termination"
-<math_type> ::= "set-theory" | "logic" | "graph" | "algebra" | "analysis" | "optimisation" | "topology" | "computation" | "probability" | "information-theory" | "dynamical-systems"
+<axis> ::= "ontology" | "teleology" | "analysis" | "reasoning" | "formalization" | "verification" | "representation" | "termination"
+<math_type> ::= "set-theory" | "logic" | "graph" | "algebra" | "analysis" | "optimization" | "topology" | "computation" | "probability" | "information-theory" | "dynamical-systems"
 <shape> ::= "set" | "boolean" | "edge-list" | "ranking" | "procedure" | "artifact" | <text>
 <node_meta_tag> ::= "@purpose" ":" <string>
 | "@axis_question" ":" <string>
@@ -178,7 +178,7 @@ BNF grammar
 | "ITERATE" | "ATTEMPT" | "ENFORCE" | "RENAME"
 | "FAIL" | "EXIT" | "RETURN" | "WAIT" | "SEND"
 | "REDUCE" | "PROPAGATE" | "FINALIZE" | "EVIDENCE"
-| "PREDICT" | "EXPLAIN" | "REFLECT" | "ABSTRACT" | "GENERALISE" | "DESCRIBE" | "FORMALISE"
+| "PREDICT" | "EXPLAIN" | "REFLECT" | "ABSTRACT" | "GENERALIZE" | "DESCRIBE" | "FORMALIZE"
 <semantic_operation> ::= "DISCOVER_RESOURCES" | "READ_RESOURCE" | "SEARCH_CONTENT" | "ANALYZE_CONTENT" | "EXTRACT_FACTS" | "CALCULATE_METRIC"
 | "COMPOSE_ARTIFACT" | "VALIDATE_ARTIFACT" | "PERSIST_ARTIFACT" | "EXECUTE_TOOL" | "REQUEST_DECISION" | "REPORT_RESULT"
 <modifier> ::= "MUST" | "NEVER" | "ALWAYS" | "REQUIRED" | "MANDATORY"

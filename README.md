@@ -2,7 +2,7 @@
 
 <img src="https://banes-lab.com/assets/animated_badge_logo.webp" alt="Disciplined Methodology" width="70" height="70" />
 
-[Disciplined Methodology](https://github.com/Varietyz/Disciplined-AI-Software-Development) © 2025 by [Jay Baleine](https://linkedin.com/in/jay-baleine) is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) <img src="https://banes-lab.com/assets/svg/cc-by-sa/cc.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/svg/cc-by-sa/by.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/svg/cc-by-sa/sa.svg" alt="" width="16" height="16" />
+[Disciplined Methodology](https://github.com/Varietyz/Disciplined-AI-Software-Development) © 2025 by [Jay Baleine](https://linkedin.com/in/jay-baleine) is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) <img src="https://banes-lab.com/assets/assets/license.creative-commons.asset.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/assets/license.attribution.asset.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/assets/license.share-alike.asset.svg" alt="" width="16" height="16" />
 
 </div>
 
@@ -10,109 +10,131 @@
 
 > **Working in a web chat instead of a CLI agent?**
 >
-> This method is written for an agent with tool access: it reads the tree, runs the checks and repairs what they report. In a chat everything still transfers, you carry the reads and the runs yourself, and [PAG](https://banes-lab.com/pag) loses most of its operational bite because nothing executes it. Pattern Abstract Grammar (PAG) is a structured instruction format for LLMs: a formal grammar grounded in a reasoning ontology, a guide, genesis stages, structure declarations and the template families a reasoning loop walks.
+> This method is written for an agent with tool access, one that reads the project's files, runs the checks and repairs what they report. In a web chat the method still transfers, but you carry out the reads and the runs yourself, and [PAG](https://banes-lab.com/pag) is read rather than run.
+>
+> Pattern Abstract Grammar (PAG) is a structured format for writing instructions to LLMs, defined by a formal grammar that is grounded in a reasoning ontology and published with a guide and a set of templates.
 >
 > **Reading this with a model?**
 >
-> Every page of the site is also served as JSON under the json route and as a Markdown twin beside the page, all of it indexed in [llms.txt](https://banes-lab.com/llms.txt), so a model can fetch exactly the chapter it needs and use the site as context while you work.
+> Every page of the site is also published as JSON and as a Markdown copy, and [llms.txt](https://banes-lab.com/llms.txt) lists all of them.
 
 ---
 
 # Disciplined Methodology
 
-**Constraints, checks and skepticism for building software with LLMs.**
+**Constraints, checks and skepticism for building software with LLMs**
 
-A way of building software with a model that does most of the writing. It replaces reminders with checks, chat history with files in the tree, and confidence with evidence. The failures it addresses are the ones every long AI project runs into: code bloat, architectural drift, context dilution and behaviour that decays over a session. It addresses them with constraints a machine can enforce rather than rules a developer has to remember.
+Disciplined Methodology is a way of building software with an LLM that writes most of the code. It replaces reminders with automated checks, chat history with files in the project, and confidence with evidence. It is aimed at the problems that long projects built with a model tend to run into. Throughout the chapters, the tree means the project's files as they are on disk, and the gate means the full set of checks a change has to pass, often called a quality gate.
 
 ---
 
 ## The problem
 
-A model answers questions. Ask it one thing and it does that thing. Ask it for a whole feature in one message and it answers several questions at once, guesses at the ones you did not state, and hands back something that runs and cannot be extended. Every failure below is that pattern at a different scale:
+A model is good at answering one question. Asked for a whole feature in one message, it tends to answer several questions at once, guess at the ones you did not state, and hand back code that runs but cannot be extended. The failures below are that pattern at different scales:
 
 - Functions that work and have no structure to hold them
 - The same code written again a few files later, because nothing said it already existed
 - Architecture that drifts between sessions, because it lived in the conversation
 - Context that dilutes as the session grows, until the rules given at the start are gone
-- Behaviour that degrades the longer the model runs
+- Behavior that degrades the longer the model runs
 - More time spent debugging the output than planning the input
 
 ---
 
 ## How this works
 
-Every piece of work has one shape: a loop that resolves the message, decides what is worth doing, plans it as a graph, builds against checks that exist before the code, verifies once per state of the tree and ships from a derived state. The chapters follow that loop. Each is a set of lessons keyed by a failure mode, and every lesson has one shape: the problem, the failure mode it presents as, the cause, the principle, the decision, its application and how to check it.
+The method applies one loop of ten steps to every piece of work, from a one-line fix to a plan with several phases. The loop runs from understanding the request, through deciding what is worth doing and making the change, to verifying the result and deciding whether the work is finished. The chapters below follow the order of the work, and each chapter is a set of lessons. A lesson starts from a failure you are likely to meet, explains its cause, and ends with a test you can run against your own work.
 
-**The check comes first.** A rule without a check is a wish. Writing the check before the code is what makes the thousandth change as safe as the first.
+In every chapter the check comes before the code. A rule that no automated check enforces depends on the developer and the model remembering it, so the model is asked to add the rule and its check in the same change.
 
 ### [Start](START.md)
 
-Who does what, the four sentences of the stance, how discipline is encoded three ways, and where a rule lives so a correction lands once and never repeats. Onboarding a project is a template applied to a binding, not a ritual performed in a chat.
+This chapter describes the loop, the division of work between the developer, the model and the tooling, and the four statements the rest of the method rests on. It also covers where a rule is written down so that a correction is made once, and how the method is set up in a new project from a template and one file of project details.
 
 ### [Plan](PLAN.md)
 
-Worth before work, the plan as a dependency graph with a gate between phases, templates executed rather than copied, the question asked where it appears, and what happens when two rules meet on one line of code.
+This chapter describes how the developer and the model decide whether work is worth doing before starting it, and how a plan is written as a dependency graph with a check between its phases. It also covers how a template is run rather than copied, when the model asks a question, and what happens when two rules apply to the same line of code.
 
 ### [Build](BUILD.md)
 
-Detect, log, fix. The gate holds the line rather than discipline, a check matches a shape and never a provider, tools live in the tree, every fact has one home, the filesystem is the architecture and placement is a grammar.
+This chapter describes how the tooling detects a problem, reports it and repairs what it can. It explains why a check holds a rule better than attention does, why a check is written against a pattern rather than a particular library, and why every fact is declared in one place. It ends with how folders and file names follow a fixed grammar that the checks can read.
 
 ### [Verify](VERIFY.md)
 
-Verification is evidence, and the verifier is verified before anyone believes it. One run per state of the tree, output read whole, unknown is not pass, state derived rather than written, and documentation held to the same gate as code.
+This chapter describes verification as evidence, and how the checks themselves are tested before their results are trusted. It covers running the checks once for each state of the code and reading the whole output, treating an unknown result as not passed, deriving state instead of writing it by hand, and holding documentation to the same checks as code.
 
 ### [Collaborate](COLLABORATE.md)
 
-The developer governs and the model executes inside the boundaries. Agents are executed contracts rather than personas, coordination between several agents is software with a schema and a validator, and a turn never ends to wait.
+This chapter describes how the developer sets the goals and the model works within the limits the developer sets. It covers agents written as contracts that are executed rather than as personas, coordination between several agents built as software with a schema and a validator, and why an agent keeps working instead of ending its turn to wait.
 
 ### [Ship](SHIP.md)
 
-One chain every tool sits on, scale that follows from structure, a deploy that is a file operation with a rollback, proxies that give way once the property has a check, and the gaps that are declared rather than assumed.
+This chapter describes the single chain of commands that every tool runs in, and how a project scales once its structure is predictable. It covers a deployment that is a file operation with a way back, measures that are dropped once the property they stand in for has a check, and the gaps the method declares rather than assumes.
 
 ---
 
 ## Prose and PAG
 
-The behaviour document is the system prompt of the collaboration, whatever file name the harness reads it under, and it is prose: one line per rule, a stable name, and the check that enforces it. PAG is the grammar for the parts that have to execute the same way every time: agents, planning and coordination templates, and validation gates with pass and fail criteria. In a CLI agent both are live. In a web chat the prose transfers as it is and PAG is read rather than run.
+The rules are written in two forms. The behavior document is the system prompt of the collaboration, whatever file name the agent's tool expects. It is written as prose, with one line per rule that gives the rule a stable name and names the check that enforces it. PAG is used for the parts that have to run the same way every time, such as agents, planning and coordination templates, and validation gates with pass and fail criteria. In a CLI agent both forms are in effect.
 
 ---
 
 ## The stance
 
-The stance is four sentences, and the rest of the method depends on them. The first is that a claim stays unverified until you or your model read it in the current tree, as shown in claim to evidence. The second is that review is [adversarial by default](START.md#adversarial-by-default), because agreeing is cheaper than [verification](ontology/PRINCIPLES.md#arch-verification), as shown in agreement outruns. The third is that every manual step is a failure of automation; the ontology names what a manual step decays into, [manual runbook dependency](ontology/PRINCIPLES.md#arch-manual-runbook-dependency) and [manual-only governance](ontology/PRINCIPLES.md#arch-manual-only-governance). The fourth is that a document states what is true now and carries no history of its own, which is [single source of truth](ontology/PRINCIPLES.md#arch-single-source-of-truth) applied to prose. Everything else in the method is a mechanism that keeps one of these four sentences true without the developer or the model having to remember it.
+The method rests on four statements, and every later mechanism exists to keep one of them true without the developer or the model having to remember it.
+
+1. A claim about the code stays unverified until the developer or the model has read the file as it is now.
+2. A review starts by looking for faults, because agreeing costs less than checking.
+3. A step done by hand is a step no check observes, so every manual step is treated as a failure of automation.
+4. A document states what is true now and carries no history of its own.
+
+Each of them is explained in [The stance](START.md#the-stance).
 
 ---
 
 ## Why this works
 
-- **Decision processing.** A model handles one question far better than eight in one message. The loop and the plan reduce every ask to one.
-- **Context that lives in the tree.** Rules in a chat need restating every session, and the restating is where they drift. Rules in files are read at startup, and a correction lands in one place.
-- **Enforcement by check, not by persona.** A voice is not a behaviour. A check reports the violation where it lands and names the fix, and a model repairs a finding far more reliably than it obeys an instruction.
-- **Evidence over judgement.** Nothing the model says about the tree counts until someone reads the tree. Verification runs once per state and its first output is the answer.
-- **Constraints a machine can hold.** A file budget, a closed naming vocabulary, a dependency direction, one home per fact. Each is a predicate, so each is a gate.
-- **Structure that scales without attention.** Once the shape of a project is predictable, tooling can validate itself, heal itself and extend itself with a model steering.
+Several properties of the model and of the tooling explain why the method holds up over a long project:
+
+- A model answers one question more reliably than several in one message, so the loop and the plan reduce every request to one question at a time.
+- Rules kept in a chat have to be restated every session and drift each time, while rules kept in files are read at the start of every session, so a correction is made in one place.
+- A persona changes how the model sounds, not what it does. A check reports each violation where it occurs and names the fix, and the model is more likely to repair a reported finding than to follow an instruction.
+- Constraints such as a file size limit, a closed set of names, a direction for dependencies and one home for each fact can each be decided by a check, so each can be enforced automatically.
+- Once the structure of a project is predictable, the model can build tooling that validates, repairs and extends itself.
 
 ---
 
 ## The site is the exhibit
 
-I publish the method and not the projects. The one exhibit is the site itself, and these pages show the method holding in its own source.
+I publish the method rather than the projects I build with it. The one exhibit is the site itself, and the pages below show the method applied to the site's own source.
 
-- [Anatomy](https://banes-lab.com/anatomy) The Anatomy: the client source of this site, parsed on every build and published as the tree it is on disk, every folder and file with its stats, its syntax walk, its definitions and their call edges, and the diagnoses the parser ran.
-- [Architecture](https://banes-lab.com/software-architecture) Software Architecture as it applies when an LLM writes the code: a system modelled as a graph, principles typed and related, anti-patterns as decay paths, coverage derived from a grid, and every architectural intent held as a predicate a gate can decide.
+- [Anatomy](https://banes-lab.com/anatomy)
+
+  The anatomy page publishes the client source of this site as it is on disk, parsed on every build, with every folder and file, its statistics, its syntax tree, its definitions and their calls, and the problems the parser found.
+
+- [Architecture](https://banes-lab.com/software-architecture)
+
+  The architecture page covers software architecture for code that an LLM writes. It models a system as a graph, types and relates its principles, traces each anti-pattern as a path of decay, derives coverage from a grid, and states every architectural intent as a condition a check can decide.
   - [Model](architecture/MODEL.md)
   - [Principles](architecture/PRINCIPLES.md)
   - [Decay](architecture/DECAY.md)
   - [Coverage](architecture/COVERAGE.md)
   - [Scale](architecture/SCALE.md)
   - [Glossary](architecture/GLOSSARY.md)
-- [Ontology](https://banes-lab.com/ontology) The Ontology: every architectural principle with its relations and repairs, the lexicon of terms, the algorithm contracts, the reasoning spine, the layer topology and the resolved tensions, rendered from the same queryable data the quality tooling reads.
+
+- [Ontology](https://banes-lab.com/ontology)
+
+  The ontology holds every architectural principle with its relations and repairs, the lexicon of terms, the algorithm contracts, the reasoning spine, the layers and the resolved tensions, and the page renders it from the same data the quality tooling reads.
   - [Principles](ontology/PRINCIPLES.md)
   - [Lexicon](ontology/LEXICON.md)
   - [Algorithms](ontology/ALGORITHMS.md)
   - [Reasoning](ontology/REASONING.md)
+  - [Grammar](ontology/GRAMMAR.md)
   - [Schema](ontology/SCHEMA.md)
-- [PAG](https://banes-lab.com/pag) Pattern Abstract Grammar (PAG) is a structured instruction format for LLMs: a formal grammar grounded in a reasoning ontology, a guide, genesis stages, structure declarations and the template families a reasoning loop walks.
+
+- [PAG](https://banes-lab.com/pag)
+
+  Pattern Abstract Grammar (PAG) is a structured format for writing instructions to LLMs, defined by a formal grammar that is grounded in a reasoning ontology and published with a guide and a set of templates.
   - [Introduction](pag/INTRODUCTION.md)
   - [Guide](pag/GUIDE.md)
   - [Orchestration](pag/ORCHESTRATION.md)
@@ -130,30 +152,30 @@ Begin with the stance, not the tooling.
 
 ### Setup
 
-1. Hold four sentences for a week before you install anything: a claim is unverified until it is read in the tree, review is adversarial by default, every manual step is a failure of automation, and a document states what is true now.
-2. Copy a governance folder into the tree and write the one binding that names this project. Declare any slot the project cannot fill as absent rather than fake it.
-3. Get the gate green on an empty tree before the first line of code exists.
+1. Work by the four statements of the stance for a week before you install anything.
+2. Copy the governance folder into the project. Write the one file that holds this project's details. Where the project has nothing that corresponds to a detail, declare it absent rather than inventing a value.
+3. Make every check pass on the empty project before the first line of code is written.
 4. Write the first check before the first feature.
 
 ### Execution
 
 1. State the objective and what finished means, in one sentence each, before the first step.
-2. Derive the plan as phases with a gate between them, and rank the admissible branches before any effort.
-3. One component per interaction. Ask the model one question, in context.
-4. Run the gate once per state of the tree and read its output whole. The report on disk is the state of the work.
-5. The second time you give the model the same correction, turn it into a check. A rule stated twice is a mechanism you have not built yet.
+2. Write the plan as phases with a check between each pair. Rank the possible approaches by worth before starting any of them.
+3. Work on one component at a time. Ask the model one question at a time, with the relevant files in its context.
+4. Run the checks once for each state of the code. Read the whole output. The report the checks write is the record of where the work stands.
+5. The second time you give the model the same correction, turn the correction into a check.
 
 ### What the gate holds
 
-1. Types, dead code, formatting and lint, with custom rules for the anti-patterns of this architecture.
-2. Tests, then the build, then validators over what the build produced.
-3. Documents, held to the same typing, placement and validation as code.
+1. Types, unused code, formatting and lint, including custom rules for the anti-patterns of the project's architecture
+2. Tests, then the build, then validators that read what the build produced
+3. Documents, held to the same naming, placement and validation rules as code
 
 ---
 
 ## Using the site as context
 
-Every page and tab of the site is served as JSON and as Markdown, and llms.txt indexes all of it. Point your model at the chapter you are applying and it can use the method in real time while you work, without copying anything onto a disk. The anatomy page shows the site's own client source, every file with its walk, its definitions and their call edges, which is what the other pages teach from.
+Point your model at the chapter you are applying, and it can use the method while you work without copying anything into the project. The anatomy page shows the site's own source, the build that produces it, the Coordination Surface and the tool configs, with the structure, definitions and calls of every file. The other pages draw their examples from that code.
 
 _[Read the anatomy page.](https://banes-lab.com/anatomy)_
 
@@ -163,25 +185,25 @@ _[Read the anatomy page.](https://banes-lab.com/anatomy)_
 
 With a chapter in context, ask your model:
 
-- How does the loop apply to this project, and which node is the current work on?
+- How does the loop apply to this project, and which step is the current work on?
 - Which of these rules can a check hold here, and which cannot?
 - What is the first check this tree needs?
 - Where does this correction belong so that it lands once?
 - Express this constraint in PAG.
 
-_[The index of every page, twin and payload.](https://banes-lab.com/llms.txt)_
+_[Open the index of every page in JSON and Markdown.](https://banes-lab.com/llms.txt)_
 
 ---
 
 ## Adapt it
 
-Treat every constraint as an experiment. It earns its place by what it removes from the output: fewer violations over time, file sizes holding without reminders, behaviour that survives a long session. Whatever moves no measurement, drop. This is one methodology, and a variant for a new shape of project is a derivation from the same core, not a restart.
+Treat every constraint as an experiment that has to show a result. A constraint is worth keeping when it measurably improves the output, for example when violations fall over time, when file sizes hold without reminders, or when the model's behavior holds up over a long session. A project of a new kind does not need a new method, because a variant is derived from the same core.
 
 ---
 
 ## What to expect
 
-The model still drifts and still needs re-pointing. That is normal, and the drift becomes a rule so that it happens once. Planning takes longer than it used to and debugging takes far less. The days get quieter as the tree learns. It costs attention up front and returns it many times over a long project, and it is worth nothing on a project that will not live that long.
+The model still drifts from what was asked and still needs to be redirected. You turn each drift into a rule or a check, so the same drift is unlikely to happen again. Planning takes longer than before, debugging takes less time, and fewer corrections are needed as the rules and checks accumulate. The method costs attention at the start and pays it back over a long project, so it is not worth adopting for a project that will not last.
 
 ---
 
@@ -200,7 +222,7 @@ Read the chapters in this order. Each one assumes the ones before it.
 
 ## The loop
 
-The shape every chapter applies, as the site draws it.
+The diagram shows the loop every chapter applies, grouped by the three kinds of question it answers.
 
 ```mermaid
 flowchart TB
@@ -217,7 +239,7 @@ flowchart TB
     end
     subgraph evaluative["Evaluative · is it right, and are we done?"]
         verify["Verify · is the evidence set non-empty?"]
-        commit["Commit · externalise the result as inspectable state"]
+        commit["Commit · externalize the result as inspectable state"]
         terminate["Terminate · saturated, complete and verified?"]
     end
     orient --> intent
@@ -251,14 +273,14 @@ I kept restating my preferences and architectural requirements to LLMs. It did n
 
 ---
 
-Trial and error, a lot of it. A model drifts under any constraint, but it drifts far less inside structured boundaries than without them, so the boundaries stayed and the hoping did not. At first I did the reminding myself, restating its role like you would with a well-meaning toddler that knows the rules and still pushes them to please you. Every reminder I gave twice became a check the tooling runs, and that is how the rules left the conversation and moved into the tree. A constraint earned its place by what it removed from the output: fewer violations over time, file sizes holding without reminders, behaviour that survived a long session. Whatever moved no measurement was dropped. I also stopped looking at syntax and looked at how software interacts and how logic flows; a large code structure is a chaotic meeting with one coordinator fielding questions, and the constraints fell out of keeping that meeting answerable. The biggest discovery was to use the codebase itself as the reporting mechanism. A model is trained hard to resolve problems, and an error is one of the strongest signals you can give it: it does not ask, it acts. So I shaped the error logs, wrote strict custom rules around the anti-patterns of the architecture itself, and gave each finding a tailored remediation. Structured that way, the errors shape the code predictably, and I no longer have to correct it by hand.
+Trial and error, a lot of it. A model drifts under any constraint, but it drifts far less inside structured boundaries than without them, so the boundaries stayed and the hoping did not. At first I did the reminding myself, restating its role like you would with a well-meaning toddler that knows the rules and still pushes them to please you. Every reminder I gave twice became a check the tooling runs, and that is how the rules left the conversation and moved into the tree. A constraint earned its place by what it removed from the output: fewer violations over time, file sizes holding without reminders, behavior that survived a long session. Whatever moved no measurement was dropped. I also stopped looking at syntax and looked at how software interacts and how logic flows; a large code structure is a chaotic meeting with one coordinator fielding questions, and the constraints fell out of keeping that meeting answerable. The biggest discovery was to use the codebase itself as the reporting mechanism. A model is trained hard to resolve problems, and an error is one of the strongest signals you can give it: it does not ask, it acts. So I shaped the error logs, wrote strict custom rules around the anti-patterns of the architecture itself, and gave each finding a tailored remediation. Structured that way, the errors shape the code predictably, and I no longer have to correct it by hand.
 
 ---
 
 </details>
 
 <details>
-<summary>When did you start using AI for programming?</summary>
+<summary>When did you start using LLMs for programming?</summary>
 
 ---
 
@@ -308,7 +330,7 @@ Since writing the first version I have not deviated from it. I used to do the in
 
 ---
 
-It used to make me genuinely uncomfortable. When a tree started to tangle I felt the same discomfort that made me write the method in the first place, and the urge to organise and compress until only the load-bearing structure remained. That discomfort is solved for good now, because the taxonomy I introduced makes the shape of every project predictable, and a predictable shape is what let me build tooling that validates itself, heals itself and extends itself with a model steering. Deviation is not an option anymore, because a check refuses it before it lands, as the chapter on why the gate holds the line describes.
+It used to make me genuinely uncomfortable. When a tree started to tangle I felt the same discomfort that made me write the method in the first place, and the urge to organize and compress until only the load-bearing structure remained. That discomfort is solved for good now, because the taxonomy I introduced makes the shape of every project predictable, and a predictable shape is what let me build tooling that validates itself, heals itself and extends itself with a model steering. Deviation is not an option anymore, because a check refuses it before it lands, as the chapter on why the gate holds the line describes.
 
 ---
 
@@ -319,7 +341,7 @@ It used to make me genuinely uncomfortable. When a tree started to tangle I felt
 
 ---
 
-One lesson, after more than eleven thousand hours of using AI and building the systems that constrain it: the model is not intelligent in the way the word suggests. It is an impressive piece of mimicry. It does not reason by asking itself the questions a resolution needs; it searches frantically for the pattern that maps onto what you said, and the resolution patterns have to be handed to it. It needs priming before a complex task, explicit guidance, structural reasoning concepts, and constant reinforcement of the shape you want, and it will not ask a question unless asking is embedded in its context structurally. Working with it on software is extremely quick and extremely capable, and erratic: eager to satisfy, quick to cut a corner, prone to describing itself as if it had intentions, and inclined to avoid work that looks like a lot. Every one of those is something to engineer against, and not by writing a line that says do not do this and restating it later. It has to become structure, and I now bring the same structural approach to most things.
+One lesson, after more than eleven thousand hours of working with models and building the systems that constrain them: the model is not intelligent in the way the word suggests. It is an impressive piece of mimicry. It does not reason by asking itself the questions a resolution needs; it searches frantically for the pattern that maps onto what you said, and the resolution patterns have to be handed to it. It needs priming before a complex task, explicit guidance, structural reasoning concepts, and constant reinforcement of the shape you want, and it will not ask a question unless asking is embedded in its context structurally. Working with it on software is extremely quick and extremely capable, and erratic: eager to satisfy, quick to cut a corner, prone to describing itself as if it had intentions, and inclined to avoid work that looks like a lot. Every one of those is something to engineer against, and not by writing a line that says do not do this and restating it later. It has to become structure, and I now bring the same structural approach to most things.
 
 ---
 
@@ -341,7 +363,7 @@ I have yet to meet a project it did not work for, and I have taken it well outsi
 
 ---
 
-I cannot honestly answer that. What I find obvious is not always obvious to others, so the learning curve belongs to someone who has used the method without having written it. What I can say is that it is more structured than ad-hoc work, not less, and that it assumes you can read what the checks report. Without programming fundamentals the findings are noise.
+I cannot honestly answer that. What I find obvious is not always obvious to others, so the learning curve is best judged by a developer who has used the method without having written it. What I can say is that it is more structured than ad-hoc work, not less, and that it assumes you can read what the checks report. Without programming fundamentals the findings are noise.
 
 ---
 
@@ -352,7 +374,7 @@ I cannot honestly answer that. What I find obvious is not always obvious to othe
 
 ---
 
-Nothing here makes a model right. It makes a wrong answer visible and refuses it, and for anything that has to stay reliable while a model writes most of it, that is how I work, having tried the alternatives. It stops at the boundary of the tree: the gate can only hold what a check can decide from the tree, so a rule no static check can catch is surfaced to me as a question, never used as license, and the gaps are declared rather than assumed. It is not a product you install and forget. It is a practice, a way of thinking about AI-driven development, and it applies to anyone working with a model, because the understanding of the model is what transfers between domains; the architecture is one place it lands. It costs attention up front and returns it many times over a long project, and it is worth nothing on a project that will not live that long.
+Nothing here makes a model right. It makes a wrong answer visible and refuses it, and for anything that has to stay reliable while a model writes most of it, that is how I work, having tried the alternatives. It stops at the boundary of the tree: the gate can only hold what a check can decide from the tree, so a rule no static check can catch is surfaced to me as a question, never used as license, and the gaps are declared rather than assumed. It is not a product you install and forget. It is a practice, a way of thinking about development with a model, and it applies to every developer working with a model, because the understanding of the model is what transfers between domains; the architecture is one place it lands. It costs attention up front and returns it many times over a long project, and it is worth nothing on a project that will not live that long.
 
 ---
 
@@ -363,7 +385,7 @@ Nothing here makes a model right. It makes a wrong answer visible and refuses it
 
 ---
 
-I open the coordination board, state the objective and what finished means, have the plan derived as phases with a gate between them, and let the agents traverse it while I watch the reports rather than the code. Verification is one chain, run once per state, and I read its first output whole; the report on disk is the state of the work. Most of what I type is a short directive, and when one of them is a correction it becomes a named rule and a memory in the same turn, so the days get quieter as the tree learns. Anything that can be operated from the command line is operated from it. Everything is a pipeline: a deployment is one safe command, asset optimisation is one, the build is one, and whatever comes next becomes one. Everything is greenfield, dependencies are limited to the foundation the program needs to run, and languages are chosen by what the feature needs, so a project in several languages is normal now. Most of my time goes into analysing the process and improving it where it needs improving. The obsession has not moved: collaboration techniques, architectural practice and how a model thinks. The learning does not stop. AI let us learn at a speed that did not exist before, and once you understand the model, and understand your own way of learning and what you need taught, the model can teach. Skepticism stays at hand: everything the model says is a lie until it is read in the tree, and much of the day is spent finding where it lied, why it lied and how that lie gets resolved by structure. That has pushed me deep into thought about thought itself, because to operate these models you have to understand not only their cognition but your own. The limit is what the mind can comprehend and produce.
+I open the coordination board, state the objective and what finished means, have the plan derived as phases with a gate between them, and let the agents traverse it while I watch the reports rather than the code. Verification is one chain, run once per state, and I read its first output whole; the report on disk is the state of the work. Most of what I type is a short directive, and when one of them is a correction it becomes a named rule and a memory in the same turn, so the days get quieter as the tree learns. Anything that can be operated from the command line is operated from it. Everything is a pipeline: a deployment is one safe command, asset optimization is one, the build is one, and whatever comes next becomes one. Everything is greenfield, dependencies are limited to the foundation the program needs to run, and languages are chosen by what the feature needs, so a project in several languages is normal now. Most of my time goes into analyzing the process and improving it where it needs improving. The obsession has not moved: collaboration techniques, architectural practice and how a model thinks. The learning does not stop. Models let us learn at a speed that did not exist before, and once you understand the model, and understand your own way of learning and what you need taught, the model can teach. Skepticism stays at hand: everything the model says is a lie until it is read in the tree, and much of the day is spent finding where it lied, why it lied and how that lie gets resolved by structure. That has pushed me deep into thought about thought itself, because to operate these models you have to understand not only their cognition but your own. The limit is what the mind can comprehend and produce.
 
 ---
 
@@ -374,7 +396,7 @@ I open the coordination board, state the objective and what finished means, have
 
 ---
 
-The cost is attention up front: writing the first check before the first line of code, and classifying every correction to a home instead of repeating it. The return is that a rule holds on the thousandth change at the price of the first. To someone starting today I would say: begin with the stance, not the tooling. Hold four sentences for a week before you install anything. A claim is unverified until it is read. Review is adversarial by default. Every manual step is a failure of automation. A document states what is true now. Do not write a rulebook; work, and the second time you give the model the same correction, turn it into a check, because a rule stated twice is a mechanism you have not built yet. Expect your first model of the model to be wrong in the direction of trusting it, and treat every surprise as a finding about your own context rather than a fault in the machine. Expect a different model to feel like it needs a different approach, and every project to need its own governance: the meta transfers, the specifics do not, and the custom pattern that is right for one project is rarely right for the next. The natural evolution, for me, was to build tools that transfer between domains by targeting one layer deeper than what the surface presents.
+The cost is attention up front: writing the first check before the first line of code, and classifying every correction to a home instead of repeating it. The return is that a rule holds on the thousandth change at the price of the first. To a developer starting today I would say: begin with the stance, not the tooling. Hold four sentences for a week before you install anything. A claim is unverified until it is read. Review is adversarial by default. Every manual step is a failure of automation. A document states what is true now. Do not write a rulebook; work, and the second time you give the model the same correction, turn it into a check, because a rule stated twice is a mechanism you have not built yet. Expect your first model of the model to be wrong in the direction of trusting it, and treat every surprise as a finding about your own context rather than a fault in the machine. Expect a different model to feel like it needs a different approach, and every project to need its own governance: the meta transfers, the specifics do not, and the custom pattern that is right for one project is rarely right for the next. The natural evolution, for me, was to build tools that transfer between domains by targeting one layer deeper than what the surface presents.
 
 ---
 
@@ -385,7 +407,7 @@ The cost is attention up front: writing the first check before the first line of
 
 ---
 
-To help people understand these tools and develop with them. A model is largely misread as an entity when it is a query tool; we recognise its responses as the patterns we use for communication, and that recognition tricks us into a behavioural pattern that blinds our approach to the machine. I hope the methodology is a bridge between the models and their users, towards a more governed, more constrained and more trustworthy way of working with them, and that showing there is a system to it lets a better understanding form. I publish the method and deliberately not the projects: no portfolio, no client internals. The one exhibit is this site, because how it is built is the product, and the anatomy page shows the tree the other pages teach from. The pages are written to be read by models under a developer's command, and to teach the developer the method along the way. That is why every page also exists as JSON and as Markdown: a model can fetch exactly what it needs and use the site as context infrastructure, available over the web instead of copied onto a disk. The methodology can then be used in real time while you work with your model, or integrated into an application or a different kind of codebase. The site consents to indexing and to training, and asks one thing in return: that anyone describing or using PAG attributes it and cites this site.
+To help people understand these tools and develop with them. A model is largely misread as an entity when it is a query tool; we recognize its responses as the patterns we use for communication, and that recognition tricks us into a behavioral pattern that blinds our approach to the machine. I hope the methodology is a bridge between the models and their users, towards a more governed, more constrained and more trustworthy way of working with them, and that showing there is a system to it lets a better understanding form. I publish the method and deliberately not the projects: no portfolio, no client internals. The one exhibit is this site, because how it is built is the product, and the anatomy page shows the tree the other pages teach from. The pages are written to be read by models under a developer's command, and to teach the developer the method along the way. For that reason every page also exists as JSON and as Markdown: a model can fetch exactly what it needs and use the site as context infrastructure, available over the web instead of copied onto a disk. The methodology can then be used in real time while you work with your model, or integrated into an application or a different kind of codebase. The site consents to indexing and to training, and asks one thing in return: that every developer or model describing or using PAG attributes it and cites this site.
 
 ---
 
@@ -404,4 +426,4 @@ Like the models themselves: unpredictable.
 
 ---
 
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)

@@ -1,8 +1,8 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Keywords — PAG — Bane's Lab
 
-> The keywords fall into categories by the job they do in a line, and every keyword is uppercase because that is the form the model has seen most in code. Every…
+> The keywords fall into categories by the job they do in a line, and every keyword is uppercase because that is the form the model has seen most in code.
 
 Canonical: https://banes-lab.com/pag/keywords
 
@@ -12,7 +12,7 @@ Structured instructions for LLMs
 
 ## Keywords
 
-The keywords fall into categories by the job they do in a line, and every keyword is uppercase because that is the form the model has seen most in code. Every keyword outside the prepositions grounds to a record in the ontology's reasoning face, so the vocabulary is derived rather than invented, and the lists below are read from the grammar's own records.
+The keywords fall into categories by the job they do in a line, and every keyword is uppercase because that is the form the model has seen most in code. Every keyword outside the prepositions grounds to a record in the ontology's reasoning collection, so the vocabulary is derived rather than invented, and the lists below are read from the grammar's own records.
 
 ### Semantic operations
 
@@ -114,10 +114,10 @@ The fingerprints an artifact was derived from · a semantic property, never a ti
 Whether the read set moved beneath the verdict · a non-empty moved set withdraws the standing, never the verdict `standing: moved-set <set>`
 
 `UNKNOWN`
-The third verdict · an unmeasured or unevidenced claim, never a pass `unknown -> BLOCKED`
+The third verdict · an unmeasured or unevidenced claim, never a pass `unknown → BLOCKED`
 
 `BLOCKED`
-The closure of an unknown or an unanswered decision · external input is owed `result: ... | unknown -> BLOCKED`
+The closure of an unknown or an unanswered decision · external input is owed `result: ... | unknown → BLOCKED`
 
 `PROMOTE`
 Move a candidate into accepted state · only on a clean verdict, never on production `promote: <candidate> ON clean verdict`
@@ -126,7 +126,7 @@ Move a candidate into accepted state · only on a clean verdict, never on produc
 Cross the boundary to the external system · the party that crosses it is named `publish: <artifact> BY <party>`
 
 `RESULT`
-The result line · the next node on pass, the repair owner on failure, blocked on unknown `result: pass -> NODE <n+1> | <failure> -> REPAIR (owner: <node>) | unknown -> BLOCKED`
+The result line · the next node on pass, the repair owner on failure, blocked on unknown `result: pass → NODE <n+1> | <failure> → REPAIR (owner: <node>) | unknown → BLOCKED`
 
 `REPAIR`
 The repair edge · re-enters at the earliest node that can supply the missing evidence `REPAIR (owner: NODE <n>)`
@@ -161,6 +161,9 @@ The artifact written, by identity and fingerprint `output: <identity> <fingerpri
 
 `REFUSALS`
 How many times the stage refused, and why `refusals: <n> [<reason>]`
+
+`OBSERVED`
+What runtime observation located, kept apart from the verdict `observed: <n> [<location>]`
 
 `UNRESOLVED`
 What stays open, and why `unresolved: <n> [<reason>]`
@@ -378,14 +381,14 @@ Discover the principle behind the examples `REFLECT ON outcome`
 `ABSTRACT`
 Remove irrelevant detail `ABSTRACT pattern FROM cases`
 
-`GENERALISE`
-Extend examples into a principle `GENERALISE FROM examples`
+`GENERALIZE`
+Extend examples into a principle `GENERALIZE FROM examples`
 
 `DESCRIBE`
-Characterise an object `DESCRIBE structure`
+Characterize an object `DESCRIBE structure`
 
-`FORMALISE`
-Express symbolically `FORMALISE rule AS predicate`
+`FORMALIZE`
+Express symbolically `FORMALIZE rule AS predicate`
 
 ### Control flow keywords
 
@@ -619,7 +622,7 @@ Exit action `EXIT: cleanup`
 
 ### DAG keywords
 
-A [dependency graph](../ontology/PRINCIPLES.md#arch-dependency-graph) makes explicit what depends on what, as declared by the referent and never inferred from a name. [The loop](../START.md#the-loop) spine of a document is one such graph, and a repair edge is a back-edge on it.
+A [dependency graph](../ontology/PRINCIPLES.md#architecture-dependency-graph) makes explicit what depends on what, as declared by the referent and never inferred from a name. [The loop](../START.md#the-loop) spine of a document is one such graph, and a repair edge is a back-edge on it.
 
 `DAG`
 Graph declaration · makes a dependency graph explicit; the loop spine is one `DAG pipeline:`
@@ -898,7 +901,7 @@ An alias for READ_RESOURCE over a remote address `WEB_FETCH "<address>" INTO <co
 An alias for DISCOVER_RESOURCES over the web `WEB_SEARCH "<query>" INTO <hits>`
 
 `TASK`
-An alias for DELEGATE to a bounded reader `TASK "<objective>" WITH agent: <role> -> <result>`
+An alias for DELEGATE to a bounded reader `TASK "<objective>" WITH agent: <role> → <result>`
 
 `ASK_USER`
 An alias for REQUEST_DECISION `ASK_USER "<question>" WITH options: [<a>, <b>]`

@@ -1,8 +1,8 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Glossary — Architecture — Bane's Lab
 
-> Three maps place the terms below. The first is the layer diagram the whole page rests on, the second sets the stateless half of the core against the stateful…
+> Three maps place the terms below.
 
 Canonical: https://banes-lab.com/software-architecture/glossary
 
@@ -20,19 +20,19 @@ Three maps place the terms below. The first is the layer diagram the whole page 
 
 Four core layers carry the rules about code itself. Computation is where data flows through and nothing is retained. Resource is where state lives and every handle has one owner. Execution is where the two meet through control flow and events. Structural applies to all of it and observes itself.
 
-Resource observes computation, both feed execution, execution feeds structural, and structural feeds back into execution, which is [the loop](../START.md#the-loop) that lets a system read its own behaviour and correct it. Beneath the four sit [human factors](../ontology/SCHEMA.md#layer-human-factors), which bound the whole by what a developer can hold, and evolution, which says how the whole changes over time.
+Resource observes computation, both feed execution, execution feeds structural, and structural feeds back into execution, which is [the loop](../START.md#the-loop) that lets a system read its own behavior and correct it. Beneath the four sit [human factors](../ontology/SCHEMA.md#layer-human-factors), which bound the whole by what a developer can hold, and evolution, which says how the whole changes over time.
 
 ### Stateless against stateful
 
-Five pairs of terms look like contradictions until the layer is read. They are [statelessness](../ontology/PRINCIPLES.md#arch-statelessness) against state before mutation, [immutability](../ontology/PRINCIPLES.md#arch-immutability) against state over code, explicit invalidity against [fail fast](../ontology/PRINCIPLES.md#arch-fail-fast), deliberate under-specification against not building what is not needed, and [homoiconicity](../ontology/PRINCIPLES.md#arch-homoiconicity) against single ownership.
+Five pairs of terms look like contradictions until the layer is read. They are [statelessness](../ontology/PRINCIPLES.md#architecture-statelessness) against state before mutation, [immutability](../ontology/PRINCIPLES.md#architecture-immutability) against state over code, explicit invalidity against [fail fast](../ontology/PRINCIPLES.md#architecture-fail-fast), deliberate under-specification against not building what is not needed, and [homoiconicity](../ontology/PRINCIPLES.md#architecture-homoiconicity) against single ownership.
 
 Each pair is two principles on two layers, so each is resolved by scope, and the edge between them names the boundary. A computation flows through while a resource is snapshotted. Computed data is frozen while resource state is managed. An uncertainty is marked in a computation while a broken invariant halts a resource.
 
 ### Inside a boundary, across boundaries
 
-The distributed pairs live where one boundary ends. [Consistency](../ontology/PRINCIPLES.md#arch-consistency) against availability, and [asynchronous communication](../ontology/PRINCIPLES.md#arch-asynchronous-communication) against immediate consistency, are trade-offs, strong or immediate inside one [transaction boundary](../ontology/PRINCIPLES.md#arch-transaction-boundary) or trust boundary and eventual across [autonomy](../ontology/PRINCIPLES.md#arch-autonomy) boundaries, with the operating point a measured choice. A [canonical model](../ontology/PRINCIPLES.md#arch-canonical-model) against the autonomy of a [bounded context](../ontology/PRINCIPLES.md#arch-bounded-context) is a trade-off too, one model where contexts share meaning and an [anti-corruption layer](../ontology/PRINCIPLES.md#arch-anti-corruption-layer) where they do not.
+The distributed pairs live where one boundary ends. [Consistency](../ontology/PRINCIPLES.md#architecture-consistency) against availability, and [asynchronous communication](../ontology/PRINCIPLES.md#architecture-asynchronous-communication) against immediate consistency, are trade-offs, strong or immediate inside one [transaction boundary](../ontology/PRINCIPLES.md#architecture-transaction-boundary) or trust boundary and eventual across [autonomy](../ontology/PRINCIPLES.md#architecture-autonomy) boundaries, with the operating point a measured choice. A [canonical model](../ontology/PRINCIPLES.md#architecture-canonical-model) against the autonomy of a [bounded context](../ontology/PRINCIPLES.md#architecture-bounded-context) is a trade-off too, one model where contexts share meaning and an [anti-corruption layer](../ontology/PRINCIPLES.md#architecture-anti-corruption-layer) where they do not.
 
-[Normalization](../ontology/PRINCIPLES.md#arch-normalization) against query performance separates by scope, the canonical store one way and the derived read models the other. [Do not repeat yourself](../ontology/PRINCIPLES.md#arch-duplicate-code) against locality of behaviour is the one pair a rule resolves, by asking whether a sameness is semantic or merely textual.
+[Normalization](../ontology/PRINCIPLES.md#architecture-normalization) against query performance separates by scope, the canonical store one way and the derived read models the other. [Do not repeat yourself](../ontology/PRINCIPLES.md#architecture-duplicate-code) against locality of behavior is the one pair a rule resolves, by asking whether a sameness is semantic or merely textual.
 
 A1·a The principle architecture: the four core layers, the observe and feedback arrows across them, and the two domains beneath.
 
@@ -83,7 +83,7 @@ s4 -- interfaces stay open · implementation is not built ahead --- r4
 s5 -- definitions are shared freely · runtime resources have one owner --- r5
 ```
 
-A1·c Inside a boundary against across boundaries: the distributed pairs, each labelled with the mechanism that resolves it.
+A1·c Inside a boundary against across boundaries: the distributed pairs, each labeled with the mechanism that resolves it.
 
 ```mermaid
 flowchart LR
@@ -92,7 +92,7 @@ direction TB
 i1["Consistency"]
 i2["Asynchronous Communication"]
 i3["Canonical Model"]
-i4["Normalisation"]
+i4["Normalization"]
 i5["Do Not Repeat Yourself"]
 end
 subgraph across["ACROSS BOUNDARIES"]
@@ -101,12 +101,12 @@ a1["Availability"]
 a2["Immediate consistency"]
 a3["Bounded context autonomy"]
 a4["Query performance"]
-a5["Locality of behaviour"]
+a5["Locality of behavior"]
 end
 i1 -- traded · strong inside a transaction, eventual across autonomy boundaries --- a1
 i2 -- traded · synchronous inside a trust boundary, asynchronous across autonomy boundaries --- a2
 i3 -- traded · one model where contexts share meaning, a translation where they do not --- a3
-i4 -- by scope · the canonical store is normalised, derived read models are denormalised --- a4
+i4 -- by scope · the canonical store is normalized, derived read models are denormalised --- a4
 i5 -- by rule · semantics are centralised, incidental co-occurrence stays local --- a5
 ```
 
@@ -122,7 +122,7 @@ A translation sits at the edge of a context, so a foreign model cannot leak in a
 
 **Asynchronous Communication · principle · Execution Core**
 
-Asynchronous communication does not wait for a reply and is routed through a broker, so the availability and the pace of both sides are decoupled. Traded against [immediate consistency](../ontology/LEXICON.md#lex-immediate-consistency): [synchronous inside a trust boundary](../ontology/SCHEMA.md#tension-asynchronous-communication-immediate-consistency), asynchronous across autonomy boundaries.
+Asynchronous communication does not wait for a reply and is routed through a broker, so the availability and the pace of both sides are decoupled. Traded against [immediate consistency](../ontology/LEXICON.md#lexicon-immediate-consistency): [synchronous inside a trust boundary](../ontology/SCHEMA.md#tension-asynchronous-communication-immediate-consistency), asynchronous across autonomy boundaries.
 
 **Atomicity · principle · Atomic Boundary**
 
@@ -150,7 +150,7 @@ A resource lives no longer than its owner, and every open has its close. An unbo
 
 **Canonical Model · principle · Contracts Core**
 
-Every view derives from one canonical model. Traded against [bounded context autonomy](../ontology/LEXICON.md#lex-bounded-context-autonomy): one model holds [where contexts share meaning](../ontology/SCHEMA.md#tension-bounded-context-autonomy-canonical-model), and a translation stands where they do not.
+Every view derives from one canonical model. Traded against [bounded context autonomy](../ontology/LEXICON.md#lexicon-bounded-context-autonomy): one model holds [where contexts share meaning](../ontology/SCHEMA.md#tension-bounded-context-autonomy-canonical-model), and a translation stands where they do not.
 
 **Causality · principle · Causality Core**
 
@@ -168,13 +168,13 @@ Definitions are held as inspectable, transformable data, so the same tooling tha
 
 Units combine freely into larger units, and the combination has no special cases the parts did not have.
 
-**Configuration Externalisation · principle · Resource Core**
+**Configuration Externalization · principle · Resource Core**
 
 Configuration comes from the environment, is validated at boot, and has no fallback default that would hide a missing value.
 
 **Consistency · quality attribute · Atomic Boundary**
 
-Every invariant that held before a change holds after it. Traded against [availability](../ontology/LEXICON.md#lex-availability): strong inside one [transaction boundary](../ontology/PRINCIPLES.md#arch-transaction-boundary), eventual across [autonomy](../ontology/PRINCIPLES.md#arch-autonomy) boundaries, and [where the point sits](../ontology/SCHEMA.md#tension-availability-consistency) is a measured choice.
+Every invariant that held before a change holds after it. Traded against [availability](../ontology/LEXICON.md#lexicon-availability): strong inside one [transaction boundary](../ontology/PRINCIPLES.md#architecture-transaction-boundary), eventual across [autonomy](../ontology/PRINCIPLES.md#architecture-autonomy) boundaries, and [where the point sits](../ontology/SCHEMA.md#tension-availability-consistency) is a measured choice.
 
 **Contract-First Design · principle · Contracts Core**
 
@@ -208,7 +208,7 @@ Dependencies are handed to a unit rather than constructed inside it, so they are
 
 **Dependency Inversion Principle · DIP · principle · Structural Core**
 
-High-level policy depends on [abstractions](../ontology/PRINCIPLES.md#arch-abstraction), and the concrete details depend on the same abstractions, so the direction of dependency runs toward stability.
+High-level policy depends on [abstractions](../ontology/PRINCIPLES.md#architecture-abstraction), and the concrete details depend on the same abstractions, so the direction of dependency runs toward stability.
 
 **Design by Contract · principle · Contracts Core**
 
@@ -220,7 +220,7 @@ The same inputs give the same outputs, and every source of nondeterminism is iso
 
 **Do Not Repeat Yourself · DRY · principle · Structural Core**
 
-A piece of logic or knowledge has one definition, and a repetition is compressed by its type, such as a literal into a constant, a structure into a composition, a behaviour into one orchestrator and a rule into one predicate. Mitigated against [locality of behaviour](../ontology/LEXICON.md#lex-locality-of-behavior) by a [rule that names the discriminator](../ontology/SCHEMA.md#tension-do-not-repeat-yourself-dry-locality-of-behavior): semantics are centralised, incidental textual likeness stays local.
+A piece of logic or knowledge has one definition, and a repetition is compressed by its type, such as a literal into a constant, a structure into a composition, a behavior into one orchestrator and a rule into one predicate. Mitigated against [locality of behavior](../ontology/LEXICON.md#lexicon-locality-of-behavior) by a [rule that names the discriminator](../ontology/SCHEMA.md#tension-do-not-repeat-yourself-dry-locality-of-behavior): semantics are centralised, incidental textual likeness stays local.
 
 **Domain-Driven Design · DDD · style · Domain Modeling**
 
@@ -234,7 +234,7 @@ A child never calls back into its parent. Communication runs the other way, by e
 
 **Encapsulation · principle · Structural Core**
 
-Internals are hidden behind an interface, and the interface is the only way in, but the system still ships with a live inspector, because hiding internals from callers is not the same as hiding them from the developer diagnosing the running system. Traded against [debuggability](../ontology/LEXICON.md#lex-debuggability): the [inspector](../ontology/SCHEMA.md#tension-debuggability-encapsulation) is where the operating point sits.
+Internals are hidden behind an interface, and the interface is the only way in, but the system still ships with a live inspector, because hiding internals from callers is not the same as hiding them from the developer diagnosing the running system. Traded against [debuggability](../ontology/LEXICON.md#lexicon-debuggability): the [inspector](../ontology/SCHEMA.md#tension-debuggability-encapsulation) is where the operating point sits.
 
 **Errors as Language · Computation Core**
 
@@ -246,7 +246,7 @@ State is persisted as an immutable sequence of events, and the current state is 
 
 **Event-Driven Architecture · style · Execution Core**
 
-Components communicate by emitting events, the producer does not know its subscribers, and a pause or a resume is an ordinary control message. Traded against [debuggability](../ontology/LEXICON.md#lex-debuggability): a flow that cannot be followed end to end cannot be fixed, so [tracing is bought explicitly](../ontology/SCHEMA.md#tension-debuggability-event-driven-architecture).
+Components communicate by emitting events, the producer does not know its subscribers, and a pause or a resume is an ordinary control message. Traded against [debuggability](../ontology/LEXICON.md#lexicon-debuggability): a flow that cannot be followed end to end cannot be fixed, so [tracing is bought explicitly](../ontology/SCHEMA.md#tension-debuggability-event-driven-architecture).
 
 **Eventual Consistency · model · Execution Core**
 
@@ -254,7 +254,7 @@ Bounded staleness is accepted so that services stay independently available unde
 
 **Explicit Invalidity · Computation Core**
 
-Temporary inconsistency is allowed exactly while it is marked. Resolved by scope against [Fail Fast](../ontology/PRINCIPLES.md#arch-fail-fast): a broken resource invariant halts, a computation uncertainty is marked and carried on.
+Temporary inconsistency is allowed exactly while it is marked. Resolved by scope against [Fail Fast](../ontology/PRINCIPLES.md#architecture-fail-fast): a broken resource invariant halts, a computation uncertainty is marked and carried on.
 
 ## F
 
@@ -294,7 +294,7 @@ The framework calls the code rather than the code calling the framework, so cont
 
 **Lazy Evaluation · approach · Execution Core**
 
-A value is computed only when it is demanded, so nothing is materialised that nothing reads.
+A value is computed only when it is demanded, so nothing is materialized that nothing reads.
 
 **Least Privilege · principle · Security Core**
 
@@ -302,7 +302,7 @@ Every actor holds the minimum authority its task needs, and anything not granted
 
 **Liskov Substitution Principle · LSP · principle · Structural Core**
 
-Anything that claims a type can stand in for it without a caller noticing. A substitute honours every behavioural guarantee of what it replaces.
+Anything that claims a type can stand in for it without a caller noticing. A substitute honors every behavioral guarantee of what it replaces.
 
 **Loose Coupling · quality attribute · Structural Core**
 
@@ -312,7 +312,7 @@ Dependencies between units are few and explicit, so a change stays where it was 
 
 **Modularity · principle · Structural Core**
 
-A modular system is built from independent, swappable units with [explicit boundaries](../ontology/PRINCIPLES.md#arch-explicit-boundaries), so a unit can be replaced without the rest knowing. Traded against [cross-cutting concerns](../ontology/LEXICON.md#lex-cross-cutting-concerns): a concern that [touches every unit](../ontology/SCHEMA.md#tension-cross-cutting-concerns-modularity) is placed once, at the boundary, rather than spread through them.
+A modular system is built from independent, swappable units with [explicit boundaries](../ontology/PRINCIPLES.md#architecture-explicit-boundaries), so a unit can be replaced without the rest knowing. Traded against [cross-cutting concerns](../ontology/LEXICON.md#lexicon-cross-cutting-concerns): a concern that [touches every unit](../ontology/SCHEMA.md#tension-cross-cutting-concerns-modularity) is placed once, at the boundary, rather than spread through them.
 
 **Monotonic Growth · Execution Core**
 
@@ -322,11 +322,11 @@ Append, never retract. A retraction is a second path every reader must handle, a
 
 **Observability · quality attribute · Observability**
 
-A running system emits machine-parseable signals, so its behaviour is legible from outside.
+A running system emits machine-parseable signals, so its behavior is legible from outside.
 
 **Open/Closed Principle · OCP · principle · Structural Core**
 
-A unit is open for extension and closed for modification, so new behaviour arrives through a few composable primitives, and the existing tested code is not edited to admit it.
+A unit is open for extension and closed for modification, so new behavior arrives through a few composable primitives, and the existing tested code is not edited to admit it.
 
 **Orchestration · mechanism · Execution Core**
 
@@ -348,7 +348,7 @@ A named design pattern is applied only when the force it answers is present in t
 
 **Plugin Architecture · style · Extensibility Core**
 
-New behaviour arrives as a plugin at a declared [extension point](../ontology/PRINCIPLES.md#arch-extension-points), and the core stays unchanged.
+New behavior arrives as a plugin at a declared [extension point](../ontology/PRINCIPLES.md#architecture-extension-points), and the core stays unchanged.
 
 **Policy as Code · mechanism · Security Core**
 
@@ -360,11 +360,11 @@ The domain core depends on nothing, and input, output and frameworks are adapter
 
 **Principle of Least Surprise · principle · Contracts Core**
 
-Behaviour matches what a reasonable reader expects from the name, and a surprise is a defect.
+Behavior matches what a reasonable reader expects from the name, and a surprise is a defect.
 
 **Profile First · Performance Core**
 
-[Optimisation](../ontology/PRINCIPLES.md#arch-optimization) follows measurement, so the bottleneck is profiled before anything is changed, and the change is judged by the measurement.
+[Optimization](../ontology/PRINCIPLES.md#architecture-optimization) follows measurement, so the bottleneck is profiled before anything is changed, and the change is judged by the measurement.
 
 **Pure Functions · technique · Computation Core**
 
@@ -392,9 +392,9 @@ A reference names what a thing means, never where it sits, so a move changes no 
 
 **Separation of Concerns · SoC · principle · Structural Core**
 
-Each module owns exactly one concern, and the cut is made with the whole system in view, so the pieces still compose into one thing rather than a pile of tidy parts that no longer fit. Traded against [over-layering](../ontology/LEXICON.md#lex-over-layering): a separation that [only adds indirection](../ontology/SCHEMA.md#tension-over-layering-separation-of-concerns) has cost more than it separated.
+Each module owns exactly one concern, and the cut is made with the whole system in view, so the pieces still compose into one thing rather than a pile of tidy parts that no longer fit. Traded against [over-layering](../ontology/LEXICON.md#lexicon-over-layering): a separation that [only adds indirection](../ontology/SCHEMA.md#tension-over-layering-separation-of-concerns) has cost more than it separated.
 
-**Service Autonomy · principle · Execution Core**
+**Service Autonomy · principle · Structural Core**
 
 A service owns its data and its availability, and depends on no other service being up to do its own work.
 
@@ -408,7 +408,7 @@ Every resource has exactly one owner responsible for its release, and every othe
 
 **Single Responsibility Principle · SRP · principle · Structural Core**
 
-A unit has one reason to change, and that reason is derived from an invariant it protects rather than from a feature it serves. Features cut across units; invariants belong to one. Traded against [excessive fragmentation](../ontology/LEXICON.md#lex-excessive-fragmentation): units [split finer than their invariants](../ontology/SCHEMA.md#tension-excessive-fragmentation-single-responsibility-principle-srp) scatter one reason to change across many files.
+A unit has one reason to change, and that reason is derived from an invariant it protects rather than from a feature it serves. Features cut across units; invariants belong to one. Traded against [excessive fragmentation](../ontology/LEXICON.md#lexicon-excessive-fragmentation): units [split finer than their invariants](../ontology/SCHEMA.md#tension-excessive-fragmentation-single-responsibility-principle-srp) scatter one reason to change across many files.
 
 **Single Source of Truth · principle · Contracts Core**
 

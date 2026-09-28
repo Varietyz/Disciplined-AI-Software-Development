@@ -1,0 +1,87 @@
+{
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.cache/**",
+    "**/coverage/**",
+    "**/_code.info.generated/**",
+    "**/*.generated.*",
+    "**/__fixtures__/**",
+    "**/fixtures/**",
+    "**/testdata/**",
+    "**/.git/**",
+    "**/.vscode/**",
+    "**/logs/**",
+    "**/_builds/**",
+    "**/_third-party/**",
+    "**/_excluded.drafts/**",
+    "**/disciplined.methodology/**",
+    "**/.quality-reports/**",
+    ".govlab/_quality.reports.generated/**",
+    "**/_experimental*/**",
+    "**/target/**",
+    "**/_build/**",
+    "**/deps/**",
+    "**/.vite/**",
+    "**/.registry/**",
+    "**/.nyc_output/**",
+    "**/out/**",
+    "**/tmp/**",
+    "**/*.test.ts"
+  ],
+  "ignoreBinaries": ["jiti"],
+  "ignoreDependencies": [
+    "stylelint-*",
+    "eslint-*",
+    "@govlab/*",
+    "vitest",
+    "prettier"
+  ],
+  "ignoreWorkspaces": [],
+  "paths": { "#host/*": ["./{app.root}/banes-lab.web/*"] },
+  "tags": [],
+  "workspaces": {
+    ".": { "entry": [], "project": [] },
+    ".govlab": { "entry": [], "project": ["**/*.ts"] },
+    "project.paths": { "entry": [], "project": ["**/*.ts"] },
+    "project.scripts": { "entry": [], "project": ["**/*.ts"] },
+    "codebase.testing": { "entry": [], "project": ["**/*.ts"] },
+    "{app.root}/banes-lab.web": { "entry": [], "project": ["**/*.ts"] },
+    "{app.root}/banes-lab.deploy": { "entry": [], "project": ["**/*.ts"] },
+    "{app.root}/banes-lab.content": { "entry": [], "project": ["**/*.ts"] },
+    "{app.root}/banes-lab.social-share": {
+      "entry": [],
+      "project": ["**/*.ts"]
+    },
+    "{app.root}/banes-lab.build.scripts": {
+      "entry": [],
+      "project": ["**/*.ts"]
+    },
+    "{app.root}/banes-lab.coordination": {
+      "entry": [],
+      "project": ["**/*.ts"]
+    },
+    "{app.root}/banes-lab.server": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.constants": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.context": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.docs": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.patterns": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.pipeline": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.quality": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.stats": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.utils/argv": { "entry": [], "project": ["**/*.ts"] },
+    "govlab.root/govlab.utils/canonical-write": {
+      "entry": [],
+      "project": ["**/*.ts"]
+    },
+    "govlab.root/govlab.utils/code-parse": {
+      "entry": [],
+      "project": ["**/*.ts"]
+    },
+    "govlab.root/govlab.utils/content-fingerprint": {
+      "entry": [],
+      "project": ["**/*.ts"]
+    }
+  }
+}

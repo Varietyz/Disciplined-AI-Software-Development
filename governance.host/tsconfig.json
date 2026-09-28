@@ -1,0 +1,17 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {"noEmit": true,
+        "customConditions": ["development"]},
+    "include": [
+        "*.ts",
+        "rules/**/*.ts",
+        "codemods/**/*.ts",
+        "doc-verbs/**/*.ts",
+        "shared/**/*.ts",
+        "types/**/*.ts"
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/*.generated.ts"
+    ]
+}

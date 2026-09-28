@@ -1,0 +1,14 @@
+{
+    "name": "@surface/pipeline",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The checks, readers and coordinators behind the Coordination Surface's board and venues.",
+    "license": "LicenseRef-PAG-NonCommercial-1.0",
+    "exports": {
+        "./core/*": "./core/*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    }
+}

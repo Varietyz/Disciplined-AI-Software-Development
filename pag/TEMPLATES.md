@@ -1,8 +1,8 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Templates — PAG — Bane's Lab
 
-> This section covers the template and how an instance is raised from it. A template record has four parts, a declared document type, the slots an instance fills,…
+> This section covers the template and how an instance is raised from it.
 
 Canonical: https://banes-lab.com/pag/templates
 
@@ -20,11 +20,11 @@ This section covers the template and how an instance is raised from it. A templa
 
 An instance derived from a sibling inherits that sibling's accidents as a contract. Four parties produce four formats for one surface, each derived from a different sibling, and the check that later reads them derives its schema from a fifth. A sibling carries one instance's choices and a template carries the constraint, and a reader copying a sibling cannot tell which is which.
 
-For this reason a template carries the contract, an instance resolves its slots, and a check reads the template. The second instance is raised from a template written for it, rather than from the first instance. In practice, a template is written the second time a shape occurs, before the second instance is written, in the order shown in [A1·e second instance](#templates-core-panel-e). It declares its type, names every slot with whether it is required and, where the values form a closed set, that set, and it names the constraints every instance must satisfy so a check can read them. The body keeps only what every instance shares, with every varying value as a slot. Each new instance is raised by resolving the slots, and an instance whose resolution reports an unresolved slot or a violation is refused.
+For this reason what every instance must share is stated once, where a tool can hold each new one to it. Shared structure is extracted once a pattern repeats, rather than copied from an earlier example. In practice, a template is written the second time a shape occurs, before the second instance is written, in the order shown in [A1·e second instance](#templates-core-panel-e). It declares its type, names every slot with whether it is required and, where the values form a closed set, that set, and it names the constraints every instance must satisfy so a check can read them. The body keeps only what every instance shares, with every varying value as a slot. Each new instance is raised by resolving the slots, and an instance whose resolution reports an unresolved slot or a violation is refused.
 
-To check this, take a template and find a value in it that would be wrong for the next instance. That value is content rather than contract, and a slot is the repair. Then resolve the template with one slot missing, and a resolution that raises the instance anyway has guessed. A shape seen once has no template, because one instance cannot show which of its parts are invariant. A template raised from one instance is [premature abstraction](../ontology/PRINCIPLES.md#arch-premature-abstraction).
+To check this, take a template and find a value in it that would be wrong for the next instance. That value is content rather than contract, and a slot is the repair. Then resolve the template with one slot missing, and a resolution that raises the instance anyway has guessed. A shape seen once has no template, because one instance cannot show which of its parts are invariant. A template raised from one instance is [premature abstraction](../ontology/PRINCIPLES.md#architecture-premature-abstraction).
 
-The slots fall into two kinds by who supplies the value. An instance slot is what this document is for, supplied when it is raised. A host slot is a fact about the tree the document will be walked in, namespaced by what it is a fact about, and resolved by the adapter rather than typed into an instance, so one template can be raised in any tree.
+The slots fall into two kinds by who supplies the value. An instance slot is what this document is for, supplied when it is raised. A host slot is a fact about the tree the document will be walked in, namespaced by its subject and filled by the adapter, so one template works in any tree.
 
 The constraints are the family's acceptance criteria, and a check over an instance reads them from the template, as [the drop-in](../START.md#onboarding) describes. What the template excludes is as deliberate as what it carries, so it names no model, no path and no tool, for the reasons described in [semantic operations](GUIDE.md#tool-invocation). A correction lands in the template and reaches every later instance, never in the instance where only its author would see it.
 
@@ -87,9 +87,9 @@ HANDOFF GATE (evidence-bearing):
 [check] input read from {INPUT_SOURCE} (evidence: the read returned content) over: {INPUT_SOURCE} measured: <read> / <declared>
 [check] analysis produced (evidence: a count above zero)
 [check] every entry of analysis names its source in input (evidence: no entry with an empty source)
-result: pass -> NODE 2 | empty -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+result: pass → NODE 2 | empty → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
-# NODE 2 — {NODE_TWO_TITLE}   [epistemic · formalisation · computation · yields: procedure]
+# NODE 2 — {NODE_TWO_TITLE}   [epistemic · formalization · computation · yields: procedure]
 @purpose: "transform every item by one rule, preserving what the next node needs"
 @genesis: transformation
 CONTRACT:
@@ -101,9 +101,9 @@ HANDOFF GATE:
 [check] one result per item (evidence: the two counts match) over: analysis measured: <transformed> / <items>
 [check] every result conforms to {TRANSFORM_RULE} (evidence: VALIDATE_ARTIFACT passed on each)
 [check] analysis unchanged (evidence: a witness read)
-result: pass -> NODE 3 | mismatch -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
-# NODE 3 — FINALISATION   [evaluative · representation · information-theory · yields: artifact]
+# NODE 3 — FINALIZATION   [evaluative · representation · information-theory · yields: artifact]
 @purpose: "persist the results once, refuse a stale destination, and report to the parties whose next work they create"
 @genesis: constraint
 CONTRACT:
@@ -117,7 +117,7 @@ HANDOFF GATE:
 [check] entry count of {OUTPUT_TARGET} matches results (evidence: the two numbers)
 refuse: {OUTPUT_TARGET} changed since it was read before PERSIST_ARTIFACT
 standing: moved-set none
-result: pass -> TERMINATE | loss -> REPAIR (owner: NODE 3) | unknown -> BLOCKED
+result: pass → TERMINATE | loss → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT prior-output-only: a node reads only the prior node's output over: every node binds: the workflow objector: [check] input names NODE n-1 or a slot
@@ -176,13 +176,13 @@ This section covers the two templates for coordination between parties, [B1·a s
 
 ### Surface and decision
 
-Each collaboration describes its [shared surfaces](ORCHESTRATION.md#shared-surfaces) in its own words. A surface is described as append-only, a mechanism implements the word faithfully, and a settled argument is deleted rather than archived because no removal axis was ever declared. A description in words has no closed set a mechanism can join on, so each party implements the words it read.
+Each collaboration invents its own vocabulary for the surfaces its parties share. A surface is described as append-only, a mechanism implements the word faithfully, and a settled argument is deleted rather than archived because no removal axis was ever declared. A description in words has no closed set a mechanism can join on, so each party implements the words it read.
 
 For this reason coordination is raised from templates whose slots are the surfaces, their lifetimes and their closures. The protocol is raised from a template whose values come from closed sets, rather than from a description each collaboration writes fresh. In practice, a surface protocol is raised by resolving its key and its three lifetime values from their closed sets, and its rules are kept as written, so every party reads the surface whole, writes inside its own record, derives every state and extracts before removal. A decision protocol is raised by stating the question and an exit condition the tree can decide, a successor is declared by name where one exists, and the closure is absorption rather than agreement. Where the adapter cannot resolve a named slot, the absence is declared rather than filled.
 
-To check this, name for each shared surface its three lifetime values and the party that may remove from it. A surface with a one-word lifetime has an undeclared axis, and the mechanism that implements the word acts on the axis it never saw. A decision protocol needs more than one party, because a decision with one party is a choice.
+To check this, name for each [shared surface](ORCHESTRATION.md#shared-surfaces) its three lifetime values and the party that may remove from it. A surface with a one-word lifetime has an undeclared axis, and the mechanism that implements the word acts on the axis it never saw. With one writer there is nothing to converge on, and the decision is simply made.
 
-The surface protocol puts the lifetime first, because every later rule depends on it, and its three axes are the ones described in shared surfaces. The rules that follow are one writer per record, a state that is a function over the edges, and a removal that refuses without a reference naming where the extraction landed. The check decides presence and never fidelity, because an extraction is a compression and a text comparison would fail every correct one.
+The surface protocol puts the lifetime first, because every later rule depends on it, and its three axes are the ones described in shared surfaces. The rules that follow are one writer per record, [derived record state](../ontology/PRINCIPLES.md#architecture-derived-record-state), a function over the edges, and a removal that refuses without a reference naming where the extraction landed. The check decides presence and never fidelity, because an extraction is a compression and a text comparison would fail every correct one.
 
 The decision protocol declares its own exit condition, because without one the decision halts indefinitely. A position without evidence is an opinion, so every position carries evidence, and its author states what the proposal makes worse, because a position that cannot be attacked converges by exhaustion rather than by agreement. What convergence is, and why the archive follows absorption, is described in the board and the venue.
 
@@ -250,7 +250,7 @@ RETURN every_party_stated_its_needs(venue) AND every_need_is_empty(venue) AND ev
 # NODE 10 — TERMINATE   [evaluative · termination · set-theory · yields: ter-stop boolean]
 CONTRACT:
 input:        the venue + the distribution its outcome implies
-transform:    converge -> distribute the implied work as a plan with an owner per item -> land it -> move the venue whole into the archive
+transform:    converge → distribute the implied work as a plan with an owner per item → land it → move the venue whole into the archive
 constraints:  convergence certifies agreement and nothing about the tree; leaving the active tree and leaving the repository are different operations
 output:       the outcome in the surviving documents, the argument in the archive
 handoff:      absorbed (yields: boolean)
@@ -290,7 +290,7 @@ For this reason a checklist is produced by owned, gated nodes, and its state is 
 
 To check this, name for each unit of a rendered checklist the node that decided it and the evidence that node read. A unit that cannot be traced to a node was authored, and a status marker on the surface stopped being true the first time the tree changed. A one-task change still walks every node, because a one-line fix can be a fix the project did not need, and orientation is what finds that out. What scales down is the size of each node's output, never the node set.
 
-The nodes are the derivation loop applied to a plan. [Verification](../ontology/PRINCIPLES.md#arch-verification) judges the reasoning, not the implementation, and its result line routes findings to the repair edge rather than forward, and an unknown to blocked. The commit node numbers the tasks only once the order is stable, and every phase it renders carries the [genesis stage](PATTERNS.md#genesis-stages) its node derived rather than a role label written beside it.
+The nodes are the derivation loop applied to a plan. [Verification](../ontology/PRINCIPLES.md#architecture-verification) judges the reasoning, not the implementation, and its result line routes findings to the repair edge rather than forward, and an unknown to blocked. The commit node numbers the tasks only once the order is stable, and every phase it renders carries the [genesis stage](PATTERNS.md#genesis-stages) its node derived rather than a role label written beside it.
 
 A task's contract has five fields, and none of them is inferred. They are the change, the file, the evidence that proves it landed, the verifier that reads the evidence, and the non-goal, which lets the next reader refuse the addition that would have widened the task. A report carries the verdict with its standing, the domain it was measured over, and the reach it covered. The standing is derived in [verify the verifier](../VERIFY.md#verify-the-verifier), and the reach is read as coverage, as described in [a report, not a checkbox](../VERIFY.md#a-report-not-a-checkbox). A pass rate is a count no step derived, and the template has no field for one.
 
@@ -303,7 +303,7 @@ type: CHECKLIST
 version: 1.0.0
 ---
 
-THIS CHECKLIST GENERATES a dependency-ordered, evidence-bearing implementation checklist whose framing, worth, seeing, derivation, projection, formalisation, admissibility, verification, commitment and termination are each produced and gated by the node that owns that decision.
+THIS CHECKLIST GENERATES a dependency-ordered, evidence-bearing implementation checklist whose framing, worth, seeing, derivation, projection, formalization, admissibility, verification, commitment and termination are each produced and gated by the node that owns that decision.
 
 %% META %%:
 priority: {project.governance_policy} > {project.principle_ontology} > this template > {project.architecture_rules} > {task_description}
@@ -329,9 +329,9 @@ rule_id: "ORIENT"   yields: boolean
 [check] core authority loaded (evidence: context_bundle.sources) over: the governing documents measured: <read> / <declared>
 [check] change_relation resolved (evidence: change.change_relation is not unknown)
 [check] every always-relevant dimension has a readout and the evidence inventory is non-empty (evidence: context_bundle.evidence)
-result: pass -> NODE 2 | missing authority -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+result: pass → NODE 2 | missing authority → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
-# NODE 2 — INTENT   [conative · teleology · optimisation · yields: objective + branch-ranking]
+# NODE 2 — INTENT   [conative · teleology · optimization · yields: objective + branch-ranking]
 @purpose: "resolve what the work is for, enumerate admissible branches, and gate on the highest-worth one before any seeing"
 @axis_question: "What is it for?"   @mandatory
 @genesis: difference
@@ -348,7 +348,7 @@ rule_id: "INTENT"   yields: boolean over ranking
 [check] objective stated (evidence: teleology_bundle.objective)
 [check] an admissible branch exists (evidence: branches with admissible true) over: branches measured: <admissible> / <branches>
 [check] selected is the argmax of utility minus cost (evidence: the ranking's first entry)
-result: pass -> NODE 3 | no admissible branch -> REPAIR (owner: NODE 1) | selected is not argmax -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → NODE 3 | no admissible branch → REPAIR (owner: NODE 1) | selected is not argmax → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — SEE   [epistemic · analysis · graph · yields: lens-set + analytic edges]
 @purpose: "select the analytical lenses relevant to the selected branch and read the system through them"
@@ -366,7 +366,7 @@ rule_id: "SEE"   yields: edge-list + boolean
 [check] every active lens has an observation (evidence: observations) over: analysis_bundle.lenses measured: <observed> / <lenses>
 [check] relational edges present where dependencies were discovered (evidence: relational_edges against discovered registrations)
 [check] no observation is inferred from a name alone (evidence: every observation cites a read)
-result: pass -> NODE 4 | gap -> REPAIR (owner: NODE 3) | unknown -> BLOCKED
+result: pass → NODE 4 | gap → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 4 — DERIVE   [epistemic · reasoning · logic · yields: principle and protocol truths]
 @purpose: "activate the principles that govern the seen decision surfaces and select protocols by semantic fit"
@@ -385,7 +385,7 @@ rule_id: "DERIVE"   yields: boolean
 [check] every active mandatory principle binds a validator (evidence: active_principles) over: active_principles measured: <bound> / <active>
 [check] every selected protocol carries a semantic reason (evidence: selected_protocols.reason)
 [check] the verification protocol is present (evidence: selected_protocols)
-result: pass -> NODE 5 | gap -> REPAIR (owner: NODE 4) | unknown -> BLOCKED
+result: pass → NODE 5 | gap → REPAIR (owner: NODE 4) | unknown → BLOCKED
 
 # NODE 5 — PROJECT   [epistemic · reasoning · logic · yields: 4D graph edge-list]
 @purpose: "decompose into phases whose order is the substrate genesis of the artifacts, and project the dependency and ripple graph"
@@ -405,10 +405,10 @@ rule_id: "PROJECT"   yields: edge-list + boolean
 [check] the Z graph is acyclic and genesis-consistent (evidence: zero cycles, zero inversions) over: phase_records measured: <ordered> / <phases>
 [check] every phase declares inputs, outputs, a genesis stage and all four axes (evidence: phase_records)
 [check] order is dependency-topological then genesis with severity as metadata only (evidence: no severity grouping)
-result: pass -> NODE 6 | cycle or inversion -> REPAIR (owner: NODE 5) | unknown -> BLOCKED
+result: pass → NODE 6 | cycle or inversion → REPAIR (owner: NODE 5) | unknown → BLOCKED
 
-# NODE 6 — ACT   [epistemic · formalisation · computation · yields: task procedures]
-@purpose: "formalise phases into atomic, target-specific tasks under binding execution constraints, with full ripple chains"
+# NODE 6 — ACT   [epistemic · formalization · computation · yields: task procedures]
+@purpose: "formalize phases into atomic, target-specific tasks under binding execution constraints, with full ripple chains"
 @axis_question: "What does it resolve to?"
 @genesis: transformation
 @cue: "FORMALISE_EXECUTABLE_TASKS"
@@ -424,25 +424,25 @@ rule_id: "ACT"   yields: procedure + set-cardinality
 [check] at least one task per phase (evidence: task_records against phase_records) over: phase_records measured: <with tasks> / <phases>
 [check] every task is atomic and target-specific with an evidence contract (evidence: expected evidence per task)
 [check] every task carries every ripple dimension with names (evidence: task.ripple)
-result: pass -> NODE 7 | non-atomic or missing ripple -> REPAIR (owner: NODE 6) | unknown -> BLOCKED
+result: pass → NODE 7 | non-atomic or missing ripple → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
-# NODE 7 — CONSTRAIN   [conative · teleology · optimisation · yields: admissibility boolean]
-@purpose: "gate the formalised plan on admissibility before verification: still worth executing, still on the selected branch, within the hard limits"
+# NODE 7 — CONSTRAIN   [conative · teleology · optimization · yields: admissibility boolean]
+@purpose: "gate the formalized plan on admissibility before verification: still worth executing, still on the selected branch, within the hard limits"
 @axis_question: "Is it still worth it, and is it allowed?"   @mandatory
 @genesis: constraint
 @cue: "ADMISSIBLE_BEFORE_VERIFY"
 CONTRACT:
 input:     task_records from NODE 6
-transform: CALCULATE_METRIC realised cost FROM task_records INTO realised_cost; FOR EACH task IN task_records: ANALYZE_CONTENT task AGAINST teleology_bundle.selected INTO trace; COMPARE realised_cost AGAINST teleology_bundle.selected.cost
+transform: CALCULATE_METRIC realized cost FROM task_records INTO realised_cost; FOR EACH task IN task_records: ANALYZE_CONTENT task AGAINST teleology_bundle.selected INTO trace; COMPARE realised_cost AGAINST teleology_bundle.selected.cost
 output:    admissibility
 DECLARE admissibility: object
 SET admissibility = {ok: <cost within budget and nothing off branch and no limit breached>, realised_cost: realised_cost, off_branch: <tasks that do not trace>, limit_breaches: <phases over a hard limit>}
 HANDOFF GATE (teleology admissibility gate):
 rule_id: "CONSTRAIN"   yields: boolean
-[check] realised cost within the branch budget (evidence: realised_cost against the budget)
+[check] realized cost within the branch budget (evidence: realised_cost against the budget)
 [check] every task traces to the selected branch (evidence: admissibility.off_branch empty) over: task_records measured: <on branch> / <tasks>
 [check] no hard limit breached (evidence: admissibility.limit_breaches empty)
-result: pass -> NODE 8 | cost over budget or off branch -> REPAIR (owner: NODE 2) | limit breach -> REPAIR (owner: NODE 6) | unknown -> BLOCKED
+result: pass → NODE 8 | cost over budget or off branch → REPAIR (owner: NODE 2) | limit breach → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # NODE 8 — VERIFY   [evaluative · verification · logic + probability · yields: validation report]
 @purpose: "judge the generated reasoning against evidence, falsification, confidence and semantic policy before commitment"
@@ -463,7 +463,7 @@ rule_id: "VERIFY"   yields: boolean
 [check] confidence is at or above the threshold (evidence: validation_report.confidence)
 [check] status is pass with zero blocking findings (evidence: validation_report.findings)
 standing: moved-set <the surfaces re-read since NODE 1>
-result: pass -> NODE 9 | repair_required -> REPAIR (owner: <the earliest node named by a finding>) | unknown -> BLOCKED
+result: pass → NODE 9 | repair_required → REPAIR (owner: <the earliest node named by a finding>) | unknown → BLOCKED
 
 # REPAIR EDGE  (verify refutes back to the earliest invalid node, bounded by the recursion limit)
 CONTRACT:
@@ -473,7 +473,7 @@ constraints: bounded by recursion_limit; severity orders the repairs among failu
 output:    repaired records at pass, or a blocked terminal with the remaining findings
 
 # NODE 9 — COMMIT   [evaluative · representation · information-theory · yields: rendered artifact]
-@purpose: "serialise only validated records into the one canonical representation, deduplicated, adding no new decision"
+@purpose: "serialize only validated records into the one canonical representation, deduplicated, adding no new decision"
 @axis_question: "How is it encoded?"
 @genesis: emergence
 @cue: "COMMIT_WITHOUT_NEW_DECISIONS"
@@ -489,7 +489,7 @@ rule_id: "COMMIT"   yields: hash + boolean
 [check] no phase or task encoded twice (evidence: the deduplication pass) over: phase_records and task_records measured: <encoded once> / <records>
 [check] no future execution checkbox pre-checked (evidence: a render scan)
 [check] no architecture decision introduced at render (evidence: the rendering rules)
-result: pass -> NODE 10 | integrity defect -> REPAIR (owner: NODE 9) | unknown -> BLOCKED
+result: pass → NODE 10 | integrity defect → REPAIR (owner: NODE 9) | unknown → BLOCKED
 
 # NODE 10 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "stop only on saturation and completion and verification; otherwise block on external input, never a self-assessed stop"
@@ -510,7 +510,7 @@ rule_id: "TERMINATE"   yields: boolean
 [check] no future execution checkbox pre-checked (evidence: render_check)
 refuse: the destination changed since it was read before PERSIST_ARTIFACT
 standing: moved-set <the surfaces re-read since NODE 8>
-result: pass -> TERMINATE | integrity defect -> REPAIR (owner: NODE 9) | unknown -> BLOCKED
+result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 9) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT ontology-before-teleology: authority, trust and the ontology of the change are resolved before its teleology, and both before any seeing over: every generation binds: the generator objector: [check] core authority loaded at NODE 1
@@ -630,9 +630,9 @@ To check this, name for each node the layer, the axis and the shape its header d
 
 The trust anchor says which inputs are evidence and which are claims, so a hypothesis is untrusted until it is scored and prior knowledge is untrusted throughout.
 
-A node is [design by contract](../ontology/PRINCIPLES.md#arch-design-by-contract) at the scale of one decision. The repair edge is the one a fixed pipeline lacks, and what it does is described in [validation gates](VALIDATION.md#validation-gates).
+A node is [design by contract](../ontology/PRINCIPLES.md#architecture-design-by-contract) at the scale of one decision. The repair edge is the one a fixed pipeline lacks, and what it does is described in [validation gates](VALIDATION.md#validation-gates).
 
-Families are selected by the genesis question, and each inlines its whole structure rather than importing a shared spine. Duplication is deliberate here and nowhere else, because [independence](../ontology/PRINCIPLES.md#arch-independence) is what makes each family walkable on its own. A family's loop, its typing and its gates are domain-neutral and transfer to any tree unchanged. Its catalogues, the taxonomies it cites and the thresholds it names, are slots the adapter resolves, as described in [limits](VALIDATION.md#limitations).
+Families are selected by the genesis question, and each inlines its whole structure rather than importing a shared spine. Duplication is deliberate here and nowhere else, because [independence](../ontology/PRINCIPLES.md#architecture-independence) is what makes each family walkable on its own. A family's loop, its typing and its gates are domain-neutral and transfer to any tree unchanged. Its catalogs, the taxonomies it cites and the thresholds it names, are slots the adapter resolves, as described in [limits](VALIDATION.md#limitations).
 
 D1·a family header
 
@@ -659,14 +659,14 @@ conative     which line is worth pursuing         intent · constrain          m
 evaluative   is it fixed, and are we done         verify · commit · terminate mandatory, always
 
 YIELDS-SHAPE LEGEND · every decision resolves to a typed shape
-set-theory -> set or boolean   logic -> boolean   graph -> edge-list   optimisation -> boolean or ranking
-analysis -> operation   computation -> procedure   probability -> a number in zero to one   dynamical-systems -> boolean or counter
+set-theory → set or boolean   logic → boolean   graph → edge-list   optimization → boolean or ranking
+analysis → operation   computation → procedure   probability → a number in zero to one   dynamical-systems → boolean or counter
 ```
 
 D1·b one node
 
 ```pag
-# NODE 2 — INTENT   [conative · teleology · optimisation · yields: ranking]
+# NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]
 @purpose: "extract the differential and rank the candidate lines by worth, so one line is traced and the rest are not"
 @axis_question: "which line is worth pursuing?"
 @cue: "rank before you trace"
@@ -682,9 +682,9 @@ handoff:      the selected line is the argmax of the admissible · yields a bool
 DECLARE tel: object
 SET tel = {
 objective: "find and fix the root cause",          # yields: a set
-utility:   FUNCTION(line) -> probability(line) * severity(line),   # yields: a number
-cost:      FUNCTION(line) -> what tracing it costs,                # yields: a number
-priority:  FUNCTION(ranked) -> ranked[0] is admissible             # yields: a boolean over a ranking
+utility:   FUNCTION(line) → probability(line) * severity(line),   # yields: a number
+cost:      FUNCTION(line) → what tracing it costs,                # yields: a number
+priority:  FUNCTION(ranked) → ranked[0] is admissible             # yields: a boolean over a ranking
 }
 
 # OUTPUT CONTRACT
@@ -695,7 +695,7 @@ rule_id: "INTENT"   yields: ranking
 [check] the selected line is the argmax of utility minus cost (evidence: the ranking)
 [check] <ranked> holds more than one admissible line (evidence: a count above one)
 [check] no line was traced before the ranking existed (evidence: the trace log starts after this gate)
-result: pass -> NODE 3 | one admissible line -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+result: pass → NODE 3 | one admissible line → REPAIR (owner: NODE 1) | unknown → BLOCKED
 ```
 
 D1·c loop spine
@@ -703,16 +703,16 @@ D1·c loop spine
 ```pag
 # THE LOOP SPINE · declared once, every node cites it
 # node        layer       axis            yields                     transition out
-# orient      epistemic   ontology        a set, with evidence       sequences -> intent
-# intent      conative    teleology       an objective, a ranking    GATE worth -> see | redirect
-# see         epistemic   analysis        lenses, edges              sequences -> derive
-# derive      epistemic   reasoning       claims                     sequences -> project
-# project     epistemic   reasoning       an ordered graph           sequences -> act
-# act         epistemic   formalisation   procedures                 sequences -> constrain
-# constrain   conative    teleology       admissibility              GATE -> verify | repair
+# orient      epistemic   ontology        a set, with evidence       sequences → intent
+# intent      conative    teleology       an objective, a ranking    GATE worth → see | redirect
+# see         epistemic   analysis        lenses, edges              sequences → derive
+# derive      epistemic   reasoning       claims                     sequences → project
+# project     epistemic   reasoning       an ordered graph           sequences → act
+# act         epistemic   formalization   procedures                 sequences → constrain
+# constrain   conative    teleology       admissibility              GATE → verify | repair
 # verify      evaluative  verification    a report                   GATE evidence · refutes back to the earliest owner
-# commit      evaluative  representation  the artifact               sequences -> terminate
-# terminate   evaluative  termination     stop                       GATE stop -> STOP | blocked -> ask
+# commit      evaluative  representation  the artifact               sequences → terminate
+# terminate   evaluative  termination     stop                       GATE stop → STOP | blocked → ask
 
 # REPAIR EDGE · verify fails backward to the earliest node that can supply the missing evidence, bounded by {recursion_limit}
 # a repair invalidates every dependent record forward · nothing downstream is restored
@@ -722,20 +722,20 @@ D1·d the families
 
 ```pag
 # the families · each a document type, each walked by the model and axis its type declares
-CHECKLIST      pattern-cycle  formalisation   a plan, produced by owned nodes
+CHECKLIST      pattern-cycle  formalization   a plan, produced by owned nodes
 DEBUG          epistemology   analysis        a symptom to an evidence-scored cause and one fix
 VERIFICATION   epistemology   verification    claims adjudicated against implementation evidence
 AUDIT          epistemology   verification    an agent measured against its contract, then corrected
-DISTILLATION   epistemology   reasoning       repeated behaviour to one proven base
+DISTILLATION   epistemology   reasoning       repeated behavior to one proven base
 TRANSLATION    epistemology   representation  a rendering audited line by line against its source
-COMPOSITION    pattern-cycle  formalisation   a structure rendered from anchors and modifiers
+COMPOSITION    pattern-cycle  formalization   a structure rendered from anchors and modifiers
 
 # the genesis question each answers · one question, one family
-"how does a plan come to be?"      -> CHECKLIST
-"how does a fix come to be?"       -> DEBUG
-"how does a verdict come to be?"   -> VERIFICATION, AUDIT
-"how does a base come to be?"      -> DISTILLATION
-"how does a rendering come to be?" -> TRANSLATION, COMPOSITION
+"how does a plan come to be?"      → CHECKLIST
+"how does a fix come to be?"       → DEBUG
+"how does a verdict come to be?"   → VERIFICATION, AUDIT
+"how does a base come to be?"      → DISTILLATION
+"how does a rendering come to be?" → TRANSLATION, COMPOSITION
 ```
 
 D1·e type to artifact
@@ -768,7 +768,7 @@ walk --> artifact
 
 ## Agent templates
 
-This section covers how a document expresses an agent, a verifier and a creator. An agent is a document of the agent type, a cognition walked on the reasoning axis, as shown in [E1·a an agent](#templates-agents-panel-a), and a verifier is a document of the [verification](../ontology/PRINCIPLES.md#arch-verification) type, an epistemology walked on the verification axis, as shown in [E1·b a verifier](#templates-agents-panel-b). A creator is a template that generates an agent, as shown in [E1·c a creator](#templates-agents-panel-c), and the first two bodies are the grammar's own template records. What an agent is, why it is a walked loop and never a persona, and how a verifier earns trust are described in [agents as executed contracts](../COLLABORATE.md#agents-as-executed-contracts) and [verify the verifier](../VERIFY.md#verify-the-verifier), and [E1·d where guarantees live](#templates-agents-panel-d) maps where each guarantee is expressed.
+This section covers how a document expresses an agent, a verifier and a creator. An agent is a document of the agent type, a cognition walked on the reasoning axis, as shown in [E1·a an agent](#templates-agents-panel-a), and a verifier is a document of the [verification](../ontology/PRINCIPLES.md#architecture-verification) type, an epistemology walked on the verification axis, as shown in [E1·b a verifier](#templates-agents-panel-b). A creator is a template that generates an agent, as shown in [E1·c a creator](#templates-agents-panel-c), and the first two bodies are the grammar's own template records. What an agent is, why it is a walked loop and never a persona, and how a verifier earns trust are described in [agents as executed contracts](../COLLABORATE.md#agents-as-executed-contracts) and [verify the verifier](../VERIFY.md#verify-the-verifier), and [E1·d where guarantees live](#templates-agents-panel-d) maps where each guarantee is expressed.
 
 ### Walked, not adopted
 
@@ -778,7 +778,7 @@ For this reason an agent document carries its guarantees as nodes and gates, so 
 
 To check this, name for each capability the agent's description claims the node whose gate exercises it. A capability with no node was adopted from the description, and the document has not shown it. An agent written for a bounded invocation returns instead of asking, which is the inversion derived in [composing a collaboration](ORCHESTRATION.md#composing-a-workflow).
 
-A claim's kind decides the evidence that can settle it, because a claim of existence needs a presence search and a claim of behaviour needs an execution, so the orient node assigns each claim its kind and the evidence shape that kind requires before anything is probed. The identity the agent writes under is declared in the body the runtime delivers, for the reason described in agents as executed contracts.
+A claim's kind decides the evidence that can settle it, because a claim of existence needs a presence search and a claim of behavior needs an execution, so the orient node assigns each claim its kind and the evidence shape that kind requires before anything is probed. The identity the agent writes under is declared in the body the runtime delivers, for the reason described in agents as executed contracts.
 
 E1·a an agent
 
@@ -808,9 +808,9 @@ HANDOFF GATE (evidence-bearing):
 [check] context read from {DOMAIN_SCOPE} (evidence: the read returned content) over: {DOMAIN_SCOPE} measured: <read> / <declared>
 [check] findings populated (evidence: a count above zero)
 [check] every finding names its source in context (evidence: no finding with an empty source)
-result: pass -> NODE 2 | empty -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+result: pass → NODE 2 | empty → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
-# NODE 2 — EXECUTION   [epistemic · formalisation · computation · yields: procedure]
+# NODE 2 — EXECUTION   [epistemic · formalization · computation · yields: procedure]
 @purpose: "act on every finding, once, with the evidence of each act recorded"
 @genesis: transformation
 CONTRACT:
@@ -822,7 +822,7 @@ HANDOFF GATE:
 [check] no outcome rests on an assumption (evidence: every outcome cites the finding it acted on)
 [check] findings unchanged (evidence: a witness read)
 refuse: a finding whose source cannot be re-read before EXECUTE_TOOL
-result: pass -> NODE 3 | mismatch -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — VERIFICATION   [evaluative · verification · logic · yields: artifact]
 @purpose: "validate the outcomes against the criteria and report to the parties whose next work they create"
@@ -837,7 +837,7 @@ HANDOFF GATE:
 [check] verdict reported (evidence: the report)
 [check] no residual failure (evidence: zero failing outcomes in the report)
 standing: moved-set none
-result: pass -> TERMINATE | residual -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → TERMINATE | residual → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT read-before-write: a node reads its input before it writes anything over: every node binds: the agent objector: [check] context read at NODE 1
@@ -885,9 +885,9 @@ rule_id: "ORIENT"   yields: boolean
 [check] the trust anchor is disclosed with its assumptions and boundary (evidence: run_context.anchor)
 [check] exactly one op-set is bound and its allowed and forbidden operations are disjoint (evidence: run_context.op_set)
 [check] every claim carries a kind and an evidence shape (evidence: run_context.claims) over: {context_claims} measured: <kinded> / <claims>
-result: pass -> NODE 2 | unkinded claim -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+result: pass → NODE 2 | unkinded claim → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
-# NODE 2 — INTENT   [conative · teleology · optimisation · yields: ranking]
+# NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]
 @purpose: "rank claims by verification worth and choose the method per claim by utility minus cost before probing anything"
 @genesis: difference
 @mandatory
@@ -903,7 +903,7 @@ rule_id: "INTENT"   yields: boolean over ranking
 [check] every claim carries a worth and a chosen method (evidence: methods) over: run_context.claims measured: <with method> / <claims>
 [check] each chosen method is the argmax of risk-weighted coverage minus cost (evidence: the per-claim ranking)
 [check] no high-worth claim is left unmapped while a low-worth claim escalates (evidence: the worth order against the escalations)
-result: pass -> NODE 3 | priority inversion -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → NODE 3 | priority inversion → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — CALIBRATE   [epistemic · analysis · graph · yields: set + boolean]
 @purpose: "probe the runtime, calibrate every detector the chosen methods use against both controls, and arm the defenses before trusting any tool"
@@ -921,9 +921,9 @@ rule_id: "CALIBRATE"   yields: boolean
 [check] every needed detector ran both the false-positive and the false-negative control (evidence: detector.reliability) over: needed detectors measured: <calibrated> / <detectors>
 [check] the defenses are armed (evidence: capability_plan.defenses)
 refuse: a probe that would mutate the target before EXECUTE_TOOL
-result: pass -> NODE 4 | unreliable detector -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → NODE 4 | unreliable detector → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
-# NODE 4 — GATHER   [epistemic · formalisation · computation · yields: set]
+# NODE 4 — GATHER   [epistemic · formalization · computation · yields: set]
 @purpose: "resolve each claim to an observable evidence requirement, order by verdict genesis, gather observations from the implementation, and hold the op-set"
 @genesis: transformation
 CONTRACT:
@@ -938,11 +938,11 @@ HANDOFF GATE (evidence-bearing):
 rule_id: "GATHER"   yields: boolean
 [check] every claim resolves to an observable requirement naming the settling observation (evidence: requirements) over: run_context.claims measured: <mapped> / <claims>
 [check] every direct requirement produced an observation from the implementation and none was inferred (evidence: observations)
-[check] the op-set was honoured, every boundary cross was sanitized and recursion stayed bounded (evidence: the admissibility record)
-result: pass -> NODE 5 | inadmissible act -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+[check] the op-set was honored, every boundary cross was sanitized and recursion stayed bounded (evidence: the admissibility record)
+result: pass → NODE 5 | inadmissible act → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 5 — ADJUDICATE   [evaluative · verification · logic + probability · yields: set + number]
-@purpose: "judge each observation against evidence, behavioural contract and hostile inputs, judge this agent's own claims, and resolve escalations without inference"
+@purpose: "judge each observation against evidence, behavioral contract and hostile inputs, judge this agent's own claims, and resolve escalations without inference"
 @genesis: constraint
 @mandatory
 CONTRACT:
@@ -960,7 +960,7 @@ rule_id: "ADJUDICATE"   yields: boolean
 [check] no pending escalation remains unresolved by tool or by an unverified mark (evidence: the escalation record)
 refuse: an adversarial input that would escape the intended root before EXECUTE_TOOL
 standing: moved-set <the implementation files re-read since NODE 4>
-result: pass -> NODE 6 | untested match -> REPAIR (owner: NODE 3) | unknown -> BLOCKED
+result: pass → NODE 6 | untested match → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 6 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "emit exactly one typed artifact, deduplicated, naming every limitation, and stop only on saturation and completion and verification"
@@ -978,11 +978,11 @@ rule_id: "TERMINATE"   yields: boolean
 [check] success only when saturation and completion and verification all hold (evidence: the termination set) over: the termination set measured: <holding> / <three>
 [check] findings are deduplicated by claim and verdict (evidence: the reduction pass)
 refuse: a report destination that changed since it was read before PERSIST_ARTIFACT
-result: pass -> TERMINATE | integrity defect -> REPAIR (owner: NODE 6) | unknown -> BLOCKED
+result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT anchor-disclosed: the trust anchor is disclosed, never verified, and everything above it is verified over: every run binds: the verifier objector: [check] the trust anchor is disclosed at NODE 1
-INVARIANT op-sets-disjoint: INVESTIGATE never mutates and ACTION never discovers new scope over: every operation binds: the verifier objector: [check] the op-set was honoured at NODE 4
+INVARIANT op-sets-disjoint: INVESTIGATE never mutates and ACTION never discovers new scope over: every operation binds: the verifier objector: [check] the op-set was honored at NODE 4
 INVARIANT calibrate-before-trust: no detector output is trusted before both controls pass over: every detector binds: the verifier objector: [check] every needed detector ran both controls at NODE 3
 INVARIANT gathered-never-inferred: an observation comes from the implementation, never from inference over: every observation binds: the verifier objector: [check] none was inferred at NODE 4
 INVARIANT match-is-not-evidence: a match counts only after calibration and adversarial survival over: every verdict binds: the verifier objector: [check] every detector survived the adversarial inputs at NODE 5
@@ -1026,9 +1026,9 @@ HANDOFF GATE:
 [check] <sources> is non-empty because a search was run (evidence: the search log) over: <the domain> measured: <read> / <sources>
 [check] every capability the agent will claim traces to an item in <evidence> (evidence: one item per capability)
 [check] nothing in <evidence> came from prior knowledge (evidence: a source per item)
-result: pass -> NODE 2 | unsourced item -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+result: pass → NODE 2 | unsourced item → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
-# NODE 2 — THE PORTABLE CONTRACT   [epistemic · formalisation · computation · yields: procedure]
+# NODE 2 — THE PORTABLE CONTRACT   [epistemic · formalization · computation · yields: procedure]
 @genesis: structure
 CONTRACT:
 input:     <evidence> from NODE 1
@@ -1039,7 +1039,7 @@ HANDOFF GATE:
 [check] <contract> names no harness feature (evidence: a scan of its literals) over: its literals measured: <neutral> / <literals>
 [check] every host fact in <contract> is a slot (evidence: no literal path or command)
 [check] every operation in <contract> is one an adapter can map (evidence: the operation set)
-result: pass -> NODE 3 | harness name -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → NODE 3 | harness name → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — RENDERING      [evaluative · representation · information-theory · yields: artifact]
 @genesis: transformation
@@ -1052,7 +1052,7 @@ HANDOFF GATE:
 [check] every operation resolved to a tool (evidence: the adapter's map) over: operations measured: <mapped> / <operations>
 [check] every slot resolved to a value or a declared absence (evidence: no unresolved slot)
 [check] the identity the agent writes under is declared in the body the runtime delivers (evidence: the body)
-result: pass -> NODE 4 | unresolved slot -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → NODE 4 | unresolved slot → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 4 — PROOF BEFORE PERSISTENCE   [evaluative · verification · logic · yields: boolean]
 @genesis: constraint
@@ -1065,7 +1065,7 @@ HANDOFF GATE:
 [check] the clean case passed for the right reason (evidence: <pass-run> names the check it passed) over: the two cases measured: <as expected> / <two>
 [check] <artifact> persisted only after both cases ran (evidence: the two runs precede the write)
 refuse: either run missing before PERSIST_ARTIFACT
-result: pass -> TERMINATE | silent contradiction -> REPAIR (owner: NODE 2) | unknown -> BLOCKED
+result: pass → TERMINATE | silent contradiction → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT evidence-first: an agent is generated from inspected evidence, never from intent alone over: every generated agent binds: the creator objector: [check] nothing in evidence came from prior knowledge at NODE 1

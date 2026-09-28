@@ -1,8 +1,8 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Coverage — Architecture — Bane's Lab
 
-> This section covers how an architectural intent becomes a predicate a check can run. The reasoning axis of the ontology turns a question into a type and a type…
+> This section covers how an architectural intent becomes a predicate a check can run.
 
 Canonical: https://banes-lab.com/software-architecture/coverage
 
@@ -18,21 +18,21 @@ This section covers how an architectural intent becomes a predicate a check can 
 
 ### Question, type, predicate
 
-Architecture is usually a set of intentions, and an intention cannot be evaluated, so neither the developer nor the model can say how much of the architecture is real. A design document states twelve principles, the codebase honours four, and no reviewer can say which four without reading everything, because the other eight were never anything a check could evaluate. An intention has no objector, so its first violation is silent, and a system whose rules are silent is governed by attention rather than by structure.
+Architecture is usually a set of intentions, and an intention cannot be evaluated, so neither the developer nor the model can say how much of the architecture is real. A design document states twelve principles, the codebase honors four, and no reviewer can say which four without reading everything, because the other eight were never anything a check could evaluate. An intention has no objector, so its first violation is silent, and a system whose rules are silent is governed by attention rather than by structure.
 
 For this reason an architecture is its predicate set, and a predicate selects what to examine and marks when the concern is closed. The architecture is counted by what the gate refuses rather than by what the document states. In practice, every architectural intent is stated as a question about [what can drift, seen through how it drifts](COVERAGE.md#what-can-drift-seen-through-how-it-drifts), and the question is resolved to a type. What exists is a set, how parts are arranged is an ordering, what connects is a graph, and how sure you are is a number. The predicate is derived from the type and run over the tree as a check.
 
-To check this, list the architectural claims your system makes. Beside each, name the predicate that decides it and where that predicate runs. A claim with no predicate beside it is a sentence in a document, and the document is the only place it holds. [Determinism](../ontology/PRINCIPLES.md#arch-determinism) lives in the predicate and never in the judgement that authored it. Which cells are worth watching is a decision, while whether a cell's predicate holds is a computation. The decision stays with the developer and the computation with the check, and a predicate never encodes taste.
+To check this, list the architectural claims your system makes. Beside each, name the predicate that decides it and where that predicate runs. A claim with no predicate beside it is a sentence in a document, and the document is the only place it holds. [Determinism](../ontology/PRINCIPLES.md#architecture-determinism) lives in the predicate and never in the judgement that authored it. Which cells are worth watching is a decision, while whether a cell's predicate holds is a computation. The decision stays with the developer and the computation with the check, and a predicate never encodes taste.
 
 ### A predicate does two jobs
 
 The double duty is what makes derivation possible. The predicate that says an export is unreachable is the same predicate that says reachability is covered, so one reading tells you where to work and the other tells you the dimension is watched. A project that has the first without the second accumulates checks by incident, and one that has both can derive its checks from its invariants.
 
-[Policy as code](../ontology/PRINCIPLES.md#arch-policy-as-code) is the canon's name for the whole move, and [fitness functions](../ontology/PRINCIPLES.md#arch-fitness-functions) are the same predicates run against an architecture rather than a request. [Static analysis](../ontology/PRINCIPLES.md#arch-static-analysis) is where most predicates live, because a shape in a tree can be decided without running anything, and [design by contract](../ontology/PRINCIPLES.md#arch-design-by-contract) is the same idea one level down, with preconditions, postconditions and invariants that a check can evaluate rather than a comment can promise.
+[Policy as code](../ontology/PRINCIPLES.md#architecture-policy-as-code) is the canon's name for the whole move, and [fitness functions](../ontology/PRINCIPLES.md#architecture-fitness-functions) are the same predicates run against an architecture rather than a request. [Static analysis](../ontology/PRINCIPLES.md#architecture-static-analysis) is where most predicates live, because a shape in a tree can be decided without running anything, and [design by contract](../ontology/PRINCIPLES.md#architecture-design-by-contract) is the same idea one level down, with preconditions, postconditions and invariants that a check can evaluate rather than a comment can promise.
 
 ### Coverage from the grid, never from a count
 
-The coverage question is then answered from the grid described in what can drift, seen through how it drifts, rather than from a count of rules. [Security theater](../ontology/PRINCIPLES.md#arch-security-theater) is what a count produces, with the presence of controls standing in for their coverage. A predicate set answers the other question, which cells have something that can disagree with them, and that is the only sense in which an architecture is enforced.
+The coverage question is then answered from the grid described in what can drift, seen through how it drifts, rather than from a count of rules. [Security theater](../ontology/PRINCIPLES.md#architecture-security-theater) is what a count produces, with the presence of controls standing in for their coverage. A predicate set answers the other question, which cells have something that can disagree with them, and that is the only sense in which an architecture is enforced.
 
 A1·a intent to predicate
 
@@ -85,13 +85,13 @@ To check this, take the checks you have and place each in its cell, then count t
 
 ### The axes, and a cell read off them
 
-A module reaching across a boundary is relation seen relationally, and a [circular dependency](../ontology/PRINCIPLES.md#arch-circular-dependency) is relation seen structurally. Two files claiming one role is identity seen structurally. A manifest entry rotting is composition seen through evolution. A discriminated union gaining a case nothing handles is change seen sequentially. A registry written and never read is function seen functionally. Intent living in a comment is meaning seen semantically. The same defect at every scale is scale seen fractally, and a convention followed everywhere except here is novelty seen as anomaly.
+A module reaching across a boundary is relation seen relationally, and a [circular dependency](../ontology/PRINCIPLES.md#architecture-circular-dependency) is relation seen structurally. Two files claiming one role is identity seen structurally. A manifest entry rotting is composition seen through evolution. A discriminated union gaining a case nothing handles is change seen sequentially. A registry written and never read is function seen functionally. Intent living in a comment is meaning seen semantically. The same defect at every scale is scale seen fractally, and a convention followed everywhere except here is novelty seen as anomaly.
 
 ### Projected onto correctness
 
-The same grid projected onto [correctness](../ontology/PRINCIPLES.md#arch-correctness) is the [test-surface catalogue](../ontology/REASONING.md#the-test-surfaces). Every surface a unit can fail in names its failure modes, its technique, its predicate and its evidence source, and its verdict domain carries unknown as a value distinct from pass. [Property-based testing](../ontology/PRINCIPLES.md#arch-property-based-testing) and [specification-based testing](../ontology/PRINCIPLES.md#arch-specification-based-testing) are techniques a surface names, and [chaos engineering](../ontology/PRINCIPLES.md#arch-chaos-engineering) is the technique for the surfaces only a running system can fail in.
+The same grid projected onto [correctness](../ontology/PRINCIPLES.md#architecture-correctness) is the [test-surface catalog](../ontology/REASONING.md#the-test-surfaces). Every surface a unit can fail in names its failure modes, its technique, its predicate and its evidence source, and its verdict domain carries unknown as a value distinct from pass. [Property-based testing](../ontology/PRINCIPLES.md#architecture-property-based-testing) and [specification-based testing](../ontology/PRINCIPLES.md#architecture-specification-based-testing) are techniques a surface names, and [chaos engineering](../ontology/PRINCIPLES.md#architecture-chaos-engineering) is the technique for the surfaces only a running system can fail in.
 
-An unmeasured surface is unknown rather than clean, as described in [unknown is not pass](../VERIFY.md#unknown-is-not-pass) and recorded in [the evidence verdict](../ontology/ALGORITHMS.md#algo-evidence-verdict). [Test pyramid inversion](../ontology/PRINCIPLES.md#arch-test-pyramid-inversion) and the [mock mirage](../ontology/PRINCIPLES.md#arch-mock-mirage) are the two ways a green run stops being evidence, and [completion](../ontology/ALGORITHMS.md#algo-coverage-completion) is the absence of required surfaces still unknown, never a percentage, because a percentage averages the surfaces that matter with the ones that cannot fail.
+An unmeasured surface is unknown rather than clean, as described in [unknown is not pass](../VERIFY.md#unknown-is-not-pass) and recorded in [the evidence verdict](../ontology/ALGORITHMS.md#algorithms-evidence-verdict). [Test pyramid inversion](../ontology/PRINCIPLES.md#architecture-test-pyramid-inversion) and the [mock mirage](../ontology/PRINCIPLES.md#architecture-mock-mirage) are the two ways a green run stops being evidence, and [completion](../ontology/ALGORITHMS.md#algorithms-coverage-completion) is the absence of required surfaces still unknown, never a percentage, because a percentage averages the surfaces that matter with the ones that cannot fail.
 
 B1·a two axes, one cell
 
@@ -144,7 +144,7 @@ export const DIMENSIONS = [
   "time",
   "state",
   "change",
-  "behaviour",
+  "behavior",
   "function",
   "cause",
   "meaning",
@@ -160,7 +160,7 @@ export const LENSES = [
   "frequency",
   "sequential",
   "relational",
-  "behavioural",
+  "behavioral",
   "functional",
   "semantic",
   "causal",
@@ -170,7 +170,7 @@ export const LENSES = [
   "fractal",
   "transformational",
   "invariant",
-  "optimisation",
+  "optimization",
   "complexity",
 ] as const;
 
@@ -215,13 +215,13 @@ To check this, find an empty cell and try to state its invariant in one sentence
 
 Two invariants keep this a method rather than a rule pile. The first is that no rule exists without a consuming failure mode. A rule earns its place only if a real drift class fires it, because a rule nothing can violate is ceremony, and ceremony costs the same review attention as a real rule, which is how a rule set stops being read.
 
-The second is that the rule set is derived while the judgement that authored it is not. Which cells need watching is a deterministic function of the architecture's declared invariants, whether an invariant was worth declaring is a decision, and the [determinism](../ontology/PRINCIPLES.md#arch-determinism) stays in the predicate rather than in the deciding.
+The second is that the rule set is derived while the judgement that authored it is not. Which cells need watching is a deterministic function of the architecture's declared invariants, whether an invariant was worth declaring is a decision, and the [determinism](../ontology/PRINCIPLES.md#architecture-determinism) stays in the predicate rather than in the deciding.
 
 ### The walk in the canon
 
-The [walk itself](../ontology/ALGORITHMS.md#algo-surface-grid-walk) and the [gap it derives](../ontology/ALGORITHMS.md#algo-uncovered-gap-derivation) are records in the canon, and the cells the canon has not yet covered are [listed rather than assumed away](../ontology/REASONING.md#the-uncovered-cells).
+The [walk itself](../ontology/ALGORITHMS.md#algorithms-surface-grid-walk) and the [gap it derives](../ontology/ALGORITHMS.md#algorithms-uncovered-gap-derivation) are records in the canon, and the cells the canon has not yet covered are [listed rather than assumed away](../ontology/REASONING.md#the-uncovered-cells).
 
-[Gap analysis](../ontology/PRINCIPLES.md#arch-gap-analysis) is the activity, and a resisting cell is its most useful output. A cell whose invariant states itself was a missing rule. A cell whose invariant will not state itself is an [architecture review](../ontology/PRINCIPLES.md#arch-architecture-review) waiting to happen, and an [architecture decision record](../ontology/PRINCIPLES.md#arch-architecture-decision-records) is where its answer lands, so the next walk finds a decision rather than the same empty cell.
+[Gap analysis](../ontology/PRINCIPLES.md#architecture-gap-analysis) is the activity, and a resisting cell is its most useful output. A cell whose invariant states itself was a missing rule. A cell whose invariant will not state itself is an [architecture review](../ontology/PRINCIPLES.md#architecture-architecture-review) waiting to happen, and an [architecture decision record](../ontology/PRINCIPLES.md#architecture-architecture-decision-records) is where its answer lands, so the next walk finds a decision rather than the same empty cell.
 
 C1·a the walk
 
@@ -243,21 +243,21 @@ decide -- no --> undecided
 
 ## The honest gaps
 
-This section covers how a rule reports what it finds and how a method declares what it lacks. Every cell that earns a rule renders two ways from one entry, a detect half and a report half, as typed in [D1·b a rule entry](#the-honest-gaps-panel-b). Every predicate the method calls for is either running in the tree or declared absent in the one document that binds the method to the tree, as shown in [D1·a running or absent](#the-honest-gaps-panel-a). A method that cannot say which of its own predicates are missing has not measured itself, and a document that describes an upgrade the tree never made is the [schema drift](../ontology/PRINCIPLES.md#arch-schema-drift) described in [a system is a graph](MODEL.md#a-system-is-a-graph).
+This section covers how a rule reports what it finds and how a method declares what it lacks. Every cell that earns a rule renders two ways from one entry, a detect half and a report half, as typed in [D1·b a rule entry](#the-honest-gaps-panel-b). Every predicate the method calls for is either running in the tree or declared absent in the one document that binds the method to the tree, as shown in [D1·a running or absent](#the-honest-gaps-panel-a). A method that cannot say which of its own predicates are missing has not measured itself, and a document that describes an upgrade the tree never made is the [schema drift](../ontology/PRINCIPLES.md#architecture-schema-drift) described in [a system is a graph](MODEL.md#a-system-is-a-graph).
 
 ### Detect, report, declare
 
 Checks that only block teach nothing, and methods that only describe cannot say which of their own predicates exist. A check refuses a change with a message that names a rule id, the author works around the id, and the document that describes the method lists a predicate that has never run anywhere. A blocking message names a rule without its reason, so the same violation returns from the next author, and a document that only describes the ideal cannot be checked against the tree, so its gaps are found by failure rather than by reading.
 
-For this reason a rule detects and reports from one entry, and a predicate the tree does not run is declared absent, never assumed. The report half is written beside the detect half rather than a blocking message alone, and an absence is named in the binding document rather than left to be assumed. In practice, each rule is authored as one entry with a detect half and a report half, discovered by shape and consumed whole by the gate. One document names every predicate the method calls for and states, for each, whether the tree runs it.
+For this reason a finding carries its own cause and repair, and a missing check is declared where the method is bound to the project. The report half is written beside the detect half rather than a blocking message alone, and an absence is named in the binding document rather than left to be assumed. In practice, each rule is authored as one entry with a detect half and a report half, discovered by shape and consumed whole by the gate. One document names every predicate the method calls for and states, for each, whether the tree runs it.
 
 To check this, take any finding your gate prints and ask whether it names the invariant and the remediation. Then take the document that describes your method and ask, for each predicate it calls for, whether the tree runs it. A finding that names only a rule, or a predicate that cannot be located, is the gap. A declared gap is not a license. Naming a predicate as absent keeps the document honest and leaves the drift class unwatched, so an absent predicate is still a cell to decide, and the declaration only says that the decision has not been made yet.
 
 ### One entry, two halves
 
-The detect half is the predicate that fires on the violating shape. The report half is the message that names the invariant and the remediation, so the failure teaches the convention rather than only blocking. [Auto-remediation](../ontology/PRINCIPLES.md#arch-auto-remediation) follows where the remediation has [one correct answer](../VERIFY.md#one-correct-answer), and where it does not the report still carries the handle a reasoning agent needs.
+The detect half is the predicate that fires on the violating shape. The report half is the message that names the invariant and the remediation, so the failure teaches the convention rather than only blocking. [Auto-remediation](../ontology/PRINCIPLES.md#architecture-auto-remediation) follows where the remediation has [one correct answer](../VERIFY.md#one-correct-answer), and where it does not the report still carries the handle a reasoning agent needs.
 
-Enforcement then follows the [registry pattern](../ontology/PRINCIPLES.md#arch-registry-pattern), with one entry per rule discovered by shape through [auto-discovery](../ontology/PRINCIPLES.md#arch-auto-discovery) and consumed by the gate, and the whole set failing the build on drift. Where a project already has a registry primitive for code, enforcement reuses it rather than inventing a second one.
+Enforcement then follows the [registry pattern](../ontology/PRINCIPLES.md#architecture-registry-pattern), with one entry per rule discovered by shape through [auto-discovery](../ontology/PRINCIPLES.md#architecture-runtime-discovery) and consumed by the gate, and the whole set failing the build on drift. Where a project already has a registry primitive for code, enforcement reuses it rather than inventing a second one.
 
 ### Declared absent, never assumed
 

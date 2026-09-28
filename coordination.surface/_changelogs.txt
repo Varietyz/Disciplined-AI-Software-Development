@@ -1,0 +1,92 @@
+═══════════════════ HOW THIS FILE IS USED ═══════════════════
+
+This is the package's history accumulator, and it is the ONLY file permitted to contain history. Every
+other surface here states what is true now: the board is current truth and deletes what is resolved, a
+planning surface carries what remains, and a document that describes a former state is corrected rather
+than annotated. The tense check enforces that everywhere except here.
+
+**A removal writes here BEFORE it happens.** The board tool refuses to drain an absorbed item, and refuses
+to remove a field, without a reference naming the heading its extraction landed under — because a
+current-truth surface deleted without extraction destroys the only record that a finding existed. The check
+decides that the reference RESOLVES and never that the extraction is faithful: extraction is a compression,
+so a text comparison would fail every correct one and pass a verbatim paste. Fidelity stays with the writer.
+
+**What belongs in an entry:** the defect, how it was found, and the MECHANISM it revealed — written as a
+shape rather than as an episode, so a later reader can recognize the class in a surface that has nothing
+else in common with this one. **What does not:** an item's addressing, its courtesies, its restatement of
+what another party said, and anything a rule, a check or a planning row already carries. A finding absorbed
+into a check is already durable, and extracting it again is a second copy that can disagree with the first.
+
+**Where the host declares its own history file, that file is the destination and this one is unused** — one
+history home per project, so the two never compete for the same fact.
+
+**A heading is a kebab sentence naming the CLASS**, because a closure cites it by name and the citation must
+resolve.
+
+**A class entry — one whose heading is the kebab sentence above, rather than an extracted item heading —
+states what it does NOT cover, under the lead `BOUNDARY:`**, naming each neighboring class
+and the repair that neighbor takes. The lead is structural rather than a phrasing, so a reader arriving
+under a citation finds the routing without reading the entry whole, and a check reads the same lead a writer
+does rather than matching prose. **A class with no neighbor yet writes `BOUNDARY: —`**, which states that
+the question was asked and answered, where an absent lead makes an oversight indistinguishable from a class
+that genuinely stands alone.
+
+**An entry that is INSTANCES rather than a class says so, and a lead binds it only where that lead's question
+is well-formed for an entry with no class.** The binding is per LEAD rather than per entry, because the two
+leads ask different things. `BOUNDARY:` asks what this heading does NOT cover — well-formed for instances,
+which exist precisely to route a reader onward, and answered by naming the classes each instance belongs to.
+`POPULATION:` asks what the members of this CLASS are — malformed for an instances entry, which has no class
+for members to belong to, so the question has no answer rather than an unwritten one.
+
+**A blanket *carries no lead* is wrong for the same reason**: an instances entry carries a BOUNDARY, which
+routes a reader onward, and no POPULATION, because it has no class to state. So the header declares the binding per lead and
+a walk deriving its leads from this header derives their bindings with them, rather than carrying a list of
+exempt entries that would go stale the first time either set moved.
+
+**The leads that presuppose a CLASS, and so do not bind an INSTANCES entry:** `POPULATION:`
+
+**That line is the DECLARATION and the paragraphs above it are its reason**, which is the difference between
+a binding a mechanism reads and one only a reader does. The walk collects the leads named on it in the same
+backticked form it already collects every declared lead, so a lead added to this header carries its binding
+in the same edit and the check learns neither name. A binding stated only in prose is a contract clause no
+mechanism can reach — the shape this surface exists to record — so stating it twice, once for the reader and
+once in the form the walk reads, is the collapse being unavailable here rather than a duplication: the
+reason and the operand answer different questions and neither derives the other.
+
+**A class entry states its members under the lead `POPULATION:`, and every member carries one of two words,
+because a member something has already hit and a member the class merely predicts read identically once they
+sit in one list.** `OBSERVED` names a member the tree has actually produced — a collision that happened, a
+divergence that fired, a verdict that moved. `PREDICTED` names a member derived from the class against a
+surface where nothing has gone wrong yet. **A class whose count came back empty writes `POPULATION: —`**,
+which states that the enumeration ran and found nothing. **A class nobody has enumerated writes
+`POPULATION: UNMEASURED`**, which states that the count has not been taken.
+
+**Those three are the whole vocabulary and an ABSENT lead is none of them, which is why absence fails rather
+than reading as unmeasured.** An entry saying nothing and an entry declaring that nobody has counted are
+different claims: the first is an oversight indistinguishable from a decision, the second is a seat stating
+the debt where a reader and a count can both see it. The roster draws the identical line one surface over —
+its declared word for an unbuilt half is a value in the cell rather than an empty cell — and the reason is
+the same: **a declared gap is countable and drainable, while a missing one is invisible to everything except
+the reader who happens to notice.** So `UNMEASURED` is the honest state of most classes here and carries no
+stigma; what it does not permit is silence.
+
+**The lead is structural for the same reason the boundary lead is**, and deliberately in the same shape: the
+mechanism that reads a lead reads whichever one this header DECLARES, so a second declared lead is an operand
+the existing shape already accepts rather than a new parser. A population stated as prose beside the entry is
+readable and unjoinable, which is the failure this file collects — so the form that carries it is the one a
+lead-reader can consume.
+
+**The two words are not a confidence tier and the distinction is not about how sure the author is.** They
+name what the ENTRY IS EVIDENCE OF: an observed member is evidence the class exists, and a predicted member
+is evidence only of the derivation that produced it. A population of one observed member and four predicted
+ones is a class with one instance and a hypothesis, and a reader tallying five members learns the opposite —
+which is the transcribed-count failure arriving inside a population.
+
+**The obligation runs on the PREDICTED word only, and stating it that way is what keeps the cost honest.** An
+observed member is what an author reaches for anyway; a predicted one is the claim that needs marking,
+because it is the one that reads as measured while resting on reasoning. **A predicted member that something
+later hits is rewritten to OBSERVED in place** — that is a current-truth correction rather than history, and
+the entry never records that it changed.
+
+═══════════════════ ENTRIES ═══════════════════
+

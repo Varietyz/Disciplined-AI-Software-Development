@@ -1,0 +1,32 @@
+{
+    "name": "@ssot/govlab",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The project's own governance host — the custom eslint rules the gate loads, the codemods it auto-fixes with, and the shared manifests and taxonomy config both derive their structural facts from.",
+    "imports": {
+        "#codemods/*": "./codemods/*.ts",
+        "#rules/*": "./rules/*.ts",
+        "#shared/*": "./shared/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "exports": {
+        "./codemods/*": "./codemods/*",
+        "./rules/*": "./rules/*",
+        "./shared/*": "./shared/*",
+        "./types/*": "./types/*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@govlab/constants": "*",
+        "@govlab/context": "*",
+        "@govlab/docs": "*",
+        "@govlab/pipeline": "*",
+        "@govlab/quality": "*",
+        "@ssot/paths": "*"
+    }
+}

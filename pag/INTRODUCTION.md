@@ -1,8 +1,8 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # PAG — Bane's Lab
 
-> Pattern Abstract Grammar (PAG) is a structured instruction format for LLMs: a formal grammar grounded in a reasoning ontology, a guide, genesis stages, structure declarations and the template families a reasoning loop walks.
+> Pattern Abstract Grammar (PAG) is a structured format for writing instructions to LLMs, defined by a formal grammar that is grounded in a reasoning ontology and published with a guide and a set of templates.
 
 Canonical: https://banes-lab.com/pag
 
@@ -14,19 +14,19 @@ Structured instructions for LLMs
 
 ## What PAG is
 
-Pattern Abstract Grammar (PAG) is a structured format for writing the instructions a model is asked to follow. A PAG document declares what kind of instruction it is and what it may touch, and it draws every operative word from a [closed vocabulary](../ontology/PRINCIPLES.md#arch-closed-vocabulary) of uppercase tokens grounded in a reasoning ontology. The work is grouped into nodes; each node reads the previous node's output and closes on a gate of checkable conditions, each with its evidence and the population it covers. The document states its boundaries as invariant records and ends with a report, and [A1·a minimal document](#what-is-pag-panel-a) shows all of these parts together. Each part is one stage of a reasoning loop written down, as listed in [A1·b construct to stage](#what-is-pag-panel-b), so the document makes [the loop](../START.md#the-loop) legible. [A1·c prose or directive](#what-is-pag-panel-c) shows where variance enters without the grammar, and [A1·d scan, loop, binding](#what-is-pag-panel-d) shows what walks a document. What the tokens gain is described in [why it works](INTRODUCTION.md#why-pag-works), and what the grammar never reaches is described under [limits](VALIDATION.md#limitations).
+Pattern Abstract Grammar (PAG) is a structured format for writing the instructions a model is asked to follow. A PAG document declares what kind of instruction it is and what it may touch, and it draws every operative word from a [closed vocabulary](../ontology/PRINCIPLES.md#architecture-closed-vocabulary) of uppercase tokens grounded in a reasoning ontology. The work is grouped into nodes; each node reads the previous node's output and closes on a gate of checkable conditions, each with its evidence and the population it covers. The document states its boundaries as invariant records and ends with a report, and [A1·a minimal document](#what-is-pag-panel-a) shows all of these parts together. Each part is one stage of a reasoning loop written down, as listed in [A1·b construct to stage](#what-is-pag-panel-b), so the document makes [the loop](../START.md#the-loop) legible. [A1·c prose or directive](#what-is-pag-panel-c) shows where variance enters without the grammar, and [A1·d scan, loop, binding](#what-is-pag-panel-d) shows what walks a document. What the tokens gain is described in [why it works](INTRODUCTION.md#why-pag-works), and what the grammar never reaches is described under [limits](VALIDATION.md#limitations).
 
 ### A contract, not a request
 
-An instruction written as prose leaves its terms to the model that reads it. The same request run twice produces two plausible results, and neither you nor the model can say which sentence was read differently. An [implicit contract](../ontology/PRINCIPLES.md#arch-implicit-contract) leaves the model to supply the terms, and it supplies them from the completion, so they vary with it.
+An instruction written as prose leaves its terms to the model that reads it. The same request run twice produces two plausible results, and neither you nor the model can say which sentence was read differently. An [implicit contract](../ontology/PRINCIPLES.md#architecture-implicit-contract) leaves the model to supply the terms, and it supplies them from the completion, so they vary with it.
 
-For this reason I write an instruction as an [explicit contract](../ontology/PRINCIPLES.md#arch-explicit-contracts) rather than as a request in prose. The instruction gets a type rather than sharper prose: a declared type, tokens from a closed set and gates with checkable exits, rather than a longer or more careful sentence. In practice, an instruction is written as a PAG document when a reasoning loop will walk it. The document declares its type, states a checkable objective, divides the work into nodes with contracts, closes each node on three to five checks that can be settled with evidence, and bounds the whole with invariants.
+For this reason I write an instruction as an [explicit contract](../ontology/PRINCIPLES.md#architecture-explicit-contracts) rather than as a request in prose. The instruction gets a type rather than sharper prose: a declared type, tokens from a closed set and gates with checkable exits, rather than a longer or more careful sentence. In practice, an instruction is written as a PAG document when a reasoning loop will walk it. The document declares its type, states a checkable objective, divides the work into nodes with contracts, closes each node on three to five checks that can be settled with evidence, and bounds the whole with invariants.
 
 To check this, hand the same document to the model twice and compare both outputs against the gates. Where both runs pass every gate, the structure held; where one fails, the failing gate points to the sentence that was still prose. A prompt that asks one question in passing gains nothing from a node structure. The grammar earns its cost where the document will be walked more than once, read by more than one party, or trusted to have done what it says.
 
 A document has no runtime. What walks it is a reasoning loop, the one the methodology page teaches, and every construct of the grammar makes one of that loop's stages explicit. The document type names which reasoning model walks the document and on which axis of the loop it sits, and an adapter outside the document maps each [semantic operation](GUIDE.md#tool-invocation) to the tool that performs it.
 
-Two kinds of check apply to a document. A scan checks its shape; that is [static analysis](../ontology/PRINCIPLES.md#arch-static-analysis), deterministic and cheap, and it is what makes the grammar parsable. The loop checks its meaning, and that check is not deterministic, because the loop is walked by a model.
+Two kinds of check apply to a document. A scan checks its shape; that is [static analysis](../ontology/PRINCIPLES.md#architecture-static-analysis), deterministic and cheap, and it is what makes the grammar parsable. The loop checks its meaning, and that check is not deterministic, because the loop is walked by a model.
 
 A1·a minimal document
 
@@ -54,7 +54,7 @@ HANDOFF GATE:
 [check] <held> read from <source> (evidence: the read returned content)
 [check] <held> conforms to <schema> (evidence: the validator's report) over: <held> records measured: <conforming> / <records>
 [check] every <held>.<record> carries the fields NODE 2 reads (evidence: no record with a missing field)
-result: pass -> NODE 2 | unread or nonconforming -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+result: pass → NODE 2 | unread or nonconforming → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — <the decision that consumes the first>   [epistemic · reasoning · set-theory · yields: set]
 @genesis: difference
@@ -66,7 +66,7 @@ HANDOFF GATE:
 [check] every <item> analyzed (evidence: one finding per item) over: <held>.<collection> measured: <analyzed> / <items>
 [check] <result> holds every <item> that met <criterion> (evidence: the two counts match)
 [check] no <item> outside <held> appears in <result> (evidence: every result item present in <held>)
-result: pass -> TERMINATE | count mismatch -> REPAIR (owner: NODE 1) | unknown -> BLOCKED
+result: pass → TERMINATE | count mismatch → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT validate-before-persist: <held> is validated before anything is persisted over: every node binds: the reader objector: [check] <held> conforms to <schema> at NODE 1
@@ -129,15 +129,15 @@ The grammar does not change how a model behaves; it changes what the model is co
 
 ### Pattern completion
 
-Careful prose is not answered with a more careful result. A page of careful prose gets a confident result that answers a slightly different question, and the difference stays invisible until the result is run. The model completes what it has seen most often, and uppercase verbs with explicit prepositions are what it has seen in code, configuration and documentation.
+Polishing an instruction's wording tends not to change how precisely the model follows it. A page of careful prose gets a confident result that answers a slightly different question, and the difference stays invisible until the result is run. The model completes what it has seen most often, and uppercase verbs with explicit prepositions are what it has seen in code, configuration and documentation.
 
-For this reason I use explicit, high-frequency tokens, which reduce interpretive variance while the output stays probabilistic. Ambiguity is reduced at the input and the output is verified, rather than the input being asked to guarantee anything. In practice, every operative word comes from the [keyword](KEYWORDS.md#keyword-ontology) vocabulary, and its operands are bound with a preposition, so the model completes a recognised structure instead of interpreting a sentence. The intent is stated as an English verb the reader can review.
+For this reason I use explicit, high-frequency tokens, which reduce interpretive variance while the output stays probabilistic. Ambiguity is reduced at the input and the output is verified, rather than the input being asked to guarantee anything. In practice, every operative word comes from the [keyword](KEYWORDS.md#keyword-ontology) vocabulary, and its operands are bound with a preposition, so the model completes a recognized structure instead of interpreting a sentence. The intent is stated as an English verb the reader can review.
 
 To check this, rewrite one prose instruction as a directive and run both several times against the same gates. The directive should pass more often, and where it does not, the gate that fails is the one whose condition was still a judgement. Structure helps where the model has seen the structure. A vocabulary invented for one project is prose with capital letters, and the model interprets it as it would interpret a sentence.
 
 The vocabulary combines code syntax for structure with English verbs for intent and prepositions for the relations between operands. A line that carries all three is one the model can complete and a reviewer can read without a legend.
 
-Token frequency is the reason the vocabulary is uppercase and closed. A word that appears in the same slot across many structured contexts carries a stable meaning into the completion, while a word that appears with many meanings carries all of them. So the grammar keeps its verbs few and capitalised, and gives each one a [semantic contract](../ontology/PRINCIPLES.md#arch-semantic-contracts), stated under [instruction patterns](PATTERNS.md#instruction-patterns). One term for one operation is the [ubiquitous language](../ontology/PRINCIPLES.md#arch-ubiquitous-language) the model and the reviewer share.
+Token frequency is the reason the vocabulary is uppercase and closed. A word that appears in the same slot across many structured contexts carries a stable meaning into the completion, while a word that appears with many meanings carries all of them. So the grammar keeps its verbs few and capitalised, and gives each one a [semantic contract](../ontology/PRINCIPLES.md#architecture-semantic-contracts), stated under [instruction patterns](PATTERNS.md#instruction-patterns). One term for one operation is the [ubiquitous language](../ontology/PRINCIPLES.md#architecture-ubiquitous-language) the model and the reviewer share.
 
 Reducing ambiguity works at the derive stage of [the loop](../START.md#the-loop). There the model works out what a line means, and a line drawn from the vocabulary leaves it one reading where prose leaves several.
 
@@ -189,7 +189,7 @@ A PAG document is one instrument, a single input inside [the loop](../START.md#t
 
 ### One instrument inside a method
 
-A document that reads well invites the belief that it did what it says, and a document cannot verify itself. A team writes careful documents, skips the checks because the documents read as complete, and discovers in production that a gate the model reported as passed was never evaluated by anything. A well-shaped input reads as a guarantee because the output usually matches it, and the failures live in the runs where it does not.
+A document that reads well invites the belief that it did what it says, and a document cannot carry out its own [verification](../ontology/PRINCIPLES.md#architecture-verification). A team writes careful documents, skips the checks because the documents read as complete, and discovers in production that a gate the model reported as passed was never evaluated by anything. A well-shaped input reads as a guarantee because the output usually matches it, and the failures live in the runs where it does not.
 
 For this reason the grammar shapes an input, and the method holds the work around it. The checks sit outside the document, in a gate the method runs, rather than inside it as sentences the model completes. In practice, a document shapes one input: the instruction a party reads before it acts. Everything around that input is held by the method. Worth is decided before the document is written, the output is checked by a gate the document did not run, and parties coordinate through surfaces the document only reads.
 

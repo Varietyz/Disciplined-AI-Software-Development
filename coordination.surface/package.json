@@ -1,0 +1,46 @@
+{
+    "name": "coordination-surface",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The board, the venues and the checks that let several LLM agents work in one codebase at once.",
+    "license": "LicenseRef-PAG-NonCommercial-1.0",
+    "workspaces": ["tools"],
+    "exports": {
+        "./config/*": "./config/*",
+        "./tools/*": "./tools/*"
+    },
+    "files": [
+        ".{provider}",
+        "_agenda.md",
+        "_agent-index.md",
+        "_changelogs.txt",
+        "_code.info.generated",
+        "_manifest.json",
+        "AGENTS.md",
+        "BOOTSTRAP.md",
+        "checklists",
+        "config",
+        "findings",
+        "LICENSE",
+        "models",
+        "README.md",
+        "roles",
+        "specifications",
+        "taxonomy",
+        "templates",
+        "tools",
+        "tsconfig.json"
+    ],
+    "scripts": {
+        "govern": "node tools/core/entrypoints/pipeline.entrypoint.ts",
+        "govern:segment": "node tools/core/entrypoints/segment.entrypoint.ts",
+        "clean": "node tools/core/entrypoints/source.entrypoint.ts",
+        "await": "node tools/core/entrypoints/board.entrypoint.ts",
+        "converge": "node tools/core/entrypoints/converge.entrypoint.ts",
+        "gates": "node tools/core/entrypoints/gate.entrypoint.ts",
+        "documents": "node tools/core/entrypoints/document.entrypoint.ts",
+        "corpus": "node tools/core/entrypoints/corpus.entrypoint.ts",
+        "typecheck": "npm run typecheck -w @surface/pipeline"
+    }
+}

@@ -1,8 +1,8 @@
-© 2025 Jay Baleine - Disciplined AI Software Development · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+© 2025 Jay Baleine - Disciplined Methodology · Bane's Lab documentation is covered by [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 # Scale — Architecture — Bane's Lab
 
-> This section covers how work is partitioned into concerns and how many parties it needs. The partition is derived rather than drawn, as shown in floor and…
+> This section covers how work is partitioned into concerns and how many parties it needs.
 
 Canonical: https://banes-lab.com/software-architecture/scale
 
@@ -20,19 +20,19 @@ This section covers how work is partitioned into concerns and how many parties i
 
 Concerns are drawn as areas of a work list, so a seat owns a region rather than a component, and every coupled edit crosses two seats. Two seats each own half of one coupled pair of surfaces, every change one makes forces a change in the other's, and the surface between them fills with items about the same edit from both sides. A concern drawn as an area of a task list follows how the list was written, and a list is written by one developer on one day, so its areas cut across the couplings that actually force changes.
 
-For this reason a concern is a connected component of the relation that joins two surfaces when a change to one forces a change to the other. The work is cut along what forces what rather than along what the work list happened to group. In practice, the surfaces a body of work touches are enumerated, and the pairs that force each other are recorded with evidence, where a change to one cannot land without a change to the other. The connected components of that relation are the concerns, each gets one owner, and the number of components is the floor. The fan-in on each [shared surface](../pag/ORCHESTRATION.md#shared-surfaces) is measured from the claims already recorded against it, and the worst fan-in sets the ceiling. A count is chosen inside that range, and the partition is written down beside the choice.
+For this reason a concern is bounded by coupling rather than by topic, so every edit that forces another stays inside one owner. The work is cut along what forces what rather than along what the work list happened to group. In practice, the surfaces a body of work touches are enumerated, and the pairs that force each other are recorded with evidence, where a change to one cannot land without a change to the other. The connected components of that relation are the concerns, each gets one owner, and the number of components is the floor. The fan-in on each [shared surface](../pag/ORCHESTRATION.md#shared-surfaces) is measured from the claims already recorded against it, and the worst fan-in sets the ceiling. A count is chosen inside that range, and the partition is written down beside the choice.
 
 To check this, take any two concerns and find one change that forces edits in both. If one exists, the partition put a forcing edge across a boundary, and the two concerns are one component. The relation is chosen once, and that choice is the one place judgement enters. Two defensible readings of what forces what yield component counts far apart, so the claim is a derivation with a choice at the bottom. The choice is answerable to evidence, and where no mechanism yet computes the partition or the fan-in, that absence is written down as debt with its operands rather than left to read as a measurement.
 
 ### A concern is a bounded context for people
 
-A concern is a [bounded context](../ontology/PRINCIPLES.md#arch-bounded-context) drawn for people rather than for models, and [context mapping](../ontology/PRINCIPLES.md#arch-context-mapping) is the activity that draws it. A concern is a component of the forcing relation for the same reason a bounded context is a region of one model, because inside it one party can be authoritative, and across its edge two parties have to be able to disagree. [Separation of concerns](../ontology/PRINCIPLES.md#arch-separation-of-concerns) at the scale of seats is the same principle as at the scale of files, and it is derived the same way, from what forces what.
+A concern is a [bounded context](../ontology/PRINCIPLES.md#architecture-bounded-context) drawn for people rather than for models, and [context mapping](../ontology/PRINCIPLES.md#architecture-context-mapping) is the activity that draws it. A concern is a component of the forcing relation for the same reason a bounded context is a region of one model, because inside it one party can be authoritative, and across its edge two parties have to be able to disagree. [Separation of concerns](../ontology/PRINCIPLES.md#architecture-separation-of-concerns) at the scale of seats is the same principle as at the scale of files, and it is derived the same way, from what forces what.
 
-Volume is the wrong operand for the floor. Quantity divides across parties and argues for a longer schedule, never a wider one. What forces a second party is indivisibility, a concern that has to be able to contradict another while both stay authoritative, and the floor counts those. [Partitioning](../ontology/PRINCIPLES.md#arch-partitioning) by volume is [horizontal scaling](../ontology/PRINCIPLES.md#arch-horizontal-scaling) of people, and it buys [throughput](../ontology/PRINCIPLES.md#arch-throughput) where the concerns are already separate and nothing where they are not.
+Volume is the wrong operand for the floor. Quantity divides across parties and argues for a longer schedule, never a wider one. What forces a second party is indivisibility, a concern that has to be able to contradict another while both stay authoritative, and the floor counts those. [Partitioning](../ontology/PRINCIPLES.md#architecture-partitioning) by volume is [horizontal scaling](../ontology/PRINCIPLES.md#architecture-horizontal-scaling) of people, and it buys [throughput](../ontology/PRINCIPLES.md#architecture-throughput) where the concerns are already separate and nothing where they are not.
 
 ### Fan-in, measured
 
-The ceiling is set by fan-in rather than by the count, because a surface with one writer cannot have its volatility raised by adding a party, and staleness rises only where parties converge on one subject. Ownership bounds fan-in without defining it, since a formally owned surface that many parties reason about behaves like [shared mutable state](../ontology/PRINCIPLES.md#arch-shared-mutable-state), and the concentration is continuous.
+The ceiling is set by fan-in rather than by the count, because a surface with one writer cannot have its volatility raised by adding a party, and staleness rises only where parties converge on one subject. Ownership bounds fan-in without defining it, since a formally owned surface that many parties reason about behaves like [shared mutable state](../ontology/PRINCIPLES.md#architecture-shared-mutable-state), and the concentration is continuous.
 
 For this reason the ceiling is measured and never declared. A count chosen because it felt right is a bound nothing can disagree with, and so it bounds nothing. Fan-in read from the claims already recorded against each surface is a number a second reader can recompute, and the ceiling follows from the worst of them.
 
@@ -119,13 +119,13 @@ To check this, take any stale claim and count who read it and who answered it. I
 
 A mechanism that records when a claim's cited surface was observed reduces no staleness, only what staleness costs, so it raises the ceiling without touching the partition.
 
-The marker is a [correlation id](../ontology/PRINCIPLES.md#arch-correlation-id) for reasoning, because it joins a claim to the state it was made against, the way a correlation id joins a log line to the request that produced it. [Causal consistency](../ontology/PRINCIPLES.md#arch-causal-consistency) is the property it buys, since a reader can tell whether a claim happened before or after the surface it rests on moved, without a clock and without asking.
+The marker is a [correlation id](../ontology/PRINCIPLES.md#architecture-correlation-id) for reasoning, because it joins a claim to the state it was made against, the way a correlation id joins a log line to the request that produced it. [Causal consistency](../ontology/PRINCIPLES.md#architecture-causal-consistency) is the property it buys, since a reader can tell whether a claim happened before or after the surface it rests on moved, without a clock and without asking.
 
 ### What the lever leaves alone
 
 The lever changes one thing. The partition stays what the forcing relation derived, the seats stay what the floor demanded, and what changes is how expensive it is for the parties to be wrong about each other for a moment.
 
-[Eventual consistency](../ontology/PRINCIPLES.md#arch-eventual-consistency) between parties is the state the marker makes affordable. Each party holds a view that may lag, and the lag is visible rather than argued. Consensus is the expensive alternative, every party agreeing before any proceeds, and it is the right mechanism only where a stale claim costs more than a halt.
+[Eventual consistency](../ontology/PRINCIPLES.md#architecture-eventual-consistency) between parties is the state the marker makes affordable. Each party holds a view that may lag, and the lag is visible rather than argued. Consensus is the expensive alternative, every party agreeing before any proceeds, and it is the right mechanism only where a stale claim costs more than a halt.
 
 B1·a rate and cost
 
@@ -158,23 +158,23 @@ This section covers what happens above one tier, where a flat surface becomes th
 
 ### Fused results up, scope down
 
-Flat fan-in grows without bound, and the growth is read as a discipline problem when it is the structure doing exactly what it was built to do. An orchestrator forwards its workers' raw records upward, the composer reads everything every worker wrote, and the surface that was supposed to bound reading has become the unbounded thing it replaced. Fan-in without reduction passes every record to every reader, so the volume a party has to read grows with the population, and that growth is the accumulation everyone then tries to drain by care.
+Flat fan-in grows without bound, and the growth is read as a discipline problem when it is the structure doing exactly what it was built to do. An orchestrator forwards its workers' raw records upward, the composer reads everything every worker wrote, and the surface that was supposed to bound reading has become the unbounded thing it replaced. Fan-in without reduction passes every record to every reader, so the volume a party has to read grows with the population, and that growth is the accumulation [the developer and the model](../COLLABORATE.md#the-developer-and-the-model) then try to drain by care.
 
-For this reason, above one tier, scale is reduction, with fused results going up, scope coming down, and every record keeping one writer. The fused result is published rather than the raw records, at every tier. In practice, the surfaces are arranged as a tree once one tier is not enough. A parent hands scope down and publishes only the fused result of its children upward, and every record keeps its one writer at every depth, so identity and reduction hold unchanged whether the tree is two levels or ten. Each reduction is derivable and checkable, so a fusion that silently drops a live item fails exactly as a dropped record does. Where the reduction step is unbuilt, it is declared so, rather than letting a design read as if it had been measured at a headcount it never reached.
+For this reason, above one tier, scale is reduction, with fused results going up, scope coming down, and every record keeping one writer. Each tier answers for a derived summary rather than relaying what its members wrote. In practice, the surfaces are arranged as a tree once one tier is not enough. A parent hands scope down and publishes only the fused result of its children upward, and every record keeps its one writer at every depth, so identity and reduction hold unchanged whether the tree is two levels or ten. Each reduction is derivable and checkable, so a fusion that silently drops a live item fails exactly as a dropped record does. Where the reduction step is unbuilt, it is declared so, rather than letting a design read as if it had been measured at a headcount it never reached.
 
 To check this, take any surface above the first tier and ask what it publishes upward. If it forwards raw records, it is accumulating by construction, and no drain rule will keep up with it. Reduction changes what is published upward and never who may write. A parent that rewrites a child's record has taken a second writer's seat, and a child that reads the global view has bypassed the bound that made its reading finite. The tree holds only while both stay on their side.
 
 ### Fan-in taken seriously
 
-Reduction is [fan-out/fan-in](../ontology/PRINCIPLES.md#arch-fan-out-fan-in) with the fan-in half taken seriously. Fan-out is cheap, because scope handed down divides. Fan-in is where every distributed design pays, because results handed up add, and the only way to keep the sum bounded is to reduce at each tier. [Orchestration](../ontology/PRINCIPLES.md#arch-orchestration) is the shape of one tier, a coordinating owner that hands scope down and publishes one fused result up, and [choreography](../ontology/PRINCIPLES.md#arch-choreography) is the shape between peers who share no parent.
+Reduction is [fan-out/fan-in](../ontology/PRINCIPLES.md#architecture-fan-out-fan-in) with the fan-in half taken seriously. Fan-out is cheap, because scope handed down divides. Fan-in is where every distributed design pays, because results handed up add, and the only way to keep the sum bounded is to reduce at each tier. [Orchestration](../ontology/PRINCIPLES.md#architecture-orchestration) is the shape of one tier, a coordinating owner that hands scope down and publishes one fused result up, and [choreography](../ontology/PRINCIPLES.md#architecture-choreography) is the shape between peers who share no parent.
 
-Branching is fractal, running from workers into an orchestrator, into another orchestrator and into a composer. Every record keeps its one writer, and a reduced tier is published by one writer, so identity and reduction hold unchanged at any depth. A [message chain](../ontology/PRINCIPLES.md#arch-message-chain), one party relaying another's raw record to a third, is the anti-pattern that appears the moment a tier forwards rather than reduces.
+Branching is fractal, running from workers into an orchestrator, into another orchestrator and into a composer. Every record keeps its one writer, and a reduced tier is published by one writer, so identity and reduction hold unchanged at any depth. A [message chain](../ontology/PRINCIPLES.md#architecture-message-chain), one party relaying another's raw record to a third, is the anti-pattern that appears the moment a tier forwards rather than reduces.
 
 ### Checkable, and honestly unmeasured
 
-A reduction is derived and checkable, and a fusion that silently drops one live item beneath it fails exactly as a dropped record does. [Missing backpressure](../ontology/PRINCIPLES.md#arch-missing-backpressure) is the same defect at a queue, where a tier that accepts more than it reduces accumulates, and the accumulation is the design working as built.
+A reduction is derived and checkable, and a fusion that silently drops one live item beneath it fails exactly as a dropped record does. [Missing backpressure](../ontology/PRINCIPLES.md#architecture-missing-backpressure) is the same defect at a queue, where a tier that accepts more than it reduces accumulates, and the accumulation is the design working as built.
 
-The reduction step itself is declared unbuilt and unmeasured at any headcount, and saying so is what stops the design reading as though it had been measured. A design that claims [scalability](../ontology/PRINCIPLES.md#arch-scalability) it has not measured makes, in prose, the unevidenced claim the coverage tab refuses.
+The reduction step itself is declared unbuilt and unmeasured at any headcount, and saying so is what stops the design reading as though it had been measured. A design that claims [scalability](../ontology/PRINCIPLES.md#architecture-scalability) it has not measured makes, in prose, the unevidenced claim the coverage tab refuses.
 
 C1·a reduction
 
@@ -196,7 +196,7 @@ This section covers what architecture means when a model writes the code, as sho
 
 ### Every principle becomes a gate
 
-AI-driven development scales code production and leaves architecture where it was, held by intentions the model does not keep. An edit is judged clean by the model's own read of it, the check that would have disagreed never ran, and the design principle the edit violates is still the first paragraph of the document the model was given. A model's adherence to an instruction is a distribution rather than a commitment, so an architecture that rests on adherence is a bet placed on every change.
+Development with a model scales code production and leaves architecture where it was, held by intentions the model does not keep. An edit is judged clean by the model's own read of it, the check that would have disagreed never ran, and the design principle the edit violates is still the first paragraph of the document the model was given. A model's adherence to an instruction is a distribution rather than a commitment, so an architecture that rests on adherence is a bet placed on every change.
 
 For this reason the architecture is the set of predicates the gate holds, and design is choosing them. Design is spent on choosing predicates rather than on explaining intentions to the model. In practice, the seven controls are installed as checks before the model writes anything, and every architectural intent is treated as unenforced until its predicate runs in the chain. The model's authority is bounded, so every model-produced artifact is validated at the boundary it crosses and raw model output never reaches a trusted sink. The model is directed with findings rather than principles, in [the loop](../START.md#the-loop) described in [detect, log, fix](../BUILD.md#detect-log-fix) on the methodology page.
 
@@ -204,15 +204,15 @@ To check this, delete the design document from the session and run the gate. Wha
 
 ### Who does what
 
-The division of labour follows from the author being a model. The tooling detects because detection is deterministic and a model's account of its own work is not. The model is asked to remediate because a finding is a task it is likely to perform consistently. The developer governs because choosing the predicates and deciding the tensions is not computed.
+The division of labor follows from the author being a model. The tooling detects because detection is deterministic and a model's account of its own work is not. The model is asked to remediate because a finding is a task it is likely to perform consistently. The developer governs because choosing the predicates and deciding the tensions is not computed.
 
-The arrangement is [policy enforcement](../ontology/PRINCIPLES.md#arch-policy-enforcement), with the policy held as code and the enforcement held by a gate, and it is the only arrangement in which an [agentic architecture](../ontology/PRINCIPLES.md#arch-agentic-architecture) keeps an architecture at all. [Prompt engineering](../ontology/PRINCIPLES.md#arch-prompt-engineering) can raise the odds that a model honours an intent. It cannot make the intent hold, because a probability is not a predicate.
+The arrangement is [policy enforcement](../ontology/PRINCIPLES.md#architecture-policy-enforcement), with the policy held as code and the enforcement held by a gate, and it is the only arrangement in which an [agentic architecture](../ontology/PRINCIPLES.md#architecture-agentic-architecture) keeps an architecture at all. [Prompt engineering](../ontology/PRINCIPLES.md#architecture-prompt-engineering) can raise the odds that a model honors an intent. It cannot make the intent hold, because a probability is not a predicate.
 
 ### A finding is the contract
 
-A finding is machine-actionable for exactly this reason, and its shape is described in detect, log, fix on the methodology page. [Auto-remediation](../ontology/PRINCIPLES.md#arch-auto-remediation) takes the findings with [one correct answer](../VERIFY.md#one-correct-answer), and the rest route to the model with their operands already resolved.
+A finding is machine-actionable for exactly this reason, and its shape is described in detect, log, fix on the methodology page. [Auto-remediation](../ontology/PRINCIPLES.md#architecture-auto-remediation) takes the findings with [one correct answer](../VERIFY.md#one-correct-answer), and the rest route to the model with their operands already resolved.
 
-[Ungrounded content](../ontology/PRINCIPLES.md#arch-ungrounded-content) is the failure this shape prevents. A model told a principle is likely to produce a plausible reading of it. A model handed a finding is asked to make the one change the finding names, and the gate that produced the finding is the same gate that checks the change, so the loop closes on evidence rather than on the model's report of itself.
+[Ungrounded content](../ontology/PRINCIPLES.md#architecture-ungrounded-content) is the failure this shape prevents. A model told a principle is likely to produce a plausible reading of it. A model handed a finding is asked to make the one change the finding names, and the gate that produced the finding is the same gate that checks the change, so the loop closes on evidence rather than on the model's report of itself.
 
 D1·a three authors
 
@@ -251,7 +251,7 @@ export const route = (finding: Finding<unknown>): "heal" | "delegate" =>
 
 ## Scale follows determinism
 
-This section covers how scale relates to [determinism](../ontology/PRINCIPLES.md#arch-determinism), as shown in [E1·a check against care](#scale-follows-determinism-panel-a) and plotted in [E1·b cost per change](#scale-follows-determinism-panel-b), and why a model author is the case where the relation matters most. The same axis is stated for a mechanism in [one correct answer](../VERIFY.md#one-correct-answer) on the methodology page.
+This section covers how scale relates to [determinism](../ontology/PRINCIPLES.md#architecture-determinism), as shown in [E1·a check against care](#scale-follows-determinism-panel-a) and plotted in [E1·b cost per change](#scale-follows-determinism-panel-b), and why a model author is the case where the relation matters most. The same axis is stated for a mechanism in [one correct answer](../VERIFY.md#one-correct-answer) on the methodology page.
 
 ### The same verdict for any author
 
@@ -263,15 +263,15 @@ To check this, take any rule you enforce by review and ask whether two reviewers
 
 ### Determinism is the axis the others derive from
 
-A deterministic subject has [testability](../ontology/PRINCIPLES.md#arch-testability), [auto-remediation](../ontology/PRINCIPLES.md#arch-auto-remediation) reaches it, and [predictability](../ontology/PRINCIPLES.md#arch-predictability) and [scalability](../ontology/PRINCIPLES.md#arch-scalability) follow without being pursued.
+A deterministic subject has [testability](../ontology/PRINCIPLES.md#architecture-testability), [auto-remediation](../ontology/PRINCIPLES.md#architecture-auto-remediation) reaches it, and [predictability](../ontology/PRINCIPLES.md#architecture-predictability) and [scalability](../ontology/PRINCIPLES.md#architecture-scalability) follow without being pursued.
 
 The rest of this page lists the subjects that can be made deterministic, namely what a file is, what a principle requires, which control is absent, which cell is watched and which concern a change forces.
 
 ### When a verdict moves
 
-[Flaky test normalization](../ontology/PRINCIPLES.md#arch-flaky-test-normalization) is what a team does when it stops believing this. A check that returns a different verdict on the same tree is treated as noise, the noise is tolerated, and every author learns that red means run it again. The repair is never a [retry pattern](../ontology/PRINCIPLES.md#arch-retry-pattern) around the check. It is finding the non-deterministic subject the check depends on and making it deterministic, or declaring that it cannot be and holding the check.
+[Flaky test normalization](../ontology/PRINCIPLES.md#architecture-flaky-test-normalization) is what a team does when it stops believing this. A check that returns a different verdict on the same tree is treated as noise, the noise is tolerated, and every author learns that red means run it again. The repair is never a [retry pattern](../ontology/PRINCIPLES.md#architecture-retry-pattern) around the check. It is finding the non-deterministic subject the check depends on and making it deterministic, or declaring that it cannot be and holding the check.
 
-[Formal verification](../ontology/PRINCIPLES.md#arch-formal-verification) is the far end of the same axis, a subject made deterministic enough that a proof replaces a run, and [static analysis](../ontology/PRINCIPLES.md#arch-static-analysis) is the near end, a shape decided without running anything. Most of an architecture's predicates live at the near end, and that is enough, because a verdict that is the same for any author is what lets the author be a model.
+[Formal verification](../ontology/PRINCIPLES.md#architecture-formal-verification) is the far end of the same axis, a subject made deterministic enough that a proof replaces a run, and [static analysis](../ontology/PRINCIPLES.md#architecture-static-analysis) is the near end, a shape decided without running anything. Most of an architecture's predicates live at the near end, and that is enough, because a verdict that is the same for any author is what lets the author be a model.
 
 E1·a check against care
 
@@ -302,7 +302,7 @@ This section covers systems built around a model, which the same canon governs w
 
 ### A dependency whose output is a distribution
 
-A model is treated as a component that returns answers, so its output crosses every boundary a deterministic component's would and none of the contracts are applied. A completion is written straight into a trusted store, the store is read as fact by the rest of the system, and the fact was a fluent guess that was never validated because the model was treated as a component rather than as an author. A model's output is a distribution, so every contract that assumes a deterministic component is violated by default where a model stands, and the only repair is to apply the contracts explicitly at the boundary the model's output crosses.
+Model output is trusted like the result of a lookup, and it reaches the system's stores unchecked. A completion is written straight into a trusted store, the store is read as fact by the rest of the system, and the fact was a fluent guess that was never validated because the model was treated as a component rather than as an author. A model's output is a distribution, so every contract that assumes a deterministic component is violated by default where a model stands, and the only repair is to apply the contracts explicitly at the boundary the model's output crosses.
 
 For this reason a model is governed as a dependency whose output is a distribution, by the same canon applied at its boundary. The model is treated as an author rather than a component, so every boundary its output crosses is one the contracts already govern. In practice, a model is versioned, gated and evaluated like any dependency, and measured before it is trusted. What it generates is grounded in retrieved evidence that cites its source rather than in recollection, and the knowledge it reasons over is structured so the output can be explained. Its authority is bounded at every boundary, so its output is validated before it reaches a sink, a raw completion never lands in a trusted store, and every capability it may invoke is declared, so it is discovered rather than reachable by default.
 
@@ -310,15 +310,15 @@ To check this, follow one model output from generation to the first trusted sink
 
 ### Governed, grounded, structured
 
-[Model governance](../ontology/PRINCIPLES.md#arch-model-governance) and [model evaluation](../ontology/PRINCIPLES.md#arch-model-evaluation) are the canon's records for the first obligation. [Model drift monitoring](../ontology/PRINCIPLES.md#arch-model-drift-monitoring) keeps measuring after the model is trusted, because a distribution that was acceptable at one version is a claim about that version only, and [model version ambiguity](../ontology/PRINCIPLES.md#arch-model-version-ambiguity) is the anti-pattern of a system that cannot say which one answered.
+[Model governance](../ontology/PRINCIPLES.md#architecture-model-governance) and [model evaluation](../ontology/PRINCIPLES.md#architecture-model-evaluation) are the canon's records for the first obligation. [Model drift monitoring](../ontology/PRINCIPLES.md#architecture-model-drift-monitoring) keeps measuring after the model is trusted, because a distribution that was acceptable at one version is a claim about that version only, and [model version ambiguity](../ontology/PRINCIPLES.md#architecture-model-version-ambiguity) is the anti-pattern of a system that cannot say which one answered.
 
-[Retrieval-augmented generation](../ontology/PRINCIPLES.md#arch-retrieval-augmented-generation) is the grounding, with [vector search](../ontology/PRINCIPLES.md#arch-vector-search) as the retrieval and the citation as the ground. [Knowledge graphs](../ontology/PRINCIPLES.md#arch-knowledge-graphs) structure what the system reasons over so that [explainability](../ontology/PRINCIPLES.md#arch-explainability) is a property of the output rather than a hope.
+[Retrieval-augmented generation](../ontology/PRINCIPLES.md#architecture-retrieval-augmented-generation) is the grounding, with [vector search](../ontology/PRINCIPLES.md#architecture-vector-search) as the retrieval and the citation as the ground. [Knowledge graphs](../ontology/PRINCIPLES.md#architecture-knowledge-graphs) structure what the system reasons over so that [explainability](../ontology/PRINCIPLES.md#architecture-explainability) is a property of the output rather than a hope.
 
 ### Bounded
 
-AI safety is the canon's record for the bound. The validation is [input validation](../ontology/PRINCIPLES.md#arch-input-validation), and a capability the model may invoke is a [capability declaration](../ontology/PRINCIPLES.md#arch-capability-declaration). [Least privilege](../ontology/PRINCIPLES.md#arch-least-privilege) and [secure by default](../ontology/PRINCIPLES.md#arch-secure-by-default) are the same two principles they are for any actor, applied to one whose intentions are a distribution.
+[Model safety](../ontology/PRINCIPLES.md#architecture-model-safety) is the canon's record for the bound. The validation is [input validation](../ontology/PRINCIPLES.md#architecture-input-validation), and a capability the model may invoke is a [capability declaration](../ontology/PRINCIPLES.md#architecture-capability-declaration). [Least privilege](../ontology/PRINCIPLES.md#architecture-least-privilege) and [secure by default](../ontology/PRINCIPLES.md#architecture-secure-by-default) are the same two principles they are for any actor, applied to one whose intentions are a distribution.
 
-An [agentic architecture](../ontology/PRINCIPLES.md#arch-agentic-architecture) is [traded against determinism](../ontology/SCHEMA.md#tension-agentic-architecture-determinism), and the operating point is the set of gates described in [the loop](../START.md#the-loop), which is the same answer this whole page gives. AI [prompt sprawl](../ontology/PRINCIPLES.md#arch-prompt-sprawl) is what a system looks like when the gates were never built and the prompts took their place.
+An [agentic architecture](../ontology/PRINCIPLES.md#architecture-agentic-architecture) is [traded against determinism](../ontology/SCHEMA.md#tension-agentic-architecture-determinism), and the operating point is the set of gates described in [the loop](../START.md#the-loop), which is the same answer this whole page gives. [Prompt sprawl](../ontology/PRINCIPLES.md#architecture-prompt-sprawl) is what a system looks like when the gates were never built and the prompts took their place.
 
 F1·a one category
 
