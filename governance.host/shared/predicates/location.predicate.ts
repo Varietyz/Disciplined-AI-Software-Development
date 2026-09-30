@@ -3,6 +3,7 @@ import {
     LOCATION_SUBJECT,
     WORKSPACE_ROOT,
     basenameOf,
+    collapsePath,
     normalizePath,
     projectFiles,
 } from "../resolvers/anchor.resolver.ts";
@@ -15,7 +16,12 @@ import { relativePath } from "@ssot/paths";
 import { resolveFile } from "../matchers/filename.matcher.ts";
 
 const SSOT_RULE_FILE = "closure-paths-via-ssot.eslint.rule.ts";
-const EXEMPT_SEGMENTS = [`/${relativePath("project.paths")}/`, ".generated.", "/node_modules/"];
+const EXEMPT_SEGMENTS = [
+    `/${relativePath("project.paths")}/`,
+    `/${relativePath("codebase.testing.paths")}/`,
+    ".generated.",
+    "/node_modules/",
+];
 const SPECIFIER_PARENTS = new Set(["ImportDeclaration", "ExportNamedDeclaration", "ExportAllDeclaration"]);
 
 const exemptBasenames = function exemptBasenames(): ReadonlySet<string> {
@@ -25,8 +31,6 @@ const exemptBasenames = function exemptBasenames(): ReadonlySet<string> {
         basenameOf(resolveFile(ANCHOR_SUBJECT, "resolver", files)),
         basenameOf(resolveFile(LOCATION_SUBJECT, "registry", files)),
         "taxonomy.config.ts",
-        "paths-composition.test.ts",
-        "paths-keys-resolve.test.ts",
         "location.registry.test.ts",
     ]);
 };
@@ -40,6 +44,20 @@ export const isSsotExemptFile = function isSsotExemptFile(filename: string): boo
         EXEMPT_BASENAMES.has(basenameOf(posix)) ||
         MEMBER_PATHS_CONFIGS.has(posix)
     );
+};
+
+const STANDALONE_SCRIPTS = `/${relativePath("app.nginxScripts")}/`;
+
+export const isStandaloneScript = function isStandaloneScript(filename: string): boolean {
+    return normalizePath(filename).includes(STANDALONE_SCRIPTS);
+};
+
+export const isMemberPathsSource = function isMemberPathsSource(fromDir: string, source: string): boolean {
+    if (!source.startsWith(".")) {
+        return false;
+    }
+    const target = collapsePath(`${normalizePath(fromDir)}/${source}`);
+    return [...MEMBER_PATHS_CONFIGS].some((config) => collapsePath(config) === target);
 };
 
 export const isModuleSpecifier = function isModuleSpecifier(node: AstNode): boolean {

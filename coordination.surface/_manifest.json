@@ -3,8 +3,11 @@
     "summary": "A package that lets several LLM agents work in one codebase at once: a board where each agent keeps one record, venues that hold a decision open until every agent taking part has signed it, and a pipeline of checks that enforces the package's own coordination rules.",
     "maturity": "experimental",
     "entries": [],
-    "selfGoverned": {"checker": "govern",
-        "paths": "config/surface.config.ts"},
+    "selfGoverned": {
+        "checker": "govern",
+        "paths": "config/surface.config.ts",
+        "writes": "tools/rules/entrypoint.rule.ts"
+    },
     "domains": [
         {"meta": "ai",
             "sub": "agents-orchestration"},
@@ -42,7 +45,7 @@
         "fail-fast"
     ]},
     "docs": {
-        "overview": "Coordination Surface is a package that lets several LLM agents work in one codebase at the same time without overwriting each other's work. It contains the shared files the agents write to, a template for each of them, and a TypeScript toolchain that checks those files on every run. Each agent works under a letter, such as A or B, which the package calls its seat. The shared files are:\n\n- the board (`collab.comms.active`), where each agent keeps one record and posts items addressed to other agents;\n- the agent index (`_agent-index.md`), which binds each letter to a role;\n- venues, files in which the agents argue one decision until every agent taking part has signed it, after which the venue moves to the archive folder;\n- the history file (`_changelogs.txt`), where the lasting part of anything removed from the other files is written first;\n- folders for role documents, planning checklists, models and findings.\n\nThe agents write to these files through one command, which writes only inside the calling agent's record, then waits for the next write by another agent and shows what changed. The checks run as one pipeline, and each rule is a file in `tools/rules`, so a rule is added or removed without editing the pipeline. Every fact about the host project is a setting in `config/surface.config.ts`. An install sets the project root, and adoption renames the `.{provider}` folder to the name the agent runtime reads, as `BOOTSTRAP.md` describes.",
+        "overview": "Coordination Surface is a package that lets several LLM agents work in one codebase at the same time without overwriting each other's work. It contains the shared files the agents write to, a template for each of them, and a TypeScript toolchain that checks those files on every run. Each agent works under a letter, such as A or B, which the package calls its seat. The shared files are:\n\n- the board (`collab.comms.active`), where each agent keeps one record and posts items addressed to other agents\n- the agent index (`_agent-index.md`), which binds each letter to a role\n- venues, files in which the agents argue one decision until every agent taking part has signed it, after which the venue moves to the archive folder\n- the history file (`_changelogs.txt`), where the lasting part of anything removed from the other files is written first\n- folders for role documents, planning checklists, models and findings\n\nThe agents write to these files through one command, which writes only inside the calling agent's record, then waits for the next write by another agent and shows what changed. The checks run as one pipeline, and each rule is a file in `tools/rules`, so a rule is added or removed without editing the pipeline. Every fact about the host project is a setting in `config/surface.config.ts`. An install sets the project root, and adoption renames the `.{provider}` folder to the name the agent runtime reads, as `BOOTSTRAP.md` describes.",
         "whenToUse": [
             "Several agents work in one codebase at once, and two of them may edit the same file. Each agent writes only inside its own record, and the write command reads the file again just before writing and refuses when it changed in between.",
             "The agents need to reach a decision together before the work goes on. A venue holds the decision open until every agent taking part has stated its needs and signed, and the checks report the venue as blocking until then.",
@@ -54,7 +57,7 @@
             "You need a task tracker. A planning checklist lists only the work that remains, and a finished task is deleted rather than marked done, so the package keeps no record of completed work outside the history file.",
             "You need your own code linted or type-checked. The checks read the coordination files, the rules and the package's own tools. A project connects its own quality toolchain through `execution.quality_command`, so one pipeline runs both."
         ],
-        "install": "1. Copy this folder into your project. The folder name does not matter.\n2. In `config/surface.config.ts`, set `project.root` to the path of your project root, relative to this folder. The default, `..`, fits a folder placed directly in the project root.\n3. Choose how you take part, with `convention.operator_mode`:\n   - `overseer`, the default: the agents do not stop to ask you. You write an entry anywhere in a venue, in any form, and each agent receives it with the changes its next wait shows. The agents address you only when they cannot go on.\n   - `interactive`: the agents bring each decision to you and wait for your answer.\n4. The package keeps its rules, skills and agent files in one folder named `.{provider}`, which each agent runtime expects under its own name, such as `.claude` or `.codex`. Ask your agent to follow `BOOTSTRAP.md`: the agent is asked to rename that folder, point the configuration at it, and load `AGENTS.md` into its instructions.\n5. Run `npm install`, then run `npm run govern` until two runs in a row report the same result; that result is the verdict. The first run repairs what it can, such as the generated binding, and each check that reads the previous run's report needs one more run to see the repair.\n6. Set any further setting your project has, such as a history file or a quality command. A setting left absent turns off the check that depends on it, and the report says so.",
+        "install": "1. Copy this folder into your project. The folder name does not matter.\n2. In `config/surface.config.ts`, set `project.root` to the path of your project root, relative to this folder. The default, `..`, fits a folder placed directly in the project root.\n3. Choose how you take part, with `convention.operator_mode`:\n   - `overseer`, the default: the agents do not stop to ask you. You write an entry anywhere in a venue, in any form, and each agent receives it with the changes its next wait shows. The agents address you only when they cannot go on.\n   - `interactive`: the agents bring each decision to you and wait for your answer.\n4. The package keeps its rules, skills and agent files in one folder named `.{provider}`, which each agent runtime expects under its own name, such as `.claude` or `.codex`. Ask your agent to follow `BOOTSTRAP.md`: the agent is asked to rename that folder, point the configuration at it, and load `AGENTS.md` into its instructions.\n5. Run `npm install`, then run `npm run govern` until two runs in a row report the same result. That result is the verdict. The first run repairs what it can, such as the generated binding, and each check that reads the previous run's report needs one more run to see the repair.\n6. Set any further setting your project has, such as a history file or a quality command. A setting left absent turns off the check that depends on it, and the report says so.",
         "quickStart": [
             {"intent": "Run every check once, with repairs on",
                 "lang": "bash",
@@ -140,7 +143,7 @@
         ],
         "disposal": [
             "To stand a board down, remove things in the reverse of the order they were created: each agent removes its own role document and record, and the agent index goes last. In that order, every check still passes after each step.",
-            "To remove the package, delete this folder. With `project.governance_policy` absent, the package has written nothing outside its folder; otherwise, also remove its status line from that file."
+            "To remove the package, delete this folder. With `project.governance_policy` absent, the package has written nothing outside its folder. Otherwise, also remove its status line from that file."
         ],
         "license": "Pattern Abstract Grammar (PAG) was created by Jay Baleine (Bane's Lab). It is free for non-commercial use and needs a paid license for commercial use. The license terms: https://banes-lab.com/licensing",
         "graph": [
@@ -180,7 +183,7 @@
             {
                 "surface": "`_agenda.md`",
                 "holds": "every planned invariant, what it must establish, and its state",
-                "lifetime": "accumulating; a planned invariant is not deleted when a different one is raised ahead of it"
+                "lifetime": "accumulating, so a planned invariant stays when a different one is raised ahead of it"
             }
         ],
         "surface-rules": [
@@ -243,7 +246,7 @@
             "**The check on well-formed fences is required.** A single unclosed marker makes its item impossible for the tool to remove.",
             "**Removal takes the whole span, never a matched line.** Removing an item by matching its text leaves its markers behind, and an orphaned fence is a span that no later operation can interpret.",
             "**An item is extracted before it is removed.** A removal names a typed reference that resolves. The check decides whether the extract is present, not whether it is faithful, because the faithfulness of a summary is a judgement.",
-            "**The agent that handled an item removes it, never its author.** Handling and removing are one operation by one agent, so a handled item never waits for its author to notice it.",
+            "**The agent that handled an item removes it, never its author.** The board then clears as soon as the reader acts, with no wait on the writer.",
             "**The one-writer-per-record rule applies to hand editing, not to the tool.** A tool that removes exactly one addressable span by id, after re-reading the file and with a compare-and-swap, is the mechanism the fence and the id were built for.",
             "**Removal depends on who an item was addressed to, not on who wrote it**, so an agent clears only traffic addressed to it, and an item's removal shows that its reader acted on it."
         ],

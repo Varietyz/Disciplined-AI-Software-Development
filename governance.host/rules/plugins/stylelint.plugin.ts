@@ -34,8 +34,6 @@ const scopeToProject = function scopeToProject(label: string, plugin: unknown): 
     return stylelint.createPlugin(ruleName, scoped);
 };
 
-const stylesheetPlugins = Object.entries(LOCAL_STYLELINT_RULES).map(([label, plugin]) =>
-    scopeToProject(label, plugin),
-);
+const stylesheetPlugins = Object.entries(LOCAL_STYLELINT_RULES).map(([label, plugin]) => scopeToProject(label, plugin));
 
 export default { plugins: stylesheetPlugins, tool: "stylelint" };

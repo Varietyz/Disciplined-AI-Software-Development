@@ -28,7 +28,9 @@ import { isWellFormedJoiner } from "../matchers/segment.matcher.ts";
 const MIN_DEPTH = 2;
 
 const tagCountOf = function tagCountOf(view: TaxonomyView): number {
-    return [...view.byFolder.values()].filter((concern) => concern.collection !== undefined).length + view.byFolder.size;
+    return (
+        [...view.byFolder.values()].filter((concern) => concern.collection !== undefined).length + view.byFolder.size
+    );
 };
 
 const assertConcerns = function assertConcerns(view: TaxonomyView, concernCount: number): void {
@@ -43,6 +45,9 @@ const assertConcerns = function assertConcerns(view: TaxonomyView, concernCount:
             throw new Error(redundantSubject(subject));
         }
     }
+};
+
+const assertMarkers = function assertMarkers(view: TaxonomyView): void {
     for (const marker of view.compoundMarkers) {
         if (view.byTag.has(marker)) {
             throw new Error(markerShadowsConcern(marker));
@@ -145,6 +150,7 @@ export const assertMirrors = function assertMirrors(
 export const assertTaxonomy = function assertTaxonomy(view: TaxonomyView, concernCount: number): void {
     assertDialects(view);
     assertConcerns(view, concernCount);
+    assertMarkers(view);
     for (const [root, declared] of Object.entries(view.declaredContainers)) {
         assertRoot(view, root, declared);
     }

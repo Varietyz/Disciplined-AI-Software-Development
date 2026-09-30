@@ -1,5 +1,5 @@
 import type { StepOptions, StepOutcome } from "../types/rule.types.ts";
-import { surfacePrefix, surfaceRoot } from "../../../config/surface.config.ts";
+import { surfacePath, surfacePrefix, surfaceRoot } from "../../../config/surface.config.ts";
 import type { Finding } from "../types/segment.types.ts";
 import { leadingInteger } from "../predicates/text.predicate.ts";
 import { runTool } from "../runners/process.runner.ts";
@@ -67,7 +67,9 @@ interface TypecheckResult {
 
 const INVARIANT = "the gate sources compile under the project's strict configuration";
 
-const PROJECTS = ["tools/tsconfig.json"];
+const PROJECT = `${surfacePath("pipeline")}/tsconfig.json`;
+
+const PROJECTS = [PROJECT];
 
 export const typecheckStage = function typecheckStage(options: StepOptions): StepOutcome {
     if (options.bypass.includes("typecheck")) {
@@ -151,13 +153,13 @@ export const runTypecheck = function runTypecheck(): TypecheckResult {
             healed: false,
             line: 0,
             locus: "tsc",
-            path: within("tools/tsconfig.json"),
+            path: PROJECT,
             remediation: {
                 action: "none",
                 decide: "the compiler failed without a recognizable diagnostic — read the output directly",
                 deterministic: false,
                 from: "tsc",
-                target: within("tools/tsconfig.json"),
+                target: PROJECT,
                 to: null,
             },
             rule: "typecheck/unparsed",

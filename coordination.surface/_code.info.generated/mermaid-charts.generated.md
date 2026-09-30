@@ -1,4 +1,4 @@
-<!-- Auto-generated 2026-09-27T14:05Z v2 -->
+<!-- Auto-generated 2026-09-29T00:16Z v4 -->
 
 # coordination-surface — architecture charts
 
@@ -28,9 +28,8 @@ flowchart TD
     script_gates["gates"]
     script_govern["govern"]
     script_govern_segment["govern:segment"]
-    script_test["test"]
     script_typecheck["typecheck"]
-    tool_node[["node"]]
+    tool_tsc[["tsc"]]
     script_await --> file_tools_core_entrypoints_board_entrypoint_ts
     script_clean --> file_tools_core_entrypoints_source_entrypoint_ts
     script_converge --> file_tools_core_entrypoints_converge_entrypoint_ts
@@ -39,16 +38,15 @@ flowchart TD
     script_gates --> file_tools_core_entrypoints_gate_entrypoint_ts
     script_govern --> file_tools_core_entrypoints_pipeline_entrypoint_ts
     script_govern_segment --> file_tools_core_entrypoints_segment_entrypoint_ts
-    script_test --> tool_node
-    script_typecheck --> script_typecheck
+    script_typecheck --> tool_tsc
     classDef kCollab stroke:#7a5c1e,stroke-width:2px;
     classDef kEntry stroke:#2f6f4f,stroke-width:2px;
     classDef kGate stroke:#8a3324,stroke-width:2px;
     classDef kHook stroke:#3a5a8a,stroke-width:2px;
     classDef kMethod stroke:#555555,stroke-width:2px;
     classDef kState stroke:#5a3a8a,stroke-width:2px;
-    class tool_node kCollab;
-    class script_await,script_clean,script_converge,script_corpus,script_documents,script_gates,script_govern,script_govern_segment,script_test,script_typecheck kEntry;
+    class tool_tsc kCollab;
+    class script_await,script_clean,script_converge,script_corpus,script_documents,script_gates,script_govern,script_govern_segment,script_typecheck kEntry;
     class file_tools_core_entrypoints_board_entrypoint_ts,file_tools_core_entrypoints_converge_entrypoint_ts,file_tools_core_entrypoints_corpus_entrypoint_ts,file_tools_core_entrypoints_document_entrypoint_ts,file_tools_core_entrypoints_gate_entrypoint_ts,file_tools_core_entrypoints_pipeline_entrypoint_ts,file_tools_core_entrypoints_segment_entrypoint_ts,file_tools_core_entrypoints_source_entrypoint_ts kState;
 ```
 

@@ -1,3 +1,4 @@
+import type { Edit } from "./codemod.types.ts";
 import type ts from "typescript";
 
 export interface CodePointFinding {
@@ -20,6 +21,22 @@ export interface IncrementFinding {
     operand: string;
     operator: string;
     reason: string | null;
+}
+
+export interface WriteFinding {
+    file: string;
+    fileName: string;
+    line: number;
+    start: number;
+    end: number;
+    replacement: string;
+    importEdits: readonly Edit[];
+    reason: string | null;
+}
+
+export interface WriteScope {
+    readonly owners: ReadonlySet<string>;
+    readonly declaresWriter: (fileName: string) => boolean;
 }
 
 export interface RenameLocation {

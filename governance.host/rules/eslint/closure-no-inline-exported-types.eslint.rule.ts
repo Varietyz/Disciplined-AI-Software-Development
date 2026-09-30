@@ -1,14 +1,9 @@
 import type { LocalRule, RuleContext, RuleListener } from "../../types/rule.types.ts";
 import { TEST_ROOT_SEGMENT, basenameOf, isInContainer, normalizePath } from "../../shared/resolvers/anchor.resolver.ts";
-import {
-    concernForPath,
-    concernSuffix,
-    isImportedRoot,
-    isTestRoot,
-    rootFor,
-} from "../../shared/manifests/taxonomy.manifest.ts";
+import { concernForPath, concernSuffix, isImportedRoot, rootFor } from "../../shared/manifests/taxonomy.manifest.ts";
 import { nameOf, nodeAt } from "../../shared/selectors/syntax.selector.ts";
 import { defineCheck } from "@govlab/context/check";
+import { isTestRoot } from "../../shared/manifests/taxonomy.root.manifest.ts";
 import { listener } from "../../shared/factories/listener.factory.ts";
 
 const TYPES_CONCERN = "types";

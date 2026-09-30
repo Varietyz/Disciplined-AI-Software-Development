@@ -12,6 +12,7 @@ import { rootsAtEphemeralDir, targetIsUnmarkedGenerated } from "../../shared/ana
 import type { Rule } from "eslint";
 import { basenameOf } from "../../shared/resolvers/anchor.resolver.ts";
 import { defineCheck } from "@govlab/context/check";
+import { governsOwnWrites } from "../../shared/resolvers/location.resolver.ts";
 
 defineCheck({ detects: [], enforces: ["architecture:idempotency", "architecture:determinism"] });
 
@@ -80,7 +81,9 @@ const handleCall = function handleCall(context: Rule.RuleContext, ownership: Wri
 const rule: Rule.RuleModule = {
     create(context: Rule.RuleContext): Rule.RuleListener {
         const ownership: WriteOwnership = {
-            owner: declaredModules(context, WRITE_OWNER_MODULES).has(basenameOf(context.filename)),
+            owner:
+                declaredModules(context, WRITE_OWNER_MODULES).has(basenameOf(context.filename)) ||
+                governsOwnWrites(context.filename),
             writers: declaredWriters(context, WRITER_FUNCTIONS),
         };
         const handlers: [string, (node: Rule.Node) => void][] = [
@@ -96,7 +99,7 @@ const rule: Rule.RuleModule = {
     meta: {
         docs: {
             description:
-                "Every file write goes through the module that owns file writes, and the raw file-write primitive is banned everywhere else. The owner writes generated output in canonical bytes and refuses a verbatim write to a file marked as generated, so a write helper cannot carry output past the check. A formatter-supported output path carries the generated marker, and serialized JSON keeps one indent and one encoding. Which modules own writes, and which of their functions write, is data in the rule's options.",
+                "Every file write goes through the module that owns file writes, and the raw file-write primitive is banned everywhere else. The owner writes generated output in canonical bytes and refuses a verbatim write to a file marked as generated, so a write helper cannot carry output past the check. A formatter-supported output path carries the generated marker, and serialized JSON keeps one indent and one encoding. Which modules own writes, and which of their functions write, is data in the rule's options. A self-governed member whose manifest names an existing write gate governs its own raw writes.",
         },
         messages: { bypass: BYPASS, encoding: ENCODING, marker: MARKER, spacing: SPACING },
         schema: WRITER_OPTIONS_SCHEMA,

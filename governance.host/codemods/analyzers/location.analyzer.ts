@@ -14,6 +14,7 @@ import path from "node:path";
 import ts from "typescript";
 
 const SSOT_MODULE = "@ssot/paths";
+const SSOT_ACCESSOR = "relativePath";
 const ROOT_POSIX = toPosix(ROOT);
 
 const PATH_CALLEES = new Set([
@@ -112,7 +113,7 @@ const ssotLocalName = function ssotLocalName(source: ts.SourceFile): string | nu
             continue;
         }
         for (const element of bindings.elements) {
-            if ((element.propertyName?.text ?? element.name.text) === "rel") {
+            if ((element.propertyName?.text ?? element.name.text) === SSOT_ACCESSOR) {
                 return element.name.text;
             }
         }
@@ -120,7 +121,7 @@ const ssotLocalName = function ssotLocalName(source: ts.SourceFile): string | nu
     return null;
 };
 
-const SSOT_CALLEES = new Set(["rel", "resolve", "pathRel"]);
+const SSOT_CALLEES = new Set([SSOT_ACCESSOR, "absolutePath"]);
 
 const viaSsot = function viaSsot(chain: readonly ts.Node[]): boolean {
     const parent = chain.at(-1);
@@ -134,7 +135,7 @@ const findingFor = function findingFor(source: ts.SourceFile, site: LiteralSite)
         return null;
     }
     const local = ssotLocalName(source);
-    const accessor = local ?? "rel";
+    const accessor = local ?? SSOT_ACCESSOR;
     const resolves = existsSync(path.join(ROOT, literal.text));
     const positionReason = usedAsPath(site.chain)
         ? null

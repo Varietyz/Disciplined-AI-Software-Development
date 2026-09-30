@@ -41,6 +41,6 @@
         "gates": "node tools/core/entrypoints/gate.entrypoint.ts",
         "documents": "node tools/core/entrypoints/document.entrypoint.ts",
         "corpus": "node tools/core/entrypoints/corpus.entrypoint.ts",
-        "typecheck": "npm run typecheck -w @surface/pipeline"
+        "typecheck": "tsc --noEmit -p tools/tsconfig.json"
     }
 }

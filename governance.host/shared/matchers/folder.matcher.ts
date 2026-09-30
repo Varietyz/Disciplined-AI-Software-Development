@@ -72,16 +72,27 @@ const deepestRank = function deepestRank(root: string, segments: readonly string
     return { after, at: segments.length };
 };
 
+const labelError = function labelError(root: string, segments: readonly string[]): string | undefined {
+    const unkebab = segments.find((name) => !isKebab(name, root));
+    if (unkebab !== undefined) {
+        return `folder '${unkebab}' is not ${vocabularyFor(root).case}-case`;
+    }
+    const repeated = segments.find((name, index) => segments.indexOf(name) !== index);
+    if (repeated !== undefined) {
+        return `folder '${repeated}' appears twice on one path. a label names one role once, so a word that fills two depths states the same axis twice; rename the outer folder or drop the inner one`;
+    }
+    return undefined;
+};
+
 export const folderPathError = function folderPathError(root: string, segments: readonly string[]): string | undefined {
     const vocabulary = vocabularyFor(root);
     const { roleOrder, rolesAtDepth, terminalRole } = vocabulary.roles;
     if (segments.length > vocabulary.maxDepth) {
         return `nests ${segments.length} folders below the governed root; the cap is ${vocabulary.maxDepth}. overflow relieves sideways — the filename variant slot for a collision, a sibling folder for breadth — never downward`;
     }
-    for (const name of segments) {
-        if (!isKebab(name, root)) {
-            return `folder '${name}' is not ${vocabulary.case}-case`;
-        }
+    const label = labelError(root, segments);
+    if (label !== undefined) {
+        return label;
     }
     if (assignRoles(root, segments, 0, -1) !== undefined) {
         return undefined;

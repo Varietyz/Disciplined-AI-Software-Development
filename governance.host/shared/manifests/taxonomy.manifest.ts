@@ -26,16 +26,8 @@ const posix = function posix(value: string): string {
     return value.split("\\").join("/");
 };
 
-export const taxonomyRoots = function taxonomyRoots(): string[] {
-    return [...TAXONOMY_ROOTS];
-};
-
 export const governedRoots = function governedRoots(): string[] {
     return TAXONOMY_ROOTS.filter((root) => !MIRRORS.has(root));
-};
-
-export const mirrorSourceOf = function mirrorSourceOf(root: string | undefined): string | undefined {
-    return root === undefined ? undefined : MIRRORS.get(root);
 };
 
 export const vocabularyFor = function vocabularyFor(root?: string): Vocabulary {
@@ -44,29 +36,6 @@ export const vocabularyFor = function vocabularyFor(root?: string): Vocabulary {
 
 export const isImportedRoot = function isImportedRoot(root: string | undefined): boolean {
     return vocabularyFor(root) !== HOST;
-};
-
-export const isTestRoot = function isTestRoot(root: string | undefined): boolean {
-    return root !== undefined && MIRRORS.has(root);
-};
-
-const markerSegmentOf = function markerSegmentOf(basename: string): string {
-    const segments = basename.split(HOST.separator);
-    return segments.length > 2 ? (segments.at(-2) ?? "") : "";
-};
-
-export const testMarkerOf = function testMarkerOf(basename: string): string | undefined {
-    const marker = markerSegmentOf(basename);
-    return HOST.testMarkers.includes(marker) ? marker : undefined;
-};
-
-export const fixtureMarkerOf = function fixtureMarkerOf(basename: string, root?: string): string | undefined {
-    const marker = markerSegmentOf(basename);
-    return vocabularyFor(root).fixtureMarkers.includes(marker) ? marker : undefined;
-};
-
-export const testMarkers = function testMarkers(): string[] {
-    return [...HOST.testMarkers, ...HOST.fixtureMarkers];
 };
 
 export const containersFor = function containersFor(root: string): string[] {

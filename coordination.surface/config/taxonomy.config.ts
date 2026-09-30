@@ -28,7 +28,7 @@ const ARTIFACT_ROOTS: Readonly<Record<string, ArtifactRootDeclaration>> = {};
 const CORPUS_ROOTS: Readonly<Record<string, CorpusRootDeclaration>> = {};
 
 export const taxonomy = {
-    Ignored: {
+    ignored: {
         foldersFiles: [
             "settings.json",
             "settings.local.json",
@@ -42,7 +42,7 @@ export const taxonomy = {
             ".gitignore",
             "SKILL.md",
             "_generated",
-            "_visualization-generated",
+            "_code.info.generated",
             "_fixtures",
         ],
     },

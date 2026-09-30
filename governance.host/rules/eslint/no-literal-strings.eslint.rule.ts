@@ -106,7 +106,7 @@ const userVisibleArrayLiterals = function userVisibleArrayLiterals(objectExpr: A
 };
 
 const METADATA_KEY = "meta";
-const METADATA_CHAIN = new Set(["ObjectExpression", "Property"]);
+const METADATA_CHAIN = new Set(["CallExpression", "ObjectExpression", "Property"]);
 
 const isUnderMetadataKey = function isUnderMetadataKey(objectExpr: AstNode): boolean {
     let cursor = nodeAt(objectExpr, "parent");

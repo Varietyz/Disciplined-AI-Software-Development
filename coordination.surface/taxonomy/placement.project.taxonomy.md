@@ -80,7 +80,7 @@ Both kinds are declared, never derived from shape. _"A folder with no subfolders
 inference, and inference is what an SSOT exists to remove: a container that lost its last folder
 would silently reclassify, and its next loose file would pass unnoticed.
 
-`Ignored.foldersFiles` is the single escape, global rather than per-root, for things outside the
+`ignored.foldersFiles` is the single escape, global rather than per-root, for things outside the
 taxonomy entirely. **It is never an answer to a finding on authored source**, because an entry that
 silences real code hides that violation and every future one under the same name.
 
@@ -202,7 +202,8 @@ filetype-agnostic.
 - **Compound markers** are `test`, `spec`, `d` and `generated`. A file whose second-to-last dot segment
   is one of these is **name-exempt but not placement-exempt**.
 - **Flat buckets** keep their shape. A reshape renames within one and never scatters it.
-- **Assets and binaries** are out of scope.
+
+Assets and binaries are governed like source, with a concern folder and a grammar name.
 
 **The highest-risk slice is anything referenced by pattern rather than by literal path.** A rename is
 safe only when every reference is a literal string a search can find. In this package that slice is

@@ -76,7 +76,7 @@ export const loadTaxonomy = function loadTaxonomy(): TaxonomyData {
         folderToTag,
         foreignContainers: withinSurface(taxonomy.foreignContainers),
         foreignGrammar: taxonomy.foreignGrammar,
-        ignored: taxonomy.Ignored.foldersFiles,
+        ignored: taxonomy.ignored.foldersFiles,
         maxDepthFromRoot: taxonomy.grammar.maxDepthFromRoot,
         specialContainers: withinSurface(taxonomy.specialContainers),
         subjects: taxonomy.subjects,

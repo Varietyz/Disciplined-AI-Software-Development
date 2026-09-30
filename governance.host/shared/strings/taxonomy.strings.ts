@@ -53,11 +53,11 @@ export const bucketNotConcern = function bucketNotConcern(root: string, special:
 };
 
 export const wildcardIgnore = function wildcardIgnore(pattern: string): string {
-    return `taxonomy: Ignored.foldersFiles holds '${pattern}', which is only wildcards and matches every name. An ignore entry names one thing outside the taxonomy, so name it.`;
+    return `taxonomy: ignored.foldersFiles holds '${pattern}', which is only wildcards and matches every name. An ignore entry names one thing outside the taxonomy, so name it.`;
 };
 
 export const extensionIgnore = function extensionIgnore(pattern: string): string {
-    return `taxonomy: Ignored.foldersFiles holds '${pattern}', which silences a whole file extension and every violation under it. Ignore a name, not a type.`;
+    return `taxonomy: ignored.foldersFiles holds '${pattern}', which silences a whole file extension and every violation under it. Ignore a name, not a type.`;
 };
 
 export const unknownSplitter = function unknownSplitter(splitter: string, known: readonly string[]): string {
@@ -129,34 +129,34 @@ const field = function field(data: Data, key: string): string {
 export const TAXONOMY_MESSAGES: Readonly<Record<string, (data: Data) => string>> = {
     badShape: (data) =>
         `'${field(data, "path")}' does not resolve in the folder grammar: ${field(data, "detail")}. Each depth takes a role strictly later than the one before it, and the file's parent is its concern folder, so move the file into the concern folder of the container it serves.`,
-    generatedFolderIntruder: (data) =>
-        `This file sits in '${field(data, "folder")}/', a generation folder whose files a tool writes, and its name carries no '${field(data, "marker")}' marker. Have the writer name it with the marker, or move it out to where authored files of its concern live.`,
-    ungovernedFile: (data) =>
-        `'${field(data, "name")}' sits outside every governed root and is neither an ecosystem-fixed name nor a boundary document. Move it into the root that owns it, or into a declared exclusion when it is not source.`,
-    ungovernedTree: (data) =>
-        `This tree holds ${field(data, "files")} text files and no governed root, exclusion or generation folder covers it. Declare it as a root in containers and convert it, or move it under a declared exclusion when it is not source.`,
     concernMismatch: (data) =>
         `'${field(data, "basename")}' declares the concern '${field(data, "tag")}' but sits in '${field(data, "folder")}/', the folder for '${field(data, "folderTag")}'. The tag equals its folder so one glob finds every file of a concern, so move the file to the folder for '${field(data, "tag")}' or retag it '${field(data, "folderTag")}'.`,
+    generatedFolderIntruder: (data) =>
+        `This file sits in '${field(data, "folder")}/', a generation folder whose files a tool writes, and its name carries no '${field(data, "marker")}' marker. Have the writer name it with the marker, or move it out to where authored files of its concern live.`,
     looseFileAtRoot: (data) =>
-        `'${field(data, "name")}' sits directly in the governed root '${field(data, "root")}', where only declared containers live. Move it into the concern folder of the container it serves, or add the name to Ignored.foldersFiles when a build owns it.`,
+        `'${field(data, "name")}' sits directly in the governed root '${field(data, "root")}', where only declared containers live. Move it into the concern folder of the container it serves, or add the name to ignored.foldersFiles when a build owns it.`,
     markerFolderIntruder: (data) =>
         `'${field(data, "basename")}' sits in '${field(data, "path")}/', a folder grammar.markerFolders reserves for files a step writes, and its name carries no marker. Move it to the concern folder its tag names.`,
     markerMisplaced: (data) =>
         `'${field(data, "basename")}' carries a marker that grammar.markerFolders binds to '${field(data, "expected")}/', and it sits in '${field(data, "path")}/'. Move it into a '${field(data, "expected")}/' folder at the concern position of its container, and repoint its path key.`,
     misplacedTest: (data) =>
         `'${field(data, "basename")}' carries the '${field(data, "marker")}' marker and sits outside the centralized test root. Every test and fixture lives in the test root that mirrors its subject's source root, so move it there.`,
-    unmirroredTest: (data) =>
-        `'${field(data, "basename")}' names the subject '${field(data, "subject")}', and no file of that name sits at the mirrored path in '${field(data, "source")}'. A test sits at its subject's own path so a missing test shows as a missing file, so move it to its subject's path or name it for the file it tests.`,
-    nonTestInMirror: (data) =>
-        `'${field(data, "basename")}' sits in a test root and carries no test marker (${field(data, "markers")}). A test root holds tests and their fixtures only, so name it with a marker or move it to the source root that owns it.`,
     missingContainer: (data) =>
         `The container '${field(data, "container")}' is declared for the root '${field(data, "root")}' and does not exist on disk, so the closed set cannot be checked. Restore the folder or drop the declaration.`,
     missingRoot: (data) =>
         `The governed root '${field(data, "root")}' is declared in taxonomy.config.ts and does not exist on disk, so it governs no files. Restore the tree or drop the root.`,
     nestedInSpecial: (data) =>
         `The bucket '${field(data, "root")}/${field(data, "container")}' holds the folder '${field(data, "nested")}', and a bucket holds one collection concern as files only. Move the folder into a container, or declare the bucket as a container.`,
+    nonTestInMirror: (data) =>
+        `'${field(data, "basename")}' sits in a test root and carries no test marker (${field(data, "markers")}). A test root holds tests and their fixtures only, so name it with a marker or move it to the source root that owns it.`,
     undeclaredContainer: (data) =>
-        `'${field(data, "root")}/${field(data, "container")}' is not a declared container. The root declares ${field(data, "declared")}. Move a subject or concern folder into an existing container, add build output or a tool cache to Ignored.foldersFiles, and propose a new container only for a new grouping axis.`,
+        `'${field(data, "root")}/${field(data, "container")}' is not a declared container. The root declares ${field(data, "declared")}. Move a subject or concern folder into an existing container, add build output or a tool cache to ignored.foldersFiles, and propose a new container only for a new grouping axis.`,
+    ungovernedFile: (data) =>
+        `'${field(data, "name")}' sits outside every governed root and is neither an ecosystem-fixed name nor a boundary document. Move it into the root that owns it, or into a declared exclusion when it is not source.`,
+    ungovernedTree: (data) =>
+        `This tree holds ${field(data, "files")} text files and no governed root, exclusion or generation folder covers it. Declare it as a root in containers and convert it, or move it under a declared exclusion when it is not source.`,
+    unmirroredTest: (data) =>
+        `'${field(data, "basename")}' names the subject '${field(data, "subject")}', and no file of that name sits at the mirrored path in '${field(data, "source")}'. The mirror pairs every test with its subject, so an untested subject stays visible. Move the test beside its subject, or rename it for the file it tests.`,
     unparsable: (data) =>
         `'${field(data, "basename")}' does not resolve as <subject>[.<variant>].<concern>.<ext>: ${field(data, "reason")} ('${field(data, "word")}'). Every slot draws from the closed arrays in taxonomy.config.ts, so rename the file with declared words, or propose the word through the vocabulary ladder.`,
 };

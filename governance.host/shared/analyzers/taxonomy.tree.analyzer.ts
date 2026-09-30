@@ -1,7 +1,6 @@
 import type { PlacementFinding, TaxonomyFinding, TaxonomyReport } from "../../types/taxonomy.types.ts";
 import {
     containersFor,
-    fixtureMarkerOf,
     isDeclaredContainer,
     isForeignContainer,
     isGeneratedFolder,
@@ -9,15 +8,12 @@ import {
     isNameExempt,
     isNestedRoot,
     isSpecialContainer,
-    isTestRoot,
-    taxonomyRoots,
-    testMarkerOf,
     vocabularyFor,
 } from "../manifests/taxonomy.manifest.ts";
 import { existsSync, readdirSync, statSync } from "node:fs";
+import { fixtureMarkerOf, isTestRoot, taxonomyRoots, testMarkerOf } from "../manifests/taxonomy.root.manifest.ts";
 import { namingFinding, placementFinding, testFinding } from "./taxonomy.analyzer.ts";
 import { WORKSPACE_ROOT } from "../resolvers/anchor.resolver.ts";
-import { isTextFile } from "../predicates/text.predicate.ts";
 import { join } from "node:path";
 
 const PATH_SEPARATOR = "/";
@@ -36,12 +32,10 @@ const childrenOf = function childrenOf(relDir: string, root?: string): Children 
     return { dirs, files: named.filter((name) => !dirs.includes(name)) };
 };
 
-const textFilesUnder = function textFilesUnder(relDir: string, root?: string): string[] {
+const filesUnder = function filesUnder(relDir: string, root?: string): string[] {
     const { dirs, files } = childrenOf(relDir, root);
-    const own = files
-        .map((name) => `${relDir}${PATH_SEPARATOR}${name}`)
-        .filter((path) => isTextFile(join(WORKSPACE_ROOT, path)));
-    return [...own, ...dirs.flatMap((name) => textFilesUnder(`${relDir}${PATH_SEPARATOR}${name}`, root))];
+    const own = files.map((name) => `${relDir}${PATH_SEPARATOR}${name}`);
+    return [...own, ...dirs.flatMap((name) => filesUnder(`${relDir}${PATH_SEPARATOR}${name}`, root))];
 };
 
 const carriesMarker = function carriesMarker(basename: string, marker: string, separator: string): boolean {
@@ -49,11 +43,16 @@ const carriesMarker = function carriesMarker(basename: string, marker: string, s
     return segments.length > 2 && segments.at(-2) === marker;
 };
 
-export const generatedFolderFindings = function generatedFolderFindings(relFolder: string, root?: string): TaxonomyFinding[] {
+export const generatedFolderFindings = function generatedFolderFindings(
+    relFolder: string,
+    root?: string,
+): TaxonomyFinding[] {
     const vocabulary = vocabularyFor(root);
     const marker = vocabulary.generatedFolder?.marker ?? "";
-    return textFilesUnder(relFolder, root)
-        .filter((path) => !carriesMarker(path.slice(path.lastIndexOf(PATH_SEPARATOR) + 1), marker, vocabulary.separator))
+    return filesUnder(relFolder, root)
+        .filter(
+            (path) => !carriesMarker(path.slice(path.lastIndexOf(PATH_SEPARATOR) + 1), marker, vocabulary.separator),
+        )
         .map((path): TaxonomyFinding => ({
             data: { folder: relFolder, marker },
             messageId: "generatedFolderIntruder",
@@ -121,13 +120,13 @@ const rootReport = function rootReport(root: string): TaxonomyReport {
             path: root,
         }));
     const loose = children.files
-        .filter((name) => !isNameExempt(name, root) && isTextFile(join(WORKSPACE_ROOT, root, name)))
+        .filter((name) => !isNameExempt(name, root))
         .map((name): TaxonomyFinding => ({
             data: { name, root },
             messageId: "looseFileAtRoot",
             path: `${root}${PATH_SEPARATOR}${name}`,
         }));
-    const perContainer = dirs.map((name) => textFilesUnder(`${root}${PATH_SEPARATOR}${name}`, root));
+    const perContainer = dirs.map((name) => filesUnder(`${root}${PATH_SEPARATOR}${name}`, root));
     const findings = dirs.flatMap((name, index) => containerFindings(root, name, perContainer[index] ?? []));
     const generated = outputs.flatMap((name) => generatedFolderFindings(`${root}${PATH_SEPARATOR}${name}`, root));
     const assessed = loose.length + perContainer.reduce((sum, files) => sum + files.length, 0);

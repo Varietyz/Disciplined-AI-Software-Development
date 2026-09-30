@@ -1,6 +1,7 @@
 import type { LocalRule, RuleContext, RuleListener, RuleNode } from "../../types/rule.types.ts";
 import {
     anchoredBySsot,
+    isMemberPathsSource,
     isModuleSpecifier,
     isPathShaped,
     isProseContext,
@@ -100,7 +101,8 @@ export default {
                     }
                 },
                 importDeclaration(view) {
-                    if (literalString(nodeAt(view, "source")) !== SSOT_MODULE) {
+                    const source = literalString(nodeAt(view, "source")) ?? "";
+                    if (source !== SSOT_MODULE && !isMemberPathsSource(fromDir, source)) {
                         return;
                     }
                     for (const spec of nodesAt(view, "specifiers")) {
@@ -172,14 +174,14 @@ export default {
                 enforces: ["architecture:single-source-of-truth"],
             }),
             description:
-                "Every workspace location comes from the paths SSOT. A file may not hardcode a member directory in a path-forming position, and may not derive a root by climbing from its own location with import.meta — file-relative arithmetic silently resolves inside the wrong package the moment anything moves, and a hardcoded member name goes stale without failing. Import `@ssot/paths` and call `resolve(key)` / `rel(key)`, adding the key to paths.yaml when it is missing.",
+                "Every workspace location comes from the paths SSOT. A file may not hardcode a member directory in a path-forming position, and may not derive a root by climbing from its own location with import.meta — file-relative arithmetic silently resolves inside the wrong package the moment anything moves, and a hardcoded member name goes stale without failing. Import `@ssot/paths` and call `relativePath(key)` / `absolutePath(key)`, adding the key to paths.yaml when it is missing. A self-governed member anchors through the paths config its manifest declares.",
             workspaceWide: true,
         },
         messages: {
             composedKey:
                 'This appends `{{ tail }}` to an SSOT lookup to rebuild a location the SSOT already declares as `{{ key }}`. Hand-composing splits one declared fact across a call and a literal, so the container stops being renameable from its declaration. Use `relativePath("{{ key }}")` / `absolutePath("{{ key }}")`.',
             hardcodedLocation:
-                '`{{ token }}` is a workspace location owned by the paths SSOT — hardcoding it here goes stale silently when the tree moves. Use `resolve("{{ token }}")` or `rel("{{ token }}")` from `@ssot/paths`, adding the key to `project.paths/paths.yaml` if it has none.',
+                "`{{ token }}` is a workspace location owned by the paths SSOT — hardcoding it here goes stale silently when the tree moves. Use `relativePath(key)` or `absolutePath(key)` from `@ssot/paths` with the key that declares `{{ token }}`, adding the key to `project.paths/paths.yaml` if it has none.",
             metaClimb:
                 "This climbs out of its own package from `import.meta`, so it resolves relative to THIS file and silently points into the wrong package once either end moves. Climbing inside the package is fine; escaping it is not — resolve the other package through `@ssot/paths`.",
             metaMissing:
@@ -187,7 +189,7 @@ export default {
             segmentedLocation:
                 "These segments concatenate to `{{ token }}`, a location owned by the paths SSOT — split across arguments no single literal spells it, so the hardcode passes every per-string check and still goes stale when the tree moves. Resolve it in one call through `@ssot/paths`.",
             unanchoredPath:
-                "`{{ value }}` is a path spelled from nothing — it names a location without an anchor the SSOT owns, so no rename can follow it and nothing fails when it goes stale. Anchor it: build the path from `resolve(key)` / `rel(key)` and keep only the tail as a literal, adding the key to `project.paths/paths.yaml` when the location has none.",
+                "`{{ value }}` is a path spelled from nothing — it names a location without an anchor the SSOT owns, so no rename can follow it and nothing fails when it goes stale. Anchor it: build the path from `relativePath(key)` / `absolutePath(key)` and keep only the tail as a literal, adding the key to `project.paths/paths.yaml` when the location has none.",
         },
         schema: [],
         type: "problem",

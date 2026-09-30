@@ -6,6 +6,7 @@ import type { Finding } from "../types/segment.types.ts";
 import { GENERATED_DIR } from "../constants/path.constants.ts";
 import { isObject } from "../predicates/schema.predicate.ts";
 import { isUnreadableJson } from "../predicates/file.predicate.ts";
+import { proofRunEmpty } from "../strings/gate.strings.ts";
 import { resolve } from "node:path";
 import { runTool } from "../runners/process.runner.ts";
 import { writeRuleReport } from "../reporters/rule.reporter.ts";
@@ -141,9 +142,7 @@ export const gateStage = function gateStage(options: StepOptions): StepOutcome {
         outcomes.length === 0
             ? [
                   gateFinding({
-                      detail:
-                          "the proof run produced no outcomes, so no rule has been shown to fire — a step whose " +
-                          `own invocation failed reports the same green as one where every pair passed: ${run.output.trim().slice(0, 300)}`,
+                      detail: proofRunEmpty(run.output.trim().slice(0, 300)),
                       rule: "gates",
                       state: "unproven",
                   }),

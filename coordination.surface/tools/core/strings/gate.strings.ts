@@ -27,6 +27,71 @@ export const ruleThrew = function ruleThrew(error: string): string {
     return `the rule threw on its fixture rather than reporting: ${error}`;
 };
 
+export const branchDisagrees = function branchDisagrees(apart: string): string {
+    return (
+        `the branch ran, and its effect differs from what the fixture declares: ${apart}. ` +
+        "A branch is proven by its effect on the tree, because a refusal reported over a tree the branch " +
+        "already changed reads like a refusal that changed nothing."
+    );
+};
+
+export const proofRunEmpty = function proofRunEmpty(output: string): string {
+    return (
+        "the proof run produced no outcomes, so no rule has been shown to fire. A run whose own invocation " +
+        `failed reports the same green as a run where every pair passed. Output: ${output}`
+    );
+};
+
+export const healedNothing = function healedNothing(kind: string): string {
+    return (
+        `the healing fixture for ${kind} healed nothing. The rule declares that it heals, and its healing branch ` +
+        "made no repair on a sample built to need one, so the branch is unproven. A run that reports no repairs " +
+        "then looks the same as a run whose healer cannot fire."
+    );
+};
+
+export const healSurvived = function healSurvived(kind: string, left: number): string {
+    return (
+        `the healing fixture for ${kind} healed, and ${String(left)} finding(s) still stand after the repair. ` +
+        "The repair fails the rule's own check, so the fix does not converge."
+    );
+};
+
+export const healOnlyProven = function healOnlyProven(kind: string, healed: string): string {
+    return (
+        `kind ${kind} · HEALING-ONLY · HEALED ${healed}, and the repair passed its own re-check. ` +
+        "A kind that cannot fire with healing off is proven by its heal, the firing member, and by the clean " +
+        "re-check, the accepting one."
+    );
+};
+
+export const violatingSilent = function violatingSilent(kind: string, samples: string): string {
+    return `the violating fixture for ${kind} produced no finding, so the rule is not shown to fire. Samples: ${samples}`;
+};
+
+export const cleanNoisy = function cleanNoisy(kind: string, count: number, first: string): string {
+    return (
+        `the clean fixture for ${kind} produced ${String(count)} findings, so the rule fires on input it must ` +
+        `accept. First: ${first}`
+    );
+};
+
+export const judgementAstray = function judgementAstray(target: string, path: string): string {
+    return (
+        `a judgement finding targets ${target} while it reports ${path}. A remediation that names an artifact ` +
+        "other than the one in violation offers one branch of a judgement as the answer, and a consumer then " +
+        "acts on the target rather than on the decide field."
+    );
+};
+
+export const healedSuffix = function healedSuffix(healed: string): string {
+    return ` · HEALED ${healed}, and the repair passed its own re-check`;
+};
+
+export const kindProven = function kindProven(kind: string, fired: number, fires: string, passes: string): string {
+    return `kind ${kind} · FIRED ${String(fired)} finding(s) on ${fires} · ACCEPTED ${passes}`;
+};
+
 export const gateSummary = function gateSummary(
     verdict: string,
     tally: {

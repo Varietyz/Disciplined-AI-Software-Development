@@ -1,5 +1,5 @@
 import type { BranchFixture, BranchObservation } from "../types/fixture.types.ts";
-import { branchExercised, branchThrew } from "../strings/gate.strings.ts";
+import { branchDisagrees, branchExercised, branchThrew } from "../strings/gate.strings.ts";
 import type { GateOutcome } from "../types/gate.types.ts";
 import { growFixtureTree } from "../generators/fixture.generator.ts";
 
@@ -50,10 +50,7 @@ export const judgeBranch = function judgeBranch(fixture: BranchFixture): GateOut
     const apart = disagreements(observed, fixture.expect);
     if (apart.length > 0) {
         return {
-            detail:
-                `the branch was exercised and its effect DISAGREES with what the fixture declares — ${apart.join(", ")}. ` +
-                "A branch is proven by its effect on the tree rather than by the code it returns, because a message " +
-                "reporting a refusal over a tree it already changed reads exactly like a refusal that changed nothing",
+            detail: branchDisagrees(apart.join(", ")),
             rule: `${fixture.subject} · ${fixture.branch}`,
             state: "silent",
         };

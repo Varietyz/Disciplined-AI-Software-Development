@@ -1,22 +1,19 @@
 import { TAG_ALTERNATIVE, TAG_LIST } from "../strings/taxonomy.strings.ts";
+import { fixtureMarkerOf, mirrorSourceOf, testMarkerOf, testMarkers } from "../manifests/taxonomy.root.manifest.ts";
+import { isExempt, isParsed, parseFilename } from "../matchers/filename.matcher.ts";
 import {
-    fixtureMarkerOf,
     isMarkerFolder,
     isNameExempt,
     isSpecialContainer,
     markerFolderOf,
-    mirrorSourceOf,
     tagsForFolder,
-    testMarkerOf,
-    testMarkers,
     vocabularyFor,
 } from "../manifests/taxonomy.manifest.ts";
-import { isExempt, isParsed, parseFilename } from "../matchers/filename.matcher.ts";
+import type { PlacementFinding } from "../../types/taxonomy.types.ts";
 import { WORKSPACE_ROOT } from "../resolvers/anchor.resolver.ts";
 import { existsSync } from "node:fs";
-import { join } from "node:path";
-import type { PlacementFinding } from "../../types/taxonomy.types.ts";
 import { folderPathError } from "../matchers/folder.matcher.ts";
+import { join } from "node:path";
 
 const PATH_SEPARATOR = "/";
 

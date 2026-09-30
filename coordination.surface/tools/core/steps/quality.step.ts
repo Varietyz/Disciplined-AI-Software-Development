@@ -1,5 +1,6 @@
 import type { StepOptions, StepOutcome } from "../types/rule.types.ts";
 import { isResolved, projectRoot, slot, slotList, slotText, surfacePrefix } from "../../../config/surface.config.ts";
+import { CONFIGURATION_PATH } from "../constants/binding.constants.ts";
 import type { Finding } from "../types/segment.types.ts";
 import { leadingInteger } from "../predicates/text.predicate.ts";
 import { runTool } from "../runners/process.runner.ts";
@@ -29,13 +30,13 @@ const absenceFinding = function absenceFinding(reason: string, locus: string): F
         healed: false,
         line: 0,
         locus,
-        path: "config/surface.config.ts",
+        path: CONFIGURATION_PATH,
         remediation: {
             action: "declare",
             decide: "a consumer whose toolchain performs these checks declares the command and elects the concerns, and the stage then runs inside the one pipeline. A consumer with no such toolchain leaves it ABSENT and the stage does not exist — which is reported rather than passed, because a green over a check nobody ran is the state this package refuses to produce",
             deterministic: false,
             from: locus,
-            target: "config/surface.config.ts",
+            target: CONFIGURATION_PATH,
             to: null,
         },
         rule: `${RULE}/notDeclared`,

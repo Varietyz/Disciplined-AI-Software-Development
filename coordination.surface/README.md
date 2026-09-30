@@ -1,4 +1,4 @@
-<!-- Auto-generated 2026-09-27T20:20Z v5 -->
+<!-- Auto-generated 2026-09-29T00:21Z v8 -->
 
 # coordination-surface
 
@@ -8,11 +8,11 @@
 
 Coordination Surface is a package that lets several LLM agents work in one codebase at the same time without overwriting each other's work. It contains the shared files the agents write to, a template for each of them, and a TypeScript toolchain that checks those files on every run. Each agent works under a letter, such as A or B, which the package calls its seat. The shared files are:
 
-- the board (`collab.comms.active`), where each agent keeps one record and posts items addressed to other agents;
-- the agent index (`_agent-index.md`), which binds each letter to a role;
-- venues, files in which the agents argue one decision until every agent taking part has signed it, after which the venue moves to the archive folder;
-- the history file (`_changelogs.txt`), where the lasting part of anything removed from the other files is written first;
-- folders for role documents, planning checklists, models and findings.
+- the board (`collab.comms.active`), where each agent keeps one record and posts items addressed to other agents
+- the agent index (`_agent-index.md`), which binds each letter to a role
+- venues, files in which the agents argue one decision until every agent taking part has signed it, after which the venue moves to the archive folder
+- the history file (`_changelogs.txt`), where the lasting part of anything removed from the other files is written first
+- folders for role documents, planning checklists, models and findings
 
 The agents write to these files through one command, which writes only inside the calling agent's record, then waits for the next write by another agent and shows what changed. The checks run as one pipeline, and each rule is a file in `tools/rules`, so a rule is added or removed without editing the pipeline. Every fact about the host project is a setting in `config/surface.config.ts`. An install sets the project root, and adoption renames the `.{provider}` folder to the name the agent runtime reads, as `BOOTSTRAP.md` describes.
 <!-- /concern:overview -->
@@ -38,7 +38,7 @@ The agents write to these files through one command, which writes only inside th
 
 ## Architecture charts
 
-Auto-generated structure, logical-flow, and dependency diagrams derived from the source AST live in [_generated.module-info/mermaid-charts.generated.md](./_generated.module-info/mermaid-charts.generated.md).
+The structure, logical-flow and dependency diagrams derived from the source AST live in [_code.info.generated/mermaid-charts.generated.md](./_code.info.generated/mermaid-charts.generated.md).
 <!-- /concern:charts -->
 
 <!-- concern:install -->
@@ -51,7 +51,7 @@ Auto-generated structure, logical-flow, and dependency diagrams derived from the
     - `overseer`, the default: the agents do not stop to ask you. You write an entry anywhere in a venue, in any form, and each agent receives it with the changes its next wait shows. The agents address you only when they cannot go on.
     - `interactive`: the agents bring each decision to you and wait for your answer.
 4. The package keeps its rules, skills and agent files in one folder named `.{provider}`, which each agent runtime expects under its own name, such as `.claude` or `.codex`. Ask your agent to follow `BOOTSTRAP.md`: the agent is asked to rename that folder, point the configuration at it, and load `AGENTS.md` into its instructions.
-5. Run `npm install`, then run `npm run govern` until two runs in a row report the same result; that result is the verdict. The first run repairs what it can, such as the generated binding, and each check that reads the previous run's report needs one more run to see the repair.
+5. Run `npm install`, then run `npm run govern` until two runs in a row report the same result. That result is the verdict. The first run repairs what it can, such as the generated binding, and each check that reads the previous run's report needs one more run to see the repair.
 6. Set any further setting your project has, such as a history file or a quality command. A setting left absent turns off the check that depends on it, and the report says so.
 
 ## Quick start
@@ -116,7 +116,7 @@ The package is used through commands rather than imports:
 
 ## Dependencies
 
-A leaf with no runtime dependencies.
+The package is a leaf with no runtime dependencies.
 <!-- /concern:deps -->
 
 <!-- concern:ai-context -->
@@ -137,7 +137,7 @@ A leaf with no runtime dependencies.
 
 ## Domains
 
-The software domains this package serves, declared in `_manifest.json` `domains` from the controlled two-tier software-domain vocabulary (`meta → sub`):
+This package serves these software domains, which `_manifest.json` declares in `domains` from the two-tier software-domain vocabulary (`meta → sub`):
 
 - **ai** — agents-orchestration
 - **developer-tooling** — linting-quality
@@ -148,7 +148,7 @@ The software domains this package serves, declared in `_manifest.json` `domains`
 
 ## Architecture principles
 
-The architectural principles this package is governed by, declared in `_manifest.json` `governance.principles` and resolved from the principle ontology:
+The principle ontology resolves the architectural principles that govern this package, which `_manifest.json` declares in `governance.principles`:
 
 - **Single Source of Truth** — _Schema / Canonical Data / Semantics_ · mandatory. Reinforces DRY, Consistency. Enables Governance, Correctness. Tensions with Availability, Decentralization. Conflicts with Duplicated Authority, Magic Value.
 - **Separation of Concerns** — _Core Modular Design_ · mandatory. Reinforces SRP, Modularity, Layered Architecture. Enables Maintainability, Replaceability. Tensions with Over-Layering. Conflicts with Cross-Cutting Leakage, Mixed Layers.
@@ -161,7 +161,7 @@ The architectural principles this package is governed by, declared in `_manifest
 
 ## Quality governance
 
-The quality concepts governing this package, declared in `_manifest.json` `governedBy` or, for a lint package, derived from the canonical concepts its own rules enforce, and resolved from the canonical quality catalog. Each maps to the custom lint rules that enforce it:
+The canonical quality catalog resolves the quality concepts that govern this package. `_manifest.json` declares them in `governedBy`, and a lint package derives them from the concepts its own rules enforce. Each maps to the custom lint rules that enforce it:
 
 - **enforced-feedback** — _architecture_
 - **explicit-retention** — _architecture_
@@ -177,7 +177,7 @@ The quality concepts governing this package, declared in `_manifest.json` `gover
 ## Disposal
 
 - To stand a board down, remove things in the reverse of the order they were created: each agent removes its own role document and record, and the agent index goes last. In that order, every check still passes after each step.
-- To remove the package, delete this folder. With `project.governance_policy` absent, the package has written nothing outside its folder; otherwise, also remove its status line from that file.
+- To remove the package, delete this folder. With `project.governance_policy` absent, the package has written nothing outside its folder. Otherwise, also remove its status line from that file.
 
 <!-- /concern:disposal -->
 
@@ -238,7 +238,7 @@ Pattern Abstract Grammar (PAG) was created by Jay Baleine (Bane's Lab). It is fr
 
 - **surface**: `_agenda.md`
 - **holds**: every planned invariant, what it must establish, and its state
-- **lifetime**: accumulating; a planned invariant is not deleted when a different one is raised ahead of it
+- **lifetime**: accumulating, so a planned invariant stays when a different one is raised ahead of it
 
 <!-- /concern:surfaces -->
 
@@ -340,7 +340,7 @@ To <letter>[, <letter>][ AND <letter>] — the argument, across as many lines as
 - **The check on well-formed fences is required.** A single unclosed marker makes its item impossible for the tool to remove.
 - **Removal takes the whole span, never a matched line.** Removing an item by matching its text leaves its markers behind, and an orphaned fence is a span that no later operation can interpret.
 - **An item is extracted before it is removed.** A removal names a typed reference that resolves. The check decides whether the extract is present, not whether it is faithful, because the faithfulness of a summary is a judgement.
-- **The agent that handled an item removes it, never its author.** Handling and removing are one operation by one agent, so a handled item never waits for its author to notice it.
+- **The agent that handled an item removes it, never its author.** The board then clears as soon as the reader acts, with no wait on the writer.
 - **The one-writer-per-record rule applies to hand editing, not to the tool.** A tool that removes exactly one addressable span by id, after re-reading the file and with a compare-and-swap, is the mechanism the fence and the id were built for.
 - **Removal depends on who an item was addressed to, not on who wrote it**, so an agent clears only traffic addressed to it, and an item's removal shows that its reader acted on it.
 

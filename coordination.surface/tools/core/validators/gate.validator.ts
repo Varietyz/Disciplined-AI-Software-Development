@@ -1,5 +1,17 @@
 import type { Counted, GateOutcome } from "../types/gate.types.ts";
-import { EXEMPTION_SAMPLED, healerThrew, ruleThrew } from "../strings/gate.strings.ts";
+import {
+    EXEMPTION_SAMPLED,
+    cleanNoisy,
+    healOnlyProven,
+    healSurvived,
+    healedNothing,
+    healedSuffix,
+    healerThrew,
+    judgementAstray,
+    kindProven,
+    ruleThrew,
+    violatingSilent,
+} from "../strings/gate.strings.ts";
 import type { GateFixture, Sample } from "../types/fixture.types.ts";
 import { countFindings, fromDisk } from "../resolvers/gate.resolver.ts";
 import type { Finding } from "../types/segment.types.ts";
@@ -43,28 +55,14 @@ const healingOutcome = function healingOutcome(
     try {
         const first = declaration.check(fromDisk(id, tree.root, paths, declared), true);
         if (first.healed.length === 0) {
-            return {
-                detail:
-                    `the healing fixture for ${fixture.kind ?? "any"} healed NOTHING — the rule declares that it heals and ` +
-                    "its healing branch produced no repair on a sample built to need one, so the branch is unproven and a " +
-                    "run reporting zero healed is indistinguishable from a run whose healer cannot fire",
-                rule: id,
-                state: "silent",
-            };
+            return { detail: healedNothing(fixture.kind ?? "any"), rule: id, state: "silent" };
         }
 
         const second = declaration.check(fromDisk(id, tree.root, paths, declared), false);
         const wanted = fixture.kind === undefined ? null : `${id}/${fixture.kind}`;
         const left = wanted === null ? second.findings : second.findings.filter((found) => found.rule === wanted);
         if (left.length > 0) {
-            return {
-                detail:
-                    `the healing fixture for ${fixture.kind ?? "any"} healed and the finding SURVIVED its own repair — ` +
-                    `${String(left.length)} still stand after healing, so the fix does not converge and a fix that fails ` +
-                    "its own check is not a fix",
-                rule: id,
-                state: "noisy",
-            };
+            return { detail: healSurvived(fixture.kind ?? "any", left.length), rule: id, state: "noisy" };
         }
 
         return null;
@@ -99,10 +97,7 @@ const healOnlyOutcome = function healOnlyOutcome(
 ): GateOutcome {
     return (
         healingOutcome(id, declaration, fixture, heals) ?? {
-            detail:
-                `kind ${fixture.kind ?? "any"} · HEALING-ONLY, which is the whole evidence available for a kind that ` +
-                `cannot fire with healing OFF: HEALED ${pathsOf(heals)}, and the ` +
-                "repair survived its own re-check — the heal is the firing member and the clean re-check is the accepting one",
+            detail: healOnlyProven(fixture.kind ?? "any", pathsOf(heals)),
             rule: id,
             state: "proven",
         }
@@ -121,9 +116,7 @@ const sampledFailure = function sampledFailure(
     }
     if (fired.findings.length === 0) {
         return {
-            detail:
-                `the violating fixture for ${fixture.kind ?? "any"} produced no finding, so the rule cannot be ` +
-                `shown to fire — samples: ${pathsOf(fixture.fires ?? [])}`,
+            detail: violatingSilent(fixture.kind ?? "any", pathsOf(fixture.fires ?? [])),
             rule: id,
             state: "silent",
         };
@@ -133,9 +126,11 @@ const sampledFailure = function sampledFailure(
     return first === undefined
         ? null
         : {
-              detail:
-                  `the clean fixture for ${fixture.kind ?? "any"} produced ${String(clean.findings.length)} findings, so the ` +
-                  `rule fires on input it must accept — first: ${first.rule} at ${first.path}:${String(first.line)} — ${first.actual}`,
+              detail: cleanNoisy(
+                  fixture.kind ?? "any",
+                  clean.findings.length,
+                  `${first.rule} at ${first.path}:${String(first.line)} — ${first.actual}`,
+              ),
               rule: id,
               state: "noisy",
           };
@@ -145,28 +140,18 @@ const astrayOutcome = function astrayOutcome(id: string, fired: readonly Finding
     const astray = misdirected(fired);
     return astray === null
         ? null
-        : {
-              detail:
-                  `a judgement finding targets ${astray.remediation.target} while reporting ${astray.path} — ` +
-                  "a remediation naming an artifact other than the one in violation offers one branch of a " +
-                  "judgement as though it were the answer, and a consumer acts on the target rather than the decide",
-              rule: id,
-              state: "noisy",
-          };
+        : { detail: judgementAstray(astray.remediation.target, astray.path), rule: id, state: "noisy" };
 };
 
 const provenOutcome = function provenOutcome(id: string, fixture: GateFixture, fired: number): GateOutcome {
-    const healed =
-        fixture.heals === undefined
-            ? ""
-            : ` · HEALED ${pathsOf(fixture.heals)} and the repair survived its own re-check`;
-    return {
-        detail:
-            `kind ${fixture.kind ?? "any"} · FIRED ${String(fired)} finding(s) on ${pathsOf(fixture.fires ?? [])}` +
-            ` · ACCEPTED ${pathsOf(fixture.passes ?? [])}${healed}`,
-        rule: id,
-        state: "proven",
-    };
+    const healed = fixture.heals === undefined ? "" : healedSuffix(pathsOf(fixture.heals));
+    const proven = kindProven(
+        fixture.kind ?? "any",
+        fired,
+        pathsOf(fixture.fires ?? []),
+        pathsOf(fixture.passes ?? []),
+    );
+    return { detail: `${proven}${healed}`, rule: id, state: "proven" };
 };
 
 const sampledOutcome = function sampledOutcome(

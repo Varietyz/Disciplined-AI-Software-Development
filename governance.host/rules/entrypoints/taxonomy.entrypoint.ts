@@ -1,9 +1,9 @@
 import { TAXONOMY_MESSAGES, taxonomyFindingLine, taxonomySummary } from "../../shared/strings/taxonomy.strings.ts";
 import { coverageFindings } from "../../shared/analyzers/taxonomy.coverage.analyzer.ts";
 import { defineCheck } from "@govlab/context/check";
-import { taxonomyRoots } from "../../shared/manifests/taxonomy.manifest.ts";
 import process from "node:process";
 import { taxonomyReport } from "../../shared/analyzers/taxonomy.tree.analyzer.ts";
+import { taxonomyRoots } from "../../shared/manifests/taxonomy.root.manifest.ts";
 
 defineCheck({
     detects: [],

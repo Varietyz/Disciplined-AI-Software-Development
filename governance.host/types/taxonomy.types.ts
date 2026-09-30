@@ -99,10 +99,12 @@ export interface IgnoreDeclaration {
     readonly foldersFiles: readonly string[];
 }
 
-export type TaxonomySource = Readonly<Record<"Ignored", IgnoreDeclaration>> & TaxonomyShape;
+export interface TaxonomySource extends TaxonomyShape {
+    readonly ignored: IgnoreDeclaration;
+}
 
 export interface TaxonomyShape {
-    readonly Excluded?: ExcludedTrees;
+    readonly excluded?: ExcludedTrees;
     readonly boundaryDocuments?: readonly string[];
     readonly concerns: readonly Concern[];
     readonly containers: Readonly<Record<string, readonly string[]>>;

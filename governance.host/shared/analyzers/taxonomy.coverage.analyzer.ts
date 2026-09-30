@@ -1,10 +1,10 @@
-import { excludedTrees, isGeneratedFolder, isIgnoredName, taxonomyRoots, vocabularyFor } from "../manifests/taxonomy.manifest.ts";
+import { excludedTrees, isGeneratedFolder, isIgnoredName, vocabularyFor } from "../manifests/taxonomy.manifest.ts";
 import { readdirSync, statSync } from "node:fs";
 import type { TaxonomyFinding } from "../../types/taxonomy.types.ts";
 import { WORKSPACE_ROOT } from "../resolvers/anchor.resolver.ts";
 import { generatedFolderFindings } from "./taxonomy.tree.analyzer.ts";
-import { isTextFile } from "../predicates/text.predicate.ts";
 import { join } from "node:path";
+import { taxonomyRoots } from "../manifests/taxonomy.root.manifest.ts";
 
 const PATH_SEPARATOR = "/";
 
@@ -16,15 +16,12 @@ const isDirectory = function isDirectory(path: string): boolean {
     return statSync(join(WORKSPACE_ROOT, path)).isDirectory();
 };
 
-const textFileCount = function textFileCount(relDir: string): number {
+const fileCount = function fileCount(relDir: string): number {
     return readdirSync(join(WORKSPACE_ROOT, relDir))
         .filter((name) => !isIgnoredName(name))
         .reduce((sum, name) => {
             const path = joined(relDir, name);
-            if (isDirectory(path)) {
-                return sum + textFileCount(path);
-            }
-            return sum + (isTextFile(join(WORKSPACE_ROOT, path)) ? 1 : 0);
+            return sum + (isDirectory(path) ? fileCount(path) : 1);
         }, 0);
 };
 
@@ -33,13 +30,17 @@ const isExemptFile = function isExemptFile(name: string): boolean {
 };
 
 const fileFinding = function fileFinding(path: string, name: string): TaxonomyFinding[] {
-    if (isExemptFile(name) || !isTextFile(join(WORKSPACE_ROOT, path))) {
+    if (isExemptFile(name)) {
         return [];
     }
     return [{ data: { name }, messageId: "ungovernedFile", path }];
 };
 
-const treeFindings = function treeFindings(relDir: string, roots: readonly string[], excluded: ReadonlySet<string>): TaxonomyFinding[] {
+const treeFindings = function treeFindings(
+    relDir: string,
+    roots: readonly string[],
+    excluded: ReadonlySet<string>,
+): TaxonomyFinding[] {
     return readdirSync(join(WORKSPACE_ROOT, relDir))
         .filter((name) => !isIgnoredName(name))
         .toSorted((a, b) => a.localeCompare(b))
@@ -57,7 +58,7 @@ const treeFindings = function treeFindings(relDir: string, roots: readonly strin
             if (roots.some((root) => root.startsWith(`${path}${PATH_SEPARATOR}`))) {
                 return treeFindings(path, roots, excluded);
             }
-            const files = textFileCount(path);
+            const files = fileCount(path);
             return files === 0 ? [] : [{ data: { files: String(files) }, messageId: "ungovernedTree", path }];
         });
 };

@@ -1,4 +1,4 @@
-<!-- Auto-generated 2026-09-27T20:21Z v11 -->
+<!-- Auto-generated 2026-09-29T00:22Z v14 -->
 
 # @ssot/govlab
 
@@ -30,14 +30,14 @@ Govlab reads every consumer's `.govlab/` by convention, so this directory is wir
 
 ## Architecture charts
 
-Auto-generated structure, logical-flow, and dependency diagrams derived from the source AST live in [_generated.module-info/mermaid-charts.generated.md](./_generated.module-info/mermaid-charts.generated.md).
+The structure, logical-flow and dependency diagrams derived from the source AST live in [_code.info.generated/mermaid-charts.generated.md](./_code.info.generated/mermaid-charts.generated.md).
 <!-- /concern:charts -->
 
 <!-- concern:install -->
 
 ## Install
 
-A private package resolved as `@ssot/govlab`; build it with `npm run build`, then import from the barrel.
+The package is private and resolves as `@ssot/govlab`. Build it with `npm run build`, then import from the barrel.
 
 ## Quick start
 
@@ -75,6 +75,7 @@ node .govlab/codemods/entrypoints/increment.entrypoint.ts --tsconfig banes-lab.r
 - `const CANON_PRECEDENCE: "CLAUDE.md > this canon > the rules and manifests on disk > memory"`
 - `const CANONICAL_TERMS: readonly TermRecord[]`
 - `function canonicalFor(terms: readonly TermRecord[], synonym: string): TermRecord | null`
+- `const CARD_RULES: readonly CanonRule[]`
 - `const CARRIED_FIELDS: ReadonlyMap<string, string>`
 - `const CASE: string`
 - `const CHECK_BY_KIND: ReadonlyMap<CompositionKind, CanonCheckId>`
@@ -82,16 +83,14 @@ node .govlab/codemods/entrypoints/increment.entrypoint.ts --tsconfig banes-lab.r
 - `const CLOSED_SCOPE_LABEL: "ontology records the build reads"`
 - `const COLLECTION_PATH_SEGMENTS: readonly string[]`
 - `const COMMENT_OPENERS: readonly (readonly string[])[]`
+- `const COMPOSITION_RULES: readonly CanonRule[]`
 - `const COMPOUND_MARKERS: readonly string[]`
-- `enum CompoundMarker`
-- `enum ConcernEntry`
-- `enum ConcernFolder`
 - `function concernForPath(filePath: string): string | undefined`
 - `function concernSuffix(tag: string, ext?: string): string`
-- `enum ConcernTag`
 - `function concernTags(): string[]`
 - `function containersFor(root: string): string[]`
 - `const COORDINATORS: ReadonlySet<string>`
+- `default export`
 - `default export`
 - `const DERIVATION_MODULES: ReadonlySet<string>`
 - `const DERIVING_METHODS: ReadonlySet<string>`
@@ -101,29 +100,27 @@ node .govlab/codemods/entrypoints/increment.entrypoint.ts --tsconfig banes-lab.r
 - `const DIAGRAM_IDENTIFIER_CHARACTERS: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"`
 - `const DIAGRAM_KEYWORDS: ReadonlySet<string>`
 - `const DIAGRAM_SHAPE_OPENERS: ReadonlySet<string>`
-- `function dialectCaseOf(ext: string, root?: string): string | null`
-- `const DIALECTS: readonly CaseDialect[]`
+- `const DIALECTS: readonly Dialect[]`
 - `const DISCOVERED_FOLDER_KEYS: readonly string[]`
 - `const DOCUMENT_CHANNEL: CanonLayerId`
 - `const DOCUMENT_LAYER: CanonLayer`
-- `const EVERY_LAYER_DECLARED: true`
+- `function excludedTrees(): string[]`
 - `const EXTERNAL_PLAINTEXT_ENDPOINTS: ReadonlySet<string>`
 - `const FACTORY_OWNED_TYPES: ReadonlyMap<string, string>`
 - `const FIELD_OVERLAP: 0.6`
 - `const FIELD_SCOPES: readonly FieldScope[]`
 - `const FILE_SHAPES: readonly string[]`
 - `const FILLER_PHRASES: readonly (readonly string[])[]`
+- `function fixtureMarkerOf(basename: string, root?: string): string | undefined`
 - `function folderFor(tag: string): string | undefined`
 - `const FUNCTION_WORDS: ReadonlySet<string>`
 - `const GENERATED_MARKER: ".generated."`
-- `enum GovernedRoot`
 - `function governedRoots(): string[]`
 - `const GRAMMAR_ROLES: GrammarRoles`
 - `const HARNESS_TOKENS: readonly string[]`
 - `const HIDDEN_FIELDS: ReadonlyMap<string, string>`
 - `const IDENTIFIER_LAYER: CanonLayer`
 - `const IMPERATIVE_OPENERS: ReadonlySet<string>`
-- `const imports: { … }`
 - `const INDEFINITE_PARTIES: readonly (readonly string[])[]`
 - `const IRREGULAR_PARTICIPLES: ReadonlySet<string>`
 - `function isCheckEnforced(id: CanonCheckId, channel: CanonLayerId): boolean`
@@ -136,6 +133,7 @@ node .govlab/codemods/entrypoints/increment.entrypoint.ts --tsconfig banes-lab.r
 - `function isDeclaredVariant(word: string, root?: string): boolean`
 - `function isEnforced(filePath: string): boolean`
 - `function isForeignContainer(root: string, segment: string): boolean`
+- `function isGeneratedFolder(name: string, root?: string): boolean`
 - `function isIgnoredName(name: string, root?: string): boolean`
 - `function isImportedRoot(root: string | undefined): boolean`
 - `function isLegalSubject(word: string, root?: string): boolean`
@@ -143,15 +141,13 @@ node .govlab/codemods/entrypoints/increment.entrypoint.ts --tsconfig banes-lab.r
 - `function isNameExempt(basename: string, root?: string): boolean`
 - `function isNestedRoot(root: string, segment: string): boolean`
 - `function isSpecialContainer(root: string, segment: string): boolean`
-- `function isTestRoot(root: string | undefined): boolean`
+- `function isTestRoot(root?: string): boolean`
 - `function isVerbOrOpensWith(name: string, verbs: readonly string[]): boolean`
 - `const JOIN_CAP: 1`
 - `const KNOWN_VIOLATIONS: ReadonlyMap<string, string>`
 - `const LABEL_MAX_WORDS: 3`
 - `const LABELLING_OPENERS: readonly (readonly string[])[]`
-- `enum Layer`
 - `function layerFor(tag: string, root?: string): string | undefined`
-- `const LAYERS: readonly ["domain", "application", "processing", "runtime", "infrastructure", "operations", "product"]`
 - `const LEGAL_SUBJECTS: ReadonlySet<string>`
 - `function legalSubjects(): string[]`
 - `const LESSON_FIELD_MOODS: Readonly<Record<string, FieldMood>>`
@@ -164,10 +160,7 @@ node .govlab/codemods/entrypoints/increment.entrypoint.ts --tsconfig banes-lab.r
 - `const MAX_DEPTH: number`
 - `const MEMBERSHIP_METHODS: ReadonlySet<string>`
 - `const METRIC_UNITS: readonly string[]`
-- `const NO_MARKER_CONCERN_OVERLAP: true`
-- `const NO_SUBJECT_CONCERN_OVERLAP: true`
-- `const NO_VARIANT_CONCERN_OVERLAP: true`
-- `const NO_VARIANT_SUBJECT_OVERLAP: true`
+- `function mirrorSourceOf(root?: string): string | undefined`
 - `const NON_IMPERATIVE_OPENERS: ReadonlySet<string>`
 - `function normalizePath(path: string): string`
 - `const NOT_PARTICIPLES: ReadonlySet<string>`
@@ -211,20 +204,21 @@ node .govlab/codemods/entrypoints/increment.entrypoint.ts --tsconfig banes-lab.r
 - `const SEPARATOR: string`
 - `const SHORT_LAYER: CanonLayer`
 - `const SOURCE_RULES: readonly CanonRule[]`
+- `function splitterFor(ext: string, root?: string): Splitter | null`
 - `const STEM_MIN_LENGTH: 4`
 - `const STRING_LAYERS: Map<string, string>`
 - `const STRINGS_CHANNEL: CanonLayerId`
 - `const STRUCTURE_RULES: readonly CanonRule[]`
-- `enum Subject`
 - `function suffixAfterVerb(name: string, verb: string): string | null`
 - `function synonymsOf(terms: readonly TermRecord[]): readonly string[]`
 - `function tagForFolder(folderSegment: string, root?: string): string | undefined`
-- `const taxonomy: { … }`
-- `enum TaxonomyConfig`
+- `function tagsForFolder(folderSegment: string, root?: string): readonly string[]`
+- `function taxonomyRoots(): string[]`
+- `function testMarkerOf(basename: string): string | undefined`
+- `function testMarkers(): string[]`
 - `const TYPE_LAYERS: Map<string, string>`
 - `const URL_SHAPED_IDENTIFIERS: ReadonlySet<string>`
 - `const VALIDATING_CLASSES: ReadonlyMap<string, string>`
-- `enum Variant`
 - `function vocabularyFor(root?: string): Vocabulary`
 - `const WORD_RULES: readonly CanonRule[]`
 - `const WRITE_OWNER_MODULES: ReadonlySet<string>`
@@ -248,6 +242,7 @@ No config file of its own. Roots resolve through `@ssot/paths`. `shared/resolver
 - `@govlab/canonical-write`
 - `@govlab/constants`
 - `@govlab/context`
+- `@govlab/docs`
 - `@govlab/pipeline`
 - `@govlab/quality`
 - `@ssot/paths`
@@ -270,7 +265,7 @@ No config file of its own. Roots resolve through `@ssot/paths`. `shared/resolver
 
 ## Domains
 
-The software domains this package serves, declared in `_manifest.json` `domains` from the controlled two-tier software-domain vocabulary (`meta → sub`):
+This package serves these software domains, which `_manifest.json` declares in `domains` from the two-tier software-domain vocabulary (`meta → sub`):
 
 - **developer-tooling** — code-generation, linting-quality
 
@@ -280,7 +275,7 @@ The software domains this package serves, declared in `_manifest.json` `domains`
 
 ## Quality governance
 
-The quality concepts governing this package, declared in `_manifest.json` `governedBy` or, for a lint package, derived from the canonical concepts its own rules enforce, and resolved from the canonical quality catalog. Each maps to the custom lint rules that enforce it:
+The canonical quality catalog resolves the quality concepts that govern this package. `_manifest.json` declares them in `governedBy`, and a lint package derives them from the concepts its own rules enforce. Each maps to the custom lint rules that enforce it:
 
 - **duplicate-code** — _complexity_
 - **separation-of-concerns** — _complexity_
@@ -302,5 +297,5 @@ The quality concepts governing this package, declared in `_manifest.json` `gover
 
 ---
 
-stable · 162 exports · 7 deps · 0 principles · 3 concepts
+stable · 156 exports · 8 deps · 0 principles · 3 concepts
 <!-- /concern:metrics -->

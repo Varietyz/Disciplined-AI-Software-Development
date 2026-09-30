@@ -55,7 +55,12 @@ const humpedWords = function humpedWords(stem: string, leadsUpper: boolean): rea
 };
 
 export const isWellFormedJoiner = function isWellFormedJoiner(joiner: string): boolean {
-    return joiner !== "" && ![...joiner].some((char) => isLower(char) || isUpper(char) || isDigit(char));
+    for (const char of joiner) {
+        if (isLower(char) || isUpper(char) || isDigit(char)) {
+            return false;
+        }
+    }
+    return joiner !== "";
 };
 
 export const wordsOf = function wordsOf(stem: string, splitter: Splitter): readonly string[] | null {

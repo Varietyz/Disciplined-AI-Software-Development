@@ -77,7 +77,13 @@ const rule: Rule = Object.assign(
             root.walkAtRules(IMPORT_NAME, (atRule: AtRule) => {
                 const target = importTargetOf(atRule.params);
                 if (target !== null && isLocal(target) && !resolves(target, from)) {
-                    utils.report({ message: messages.unresolved(target), node: atRule, result, ruleName, word: target });
+                    utils.report({
+                        message: messages.unresolved(target),
+                        node: atRule,
+                        result,
+                        ruleName,
+                        word: target,
+                    });
                 }
             });
         },

@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://banes-lab.com/assets/animated_badge_logo.webp" alt="Disciplined Methodology" width="70" height="70" />
+<img src="https://banes-lab.com/static/assets/site.badge.asset.webp" alt="Disciplined Methodology" width="70" height="70" />
 
-[Disciplined Methodology](https://github.com/Varietyz/Disciplined-AI-Software-Development) © 2025 by [Jay Baleine](https://linkedin.com/in/jay-baleine) is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) <img src="https://banes-lab.com/assets/assets/license.creative-commons.asset.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/assets/license.attribution.asset.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/assets/assets/license.share-alike.asset.svg" alt="" width="16" height="16" />
+[Disciplined Methodology](https://github.com/Varietyz/Disciplined-AI-Software-Development) © 2025 by [Jay Baleine](https://linkedin.com/in/jay-baleine) is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) <img src="https://banes-lab.com/static/assets/license.creative-commons.asset.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/static/assets/license.attribution.asset.svg" alt="" width="16" height="16" /><img src="https://banes-lab.com/static/assets/license.share-alike.asset.svg" alt="" width="16" height="16" />
 
 </div>
 

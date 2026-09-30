@@ -7,6 +7,7 @@ import {
     normalizePath,
 } from "../../shared/resolvers/anchor.resolver.ts";
 import type { LocalRule, RuleContext, RuleListener } from "../../types/rule.types.ts";
+import { isModuleSpecifier, isStandaloneScript } from "../../shared/predicates/location.predicate.ts";
 import {
     isType,
     literalString,
@@ -20,7 +21,6 @@ import type { AstNode } from "../../types/syntax.types.ts";
 import { concernSuffix } from "../../shared/manifests/taxonomy.manifest.ts";
 import { containerPath } from "../../shared/resolvers/container.resolver.ts";
 import { defineCheck } from "@govlab/context/check";
-import { isModuleSpecifier } from "../../shared/predicates/location.predicate.ts";
 import { listener } from "../../shared/factories/listener.factory.ts";
 
 const CORE_CONTAINER = containerPath("core", GOVERNED_ROOT);
@@ -31,14 +31,14 @@ const ENV_BASE_URL = "import.meta.env.BASE_URL";
 const ENV_NAMESPACE = "env";
 const BASE_URL_PROPERTY = "BASE_URL";
 
+const ALLOWED_SEGMENTS = [ASSET_MODULE_PREFIX, SCRIPT_ROOT_SEGMENT, BUILD_SCRIPT_ROOT_SEGMENT];
+
 const isAllowedFile = function isAllowedFile(filename: string): boolean {
     const norm = normalizePath(filename);
-    return (
-        norm.includes(ASSET_MODULE_PREFIX) ||
-        norm.includes(SCRIPT_ROOT_SEGMENT) ||
-        norm.includes(BUILD_SCRIPT_ROOT_SEGMENT) ||
-        basenameOf(norm).endsWith(REGISTRY_SUFFIX)
-    );
+    if (ALLOWED_SEGMENTS.some((segment) => norm.includes(segment))) {
+        return true;
+    }
+    return isStandaloneScript(norm) || basenameOf(norm).endsWith(REGISTRY_SUFFIX);
 };
 
 const pathHintIn = function pathHintIn(value: string): string | null {
@@ -96,7 +96,7 @@ export default {
                 enforces: ["architecture:single-source-of-truth"],
             }),
             description:
-                "An asset location, an environment import, a URL or a route written as a literal at a call site is banned; each is declared once in the asset catalog and reached through its accessor. These are deployment facts, not code facts — they change on a different schedule than the code that consumes them, and a literal ties the two together. The location shapes the rule looks for are data in the asset manifest, and a registry module is exempt because it is where such a shape is declared.",
+                "An asset location, an environment import, a URL or a route written as a literal at a call site is banned; each is declared once in the asset catalog and reached through its accessor. These are deployment facts, not code facts — they change on a different schedule than the code that consumes them, and a literal ties the two together. The location shapes the rule looks for are data in the asset manifest, and a registry module is exempt because it is where such a shape is declared. A standalone server script ships as one file that can import nothing, so it is its own catalog.",
         },
         messages: {
             envBaseUrl:

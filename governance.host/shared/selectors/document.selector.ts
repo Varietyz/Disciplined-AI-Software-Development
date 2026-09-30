@@ -68,11 +68,23 @@ export const markdownTexts = function markdownTexts(label: string, content: stri
     return texts;
 };
 
+const unfencedLines = function unfencedLines(value: string): string[] {
+    const lines: string[] = [];
+    let fenced = false;
+    for (const line of value.split(LINE)) {
+        const fence = line.trimStart().startsWith(FENCE);
+        fenced = fence ? !fenced : fenced;
+        if (!fence && !fenced) {
+            lines.push(line);
+        }
+    }
+    return lines;
+};
+
 export const jsonTexts = function jsonTexts(label: string, value: unknown, pointer = ""): DocumentText[] {
     if (typeof value === "string") {
         const at = `${label}${FRAGMENT}${pointer}`;
-        return value
-            .split(LINE)
+        return unfencedLines(value)
             .filter((line) => line.includes(SPACE))
             .map((line) => ({ at, text: withoutCode(line) }));
     }
