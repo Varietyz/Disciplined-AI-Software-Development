@@ -26,8 +26,8 @@ export const barrierOpen = function barrierOpen(parked: number, peers: number): 
     );
 };
 
-export const kindEcho = function kindEcho(kind: string, judgement: boolean): string {
-    const closure = judgement
+export const kindEcho = function kindEcho(kind: string, judgment: boolean): string {
+    const closure = judgment
         ? "it asks for a reading, so an addressee closes it by acknowledging it, with no reference"
         : "it asks for something that can exist, so it closes with a reference to where that thing landed";
     return (
@@ -390,7 +390,7 @@ export const DEFER_NEEDS_RECEIVER =
 export const kindRequired = function kindRequired(kinds: readonly string[]): string {
     return (
         `--kind must be one of ${kinds.join(" or ")}. The kind decides how the item closes: an artifact item closes ` +
-        "with a reference to what was made, and a judgement item closes when an addressee acknowledges it"
+        "with a reference to what was made, and a judgment item closes when an addressee acknowledges it"
     );
 };
 
@@ -467,7 +467,7 @@ export const waitSolitary = function waitSolitary(able: number, waiting: number)
 
 export const waitAllParked = function waitAllParked(able: number, waiting: number): string {
     return (
-        "BLOCKED  Every other active seat is waiting for an update, so a wait now would leave every seat waiting." +
+        "BLOCKED  Every other active seat is waiting for an update, so a wait now would leave every seat waiting. " +
         "Read what changed and post your response before you wait. " +
         `${String(waiting)} of ${String(able)} able to write are waiting.\n`
     );

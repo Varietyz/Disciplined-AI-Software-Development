@@ -1,0 +1,443 @@
+{
+    "meta": {
+        "note": "Hand-authored formatter value settings, each cell checked against the tool's own documentation. EditorConfig is the value-setting nucleus for the first four settings.",
+        "verified": "doc-only"
+    },
+    "settings": [
+        {
+            "id": "line-length",
+            "kind": "value",
+            "surface": "layout",
+            "dimension": "format",
+            "valueType": "int",
+            "default": 100
+        },
+        {
+            "id": "indent-style",
+            "kind": "value",
+            "surface": "layout",
+            "dimension": "format",
+            "valueType": "enum",
+            "default": "space"
+        },
+        {
+            "id": "indent-size",
+            "kind": "value",
+            "surface": "layout",
+            "dimension": "format",
+            "valueType": "int",
+            "default": 4
+        },
+        {
+            "id": "quote-style",
+            "kind": "value",
+            "surface": "layout",
+            "dimension": "format",
+            "valueType": "enum",
+            "default": "double"
+        },
+        {
+            "id": "trailing-comma",
+            "kind": "value",
+            "surface": "layout",
+            "dimension": "format",
+            "valueType": "enum",
+            "default": "all"
+        },
+        {
+            "id": "final-newline",
+            "kind": "value",
+            "surface": "layout",
+            "dimension": "format",
+            "valueType": "bool",
+            "default": true
+        },
+        {
+            "id": "end-of-line",
+            "kind": "value",
+            "surface": "layout",
+            "dimension": "format",
+            "valueType": "enum",
+            "default": "lf"
+        },
+        {
+            "id": "trim-trailing-whitespace",
+            "kind": "value",
+            "surface": "layout",
+            "dimension": "format",
+            "valueType": "bool",
+            "default": true
+        }
+    ],
+    "rows": [
+        {
+            "canonicalId": "line-length",
+            "tool": "prettier",
+            "langs": ["typescript"],
+            "knob": "printWidth",
+            "default": 80,
+            "fidelity": "approximate",
+            "fixed": false
+        },
+        {
+            "canonicalId": "line-length",
+            "tool": "biome",
+            "langs": ["typescript"],
+            "knob": "lineWidth",
+            "default": 80,
+            "fidelity": "approximate",
+            "fixed": false
+        },
+        {
+            "canonicalId": "line-length",
+            "tool": "eslint",
+            "langs": ["typescript"],
+            "knob": "max-len",
+            "default": null,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "line-length",
+            "tool": "ruff-format",
+            "langs": ["python"],
+            "knob": "line-length",
+            "default": 88,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "line-length",
+            "tool": "black",
+            "langs": ["python"],
+            "knob": "line-length",
+            "default": 88,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "line-length",
+            "tool": "rustfmt",
+            "langs": ["rust"],
+            "knob": "max_width",
+            "default": 100,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "line-length",
+            "tool": "gofmt",
+            "langs": ["go"],
+            "knob": null,
+            "default": null,
+            "fidelity": "advisory",
+            "fixed": true
+        },
+        {
+            "canonicalId": "line-length",
+            "tool": "clang-format",
+            "langs": ["cpp"],
+            "knob": "ColumnLimit",
+            "default": null,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-style",
+            "tool": "prettier",
+            "langs": ["typescript"],
+            "knob": "useTabs",
+            "default": false,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-style",
+            "tool": "biome",
+            "langs": ["typescript"],
+            "knob": "indentStyle",
+            "default": "tab",
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-style",
+            "tool": "ruff-format",
+            "langs": ["python"],
+            "knob": "indent-style",
+            "default": "space",
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-style",
+            "tool": "black",
+            "langs": ["python"],
+            "knob": null,
+            "default": "space",
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "indent-style",
+            "tool": "rustfmt",
+            "langs": ["rust"],
+            "knob": "hard_tabs",
+            "default": false,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-style",
+            "tool": "gofmt",
+            "langs": ["go"],
+            "knob": null,
+            "default": "tab",
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "indent-style",
+            "tool": "clang-format",
+            "langs": ["cpp"],
+            "knob": "UseTab",
+            "default": "Never",
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-size",
+            "tool": "prettier",
+            "langs": ["typescript"],
+            "knob": "tabWidth",
+            "default": 2,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-size",
+            "tool": "biome",
+            "langs": ["typescript"],
+            "knob": "indentWidth",
+            "default": 2,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-size",
+            "tool": "ruff-format",
+            "langs": ["python"],
+            "knob": "indent-width",
+            "default": 4,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-size",
+            "tool": "black",
+            "langs": ["python"],
+            "knob": null,
+            "default": 4,
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "indent-size",
+            "tool": "rustfmt",
+            "langs": ["rust"],
+            "knob": "tab_spaces",
+            "default": 4,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "indent-size",
+            "tool": "clang-format",
+            "langs": ["cpp"],
+            "knob": "IndentWidth",
+            "default": null,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "quote-style",
+            "tool": "prettier",
+            "langs": ["typescript"],
+            "knob": "singleQuote",
+            "default": false,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "quote-style",
+            "tool": "biome",
+            "langs": ["typescript"],
+            "knob": "quoteStyle",
+            "default": "double",
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "quote-style",
+            "tool": "ruff-format",
+            "langs": ["python"],
+            "knob": "quote-style",
+            "default": "double",
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "quote-style",
+            "tool": "black",
+            "langs": ["python"],
+            "knob": null,
+            "default": "double",
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "trailing-comma",
+            "tool": "prettier",
+            "langs": ["typescript"],
+            "knob": "trailingComma",
+            "default": "all",
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "trailing-comma",
+            "tool": "ruff-format",
+            "langs": ["python"],
+            "knob": "skip-magic-trailing-comma",
+            "default": null,
+            "fidelity": "approximate",
+            "fixed": false
+        },
+        {
+            "canonicalId": "trailing-comma",
+            "tool": "rustfmt",
+            "langs": ["rust"],
+            "knob": "match_block_trailing_comma",
+            "default": null,
+            "fidelity": "approximate",
+            "fixed": false
+        },
+        {
+            "canonicalId": "trailing-comma",
+            "tool": "gofmt",
+            "langs": ["go"],
+            "knob": null,
+            "default": null,
+            "fidelity": "advisory",
+            "fixed": true
+        },
+        {
+            "canonicalId": "final-newline",
+            "tool": "prettier",
+            "langs": ["typescript"],
+            "knob": null,
+            "default": true,
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "final-newline",
+            "tool": "ruff-format",
+            "langs": ["python"],
+            "knob": null,
+            "default": true,
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "final-newline",
+            "tool": "rustfmt",
+            "langs": ["rust"],
+            "knob": null,
+            "default": true,
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "final-newline",
+            "tool": "gofmt",
+            "langs": ["go"],
+            "knob": null,
+            "default": true,
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "end-of-line",
+            "tool": "prettier",
+            "langs": ["typescript"],
+            "knob": "endOfLine",
+            "default": "lf",
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "end-of-line",
+            "tool": "ruff-format",
+            "langs": ["python"],
+            "knob": "line-ending",
+            "default": "auto",
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "end-of-line",
+            "tool": "rustfmt",
+            "langs": ["rust"],
+            "knob": "newline_style",
+            "default": null,
+            "fidelity": "exact",
+            "fixed": false
+        },
+        {
+            "canonicalId": "end-of-line",
+            "tool": "gofmt",
+            "langs": ["go"],
+            "knob": null,
+            "default": "lf",
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "trim-trailing-whitespace",
+            "tool": "prettier",
+            "langs": ["typescript"],
+            "knob": null,
+            "default": true,
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "trim-trailing-whitespace",
+            "tool": "ruff-format",
+            "langs": ["python"],
+            "knob": null,
+            "default": true,
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "trim-trailing-whitespace",
+            "tool": "rustfmt",
+            "langs": ["rust"],
+            "knob": null,
+            "default": true,
+            "fidelity": "exact",
+            "fixed": true
+        },
+        {
+            "canonicalId": "trim-trailing-whitespace",
+            "tool": "gofmt",
+            "langs": ["go"],
+            "knob": null,
+            "default": true,
+            "fidelity": "exact",
+            "fixed": true
+        }
+    ]
+}

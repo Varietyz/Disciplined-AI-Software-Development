@@ -1,0 +1,48 @@
+{
+    "note": "Directive-preservation policy keyed by tree-sitter grammar name (from @govlab/code-parse). tree-sitter locates every comment node; this table decides which comments to KEEP. A comment is kept ONLY when it is load-bearing — a build/compiler directive whose removal breaks compilation, an executable shebang, a runtime-semantic pragma whose removal changes behavior, or a test-runner per-file environment pragma that has no config equivalent. Doc comments (/**, ///, //!), lint/type suppressions (eslint-disable, @ts-, nolint on non-Go, noqa, pylint), and editor hints are NOT directives — they are stripped like any comment (zero tolerance). Go keeps //nolint and the generated-file marker to stay identical to the go-governance nocomments gate, the single Go authority. License/copyright/SPDX headers are preserved across every language by content match in comment-clean.ts (LICENSE_MARKERS), not per row. A grammar absent here strips every non-license comment.",
+    "grammars": [
+        {
+            "lang": "go",
+            "directivePrefixes": [
+                "//go:",
+                "//line",
+                "// +build",
+                "//+build",
+                "//export",
+                "//sys",
+                "//sysnb",
+                "//nolint",
+                "// Code generated"
+            ]
+        },
+        {"lang": "typescript",
+            "directivePrefixes": [
+                "// @vitest-environment",
+                "/* @vitest-environment"
+            ]},
+        {"lang": "tsx",
+            "directivePrefixes": [
+                "// @vitest-environment",
+                "/* @vitest-environment"
+            ]},
+        {"lang": "python",
+            "directivePrefixes": ["#!"]},
+        {
+            "lang": "ruby",
+            "directivePrefixes": [
+                "#!",
+                "# frozen_string_literal:",
+                "# encoding:",
+                "# shareable_constant_value:"
+            ]
+        },
+        {"lang": "bash",
+            "directivePrefixes": ["#!"]},
+        {"lang": "r",
+            "directivePrefixes": ["#!"]},
+        {"lang": "lua",
+            "directivePrefixes": ["#!"]},
+        {"lang": "elixir",
+            "directivePrefixes": ["#!"]}
+    ]
+}

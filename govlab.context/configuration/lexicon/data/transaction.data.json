@@ -1,0 +1,280 @@
+{
+    "category": "transactions-state-concurrency",
+    "records": [
+        {
+            "name": "Idempotency Key or Deterministic Operation",
+            "kind": "constraint",
+            "definition": "The requirement that an operation carry a deduplication key or be deterministic so repeating it is safe."
+        },
+        {
+            "name": "Non-Repeatable Side Effects",
+            "kind": "anti-pattern",
+            "definition": "Side effects whose repetition changes the outcome, so retrying an operation double-applies them."
+        },
+        {
+            "name": "Safe Retries",
+            "kind": "capability",
+            "definition": "The ability to retry an operation without fear of duplicating its effects."
+        },
+        {
+            "name": "State Tracking",
+            "kind": "quality-attribute",
+            "definition": "The degree to which making operations idempotent requires tracking processed keys or prior state."
+        },
+        {
+            "name": "All-or-Nothing State Change",
+            "kind": "capability",
+            "definition": "The ability to apply a set of changes so that either all of them take effect or none do."
+        },
+        {
+            "name": "Distributed Scalability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enforcing atomic transactions across nodes limits how far a system can scale out."
+        },
+        {
+            "name": "Partial Commit",
+            "kind": "anti-pattern",
+            "definition": "Committing only some of a multi-step change after a failure, leaving state half-updated and inconsistent."
+        },
+        {
+            "name": "BASE/Eventual Consistency",
+            "kind": "model",
+            "definition": "A consistency model favoring availability and soft state, letting replicas converge over time rather than staying strongly consistent."
+        },
+        {
+            "name": "Distributed Availability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which insisting on strong transactional consistency reduces availability across a distributed system."
+        },
+        {
+            "name": "Durability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which committed data survives crashes and is never lost once acknowledged."
+        },
+        {
+            "name": "Strong Transactional Guarantees",
+            "kind": "capability",
+            "definition": "The ability to guarantee that a group of operations is atomic, consistent, isolated, and durable."
+        },
+        {
+            "name": "Consistency Rules",
+            "kind": "constraint",
+            "definition": "The requirement that the invariants a transaction must preserve be defined for its scope."
+        },
+        {
+            "name": "Hidden Distributed Transaction",
+            "kind": "anti-pattern",
+            "definition": "A transaction that silently spans service boundaries, coupling systems that should commit independently."
+        },
+        {
+            "name": "Large Transaction Scope",
+            "kind": "quality-attribute",
+            "definition": "The degree to which widening a transaction to cover more work increases contention and failure surface."
+        },
+        {
+            "name": "Safe State Mutation",
+            "kind": "capability",
+            "definition": "The ability to mutate state within a bounded transaction so partial failures cannot corrupt it."
+        },
+        {
+            "name": "Coordinated Persistence",
+            "kind": "capability",
+            "definition": "The ability to commit a set of related changes together as one atomic unit of work."
+        },
+        {
+            "name": "Repository Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which coordinating saves through a unit of work adds indirection to the persistence layer."
+        },
+        {
+            "name": "Scattered Save Calls",
+            "kind": "anti-pattern",
+            "definition": "Persisting related changes through many independent save calls, so a mid-sequence failure leaves partial state."
+        },
+        {
+            "name": "Inconsistent Replicas/Models",
+            "kind": "anti-pattern",
+            "definition": "Replicas or models that disagree on the same data, so reads return conflicting answers."
+        },
+        {
+            "name": "Reliable State",
+            "kind": "capability",
+            "definition": "The ability to trust that stored state always satisfies its invariants."
+        },
+        {
+            "name": "Dirty Reads/Writes",
+            "kind": "anti-pattern",
+            "definition": "Reading or overwriting another transaction's uncommitted changes, so a rollback leaves corrupt data."
+        },
+        {
+            "name": "Safe Concurrent Operations",
+            "kind": "capability",
+            "definition": "The ability to run concurrent transactions without their intermediate states interfering."
+        },
+        {
+            "name": "Safe Parallel Mutation",
+            "kind": "capability",
+            "definition": "The ability to let multiple actors mutate shared state in parallel without corrupting it."
+        },
+        {
+            "name": "Shared State Identification",
+            "kind": "constraint",
+            "definition": "The requirement that all state shared between concurrent actors be identified before it is guarded."
+        },
+        {
+            "name": "Blind Overwrite",
+            "kind": "anti-pattern",
+            "definition": "Writing over another actor's update without checking whether the data changed first, silently losing it."
+        },
+        {
+            "name": "Conflict Detection",
+            "kind": "capability",
+            "definition": "The ability to detect that data changed since it was read, so a conflicting write can be rejected."
+        },
+        {
+            "name": "Retry Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which rejecting conflicting writes pushes retry-and-merge logic onto callers."
+        },
+        {
+            "name": "Version Field",
+            "kind": "artifact",
+            "definition": "A field on a record whose value changes on each write, used to detect concurrent modification."
+        },
+        {
+            "name": "Lock Ownership",
+            "kind": "constraint",
+            "definition": "The requirement that a lock be exclusively held by one actor for the duration of a critical section."
+        },
+        {
+            "name": "Lock-Free Throughput",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a design sustains high throughput by coordinating concurrent access without holding locks."
+        },
+        {
+            "name": "Strong Conflict Prevention",
+            "kind": "capability",
+            "definition": "The ability to prevent conflicting updates by locking data before it is modified."
+        },
+        {
+            "name": "Data Sharing",
+            "kind": "quality-attribute",
+            "definition": "The degree to which strictly isolating state limits components from directly sharing data."
+        },
+        {
+            "name": "Effect Boundaries",
+            "kind": "constraint",
+            "definition": "The requirement that side effects be confined to explicit boundaries rather than scattered through pure logic."
+        },
+        {
+            "name": "Performance Optimization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which pushing side effects to the edges can forgo in-place optimizations that mutate for speed."
+        },
+        {
+            "name": "Pure Core / Imperative Shell",
+            "kind": "pattern",
+            "definition": "An arrangement that keeps decision logic pure and pushes all side effects to a thin outer shell."
+        },
+        {
+            "name": "Ad-Hoc Lock Ordering",
+            "kind": "anti-pattern",
+            "definition": "Ordering lock acquisition by hand-reasoning rather than a proven scheme, inviting deadlock."
+        },
+        {
+            "name": "Concurrency Correctness",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:deadlock-freedom",
+                    "reason": "Concurrency correctness is concurrent flows producing correct results, while deadlock freedom is those flows never halting for good."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The degree to which concurrent flows produce correct results free of races and lost updates, for example because each unit's state is isolated.",
+            "aliases": ["Concurrency Safety"]
+        },
+        {
+            "name": "Concurrent-Flow Modeling",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:reachability-and-deadlock-analysis",
+                    "reason": "Concurrent-flow modeling builds the explicit model of token flow, while reachability analysis examines which states that model can reach."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to model concurrent token flow explicitly so its behavior can be analyzed."
+        },
+        {
+            "name": "Deadlock Freedom",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:lock-free-throughput",
+                    "reason": "Deadlock freedom is never halting for good, while lock-free throughput is sustaining speed by not holding locks at all."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The degree to which a concurrent design is provably free of states where progress halts permanently, which acquiring several locks pessimistically puts at risk.",
+            "aliases": ["Deadlocks"]
+        },
+        {
+            "name": "Modeling Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree to which formally modeling concurrency as a net adds effort over writing the code directly."
+        },
+        {
+            "name": "Places and Transitions",
+            "kind": "constraint",
+            "definition": "The requirement that a modeled system be expressed as places holding tokens and transitions that move them."
+        },
+        {
+            "name": "Reachability and Deadlock Analysis",
+            "kind": "capability",
+            "definition": "The ability to analyze which states a concurrent model can reach and whether any of them deadlock."
+        },
+        {
+            "name": "Reconciliation Job",
+            "kind": "technique",
+            "definition": "A technique for periodically comparing two copies of related state and repairing the differences found."
+        },
+        {
+            "name": "Merge Policy",
+            "kind": "technique",
+            "definition": "A technique for declaring how two concurrent changes to one value are combined."
+        },
+        {
+            "name": "Transaction Isolation Level",
+            "kind": "technique",
+            "definition": "A technique for choosing how much concurrent transactions see of each other's uncommitted and recent writes."
+        },
+        {
+            "name": "Make Immutable",
+            "kind": "technique",
+            "definition": "A technique for replacing in-place mutation with new values, so state shared between readers cannot change under them."
+        },
+        {
+            "name": "Read From Primary After Write",
+            "kind": "technique",
+            "definition": "A technique for routing a client's reads to the primary for a short time after it writes, so it sees its own write."
+        },
+        {
+            "name": "Consistency Contract",
+            "kind": "technique",
+            "definition": "A technique for stating which reads may be stale, for how long, and how a client learns that its write is visible."
+        },
+        {
+            "name": "Fix the Race",
+            "kind": "technique",
+            "definition": "A technique for removing a race by ordering, locking or making the shared state immutable, instead of retrying the test."
+        },
+        {
+            "name": "Apply Concurrency Control",
+            "kind": "technique",
+            "definition": "A technique for coordinating concurrent writers with locks, versions or ownership, so no write is lost."
+        },
+        {
+            "name": "Introduce Transaction Boundary",
+            "kind": "technique",
+            "definition": "A technique for declaring which writes commit or fail together."
+        }
+    ]
+}

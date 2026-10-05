@@ -1,0 +1,110 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../../LICENSE.",
+    "check": {
+        "by": [
+            "the template round-trip check, which fills the template and validates the result against the grammar",
+            "the slot check, which requires every declared slot to appear in the body and every slot in the body to be declared"
+        ],
+        "population": "this template's body and slots, and every document created from it",
+        "freshness": "a verdict stands until the template, its document type or the grammar changes",
+        "refusal": "the gate fails on a dangling slot, an unregistered type, or a filled template that does not validate",
+        "observation": "none: a template is static text, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a slot the body never carries and a template of an unregistered type, another plants a retired head in a real template, and every filled template validates clean",
+        "authority": "the template's document type and the grammar, which every document created from the template conforms to"
+    },
+    "type": "DEBUG",
+    "title": "Debugging Meta-Template (evidence-gated root-cause + surgical-fix generator)",
+    "slots": [
+        {
+            "name": "project.debug_protocols",
+            "description": "host debug protocol docs discovered at orientation",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.clue_taxonomy",
+            "description": "the host's clue-class taxonomy used to classify candidate bug-lines",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.known_unknowables",
+            "description": "platform-intrinsic calls to filter out of the trace",
+            "required": false,
+            "kind": "string"
+        },
+        {
+            "name": "convention.symptom_patterns",
+            "description": "patterns that mark a symptom treatment (refused, not applied)",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "limits.max_fix_attempts",
+            "description": "the fix-attempt budget — the loop-breaker bound (reflect, not iterate)",
+            "required": true,
+            "kind": "string"
+        },
+        {"name": "limits.max_fix_lines",
+            "description": "the maximum fix size",
+            "required": true,
+            "kind": "string"},
+        {
+            "name": "limits.info_debt",
+            "description": "the information-debt threshold that gates tracing before hypotheses",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "limits.min_tci",
+            "description": "the minimum trace-confidence index before hypotheses",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "limits.min_success",
+            "description": "the minimum success score for a fix to be accepted",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "toolchain.test.execute",
+            "description": "the blocking test command that proves broken-fixed and no-regression",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "bug_report",
+            "description": "the raw bug report / failure description",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "task_name",
+            "description": "kebab-case name for the output file",
+            "required": true,
+            "kind": "string"
+        }
+    ],
+    "constraints": [
+        "declaration_required",
+        "gate_per_node",
+        "contract_reads_prior_output",
+        "population_declared",
+        "refusal_before_write",
+        "invariant_has_objector",
+        "evidence_grounded",
+        "reversible_baseline_before_change",
+        "differential_extracted_first",
+        "candidate_lines_worth_ranked",
+        "trace_confidence_and_info_debt_gated",
+        "hypothesis_scored_against_risk_x_complexity_bar",
+        "fix_minimal_and_root_cause",
+        "symptom_treatment_refused",
+        "broken_fixed_and_no_regression_from_real_test",
+        "reflect_not_iterate_at_loop_breaker",
+        "procedural_matching_never_regex",
+        "unknown_is_not_pass"
+    ],
+    "body": "---\nname: {task_name}\ntype: DEBUG\nversion: 1.0.0\n---\n\nTHIS DEBUG RESOLVES a bug to an evidence-scored root cause and one surgical fix by walking the derivation loop, where every decision is typed to a math shape, the fix is grounded in the substrate genesis cycle, and the mandatory gates are enforced.\n\n%% META %%:\n    priority: EVIDENCE > ROOT_CAUSE > SPEED\n    trust: procedural_trace = TRUSTED, test_result = TRUSTED, prior_knowledge = UNTRUSTED, a_hypothesis = UNTRUSTED_UNTIL_SCORED\n    objective: {bug_report}\n    jurisdiction: {bug_report} and the code the trace reaches | external: the platform intrinsics in {convention.known_unknowables}\n    recursion_limit: {limits.max_fix_attempts}\n\n# NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set + evidence]\n@purpose: \"load the protocols, probe capabilities, take a reversible baseline and frame the bug by ontological dimension before touching anything\"\n@genesis: existence\nCONTRACT:\n  input:     {bug_report}\n  transform: READ_RESOURCE {project.debug_protocols} INTO protocols; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; PERSIST_ARTIFACT <a reversible baseline checkpoint> TO <the checkpoint store>; ANALYZE_CONTENT {bug_report} AGAINST <identity, behavior, change, cause, and when relevant time, space, state> INTO readout\n  constraints: a hypothesis is untrusted until scored; nothing is changed before the baseline exists\n  output:    session\nDECLARE session: object\nSET session = {protocols: protocols, capability: capability, baseline: <the checkpoint>, readout: readout, attempts: 0}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"ORIENT\"   yields: boolean\n  [check] protocols discovered and capabilities probed (evidence: session.capability is full, degraded or blocked)\n  [check] a reversible baseline exists before any change (evidence: session.baseline)\n  [check] the bug is framed by dimension (evidence: session.readout) over: the always-relevant dimensions measured: <framed> / <dimensions>\n  refuse: a checkpoint store that cannot be read back before PERSIST_ARTIFACT\n  result: pass → NODE 2 | capability blocked → REPAIR (owner: NODE 1) | unknown → BLOCKED\n\n# NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]\n@purpose: \"extract the differential, rank candidate bug-lines by worth and set the risk bar before tracing\"\n@genesis: difference\n@mandatory\nCONTRACT:\n  input:     session from NODE 1\n  transform: EXTRACT_FACTS <the works-versus-breaks differential> FROM session.readout INTO differential; ANALYZE_CONTENT differential AGAINST {convention.clue_taxonomy} INTO clues; FOR EACH line IN <candidate bug-lines>: CALCULATE_METRIC probability times severity minus tracing cost FROM line INTO line.worth; RANK <candidate bug-lines> BY worth\n  constraints: a data-loss or crash risk raises the confidence bar and a cosmetic risk lowers it; an absent differential or an all-unknown line set is a decision the developer owns\n  output:    ranked_lines\nDECLARE ranked_lines: array\nSET ranked_lines = <the candidate lines ordered by worth, with the risk bar>\nHANDOFF GATE (tel-priority injection-gate):\n  rule_id: \"INTENT\"   yields: boolean over ranking\n  [check] the differential is stated (evidence: differential)\n  [check] every candidate line carries a worth (evidence: ranked_lines) over: <candidate bug-lines> measured: <scored> / <candidates>\n  [check] the selected line is the argmax of worth (evidence: the ranking's first entry)\n  result: pass → NODE 3 | no differential → REPAIR (owner: NODE 1) | unknown → BLOCKED\n\n# NODE 3 — TRACE AND HYPOTHESIZE   [epistemic · analysis · graph · yields: edge-list + number]\n@purpose: \"trace the highest-worth line until confident, then score a hypothesis against the risk-times-complexity bar\"\n@genesis: relation\nCONTRACT:\n  input:     ranked_lines from NODE 2\n  transform: SEARCH_CONTENT <the code> FOR <the selected line's entry points> INTO trace; FILTER trace WHERE <not in {convention.known_unknowables}>; CALCULATE_METRIC trace-confidence index FROM trace INTO tci; CALCULATE_METRIC information debt FROM trace INTO debt; FOR EACH hypothesis IN <candidates at the failure location>: CALCULATE_METRIC evidence score FROM hypothesis INTO hypothesis.confidence\n  constraints: no hypothesis before tci clears {limits.min_tci} and debt clears {limits.info_debt}; the required confidence is the risk bar times the complexity tier\n  output:    hypothesis\nDECLARE hypothesis: object\nSET hypothesis = {statement: <one sentence with a concrete failure location>, confidence: <a number in zero to one>, trace: trace}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"TRACE\"   yields: boolean\n  [check] tci and information debt cleared their thresholds before any hypothesis (evidence: tci and debt against the limits) over: trace paths measured: <fully traced> / <paths>\n  [check] the hypothesis clears the risk-times-complexity bar (evidence: hypothesis.confidence against the bar)\n  [check] the hypothesis names a concrete failure location in one sentence (evidence: hypothesis.statement)\n  result: pass → NODE 4 | trace stagnated → REPAIR (owner: NODE 2) | unknown → BLOCKED\n\n# NODE 4 — FIX   [epistemic · formalization · analysis · yields: operation]\n@purpose: \"design the minimal root-cause fix at the failure location, project its ripple, and apply it while refusing symptom treatments\"\n@genesis: transformation\nCONTRACT:\n  input:     hypothesis from NODE 3\n  transform: COMPOSE_ARTIFACT fix FROM hypothesis USING <the minimal edit at the failure location>; ANALYZE_CONTENT fix FOR <call sites, tests, invariants> INTO ripple; VALIDATE_ARTIFACT fix AGAINST {convention.symptom_patterns} INTO symptom_check; PERSIST_ARTIFACT fix TO <the failure location>\n  constraints: a design over {limits.max_fix_lines} signals a wrong or architectural hypothesis and returns to NODE 3; a symptom-pattern match is refused, never applied; the attempt count increments on apply\n  preserves: the baseline checkpoint\n  output:    applied_fix\nDECLARE applied_fix: object\nSET applied_fix = {edit: fix, location: <the failure location>, ripple: ripple, attempts: session.attempts + 1}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"FIX\"   yields: boolean\n  [check] the fix is minimal and at the failure location (evidence: the change and its location) over: changed files measured: <at the location> / <changed>\n  [check] the fix is within {limits.max_fix_lines} (evidence: the line count)\n  [check] no symptom-pattern treatment applied (evidence: symptom_check)\n  refuse: a symptom-pattern match, or a design over {limits.max_fix_lines}, before PERSIST_ARTIFACT\n  result: pass → NODE 5 | oversized → REPAIR (owner: NODE 3) | symptom → REPAIR (owner: NODE 3) | unknown → BLOCKED\n\n# NODE 5 — VERIFY   [evaluative · verification · logic + probability · yields: number]\n@purpose: \"gate the applied fix on admissibility, then prove broken-fixed and no-regression from real test execution, reverting on failure\"\n@genesis: constraint\n@mandatory\nCONTRACT:\n  input:     applied_fix from NODE 4\n  transform: EXECUTE_TOOL {toolchain.test.execute} WITH timeout: <bound> INTO results; CALCULATE_METRIC success score FROM results INTO score; ANALYZE_CONTENT results FOR <a regression in the working scenario> INTO refuter\n  constraints: admissible only when root-cause not symptom, within {limits.max_fix_lines}, and attempts within {limits.max_fix_attempts}; a score below {limits.min_success} restores the checkpoint and never leaves the fix in place\n  output:    validation\nDECLARE validation: object\nSET validation = {status: <fixed or reverted>, score: score, refuter: refuter, results: results}\nHANDOFF GATE (ver-stop gate):\n  rule_id: \"VERIFY\"   yields: boolean\n  [check] the broken scenario now passes and the working scenario did not regress (evidence: results from the real run) over: scenarios measured: <passing> / <scenarios>\n  [check] the success score meets {limits.min_success} (evidence: score against the limit)\n  [check] a regression refuter is named (evidence: validation.refuter)\n  [check] a failing fix restored the checkpoint (evidence: the restore, or no failure)\n  refuse: a test command that cannot run before EXECUTE_TOOL\n  standing: moved-set <the files changed since NODE 1>\n  result: pass → NODE 6 | reverted → REPAIR (owner: NODE 3) | attempts exhausted → BLOCKED | unknown → BLOCKED\n\n# REPAIR EDGE  (verify refutes back to the earliest node that can supply the missing evidence; at the attempt limit reflect, never iterate)\nCONTRACT:\n  input:     a reverted validation or a failed admissibility\n  transform: <restore the checkpoint; pivot to the next hypothesis at NODE 3 when one clears the bar, else to fresh evidence at NODE 2>; <at {limits.max_fix_attempts} record which assumption failed and REQUEST_DECISION the developer for reproduction context>\n  constraints: bounded by recursion_limit; every changed file reverts through the checkpoint\n  output:    a viable pivot, or a recorded reflection and a request for reproduction context\n\n# NODE 6 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]\n@purpose: \"persist the outcome deduplicated and emit exactly one terminal, fixed or blocked, stopping only on saturation and completion and verification\"\n@genesis: emergence\n@mandatory\nCONTRACT:\n  input:     validation from NODE 5\n  transform: COMPOSE_ARTIFACT report FROM {hypothesis, applied_fix, validation} USING <the fixed or blocked shape>; REDUCE <history entries> TO <one per bug, class, root cause and fix>; PERSIST_ARTIFACT report TO <{task_name} report>; REPORT_RESULT report TO <the parties whose next work it creates>\n  constraints: exactly one terminal; a self-assessed done is not ter-stop\n  output:    report\n  freshness: fingerprint(validation) + fingerprint(this document)\nHANDOFF GATE (ter-stop gate):\n  rule_id: \"TERMINATE\"   yields: boolean\n  [check] the outcome is persisted and history is deduplicated (evidence: the history read back) over: history entries measured: <distinct> / <entries>\n  [check] fixed holds only when saturation and completion and verification all hold (evidence: the termination set)\n  [check] exactly one terminal names the root cause or the blocking reason and reflection (evidence: report)\n  refuse: a report destination that changed since it was read before PERSIST_ARTIFACT\n  result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED\n\n# CROSS-NODE INVARIANTS\nINVARIANT baseline-first: a reversible checkpoint exists before any change over: every debug binds: the debugger objector: [check] a reversible baseline exists at NODE 1\nINVARIANT worth-before-trace: no lower-worth line is traced while a higher-worth line is untraced over: candidate lines binds: the debugger objector: [check] the selected line is the argmax at NODE 2\nINVARIANT confidence-before-hypothesis: no hypothesis forms below the trace-confidence and information-debt thresholds over: every hypothesis binds: the debugger objector: [check] tci and information debt cleared at NODE 3\nINVARIANT root-cause-only: a symptom treatment is refused, never applied over: every fix binds: the debugger objector: [check] no symptom-pattern treatment applied at NODE 4\nINVARIANT real-test-only: broken-fixed and no-regression are proven from a real run, never a plan over: every fix binds: the debugger objector: [check] the broken scenario now passes at NODE 5\nINVARIANT reflect-not-iterate: at the attempt limit the debugger reflects and blocks on the developer over: every repair binds: the debugger objector: [check] attempts within {limits.max_fix_attempts} at NODE 5\nINVARIANT no-regex-no-hardcode: matching is procedural and every taxonomy, threshold and command resolves from a slot over: every node binds: the debugger objector: none\n\nREPORT:\n  subject: NODE 6\n  verdict: pass | fail | unknown\n  domain: declared <scenarios> measured <passing>\n  populations: fix attempts <n>, hypotheses scored <n>, files changed <n>\n  refusals: <n> [<reason>]\n  unresolved: <n> [<reason>]\n  completion: saturated <bool> complete <bool> verified <bool>\n"
+}

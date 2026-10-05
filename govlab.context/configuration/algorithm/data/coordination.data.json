@@ -1,0 +1,168 @@
+{
+    "category": "coordination",
+    "tier": "process",
+    "check": {
+        "by": ["the coordination member's venue, archive and writer checks"],
+        "population": "every venue closure, run start, duplicate set and surface lifetime a coordination topology carries",
+        "freshness": "a verdict stands until a venue, a run declaration, a copy of a fact or a lifetime declaration changes",
+        "refusal": "the coordination checks refuse a venue closed without its outcome absorbed, a closure missing its extraction, and a writer outside the sanctioned set",
+        "observation": "each closure, run and copy compared against the declarations that govern it",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the declared schema and lifetime of each surface, which every closure, run and copy conforms to"
+    },
+    "records": [
+        {
+            "id": "convergence-walk",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "computation",
+            "yields": "procedure",
+            "principleRef": "independent-lifetime-axes",
+            "title": "Convergence Walk",
+            "exemplar": {
+                "before": "A discussion is closed once every party signs, so the ruling stands, the gate turns green and the change the ruling implied is never built.",
+                "after": "open with an exit condition → hold, failing the pipeline → sign, one own line per participant → close, outcome written to the surviving documents → absorb, a checklist with an owner per item that lands → archive, the venue moved with every position intact",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Take a venue from its opening to the archive in a fixed order, so the question of whether a decision is made and the question of whether it is built are answered by two surfaces.",
+            "invariant": "A venue leaves the active surface only once its outcome is absorbed, and it leaves by moving to the archive, never by deletion.",
+            "flow": [
+                "OpenVenue",
+                "HoldVenue",
+                "SignOutcome",
+                "CloseOutcome",
+                "AbsorbWork",
+                "ArchiveVenue"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConvergenceWalk",
+                    "rhs": "<OpenVenue> \"→\" <HoldVenue> \"→\" <SignOutcome> \"→\" <CloseOutcome> \"→\" <AbsorbWork> \"→\" <ArchiveVenue>"
+                },
+                {"lhs": "ArchiveVenue",
+                    "rhs": "\"moved_with_positions\""}
+            ],
+            "composes": [],
+            "force": [
+                "control_coordination",
+                "observability_traceability"
+            ]
+        },
+        {
+            "id": "invocation-join",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "principleRef": "read-time-join",
+            "title": "Invocation Join",
+            "exemplar": {
+                "before": "Every caller of a shared measurement starts its own run, so two runs over one question collide and each writes a report.",
+                "after": "caller → a live declared scope covers the question: join, read the published result and its standing, write nothing → none covers it: start, write the entry, then read the set → the earlier stamp proceeds, the other exits without writing",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Decide for each caller whether a live run already answers its question, joining by reading when one does and starting by declare-then-read ordering when none does.",
+            "invariant": "A joiner writes nothing and enters no collision comparison, and a starter writes its entry before it reads the set of live runs.",
+            "flow": [
+                "Caller",
+                "CoverageTest",
+                "JoinByRead",
+                "DeclareEntry",
+                "ReadLiveSet",
+                "StartVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "InvocationJoin",
+                    "rhs": "<Caller> \"→\" <CoverageTest> \"→\" <JoinByRead> \"|\" <DeclareEntry> \"→\" <ReadLiveSet> \"→\" <StartVerdict>"
+                },
+                {"lhs": "StartVerdict",
+                    "rhs": "\"proceed\" | \"yield\""}
+            ],
+            "composes": [],
+            "force": [
+                "control_coordination",
+                "state_transaction"
+            ]
+        },
+        {
+            "id": "duplicate-disposition-walk",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "principleRef": "period-decided-disposition",
+            "title": "Duplicate Disposition Walk",
+            "exemplar": {
+                "before": "A fact stated in several places is collapsed toward whichever copy looks authoritative, and the copies written once against an earlier state of the source are overwritten.",
+                "after": "enumerate every copy any consumer reaches → count the distinguished copies: one gives a direction, none refuses as a cycle, more than one refuses as undeclared → read each edge's period → deliver: add the copy the population is missing",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Walk a duplicated fact in order, enumerating its copies, counting the distinguished ones, reading each derivation edge's period, choosing the disposition and checking which consumer each copy reaches.",
+            "invariant": "A collapse follows only a direction exactly one distinguished copy supplies, and a copy across a one-shot edge is diagnosed rather than rewritten.",
+            "flow": [
+                "EnumerateCopies",
+                "CountDistinguished",
+                "ReadPeriods",
+                "ChooseDisposition",
+                "CheckDelivery"
+            ],
+            "productions": [
+                {
+                    "lhs": "DuplicateDispositionWalk",
+                    "rhs": "<EnumerateCopies> \"→\" <CountDistinguished> \"→\" <ReadPeriods> \"→\" <ChooseDisposition> \"→\" <CheckDelivery>"
+                },
+                {"lhs": "CountDistinguished",
+                    "rhs": "\"direction\" | \"cycle\" | \"undeclared\""},
+                {
+                    "lhs": "ChooseDisposition",
+                    "rhs": "\"nothing_owed\" | \"comparator_owed\" | \"diagnose_and_repair_source\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "lifetime-resolution",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "set-theory",
+            "yields": "set",
+            "principleRef": "independent-lifetime-axes",
+            "title": "Lifetime Resolution",
+            "exemplar": {
+                "before": "A mechanism decides what it may do to a surface from the shape of its path, so a retired surface under a working folder is swept like a live one.",
+                "after": "surface → the file's declared default on each axis → each section's declared divergence → the resolved retention, mutability and removal authority for the unit the operation targets → an undeclared surface stays undeclared",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Resolve the lifetime of the unit an operation targets from the file's declared default and the declared divergence of its section, reading each axis separately and never from the path.",
+            "invariant": "Every decision a mechanism takes about a surface resolves from a declared lifetime, and a surface that declares nothing is undeclared rather than defaulted.",
+            "flow": [
+                "Surface",
+                "FileDefault",
+                "SectionDivergence",
+                "ResolvedAxes"
+            ],
+            "productions": [
+                {
+                    "lhs": "LifetimeResolution",
+                    "rhs": "<Surface> \"→\" <FileDefault> \"→\" <SectionDivergence> \"→\" <ResolvedAxes>"
+                },
+                {"lhs": "ResolvedAxes",
+                    "rhs": "\"retention\" \",\" \"mutability\" \",\" \"removal_authority\""}
+            ],
+            "composes": [],
+            "force": [
+                "control_coordination",
+                "model_governance"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,4 @@
+{
+    "note": "The ONLY quality configs permitted to not derive from the SSOT emitters. Anything not SSOT-wired and not listed here is flagged by the config drift check in config.entrypoint.ts. Each entry states why it cannot be SSOT-emitted.",
+    "exceptions": []
+}

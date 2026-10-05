@@ -1,0 +1,36 @@
+{
+    "resolutions": [
+        {
+            "a": "duplicate-code",
+            "b": "Locality of Behavior",
+            "mechanism": "mitigation",
+            "scopeA": "structural-core",
+            "scopeB": "structural-core",
+            "rule": "Knowledge that means the same thing, such as a rule, a schema or a single source of truth, is centralized. Code that only looks alike stays local, because abstracting a coincidental similarity produces shared code with no shared meaning."
+        },
+        {
+            "a": "normalization",
+            "b": "Query Performance",
+            "mechanism": "scope-separation",
+            "scopeA": "contracts-core",
+            "scopeB": "performance-core",
+            "rule": "The source of truth is normalized into one canonical store with no duplication. Derived read models, or projections, are denormalized for query performance, and the canonical store never is, so the two live in separate scopes: the system of record and the read projection."
+        },
+        {
+            "a": "normalization",
+            "b": "Denormalized Read Models",
+            "mechanism": "scope-separation",
+            "scopeA": "contracts-core",
+            "scopeB": "performance-core",
+            "rule": "The canonical store is normalized, and only the read models rebuilt from it are denormalized. Normalization governs the write model and denormalization governs the read projection, so the two never compete over one store."
+        },
+        {
+            "a": "database-normalization",
+            "b": "Read Performance",
+            "mechanism": "scope-separation",
+            "scopeA": "contracts-core",
+            "scopeB": "performance-core",
+            "rule": "The canonical schema stays normalized. Read performance comes from derived, denormalized projections rebuilt from it, never from denormalizing the source of truth."
+        }
+    ]
+}

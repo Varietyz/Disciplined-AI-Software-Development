@@ -1,0 +1,16 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "customConditions": ["development"],
+        "lib": ["ESNext"],
+        "noUncheckedIndexedAccess": false,
+        "noPropertyAccessFromIndexSignature": false
+    },
+    "include": ["**/*.ts"],
+    "exclude": [
+        "**/node_modules",
+        "**/dist",
+        "**/build"
+    ]
+}

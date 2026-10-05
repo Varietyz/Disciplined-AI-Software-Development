@@ -1,0 +1,88 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../../LICENSE.",
+    "check": {
+        "by": [
+            "the template round-trip check, which fills the template and validates the result against the grammar",
+            "the slot check, which requires every declared slot to appear in the body and every slot in the body to be declared"
+        ],
+        "population": "this template's body and slots, and every document created from it",
+        "freshness": "a verdict stands until the template, its document type or the grammar changes",
+        "refusal": "the gate fails on a dangling slot, an unregistered type, or a filled template that does not validate",
+        "observation": "none: a template is static text, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a slot the body never carries and a template of an unregistered type, another plants a retired head in a real template, and every filled template validates clean",
+        "authority": "the template's document type and the grammar, which every document created from the template conforms to"
+    },
+    "type": "DISTILLATION",
+    "title": "Pattern Distillation Meta-Template (behavioral-evidence base + proven-elimination generator)",
+    "slots": [
+        {
+            "name": "project.architecture_registry",
+            "description": "the host architecture registry of existing bases and implementations",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "project.rule_sources",
+            "description": "the host architecture rule sources read at orientation",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "project.registry_regenerate",
+            "description": "the command that regenerates the architecture registry to the new truth",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.role_taxonomy",
+            "description": "the host's role-class taxonomy (manager/repository/handler/service/...)",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "limits.max_lines",
+            "description": "the maximum size of a composed base before it must be split",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "toolchain.verify.execute",
+            "description": "the blocking verifier that proves an anti-pattern is removed per target",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "task_description",
+            "description": "the distillation intent / scope",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "task_name",
+            "description": "kebab-case name for the output file",
+            "required": true,
+            "kind": "string"
+        }
+    ],
+    "constraints": [
+        "declaration_required",
+        "gate_per_node",
+        "contract_reads_prior_output",
+        "population_declared",
+        "refusal_before_write",
+        "invariant_has_objector",
+        "evidence_grounded",
+        "measure_baseline_before_propose",
+        "candidate_worth_ranked_impact_minus_effort",
+        "base_requires_behavioral_evidence_not_naming",
+        "boundary_principles_justify_the_base",
+        "migration_reversible_per_target",
+        "prove_on_simple_targets_first",
+        "base_within_size_limit",
+        "elimination_proven_over_whole_scope_from_source",
+        "registry_regenerated_to_new_truth",
+        "roi_measured_not_asserted",
+        "unknown_is_not_pass"
+    ],
+    "body": "---\nname: {task_name}\ntype: DISTILLATION\nversion: 1.0.0\n---\n\nTHIS DISTILLATION DISTILLS repeated behavioral evidence into one justified shared abstraction, and is incomplete until the old pattern is proven gone.\n\n%% META %%:\n    priority: BEHAVIORAL_EVIDENCE > BOUNDARY_PRINCIPLES > TASK\n    trust: procedural_scan = TRUSTED, naming_similarity = UNTRUSTED, prior_knowledge = UNTRUSTED\n    objective: {task_description}\n    jurisdiction: {task_description} across the role families {convention.role_taxonomy} names | external: every family the scope does not name\n    recursion_limit: 3\n\n# NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set]\n@purpose: \"load the registry and rule sources, probe capabilities, and measure the existing baseline before proposing any base\"\n@genesis: existence\nCONTRACT:\n  input:     {task_description}\n  transform: READ_RESOURCE {project.architecture_registry} INTO registry; READ_RESOURCE {project.rule_sources} INTO rules; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; EXTRACT_FACTS <existing bases, implementation counts, hierarchy depth> FROM registry INTO baseline; FOR EACH role IN {convention.role_taxonomy}: ANALYZE_CONTENT <its classes> AGAINST <the expected base> INTO gap\n  constraints: compare against existing bases before proposing a new one; a missing adoption is not a missing abstraction\n  output:    baseline_bundle\nDECLARE baseline_bundle: object\nSET baseline_bundle = {registry: registry, rules: rules, capability: capability, baseline: baseline, gap: <adoption versus abstraction per role>}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"ORIENT\"   yields: boolean\n  [check] the registry and rule sources are loaded with provenance (evidence: baseline_bundle.registry and rules)\n  [check] the existing architecture is measured (evidence: baseline_bundle.baseline) over: existing bases measured: <measured> / <bases>\n  [check] the compliance gap distinguishes adoption from abstraction (evidence: baseline_bundle.gap)\n  refuse: a probe that would mutate the tree before EXECUTE_TOOL\n  result: pass → NODE 2 | context unavailable → BLOCKED | unknown → BLOCKED\n\n# NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]\n@purpose: \"score every candidate anti-pattern by worth and gate on the highest-worth one and its highest-worth remediation before any composition\"\n@genesis: difference\n@mandatory\nCONTRACT:\n  input:     baseline_bundle from NODE 1\n  transform: EXTRACT_FACTS candidate anti-patterns FROM baseline_bundle.gap INTO candidates; FOR EACH candidate IN candidates: CALCULATE_METRIC impact minus effort FROM candidate INTO candidate.worth; FILTER candidates WHERE <not already covered by an existing base>; RANK candidates BY worth\n  constraints: the verdict create-base, prefer-composition, prefer-utility or reject-abstraction is a worth decision, never a reflex\n  output:    selected\nDECLARE selected: object\nSET selected = <the argmax admissible candidate with its remediation verdict, or a redirect to adopting an existing base>\nHANDOFF GATE (tel-priority injection-gate):\n  rule_id: \"INTENT\"   yields: boolean over ranking\n  [check] every candidate carries impact, effort and an admissibility verdict (evidence: candidates) over: candidates measured: <scored> / <candidates>\n  [check] the selected candidate is the argmax of impact minus effort among admissible ones (evidence: the ranking's first entry)\n  [check] no candidate already covered by an existing base is selected (evidence: the coverage filter)\n  result: pass → NODE 3 | none admissible → REPAIR (owner: NODE 1) | unknown → BLOCKED\n\n# NODE 3 — SIGN   [epistemic · analysis · graph · yields: edge-list + boolean]\n@purpose: \"sign each class's behavior from evidence, surface repeated structure and inconsistency, and reason to the boundary verdict\"\n@genesis: relation\nCONTRACT:\n  input:     selected from NODE 2\n  transform: FOR EACH class IN <the selected role family>: EXTRACT_FACTS <initialization, lifecycle, error handling, state, dependencies, orchestration> FROM class INTO signature; ANALYZE_CONTENT signatures FOR <repeated structure with occurrence counts and competing implementations> INTO patterns; ANALYZE_CONTENT patterns AGAINST <universal, invariant, foundational, enforcing, load-reducing, and domain coverage> INTO verdict\n  constraints: a base needs behavioral evidence, never naming similarity; without sufficient boundary principles the verdict is composition, utility or a local refactor\n  output:    boundary_verdict\nDECLARE boundary_verdict: object\nSET boundary_verdict = {signatures: signatures, patterns: patterns, verdict: verdict}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"SIGN\"   yields: boolean\n  [check] every class in the family is signed from evidence, not names (evidence: signatures) over: the family measured: <signed> / <classes>\n  [check] repeated structure and inconsistency are surfaced with counts (evidence: patterns)\n  [check] a base verdict rests on sufficient boundary principles and coverage (evidence: boundary_verdict.verdict)\n  result: pass → NODE 4 | insufficient boundary → REPAIR (owner: NODE 2) | unknown → BLOCKED\n\n# NODE 4 — COMPOSE AND MIGRATE   [epistemic · formalization · computation · yields: procedure]\n@purpose: \"split concrete from abstract, design the template-method lifecycle, compose the base within limits, and migrate targets simple-first and reversibly\"\n@genesis: structure\nCONTRACT:\n  input:     boundary_verdict from NODE 3\n  transform: COMPOSE_ARTIFACT base FROM boundary_verdict USING <concrete constructor, initialize, destroy, handle-error and dependency setup; abstract on-initialize, on-destroy, on-error, configure and execute-core; guard then shared then hook then error policy>; ORDER targets BY ascending complexity then dependency; FOR EACH target IN targets: PERSIST_ARTIFACT <a checkpoint> TO <the checkpoint store>; PERSIST_ARTIFACT <the migrated target> TO target; EXECUTE_TOOL {toolchain.verify.execute} WITH timeout: <bound> INTO removal\n  constraints: a base over {limits.max_lines} is split; a failed migration restores its checkpoint; a base whose boundary collapsed or that blew the effort budget is inadmissible\n  preserves: every behavior signed at NODE 3\n  output:    migration\nDECLARE migration: object\nSET migration = {base: base, targets: <each with checkpoint, outcome and removal verdict>, admissible: <boundary still sufficient, size within limit, effort within budget, every target reversible>}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"COMPOSE\"   yields: boolean\n  [check] concrete and abstract responsibilities are split and the lifecycle is defined (evidence: base)\n  [check] the base is within {limits.max_lines} with a compliant name and location (evidence: the base's size and path)\n  [check] every target migrated or restored from its checkpoint (evidence: migration.targets) over: targets measured: <migrated> / <targets>\n  [check] the base is admissible (evidence: migration.admissible)\n  refuse: a target whose checkpoint cannot be read back before PERSIST_ARTIFACT\n  result: pass → NODE 5 | inadmissible → REPAIR (owner: NODE 3) | unknown → BLOCKED\n\n# NODE 5 — ELIMINATE   [evaluative · verification · logic + probability · yields: number]\n@purpose: \"prove the old pattern is eliminated across the whole scope from real source, and migrate any straggler reversibly\"\n@genesis: constraint\n@mandatory\nCONTRACT:\n  input:     migration from NODE 4\n  transform: SEARCH_CONTENT <the whole scope> FOR <the old pattern> INTO occurrences; FILTER occurrences WHERE <outside the approved base locations>; CALCULATE_METRIC completeness FROM occurrences INTO completeness; ANALYZE_CONTENT occurrences FOR <a stray occurrence that would refute elimination> INTO refuter\n  constraints: the scan reads real source, never the migration log; a stray occurrence refutes back to NODE 4, bounded by recursion_limit\n  output:    elimination\nDECLARE elimination: object\nSET elimination = {occurrences: occurrences, completeness: completeness, refuter: refuter}\nHANDOFF GATE (ver-stop gate):\n  rule_id: \"ELIMINATE\"   yields: boolean\n  [check] the scan ran over the whole scope from real source (evidence: the scanned file set) over: the scope measured: <scanned> / <files>\n  [check] only approved base-location occurrences remain (evidence: elimination.occurrences)\n  [check] a refuter is named and completeness meets its threshold (evidence: elimination.refuter and completeness)\n  standing: moved-set <the files changed since NODE 4>\n  result: pass → NODE 6 | stray occurrence → REPAIR (owner: NODE 4) | unknown → BLOCKED\n\n# NODE 6 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]\n@purpose: \"regenerate the registry to the new truth, persist measured ROI deduplicated, and stop only on saturation and completion and verification\"\n@genesis: emergence\n@mandatory\nCONTRACT:\n  input:     elimination from NODE 5\n  transform: EXECUTE_TOOL {project.registry_regenerate} WITH timeout: <bound> INTO regenerated; READ_RESOURCE {project.architecture_registry} INTO registry_after; CALCULATE_METRIC <duplication, code, adoption, lines saved, load> FROM {baseline_bundle, migration, registry_after} INTO roi; COMPOSE_ARTIFACT report FROM {migration, elimination, roi} USING <the success or blocked shape>; PERSIST_ARTIFACT report TO <{task_name} report>; REPORT_RESULT report TO <the parties whose next work it creates>\n  constraints: ROI is measured, never asserted; the registry reflects the new base and the migrated implementations; a self-assessed done is not ter-stop\n  output:    report\n  freshness: fingerprint(registry_after) + fingerprint(this document)\nHANDOFF GATE (ter-stop gate):\n  rule_id: \"TERMINATE\"   yields: boolean\n  [check] the registry is regenerated and reflects the new truth (evidence: registry_after names the base and the migrated implementations) over: migrated implementations measured: <represented> / <migrated>\n  [check] ROI is computed from measurements and history is persisted deduplicated (evidence: roi and the history read back)\n  [check] success only when saturation and completion and verification all hold (evidence: the termination set)\n  refuse: a report destination that changed since it was read before PERSIST_ARTIFACT\n  result: pass → TERMINATE | registry stale → REPAIR (owner: NODE 6) | unknown → BLOCKED\n\n# CROSS-NODE INVARIANTS\nINVARIANT measure-before-propose: the existing baseline is measured before any base is proposed over: every distillation binds: the distiller objector: [check] the existing architecture is measured at NODE 1\nINVARIANT worth-before-base: the selected candidate is the highest-worth admissible one over: candidates binds: the distiller objector: [check] the selected candidate is the argmax at NODE 2\nINVARIANT evidence-not-names: a base rests on behavioral evidence, never on naming similarity over: every base binds: the distiller objector: [check] every class is signed from evidence at NODE 3\nINVARIANT reversible-migration: every target migrates through a checkpoint and restores on failure over: targets binds: the distiller objector: [check] every target migrated or restored at NODE 4\nINVARIANT gone-means-scanned: elimination is proven over the whole scope from real source over: the scope binds: the distiller objector: [check] the scan ran over the whole scope at NODE 5\nINVARIANT roi-measured: ROI is a measurement over the regenerated registry, never an assertion over: every report binds: the distiller objector: [check] ROI is computed from measurements at NODE 6\n\nREPORT:\n  subject: NODE 6\n  verdict: pass | fail | unknown\n  domain: declared <files in scope> measured <scanned>\n  populations: targets migrated <n>, targets restored <n>, occurrences remaining <n>\n  refusals: <n> [<reason>]\n  unresolved: <n> [<reason>]\n  completion: saturated <bool> complete <bool> verified <bool>\n"
+}

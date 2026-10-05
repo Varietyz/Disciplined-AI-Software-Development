@@ -32,16 +32,16 @@ A1·a two channels
 
 ```mermaid
 flowchart TB
-developer["The developer"]
-model["The model"]
-tree["The tree"]
-developer -- what the work is for, what finished means --> model
-developer -- a correction, brief, once --> model
-model -- the shape of the work --> tree
-model -- a question through one channel, recommendation first --> developer
-model -- the correction hardened into a rule and a memory --> tree
-tree -- read whole, every session --> model
-developer -. calls the stop .-> model
+    developer["The developer"]
+    model["The model"]
+    tree["The tree"]
+    developer -- what the work is for, what finished means --> model
+    developer -- a correction, brief, once --> model
+    model -- the shape of the work --> tree
+    model -- a question through one channel, recommendation first --> developer
+    model -- the correction hardened into a rule and a memory --> tree
+    tree -- read whole, every session --> model
+    developer -. calls the stop .-> model
 ```
 
 ## Agents as executed contracts
@@ -66,32 +66,32 @@ B1·a a verifying agent
 
 ```mermaid
 flowchart TB
-anchor["Disclose the trust anchor · what is assumed and cannot be verified"]
-phase["Bind to one phase · investigate discovers and never fixes, action fixes and never discovers"]
-rank["Rank the claims by verification worth"]
-calibrate["Calibrate every detector · a known-good it must match, a known-bad it must not"]
-resolve["Resolve each claim to the observation that would settle it"]
-gather["Gather from the implementation · never infer"]
-admissible["Check the phase was honored"]
-verify["Classify each claim · verified, contradicted, unverified"]
-audit["Audit the agent's own contract · an overclaim lowers its confidence"]
-artifact["Emit exactly one typed artifact"]
-anchor --> phase --> rank --> calibrate --> resolve --> gather --> admissible --> verify --> audit --> artifact
-verify -. refuted or escalated, bounded .-> resolve
+    anchor["Disclose the trust anchor · what is assumed and cannot be verified"]
+    phase["Bind to one phase · investigate discovers and never fixes, action fixes and never discovers"]
+    rank["Rank the claims by verification worth"]
+    calibrate["Calibrate every detector · a known-good it must match, a known-bad it must not"]
+    resolve["Resolve each claim to the observation that would settle it"]
+    gather["Gather from the implementation · never infer"]
+    admissible["Check the phase was honored"]
+    verify["Classify each claim · verified, contradicted, unverified"]
+    audit["Audit the agent's own contract · an overclaim lowers its confidence"]
+    artifact["Emit exactly one typed artifact"]
+    anchor --> phase --> rank --> calibrate --> resolve --> gather --> admissible --> verify --> audit --> artifact
+    verify -. refuted or escalated, bounded .-> resolve
 ```
 
 B1·b making an agent
 
 ```mermaid
 flowchart TB
-evidence["Inspected domain evidence"]
-contract["A portable contract · semantic operations and slots, no runtime"]
-adapter["An adapter renders it for one runtime"]
-grounded{"Grounded, embodied, no leakage?"}
-persisted["Persisted, with its participation declared in the body"]
-evidence --> contract --> adapter --> grounded
-grounded -- yes --> persisted
-grounded -- no --> contract
+    evidence["Inspected domain evidence"]
+    contract["A portable contract · semantic operations and slots, no runtime"]
+    adapter["An adapter renders it for one runtime"]
+    grounded{"Grounded, embodied, no leakage?"}
+    persisted["Persisted, with its participation declared in the body"]
+    evidence --> contract --> adapter --> grounded
+    grounded -- yes --> persisted
+    grounded -- no --> contract
 ```
 
 ## Coordination is software
@@ -124,46 +124,46 @@ C1·a the model
 
 ```mermaid
 flowchart TB
-subgraph surface["A surface · a file the parties read and write"]
-r1["Record · one writer, declared on the record"]
-r2["Record · one writer"]
-r3["Record · one writer"]
-end
-artifact["An artifact in the tree"]
-other["A record on another surface"]
-r1 -- satisfied-by · closes when the artifact exists --> artifact
-r2 -- blocks · the target cannot close first --> r3
-r3 -- answers · refutes · supersedes --> other
-state["Every record state is a query over these edges · no party writes one"]
-surface -.-> state
+    subgraph surface["A surface · a file the parties read and write"]
+        r1["Record · one writer, declared on the record"]
+        r2["Record · one writer"]
+        r3["Record · one writer"]
+    end
+    artifact["An artifact in the tree"]
+    other["A record on another surface"]
+    r1 -- satisfied-by · closes when the artifact exists --> artifact
+    r2 -- blocks · the target cannot close first --> r3
+    r3 -- answers · refutes · supersedes --> other
+    state["Every record state is a query over these edges · no party writes one"]
+    surface -.-> state
 ```
 
 C1·b a seat's making
 
 ```mermaid
 flowchart TB
-claim["A letter is claimed by adding a row to the index, before the first write"]
-allocated["The identity is allocated · the shortest free one, never reused"]
-role["A role document at the concern, the letter in a field"]
-record["A fenced record on the board, raised from the template"]
-state["One mutable column · active, inactive, invoked · a seat moves only its own row"]
-claim --> allocated --> role --> record
-claim -.-> state
+    claim["A letter is claimed by adding a row to the index, before the first write"]
+    allocated["The identity is allocated · the shortest free one, never reused"]
+    role["A role document at the concern, the letter in a field"]
+    record["A fenced record on the board, raised from the template"]
+    state["One mutable column · active, inactive, invoked · a seat moves only its own row"]
+    claim --> allocated --> role --> record
+    claim -.-> state
 ```
 
 C1·c reader classes
 
 ```mermaid
 flowchart TB
-participant["A participant · holds a seat"]
-owns["Receives the surfaces it owns and its inbox"]
-waits["Ends never · it waits, and waiting has a command"]
-bounded["A bounded reader · a spawned run"]
-injected["Receives a task and whatever the host injects · never a coordination surface"]
-projection["One derived line is its whole view of the graph"]
-returns["Ends by returning · which is its contract"]
-participant --> owns --> waits
-bounded --> injected --> projection --> returns
+    participant["A participant · holds a seat"]
+    owns["Receives the surfaces it owns and its inbox"]
+    waits["Ends never · it waits, and waiting has a command"]
+    bounded["A bounded reader · a spawned run"]
+    injected["Receives a task and whatever the host injects · never a coordination surface"]
+    projection["One derived line is its whole view of the graph"]
+    returns["Ends by returning · which is its contract"]
+    participant --> owns --> waits
+    bounded --> injected --> projection --> returns
 ```
 
 ## The board and the venue
@@ -182,7 +182,7 @@ To check this, read the board for an item that argues rather than states, and re
 
 The delimiter is not decoration. A seat revising its own record needs a span it can match exactly, one that no other seat's content occupies. Without it, the only thing left to match is the whole file, so the seat reaches for a whole-file write, which succeeds, reports success to the party that overwrote, and says nothing to the party that was overwritten. A template that has to contain a record shape in order to describe one fences the specimen, because a fenced specimen is a record mentioned, while an unfenced one is a record claimed; this is the confusion between use and mention, appearing on the write side.
 
-An item's kind sits on its marker and selects its closure, which the grammar page describes as [handoff signals](pag/ORCHESTRATION.md#handoff-signals): typed items with closures that can be checked. An artifact item asks for something that can exist, so it closes with a typed reference that has to resolve. A reference whose kind names no corpus would resolve vacuously and read exactly like one that passed, which is why the set of kinds is closed. A judgement item asks for a reading, so it closes when its declared acknowledger signs it off, with no reference, because there is nothing for a reference to point at; the acknowledger is required or forbidden by kind rather than optional. An artifact item that carries nothing durable closes with a reference declared empty, and the tool then publishes the classes already filed, so declaring nothing durable becomes a lookup a peer can contest rather than an oversight that stays invisible.
+An item's kind sits on its marker and selects its closure, which the grammar page describes as [handoff signals](pag/ORCHESTRATION.md#handoff-signals): typed items with closures that can be checked. An artifact item asks for something that can exist, so it closes with a typed reference that has to resolve. A reference whose kind names no corpus would resolve vacuously and read exactly like one that passed, which is why the set of kinds is closed. A judgment item asks for a reading, so it closes when its declared acknowledger signs it off, with no reference, because there is nothing for a reference to point at; the acknowledger is required or forbidden by kind rather than optional. An artifact item that carries nothing durable closes with a reference declared empty, and the tool then publishes the classes already filed, so declaring nothing durable becomes a lookup a peer can contest rather than an oversight that stays invisible.
 
 The sweep is the mechanical drain, and it is gated on delivery: an item is a message on a [message queue](ontology/PRINCIPLES.md#architecture-message-queue) whose consumers are named, and it leaves the queue once every consumer has taken delivery. On every write, the tool sweeps the items that every addressee has both written after and been handed in a delivered read, extracting each one whole into the accumulator before removing it. It holds any item an addressee has not received, because having written after an item says something about that party's writing and nothing about its reading. Durability and delivery are independent, and archiving an item that no addressee received preserves the first while destroying the second. An argument is refused on the swept surface by its shape: a body carrying the declared fields of a position, derived from the venue template rather than listed, is turned back with the instruction to name the venue.
 
@@ -202,41 +202,41 @@ D1·a two surfaces
 
 ```mermaid
 flowchart TB
-subgraph board["The board · current truth only"]
-b1["Who owns what · what is directed at whom"]
-b2["Swept · a resolved item is deleted, never marked"]
-b3["Read whole, every round"]
-end
-subgraph venue["The venue · an argument"]
-v1["Where each seat stands · what it still needs"]
-v2["Accumulates until it converges · dissent survives"]
-v3["Holds the build while open · that red is intended"]
-end
-transport["One transport · fenced records, tool-allocated ids, compare-and-swap"]
-board -.-> transport
-venue -.-> transport
-venue -- converged, absorbed, then archived whole --> archive["The archive · the reasoning survives"]
-board -- absorbed items extract first --> history["The history accumulator · the only home history has"]
+    subgraph board["The board · current truth only"]
+        b1["Who owns what · what is directed at whom"]
+        b2["Swept · a resolved item is deleted, never marked"]
+        b3["Read whole, every round"]
+    end
+    subgraph venue["The venue · an argument"]
+        v1["Where each seat stands · what it still needs"]
+        v2["Accumulates until it converges · dissent survives"]
+        v3["Holds the build while open · that red is intended"]
+    end
+    transport["One transport · fenced records, tool-allocated ids, compare-and-swap"]
+    board -.-> transport
+    venue -.-> transport
+    venue -- converged, absorbed, then archived whole --> archive["The archive · the reasoning survives"]
+    board -- absorbed items extract first --> history["The history accumulator · the only home history has"]
 ```
 
 D1·b an item's closure
 
 ```mermaid
 flowchart TB
-posted["An item is posted · a fenced span, an allocated id, a kind, a stamp, its addressees"]
-kind{"Which kind?"}
-artifact["Artifact · asks for something that can exist"]
-judgement["Judgement · asks for a reading"]
-ref["Closes with a typed reference that must resolve"]
-ack["Closes by its acknowledger, with no reference"]
-handler["Closed by a seat in its reader set · never its author"]
-ledger["Held while a named recipient has not marked it read"]
-extract["Its durable half extracted to the accumulator first"]
-dropped["The span is dropped, never a matched line"]
-posted --> kind
-kind -- artifact --> artifact --> ref --> handler
-kind -- judgement --> judgement --> ack --> handler
-handler --> ledger --> extract --> dropped
+    posted["An item is posted · a fenced span, an allocated id, a kind, a stamp, its addressees"]
+    kind{"Which kind?"}
+    artifact["Artifact · asks for something that can exist"]
+    judgment["Judgment · asks for a reading"]
+    ref["Closes with a typed reference that must resolve"]
+    ack["Closes by its acknowledger, with no reference"]
+    handler["Closed by a seat in its reader set · never its author"]
+    ledger["Held while a named recipient has not marked it read"]
+    extract["Its durable half extracted to the accumulator first"]
+    dropped["The span is dropped, never a matched line"]
+    posted --> kind
+    kind -- artifact --> artifact --> ref --> handler
+    kind -- judgment --> judgment --> ack --> handler
+    handler --> ledger --> extract --> dropped
 ```
 
 D1·c a seat's record
@@ -244,32 +244,97 @@ D1·c a seat's record
 ```text
 ┌─── <record> <seat> ─── one writer: <seat> · others cite, never edit · a span edit only, never a whole-file write
 <seat> — <state from the closed set>
-<field>:   <the concerns this seat claims, by concern and never by directory>
-<field>:   <the current unit and its state>
-<field>:
-┌─── <item> <seat>-<allocated id> ─── kind:<artifact | judgement> at:<stamp> to:<seats | *>
-To <seat> — the argument, across as many lines as it needs.
-└─── END <item> <seat>-<allocated id>
-<field>:   <typed pointers, each naming a declared kind>
+  <field>:   <the concerns this seat claims, by concern and never by directory>
+  <field>:   <the current unit and its state>
+  <field>:
+             ┌─── <item> <seat>-<allocated id> ─── kind:<artifact | judgment> at:<stamp> to:<seats | *>
+             To <seat> — the argument, across as many lines as it needs.
+             └─── END <item> <seat>-<allocated id>
+  <field>:   <typed pointers, each naming a declared kind>
 └─── END <record> <seat>
 ```
 
 D1·d a venue receiving positions
 
+```text
+$ npm run await -- --agent A --file retries-have-one-home.1.blocking.md --item-file position-a.md --kind judgment --no-wait
+ITEM  A-1 was added to coordination/retries-have-one-home.1.blocking.md.
+  kind:judgment — it asks for a reading, so an addressee closes it by acknowledging it, with no reference. If that does not describe what you wrote, change the kind on the item's marker.
+YOUR CLAIM ON coordination/collab.comms.active, shown because you just wrote elsewhere:
+  Status: —
+  Flags: —
+  Every seat reads the board each round, so correct any field that describes work you have moved past.
+OPEN VENUES, listed from the venue folder and each venue's roster:
+  coordination/retries-have-one-home.1.blocking.md (the surface you are writing to)
+  Arguments go to a venue, not to the board.
+YOUR RECORD ON coordination/retries-have-one-home.1.blocking.md, shown because these fields decide when the venue can close:
+  Needs: empty (write `—` if there is nothing to state)
+  Durable: empty (write `—` if there is nothing to state)
+  Convergence reads them for every active seat, so correct any that describe work you have moved past.
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+SINCE A LAST LOOKED  9 changed line(s)
+  + ┌─── AGENT A-1 ─── kind:judgment at:1791148930082 to:*
+  + Position A1 — The retry limit moves into the settings file.
+  + Axis: Where the retry limit lives.
+  + Evidence: client.ts and worker.ts each set their own limit.
+  + Proposes: One retry.limit setting that both files read.
+  + Costs: Both call sites change in one step.
+  + Contradicts:
+  + Signed: A
+  + └─── END AGENT A-1
+
+$ npm run await -- --agent B --file retries-have-one-home.1.blocking.md --item-file position-b.md --kind judgment --no-wait
+ITEM  B-1 was added to coordination/retries-have-one-home.1.blocking.md.
+  kind:judgment — it asks for a reading, so an addressee closes it by acknowledging it, with no reference. If that does not describe what you wrote, change the kind on the item's marker.
+WRITTEN AGAINST AN OLDER READ  1 item(s) from A landed on coordination/retries-have-one-home.1.blocking.md between your last read and this write, over 0s: A-1
+  Read them before relying on anything you stated about this surface; your statements were based on the earlier read.
+YOUR CLAIM ON coordination/collab.comms.active, shown because you just wrote elsewhere:
+  Status: —
+  Flags: —
+  Every seat reads the board each round, so correct any field that describes work you have moved past.
+OPEN VENUES, listed from the venue folder and each venue's roster:
+  coordination/retries-have-one-home.1.blocking.md (the surface you are writing to)
+  Arguments go to a venue, not to the board.
+YOUR RECORD ON coordination/retries-have-one-home.1.blocking.md, shown because these fields decide when the venue can close:
+  Needs: empty (write `—` if there is nothing to state)
+  Durable: empty (write `—` if there is nothing to state)
+  Convergence reads them for every active seat, so correct any that describe work you have moved past.
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+SINCE B LAST LOOKED  18 changed line(s)
+  + ┌─── AGENT A-1 ─── kind:judgment at:1791148930082 to:*
+  + Position A1 — The retry limit moves into the settings file.
+  + Axis: Where the retry limit lives.
+  + Evidence: client.ts and worker.ts each set their own limit.
+  + Proposes: One retry.limit setting that both files read.
+  + Costs: Both call sites change in one step.
+  + Contradicts:
+  + Signed: A
+  + └─── END AGENT A-1
+  + ┌─── AGENT B-1 ─── kind:judgment at:1791148931513 to:*
+  + Position B1 — The worker keeps its own limit.
+  + Axis: Where the retry limit lives.
+  + Evidence: The worker retries a queue, and the client retries a request.
+  + Proposes: Two settings, one for each caller.
+  + Costs: Two values to keep in step.
+  + Contradicts: A-1
+  + Signed: B
+  + └─── END AGENT B-1
+```
+
 D1·e convergence
 
 ```mermaid
 flowchart TB
-open["Open · the venue declares its own exit condition and holds the build"]
-needs["Every convened seat states its needs"]
-signed["Every convened seat has signed · a signature with an open need is refused"]
-durable["Every seat's durable half resolves in the accumulator"]
-deferred["Every deferred question has a destination that resolves"]
-directives["Every directive is discharged"]
-absorbed["The outcome is absorbed · the distribution checklist carries no open item"]
-inherited["Every clause the successor inherits was deferred here"]
-archive["Moved whole into the archive · never deleted"]
-open --> needs --> signed --> durable --> deferred --> directives --> absorbed --> inherited --> archive
+    open["Open · the venue declares its own exit condition and holds the build"]
+    needs["Every convened seat states its needs"]
+    signed["Every convened seat has signed · a signature with an open need is refused"]
+    durable["Every seat's durable half resolves in the accumulator"]
+    deferred["Every deferred question has a destination that resolves"]
+    directives["Every directive is discharged"]
+    absorbed["The outcome is absorbed · the distribution checklist carries no open item"]
+    inherited["Every clause the successor inherits was deferred here"]
+    archive["Moved whole into the archive · never deleted"]
+    open --> needs --> signed --> durable --> deferred --> directives --> absorbed --> inherited --> archive
 ```
 
 D1·f a venue schedule
@@ -349,61 +414,180 @@ E1·a one invocation
 
 ```mermaid
 flowchart TB
-invoke["One invocation · the seat declared, the surface named"]
-check["Every operand of every requested operation is checked before any lands"]
-witness["A witness read immediately before the write"]
-moved{"Did the surface move since the read?"}
-span{"Does the change overlap this seat's own span?"}
-replay["Replay · the writes commute"]
-refuse["Refuse · carrying the diff of that span"]
-land["Land inside the seat's own fence"]
-sweep["Sweep · items every addressee has written past and been handed, extracted whole"]
-echo["Echo the seat's own claim, the items it can close, the open discussions"]
-snapshot["Re-snapshot for this seat · the next call reports only what changed"]
-invoke --> check --> witness --> moved
-moved -- no --> land
-moved -- yes --> span
-span -- no --> replay --> land
-span -- yes --> refuse
-land --> sweep --> echo --> snapshot
+    invoke["One invocation · the seat declared, the surface named"]
+    check["Every operand of every requested operation is checked before any lands"]
+    witness["A witness read immediately before the write"]
+    moved{"Did the surface move since the read?"}
+    span{"Does the change overlap this seat's own span?"}
+    replay["Replay · the writes commute"]
+    refuse["Refuse · carrying the diff of that span"]
+    land["Land inside the seat's own fence"]
+    sweep["Sweep · items every addressee has written past and been handed, extracted whole"]
+    echo["Echo the seat's own claim, the items it can close, the open discussions"]
+    snapshot["Re-snapshot for this seat · the next call reports only what changed"]
+    invoke --> check --> witness --> moved
+    moved -- no --> land
+    moved -- yes --> span
+    span -- no --> replay --> land
+    span -- yes --> refuse
+    land --> sweep --> echo --> snapshot
 ```
 
 E1·b a seat's next delivery
 
+```text
+$ npm run await -- --agent B --file retries-have-one-home.1.blocking.md --item-file position-b.md --kind judgment --no-wait
+ITEM  B-1 was added to coordination/retries-have-one-home.1.blocking.md.
+  kind:judgment — it asks for a reading, so an addressee closes it by acknowledging it, with no reference. If that does not describe what you wrote, change the kind on the item's marker.
+WRITTEN AGAINST AN OLDER READ  1 item(s) from A landed on coordination/retries-have-one-home.1.blocking.md between your last read and this write, over 0s: A-1
+  Read them before relying on anything you stated about this surface; your statements were based on the earlier read.
+YOUR CLAIM ON coordination/collab.comms.active, shown because you just wrote elsewhere:
+  Status: —
+  Flags: —
+  Every seat reads the board each round, so correct any field that describes work you have moved past.
+OPEN VENUES, listed from the venue folder and each venue's roster:
+  coordination/retries-have-one-home.1.blocking.md (the surface you are writing to)
+  Arguments go to a venue, not to the board.
+YOUR RECORD ON coordination/retries-have-one-home.1.blocking.md, shown because these fields decide when the venue can close:
+  Needs: empty (write `—` if there is nothing to state)
+  Durable: empty (write `—` if there is nothing to state)
+  Convergence reads them for every active seat, so correct any that describe work you have moved past.
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+SINCE B LAST LOOKED  18 changed line(s)
+  + ┌─── AGENT A-1 ─── kind:judgment at:1791148930082 to:*
+  + Position A1 — The retry limit moves into the settings file.
+  + Axis: Where the retry limit lives.
+  + Evidence: client.ts and worker.ts each set their own limit.
+  + Proposes: One retry.limit setting that both files read.
+  + Costs: Both call sites change in one step.
+  + Contradicts:
+  + Signed: A
+  + └─── END AGENT A-1
+  + ┌─── AGENT B-1 ─── kind:judgment at:1791148931513 to:*
+  + Position B1 — The worker keeps its own limit.
+  + Axis: Where the retry limit lives.
+  + Evidence: The worker retries a queue, and the client retries a request.
+  + Proposes: Two settings, one for each caller.
+  + Costs: Two values to keep in step.
+  + Contradicts: A-1
+  + Signed: B
+  + └─── END AGENT B-1
+
+$ npm run await -- --agent A --file retries-have-one-home.1.blocking.md --no-wait
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+SINCE A LAST LOOKED  9 changed line(s)
+  + Axis: Where the retry limit lives.
+  + ┌─── AGENT B-1 ─── kind:judgment at:1791148931513 to:*
+  + Position B1 — The worker keeps its own limit.
+  + Evidence: The worker retries a queue, and the client retries a request.
+  + Proposes: Two settings, one for each caller.
+  + Costs: Two values to keep in step.
+  + Contradicts: A-1
+  + Signed: B
+  + └─── END AGENT B-1
+```
+
 E1·c a wait resolving
+
+```text
+$ npm run await -- --agent C --file retries-have-one-home.1.blocking.md
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+WATCHING  coordination/retries-have-one-home.1.blocking.md for up to 3600s (1 of 3 able to write are waiting).
+
+$ npm run await -- --agent B --file retries-have-one-home.1.blocking.md --item-file position-b.md --kind judgment --no-wait
+ITEM  B-1 was added to coordination/retries-have-one-home.1.blocking.md.
+  kind:judgment — it asks for a reading, so an addressee closes it by acknowledging it, with no reference. If that does not describe what you wrote, change the kind on the item's marker.
+WRITTEN AGAINST AN OLDER READ  1 item(s) from A landed on coordination/retries-have-one-home.1.blocking.md between your last read and this write, over 0s: A-1
+  Read them before relying on anything you stated about this surface; your statements were based on the earlier read.
+YOUR CLAIM ON coordination/collab.comms.active, shown because you just wrote elsewhere:
+  Status: —
+  Flags: —
+  Every seat reads the board each round, so correct any field that describes work you have moved past.
+OPEN VENUES, listed from the venue folder and each venue's roster:
+  coordination/retries-have-one-home.1.blocking.md (the surface you are writing to)
+  Arguments go to a venue, not to the board.
+YOUR RECORD ON coordination/retries-have-one-home.1.blocking.md, shown because these fields decide when the venue can close:
+  Needs: empty (write `—` if there is nothing to state)
+  Durable: empty (write `—` if there is nothing to state)
+  Convergence reads them for every active seat, so correct any that describe work you have moved past.
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+SINCE B LAST LOOKED  18 changed line(s)
+  + ┌─── AGENT A-1 ─── kind:judgment at:1791148930082 to:*
+  + Position A1 — The retry limit moves into the settings file.
+  + Axis: Where the retry limit lives.
+  + Evidence: client.ts and worker.ts each set their own limit.
+  + Proposes: One retry.limit setting that both files read.
+  + Costs: Both call sites change in one step.
+  + Contradicts:
+  + Signed: A
+  + └─── END AGENT A-1
+  + ┌─── AGENT B-1 ─── kind:judgment at:1791148931513 to:*
+  + Position B1 — The worker keeps its own limit.
+  + Axis: Where the retry limit lives.
+  + Evidence: The worker retries a queue, and the client retries a request.
+  + Proposes: Two settings, one for each caller.
+  + Costs: Two values to keep in step.
+  + Contradicts: A-1
+  + Signed: B
+  + └─── END AGENT B-1
+
+$ npm run await -- --agent C --file retries-have-one-home.1.blocking.md
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+WATCHING  coordination/retries-have-one-home.1.blocking.md for up to 3600s (1 of 3 able to write are waiting).
+CHANGED  coordination/retries-have-one-home.1.blocking.md was updated after 2s.
+SINCE C LAST LOOKED  18 changed line(s)
+  + ┌─── AGENT A-1 ─── kind:judgment at:1791148930082 to:*
+  + Position A1 — The retry limit moves into the settings file.
+  + Axis: Where the retry limit lives.
+  + Evidence: client.ts and worker.ts each set their own limit.
+  + Proposes: One retry.limit setting that both files read.
+  + Costs: Both call sites change in one step.
+  + Contradicts:
+  + Signed: A
+  + └─── END AGENT A-1
+  + ┌─── AGENT B-1 ─── kind:judgment at:1791148931513 to:*
+  + Position B1 — The worker keeps its own limit.
+  + Axis: Where the retry limit lives.
+  + Evidence: The worker retries a queue, and the client retries a request.
+  + Proposes: Two settings, one for each caller.
+  + Costs: Two values to keep in step.
+  + Contradicts: A-1
+  + Signed: B
+  + └─── END AGENT B-1
+```
 
 E1·d the wait cap
 
 ```mermaid
 flowchart TB
-able["Seats able to write · parked, running a live claim, or active inside the liveness window"]
-waiting["Seats already parked"]
-cap{"Would this wait leave no seat able to write?"}
-blocked["Blocked · write first, the board owes a response"]
-watch["Watch the surface · changed with the diff, quiet after the window, removed if deleted"]
-able --> cap
-waiting --> cap
-cap -- yes --> blocked
-cap -- no --> watch
+    able["Seats able to write · parked, running a live claim, or active inside the liveness window"]
+    waiting["Seats already parked"]
+    cap{"Would this wait leave no seat able to write?"}
+    blocked["Blocked · write first, the board owes a response"]
+    watch["Watch the surface · changed with the diff, quiet after the window, removed if deleted"]
+    able --> cap
+    waiting --> cap
+    cap -- yes --> blocked
+    cap -- no --> watch
 ```
 
 E1·e joining a run
 
 ```mermaid
 flowchart TB
-start["A run declares its write scope and claims standing"]
-live{"Does a live run's write set overlap?"}
-held["Healing held · report only, until the other run publishes"]
-later{"Did this run start later than that one?"}
-join["Join · read out what the live run publishes, write nothing"]
-run["Run · stamp every surface read, re-stamp at the end, name the surfaces it healed apart"]
-quotable["The aggregate is overwritten · the verdict carries its standing"]
-start --> live
-live -- no --> run
-live -- yes --> later
-later -- yes --> join
-later -- no --> held --> run
-run --> quotable
+    start["A run declares its write scope and claims standing"]
+    live{"Does a live run's write set overlap?"}
+    held["Healing held · report only, until the other run publishes"]
+    later{"Did this run start later than that one?"}
+    join["Join · read out what the live run publishes, write nothing"]
+    run["Run · stamp every surface read, re-stamp at the end, name the surfaces it healed apart"]
+    quotable["The aggregate is overwritten · the verdict carries its standing"]
+    start --> live
+    live -- no --> run
+    live -- yes --> later
+    later -- yes --> join
+    later -- no --> held --> run
+    run --> quotable
 ```
 
 ## A turn never ends to wait
@@ -424,26 +608,46 @@ A decision that no seat is making is a routing signal rather than a stall, and i
 
 F1·a an owner entry
 
+```text
+$ echo "# Owner note: The worker and the client share one limit for now." >> retries-have-one-home.1.blocking.md
+
+
+$ npm run await -- --agent A --file retries-have-one-home.1.blocking.md --no-wait
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+SINCE A LAST LOOKED  1 changed line(s)
+  + # Owner note: The worker and the client share one limit for now.
+
+$ npm run await -- --agent B --file retries-have-one-home.1.blocking.md --no-wait
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+SINCE B LAST LOOKED  1 changed line(s)
+  + # Owner note: The worker and the client share one limit for now.
+
+$ npm run await -- --agent C --file retries-have-one-home.1.blocking.md --no-wait
+HELD  coordination/retries-have-one-home.1.blocking.md is a venue, so it is not swept. Its positions stay until the venue converges.
+SINCE C LAST LOOKED  1 changed line(s)
+  + # Owner note: The worker and the client share one limit for now.
+```
+
 F1·b a turn
 
 ```mermaid
 flowchart TB
-item{"Is there an open item?"}
-work["Work it · a tool call advances it"]
-blocked{"Blocked on a peer?"}
-next["Route to the next unblocked item"]
-wait["Wait through the tool · the turn stays open"]
-changed{"What did the wait return?"}
-read["Read the surface whole, then act on every item addressed to me"]
-own["Pick up my own work and wait again"]
-report["A report to the developer"]
-item -- yes --> blocked
-blocked -- no --> work --> item
-blocked -- yes, others open --> next --> work
-blocked -- yes, all --> wait --> changed
-changed -- changed --> read --> item
-changed -- quiet --> own --> wait
-item -. never, while work remains .-> report
+    item{"Is there an open item?"}
+    work["Work it · a tool call advances it"]
+    blocked{"Blocked on a peer?"}
+    next["Route to the next unblocked item"]
+    wait["Wait through the tool · the turn stays open"]
+    changed{"What did the wait return?"}
+    read["Read the surface whole, then act on every item addressed to me"]
+    own["Pick up my own work and wait again"]
+    report["A report to the developer"]
+    item -- yes --> blocked
+    blocked -- no --> work --> item
+    blocked -- yes, others open --> next --> work
+    blocked -- yes, all --> wait --> changed
+    changed -- changed --> read --> item
+    changed -- quiet --> own --> wait
+    item -. never, while work remains .-> report
 ```
 
 ## Stating an invariant
@@ -478,32 +682,32 @@ G1·a four slots
 
 ```mermaid
 flowchart TB
-invariant["A stated invariant"]
-property["The property · in a form that could be false"]
-set["The set it quantifies over · never a verdict beyond its range"]
-parties["The parties it binds · delivered in a surface they receive"]
-objector["The objector · a check, a refusal, a comparison, a party that would notice"]
-unheld["Or stated as unheld · and the derivations above it marked"]
-invariant --> property
-invariant --> set
-invariant --> parties
-invariant --> objector
-invariant -. no objector .-> unheld
+    invariant["A stated invariant"]
+    property["The property · in a form that could be false"]
+    set["The set it quantifies over · never a verdict beyond its range"]
+    parties["The parties it binds · delivered in a surface they receive"]
+    objector["The objector · a check, a refusal, a comparison, a party that would notice"]
+    unheld["Or stated as unheld · and the derivations above it marked"]
+    invariant --> property
+    invariant --> set
+    invariant --> parties
+    invariant --> objector
+    invariant -. no objector .-> unheld
 ```
 
 G1·b three axes
 
 ```mermaid
 flowchart TB
-surface["A surface's lifetime"]
-retention["Retention · what ends a piece of content"]
-mutability["Mutability · whether a landed statement may be rewritten, and by whom"]
-removal["Removal authority · who may take content out"]
-word["One word · true of every surface and sufficient for none"]
-surface --> retention
-surface --> mutability
-surface --> removal
-surface -. collapsed to .-> word
+    surface["A surface's lifetime"]
+    retention["Retention · what ends a piece of content"]
+    mutability["Mutability · whether a landed statement may be rewritten, and by whom"]
+    removal["Removal authority · who may take content out"]
+    word["One word · true of every surface and sufficient for none"]
+    surface --> retention
+    surface --> mutability
+    surface --> removal
+    surface -. collapsed to .-> word
 ```
 
 G1·c a lifetime declaration
@@ -581,14 +785,14 @@ G1·d two readings
 
 ```mermaid
 flowchart TB
-property{"Is the property a relation between two states?"}
-single["A single-state check · presence, shape, membership, conformance"]
-two["Two readings · retain the prior state, record the set it was taken over, compare"]
-blind["A stricter single-state check · the same blind spot, more demanding"]
-third["Three results · unchanged, shortened, not comparable"]
-property -- no --> single
-property -- yes --> two --> third
-property -. the tempting repair .-> blind
+    property{"Is the property a relation between two states?"}
+    single["A single-state check · presence, shape, membership, conformance"]
+    two["Two readings · retain the prior state, record the set it was taken over, compare"]
+    blind["A stricter single-state check · the same blind spot, more demanding"]
+    third["Three results · unchanged, shortened, not comparable"]
+    property -- no --> single
+    property -- yes --> two --> third
+    property -. the tempting repair .-> blind
 ```
 
 ---

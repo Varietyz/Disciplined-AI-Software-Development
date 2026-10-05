@@ -1,0 +1,390 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../LICENSE.",
+    "check": {
+        "by": ["the grammar integrity check, which resolves every nonterminal a production references and every declared terminal"],
+        "population": "every production and every terminal the grammar declares",
+        "freshness": "a verdict stands until a production or the terminal list changes",
+        "refusal": "the ontology resolution gate fails on a dangling nonterminal or an unused terminal",
+        "observation": "none: the productions describe document shape and are never executed",
+        "evidence": "fires-and-accepts: a suite plants a dangling nonterminal and an unused terminal, and passes a grammar whose every reference resolves",
+        "authority": "the production and terminal lists, which every reference in a right-hand side resolves to"
+    },
+    "records": [
+        {
+            "group": "planning",
+            "lhs": "instruction",
+            "rhs": "<frontmatter> <optional_meta_block> <optional_document_declaration> <body>",
+            "grounds": ["reasoning:loop:derivation-loop"]
+        },
+        {"group": "planning",
+            "lhs": "frontmatter",
+            "rhs": "\"---\" <yaml_content> \"---\""},
+        {
+            "group": "planning",
+            "lhs": "document_declaration",
+            "rhs": "\"THIS\" <document_type> <document_verb> <description>"
+        },
+        {
+            "group": "planning",
+            "lhs": "meta_block",
+            "rhs": "\"%%\" \"META\" \"%%\" \":\" <meta_field>+",
+            "grounds": ["reasoning:node:tel-objective"]
+        },
+        {
+            "group": "planning",
+            "lhs": "meta_field",
+            "rhs": "\"objective:\" <string> | \"priority:\" <authority_chain> | \"trust:\" <trust_clause> | \"jurisdiction:\" <scope> \"|\" \"external:\" <scope> | \"recursion_limit:\" <bound>",
+            "grounds": [
+                "reasoning:node:tel-objective",
+                "reasoning:invariant:epi-reachable-check"
+            ]
+        },
+        {
+            "group": "planning",
+            "lhs": "body",
+            "rhs": "<node>+ <repair_edge>* <optional_invariant_block> <optional_report_block>",
+            "grounds": ["reasoning:loop:derivation-loop"]
+        },
+        {
+            "group": "planning",
+            "lhs": "node",
+            "rhs": "<node_header> <node_meta_tag>* <contract> <optional_output_contract> <handoff_gate>",
+            "grounds": ["reasoning:loop:derivation-loop"]
+        },
+        {
+            "group": "planning",
+            "lhs": "node_header",
+            "rhs": "\"#\" \"NODE\" <node_number> \"—\" <node_title> \"[\" <layer> \"·\" <axis> \"·\" <math_type> \"·\" \"yields:\" <shape> \"]\"",
+            "grounds": ["reasoning:axis:ontology"]
+        },
+        {
+            "group": "planning",
+            "lhs": "node_meta_tag",
+            "rhs": "\"@purpose:\" <string> | \"@axis_question:\" <string> | \"@cue:\" <string> | \"@genesis:\" <substrate_stage> | \"@mandatory\"",
+            "grounds": [
+                "reasoning:node:tel-objective",
+                "reasoning:substrate-node:existence"
+            ]
+        },
+        {
+            "group": "planning",
+            "lhs": "contract",
+            "rhs": "\"CONTRACT:\" \"input:\" <contract_input> \"transform:\" <directive>+ <optional_preserves> <optional_constraints> \"output:\" <contract_output> <optional_freshness> <optional_handoff_summary>",
+            "grounds": ["reasoning:loop:derivation-loop"]
+        },
+        {
+            "group": "planning",
+            "lhs": "preserves_clause",
+            "rhs": "\"preserves:\" <distinction_set>",
+            "grounds": ["reasoning:invariant:epi-preserved-distinction"]
+        },
+        {
+            "group": "planning",
+            "lhs": "freshness_clause",
+            "rhs": "\"freshness:\" <fingerprint> \"+\" <fingerprint>",
+            "grounds": ["reasoning:node:ver-freshness"]
+        },
+        {
+            "group": "planning",
+            "lhs": "handoff_gate",
+            "rhs": "\"HANDOFF\" \"GATE\" <optional_gate_qualifier> \":\" <optional_rule_id> <check_line>+ <optional_refusal_line> <optional_standing_line> <result_line>",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "group": "planning",
+            "lhs": "check_line",
+            "rhs": "<check_marker> <check_condition> \"(evidence:\" <check_evidence> \")\" <optional_population_clause>",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "group": "planning",
+            "lhs": "check_marker",
+            "rhs": "\"[check]\" | \"ASSERT\" | \"REQUIRE\"",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "group": "planning",
+            "lhs": "population_clause",
+            "rhs": "\"over:\" <set> \"measured:\" <count> \"/\" <count>",
+            "grounds": ["reasoning:node:ver-population"]
+        },
+        {
+            "group": "planning",
+            "lhs": "refusal_line",
+            "rhs": "\"refuse:\" <condition> \"before\" <write>",
+            "grounds": ["reasoning:node:ver-refusal"]
+        },
+        {
+            "group": "planning",
+            "lhs": "standing_line",
+            "rhs": "\"standing:\" \"moved-set\" <set>",
+            "grounds": ["reasoning:node:ver-standing"]
+        },
+        {
+            "group": "planning",
+            "lhs": "result_line",
+            "rhs": "\"result:\" \"pass\" <arrow> <next_node> (\"|\" <failure_name> <arrow> \"REPAIR\" \"(owner:\" <owner_node> \")\")+ \"|\" \"unknown\" <arrow> \"BLOCKED\"",
+            "grounds": [
+                "reasoning:node:ver-refutation",
+                "reasoning:node:ter-block"
+            ]
+        },
+        {
+            "group": "planning",
+            "lhs": "arrow",
+            "rhs": "\"→\" | \"->\"",
+            "grounds": ["reasoning:representation:symbolic"]
+        },
+        {
+            "group": "planning",
+            "lhs": "repair_edge",
+            "rhs": "\"#\" \"REPAIR\" \"EDGE\" <description>",
+            "grounds": ["reasoning:node:ver-refutation"]
+        },
+        {
+            "group": "planning",
+            "lhs": "invariant_block",
+            "rhs": "\"#\" \"CROSS-NODE\" \"INVARIANTS\" <invariant_record>+",
+            "grounds": ["reasoning:substrate-node:invariant"]
+        },
+        {
+            "group": "planning",
+            "lhs": "invariant_record",
+            "rhs": "\"INVARIANT\" <name> \":\" <property> \"over:\" <set> \"binds:\" <parties> \"objector:\" (<check_ref> | \"none\")",
+            "grounds": [
+                "reasoning:substrate-node:invariant",
+                "reasoning:node:ver-falsification"
+            ]
+        },
+        {
+            "group": "planning",
+            "lhs": "report_block",
+            "rhs": "\"REPORT\" \":\" <report_field>+",
+            "grounds": [
+                "reasoning:node:ver-evidence",
+                "reasoning:invariant:epi-verdict-is-representation"
+            ]
+        },
+        {
+            "group": "planning",
+            "lhs": "report_field",
+            "rhs": "\"subject:\" <node_ref> | \"verdict:\" <verdict> | \"domain:\" \"declared\" <count> \"measured\" <count> | \"populations:\" <partition_list> | \"inputs:\" <fingerprint_list> | \"code:\" <fingerprint> | \"output:\" <fingerprint> | \"refusals:\" <count> <reason_list> | \"observed:\" <count> <location_list> | \"unresolved:\" <count> <reason_list> | \"completion:\" \"saturated\" <boolean> \"complete\" <boolean> \"verified\" <boolean>",
+            "grounds": [
+                "reasoning:node:ver-population",
+                "reasoning:node:ver-freshness",
+                "reasoning:node:ver-observation",
+                "reasoning:node:ter-stop"
+            ]
+        },
+        {
+            "group": "planning",
+            "lhs": "verdict",
+            "rhs": "\"pass\" | \"fail\" | \"unknown\"",
+            "grounds": ["reasoning:node:ver-confidence"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "semantic_operation",
+            "rhs": "\"DISCOVER_RESOURCES\" | \"READ_RESOURCE\" | \"SEARCH_CONTENT\" | \"ANALYZE_CONTENT\" | \"EXTRACT_FACTS\" | \"CALCULATE_METRIC\" | \"COMPOSE_ARTIFACT\" | \"VALIDATE_ARTIFACT\" | \"PERSIST_ARTIFACT\" | \"EXECUTE_TOOL\" | \"REQUEST_DECISION\" | \"REPORT_RESULT\"",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "group": "statement",
+            "lhs": "directive",
+            "rhs": "<optional_task_marker> <optional_meta_tag> <optional_context_cue> <directive_body>",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "group": "statement",
+            "lhs": "action_expr",
+            "rhs": "<action_verb> <modifier>* <action_target> <optional_action_args>",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "group": "statement",
+            "lhs": "if_statement",
+            "rhs": "\"IF\" <condition> \":\" <directive>+ (\"ELSE\" \"IF\" <condition> \":\" <directive>+)* <optional_else_clause>",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "group": "statement",
+            "lhs": "for_loop",
+            "rhs": "\"FOR\" \"EACH\" <iterator> \"IN\" <collection> \":\" <directive>+",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "group": "statement",
+            "lhs": "try_catch",
+            "rhs": "\"TRY\" \":\" <directive>+ \"CATCH\" <optional_exception_var> \":\" <directive>+",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "group": "statement",
+            "lhs": "declaration_statement",
+            "rhs": "\"SET\" <variable_name> \"=\" <expression> | \"DECLARE\" <variable_name> \":\" <type_annotation>",
+            "grounds": ["reasoning:representation:symbolic"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "tool_invocation",
+            "rhs": "<semantic_operation> <tool_target> <optional_tool_param_clause> <optional_tool_result_clause>",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "tool_result_clause",
+            "rhs": "<arrow> <tool_result_binding> | \"INTO\" <tool_result_binding> | \"AS\" <tool_result_binding>",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "state_machine_declaration",
+            "rhs": "\"STATE_MACHINE\" <machine_name> \":\" <state_definition>+ <transition_definition>+",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "dag_declaration",
+            "rhs": "\"DAG\" <dag_name> \":\" <dag_item>+",
+            "grounds": [
+                "reasoning:representation:graph",
+                "reasoning:invariant:epi-declared-dependency"
+            ]
+        },
+        {
+            "group": "coordination",
+            "lhs": "priority_queue_declaration",
+            "rhs": "\"PRIORITY_QUEUE\" <queue_name> <optional_comparison> \":\"",
+            "grounds": ["reasoning:node:tel-priority"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "flowchart_declaration",
+            "rhs": "\"FLOWCHART\" <flow_name> \":\" <optional_layout> <flow_item>+",
+            "grounds": [
+                "reasoning:representation:graph",
+                "reasoning:axis:representation"
+            ]
+        },
+        {
+            "group": "coordination",
+            "lhs": "surface_declaration",
+            "rhs": "\"SURFACE\" <surface_key> \":\" <record_declaration>+",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "record_declaration",
+            "rhs": "\"RECORD\" <record_id> \"subject:\" <subject_key> <edge_clause>*",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "edge_clause",
+            "rhs": "<edge_kind> <target_id>",
+            "grounds": ["reasoning:invariant:epi-declared-dependency"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "edge_kind",
+            "rhs": "\"PARENT\" | \"SATISFIED_BY\" | \"BLOCKS\" | \"ANSWERS\" | \"REFUTES\" | \"SUPERSEDES\"",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "group": "coordination",
+            "lhs": "wait_statement",
+            "rhs": "\"WAIT\" \"ON\" <surface_key> \"AS\" <reader> \"INTO\" <diff_binding>",
+            "grounds": ["reasoning:node:ter-block"]
+        }
+    ],
+    "terminals": [
+        "action_target",
+        "action_verb",
+        "authority_chain",
+        "axis",
+        "boolean",
+        "bound",
+        "check_condition",
+        "check_evidence",
+        "check_ref",
+        "collection",
+        "condition",
+        "contract_input",
+        "contract_output",
+        "count",
+        "dag_item",
+        "dag_name",
+        "description",
+        "diff_binding",
+        "directive_body",
+        "distinction_set",
+        "document_type",
+        "document_verb",
+        "expression",
+        "failure_name",
+        "fingerprint",
+        "fingerprint_list",
+        "flow_item",
+        "flow_name",
+        "iterator",
+        "layer",
+        "location_list",
+        "machine_name",
+        "math_type",
+        "modifier",
+        "name",
+        "next_node",
+        "node_number",
+        "node_ref",
+        "node_title",
+        "optional_action_args",
+        "optional_comparison",
+        "optional_constraints",
+        "optional_context_cue",
+        "optional_document_declaration",
+        "optional_else_clause",
+        "optional_exception_var",
+        "optional_freshness",
+        "optional_gate_qualifier",
+        "optional_handoff_summary",
+        "optional_invariant_block",
+        "optional_layout",
+        "optional_meta_block",
+        "optional_meta_tag",
+        "optional_output_contract",
+        "optional_population_clause",
+        "optional_preserves",
+        "optional_refusal_line",
+        "optional_report_block",
+        "optional_rule_id",
+        "optional_standing_line",
+        "optional_task_marker",
+        "optional_tool_param_clause",
+        "optional_tool_result_clause",
+        "owner_node",
+        "parties",
+        "partition_list",
+        "property",
+        "queue_name",
+        "reader",
+        "reason_list",
+        "record_id",
+        "scope",
+        "set",
+        "shape",
+        "state_definition",
+        "string",
+        "subject_key",
+        "substrate_stage",
+        "surface_key",
+        "target_id",
+        "tool_result_binding",
+        "tool_target",
+        "transition_definition",
+        "trust_clause",
+        "type_annotation",
+        "variable_name",
+        "write",
+        "yaml_content"
+    ]
+}

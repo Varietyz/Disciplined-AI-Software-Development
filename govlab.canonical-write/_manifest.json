@@ -1,0 +1,100 @@
+{
+    "label": "Canonical Write",
+    "summary": "The one module that writes files. It serializes data and writes it to disk through prettier, so a generated file emits idempotent bytes, and it writes every other file verbatim.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "platform",
+            "sub": "file-system"},
+        {"meta": "developer-tooling",
+            "sub": "code-generation"}
+    ],
+    "capabilities": [
+        "canonical-json-write",
+        "canonical-text-write",
+        "verbatim-write",
+        "generated-mark-stamp",
+        "prettier-formatted-output"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "immutability",
+        "serialization"
+    ],
+    "visibility": {"private": true,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "docs": {
+        "overview": "The canonical writers, with one guarantee. `writeCanonicalJson(path, value)` serializes a value and writes it formatted by the project's own prettier configuration. `writeCanonicalText(path, text)` does the same for already-rendered text, inferring the parser from the file extension. The guarantee is that the same input produces the same bytes, on every machine and every run, so a drift check comparing a file against a fresh render sees only semantic differences.\n\nA generated Markdown file also carries one mark, `<!-- Auto-generated <time> v<n> -->`, on its first line or the first line after its frontmatter. `stampGenerated(body, previous, now, normalize?)` compares the new body with the body on disk, both with the mark stripped. An equal body keeps the held mark, so the file stays byte-identical, and a changed body takes the current minute and the next version. `writeGeneratedMarkdown(path, text)` formats first and then stamps against the file on disk.\n\nEvery other write goes through `writeVerbatim(path, content)`, which writes text or bytes exactly as given: an edited source file, a cache entry, a built page, a log, a binary, or a generated file whose serializer is already deterministic and which the format stage never reaches. The workspace's write gate bans the raw file-write primitive outside this module, so every write in the workspace passes through one place, and a write helper elsewhere cannot hide a write from the gate.",
+        "whenToUse": [
+            "Any generator whose output is committed and drift-checked, such as a catalog, an index, a generated README or a report artifact.",
+            "Writing JSON that the developer will read in a diff, where a formatting-only change would bury the semantic one.",
+            "Emitting rendered text (markdown, TypeScript) that must match a fresh render byte for byte.",
+            "Writing a cache entry, a log, a built page, an edited source file or a binary through `writeVerbatim`, whose bytes are the caller's."
+        ],
+        "whenNotToUse": [
+            "A test fixture under a temporary directory, which the write gate leaves to the raw primitive.",
+            "A hot loop formatting thousands of small files through a canonical writer. Formatting is not free, so a generated artifact the format stage never reaches goes through `writeVerbatim`."
+        ],
+        "quickStart": [
+            {
+                "intent": "Write a generated artifact whose bytes must be reproducible",
+                "lang": "ts",
+                "code": "import { writeCanonicalJson, writeCanonicalText } from \"@govlab/canonical-write\";\n\nawait writeCanonicalJson(resolve(outDir, \"catalog.generated.json\"), { rules, summary });\nawait writeCanonicalText(resolve(outDir, \"INDEX.generated.md\"), renderedMarkdown);"
+            },
+            {
+                "intent": "Drift-check a written artifact against a fresh render",
+                "lang": "ts",
+                "code": "await writeCanonicalJson(path, value);\n\nconst fresh = await renderCanonical(value);\nif (readFileSync(path, \"utf8\") !== fresh) {\n    throw new Error(`${path} has drifted — regenerate it`);\n}"
+            },
+            {
+                "intent": "Write a generated Markdown document whose mark moves only when its body changes",
+                "lang": "ts",
+                "code": "import { writeGeneratedMarkdown } from \"@govlab/canonical-write\";\n\nawait writeGeneratedMarkdown(resolve(outDir, \"INDEX.generated.md\"), renderedMarkdown);"
+            }
+        ],
+        "configuration": "None of its own. Each writer formats with the prettier options the caller passes, and infers the parser from the target path's extension. A caller whose output the format stage also reaches passes the same options that stage uses, so the stage leaves the file as written.",
+        "install": "A private workspace package resolved through the root `package.json` workspaces glob `govlab.root/govlab.utils/*`. One `npm install` at the repo root links it, and `prettier` is hoisted there instead of declared here. There is no build step, so a consumer imports `@govlab/canonical-write` and calls it.",
+        "disposal": [
+            "Declare another module as the write owner in the write gate's options, then move each call site to it. Generated bytes become writer-dependent unless the new owner formats them.",
+            "Weaken or delete every `--check` drift gate that compares a generated file against a fresh render.",
+            "Drop `@govlab/canonical-write` from the `govlab.quality` and `govlab.pipeline` manifests, then remove the package and its workspace entry."
+        ],
+        "aiContext": [
+            "Canonical means reproducible, not merely pretty. A drift check comparing a file against a fresh render sees only semantic differences.",
+            "Every writer is async. A generator that forgets to await writes nothing and still exits zero.",
+            "A generator stamps after it formats. Stamping unformatted text compares a body the format pass then rewrites, so the version rises on every run.",
+            "A drift check compares the stamped file with the mark kept, so a hand edit to the mark counts as drift.",
+            "Formatting uses the options the caller passes, not a config file on disk. Raw bytes get rewritten by the next format pass, and a drift gate reports that rewrite.",
+            "A pure leaf: zero `@govlab/*` sibling dependencies, so the packages that generate artifacts depend on it without a cycle."
+        ],
+        "apiNotes": [
+            {
+                "name": "writeCanonicalJson",
+                "note": "serializes a value and writes it formatted by prettier with the caller's options. It is the writer for every generated `.json` artifact."
+            },
+            {
+                "name": "writeCanonicalText",
+                "note": "writes already-rendered text through the same formatter, inferring the parser from the file extension, for generated markdown and TypeScript."
+            },
+            {
+                "name": "writeGeneratedMarkdown",
+                "note": "formats the text, then stamps it against the file on disk and writes it. It is the writer for a generated Markdown file that no drift check produces."
+            },
+            {
+                "name": "writeVerbatim",
+                "note": "writes text or bytes exactly as given. It is the writer for every file whose bytes the caller already owns."
+            },
+            {
+                "name": "stampGenerated",
+                "note": "returns the body with its mark: the held mark when the normalized body is unchanged, otherwise the current minute and the next version. A drift spec's produce step calls it with the file on disk."
+            },
+            {
+                "name": "parseMark",
+                "note": "reads the time and version from a mark line, and answers null for a text with no mark or a malformed one. `stripMark` removes the line and the blank lines after it."
+            }
+        ]
+    }
+}

@@ -1,0 +1,80 @@
+{
+    "label": "Argv Contract",
+    "summary": "A declared command-line contract for a script: every flag and positional is declared, --help is answered before any effect, and an undeclared flag is a refusal rather than a silently ignored word.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "build-tooling"}
+    ],
+    "capabilities": [
+        "declared-flag-contract",
+        "help-before-effect",
+        "undeclared-flag-refusal",
+        "positional-arity-check"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "type-safety",
+        "separation-of-concerns",
+        "immutability"
+    ],
+    "visibility": {"private": false,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "docs": {
+        "overview": "A dependency-free leaf that turns a script's command line into a contract. A script declares its command, its flags (name, whether a value follows, whether it may repeat) and its positionals. `resolveArgv` answers `--help` with that contract and exits before the script has any effect. It refuses an undeclared flag, a missing flag value, a repeated non-repeatable flag or a positional the contract does not declare, and only then hands the script a parsed view. It closes one failure: a script that filters unknown words out of `process.argv` and runs anyway, so that `--help` on a tree-rewriting script launches the rewrite.",
+        "whenToUse": [
+            "Any script invoked from the shell or an npm script that reads `process.argv`, such as an entrypoint, a gate, a probe or a pipeline runner.",
+            "A script that writes a tree, where an ignored word means a full run the developer did not ask for."
+        ],
+        "whenNotToUse": [
+            "Library code with no command line. Nothing here applies to a function taking arguments.",
+            "A script needing subcommand grammars with their own flag sets. Declare one contract per entrypoint and dispatch on a positional instead."
+        ],
+        "quickStart": [
+            {
+                "intent": "Declare a contract and read the parsed flags",
+                "lang": "js",
+                "code": "import { flagValue, hasFlag, resolveArgv } from \"@govlab/argv\";\n\nconst argv = resolveArgv({\n    command: \"npm run snapshot --\",\n    flags: [\n        { describe: \"the page to open\", name: \"--url\", takesValue: true },\n        { describe: \"render on the gpu instead of in software\", name: \"--gpu\", takesValue: false },\n    ],\n    summary: \"Open a page in a headless browser and capture it.\",\n});\nconst url = flagValue(argv, \"--url\");\nconst gpu = hasFlag(argv, \"--gpu\");"
+            }
+        ],
+        "configuration": "No configuration. The contract is the spec object the script passes. `resolveArgv` reads `process.argv` past the runtime and script path unless an explicit array is given, which is how a test drives it.",
+        "install": "Nothing to install beyond the workspace root's single `npm install`. A consuming member declares `\"@govlab/argv\": \"*\"` as a sibling dependency.",
+        "disposal": [
+            "Remove `govlab.root/govlab.utils/argv/`.",
+            "Drop `\"@govlab/argv\": \"*\"` from every consuming package manifest.",
+            "Every script that imported it goes back to reading `process.argv` directly."
+        ],
+        "aiContext": [
+            "`parseArgv` is pure and returns a tagged outcome (`help`, `refused`, `parsed`). `resolveArgv` is the one impure surface, and it exits the process on `help` and `refused`, so a script never runs past a contract it did not satisfy.",
+            "`--help` and `-h` are answered before any other word is read, so they win even beside a refused flag.",
+            "A flag value is any following word that does not start with a dash. A flag given twice is refused unless declared repeatable, and a repeatable flag's values are read with `flagValues`.",
+            "Positionals are counted against the contract: more than declared, or fewer than the required ones, is a refusal.",
+            "A pure leaf: zero `@govlab/*` sibling dependencies."
+        ],
+        "apiNotes": [
+            {
+                "name": "parseArgv",
+                "note": "pure, and maps the contract plus a word list to a tagged `help`, `refused` or `parsed` outcome."
+            },
+            {
+                "name": "resolveArgv",
+                "note": "the impure front: prints usage and exits clean on help, prints the reason and usage and exits non-zero on refusal, returns the parsed view otherwise."
+            },
+            {"name": "usageOf",
+                "note": "renders the contract as the usage text `--help` prints."},
+            {"name": "flagValue",
+                "note": "the first value of a value-taking flag, or undefined when absent."},
+            {"name": "flagValues",
+                "note": "every value of a repeatable flag, in order given."},
+            {"name": "hasFlag",
+                "note": "whether a flag was given at all."},
+            {
+                "name": "numberFlag",
+                "note": "a flag's value parsed as a base-ten integer, or the fallback when absent or not a number."
+            }
+        ]
+    }
+}

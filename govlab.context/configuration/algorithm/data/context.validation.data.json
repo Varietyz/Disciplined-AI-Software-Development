@@ -1,0 +1,721 @@
+{
+    "category": "context-verification",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the verifier's evidence gate, which maps every claim to implementation evidence",
+            "its calibration and self-tests, which check the verifier before its results are trusted"
+        ],
+        "population": "every claim under investigation and the files that could support it",
+        "freshness": "a verdict stands until the code or document behind a claim changes",
+        "refusal": "a claim with no mapped evidence is reported unverified, and the investigation writes no fix",
+        "observation": "the environment capability probes, which measure the runtime before the workflow relies on it",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the implementation evidence, which a claim is verified against"
+    },
+    "records": [
+        {
+            "id": "phase-separated-execution",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Phase-Separated Execution",
+            "exemplar": {
+                "before": "An investigation starts fixing gaps and a fix expands its scope, with neither reported.",
+                "after": "detect phase{INVESTIGATE | ACTION} → bind allowed ops → INVESTIGATE{discover, test, document, no-modify} | ACTION{fix known gap, version, no-discovery}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect the current workflow phase, bind allowed operations to that phase, reject operations outside the phase contract, and emit only the artifact valid for that phase.",
+            "invariant": "A system must separate discovery from mutation so that analysis cannot accidentally remediate and remediation cannot silently expand scope.",
+            "flow": [
+                "DetectPhase",
+                "BindCapabilities",
+                "EnforceMode",
+                "ExecuteAllowedOnly",
+                "EmitPhaseArtifact"
+            ],
+            "productions": [
+                {
+                    "lhs": "PhaseExecution",
+                    "rhs": "<PhaseDetect> \"→\" <CapabilityBinding> \"→\" <ModeEnforcement> \"→\" <AllowedExecution> \"→\" <PhaseOutput>"
+                },
+                {"lhs": "PhaseDetect",
+                    "rhs": "\"INVESTIGATE\" | \"ACTION\""},
+                {"lhs": "AllowedExecution",
+                    "rhs": "<InvestigationOnly> | <ActionOnly>"},
+                {"lhs": "InvestigationOnly",
+                    "rhs": "\"Discover\" \"Test\" \"Document\" \"NoModify\""},
+                {"lhs": "ActionOnly",
+                    "rhs": "\"FixKnownGap\" \"Modify\" \"Version\" \"NoDiscovery\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "state_transaction",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "evidence-gated-claim-verification",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Evidence-Gated Claim Verification",
+            "exemplar": {
+                "before": "'The core has no infra imports' trusted because it sounds right.",
+                "after": "claims → map each to an observable evidence requirement → collect implementation evidence → verdict{verified | contradicted | unverified}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Extract claims, resolve each claim into observable evidence requirements, collect direct implementation evidence, classify each claim as verified, contradicted, or unverified, and report discrepancies.",
+            "invariant": "No architectural claim is trusted until mapped to implementation evidence.",
+            "flow": [
+                "Claim",
+                "EvidenceRequirement",
+                "Observation",
+                "Classification",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "ClaimVerification",
+                    "rhs": "<ClaimSet> \"→\" <EvidenceMap> \"→\" <ObservationSet> \"→\" <VerdictSet> \"→\" <Report>"
+                },
+                {"lhs": "ClaimSet",
+                    "rhs": "<Claim> | <Claim> \",\" <ClaimSet>"},
+                {"lhs": "VerdictSet",
+                    "rhs": "\"verified\" | \"contradicted\" | \"unverified\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "observability_traceability"
+            ]
+        },
+        {
+            "id": "validation-gate",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Validation Gate",
+            "exemplar": {
+                "before": "A stage's uncertainty stays hidden and flows silently downstream.",
+                "after": "stage → criteria{critical | noncritical} → {PASS | WARN | BLOCK} → block downstream on a critical failure",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "After each critical stage, evaluate declared success criteria, block downstream progression when critical criteria fail, and carry warning-state forward when noncritical criteria fail.",
+            "invariant": "Complex workflows require explicit checkpoints that convert hidden uncertainty into visible control flow.",
+            "flow": [
+                "Stage",
+                "Criteria",
+                "Evaluate",
+                "Pass|Warn|Block",
+                "Continue|Abort"
+            ],
+            "productions": [
+                {"lhs": "ValidationGate",
+                    "rhs": "<Stage> \"→\" <CriteriaSet> \"→\" <GateResult>"},
+                {"lhs": "GateResult",
+                    "rhs": "\"PASS\" | \"WARN\" | \"BLOCK\""},
+                {"lhs": "CriteriaSet",
+                    "rhs": "<Criterion> | <Criterion> \",\" <CriteriaSet>"},
+                {"lhs": "Criterion",
+                    "rhs": "<Condition> \":\" <PriorityRank>"},
+                {"lhs": "PriorityRank",
+                    "rhs": "\"critical\" | \"high\" | \"medium\" | \"low\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "file-modification-recovery",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "File Modification Recovery",
+            "exemplar": {
+                "before": "A stale-write failure re-patches the old content, corrupting state.",
+                "after": "edit fail → re-read current → merge the delta into full state → write complete version → verify{exists & content matches}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "When a file mutation fails because state changed between read and edit, reread the current file, merge the intended delta into the current content, write the complete new version, and verify persistence.",
+            "invariant": "Treat stale-write failures as state synchronization failures, not as patch failures.",
+            "flow": [
+                "EditFail",
+                "ReRead",
+                "MergeDelta",
+                "WriteFullState",
+                "Verify"
+            ],
+            "productions": [
+                {
+                    "lhs": "FileRecovery",
+                    "rhs": "\"ModificationError\" \"→\" <ReadCurrent> \"→\" <Merge> \"→\" <WriteComplete> \"→\" <VerifyWrite>"
+                },
+                {"lhs": "Merge",
+                    "rhs": "<CurrentContent> \"+\" <RequiredChange> \"→\" <NewContent>"},
+                {"lhs": "VerifyWrite",
+                    "rhs": "\"Exists\" \"&\" \"ContentMatches\""}
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "correctness_verification",
+                "resilience_recovery"
+            ]
+        },
+        {
+            "id": "trust-anchor-declaration",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Trust Anchor Declaration",
+            "exemplar": {
+                "before": "The verifier's own axioms are hidden, so its boundary is unknowable.",
+                "after": "declare minimal assumptions{runtime, filesystem, execution, tool IO} → boundary{cannot verify the verifier} → disclosed, not verified",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Declare the minimum assumptions required for the system to verify anything, bind all verification logic to those assumptions, and disclose the verification boundary.",
+            "invariant": "Every axiom a verifier rests on is declared explicitly.",
+            "flow": [
+                "MinimalAssumptions",
+                "Boundary",
+                "VerificationScope",
+                "Disclosure"
+            ],
+            "productions": [
+                {"lhs": "TrustAnchor",
+                    "rhs": "<AssumptionSet> \"→\" <TrustBoundary> \"→\" <Scope>"},
+                {"lhs": "AssumptionSet",
+                    "rhs": "<Assumption> | <Assumption> \",\" <AssumptionSet>"},
+                {
+                    "lhs": "Assumption",
+                    "rhs": "\"RuntimeWorks\" | \"FilesystemWorks\" | \"CommandExecutionWorks\" | \"ToolIOWorks\""
+                },
+                {"lhs": "TrustBoundary",
+                    "rhs": "\"CannotVerifyVerifierWithoutExternalReference\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "environment-capability-verification",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Environment Capability Verification",
+            "exemplar": {
+                "before": "Advanced analysis relied on before checking the runtime can run it.",
+                "after": "requirements{runtime, package manager, write, filesystem} → probe each → classify by severity → mode{full | degraded | blocked}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Before executing advanced behavior, probe required runtime dependencies, classify each dependency failure by severity, and degrade or block capability based on criticality.",
+            "invariant": "Runtime capability must be measured before the workflow relies on it.",
+            "flow": [
+                "Requirement",
+                "Probe",
+                "Status",
+                "Severity",
+                "CapabilityMode"
+            ],
+            "productions": [
+                {
+                    "lhs": "EnvironmentVerification",
+                    "rhs": "<RequirementSet> \"→\" <ProbeSet> \"→\" <StatusSet> \"→\" <CapabilityVerdict>"
+                },
+                {"lhs": "CapabilityVerdict",
+                    "rhs": "\"full\" | \"degraded\" | \"blocked\""},
+                {"lhs": "Status",
+                    "rhs": "\"passed\" | \"failed\""},
+                {
+                    "lhs": "Requirement",
+                    "rhs": "\"runtime\" | \"packageManager\" | \"writePermission\" | \"filesystem\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "tool-calibration",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Tool Calibration",
+            "exemplar": {
+                "before": "A detector's match trusted with no control test.",
+                "after": "known-good + known-bad fixtures → run tool → detect false-positive AND false-negative → reliable only if both controls pass",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Create known-good and known-bad fixtures, run the verification tool against both, detect false positives and false negatives, and mark the tool reliable only if both controls pass.",
+            "invariant": "Verification tools must be tested against controls before their results are trusted.",
+            "flow": [
+                "KnownGood + KnownBad",
+                "RunTool",
+                "CompareExpected",
+                "CalibrateReliability"
+            ],
+            "productions": [
+                {
+                    "lhs": "ToolCalibration",
+                    "rhs": "<FixtureSet> \"→\" <ToolRun> \"→\" <ExpectedComparison> \"→\" <ReliabilityVerdict>"
+                },
+                {"lhs": "FixtureSet",
+                    "rhs": "<KnownGood> \",\" <KnownBad>"},
+                {
+                    "lhs": "ReliabilityVerdict",
+                    "rhs": "\"reliable\" | \"false_positive_risk\" | \"false_negative_risk\" | \"unreliable\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "behavioral-self-test",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Behavioral Self-Test",
+            "exemplar": {
+                "before": "A claimed capability trusted without ever running it on a case.",
+                "after": "claimed behavior → positive + negative case → execute → compare → {matches contract | false-positive | false-negative | failed}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Execute the system’s claimed behaviors against simple positive and negative cases, compare actual output to expected output, and treat mismatch as implementation evidence failure.",
+            "invariant": "A capability counts only once its behavior matches a testable contract.",
+            "flow": [
+                "ClaimedBehavior",
+                "PositiveCase + NegativeCase",
+                "Execute",
+                "Compare",
+                "Verdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "BehavioralSelfTest",
+                    "rhs": "<BehaviorClaim> \"→\" <TestCasePair> \"→\" <ExecutionResult> \"→\" <BehaviorVerdict>"
+                },
+                {"lhs": "TestCasePair",
+                    "rhs": "<PositiveCase> \",\" <NegativeCase>"},
+                {
+                    "lhs": "BehaviorVerdict",
+                    "rhs": "\"matches_contract\" | \"false_positive\" | \"false_negative\" | \"failed\""
+                }
+            ],
+            "composes": [],
+            "force": ["contract_compatibility"]
+        },
+        {
+            "id": "adversarial-input-testing",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Adversarial Input Testing",
+            "exemplar": {
+                "before": "A detector accepted after ordinary examples pass, never tested hostilely.",
+                "after": "attacks{pathTraversal, nullByte, unicodeHomoglyph, commentFalsePositive, patternSpoof} → run detector → {blocked | ignored | vulnerable}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Generate malicious, malformed, ambiguous, and deceptive inputs, execute the detection logic against them, and classify whether the system resists or accepts invalid patterns.",
+            "invariant": "Verification logic must be tested against hostile inputs, not only ordinary examples.",
+            "flow": [
+                "AttackInput",
+                "ExecuteDetector",
+                "ExpectedReject|ExpectedIgnore",
+                "VulnerabilityVerdict"
+            ],
+            "productions": [
+                {"lhs": "AdversarialTesting",
+                    "rhs": "<AttackSet> \"→\" <DetectorExecution> \"→\" <SecurityVerdict>"},
+                {"lhs": "AttackSet",
+                    "rhs": "<Attack> | <Attack> \",\" <AttackSet>"},
+                {
+                    "lhs": "Attack",
+                    "rhs": "\"pathTraversal\" | \"nullByte\" | \"unicodeHomoglyph\" | \"commentFalsePositive\" | \"patternSpoof\""
+                },
+                {"lhs": "SecurityVerdict",
+                    "rhs": "\"blocked\" | \"ignored\" | \"vulnerable\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "defensive-string-normalization",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Defensive String Normalization",
+            "exemplar": {
+                "before": "A raw external string passed straight to a filesystem or command boundary.",
+                "after": "raw string → null-guard → strip{'../', null byte} → Unicode NFC → only the sanitized string crosses a boundary",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Reject null input, remove dangerous path/control patterns, normalize Unicode representation, and only pass sanitized strings to filesystem, parser, or command boundaries.",
+            "invariant": "All external strings must be converted from hostile representation into bounded representation before use.",
+            "flow": [
+                "RawString",
+                "NullGuard",
+                "StripDanger",
+                "Normalize",
+                "SafeString"
+            ],
+            "productions": [
+                {
+                    "lhs": "StringNormalization",
+                    "rhs": "<RawString> \"→\" <NullGuard> \"→\" <DangerRemoval> \"→\" <UnicodeNormalize> \"→\" <SafeString>"
+                },
+                {"lhs": "NullGuard",
+                    "rhs": "\"reject(null|undefined)\""},
+                {"lhs": "DangerRemoval",
+                    "rhs": "\"remove('../')\" | \"remove('..\\\\')\" | \"remove(NULL_BYTE)\""},
+                {"lhs": "UnicodeNormalize",
+                    "rhs": "\"NFC\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "safe-arithmetic-contract",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Safe Arithmetic Contract",
+            "exemplar": {
+                "before": "A division runs unchecked and returns NaN or Infinity into a decision.",
+                "after": "operands → preconditions{denominator != 0, finite} → compute → postconditions{isFinite, within bounds} → number | null | typed failure",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Check operands before calculation, reject division by zero, reject non-finite results, enforce bounds, and return nullable or typed failure instead of unsafe numeric state.",
+            "invariant": "Arithmetic output is only valid if the operation and result both satisfy the numeric contract.",
+            "flow": [
+                "Operands",
+                "PreconditionCheck",
+                "Compute",
+                "FiniteCheck",
+                "BoundsCheck",
+                "Result|Failure"
+            ],
+            "productions": [
+                {
+                    "lhs": "SafeArithmetic",
+                    "rhs": "<Operands> \"→\" <Preconditions> \"→\" <Computation> \"→\" <Postconditions> \"→\" <NumericOutput>"
+                },
+                {"lhs": "Preconditions",
+                    "rhs": "\"denominator != 0\" | \"operands finite\""},
+                {"lhs": "Postconditions",
+                    "rhs": "\"isFinite(result)\" | \"withinBounds(result)\""},
+                {"lhs": "NumericOutput",
+                    "rhs": "<Number> | \"null\" | <TypedFailure>"}
+            ],
+            "composes": [],
+            "force": ["contract_compatibility"]
+        },
+        {
+            "id": "recursion-control",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Recursion Control",
+            "exemplar": {
+                "before": "A recursive self-reference runs away with no depth bound.",
+                "after": "enter → increment depth → depth <= max? → {continue | reject max-depth} → unwind on exit",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Increment depth on recursive entry, compare against maximum depth, reject excessive recursion, and unwind depth on completion.",
+            "invariant": "Recursive systems require explicit depth governance to prevent runaway self-reference.",
+            "flow": [
+                "Enter",
+                "IncrementDepth",
+                "CheckLimit",
+                "Continue|Reject",
+                "Exit"
+            ],
+            "productions": [
+                {
+                    "lhs": "RecursionControl",
+                    "rhs": "<EnterRecursiveCall> \"→\" <DepthIncrement> \"→\" <LimitCheck> \"→\" <Decision> \"→\" <Exit>"
+                },
+                {"lhs": "Decision",
+                    "rhs": "\"continue\" | \"reject_max_depth_exceeded\""},
+                {"lhs": "LimitCheck",
+                    "rhs": "\"currentDepth <= maxDepth\""}
+            ],
+            "composes": [],
+            "force": ["security_governance"]
+        },
+        {
+            "id": "recursive-self-verification",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Recursive Self-Verification",
+            "exemplar": {
+                "before": "The verifier exempts itself from its own rules and overclaims.",
+                "after": "self definition → extract self-claims → search implementation evidence → discrepancies → confidence{confirmed | overclaimed | invalid}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load the system’s own definition, extract self-claims, search for implementation evidence of each claim, classify discrepancies, and downgrade confidence when self-description exceeds implemented behavior.",
+            "invariant": "A verifier should apply its verification rules to itself.",
+            "flow": [
+                "SelfDefinition",
+                "ExtractClaims",
+                "VerifyClaims",
+                "DetectDiscrepancies",
+                "ConfidenceAdjustment"
+            ],
+            "productions": [
+                {
+                    "lhs": "SelfVerification",
+                    "rhs": "<SelfDefinition> \"→\" <SelfClaimSet> \"→\" <EvidenceSearch> \"→\" <DiscrepancySet> \"→\" <ConfidenceState>"
+                },
+                {
+                    "lhs": "ConfidenceState",
+                    "rhs": "\"confirmed\" | \"partially_confirmed\" | \"overclaimed\" | \"invalid\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "advanced-tool-escalation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Advanced Tool Escalation",
+            "exemplar": {
+                "before": "A capability gap filled by inference instead of evidence.",
+                "after": "analysis need → capability gap → write script → execute → parse → integrate the result as evidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "When direct tools cannot answer a verification question, synthesize a specialized analyzer, execute it against the target, parse its output, and integrate the result as evidence.",
+            "invariant": "Missing capability should trigger controlled tool construction rather than unsupported inference.",
+            "flow": [
+                "Need",
+                "CapabilityGap",
+                "GenerateTool",
+                "ExecuteTool",
+                "ParseEvidence",
+                "Integrate"
+            ],
+            "productions": [
+                {
+                    "lhs": "ToolEscalation",
+                    "rhs": "<AnalysisNeed> \"→\" <CapabilityCheck> \"→\" <ToolConstruction> \"→\" <ToolExecution> \"→\" <EvidenceIntegration>"
+                },
+                {"lhs": "CapabilityCheck",
+                    "rhs": "\"direct_capability_available\" | \"requires_generated_tool\""},
+                {
+                    "lhs": "ToolConstruction",
+                    "rhs": "\"write_script\" \"→\" \"execute_script\" \"→\" \"parse_results\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "model_governance",
+                "object_creation"
+            ]
+        },
+        {
+            "id": "investigation-report",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Investigation Report",
+            "exemplar": {
+                "before": "An investigation that also 'quickly fixes' what it found.",
+                "after": "evidence → findings + risks + adversarial results + confidence → one investigation report, no remediation",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Collect verified findings, failed checks, warnings, discrepancies, environmental limits, adversarial results, and confidence level into a structured report without performing remediation.",
+            "invariant": "Investigation produces evidence, not fixes.",
+            "flow": [
+                "EvidenceSet",
+                "FindingSet",
+                "RiskSet",
+                "Confidence",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "InvestigationReport",
+                    "rhs": "<EvidenceSet> \"→\" <Findings> \"→\" <Risks> \"→\" <Confidence> \"→\" <Report>"
+                },
+                {"lhs": "Findings",
+                    "rhs": "<VerifiedFinding> | <Discrepancy> | <UnverifiedClaim>"},
+                {"lhs": "Report",
+                    "rhs": "\"investigation_report\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "action-log",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Action Log",
+            "exemplar": {
+                "before": "A fix run against a gap that was never documented, discovering new scope mid-flight.",
+                "after": "documented gaps only → bounded fix → version → verify write → action log; discovers nothing new",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Accept only documented gaps as input, apply bounded changes, version the modified artifact, verify the write, and emit an action log without discovering new scope.",
+            "invariant": "Remediation operates only on known evidence.",
+            "flow": [
+                "DocumentedGap",
+                "BoundedFix",
+                "Version",
+                "Verify",
+                "ActionLog"
+            ],
+            "productions": [
+                {
+                    "lhs": "ActionLog",
+                    "rhs": "<DocumentedGapSet> \"→\" <FixSet> \"→\" <VersionedArtifact> \"→\" <Verification> \"→\" <Log>"
+                },
+                {"lhs": "DocumentedGapSet",
+                    "rhs": "<Gap> | <Gap> \",\" <DocumentedGapSet>"},
+                {"lhs": "FixSet",
+                    "rhs": "<Fix> | <Fix> \",\" <FixSet>"},
+                {"lhs": "Log",
+                    "rhs": "\"action_log\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "contract-based-verification-kernel",
+            "principleRef": "design-by-contract",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "trust-anchor-declaration"},
+                {"stage": "see",
+                    "record": "tool-calibration"},
+                {"stage": "act",
+                    "record": "advanced-tool-escalation"},
+                {"stage": "constrain",
+                    "record": "phase-separated-execution"},
+                {"stage": "verify",
+                    "record": "evidence-gated-claim-verification"},
+                {"stage": "commit",
+                    "record": "investigation-report"},
+                {"stage": "terminate",
+                    "record": "validation-gate"}
+            ],
+            "title": "Contract-Based Verification Kernel",
+            "exemplar": {
+                "before": "Behavior trusted because it looks right, with no phase, calibration, or self-check.",
+                "after": "declare assumptions → detect phase → verify environment → calibrate tools → phase-legal execution → adversarial test → validation gate → self-verify → typed artifact",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Declare assumptions, detect phase, verify environment, calibrate tools, execute phase-legal behavior, test adversarially, enforce validation gates, self-verify claims, and emit a typed artifact.",
+            "invariant": "A reusable verification kernel is a gated state machine whose transitions are evidence-bound and phase-constrained.",
+            "flow": [
+                "Assumptions",
+                "Phase",
+                "Environment",
+                "Calibration",
+                "Execution",
+                "AdversarialTest",
+                "SelfVerify",
+                "TypedOutput"
+            ],
+            "productions": [
+                {
+                    "lhs": "VerificationKernel",
+                    "rhs": "<TrustAnchor> \"→\" <PhaseExecution> \"→\" <EnvironmentVerification> \"→\" <ToolCalibration> \"→\" <BehavioralSelfTest> \"→\" <AdversarialTesting> \"→\" <ValidationGate> \"→\" <SelfVerification> \"→\" <TypedOutput>"
+                },
+                {
+                    "lhs": "TypedOutput",
+                    "rhs": "\"investigation_report\" | \"action_log\" | \"blocked_execution_report\""
+                }
+            ],
+            "composes": [
+                "tool-calibration",
+                "behavioral-self-test",
+                "validation-gate"
+            ],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "context-verification-concern",
+            "title": "<Context Verification Concern>",
+            "intent": "<Detect required contract> → <Bind allowed capability> → <Execute bounded operation> → <Validate evidence> → <Emit typed result>",
+            "invariant": "<Any system behavior should be treated as a contract-bound transition whose legitimacy depends on phase, evidence, and postcondition verification.>",
+            "flow": [
+                "Contract",
+                "Capability",
+                "Operation",
+                "Gate",
+                "Artifact"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConcernAlgorithm",
+                    "rhs": "<PhaseContract> \"→\" <CapabilityBinding> \"→\" <Operation> \"→\" <ValidationGate> \"→\" <TypedArtifact>"
+                },
+                {
+                    "lhs": "PhaseContract",
+                    "rhs": "<Precondition> \",\" <AllowedActionSet> \",\" <ForbiddenActionSet> \",\" <Postcondition>"
+                },
+                {"lhs": "TypedArtifact",
+                    "rhs": "<Report> | <Log> | <Failure>"}
+            ],
+            "composes": ["validation-gate"],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification"
+            ],
+            "meta": true
+        }
+    ]
+}

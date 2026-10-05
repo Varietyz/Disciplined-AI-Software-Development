@@ -1,0 +1,594 @@
+{
+    "check": {
+        "by": [
+            "the techniques each surface lists, whose results the surface's predicate and evidence decide",
+            "the covered-surfaces check, which validates every surface a module declares covered"
+        ],
+        "population": "every module that declares the surface covered, and the code under that module",
+        "freshness": "a verdict stands until the module's code, its declaration or the surface changes",
+        "refusal": "the covered-surfaces check fails a module that declares an unknown surface; a surface whose evidence is empty stays unknown, never pass",
+        "observation": "the runtime techniques among the surface's list, which locate failures without certifying their absence",
+        "evidence": "fires-and-accepts: a suite plants a surface with no techniques, an empty verdict domain, a blank predicate and a colliding cell, and the bundled surfaces validate clean",
+        "authority": "the evidence the surface's techniques produce, which the verdict is decided from, so an empty evidence set leaves it unknown"
+    },
+    "records": [
+        {
+            "id": "semantic-correctness",
+            "dimension": "meaning",
+            "lens": "meaning",
+            "fit": "An output is correct when it signifies what the input asked for, so the surface compares the meaning of the result with the meaning expected.",
+            "failureModes": [
+                "wrong value",
+                "incorrect algorithm",
+                "wrong computation"
+            ],
+            "techniques": [
+                "unit-testing",
+                "property-based-testing",
+                "differential-testing",
+                "assertion-checking"
+            ],
+            "predicate": {
+                "type": "equivalence",
+                "expression": "output(input) = expected(input)",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "correct-outputs",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "functional-correctness",
+            "dimension": "function",
+            "lens": "behavior",
+            "fit": "A workflow fulfils its role through the actions it takes, so the surface reads the role from the transitions the system actually performs.",
+            "failureModes": [
+                "invalid workflow",
+                "missing transition",
+                "incorrect business rule"
+            ],
+            "techniques": [
+                "integration-testing",
+                "model-checking"
+            ],
+            "predicate": {
+                "type": "invariant",
+                "expression": "transition in allowedTransitions",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "correct-state-evolution",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "state-correctness",
+            "dimension": "state",
+            "lens": "sequential",
+            "fit": "A state is valid only relative to the one before it, so the surface checks conditions in the order they occur.",
+            "failureModes": [
+                "invalid state",
+                "broken state transitions",
+                "violated lifecycle rules"
+            ],
+            "techniques": [
+                "assertion-checking",
+                "property-based-testing"
+            ],
+            "predicate": {
+                "type": "temporal-order",
+                "expression": "state[t+1] in next(state[t])",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "valid-state-transitions",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "interface-correctness",
+            "dimension": "structure",
+            "lens": "structure",
+            "fit": "A contract is an arrangement of fields and types, so the surface compares the shape of a payload with the shape the contract declares.",
+            "failureModes": [
+                "invalid input/output shape",
+                "schema mismatch",
+                "contract violation"
+            ],
+            "techniques": [
+                "runtime-validation",
+                "contract-testing"
+            ],
+            "predicate": {
+                "type": "schema",
+                "expression": "payload models declaredSchema",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "valid-interfaces-and-contracts",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "interaction-correctness",
+            "dimension": "relation",
+            "lens": "relation",
+            "fit": "An interaction is the connection between two components, so the surface checks each request against the response its counterpart owes.",
+            "failureModes": [
+                "wrong API response",
+                "incorrect UI behavior",
+                "invalid component communication"
+            ],
+            "techniques": [
+                "end-to-end-testing",
+                "contract-testing",
+                "integration-testing"
+            ],
+            "predicate": {
+                "type": "equivalence",
+                "expression": "response = contract(request)",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "correct-interactions",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "temporal-correctness",
+            "dimension": "time",
+            "lens": "time",
+            "fit": "Execution time is a duration measured across a run, so the surface compares elapsed time with the deadline.",
+            "failureModes": [
+                "timeout",
+                "deadline miss",
+                "stale data",
+                "starvation"
+            ],
+            "techniques": [
+                "load-testing",
+                "monitoring",
+                "tracing"
+            ],
+            "predicate": {"type": "bound",
+                "expression": "elapsed <= deadline",
+                "grounds": ["ver-ground-truth"]},
+            "invariant": "acceptable-execution-time",
+            "evidence": {"required": true,
+                "source": "measurement",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "concurrency-correctness",
+            "dimension": "behavior",
+            "lens": "time",
+            "fit": "Concurrent code misbehaves only in particular interleavings, so the surface examines what the system does across the orderings time allows.",
+            "failureModes": [
+                "race conditions",
+                "deadlocks",
+                "livelocks",
+                "ordering failures"
+            ],
+            "techniques": [
+                "stress-testing",
+                "deterministic-replay"
+            ],
+            "predicate": {
+                "type": "invariant",
+                "expression": "for-all interleavings: linearizable(history)",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "safe-concurrent-behavior",
+            "evidence": {"required": true,
+                "source": "runtime-observation",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "memory-correctness",
+            "dimension": "composition",
+            "lens": "change",
+            "fit": "A leak shows as the live set growing in content over a long run, so the surface tracks what memory holds as the run develops.",
+            "failureModes": [
+                "memory leaks",
+                "excessive allocation",
+                "fragmentation",
+                "retention bugs"
+            ],
+            "techniques": [
+                "heap-analysis",
+                "profiling"
+            ],
+            "predicate": {
+                "type": "bound",
+                "expression": "liveSet bounded as t grows and retained delta approaches 0",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "controlled-memory-usage",
+            "evidence": {"required": true,
+                "source": "measurement",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "resource-correctness",
+            "dimension": "composition",
+            "lens": "behavior",
+            "fit": "A handle leak is a resource the system acquires and never gives back, so the surface pairs each acquisition with its release.",
+            "failureModes": ["file/socket/connection/handle leaks"],
+            "techniques": [
+                "monitoring",
+                "assertion-checking"
+            ],
+            "predicate": {
+                "type": "absence",
+                "expression": "acquired = released (no leaked handles)",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "acceptable-resource-consumption",
+            "evidence": {"required": true,
+                "source": "runtime-observation",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "performance-correctness",
+            "dimension": "scale",
+            "lens": "statistical",
+            "fit": "Performance depends on load, and one request says little about it, so the surface reads latency and throughput as distributions over many requests.",
+            "failureModes": [
+                "slow algorithms",
+                "excessive CPU",
+                "high latency",
+                "throughput degradation"
+            ],
+            "techniques": [
+                "profiling",
+                "load-testing"
+            ],
+            "predicate": {
+                "type": "bound",
+                "expression": "latency_p99 <= budget and throughput >= floor",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "acceptable-execution-time",
+            "evidence": {"required": true,
+                "source": "measurement",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "reliability-correctness",
+            "dimension": "probability",
+            "lens": "anomaly",
+            "fit": "A crash is a rare departure from normal running, so the surface looks for the inputs and faults that make it likely.",
+            "failureModes": [
+                "crashes",
+                "unhandled exceptions",
+                "process termination"
+            ],
+            "techniques": [
+                "chaos-testing",
+                "fault-injection",
+                "monitoring"
+            ],
+            "predicate": {
+                "type": "absence",
+                "expression": "no input leads to an unhandled fault",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "reliability-under-faults",
+            "evidence": {"required": true,
+                "source": "runtime-observation",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "availability-correctness",
+            "dimension": "probability",
+            "lens": "time",
+            "fit": "Availability is the share of time the service answers, so the surface measures uptime over a period under a declared fault set.",
+            "failureModes": [
+                "service outage",
+                "cascading failure",
+                "degraded service"
+            ],
+            "techniques": [
+                "chaos-testing",
+                "fault-injection"
+            ],
+            "predicate": {
+                "type": "bound",
+                "expression": "uptime >= SLO under the declared fault set",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "availability-under-stress",
+            "evidence": {"required": true,
+                "source": "runtime-observation",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "consistency-correctness",
+            "dimension": "relation",
+            "lens": "statistical",
+            "fit": "Replicas agree or drift as a population, so the surface compares the state of every copy with the others.",
+            "failureModes": [
+                "stale cache",
+                "divergent replicas",
+                "invalid synchronization"
+            ],
+            "techniques": [
+                "differential-testing",
+                "assertion-checking"
+            ],
+            "predicate": {
+                "type": "invariant",
+                "expression": "for-all replicas: converge(state)",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "consistency-across-components",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "data-correctness",
+            "dimension": "identity",
+            "lens": "structure",
+            "fit": "Persisted data is correct when each record is still the same record in the same shape, so the surface checks identity and layout across writes and migrations.",
+            "failureModes": [
+                "corrupted persistence",
+                "invalid migrations",
+                "duplicate records"
+            ],
+            "techniques": [
+                "assertion-checking",
+                "integration-testing"
+            ],
+            "predicate": {
+                "type": "invariant",
+                "expression": "persisted = written and migrate then inverse = identity",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "correct-outputs",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "numerical-correctness",
+            "dimension": "scale",
+            "lens": "anomaly",
+            "fit": "Numbers fail at the edges of their range, so the surface looks for the magnitudes where a result overflows, loses precision or turns into NaN.",
+            "failureModes": [
+                "overflow",
+                "precision loss",
+                "NaN propagation"
+            ],
+            "techniques": [
+                "property-based-testing",
+                "static-analysis"
+            ],
+            "predicate": {
+                "type": "invariant",
+                "expression": "result is finite and not overflow and not NaN",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "numerical-validity",
+            "evidence": {"required": true,
+                "source": "analysis-report",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "security-correctness",
+            "dimension": "cause",
+            "lens": "cause",
+            "fit": "An exploit is a chain from an input to an effect the boundary should prevent, so the surface traces what each input can cause.",
+            "failureModes": [
+                "injection",
+                "privilege escalation",
+                "unsafe deserialization"
+            ],
+            "techniques": [
+                "static-analysis",
+                "fuzz-testing"
+            ],
+            "predicate": {
+                "type": "absence",
+                "expression": "no input yields privilege escalation or injection",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "security-boundaries",
+            "evidence": {"required": true,
+                "source": "analysis-report",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "determinism-correctness",
+            "dimension": "novelty",
+            "lens": "anomaly",
+            "fit": "Nondeterminism appears as an output that differs from the one expected for the same input, so the surface repeats runs and looks for the deviation.",
+            "failureModes": ["the same input producing different outputs"],
+            "techniques": [
+                "property-based-testing",
+                "deterministic-replay"
+            ],
+            "predicate": {
+                "type": "equivalence",
+                "expression": "f(x) = f(x) across runs",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "deterministic-behavior-where-required",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "protocol-correctness",
+            "dimension": "relation",
+            "lens": "sequential",
+            "fit": "A protocol is a relation between parties that holds only in a given order of messages, so the surface checks the sequence against the protocol's grammar.",
+            "failureModes": [
+                "invalid message ordering",
+                "malformed communication sequence"
+            ],
+            "techniques": [
+                "contract-testing",
+                "model-checking"
+            ],
+            "predicate": {
+                "type": "temporal-order",
+                "expression": "messageSeq in protocolGrammar",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "protocol-compliance",
+            "evidence": {"required": true,
+                "source": "test-result",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "configuration-correctness",
+            "dimension": "state",
+            "lens": "structure",
+            "fit": "Configuration is the condition a deployment starts in, and it is valid when its keys and values take the declared shape, so the surface checks it against its schema.",
+            "failureModes": [
+                "invalid environment variables",
+                "feature flag errors",
+                "deployment mismatch"
+            ],
+            "techniques": [
+                "runtime-validation",
+                "static-analysis"
+            ],
+            "predicate": {
+                "type": "schema",
+                "expression": "config models configSchema",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "configuration-validity",
+            "evidence": {"required": true,
+                "source": "analysis-report",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        },
+        {
+            "id": "observability-correctness",
+            "dimension": "meaning",
+            "lens": "frequency",
+            "fit": "A signal is accurate when every event it stands for is emitted each time the event occurs, so the surface compares how often events happen with how often they are reported.",
+            "failureModes": [
+                "missing logs",
+                "incorrect metrics",
+                "broken traces"
+            ],
+            "techniques": [
+                "monitoring",
+                "tracing"
+            ],
+            "predicate": {
+                "type": "invariant",
+                "expression": "for-all event: emitted and measurable",
+                "grounds": ["ver-ground-truth"]
+            },
+            "invariant": "accurate-observability",
+            "evidence": {"required": true,
+                "source": "runtime-observation",
+                "grounds": ["ver-evidence"]},
+            "verdictDomain": [
+                "pass",
+                "fail",
+                "unknown"
+            ]
+        }
+    ]
+}

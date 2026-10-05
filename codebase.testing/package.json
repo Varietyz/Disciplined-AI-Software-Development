@@ -1,0 +1,34 @@
+{
+    "name": "@codebase/testing",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The centralized test surface — every suite for every workspace, mirroring its source tree.",
+    "license": "CC-BY-SA-4.0",
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@banes-lab/content": "*",
+        "@banes-lab/deploy": "*",
+        "@banes-lab/social-share": "*",
+        "@banes-lab/web": "*",
+        "@ssot/govlab": "*",
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@govlab/constants": "*",
+        "@govlab/code-parse": "*",
+        "@govlab/content-fingerprint": "*",
+        "@govlab/context": "*",
+        "@govlab/docs": "*",
+        "@ssot/paths": "*",
+        "@ssot/secrets": "*",
+        "@govlab/patterns": "*",
+        "@govlab/pipeline": "*",
+        "@govlab/quality": "*",
+        "@govlab/stats": "*",
+        "@banes-lab/build-scripts": "*",
+        "@project/scripts": "*",
+        "coordination-surface": "*"
+    }
+}

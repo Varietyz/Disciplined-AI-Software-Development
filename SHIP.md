@@ -72,36 +72,36 @@ A1·b the stages
 
 ```mermaid
 flowchart TB
-command["one command"]
-rederive["the rule index is re-derived from disk before any stage"]
-prepare["dependency integrity, one typecheck per member"]
-unused["dead code, dead exports, dead dependencies"]
-fixers["strip comments, rebuild the graph, run the rewriters"]
-format["the formatter, fix on"]
-lint["every linter, per member, fix on, reading the graph the fixers wrote"]
-test["every suite, then the passing-test floor"]
-build["the site, the diagrams, the chapters, every generator, every derivation"]
-validate["discovery, leaks, graphs, configs, documents"]
-report["the one aggregate · written on every exit"]
-command --> rederive --> prepare --> unused --> fixers --> format --> lint --> test --> build --> validate --> report
-prepare -. fail fast .-> report
-lint -. fail fast .-> report
-test -. fail fast .-> report
+    command["one command"]
+    rederive["the rule index is re-derived from disk before any stage"]
+    prepare["dependency integrity, one typecheck per member"]
+    unused["dead code, dead exports, dead dependencies"]
+    fixers["strip comments, rebuild the graph, run the rewriters"]
+    format["the formatter, fix on"]
+    lint["every linter, per member, fix on, reading the graph the fixers wrote"]
+    test["every suite, then the passing-test floor"]
+    build["the site, the diagrams, the chapters, every generator, every derivation"]
+    validate["discovery, leaks, graphs, configs, documents"]
+    report["the one aggregate · written on every exit"]
+    command --> rederive --> prepare --> unused --> fixers --> format --> lint --> test --> build --> validate --> report
+    prepare -. fail fast .-> report
+    lint -. fail fast .-> report
+    test -. fail fast .-> report
 ```
 
 A1·c narrowing
 
 ```mermaid
 flowchart TB
-whole["No arguments · every stage, whole scope, healing on"]
-member["A member · that member's steps, repo-wide steps reported as skipped"]
-step["A step · only that step"]
-bypass["A bypass · one stage skipped, local iteration only"]
-claim["A completion claim"]
-whole --> claim
-member -. never satisfies .-> claim
-step -. never satisfies .-> claim
-bypass -. never satisfies .-> claim
+    whole["No arguments · every stage, whole scope, healing on"]
+    member["A member · that member's steps, repo-wide steps reported as skipped"]
+    step["A step · only that step"]
+    bypass["A bypass · one stage skipped, local iteration only"]
+    claim["A completion claim"]
+    whole --> claim
+    member -. never satisfies .-> claim
+    step -. never satisfies .-> claim
+    bypass -. never satisfies .-> claim
 ```
 
 ## Scale follows from structure
@@ -124,16 +124,16 @@ B1·a floor, ceiling, count
 
 ```mermaid
 flowchart TB
-work["A body of work"]
-partition["Partition it into concerns that must be able to contradict each other"]
-floor["Floor · the number of concerns"]
-fanin["Measure the fan-in on each shared surface"]
-ceiling["Ceiling · the worst fan-in before claims stop surviving"]
-count["The count · a choice inside the range, with the partition written down"]
-work --> partition --> floor
-partition --> fanin --> ceiling
-floor --> count
-ceiling --> count
+    work["A body of work"]
+    partition["Partition it into concerns that must be able to contradict each other"]
+    floor["Floor · the number of concerns"]
+    fanin["Measure the fan-in on each shared surface"]
+    ceiling["Ceiling · the worst fan-in before claims stop surviving"]
+    count["The count · a choice inside the range, with the partition written down"]
+    work --> partition --> floor
+    partition --> fanin --> ceiling
+    floor --> count
+    ceiling --> count
 ```
 
 ## The deploy is a file operation
@@ -154,18 +154,18 @@ C1·a routes to site
 
 ```mermaid
 flowchart TB
-routes["The served routes"]
-follow["Follow every path a text artifact names"]
-reached["What a page can reach"]
-prune["Delete everything else"]
-backup["Back up what is live"]
-upload["Upload the whole of what is left"]
-check{"Healthy?"}
-done["Live"]
-restore["Restore the backup"]
-routes --> follow --> reached --> prune --> backup --> upload --> check
-check -- yes --> done
-check -- no --> restore
+    routes["The served routes"]
+    follow["Follow every path a text artifact names"]
+    reached["What a page can reach"]
+    prune["Delete everything else"]
+    backup["Back up what is live"]
+    upload["Upload the whole of what is left"]
+    check{"Healthy?"}
+    done["Live"]
+    restore["Restore the backup"]
+    routes --> follow --> reached --> prune --> backup --> upload --> check
+    check -- yes --> done
+    check -- no --> restore
 ```
 
 ## Proxies give way
@@ -184,20 +184,20 @@ D1·a two proxies
 
 ```mermaid
 flowchart TB
-subgraph proxies["The proxy rule"]
-r1["Benchmark everything before any application logic"]
-r2["Synchronous over asynchronous, always"]
-end
-subgraph properties["The property it stands for"]
-p1["A measurement precedes an optimization"]
-p2["One correct answer exists"]
-end
-subgraph holds["What holds the property"]
-h1["Measure a hot path when you have one, never as a rite"]
-h2["Asynchronous by necessity, still one correct answer"]
-end
-r1 --> p1 --> h1
-r2 --> p2 --> h2
+    subgraph proxies["The proxy rule"]
+        r1["Benchmark everything before any application logic"]
+        r2["Synchronous over asynchronous, always"]
+    end
+    subgraph properties["The property it stands for"]
+        p1["A measurement precedes an optimization"]
+        p2["One correct answer exists"]
+    end
+    subgraph holds["What holds the property"]
+        h1["Measure a hot path when you have one, never as a rite"]
+        h2["Asynchronous by necessity, still one correct answer"]
+    end
+    r1 --> p1 --> h1
+    r2 --> p2 --> h2
 ```
 
 ## The honest gaps

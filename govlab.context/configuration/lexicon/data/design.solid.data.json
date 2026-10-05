@@ -1,0 +1,107 @@
+{
+    "category": "solid-object-oriented-design",
+    "records": [
+        {
+            "name": "Broken Inheritance",
+            "kind": "anti-pattern",
+            "definition": "A subclass that violates its base type's contract, for example by an override that changes the expected inputs or outputs, so substituting it breaks callers that rely on the base behavior.",
+            "aliases": ["Incompatible Override"]
+        },
+        {
+            "name": "Fat Interface",
+            "distinctFrom": [
+                {
+                    "id": "architecture:repository-dump",
+                    "reason": "A fat interface bundles unrelated operations for its clients, while a repository dump is a repository grown into a second service layer."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "An interface bundling many unrelated operations, forcing clients to depend on methods they never call."
+        },
+        {
+            "name": "Switch-Based Extension",
+            "kind": "anti-pattern",
+            "definition": "Extending behavior by editing a growing switch or conditional on a type instead of adding a new polymorphic type."
+        },
+        {
+            "name": "Type Switching",
+            "kind": "anti-pattern",
+            "definition": "Branching on an object's concrete type instead of dispatching through a shared polymorphic interface or a visitor's double dispatch.",
+            "aliases": ["Type-Switch Dispatch"]
+        },
+        {
+            "name": "Consumer-Specific Contracts",
+            "kind": "capability",
+            "definition": "The ability to give each client an interface exposing only the operations it uses."
+        },
+        {
+            "name": "Feature Extension without Modification",
+            "kind": "capability",
+            "definition": "The ability to add new behavior by writing new code rather than editing existing, tested code."
+        },
+        {
+            "name": "Contract Preservation",
+            "distinctFrom": [
+                {
+                    "id": "architecture:invariant",
+                    "reason": "Contract preservation binds a subtype to all of its base type's guarantees, while an invariant is one guarantee that holds in every state."
+                },
+                {
+                    "id": "architecture:postconditions",
+                    "reason": "Contract preservation binds a subtype to every guarantee, while a postcondition is the one an operation gives on return."
+                },
+                {
+                    "id": "architecture:preconditions",
+                    "reason": "Contract preservation binds a subtype to every guarantee, while a precondition is what an operation needs before it runs."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that a subtype honor every behavioral guarantee of the type it replaces."
+        },
+        {
+            "name": "Role-Specific Interfaces",
+            "kind": "constraint",
+            "definition": "The requirement that interfaces be defined per client role rather than as one general-purpose surface."
+        },
+        {
+            "name": "Interface Proliferation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which splitting interfaces finely multiplies the number of small interfaces to manage."
+        },
+        {
+            "name": "Narrow Specialized Behavior",
+            "kind": "quality-attribute",
+            "definition": "The degree to which honoring a base type's contract constrains a subtype from specializing its own behavior."
+        },
+        {
+            "name": "Extract Interface",
+            "kind": "technique",
+            "definition": "A technique for declaring the operations clients use as an interface, so the clients depend on it instead of on the class."
+        },
+        {
+            "name": "Extract Role Interface",
+            "kind": "technique",
+            "definition": "A technique for splitting the operations one client role uses into an interface of their own."
+        },
+        {
+            "name": "Split Interface",
+            "kind": "technique",
+            "definition": "A technique for dividing a broad interface into smaller ones, each holding operations that change together."
+        },
+        {
+            "name": "Replace Inheritance with Delegation",
+            "kind": "technique",
+            "definition": "A technique for replacing a subclass with a class that holds the former base as a field and forwards to it."
+        },
+        {
+            "name": "Split Hierarchy",
+            "kind": "technique",
+            "definition": "A technique for dividing a class hierarchy whose subtypes do not honor one contract into hierarchies that each do."
+        },
+        {
+            "name": "Invert Dependency",
+            "kind": "technique",
+            "definition": "A technique for making a high-level module own an abstraction that a low-level module implements."
+        }
+    ]
+}

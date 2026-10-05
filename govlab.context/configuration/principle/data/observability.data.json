@@ -1,0 +1,516 @@
+{
+    "category": "Observability / Auditability / Traceability",
+    "check": {
+        "population": "every critical path, sensitive operation, request and message the telemetry is meant to cover",
+        "freshness": "a verdict stands until a code path, a telemetry field or an alert threshold changes",
+        "refusal": "the logging, tracing or audit policy check fails a change that leaves a covered path without its signal",
+        "observation": "emitted logs, metrics, spans and audit records, compared with the paths that should emit them",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the declared telemetry coverage, which the emitted signals are compared against"
+    },
+    "records": [
+        {
+            "id": "observability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:fault-tolerance",
+                    "reason": "Observability is seeing internal behavior, while fault tolerance is operating correctly through component failure."
+                },
+                {
+                    "id": "architecture:auditability",
+                    "reason": "Observability infers internal behavior from signals, while auditability ties sensitive actions to their actors afterwards."
+                },
+                {
+                    "id": "architecture:traceability",
+                    "reason": "Observability is the whole view from logs, metrics and traces, while traceability is following one request or change end to end."
+                },
+                {
+                    "id": "lexicon:cost-noise",
+                    "reason": "Observability is the insight telemetry gives, while cost and noise are what collecting more of it adds."
+                },
+                {
+                    "id": "lexicon:debuggability",
+                    "reason": "Observability is inferring behavior in production, while debuggability is how easily the developer locates a fault."
+                },
+                {
+                    "id": "lexicon:fault-isolation",
+                    "reason": "Observability is seeing a failure, while fault isolation is keeping it from spreading."
+                }
+            ],
+            "name": "Observability",
+            "definition": "The degree to which a system's internal behavior in production can be inferred from the logs, metrics and traces it emits.",
+            "type": "quality-attribute",
+            "scope": [
+                "service",
+                "system",
+                "runtime"
+            ],
+            "requires": [
+                "Logs",
+                "Metrics",
+                "Traces"
+            ],
+            "reinforces": [
+                "Resilience",
+                "Debuggability"
+            ],
+            "enables": ["Incident Diagnosis"],
+            "conflicts_with": [
+                "Opaque System",
+                "Unobservable Failure"
+            ],
+            "tensions_with": ["Cost/Noise"],
+            "violated_by": ["lexicon:blind-operation"],
+            "detected_by": ["missing telemetry around critical paths"],
+            "measured_by": [
+                "telemetry coverage",
+                "MTTR"
+            ],
+            "refactored_by": [
+                "lexicon:structured-log",
+                "lexicon:metrics",
+                "architecture:distributed-tracing"
+            ],
+            "enforced_by": ["observability standards"],
+            "severity": "contextual",
+            "mandatoryFor": "production systems",
+            "exemplar": {
+                "before": "async function processFoo(foo: Foo) {\n  await fooStore.save(foo);\n}",
+                "after": "async function processFoo(foo: Foo, telemetry: Telemetry) {\n  return telemetry.trace(\"foo.process\", { fooId: foo.id }, async span => {\n    await fooStore.save(foo);\n    span.event(\"foo.saved\");\n    telemetry.count(\"foo.processed\", 1);\n  });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "logging",
+            "name": "Logging",
+            "definition": "A mechanism that records structured events with their context as the code runs.",
+            "type": "mechanism",
+            "scope": [
+                "application",
+                "service"
+            ],
+            "requires": [
+                "Structured Events",
+                "Context"
+            ],
+            "reinforces": [
+                "Traceability",
+                "Debugging"
+            ],
+            "enables": ["Incident Analysis"],
+            "conflicts_with": [
+                "Silent Failure",
+                "Log-as-Control-Flow"
+            ],
+            "tensions_with": ["Noise/Personal Data Leakage"],
+            "violated_by": ["architecture:unobservable-failure"],
+            "detected_by": ["absence of logs on error/business events"],
+            "measured_by": [
+                "log coverage",
+                "signal/noise ratio"
+            ],
+            "refactored_by": [
+                "lexicon:structured-log",
+                "lexicon:pass-context-explicitly"
+            ],
+            "enforced_by": [
+                "logging policy",
+                "linting"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "console.log(\"saved\", foo);",
+                "after": "logger.info(\"foo.saved\", { fooId: foo.id, version: foo.version });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "monitoring",
+            "distinctFrom": [
+                {
+                    "id": "architecture:alerting",
+                    "reason": "Monitoring collects and compares metrics over time, while alerting notifies a responder when a condition holds past its threshold."
+                },
+                {
+                    "id": "lexicon:metrics",
+                    "reason": "Monitoring is the mechanism that collects and compares, while metrics are the measurements it collects."
+                },
+                {
+                    "id": "lexicon:guardrails",
+                    "reason": "Monitoring observes behavior after the fact, while guardrails bound what a model may output or do as it runs."
+                }
+            ],
+            "name": "Monitoring",
+            "definition": "A mechanism that collects metrics about resources and service levels over time and compares them with thresholds.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "infrastructure"
+            ],
+            "requires": [
+                "Metrics",
+                "Thresholds"
+            ],
+            "reinforces": ["Reliability"],
+            "enables": ["Failure Detection"],
+            "conflicts_with": ["Blind Operation"],
+            "tensions_with": ["Alert Noise"],
+            "violated_by": ["lexicon:blind-operation"],
+            "detected_by": ["missing dashboards/SLI metrics"],
+            "measured_by": [
+                "metric coverage",
+                "detection latency"
+            ],
+            "refactored_by": [
+                "lexicon:metrics",
+                "lexicon:service-level-objectives"
+            ],
+            "enforced_by": ["production readiness checklist"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "setInterval(() => report(fooQueue.length), 60_000);",
+                "after": "metrics.gauge(\"foo.queue.depth\", () => fooQueue.length);\nmetrics.histogram(\"foo.processing.duration_ms\", fooProcessingDuration);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "alerting",
+            "name": "Alerting",
+            "definition": "A mechanism that notifies an on-call responder when a monitored condition holds for longer than its threshold.",
+            "type": "mechanism",
+            "scope": [
+                "operations",
+                "service"
+            ],
+            "requires": [
+                "Monitoring",
+                "Thresholds"
+            ],
+            "reinforces": ["Incident Response"],
+            "enables": ["Timely Intervention"],
+            "conflicts_with": [
+                "Silent Failure",
+                "Observability Noise"
+            ],
+            "tensions_with": ["Alert Fatigue"],
+            "violated_by": ["architecture:unobservable-failure"],
+            "detected_by": ["incident reported by customers before monitoring caught it"],
+            "measured_by": [
+                "MTTD",
+                "alert precision"
+            ],
+            "refactored_by": [
+                "lexicon:alert-on-critical-failure",
+                "lexicon:track-rule-metrics"
+            ],
+            "enforced_by": ["on-call policy"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "if (errorRate > 0.05) notify(\"foo errors\");",
+                "after": "alerts.define(\"FooErrorBudgetBurn\", {\n  condition: rate(\"foo.errors\", \"5m\") > 0.05,\n  for: \"10m\",\n  severity: \"critical\",\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "auditability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:traceability",
+                    "reason": "Auditability ties each sensitive action to its actor, target, time and reason, while traceability follows a request or change end to end."
+                },
+                {
+                    "id": "lexicon:storage-privacy",
+                    "reason": "Auditability is keeping the history, while storage and privacy are the costs of keeping it."
+                },
+                {
+                    "id": "architecture:reproducibility",
+                    "reason": "Auditability records what happened, while reproducibility reruns it and gets the same output."
+                }
+            ],
+            "name": "Auditability",
+            "definition": "The degree to which each sensitive action can be traced afterwards to its actor, target, time and reason.",
+            "type": "quality-attribute",
+            "scope": [
+                "system",
+                "data",
+                "security"
+            ],
+            "requires": [
+                "Audit Logging",
+                "Traceability"
+            ],
+            "reinforces": ["Compliance"],
+            "enables": ["Accountability"],
+            "conflicts_with": ["Opaque Mutation"],
+            "tensions_with": ["Storage/Privacy"],
+            "violated_by": ["lexicon:untracked-mutation"],
+            "detected_by": ["missing audit event for sensitive operation"],
+            "measured_by": ["audit event coverage"],
+            "refactored_by": [
+                "architecture:audit-logging",
+                "lexicon:data-change-audit"
+            ],
+            "enforced_by": ["compliance gates"],
+            "severity": "contextual",
+            "mandatoryFor": "regulated or sensitive systems",
+            "exemplar": {
+                "before": "function renameFoo(foo: Foo, name: string) { foo.name = name; }",
+                "after": "function renameFoo(foo: Foo, name: string, actor: Actor) {\n  const previous = foo.name;\n  foo.rename(name);\n  audit.append({ action: \"FooRenamed\", fooId: foo.id, actorId: actor.id, previous, next: name });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "audit-logging",
+            "name": "Audit Logging",
+            "definition": "A mechanism that appends an immutable record of each sensitive operation, naming the actor, the action, the target and the time.",
+            "type": "mechanism",
+            "scope": [
+                "security",
+                "compliance",
+                "data mutation"
+            ],
+            "requires": [
+                "Actor",
+                "Action",
+                "Timestamp",
+                "Target"
+            ],
+            "reinforces": [
+                "Auditability",
+                "Traceability"
+            ],
+            "enables": ["Forensics"],
+            "conflicts_with": ["Untracked Mutation"],
+            "tensions_with": ["Privacy"],
+            "violated_by": ["lexicon:opaque-mutation"],
+            "detected_by": ["missing audit instrumentation"],
+            "measured_by": ["audit coverage"],
+            "refactored_by": ["architecture:append-only-log"],
+            "enforced_by": [
+                "policy-as-code",
+                "tests"
+            ],
+            "severity": "contextual",
+            "mandatoryFor": "sensitive systems",
+            "exemplar": {
+                "before": "logger.info(`user ${user.id} changed foo ${foo.id}`);",
+                "after": "auditLog.append({\n  eventId: eventId(),\n  action: \"FOO_UPDATE\",\n  actorId: user.id,\n  resourceId: foo.id,\n  occurredAt: clock.now().toISOString(),\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "traceability",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:metadata-propagation-overhead",
+                    "reason": "Traceability is following a request end to end, while propagation overhead is the size and processing that carrying its metadata costs."
+                }
+            ],
+            "name": "Traceability",
+            "definition": "The degree to which a request, workflow or change can be followed end to end through correlated records.",
+            "type": "quality-attribute",
+            "scope": [
+                "request",
+                "workflow",
+                "change"
+            ],
+            "requires": [
+                "Correlation ID",
+                "Logs/Traces"
+            ],
+            "reinforces": [
+                "Debuggability",
+                "Auditability"
+            ],
+            "enables": ["End-to-End Causality"],
+            "conflicts_with": ["Anonymous Flow"],
+            "tensions_with": ["Metadata Propagation Overhead"],
+            "violated_by": ["lexicon:uncorrelated-events"],
+            "detected_by": ["missing correlation propagation"],
+            "measured_by": ["trace completeness"],
+            "refactored_by": [
+                "architecture:correlation-id",
+                "architecture:distributed-tracing"
+            ],
+            "enforced_by": [
+                "middleware",
+                "tracing policy"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "await processFoo(foo);",
+                "after": "const trace = traceContext.start({ operation: \"processFoo\", fooId: foo.id });\nawait processFoo(foo, trace);\ntrace.finish();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "correlation-id",
+            "distinctFrom": [
+                {
+                    "id": "architecture:distributed-tracing",
+                    "reason": "A correlation id is one identifier carried through a request, while distributed tracing records each call as a timed span of one trace."
+                }
+            ],
+            "name": "Correlation ID",
+            "definition": "A mechanism that attaches one identifier to a request and carries it through every call, message and log line the request causes.",
+            "type": "mechanism",
+            "scope": [
+                "request",
+                "message",
+                "workflow"
+            ],
+            "requires": ["Context Propagation"],
+            "reinforces": ["Distributed Tracing"],
+            "enables": ["Request-Level Traceability"],
+            "conflicts_with": ["Uncorrelated Events"],
+            "tensions_with": ["Header/Metadata Management"],
+            "violated_by": ["lexicon:uncorrelated-events"],
+            "detected_by": ["missing correlation field"],
+            "measured_by": ["correlation coverage"],
+            "refactored_by": ["architecture:chain-of-responsibility-pattern"],
+            "enforced_by": ["logging/tracing standards"],
+            "severity": "contextual",
+            "mandatoryFor": "distributed systems",
+            "exemplar": {
+                "before": "await http.post(\"/bar\", { fooId: foo.id });",
+                "after": "const correlationId = request.headers.get(\"X-Correlation-ID\") ?? idSource.next();\nawait http.post(\"/bar\", { fooId: foo.id }, { headers: { \"X-Correlation-ID\": correlationId } });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "causation-id",
+            "name": "Causation ID",
+            "definition": "A mechanism that stamps each event with the identifier of the event that caused it.",
+            "type": "mechanism",
+            "scope": [
+                "event",
+                "message",
+                "workflow"
+            ],
+            "requires": ["Event Metadata"],
+            "reinforces": [
+                "Causality",
+                "Audit Trail"
+            ],
+            "enables": ["Cause-Effect Reconstruction"],
+            "conflicts_with": ["Unlinked Events"],
+            "tensions_with": ["Metadata Verbosity"],
+            "violated_by": ["lexicon:unlinked-events"],
+            "detected_by": ["missing causation field in event metadata"],
+            "measured_by": ["causation coverage"],
+            "refactored_by": [],
+            "enforced_by": ["event schema rules"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "events.publish({ id: eventId(), type: \"BarCreated\", fooId: event.fooId });",
+                "after": "events.publish({\n  id: eventId(),\n  type: \"BarCreated\",\n  fooId: event.fooId,\n  correlationId: event.correlationId,\n  causationId: event.id,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "distributed-tracing",
+            "name": "Distributed Tracing",
+            "definition": "A mechanism that propagates a trace context across service calls and records each call as a timed span of one trace.",
+            "type": "mechanism",
+            "scope": [
+                "distributed system",
+                "service mesh"
+            ],
+            "requires": ["Trace Context Propagation"],
+            "reinforces": [
+                "Observability",
+                "Causality"
+            ],
+            "enables": ["Latency/Failure Root Cause Analysis"],
+            "conflicts_with": ["Opaque Distributed Calls"],
+            "tensions_with": ["Overhead/Sampling"],
+            "violated_by": ["lexicon:opaque-distributed-calls"],
+            "detected_by": [
+                "broken traces",
+                "missing spans"
+            ],
+            "measured_by": [
+                "trace completeness",
+                "span coverage"
+            ],
+            "refactored_by": [],
+            "enforced_by": ["observability policy"],
+            "severity": "contextual",
+            "mandatoryFor": "distributed systems",
+            "exemplar": {
+                "before": "await fooService.call();\nawait barService.call();",
+                "after": "await tracer.span(\"foo.request\", async span => {\n  await fooService.call({ traceparent: span.traceparent });\n  await barService.call({ traceparent: span.traceparent });\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "slo-sli",
+            "name": "SLO/SLI",
+            "aliases": [
+                "Service Level Objective",
+                "Service Level Indicator",
+                "Objective Reliability Targets"
+            ],
+            "definition": "A rule or precondition that a service's reliability is stated as a measured indicator with an objective and an error budget over a window.",
+            "type": "constraint",
+            "scope": [
+                "service",
+                "reliability",
+                "operations"
+            ],
+            "requires": ["Monitoring"],
+            "reinforces": [
+                "Observability",
+                "Alerting"
+            ],
+            "enables": ["Error-Budget Decisions"],
+            "conflicts_with": ["Vague Reliability Goals"],
+            "tensions_with": ["Feature Velocity"],
+            "violated_by": ["lexicon:vague-reliability-goals"],
+            "detected_by": ["no measured indicator behind reliability claims"],
+            "measured_by": ["SLO attainment vs error budget"],
+            "refactored_by": ["lexicon:service-level-objectives"],
+            "enforced_by": ["reliability review"],
+            "severity": "contextual",
+            "mandatoryFor": "production systems",
+            "exemplar": {
+                "before": "alert.when(latency > 1000);",
+                "after": "const fooLatencySli = ratio(\"foo.requests.fast\", \"foo.requests.total\");\ndefineSLO(\"foo-latency\", { sli: fooLatencySli, objective: 0.99, window: \"30d\", errorBudget: 0.01 });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "dashboards",
+            "name": "Dashboards",
+            "definition": "Descriptive data about a system's key signals, arranged as panels that show health and trends at a glance.",
+            "type": "artifact",
+            "scope": [
+                "service",
+                "operations",
+                "visibility"
+            ],
+            "requires": ["Monitoring"],
+            "reinforces": [
+                "Observability",
+                "Traceability"
+            ],
+            "enables": [
+                "At-a-Glance System Health",
+                "Trend Visibility"
+            ],
+            "conflicts_with": ["Log-Grep-Only Diagnosis"],
+            "tensions_with": ["Dashboard Sprawl"],
+            "violated_by": ["lexicon:log-grep-only-diagnosis"],
+            "detected_by": ["no curated view of key signals"],
+            "measured_by": ["time-to-diagnose during incidents"],
+            "refactored_by": ["architecture:monitoring"],
+            "enforced_by": ["operations review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "grepLogsForFooErrors();",
+                "after": "const fooDashboard = dashboard(\"foo-health\", {\n  panels: [rate(\"foo.errors\"), histogram(\"foo.latency\"), gauge(\"foo.queue.depth\")],\n});",
+                "lang": "ts"
+            }
+        }
+    ]
+}

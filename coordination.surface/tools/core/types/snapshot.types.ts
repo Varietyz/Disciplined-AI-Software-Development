@@ -27,7 +27,7 @@ export interface Measured {
     readonly frozenAnchors: Set<string>;
 }
 
-export interface Judgement {
+export interface Judgment {
     readonly path: string;
     readonly verdict: Verdict;
     readonly finding: Finding | null;

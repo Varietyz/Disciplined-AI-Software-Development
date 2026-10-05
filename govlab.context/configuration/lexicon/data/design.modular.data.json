@@ -1,0 +1,371 @@
+{
+    "category": "core-modular-design",
+    "records": [
+        {
+            "name": "Centralized Runtime Control",
+            "distinctFrom": [
+                {
+                    "id": "architecture:cyclic-deployment-dependency",
+                    "reason": "Centralized runtime control makes modules unable to act without one controller, while a cyclic deployment dependency makes services deploy in lockstep."
+                },
+                {
+                    "id": "lexicon:shared-database",
+                    "reason": "Centralized runtime control concentrates control flow, while a shared database concentrates data."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Concentrating runtime control in one place so otherwise-independent modules cannot act without it."
+        },
+        {
+            "name": "Context-Specific Coupling",
+            "kind": "anti-pattern",
+            "definition": "Baking one caller's specific assumptions into a component, preventing its reuse elsewhere."
+        },
+        {
+            "name": "Copy-Paste Programming",
+            "kind": "anti-pattern",
+            "definition": "Duplicating code by copying and pasting instead of extracting a shared abstraction."
+        },
+        {
+            "name": "Cross-Cutting Leakage",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:mixed-layers",
+                    "reason": "Cross-cutting leakage spreads one concern such as logging through many modules, while mixed layers put several layers' logic in one place."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Letting a concern such as logging or security bleed into unrelated modules throughout the code."
+        },
+        {
+            "name": "Deep Inheritance Hierarchy",
+            "kind": "anti-pattern",
+            "definition": "Stacking many layers of subclassing, so behavior is scattered and fragile to change."
+        },
+        {
+            "name": "Exposed Internals",
+            "distinctFrom": [
+                {
+                    "id": "architecture:feature-envy",
+                    "reason": "Exposed internals are a module opening its own details, while feature envy is a module working mostly on another's data."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Making a module's internal fields and workings reachable from outside, whether public outright or through trivial getters and setters, so callers depend on details that should be hidden and its invariants go unprotected.",
+            "aliases": ["Anemic Encapsulation"]
+        },
+        {
+            "name": "Implementation-Specific Contracts",
+            "kind": "anti-pattern",
+            "definition": "Defining an interface around one implementation's quirks, so no alternative can satisfy it."
+        },
+        {
+            "name": "Leaky Abstraction",
+            "kind": "anti-pattern",
+            "definition": "An abstraction that forces callers to understand its underlying implementation to use it correctly."
+        },
+        {
+            "name": "Mixed Layers",
+            "kind": "anti-pattern",
+            "definition": "Interleaving different architectural layers' logic in one place instead of keeping each concern separate."
+        },
+        {
+            "name": "Monolithic Procedures",
+            "kind": "anti-pattern",
+            "definition": "Writing large all-in-one procedures that cannot be recombined from smaller, independent parts."
+        },
+        {
+            "name": "Shared Runtime Dependency",
+            "kind": "anti-pattern",
+            "definition": "Coupling supposedly-independent modules through a shared runtime component they all depend on."
+        },
+        {
+            "name": "Tight Coupling",
+            "distinctFrom": [
+                {
+                    "id": "architecture:circular-dependency",
+                    "reason": "Tight coupling is any binding that forces changes together, while a circular dependency is the particular case of a cycle."
+                },
+                {
+                    "id": "architecture:inappropriate-intimacy",
+                    "reason": "Tight coupling is any binding that forces changes together, while inappropriate intimacy is the case of depending on another module's internals."
+                },
+                {
+                    "id": "architecture:message-chain",
+                    "reason": "Tight coupling is any binding that forces changes together, while a message chain is the case of a client walking a chain of objects."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Binding components so closely that a change in one forces changes in the others."
+        },
+        {
+            "name": "Bounded Context Ownership",
+            "kind": "capability",
+            "definition": "The ability for a team or module to own and control one bounded part of the system."
+        },
+        {
+            "name": "Change Isolation",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:invariant-protection",
+                    "reason": "Change isolation keeps a change from reaching callers, while invariant protection keeps an object's rules holding."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to confine the impact of a change behind a boundary so callers are unaffected."
+        },
+        {
+            "name": "Independent Testing",
+            "kind": "capability",
+            "definition": "The ability to test a component in isolation without standing up its collaborators.",
+            "aliases": ["Test Isolation"]
+        },
+        {
+            "name": "Internal Refactoring",
+            "kind": "capability",
+            "definition": "The ability to rework a module's internals freely as long as its interface stays stable."
+        },
+        {
+            "name": "Invariant Protection",
+            "kind": "capability",
+            "definition": "The ability to guarantee an object's rules always hold by controlling all access to its state."
+        },
+        {
+            "name": "Product Lines",
+            "kind": "capability",
+            "definition": "The ability to build a family of related products from shared, reusable components."
+        },
+        {
+            "name": "Shared Libraries",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:product-lines",
+                    "reason": "Shared libraries reuse common functionality across projects, while product lines build a family of related products from shared components."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to factor common functionality into libraries reused across projects."
+        },
+        {
+            "name": "Strategy Swap",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:deferred-implementation-choice",
+                    "reason": "A strategy swap replaces one implementation with another, while deferred implementation choice postpones picking one until runtime."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to replace one interchangeable algorithm or implementation, such as a plugin at a declared seam, with another without modifying its host.",
+            "aliases": ["Plugin Swap"]
+        },
+        {
+            "name": "Vendor Swap",
+            "kind": "capability",
+            "definition": "The ability to replace one vendor's implementation with another behind a stable interface."
+        },
+        {
+            "name": "Delegation",
+            "kind": "technique",
+            "definition": "Forwarding work to a contained collaborator object rather than inheriting the behavior."
+        },
+        {
+            "name": "Deep Optimization",
+            "kind": "activity",
+            "definition": "The practice of optimizing heavily against a specific implementation's traits, which ties code to it."
+        },
+        {
+            "name": "YAGNI",
+            "kind": "principle",
+            "definition": "You Aren't Gonna Need It: build only what current requirements demand and defer speculative generality.",
+            "aliases": ["You Aren't Gonna Need It"]
+        },
+        {
+            "name": "Canonical Source",
+            "kind": "constraint",
+            "definition": "The requirement that each piece of knowledge have one authoritative definition rather than copies."
+        },
+        {
+            "name": "Contract Compatibility",
+            "kind": "constraint",
+            "definition": "The requirement that every alternative implementation fully honor the same interface contract.",
+            "aliases": ["Interface Conformance"]
+        },
+        {
+            "name": "Explicit Interfaces",
+            "kind": "constraint",
+            "definition": "The requirement that a module interact only through declared interfaces, not its hidden internals."
+        },
+        {
+            "name": "Interface Definition",
+            "kind": "constraint",
+            "definition": "The requirement that an abstraction expose a defined interface separate from its implementation."
+        },
+        {
+            "name": "Stable Semantics",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:interface-definition",
+                    "reason": "Stable semantics keeps an abstraction's meaning while implementations change, while an interface definition gives it a declared surface apart from its implementation."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that an abstraction's meaning stay consistent even as its implementations change."
+        },
+        {
+            "name": "Coordination Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree of extra coordination required when components are made fully independent."
+        },
+        {
+            "name": "Excessive Fragmentation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which splitting responsibilities too finely scatters logic across many small units."
+        },
+        {
+            "name": "Locality of Behavior",
+            "kind": "quality-attribute",
+            "definition": "The degree to which keeping related behavior together can conflict with removing all duplication."
+        },
+        {
+            "name": "Over-Generalization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which making code reusable for every case adds abstraction that harms clarity."
+        },
+        {
+            "name": "Over-Layering",
+            "kind": "quality-attribute",
+            "definition": "The degree to which adding separating layers introduces indirection that outweighs the separation gained."
+        },
+        {
+            "name": "Over-Specialization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which pursuing tight cohesion can narrow a unit's purpose too far to reuse."
+        },
+        {
+            "name": "Performance Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree of runtime cost added by composing behavior from many small, indirected parts."
+        },
+        {
+            "name": "Simplicity for Trivial Reuse",
+            "kind": "quality-attribute",
+            "definition": "The degree to which composition adds wiring that inheritance would make simpler for trivial reuse."
+        },
+        {
+            "name": "Specialized Optimization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which optimizing for one implementation undermines the ability to swap implementations."
+        },
+        {
+            "name": "Extract Class",
+            "kind": "technique",
+            "definition": "A technique for moving a cohesive group of fields and methods out of a class into a new class of their own."
+        },
+        {
+            "name": "Extract Module",
+            "kind": "technique",
+            "definition": "A technique for moving one responsibility out of a module into a new module with its own entry point."
+        },
+        {
+            "name": "Split Module",
+            "kind": "technique",
+            "definition": "A technique for dividing a module into modules that each hold one reason to change."
+        },
+        {
+            "name": "Move Behavior to Its Owner",
+            "kind": "technique",
+            "definition": "A technique for moving a method or function to the module that owns the data it reads and writes."
+        },
+        {
+            "name": "Extract Function",
+            "kind": "technique",
+            "definition": "A technique for moving a fragment of a long function into a named function of its own."
+        },
+        {
+            "name": "Split Method",
+            "kind": "technique",
+            "definition": "A technique for dividing a method that branches on a flag into one method per behavior."
+        },
+        {
+            "name": "Inline Abstraction",
+            "kind": "technique",
+            "definition": "A technique for removing an interface, layer or wrapper that adds no policy and calling its single implementation directly."
+        },
+        {
+            "name": "Hide Delegate",
+            "kind": "technique",
+            "definition": "A technique for adding a method on an object that forwards to the object behind it, so clients stop navigating the chain."
+        },
+        {
+            "name": "Encapsulate State",
+            "kind": "technique",
+            "definition": "A technique for making a module's state private and exposing only operations that keep its rules."
+        },
+        {
+            "name": "Restrict Exports",
+            "kind": "technique",
+            "definition": "A technique for narrowing a module's public surface to the operations its consumers need."
+        },
+        {
+            "name": "Introduce Parameter Object",
+            "kind": "technique",
+            "definition": "A technique for replacing a group of parameters that travel together with one named object."
+        },
+        {
+            "name": "Separate Query from Command",
+            "kind": "technique",
+            "definition": "A technique for splitting an operation that both returns data and changes state into a query and a command."
+        },
+        {
+            "name": "Collapse Layers",
+            "kind": "technique",
+            "definition": "A technique for merging layers that only pass calls through, so a simple operation crosses fewer boundaries."
+        },
+        {
+            "name": "Preserve Only Real Boundaries",
+            "kind": "technique",
+            "definition": "A technique for keeping an abstraction only where it separates parts that change for different reasons."
+        },
+        {
+            "name": "Split by Domain",
+            "kind": "technique",
+            "definition": "A technique for dividing a catch-all module into modules named for the domain concepts they serve."
+        },
+        {
+            "name": "Centralize the Rule",
+            "kind": "technique",
+            "definition": "A technique for gathering every copy of one rule into a single definition that the copies are replaced by."
+        },
+        {
+            "name": "Explicit Dependency",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:explicit-dependencies",
+                    "reason": "Explicit dependency is the technique of declaring what a module needs, while explicit dependencies is the degree to which a component's needs are visible."
+                }
+            ],
+            "kind": "technique",
+            "definition": "A technique for declaring what a module needs as parameters or imports instead of reaching it through global state."
+        },
+        {
+            "name": "Localize Effect",
+            "kind": "technique",
+            "definition": "A technique for confining a change of global behavior to the scope that needs it."
+        },
+        {
+            "name": "Restrict Global Mutation",
+            "kind": "technique",
+            "definition": "A technique for forbidding writes to global objects outside one owning module."
+        },
+        {
+            "name": "Split Abstraction",
+            "kind": "technique",
+            "definition": "A technique for dividing an abstraction that grew flags for each caller into abstractions that fit one use each."
+        },
+        {
+            "name": "Define Module Boundaries",
+            "kind": "technique",
+            "definition": "A technique for declaring which module owns each piece of code and which entry points other modules may use."
+        }
+    ]
+}

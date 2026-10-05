@@ -22,7 +22,7 @@ Work that skips the question of worth can be done well and still turn out to be 
 
 For this reason worth is decided before any work begins, and what the work will not do is stated as plainly as what it will. The approaches that are allowed are ranked before any effort is spent, rather than the first workable one being taken. In practice, the objective is written in one sentence before the first step, worded so the result can be checked against it. What is out of scope is written beside it, because scope that is never stated grows quietly. Each approach is weighed by what it achieves against what it costs, the reason the chosen one won is written down, and only then does planning begin.
 
-To check this, read the objective again once the work is done. The result should be the thing the sentence named; a result that needs a new sentence to describe it answered a different question. Worth is not computed anywhere in this method: no tool weighs utility against cost across the approaches for you. The gate is a judgement I make and write down, and saying so openly is what stops it from being mistaken for a mechanism.
+To check this, read the objective again once the work is done. The result should be the thing the sentence named; a result that needs a new sentence to describe it answered a different question. Worth is not computed anywhere in this method: no tool weighs utility against cost across the approaches for you. The gate is a judgment I make and write down, and saying so openly is what stops it from being mistaken for a mechanism.
 
 The gate has a particular shape, and the shape is what makes it hold. The intent node produces an objective and a ranking, never a simple yes. A ranking needs more than one option, so a plan with only one option has not ranked anything and has not passed the gate. Each option records what it achieves and what it costs, and the chosen one is the option where that difference is largest among those that are allowed at all. An option that would cross a hard limit is not a worse option; it is not an option. Whether a change is allowed is asked again at the [constrain](ontology/REASONING.md#stage-constrain) node once the work exists, because a plan that looked acceptable on paper can still produce a change that is not. [When rules collide](PLAN.md#when-rules-collide) applies the same gate to two rules that meet on one piece of code.
 
@@ -34,16 +34,16 @@ A1·a the worth gate
 
 ```mermaid
 flowchart TB
-request["A request"]
-objective["The objective · one sentence the result is checked against"]
-nongoal["The non-goal · the nearest thing this will not do"]
-branches["The allowed approaches"]
-rank{"Highest worth · utility minus cost?"}
-chosen["The chosen approach, and why the others lost"]
-stop["Below worth · redirect or stop"]
-request --> objective --> nongoal --> branches --> rank
-rank -- yes --> chosen
-rank -- no --> stop
+    request["A request"]
+    objective["The objective · one sentence the result is checked against"]
+    nongoal["The non-goal · the nearest thing this will not do"]
+    branches["The allowed approaches"]
+    rank{"Highest worth · utility minus cost?"}
+    chosen["The chosen approach, and why the others lost"]
+    stop["Below worth · redirect or stop"]
+    request --> objective --> nongoal --> branches --> rank
+    rank -- yes --> chosen
+    rank -- no --> stop
 ```
 
 ## The plan is a graph
@@ -68,19 +68,19 @@ B1·a list against graph
 
 ```mermaid
 flowchart TB
-subgraph flat["The flat list"]
-direction TB
-f1["item, in the order it came to mind"] --> f2["item"] --> f3["item"] --> f4["item"]
-f4 --> ticked["done when every box is ticked"]
-end
-subgraph graph["The graph"]
-direction TB
-p1["phase 1"] -- gate: the evidence phase 2 reads --> p2["phase 2"]
-p1 -- gate --> p3["phase 3"]
-p2 -- gate --> p4["phase 4"]
-p3 -- gate --> p4
-p4 --> objective["done when the objective sentence reads true against the tree"]
-end
+    subgraph flat["The flat list"]
+        direction TB
+        f1["item, in the order it came to mind"] --> f2["item"] --> f3["item"] --> f4["item"]
+        f4 --> ticked["done when every box is ticked"]
+    end
+    subgraph graph["The graph"]
+        direction TB
+        p1["phase 1"] -- gate: the evidence phase 2 reads --> p2["phase 2"]
+        p1 -- gate --> p3["phase 3"]
+        p2 -- gate --> p4["phase 4"]
+        p3 -- gate --> p4
+        p4 --> objective["done when the objective sentence reads true against the tree"]
+    end
 ```
 
 ## Execute the template
@@ -89,7 +89,7 @@ A plan in this method is produced by running a template against the task, as sho
 
 ### Executed, not imitated
 
-A plan that copies a template's headings gets none of the guarantees the template was written to give. It can have every right heading and none of the right answers, and the reader still trusts it because of the headings. This happens because a template copied for its shape gives the look of rigour without any of its questions being answered.
+A plan that copies a template's headings gets none of the guarantees the template was written to give. It can have every right heading and none of the right answers, and the reader still trusts it because of the headings. This happens because a template copied for its shape gives the look of rigor without any of its questions being answered.
 
 For this reason, when a shape recurs I turn it into a template, and I run the template as a procedure rather than copying it. When the draft and the template disagree, the draft is restructured to fit the template rather than defended. In practice, the first plan is drafted from the task and then compared with the template node by node and gate by gate, with the draft treated as raw material for the restructure. Only current and future work stays in the result, and a task is deleted as soon as it is finished.
 
@@ -197,31 +197,31 @@ C1·c draft, compare, restructure
 
 ```mermaid
 flowchart TB
-draft["Draft · the first plan from the task"]
-compare["Compare · node by node, gate by gate, against the template"]
-restructure["Restructure · to what the template enforces"]
-plan["The plan · worth ranked, phases ordered, gates named, termination stated"]
-draft --> compare --> restructure --> plan
-compare -. the draft is raw material, the template is the authority .-> draft
+    draft["Draft · the first plan from the task"]
+    compare["Compare · node by node, gate by gate, against the template"]
+    restructure["Restructure · to what the template enforces"]
+    plan["The plan · worth ranked, phases ordered, gates named, termination stated"]
+    draft --> compare --> restructure --> plan
+    compare -. the draft is raw material, the template is the authority .-> draft
 ```
 
 C1·d one per question
 
 ```mermaid
 flowchart TB
-question{"How does the thing come to be?"}
-checklist["A plan, a checklist, a task set"]
-claim["A verdict on claims, an audit"]
-pattern["A shared abstraction from repeated evidence"]
-agent["A reusable specialized investigator"]
-layer["A template from an executed document"]
-none["None fits · say so rather than force one"]
-question -- anything --> checklist
-question -- a verdict --> claim
-question -- a base --> pattern
-question -- an agent --> agent
-question -- a template --> layer
-question -. no fit .-> none
+    question{"How does the thing come to be?"}
+    checklist["A plan, a checklist, a task set"]
+    claim["A verdict on claims, an audit"]
+    pattern["A shared abstraction from repeated evidence"]
+    agent["A reusable specialized investigator"]
+    layer["A template from an executed document"]
+    none["None fits · say so rather than force one"]
+    question -- anything --> checklist
+    question -- a verdict --> claim
+    question -- a base --> pattern
+    question -- an agent --> agent
+    question -- a template --> layer
+    question -. no fit .-> none
 ```
 
 ## Ask where it appears
@@ -244,23 +244,23 @@ D1·a three fates
 
 ```mermaid
 flowchart TB
-appears["An uncertainty appears"]
-changes{"Does the answer change what gets built?"}
-contract{"Does the contract already decide it?"}
-seat{"Is there a channel to ask?"}
-ask["Ask now, with a recommendation first"]
-state["State the assumption, name what would settle it, return"]
-shared["Do the parts every answer shares"]
-proceed["Return a result, no question"]
-assume["Assume, and the work rests on a guess"]
-appears --> changes
-changes -- no --> proceed
-changes -- yes --> contract
-contract -- yes --> proceed
-contract -- no --> seat
-seat -- yes --> ask --> shared
-seat -- no, a bounded run --> state
-changes -. skipped .-> assume
+    appears["An uncertainty appears"]
+    changes{"Does the answer change what gets built?"}
+    contract{"Does the contract already decide it?"}
+    seat{"Is there a channel to ask?"}
+    ask["Ask now, with a recommendation first"]
+    state["State the assumption, name what would settle it, return"]
+    shared["Do the parts every answer shares"]
+    proceed["Return a result, no question"]
+    assume["Assume, and the work rests on a guess"]
+    appears --> changes
+    changes -- no --> proceed
+    changes -- yes --> contract
+    contract -- yes --> proceed
+    contract -- no --> seat
+    seat -- yes --> ask --> shared
+    seat -- no, a bounded run --> state
+    changes -. skipped .-> assume
 ```
 
 ## When rules collide
@@ -283,17 +283,17 @@ E1·a one form
 
 ```mermaid
 flowchart LR
-a["Rule A"]
-b["Rule B"]
-line["One line of code"]
-boundary["The domain boundary"]
-form["The one form that satisfies both"]
-off["One rule switched off"]
-a --> line
-b --> line
-line --> boundary
-boundary --> form
-line -. the tempting move .-> off
+    a["Rule A"]
+    b["Rule B"]
+    line["One line of code"]
+    boundary["The domain boundary"]
+    form["The one form that satisfies both"]
+    off["One rule switched off"]
+    a --> line
+    b --> line
+    line --> boundary
+    boundary --> form
+    line -. the tempting move .-> off
 ```
 
 ---

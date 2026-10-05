@@ -1,0 +1,52 @@
+.stage-card {
+    color: var(--white);
+    font-family: var(--font-family-heading);
+}
+
+.stage-card .share-ground {
+    background-color: var(--banes-lab-ground-deep);
+}
+
+.stage-card .share-pool {
+    background-image: radial-gradient(closest-side, var(--accent-tone), transparent);
+    border-radius: var(--radius-round);
+}
+
+.stage-card .share-kicker {
+    color: var(--banes-lab-accent);
+    font-family: var(--font-family-mono);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+}
+
+.stage-card .share-byline {
+    color: var(--accent-half);
+    font-family: var(--font-family-mono);
+    letter-spacing: var(--letter-spacing-wide);
+    white-space: nowrap;
+}
+
+.stage-card .share-title {
+    color: var(--accent-tone);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.1;
+}
+
+.stage-card .share-subtitle {
+    color: var(--white-alpha-secondary);
+    line-height: var(--line-height-normal);
+}
+
+.stage-card .share-rule {
+    background-color: var(--accent-tone);
+    background-image: linear-gradient(90deg, transparent, var(--white-alpha-tertiary), transparent);
+    background-repeat: no-repeat;
+    background-size: var(--percent-half) var(--percent-full);
+}
+
+.stage-card .share-domain {
+    color: var(--accent-half);
+    font-family: var(--font-family-mono);
+    letter-spacing: var(--letter-spacing-wide);
+    white-space: nowrap;
+}

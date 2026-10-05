@@ -1,0 +1,1647 @@
+{
+    "category": "architecture",
+    "tier": "leaf",
+    "check": {
+        "by": [
+            "the fitness functions, contract tests and architecture tests each contract names",
+            "the reviews a contract names where no automated check exists"
+        ],
+        "population": "every module and boundary the contract governs",
+        "freshness": "a verdict stands until the module, its dependencies or the contract changes",
+        "refusal": "a failing fitness function or contract test blocks the release",
+        "observation": "the traces and health signals the observability contracts require, which locate a contract failure in production",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the contract, which the module and its tests conform to"
+    },
+    "records": [
+        {
+            "id": "document-truth-alignment",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Document Truth Alignment",
+            "intent": "For any document that states facts about a codebase, separate invariant facts (counts, paths, names, and the doc-type's structural schema) from variant prose, bind each invariant to a code-derived value through a stable key, compile the document from a template, and gate the output so a stated fact can never drift from the code it describes.",
+            "invariant": "A document is well-formed iff every rendered invariant equals its resolved code-truth and every doc-type-required meta-concern is present in order; prose is free.",
+            "flow": [
+                "Concern",
+                "Variant",
+                "Invariant",
+                "TruthKey",
+                "Deriver",
+                "Template",
+                "Compilation",
+                "DriftGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "DocumentTruth",
+                    "rhs": "<VariantProse> \"+\" <InvariantSet> \"→\" <TruthKeyBinding> \"→\" <DeriverResolution> \"→\" <TemplateCompilation> \"→\" <DriftGate>"
+                },
+                {
+                    "lhs": "InvariantBinding",
+                    "rhs": "<TruthKey> \",\" <TokenSlot> \",\" <DerivedValue> \",\" <DocTypeSchema>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "contract_compatibility",
+                "modularity"
+            ],
+            "exemplar": {
+                "before": "A doc states 'the system has 12 modules' — a hand-typed count that drifts the moment a module is added.",
+                "after": "invariant{moduleCount} → truth-key{modules.length} → deriver{scan workspaces} → template{'... has {moduleCount} modules'} → drift-gate{rendered == derived, else fail}",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "architectural-contract-kernel",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Architectural Contract Kernel",
+            "intent": "For any programmatic system, identify architectural concerns, define explicit contracts for each concern, bind implementations to those contracts, validate invariants, observe behavior, and evolve through versioned change.",
+            "invariant": "Architecture is a graph of bounded contracts whose nodes expose stable intent and whose edges preserve compatibility, causality, and governance.",
+            "flow": [
+                "Concern",
+                "Boundary",
+                "Contract",
+                "Implementation",
+                "Verification",
+                "Observation",
+                "Evolution"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureKernel",
+                    "rhs": "<ConcernSet> \"→\" <BoundarySet> \"→\" <ContractSet> \"→\" <ImplementationGraph> \"→\" <VerificationSet> \"→\" <ObservationSet> \"→\" <EvolutionPolicy>"
+                },
+                {
+                    "lhs": "ConcernContract",
+                    "rhs": "<Intent> \",\" <Responsibility> \",\" <InputContract> \",\" <OutputContract> \",\" <InvariantSet> \",\" <FailurePolicy> \",\" <VersionPolicy>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "security_governance",
+                "causality_ordering"
+            ],
+            "exemplar": {
+                "before": "class FooService { save(f) { db.write(f); log(f); notify(f); } }",
+                "after": "interface FooPort { save(f: Foo): Promise<void>; }\nclass FooService implements FooPort {\n  constructor(private repo: FooRepo, private events: EventSink) {}\n  async save(f: Foo) { await this.repo.save(f); this.events.emit({ type: \"FooSaved\", f }); }\n}",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "responsibility-boundary",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Responsibility Boundary",
+            "intent": "Partition behavior into cohesive units, assign each unit one reason to change, hide internal details, expose only intentional interfaces, and reject cross-boundary leakage.",
+            "invariant": "Modularity is achieved when responsibility, knowledge, and change pressure are localized.",
+            "flow": [
+                "Behavior",
+                "Responsibility",
+                "Boundary",
+                "Interface",
+                "Encapsulation",
+                "Replaceability"
+            ],
+            "productions": [
+                {
+                    "lhs": "ResponsibilityBoundary",
+                    "rhs": "<BehaviorSet> \"→\" <ResponsibilityPartition> \"→\" <ModuleBoundary> \"→\" <PublicInterface> \"→\" <PrivateImplementation>"
+                },
+                {
+                    "lhs": "ModuleBoundary",
+                    "rhs": "\"single_responsibility\" \",\" \"high_cohesion\" \",\" \"low_coupling\" \",\" \"information_hiding\" \",\" \"replaceable_implementation\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility"
+            ],
+            "exemplar": {
+                "before": "class FooUtil { parse() {} save() {} render() {} notify() {} }",
+                "after": "class FooParser { parse() {} }\nclass FooRepository { save() {} }\nclass FooView { render() {} }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "coupling-control",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Coupling Control",
+            "intent": "Detect dependency directions, invert dependencies toward abstractions, restrict imports to approved boundaries, and preserve autonomy between modules.",
+            "invariant": "Low coupling is enforced by making dependencies point at contracts instead of concrete implementations.",
+            "flow": [
+                "ConcreteDependency",
+                "AbstractionBoundary",
+                "DependencyRule",
+                "ImportValidation"
+            ],
+            "productions": [
+                {
+                    "lhs": "CouplingControl",
+                    "rhs": "<DependencyGraph> \"→\" <AbstractionNodeSet> \"→\" <AllowedEdgeSet> \"→\" <ForbiddenEdgeSet> \"→\" <DependencyValidation>"
+                },
+                {
+                    "lhs": "DependencyRule",
+                    "rhs": "\"depend_on_interface\" | \"depend_on_port\" | \"same_boundary_only\" | \"adapter_required\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility"
+            ],
+            "exemplar": {
+                "before": "import { SqlFooStore } from \"./infra/sql\";\nclass FooService { store = new SqlFooStore(); }",
+                "after": "interface FooStore { save(f: Foo): Promise<void>; }\nclass FooService { constructor(private store: FooStore) {} }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "interface-contract",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Interface Contract",
+            "intent": "Define explicit interfaces with preconditions, postconditions, invariants, error semantics, version rules, and compatibility guarantees before implementation.",
+            "invariant": "Interfaces are executable promises between independently changeable parts.",
+            "flow": [
+                "Intent",
+                "Interface",
+                "Preconditions",
+                "Postconditions",
+                "Compatibility",
+                "Implementation"
+            ],
+            "productions": [
+                {
+                    "lhs": "InterfaceContract",
+                    "rhs": "<InterfaceName> \",\" <OperationSet> \",\" <PreconditionSet> \",\" <PostconditionSet> \",\" <InvariantSet> \",\" <ErrorContract> \",\" <VersionContract>"
+                },
+                {
+                    "lhs": "CompatibilityRule",
+                    "rhs": "\"backward_compatible\" | \"forward_compatible\" | \"breaking_change_requires_new_version\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency"
+            ],
+            "exemplar": {
+                "before": "function doFoo(a, b, n) {}",
+                "after": "interface FooOp {\n  (a: Foo, b: Bar, n: number): Result<FooOut, FooError>;\n}",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "substitutability",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Substitutability",
+            "intent": "Validate that every implementation of an abstraction preserves the abstraction’s behavior, accepts valid parent inputs, returns valid parent outputs, and does not strengthen forbidden constraints.",
+            "invariant": "Polymorphism is safe only when behavioral subtyping holds.",
+            "flow": [
+                "Interface",
+                "Implementation",
+                "ContractCheck",
+                "Substitute|Reject"
+            ],
+            "productions": [
+                {
+                    "lhs": "Substitutability",
+                    "rhs": "<BaseContract> \"→\" <CandidateImplementation> \"→\" <BehavioralCompatibilityCheck> \"→\" <SubstitutionVerdict>"
+                },
+                {
+                    "lhs": "BehavioralCompatibilityCheck",
+                    "rhs": "\"preconditions_not_stronger\" \",\" \"postconditions_not_weaker\" \",\" \"invariants_preserved\" \",\" \"errors_compatible\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification"
+            ],
+            "exemplar": {
+                "before": "class ReadOnlyFooStore extends FooStore { save() { throw new Error(\"unsupported\"); } }",
+                "after": "interface FooReader { find(id: FooId): Foo | undefined; }\ninterface FooWriter extends FooReader { save(f: Foo): void; }\nclass ReadOnlyFooStore implements FooReader { find(id: FooId) { return fooCache.get(id); } }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "canonical-data",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Canonical Data",
+            "intent": "Normalize incoming data into a canonical schema, validate types and semantics, preserve one source of truth, and translate at system boundaries only.",
+            "invariant": "Semantic consistency requires one canonical model and controlled translation at edges.",
+            "flow": [
+                "RawData",
+                "Validate",
+                "Normalize",
+                "CanonicalModel",
+                "BoundaryTranslation"
+            ],
+            "productions": [
+                {
+                    "lhs": "CanonicalDataFlow",
+                    "rhs": "<ExternalData> \"→\" <SchemaValidation> \"→\" <Canonicalization> \"→\" <CanonicalModel> \"→\" <BoundaryAdapter>"
+                },
+                {
+                    "lhs": "CanonicalModel",
+                    "rhs": "<Schema> \",\" <TypeRules> \",\" <SemanticRules> \",\" <NormalizationRules> \",\" <SourceOfTruth>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "correctness_verification",
+                "model_governance"
+            ],
+            "exemplar": {
+                "before": "function useFoo(raw) { const name = raw.name ?? raw.Name ?? raw.title; }",
+                "after": "function toCanonicalFoo(raw: unknown): Foo { return { id: fooId(raw), name: pickName(raw) }; }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "domain-boundary",
+            "mathType": "topology",
+            "yields": "boolean",
+            "title": "Domain Boundary",
+            "intent": "Identify bounded contexts, define the ubiquitous language and the owner of each context's model, map the relationships between contexts, and use anti-corruption layers where semantics differ.",
+            "invariant": "Domain architecture protects meaning by making semantic boundaries explicit.",
+            "flow": [
+                "Domain",
+                "BoundedContext",
+                "Language",
+                "ContextMap",
+                "TranslationBoundary"
+            ],
+            "productions": [
+                {
+                    "lhs": "DomainBoundary",
+                    "rhs": "<DomainModel> \"→\" <BoundedContextSet> \"→\" <UbiquitousLanguageSet> \"→\" <ContextMap> \"→\" <IntegrationPolicy>"
+                },
+                {
+                    "lhs": "IntegrationPolicy",
+                    "rhs": "\"shared_kernel\" | \"customer_supplier\" | \"anti_corruption_layer\" | \"published_language\" | \"separate_ways\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "domain_boundary"
+            ],
+            "exemplar": {
+                "before": "fooContext.use(sharedBaz);\nbarContext.use(sharedBaz);",
+                "after": "function toBarBaz(f: FooBaz): BarBaz { return { id: f.id }; }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "self-description-manifest",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Self-Description Manifest",
+            "intent": "Require every component to declare identity, capabilities, contracts, dependencies, configuration, health model, and version metadata in a machine-readable manifest.",
+            "invariant": "Runtime systems become discoverable and governable when components describe themselves.",
+            "flow": [
+                "Component",
+                "Manifest",
+                "CapabilityDeclaration",
+                "Discovery",
+                "Validation"
+            ],
+            "productions": [
+                {
+                    "lhs": "SelfDescription",
+                    "rhs": "<Component> \"→\" <Manifest> \"→\" <CapabilitySet> \"→\" <ContractReferenceSet> \"→\" <RuntimeRegistration>"
+                },
+                {
+                    "lhs": "Manifest",
+                    "rhs": "\"identity\" \",\" \"version\" \",\" \"capabilities\" \",\" \"dependencies\" \",\" \"contracts\" \",\" \"configuration\" \",\" \"health\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "model_governance"
+            ],
+            "exemplar": {
+                "before": "export class FooPlugin { transform(x) { return x; } }",
+                "after": "export const manifest = { identity: \"foo-plugin\", version: \"1.2.0\", capabilities: [\"transform\"], contracts: [\"FooPort@1\"], dependencies: [] };",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "runtime-discovery",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Runtime Discovery",
+            "intent": "Discover available components by manifest, convention, registry, or service endpoint; validate discovered candidates against contracts; bind dynamically only after compatibility checks.",
+            "invariant": "Dynamic binding is safe only when discovery is filtered by explicit contracts.",
+            "flow": [
+                "DiscoverySource",
+                "CandidateSet",
+                "ContractValidation",
+                "Binding",
+                "RuntimeUse"
+            ],
+            "productions": [
+                {
+                    "lhs": "RuntimeDiscovery",
+                    "rhs": "<DiscoveryMechanism> \"→\" <CandidateComponentSet> \"→\" <CapabilityMatch> \"→\" <ContractValidation> \"→\" <BindingDecision>"
+                },
+                {
+                    "lhs": "DiscoveryMechanism",
+                    "rhs": "\"manifest\" | \"registry\" | \"service_discovery\" | \"convention\" | \"configuration\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification"
+            ],
+            "principleRef": "runtime-discovery",
+            "exemplar": {
+                "before": "const plugin = new KnownFooPlugin();",
+                "after": "const candidates = registry.discover({ capability: \"transform\" });\nconst bound = candidates.filter((c) => satisfies(c.contract, FooPortV1));",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "extension-point",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Extension Point",
+            "intent": "Define stable extension contracts, register implementations through IoC or plugin registries, isolate plugin failures, and expose deterministic loading order.",
+            "invariant": "Extensibility requires stable hooks, controlled registration, and observable binding.",
+            "flow": [
+                "ExtensionContract",
+                "PluginRegistration",
+                "DependencyInjection",
+                "Isolation",
+                "Dispatch"
+            ],
+            "productions": [
+                {
+                    "lhs": "ExtensionArchitecture",
+                    "rhs": "<ExtensionPoint> \"→\" <PluginContract> \"→\" <PluginRegistry> \"→\" <BindingPolicy> \"→\" <FailureIsolation>"
+                },
+                {
+                    "lhs": "BindingPolicy",
+                    "rhs": "\"dependency_injection\" | \"service_registry\" | \"service_locator\" | \"manual_registration\" | \"auto_discovery\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "observability_traceability"
+            ],
+            "exemplar": {
+                "before": "switch (kind) { case \"foo\": doFoo(); break; case \"bar\": doBar(); break; }",
+                "after": "registry.register(\"foo\", fooHandler);\nregistry.register(\"bar\", barHandler);\nregistry.get(kind)?.handle(input);",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "construction-boundary",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Construction Boundary",
+            "intent": "Hide object creation behind factories, builders, prototypes, or abstract factories so callers depend on creation contracts rather than concrete constructors.",
+            "invariant": "Creation logic is a boundary and should be replaceable independently from usage logic.",
+            "flow": [
+                "CreationRequest",
+                "ConstructionContract",
+                "Factory|Builder|Prototype",
+                "Instance"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConstructionBoundary",
+                    "rhs": "<CreationIntent> \"→\" <ConstructionStrategy> \"→\" <InstanceContract> \"→\" <ConstructedObject>"
+                },
+                {
+                    "lhs": "ConstructionStrategy",
+                    "rhs": "\"factory\" | \"factory_method\" | \"abstract_factory\" | \"builder\" | \"prototype\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "object_creation"
+            ],
+            "exemplar": {
+                "before": "const c = new FooConnection(host, port, user, pw);",
+                "after": "const c = fooConnectionFactory.create(config);",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "structural-mediation",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Structural Mediation",
+            "intent": "Insert adapters, facades, proxies, bridges, or decorators where incompatible structure, access control, abstraction separation, or behavior layering is required.",
+            "invariant": "Structural patterns reshape access without corrupting the core contract.",
+            "flow": [
+                "ClientNeed",
+                "StructuralMismatch",
+                "MediatingPattern",
+                "CompatibleInterface"
+            ],
+            "productions": [
+                {
+                    "lhs": "StructuralMediation",
+                    "rhs": "<ClientContract> \"→\" <MismatchType> \"→\" <StructuralPattern> \"→\" <CompatibleBoundary>"
+                },
+                {
+                    "lhs": "StructuralPattern",
+                    "rhs": "\"adapter\" | \"facade\" | \"proxy\" | \"bridge\" | \"decorator\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility"
+            ],
+            "exemplar": {
+                "before": "legacyFooApi.call(new FooXmlPayload(foo));",
+                "after": "class FooAdapter implements FooPort {\n  constructor(private legacy: FooXmlApi) {}\n  save(f: Foo) { return this.legacy.call(toFooXml(f)); }\n}",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "behavioral-dispatch",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Behavioral Dispatch",
+            "intent": "Externalize variable behavior into strategies, template hooks, observers, or mediators while preserving stable orchestration contracts.",
+            "invariant": "Behavioral variation belongs behind dispatch contracts, not scattered conditionals.",
+            "flow": [
+                "StableFlow",
+                "VariationPoint",
+                "DispatchPattern",
+                "RuntimeBehavior"
+            ],
+            "productions": [
+                {
+                    "lhs": "BehavioralDispatch",
+                    "rhs": "<StableOperation> \"→\" <VariationPoint> \"→\" <BehaviorPattern> \"→\" <SelectedBehavior>"
+                },
+                {
+                    "lhs": "BehaviorPattern",
+                    "rhs": "\"strategy\" | \"template_method\" | \"observer\" | \"mediator\" | \"polymorphic_dispatch\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "control_coordination"
+            ],
+            "exemplar": {
+                "before": "function handleFoo(f) { if (f.kind === \"a\") { return runA(f); } else if (f.kind === \"b\") { return runB(f); } }",
+                "after": "const strategies: Record<FooKind, FooStrategy> = { a: fooStrategyA, b: fooStrategyB };\nfunction handleFoo(f: Foo) { return strategies[f.kind].run(f); }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "architectural-style-boundary",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Architectural Style Boundary",
+            "intent": "Select an architectural style, from a monolith or modular monolith to layered, hexagonal or microservices, by dependency direction, deployment autonomy, domain complexity, team topology, operational maturity and change isolation needs, then enforce the style through boundary rules.",
+            "invariant": "Architecture style is a macro-contract for dependency flow and deployment shape.",
+            "flow": [
+                "SystemForces",
+                "StyleSelection",
+                "BoundaryRules",
+                "FitnessValidation"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureStyle",
+                    "rhs": "<SystemForces> \"→\" <Style> \"→\" <BoundaryRuleSet> \"→\" <FitnessFunctionSet>"
+                },
+                {
+                    "lhs": "Style",
+                    "rhs": "\"hexagonal\" | \"ports_and_adapters\" | \"clean_architecture\" | \"layered\" | \"component_based\" | \"package_by_feature\" | \"microservices\" | \"modular_monolith\" | \"monolith\""
+                },
+                {
+                    "lhs": "SystemForces",
+                    "rhs": "\"domain_complexity\" \",\" \"team_topology\" \",\" \"deployment_autonomy\" \",\" \"consistency_requirement\" \",\" \"operational_maturity\" \",\" \"scaling_pressure\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "domain_boundary"
+            ],
+            "exemplar": {
+                "before": "import { SqlDriver } from \"../infra/sql\";",
+                "after": "export const boundaries = { ui: [\"app\"], app: [\"domain\"], domain: [] };",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "port-adapter",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Port Adapter",
+            "intent": "Place domain logic behind inbound and outbound ports, implement external technology through adapters, and forbid domain dependence on infrastructure.",
+            "invariant": "The domain remains stable by depending on ports, not delivery or persistence mechanisms.",
+            "flow": [
+                "UseCase",
+                "InboundPort",
+                "DomainLogic",
+                "OutboundPort",
+                "Adapter"
+            ],
+            "productions": [
+                {
+                    "lhs": "PortAdapterFlow",
+                    "rhs": "<ExternalDriver> \"→\" <InboundAdapter> \"→\" <InboundPort> \"→\" <UseCase> \"→\" <OutboundPort> \"→\" <OutboundAdapter>"
+                },
+                {
+                    "lhs": "DependencyDirection",
+                    "rhs": "\"adapter_depends_on_port\" \",\" \"domain_depends_on_abstraction\" \",\" \"infrastructure_outside_core\""
+                }
+            ],
+            "composes": [],
+            "force": ["domain_boundary"],
+            "exemplar": {
+                "before": "class FooUseCase { run(f) { new FooHttpClient().send(f); } }",
+                "after": "interface FooOutPort { send(f: Foo): Promise<void>; }\nclass FooUseCase { constructor(private out: FooOutPort) {} }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "event-messaging",
+            "mathType": "analysis",
+            "yields": "operation",
+            "title": "Event Messaging",
+            "intent": "Convert state changes into events, classify domain versus integration events, publish through durable channels, consume idempotently, and preserve ordering where required.",
+            "invariant": "Event-driven systems trade immediate consistency for decoupled causal propagation.",
+            "flow": [
+                "StateChange",
+                "Event",
+                "Publish",
+                "Consume",
+                "IdempotentEffect",
+                "Consistency"
+            ],
+            "productions": [
+                {
+                    "lhs": "EventMessaging",
+                    "rhs": "<StateChange> \"→\" <EventClassification> \"→\" <MessageEnvelope> \"→\" <BrokerOrBus> \"→\" <Consumer> \"→\" <EffectPolicy>"
+                },
+                {"lhs": "EventClassification",
+                    "rhs": "\"domain_event\" | \"integration_event\" | \"stream_event\""},
+                {
+                    "lhs": "EffectPolicy",
+                    "rhs": "\"idempotent\" \",\" \"retryable\" \",\" \"observable\" \",\" \"ordered_if_required\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "event_messaging",
+                "domain_boundary",
+                "causality_ordering"
+            ],
+            "exemplar": {
+                "before": "async function doFoo(f) { await stepBar(f); await stepBaz(f); await stepQux(f); }",
+                "after": "async function doFoo(f) { await fooStore.save(f); await bus.publish({ type: \"FooHappened\", f }); }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "saga-compensation",
+            "canon": ["saga-compensation"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Saga Compensation",
+            "intent": "For long-running distributed workflows, split work into steps, persist progress, define compensating actions, and recover from partial failure through forward or backward correction.",
+            "invariant": "Distributed transactions require explicit process state and compensation.",
+            "flow": [
+                "Workflow",
+                "StepGraph",
+                "LocalTransaction",
+                "Event",
+                "Compensation|Continue"
+            ],
+            "productions": [
+                {
+                    "lhs": "Saga",
+                    "rhs": "<SagaState> \"→\" <Step> \"→\" <LocalTransaction> \"→\" <ProgressEvent> \"→\" (<NextStep> | <CompensatingTransaction>)"
+                },
+                {
+                    "lhs": "SagaStep",
+                    "rhs": "<Command> \",\" <SuccessEvent> \",\" <FailureEvent> \",\" <CompensationCommand>"
+                }
+            ],
+            "composes": [],
+            "force": ["event_messaging"],
+            "exemplar": {
+                "before": "await reserveFoo(x); await reserveBar(x);",
+                "after": "const saga = [ { do: reserveFoo, undo: releaseFoo }, { do: reserveBar, undo: releaseBar } ];\nrunSaga(saga);",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "transaction-boundary",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Transaction Boundary",
+            "intent": "Define atomic state-change boundaries, isolate concurrent mutation, enforce consistency rules, and commit or roll back as a unit.",
+            "invariant": "Correct state change requires explicit transaction scope and isolation semantics.",
+            "flow": [
+                "Command",
+                "UnitOfWork",
+                "Invariant",
+                "Commit|Rollback"
+            ],
+            "productions": [
+                {
+                    "lhs": "TransactionBoundary",
+                    "rhs": "<Command> \"→\" <TransactionScope> \"→\" <InvariantCheck> \"→\" <ConcurrencyControl> \"→\" <CommitDecision>"
+                },
+                {
+                    "lhs": "ConcurrencyControl",
+                    "rhs": "\"optimistic_locking\" | \"pessimistic_locking\" | \"serial_execution\" | \"state_isolation\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "state_transaction"
+            ],
+            "principleRef": "transaction-boundary",
+            "exemplar": {
+                "before": "decFoo(a, n); incBar(b, n);",
+                "after": "await unitOfWork(async (tx) => { await decFoo(tx, a, n); await incBar(tx, b, n); });",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "idempotent-side-effect",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Idempotent Side Effect",
+            "intent": "Assign a stable operation identity, check whether the effect was already applied, execute only once, and return the same semantic result for repeated requests.",
+            "invariant": "External side effects must be repeat-safe under retries.",
+            "flow": [
+                "Request",
+                "IdempotencyKey",
+                "PriorResultCheck",
+                "ExecuteOnce",
+                "PersistOutcome"
+            ],
+            "productions": [
+                {
+                    "lhs": "Idempotency",
+                    "rhs": "<Request> \"→\" <IdempotencyKey> \"→\" <DeduplicationStore> \"→\" (<PriorResult> | <SideEffectExecution>) \"→\" <StableResponse>"
+                },
+                {"lhs": "StableResponse",
+                    "rhs": "\"same_key_same_effect_same_semantic_result\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "state_transaction",
+                "resilience_recovery"
+            ],
+            "exemplar": {
+                "before": "async function applyFoo(req) { await external.apply(req.value); }",
+                "after": "async function applyFoo(req) {\n  if (await seen(req.key)) return priorResult(req.key);\n  const r = await external.apply(req.value); await persist(req.key, r); return r;\n}",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "deterministic-core",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Deterministic Core",
+            "intent": "Push nondeterminism to system edges, keep core logic pure where possible, use immutable inputs, and make outputs reproducible under identical inputs.",
+            "invariant": "Correctness improves when the core is deterministic and side effects are controlled.",
+            "flow": [
+                "ExternalInput",
+                "Normalize",
+                "PureCore",
+                "DeterministicOutput",
+                "ControlledEffect"
+            ],
+            "productions": [
+                {
+                    "lhs": "DeterministicCore",
+                    "rhs": "<Input> \"→\" <Canonicalization> \"→\" <PureFunctionSet> \"→\" <Output> \"→\" <EffectBoundary>"
+                },
+                {
+                    "lhs": "PurityConstraint",
+                    "rhs": "\"no_hidden_state\" \",\" \"no_hidden_time\" \",\" \"no_hidden_randomness\" \",\" \"referential_transparency\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"],
+            "exemplar": {
+                "before": "function scoreFoo(f) { return f.base * (Date.now() % 2 ? 1.1 : 1); }",
+                "after": "function scoreFoo(f: Foo, now: Date) { return f.base * rateAt(now); }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "verification-fitness",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Verification Fitness",
+            "intent": "Define executable architecture rules, validate with static analysis, specification tests, property tests, and runtime checks, then block release when critical rules fail.",
+            "invariant": "Architecture must be continuously verified by fitness functions.",
+            "flow": [
+                "Rule",
+                "Test",
+                "Evidence",
+                "Pass|Fail",
+                "Gate"
+            ],
+            "productions": [
+                {
+                    "lhs": "VerificationFitness",
+                    "rhs": "<SpecificationSet> \"→\" <VerificationMethodSet> \"→\" <EvidenceSet> \"→\" <FitnessVerdict>"
+                },
+                {
+                    "lhs": "VerificationMethod",
+                    "rhs": "\"type_check\" | \"static_analysis\" | \"schema_validation\" | \"contract_test\" | \"property_based_test\" | \"specification_test\" | \"formal_verification\" | \"runtime_validation\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ],
+            "exemplar": {
+                "before": "reviewChecklist.push(\"domain must not import infra\");",
+                "after": "test(\"domain imports no infra\", () => expect(importsOf(\"domain\")).not.toContain(\"infra\"));",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "error-boundary",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Error Boundary",
+            "intent": "Detect invalid state early, fail fast for programmer errors, fail safe for recoverable runtime faults, fail secure for security-sensitive failures, and return typed errors.",
+            "invariant": "Error handling is a contract for containment, disclosure, and recovery.",
+            "flow": [
+                "Operation",
+                "Guard",
+                "ErrorClass",
+                "BoundaryPolicy",
+                "RecoveryOrAbort"
+            ],
+            "productions": [
+                {
+                    "lhs": "ErrorBoundary",
+                    "rhs": "<Operation> \"→\" <PreconditionCheck> \"→\" <ErrorClassification> \"→\" <FailurePolicy> \"→\" <ResultContract>"
+                },
+                {
+                    "lhs": "FailurePolicy",
+                    "rhs": "\"fail_fast\" | \"fail_safe\" | \"fail_secure\" | \"graceful_degradation\" | \"fallback\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "resilience_recovery",
+                "security_governance"
+            ],
+            "exemplar": {
+                "before": "try { doFoo(); } catch (e) { return null; }",
+                "after": "try { return ok(doFoo()); } catch (e) {\n  if (isProgrammerError(e)) throw e;\n  Logger.error(\"doFoo failed\", e); return err(\"foo.retry\");\n}",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "resilience-control",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Resilience Control",
+            "intent": "Wrap remote or unreliable calls with timeout, retry, circuit breaker, bulkhead isolation, fallback, and backpressure policies.",
+            "invariant": "Resilience is controlled failure under resource and dependency stress.",
+            "flow": [
+                "Call",
+                "Timeout",
+                "RetryPolicy",
+                "CircuitBreaker",
+                "Bulkhead",
+                "Fallback"
+            ],
+            "productions": [
+                {
+                    "lhs": "ResilienceControl",
+                    "rhs": "<ExternalCall> \"→\" <TimeoutPolicy> \"→\" <RetryPolicy> \"→\" <CircuitBreaker> \"→\" <Bulkhead> \"→\" <FallbackPolicy> \"→\" <BackpressurePolicy>"
+                },
+                {
+                    "lhs": "RetryPolicy",
+                    "rhs": "\"bounded_attempts\" \",\" \"jittered_backoff\" \",\" \"idempotency_required\""
+                }
+            ],
+            "composes": [],
+            "force": ["resilience_recovery"],
+            "exemplar": {
+                "before": "const r = await callFoo(url);",
+                "after": "const r = await breaker.run(() => withTimeout(callFoo(url), 2000), { retries: 3, backoff: jitter });",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "recovery-deployment",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Recovery Deployment",
+            "intent": "Continuously health-check services, isolate failed instances, fail over to redundancy, roll back unsafe releases, and use canary or blue-green deployment for controlled exposure.",
+            "invariant": "Deployment safety requires observable health and reversible rollout.",
+            "flow": [
+                "Deploy",
+                "HealthCheck",
+                "TrafficShift",
+                "DetectFailure",
+                "Rollback|Promote"
+            ],
+            "productions": [
+                {
+                    "lhs": "RecoveryDeployment",
+                    "rhs": "<ReleaseCandidate> \"→\" <DeploymentStrategy> \"→\" <HealthSignalSet> \"→\" <PromotionDecision>"
+                },
+                {
+                    "lhs": "DeploymentStrategy",
+                    "rhs": "\"blue_green\" | \"canary\" | \"rolling\" | \"rollback\" | \"auto_remediation\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "resilience_recovery",
+                "observability_traceability"
+            ],
+            "exemplar": {
+                "before": "deployAll(fooV2);",
+                "after": "canary(fooV2, { percent: 5, healthCheck });",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "observability-trace",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Observability Trace",
+            "intent": "Attach correlation and causation identifiers to every operation, emit structured logs, metrics, traces, and audit records, then connect them into an explainable execution graph.",
+            "invariant": "A system is operable only when behavior can be reconstructed from evidence.",
+            "flow": [
+                "Request",
+                "CorrelationID",
+                "Logs/Metrics/Traces",
+                "Audit",
+                "CausalGraph"
+            ],
+            "productions": [
+                {
+                    "lhs": "ObservabilityTrace",
+                    "rhs": "<Operation> \"→\" <CorrelationId> \"→\" <CausationId> \"→\" <TelemetryEventSet> \"→\" <TraceGraph> \"→\" <AuditRecord>"
+                },
+                {"lhs": "TelemetryEvent",
+                    "rhs": "\"log\" | \"metric\" | \"trace_span\" | \"alert\" | \"audit_log\""}
+            ],
+            "composes": [],
+            "force": ["observability_traceability"],
+            "exemplar": {
+                "before": "console.log(\"processing foo\");",
+                "after": "logger.info(\"foo.process\", { correlationId: ctx.cid, causationId: ctx.parentId, fooId: foo.id });",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "causality-ordering",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Causality Ordering",
+            "intent": "Model events as a dependency graph, assign causal metadata, preserve happens-before relationships with sequence numbers, Lamport clocks or vector clocks where physical timestamps are insufficient, and reject or compensate for invalid ordering.",
+            "invariant": "Distributed correctness depends on causal ordering, not just timestamps.",
+            "flow": [
+                "Event",
+                "CausalMetadata",
+                "DependencyGraph",
+                "OrderingValidation"
+            ],
+            "productions": [
+                {
+                    "lhs": "CausalityOrdering",
+                    "rhs": "<EventSet> \"→\" <CausalMetadataSet> \"→\" <DependencyGraph> \"→\" <OrderingPolicy>"
+                },
+                {
+                    "lhs": "CausalMetadata",
+                    "rhs": "\"correlation_id\" | \"causation_id\" | \"sequence_number\" | \"lamport_clock\" | \"vector_clock\""
+                },
+                {"lhs": "DependencyGraph",
+                    "rhs": "\"DAG\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "observability_traceability",
+                "model_governance",
+                "event_messaging",
+                "causality_ordering"
+            ],
+            "exemplar": {
+                "before": "events.sort((a, b) => a.timestamp - b.timestamp);",
+                "after": "events.sort(byVectorClock);",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "performance-scaling",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Performance Scaling",
+            "intent": "Measure workload, identify bottlenecks, choose vertical or horizontal scaling, partition load, cache safe data, enforce rate limits, and benchmark continuously.",
+            "invariant": "Scalability is achieved by measured bottleneck removal, not speculative optimization.",
+            "flow": [
+                "Workload",
+                "Profile",
+                "Bottleneck",
+                "ScaleStrategy",
+                "Benchmark",
+                "Feedback"
+            ],
+            "productions": [
+                {
+                    "lhs": "PerformanceScaling",
+                    "rhs": "<WorkloadModel> \"→\" <ProfilingResult> \"→\" <BottleneckAnalysis> \"→\" <ScalingStrategy> \"→\" <OptimizationPolicy> \"→\" <BenchmarkResult>"
+                },
+                {
+                    "lhs": "ScalingStrategy",
+                    "rhs": "\"vertical_scaling\" | \"horizontal_scaling\" | \"load_balancing\" | \"sharding\" | \"partitioning\" | \"caching\" | \"stateless_replication\""
+                }
+            ],
+            "composes": [],
+            "force": ["performance_scaling"],
+            "exemplar": {
+                "before": "optimizeEverywhere(app);",
+                "after": "const hot = profile(load).topBottleneck();\nscale(hot, hot.isCpuBound ? \"horizontal\" : \"cache\"); benchmark();",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "cache-correctness",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Cache Correctness",
+            "intent": "Cache only data with defined freshness, key identity, invalidation triggers, consistency expectations, and fallback behavior.",
+            "invariant": "Caching is safe only when staleness and invalidation are explicit.",
+            "flow": [
+                "Data",
+                "CacheKey",
+                "FreshnessPolicy",
+                "Invalidation",
+                "ReadThrough|Bypass"
+            ],
+            "productions": [
+                {
+                    "lhs": "CacheContract",
+                    "rhs": "<CacheableData> \"→\" <CacheKey> \"→\" <FreshnessPolicy> \"→\" <InvalidationPolicy> \"→\" <ConsistencyPolicy>"
+                },
+                {
+                    "lhs": "ConsistencyPolicy",
+                    "rhs": "\"strong\" | \"eventual\" | \"read_your_writes\" | \"bounded_staleness\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "resilience_recovery"
+            ],
+            "exemplar": {
+                "before": "cache.set(key, value);",
+                "after": "cache.set(fingerprint(inputs, deriverVersion), value, { invalidateOn: [\"FooChanged\"], consistency: \"read_your_writes\" });",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "portability-environment",
+            "mathType": "topology",
+            "yields": "boolean",
+            "title": "Portability Environment",
+            "intent": "Externalize configuration, standardize protocols, isolate platform assumptions behind adapters, package runtime dependencies, and validate parity across environments.",
+            "invariant": "Portable systems separate behavior from deployment substrate.",
+            "flow": [
+                "Code",
+                "ExternalConfig",
+                "StandardProtocol",
+                "Container|Package",
+                "EnvironmentParity"
+            ],
+            "productions": [
+                {
+                    "lhs": "PortabilityContract",
+                    "rhs": "<ApplicationCore> \"→\" <ConfigurationExternalization> \"→\" <ProtocolBoundary> \"→\" <InfrastructureAdapter> \"→\" <EnvironmentValidation>"
+                },
+                {
+                    "lhs": "EnvironmentValidation",
+                    "rhs": "\"dev\" \",\" \"test\" \",\" \"staging\" \",\" \"production\" \",\" \"parity_check\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"],
+            "exemplar": {
+                "before": "const db = connect(\"driver://prod-host:5432\");",
+                "after": "const db = connect(config.databaseUrl);",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "security-policy",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Security Policy",
+            "intent": "Threat-model the system, reduce attack surface, authenticate identity, authorize actions, validate input, encode output, encrypt data, protect secrets, and enforce policy continuously.",
+            "invariant": "Security is a default-deny contract over identity, data, and operations.",
+            "flow": [
+                "ThreatModel",
+                "Identity",
+                "Authorization",
+                "Validation",
+                "Protection",
+                "Audit"
+            ],
+            "productions": [
+                {
+                    "lhs": "SecurityPolicy",
+                    "rhs": "<ThreatModel> \"→\" <IdentityProof> \"→\" <AccessDecision> \"→\" <InputOutputGuard> \"→\" <DataProtection> \"→\" <PolicyEnforcement> \"→\" <SecurityAudit>"
+                },
+                {"lhs": "AccessDecision",
+                    "rhs": "\"RBAC\" | \"ABAC\" | \"least_privilege\" | \"zero_trust\""},
+                {
+                    "lhs": "DataProtection",
+                    "rhs": "\"encryption_at_rest\" \",\" \"encryption_in_transit\" \",\" \"secrets_management\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "security_governance",
+                "model_governance"
+            ],
+            "exemplar": {
+                "before": "if (user) allowFoo();",
+                "after": "if (!policy.can(user, \"foo:write\", resource)) throw forbidden();\nconst foo = validate(FooSchema, input);",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "control-plane",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Control Plane",
+            "intent": "Separate control concerns from data execution, centralize policy/configuration/authentication/logging where beneficial, and decentralize runtime execution where autonomy is required.",
+            "invariant": "A control plane coordinates policy while data planes execute work.",
+            "flow": [
+                "Policy",
+                "ControlPlane",
+                "DistributedExecution",
+                "Feedback"
+            ],
+            "productions": [
+                {
+                    "lhs": "ControlPlane",
+                    "rhs": "<PolicySet> \"→\" <CentralizedCoordination> \"→\" <DataPlaneSet> \"→\" <TelemetryFeedback> \"→\" <PolicyAdjustment>"
+                },
+                {
+                    "lhs": "CentralizedCoordination",
+                    "rhs": "\"configuration\" | \"authentication\" | \"authorization\" | \"logging\" | \"orchestration\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "security_governance",
+                "control_coordination"
+            ],
+            "principleRef": "control-plane",
+            "exemplar": {
+                "before": "Every service reads its own ad-hoc config and does its own auth — policy is scattered and drifts.",
+                "after": "policy{central} → control-plane{config, auth, orchestration} → data-planes{Foo, Bar execute work} → telemetry-feedback → policy-adjustment",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "declarative-metaprogramming",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Declarative Metaprogramming",
+            "intent": "Represent behavior as data, validate the model or DSL, compile or interpret it into runtime behavior, and restrict reflection or code generation behind safety contracts.",
+            "invariant": "Metaprogramming is safe when code-as-data has schema, validation, and bounded execution.",
+            "flow": [
+                "Model",
+                "Schema",
+                "Compile|Interpret",
+                "RuntimeBehavior",
+                "SafetyCheck"
+            ],
+            "productions": [
+                {
+                    "lhs": "DeclarativeMetaprogramming",
+                    "rhs": "<ProgramModel> \"→\" <ModelSchema> \"→\" <TransformationEngine> \"→\" <GeneratedOrInterpretedBehavior> \"→\" <SafetyBoundary>"
+                },
+                {
+                    "lhs": "TransformationEngine",
+                    "rhs": "\"reflection\" | \"introspection\" | \"compile_time_evaluation\" | \"runtime_code_generation\" | \"DSL_interpreter\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "model_governance",
+                "metaprogramming_modeling"
+            ],
+            "exemplar": {
+                "before": "eval(fooExpression);",
+                "after": "const ast = parse(fooDsl, GRAMMAR); validate(ast, SCHEMA); run(compile(ast), sandbox);",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "streaming-dataflow",
+            "mathType": "analysis",
+            "yields": "operation",
+            "title": "Streaming Dataflow",
+            "intent": "Process data sequentially through bounded pipeline stages, preserve forward-only semantics where required, apply backpressure, checkpoint state where needed, and keep stages stateless unless state is explicitly modeled.",
+            "invariant": "Streaming systems are contracts over flow, order, pressure, and bounded memory.",
+            "flow": [
+                "Source",
+                "Stage",
+                "Stage",
+                "Sink",
+                "Checkpoint"
+            ],
+            "productions": [
+                {
+                    "lhs": "StreamingDataflow",
+                    "rhs": "<Source> \"→\" <PipelineStageSet> \"→\" <BackpressurePolicy> \"→\" <CheckpointPolicy> \"→\" <Sink>"
+                },
+                {"lhs": "PipelineStage",
+                    "rhs": "<InputStream> \"→\" <Transform> \"→\" <OutputStream>"},
+                {
+                    "lhs": "ProcessingMode",
+                    "rhs": "\"single_pass\" | \"lazy_evaluation\" | \"sequential_access\" | \"forward_only\" | \"stateless\" | \"stateful_with_checkpoint\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency",
+                "resilience_recovery",
+                "streaming_dataflow",
+                "causality_ordering"
+            ],
+            "exemplar": {
+                "before": "const all = await loadAllFoo(); return all.map(toBar).filter(isBaz);",
+                "after": "fooSource.pipe(mapStage(toBar)).pipe(filterStage(isBaz)).pipe(sink, { backpressure: true });",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "rag-knowledge-boundary",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "RAG Knowledge Boundary",
+            "intent": "Retrieve knowledge from indexed sources, validate relevance and freshness, ground generation in retrieved evidence, and distinguish known, inferred, and unsupported output.",
+            "invariant": "Retrieval-augmented systems must separate source evidence from generated synthesis.",
+            "flow": [
+                "Query",
+                "Retrieve",
+                "Rank",
+                "Ground",
+                "Generate",
+                "Cite|Reject"
+            ],
+            "productions": [
+                {
+                    "lhs": "RAGBoundary",
+                    "rhs": "<UserQuery> \"→\" <Retriever> \"→\" <CandidateEvidenceSet> \"→\" <RelevanceValidation> \"→\" <GroundedGeneration> \"→\" <EvidenceDisclosure>"
+                },
+                {
+                    "lhs": "EvidenceDisclosure",
+                    "rhs": "\"supported\" | \"partially_supported\" | \"unsupported_reject_or_disclose\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification",
+                "model_governance"
+            ],
+            "exemplar": {
+                "before": "const answer = model.generate(query);",
+                "after": "const ev = retrieve(query);\nconst g = generate(query, ev);\nreturn g.supported ? cite(g, ev) : disclose(\"unsupported\");",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "architecture-selection-meta-algorithm",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Architecture Selection Meta-Algorithm",
+            "intent": "Given a concern, classify its force type, select the corresponding contract family, compose required invariants, bind implementation patterns, and attach validation gates.",
+            "invariant": "Architectural patterns are reusable only when selected by force, not by name.",
+            "flow": [
+                "Concern",
+                "ForceType",
+                "ContractFamily",
+                "PatternSet",
+                "ValidationGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureSelection",
+                    "rhs": "<Concern> \"→\" <ForceFamily> \"→\" <ContractFamily> \"→\" <ImplementationPatternSet> \"→\" <ValidationGateSet>"
+                },
+                {
+                    "lhs": "ForceFamily",
+                    "rhs": "\"modularity\" | \"compatibility\" | \"semantics\" | \"extension\" | \"state\" | \"correctness\" | \"resilience\" | \"security\" | \"scale\" | \"governance\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification"
+            ],
+            "exemplar": {
+                "before": "A pattern chosen by name ('let's use Foo') before the force it must resolve is known.",
+                "after": "concern → force{change-isolation} → contract-family{deployment-boundary} → pattern{selected by force, not by name} → validation-gate",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "universal-architectural-concern-template",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Universal Architectural Concern Template",
+            "intent": "For any architectural concern, define its intent, boundary, contract, invariants, allowed variation, forbidden leakage, validation strategy, observability model, and evolution policy.",
+            "invariant": "Every architecture principle can be operationalized as a bounded contract with verification and change rules.",
+            "flow": [
+                "Intent",
+                "Boundary",
+                "Contract",
+                "Invariant",
+                "Variation",
+                "Validation",
+                "Evolution"
+            ],
+            "productions": [
+                {
+                    "lhs": "UniversalConcern",
+                    "rhs": "<Intent> \"→\" <Boundary> \"→\" <Contract> \"→\" <InvariantSet> \"→\" <AllowedVariationSet> \"→\" <ForbiddenLeakageSet> \"→\" <ValidationStrategy> \"→\" <ObservabilityModel> \"→\" <EvolutionPolicy>"
+                },
+                {
+                    "lhs": "Contract",
+                    "rhs": "<Input> \",\" <Output> \",\" <Preconditions> \",\" <Postconditions> \",\" <FailureModes> \",\" <CompatibilityRules>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "correctness_verification",
+                "observability_traceability",
+                "model_governance",
+                "architecture_evolution"
+            ],
+            "exemplar": {
+                "before": "A principle stated as prose ('be modular') with no operational contract.",
+                "after": "intent → boundary → contract{in, out, pre, post} → invariants → allowed-variation → forbidden-leakage → validation → observability → evolution",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "architectural-contract-algebra",
+            "principleRef": "design-by-contract",
+            "title": "Architectural Contract Algebra",
+            "intent": "<Classify architectural force> → <Declare boundary> → <Define contract> → <Choose pattern> → <Bind implementation> → <Verify invariant> → <Observe runtime> → <Govern evolution>",
+            "invariant": "Architecture becomes reproducible when every named principle is reduced to a force, every force becomes a contract, every contract has invariants, and every invariant has validation.",
+            "flow": [
+                "Force",
+                "Contract",
+                "Pattern",
+                "Implementation",
+                "Verification",
+                "Operation",
+                "Evolution"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitecturalContractAlgebra",
+                    "rhs": "<Force> \"→\" <Boundary> \"→\" <Contract> \"→\" <Pattern> \"→\" <Implementation> \"→\" <Verification> \"→\" <Observation> \"→\" <Evolution>"
+                },
+                {
+                    "lhs": "Force",
+                    "rhs": "\"change\" | \"dependency\" | \"semantic_consistency\" | \"runtime_extension\" | \"state_mutation\" | \"failure\" | \"scale\" | \"security\" | \"governance\" | \"intelligence\""
+                },
+                {
+                    "lhs": "Boundary",
+                    "rhs": "<ModuleBoundary> | <DomainBoundary> | <InterfaceBoundary> | <TransactionBoundary> | <SecurityBoundary> | <DeploymentBoundary> | <ObservationBoundary>"
+                },
+                {
+                    "lhs": "Pattern",
+                    "rhs": "<CreationalPattern> | <StructuralPattern> | <BehavioralPattern> | <ArchitecturalStyle> | <MessagingPattern> | <ResiliencePattern> | <GovernancePattern>"
+                },
+                {
+                    "lhs": "Verification",
+                    "rhs": "<StaticCheck> | <ContractTest> | <SchemaValidation> | <PropertyTest> | <FitnessFunction> | <RuntimeHealthCheck> | <AuditReview>"
+                },
+                {
+                    "lhs": "Evolution",
+                    "rhs": "<VersioningPolicy> | <CompatibilityPolicy> | <MigrationPolicy> | <RollbackPolicy> | <ADRPolicy> | <ContinuousCompliancePolicy>"
+                }
+            ],
+            "composes": [
+                "domain-boundary",
+                "transaction-boundary"
+            ],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ],
+            "meta": true
+        },
+        {
+            "id": "manifest-driven-documentation",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Manifest-Driven Documentation",
+            "intent": "For a module whose public surface is machine-derivable, make its metadata manifest the single documentation source of truth: authored narrative lives in mandated, shape-validated manifest fields (with self-expanding custom fields), the API surface is collected deterministically from the built type-declarations, one marker-layered document is compiled per module from both, and a governance router runs the context-detection rules on the manifest strings where a manifest governs (rendering each field to its markdown fragment first) and on the document itself where none exists. Beyond the module document, a manifest may declare typed documents — each a form plus concern that routes through the pure location function to a computed path — generated and drift-checked the same way, so the manifest is the single content generator with no separate template mechanism.",
+            "invariant": "A module's document is well-formed iff it recompiles byte-identical from its manifest docs-block plus its derived surface, its docs-block satisfies the mandated schema with every custom field a renderable shape, and every governed string passes the context rules reported at its manifest field; the manifest, where present, is the governed surface and the document is exempt and drift-checked.",
+            "flow": [
+                "Manifest",
+                "AuthoredField",
+                "DerivedSurface",
+                "SectionDeriver",
+                "MarkerLayer",
+                "Compilation",
+                "GovernanceRouter",
+                "DriftGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "ModuleDocument",
+                    "rhs": "<ManifestAuthoredFields> \"+\" <DerivedSurface> \"→\" <SectionDeriverResolution> \"→\" <MarkerLayerTemplate> \"→\" <Compilation> \"→\" <DriftGate>"
+                },
+                {
+                    "lhs": "GovernanceRouter",
+                    "rhs": "<ManifestPresent> \"→\" <RenderFieldToFragment> <ScanFragment> | <ManifestAbsent> \"→\" <ScanDocument>"
+                },
+                {
+                    "lhs": "TypedDocument",
+                    "rhs": "<FormConcernName> \"→\" <LocationRouter> \"→\" <BodySections> \"→\" <Compilation> \"→\" <DriftGate>"
+                }
+            ],
+            "composes": [
+                "document-truth-alignment",
+                "self-description-manifest",
+                "extension-point"
+            ],
+            "force": [
+                "correctness_verification",
+                "contract_compatibility",
+                "modularity"
+            ],
+            "exemplar": {
+                "before": "A README hand-authored as prose that drifts from the exports it claims to document.",
+                "after": "manifest.docs{authored} + derivedSurface{from .d.ts} → section-derivers → marker-template → compile → drift-gate{recompiles byte-identical, else fail}",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "consumer-config-ssot",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Consumer Config SSOT",
+            "intent": "For any reusable package that must stay agnostic of the applications consuming it, hardcode zero consumer-specific truths in package source; declare every consumer-specific value in one consumer-owned config of typed sections, load it through a framework the leaf packages never import, and hand each package only the section it needs through an injection surface — so a package drops into any consumer without a literal about that consumer leaking through its source.",
+            "invariant": "A package is consumer-agnostic iff every consumer-specific value it depends on arrives by injection at wiring time and no consumer token, path, or config-location appears in its source; the one consumer config is the single reader-visible source of those values and a static gate rejects any re-hardcoding.",
+            "flow": [
+                "ConsumerValue",
+                "ConfigSection",
+                "FrameworkLoad",
+                "InjectionSurface",
+                "PackageConsumption",
+                "CouplingGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConsumerConfigSSOT",
+                    "rhs": "<ConsumerValueSet> \"→\" <ConfigSectionSet> \"→\" <FrameworkLoad> \"→\" <InjectionSurface> \"→\" <PackageConsumption> \"+\" <CouplingGate>"
+                },
+                {
+                    "lhs": "InjectionSurface",
+                    "rhs": "<SettingsChannel> \"|\" <OptionsChannel> \"|\" <ArgvEnvChannel> \"|\" <FactoryOptionChannel>"
+                }
+            ],
+            "composes": [
+                "architectural-contract-kernel",
+                "responsibility-boundary"
+            ],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "correctness_verification"
+            ],
+            "exemplar": {
+                "before": "const ROOT = \"my-app\";\nconst cfg = read(\"../config/app.json\");",
+                "after": "export function createFoo(opts: { root: string; store: FooStore }) { return new Foo(opts); }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "finite-state-machine",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Finite State Machine",
+            "intent": "Model behavior as a finite set of states with explicit legal transitions, so illegal state combinations are unrepresentable.",
+            "invariant": "Every runtime state is one of the declared states and every transition is a declared edge.",
+            "flow": [
+                "EnumerateStates",
+                "DefineEvents",
+                "DeclareTransitions",
+                "RejectUndeclared"
+            ],
+            "productions": [
+                {
+                    "lhs": "FiniteStateMachine",
+                    "rhs": "<EnumerateStates> \"→\" <DefineEvents> \"→\" <DeclareTransitions> \"→\" <RejectUndeclared>"
+                }
+            ],
+            "composes": [
+                "State Pattern",
+                "Structural Core"
+            ],
+            "force": ["boolean-flag-soup (illegal-states)"],
+            "principleRef": "finite-state-machine",
+            "exemplar": {
+                "before": "let isOpen = false, isLoading = false, isError = false;\nfunction onClick() { isLoading = true; if (isOpen) isOpen = false; }",
+                "after": "type FooState = \"closed\" | \"loading\" | \"open\" | \"error\";\nconst transitions: Record<FooState, Partial<Record<FooEvent, FooState>>> = {\n  closed: { open: \"loading\" },\n  loading: { ready: \"open\", fail: \"error\" },\n  open: { close: \"closed\" },\n  error: { retry: \"loading\" },\n};\nfunction next(state: FooState, event: FooEvent): FooState { return transitions[state][event] ?? state; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "statecharts",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Statecharts",
+            "intent": "Extend a flat state machine with hierarchy and parallel regions, so independent concerns compose without state explosion.",
+            "invariant": "Independent behavioral concerns live in separate parallel regions rather than a cross product of flat states.",
+            "flow": [
+                "IdentifyIndependentConcerns",
+                "NestRelatedStates",
+                "SeparateParallelRegions",
+                "GuardTransitions"
+            ],
+            "productions": [
+                {
+                    "lhs": "Statecharts",
+                    "rhs": "<IdentifyIndependentConcerns> \"→\" <NestRelatedStates> \"→\" <SeparateParallelRegions> \"→\" <GuardTransitions>"
+                }
+            ],
+            "composes": [
+                "finite-state-machine",
+                "separation-of-concerns"
+            ],
+            "force": ["flat-state-explosion (combinatorial-growth)"],
+            "principleRef": "statecharts",
+            "exemplar": {
+                "before": "type S = \"idleMuted\" | \"idleLoud\" | \"playingMuted\" | \"playingLoud\";",
+                "after": "const fooChart = {\n  initial: \"idle\",\n  states: { idle: {}, playing: {} },\n  parallel: { volume: { states: { muted: {}, loud: {} } } },\n};",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "petri-nets",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Petri Nets",
+            "intent": "Model concurrent flow as places, tokens, and transitions, so reachability and deadlock are analyzable before runtime.",
+            "invariant": "Concurrent progress is expressed as token flow through transitions whose enabling conditions are explicit.",
+            "flow": [
+                "DefinePlaces",
+                "PlaceTokens",
+                "DefineTransitions",
+                "AnalyzeReachability",
+                "AssertNoDeadlock"
+            ],
+            "productions": [
+                {
+                    "lhs": "PetriNet",
+                    "rhs": "<DefinePlaces> \"→\" <PlaceTokens> \"→\" <DefineTransitions> \"→\" <AnalyzeReachability> \"→\" <AssertNoDeadlock>"
+                }
+            ],
+            "composes": [
+                "Concurrency Correctness",
+                "Correctness Core"
+            ],
+            "force": ["ad-hoc-lock-ordering (deadlock)"],
+            "principleRef": "petri-nets",
+            "exemplar": {
+                "before": "acquire(a); acquire(b); work(); release(b); release(a);",
+                "after": "const net = petriNet({\n  places: { idle: 1, aHeld: 0, bHeld: 0 },\n  transitions: [\n    { name: \"takeA\", consume: { idle: 1 }, produce: { aHeld: 1 } },\n    { name: \"takeB\", consume: { aHeld: 1 }, produce: { bHeld: 1 } },\n  ],\n});\nassertNoDeadlock(reachableMarkings(net));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "queuing-theory",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Queuing Theory",
+            "intent": "Size a system from arrival and service rates, so capacity and wait time are predicted rather than guessed.",
+            "invariant": "Utilization stays below one and predicted wait time is derived from the arrival/service-rate model.",
+            "flow": [
+                "MeasureArrivalRate",
+                "MeasureServiceRate",
+                "ComputeUtilization",
+                "PredictWaitTime",
+                "SizeServers"
+            ],
+            "productions": [
+                {
+                    "lhs": "QueuingModel",
+                    "rhs": "<MeasureArrivalRate> \"→\" <MeasureServiceRate> \"→\" <ComputeUtilization> \"→\" <PredictWaitTime> \"→\" <SizeServers>"
+                }
+            ],
+            "composes": [
+                "Capacity Planning",
+                "Performance Core"
+            ],
+            "force": ["guess-based-capacity (saturation)"],
+            "principleRef": "queuing-theory",
+            "exemplar": {
+                "before": "const workers = 4;",
+                "after": "const rho = arrivalRate / (workers * serviceRate);\nif (rho >= 1) throw new Error(\"unstable queue: utilization >= 1\");\nconst avgWaitMs = mm1WaitTime({ arrivalRate, serviceRate, servers: workers });",
+                "lang": "ts"
+            }
+        }
+    ]
+}

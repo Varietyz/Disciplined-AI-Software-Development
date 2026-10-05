@@ -114,7 +114,7 @@ export const rule: RuleDeclaration = {
                 notChecked:
                     "whether the authored half is RIGHT — the walk decides that a state matches the tree and " +
                     "says nothing about whether a row's invariant, its ordinal or what it must establish is the " +
-                    "correct intent, which is the series' own judgement and is held by the seats. The ORDER of " +
+                    "correct intent, which is the series' own judgment and is held by the seats. The ORDER of " +
                     "the rows is likewise the plan's own and is read by the ordering axis rather than here",
                 population:
                     "the ROWS of the typed plan, never the files this run hands the check — the plan is the " +

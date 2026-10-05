@@ -1,0 +1,279 @@
+{
+    "category": "governed-plan-loop",
+    "tier": "process",
+    "check": {
+        "by": ["the phase close gate, whose verification flag only deterministic engine code writes"],
+        "population": "every phase and task of the living plan",
+        "freshness": "a verdict stands until the plan or the verified work changes",
+        "refusal": "a phase does not close while its gate fails, and a failure routes back to execution",
+        "observation": "the persisted plan state, which records progress across restarts",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the engine's verification flag, which a phase closes on"
+    },
+    "records": [
+        {
+            "id": "living-plan-state",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Living Plan State",
+            "exemplar": {
+                "before": "Plan progress inferred from the conversation, so a discovery mid-pass falls out of scope on restart.",
+                "after": "plan delta → transition guard{done requires grounding} → append/update-only durable state{tasks, considerations, dismissed keys} → render from state, restart-survivable",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Treat the plan as durable append/update-only state — tasks carrying status and grounding, a considerations backlog, and a dismissed-key set — maintained every turn and re-delivered on restart, so anything discovered mid-pass is retained instead of falling out of scope.",
+            "invariant": "Plan progress is authoritative persisted state, never inferred from transient conversation, and a completion is recorded only with evidence.",
+            "flow": [
+                "EmitDelta",
+                "GuardTransition",
+                "AppendOnly",
+                "Persist",
+                "RenderFromState"
+            ],
+            "productions": [
+                {
+                    "lhs": "LivingPlanState",
+                    "rhs": "<PlanDelta> \"→\" <TransitionGuard> \"→\" <DurableMerge> \"→\" <StateRender>"
+                },
+                {"lhs": "TaskStatus",
+                    "rhs": "\"pending\" | \"active\" | \"done\""},
+                {"lhs": "ConsiderationStatus",
+                    "rhs": "\"open\" | \"confirmed\" | \"dismissed\""},
+                {"lhs": "DoneTransition",
+                    "rhs": "\"requires\" <GroundingCitation>"}
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "causality_ordering",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "boundary-reconciliation",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Boundary Reconciliation",
+            "exemplar": {
+                "before": "Considerations acted on mid-phase, and a dismissed one resurfaces — the loop oscillates.",
+                "after": "capture during phase → act only at the boundary → dedup new opens vs (confirmed | dismissed) → triage{confirm → task | dismiss → resolved-false} → dry pass or bound",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Capture considerations during a phase but act on them only at the phase boundary — triage each open consideration against code and canon into a confirmed task or a dismissed resolved-false key, deduping new opens against the confirmed and dismissed sets before triage.",
+            "invariant": "A dismissed consideration never resurfaces and the backlog converges monotonically, so the loop cannot oscillate.",
+            "flow": [
+                "Capture",
+                "DeferToBoundary",
+                "DedupBeforeTriage",
+                "Triage",
+                "DryPassOrBound"
+            ],
+            "productions": [
+                {
+                    "lhs": "BoundaryReconciliation",
+                    "rhs": "<Backlog> \"→\" <Dedup> \"→\" <Triage> \"→\" <Termination>"
+                },
+                {"lhs": "Triage",
+                    "rhs": "\"confirm\" \"→\" <Task> | \"dismiss\" \"→\" <ResolvedFalse>"},
+                {"lhs": "Dedup",
+                    "rhs": "\"newOpens\" \"against\" \"(confirmed | resolvedFalse)\""},
+                {"lhs": "Termination",
+                    "rhs": "\"dryPass\" | \"maxReconcileRounds\""}
+            ],
+            "composes": ["recursion-control"],
+            "force": [
+                "causality_ordering",
+                "resilience_recovery",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "phase-close-gate",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Phase Close Gate",
+            "exemplar": {
+                "before": "The phase is self-declared done.",
+                "after": "all tasks done & dry reconciliation holds & verify clean (scope) & coverage graph confirms ripple → close | return to execute; never self-declared",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Make completion a gated state of the plan rather than a judgment call — a phase closes only when all tasks are done, a dry reconciliation pass holds, verify is clean for the chosen scope, and the coverage graph confirms the ripple set; otherwise the loop returns to execution.",
+            "invariant": "Completion can never be self-declared; closure is a composed evidence-bound gate whose failure routes back to execution, never to done.",
+            "flow": [
+                "AllTasksDone",
+                "DryPass",
+                "VerifyClean",
+                "CoverageConfirmed",
+                "CloseOrExecute"
+            ],
+            "productions": [
+                {
+                    "lhs": "PhaseCloseGate",
+                    "rhs": "<TaskCompletion> \"&\" <DryPass> \"&\" <VerifyResult> \"&\" <CoverageResult> \"→\" <Decision>"
+                },
+                {"lhs": "Decision",
+                    "rhs": "\"close\" | \"return_to_execute\""},
+                {"lhs": "VerifyResult",
+                    "rhs": "\"scope:full\" | \"scope:work\""}
+            ],
+            "composes": [
+                "validation-gate",
+                "boundary-reconciliation"
+            ],
+            "force": [
+                "security_governance",
+                "correctness_verification",
+                "state_transaction"
+            ]
+        },
+        {
+            "id": "plan-phase-verification",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Plan Phase Verification",
+            "exemplar": {
+                "before": "A plan presented to the developer un-reviewed, its verified flag set by model tokens.",
+                "after": "auto loopback → 3 passes{evidence, completeness, adversarial} → reconcile findings → loop-owned counter (not model-emitted) → render blocked until verified",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Before a composed plan reaches the developer, the engine loops it back through evidence, completeness, and adversarial-skepticism passes, reconciles the findings into the plan, and increments a loop-owned pass counter the model cannot forge; a render boundary blocks an unverified plan.",
+            "invariant": "A plan is never presented un-reviewed, and the verification flag is written only by deterministic engine code, never by model tokens.",
+            "flow": [
+                "AutoLoopback",
+                "ThreePassVerify",
+                "ReconcileFindings",
+                "LoopOwnedIncrement",
+                "PresentGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "PlanPhaseVerification",
+                    "rhs": "<AutoLoopback> \"→\" <VerifyPasses> \"→\" <Reconcile> \"→\" <CounterIncrement> \"→\" <PresentGate>"
+                },
+                {"lhs": "VerifyPasses",
+                    "rhs": "\"evidence\" \",\" \"completeness\" \",\" \"adversarial\""},
+                {"lhs": "PresentGate",
+                    "rhs": "\"verificationPasses >= 1\""},
+                {"lhs": "Counter",
+                    "rhs": "\"loop_owned\" \"not_model_emitted\""}
+            ],
+            "composes": [
+                "evidence-gated-claim-verification",
+                "boundary-reconciliation",
+                "recursion-control"
+            ],
+            "force": [
+                "correctness_verification",
+                "security_governance",
+                "observability_traceability"
+            ]
+        },
+        {
+            "id": "governed-autonomous-plan-loop",
+            "principleRef": "auditability",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "commit",
+                    "record": "living-plan-state"},
+                {"stage": "constrain",
+                    "record": "boundary-reconciliation"},
+                {"stage": "verify",
+                    "record": "plan-phase-verification"},
+                {"stage": "terminate",
+                    "record": "phase-close-gate"}
+            ],
+            "title": "Governed Autonomous Plan Loop",
+            "exemplar": {
+                "before": "A long task driven from conversation memory, self-declared done, losing mid-pass discoveries on restart.",
+                "after": "seed phase → investigate → execute → gated self-audit + canon self-inform → capture + reconcile at boundary → close only on a mechanically resolved gated state → re-seed next phase",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Drive a large task to completion under gates — seed per phase, investigate, execute, self-inform from canon and self-audit, capture considerations, reconcile at the boundary, and close only when the plan is a mechanically resolved state, then re-seed the next phase.",
+            "invariant": "Autonomy is bounded by gates rather than disposition — the plan can only grow with code-verified work, completion is a gated state and not a judgment call, and every step is restart-survivable.",
+            "flow": [
+                "SeedPhase",
+                "Investigate",
+                "Execute",
+                "GatedSelfAuditAndInform",
+                "CaptureConsiderations",
+                "BoundaryReconcile",
+                "CloseGate",
+                "ReSeedNextPhase"
+            ],
+            "productions": [
+                {
+                    "lhs": "GovernedPlanLoop",
+                    "rhs": "<PhaseSeed> \"→\" <ActivityCycle> \"→\" <BoundaryReconciliation> \"→\" <PhaseCloseGate> \"→\" <ReSeed>"
+                },
+                {"lhs": "ActivityCycle",
+                    "rhs": "\"investigate\" \"→\" \"execute\" \"→\" \"verify\""},
+                {"lhs": "SelfDrive",
+                    "rhs": "<CanonSelfInform> \"&\" <SkepticalSweep> \"&\" <PlanMaintenance>"},
+                {"lhs": "Completion",
+                    "rhs": "\"gated_state\" \"not_judgment_call\""}
+            ],
+            "composes": [
+                "living-plan-state",
+                "boundary-reconciliation",
+                "phase-close-gate",
+                "plan-phase-verification",
+                "phase-separated-execution"
+            ],
+            "force": [
+                "state_transaction",
+                "security_governance",
+                "correctness_verification",
+                "resilience_recovery",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "governed-plan-concern",
+            "title": "<Governed Plan Concern>",
+            "intent": "<Seed the phase> → <Investigate and execute under gates> → <Self-inform from canon and self-audit> → <Capture and reconcile considerations at the boundary> → <Close only on a mechanically resolved gated state> → <Re-seed the next phase>",
+            "invariant": "A large task reaches completion only under gates, never by disposition: the plan grows solely from code-verified work, completion is a gated state rather than a judgment call, and every step is restart-survivable.",
+            "flow": [
+                "SeedPhase",
+                "GatedActivity",
+                "BoundaryReconcile",
+                "CloseGate",
+                "ReSeed"
+            ],
+            "productions": [
+                {
+                    "lhs": "GovernedPlanConcern",
+                    "rhs": "<PhaseSeed> \"→\" <GatedActivityCycle> \"→\" <BoundaryReconciliation> \"→\" <PhaseCloseGate> \"→\" <ReSeed>"
+                },
+                {"lhs": "GatedActivityCycle",
+                    "rhs": "\"investigate\" \"→\" \"execute\" \"→\" \"gated_self_audit\""}
+            ],
+            "composes": [
+                "living-plan-state",
+                "phase-close-gate"
+            ],
+            "force": [
+                "state_transaction",
+                "correctness_verification",
+                "security_governance"
+            ],
+            "meta": true
+        }
+    ]
+}

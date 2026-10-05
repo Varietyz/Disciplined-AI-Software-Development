@@ -1,0 +1,120 @@
+{
+    "category": "creational-patterns",
+    "records": [
+        {
+            "name": "Complex Factory Hierarchies",
+            "kind": "anti-pattern",
+            "definition": "Building elaborate parallel factory class hierarchies where cloning an existing configured instance would suffice."
+        },
+        {
+            "name": "Concrete Constructor Coupling",
+            "kind": "anti-pattern",
+            "definition": "Instantiating concrete classes directly with constructors, coupling callers to specific implementations."
+        },
+        {
+            "name": "Global Mutable State",
+            "kind": "anti-pattern",
+            "definition": "Exposing global variables that any code can mutate, creating hidden coupling and nondeterminism."
+        },
+        {
+            "name": "Mixed Product Families",
+            "kind": "anti-pattern",
+            "definition": "Combining products from different incompatible families, producing inconsistent sets of objects."
+        },
+        {
+            "name": "Scattered Construction Logic",
+            "kind": "anti-pattern",
+            "definition": "Spreading object-creation logic across many call sites instead of centralizing it in a factory."
+        },
+        {
+            "name": "Telescoping Constructor",
+            "kind": "anti-pattern",
+            "definition": "Overloading constructors with ever more parameters to cover optional fields, producing unreadable call sites."
+        },
+        {
+            "name": "Controlled Instantiation",
+            "kind": "capability",
+            "definition": "The ability to govern how and when an object is created."
+        },
+        {
+            "name": "Deferred Instantiation",
+            "kind": "capability",
+            "definition": "The ability to let subclasses decide which class to instantiate, deferring the choice from the base class."
+        },
+        {
+            "name": "Dynamic Object Creation",
+            "kind": "capability",
+            "definition": "The ability to create new objects at runtime by cloning existing configured instances."
+        },
+        {
+            "name": "Family-Level Replacement",
+            "kind": "capability",
+            "definition": "The ability to swap an entire family of related products by changing a single factory."
+        },
+        {
+            "name": "Polymorphic Construction",
+            "kind": "capability",
+            "definition": "The ability to create objects through a common interface without naming their concrete classes."
+        },
+        {
+            "name": "Shared Resource Access",
+            "kind": "capability",
+            "definition": "The ability to give many callers coordinated access to one shared resource."
+        },
+        {
+            "name": "Valid Object Creation",
+            "kind": "capability",
+            "definition": "The ability to construct an object only once all its required parts are supplied and validated."
+        },
+        {
+            "name": "Cloneable Template Object",
+            "kind": "constraint",
+            "definition": "The requirement that a prototype object support being copied to produce new instances."
+        },
+        {
+            "name": "Creation Variation",
+            "kind": "constraint",
+            "definition": "A precondition that different variants of a product must be produced depending on runtime context."
+        },
+        {
+            "name": "Related Product Variants",
+            "kind": "constraint",
+            "definition": "The requirement that products form families of related variants meant to be used together."
+        },
+        {
+            "name": "Single-Instance Need",
+            "kind": "constraint",
+            "definition": "A precondition that exactly one instance of a type must exist across the system."
+        },
+        {
+            "name": "Subclass-Controlled Creation",
+            "kind": "constraint",
+            "definition": "The requirement that subclasses determine which concrete product a creator instantiates."
+        },
+        {
+            "name": "Complex Construction",
+            "kind": "quality-attribute",
+            "definition": "The degree of complexity in assembling an object that motivates a step-by-step builder."
+        },
+        {
+            "name": "Copy Semantics",
+            "kind": "quality-attribute",
+            "definition": "The degree of care required to define correct deep versus shallow copying when cloning objects."
+        },
+        {
+            "name": "Inheritance Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which relying on subclassing to vary creation adds to the inheritance hierarchy's complexity."
+        },
+        {
+            "name": "Constructor-Valid State",
+            "kind": "technique",
+            "definition": "A technique for having a constructor or factory accept only arguments that produce a valid object."
+        },
+        {
+            "name": "Repeated Expensive Setup",
+            "kind": "anti-pattern",
+            "definition": "A defect in which each new object repeats a costly setup that copying a prepared instance would avoid."
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 import { BINDING_PATH, SLOT_CONSUMERS } from "../core/constants/binding.constants.ts";
 import type { RuleContext, RuleDeclaration, RuleResult } from "../core/types/rule.types.ts";
-import { drifted, misSectioned, unhonoured, unresolvedSlot } from "../core/factories/binding.factory.ts";
+import { drifted, misSectioned, unhonored, unresolvedSlot } from "../core/factories/binding.factory.ts";
 import { enumeratesVocabulary, slotStates, slotsIn } from "../core/analyzers/binding.analyzer.ts";
 import { renderBinding, writeBinding } from "../core/generators/binding.generator.ts";
 import type { Finding } from "../core/types/segment.types.ts";
@@ -99,7 +99,7 @@ const consumerFindings = function consumerFindings(path: string, source: string,
     const unstated = (slot: Slot): Finding[] => {
         const state = declared.states.get(slot.name);
         const open = state !== undefined && state !== "RESOLVED" && !honored.has(slot.name);
-        return open && firstUnmentioned.has(slot) ? [unhonoured(path, slot.line, slot.name, state)] : [];
+        return open && firstUnmentioned.has(slot) ? [unhonored(path, slot.line, slot.name, state)] : [];
     };
 
     return slots.flatMap((slot) => [
@@ -145,7 +145,7 @@ export const rule: RuleDeclaration = {
     invariant:
         "every abstract slot a consumer names resolves through the adapter binding, and the binding is rendered from the configuration rather than authored beside it",
     jurisdiction: "taxonomy",
-    kinds: ["unresolvedSlot", "slotInWrongSection", "stateNotHonoured", "bindingDrift"],
+    kinds: ["unresolvedSlot", "slotInWrongSection", "stateNotHonored", "bindingDrift"],
 
     reads: [BINDING_PATH],
 

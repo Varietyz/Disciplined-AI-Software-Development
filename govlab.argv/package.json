@@ -1,0 +1,21 @@
+{
+    "name": "@govlab/argv",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "A declared command-line contract for a script: every flag and positional is declared, --help is answered before any effect, and an undeclared flag is a refusal rather than a silently ignored word.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./*": "./*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    }
+}

@@ -1,0 +1,446 @@
+{
+    "category": "refused-tags",
+    "exampleShape": "renamed-file",
+    "enforcedBy": ["the naming gate, which refuses the word in the concern slot because no declaration admits it"],
+    "check": {
+        "population": "every filename that would carry the refused word, and the covering tags each refusal names",
+        "freshness": "a verdict stands until a covering tag is renamed or removed, or the refused word is admitted by an approved edit",
+        "refusal": "the lint run fails a filename carrying the refused word as its concern",
+        "observation": "each refused word resolved through its covering-tag edges, which the resolution gate follows",
+        "evidence": "fires-and-accepts: a suite lints a file whose concern slot holds an undeclared word and passes a file carrying a declared tag",
+        "authority": "the covering tags, which a refused word resolves to, so admitting the word is an approved edit to the vocabulary"
+    },
+    "records": [
+        {
+            "name": "Spawner or Prefab as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file spawner or prefab, where the factory tag already covers a file that constructs instances.",
+            "exemplar": {
+                "before": "spawners/enemy.spawner.ts",
+                "after": "factories/enemy.factory.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["factory-tag"]
+        },
+        {
+            "name": "Blueprint or Archetype as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file blueprint or archetype, where the specification tag covers a file that declares a rule and the template tag covers one that declares a shape.",
+            "exemplar": {
+                "before": "archetypes/enemy.archetype.ts",
+                "after": "templates/enemy.template.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "specification-tag",
+                "template-tag"
+            ]
+        },
+        {
+            "name": "Loop or Tick as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a simulation's main loop or its tick as its own concern, where the engine tag covers the file that runs the loop and the step tag covers one advance.",
+            "exemplar": {
+                "before": "ticks/physics.tick.ts",
+                "after": "steps/physics.step.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "engine-tag",
+                "step-tag"
+            ]
+        },
+        {
+            "name": "Batcher as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file batcher, where the batching tag already covers a file that groups small operations into larger ones.",
+            "exemplar": {
+                "before": "batchers/draw-call.batcher.ts",
+                "after": "batching/draw-call.batching.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["batching-tag"]
+        },
+        {
+            "name": "Spatial Index as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a spatial hash or a quadtree as a domain concern, where a lookup structure over known members takes the registry tag.",
+            "exemplar": {
+                "before": "quadtrees/enemy.quadtree.ts",
+                "after": "registries/enemy.registry.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["registry-tag"]
+        },
+        {
+            "name": "Keybinding as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file keybinding or control-scheme, where the binding tag already covers a file that ties a name to what it resolves to.",
+            "exemplar": {
+                "before": "keybindings/editor.keybinding.ts",
+                "after": "bindings/editor.binding.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["binding-tag"]
+        },
+        {
+            "name": "Control Widget as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a slider or a toggle control by its kind of control, where the widget tag covers every interactive control.",
+            "exemplar": {
+                "before": "sliders/brightness.slider.ts",
+                "after": "widgets/brightness.widget.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["widget-tag"]
+        },
+        {
+            "name": "Condition as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file condition or phase-condition, where the predicate tag already covers a file that answers yes or no.",
+            "exemplar": {
+                "before": "conditions/boss-phase.condition.ts",
+                "after": "predicates/boss-phase.predicate.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["predicate-tag"]
+        },
+        {
+            "name": "Strategy as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file strategy or difficulty-policy, where the policy tag already covers a file that chooses among behaviors by a rule.",
+            "exemplar": {
+                "before": "strategies/difficulty.strategy.ts",
+                "after": "policies/difficulty.policy.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["policy-tag"]
+        },
+        {
+            "name": "Agent Memory as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file pattern-memory or agent-memory, where the memory tag already covers what an agent remembers between steps.",
+            "exemplar": {
+                "before": "agent-memories/scout.agent-memory.ts",
+                "after": "memory/scout.memory.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["memory-tag"]
+        },
+        {
+            "name": "Savegame as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file savegame or autosave, where the persistence tag covers saving state and the store tag covers holding it.",
+            "exemplar": {
+                "before": "savegames/campaign.savegame.ts",
+                "after": "persistence/campaign.persistence.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "persistence-tag",
+                "store-tag"
+            ]
+        },
+        {
+            "name": "Pause or Boot as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file after one lifecycle moment such as pause, boot or teardown, where the lifecycle tag covers how a component starts and stops.",
+            "exemplar": {
+                "before": "boot/game.boot.ts",
+                "after": "lifecycle/game.lifecycle.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["lifecycle-tag"]
+        },
+        {
+            "name": "Screen or Page as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file endscreen, hud-panel or page, where the view tag covers a file that renders one screen.",
+            "exemplar": {
+                "before": "pages/leaderboard.page.ts",
+                "after": "views/leaderboard.view.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["view-tag"]
+        },
+        {
+            "name": "Page Script as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file page-script, where the entrypoint tag covers the file a runtime starts from.",
+            "exemplar": {
+                "before": "page-scripts/pricing.page-script.ts",
+                "after": "entrypoints/pricing.entrypoint.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["entrypoint-tag"]
+        },
+        {
+            "name": "Preloader as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file preloader or asset-loader, where the loader tag already covers reading a resource into memory.",
+            "exemplar": {
+                "before": "preloaders/level-assets.preloader.ts",
+                "after": "loaders/level-assets.loader.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["loader-tag"]
+        },
+        {
+            "name": "Object Pool as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file object-pool, where the pool tag already covers keeping reusable instances.",
+            "exemplar": {
+                "before": "object-pools/enemy.object-pool.ts",
+                "after": "pools/enemy.pool.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["pool-tag"]
+        },
+        {
+            "name": "Cooldown as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file cooldown or throttle, where the throttling tag covers limiting how often something runs and the timer tag covers running it after a delay.",
+            "exemplar": {
+                "before": "cooldowns/dash.cooldown.ts",
+                "after": "throttling/dash.throttling.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "throttling-tag",
+                "timer-tag"
+            ]
+        },
+        {
+            "name": "Thread as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file thread, where the worker tag covers running work apart from the caller.",
+            "exemplar": {
+                "before": "threads/image-resize.thread.ts",
+                "after": "workers/image-resize.worker.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["worker-tag"]
+        },
+        {
+            "name": "Particle Emitter as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file particle-emitter, where the emitter tag already covers a file that produces output for others to receive.",
+            "exemplar": {
+                "before": "particle-emitters/smoke.particle-emitter.ts",
+                "after": "emitters/smoke.emitter.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["emitter-tag"]
+        },
+        {
+            "name": "Juice or Screenshake as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file feedback, juice or screenshake, where the effect tag covers feedback that leaves the state behind it unchanged.",
+            "exemplar": {
+                "before": "screenshakes/explosion.screenshake.ts",
+                "after": "effects/explosion.effect.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["effect-tag"]
+        },
+        {
+            "name": "Manager as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file manager, which names a stature rather than a role, where the coordinator tag covers a file that owns a lifecycle and the service tag one that offers a stateful capability.",
+            "exemplar": {
+                "before": "managers/audio.manager.ts",
+                "after": "coordinators/audio.coordinator.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "coordinator-tag",
+                "service-tag",
+                "saturated-role-tag"
+            ]
+        },
+        {
+            "name": "Page Feature as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file page-feature or plug-in behavior, where the extension and plugin tags cover capability added to a host.",
+            "exemplar": {
+                "before": "page-features/comments.page-feature.ts",
+                "after": "extensions/comments.extension.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "extension-tag",
+                "plugin-tag"
+            ]
+        },
+        {
+            "name": "Id Table as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file ids, id-table or symbol-table, where the constants collection tag covers a file of fixed named values.",
+            "exemplar": {
+                "before": "id-tables/country.id-table.ts",
+                "after": "constants/country.constants.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["constants-tag"]
+        },
+        {
+            "name": "Attack Pattern as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file weapon-pattern or attack-pattern, where the behavior tag covers a file that decides and the specification tag one that only declares.",
+            "exemplar": {
+                "before": "attack-patterns/boss.attack-pattern.ts",
+                "after": "behaviors/boss.behavior.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "behavior-tag",
+                "specification-tag"
+            ]
+        },
+        {
+            "name": "Checker or Linter as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file checker or linter, where the validator tag covers a file that decides whether its input is valid.",
+            "exemplar": {
+                "before": "checkers/spelling.checker.ts",
+                "after": "validators/spelling.validator.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["validator-tag"]
+        },
+        {
+            "name": "Scanner as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file scanner, which overlaps reporter and inspector, where the analyzer and inspector tags cover a file that reads material and derives facts from it.",
+            "exemplar": {
+                "before": "scanners/dependency.scanner.ts",
+                "after": "analyzers/dependency.analyzer.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "analyzer-tag",
+                "inspector-tag"
+            ]
+        },
+        {
+            "name": "Fixer or Healer as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file fixer, healer or repairer, where the transformer tag covers a file that maps an input state to an output state.",
+            "exemplar": {
+                "before": "fixers/import-order.fixer.ts",
+                "after": "transformers/import-order.transformer.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["transformer-tag"]
+        },
+        {
+            "name": "Walker or Crawler as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file walker or crawler, where the iterator tag covers a file that yields the members of a set.",
+            "exemplar": {
+                "before": "crawlers/link.crawler.ts",
+                "after": "iterators/link.iterator.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["iterator-tag"]
+        },
+        {
+            "name": "Gate as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file gate, which names a decision rather than a thing, where the predicate and validator tags cover the decision it makes.",
+            "exemplar": {
+                "before": "gates/age.gate.ts",
+                "after": "predicates/age.predicate.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "predicate-tag",
+                "validator-tag"
+            ]
+        },
+        {
+            "name": "Index as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file index, which overlaps cache and registry, where the registry tag covers a lookup over known members.",
+            "exemplar": {
+                "before": "indexes/product.index.ts",
+                "after": "registries/product.registry.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "registry-tag",
+                "vocabulary-inflation"
+            ]
+        },
+        {
+            "name": "Handler as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file handler, which fits every role, where the processor tag covers applying an operation to each item and the coordinator tag covers driving collaborators.",
+            "exemplar": {
+                "before": "handlers/upload.handler.ts",
+                "after": "processors/upload.processor.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": [
+                "processor-tag",
+                "coordinator-tag",
+                "saturated-role-tag"
+            ]
+        },
+        {
+            "name": "Guide or Note as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file doc, guide or note, where the reference tag covers authored knowledge a reader consults.",
+            "exemplar": {
+                "before": "guides/deployment.guide.md",
+                "after": "references/deployment.reference.md",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["reference-tag"]
+        },
+        {
+            "name": "Plan as a Tag",
+            "kind": "anti-pattern",
+            "definition": "Tagging a file plan, where the specification tag covers a file that declares a required end state.",
+            "exemplar": {
+                "before": "plans/launch.plan.ts",
+                "after": "specifications/launch.specification.ts",
+                "lang": "path",
+                "medium": "code"
+            },
+            "seeAlso": ["specification-tag"]
+        }
+    ]
+}

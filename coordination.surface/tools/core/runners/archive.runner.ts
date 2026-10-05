@@ -28,7 +28,7 @@ import {
     repairMissingHistory,
 } from "../strings/archive.strings.ts";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { JUDGEMENT_KIND } from "../constants/board.constants.ts";
+import { JUDGMENT_KIND } from "../constants/board.constants.ts";
 import { appendSection } from "../formatters/text.formatter.ts";
 import { closureRefusal } from "../validators/archive.validator.ts";
 import { itemKindOf } from "../formatters/board.formatter.ts";
@@ -173,7 +173,7 @@ export const runClosure = function runClosure(request: ClosureRequest): ClosureO
     const kind = itemKindOf(source, request.closes);
 
     return {
-        acknowledged: kind === JUDGEMENT_KIND,
+        acknowledged: kind === JUDGMENT_KIND,
         author: authorOf(request.closes),
         label: handledBy(request.agent ?? ""),
         refusal: closureRefusal(request.closes, request.ref, request.agent, text, carried, kind),

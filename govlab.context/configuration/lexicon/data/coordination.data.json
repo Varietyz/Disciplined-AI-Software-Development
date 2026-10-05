@@ -1,0 +1,166 @@
+{
+    "category": "control-coordination-centralization",
+    "records": [
+        {
+            "name": "Central Orchestrator Bottleneck",
+            "kind": "anti-pattern",
+            "definition": "Routing every interaction through one central orchestrator that becomes a bottleneck and single point of failure."
+        },
+        {
+            "name": "Centralized Control",
+            "kind": "anti-pattern",
+            "definition": "Concentrating decision-making authority in one place so nodes cannot act independently."
+        },
+        {
+            "name": "Fully Decentralized Control",
+            "kind": "anti-pattern",
+            "definition": "Leaving control fully decentralized with no central plane, so global runtime policy cannot be coordinated."
+        },
+        {
+            "name": "Independent Node Decisions",
+            "kind": "anti-pattern",
+            "definition": "Letting each node decide independently with no agreement, so they diverge on shared state."
+        },
+        {
+            "name": "Local-Only Logs",
+            "kind": "anti-pattern",
+            "definition": "Leaving logs scattered on each host with no aggregation, so cross-service analysis is impossible."
+        },
+        {
+            "name": "Pure Choreography",
+            "kind": "anti-pattern",
+            "definition": "Coordinating a multi-step workflow purely through choreography when central orchestration is needed, scattering its logic."
+        },
+        {
+            "name": "Scattered Auth Implementations",
+            "kind": "anti-pattern",
+            "definition": "Reimplementing authentication separately in each service instead of centralizing it."
+        },
+        {
+            "name": "Scattered Configuration",
+            "kind": "anti-pattern",
+            "definition": "Spreading configuration across many services with no single source, so values drift out of sync."
+        },
+        {
+            "name": "Split-Brain Coordination",
+            "kind": "anti-pattern",
+            "definition": "Two nodes both believing they are leader and acting independently, corrupting shared state."
+        },
+        {
+            "name": "Agreed Single Value Across Nodes",
+            "kind": "capability",
+            "definition": "The ability for distributed nodes to agree on a single value despite failures."
+        },
+        {
+            "name": "Automatic Failover of Leadership",
+            "kind": "capability",
+            "definition": "The ability to automatically elect a new leader when the current one fails."
+        },
+        {
+            "name": "Central-Orchestrator-Free Coordination",
+            "kind": "capability",
+            "definition": "The ability for services to coordinate through events without a central orchestrator."
+        },
+        {
+            "name": "Centralized Control of Distributed Runtime",
+            "kind": "capability",
+            "definition": "The ability to manage a distributed runtime's behavior from one central control point."
+        },
+        {
+            "name": "Cross-Service Analysis",
+            "kind": "capability",
+            "definition": "The ability to analyze behavior across services by querying their aggregated logs."
+        },
+        {
+            "name": "Independent Ownership",
+            "kind": "capability",
+            "definition": "The ability for each node or team to own and control its part without central approval."
+        },
+        {
+            "name": "Ordered Multi-Step Execution",
+            "kind": "capability",
+            "definition": "The ability to execute the steps of a workflow in a defined order."
+        },
+        {
+            "name": "Single-Writer Coordination",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:automatic-failover-of-leadership",
+                    "reason": "Single-writer coordination makes one elected node the only writer, while leadership failover elects a new one when it fails."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to designate one writer for each unit of shared state, whether an elected node or the party a record names, so updates to it need no further coordination."
+        },
+        {
+            "name": "Unified Config Management",
+            "kind": "capability",
+            "definition": "The ability to manage all services' configuration from one place."
+        },
+        {
+            "name": "Unified Identity",
+            "kind": "capability",
+            "definition": "The ability to give users one identity recognized across all services."
+        },
+        {
+            "name": "Config Store",
+            "kind": "mechanism",
+            "definition": "A central store that holds configuration values for many services to read."
+        },
+        {
+            "name": "Coordinator",
+            "kind": "mechanism",
+            "definition": "A component that directs the steps of a multi-service workflow in order."
+        },
+        {
+            "name": "Identity Provider",
+            "kind": "mechanism",
+            "definition": "A central service that authenticates identities and issues credentials for others to trust."
+        },
+        {
+            "name": "Log Aggregation",
+            "kind": "mechanism",
+            "definition": "A facility that collects logs from many sources into one central store."
+        },
+        {
+            "name": "Management API",
+            "kind": "mechanism",
+            "definition": "A programmatic interface through which operators manage a distributed runtime's state."
+        },
+        {
+            "name": "Quorum",
+            "kind": "constraint",
+            "definition": "The requirement that a majority of nodes agree before a decision commits."
+        },
+        {
+            "name": "Central Dependency Risk",
+            "kind": "quality-attribute",
+            "definition": "The degree to which centralizing configuration makes the whole system depend on one config source."
+        },
+        {
+            "name": "Centralized Coordinator Coupling",
+            "kind": "quality-attribute",
+            "definition": "The degree to which routing a workflow through a central coordinator couples participants to it."
+        },
+        {
+            "name": "Cost/Personal Data Exposure",
+            "kind": "quality-attribute",
+            "definition": "The degree to which aggregating all logs centrally raises storage cost and personal-data exposure."
+        },
+        {
+            "name": "Identity Provider Availability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which every login depends on the central identity provider staying available."
+        },
+        {
+            "name": "Externalize Configuration",
+            "kind": "technique",
+            "definition": "A technique for moving values that vary by environment out of code into configuration read at startup."
+        },
+        {
+            "name": "Configuration Schema",
+            "kind": "technique",
+            "definition": "A technique for validating configuration against a declared schema before the system starts."
+        }
+    ]
+}

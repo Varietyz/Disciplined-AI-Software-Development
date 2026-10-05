@@ -1,0 +1,26 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "customConditions": ["development"],
+        "lib": [
+            "ESNext",
+            "DOM",
+            "DOM.Iterable",
+            "DOM.AsyncIterable"
+        ],
+        "noUncheckedIndexedAccess": true,
+        "noPropertyAccessFromIndexSignature": false,
+        "types": [
+            "node",
+            "vite/client",
+            "@webgpu/types"
+        ]
+    },
+    "include": ["**/*.ts"],
+    "exclude": [
+        "**/node_modules",
+        "**/dist",
+        "**/build"
+    ]
+}

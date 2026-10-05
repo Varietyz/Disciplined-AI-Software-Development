@@ -1,0 +1,61 @@
+{
+    "check": {
+        "by": [
+            "the ontology resolution gate over the techniques, nodes and structured-document constructs that name the mode",
+            "the model-step check for every model whose steps are modes"
+        ],
+        "population": "every technique, node, model step and document construct that names the mode",
+        "freshness": "a verdict stands until the mode list or a record that names a mode changes",
+        "refusal": "the gate fails on a technique, node, model step or construct that names a mode that does not exist",
+        "observation": "none: a mode is a way of reasoning, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: a suite plants a technique whose mode does not exist, and the bundled records validate clean",
+        "authority": "the mode list, which every technique, node, step and construct that names a mode cites"
+    },
+    "records": [
+        {"id": "observation",
+            "question": "What is there?",
+            "practice": "identifying patterns or examples"},
+        {"id": "description",
+            "question": "How can it be characterized?",
+            "practice": "defining objects"},
+        {
+            "id": "comparison",
+            "question": "How is it similar or different?",
+            "practice": "finding similarities and differences"
+        },
+        {"id": "classification",
+            "question": "Which kind is it?",
+            "practice": "grouping by properties"},
+        {"id": "abstraction",
+            "practice": "removing irrelevant details"},
+        {"id": "generalization",
+            "practice": "extending examples into principles"},
+        {"id": "formalization",
+            "practice": "expressing ideas symbolically"},
+        {"id": "explanation",
+            "question": "Why is it this way?",
+            "practice": "identifying mechanisms"},
+        {"id": "deduction",
+            "practice": "deriving necessary consequences"},
+        {"id": "construction",
+            "practice": "building objects that satisfy rules"},
+        {"id": "proof",
+            "practice": "establishing certainty"},
+        {"id": "prediction",
+            "question": "What comes next?",
+            "practice": "inferring future states"},
+        {"id": "optimization",
+            "practice": "selecting preferred solutions"},
+        {"id": "intervention",
+            "question": "How can it be changed?",
+            "practice": "modifying systems"},
+        {"id": "creation",
+            "question": "Can new examples be produced?",
+            "practice": "generating new structures"},
+        {
+            "id": "reflection",
+            "question": "What general principles emerge?",
+            "practice": "discovering the principles behind the examples"
+        }
+    ]
+}

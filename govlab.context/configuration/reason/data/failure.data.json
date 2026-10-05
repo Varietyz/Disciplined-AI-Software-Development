@@ -1,0 +1,150 @@
+{
+    "check": {
+        "by": [
+            "the quality rules each shape names, which refuse its syntactic signature where one exists",
+            "the classification step of the verification substrate, which files every silent failure under a shape before a fix is chosen"
+        ],
+        "population": "every source file the named rules lint, and every failure a check or a review classifies",
+        "freshness": "a verdict stands until the linted source, a named rule or the shape's instances change",
+        "refusal": "a named rule fails the lint stage on the signature; the invariant each shape breaks is gated in every structured document that grounds it",
+        "observation": "the runtime observations that locate a failure, which are then filed under a shape",
+        "evidence": "fires-and-accepts: a suite plants a shape that names no invariant and no canon, and the bundled shapes validate clean",
+        "authority": "the invariant the shape breaks, which the shape cites, while each named rule conforms to the shape's signature"
+    },
+    "records": [
+        {
+            "id": "no-reachable-check",
+            "name": "No reachable check",
+            "shape": "A representation that no check reaches.",
+            "fix": "Declare the representation into a check's jurisdiction, or state in writing that it lies outside it.",
+            "breaks": "epi-reachable-check",
+            "instances": [
+                "architecture:manual-only-governance",
+                "architecture:unobservable-failure",
+                "lexicon:untested-implementation"
+            ],
+            "canon": ["none: whether a representation is reachable is a property of the gate's jurisdiction, which no source rule sees"]
+        },
+        {
+            "id": "empty-domain",
+            "name": "Empty domain",
+            "shape": "A check that ran over an empty domain and reported a pass.",
+            "fix": "Report the population beside every rate, and confirm at start-up that every name the check uses resolves.",
+            "breaks": "epi-declared-domain",
+            "instances": ["lexicon:silent-failure"],
+            "canon": [
+                "empty-block",
+                "exception-handling"
+            ]
+        },
+        {
+            "id": "spent-parent",
+            "name": "Spent parent",
+            "shape": "A parent counted as read while its children were never read.",
+            "fix": "Subtract the read set from the child set and report what remains.",
+            "breaks": "epi-declared-domain",
+            "canon": ["none: a read set is known only while the run executes"]
+        },
+        {
+            "id": "edge-from-spelling",
+            "name": "Edge from spelling",
+            "shape": "A dependency created because two names share a word.",
+            "fix": "Join on the id the referent declares.",
+            "breaks": "epi-declared-dependency",
+            "instances": ["lexicon:hidden-dependency"],
+            "canon": ["none: a join on spelling reads like any other string comparison in source"]
+        },
+        {
+            "id": "trusted-leaf",
+            "name": "Trusted leaf",
+            "shape": "A node inside the graph that is trusted without a check, such as an exit code or a modification time.",
+            "fix": "Route the node through a check that can fail, and disclose what no check can reach.",
+            "breaks": "epi-verdict-is-representation",
+            "instances": [
+                "architecture:flaky-test-normalization",
+                "architecture:mock-mirage",
+                "architecture:security-theater"
+            ],
+            "canon": ["error-handling"]
+        },
+        {
+            "id": "lossy-lowering",
+            "name": "Lossy lowering",
+            "shape": "A reshaped representation that dropped a distinction a later check needs.",
+            "fix": "Keep the distinction, and refuse at the writer anything the layout cannot express.",
+            "breaks": "epi-preserved-distinction",
+            "instances": [
+                "architecture:null-semantics-drift",
+                "architecture:schema-drift",
+                "architecture:silent-data-corruption"
+            ],
+            "canon": ["type-safety"]
+        },
+        {
+            "id": "stale-read",
+            "name": "Stale read",
+            "shape": "A check that reads a representation the run already changed.",
+            "fix": "Derive after the last mutator, and decide freshness by the fingerprint of the inputs and the code.",
+            "breaks": "epi-fresh-read",
+            "instances": ["architecture:cache-poisoning-by-design"],
+            "canon": ["none: no catalogued rule refuses a cache keyed by time or by lifetime alone"]
+        },
+        {
+            "id": "two-derivations",
+            "name": "Two derivations",
+            "shape": "One question answered by two derivations that can drift apart.",
+            "fix": "Collapse them to one derivation, computed by the producer of the answer.",
+            "breaks": "epi-one-derivation",
+            "instances": ["lexicon:duplicated-authority"],
+            "canon": ["duplicate-code"]
+        },
+        {
+            "id": "weak-link-kept",
+            "name": "Weak link kept",
+            "shape": "A link below the certainty floor kept in a chain with a flag on it.",
+            "fix": "Remove the link from the chain.",
+            "breaks": "epi-weakest-link",
+            "canon": ["none: the certainty of a link is a property of the chain, which no source rule sees"]
+        },
+        {
+            "id": "absence-certified-by-observation",
+            "name": "Absence certified by observation",
+            "shape": "No observed failure read as proof that no failure exists.",
+            "fix": "Use the observation to locate failures, and leave the verdict on absence to a check.",
+            "breaks": "epi-observation-locates",
+            "canon": ["none: the shape lies in how a report is read, not in source"]
+        },
+        {
+            "id": "stop-on-confidence",
+            "name": "Stop on confidence",
+            "shape": "A run that stops because the model is confident, before completion, saturation and verification hold.",
+            "fix": "Stop only when the three conditions hold, or when the run is blocked on something outside it.",
+            "breaks": "epi-terminate-on-three",
+            "canon": ["none: the shape lies in how a run decides to stop, not in source"]
+        },
+        {
+            "id": "unfailable-floor",
+            "name": "Unfailable floor",
+            "shape": "A threshold set below what its population already meets, so the check it guards cannot fail until most of the population is gone.",
+            "fix": "Set the floor from the population as it stands, and plant a case below it to watch the check fail.",
+            "breaks": "epi-verdict-is-representation",
+            "canon": ["none: whether a floor can be reached is a property of the population, which no source rule sees"]
+        },
+        {
+            "id": "verdictless-verifier",
+            "name": "Verdictless verifier",
+            "shape": "A tool named as a verifier that reports no pass, no fail and no exit code, so what it examines has no check at all.",
+            "fix": "Give the tool a verdict and an exit code, or rename it to the probe it is.",
+            "breaks": "epi-reachable-check",
+            "canon": ["none: whether a tool issues a verdict is a property of its output contract, which no source rule sees"]
+        },
+        {
+            "id": "unindexed-construct-kind",
+            "name": "Unindexed construct kind",
+            "shape": "A kind of construct the index a family of checks reads never records, so every check over that index misses every construct of the kind.",
+            "fix": "Record the kind in the index, and confirm that a planted construct of the kind is reported.",
+            "breaks": "epi-preserved-distinction",
+            "canon": ["none: an index's coverage of construct kinds is a property of its builder, which no source rule sees"]
+        }
+    ]
+}

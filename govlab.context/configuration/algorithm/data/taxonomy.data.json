@@ -1,0 +1,672 @@
+{
+    "category": "taxonomy",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the placement and naming gates",
+            "the discovery verification, which compares what each pattern-resolved surface collects before and after a rename"
+        ],
+        "population": "every file and folder under a declared governed root",
+        "freshness": "a verdict stands until a file is created, moved or renamed, or the vocabulary changes",
+        "refusal": "the lint stage fails an undeclared word, a tag that does not match its folder, or a path over the depth cap",
+        "observation": "none: placement is decided on the tree",
+        "evidence": "fires-and-accepts: one suite lints a file whose tag is undeclared and one whose tag differs from its folder, another refuses a repeated role and a path past the depth cap, and both pass conforming paths",
+        "authority": "the declared vocabularies and roots, which every path conforms to, so an undeclared word is an approved edit to the declaration"
+    },
+    "records": [
+        {
+            "id": "taxonomy-jurisdiction",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "principleRef": "declared-jurisdiction",
+            "title": "Taxonomy Jurisdiction",
+            "exemplar": {
+                "before": "Whether a file is governed is decided per file as it comes up, so an undeclared tree is silently exempt and a stray root-level folder reads as legitimate.",
+                "after": "registry → governed roots → containers + buckets + ignore entries → the governed file set, and the flagged set of root folders declared as neither",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Read the registry's root, container, bucket and ignore declarations, enumerate every file under a declared root, and separate the governed set from the ignored set and from the folders declared as neither, so jurisdiction is read rather than inferred.",
+            "invariant": "No declaration, no enforcement: a file is governed only under a declared root, and a root folder in neither the container nor the bucket declaration is a finding rather than a new container.",
+            "flow": [
+                "Registry",
+                "GovernedRootSet",
+                "ContainerSet",
+                "GovernedFileSet",
+                "FlaggedFolderSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "TaxonomyJurisdiction",
+                    "rhs": "<Registry> \"→\" <GovernedRootSet> \"→\" <JurisdictionPartition>"
+                },
+                {
+                    "lhs": "JurisdictionPartition",
+                    "rhs": "<GovernedFileSet> \",\" <IgnoredSet> \",\" <FlaggedFolderSet>"
+                },
+                {"lhs": "GovernedRootSet",
+                    "rhs": "<ContainerSet> \",\" <BucketSet> \",\" <IgnoreSet>"}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "reshape-risk-priority",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "principleRef": "manual-identity-migration",
+            "title": "Reshape Risk Priority",
+            "exemplar": {
+                "before": "Conversion starts wherever the tree looks worst, so the first container is the one with the most importers and the most pattern-resolved aggregators.",
+                "after": "containers → score(importer count x shape-discovered surface count) → ascending rank → pilot the lowest-risk container end to end first",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Score each governed container by how much reference surface a rename disturbs — importer count and the number of surfaces that resolve by pattern rather than by literal path — and rank ascending, so the pilot is the lowest-risk container and the highest-risk one lands last.",
+            "invariant": "The container converted first is the one whose failure is cheapest to detect, not the one whose naming is worst.",
+            "flow": [
+                "ContainerSet",
+                "ReferenceSurfaceCount",
+                "RiskScore",
+                "OrderedContainerQueue"
+            ],
+            "productions": [
+                {
+                    "lhs": "ReshapeRiskPriority",
+                    "rhs": "<ContainerSet> \"→\" <RiskScoreSet> \"→\" <OrderedContainerQueue>"
+                },
+                {"lhs": "RiskScore",
+                    "rhs": "<ImporterCount> \"*\" <ShapeDiscoveredSurfaceCount>"}
+            ],
+            "composes": [],
+            "force": [
+                "architecture_evolution",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "path-role-walk",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "principleRef": "bounded-nesting-depth",
+            "title": "Path Role Walk",
+            "exemplar": {
+                "before": "A path is judged by whether it looks tidy, so a concern folder nested under a concern folder and a subject folder below its concern both read as ordinary nesting.",
+                "after": "path → assign each depth a role in the order container < subject < concern → depth<=cap and no role repeated or revisited → the role-assignment edge list plus the violating depths",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Walk every governed path from its root, assign each folder depth a role from the declared grammar in the ordered sequence container then subject then concern, and emit the depth-to-role edge list together with the depths that repeat a role, revisit an earlier one, or exceed the cap.",
+            "invariant": "Each depth consumes a role strictly later than the depth before it, a role may be skipped but never repeated or revisited, and the file's parent always resolves to the concern role.",
+            "flow": [
+                "GovernedPath",
+                "DepthSequence",
+                "RoleAssignment",
+                "RoleEdgeList",
+                "DepthViolationSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "PathRoleWalk",
+                    "rhs": "<GovernedPath> \"→\" <RoleAssignment> \"→\" <RoleEdgeList> \",\" <DepthViolationSet>"
+                },
+                {"lhs": "RoleAssignment",
+                    "rhs": "<Container> \"<\" <Subject> \"<\" <Concern>"},
+                {
+                    "lhs": "DepthViolation",
+                    "rhs": "\"over_cap\" | \"role_repeated\" | \"role_revisited\" | \"file_outside_concern\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "concern-classification",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:semantic-correctness"],
+            "principleRef": "narrowest-concern",
+            "title": "Concern Classification",
+            "exemplar": {
+                "before": "A file is tagged from where it currently sits, so a saturated label absorbs several distinct roles and a two-role file is hidden under whichever word came first.",
+                "after": "read the file → narrowest accurate declared concern → one concern: classified; two concerns: split candidate; irreducible overlap: domain-ward layer wins",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Read each governed file, assign the narrowest accurate concern from the declared vocabulary by its primary responsibility, record a file that fits two concerns as a split candidate, and break an irreducible overlap by the domain-ward layer, so classification is judgment against the file rather than pattern-matching against its path.",
+            "invariant": "A concern is assigned by reading the file, never by its current location; a file that fits two concerns is a split candidate, not a tie to be broken arbitrarily.",
+            "flow": [
+                "GovernedFile",
+                "PrimaryResponsibility",
+                "CandidateConcernSet",
+                "AssignedConcern",
+                "SplitCandidateSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConcernClassification",
+                    "rhs": "<GovernedFile> \"→\" <CandidateConcernSet> \"→\" <AssignedConcern> \"|\" <SplitCandidate>"
+                },
+                {"lhs": "CandidateConcernSet",
+                    "rhs": "<PrimaryResponsibility> \"→\" <DeclaredConcern> \"+\""},
+                {"lhs": "AssignedConcern",
+                    "rhs": "<NarrowestAccurateConcern> \"|\" <DomainWardTieBreak>"}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "name-projection",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "principleRef": "positional-slot-resolution",
+            "title": "Name Projection",
+            "exemplar": {
+                "before": "The new name is written by hand, so the tag lands mid-name, a compound swallows the concern, and the folder chain is chosen separately from the filename.",
+                "after": "(subject, variant?, concern, ext) → foo.<variant>.<concern>.<ext> with the tag terminating → the folder chain container/[subject]/<concern-folder> that the tag itself determines",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compose the target name from the assigned concern, the subject, and a variant taken only where a collision or a facet requires one, and derive the folder chain from that same concern, so the filename and its placement are one projection rather than two decisions.",
+            "invariant": "The concern tag terminates the filename and names the parent folder, so the name determines the placement and one unanchored pattern resolves either level.",
+            "flow": [
+                "AssignedConcern",
+                "SubjectSelection",
+                "VariantTrigger",
+                "TargetName",
+                "TargetFolderChain"
+            ],
+            "productions": [
+                {
+                    "lhs": "NameProjection",
+                    "rhs": "<AssignedConcern> \",\" <Subject> \",\" <VariantTrigger> \"→\" <TargetName> \",\" <TargetFolderChain>"
+                },
+                {"lhs": "TargetName",
+                    "rhs": "<Subject> \".\" <Variant>? \".\" <ConcernTag> \".\" <Extension>"},
+                {"lhs": "TargetFolderChain",
+                    "rhs": "<Container> \"/\" <SubjectFolder>? \"/\" <ConcernFolder>"},
+                {"lhs": "VariantTrigger",
+                    "rhs": "\"collision\" | \"facet\" | \"none\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "contract_compatibility"
+            ]
+        },
+        {
+            "id": "container-reshape",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "principleRef": "manual-identity-migration",
+            "title": "Container Reshape",
+            "exemplar": {
+                "before": "A rename tool rewrites every literal path across the whole tree at once, and the surfaces that resolve by pattern are never re-pointed.",
+                "after": "one container → split candidates first → move and rename → update every importer → move the mirrored tests → re-point every shape-discovered surface → gate green before the next container",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Convert one container at a time: split the multi-role files first, move and rename each remaining file to its projected name and folder, update every importer in the same pass, move the mirrored tests to match the new concern folders, and re-point every surface whose pattern encoded the old form.",
+            "invariant": "A rename is one identity migration completed within a single container, references included; the gate is green before the next container starts.",
+            "flow": [
+                "OrderedContainerQueue",
+                "SplitExecution",
+                "MoveRename",
+                "ImporterUpdate",
+                "TestMirrorMove",
+                "SurfaceRepoint"
+            ],
+            "productions": [
+                {
+                    "lhs": "ContainerReshape",
+                    "rhs": "<Container> \"→\" <SplitExecution> \"→\" <MoveRename> \"→\" <ReferenceUpdate> \"→\" <SurfaceRepoint>"
+                },
+                {"lhs": "ReferenceUpdate",
+                    "rhs": "<ImporterUpdate> \",\" <TestMirrorMove>"}
+            ],
+            "composes": [],
+            "force": [
+                "architecture_evolution",
+                "modularity"
+            ]
+        },
+        {
+            "id": "vocabulary-admission-gate",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean",
+            "grounds": ["reasoning:tel-priority"],
+            "principleRef": "closed-vocabulary",
+            "title": "Vocabulary Admission Gate",
+            "exemplar": {
+                "before": "An unclassifiable file is answered by adding its word to the vocabulary, or by an ignore entry, and the check goes green either way; where a word is refused, the refusal names only what is wrong.",
+                "after": "proposed word → rejection-table index resolves the covering concern: refuse naming it, and rename the file → uncovered: is-a a role: concerns; has-a a thing: subjects → otherwise refuse; admission is a developer-approved registry edit",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Hold every proposed word against the declared vocabularies and the rejection table, resolve and name the declared word that covers it where one does, refuse a word that names a process, an adjective, a grouping label, or a measurement, sort a surviving word by the is-a test into concerns or subjects, and admit it only by developer-approved registry edit.",
+            "invariant": "An undeclared word is a finding, never a license to add one, and a refusal names the covering word wherever the table resolves one; coverage is decided by the role a file plays, never by general-language synonymy.",
+            "flow": [
+                "ProposedWord",
+                "CoverageCheck",
+                "CoveringConcern",
+                "IsATest",
+                "AdmissionVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "VocabularyAdmissionGate",
+                    "rhs": "<ProposedWord> \"→\" <CoverageCheck> \"→\" <IsATest> \"→\" <AdmissionVerdict>"
+                },
+                {
+                    "lhs": "CoverageCheck",
+                    "rhs": "<ProposedWord> \"→\" <RejectionTableIndex> \"→\" <CoveringConcern> \"|\" \"uncovered\""
+                },
+                {"lhs": "RejectionTableIndex",
+                    "rhs": "<RefusedWord> \"→\" <DeclaredConcern>"},
+                {
+                    "lhs": "AdmissionVerdict",
+                    "rhs": "\"admit_concern\" | \"admit_subject\" | \"refuse_rename_file\" | \"refuse_covered_by\" <CoveringConcern>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "discovery-verification",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "principleRef": "glob-resolvable-tree",
+            "title": "Discovery Verification",
+            "exemplar": {
+                "before": "The gate is green after the rename, so the reshape is called done; the aggregator that collected by suffix now collects nothing and there is nothing left to check.",
+                "after": "per aggregator → collected member set before vs after → equal or intentionally changed: pass; silently emptied or shrunk: fail, and a green gate is not evidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For every shape-discovered surface touched by the reshape, compare the member set it collects against what it collected before, and issue the verdict from that comparison, so a collection that silently emptied is caught rather than read as a clean pass.",
+            "invariant": "A green gate is not evidence for a pattern-resolved surface; the verdict comes from the collected member set, and an unexplained drop is a failure.",
+            "flow": [
+                "ShapeDiscoveredSurfaceSet",
+                "CollectedSetBefore",
+                "CollectedSetAfter",
+                "DiscoveryVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "DiscoveryVerification",
+                    "rhs": "<ShapeDiscoveredSurfaceSet> \"→\" <CollectedSetDelta> \"→\" <DiscoveryVerdict>"
+                },
+                {"lhs": "CollectedSetDelta",
+                    "rhs": "<CollectedSetBefore> \"-\" <CollectedSetAfter>"},
+                {"lhs": "DiscoveryVerdict",
+                    "rhs": "\"preserved\" | \"intended_change\" | \"silently_emptied\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "observability_traceability"
+            ]
+        },
+        {
+            "id": "taxonomy-ledger",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "principleRef": "derived-naming-registry",
+            "title": "Taxonomy Ledger",
+            "exemplar": {
+                "before": "Which containers are converted and which words were refused is remembered rather than recorded, so the same rejected word is proposed again and the vocabulary drifts from the document.",
+                "after": "registry version + per-container conversion state + admitted and refused words → a durable ledger the next reshape and the next proposal both read",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Record the registry version, the conversion state of each container, and every admitted and refused word with its reasoning, so the taxonomy's history is durable evidence rather than a fact re-derived from the tree on each pass.",
+            "invariant": "A refusal is recorded with its reason, so the answer to why a word is absent is retrievable rather than lost.",
+            "flow": [
+                "RegistryVersion",
+                "ContainerConversionState",
+                "AdmissionRecordSet",
+                "TaxonomyLedger"
+            ],
+            "productions": [
+                {
+                    "lhs": "TaxonomyLedger",
+                    "rhs": "<RegistryVersion> \",\" <ContainerConversionState> \",\" <AdmissionRecordSet>"
+                },
+                {"lhs": "AdmissionRecord",
+                    "rhs": "<ProposedWord> \",\" <AdmissionVerdict> \",\" <Reasoning>"}
+            ],
+            "composes": [],
+            "force": [
+                "observability_traceability",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "taxonomy-completion",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ter-stop"],
+            "principleRef": "concern-folder-correspondence",
+            "title": "Taxonomy Completion",
+            "exemplar": {
+                "before": "Conversion is declared done on the container count, while unclassified files sit under an ignore entry and one aggregator still collects nothing.",
+                "after": "every governed file placed and named to the grammar AND every split candidate resolved AND every surface verified preserved → complete; any residual → incomplete",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Mark the taxonomy complete only when every governed file resolves against the grammar at both levels, no split candidate is outstanding, and every shape-discovered surface has a preserved verdict, leaving it incomplete while any residual remains.",
+            "invariant": "Completion is the absence of residual findings, never a converted-container count, and never a finding removed by an ignore entry.",
+            "flow": [
+                "TaxonomyLedger",
+                "ResidualFindingSet",
+                "CompletionVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "TaxonomyCompletion",
+                    "rhs": "<TaxonomyLedger> \"→\" <ResidualFindingSet> \"→\" <CompletionVerdict>"
+                },
+                {
+                    "lhs": "ResidualFindingSet",
+                    "rhs": "<PlacementViolationSet> \"+\" <NamingViolationSet> \"+\" <SplitCandidateSet> \"+\" <UnverifiedSurfaceSet>"
+                },
+                {"lhs": "CompletionVerdict",
+                    "rhs": "\"taxonomy_complete\" | \"taxonomy_incomplete\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "container-ladder",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "principleRef": "declared-jurisdiction",
+            "title": "Container Ladder",
+            "exemplar": {
+                "before": "A folder appears at a governed root, so it is declared a container, and the next folder that resists placement gets one too.",
+                "after": "folder at a root → groups concern sets that must not merge: subject folder → holds one role: concern folder → an existing container groups it: move it there → not source: ignore entry → only a new grouping axis: container, by approved edit",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Decide what a folder found at a governed root is by asking, in order, whether it groups concern sets, holds one role, belongs under an existing container, or is not source at all, so a new container is declared only for a new grouping axis.",
+            "invariant": "A container is declared only for a grouping axis no existing container covers, and never to house a folder that resists placement or to shorten a path.",
+            "flow": [
+                "RootFolder",
+                "SubjectTest",
+                "ConcernTest",
+                "ExistingContainerTest",
+                "SourceTest",
+                "LadderVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "ContainerLadder",
+                    "rhs": "<RootFolder> \"→\" <SubjectTest> \"→\" <ConcernTest> \"→\" <ExistingContainerTest> \"→\" <SourceTest> \"→\" <LadderVerdict>"
+                },
+                {
+                    "lhs": "LadderVerdict",
+                    "rhs": "\"subject_folder\" | \"concern_folder\" | \"move_under_container\" | \"ignore_entry\" | \"propose_container\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "export-triage-ladder",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "principleRef": "manual-identity-migration",
+            "title": "Export Triage Ladder",
+            "exemplar": {
+                "before": "The dead-code report lists exports nothing imports, and they are removed in bulk; a capability a call site was hand-rolling disappears with the evidence of the gap.",
+                "after": "unreferenced export → a call site hand-rolls it: wire it → capability awaiting a consumer: stage it in the allowlist → superseded with no consumer: delete with every reference → only consumer was a merged duplicate: remove with the duplicate",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Give each export nothing imports the first verdict that holds, in order: wire it where a call site repeats its work, stage it as capability awaiting a consumer, delete a superseded one with its references, or remove it with the duplicate it served.",
+            "invariant": "An unreferenced export is triaged one at a time while its file is being read, and a report that nothing imports it starts the ladder rather than concluding it.",
+            "flow": [
+                "UnreferencedExport",
+                "HandRolledCallSite",
+                "AwaitingConsumer",
+                "Superseded",
+                "ConsolidatedDuplicate",
+                "TriageVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "ExportTriageLadder",
+                    "rhs": "<UnreferencedExport> \"→\" <HandRolledCallSite> \"→\" <AwaitingConsumer> \"→\" <Superseded> \"→\" <ConsolidatedDuplicate> \"→\" <TriageVerdict>"
+                },
+                {"lhs": "TriageVerdict",
+                    "rhs": "\"wire\" | \"stage\" | \"delete\" | \"remove_with_duplicate\""}
+            ],
+            "composes": [],
+            "force": [
+                "architecture_evolution",
+                "modularity"
+            ]
+        },
+        {
+            "id": "dialect-resolution",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "principleRef": "case-dialect",
+            "title": "Dialect Resolution",
+            "exemplar": {
+                "before": "A language that names its files in another case is either left outside the grammar or forced into dotted names its own tools cannot find.",
+                "after": "extension → dialect case → stem split at word boundaries → longest trailing run that is a declared tag: concern → leading words: subject, then a declared variant → the same three slots the dotted grammar reads",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Resolve a filename whose extension a dialect names by splitting its stem at that case's word boundaries, taking the longest trailing word run that is a declared tag as the concern and the leading words as the subject and an optional declared variant.",
+            "invariant": "A dialect changes how the slots are spelled and never which words may fill them, so every dialect file resolves against the same closed vocabularies as a dotted one.",
+            "flow": [
+                "Extension",
+                "DialectCase",
+                "WordRun",
+                "ConcernRun",
+                "HeadSlots",
+                "ResolvedSlots"
+            ],
+            "productions": [
+                {
+                    "lhs": "DialectResolution",
+                    "rhs": "<Extension> \"→\" <DialectCase> \"→\" <WordRun> \"→\" <ConcernRun> \",\" <HeadSlots> \"→\" <ResolvedSlots>"
+                },
+                {"lhs": "DialectCase",
+                    "rhs": "\"camel\" | \"pascal\" | \"snake\" | \"kebab\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "contract_compatibility"
+            ]
+        },
+        {
+            "id": "alignment-cadence",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "principleRef": "manual-identity-migration",
+            "title": "Alignment Cadence",
+            "exemplar": {
+                "before": "A long conversion runs on a protocol read once at the start, and later files are classified under rulings that have faded from working context while every record still looks correct.",
+                "after": "conversion record → cites an alignment entry → the entry's hash equals the protocol's current hash and the run citing it is within the declared span → accepted; otherwise → re-read the protocol whole and write a new entry",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Accept a conversion record only when the alignment entry it cites was written against the protocol's current revision and fewer than the declared span of records cite that entry, so the rules are re-read at a bounded cadence.",
+            "invariant": "Editing the protocol reopens every record written against the earlier revision, and no alignment entry covers more than the declared span of records.",
+            "flow": [
+                "ConversionRecord",
+                "AlignmentEntry",
+                "RevisionCheck",
+                "SpanCheck",
+                "AlignmentVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "AlignmentCadence",
+                    "rhs": "<ConversionRecord> \"→\" <AlignmentEntry> \"→\" <RevisionCheck> \",\" <SpanCheck> \"→\" <AlignmentVerdict>"
+                },
+                {"lhs": "AlignmentVerdict",
+                    "rhs": "\"current\" | \"stale_revision\" | \"span_exceeded\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "observability_traceability"
+            ]
+        },
+        {
+            "id": "taxonomy-kernel",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "principleRef": "closed-vocabulary",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "taxonomy-jurisdiction"},
+                {"stage": "intent",
+                    "record": "reshape-risk-priority"},
+                {"stage": "see",
+                    "record": "path-role-walk"},
+                {"stage": "derive",
+                    "record": "concern-classification"},
+                {"stage": "project",
+                    "record": "name-projection"},
+                {"stage": "act",
+                    "record": "container-reshape"},
+                {"stage": "constrain",
+                    "record": "vocabulary-admission-gate"},
+                {"stage": "verify",
+                    "record": "discovery-verification"},
+                {"stage": "commit",
+                    "record": "taxonomy-ledger"},
+                {"stage": "terminate",
+                    "record": "taxonomy-completion"}
+            ],
+            "title": "Taxonomy Kernel",
+            "exemplar": {
+                "before": "Naming and placement are conventions carried in reviewers' heads, so a path has more than one right answer, an undeclared word enters whenever a file resists classification, and no pattern resolves a concern tree-wide.",
+                "after": "jurisdiction → risk priority → role walk → classification → name projection → container reshape → admission gate → discovery verification → ledger → completion",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Resolve jurisdiction from the registry, order the containers by reshape risk, walk each path into its ordered roles, classify each file to its narrowest concern, project the name and the folder chain together, reshape one container at a time, hold every proposed word at the admission gate, verify that pattern-resolved surfaces still collect what they collected, ledger the state, and terminate only when no residual finding remains.",
+            "invariant": "Placement and naming are one derivation from a declared vocabulary to a verified tree, in which every folder and every filename slot resolves to a declared word and one unanchored pattern resolves a concern at either level.",
+            "flow": [
+                "Jurisdiction",
+                "RiskPriority",
+                "RoleWalk",
+                "Classification",
+                "NameProjection",
+                "Reshape",
+                "AdmissionGate",
+                "DiscoveryVerification",
+                "Ledger",
+                "Completion"
+            ],
+            "productions": [
+                {
+                    "lhs": "TaxonomyKernel",
+                    "rhs": "<TaxonomyJurisdiction> \"→\" <ReshapeRiskPriority> \"→\" <PathRoleWalk> \"→\" <ConcernClassification> \"→\" <NameProjection> \"→\" <ContainerReshape> \"→\" <VocabularyAdmissionGate> \"→\" <DiscoveryVerification> \"→\" <TaxonomyLedger> \"→\" <TaxonomyCompletion>"
+                }
+            ],
+            "composes": [
+                "taxonomy-jurisdiction",
+                "reshape-risk-priority",
+                "path-role-walk",
+                "concern-classification",
+                "name-projection",
+                "container-reshape",
+                "vocabulary-admission-gate",
+                "discovery-verification",
+                "taxonomy-ledger",
+                "taxonomy-completion"
+            ],
+            "force": [
+                "semantic_consistency",
+                "modularity",
+                "architecture_evolution",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "taxonomy-concern",
+            "title": "<Taxonomy Concern>",
+            "intent": "<Resolve jurisdiction from the declared roots> → <Order containers by reshape risk> → <Walk each path into ordered roles> → <Classify each file to its narrowest concern> → <Project the name and its folder chain together> → <Reshape one container at a time> → <Hold every proposed word at the admission gate> → <Verify pattern-resolved discovery survived> → <Ledger the state> → <Terminate on no residual finding>",
+            "invariant": "Every governed folder and every filename slot resolves to a word from a closed declared vocabulary, the concern tag terminates the filename and names its parent folder, and no path exceeds the declared depth cap.",
+            "flow": [
+                "Jurisdiction",
+                "RoleWalk",
+                "Classification",
+                "NameProjection",
+                "Reshape",
+                "AdmissionGate",
+                "Verification",
+                "Ledger"
+            ],
+            "productions": [
+                {
+                    "lhs": "TaxonomyConcern",
+                    "rhs": "<GovernedRootSet> \"→\" <RoleEdgeList> \"→\" <AssignedConcern> \"→\" <TargetName> \",\" <TargetFolderChain> \"→\" <DiscoveryVerdict> \"→\" <TaxonomyLedger>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "modularity"
+            ],
+            "meta": true
+        }
+    ]
+}

@@ -40,43 +40,43 @@ version: 1.0.0
 THIS TASK EXECUTES <what the document is for, in one sentence>
 
 %% META %%:
-objective: "<what finished looks like, checkable against the tree>"
-jurisdiction: <source> | external: everything else
-recursion_limit: <a bound on repair>
+    objective: "<what finished looks like, checkable against the tree>"
+    jurisdiction: <source> | external: everything else
+    recursion_limit: <a bound on repair>
 
 # NODE 1 — <the first bounded decision>   [epistemic · analysis · logic · yields: boolean]
 @genesis: existence
 CONTRACT:
-input:     <source>
-transform: READ_RESOURCE <source> INTO <held>; VALIDATE_ARTIFACT <held> AGAINST <schema>
-output:    <held>, validated
+  input:     <source>
+  transform: READ_RESOURCE <source> INTO <held>; VALIDATE_ARTIFACT <held> AGAINST <schema>
+  output:    <held>, validated
 HANDOFF GATE:
-[check] <held> read from <source> (evidence: the read returned content)
-[check] <held> conforms to <schema> (evidence: the validator's report) over: <held> records measured: <conforming> / <records>
-[check] every <held>.<record> carries the fields NODE 2 reads (evidence: no record with a missing field)
-result: pass → NODE 2 | unread or nonconforming → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  [check] <held> read from <source> (evidence: the read returned content)
+  [check] <held> conforms to <schema> (evidence: the validator's report) over: <held> records measured: <conforming> / <records>
+  [check] every <held>.<record> carries the fields NODE 2 reads (evidence: no record with a missing field)
+  result: pass → NODE 2 | unread or nonconforming → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — <the decision that consumes the first>   [epistemic · reasoning · set-theory · yields: set]
 @genesis: difference
 CONTRACT:
-input:     <held> from NODE 1
-transform: FOR EACH <item> IN <held>.<collection>: ANALYZE_CONTENT <item> AGAINST <criterion> INTO <finding>; IF <finding>.<met>: APPEND <item> TO <result>
-output:    <result>
+  input:     <held> from NODE 1
+  transform: FOR EACH <item> IN <held>.<collection>: ANALYZE_CONTENT <item> AGAINST <criterion> INTO <finding>; IF <finding>.<met>: APPEND <item> TO <result>
+  output:    <result>
 HANDOFF GATE:
-[check] every <item> analyzed (evidence: one finding per item) over: <held>.<collection> measured: <analyzed> / <items>
-[check] <result> holds every <item> that met <criterion> (evidence: the two counts match)
-[check] no <item> outside <held> appears in <result> (evidence: every result item present in <held>)
-result: pass → TERMINATE | count mismatch → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  [check] every <item> analyzed (evidence: one finding per item) over: <held>.<collection> measured: <analyzed> / <items>
+  [check] <result> holds every <item> that met <criterion> (evidence: the two counts match)
+  [check] no <item> outside <held> appears in <result> (evidence: every result item present in <held>)
+  result: pass → TERMINATE | count mismatch → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT validate-before-persist: <held> is validated before anything is persisted over: every node binds: the reader objector: [check] <held> conforms to <schema> at NODE 1
 INVARIANT source-untouched: <source> is never modified in place over: <source> binds: the reader objector: none
 
 REPORT:
-subject: NODE 2
-verdict: pass | fail | unknown
-domain: declared <items> measured <analyzed>
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 2
+  verdict: pass | fail | unknown
+  domain: declared <items> measured <analyzed>
+  completion: saturated <bool> complete <bool> verified <bool>
 ```
 
 A1·b construct to stage
@@ -98,29 +98,29 @@ A1·c prose or directive
 
 ```mermaid
 flowchart TB
-prose["Prose · 'get the data and check it'"]
-interpret["The model interprets · what is get, what is check, what counts as valid"]
-variance["A different completion each run"]
-pag["A directive · READ data FROM source, VALIDATE data AGAINST schema"]
-pattern["The model completes a pattern it has seen"]
-narrow["A narrower set of completions · still probabilistic"]
-prose --> interpret --> variance
-pag --> pattern --> narrow
+    prose["Prose · 'get the data and check it'"]
+    interpret["The model interprets · what is get, what is check, what counts as valid"]
+    variance["A different completion each run"]
+    pag["A directive · READ data FROM source, VALIDATE data AGAINST schema"]
+    pattern["The model completes a pattern it has seen"]
+    narrow["A narrower set of completions · still probabilistic"]
+    prose --> interpret --> variance
+    pag --> pattern --> narrow
 ```
 
 A1·d scan, loop, binding
 
 ```mermaid
 flowchart TB
-doc["A document · typed, contracted, gated, bounded"]
-scan["A scan · checks the shape, deterministic"]
-loop["A reasoning loop · orient, intent, see, derive, project, act, constrain, verify, commit, terminate"]
-binding["A binding · maps each operation to a tool, each slot to a value"]
-output["Output · a sample, unverified until read"]
-doc --> scan
-doc --> loop --> output
-loop -- an effect --> binding
-doc -. has no runtime of its own .-> output
+    doc["A document · typed, contracted, gated, bounded"]
+    scan["A scan · checks the shape, deterministic"]
+    loop["A reasoning loop · orient, intent, see, derive, project, act, constrain, verify, commit, terminate"]
+    binding["A binding · maps each operation to a tool, each slot to a value"]
+    output["Output · a sample, unverified until read"]
+    doc --> scan
+    doc --> loop --> output
+    loop -- an effect --> binding
+    doc -. has no runtime of its own .-> output
 ```
 
 ## Why it works
@@ -133,11 +133,11 @@ Polishing an instruction's wording tends not to change how precisely the model f
 
 For this reason I use explicit, high-frequency tokens, which reduce interpretive variance while the output stays probabilistic. Ambiguity is reduced at the input and the output is verified, rather than the input being asked to guarantee anything. In practice, every operative word comes from the [keyword](KEYWORDS.md#keyword-ontology) vocabulary, and its operands are bound with a preposition, so the model completes a recognized structure instead of interpreting a sentence. The intent is stated as an English verb the reader can review.
 
-To check this, rewrite one prose instruction as a directive and run both several times against the same gates. The directive should pass more often, and where it does not, the gate that fails is the one whose condition was still a judgement. Structure helps where the model has seen the structure. A vocabulary invented for one project is prose with capital letters, and the model interprets it as it would interpret a sentence.
+To check this, rewrite one prose instruction as a directive and run both several times against the same gates. The directive should pass more often, and where it does not, the gate that fails is the one whose condition was still a judgment. Structure helps where the model has seen the structure. A vocabulary invented for one project is prose with capital letters, and the model interprets it as it would interpret a sentence.
 
 The vocabulary combines code syntax for structure with English verbs for intent and prepositions for the relations between operands. A line that carries all three is one the model can complete and a reviewer can read without a legend.
 
-Token frequency is the reason the vocabulary is uppercase and closed. A word that appears in the same slot across many structured contexts carries a stable meaning into the completion, while a word that appears with many meanings carries all of them. So the grammar keeps its verbs few and capitalised, and gives each one a [semantic contract](../ontology/PRINCIPLES.md#architecture-semantic-contracts), stated under [instruction patterns](PATTERNS.md#instruction-patterns). One term for one operation is the [ubiquitous language](../ontology/PRINCIPLES.md#architecture-ubiquitous-language) the model and the reviewer share.
+Token frequency is the reason the vocabulary is uppercase and closed. A word that appears in the same slot across many structured contexts carries a stable meaning into the completion, while a word that appears with many meanings carries all of them. So the grammar keeps its verbs few and capitalized, and gives each one a [semantic contract](../ontology/PRINCIPLES.md#architecture-semantic-contracts), stated under [instruction patterns](PATTERNS.md#instruction-patterns). One term for one operation is the [ubiquitous language](../ontology/PRINCIPLES.md#architecture-ubiquitous-language) the model and the reviewer share.
 
 Reducing ambiguity works at the derive stage of [the loop](../START.md#the-loop). There the model works out what a line means, and a line drawn from the vocabulary leaves it one reading where prose leaves several.
 
@@ -161,26 +161,26 @@ B1·b vocabulary origin
 
 ```mermaid
 flowchart TB
-code["Code syntax · loops, conditions, assignment"]
-verbs["English verbs · analyze, validate, report"]
-preps["Prepositions · FROM, INTO, AGAINST, USING"]
-token["An uppercase token in a fixed slot"]
-completion["A completion drawn from structured contexts"]
-code --> token
-verbs --> token
-preps --> token
-token --> completion
+    code["Code syntax · loops, conditions, assignment"]
+    verbs["English verbs · analyze, validate, report"]
+    preps["Prepositions · FROM, INTO, AGAINST, USING"]
+    token["An uppercase token in a fixed slot"]
+    completion["A completion drawn from structured contexts"]
+    code --> token
+    verbs --> token
+    preps --> token
+    token --> completion
 ```
 
 B1·c the honest claim
 
 ```mermaid
 flowchart LR
-input["Input ambiguity · reduced"]
-load["Interpretation load · reduced"]
-variance["Output variance · narrowed, never removed"]
-claim["The honest claim · tends toward consistency"]
-input --> load --> variance --> claim
+    input["Input ambiguity · reduced"]
+    load["Interpretation load · reduced"]
+    variance["Output variance · narrowed, never removed"]
+    claim["The honest claim · tends toward consistency"]
+    input --> load --> variance --> claim
 ```
 
 ## PAG and the method
@@ -206,36 +206,36 @@ C1·a one input
 
 ```mermaid
 flowchart TB
-subgraph method["The method · holds the work"]
-worth["Worth before work"]
-gates["Checks that hold the rules"]
-evidence["Evidence, never a claim"]
-seats["Coordination between parties"]
-end
-subgraph grammar["The grammar · shapes one input"]
-doc["A document · typed, contracted, gated, bounded"]
-end
-worth --> doc
-doc --> gates
-gates --> evidence
-seats -. every party reads the same document .-> doc
+    subgraph method["The method · holds the work"]
+        worth["Worth before work"]
+        gates["Checks that hold the rules"]
+        evidence["Evidence, never a claim"]
+        seats["Coordination between parties"]
+    end
+    subgraph grammar["The grammar · shapes one input"]
+        doc["A document · typed, contracted, gated, bounded"]
+    end
+    worth --> doc
+    doc --> gates
+    gates --> evidence
+    seats -. every party reads the same document .-> doc
 ```
 
 C1·b what it adds
 
 ```mermaid
 flowchart LR
-subgraph adds["What the grammar adds"]
-tokens["Tokens the model weights"]
-order["A processing order"]
-exits["Explicit exit criteria"]
-bounds["Boundaries the model can quote"]
-end
-narrow["A narrower completion set · never a promise about the completion"]
-tokens --> narrow
-order --> narrow
-exits --> narrow
-bounds --> narrow
+    subgraph adds["What the grammar adds"]
+        tokens["Tokens the model weights"]
+        order["A processing order"]
+        exits["Explicit exit criteria"]
+        bounds["Boundaries the model can quote"]
+    end
+    narrow["A narrower completion set · never a promise about the completion"]
+    tokens --> narrow
+    order --> narrow
+    exits --> narrow
+    bounds --> narrow
 ```
 
 ---

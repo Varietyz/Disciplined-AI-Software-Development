@@ -1,0 +1,321 @@
+{
+    "note": "Classification of every catalog ecosystem (the byEcosystem index of the rule catalog). kind=language|iac carries the literal root-marker files that detect the ecosystem in a project; kind=exclude carries a documented reason. Languages and frameworks without a fixed root marker use their closest config file. Rule-source tools (codeql/ql/semgrep-unified), cross-language rule buckets (generic/regex/secrets/text/common), cloud-provider rule buckets and ingestion artifacts are excluded, because they are not detectable project ecosystems.",
+    "ecosystems": {
+        "python": {"kind": "language",
+            "markers": [
+                "pyproject.toml",
+                "setup.cfg"
+            ]},
+        "ruby": {"kind": "language",
+            "markers": [
+                "Gemfile",
+                ".rubocop.yml"
+            ]},
+        "terraform": {"kind": "iac",
+            "markers": [".tflint.hcl"]},
+        "arm": {"kind": "iac",
+            "markers": ["azuredeploy.json"]},
+        "ansible": {"kind": "iac",
+            "markers": [
+                "ansible.cfg",
+                ".ansible-lint"
+            ]},
+        "argo_workflows": {
+            "kind": "exclude",
+            "reason": "2 rules; Argo Workflows CRDs are Kubernetes manifests — covered by checkov under the kubernetes profile."
+        },
+        "serverless": {
+            "kind": "exclude",
+            "reason": "= serverlessfw (Serverless Framework; kics naming); covered by the serverlessfw profile."
+        },
+        "cloudformation": {"kind": "iac",
+            "markers": [
+                "template.yaml",
+                "template.yml"
+            ]},
+        "azure_pipelines": {
+            "kind": "exclude",
+            "reason": "CI pipeline config rule bucket (kics); no standalone bundled linter — the CI provider validates its own config."
+        },
+        "bitbucket_pipelines": {
+            "kind": "exclude",
+            "reason": "CI pipeline config rule bucket (kics); no standalone bundled linter."
+        },
+        "bitbucket": {"kind": "exclude",
+            "reason": "VCS platform config rule bucket, not a project ecosystem."},
+        "circleci_pipelines": {
+            "kind": "exclude",
+            "reason": "CI pipeline config rule bucket (kics); no standalone bundled linter."
+        },
+        "dockerfile": {"kind": "iac",
+            "markers": ["Dockerfile"]},
+        "example_runner": {"kind": "exclude",
+            "reason": "ingestion example artifact, not a project ecosystem."},
+        "github_actions": {"kind": "iac",
+            "markers": [
+                "action.yml",
+                "action.yaml"
+            ]},
+        "github": {"kind": "exclude",
+            "reason": "VCS platform config rule bucket, not a project ecosystem."},
+        "gitlab_ci": {
+            "kind": "exclude",
+            "reason": "CI pipeline config rule bucket (kics); no standalone bundled linter."
+        },
+        "gitlab": {"kind": "exclude",
+            "reason": "VCS platform config rule bucket, not a project ecosystem."},
+        "kubernetes": {"kind": "iac",
+            "markers": [
+                "kustomization.yaml",
+                "Chart.yaml"
+            ]},
+        "openapi": {"kind": "iac",
+            "markers": [
+                "openapi.yaml",
+                "openapi.json",
+                "swagger.yaml"
+            ]},
+        "java": {"kind": "language",
+            "markers": [
+                "pom.xml",
+                "build.gradle"
+            ]},
+        "cpp": {"kind": "language",
+            "markers": [
+                "CMakeLists.txt",
+                "conanfile.txt",
+                "conanfile.py"
+            ]},
+        "rust": {"kind": "language",
+            "markers": ["Cargo.toml"]},
+        "clojure": {"kind": "language",
+            "markers": [
+                "deps.edn",
+                "project.clj"
+            ]},
+        "actions": {
+            "kind": "exclude",
+            "reason": "= github_actions (rule bucket); covered by the github_actions profile."
+        },
+        "codeql": {
+            "kind": "exclude",
+            "reason": "CodeQL is a cross-language analysis engine and rule SOURCE, not a target ecosystem; its findings apply to the profiled languages."
+        },
+        "csharp": {"kind": "language",
+            "markers": ["global.json"]},
+        "go": {"kind": "language",
+            "markers": ["go.mod"],
+            "defaultPaths": ["./..."]},
+        "javascript": {"kind": "language",
+            "markers": ["package.json"]},
+        "ql": {"kind": "exclude",
+            "reason": "QL is CodeQL's query language (rule source), not a project ecosystem."},
+        "swift": {"kind": "language",
+            "markers": ["Package.swift"]},
+        "test": {"kind": "exclude",
+            "reason": "ingestion test artifact, not a project ecosystem."},
+        "unified": {
+            "kind": "exclude",
+            "reason": "semgrep cross-language 'unified' rule bucket, not a project ecosystem."
+        },
+        "elixir": {"kind": "language",
+            "markers": ["mix.exs"]},
+        "kotlin": {"kind": "language",
+            "markers": ["build.gradle.kts"]},
+        "typescript": {"kind": "language",
+            "markers": [
+                "tsconfig.json",
+                "tsconfig.base.json"
+            ]},
+        "yaml": {"kind": "iac",
+            "markers": [
+                ".yamllint",
+                ".yamllint.yaml",
+                ".yamllint.yml"
+            ]},
+        "json": {
+            "kind": "exclude",
+            "reason": "JSON is a data format within other ecosystems, not a standalone project type; formatting is the host project's (prettier)."
+        },
+        "azureresourcemanager": {
+            "kind": "exclude",
+            "reason": "= arm (Azure Resource Manager; kics naming); covered by the arm profile."
+        },
+        "buildah": {"kind": "exclude",
+            "reason": "1 rule; container build — covered by dockerfile/hadolint."},
+        "cicd": {
+            "kind": "exclude",
+            "reason": "generic CI/CD rule bucket (kics); the concrete CI systems are separate buckets."
+        },
+        "common": {"kind": "exclude",
+            "reason": "shared/common rule bucket, not a project ecosystem."},
+        "crossplane": {
+            "kind": "exclude",
+            "reason": "Crossplane CRDs; niche, no standalone root marker — checkov covers them under kubernetes."
+        },
+        "dockercompose": {"kind": "iac",
+            "markers": [
+                "docker-compose.yml",
+                "docker-compose.yaml",
+                "compose.yaml"
+            ]},
+        "googledeploymentmanager": {
+            "kind": "exclude",
+            "reason": "GCP Deployment Manager config; niche, no standalone root marker; requires-live-verification."
+        },
+        "grpc": {"kind": "iac",
+            "markers": [
+                "buf.yaml",
+                "buf.yml"
+            ]},
+        "knative": {"kind": "exclude",
+            "reason": "1 rule; Knative CRDs — covered by checkov under kubernetes."},
+        "pulumi": {"kind": "iac",
+            "markers": [
+                "Pulumi.yaml",
+                "Pulumi.yml"
+            ]},
+        "serverlessfw": {"kind": "iac",
+            "markers": [
+                "serverless.yml",
+                "serverless.yaml"
+            ]},
+        "r": {"kind": "language",
+            "markers": [
+                "DESCRIPTION",
+                ".lintr"
+            ]},
+        "lua": {"kind": "language",
+            "markers": [".luacheckrc"]},
+        "perl": {"kind": "language",
+            "markers": [
+                "cpanfile",
+                "Makefile.PL"
+            ]},
+        "php": {"kind": "language",
+            "markers": ["composer.json"]},
+        "modelica": {
+            "kind": "exclude",
+            "reason": "Modelica — niche modeling language; no bundled linter; requires-live-verification."
+        },
+        "apex": {
+            "kind": "exclude",
+            "reason": "Salesforce Apex — PMD Apex ruleset; niche, no bundled invocation; requires-live-verification."
+        },
+        "ecmascript": {
+            "kind": "exclude",
+            "reason": "= javascript (sonar's ECMAScript rule bucket); covered by the javascript profile."
+        },
+        "xsl": {
+            "kind": "exclude",
+            "reason": "XSL (sonar); XML transform data within other ecosystems, no standalone linter."
+        },
+        "velocity": {"kind": "exclude",
+            "reason": "Apache Velocity templates (sonar); niche, no bundled linter."},
+        "html": {
+            "kind": "exclude",
+            "reason": "HTML (sonar); markup within web projects; no bundled standalone linter."
+        },
+        "plsql": {
+            "kind": "exclude",
+            "reason": "PL/SQL (sonar); no standalone root marker/bundled dialect linter; generic SQL is covered by sqlfluff."
+        },
+        "jsp": {"kind": "exclude",
+            "reason": "JSP (sonar); Java web templates — covered under the java profile."},
+        "pom": {
+            "kind": "exclude",
+            "reason": "Maven POM (sonar); build metadata within java — covered under the java profile."
+        },
+        "xml": {
+            "kind": "exclude",
+            "reason": "XML (sonar); data format within other ecosystems, not a standalone project type."
+        },
+        "visualforce": {
+            "kind": "exclude",
+            "reason": "Visualforce (Salesforce); niche, no bundled linter; requires-live-verification."
+        },
+        "scala": {"kind": "language",
+            "markers": ["build.sbt"]},
+        "solidity": {"kind": "language",
+            "markers": [
+                "foundry.toml",
+                "hardhat.config.js",
+                "hardhat.config.ts"
+            ]},
+        "regex": {
+            "kind": "exclude",
+            "reason": "regex-pattern rule bucket (semgrep/generic), not a project ecosystem."
+        },
+        "generic": {
+            "kind": "exclude",
+            "reason": "generic/cross-language rule bucket (semgrep/kics), not a project ecosystem."
+        },
+        "hcl": {
+            "kind": "exclude",
+            "reason": "= terraform/HCL (kics/trivy HCL bucket); covered by the terraform profile."
+        },
+        "ocaml": {
+            "kind": "exclude",
+            "reason": "OCaml (sonar); no bundled linter (dune/merlin) in the catalog; requires-live-verification."
+        },
+        "c": {
+            "kind": "exclude",
+            "reason": "C shares clang tooling with C++ — covered by the cpp profile (clang-tidy/clang-format run across the tree)."
+        },
+        "bash": {"kind": "exclude",
+            "reason": "= shell (shellcheck); covered by the shell profile."},
+        "dart": {"kind": "language",
+            "markers": ["pubspec.yaml"]},
+        "shell": {"kind": "language",
+            "markers": [".shellcheckrc"]},
+        "vbnet": {
+            "kind": "exclude",
+            "reason": "VB.NET (sonar); no distinct project marker vs C#; covered by the .NET toolchain under the csharp profile."
+        },
+        "css": {"kind": "language",
+            "markers": [
+                ".stylelintrc",
+                ".stylelintrc.json"
+            ]},
+        "secrets": {
+            "kind": "exclude",
+            "reason": "secret-detection rule bucket (cross-cutting); handled by a secret scanner (gitleaks/trufflehog), not a language profile."
+        },
+        "text": {"kind": "exclude",
+            "reason": "generic text rule bucket, not a project ecosystem."},
+        "sql": {"kind": "language",
+            "markers": [".sqlfluff"]},
+        "aws": {
+            "kind": "exclude",
+            "reason": "cloud-provider rule bucket (trivy/checkov/kics) — the provider is a target of terraform/cloudformation, not a detectable project ecosystem; covered by the IaC profiles' scanners."
+        },
+        "azure": {
+            "kind": "exclude",
+            "reason": "cloud-provider rule bucket (trivy/checkov/kics); covered by the IaC profiles' scanners."
+        },
+        "cloudstack": {
+            "kind": "exclude",
+            "reason": "cloud-provider rule bucket (trivy/checkov/kics); covered by the IaC profiles' scanners."
+        },
+        "digitalocean": {
+            "kind": "exclude",
+            "reason": "cloud-provider rule bucket (trivy/checkov/kics); covered by the IaC profiles' scanners."
+        },
+        "google": {
+            "kind": "exclude",
+            "reason": "cloud-provider rule bucket (trivy/checkov/kics); covered by the IaC profiles' scanners."
+        },
+        "nifcloud": {
+            "kind": "exclude",
+            "reason": "cloud-provider rule bucket (trivy/checkov/kics); covered by the IaC profiles' scanners."
+        },
+        "oracle": {
+            "kind": "exclude",
+            "reason": "cloud-provider rule bucket (trivy/checkov/kics); covered by the IaC profiles' scanners."
+        },
+        "openstack": {
+            "kind": "exclude",
+            "reason": "cloud-provider rule bucket (trivy/checkov/kics); covered by the IaC profiles' scanners."
+        }
+    }
+}

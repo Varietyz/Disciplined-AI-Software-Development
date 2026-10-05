@@ -1,0 +1,373 @@
+{
+    "category": "living-profile",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the merge core's determinism and idempotency checks",
+            "the provenance log, which records every version and the evidence behind it"
+        ],
+        "population": "every delta applied to the profile",
+        "freshness": "a verdict stands until a new turn produces evidence or the frozen baseline changes",
+        "refusal": "a delta without same-turn evidence is rejected, and the fallback mirror accepts no writes",
+        "observation": "the provenance log, which locates when and from what evidence each fact entered",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the same-turn evidence, which every delta cites, and the frozen baseline, which the mirror never overrides"
+    },
+    "records": [
+        {
+            "id": "profile-compose",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Profile Compose",
+            "exemplar": {
+                "before": "Accumulated profile knowledge treated as ground truth, never re-verified.",
+                "after": "profile store → read doc (or empty) → strip volatile metadata → compact view → injected as disclosed memory, reverifiable against source",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Specializing the RAG Knowledge Boundary, read the durable profile document (or an empty one), strip volatile metadata, and project a compact view injected into reasoning as retrieved memory rather than ground truth.",
+            "invariant": "Accumulated knowledge is disclosed as supported evidence, not authority; the consumer still grounds every use against live source.",
+            "flow": [
+                "Store",
+                "ReadDoc|Empty",
+                "StripVolatileMetadata",
+                "CompactView",
+                "ContextInjection"
+            ],
+            "productions": [
+                {
+                    "lhs": "ProfileCompose",
+                    "rhs": "<ProfileStore> \"→\" (<StoredDocument> | <EmptyDocument>) \"→\" <MetadataStrip> \"→\" <CompactKnowledgeView> \"→\" <ContextEvidence>"
+                },
+                {"lhs": "CompactKnowledgeView",
+                    "rhs": "<AxisSet> \"without\" <VolatileMetadata>"},
+                {
+                    "lhs": "ContextEvidence",
+                    "rhs": "\"disclosed_as_memory\" \",\" \"not_ground_truth\" \",\" \"reverifiable_against_source\""
+                }
+            ],
+            "composes": ["rag-knowledge-boundary"],
+            "force": [
+                "modularity",
+                "model_governance",
+                "event_messaging"
+            ]
+        },
+        {
+            "id": "delta-capture",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Delta Capture",
+            "exemplar": {
+                "before": "A speculative claim written into durable memory without same-turn evidence.",
+                "after": "structured turn → knowledge delta → keep only facts verified this turn → admissible delta; unverified rejected",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Specializing the RAG Knowledge Boundary, accept a structured knowledge delta the reasoning turn self-reports inline, admit only facts verified within that same turn, and reject speculation without a separate extraction pass.",
+            "invariant": "A durable fact enters the profile only from evidence produced in the same turn; unsupported claims are rejected, never guessed into memory.",
+            "flow": [
+                "StructuredTurn",
+                "KnowledgeDelta|Null",
+                "VerifiedThisTurnFilter",
+                "AdmissibleDelta"
+            ],
+            "productions": [
+                {
+                    "lhs": "DeltaCapture",
+                    "rhs": "<StructuredTurn> \"→\" (<KnowledgeDelta> | <NullDelta>) \"→\" <EvidenceFilter> \"→\" <AdmissibleDelta>"
+                },
+                {
+                    "lhs": "EvidenceFilter",
+                    "rhs": "\"verified_this_turn\" \"→\" \"supported\" | \"unverified\" \"→\" \"unsupported_reject\""
+                },
+                {"lhs": "AdmissibleDelta",
+                    "rhs": "<AxisDeltaSet>"}
+            ],
+            "composes": ["rag-knowledge-boundary"],
+            "force": [
+                "modularity",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "idempotent-merge",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Idempotent Merge",
+            "exemplar": {
+                "before": "Re-applying the same delta grows an axis and changes the document.",
+                "after": "doc + delta → stable fact identity → per-field-kind merge{overwrite | union | append-dedupe-cap} → double-apply is a no-op",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Specializing the Idempotent Side Effect, assign each fact a stable identity, apply the delta per field kind, deduplicate and cap, and guarantee that re-applying the same delta yields the same document.",
+            "invariant": "Merge is idempotent and bounded — the same delta applied twice is a no-op, and no axis grows without limit.",
+            "flow": [
+                "Doc + Delta",
+                "StableFactIdentity",
+                "PerFieldKindMerge",
+                "DedupeAndCap",
+                "MergedDoc"
+            ],
+            "productions": [
+                {
+                    "lhs": "IdempotentMerge",
+                    "rhs": "<Document> \",\" <AdmissibleDelta> \"→\" <FactIdentitySet> \"→\" <PerFieldKindApplication> \"→\" <DedupeAndCap> \"→\" <MergedDocument>"
+                },
+                {"lhs": "FieldKind",
+                    "rhs": "\"scalar_overwrite\" | \"set_union\" | \"list_append_dedupe_cap\""},
+                {"lhs": "DedupeAndCap",
+                    "rhs": "\"dedupe_by_stable_identity\" \",\" \"cap_list_axis_to_limit\""}
+            ],
+            "composes": ["idempotent-side-effect"],
+            "force": ["state_transaction"]
+        },
+        {
+            "id": "version-provenance",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Version Provenance",
+            "exemplar": {
+                "before": "A version bumped and mutated in place even on a no-op merge.",
+                "after": "merged doc → change detect → {no-op: untouched | real change: bump + timestamp + modification record}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Specializing Governance Evolution, detect whether the merge changed state, and only on real change bump the version, timestamp it, and append a modification record — leaving a no-op untouched.",
+            "invariant": "A no-op delta bumps nothing; every real change is auditable and reversible, and a version is never mutated in place without a provenance record.",
+            "flow": [
+                "MergedDoc",
+                "ChangeDetect",
+                "(NoOp | VersionBump + Timestamp + ModificationRecord)",
+                "VersionedDoc"
+            ],
+            "productions": [
+                {
+                    "lhs": "VersionProvenance",
+                    "rhs": "<MergedDocument> \"→\" <ChangeDetection> \"→\" (<NoOpOutcome> | <VersionedOutcome>)"
+                },
+                {
+                    "lhs": "ChangeDetection",
+                    "rhs": "\"merged_equals_prior\" \"→\" \"no_op\" | \"merged_differs\" \"→\" \"versioned\""
+                },
+                {"lhs": "VersionedOutcome",
+                    "rhs": "<VersionBump> \",\" <Timestamp> \",\" <ModificationRecord>"},
+                {"lhs": "ModificationRecord",
+                    "rhs": "\"at\" \",\" \"changed_axes\" \",\" \"prior_version\""}
+            ],
+            "composes": ["architecture-evolution-governance"],
+            "force": [
+                "security_governance",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "deterministic-merge-core",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Deterministic Merge Core",
+            "exemplar": {
+                "before": "Merge reads the wall clock internally, so identical inputs differ.",
+                "after": "(doc, delta, injected clock) → pure merge → (doc', modification|null); no hidden time/state/randomness",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Specializing the Deterministic Core, keep compose and merge pure functions over immutable inputs with the clock injected, so identical inputs reproduce identical outputs.",
+            "invariant": "No hidden time, state, or randomness — the clock is a parameter, and merge is referentially transparent.",
+            "flow": [
+                "(Doc, Delta, Clock)",
+                "PureMerge",
+                "(Doc', Modification|Null)"
+            ],
+            "productions": [
+                {
+                    "lhs": "ProfileMergeCore",
+                    "rhs": "<Document> \",\" <AdmissibleDelta> \",\" <InjectedClock> \"→\" <PureMerge> \"→\" (<NextDocument> \",\" <ModificationOrNull>)"
+                },
+                {
+                    "lhs": "PurityConstraint",
+                    "rhs": "\"no_hidden_state\" \",\" \"no_hidden_time\" \",\" \"no_hidden_randomness\" \",\" \"referential_transparency\""
+                },
+                {"lhs": "InjectedClock",
+                    "rhs": "\"now_supplied_by_adapter\""}
+            ],
+            "composes": ["deterministic-core"],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "persistence-fork",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Persistence Fork",
+            "exemplar": {
+                "before": "Accumulation written to a fallback mirror, creating a divergent source of truth.",
+                "after": "connection mode → {trusted arm connected: authoritative per-owner store, write back | disconnected: read-only mirror}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Specializing the Port Adapter, resolve the durable store by connection mode — an authoritative per-owner store when the trusted arm is connected, a read-only mirror otherwise — and write back only where accumulation is trusted.",
+            "invariant": "Authoritative accumulation happens only against the trusted store; the fallback is a read mirror, never a divergent source of truth.",
+            "flow": [
+                "ConnectionMode",
+                "AuthoritativeStore|LimitedMirror",
+                "ScopedKey",
+                "Persist|MirrorReadOnly"
+            ],
+            "productions": [
+                {
+                    "lhs": "PersistenceFork",
+                    "rhs": "<ConnectionMode> \"→\" (<AuthoritativeStore> | <LimitedMirror>) \"→\" <ScopedOwnerKey> \"→\" <PersistenceOutcome>"
+                },
+                {"lhs": "ConnectionMode",
+                    "rhs": "\"trusted_arm_connected\" | \"disconnected_limited\""},
+                {"lhs": "PersistenceOutcome",
+                    "rhs": "\"persist_write_back\" | \"mirror_read_only\""},
+                {"lhs": "ScopedOwnerKey",
+                    "rhs": "\"stable_owner_identity\" \",\" \"sanitized\""}
+            ],
+            "composes": ["port-adapter"],
+            "force": [
+                "semantic_consistency",
+                "resilience_recovery"
+            ]
+        },
+        {
+            "id": "seed-composition",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Seed Composition",
+            "exemplar": {
+                "before": "Accumulated knowledge merged into the baseline, rewriting frozen scope.",
+                "after": "frozen baseline + composed knowledge → additive overlay (baseline immutable) → turn seed",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Specializing Canonical Data, overlay the accumulated knowledge onto the frozen baseline scope as additive context without mutating the baseline.",
+            "invariant": "The frozen baseline is an immutable source of truth; accumulated knowledge is additive context, never a rewrite of scope.",
+            "flow": [
+                "FrozenBaseline + ComposedKnowledge",
+                "AdditiveOverlay",
+                "TurnSeed"
+            ],
+            "productions": [
+                {
+                    "lhs": "SeedComposition",
+                    "rhs": "<FrozenBaseline> \",\" <ComposedKnowledgeView> \"→\" <AdditiveOverlay> \"→\" <TurnSeed>"
+                },
+                {
+                    "lhs": "AdditiveOverlay",
+                    "rhs": "\"baseline_immutable\" \",\" \"knowledge_appended_not_merged_into_baseline\""
+                },
+                {"lhs": "TurnSeed",
+                    "rhs": "<BaselineScope> \",\" <AccumulatedKnowledge>"}
+            ],
+            "composes": ["canonical-data"],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "living-profile-kernel",
+            "principleRef": "versioning",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "seed-composition"},
+                {"stage": "verify",
+                    "record": "delta-capture"},
+                {"stage": "act",
+                    "record": "idempotent-merge"},
+                {"stage": "commit",
+                    "record": "version-provenance"}
+            ],
+            "title": "Living Profile Kernel",
+            "exemplar": {
+                "before": "Per-turn evidence written to memory ungated, unbounded, unversioned.",
+                "after": "compose → seed → turn → capture verified delta → idempotent merge (injected clock) → version only real change → persist against the fork → loop",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compose the accumulated knowledge onto the frozen baseline into a seed, run the reasoning turn, capture the inline verified delta, merge it idempotently under an injected clock, version only real change, and persist against the fork — looping per turn.",
+            "invariant": "A living profile is a versioned, idempotently accumulated, provenance-logged memory that grows only from verified per-turn evidence and never overrides frozen scope or live source.",
+            "flow": [
+                "Baseline",
+                "Compose",
+                "Seed",
+                "Turn",
+                "Delta",
+                "Merge(Clock)",
+                "Version",
+                "Persist",
+                "(next turn)"
+            ],
+            "productions": [
+                {
+                    "lhs": "LivingProfileKernel",
+                    "rhs": "<SeedComposition> \"→\" <ReasoningTurn> \"→\" <DeltaCapture> \"→\" <IdempotentMerge> \"→\" <ProfileMergeCore> \"→\" <VersionProvenance> \"→\" <PersistenceFork> \"→\" <ProfileCompose>"
+                },
+                {
+                    "lhs": "KernelInvariant",
+                    "rhs": "\"grows_only_from_verified_evidence\" \",\" \"never_overrides_frozen_scope\" \",\" \"never_overrides_live_source\" \",\" \"bounded_and_idempotent\" \",\" \"auditable_and_reversible\""
+                }
+            ],
+            "composes": [
+                "seed-composition",
+                "delta-capture",
+                "idempotent-merge",
+                "version-provenance",
+                "persistence-fork",
+                "profile-compose"
+            ],
+            "force": ["model_governance"]
+        },
+        {
+            "id": "living-accumulation-concern",
+            "title": "<Living Accumulation Concern>",
+            "intent": "<Compose prior memory as disclosed evidence> → <Capture only same-turn verified deltas> → <Merge idempotently by stable identity, bounded> → <Version and log only real change> → <Persist against the connection fork> → <Overlay onto the immutable baseline>",
+            "invariant": "Any per-turn evidence stream becomes durable memory only when accumulation is idempotent, bounded, provenance-logged, deterministic at its core, and additive to an immutable baseline it may never rewrite.",
+            "flow": [
+                "Evidence",
+                "Admissibility",
+                "IdempotentMerge",
+                "Provenance",
+                "Persistence",
+                "AdditiveOverlay"
+            ],
+            "productions": [
+                {
+                    "lhs": "LivingAccumulationConcern",
+                    "rhs": "<DisclosedMemory> \"→\" <AdmissibleDelta> \"→\" <IdempotentBoundedMerge> \"→\" <VersionProvenance> \"→\" <PersistenceFork> \"→\" <AdditiveBaselineOverlay>"
+                },
+                {
+                    "lhs": "IdempotentBoundedMerge",
+                    "rhs": "\"stable_identity\" \",\" \"dedupe\" \",\" \"cap\" \",\" \"double_apply_is_no_op\""
+                }
+            ],
+            "composes": [
+                "version-provenance",
+                "persistence-fork"
+            ],
+            "force": [
+                "state_transaction",
+                "correctness_verification",
+                "streaming_dataflow"
+            ],
+            "meta": true
+        }
+    ]
+}

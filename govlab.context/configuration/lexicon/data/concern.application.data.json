@@ -1,0 +1,275 @@
+{
+    "category": "application-concerns",
+    "exampleShape": "placed-file",
+    "enforcedBy": ["the naming gate, which refuses a filename whose last segment before the extension is an undeclared tag or differs from its folder's tag"],
+    "check": {
+        "population": "every filename whose concern slot holds the tag, and the folder holding each such file",
+        "freshness": "a verdict stands until a file carrying the tag is created, moved or renamed, or the declared vocabulary changes",
+        "refusal": "the lint run fails a file whose tag is undeclared or disagrees with its folder",
+        "observation": "each filename parsed by position against the declared concern vocabulary",
+        "evidence": "fires-and-accepts: a suite lints a file whose tag is undeclared and one whose tag differs from its folder, and passes a conforming file",
+        "authority": "the declared concern vocabulary, which a filename's tag and its folder conform to"
+    },
+    "records": [
+        {
+            "name": "Service Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that offers a stateful capability other code calls, filed in a services folder.",
+            "example": "services/billing.service.ts"
+        },
+        {
+            "name": "Controller Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that receives an external request and routes it to the code that answers it, filed in a controllers folder.",
+            "example": "controllers/account.controller.ts"
+        },
+        {
+            "name": "Coordinator Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:service-tag",
+                    "reason": "A coordinator owns a lifecycle and drives its collaborators, while a service offers a stateful capability that others call."
+                },
+                {
+                    "id": "lexicon:processor-tag",
+                    "reason": "A coordinator drives collaborators through a lifecycle, while a processor applies one operation to each item passing through."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that owns a lifecycle and drives the collaborators it depends on, filed in a coordinators folder.",
+            "example": "coordinators/upload.coordinator.ts",
+            "seeAlso": ["coordinator"]
+        },
+        {
+            "name": "Orchestrator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that sequences several independent steps into one run and decides what happens when one fails, filed in an orchestrators folder.",
+            "example": "orchestrators/onboarding.orchestrator.ts"
+        },
+        {
+            "name": "Mediator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file through which peers communicate so that none of them refers to another directly, filed in a mediators folder.",
+            "example": "mediators/chat.mediator.ts"
+        },
+        {
+            "name": "Dispatcher Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that selects which handler receives each incoming message, filed in a dispatchers folder.",
+            "example": "dispatchers/command.dispatcher.ts"
+        },
+        {
+            "name": "Workflow Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a multi-step process with its transitions and outcomes, filed in a workflows folder.",
+            "example": "workflows/approval.workflow.ts"
+        },
+        {
+            "name": "Job Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a unit of work run outside the request that asked for it, filed in a jobs folder.",
+            "example": "jobs/invoice-export.job.ts"
+        },
+        {
+            "name": "Task Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one named piece of work a runner can schedule and report on, filed in a tasks folder.",
+            "example": "tasks/nightly-cleanup.task.ts"
+        },
+        {
+            "name": "Stage Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one ordered phase of a larger run, filed in a stages folder.",
+            "example": "stages/transcode.stage.ts",
+            "seeAlso": ["stages"]
+        },
+        {
+            "name": "Step Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that performs one advance of a process, filed in a steps folder.",
+            "example": "steps/payment-capture.step.ts"
+        },
+        {
+            "name": "State Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds the current condition of something the system tracks, filed in a state folder.",
+            "example": "state/player.state.ts"
+        },
+        {
+            "name": "State-Machine Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a set of states and the allowed transitions between them, filed in a state-machines folder.",
+            "example": "state-machines/order.state-machine.ts"
+        },
+        {
+            "name": "Transition Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one move from a state to the next with its guard, filed in a transitions folder.",
+            "example": "transitions/door-open.transition.ts"
+        },
+        {
+            "name": "Store Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds state and controls how it is read and changed, filed in a stores folder.",
+            "example": "stores/cart.store.ts"
+        },
+        {
+            "name": "Reducer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that computes the next state from the current state and an action, filed in a reducers folder.",
+            "example": "reducers/todo.reducer.ts"
+        },
+        {
+            "name": "Mutation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one permitted change to held state, filed in a mutations folder.",
+            "example": "mutations/rename-file.mutation.ts"
+        },
+        {
+            "name": "Selector Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that derives a value from held state for its readers, filed in a selectors folder.",
+            "example": "selectors/visible-todos.selector.ts"
+        },
+        {
+            "name": "Observer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that watches a subject and reacts when it changes, filed in an observers folder.",
+            "example": "observers/stock-price.observer.ts"
+        },
+        {
+            "name": "Listener Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that is registered for one kind of event and runs when it arrives, filed in a listeners folder.",
+            "example": "listeners/keyboard.listener.ts"
+        },
+        {
+            "name": "Emitter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that produces events or output for others to receive, filed in an emitters folder.",
+            "example": "emitters/particle.emitter.ts"
+        },
+        {
+            "name": "Signal Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a reactive value whose readers update when it changes, filed in a signals folder.",
+            "example": "signals/counter.signal.ts"
+        },
+        {
+            "name": "Publisher Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that sends messages to a topic without knowing who receives them, filed in a publishers folder.",
+            "example": "publishers/order.publisher.ts",
+            "seeAlso": ["publisher"]
+        },
+        {
+            "name": "Subscriber Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that receives the messages of a topic it has joined, filed in a subscribers folder.",
+            "example": "subscribers/email.subscriber.ts",
+            "seeAlso": ["subscriber"]
+        },
+        {
+            "name": "Subscription Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines the binding between a subscriber and what it receives, including how it ends, filed in a subscriptions folder.",
+            "example": "subscriptions/newsletter.subscription.ts"
+        },
+        {
+            "name": "Context Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that carries the ambient values a unit of work reads without passing them through every call, filed in a context folder.",
+            "example": "context/request.context.ts"
+        },
+        {
+            "name": "Capability Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that grants or describes one ability a component may use, filed in a capabilities folder.",
+            "example": "capabilities/camera.capability.ts"
+        },
+        {
+            "name": "Propagation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that carries context across a boundary such as a thread or a network call, filed in a propagation folder.",
+            "example": "propagation/trace.propagation.ts"
+        },
+        {
+            "name": "Correlation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that assigns and reads the identifiers tying related operations together, filed in a correlation folder.",
+            "example": "correlation/request.correlation.ts"
+        },
+        {
+            "name": "Ambient-Context Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds values available implicitly for the length of one operation, filed in an ambient-context folder.",
+            "example": "ambient-context/tenant.ambient-context.ts"
+        },
+        {
+            "name": "Viewmodel Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that shapes state for one view and exposes the actions that view offers, filed in a viewmodels folder.",
+            "example": "viewmodels/profile.viewmodel.ts"
+        },
+        {
+            "name": "Presenter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that formats data for a passive view and handles that view's input, filed in a presenters folder.",
+            "example": "presenters/invoice.presenter.ts"
+        },
+        {
+            "name": "Navigation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines how a participant moves between views, filed in a navigation folder.",
+            "example": "navigation/tab-bar.navigation.ts"
+        },
+        {
+            "name": "Input Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that reads device input and turns it into actions the system understands, filed in an input folder.",
+            "example": "input/gamepad.input.ts"
+        },
+        {
+            "name": "Gesture Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that recognizes a pattern of pointer or touch movement as one intent, filed in a gestures folder.",
+            "example": "gestures/pinch.gesture.ts"
+        },
+        {
+            "name": "Behavior Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that decides what an agent does next from what it perceives, filed in a behaviors folder.",
+            "example": "behaviors/patrol.behavior.ts"
+        },
+        {
+            "name": "Heuristic Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that scores options by an approximate rule where an exact answer costs too much, filed in a heuristics folder.",
+            "example": "heuristics/path-cost.heuristic.ts"
+        },
+        {
+            "name": "Intent Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that represents what an agent means to do before any action carries it out, filed in an intents folder.",
+            "example": "intents/attack.intent.ts"
+        },
+        {
+            "name": "Actuator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that turns an agent's decision into an effect on the world, filed in an actuators folder.",
+            "example": "actuators/motor.actuator.ts"
+        },
+        {
+            "name": "Classifier Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that assigns an input to one of a set of categories, filed in a classifiers folder.",
+            "example": "classifiers/spam.classifier.ts"
+        },
+        {
+            "name": "Learner Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that adjusts an agent's parameters from the outcomes it observes, filed in a learners folder.",
+            "example": "learners/reward.learner.ts"
+        }
+    ]
+}

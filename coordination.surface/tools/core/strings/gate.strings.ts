@@ -76,10 +76,10 @@ export const cleanNoisy = function cleanNoisy(kind: string, count: number, first
     );
 };
 
-export const judgementAstray = function judgementAstray(target: string, path: string): string {
+export const judgmentAstray = function judgmentAstray(target: string, path: string): string {
     return (
-        `a judgement finding targets ${target} while it reports ${path}. A remediation that names an artifact ` +
-        "other than the one in violation offers one branch of a judgement as the answer, and a consumer then " +
+        `a judgment finding targets ${target} while it reports ${path}. A remediation that names an artifact ` +
+        "other than the one in violation offers one branch of a judgment as the answer, and a consumer then " +
         "acts on the target rather than on the decide field."
     );
 };

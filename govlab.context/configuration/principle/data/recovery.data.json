@@ -1,0 +1,510 @@
+{
+    "category": "Self-Healing / Recovery / Deployment Safety",
+    "check": {
+        "population": "every service, replica, release and recovery path in production",
+        "freshness": "a verdict stands until the topology, the release or the recovery policy changes, and is renewed by each recovery drill",
+        "refusal": "the release gate, disaster-recovery test or orchestration policy blocks a release or topology without a working recovery path",
+        "observation": "health signals, recovery outcomes and drill results recorded against each service",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the recovery policy, which each drill and recovery outcome is compared against"
+    },
+    "records": [
+        {
+            "id": "self-healing-architecture",
+            "distinctFrom": [
+                {
+                    "id": "architecture:auto-remediation",
+                    "reason": "A self-healing architecture is the whole system restoring its components, while auto-remediation is one automated response to one known failure."
+                },
+                {
+                    "id": "lexicon:automation",
+                    "reason": "Self-healing is restoring failed components without human action, while automation is any task run without manual intervention."
+                },
+                {
+                    "id": "lexicon:recovery",
+                    "reason": "Self-healing is recovery that the system starts itself, while recovery is returning to correct operation by any means."
+                }
+            ],
+            "name": "Self-Healing Architecture",
+            "definition": "The ability of a system to detect a failed component from its health signals and restore it without human action.",
+            "type": "capability",
+            "aliases": ["Self-Healing"],
+            "scope": [
+                "system",
+                "infrastructure",
+                "runtime"
+            ],
+            "requires": [
+                "Observability",
+                "Health Checks",
+                "Automation"
+            ],
+            "reinforces": ["Resilience"],
+            "enables": ["Auto-Remediation"],
+            "conflicts_with": ["Manual Runbook Dependency"],
+            "tensions_with": ["Unsafe Automation"],
+            "violated_by": ["architecture:manual-runbook-dependency"],
+            "detected_by": ["recurring manual recovery steps"],
+            "measured_by": [
+                "MTTR",
+                "auto-recovery success"
+            ],
+            "refactored_by": [
+                "architecture:health-checks",
+                "lexicon:recovery-policy"
+            ],
+            "enforced_by": [
+                "orchestration policy",
+                "runbooks"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "process.on(\"error\", error => fooLog.record(error));",
+                "after": "supervisor.watch(\"foo-worker\", {\n  start: startFooWorker,\n  health: fooWorkerHealth,\n  restart: { maxAttempts: 5, backoffMs: 1000 },\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "health-checks",
+            "distinctFrom": [
+                {
+                    "id": "architecture:load-balancing",
+                    "reason": "Health checks report whether an instance can serve, while load balancing spreads requests across the instances that can."
+                }
+            ],
+            "name": "Health Checks",
+            "definition": "A mechanism that reports whether an instance and the dependencies it needs are ready to serve, so routing and restarts can act on it.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "deployment",
+                "runtime"
+            ],
+            "requires": ["Observable Health Criteria"],
+            "reinforces": [
+                "Self-Healing",
+                "Load Balancing"
+            ],
+            "enables": ["Readiness/Liveness Routing"],
+            "conflicts_with": ["Blind Routing"],
+            "tensions_with": ["False Positives"],
+            "violated_by": ["lexicon:blind-routing"],
+            "detected_by": ["missing or shallow health endpoint"],
+            "measured_by": ["health-check accuracy"],
+            "refactored_by": [],
+            "enforced_by": ["deployment policy"],
+            "severity": "contextual",
+            "mandatoryFor": "services",
+            "exemplar": {
+                "before": "app.get(\"/health\", () => \"ok\");",
+                "after": "app.get(\"/health\", async () => {\n  const fooStoreOk = await fooStore.ping();\n  const eventBusOk = await eventBus.ping();\n  return {\n    state: fooStoreOk && eventBusOk ? \"ready\" : \"blocked\",\n    checks: { fooStore: fooStoreOk, eventBus: eventBusOk },\n  };\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "failover",
+            "distinctFrom": [
+                {
+                    "id": "architecture:redundancy",
+                    "reason": "Failover is the switch to a standby, while redundancy is keeping the standby there to switch to."
+                },
+                {
+                    "id": "architecture:replication",
+                    "reason": "Failover switches traffic to another instance, while replication keeps that instance's data current."
+                }
+            ],
+            "name": "Failover",
+            "definition": "A mechanism that switches traffic or reads to a standby instance when the active one fails.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "infrastructure",
+                "data"
+            ],
+            "requires": [
+                "Redundancy",
+                "Health Detection"
+            ],
+            "reinforces": ["Availability"],
+            "enables": ["Continuity During Failure"],
+            "conflicts_with": ["Single Instance Dependency"],
+            "tensions_with": ["Consistency"],
+            "violated_by": ["lexicon:single-instance-dependency"],
+            "detected_by": ["single active dependency with no failover"],
+            "measured_by": [
+                "failover time",
+                "availability"
+            ],
+            "refactored_by": ["architecture:read-replica"],
+            "enforced_by": ["disaster recovery tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await primaryFooStore.find(id);",
+                "after": "const foo = await failover.read([\n  primaryFooStore,\n  secondaryFooStore,\n], store => store.find(id));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "redundancy",
+            "name": "Redundancy",
+            "definition": "A mechanism that keeps spare instances or capacity for a critical component, spread across failure domains.",
+            "type": "mechanism",
+            "scope": [
+                "infrastructure",
+                "service",
+                "data"
+            ],
+            "requires": ["Replication or Alternate Capacity"],
+            "reinforces": ["Fault Tolerance"],
+            "enables": ["Failover"],
+            "conflicts_with": ["Single Point of Failure"],
+            "tensions_with": ["Cost"],
+            "violated_by": ["lexicon:single-point-of-failure"],
+            "detected_by": ["SPOF analysis"],
+            "measured_by": ["redundancy factor"],
+            "refactored_by": [
+                "architecture:read-replica",
+                "architecture:failover"
+            ],
+            "enforced_by": ["architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const fooService = deploy({ replicas: 1 });",
+                "after": "const fooService = deploy({ replicas: 3, spreadAcross: [\"zone-a\", \"zone-b\", \"zone-c\"] });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "replication",
+            "name": "Replication",
+            "definition": "A mechanism that keeps copies of data on several nodes under a declared consistency policy, such as a write quorum.",
+            "type": "mechanism",
+            "scope": [
+                "database",
+                "service",
+                "cache"
+            ],
+            "requires": ["Consistency Policy"],
+            "reinforces": [
+                "Scalability",
+                "Availability"
+            ],
+            "enables": [
+                "Read Scaling",
+                "Failover"
+            ],
+            "conflicts_with": ["Single Copy State"],
+            "tensions_with": ["Consistency Lag"],
+            "violated_by": ["lexicon:single-copy-state"],
+            "detected_by": ["SPOF data stores"],
+            "measured_by": [
+                "replication lag",
+                "replica count"
+            ],
+            "refactored_by": [
+                "architecture:read-replica",
+                "lexicon:consistency-contract"
+            ],
+            "enforced_by": ["infrastructure policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await primaryFooStore.save(foo);",
+                "after": "await replicatedFooStore.save(foo, { replicas: 3, writeQuorum: 2 });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "auto-scaling",
+            "name": "Auto-Scaling",
+            "definition": "The ability to change the number of running instances automatically, between set bounds, from a load metric.",
+            "type": "capability",
+            "scope": [
+                "deployment",
+                "service",
+                "infrastructure"
+            ],
+            "requires": [
+                "Horizontal Scalability",
+                "Metrics"
+            ],
+            "aliases": ["Demand-Based Capacity"],
+            "reinforces": ["Elasticity"],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Cost/Cold Start",
+                "Fixed Capacity"
+            ],
+            "violated_by": ["lexicon:fixed-capacity-design"],
+            "detected_by": ["saturation under load without scale policy"],
+            "measured_by": [
+                "scaling latency",
+                "saturation rate"
+            ],
+            "refactored_by": [
+                "lexicon:autoscaling-policy",
+                "lexicon:externalize-session-state"
+            ],
+            "enforced_by": ["infrastructure-as-code policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "deployFooWorkers({ replicas: 4 });",
+                "after": "deployFooWorkers({\n  minReplicas: 2,\n  maxReplicas: 20,\n  scaleOn: { queueDepthPerWorker: 100 },\n  scaleInCooldownSeconds: 300,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "auto-remediation",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:incident-reduction",
+                    "reason": "Auto-remediation is running the known fix, while incident reduction is the fall in incidents that reach a responder as a result."
+                },
+                {
+                    "id": "lexicon:reduced-mean-time-to-recovery",
+                    "reason": "Auto-remediation is running the known fix, while reduced mean time to recovery is the shorter outage that results."
+                }
+            ],
+            "name": "Auto-Remediation",
+            "definition": "The ability to run a guarded, automated response, such as a restart, a reset and replay or a compaction, when an alert or a health signal shows a failure whose fix is known.",
+            "type": "capability",
+            "aliases": ["Autonomous Recovery"],
+            "scope": [
+                "runtime",
+                "service",
+                "infrastructure"
+            ],
+            "requires": [
+                "Health Signal",
+                "Remediation Workflow"
+            ],
+            "reinforces": ["Self-Healing Architecture"],
+            "enables": [
+                "Incident Reduction",
+                "Reduced Mean Time to Recovery"
+            ],
+            "conflicts_with": ["Manual Runbook Dependency"],
+            "tensions_with": [
+                "Unsafe Automation",
+                "Manual Remediation"
+            ],
+            "violated_by": ["architecture:manual-runbook-dependency"],
+            "detected_by": ["repeated manual runbook actions"],
+            "measured_by": [
+                "remediation success",
+                "false action rate"
+            ],
+            "refactored_by": [
+                "lexicon:automate-the-runbook",
+                "lexicon:guardrails"
+            ],
+            "enforced_by": ["operations policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "alert.on(\"FooDiskFull\", pageOnCall);",
+                "after": "alert.on(\"FooDiskFull\", async event => {\n  await fooStorage.compact(event.volumeId);\n  await fooStorage.verify(event.volumeId);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "rollback",
+            "name": "Rollback",
+            "definition": "A mechanism that restores the previous versioned release when a deployment fails its verification.",
+            "type": "mechanism",
+            "scope": [
+                "deployment",
+                "release"
+            ],
+            "requires": [
+                "Versioned Artifact",
+                "Reversible Deployment"
+            ],
+            "reinforces": [
+                "Resilience",
+                "Recovery"
+            ],
+            "enables": ["Fast Failure Recovery"],
+            "conflicts_with": [
+                "Irreversible Deployment",
+                "Irreversible Migration"
+            ],
+            "tensions_with": ["Data Migration Compatibility"],
+            "violated_by": ["lexicon:irreversible-deployment"],
+            "detected_by": ["no rollback path"],
+            "measured_by": ["rollback success time"],
+            "refactored_by": [
+                "lexicon:rollback-plan",
+                "lexicon:expand-contract-migration"
+            ],
+            "enforced_by": ["release gates"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "deploy(fooVersion);",
+                "after": "const release = await deploy(fooVersion);\nif (!(await release.verify())) await release.rollback(previousFooVersion);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "blue-green-deployment",
+            "name": "Blue-Green Deployment",
+            "aliases": ["Red-Black Deployment"],
+            "definition": "A design pattern that deploys a release to an idle copy of production, verifies it, and switches traffic to it at once.",
+            "type": "pattern",
+            "scope": [
+                "deployment",
+                "release"
+            ],
+            "requires": ["Parallel Environments"],
+            "reinforces": [
+                "Rollback",
+                "Availability"
+            ],
+            "enables": ["Low-Risk Cutover"],
+            "conflicts_with": ["In-Place Mutation Only"],
+            "tensions_with": ["Infrastructure Cost"],
+            "violated_by": ["lexicon:in-place-mutation-only"],
+            "detected_by": ["no parallel release environment"],
+            "measured_by": ["cutover failure rate"],
+            "refactored_by": [],
+            "enforced_by": ["deployment pipeline"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "routeAllTraffic(deployFoo(\"v2\"));",
+                "after": "const green = await deployFoo(\"v2\");\nawait verify(green);\nawait router.switch({ from: \"blue\", to: \"green\" });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "canary-deployment",
+            "name": "Canary Deployment",
+            "aliases": ["Canary Release"],
+            "definition": "A design pattern that sends a small share of traffic to a new release and widens the share only while its error and latency stay within limits.",
+            "type": "pattern",
+            "scope": [
+                "deployment",
+                "release"
+            ],
+            "requires": [
+                "Traffic Splitting",
+                "Observability"
+            ],
+            "reinforces": ["Progressive Delivery"],
+            "enables": ["Controlled Exposure"],
+            "conflicts_with": ["Big-Bang Release"],
+            "tensions_with": ["Rollout Complexity"],
+            "violated_by": ["architecture:big-bang-release"],
+            "detected_by": ["no staged traffic policy"],
+            "measured_by": [
+                "canary error budget",
+                "rollback trigger rate"
+            ],
+            "refactored_by": ["lexicon:guardrails"],
+            "enforced_by": ["deployment pipeline"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await router.route(\"foo-v2\", 100);",
+                "after": "await router.route(\"foo-v2\", 5);\nawait verifyCanary({ errorRate: 0.01, latencyP95Ms: 200 });\nawait router.progressiveShift(\"foo-v2\", [25, 50, 100]);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "chaos-engineering",
+            "name": "Chaos Engineering",
+            "definition": "The practice of injecting controlled faults into a running system to test a stated hypothesis about how it recovers.",
+            "type": "activity",
+            "scope": [
+                "system",
+                "resilience",
+                "operations"
+            ],
+            "requires": ["Observability"],
+            "reinforces": [
+                "Self-Healing Architecture",
+                "Fault Tolerance"
+            ],
+            "enables": ["Empirical Resilience Verification"],
+            "conflicts_with": ["Untested Failure Assumptions"],
+            "tensions_with": ["Production Risk"],
+            "violated_by": ["lexicon:untested-failure-assumptions"],
+            "detected_by": ["no fault-injection testing of recovery paths"],
+            "measured_by": ["unverified failure-mode count"],
+            "refactored_by": [],
+            "enforced_by": ["resilience review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "assumeFooSurvivesZoneLoss();",
+                "after": "chaos.experiment(\"foo-zone-loss\", {\n  inject: () => killZone(\"zone-a\"),\n  hypothesis: () => fooHealth.available(),\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "graceful-shutdown",
+            "name": "Graceful Shutdown",
+            "definition": "A mechanism that, on a stop signal, stops accepting work, drains in-flight work and closes connections before the process exits.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "runtime",
+                "resilience"
+            ],
+            "requires": ["Lifecycle Signals"],
+            "reinforces": [
+                "Reliability",
+                "Data Integrity"
+            ],
+            "enables": [
+                "In-Flight Work Drain",
+                "Connection Cleanup"
+            ],
+            "conflicts_with": ["Hard Process Kill"],
+            "tensions_with": ["Shutdown Latency"],
+            "violated_by": ["lexicon:hard-process-kill"],
+            "detected_by": ["dropped in-flight work on deploy/restart"],
+            "measured_by": ["requests lost per restart"],
+            "refactored_by": [],
+            "enforced_by": ["operations review"],
+            "severity": "contextual",
+            "mandatoryFor": "production systems",
+            "exemplar": {
+                "before": "process.on(\"SIGTERM\", () => process.exit(0));",
+                "after": "process.on(\"SIGTERM\", async () => {\n  server.stopAccepting();\n  await fooQueue.drain();\n  await server.close();\n  process.exit(0);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "raid-redundancy",
+            "name": "RAID Redundancy",
+            "aliases": ["Redundant Array of Independent Disks"],
+            "definition": "A technique for spreading data across several disks with mirroring or parity, so the loss of a disk loses no data.",
+            "type": "technique",
+            "scope": [
+                "storage",
+                "redundancy",
+                "infrastructure"
+            ],
+            "requires": ["Multiple Physical Disks"],
+            "reinforces": [
+                "Redundancy",
+                "Fault Tolerance"
+            ],
+            "enables": [
+                "Disk-Failure Survival",
+                "Parity-Based Recovery"
+            ],
+            "conflicts_with": ["Single-Disk Point of Failure"],
+            "tensions_with": ["Write Amplification"],
+            "violated_by": ["lexicon:single-disk-point-of-failure"],
+            "detected_by": ["total data loss when one drive fails"],
+            "measured_by": ["tolerated simultaneous disk failures"],
+            "refactored_by": [],
+            "enforced_by": ["storage architecture review"],
+            "severity": "contextual",
+            "mandatoryFor": "managed infrastructure",
+            "exemplar": {
+                "before": "const store = new SingleDiskFooStore(\"/dev/sda\");",
+                "after": "const store = new FooStore({\n  volume: raidArray({ level: 10, disks: [\"/dev/sda\", \"/dev/sdb\", \"/dev/sdc\", \"/dev/sdd\"] }),\n});",
+                "lang": "ts"
+            }
+        }
+    ]
+}

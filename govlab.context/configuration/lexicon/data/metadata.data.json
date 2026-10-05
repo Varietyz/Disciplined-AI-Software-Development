@@ -1,0 +1,161 @@
+{
+    "category": "metadata-self-description-declarative-systems",
+    "records": [
+        {
+            "name": "Excessive Configuration",
+            "kind": "anti-pattern",
+            "definition": "Requiring explicit configuration for everything instead of relying on sensible conventions."
+        },
+        {
+            "name": "Hardcoded Behavior",
+            "kind": "anti-pattern",
+            "definition": "Hardcoding behavior in code instead of driving it from declarative metadata."
+        },
+        {
+            "name": "Hardcoded Registration",
+            "kind": "anti-pattern",
+            "definition": "Registering components with hardcoded wiring instead of declaring them in a manifest."
+        },
+        {
+            "name": "Hidden Runtime Behavior",
+            "kind": "anti-pattern",
+            "definition": "Behavior that is opaque at runtime because the system does not describe its own structure."
+        },
+        {
+            "name": "Implicit Capability",
+            "kind": "anti-pattern",
+            "definition": "Leaving what a component can do implicit and undiscoverable instead of declaring it."
+        },
+        {
+            "name": "Opaque API",
+            "kind": "anti-pattern",
+            "definition": "An API that does not describe itself, so clients must rely on external, out-of-band documentation."
+        },
+        {
+            "name": "Opaque Binary/Untyped Structures",
+            "kind": "anti-pattern",
+            "definition": "Using opaque binary or untyped data that carries no description of its own structure."
+        },
+        {
+            "name": "Client Generation",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:hateoas-style-navigation",
+                    "reason": "Client generation builds client code from an API's self-description ahead of time, while hypermedia navigation follows the links each response returns."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to generate client code automatically from an API's self-description."
+        },
+        {
+            "name": "Dynamic Processing",
+            "kind": "capability",
+            "definition": "The ability to process data generically by reading its self-describing structure."
+        },
+        {
+            "name": "HATEOAS-style Navigation",
+            "kind": "capability",
+            "definition": "The ability for clients to navigate an API by following links it returns in its responses."
+        },
+        {
+            "name": "Plugin Loading",
+            "kind": "capability",
+            "definition": "The ability to discover and load plugins declared in manifests at runtime."
+        },
+        {
+            "name": "Reduced Boilerplate",
+            "kind": "capability",
+            "definition": "The ability to avoid repetitive boilerplate by relying on conventions."
+        },
+        {
+            "name": "Runtime Configuration without Code Change",
+            "kind": "capability",
+            "definition": "The ability to change a system's behavior by editing configuration rather than code."
+        },
+        {
+            "name": "Manifest",
+            "kind": "artifact",
+            "definition": "A declarative document listing a component's capabilities and metadata."
+        },
+        {
+            "name": "Manifest Schema",
+            "kind": "artifact",
+            "definition": "A formal definition of the structure a manifest must follow."
+        },
+        {
+            "name": "Metadata Schema",
+            "kind": "artifact",
+            "definition": "A formal definition of the metadata fields that drive a system's behavior."
+        },
+        {
+            "name": "Explicit Semantics",
+            "kind": "constraint",
+            "definition": "The requirement that declarative configuration carry an explicit, defined meaning."
+        },
+        {
+            "name": "Stable Conventions",
+            "kind": "constraint",
+            "definition": "The requirement that the conventions a system relies on stay stable and well-known."
+        },
+        {
+            "name": "Declaration Drift",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a declared capability set drifts out of sync with the actual behavior."
+        },
+        {
+            "name": "Dynamic Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which interpreting declarative configuration at runtime adds hidden dynamic complexity."
+        },
+        {
+            "name": "Explicitness",
+            "kind": "quality-attribute",
+            "definition": "The degree to which relying on conventions reduces the explicitness of how a system is configured."
+        },
+        {
+            "name": "Manifest Drift",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a manifest drifts out of sync with the components it declares."
+        },
+        {
+            "name": "Metadata Drift",
+            "kind": "quality-attribute",
+            "definition": "The degree to which self-describing metadata drifts out of sync with the actual system."
+        },
+        {
+            "name": "Payload Verbosity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which embedding self-description in responses enlarges their payloads."
+        },
+        {
+            "name": "Self-Description",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a component exposes its own capabilities and structure for inspection."
+        },
+        {
+            "name": "Size Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree to which embedding structural descriptions in data increases its size."
+        },
+        {
+            "name": "Runtime Topology Report",
+            "kind": "technique",
+            "definition": "A technique for having a system report its loaded components and their bindings at startup."
+        },
+        {
+            "name": "Binding Decision Log",
+            "kind": "technique",
+            "definition": "A technique for logging which implementation was bound to each extension point and why."
+        },
+        {
+            "name": "Declare Capability",
+            "kind": "technique",
+            "definition": "A technique for having each component state in metadata what it provides and what it requires."
+        },
+        {
+            "name": "Unvalidated Metadata",
+            "kind": "anti-pattern",
+            "definition": "A defect in which metadata that drives behavior is read without being validated against a schema."
+        }
+    ]
+}

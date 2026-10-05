@@ -1,0 +1,8 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {"noEmit": true,
+        "customConditions": ["development"],
+        "lib": ["ESNext"]},
+    "include": ["**/*.ts"],
+    "exclude": ["**/node_modules"]
+}

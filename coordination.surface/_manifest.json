@@ -70,7 +70,7 @@
             {
                 "intent": "Post a position to a venue, with the text read from a file",
                 "lang": "bash",
-                "code": "npm run await -- --agent A --file <venue> --item-file position.md --kind judgement"
+                "code": "npm run await -- --agent A --file <venue> --item-file position.md --kind judgment"
             },
             {
                 "intent": "Check a venue, and move it to the archive when every check holds",
@@ -111,7 +111,7 @@
                 "note": "The project's own instructions file, where the package keeps one status line. Absent by default, so the package writes nothing outside its folder."
             },
             {
-                "option": "execution.quality_command and execution.quality_concerns",
+                "option": "execution.quality_command, execution.quality_concerns",
                 "note": "The project's own quality toolchain and which of its checks the pipeline runs, so one command runs both."
             },
             {
@@ -120,7 +120,7 @@
                 "note": "The credential prefixes the secret check looks for, each with its shortest length, such as `sk_live_:24`."
             },
             {
-                "option": "convention.read_token_budget and convention.chars_per_token",
+                "option": "convention.read_token_budget, convention.chars_per_token",
                 "note": "How much one agent reads at once, which the check on record size is measured against."
             },
             {
@@ -232,20 +232,20 @@
             "An item satisfied by an **artifact** closes by derivation, when its citation resolves.",
             "**`Satisfied-by` names a condition that can be false, never a path.** A file path resolves as soon as the file exists, so the item would read as closed while the defect is still open. The citation points at something whose state can be wrong.",
             "**The condition also tracks the work: it is true when the work is done and false when it is not.** A citation that points at the findings themselves is satisfied by a broken codebase and becomes false once the findings are repaired.",
-            "An item satisfied by a **judgement** is closed by its declared acknowledger and carries no reference, because there is nothing for one to point at. If the acknowledger is not ACTIVE, the item cannot close, so it is re-addressed rather than left.",
+            "An item satisfied by a **judgment** is closed by its declared acknowledger and carries no reference, because there is nothing for one to point at. If the acknowledger is not ACTIVE, the item cannot close, so it is re-addressed rather than left.",
             "**That binding is checked.** The declared set is derived from the ACTIVE seats, so when a seat goes inactive, the check follows the new set on the next run with no file to edit. Leaving a binding unclaimed is allowed, but binding it to an absent agent is not, because that row can be built but never retired.",
             "**Absorbing an item is a transition, not a state.** Its lasting part is written to the history file, and the item is deleted in the same change, so history has one home.",
             "An item left unacknowledged past the declared stall limit is reported as a finding and escalated to the board."
         ],
-        "item-shape": "An item addressed from one agent to another is a **fenced span with an allocated id**, not a sentence in a field.\n\n```text EXAMPLE: an item\n┌─── AGENT <letter>-<ordinal> ─── kind:<artifact | judgement> at:<ms> to:<letters | *>\nTo <letter>[, <letter>][ AND <letter>] — the argument, across as many lines as it needs.\n└─── END AGENT <letter>-<ordinal>\n```",
+        "item-shape": "An item addressed from one agent to another is a **fenced span with an allocated id**, not a sentence in a field.\n\n```text EXAMPLE: an item\n┌─── AGENT <letter>-<ordinal> ─── kind:<artifact | judgment> at:<ms> to:<letters | *>\nTo <letter>[, <letter>][ AND <letter>] — the argument, across as many lines as it needs.\n└─── END AGENT <letter>-<ordinal>\n```",
         "board-items": [
-            "**The kind selects how an item closes, and it sits on the opening marker.** An artifact item asks for something that can exist and closes with a typed reference that resolves. A judgement item asks for a reading and is closed by its acknowledger, with no reference.",
+            "**The kind selects how an item closes, and it sits on the opening marker.** An artifact item asks for something that can exist and closes with a typed reference that resolves. A judgment item asks for a reading and is closed by its acknowledger, with no reference.",
             "**The id and the fence work as one mechanism.** The id makes a fence addressable, and the fence makes the id's span removable. A span resolves only when exactly one opening and one closing marker carry its key, so at item level the key cannot be the agent letter, because one agent writes many items.",
             "**The field opens with the absent token `—`, and the fences follow it.** A marker that shares the field's label line is not recognized, so the item reads as an opening with no close.",
             "**A fenced item may span as many lines as its argument needs.**",
             "**The check on well-formed fences is required.** A single unclosed marker makes its item impossible for the tool to remove.",
             "**Removal takes the whole span, never a matched line.** Removing an item by matching its text leaves its markers behind, and an orphaned fence is a span that no later operation can interpret.",
-            "**An item is extracted before it is removed.** A removal names a typed reference that resolves. The check decides whether the extract is present, not whether it is faithful, because the faithfulness of a summary is a judgement.",
+            "**An item is extracted before it is removed.** A removal names a typed reference that resolves. The check decides whether the extract is present, not whether it is faithful, because the faithfulness of a summary is a judgment.",
             "**The agent that handled an item removes it, never its author.** The board then clears as soon as the reader acts, with no wait on the writer.",
             "**The one-writer-per-record rule applies to hand editing, not to the tool.** A tool that removes exactly one addressable span by id, after re-reading the file and with a compare-and-swap, is the mechanism the fence and the id were built for.",
             "**Removal depends on who an item was addressed to, not on who wrote it**, so an agent clears only traffic addressed to it, and an item's removal shows that its reader acted on it."

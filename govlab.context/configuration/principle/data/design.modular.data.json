@@ -1,0 +1,1109 @@
+{
+    "category": "Core Modular Design",
+    "check": {
+        "population": "every class, module and package boundary in the codebase",
+        "freshness": "a verdict stands until the module's contents, exports or imports change",
+        "refusal": "the dependency, visibility or clone rule fails the build on the change that breaks the property",
+        "observation": "cohesion, coupling, duplication and export metrics read from source and the import graph",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the declared module boundary, which every import and export conforms to"
+    },
+    "records": [
+        {
+            "id": "single-responsibility",
+            "distinctFrom": [
+                {
+                    "id": "architecture:interface-segregation",
+                    "reason": "Single responsibility limits a module's reasons to change, while interface segregation limits what a client depends on."
+                },
+                {
+                    "id": "architecture:open-closed",
+                    "reason": "Single responsibility limits reasons to change, while the open/closed principle governs adding behavior without editing."
+                },
+                {
+                    "id": "architecture:composability",
+                    "reason": "Single responsibility limits what one part does, while composability governs how parts combine."
+                },
+                {
+                    "id": "architecture:separation-of-concerns",
+                    "reason": "Single responsibility is one reason to change per class or module, while separation of concerns separates the named concerns of a system."
+                }
+            ],
+            "aliases": [
+                "SRP",
+                "Single Responsibility Principle"
+            ],
+            "name": "Single Responsibility Principle (SRP)",
+            "definition": "A design rule that a class or module has one reason to change, because it serves one responsibility.",
+            "type": "principle",
+            "scope": [
+                "class",
+                "module",
+                "service"
+            ],
+            "requires": [
+                "High Cohesion",
+                "Explicit Boundaries"
+            ],
+            "reinforces": [
+                "Separation of Concerns",
+                "Modularity",
+                "Testability"
+            ],
+            "enables": [
+                "Replaceability",
+                "Reusability"
+            ],
+            "conflicts_with": [
+                "God Object",
+                "Blob Class",
+                "Divergent Change"
+            ],
+            "tensions_with": ["Excessive Fragmentation"],
+            "violated_by": [
+                "architecture:god-object",
+                "architecture:divergent-change"
+            ],
+            "detected_by": [
+                "high fan-in/fan-out",
+                "unrelated methods",
+                "unrelated dependencies"
+            ],
+            "measured_by": [
+                "cohesion score",
+                "responsibility count",
+                "change-coupling"
+            ],
+            "refactored_by": [
+                "lexicon:extract-class",
+                "lexicon:extract-module",
+                "lexicon:split-bounded-context",
+                "lexicon:move-behavior-to-its-owner"
+            ],
+            "enforced_by": [
+                "architecture tests",
+                "package boundaries",
+                "static analysis"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooService {\n  save(foo: Foo) { fooDb.insert(foo); }\n  send(foo: Foo) { fooMail.send(foo); }\n  report(foo: Foo) { return `${foo.id}:${foo.name}`; }\n}",
+                "after": "class FooRepository { save(foo: Foo) { return fooDb.insert(foo); } }\nclass FooNotifier { send(foo: Foo) { return fooMail.send(foo); } }\nclass FooReporter { report(foo: Foo) { return `${foo.id}:${foo.name}`; } }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "separation-of-concerns",
+            "distinctFrom": [
+                {
+                    "id": "architecture:one-concern-per-file",
+                    "reason": "Separation of concerns splits code by responsibility, while one concern per file binds each file to one declared role tag."
+                },
+                {
+                    "id": "architecture:open-closed",
+                    "reason": "Separation of concerns decides where concerns live, while the open/closed principle decides how behavior is added."
+                },
+                {
+                    "id": "architecture:composability",
+                    "reason": "Separation of concerns keeps concerns apart, while composability lets parts combine."
+                }
+            ],
+            "aliases": ["SoC"],
+            "name": "Separation of Concerns",
+            "definition": "A design rule that parsing, business logic, persistence and presentation each live in their own part of the code.",
+            "canon": ["separation-of-concerns"],
+            "type": "principle",
+            "scope": [
+                "module",
+                "package",
+                "component",
+                "system"
+            ],
+            "requires": [
+                "Explicit Boundaries",
+                "Abstraction"
+            ],
+            "reinforces": [
+                "SRP",
+                "Modularity",
+                "Layered Architecture"
+            ],
+            "enables": [
+                "Maintainability",
+                "Replaceability"
+            ],
+            "conflicts_with": [
+                "Cross-Cutting Leakage",
+                "Mixed Layers"
+            ],
+            "tensions_with": ["Over-Layering"],
+            "violated_by": ["lexicon:mixed-layers"],
+            "detected_by": [
+                "layer imports",
+                "mixed naming roles",
+                "cross-boundary logic"
+            ],
+            "measured_by": [
+                "dependency direction",
+                "layer purity",
+                "concern overlap"
+            ],
+            "refactored_by": [
+                "lexicon:extract-module",
+                "lexicon:move-behavior-to-its-owner",
+                "lexicon:define-module-boundaries"
+            ],
+            "enforced_by": [
+                "import rules",
+                "dependency graph checks"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function handleFoo(request: Request) {\n  const foo = JSON.parse(request.body);\n  fooDb.insert(foo);\n  return `<div>${foo.name}</div>`;\n}",
+                "after": "function parseFoo(request: Request): Foo { return decodeFoo(request.body); }\nfunction saveFoo(foo: Foo) { return fooDb.insert(foo); }\nfunction renderFoo(foo: Foo) { return `<div>${foo.name}</div>`; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "duplicate-code",
+            "aliases": [
+                "DRY",
+                "Do Not Repeat Yourself",
+                "Don't Repeat Yourself"
+            ],
+            "name": "Do Not Repeat Yourself (DRY)",
+            "definition": "A design rule that each piece of logic, constant or schema has one source in the code, and every other use refers to it.",
+            "canon": ["duplicate-code"],
+            "type": "principle",
+            "scope": [
+                "function",
+                "module",
+                "domain"
+            ],
+            "requires": [
+                "Abstraction",
+                "Canonical Source"
+            ],
+            "reinforces": [
+                "Single Source of Truth",
+                "Reusability"
+            ],
+            "enables": [
+                "Consistency",
+                "Maintainability"
+            ],
+            "conflicts_with": ["Copy-Paste Programming"],
+            "tensions_with": [
+                "Locality of Behavior",
+                "Simplicity"
+            ],
+            "violated_by": ["lexicon:copy-paste-programming"],
+            "detected_by": [
+                "clone detection",
+                "duplicated branches",
+                "repeated literals"
+            ],
+            "measured_by": [
+                "duplication percentage",
+                "clone count"
+            ],
+            "refactored_by": [
+                "lexicon:extract-function",
+                "lexicon:extract-module",
+                "lexicon:introduce-parameter-object",
+                "lexicon:centralize-the-rule"
+            ],
+            "enforced_by": [
+                "clone analyzers",
+                "lint rules",
+                "review gates"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function validateFoo(foo: Foo) {\n  if (!foo.name || foo.name.length > 40) throw new Error(\"invalid name\");\n}\nfunction validateBar(bar: Bar) {\n  if (!bar.name || bar.name.length > 40) throw new Error(\"invalid name\");\n}",
+                "after": "function validateName(name: string) {\n  if (!name || name.length > 40) throw new Error(\"invalid name\");\n}\nfunction validateFoo(foo: Foo) { validateName(foo.name); }\nfunction validateBar(bar: Bar) { validateName(bar.name); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "high-cohesion",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:over-specialization",
+                    "reason": "High cohesion is members sharing one purpose, while over-specialization is the reuse lost by narrowing that purpose too far."
+                }
+            ],
+            "name": "High Cohesion",
+            "definition": "The degree to which the members of a class or module work on the same data towards the same purpose.",
+            "type": "quality-attribute",
+            "scope": [
+                "class",
+                "module",
+                "component"
+            ],
+            "requires": [
+                "SRP",
+                "Explicit Boundaries"
+            ],
+            "reinforces": [
+                "Modularity",
+                "Encapsulation"
+            ],
+            "enables": [
+                "Testability",
+                "Replaceability"
+            ],
+            "conflicts_with": [
+                "God Object",
+                "Utility Dump",
+                "Shotgun Surgery"
+            ],
+            "tensions_with": ["Over-Specialization"],
+            "violated_by": ["architecture:divergent-change"],
+            "detected_by": [
+                "low LCOM",
+                "scattered dependencies",
+                "unrelated public API"
+            ],
+            "measured_by": [
+                "cohesion metrics",
+                "change locality"
+            ],
+            "refactored_by": [
+                "lexicon:extract-class",
+                "lexicon:split-module",
+                "lexicon:move-behavior-to-its-owner"
+            ],
+            "enforced_by": [
+                "module ownership",
+                "architecture review"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooManager {\n  saveFoo(foo: Foo) { return fooDb.insert(foo); }\n  resizeImage(image: Image) { return image.resize(100, 100); }\n  parseBar(raw: string) { return JSON.parse(raw) as Bar; }\n}",
+                "after": "class FooRepository {\n  save(foo: Foo) { return fooDb.insert(foo); }\n  load(id: FooId) { return fooDb.find(id); }\n  remove(id: FooId) { return fooDb.delete(id); }\n}\nclass ImageResizer { resize(image: Image) { return image.resize(100, 100); } }\nclass BarParser { parse(raw: string) { return JSON.parse(raw) as Bar; } }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "low-coupling",
+            "distinctFrom": [
+                {
+                    "id": "architecture:high-cohesion",
+                    "reason": "Low coupling is about the dependencies between modules, while high cohesion is about the purpose inside one."
+                },
+                {
+                    "id": "architecture:portability",
+                    "reason": "Low coupling limits how far a change ripples between modules, while portability is running on another platform unchanged."
+                },
+                {
+                    "id": "architecture:replaceability",
+                    "reason": "Low coupling limits how far a change spreads, while replaceability is swapping an implementation without editing its callers."
+                },
+                {
+                    "id": "architecture:stable-interfaces",
+                    "reason": "Low coupling is few forced changes between modules, while stable interfaces are signatures that keep across releases."
+                },
+                {
+                    "id": "architecture:testability",
+                    "reason": "Low coupling concerns change between modules, while testability is running code in isolation with supplied dependencies."
+                },
+                {
+                    "id": "lexicon:domain-purity",
+                    "reason": "Low coupling applies between any modules, while domain purity keeps the domain model free of infrastructure concerns."
+                }
+            ],
+            "aliases": [
+                "Loose Coupling",
+                "Decoupling"
+            ],
+            "name": "Low Coupling",
+            "definition": "The degree to which a module can change without forcing changes in the modules around it.",
+            "type": "quality-attribute",
+            "scope": [
+                "module",
+                "component",
+                "service"
+            ],
+            "requires": [
+                "Abstraction",
+                "Stable Interfaces"
+            ],
+            "reinforces": [
+                "Modularity",
+                "Replaceability",
+                "Portability"
+            ],
+            "enables": [
+                "Independent Deployment",
+                "Test Isolation"
+            ],
+            "conflicts_with": [
+                "Tight Coupling",
+                "Cyclic Dependencies",
+                "Inappropriate Intimacy",
+                "Message Chain"
+            ],
+            "tensions_with": ["Runtime Indirection"],
+            "violated_by": [
+                "lexicon:tight-coupling",
+                "architecture:circular-dependency"
+            ],
+            "detected_by": [
+                "dependency cycles",
+                "high afferent/efferent coupling"
+            ],
+            "measured_by": [
+                "coupling metrics",
+                "dependency graph density"
+            ],
+            "refactored_by": [
+                "lexicon:extract-interface",
+                "architecture:dependency-injection",
+                "lexicon:extract-adapter"
+            ],
+            "enforced_by": [
+                "dependency rules",
+                "architecture fitness tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooService {\n  save(foo: Foo) {\n    const db = new SqlDatabase(\"foo-prod\");\n    barIndex.update(foo);\n    return db.table(\"foos\").insert(foo);\n  }\n}",
+                "after": "class FooService {\n  constructor(private readonly events: EventSink) {}\n  save(foo: Foo) { return this.events.emit({ type: \"FooSaved\", foo }); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "encapsulation",
+            "distinctFrom": [
+                {
+                    "id": "architecture:abstraction",
+                    "reason": "Encapsulation guards an object's state behind its operations, while abstraction expresses what a thing does without how."
+                },
+                {
+                    "id": "architecture:information-hiding",
+                    "reason": "Encapsulation protects state and its invariants, while information hiding keeps implementation decisions private behind an interface."
+                },
+                {
+                    "id": "architecture:single-responsibility",
+                    "reason": "Encapsulation guards state, while single responsibility limits a module to one reason to change."
+                },
+                {
+                    "id": "architecture:immutability",
+                    "reason": "Encapsulation controls how state changes, while immutability forbids change after creation."
+                },
+                {
+                    "id": "architecture:open-closed",
+                    "reason": "Encapsulation protects existing state, while the open/closed principle governs how new behavior is added."
+                },
+                {
+                    "id": "architecture:state-isolation",
+                    "reason": "Encapsulation limits writes to an object's own operations, while state isolation limits writes to one unit of concurrent execution."
+                }
+            ],
+            "name": "Encapsulation",
+            "definition": "A design rule that an object's state is changed only through its own operations, which keep its invariants.",
+            "canon": ["encapsulation"],
+            "type": "principle",
+            "scope": [
+                "class",
+                "module",
+                "component"
+            ],
+            "requires": [
+                "Information Hiding",
+                "Stable Interfaces"
+            ],
+            "reinforces": [
+                "Abstraction",
+                "Low Coupling"
+            ],
+            "enables": [
+                "Change Isolation",
+                "Invariant Protection"
+            ],
+            "conflicts_with": [
+                "Exposed Internals",
+                "Anemic Encapsulation",
+                "Feature Envy"
+            ],
+            "tensions_with": ["Debuggability"],
+            "violated_by": [
+                "lexicon:exposed-internals",
+                "architecture:shared-mutable-state"
+            ],
+            "detected_by": [
+                "public state",
+                "excessive setters",
+                "external invariant manipulation"
+            ],
+            "measured_by": [
+                "public surface area",
+                "mutation exposure"
+            ],
+            "refactored_by": [
+                "lexicon:encapsulate-state",
+                "lexicon:extract-function",
+                "lexicon:restrict-exports"
+            ],
+            "enforced_by": [
+                "visibility rules",
+                "linting",
+                "API review"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooCounter {\n  count = 0;\n}\nconst counter = new FooCounter();\ncounter.count = -100;",
+                "after": "class FooCounter {\n  #count = 0;\n  increment() { this.#count += 1; }\n  value() { return this.#count; }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "information-hiding",
+            "name": "Information Hiding",
+            "definition": "A design rule that a module exposes an interface and keeps the implementation decisions behind it private.",
+            "type": "principle",
+            "scope": [
+                "class",
+                "module",
+                "package"
+            ],
+            "requires": [
+                "Encapsulation",
+                "Explicit Interfaces"
+            ],
+            "reinforces": [
+                "Low Coupling",
+                "Replaceability"
+            ],
+            "enables": ["Internal Refactoring"],
+            "conflicts_with": ["Leaky Abstraction"],
+            "tensions_with": ["Observability"],
+            "violated_by": [
+                "lexicon:leaky-abstraction",
+                "lexicon:exposed-internals"
+            ],
+            "detected_by": [
+                "internal packages imported externally",
+                "exposed persistence models"
+            ],
+            "measured_by": [
+                "internal API exposure",
+                "dependency leakage"
+            ],
+            "refactored_by": [
+                "architecture:facade-pattern",
+                "lexicon:restrict-exports"
+            ],
+            "enforced_by": [
+                "package visibility",
+                "module export rules"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooStore {\n  public readonly rows = new Map<string, Foo>();\n}\nfooStore.rows.set(foo.id, foo);",
+                "after": "interface FooStore {\n  save(foo: Foo): void;\n  find(id: string): Foo | undefined;\n}\nclass MapFooStore implements FooStore {\n  #rows = new Map<string, Foo>();\n  save(foo: Foo) { this.#rows.set(foo.id, foo); }\n  find(id: string) { return this.#rows.get(id); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "abstraction",
+            "distinctFrom": [
+                {
+                    "id": "architecture:dependency-inversion",
+                    "reason": "Abstraction expresses a concept by what it does, while dependency inversion fixes that the high-level policy owns that expression."
+                },
+                {
+                    "id": "architecture:duplicate-code",
+                    "reason": "Abstraction hides how a thing works behind what it does, while DRY keeps one source for each piece of logic."
+                },
+                {
+                    "id": "architecture:interface-based-design",
+                    "reason": "Abstraction is the general rule, while interface-based design applies it to module dependencies supplied from outside."
+                },
+                {
+                    "id": "architecture:inversion-of-control",
+                    "reason": "Abstraction hides detail, while inversion of control moves object creation and control flow to a framework or composition root."
+                },
+                {
+                    "id": "architecture:open-closed",
+                    "reason": "Abstraction hides detail, while the open/closed principle adds behavior at an extension point without editing existing code."
+                },
+                {
+                    "id": "architecture:separation-of-concerns",
+                    "reason": "Abstraction separates what from how, while separation of concerns separates parsing, logic, persistence and presentation."
+                }
+            ],
+            "name": "Abstraction",
+            "definition": "A design rule that a concept is expressed by what it does for the code that uses it, and the detail of how it does it stays out of that expression.",
+            "type": "principle",
+            "scope": [
+                "class",
+                "module",
+                "service",
+                "system"
+            ],
+            "requires": [
+                "Stable Semantics",
+                "Interface Definition"
+            ],
+            "reinforces": [
+                "DIP",
+                "Low Coupling",
+                "Portability"
+            ],
+            "enables": [
+                "Polymorphism",
+                "Replaceability"
+            ],
+            "conflicts_with": [
+                "Concrete Coupling",
+                "Middle Man"
+            ],
+            "tensions_with": ["Simplicity"],
+            "violated_by": [
+                "lexicon:leaky-abstraction",
+                "architecture:concrete-coupling"
+            ],
+            "detected_by": ["concrete type usage across boundaries"],
+            "measured_by": [
+                "abstraction ratio",
+                "interface stability"
+            ],
+            "refactored_by": [
+                "lexicon:extract-interface",
+                "lexicon:introduce-port",
+                "lexicon:invert-dependency"
+            ],
+            "enforced_by": [
+                "architecture tests",
+                "dependency inversion rules"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function saveFoo(foo: Foo) {\n  return sqlClient.query(\"insert into foos(id,name) values($1,$2)\", [foo.id, foo.name]);\n}",
+                "after": "interface FooRepository { save(foo: Foo): Promise<void>; }\nclass SqlFooRepository implements FooRepository {\n  save(foo: Foo) { return sqlClient.query(\"insert into foos(id,name) values($1,$2)\", [foo.id, foo.name]); }\n}\nclass HttpFooRepository implements FooRepository {\n  save(foo: Foo) { return http.post(\"/foos\", foo); }\n}\nfunction saveFoo(foo: Foo, repository: FooRepository) { return repository.save(foo); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "modularity",
+            "distinctFrom": [
+                {
+                    "id": "architecture:autonomy",
+                    "reason": "Modularity divides a system into cohesive parts, while autonomy gives each owner its own data and decisions."
+                },
+                {
+                    "id": "architecture:composability",
+                    "reason": "Modularity divides a system, while composability lets its parts combine."
+                },
+                {
+                    "id": "architecture:encapsulation",
+                    "reason": "Modularity is division into modules, while encapsulation protects one object's state."
+                },
+                {
+                    "id": "architecture:open-closed",
+                    "reason": "Modularity divides the system, while the open/closed principle governs adding behavior at an extension point."
+                },
+                {
+                    "id": "architecture:package-by-feature",
+                    "reason": "Modularity is the rule to divide, while package by feature chooses the axis of division, the feature."
+                },
+                {
+                    "id": "architecture:separation-of-concerns",
+                    "reason": "Modularity divides into cohesive modules, while separation of concerns names which concerns must not share a part."
+                },
+                {
+                    "id": "architecture:single-responsibility",
+                    "reason": "Modularity is the division of a system, while single responsibility limits one class or module to one reason to change."
+                }
+            ],
+            "name": "Modularity",
+            "definition": "A design rule that a system is divided into cohesive modules with explicit boundaries and few dependencies between them.",
+            "type": "principle",
+            "scope": [
+                "package",
+                "component",
+                "service",
+                "system"
+            ],
+            "requires": [
+                "High Cohesion",
+                "Low Coupling",
+                "Explicit Boundaries"
+            ],
+            "reinforces": [
+                "Separation of Concerns",
+                "Composability"
+            ],
+            "enables": [
+                "Replaceability",
+                "Plugin Architecture"
+            ],
+            "conflicts_with": ["Big Ball of Mud"],
+            "tensions_with": ["Cross-Cutting Concerns"],
+            "violated_by": [
+                "architecture:circular-dependency",
+                "architecture:shared-mutable-state",
+                "architecture:boundary-leakage"
+            ],
+            "detected_by": [
+                "dependency cycles",
+                "unstable module graph"
+            ],
+            "measured_by": [
+                "modularity score",
+                "graph density",
+                "instability"
+            ],
+            "refactored_by": [
+                "lexicon:split-module",
+                "lexicon:define-module-boundaries",
+                "lexicon:invert-dependency"
+            ],
+            "enforced_by": [
+                "module rules",
+                "package ownership",
+                "fitness functions"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooApplication {\n  parse(raw: string) { return JSON.parse(raw) as Foo; }\n  save(foo: Foo) { return fooDb.insert(foo); }\n  publish(foo: Foo) { return fooBus.emit(foo); }\n}",
+                "after": "export const fooParser = { parse: (raw: string) => decodeFoo(raw) };\nexport const fooRepository = { save: (foo: Foo) => fooDb.insert(foo) };\nexport const fooPublisher = { publish: (foo: Foo) => fooBus.emit(foo) };",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "composability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:duplicate-code",
+                    "reason": "Composability lets parts combine through compatible interfaces, while DRY keeps one source for each piece of logic."
+                }
+            ],
+            "name": "Composability",
+            "definition": "A design rule that parts share compatible interfaces and carry no hidden side effects, so they can be combined into larger parts.",
+            "type": "principle",
+            "scope": [
+                "function",
+                "component",
+                "system"
+            ],
+            "requires": [
+                "Stable Interfaces",
+                "Low Coupling"
+            ],
+            "reinforces": [
+                "Modularity",
+                "Reusability"
+            ],
+            "enables": [
+                "Pipeline Architecture",
+                "Plugin Architecture"
+            ],
+            "conflicts_with": ["Monolithic Procedures"],
+            "tensions_with": ["Performance Overhead"],
+            "violated_by": [
+                "architecture:hidden-side-effect",
+                "lexicon:implementation-specific-contracts"
+            ],
+            "detected_by": [
+                "non-chainable APIs",
+                "incompatible contracts"
+            ],
+            "measured_by": [
+                "composition count",
+                "interface compatibility"
+            ],
+            "refactored_by": [
+                "lexicon:standardize-the-interface",
+                "lexicon:extract-module",
+                "architecture:adapter-pattern"
+            ],
+            "enforced_by": [
+                "contract tests",
+                "type checks"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function processFoo(raw: string) {\n  const foo = JSON.parse(raw) as Foo;\n  const normalized = { ...foo, name: foo.name.trim() };\n  return fooDb.insert(normalized);\n}",
+                "after": "const parseFoo = (raw: string): Foo => decodeFoo(raw);\nconst normalizeFoo = (foo: Foo): Foo => ({ ...foo, name: foo.name.trim() });\nconst saveFoo = (foo: Foo) => fooDb.insert(foo);\nconst processFoo = flow(parseFoo, normalizeFoo, saveFoo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "composition-over-inheritance",
+            "name": "Composition Over Inheritance",
+            "aliases": ["Composite Reuse Principle"],
+            "definition": "A design rule that behavior is reused by holding and delegating to another object instead of extending its class.",
+            "type": "principle",
+            "scope": [
+                "class",
+                "component"
+            ],
+            "requires": [
+                "Delegation",
+                "Interface-Based Design"
+            ],
+            "reinforces": [
+                "Low Coupling",
+                "Replaceability"
+            ],
+            "enables": [
+                "Strategy Pattern",
+                "Decorator Pattern"
+            ],
+            "conflicts_with": ["Deep Inheritance Hierarchy"],
+            "tensions_with": ["Simplicity for Trivial Reuse"],
+            "violated_by": [
+                "lexicon:deep-inheritance-hierarchy",
+                "lexicon:broken-inheritance"
+            ],
+            "detected_by": [
+                "inheritance depth",
+                "overridden behavior conflicts"
+            ],
+            "measured_by": [
+                "inheritance depth",
+                "composition ratio"
+            ],
+            "refactored_by": [
+                "lexicon:replace-inheritance-with-delegation",
+                "architecture:strategy-pattern"
+            ],
+            "enforced_by": [
+                "inheritance depth limits",
+                "review rules"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class RetryingSqlFooStore extends SqlFooStore {\n  async save(foo: Foo) {\n    for (let attempt = 0; attempt < 3; attempt += 1) {\n      try { return await super.save(foo); } catch (error) { if (attempt === 2) throw error; }\n    }\n  }\n}",
+                "after": "class RetryingFooStore implements FooStore {\n  constructor(private readonly inner: FooStore, private readonly attempts: number) {}\n  async save(foo: Foo) {\n    for (let attempt = 0; attempt < this.attempts; attempt += 1) {\n      try { return await this.inner.save(foo); } catch (error) { if (attempt === this.attempts - 1) throw error; }\n    }\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "reusability",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:over-generalization",
+                    "reason": "Reusability serves new callers unchanged, while over-generalization is the clarity lost by making code serve every case."
+                }
+            ],
+            "name": "Reusability",
+            "definition": "The degree to which a function or module can serve a new caller without change, because it carries no context of its first one.",
+            "type": "quality-attribute",
+            "scope": [
+                "function",
+                "module",
+                "component"
+            ],
+            "requires": [
+                "Abstraction",
+                "Stable Contracts"
+            ],
+            "reinforces": [
+                "DRY",
+                "Composability"
+            ],
+            "enables": [
+                "Shared Libraries",
+                "Product Lines"
+            ],
+            "conflicts_with": ["Context-Specific Coupling"],
+            "tensions_with": [
+                "YAGNI",
+                "Over-Generalization"
+            ],
+            "violated_by": ["lexicon:context-specific-coupling"],
+            "detected_by": ["environment-specific logic in reusable code"],
+            "measured_by": [
+                "reuse count",
+                "dependency portability"
+            ],
+            "refactored_by": [
+                "lexicon:introduce-parameter-object",
+                "lexicon:extract-module",
+                "lexicon:pass-context-explicitly"
+            ],
+            "enforced_by": [
+                "API review",
+                "dependency rules"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function saveAdminFoo(foo: Foo) { return adminFooDb.insert(foo); }\nfunction savePublicFoo(foo: Foo) { return publicFooDb.insert(foo); }",
+                "after": "function saveFoo(store: FooStore, foo: Foo) { return store.save(foo); }\nconst saveAdminFoo = (foo: Foo) => saveFoo(adminFooStore, foo);\nconst savePublicFoo = (foo: Foo) => saveFoo(publicFooStore, foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "replaceability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:high-cohesion",
+                    "reason": "Replaceability is swapping an implementation, while high cohesion is members sharing one purpose."
+                },
+                {
+                    "id": "architecture:interchangeability",
+                    "reason": "Replaceability is substituting one implementation when the code changes, while interchangeability is selecting among several live implementations at runtime."
+                },
+                {
+                    "id": "architecture:portability",
+                    "reason": "Replaceability swaps one component, while portability moves the whole software to another platform."
+                },
+                {
+                    "id": "architecture:reusability",
+                    "reason": "Replaceability puts a new implementation behind the same callers, while reusability serves a new caller with the same implementation."
+                },
+                {
+                    "id": "architecture:testability",
+                    "reason": "Replaceability swaps an implementation in production, while testability supplies dependencies in a test."
+                },
+                {
+                    "id": "architecture:stable-interfaces",
+                    "reason": "Replaceability swaps what sits behind an interface, while stable interfaces keep the interface itself unchanged across releases."
+                },
+                {
+                    "id": "lexicon:maintainability",
+                    "reason": "Replaceability makes one kind of change cheap, while maintainability is the ease of every kind of correction and extension."
+                }
+            ],
+            "name": "Replaceability",
+            "definition": "The degree to which a component can be swapped for another implementation of its interface without editing its callers.",
+            "type": "quality-attribute",
+            "scope": [
+                "component",
+                "service",
+                "infrastructure"
+            ],
+            "requires": [
+                "Stable Interfaces",
+                "Low Coupling"
+            ],
+            "reinforces": [
+                "DIP",
+                "Ports and Adapters"
+            ],
+            "enables": [
+                "Vendor Swap",
+                "Plugin Architecture"
+            ],
+            "conflicts_with": ["Concrete Coupling"],
+            "tensions_with": ["Deep Optimization"],
+            "violated_by": ["architecture:vendor-lock-in-leakage"],
+            "detected_by": ["infrastructure imports in core layers"],
+            "measured_by": [
+                "adapter coverage",
+                "boundary purity"
+            ],
+            "refactored_by": [
+                "lexicon:introduce-port",
+                "lexicon:extract-adapter",
+                "lexicon:invert-dependency"
+            ],
+            "enforced_by": [
+                "import restrictions",
+                "adapter tests"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooService {\n  private readonly store = new SqlFooStore();\n  save(foo: Foo) { return this.store.save(foo); }\n}",
+                "after": "class FooService {\n  constructor(private readonly store: FooStore) {}\n  save(foo: Foo) { return this.store.save(foo); }\n}\ntest(\"saves without a database\", async () => {\n  const store = new MemoryFooStore();\n  await new FooService(store).save(foo);\n  expect(store.find(foo.id)).toEqual(foo);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "interchangeability",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:specialized-optimization",
+                    "reason": "Interchangeability lets implementations be swapped, while specialized optimization is the tuning for one implementation that it gives up."
+                }
+            ],
+            "name": "Interchangeability",
+            "definition": "The degree to which several implementations conform to one contract closely enough to be selected at runtime.",
+            "type": "quality-attribute",
+            "scope": [
+                "component",
+                "plugin",
+                "service"
+            ],
+            "requires": [
+                "Contract Compatibility",
+                "Interface Conformance"
+            ],
+            "reinforces": [
+                "Replaceability",
+                "Polymorphism"
+            ],
+            "enables": [
+                "Strategy Swap",
+                "Plugin Swap"
+            ],
+            "conflicts_with": ["Implementation-Specific Contracts"],
+            "tensions_with": ["Specialized Optimization"],
+            "violated_by": ["lexicon:implementation-specific-contracts"],
+            "detected_by": [
+                "contract test failure",
+                "incompatible schema"
+            ],
+            "measured_by": [
+                "conformance score",
+                "compatibility tests"
+            ],
+            "refactored_by": [
+                "lexicon:standardize-the-interface",
+                "lexicon:extract-adapter",
+                "lexicon:contract-testing"
+            ],
+            "enforced_by": [
+                "contract tests",
+                "schema validation"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function loadFoo(kind: \"sql\" | \"memory\", id: FooId) {\n  if (kind === \"sql\") return sqlFooStore.find(id);\n  return memoryFooStore.get(id);\n}",
+                "after": "interface FooStore { find(id: FooId): Promise<Foo | undefined>; }\nfunction loadFoo(store: FooStore, id: FooId) { return store.find(id); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "independence",
+            "name": "Independence",
+            "definition": "A design rule that a module can be tested and deployed without the modules around it being present or released.",
+            "type": "principle",
+            "scope": [
+                "module",
+                "service",
+                "deployment"
+            ],
+            "requires": [
+                "Low Coupling",
+                "Explicit Boundaries"
+            ],
+            "reinforces": [
+                "Autonomy",
+                "Portability"
+            ],
+            "enables": [
+                "Independent Testing",
+                "Independent Deployment"
+            ],
+            "conflicts_with": ["Shared Runtime Dependency"],
+            "tensions_with": ["Coordination Cost"],
+            "violated_by": [
+                "lexicon:shared-database",
+                "architecture:synchronous-chain-trap"
+            ],
+            "detected_by": [
+                "shared mutable resources",
+                "deployment coupling"
+            ],
+            "measured_by": [
+                "independent deployability",
+                "dependency count"
+            ],
+            "refactored_by": [
+                "lexicon:split-bounded-context",
+                "architecture:domain-events",
+                "lexicon:introduce-port"
+            ],
+            "enforced_by": [
+                "deployment rules",
+                "service ownership"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooModule {\n  create(foo: Foo) {\n    barModule.refresh(foo.id);\n    bazModule.rebuild(foo.id);\n    return fooDb.insert(foo);\n  }\n}",
+                "after": "class FooModule {\n  constructor(private readonly store: FooStore, private readonly events: EventSink) {}\n  async create(foo: Foo) {\n    await this.store.save(foo);\n    this.events.emit({ type: \"FooCreated\", fooId: foo.id });\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "autonomy",
+            "distinctFrom": [
+                {
+                    "id": "architecture:explicit-contracts",
+                    "reason": "Autonomy is ownership of data and decisions, while explicit contracts are the declared boundaries others use to reach them."
+                },
+                {
+                    "id": "architecture:governance",
+                    "reason": "Autonomy leaves decisions with their owner, while governance holds decisions to shared policy."
+                },
+                {
+                    "id": "architecture:standardization",
+                    "reason": "Autonomy lets each owner choose, while standardization fixes one choice everywhere."
+                },
+                {
+                    "id": "architecture:decentralization",
+                    "reason": "Autonomy is one unit owning its data and decisions, while decentralization is the system-wide placement of control with those units."
+                },
+                {
+                    "id": "architecture:independence",
+                    "reason": "Autonomy is ownership, while independence is being tested and deployed without the neighboring modules."
+                }
+            ],
+            "name": "Autonomy",
+            "definition": "A design rule that a service or team owns its data and decisions, so it alone writes its data and others reach or change it only through its published API or events.",
+            "type": "principle",
+            "aliases": ["Service Autonomy"],
+            "scope": [
+                "service",
+                "team",
+                "bounded context"
+            ],
+            "requires": [
+                "Independence",
+                "Own Data",
+                "Explicit Contracts"
+            ],
+            "reinforces": [
+                "Decentralization",
+                "Resilience"
+            ],
+            "enables": [
+                "Microservices",
+                "Bounded Context Ownership",
+                "Independent Deployment"
+            ],
+            "conflicts_with": [
+                "Centralized Runtime Control",
+                "Shared Database",
+                "Cyclic Deployment Dependency"
+            ],
+            "tensions_with": [
+                "Governance",
+                "Standardization",
+                "Global Consistency"
+            ],
+            "violated_by": [
+                "lexicon:shared-database",
+                "architecture:distributed-monolith"
+            ],
+            "detected_by": [
+                "external writes to owned data",
+                "cross-team coupling"
+            ],
+            "measured_by": [
+                "ownership clarity",
+                "deployment independence"
+            ],
+            "refactored_by": [
+                "lexicon:own-data-per-service",
+                "lexicon:split-bounded-context",
+                "architecture:domain-events"
+            ],
+            "enforced_by": [
+                "ownership boundaries",
+                "API policies"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "async function createFoo(foo: Foo) {\n  const bar = await barService.get(foo.barId);\n  await bazService.validate(foo, bar);\n  return fooStore.save(foo);\n}",
+                "after": "async function createFoo(foo: Foo) {\n  await fooStore.save(foo);\n  await outbox.append({ type: \"FooCreated\", fooId: foo.id, barId: foo.barId });\n}",
+                "lang": "ts"
+            }
+        }
+    ]
+}

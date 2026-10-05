@@ -4,12 +4,12 @@ import {
     compressNeedsExtracted,
     extractedUnresolved,
     fenceMalformed,
-    judgementWithRef,
+    judgmentWithRef,
     notReader,
     refKindWrong,
 } from "../strings/archive.strings.ts";
 import { citationRefusal, parseCitation, resolvesCitation } from "../resolvers/reference.resolver.ts";
-import { JUDGEMENT_KIND } from "../constants/board.constants.ts";
+import { JUDGMENT_KIND } from "../constants/board.constants.ts";
 import { projectRoot } from "../../../config/surface.config.ts";
 
 export const EMPTY_EXTRACTION = "none:carries-nothing-durable";
@@ -19,11 +19,11 @@ export const EXTRACTION_KIND = "changelog";
 const NOT_READER = "NOTREADER";
 
 const shapeRefusal = function shapeRefusal(closes: string, ref: string | null, kind: string): string | null {
-    const judgement = kind === JUDGEMENT_KIND;
-    if (judgement && ref !== null) {
-        return judgementWithRef(closes);
+    const judgment = kind === JUDGMENT_KIND;
+    if (judgment && ref !== null) {
+        return judgmentWithRef(closes);
     }
-    return !judgement && ref === null ? artifactNeedsRef(closes, EMPTY_EXTRACTION) : null;
+    return !judgment && ref === null ? artifactNeedsRef(closes, EMPTY_EXTRACTION) : null;
 };
 
 const extractionCitationRefusal = function extractionCitationRefusal(

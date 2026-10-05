@@ -110,7 +110,7 @@ I publish the method rather than the projects I build with it. The one exhibit i
 
 - [Anatomy](https://banes-lab.com/anatomy)
 
-  The anatomy page publishes the client source of this site as it is on disk, parsed on every build, with every folder and file, its statistics, its syntax tree, its definitions and their calls, and the problems the parser found.
+  The anatomy page publishes the source of this site as it is on disk, every workspace member parsed on every build. It shows every folder and file, its statistics, its syntax tree, its definitions and their calls, and the problems the parser found.
 
 - [Architecture](https://banes-lab.com/software-architecture)
 
@@ -284,7 +284,7 @@ Trial and error, a lot of it. A model drifts under any constraint, but it drifts
 
 ---
 
-August 2024. I had made a theme pack for RuneLite and one plugin overlay did not match my layout. I opened my first GitHub account to file an issue asking for a customisation option, and the answer was that it was not a priority and I should build it myself. So I did, with ChatGPT guiding me through forking the client and writing a plugin. That plugin is where the interest in the principles under software started, rather than in any particular syntax. I read development the way I read a book: the syntax is the cover, the logic is the content. Instead of learning syntax structures I learned how software interacts, how logic flows and what kinds of algorithms exist, and found that all of it reduces to the same thing, sequences of questions and answers.
+August 2024. I had made a theme pack for RuneLite and one plugin overlay did not match my layout. I opened my first GitHub account to file an issue asking for a customization option, and the answer was that it was not a priority and I should build it myself. So I did, with ChatGPT guiding me through forking the client and writing a plugin. That plugin is where the interest in the principles under software started, rather than in any particular syntax. I read development the way I read a book: the syntax is the cover, the logic is the content. Instead of learning syntax structures I learned how software interacts, how logic flows and what kinds of algorithms exist, and found that all of it reduces to the same thing, sequences of questions and answers.
 
 ---
 

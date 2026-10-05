@@ -1,0 +1,46 @@
+{
+    "check": {
+        "by": ["the ontology resolution gate, which requires every lens to name a universal axis that exists"],
+        "population": "every lens that names the universal axis",
+        "freshness": "a verdict stands until the universal axes or a lens changes",
+        "refusal": "the gate fails on a lens that names a universal axis that does not exist",
+        "observation": "none: a universal axis groups lenses, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: a suite plants a lens whose universal axis does not exist, and the bundled lenses validate clean",
+        "authority": "the universal axis list, which every lens cites"
+    },
+    "records": [
+        {"id": "existence",
+            "question": "What entities are present?",
+            "subsumes": ["identity"]},
+        {"id": "arrangement",
+            "question": "How are they organized?",
+            "subsumes": [
+                "structure",
+                "space"
+            ]},
+        {"id": "dynamics",
+            "question": "How do they change?",
+            "subsumes": [
+                "time",
+                "change"
+            ]},
+        {
+            "id": "interaction",
+            "question": "How do they influence one another?",
+            "subsumes": [
+                "relation",
+                "behavior",
+                "cause"
+            ]
+        },
+        {
+            "id": "abstraction",
+            "question": "What meaning or principle can be inferred?",
+            "subsumes": [
+                "meaning",
+                "function",
+                "probability"
+            ]
+        }
+    ]
+}

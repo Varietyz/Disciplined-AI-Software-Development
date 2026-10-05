@@ -1,0 +1,34 @@
+{
+    "name": "@banes-lab/social-share",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "Renders the site's social share images by code: drop-in card plugins with typed, expression-driven specs, a live preview stage, and a deterministic PNG and animated GIF export.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#cards/*": "./cards/*.ts",
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#runtime/*": "./runtime/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./runtime/entrypoints/card.entrypoint.ts",
+    "exports": {
+        ".": "./runtime/entrypoints/card.entrypoint.ts",
+        "./*": "./*"
+    },
+    "scripts": {
+        "dev": "vite",
+        "social": "node runtime/entrypoints/card.entrypoint.ts",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@banes-lab/build-scripts": "*",
+        "@banes-lab/web": "*",
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@govlab/context": "*",
+        "@ssot/paths": "*",
+        "@ssot/secrets": "*"
+    }
+}

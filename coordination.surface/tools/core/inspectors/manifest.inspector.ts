@@ -96,7 +96,7 @@ const runtimeFindings = function runtimeFindings(manifestPath: string, runtime: 
             "declaredRuntimeDependency",
             `dependencies "${name}"`,
             `${name} is declared as a RUNTIME dependency`,
-            "runtime code here takes no third-party dependency, so a consumer needs no toolchain of its own to run what it adopted — a declared runtime dependency makes this package's reach a function of what the consumer already has, and the invariant it breaks is one no amount of noticing holds because a manifest field is read by installers rather than by readers. Vendor the behavior, move it behind an injected port the consumer supplies, or demote it to a development dependency where it does not travel; where one is genuinely structurally unavoidable, that judgement is the maintainer's and is recorded rather than assumed, which is why this does not heal",
+            "runtime code here takes no third-party dependency, so a consumer needs no toolchain of its own to run what it adopted — a declared runtime dependency makes this package's reach a function of what the consumer already has, and the invariant it breaks is one no amount of noticing holds because a manifest field is read by installers rather than by readers. Vendor the behavior, move it behind an injected port the consumer supplies, or demote it to a development dependency where it does not travel; where one is genuinely structurally unavoidable, that judgment is the maintainer's and is recorded rather than assumed, which is why this does not heal",
         ),
     );
 };

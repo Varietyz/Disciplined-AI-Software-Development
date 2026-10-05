@@ -1,0 +1,90 @@
+{
+    "label": "Bane's Lab Server",
+    "summary": "The nginx configuration that serves banes-lab.com and the njs script behind its query endpoint, pushed to the droplet by the deploy member.",
+    "maturity": "experimental",
+    "domains": [
+        {"meta": "devops",
+            "sub": "provisioning"},
+        {"meta": "security",
+            "sub": "content-security-policy"}
+    ],
+    "ecosystem": "typescript",
+    "visibility": {"private": true,
+        "hidden": false},
+    "capabilities": [
+        "serve-prerendered-pages-and-alternates",
+        "negotiate-markdown-and-json-by-accept",
+        "answer-catalog-queries-in-njs",
+        "send-per-request-csp-nonces",
+        "publish-an-mta-sts-policy"
+    ],
+    "governedBy": ["separation-of-concerns"],
+    "entries": [],
+    "docs": {
+        "overview": "This member holds what the droplet runs, and no code runs here locally. `configuration/configs/nginx.config.conf` is the http-level configuration, `configuration/configs/site.config.conf` the site with its four server blocks (the apex site, the www redirect, the MTA-STS policy host and the plain-HTTP redirect), and `runtime/entrypoints/catalog.entrypoint.ts` the njs module behind `/q`, the JSON 404 and 410 answers and the refusal of a query string on a static catalog address. `runtime/backups/` holds the `*.backup.*` copies the deploy downloads: the live site file before every push, the site archive before every site deploy, and the whole nginx tree on a full pull. The files carry no comments: the reasons behind the non-obvious directives are the traps below.",
+        "whenToUse": [
+            "Changing how nginx serves the site: a header, a location, a rewrite, a negotiation map or a compression list.",
+            "Changing the query endpoint's behavior in `runtime/entrypoints/catalog.entrypoint.ts`. Its messages and limits live in the catalog's query leaf, which the build member writes."
+        ],
+        "whenNotToUse": [
+            "Shipping the files. The deploy member pushes them with `npm run nginx:deploy`, and this member has no scripts.",
+            "Copy that nginx answers with. The Markdown 404 body is the only literal, and the build member's catalog validator checks it against its constant."
+        ],
+        "install": "A workspace member only so the document gate reaches it. It declares no dependencies and has nothing to install.",
+        "quickStart": [
+            {
+                "intent": "Push the configuration and the njs script to the droplet, test and reload nginx",
+                "lang": "bash",
+                "code": "npm run nginx:deploy"
+            }
+        ],
+        "configuration": [
+            {
+                "option": "configuration/configs/nginx.config.conf",
+                "note": "The http block every site on the droplet shares, pushed as `/etc/nginx/nginx.conf`: TLS policy, rate-limit zones, the Markdown negotiation maps and the default gzip list."
+            },
+            {
+                "option": "configuration/configs/site.config.conf",
+                "note": "Everything specific to banes-lab.com, pushed into the server's nginx sites-available folder as banes-lab, including the JSON negotiation, the shortened access log and the njs import, because the rollback restores only this file."
+            },
+            {
+                "option": "runtime/entrypoints/catalog.entrypoint.ts",
+                "note": "The njs module, authored in TypeScript. The deploy member strips its types and pushes it as `catalog.js`, named for its subject, which is the name the site file imports. It reads the deployed catalog from the document root and caches it until the id manifest's modification time changes."
+            }
+        ],
+        "configuration-traps": [
+            "Any `add_header` inside a location drops every `add_header` inherited from the server block, so the full security header set is repeated in every location. Removing the repetition removes the headers.",
+            "A `gzip_types` or `brotli_types` list at server level replaces the http-level list rather than extending it. The site's list repeats `nginx.conf`'s and adds the Markdown media type.",
+            "The Markdown location sets the bare Markdown media type and lets the charset module append `; charset=utf-8`. The compression lists match the whole content type, so a type written with its parameter would send Markdown uncompressed.",
+            "Every script, preload and stylesheet tag carries the `__CSP_NONCE__` placeholder, and `sub_filter` swaps it for `$request_id`, the value the CSP header names. The filter touches only text/html, runs before on-the-fly brotli and drops ETag and Last-Modified, so a page is never answered 304 with a stale nonce. A precompressed `.br` or `.gz` sibling of a page would bypass the filter, which is why the prerender writes none.",
+            "`nginx.conf` is shared with another project on the droplet, and whichever project pushes last overwrites it. Anything this site needs lives in the site file, and the rate-limit zone values must match the other project's copy.",
+            "The headers-more module loads through a `modules-enabled` drop-in written at install. A `load_module` line for it in `nginx.conf` would load it twice.",
+            "Visitor addresses are logged shortened (IPv4 to its /24, IPv6 to its first three groups), and the privacy policy relies on it. Every server block, the redirects included, logs through `banes_lab_shortened`, so none falls back to the shared full-address log.",
+            "`js_engine qjs` sits beside the `js_import`, because the default njs engine has no `Map` and no object spread, and the script is written and tested against a full ECMAScript engine. Without it every njs answer is a 500 that the configuration test does not catch. `nginx.entrypoint.ts` in the standalone scripts fails the gate's validation stage on an import with no engine. The script imports `fs`, never `node:fs`, which njs does not resolve.",
+            "The site file depends on catalog files that only the site deploy ships: the query script reads `/json/api/query` before it answers. When a push adds a dependency like that, the site deploys first, or `/q` and every missing JSON address answer 500.",
+            "The page location never tries the directory form of the request path. A directory match would redirect to a trailing slash, which the rewrite at the top of the same location strips again.",
+            "`/json/` is a `^~` prefix location so a catalog address ending in `.md` (a Markdown source file's JSON leaf) stays out of the Markdown regex location.",
+            "A Markdown twin of a page names that page as its canonical through a `Link` header, so a search engine folds the twin into the page. The value comes from `js_set` and `markdownCanonical` in the query script, which checks that the page's HTML file exists, because a file test in an `if` would move the request into the `if` block's context, which drops the location's `try_files`. A catalog-only leaf gets an empty value, and nginx sends no header for an empty value. The header omits `always`, so a 404 carries no canonical.",
+            "The Markdown 404 choice reads `$request_uri`, not `$uri`, because an unknown page route is rewritten through `@markdown` before its 404 is chosen.",
+            "OCSP stapling is off because the certificate names no OCSP responder. Enabling it only produces a warning on every configuration test.",
+            "Raise the id in the `_mta-sts` DNS TXT record whenever the MTA-STS policy changes, or sending servers keep the cached policy for `max_age`.",
+            "Only `limit_conn` guards the page location. Every response is a static file, and HTTP/2 multiplexes a visitor's requests over one connection, so the connection cap does not reach ordinary visitors."
+        ],
+        "disposal": [
+            "Remove the member's workspace entry from the root `package.json` and its `server` entry from `docs.members` in `.govlab/govlab.config.ts`.",
+            "Remove the `server`, `nginx`, `nginxMain`, `nginxSite`, `nginxScripts` and `backups` keys from the `app` branch of `project.paths/paths.yaml`, together with the deploy member's nginx step that reads them.",
+            "Delete the directory, reinstall, run the gate."
+        ],
+        "apiNotes": [
+            {
+                "name": "catalog.entrypoint.ts",
+                "note": "Exports `q`, `missing` and `staticQuery` as the njs handlers the site file names. Every handler loads the catalog state first and throws when a catalog file it needs is absent, which nginx answers as 500."
+            }
+        ],
+        "aiContext": [
+            "The configuration files carry no comments, and `nginx.entrypoint.ts` in the standalone scripts fails the gate's validation stage on one. A reason behind a directive goes into `configuration-traps` here.",
+            "Every location that adds a header repeats the full header set, so a new header goes into every location block.",
+            "The deploy member pushes the http configuration, the scripts under `runtime/entrypoints/` and the site file. A TypeScript script ships as JavaScript named for its subject, with its types stripped and each `node:` import mapped to the bare name njs registers. On a failure the deploy member restores every file it replaced and removes each one it added."
+        ]
+    }
+}

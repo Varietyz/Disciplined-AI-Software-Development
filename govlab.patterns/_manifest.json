@@ -1,0 +1,82 @@
+{
+    "label": "GovLab Patterns",
+    "summary": "A domain-agnostic pattern-analysis substrate, the pattern engine of govlab. It ingests records, detects their schema, maps fields onto representation plugins, and scores reusable analyses against declared null models. It materializes a typed records-to-findings graph validated at construction, and reasons the ontology, analysis, representation and reasoning axes at the explanation rung, with deterministic structure-preserving synthesis at the creation rung. It also ingests source code into walk, call-graph and finding reports. It is a backend library with no runtime UI.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "observability",
+            "sub": "analytics"},
+        {"meta": "developer-tooling",
+            "sub": "linting-quality"},
+        {"meta": "data",
+            "sub": "data-modeling"}
+    ],
+    "capabilities": [
+        "shared-pattern-kernel",
+        "schema-detection",
+        "representation-mapping",
+        "null-model-significance",
+        "analysis-graph-validation",
+        "finding-contract",
+        "compose-root",
+        "language-agnostic-code-ingestion",
+        "hexagon-svg-generation",
+        "math-type-classification"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "type-safety",
+        "immutability",
+        "separation-of-concerns"
+    ],
+    "governance": {"principles": [
+        "single-responsibility",
+        "open-closed",
+        "dependency-inversion"
+    ]},
+    "visibility": {"private": false,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "docs": {
+        "overview": "One pattern-analysis substrate over a shared kernel, laid out in the `configuration`, `core` and `runtime` containers with a flat `types` bucket.\n\n- The axis kernel holds the four PROTOCOL axes, generated from the reasoning ontology into `configuration/generated/axis.generated.ts`, with their predicates and the coordinate factory (`core/factories/axis.factory.ts`).\n- The analysis graph (`core/models/graph.model.ts`) validates single production, acyclicity and monotone reasoning through `core/validators/graph.validator.ts`.\n- Schema detection, the representation resolver and the six representation kinds each fold records into a summary through an aggregator under `core/aggregators/`.\n- Each representation kind is a self-registering plugin under `core/plugins/`. `core/loaders/representation.loader.ts` imports every file in that folder at load, so adding a representation adds one file.\n- The declared null models (`core/analyzers/baseline.analyzer.ts`) score every finding's significance.\n- Code ingestion parses source through `@govlab/code-parse` into records, symbols and imports, and the package coordinator renders each module's walk, call graph and findings into its report artifacts.\n\n`createGovlabPatterns(options)` folds every registered pattern face into one typed port over this kernel. The face registry is the extension seam and holds no face today.",
+        "whenToUse": [
+            "Analyzing any record dataset: detect its schema, map fields to representations, and stream reusable analyses that emit coordinate-stamped findings scored against a declared null.",
+            "Reasoning over the codebase's own structured data (quality findings, catalog records) as records, with distribution, entropy, drift and anomaly analyses measured against a null instead of asserted.",
+            "Producing a graph-validated, provenance-carrying findings report where every derived statistic has a single producer and every finding a typed coordinate.",
+            "Generating each module's code walk, call graph and structural findings as report artifacts, and verifying them against a fresh generation."
+        ],
+        "whenNotToUse": [
+            "As a linter or code scanner. It holds the analysis substrate, not the quality tooling (`@govlab/quality`).",
+            "As a runtime presentation layer. Its output is structured findings and, at build time, static artifacts.",
+            "For records whose shape resists every representation. Refuse the mapping instead of forcing one that does not fit."
+        ],
+        "quickStart": [
+            {
+                "intent": "Analyze a record set into coordinate-stamped findings",
+                "lang": "ts",
+                "code": "import { report } from \"@govlab/patterns\";\nconst result = report([{ tool: \"Read\", tokens: 1 }, { tool: \"Edit\", tokens: 2 }]);\nresult.headline.findings;"
+            },
+            {
+                "intent": "Compose the substrate port",
+                "lang": "ts",
+                "code": "import { createGovlabPatterns } from \"@govlab/patterns\";\nconst lab = createGovlabPatterns();\nlab.faces;"
+            }
+        ],
+        "configuration": "`createGovlabPatterns(options)` accepts an options object with an injected `logger` that defaults to a no-op. `analyze`, `report` and the streaming pipelines accept an explicit field-to-representation `mapping` and the set of fields to read as floats. `synthesize` takes a `seed` and a `count`, so a synthesis run is reproducible. The report entry point takes `--all`, `--check`, `--fast` and `--ignore`, and reads the shared cache switch `GOVLAB_NO_CACHE`.",
+        "disposal": [
+            "Remove `govlab.root/govlab.patterns/`.",
+            "Drop the `Validate SVG` step from `govlab.root/govlab.pipeline/core/factories/validation.factory.ts`.",
+            "Remove the `govlab.patterns` branch and the `findings` key from `project.paths/paths.yaml`.",
+            "Remove every import of `@govlab/patterns` in consumers, which are the build member's anatomy converters and the test suites."
+        ],
+        "install": "A private workspace package resolved through the root `package.json` `workspaces` glob `govlab.root/govlab.*`. Import the bare specifier `@govlab/patterns` from its barrel. It runs directly from TypeScript source with no build step.",
+        "aiContext": [
+            "The substrate is one composed port over a shared kernel. `createGovlabPatterns()` returns a port whose face registry is ready for self-registering faces and holds none today. The barrel exposes the analysis concerns (schema detection, representation mapping, aggregators, null models and findings), each bounded over the kernel.",
+            "A finding carries a four-axis PROTOCOL coordinate (Ontology, Analysis, Reasoning, Representation) drawn from the shared canonical vocabulary. `runtime/entrypoints/axis.entrypoint.ts` regenerates that vocabulary from `@govlab/context`, so a consumer that also has the context resolves the same id by identity.",
+            "A representation is a plugin file under `core/plugins/` that calls `registerRepresentation` with its name, its applicable analyses and a runtime factory. `loadPlugins(dir)` loads further plugin folders the same way.",
+            "`@govlab/patterns` composes the sibling leaves `@govlab/code-parse` (tree-sitter parsing) and `@govlab/content-fingerprint` (fingerprint caching and body hashing)."
+        ]
+    }
+}

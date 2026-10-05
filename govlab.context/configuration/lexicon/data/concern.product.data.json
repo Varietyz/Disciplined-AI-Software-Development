@@ -1,0 +1,259 @@
+{
+    "category": "product-concerns",
+    "exampleShape": "placed-file",
+    "enforcedBy": ["the naming gate, which refuses a filename whose last segment before the extension is an undeclared tag or differs from its folder's tag"],
+    "check": {
+        "population": "every filename whose concern slot holds the tag, and the folder holding each such file",
+        "freshness": "a verdict stands until a file carrying the tag is created, moved or renamed, or the declared vocabulary changes",
+        "refusal": "the lint run fails a file whose tag is undeclared or disagrees with its folder",
+        "observation": "each filename parsed by position against the declared concern vocabulary",
+        "evidence": "fires-and-accepts: a suite lints a file whose tag is undeclared and one whose tag differs from its folder, and passes a conforming file",
+        "authority": "the declared concern vocabulary, which a filename's tag and its folder conform to"
+    },
+    "records": [
+        {
+            "name": "Test Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the compound marker for a file that exercises another file and asserts on the outcome, which is exempt from the naming grammar and placed in its subject's mirrored concern folder.",
+            "example": "stores/cart.store.test.ts",
+            "seeAlso": [
+                "tests",
+                "compound-marker"
+            ]
+        },
+        {
+            "name": "Suite Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that groups related test cases under one setup, filed in a suites folder.",
+            "example": "suites/checkout.suite.ts"
+        },
+        {
+            "name": "Case Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds the inputs and expected outcomes one test runs, filed in a cases folder.",
+            "example": "cases/login.case.ts"
+        },
+        {
+            "name": "Fixture Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that provides the known state or samples a test starts from, filed in a fixtures folder.",
+            "example": "fixtures/sample-order.fixture.ts"
+        },
+        {
+            "name": "Mock Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that stands in for a collaborator and records how it was called, filed in a mocks folder.",
+            "example": "mocks/mailer.mock.ts"
+        },
+        {
+            "name": "Fake Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that implements a collaborator in a simpler working form for tests, filed in a fakes folder.",
+            "example": "fakes/payment-gateway.fake.ts"
+        },
+        {
+            "name": "Stub Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that returns fixed answers in place of a collaborator, filed in a stubs folder.",
+            "example": "stubs/weather-api.stub.ts"
+        },
+        {
+            "name": "Spy Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that wraps a real collaborator and records its calls, filed in a spies folder.",
+            "example": "spies/logger.spy.ts"
+        },
+        {
+            "name": "Double Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that replaces a collaborator in a test when no narrower double names its role, filed in a doubles folder.",
+            "example": "doubles/clock.double.ts"
+        },
+        {
+            "name": "Assertion Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines reusable checks tests apply to outcomes, filed in an assertions folder.",
+            "example": "assertions/money.assertion.ts"
+        },
+        {
+            "name": "Harness Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that sets up and drives the environment a subject is tested in, filed in a harnesses folder.",
+            "example": "harnesses/device.harness.ts"
+        },
+        {
+            "name": "Runner Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that discovers and runs a set of tests or tasks and collects their results, filed in a runners folder.",
+            "example": "runners/benchmark.runner.ts"
+        },
+        {
+            "name": "Coverage Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that measures which parts of a subject its tests reach, filed in a coverage folder.",
+            "example": "coverage/branch.coverage.ts"
+        },
+        {
+            "name": "Reference Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file of authored knowledge a reader consults, such as a guide or a note, filed in a references folder.",
+            "example": "references/style-guide.reference.md"
+        },
+        {
+            "name": "View Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that renders one screen or page from the state it is given, filed in a views folder.",
+            "example": "views/settings.view.ts"
+        },
+        {
+            "name": "Component Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that renders one reusable piece of interface with its own inputs, filed in a components folder.",
+            "example": "components/date-picker.component.ts"
+        },
+        {
+            "name": "Widget Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that renders one interactive control, filed in a widgets folder.",
+            "example": "widgets/volume-slider.widget.ts"
+        },
+        {
+            "name": "Layout Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that arranges regions of an interface without deciding their contents, filed in a layouts folder.",
+            "example": "layouts/two-column.layout.ts"
+        },
+        {
+            "name": "Template Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds a shape with slots that are filled to produce an output, filed in a templates folder.",
+            "example": "templates/invoice-email.template.html"
+        },
+        {
+            "name": "Theme Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that selects one coherent set of visual values for a whole interface, filed in a themes folder.",
+            "example": "themes/midnight.theme.ts"
+        },
+        {
+            "name": "Style Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds the presentation rules for one surface, filed in a styles folder.",
+            "example": "styles/button.style.css"
+        },
+        {
+            "name": "Tokens Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the collection tag for a file that declares named design values such as colors and spacing, plural in both folder and tag.",
+            "example": "tokens/spacing.tokens.css"
+        },
+        {
+            "name": "Strings Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the collection tag for a file that holds the user-visible text a surface displays, plural in both folder and tag.",
+            "example": "strings/checkout.strings.ts"
+        },
+        {
+            "name": "Accessibility Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that makes an interface usable through assistive technology, filed in an accessibility folder.",
+            "example": "accessibility/focus-trap.accessibility.ts"
+        },
+        {
+            "name": "Command Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one command a command-line or chat surface accepts, filed in a commands folder.",
+            "example": "commands/sync.command.ts"
+        },
+        {
+            "name": "Prompt Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that asks a participant for input and validates the answer, filed in a prompts folder.",
+            "example": "prompts/delete-confirmation.prompt.ts"
+        },
+        {
+            "name": "Printer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that writes a command surface's output to a terminal, filed in a printers folder.",
+            "example": "printers/progress-bar.printer.ts"
+        },
+        {
+            "name": "Renderer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that draws frames to a display from a scene or a model, filed in a renderers folder.",
+            "example": "renderers/terrain.renderer.ts"
+        },
+        {
+            "name": "Shader Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds a program the graphics processor runs per vertex or per pixel, filed in a shaders folder.",
+            "example": "shaders/water.shader.glsl"
+        },
+        {
+            "name": "Material Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines how a surface reflects light and which textures it uses, filed in a materials folder.",
+            "example": "materials/brushed-metal.material.ts"
+        },
+        {
+            "name": "Sprite Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a two-dimensional image drawn and moved as one object, filed in a sprites folder.",
+            "example": "sprites/hero.sprite.ts"
+        },
+        {
+            "name": "Atlas Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that packs many images into one texture with the coordinates of each, filed in an atlases folder.",
+            "example": "atlases/interface.atlas.ts"
+        },
+        {
+            "name": "Geometry Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the mass tag for a file that holds shapes as vertices and faces, singular in both folder and tag.",
+            "example": "geometry/terrain.geometry.ts"
+        },
+        {
+            "name": "Camera Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines the viewpoint and projection a scene is seen through, filed in a cameras folder.",
+            "example": "cameras/follow.camera.ts"
+        },
+        {
+            "name": "Viewport Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines the region of a display a camera draws into, filed in a viewports folder.",
+            "example": "viewports/minimap.viewport.ts"
+        },
+        {
+            "name": "Frame Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one rendered image in a sequence and what it contains, filed in a frames folder.",
+            "example": "frames/title-card.frame.ts"
+        },
+        {
+            "name": "Effect Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that adds visual or audio feedback to an event without changing the state behind it, filed in an effects folder.",
+            "example": "effects/screen-shake.effect.ts"
+        },
+        {
+            "name": "Particle Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that simulates many small short-lived elements such as sparks or smoke, filed in a particles folder.",
+            "example": "particles/campfire.particle.ts"
+        },
+        {
+            "name": "Telegraph Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that signals an action before it lands so a participant can react, filed in a telegraphs folder.",
+            "example": "telegraphs/ground-slam.telegraph.ts"
+        },
+        {
+            "name": "Respawn Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that returns a removed participant or object to the world under stated rules, filed in a respawn folder.",
+            "example": "respawn/player.respawn.ts"
+        }
+    ]
+}

@@ -1,0 +1,1219 @@
+{
+    "category": "pattern-distillation",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the anti-pattern elimination verification and the anti-reintroduction gate",
+            "the duplication detectors the analysis lenses name"
+        ],
+        "population": "every class family the analysis partitions",
+        "freshness": "a verdict stands until the family's code or the architecture registry changes",
+        "refusal": "completion is refused until the old pattern is gone and a gate forbids its return",
+        "observation": "none: distillation is verified on source",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the distilled pattern, which the family's code migrates to"
+    },
+    "records": [
+        {
+            "id": "analysis-workspace",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Analysis Workspace",
+            "exemplar": {
+                "before": "Refactoring begins ad hoc, with no auditable record of what it started from.",
+                "after": "session → workspace{phase/metric/migration locations} → load baseline + registries → manifest → block if required context missing",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Create a unique analysis session, allocate phase/metric/migration artifact locations, load baseline documentation and registries, write a manifest, and block continuation if required context is unavailable.",
+            "invariant": "Architectural refactoring must begin from an auditable workspace with explicit input provenance.",
+            "flow": [
+                "Session",
+                "Workspace",
+                "ContextLoad",
+                "Manifest",
+                "Gate"
+            ],
+            "productions": [
+                {
+                    "lhs": "AnalysisWorkspace",
+                    "rhs": "<SessionId> \"→\" <WorkspacePath> \"→\" <ContextResourceSet> \"→\" <Manifest> \"→\" <InitializationGate>"
+                },
+                {
+                    "lhs": "InitializationGate",
+                    "rhs": "\"workspace_exists\" \",\" \"manifest_written\" \",\" \"baseline_docs_loaded\" \",\" \"registry_loaded\""
+                }
+            ],
+            "composes": [],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "registry-baseline",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Registry Baseline",
+            "exemplar": {
+                "before": "A new base abstraction created without measuring what already exists.",
+                "after": "registry → existing bases + implementation counts + hierarchy depth → current abstraction state, before proposing a change",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Read existing architectural registries, extract known base abstractions, count implementations, measure hierarchy depth, and record the current abstraction state before proposing changes.",
+            "invariant": "New abstractions must be compared against existing architecture before being created.",
+            "flow": [
+                "Registry",
+                "ExistingAbstractions",
+                "ImplementationCounts",
+                "HierarchyMetrics",
+                "Baseline"
+            ],
+            "productions": [
+                {
+                    "lhs": "RegistryBaseline",
+                    "rhs": "<RegistryData> \"→\" <BaseAbstractionSet> \"→\" <ImplementationMetricSet> \"→\" <HierarchyMetricSet> \"→\" <BaselineReport>"
+                },
+                {
+                    "lhs": "ImplementationMetricSet",
+                    "rhs": "\"total_base_classes\" \",\" \"total_implementations\" \",\" \"implementation_count_by_base\""
+                }
+            ],
+            "composes": [],
+            "force": ["runtime_extensibility"]
+        },
+        {
+            "id": "compliance-gap",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Compliance Gap",
+            "exemplar": {
+                "before": "'The Foos don't extend a base' — but is the base missing, or just its adoption?",
+                "after": "role classes → expected base rule → conforming vs nonconforming → compliance rate distinguishing missing adoption from missing abstraction",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Discover implementation classes by role, detect which ones conform to expected base abstractions, calculate noncompliance counts, and compute architectural compliance rate.",
+            "invariant": "Pattern distillation must distinguish missing adoption from missing abstraction.",
+            "flow": [
+                "RoleClasses",
+                "ExpectedBaseRule",
+                "ConformingSet + NonconformingSet",
+                "ComplianceRate"
+            ],
+            "productions": [
+                {
+                    "lhs": "ComplianceGap",
+                    "rhs": "<RoleClassSet> \"→\" <BaseExpectation> \"→\" <ConformanceScan> \"→\" <GapReport>"
+                },
+                {"lhs": "BaseExpectation",
+                    "rhs": "<RoleName> \"extends\" <ExpectedBaseClass>"},
+                {
+                    "lhs": "GapReport",
+                    "rhs": "\"noncompliant_count\" \",\" \"compliant_count\" \",\" \"compliance_rate\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "semantic-domain-partitioning",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Semantic Domain Partitioning",
+            "exemplar": {
+                "before": "Abstractions drawn from arbitrary files instead of families of like responsibility.",
+                "after": "resources → classify by role{manager|repository|handler|service|adapter} → per-family analysis",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Group implementation resources by semantic role, such as manager, repository, handler, service, controller, adapter, or worker, then analyze each family separately.",
+            "invariant": "Reusable abstractions emerge from families of similar responsibility, not arbitrary files.",
+            "flow": [
+                "ResourceSet",
+                "RoleClassifier",
+                "SemanticDomains",
+                "DomainMetrics"
+            ],
+            "productions": [
+                {
+                    "lhs": "SemanticDomainPartitioning",
+                    "rhs": "<ResourceSet> \"→\" <RoleClassification> \"→\" <SemanticDomainSet>"
+                },
+                {
+                    "lhs": "SemanticDomain",
+                    "rhs": "<DomainName> \",\" <ResourcePathSet> \",\" <ClassCount> \",\" <BehavioralSignatureSet>"
+                },
+                {
+                    "lhs": "RoleClassification",
+                    "rhs": "\"manager\" | \"repository\" | \"handler\" | \"service\" | \"controller\" | \"adapter\" | \"worker\" | \"unknown\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "performance_scaling",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "behavioral-signature-extraction",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "analysis",
+            "yields": "operation",
+            "title": "Behavioral Signature Extraction",
+            "exemplar": {
+                "before": "A base-class candidate proposed on naming similarity alone.",
+                "after": "class → scan{constructor, lifecycle hooks, error handling, state, dependencies, public methods} → behavioral signature (evidence, not names)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each class in a semantic domain, inspect constructor behavior, lifecycle hooks, error handling, state management, dependency acquisition, and public orchestration methods.",
+            "invariant": "Base-class candidates require behavioral evidence, not just naming similarity.",
+            "flow": [
+                "ClassResource",
+                "BehaviorScan",
+                "Signature",
+                "DomainSignatureSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "BehavioralSignature",
+                    "rhs": "<InitializationBehavior> \",\" <LifecycleBehavior> \",\" <ErrorHandlingBehavior> \",\" <StateManagementBehavior> \",\" <DependencyManagementBehavior> \",\" <PublicMethodPatternSet>"
+                },
+                {
+                    "lhs": "LifecycleBehavior",
+                    "rhs": "\"initialize\" \",\" \"destroy\" \",\" \"onInitialize\" \",\" \"onDestroy\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "domain_boundary",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "cross-class-pattern-detection",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Cross-Class Pattern Detection",
+            "exemplar": {
+                "before": "One duplicated block noticed; the family-wide repetition stays invisible.",
+                "after": "signatures → search repeated{imports, init, lifecycle, error, state, deps} across the role family → cross-class pattern + occurrence count",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Search across semantic domains for repeated imports, repeated initialization, repeated lifecycle code, repeated error handling, repeated state setup, and repeated dependency wiring.",
+            "invariant": "Duplication becomes an abstraction candidate when it appears across multiple implementations with the same role.",
+            "flow": [
+                "DomainSignatures",
+                "CrossClassSearch",
+                "DuplicatePatternSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "CrossClassPatternDetection",
+                    "rhs": "<BehavioralSignatureSet> \"→\" <RepeatedStructureSearch> \"→\" <CrossClassPatternSet>"
+                },
+                {
+                    "lhs": "CrossClassPattern",
+                    "rhs": "<PatternName> \",\" <OccurrenceCount> \",\" <AffectedResourceSet> \",\" <PatternRole>"
+                },
+                {
+                    "lhs": "PatternRole",
+                    "rhs": "\"initialization\" | \"lifecycle\" | \"error_handling\" | \"state_management\" | \"dependency_management\""
+                }
+            ],
+            "composes": [],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "behavioral-inconsistency",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Behavioral Inconsistency",
+            "exemplar": {
+                "before": "Three competing implementations of one behavior, none textually duplicated, so nothing flags.",
+                "after": "behavior family → variation counts → consistency = dominant/total → {consistent | weakly | inconsistent} → normalize the inconsistent",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect multiple competing implementations of the same behavior, count each variation, compute dominant-pattern consistency, and flag low-consistency behavior for normalization.",
+            "invariant": "Inconsistent behavior is an architectural smell even when code is not textually duplicated.",
+            "flow": [
+                "BehaviorFamily",
+                "VariationCounts",
+                "ConsistencyRate",
+                "NormalizeCandidate"
+            ],
+            "productions": [
+                {
+                    "lhs": "BehavioralInconsistency",
+                    "rhs": "<BehaviorFamily> \"→\" <VariationSet> \"→\" <ConsistencyMetric> \"→\" <InconsistencyVerdict>"
+                },
+                {"lhs": "ConsistencyMetric",
+                    "rhs": "\"max_variation_count / total_variation_count\""},
+                {"lhs": "InconsistencyVerdict",
+                    "rhs": "\"consistent\" | \"weakly_consistent\" | \"inconsistent\""}
+            ],
+            "composes": [],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "sequential-chain-duplication",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "grounds": ["reasoning:ana-sequential"],
+            "title": "Sequential Chain Duplication",
+            "exemplar": {
+                "before": "Two classes call the same steps in the same order, but no single block is textually identical, so frequency scanning finds nothing.",
+                "after": "role family → extract ordered call-sequence per class → align sequences → repeated ordered chain + occurrence count",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each class in the role family, extract the ordered sequence of orchestration steps, align sequences across the family, and surface repeated ordered chains that no textual-duplication scan would catch.",
+            "invariant": "Order-sensitive repetition is duplication even when no contiguous block is textually identical.",
+            "flow": [
+                "RoleFamily",
+                "OrderedCallSequence",
+                "SequenceAlignment",
+                "RepeatedChainSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "SequentialChainDuplication",
+                    "rhs": "<CallSequenceSet> \"→\" <SequenceAlignment> \"→\" <RepeatedOrderedChainSet>"
+                },
+                {
+                    "lhs": "RepeatedOrderedChain",
+                    "rhs": "<OrderedStepList> \",\" <OccurrenceCount> \",\" <AffectedResourceSet>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "causality_ordering"
+            ]
+        },
+        {
+            "id": "temporal-coupling-detection",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "grounds": ["reasoning:ana-temporal"],
+            "title": "Temporal Coupling Detection",
+            "exemplar": {
+                "before": "Every class re-encodes 'call setup before use, teardown after' as scattered ad-hoc ordering, and the shared lifecycle contract stays invisible.",
+                "after": "role family → must-precede/must-follow constraints per class → intersect across family → shared temporal-coupling contract",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect must-precede and must-follow ordering constraints between operations in each class, intersect them across the role family, and surface the shared temporal-coupling contract that a base lifecycle would centralize.",
+            "invariant": "A lifecycle ordering constraint re-encoded across a family is a shared contract, not a per-class detail.",
+            "flow": [
+                "RoleFamily",
+                "OrderingConstraintSet",
+                "CrossFamilyIntersection",
+                "SharedCouplingContract"
+            ],
+            "productions": [
+                {
+                    "lhs": "TemporalCouplingDetection",
+                    "rhs": "<OrderingConstraintSet> \"→\" <ConstraintIntersection> \"→\" <SharedTemporalContractSet>"
+                },
+                {
+                    "lhs": "OrderingConstraint",
+                    "rhs": "<Operation> \"must_precede\" <Operation> | <Operation> \"must_follow\" <Operation>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "relational-graph-duplication",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "grounds": ["reasoning:ana-relational"],
+            "title": "Relational Graph Duplication",
+            "exemplar": {
+                "before": "The same object graph — acquire A, wire B onto A, hand both to C — is reassembled by hand in every class.",
+                "after": "role family → dependency-acquisition subgraph per class → subgraph isomorphism across family → repeated wiring subgraph",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Build the dependency-acquisition subgraph for each class, test for isomorphic subgraphs across the role family, and surface repeated object-graph wiring that a base or factory would assemble once.",
+            "invariant": "A dependency subgraph reassembled across a family is duplicated structure, distinct from duplicated statements.",
+            "flow": [
+                "RoleFamily",
+                "DependencySubgraph",
+                "SubgraphIsomorphism",
+                "RepeatedWiringSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "RelationalGraphDuplication",
+                    "rhs": "<DependencySubgraphSet> \"→\" <IsomorphismScan> \"→\" <RepeatedWiringSubgraphSet>"
+                },
+                {
+                    "lhs": "RepeatedWiringSubgraph",
+                    "rhs": "<NodeSet> \",\" <EdgeSet> \",\" <OccurrenceCount> \",\" <AffectedResourceSet>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "causal-wiring-duplication",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "grounds": ["reasoning:ana-causal"],
+            "title": "Causal Wiring Duplication",
+            "exemplar": {
+                "before": "The same trigger-to-reaction wiring — this event runs that handler, that failure invokes this recovery — is duplicated across the family.",
+                "after": "role family → cause→effect edges per class → match trigger/reaction pairs across family → repeated causal-wiring set",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Extract cause-to-effect edges (event to handler, failure to recovery, state change to reaction) per class, match trigger/reaction pairs across the role family, and surface repeated causal wiring that a base policy would centralize.",
+            "invariant": "Repeated trigger-to-reaction wiring is duplicated causal policy even when the surrounding code differs.",
+            "flow": [
+                "RoleFamily",
+                "CausalEdgeSet",
+                "TriggerReactionMatch",
+                "RepeatedCausalWiringSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "CausalWiringDuplication",
+                    "rhs": "<CausalEdgeSet> \"→\" <TriggerReactionMatch> \"→\" <RepeatedCausalWiringSet>"
+                },
+                {"lhs": "CausalEdge",
+                    "rhs": "<Trigger> \"causes\" <Reaction> \",\" <OccurrenceCount>"}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "causality_ordering"
+            ]
+        },
+        {
+            "id": "anomaly-outlier-detection",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "grounds": ["reasoning:ana-anomaly"],
+            "title": "Anomaly Outlier Detection",
+            "exemplar": {
+                "before": "A family shares one behavior — except the one class that does it differently, and a consistency ratio only reports 'weakly consistent' without naming the deviant.",
+                "after": "behavior family → per-class deviation score against the dominant signature → outlier set + why each deviates → normalize or justify",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Score each class's deviation from the dominant behavioral signature, identify the outliers, and name why each deviates, so inconsistency is localized to the deviant implementation rather than reported as an aggregate rate.",
+            "invariant": "Inconsistency is an anomaly to be localized to a deviant implementation, not merely a family-level ratio.",
+            "flow": [
+                "BehaviorFamily",
+                "DominantSignature",
+                "DeviationScore",
+                "OutlierSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "AnomalyOutlierDetection",
+                    "rhs": "<BehaviorFamily> \"→\" <DominantSignature> \"→\" <DeviationScoreSet> \"→\" <OutlierSet>"
+                },
+                {"lhs": "Outlier",
+                    "rhs": "<Resource> \",\" <DeviationScore> \",\" <DeviationReason>"}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "conceptual-duplication-detection",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "information-theory",
+            "yields": "novelty-score",
+            "grounds": ["reasoning:ana-semantic"],
+            "title": "Conceptual Duplication Detection",
+            "exemplar": {
+                "before": "Two implementations mean the same thing under different names, so no textual, structural, or frequency scan flags them.",
+                "after": "role family → semantic signature per behavior (intent, inputs→outputs, effects) → cluster by meaning not name → same-meaning/different-name set + novelty score",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Derive a name-independent semantic signature for each behavior (intent, input-to-output shape, effects), cluster behaviors by meaning rather than identifier, and surface same-meaning/different-name clusters that only the semantic lens can detect.",
+            "invariant": "Same meaning under different names is duplication that textual, structural, and frequency lenses are blind to.",
+            "flow": [
+                "RoleFamily",
+                "SemanticSignature",
+                "MeaningCluster",
+                "ConceptualDuplicateSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConceptualDuplicationDetection",
+                    "rhs": "<SemanticSignatureSet> \"→\" <MeaningClustering> \"→\" <ConceptualDuplicateSet>"
+                },
+                {"lhs": "SemanticSignature",
+                    "rhs": "<Intent> \",\" <InputOutputShape> \",\" <EffectSet>"}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "fractal-scale-duplication",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "topology",
+            "yields": "boolean",
+            "grounds": ["reasoning:ana-fractal"],
+            "title": "Fractal Scale Duplication",
+            "exemplar": {
+                "before": "The distiller scans one scale — the class family — and misses that the same shape repeats at the method level and again at the module level.",
+                "after": "candidate shape → test recurrence at method / class / module scale → scale-invariant duplication + the scale the abstraction belongs at",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Test whether a duplication shape recurs at more than one scale (method, class, module), and determine the scale at which the abstraction belongs, so single-scale scanning does not abstract at the wrong level.",
+            "invariant": "A shape that recurs across scales must be abstracted at the scale where it is invariant, not only where it was first noticed.",
+            "flow": [
+                "CandidateShape",
+                "MultiScaleRecurrence",
+                "ScaleInvariance",
+                "AbstractionScale"
+            ],
+            "productions": [
+                {
+                    "lhs": "FractalScaleDuplication",
+                    "rhs": "<CandidateShape> \"→\" <MultiScaleRecurrenceScan> \"→\" <ScaleInvarianceVerdict>"
+                },
+                {
+                    "lhs": "ScaleInvarianceVerdict",
+                    "rhs": "\"method_scale\" | \"class_scale\" | \"module_scale\" | \"scale_invariant\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "anti-pattern-classification",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Anti-Pattern Classification",
+            "exemplar": {
+                "before": "Findings kept as loose notes, not comparable across the backlog.",
+                "after": "findings → anti-pattern records{type, occurrence, impact, effort, severity, affected resources}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Convert duplicated, inconsistent, and architecture-violating findings into anti-pattern records with type, occurrence count, impact, effort, severity, and affected resources.",
+            "invariant": "Refactoring targets should be normalized into comparable anti-pattern contracts.",
+            "flow": [
+                "Finding",
+                "AntiPatternRecord",
+                "PriorityInput"
+            ],
+            "productions": [
+                {"lhs": "AntiPatternClassification",
+                    "rhs": "<FindingSet> \"→\" <AntiPatternSet>"},
+                {
+                    "lhs": "AntiPattern",
+                    "rhs": "<AntiPatternType> \",\" <Pattern> \",\" <OccurrenceCount> \",\" <Impact> \",\" <Effort> \",\" <PriorityRank> \",\" <AffectedResourceSet>"
+                },
+                {
+                    "lhs": "AntiPatternType",
+                    "rhs": "\"copy_paste_duplication\" | \"behavioral_inconsistency\" | \"architectural_violation\" | \"conceptual_duplication\" | \"structural_duplication\" | \"sequential_duplication\" | \"temporal_coupling\" | \"relational_duplication\" | \"causal_duplication\" | \"scale_duplication\""
+                },
+                {"lhs": "PriorityRank",
+                    "rhs": "\"critical\" | \"high\" | \"medium\" | \"low\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "anti-pattern-priority-matrix",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Anti-Pattern Priority Matrix",
+            "exemplar": {
+                "before": "Refactoring picks a target by gut feel, not value.",
+                "after": "anti-patterns → impact * effort → priority → sorted into remediation bands",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Assign numeric impact and effort scores, calculate priority, sort anti-patterns, and group them into remediation bands.",
+            "invariant": "Distillation should address high-value anti-patterns first.",
+            "flow": [
+                "AntiPattern",
+                "ImpactScore + EffortScore",
+                "Priority",
+                "SortedBacklog"
+            ],
+            "productions": [
+                {
+                    "lhs": "PriorityMatrix",
+                    "rhs": "<AntiPatternSet> \"→\" <ScoredAntiPatternSet> \"→\" <PriorityBandSet>"
+                },
+                {
+                    "lhs": "ScoredAntiPattern",
+                    "rhs": "<AntiPattern> \",\" <ImpactScore> \",\" <EffortScore> \",\" <PriorityValue>"
+                },
+                {"lhs": "PriorityValue",
+                    "rhs": "<ImpactScore> \"*\" <EffortScore>"},
+                {"lhs": "PriorityBand",
+                    "rhs": "\"priority_1\" | \"priority_2\" | \"priority_3\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "abstraction-boundary-principle",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Abstraction Boundary Principle",
+            "exemplar": {
+                "before": "Duplication abstracted into a base whether or not the behavior belongs below the subclass boundary.",
+                "after": "anti-pattern → boundary principles{universal, invariant, foundational, enforcing, load-reducing} → {base | utility | composition | local-refactor}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Evaluate each high-priority anti-pattern against boundary principles: universal, invariant, foundational, enforcing, and cognitive-load-reducing.",
+            "invariant": "A base abstraction is justified only when the behavior belongs below the subclass boundary.",
+            "flow": [
+                "AntiPattern",
+                "BoundaryPrinciples",
+                "PrinciplesMet",
+                "AbstractionEligible"
+            ],
+            "productions": [
+                {
+                    "lhs": "BoundaryPrincipleEvaluation",
+                    "rhs": "<AntiPattern> \"→\" <BoundaryPrincipleSet> \"→\" <EligibilityVerdict>"
+                },
+                {
+                    "lhs": "BoundaryPrincipleSet",
+                    "rhs": "\"universal\" \",\" \"invariant\" \",\" \"foundational\" \",\" \"enforcing\" \",\" \"reducing_load\""
+                },
+                {
+                    "lhs": "EligibilityVerdict",
+                    "rhs": "\"base_candidate\" | \"utility_candidate\" | \"composition_candidate\" | \"local_refactor_only\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility"
+            ]
+        },
+        {
+            "id": "base-class-candidate-selection",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Base-Class Candidate Selection",
+            "exemplar": {
+                "before": "Incidental reuse promoted to inheritance.",
+                "after": "anti-pattern + domain coverage + boundary score → verdict{create_base | prefer_composition | prefer_utility | reject}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Promote an anti-pattern to a base-class candidate only when it satisfies enough boundary principles and applies across a meaningful portion of the semantic domain.",
+            "invariant": "Inheritance should encode stable lifecycle or invariant behavior, not incidental reuse.",
+            "flow": [
+                "AntiPattern + DomainCoverage + BoundaryScore",
+                "Candidate|Reject"
+            ],
+            "productions": [
+                {
+                    "lhs": "BaseClassCandidateSelection",
+                    "rhs": "<AntiPattern> \",\" <DomainCoverage> \",\" <BoundaryScore> \"→\" <CandidateVerdict>"
+                },
+                {
+                    "lhs": "CandidateVerdict",
+                    "rhs": "\"create_base_class\" | \"prefer_composition\" | \"prefer_utility\" | \"reject_abstraction\""
+                },
+                {"lhs": "DomainCoverage",
+                    "rhs": "\"occurrence_count / total_domain_classes\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "semantic_consistency",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "concrete-vs-abstract-responsibility-split",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "grounds": [
+                "reasoning:substrate-node:invariant",
+                "reasoning:ont-novelty"
+            ],
+            "title": "Concrete-vs-Abstract Responsibility Split",
+            "exemplar": {
+                "before": "The split is drawn from a fixed OOP lifecycle vocabulary (constructor/initialize/destroy/onInitialize/executeCore), which pre-decides the shape whether or not the family's behavior matches it.",
+                "after": "family behavior → partition INVARIANT (identical across every member) from VARIANT (differs per member) → invariant set = concrete base, variant set = the abstract seam; the hook names are read from the variant behavior, not assumed",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Partition the family's behavior into what is invariant across every member (the topology preserved under substitution) and what varies per member (the novelty); the invariant set becomes the concrete base, the variant set becomes the abstract seam. The concrete/abstract boundary is derived from the evidence, not read off a fixed lifecycle vocabulary — so the split holds for any paradigm, not only OOP class lifecycles.",
+            "invariant": "The concrete/abstract boundary is the invariant/variant boundary of the family, discovered from evidence — never a pre-assumed lifecycle template.",
+            "flow": [
+                "FamilyBehaviorSet",
+                "InvariantPartition + VariantPartition",
+                "ConcreteBase + AbstractSeam"
+            ],
+            "productions": [
+                {
+                    "lhs": "ResponsibilitySplit",
+                    "rhs": "<FamilyBehaviorSet> \"→\" <InvariantSet> \",\" <VariantSet> \"→\" <ConcreteBase> \",\" <AbstractSeamSet>"
+                },
+                {"lhs": "InvariantSet",
+                    "rhs": "\"behavior identical across every family member\""},
+                {"lhs": "VariantSet",
+                    "rhs": "\"behavior that differs per family member\""},
+                {"lhs": "AbstractSeam",
+                    "rhs": "<VariantBehaviorName> \",\" <SeamKind>"},
+                {"lhs": "SeamKind",
+                    "rhs": "\"hook\" | \"abstract_method\" | \"injected_strategy\" | \"parameter\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "template-method-lifecycle",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Template Method Lifecycle",
+            "exemplar": {
+                "before": "Each subclass re-implements the same guard-setup-cleanup lifecycle.",
+                "after": "public lifecycle method → guard → shared setup/cleanup → subclass hook → centralized error handling → one predictable contract",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Define public lifecycle methods that enforce guard checks, call shared setup or cleanup, invoke subclass hooks, and centralize error handling.",
+            "invariant": "Template method converts repeated lifecycle code into one predictable behavioral contract.",
+            "flow": [
+                "PublicMethod",
+                "Guard",
+                "SharedBehavior",
+                "Hook",
+                "ErrorPolicy",
+                "Result"
+            ],
+            "productions": [
+                {
+                    "lhs": "TemplateLifecycle",
+                    "rhs": "<LifecycleMethod> \"→\" <GuardCheck> \"→\" <SharedOperation> \"→\" <SubclassHook> \"→\" <ErrorHandlingPolicy>"
+                },
+                {"lhs": "LifecycleMethod",
+                    "rhs": "\"initialize\" | \"destroy\" | \"execute\" | \"process\""},
+                {"lhs": "SubclassHook",
+                    "rhs": "\"onInitialize\" | \"onDestroy\" | \"onExecute\" | \"onProcess\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "base-schematic-composition",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Base Schematic Composition",
+            "exemplar": {
+                "before": "A base generated so large it becomes the new god object.",
+                "after": "candidate → generate base → size <= max (split if oversized) + name + location conventions → persistable base",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Generate the base abstraction from the selected candidate, enforce size constraints, split if oversized, and record which anti-patterns the abstraction eliminates.",
+            "invariant": "Generated abstractions must remain small enough to be maintainable.",
+            "flow": [
+                "Candidate",
+                "GenerateBase",
+                "SizeCheck",
+                "SplitIfNeeded",
+                "BaseArtifact"
+            ],
+            "productions": [
+                {
+                    "lhs": "BaseSchematicComposition",
+                    "rhs": "<BaseClassCandidate> \"→\" <GeneratedBaseArtifact> \"→\" <ConstraintCheck> \"→\" <PersistableBaseArtifact>"
+                },
+                {
+                    "lhs": "ConstraintCheck",
+                    "rhs": "\"line_count <= max_allowed_lines\" \",\" \"name_matches_convention\" \",\" \"location_matches_architecture\""
+                }
+            ],
+            "composes": [],
+            "force": ["modularity"]
+        },
+        {
+            "id": "migration-ordering",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Migration Ordering",
+            "exemplar": {
+                "before": "The most complex implementation migrated first, and the base is wrong before it's proven.",
+                "after": "target classes → complexity score → migrate ascending complexity → prove the base on simple cases first",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Sort target classes by complexity from lowest to highest, migrate simpler implementations first, and use early migrations to validate the abstraction before complex adoption.",
+            "invariant": "Migration risk decreases when the base pattern is proven on low-complexity cases first.",
+            "flow": [
+                "TargetClasses",
+                "ComplexityMetric",
+                "SortedMigrationOrder"
+            ],
+            "productions": [
+                {
+                    "lhs": "MigrationOrdering",
+                    "rhs": "<TargetClassSet> \"→\" <ComplexityScoreSet> \"→\" <MigrationQueue>"
+                },
+                {
+                    "lhs": "ComplexityScore",
+                    "rhs": "\"line_count\" | \"method_count\" | \"dependency_count\" | \"state_property_count\""
+                },
+                {"lhs": "MigrationQueue",
+                    "rhs": "\"ascending_complexity\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "causality_ordering",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "backup-verified-migration",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Backup-Verified Migration",
+            "exemplar": {
+                "before": "A refactor breaks a target and there is no way back.",
+                "after": "per target → checkpoint → refactor to the base → verify the anti-pattern is gone → commit | restore from checkpoint",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each target class, create a recoverable checkpoint, refactor it to extend or use the abstraction, verify the removed anti-pattern no longer exists, and restore from backup on failure.",
+            "invariant": "Structural migration must be reversible per target artifact.",
+            "flow": [
+                "Backup",
+                "Refactor",
+                "Verify",
+                "Commit|Restore"
+            ],
+            "productions": [
+                {
+                    "lhs": "MigrationExecution",
+                    "rhs": "<TargetClass> \"→\" <Checkpoint> \"→\" <RefactorToBase> \"→\" <Verification> \"→\" <MigrationOutcome>"
+                },
+                {
+                    "lhs": "MigrationOutcome",
+                    "rhs": "\"committed\" | \"restored_from_checkpoint\" | \"failed_with_log\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "streaming_dataflow",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "anti-pattern-elimination-verification",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Anti-Pattern Elimination Verification",
+            "exemplar": {
+                "before": "Distillation declared done while the old pattern still lives at three sites.",
+                "after": "known anti-pattern → search the whole scope → allow only approved base-location occurrences → fail completion on unapproved duplicates",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "After migration, search the entire target scope for old duplicate patterns, allow only approved base-location occurrences, and fail completion if unapproved duplicates remain.",
+            "invariant": "Refactoring is incomplete until the old pattern is gone.",
+            "flow": [
+                "KnownAntiPattern",
+                "ScopeSearch",
+                "RemainingOccurrences",
+                "Pass|Fail"
+            ],
+            "productions": [
+                {
+                    "lhs": "AntiPatternElimination",
+                    "rhs": "<AntiPatternPatternSet> \"→\" <WholeScopeSearch> \"→\" <RemainingOccurrenceSet> \"→\" <EliminationVerdict>"
+                },
+                {
+                    "lhs": "EliminationVerdict",
+                    "rhs": "\"eliminated\" | \"remaining_unapproved_occurrences\" | \"base_only_occurrence\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "registry-regeneration",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Registry Regeneration",
+            "exemplar": {
+                "before": "The registry still reflects the pre-refactor architecture.",
+                "after": "migration result → regenerate registry → reread → confirm new base + migrated implementations represented",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "After creating or migrating abstractions, regenerate or update the architecture registry, reread it, and confirm the new base and migrated implementations are represented.",
+            "invariant": "Architecture metadata must reflect the new implementation truth.",
+            "flow": [
+                "RefactorResult",
+                "RegistryRegeneration",
+                "RegistryReadback",
+                "RepresentationCheck"
+            ],
+            "productions": [
+                {
+                    "lhs": "RegistryRegeneration",
+                    "rhs": "<MigrationResult> \"→\" <RegistryUpdate> \"→\" <UpdatedRegistry> \"→\" <RegistryVerification>"
+                },
+                {
+                    "lhs": "RegistryVerification",
+                    "rhs": "\"new_base_present\" \",\" \"implementation_count_updated\" \",\" \"old_pattern_absent_or_marked\""
+                }
+            ],
+            "composes": [],
+            "force": ["runtime_extensibility"]
+        },
+        {
+            "id": "anti-reintroduction-gate",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "grounds": ["reasoning:constraint"],
+            "title": "Anti-Reintroduction Gate",
+            "exemplar": {
+                "before": "The distilled base eliminates the duplication today, but nothing stops the developer or the model from reintroducing the same anti-pattern — the gate held only for this run, by discipline.",
+                "after": "distilled boundary → author/strengthen a custom lint rule forbidding the anti-pattern + the base-bypass → build the plugin → regenerate the rule catalog → the boundary is enforced structurally",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "After eliminating an anti-pattern, author or strengthen the custom lint rule that statically forbids its reintroduction and any bypass of the new base, build the rule plugin, and regenerate the rule catalog, so the distilled boundary is enforced by a gate rather than by discipline.",
+            "invariant": "A distilled pattern is incomplete until a gate forbids its reintroduction.",
+            "flow": [
+                "DistilledBoundary",
+                "LintRuleAuthored",
+                "PluginBuilt",
+                "CatalogRegenerated",
+                "EnforcedBoundary"
+            ],
+            "productions": [
+                {
+                    "lhs": "AntiReintroductionGate",
+                    "rhs": "<DistilledBoundary> \"→\" <CustomLintRule> \"→\" <PluginBuild> \"→\" <CatalogRegeneration> \"→\" <EnforcementVerdict>"
+                },
+                {"lhs": "EnforcementVerdict",
+                    "rhs": "\"gate_active\" | \"gate_absent\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "distillation-metrics",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Distillation Metrics",
+            "exemplar": {
+                "before": "ROI asserted ('much cleaner now') with no numbers.",
+                "after": "before + after → {duplication reduction, code reduction, adoption rate, lines saved, maintenance + cognitive-load reduction}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Calculate duplication reduction, code reduction, adoption rate, lines saved, maintenance burden reduction, and cognitive-load reduction after migration.",
+            "invariant": "Refactoring should produce measurable architectural ROI.",
+            "flow": [
+                "BeforeMetrics + AfterMetrics",
+                "ReductionMetrics",
+                "ROISummary"
+            ],
+            "productions": [
+                {
+                    "lhs": "DistillationMetrics",
+                    "rhs": "<BaselineMetricSet> \",\" <PostMigrationMetricSet> \"→\" <FinalMetricSet>"
+                },
+                {
+                    "lhs": "FinalMetricSet",
+                    "rhs": "\"duplication_reduction\" \",\" \"code_reduction\" \",\" \"base_class_adoption\" \",\" \"lines_saved\" \",\" \"maintenance_burden_reduction\" \",\" \"cognitive_load_reduction\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "pattern-distillation-history",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Pattern Distillation History",
+            "exemplar": {
+                "before": "Each distillation forgets the last — the same lessons re-learned.",
+                "after": "summary → durable history log + metric snapshots + lessons → reusable evidence for future abstraction decisions",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Append the completed analysis summary to a durable history log, store metric snapshots, and preserve lessons learned for future abstraction decisions.",
+            "invariant": "Refactoring intelligence improves when outcomes become reusable historical evidence.",
+            "flow": [
+                "Summary",
+                "HistoryAppend",
+                "MetricSnapshot",
+                "LessonsLearned"
+            ],
+            "productions": [
+                {
+                    "lhs": "DistillationHistory",
+                    "rhs": "<SummaryReport> \"→\" <HistoryLog> \"→\" <MetricStore> \"→\" <ReusableLearningSet>"
+                },
+                {"lhs": "ReusableLearning",
+                    "rhs": "<Lesson> \",\" <Evidence> \",\" <ApplicabilityContext>"}
+            ],
+            "composes": [],
+            "force": ["modularity"]
+        },
+        {
+            "id": "pattern-distillation-completion-truthfulness",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Pattern Distillation Completion Truthfulness",
+            "exemplar": {
+                "before": "'Done' asserted while verification, registry-update, and the anti-reintroduction gate never ran.",
+                "after": "gates{workspace, baseline, semantic, anti-pattern, abstraction, migration, verification, registry, enforcement, metrics} all pass → complete; else incomplete",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Mark pattern distillation complete only if workspace, baseline, semantic analysis, anti-pattern classification, abstraction selection, migration, verification, registry update, anti-reintroduction gate, and metrics logging all pass.",
+            "invariant": "Completion is an evidence state, not an assertion — and it includes a gate that forbids the anti-pattern's return.",
+            "flow": [
+                "PhaseGates",
+                "VerificationResults",
+                "Metrics",
+                "Complete|Incomplete"
+            ],
+            "productions": [
+                {
+                    "lhs": "DistillationCompletion",
+                    "rhs": "<InitializationGate> \",\" <RegistryGate> \",\" <SemanticAnalysisGate> \",\" <AntiPatternGate> \",\" <AbstractionGate> \",\" <MigrationGate> \",\" <EnforcementGate> \",\" <MetricsGate> \"→\" <CompletionVerdict>"
+                },
+                {
+                    "lhs": "CompletionVerdict",
+                    "rhs": "\"pattern_distillation_complete\" | \"pattern_distillation_incomplete\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "runtime_extensibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "pattern-distiller-kernel",
+            "principleRef": "premature-abstraction",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "analysis-workspace"},
+                {"stage": "see",
+                    "record": "behavioral-signature-extraction"},
+                {"stage": "derive",
+                    "record": "anti-pattern-classification"},
+                {"stage": "intent",
+                    "record": "anti-pattern-priority-matrix"},
+                {"stage": "project",
+                    "record": "migration-ordering"},
+                {"stage": "act",
+                    "record": "backup-verified-migration"},
+                {"stage": "verify",
+                    "record": "anti-pattern-elimination-verification"},
+                {"stage": "commit",
+                    "record": "pattern-distillation-history"},
+                {"stage": "terminate",
+                    "record": "pattern-distillation-completion-truthfulness"}
+            ],
+            "title": "Pattern Distiller Kernel",
+            "exemplar": {
+                "before": "Repeated behavior abstracted by intuition, migrated irreversibly, never verified.",
+                "after": "workspace → baseline → semantics → anti-patterns → abstraction boundary → base schematic → reversible migration → elimination proof → registry regenerate → ROI → history",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Initialize an analysis workspace, read registry baselines, partition semantic domains, extract behavioral signatures, detect anti-patterns, prioritize them, evaluate abstraction boundaries, compose base schematics, migrate targets, verify elimination, update registries, calculate ROI, and persist history.",
+            "invariant": "Pattern distillation is a forensic compiler from repeated behavioral evidence into predictable implementation architecture.",
+            "flow": [
+                "Workspace",
+                "Registry",
+                "Semantics",
+                "AntiPatterns",
+                "Abstraction",
+                "Migration",
+                "Verification",
+                "Metrics",
+                "History"
+            ],
+            "productions": [
+                {
+                    "lhs": "PatternDistillerKernel",
+                    "rhs": "<AnalysisWorkspace> \"→\" <RegistryBaseline> \"→\" <ComplianceGap> \"→\" <SemanticDomainPartitioning> \"→\" <BehavioralSignature> \"→\" <CrossClassPatternDetection> \"→\" <AntiPatternClassification> \"→\" <PriorityMatrix> \"→\" <BoundaryPrincipleEvaluation> \"→\" <BaseClassCandidateSelection> \"→\" <ResponsibilitySplit> \"→\" <BaseSchematicComposition> \"→\" <MigrationExecution> \"→\" <AntiPatternElimination> \"→\" <RegistryRegeneration> \"→\" <DistillationMetrics> \"→\" <DistillationHistory>"
+                }
+            ],
+            "composes": [
+                "analysis-workspace",
+                "registry-baseline",
+                "compliance-gap",
+                "semantic-domain-partitioning",
+                "cross-class-pattern-detection",
+                "anti-pattern-classification",
+                "base-class-candidate-selection",
+                "base-schematic-composition",
+                "registry-regeneration",
+                "distillation-metrics"
+            ],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "pattern-distillation-concern",
+            "title": "<Pattern Distillation Concern>",
+            "intent": "<Initialize evidence workspace> → <Measure current architecture> → <Group semantic families> → <Extract behavioral signatures> → <Detect duplicate/inconsistent behavior> → <Score anti-patterns> → <Evaluate abstraction boundary> → <Compose reusable schematic> → <Migrate with rollback> → <Verify old-pattern elimination> → <Record ROI>",
+            "invariant": "Any repeated implementation behavior should become a shared abstraction only when evidence proves it is universal, invariant, foundational, enforceable, and cognitively load-reducing.",
+            "flow": [
+                "Evidence",
+                "Semantics",
+                "AntiPattern",
+                "Boundary",
+                "Abstraction",
+                "Migration",
+                "Verification",
+                "Metrics"
+            ],
+            "productions": [
+                {
+                    "lhs": "PatternDistillationConcern",
+                    "rhs": "<EvidenceWorkspace> \"→\" <ArchitecturalBaseline> \"→\" <SemanticDomainSet> \"→\" <BehavioralSignatureSet> \"→\" <AntiPatternSet> \"→\" <AbstractionBoundary> \"→\" <ReusableSchematic> \"→\" <MigrationPlan> \"→\" <EliminationVerification> \"→\" <ROIMetrics>"
+                },
+                {
+                    "lhs": "AbstractionBoundary",
+                    "rhs": "\"universal\" \",\" \"invariant\" \",\" \"foundational\" \",\" \"enforcing\" \",\" \"reducing_load\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "semantic_consistency",
+                "state_transaction",
+                "correctness_verification"
+            ],
+            "meta": true
+        }
+    ]
+}

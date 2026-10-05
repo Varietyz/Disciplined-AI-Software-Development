@@ -1,0 +1,213 @@
+{
+    "category": "quality-attributes",
+    "records": [
+        {
+            "name": "Availability",
+            "kind": "quality-attribute",
+            "definition": "The proportion of time a system is operational and able to serve requests."
+        },
+        {
+            "name": "Security",
+            "distinctFrom": [
+                {
+                    "id": "architecture:model-safety",
+                    "reason": "Security protects data and behavior from attack, while model safety prevents a model's harmful inputs, outputs and actions."
+                },
+                {
+                    "id": "architecture:runtime-extensibility",
+                    "reason": "Security limits what can reach a system, while runtime extensibility opens it to new capability as it runs."
+                },
+                {
+                    "id": "lexicon:quality",
+                    "reason": "Security is one expectation of a system, while quality is how far it meets all of them."
+                },
+                {
+                    "id": "lexicon:architecture-compliance",
+                    "reason": "Security is protection from misuse, while architecture compliance is conformance to the intended structure."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system protects its data and behavior from unauthorized access, misuse, or attack."
+        },
+        {
+            "name": "Simplicity",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:locality-of-behavior",
+                    "reason": "Simplicity is the absence of unneeded structure, while locality of behavior keeps related behavior together even at the cost of some duplication."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The absence of unnecessary structure, keeping a system easy to understand and change."
+        },
+        {
+            "name": "Debuggability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:traceability",
+                    "reason": "Debuggability is locating and understanding a fault, while traceability is following one request or change end to end."
+                },
+                {
+                    "id": "architecture:auditability",
+                    "reason": "Debuggability serves finding faults, while auditability serves accounting for sensitive actions."
+                },
+                {
+                    "id": "lexicon:strong-consistency",
+                    "reason": "Debuggability is how easily a fault is understood, while strong consistency is every read seeing the latest write."
+                },
+                {
+                    "id": "lexicon:ordering",
+                    "reason": "Debuggability is understanding faults, while ordering is processing events in one defined sequence."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The ease with which a fault can be located and understood from a system's observable behavior."
+        },
+        {
+            "name": "Maintainability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:pattern-consistency",
+                    "reason": "Maintainability is the ease of changing a system, while pattern consistency is one problem solved one way, which helps it."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The ease with which a system can be corrected, adapted, and extended over its lifetime."
+        },
+        {
+            "name": "Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of interdependence and intricacy that makes a system harder to reason about and change."
+        },
+        {
+            "name": "Fault Isolation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a failure in one component is contained and prevented from cascading to others."
+        },
+        {
+            "name": "Architecture Compliance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which an implementation conforms to its intended architectural rules, boundaries, and constraints."
+        },
+        {
+            "name": "Coordination Overhead",
+            "kind": "quality-attribute",
+            "definition": "The additional cost incurred to synchronize and coordinate concurrent or distributed units of work."
+        },
+        {
+            "name": "Data Integrity",
+            "kind": "quality-attribute",
+            "definition": "The accuracy, consistency, and validity of data maintained over its entire lifecycle."
+        },
+        {
+            "name": "Discoverability",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:glob-resolvability",
+                    "reason": "Discoverability is how easily anything in a system is found and understood, while glob resolvability is one pattern collecting a whole concern."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The ease with which a system's components, capabilities, or endpoints can be found and understood."
+        },
+        {
+            "name": "Mapping Overhead",
+            "kind": "quality-attribute",
+            "definition": "The additional cost of translating data or calls between two differing representations or models."
+        },
+        {
+            "name": "Operational Overhead",
+            "kind": "quality-attribute",
+            "definition": "The ongoing effort and resource cost of deploying, running, and maintaining a system in production."
+        },
+        {
+            "name": "Ordering",
+            "kind": "quality-attribute",
+            "definition": "The guarantee that events or messages are processed in a well-defined, consistent sequence."
+        },
+        {
+            "name": "Partial Availability",
+            "kind": "quality-attribute",
+            "definition": "The condition in which a system continues serving a subset of its functions while some components are unavailable."
+        },
+        {
+            "name": "Performance",
+            "kind": "quality-attribute",
+            "definition": "The speed, throughput, and resource efficiency with which a system performs its work."
+        },
+        {
+            "name": "Policy Complexity",
+            "kind": "quality-attribute",
+            "definition": "The difficulty of understanding, maintaining, and reasoning about a policy as its rules multiply."
+        },
+        {
+            "name": "Readability",
+            "kind": "quality-attribute",
+            "definition": "The ease with which source code can be read and understood by a developer."
+        },
+        {
+            "name": "Reliability",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:data-integrity",
+                    "reason": "Reliability is functions performing correctly over time, while data integrity is the data staying accurate and valid over its life."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system performs its required functions correctly and consistently over time."
+        },
+        {
+            "name": "Resource Efficiency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system accomplishes its work using minimal computational resources."
+        },
+        {
+            "name": "Retry Safety",
+            "kind": "quality-attribute",
+            "definition": "The property that an operation can be retried without producing duplicate or inconsistent effects."
+        },
+        {
+            "name": "Robustness",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system continues to operate correctly under invalid input, stress, or unexpected conditions."
+        },
+        {
+            "name": "Static Safety",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:security-debugging",
+                    "reason": "Static safety catches errors before code runs, while the security and debugging cost is what generating code at runtime adds."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The guarantee that whole classes of errors are caught at compile time, before code runs."
+        },
+        {
+            "name": "Substitutability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a component can be replaced by another honoring the same contract without breaking clients."
+        },
+        {
+            "name": "Team Autonomy",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:independent-scaling",
+                    "reason": "Team autonomy is teams deciding without coordination, while independent scaling is parts of the system growing separately."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The degree to which a team can make and deliver decisions independently, without cross-team coordination."
+        },
+        {
+            "name": "Tooling Complexity",
+            "kind": "quality-attribute",
+            "definition": "The effort required to set up, learn, and maintain the tools a technique or approach depends on."
+        },
+        {
+            "name": "User Experience",
+            "kind": "quality-attribute",
+            "definition": "The overall quality of a user's interaction with a system, including responsiveness, clarity, and ease of use.",
+            "aliases": ["UX"]
+        }
+    ]
+}

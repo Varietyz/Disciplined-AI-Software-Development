@@ -1,0 +1,182 @@
+{
+    "meta": {
+        "note": "Per config file / parent tool: how a resolved ToolResolution serializes to the tool's native config. 'central' idiom = a select list + a settings container keyed by the (already native-dotted) knob path. Plugin tool records route to their parent via pluginParent. See doc-arch/designs/quality/native-config-emitters.md."
+    },
+    "descriptors": [
+        {
+            "tool": "golangci-lint",
+            "idiom": "central",
+            "format": "yaml",
+            "configTarget": ".golangci.yml",
+            "preamble": {"version": "2"},
+            "selectContainer": "linters.enable",
+            "settingsContainer": "linters.settings",
+            "ignoreContainer": "linters.disable"
+        },
+        {
+            "tool": "ruff",
+            "idiom": "central",
+            "format": "toml",
+            "configTarget": "ruff.toml",
+            "selectContainer": "lint.select",
+            "settingsContainer": null
+        },
+        {
+            "tool": "clippy",
+            "idiom": "central",
+            "format": "toml",
+            "configTarget": "clippy.toml",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "knobCase": "kebab"
+        },
+        {
+            "tool": "rubocop",
+            "idiom": "per-rule",
+            "format": "yaml",
+            "configTarget": ".rubocop.yml",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "enableKey": "Enabled"
+        },
+        {
+            "tool": "perlcritic",
+            "idiom": "per-rule",
+            "format": "ini",
+            "configTarget": ".perlcriticrc",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "enableKey": null
+        },
+        {
+            "tool": "pylint",
+            "idiom": "central",
+            "format": "ini",
+            "configTarget": ".pylintrc",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "knobSection": {"max-args": "DESIGN",
+                "max-statements": "DESIGN",
+                "indent-string": "FORMAT"}
+        },
+        {
+            "tool": "yamllint",
+            "idiom": "rules-container",
+            "format": "yaml",
+            "configTarget": ".yamllint",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "ruleContainer": "rules"
+        },
+        {
+            "tool": "checkstyle",
+            "idiom": "central",
+            "format": "xml",
+            "configTarget": "checkstyle.xml",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "xmlWrap": [
+                {"tag": "module",
+                    "attrs": {"name": "Checker"}},
+                {"tag": "module",
+                    "attrs": {"name": "TreeWalker"}}
+            ],
+            "xmlRuleTag": "module",
+            "xmlNameAttr": "name",
+            "xmlPropsWrap": null,
+            "xmlDoctype": "<!DOCTYPE module PUBLIC \"-//Checkstyle//DTD Checkstyle Configuration 1.3//EN\" \"https://checkstyle.org/dtds/configuration_1_3.dtd\">"
+        },
+        {
+            "tool": "pmd",
+            "idiom": "central",
+            "format": "xml",
+            "configTarget": "pmd-ruleset.xml",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "xmlWrap": [
+                {"tag": "ruleset",
+                    "attrs": {"name": "govlab",
+                        "xmlns": "http://pmd.sourceforge.net/ruleset/2.0.0"}}
+            ],
+            "xmlRuleTag": "rule",
+            "xmlNameAttr": "ref",
+            "xmlPropsWrap": "properties",
+            "xmlRefPrefix": "category/java/design.xml/",
+            "xmlDescription": "GovLab SSOT-emitted ruleset"
+        },
+        {
+            "tool": "phpmd",
+            "idiom": "central",
+            "format": "xml",
+            "configTarget": "phpmd.xml",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "xmlWrap": [
+                {"tag": "ruleset",
+                    "attrs": {"name": "govlab",
+                        "xmlns": "http://pmd.sf.net/ruleset/1.0.0"}}
+            ],
+            "xmlRuleTag": "rule",
+            "xmlNameAttr": "ref",
+            "xmlPropsWrap": "properties",
+            "xmlRefPrefix": "rulesets/codesize.xml/",
+            "xmlDescription": "GovLab SSOT-emitted ruleset"
+        },
+        {
+            "tool": "prettier",
+            "idiom": "central",
+            "format": "js-record",
+            "configTarget": ".prettierrc",
+            "selectContainer": null,
+            "settingsContainer": null
+        },
+        {
+            "tool": "revive",
+            "idiom": "rules-container",
+            "format": "toml",
+            "configTarget": "revive.toml",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "ruleContainer": "rule",
+            "argumentsKey": "arguments"
+        },
+        {
+            "tool": "swiftlint",
+            "idiom": "per-rule",
+            "format": "yaml",
+            "configTarget": ".swiftlint.yml",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "enableKey": null,
+            "compoundSplit": "|"
+        },
+        {
+            "tool": "sqlfluff",
+            "idiom": "central",
+            "format": "ini",
+            "configTarget": ".sqlfluff",
+            "selectContainer": null,
+            "settingsContainer": null,
+            "knobSection": {"tab_space_size": "sqlfluff:indentation"}
+        }
+    ],
+    "pluginParent": {
+        "eslint-ts": "eslint",
+        "eslint-vue": "eslint",
+        "eslint-react": "eslint",
+        "eslint-import": "eslint",
+        "eslint-unicorn": "eslint",
+        "eslint-stylistic": "eslint",
+        "rubocop-rails": "rubocop",
+        "rubocop-rspec": "rubocop",
+        "rubocop-performance": "rubocop"
+    },
+    "deferred": [
+        {"tool": "credo",
+            "reason": "config is Elixir code (.credo.exs), not a data format"},
+        {"tool": "luacheck",
+            "reason": "config is a Lua script (.luacheckrc)"},
+        {"tool": "lintr",
+            "reason": "config is a DCF file holding R expressions (.lintr)"}
+    ]
+}

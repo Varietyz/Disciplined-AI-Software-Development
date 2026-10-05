@@ -30,7 +30,7 @@ const isPascalCase = function isPascalCase(name: string): boolean {
     return !isConstantCase(name);
 };
 
-const camelised = function camelised(name: string): string {
+const camelized = function camelized(name: string): string {
     return name.charAt(0).toLowerCase() + name.slice(1);
 };
 
@@ -141,7 +141,7 @@ const findingsIn = function findingsIn(
         if (declared === undefined || !ts.isIdentifier(name)) {
             continue;
         }
-        const to = camelised(name.text);
+        const to = camelized(name.text);
         const { blocked, locations } = collectReferences(program, files, declared);
         out.push({
             file: relPath(sourceFile.fileName),

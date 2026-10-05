@@ -1,0 +1,728 @@
+{
+    "category": "Event / Messaging / Asynchronous Architecture",
+    "check": {
+        "population": "every event, message, topic and consumer that crosses an asynchronous boundary",
+        "freshness": "a verdict stands until an event schema, a consumer or the delivery guarantee changes",
+        "refusal": "the schema registry, idempotency test or workflow test fails the change that breaks delivery or contract",
+        "observation": "published schemas, consumer registrations, and redelivery, lag and dead-letter counts from the broker",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the published schema and the delivery guarantee, which every producer and consumer conforms to"
+    },
+    "records": [
+        {
+            "id": "event-driven-architecture",
+            "name": "Event-Driven Architecture",
+            "aliases": ["EDA"],
+            "definition": "A convention of connecting services through published events, with each consumer reacting independently of the producer.",
+            "type": "style",
+            "scope": [
+                "service",
+                "integration",
+                "system"
+            ],
+            "requires": [
+                "Events",
+                "Message Contract",
+                "Idempotency"
+            ],
+            "reinforces": [
+                "Loose Coupling",
+                "Asynchronous Communication"
+            ],
+            "enables": [
+                "Event Sourcing",
+                "CQRS",
+                "Saga"
+            ],
+            "conflicts_with": ["Hidden Temporal Coupling"],
+            "tensions_with": [
+                "Debuggability",
+                "Strong Consistency"
+            ],
+            "violated_by": [
+                "lexicon:non-idempotent-operation",
+                "lexicon:ad-hoc-payloads"
+            ],
+            "detected_by": [
+                "missing correlation IDs",
+                "direct synchronous chains"
+            ],
+            "measured_by": [
+                "event contract coverage",
+                "retry safety"
+            ],
+            "refactored_by": [
+                "architecture:domain-events",
+                "architecture:outbox-pattern",
+                "lexicon:consumer-driven-contract-tests"
+            ],
+            "enforced_by": [
+                "schema registry",
+                "idempotency tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "async function createFoo(foo: Foo) {\n  await fooStore.save(foo);\n  await barService.refresh(foo.id);\n  await bazService.notify(foo.id);\n}",
+                "after": "async function createFoo(foo: Foo) {\n  await fooStore.save(foo);\n  await events.publish({ type: \"FooCreated\", fooId: foo.id });\n}\nevents.on(\"FooCreated\", updateBarProjection);\nevents.on(\"FooCreated\", notifyBaz);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "publish-subscribe-pattern",
+            "name": "Publish/Subscribe Pattern",
+            "aliases": ["Pub/Sub"],
+            "definition": "A design pattern in which publishers send messages to a topic and every subscriber to that topic receives them.",
+            "type": "pattern",
+            "scope": [
+                "integration",
+                "eventing"
+            ],
+            "requires": [
+                "Publisher",
+                "Subscriber",
+                "Broker/Event Bus"
+            ],
+            "reinforces": ["Loose Coupling"],
+            "enables": ["Fan-Out Notification"],
+            "conflicts_with": ["Direct Point-to-Point Calls"],
+            "tensions_with": ["Delivery Ordering"],
+            "violated_by": ["lexicon:point-to-point-coupling"],
+            "detected_by": ["direct calls to subscriber list"],
+            "measured_by": ["publisher-subscriber coupling"],
+            "refactored_by": ["architecture:event-bus"],
+            "enforced_by": ["messaging contracts"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function saveFoo(foo: Foo) {\n  fooStore.save(foo);\n  auditFoo(foo);\n  indexFoo(foo);\n}",
+                "after": "publisher.publish(\"foo.saved\", { fooId: foo.id });\nsubscriber.on(\"foo.saved\", auditFoo);\nsubscriber.on(\"foo.saved\", indexFoo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "message-queue",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:consumer",
+                    "reason": "A message queue holds messages until they are acknowledged, while the consumer is the component that takes and processes them."
+                }
+            ],
+            "name": "Message Queue",
+            "definition": "A mechanism that holds messages durably until a consumer takes and acknowledges each one.",
+            "type": "mechanism",
+            "scope": [
+                "integration",
+                "async processing"
+            ],
+            "requires": [
+                "Message Contract",
+                "Consumer"
+            ],
+            "reinforces": [
+                "Resilience",
+                "Backpressure"
+            ],
+            "enables": ["Asynchronous Processing"],
+            "conflicts_with": ["In-Memory Direct Invocation"],
+            "tensions_with": ["Latency"],
+            "violated_by": ["architecture:missing-backpressure"],
+            "detected_by": ["synchronous blocking chains for async work"],
+            "measured_by": [
+                "queue depth",
+                "retry/dead-letter rates"
+            ],
+            "refactored_by": ["architecture:competing-consumers"],
+            "enforced_by": [
+                "infrastructure policy",
+                "load tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "for (const foo of foos) await processFoo(foo);",
+                "after": "for (const foo of foos) await fooQueue.enqueue({ type: \"ProcessFoo\", foo });\nfooWorker.consume(fooQueue, message => processFoo(message.foo));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "message-broker",
+            "name": "Message Broker",
+            "definition": "Descriptive data about topics, queues and routing rules, held by an intermediary service that delivers messages between producers and consumers.",
+            "type": "artifact",
+            "scope": [
+                "integration",
+                "messaging"
+            ],
+            "requires": [
+                "Message Queue",
+                "Routing"
+            ],
+            "reinforces": [
+                "Decoupling",
+                "Scalability"
+            ],
+            "enables": [
+                "Pub/Sub",
+                "Work Distribution"
+            ],
+            "conflicts_with": ["Point-to-Point Coupling"],
+            "tensions_with": ["Operational Dependency"],
+            "violated_by": ["lexicon:direct-point-to-point-calls"],
+            "detected_by": ["direct service calls in async workflows"],
+            "measured_by": ["broker usage coverage"],
+            "refactored_by": ["architecture:message-queue"],
+            "enforced_by": ["architecture policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await fooService.sendToBar(barMessage);\nawait fooService.sendToBaz(bazMessage);",
+                "after": "await broker.publish(\"foo.created\", fooMessage, { durable: true });\nbroker.subscribe(\"foo.created\", { group: \"bar-consumer\", ack: \"manual\" }, handleBar);\nbroker.subscribe(\"foo.created\", { group: \"baz-consumer\", ack: \"manual\" }, handleBaz);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "event-bus",
+            "name": "Event Bus",
+            "definition": "A mechanism that dispatches each emitted event to the handlers registered for its type.",
+            "type": "mechanism",
+            "scope": [
+                "application",
+                "integration"
+            ],
+            "requires": [
+                "Event Contract",
+                "Subscriber Model"
+            ],
+            "reinforces": [
+                "Pub/Sub",
+                "Event-Driven Architecture"
+            ],
+            "enables": ["Decoupled Event Distribution"],
+            "conflicts_with": ["Direct Event Handler Calls"],
+            "tensions_with": ["Event Storm / Traceability"],
+            "violated_by": ["lexicon:hidden-dependency"],
+            "detected_by": ["undocumented subscribers"],
+            "measured_by": ["event dependency visibility"],
+            "refactored_by": ["architecture:registry-pattern"],
+            "enforced_by": ["handler registry validation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "fooEditor.onSave = foo => fooView.refresh(foo);\nfooEditor.onDelete = id => fooView.remove(id);",
+                "after": "eventBus.emit({ type: \"FooSaved\", foo });\neventBus.emit({ type: \"FooDeleted\", fooId: id });\neventBus.on(\"FooSaved\", event => fooView.refresh(event.foo));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "event-stream",
+            "name": "Event Stream",
+            "definition": "A mechanism that keeps events in an ordered, replayable log that consumers read from their own offset.",
+            "type": "mechanism",
+            "scope": [
+                "stream processing",
+                "integration"
+            ],
+            "requires": [
+                "Ordered Log",
+                "Event Schema"
+            ],
+            "reinforces": ["Streaming Architecture"],
+            "enables": [
+                "Replay",
+                "Continuous Processing"
+            ],
+            "conflicts_with": ["Mutable State Only"],
+            "tensions_with": ["Storage Volume"],
+            "violated_by": ["lexicon:non-replayable-processing"],
+            "detected_by": [
+                "missing offsets",
+                "missing event schema"
+            ],
+            "measured_by": [
+                "replay success",
+                "lag"
+            ],
+            "refactored_by": ["lexicon:offset-tracking"],
+            "enforced_by": ["stream contract tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const latest = await fooApi.getCurrentState(fooId);",
+                "after": "const stream = fooEvents.stream(fooId);\nfor await (const event of stream) fooProjection.apply(event);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "event-sourcing",
+            "distinctFrom": [
+                {
+                    "id": "architecture:command-query-responsibility-segregation",
+                    "reason": "Event sourcing stores state as its events, while CQRS separates the command model from the query model whatever the storage."
+                },
+                {
+                    "id": "architecture:append-only-log",
+                    "reason": "Event sourcing rebuilds state by replay, while an append-only log is the storage it replays from."
+                },
+                {
+                    "id": "architecture:domain-events",
+                    "reason": "Event sourcing makes events the source of state, while domain events can be published with state stored some other way."
+                },
+                {
+                    "id": "architecture:saga-pattern",
+                    "reason": "Event sourcing is how state is stored, while a saga is how a distributed transaction is coordinated."
+                }
+            ],
+            "name": "Event Sourcing",
+            "definition": "A design pattern that stores state as the sequence of events that produced it and rebuilds current state by replaying them.",
+            "type": "pattern",
+            "scope": [
+                "domain",
+                "persistence"
+            ],
+            "requires": [
+                "Append-Only Log",
+                "Domain Events"
+            ],
+            "reinforces": [
+                "Auditability",
+                "Temporal Modeling"
+            ],
+            "enables": [
+                "Replay",
+                "Historical Reconstruction"
+            ],
+            "conflicts_with": ["CRUD-Only State Persistence"],
+            "tensions_with": ["Query Complexity"],
+            "violated_by": ["lexicon:crud-only-state-persistence"],
+            "detected_by": ["state changes lacking events"],
+            "measured_by": ["event/state consistency"],
+            "refactored_by": ["lexicon:query-projection"],
+            "enforced_by": ["event append rules"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "type FooRow = { id: FooId; name: string; status: string };\nawait fooTable.update(foo);",
+                "after": "type FooEvent = FooCreated | FooRenamed | FooClosed;\nawait fooEventStore.append(foo.id, foo.uncommittedEvents());\nconst foo = fooEventStore.read(fooId).reduce(applyFooEvent, emptyFoo());",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "command-query-responsibility-segregation",
+            "distinctFrom": [
+                {
+                    "id": "architecture:saga-pattern",
+                    "reason": "CQRS splits the write model from the read model, while a saga sequences local transactions with compensations."
+                }
+            ],
+            "aliases": ["CQRS"],
+            "name": "Command Query Responsibility Segregation (CQRS)",
+            "definition": "A design pattern that separates the model that handles commands from the model that answers queries.",
+            "type": "pattern",
+            "scope": [
+                "application",
+                "data access"
+            ],
+            "requires": ["Command/Query Separation"],
+            "reinforces": [
+                "Scalability",
+                "Event Sourcing"
+            ],
+            "enables": ["Read/Write Model Optimization"],
+            "conflicts_with": ["Unified CRUD Model"],
+            "tensions_with": ["Eventual Consistency"],
+            "violated_by": ["lexicon:unified-crud-model"],
+            "detected_by": ["command/query side-effect violations"],
+            "measured_by": ["read/write separation compliance"],
+            "refactored_by": [],
+            "enforced_by": [
+                "handler conventions",
+                "tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class FooRepository {\n  save(foo: Foo) {}\n  search(query: string): Foo[] { return complexJoin(query); }\n}",
+                "after": "class FooCommandStore { save(foo: Foo) { return fooDb.write(foo); } }\nclass FooQueryStore { search(query: string) { return fooReadModel.search(query); } }\ncommandBus.execute(new SaveFoo(foo));\nqueryBus.execute(new SearchFoos(query));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "domain-events",
+            "name": "Domain Events",
+            "definition": "A design pattern that records each significant change in the domain as an event named in the domain's language.",
+            "type": "pattern",
+            "scope": [
+                "domain",
+                "bounded context"
+            ],
+            "requires": [
+                "Domain Model",
+                "Event Semantics"
+            ],
+            "reinforces": [
+                "DDD",
+                "Event-Driven Architecture"
+            ],
+            "enables": ["Decoupled Domain Reactions"],
+            "conflicts_with": ["Infrastructure Events in Domain"],
+            "tensions_with": ["Event Granularity"],
+            "violated_by": ["lexicon:infrastructure-events-in-domain"],
+            "detected_by": ["CRUD-named domain events"],
+            "measured_by": ["semantic event quality"],
+            "refactored_by": ["lexicon:name-the-concept"],
+            "enforced_by": ["domain review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class Foo {\n  rename(name: string) { this.name = name; }\n}",
+                "after": "class Foo {\n  #events: FooDomainEvent[] = [];\n  rename(name: string) {\n    this.name = name;\n    this.#events.push({ type: \"FooRenamed\", fooId: this.id, name });\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "integration-events",
+            "name": "Integration Events",
+            "definition": "A design pattern that publishes a versioned public event, mapped from an internal domain event, for consumers outside the service.",
+            "type": "pattern",
+            "scope": [
+                "service boundary",
+                "messaging"
+            ],
+            "requires": [
+                "Message Contract",
+                "Versioning"
+            ],
+            "reinforces": ["Interoperability"],
+            "enables": ["Cross-Service Communication"],
+            "conflicts_with": ["Internal Domain Event Leakage"],
+            "tensions_with": ["Duplication with Domain Events"],
+            "violated_by": ["lexicon:internal-domain-event-leakage"],
+            "detected_by": ["internal event schema published externally"],
+            "measured_by": ["boundary event contract coverage"],
+            "refactored_by": [],
+            "enforced_by": ["event schema review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "barService.consume(fooDomainEvent);",
+                "after": "const integrationEvent: FooCreatedV1 = {\n  type: \"com.example.foo-created.v1\",\n  fooId: event.fooId,\n  occurredAt: clock.now().toISOString(),\n};\nintegrationBus.publish(integrationEvent);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "asynchronous-communication",
+            "name": "Asynchronous Communication",
+            "definition": "A design rule that work the caller does not need at once is sent as a message, so the caller does not wait on it.",
+            "type": "principle",
+            "scope": [
+                "service",
+                "system"
+            ],
+            "requires": [
+                "Message Contract",
+                "Retry Safety"
+            ],
+            "reinforces": [
+                "Resilience",
+                "Loose Coupling"
+            ],
+            "enables": ["Event-Driven Architecture"],
+            "conflicts_with": [
+                "Blocking Synchronous Chains",
+                "Synchronous Chain Trap"
+            ],
+            "tensions_with": ["Immediate Consistency"],
+            "violated_by": ["architecture:synchronous-chain-trap"],
+            "detected_by": ["long blocking chains"],
+            "measured_by": ["sync dependency depth"],
+            "refactored_by": [
+                "architecture:message-queue",
+                "lexicon:query-projection"
+            ],
+            "enforced_by": ["architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const bar = await barService.createFromFoo(foo);\nconst baz = await bazService.createFromBar(bar);",
+                "after": "await outbox.append({ type: \"FooCreated\", fooId: foo.id });\nreturn { accepted: true, fooId: foo.id };",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "eventual-consistency",
+            "distinctFrom": [
+                {
+                    "id": "architecture:causal-consistency",
+                    "reason": "Eventual consistency promises only that replicas converge, while causal consistency also promises that no effect is read before its cause."
+                }
+            ],
+            "name": "Eventual Consistency",
+            "definition": "A conceptual representation of a consistency guarantee in which replicas and projections converge once updates stop arriving.",
+            "type": "model",
+            "scope": [
+                "distributed system",
+                "data"
+            ],
+            "requires": [
+                "Idempotency",
+                "Retry",
+                "Reconciliation"
+            ],
+            "reinforces": [
+                "Availability",
+                "Scalability"
+            ],
+            "enables": ["Distributed Autonomy"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "User Expectations",
+                "Strong Immediate Consistency"
+            ],
+            "violated_by": ["lexicon:global-acid-transaction"],
+            "detected_by": ["synchronous compensation hacks"],
+            "measured_by": [
+                "convergence time",
+                "inconsistency window"
+            ],
+            "refactored_by": [
+                "lexicon:query-projection",
+                "lexicon:reconciliation-job",
+                "architecture:saga-pattern"
+            ],
+            "enforced_by": ["consistency tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await fooStore.save(foo);\nawait fooSearch.update(foo);\nawait fooAnalytics.update(foo);",
+                "after": "await fooStore.save(foo);\nfooEvents.emit({ type: \"FooSaved\", foo });\nconst view = await fooSearchView.find(foo.id);\nconst converged = view.version >= foo.version;\nreturn { foo: view, converged };",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "saga-pattern",
+            "name": "Saga Pattern",
+            "aliases": ["Saga"],
+            "definition": "A design pattern that runs a cross-service transaction as a sequence of local steps, each paired with a compensating step.",
+            "type": "pattern",
+            "scope": [
+                "service workflow",
+                "distributed system"
+            ],
+            "requires": [
+                "Compensating Transaction",
+                "Idempotency"
+            ],
+            "reinforces": ["Eventual Consistency"],
+            "enables": ["Long-Running Transactions"],
+            "conflicts_with": ["Global ACID Transaction"],
+            "tensions_with": ["Workflow Complexity"],
+            "violated_by": [
+                "lexicon:global-acid-transaction",
+                "lexicon:hidden-distributed-transaction"
+            ],
+            "detected_by": ["distributed transaction attempts"],
+            "measured_by": ["compensation coverage"],
+            "refactored_by": ["architecture:compensating-transaction"],
+            "enforced_by": ["workflow tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const tx = coordinator.begin();\nawait fooService.prepare(tx, foo);\nawait barService.prepare(tx, bar);\nawait bazService.prepare(tx, baz);\nawait coordinator.commit(tx);",
+                "after": "await saga([\n  { action: () => fooService.create(foo), compensate: id => fooService.cancel(id) },\n  { action: () => barService.create(bar), compensate: id => barService.cancel(id) },\n  { action: () => bazService.create(baz), compensate: id => bazService.cancel(id) },\n]).run();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "outbox-pattern",
+            "name": "Outbox Pattern",
+            "aliases": ["Transactional Outbox"],
+            "definition": "A design pattern that writes an outgoing message in the same local transaction as the state change, and a relay publishes it afterwards.",
+            "type": "pattern",
+            "scope": [
+                "persistence",
+                "messaging"
+            ],
+            "requires": [
+                "Local Transaction",
+                "Message Relay"
+            ],
+            "reinforces": ["Event Reliability"],
+            "enables": ["Atomic State Change + Message Publish"],
+            "conflicts_with": ["Dual Write"],
+            "tensions_with": ["Relay Complexity"],
+            "violated_by": ["architecture:dual-write"],
+            "detected_by": ["dual-write patterns"],
+            "measured_by": [
+                "lost-message rate",
+                "outbox coverage"
+            ],
+            "refactored_by": ["lexicon:message-relay"],
+            "enforced_by": [
+                "persistence rules",
+                "integration tests"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "await fooStore.save(foo);\nawait eventBus.publish({ type: \"FooSaved\", fooId: foo.id });",
+                "after": "await database.transaction(async tx => {\n  await tx.foos.save(foo);\n  await tx.outbox.insert({ id: eventId(), type: \"FooSaved\", fooId: foo.id });\n});\nawait outboxRelay.publishPending();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "compensating-transaction",
+            "name": "Compensating Transaction",
+            "aliases": ["Compensating Action"],
+            "definition": "A mechanism that undoes the business effect of a completed step when a later step of the workflow fails.",
+            "type": "mechanism",
+            "scope": [
+                "workflow",
+                "distributed transaction"
+            ],
+            "requires": ["Reversible/Compensable Step"],
+            "reinforces": [
+                "Saga Pattern",
+                "Resilience"
+            ],
+            "enables": ["Failure Recovery"],
+            "conflicts_with": ["Irreversible Side Effects"],
+            "tensions_with": ["Business Complexity"],
+            "violated_by": ["lexicon:irreversible-side-effects"],
+            "detected_by": ["saga steps without compensation"],
+            "measured_by": ["compensation coverage"],
+            "refactored_by": [],
+            "enforced_by": ["workflow tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await fooService.create(foo);\nawait barService.create(bar);",
+                "after": "const fooId = await fooService.create(foo);\ntry {\n  await barService.create(bar);\n} catch (error) {\n  await fooService.compensateCreate(fooId);\n  throw error;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "append-only-log",
+            "distinctFrom": [
+                {
+                    "id": "architecture:domain-events",
+                    "reason": "An append-only log is the storage shape that never rewrites an entry, while domain events are what gets recorded, named in the domain's language."
+                }
+            ],
+            "name": "Append-Only Log",
+            "definition": "A design pattern that records history as immutable entries added at the end of the log.",
+            "type": "pattern",
+            "scope": [
+                "event store",
+                "audit",
+                "stream"
+            ],
+            "requires": ["Immutable Events"],
+            "reinforces": [
+                "Auditability",
+                "Event Sourcing"
+            ],
+            "enables": [
+                "Replay",
+                "Temporal Queries"
+            ],
+            "conflicts_with": ["In-Place Mutation"],
+            "tensions_with": ["Storage Growth"],
+            "violated_by": ["lexicon:in-place-mutation"],
+            "detected_by": ["mutable event rows"],
+            "measured_by": ["append-only compliance"],
+            "refactored_by": ["lexicon:snapshot-compaction"],
+            "enforced_by": ["database constraints"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "fooState.set(foo.id, foo);\nfooState.delete(foo.id);",
+                "after": "type FooLogEntry = FooCreated | FooUpdated | FooRemoved;\nfooLog.append({ seq: nextSeq(), type: \"FooRemoved\", fooId: foo.id });\nconst state = projectFooLog(fooLog.read());",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "dead-letter-queue",
+            "name": "Dead-Letter Queue",
+            "aliases": ["DLQ"],
+            "definition": "A design pattern that moves a message which keeps failing into a separate queue, where it can be inspected and reprocessed.",
+            "type": "pattern",
+            "scope": [
+                "service",
+                "messaging",
+                "resilience"
+            ],
+            "requires": ["Message Queue"],
+            "reinforces": [
+                "Fault Isolation",
+                "Observability"
+            ],
+            "enables": [
+                "Poison-Message Quarantine",
+                "Reprocessing After Fix"
+            ],
+            "conflicts_with": ["Infinite Redelivery Loop"],
+            "tensions_with": ["Operational Overhead"],
+            "violated_by": ["lexicon:infinite-redelivery-loop"],
+            "detected_by": ["retry storms on a single poison message"],
+            "measured_by": ["redelivery count per failed message"],
+            "refactored_by": [],
+            "enforced_by": ["messaging design review"],
+            "severity": "contextual",
+            "mandatoryFor": "production systems",
+            "exemplar": {
+                "before": "worker.consume(fooQueue, async message => {\n  await processFoo(message);\n});",
+                "after": "worker.consume(fooQueue, async message => {\n  try {\n    await processFoo(message);\n  } catch (error) {\n    if (message.attempts >= 5) return fooDeadLetterQueue.send(message, error);\n    throw error;\n  }\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "idempotent-consumer",
+            "name": "Idempotent Consumer",
+            "definition": "A design pattern in which a consumer records each message it has processed, so a redelivered message has no second effect.",
+            "type": "pattern",
+            "scope": [
+                "service",
+                "messaging",
+                "correctness"
+            ],
+            "requires": ["Deduplication Key"],
+            "reinforces": [
+                "Eventual Consistency",
+                "At-Least-Once Delivery Safety"
+            ],
+            "enables": ["Safe Message Redelivery"],
+            "conflicts_with": ["Duplicate Side Effects"],
+            "tensions_with": ["State Overhead"],
+            "violated_by": ["lexicon:duplicate-side-effects"],
+            "detected_by": ["duplicate effects under at-least-once delivery"],
+            "measured_by": ["duplicate-processing incident rate"],
+            "refactored_by": [],
+            "enforced_by": ["messaging design review"],
+            "severity": "contextual",
+            "mandatoryFor": "distributed systems",
+            "exemplar": {
+                "before": "worker.consume(fooQueue, message => chargeFoo(message.fooId, message.amount));",
+                "after": "worker.consume(fooQueue, async message => {\n  if (await processedMessages.has(message.id)) return;\n  await chargeFoo(message.fooId, message.amount);\n  await processedMessages.add(message.id);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "competing-consumers",
+            "name": "Competing Consumers",
+            "definition": "A design pattern in which several consumers read from one queue, and each message goes to only one of them.",
+            "type": "pattern",
+            "scope": [
+                "service",
+                "messaging",
+                "scalability"
+            ],
+            "requires": ["Message Queue"],
+            "reinforces": [
+                "Horizontal Scaling",
+                "Load Balancing"
+            ],
+            "enables": [
+                "Parallel Message Processing",
+                "Consumer Elasticity"
+            ],
+            "conflicts_with": ["Single Serial Consumer"],
+            "tensions_with": ["Ordering"],
+            "violated_by": ["lexicon:single-serial-consumer"],
+            "detected_by": ["queue depth rising with a single processor"],
+            "measured_by": ["consumer utilization vs backlog growth"],
+            "refactored_by": [],
+            "enforced_by": ["messaging design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "fooWorker.consume(fooQueue, processFoo);",
+                "after": "for (let worker = 0; worker < WORKER_COUNT; worker += 1) {\n  new FooWorker(worker).consume(fooQueue, processFoo);\n}",
+                "lang": "ts"
+            }
+        }
+    ]
+}

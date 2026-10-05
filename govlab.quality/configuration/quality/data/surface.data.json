@@ -1,0 +1,156 @@
+{
+    "surfaces": [
+        {
+            "id": "layout",
+            "ownerByLanguage": {
+                "typescript": "prettier",
+                "python": "ruff-format",
+                "rust": "rustfmt",
+                "go": "gofmt",
+                "cpp": "clang-format"
+            },
+            "fixedOwners": ["go"],
+            "alternatives": {"typescript": ["biome"],
+                "python": ["black"]}
+        },
+        {
+            "id": "import-order",
+            "ownerByLanguage": {"typescript": "eslint",
+                "python": "ruff",
+                "rust": "rustfmt",
+                "go": "gofmt"},
+            "fixedOwners": [],
+            "alternatives": {"typescript": ["prettier"],
+                "go": ["goimports"]}
+        },
+        {
+            "id": "unused-symbols",
+            "ownerByLanguage": {
+                "typescript": "tsc",
+                "python": "ruff",
+                "rust": "rustc",
+                "go": "compiler",
+                "cpp": "clang-tidy"
+            },
+            "fixedOwners": ["go"],
+            "alternatives": {"typescript": ["eslint"]}
+        },
+        {
+            "id": "complexity",
+            "ownerByLanguage": {
+                "typescript": "eslint",
+                "python": "ruff",
+                "rust": "clippy",
+                "go": "golangci-lint",
+                "cpp": "clang-tidy"
+            },
+            "fixedOwners": [],
+            "advisoryOwners": ["rust"],
+            "alternatives": {}
+        }
+    ],
+    "conflicts": [
+        {
+            "kind": "ownership-overlap",
+            "surface": "layout",
+            "tools": [
+                "prettier",
+                "eslint"
+            ],
+            "lang": "typescript",
+            "resolution": "prettier owns layout; disable the eslint stylistic rules (eslint-config-prettier)"
+        },
+        {
+            "kind": "ownership-overlap",
+            "surface": "layout",
+            "tools": [
+                "prettier",
+                "biome"
+            ],
+            "lang": "typescript",
+            "resolution": "both are formatters; pick one owner"
+        },
+        {
+            "kind": "ownership-overlap",
+            "surface": "layout",
+            "tools": [
+                "black",
+                "ruff-format"
+            ],
+            "lang": "python",
+            "resolution": "both format; pick one owner (ruff is a black drop-in)"
+        },
+        {
+            "kind": "ownership-overlap",
+            "surface": "import-order",
+            "tools": [
+                "isort",
+                "ruff"
+            ],
+            "lang": "python",
+            "resolution": "both sort imports; pick one owner"
+        },
+        {
+            "kind": "ownership-overlap",
+            "surface": "unused-symbols",
+            "tools": [
+                "tsc",
+                "eslint"
+            ],
+            "lang": "typescript",
+            "resolution": "both report unused; pick one owner"
+        },
+        {
+            "kind": "unsatisfiable-on-fixed",
+            "canonicalId": "indent-style",
+            "value": "space",
+            "tool": "gofmt",
+            "lang": "go",
+            "resolution": "gofmt mandates tabs; canonical space is unsatisfiable"
+        },
+        {
+            "kind": "unsatisfiable-on-fixed",
+            "canonicalId": "indent-size",
+            "value": 2,
+            "tool": "black",
+            "lang": "python",
+            "resolution": "black fixes indent at 4 spaces"
+        },
+        {
+            "kind": "unsatisfiable-on-fixed",
+            "canonicalId": "quote-style",
+            "value": "single",
+            "tool": "black",
+            "lang": "python",
+            "resolution": "black forces double; skip-string-normalization only preserves existing"
+        },
+        {
+            "kind": "unsatisfiable-on-fixed",
+            "canonicalId": "line-length",
+            "value": "any",
+            "tool": "gofmt",
+            "lang": "go",
+            "resolution": "gofmt has no width knob"
+        },
+        {
+            "kind": "known-bad-pair",
+            "tools": [
+                "prettier",
+                "eslint"
+            ],
+            "surface": "layout",
+            "lang": "typescript",
+            "resolution": "prettier printWidth (soft) at the same number as a hard max-len linter: set the linter above the soft target or disable it (ownership)"
+        },
+        {
+            "kind": "known-bad-pair",
+            "tools": [
+                "isort",
+                "black"
+            ],
+            "surface": "import-order",
+            "lang": "python",
+            "resolution": "isort profile = black reconciles import wrapping"
+        }
+    ]
+}

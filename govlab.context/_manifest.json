@@ -1,0 +1,136 @@
+{
+    "label": "GovLab Context",
+    "summary": "The queryable-ontology framework: ontology collections over one shared kernel of loader, slug, id-index, query and validate primitives. `arch` is the architecture-principle relationship graph, `algo` the contract-based algorithm catalog, `pag` the Pattern Abstract Grammar, `lex` the lexicon of terms, and `reason` the reasoning meta-ontology every algorithm grammar grounds itself in. `createGovlabContext()` composes them with the cross-ontology joins wired and a self-validating resolution gate, so the model's composition layer and governance retrieve architecture, design, grammar, vocabulary and reasoning context from one port.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "ai",
+            "sub": "prompt-engineering"}
+    ],
+    "capabilities": [
+        "shared-ontology-kernel",
+        "context-retrieval-orchestrator",
+        "principle-ontology",
+        "anti-pattern-catalog",
+        "relationship-graph",
+        "refactor-recipes",
+        "governance-metadata",
+        "ontology-validation",
+        "algorithm-catalog",
+        "flow-graph",
+        "dependency-closure",
+        "concept-clustering",
+        "force-classification",
+        "cross-ontology-join",
+        "keyword-ontology",
+        "document-type-contracts",
+        "structural-parser",
+        "well-formedness-validation",
+        "meta-templates",
+        "context-derivation",
+        "term-lexicon",
+        "kind-taxonomy",
+        "concern-taxonomy",
+        "placement-naming-grammar",
+        "resolution-closure-gate",
+        "kind-consistency-gate",
+        "composed-relationship-graph",
+        "principle-architecture-layers",
+        "tension-resolution-join",
+        "reasoning-ontology",
+        "derivation-loop",
+        "pattern-reasoning-space",
+        "grammar-gate-coherence",
+        "test-surface-catalog",
+        "coverage-derivation"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "type-safety",
+        "immutability",
+        "serialization",
+        "separation-of-concerns"
+    ],
+    "governance": {
+        "principles": [
+            "self-describing-architecture",
+            "manifest-based-design",
+            "metadata-driven-design",
+            "convention-over-configuration"
+        ]
+    },
+    "visibility": {"private": false,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "docs": {
+        "overview": "One queryable-ontology framework spanning knowledge collections over a shared kernel.\n\nThe kernel under `core/` holds the concerns every ontology repeats:\n\n- a walk-free loader over each collection's `configuration/<collection>/data/` folder with a `{ category, records }` fold (`core/loaders/ontology.loader.ts`)\n- the JSON coercion primitives (`core/normalizers/field.normalizer.ts`) and one `slugify`\n- a generic `createOntology<R>` engine, and the `BaseOntology<R, F>` base class a record collection extends for its retrieval surface\n- a `defineOntologyFace` self-registration contract with a dependency-ordered `foldFaces` runner\n- the canonical force vocabulary, and the closed vocabularies each collection declares\n\nEach collection is data plus a thin specialization that registers itself:\n\n- `arch` holds principle records with a typed relationship graph (`requires`, `reinforces`, `enables`, `conflicts_with`, `tensions_with`) and `resolve` and refactor recipes.\n- `algo` holds contract-based algorithms with intent, invariant, flow, BNF, `composes` and `force`. They resolve by closure, cluster and force, and join to arch by `principleRef`.\n- `pag` holds the Pattern Abstract Grammar: the keyword ontology, the document-type contracts, a regex-free structural parser, a well-formedness validator and the meta-templates.\n- `lex` holds the lexicon, whose `Term` records `{ id, name, kind, definition, aliases }` give every arch relationship edge a resolvable, kind-typed, defined home.\n- `reason` is a non-record reasoning meta-ontology: the derivation-loop procedure with its mandatory teleology, verification and termination gates, the domain-agnostic pattern reasoning-space, and a governed test-surface sub-collection under `configuration/reason/data/`. Every algorithm grammar grounds its gates in a reason axis through `grounds`.\n\nThe kind vocabulary has one source of truth in `configuration/constants/kind.constants.ts`. `KIND_TAXONOMY` is the ordered decision procedure with a per-kind discriminator and definition signatures, and `RELATION_RANGES` and the gate derive from it.\n\n`createGovlabContext()` folds the registered collections, wires the cross-ontology joins, exposes `kindTaxonomy()`, and adds a self-validating resolution gate (`validateResolution()` and `runtime/entrypoints/ontology.entrypoint.ts`). The gate checks that every arch edge resolves to a Principle or Term, the polarity law (anti-patterns only through `conflicts_with`), kind membership, kind↔definition-signature consistency, and closure across every collection.\n\nThe context also owns the composition-root-only layer and tension join (`core/factories/layer.factory.ts` over `core/resolvers/layer.resolver.ts`). The execution-model layers of the principle architecture reuse the algo cluster ids as nodes. With a universal category→layer membership map, they turn every arch `tensions_with` edge into a resolved `TensionResolution`. The resolution is `scope-separation` only between two principles in different layers, `irreducible-tradeoff` otherwise, or a hand-authored override. The `unresolvedTensions` and `deadResolutionSeeds` axes gate it, and `layerOf`, `layers`, `resolveTension` and `resolutions` query it. The package root exports each collection's factory.",
+        "whenToUse": [
+            "Deriving compositional context for the model. Retrieve the principles, algorithms and grammar relevant to a force, concern or document type, and inject them as structured context instead of prose.",
+            "Reasoning at compose or refactor time over the principle graph: what a change touches, what it conflicts with, and how a violation is refactored.",
+            "Walking an algorithm's composition closure or clustering the catalog by force, and joining the algorithm layer to the principle graph by `principleRef`.",
+            "Composing or linting a PAG document (agent, workflow, checklist) with `contextFor(type)`, `parse`, `validate` and `resolvePagTemplate`.",
+            "Resolving a concept to its definition, kind and the principles that reference it through the `lexicon` collection, and classifying a concept by the `kindTaxonomy()` decision procedure.",
+            "Composing a cross-face relationship graph from a seed principle, term or algorithm, which yields the node plus its resolved neighborhood across arch, algo, pag, lex and quality, through the consumer's `compose` surface.",
+            "Validating the ontology. The self-validating resolution gate proves every edge resolves (Principle ∪ Term), the polarity law, kind membership, and kind↔definition consistency.",
+            "Reasoning about how a codebase names and places its files. The `Taxonomy / Classification / Naming` arch category, its lexicon terms and the `taxonomy` algo grammar hold the concern-taxonomy standard as queryable ontology instead of prose. The standard covers the closed vocabulary, positional slot resolution, concern and folder correspondence, the depth cap and its sideways-overflow slots, the classification law, and the manual identity-migration reshape.",
+            "Resolving an apparent principle conflict. `resolveTension(a, b)` returns how a `tensions_with` pair resolves, with the layer each occupies and whether the fix separates scopes or accepts an intrinsic tradeoff. `layerOf` and `layers` place any principle or concept in the execution-model layer topology."
+        ],
+        "whenNotToUse": [
+            "As a linter or code scanner. It holds the knowledge the quality tooling (`@govlab/quality`) reasons from, not the tooling.",
+            "For the ecosystem-knob quality-gate mapping from canonical linter concepts to per-tool knobs, which is `@govlab/quality`.",
+            "As a compilable grammar or a PAG interpreter. The BNF productions are descriptive contracts, `parse` is a shallow structural parser, and nothing here executes PAG."
+        ],
+        "quickStart": [
+            {
+                "intent": "Compose the whole retrieval surface with the cross-ontology joins wired",
+                "lang": "ts",
+                "code": "import { createGovlabContext } from \"@govlab/context\";\nconst ctx = createGovlabContext();\nctx.arch.resolve([\"single-responsibility\"]);\nctx.algo.joinConcerns();\nctx.pag.contextFor(\"AGENT\");"
+            },
+            {
+                "intent": "Build one collection on its own",
+                "lang": "ts",
+                "code": "import { createArchRelations } from \"@govlab/context\";\nconst arch = createArchRelations();\narch.validateOntology();"
+            },
+            {
+                "intent": "Resolve the lexicon, classify by the kind taxonomy, and prove the ontology validates itself",
+                "lang": "ts",
+                "code": "import { createGovlabContext } from \"@govlab/context\";\nconst ctx = createGovlabContext();\nctx.lex.resolve(\"<concept-name>\");\nctx.kindTaxonomy();\nctx.validateResolution();"
+            }
+        ],
+        "configuration": "Every collection and the orchestrator accept an options object with injected cross-cutting concerns: a `logger` defaulting to a no-op and, at the collection level, the cross-ontology resolvers. `createGovlabContext(options)` supplies those resolvers internally, so a consumer gets the joins without wiring them. They resolve the arch principles for a force, the arch principle for an algo `principleRef`, and the algo `pag`-domain contracts for a pag document type. The canonical force and concern vocabulary the collections validate against lives in `configuration/constants/vocabulary.constants.ts`. The resolution entry point takes `--debug` to write each collection's load notes to stderr.",
+        "disposal": [
+            "Remove `govlab.root/govlab.context/`.",
+            "Drop `govlab.root/govlab.*` from the root `package.json` `workspaces` if no lab package remains.",
+            "Remove every import of `@govlab/context` in consumers, which are the `@govlab/docs` manifest plugins, the `@govlab/quality` canon gate, and the build and content members.",
+            "Repoint the data-dir keys of the canon gate `@govlab/quality/runtime/entrypoints/canon.entrypoint.ts`, then regenerate the catalog (`npm run catalog:regenerate`) and the documents (`npm run docs:generate`)."
+        ],
+        "install": "A private workspace package resolved through the root `package.json` `workspaces` glob `govlab.root/govlab.*`. A consumer declares it as a dependency and imports the bare specifier `@govlab/context`. It is authored in TypeScript and resolved directly from its `.ts` barrel under Node, with no build step between a consumer and the source.",
+        "aiContext": [
+            "The framework is one composed port. `createGovlabContext()` returns the collections (`arch`, `algo`, `pag`, `lex`, `reason`) with the cross-ontology joins wired, plus `kindTaxonomy()` and the self-validating `validateResolution()` gate. Each collection's factory (`createArchRelations`, `createAlgoGrammar`, `createPagGrammar`, `createLexicon`, `createReason`) is exported from the package root.",
+            "The `reasoning` collection is the reasoning meta-ontology, the root truth every algorithm grammar is an instance of. It is a non-record collection over `configuration/reason/data/`, shaped like `pag`. It holds the derivation loop (`orient → intent → see → derive → project → act → constrain → verify → commit → terminate`) with its mandatory-always gates (`reasoning:tel-priority`, `reasoning:ver-evidence`, `reasoning:ter-stop`), the typed axis nodes, and the domain-agnostic pattern reasoning-space. The reasoning-space holds dimensions, lenses, modes and representations, one canonical set the loop nodes reference by `concept`. `validateResolution()` validates its cross-face `edges` into algo and pag and every algo record's `grounds` reference, so a grammar gate references the canonical loop gate instead of defining it again. Reason ids sit outside canon reconciliation, like `pag`, and carry no kind `type`.",
+            "The `reasoning` collection carries a governed test-surface sub-collection, the agnostic model of what a system can be wrong about. `reason.testSurfaces()`, `techniques()` and `invariants()` expose the records under `configuration/reason/data/`. Each `TestSurface` is a `dimension`·`lens` cell mapped to an `invariant` (the assertion) that `techniques[]` obtain. Its `predicate` is grounded into `ver-ground-truth` and its `evidence` into `ver-evidence`. Its `verdictDomain` is closed to `pass`, `fail` and `unknown`, where `unknown` is an empty evidence set, the coverage-gap state.",
+            "`validateResolution()` resolves every test-surface reference and closed value: the dimension, lens, techniques, invariant, predicate and evidence groundings and technique mode, plus the verdict, source and predicate-type vocabularies. It also gates cardinality: no surface with zero techniques, an empty verdict domain, a blank predicate, or a colliding `(dimension,lens)` cell. `reason.uncoveredCells()` derives the grid complement (dimensions × lenses − covered) instead of storing it.",
+            "The coverage-derivation methodology that walks the catalog is the `algo` `test-coverage` domain, a typed derivation-loop instance grounding `reasoning:derivation-loop`. A consumer module declares `coversSurfaces: string[]` in its `_manifest.json`, and the `covers-surfaces` docs plugin validates it against `reason.testSurfaces()`.",
+            "The `lexicon` collection is the declarative 'what-is' layer that completes the ontology. A `Term { id=slugify(name), name, kind, definition, aliases }` gives every arch relationship-edge target a resolvable, kind-typed, defined home, so the relationship graph is traversable with no dangling edges. The canonical kinds are governed by `KIND_TAXONOMY` in `configuration/constants/kind.constants.ts`, an ordered first-match decision procedure with a per-kind discriminator and definition signatures. `RELATION_RANGES` in `configuration/constants/architecture.constants.ts`, which holds the polarity law, and the gate derive their kind set from it.",
+            "The self-validating gate (`validateResolution()` and `runtime/entrypoints/ontology.entrypoint.ts`, wired into verify) fails on any unresolved edge, any polarity violation, any non-canonical kind, and any definition that opens with a foreign kind's signature. A polarity violation is an anti-pattern referenced by a relation other than `conflicts_with`.",
+            "The shared kernel under `core/` is the single implementation of the concerns every ontology repeats. It holds JSON coercion (`core/normalizers/field.normalizer.ts`: `asString`, `asStringArray`, `asExemplar`, and `asClosed` for closed vocabularies), a walk-free loader that reads each collection's data folder through its paths key, and one `slugify`. It also holds the `createOntology<R>` engine (id-index, `query`, the duplicate-id and dangling-edge validate primitives, `deepFreeze`) and the `defineOntologyFace` contract with its `foldFaces` runner.",
+            "A record collection (arch, algo, lex) extends `BaseOntology`, which owns the `get`, `all`, `ids` and `query` surface and runs the collection's injected `matches` predicate. A non-record collection with no single `idOf` (pag) implements the port directly. Collections supply their own record schema, `idOf` and `edgesOf`, and their own `validateOntology` output shape, so the shapes are not unified. Arch canonicalizes edge targets, algo scans `composes` raw, and pag reports `danglingSlots`.",
+            "Concern taxonomy, meaning how a codebase names and places its files, is a first-class ontology domain, not a convention living only in prose. It spans the arch, lex and algo collections on one category slug (`taxonomy-classification-naming`).",
+            "`configuration/principle/data/taxonomy.data.json` holds the taxonomy principles: closed vocabulary, positional slot resolution, concern and folder correspondence, declared jurisdiction, bounded nesting depth with sideways overflow, one concern per file, the narrowest concern with the domain-ward layer tie-break, agnostic-first vocabulary, guided vocabulary refusal, the derived naming registry, and manual identity migration.",
+            "`configuration/lexicon/data/` holds the slot and role vocabulary and the anti-patterns those principles conflict with: vocabulary inflation, ignore-list silencing, the depth-relief container, downward nesting, the saturated role tag, the concern-swallowing compound, automated reshape, unguided refusal and borrowed synonymy.",
+            "`configuration/algorithm/data/taxonomy.data.json` is the typed derivation-loop instance that operationalizes the taxonomy principles, with its kernel grounding `reasoning:derivation-loop` and its data file declaring the `process` tier. Its stages are orient→jurisdiction, intent→reshape-risk-priority grounding `tel-priority`, see→path-role-walk, derive→concern-classification, project→name-projection, act→container-reshape, constrain→vocabulary-admission-gate, verify→discovery-verification grounding `ver-evidence`, commit→ledger, and terminate→completion grounding `ter-stop`.",
+            "`configuration/layer/data/index.data.json` maps the taxonomy category to `structural-core`, so `layerOf` and `resolveTension` place these principles in the same layer space as every other. The project's own closed word-lists and jurisdiction declarations stay out of the ontology as per-project registry data. The ontology carries the agnostic standard those declarations instantiate, so its exemplars use placeholder subjects and only declared concern words.",
+            "Coordination between parties that share a written surface is a second ontology domain on one category slug (`coordination-surfaces`) across the arch and lex collections. The algo `coordination` grammar sits at the `process` tier. The arch records hold the classes a coordination model states: derived record state, write barriers, independent lifetime axes, write scope and read population, read-time joins, period-decided disposition, and the anti-patterns they conflict with. The lex terms hold the surface, reader, lifetime, invocation, copy and allocation vocabulary. `configuration/layer/data/index.data.json` maps the category to `execution-core`.",
+            "Every record carries, or inherits from its category or data file, a `check` facet stating how a codebase is checked against the concept it names. Each answer is a value or `none: <reason>`. It answers `population` (the set the check runs over), `freshness` (what makes a verdict stale), `refusal` (where the check blocks before a write) and `observation` (what locates a violation at runtime). It also answers `evidence`, the sign of what the check has shown (`fires`, `fires-and-accepts`, `contradicted` or `none`) followed by what shows it, and `authority`, the side that is the source when the check and its subject disagree. The check itself comes from the field that already names it: `enforced_by` on an architecture record, the architecture edges that name a lexicon term (with any `enforcedBy` the term adds), and `check.by` in the collections that have no such field.",
+            "The lexicon's check facet is one collection declaration, `configuration/lexicon/data/check.data.json`. `checkGaps()` measures the coverage per collection and per question, and `checkedRecords()` returns each record with its merged facet. `validateResolution()` reports every record that lacks a check, every check or dependency reference that resolves to no record, every data key a loader never reads, and every required field left without a value.",
+            "Canonical data stays JSON under each `configuration/<collection>/data/`, a portable substrate that tooling in other languages reads directly. The TypeScript is the typed binding, never the source of truth. Ids are `slugify(name)`, derived and stable keys, and the id space is namespaced per face.",
+            "The cross-ontology joins are identity-based. Algo `force` and arch `scope` validate against the kernel's canonical vocabulary, algo→arch resolves by `principleRef`, and algo's `pag`-domain document types bind to pag's `document-types` records. `createGovlabContext` supplies these resolvers, so the joins are live.",
+            "The layer and tension join (`core/factories/layer.factory.ts`) is a composition-root concern, not a per-record collection. A tension resolution is a 2-ary hyperedge (two concepts and a rule), so it lives beside `crossValidate` and `joinConcerns` in `createGovlabContext`. Layer nodes reuse the algo cluster ids (`computation-core`, `structural-core`, the cross-cutting `*-core`), and `configuration/layer/data/graph.data.json` only references them, never overloading the clusters' `composes` or `force`.",
+            "`configuration/layer/data/index.data.json` maps every arch and lex category slug to a layer, with per-term overrides for the split `quality-attributes` terms. `layerOf` therefore places both a principle, through its category, and a lex quality-attribute term in the same layer space.",
+            "`resolveTension(a, b)` consults the overrides in `configuration/layer/data/tension.data.json` first, keyed by canonical id so an alias like `dry` matches the edge `duplicate-code`. It then derives `scope-separation` only when both endpoints are genuine principles in different layers, and `irreducible-tradeoff` otherwise, because a principle cannot be scope-separated from a quality, metric or cost it competes with, nor from a same-layer peer. The `unresolvedTensions` axis checks that every `tensions_with` edge resolves, and `deadResolutionSeeds` checks that every override matches a live edge. Query through `layer:<id>` and `tension:<a>-vs-<b>` refs.",
+            "The pag collection names no host's tool surface. Its `semantic_operation` category is the vocabulary an adapter binding maps a host's tools onto, and every keyword outside `contextual` grounds into a reason record. The `configuration/grammar/data/` grammar content is PAG, the Pattern Abstract Grammar created by Bane's Lab (`https://banes-lab.com/pag`), and the module stays `private` for publication."
+        ]
+    }
+}

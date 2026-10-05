@@ -1,0 +1,279 @@
+{
+    "category": "behavioral-patterns",
+    "records": [
+        {
+            "name": "Direct Callback Coupling",
+            "kind": "anti-pattern",
+            "definition": "Wiring a source to notify specific recipients by direct call, coupling it to each one."
+        },
+        {
+            "name": "Direct Method Invocation",
+            "kind": "anti-pattern",
+            "definition": "Invoking an operation by direct method call, so it cannot be queued, logged, or undone."
+        },
+        {
+            "name": "Duplicated Workflow",
+            "kind": "anti-pattern",
+            "definition": "Repeating the same overall algorithm in many places, each copy re-implementing the shared steps."
+        },
+        {
+            "name": "Exposed Internal Representation",
+            "kind": "anti-pattern",
+            "definition": "Forcing clients to traverse a collection through its internal structure, coupling them to that structure."
+        },
+        {
+            "name": "External State Reach-In",
+            "kind": "anti-pattern",
+            "definition": "Reading or writing an object's internal state from outside to snapshot it, breaking its encapsulation."
+        },
+        {
+            "name": "Flat State Explosion",
+            "kind": "anti-pattern",
+            "definition": "Enumerating every combination of conditions as a separate flat state, so the state count explodes."
+        },
+        {
+            "name": "Large Conditional Logic",
+            "kind": "anti-pattern",
+            "definition": "Selecting behavior with a large branching conditional instead of pluggable strategy objects."
+        },
+        {
+            "name": "Mesh Dependencies",
+            "kind": "anti-pattern",
+            "definition": "Letting every object refer directly to every other, forming a dense mesh of point-to-point dependencies."
+        },
+        {
+            "name": "Monolithic Handler",
+            "kind": "anti-pattern",
+            "definition": "Handling every case in one large handler instead of a chain of focused, single-purpose handlers."
+        },
+        {
+            "name": "Centralized Interaction Logic",
+            "kind": "capability",
+            "definition": "The ability to concentrate how a set of objects interact within one mediating component."
+        },
+        {
+            "name": "Controlled Variation",
+            "kind": "capability",
+            "definition": "The ability to let subclasses vary only the designated steps of a fixed algorithm."
+        },
+        {
+            "name": "Decoupled Notification",
+            "kind": "capability",
+            "definition": "The ability to notify interested parties of a change without the source knowing who they are."
+        },
+        {
+            "name": "Deferred Execution",
+            "kind": "capability",
+            "definition": "The ability to capture a request as an object so it can be run later, held in a queue, or logged.",
+            "aliases": ["Request Queuing"]
+        },
+        {
+            "name": "Exhaustive State Reasoning",
+            "kind": "capability",
+            "definition": "The ability to enumerate and reason about every state a system can occupy and every transition between them."
+        },
+        {
+            "name": "Framework Reuse",
+            "kind": "capability",
+            "definition": "The ability to reuse a fixed algorithm skeleton across many concrete implementations."
+        },
+        {
+            "name": "Guarded Transitions",
+            "kind": "capability",
+            "definition": "The ability to permit a state transition only when a specified condition holds."
+        },
+        {
+            "name": "Hierarchical States",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:guarded-transitions",
+                    "reason": "Hierarchical states nest states to share behavior, while guarded transitions condition a move between states."
+                },
+                {
+                    "id": "lexicon:parallel-regions",
+                    "reason": "Hierarchical states nest one state inside another, while parallel regions run independent states at the same time."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to nest states so shared behavior is defined once on an enclosing state."
+        },
+        {
+            "name": "Lazy Traversal",
+            "kind": "capability",
+            "definition": "The ability to produce a collection's elements one at a time on demand rather than all at once."
+        },
+        {
+            "name": "Null-Check Elimination",
+            "kind": "capability",
+            "definition": "The ability to remove scattered null checks by substituting a benign do-nothing object."
+        },
+        {
+            "name": "Operation Extension Without Element Change",
+            "kind": "capability",
+            "definition": "The ability to add new operations over a structure without modifying its element classes."
+        },
+        {
+            "name": "Ordered Fallthrough",
+            "kind": "capability",
+            "definition": "The ability to offer a request to handlers in sequence until one of them accepts it."
+        },
+        {
+            "name": "Parallel Regions",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:guarded-transitions",
+                    "reason": "Parallel regions are independent states active at once, while guarded transitions condition one move between states."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to model concurrently-active, independent regions of state within one machine."
+        },
+        {
+            "name": "Pluggable Handling",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:ordered-fallthrough",
+                    "reason": "Pluggable handling adds or reorders handlers without changing the others, while ordered fallthrough offers a request to each handler in turn until one accepts."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to add or reorder request handlers without changing the ones already in the chain."
+        },
+        {
+            "name": "Runtime Behavior Selection",
+            "kind": "capability",
+            "definition": "The ability to choose among interchangeable algorithms at runtime."
+        },
+        {
+            "name": "Snapshot/Restore",
+            "kind": "capability",
+            "definition": "The ability to capture an object's state and later restore it to that captured point."
+        },
+        {
+            "name": "State-Local Behavior",
+            "kind": "capability",
+            "definition": "The ability to attach behavior to each state so an object acts according to its current state."
+        },
+        {
+            "name": "Structure-Agnostic Iteration",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:lazy-traversal",
+                    "reason": "Structure-agnostic iteration hides how a collection is organized, while lazy traversal produces its elements only on demand."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to traverse a collection without depending on how it is internally organized."
+        },
+        {
+            "name": "Fail-Safe Defaults",
+            "kind": "principle",
+            "definition": "Defaulting to safe, benign behavior when a value or handler is absent rather than failing or branching."
+        },
+        {
+            "name": "Explicit State Model",
+            "kind": "constraint",
+            "definition": "The requirement that an object's states and their transitions be modeled explicitly."
+        },
+        {
+            "name": "Explicit State Set",
+            "kind": "constraint",
+            "definition": "The requirement that the complete set of possible states be defined up front."
+        },
+        {
+            "name": "Interchangeable Algorithms",
+            "kind": "constraint",
+            "definition": "The requirement that competing algorithms share one interface so they can be swapped freely."
+        },
+        {
+            "name": "Shared Behavioral Interface",
+            "kind": "constraint",
+            "definition": "The requirement that the real object and its null stand-in implement one common interface."
+        },
+        {
+            "name": "Stable Algorithm Skeleton",
+            "kind": "constraint",
+            "definition": "The requirement that the overall algorithm's structure stay fixed while specific steps vary."
+        },
+        {
+            "name": "Stable Element Hierarchy",
+            "kind": "constraint",
+            "definition": "The requirement that the set of element types stay fixed so new operations can be added over them."
+        },
+        {
+            "name": "Subject/Subscriber Contract",
+            "kind": "constraint",
+            "definition": "The requirement of an agreed interface by which subjects notify and subscribers receive updates."
+        },
+        {
+            "name": "Uniform Handler Interface",
+            "kind": "constraint",
+            "definition": "The requirement that every handler in a chain share one interface so requests pass along uniformly."
+        },
+        {
+            "name": "Uniform Traversal Interface",
+            "kind": "constraint",
+            "definition": "The requirement that collections expose one common interface for stepping through their elements."
+        },
+        {
+            "name": "Class Count",
+            "kind": "quality-attribute",
+            "definition": "The degree to which extracting each algorithm into its own class raises the total number of classes."
+        },
+        {
+            "name": "Class Proliferation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which modeling each state as its own class multiplies the number of classes."
+        },
+        {
+            "name": "Coordination Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of complexity in how objects must coordinate, which motivates a mediator."
+        },
+        {
+            "name": "Element Stability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which adding new operations stays easy only while the set of element types stays fixed."
+        },
+        {
+            "name": "Inheritance Coupling",
+            "kind": "quality-attribute",
+            "definition": "The degree to which basing a template method on subclassing binds subclasses tightly to the base class."
+        },
+        {
+            "name": "Mediator God Object",
+            "kind": "quality-attribute",
+            "definition": "The degree to which concentrating interaction logic in a mediator risks growing it into an overloaded object."
+        },
+        {
+            "name": "Memory Footprint",
+            "kind": "quality-attribute",
+            "definition": "The degree of memory consumed by retaining state snapshots for later restoration."
+        },
+        {
+            "name": "Silent No-Op Risk",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a do-nothing stand-in can hide an error."
+        },
+        {
+            "name": "State Explosion",
+            "kind": "quality-attribute",
+            "definition": "The degree to which the number of explicit states grows unmanageably as conditions multiply."
+        },
+        {
+            "name": "Encode State Machine",
+            "kind": "technique",
+            "definition": "A technique for declaring the states and legal transitions of a lifecycle, so an operation called in the wrong state is refused."
+        },
+        {
+            "name": "Make Order Explicit",
+            "kind": "technique",
+            "definition": "A technique for expressing a required call order in types or a state machine instead of in documentation."
+        },
+        {
+            "name": "Scattered Null Guards",
+            "kind": "anti-pattern",
+            "definition": "A defect in which every call site repeats a null check before the same operation."
+        }
+    ]
+}

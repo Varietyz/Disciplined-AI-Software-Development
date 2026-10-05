@@ -43,7 +43,7 @@ Compose an artifact from facts using a shape `COMPOSE_ARTIFACT <artifact> FROM <
 Validate an artifact against a schema `VALIDATE_ARTIFACT <artifact> AGAINST <schema>`
 
 `PERSIST_ARTIFACT`
-Persist an artifact to a destination · the adapter maps WRITE and EDIT to it; a refusal is named before it `PERSIST_ARTIFACT <artifact> TO <destination>`
+Persist an artifact to a destination · the adapter maps WRITE and EDIT to it, and a refusal is named before it `PERSIST_ARTIFACT <artifact> TO <destination>`
 
 `EXECUTE_TOOL`
 Execute a command with a bound · the adapter maps BASH to it `EXECUTE_TOOL <command> WITH timeout: <bound> INTO <result>`
@@ -200,9 +200,6 @@ Metadata block `%% META %%:`
 `USE`
 Template usage `USE TEMPLATE name`
 
-`TEMPLATE`
-Template reference `USE TEMPLATE validation`
-
 `CUE`
 The one-line reminder a reader executes at a node `@cue: "<reminder>"`
 
@@ -215,14 +212,17 @@ What a node decides, in one sentence `@purpose: "<what this node decides>"`
 `AXIS_QUESTION`
 The question a node's axis asks `@axis_question: "<the question>"`
 
-`PRIORITY`
-The authority tiers · which source grounds which, highest first `priority: <governing document> > <ontology> > <template> > <task>`
-
 `TRUST`
 What is trusted as evidence and what stays a claim `trust: tool_output = TRUSTED, prior_knowledge = UNTRUSTED`
 
 `JURISDICTION`
 What the document may touch, and what is declared outside it `jurisdiction: <in scope> | external: <declared outside>`
+
+`PRIORITY`
+The authority tiers · which source grounds which, highest first `priority: <governing document> > <ontology> > <template> > <task>`
+
+`TEMPLATE`
+Template reference `USE TEMPLATE validation`
 
 ### Action keywords
 
@@ -524,7 +524,7 @@ Absolute prohibition `FORBIDDEN: direct DB`
 
 ### Coordination keywords
 
-A [shared surface](ORCHESTRATION.md#shared-surfaces) makes this structure explicit. It consists of the surface, its records, each with exactly one writer, the addressed items inside them, the typed edges between records, the states derived from those edges, the reader classes, and the one operation that posts and waits. The waiting, locking and retry tokens describe the same model from one party's turn.
+A [shared surface](ORCHESTRATION.md#shared-surfaces) makes this structure explicit. It consists of the surface, its records, each with exactly one writer, the addressed items inside them, the typed edges between records, the states derived from those edges, the reader classes, and the one operation that posts and waits. The waiting, locking and [retry](../ontology/PRINCIPLES.md#architecture-retry-pattern) tokens describe the same model from one party's turn.
 
 `AWAIT`
 Async wait · waiting has a command, a turn never ends to wait `AWAIT op INTO result`
@@ -578,13 +578,10 @@ Edge · this record replaces the target `SUPERSEDES <record>`
 Derived state · an unresolved outbound edge, never written `state: OPEN`
 
 `ABSORBED`
-Derived state · the satisfying artifact exists; extract, then delete `state: ABSORBED`
+Derived state · the satisfying artifact exists, so it is extracted, then deleted `state: ABSORBED`
 
 `READER`
 A party's class, derived from what it received · participant or bounded `READER <party> AS participant | bounded`
-
-`WAIT`
-Post and wait as one operation · reports the diff since this reader last looked `WAIT ON <surface> AS <reader> INTO <diff>`
 
 `BARRIER`
 Proceed with an exclusive write only once every peer is parked `BARRIER ON <surface>`
@@ -592,9 +589,12 @@ Proceed with an exclusive write only once every peer is parked `BARRIER ON <surf
 `SWAP`
 Compare-and-swap on the writer's own span · refuses an overlap with its diff `SWAP <span> AGAINST <read>`
 
+`WAIT`
+Post and wait as one operation · reports the diff since this reader last looked `WAIT ON <surface> AS <reader> INTO <diff>`
+
 ### State machine keywords
 
-A state machine makes a lifetime explicit, meaning the states a thing can be in and the transitions that are legal between them. In a coordinated document a state is derived from the graph and never written, so the machine declares what may happen, not what has.
+A [state machine](../ontology/PRINCIPLES.md#architecture-finite-state-machine) makes a lifetime explicit, meaning the states a thing can be in and the transitions that are legal between them. In a coordinated document a state is derived from the graph and never written, so the machine declares what may happen, not what has.
 
 `STATE_MACHINE`
 Machine declaration · makes a lifetime or a derived-state set explicit `STATE_MACHINE workflow:`
@@ -625,10 +625,7 @@ Exit action `EXIT: cleanup`
 A [dependency graph](../ontology/PRINCIPLES.md#architecture-dependency-graph) makes explicit what depends on what, as declared by the referent and never inferred from a name. [The loop](../START.md#the-loop) spine of a document is one such graph, and a repair edge is a back-edge on it.
 
 `DAG`
-Graph declaration · makes a dependency graph explicit; the loop spine is one `DAG pipeline:`
-
-`NODE`
-Node definition `NODE build:`
+Graph declaration · makes a dependency graph explicit, and the loop spine is one `DAG pipeline:`
 
 `DEPENDS_ON`
 Dependencies · declared by the referent, never inferred from a name `DEPENDS_ON [a, b]`
@@ -642,12 +639,15 @@ Reverse sequencing `BEFORE deploy`
 `PARALLEL_GROUP`
 Parallel nodes · peers with no edge between them `PARALLEL_GROUP: a, b`
 
+`NODE`
+Node definition `NODE build:`
+
 ### Priority queue keywords
 
 A priority queue makes a ranking explicit, with the candidates ordered by a declared worth. The branch ranking a worth gate emits is one, and a peek returns the selected branch.
 
 `PRIORITY_QUEUE`
-Queue declaration · makes a ranking explicit; the branch ranking a worth gate emits is one `PRIORITY_QUEUE branches:`
+Queue declaration · makes a ranking explicit, and the branch ranking a worth gate emits is one `PRIORITY_QUEUE branches:`
 
 `PRIORITY`
 Priority value · utility minus cost `PRIORITY = 10`
@@ -827,23 +827,11 @@ These prepositions and connectors state the relation between the operands of a l
 `INTO`
 Destination `READ file INTO data`
 
-`FROM`
-Source `EXTRACT FROM response`
-
 `WITH`
 Association `EXECUTE WITH params`
 
 `USING`
 Instrument `VALIDATE USING schema`
-
-`FOR`
-Purpose/Iteration `SEARCH FOR pattern`
-
-`IN`
-Containment `FIND key IN object`
-
-`TO`
-Target `WRITE TO file`
 
 `AS`
 Alias/Role `BIND result AS alias`
@@ -871,6 +859,18 @@ Negation `NOT condition`
 
 `STYLE`
 Formatting `STYLE output`
+
+`FOR`
+Purpose/Iteration `SEARCH FOR pattern`
+
+`IN`
+Containment `FIND key IN object`
+
+`FROM`
+Source `EXTRACT FROM response`
+
+`TO`
+Target `WRITE TO file`
 
 ### An adapter's aliases
 

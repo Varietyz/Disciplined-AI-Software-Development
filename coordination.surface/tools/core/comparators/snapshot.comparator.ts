@@ -1,36 +1,31 @@
 import { ANCHOR_KINDS, markedElsewhere, measured, sameKinds } from "../analyzers/snapshot.analyzer.ts";
-import type { Comparison, Extent, Judgement, Measured, Retained, Verdict } from "../types/snapshot.types.ts";
+import type { Comparison, Extent, Judgment, Measured, Retained, Verdict } from "../types/snapshot.types.ts";
 import { frozenFinding, shortenedFinding } from "../factories/snapshot.factory.ts";
 import type { Finding } from "../types/segment.types.ts";
 import type { StepOptions } from "../types/rule.types.ts";
 import { retainedFrom } from "../readers/snapshot.reader.ts";
 
-const judgement = function judgement(path: string, verdict: Verdict, finding: Finding | null = null): Judgement {
+const judgment = function judgment(path: string, verdict: Verdict, finding: Finding | null = null): Judgment {
     return { finding, memberless: false, path, renamed: null, verdict };
 };
 
-const judgeAbsent = function judgeAbsent(
-    path: string,
-    prior: Extent,
-    retained: Retained,
-    extents: Measured,
-): Judgement {
+const judgeAbsent = function judgeAbsent(path: string, prior: Extent, retained: Retained, extents: Measured): Judgment {
     if (prior.anchors.length === 0) {
         const carried = markedElsewhere(prior.mark, retained.surfaces, extents.current);
         return carried === null
-            ? { ...judgement(path, "not-comparable"), memberless: true }
-            : { ...judgement(path, "relocated"), renamed: `${path} → ${carried}` };
+            ? { ...judgment(path, "not-comparable"), memberless: true }
+            : { ...judgment(path, "relocated"), renamed: `${path} → ${carried}` };
     }
 
     const stranded = prior.anchors.filter((anchor) => !extents.frozenAnchors.has(anchor));
     return stranded.length === 0
-        ? judgement(path, "relocated")
-        : judgement(path, "shortened", shortenedFinding(path, stranded, prior.lifetime));
+        ? judgment(path, "relocated")
+        : judgment(path, "shortened", shortenedFinding(path, stranded, prior.lifetime));
 };
 
-const judgePresent = function judgePresent(path: string, prior: Extent, now: Extent, frozen: boolean): Judgement {
+const judgePresent = function judgePresent(path: string, prior: Extent, now: Extent, frozen: boolean): Judgment {
     if (now.lifetime !== prior.lifetime) {
-        return judgement(path, "not-comparable");
+        return judgment(path, "not-comparable");
     }
 
     const held = new Set(now.anchors);
@@ -39,16 +34,16 @@ const judgePresent = function judgePresent(path: string, prior: Extent, now: Ext
         const priorHeld = new Set(prior.anchors);
         const difference = [...missing, ...now.anchors.filter((anchor) => !priorHeld.has(anchor))];
         return difference.length === 0
-            ? judgement(path, "unchanged")
-            : judgement(path, "shortened", frozenFinding(path, difference, prior.lifetime));
+            ? judgment(path, "unchanged")
+            : judgment(path, "shortened", frozenFinding(path, difference, prior.lifetime));
     }
 
     return missing.length === 0
-        ? judgement(path, "unchanged")
-        : judgement(path, "shortened", shortenedFinding(path, missing, prior.lifetime));
+        ? judgment(path, "unchanged")
+        : judgment(path, "shortened", shortenedFinding(path, missing, prior.lifetime));
 };
 
-const compared = function compared(retained: Retained, extents: Measured): Judgement[] {
+const compared = function compared(retained: Retained, extents: Measured): Judgment[] {
     return Object.entries(retained.surfaces).map(([path, prior]) => {
         const now = extents.current.get(path);
         return now === undefined
@@ -58,7 +53,7 @@ const compared = function compared(retained: Retained, extents: Measured): Judge
 };
 
 const verdictsOf = function verdictsOf(
-    judged: readonly Judgement[],
+    judged: readonly Judgment[],
     current: ReadonlyMap<string, Extent>,
     unseen: Verdict,
 ): Record<string, Verdict> {

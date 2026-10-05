@@ -1,0 +1,29 @@
+{
+    "name": "@govlab/code-parse",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "Language-agnostic source parsing to a concrete syntax tree via tree-sitter, with comment-node extraction and extension/shebang language detection.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#runtime/*": "./runtime/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./*": "./*"
+    },
+    "files": ["core/generated"],
+    "scripts": {
+        "build:grammars": "node runtime/entrypoints/grammar.entrypoint.ts",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@ssot/paths": "*"
+    }
+}

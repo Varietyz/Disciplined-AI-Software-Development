@@ -1,0 +1,1054 @@
+{
+    "category": "Security / Privacy / Compliance / Governance",
+    "check": {
+        "population": "every endpoint, credential, data store, permission and policy inside the trust boundary",
+        "freshness": "a verdict stands until the code, the policy, the configuration or the threat model changes",
+        "refusal": "the security gate, policy engine or secret scan fails the change or rejects the request",
+        "observation": "scans of source and configuration, policy decisions, and security test results",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the policy and the threat model, which code, configuration and requests conform to"
+    },
+    "records": [
+        {
+            "id": "security-by-design",
+            "distinctFrom": [
+                {
+                    "id": "architecture:attack-surface-reduction",
+                    "reason": "Security by design builds controls in from the first design, while attack surface reduction removes what nothing uses."
+                },
+                {
+                    "id": "architecture:fail-secure",
+                    "reason": "Security by design is the approach to every component, while fail secure is one rule, that a failed check denies access."
+                },
+                {
+                    "id": "architecture:defense-in-depth",
+                    "reason": "Security by design puts controls in from the start, while defense in depth layers several independent controls on each asset."
+                },
+                {
+                    "id": "architecture:secure-by-default",
+                    "reason": "Security by design shapes the whole design, while secure by default fixes the state its settings ship in."
+                }
+            ],
+            "name": "Security by Design",
+            "definition": "A design rule that threats are modeled and controls built into every component from its first design.",
+            "type": "principle",
+            "scope": [
+                "system",
+                "service",
+                "codebase"
+            ],
+            "requires": [
+                "Threat Modeling",
+                "Secure Defaults"
+            ],
+            "reinforces": [
+                "Defense in Depth",
+                "Compliance"
+            ],
+            "enables": ["Proactive Risk Reduction"],
+            "conflicts_with": ["Security as Afterthought"],
+            "tensions_with": ["Developer Ergonomics"],
+            "violated_by": ["lexicon:security-as-afterthought"],
+            "detected_by": ["missing authz/input validation/threat model"],
+            "measured_by": ["security control coverage"],
+            "refactored_by": [
+                "lexicon:trust-boundaries",
+                "architecture:input-validation",
+                "architecture:access-control"
+            ],
+            "enforced_by": [
+                "security gates",
+                "policy-as-code"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function createFoo(request: Request) {\n  return fooStore.save(request.body as Foo);\n}",
+                "after": "function createFoo(request: Request, identity: Identity) {\n  const input = CreateFooSchema.parse(request.body);\n  authorize(identity, \"foo:create\");\n  return fooStore.save(Foo.create(input));\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "defense-in-depth",
+            "name": "Defense in Depth",
+            "definition": "A design rule that several independent security controls protect each asset, so one failed control does not expose it.",
+            "type": "principle",
+            "scope": [
+                "system",
+                "infrastructure",
+                "application"
+            ],
+            "requires": ["Layered Controls"],
+            "reinforces": ["Security by Design"],
+            "enables": ["Compromise Containment"],
+            "conflicts_with": ["Single Control Reliance"],
+            "tensions_with": ["Complexity"],
+            "violated_by": ["lexicon:single-control-reliance"],
+            "detected_by": ["missing secondary control"],
+            "measured_by": ["control depth"],
+            "refactored_by": ["lexicon:controls"],
+            "enforced_by": ["threat model review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "app.post(\"/foo\", createFoo);",
+                "after": "app.post(\"/foo\",\n  authenticate(),\n  authorize(\"foo:create\"),\n  validate(CreateFooSchema),\n  rateLimit({ limit: 100 }),\n  audit(\"FOO_CREATE\"),\n  createFoo,\n);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "least-privilege",
+            "name": "Least Privilege",
+            "aliases": [
+                "Principle of Least Privilege",
+                "PoLP"
+            ],
+            "definition": "A design rule that each user, service and process holds only the permissions its task needs.",
+            "type": "principle",
+            "scope": [
+                "user",
+                "service",
+                "process",
+                "data"
+            ],
+            "requires": [
+                "Access Control",
+                "Minimal Permissions"
+            ],
+            "reinforces": [
+                "Zero Trust",
+                "Damage Limitation"
+            ],
+            "enables": ["Reduced Blast Radius"],
+            "conflicts_with": ["Broad Admin Access"],
+            "tensions_with": ["Operational Convenience"],
+            "violated_by": ["lexicon:broad-admin-access"],
+            "detected_by": ["overbroad roles/scopes"],
+            "measured_by": ["privilege excess count"],
+            "refactored_by": ["lexicon:least-privilege-credential"],
+            "enforced_by": ["IAM policy checks"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooJob {\n  constructor(private readonly db: AdminDatabase) {}\n  run(foo: Foo) { return this.db.execute(`insert into foo values (?)`, foo); }\n}",
+                "after": "interface FooWriter { insert(foo: Foo): Promise<void>; }\nclass FooJob {\n  constructor(private readonly foos: FooWriter) {}\n  run(foo: Foo) { return this.foos.insert(foo); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "zero-trust-architecture",
+            "name": "Zero Trust Architecture",
+            "aliases": ["Zero Trust"],
+            "definition": "A convention of authenticating and authorizing every request on its own identity and context, whatever network it comes from.",
+            "type": "style",
+            "scope": [
+                "system",
+                "network",
+                "identity"
+            ],
+            "requires": [
+                "Strong Identity",
+                "Continuous Authorization"
+            ],
+            "reinforces": ["Least Privilege"],
+            "enables": ["Perimeterless Security"],
+            "conflicts_with": ["Trusted Internal Network Assumption"],
+            "tensions_with": ["Latency/Complexity"],
+            "violated_by": ["lexicon:trusted-internal-network-assumption"],
+            "detected_by": ["internal endpoints without authz/authn"],
+            "measured_by": ["trustless control coverage"],
+            "refactored_by": [
+                "architecture:authentication",
+                "architecture:authorization",
+                "lexicon:network-segmentation"
+            ],
+            "enforced_by": [
+                "policy-as-code",
+                "gateway rules"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "if (request.network === \"internal\") return createFoo(request.body);",
+                "after": "const identity = authenticate(request.credentials);\nauthorize(identity, \"foo:create\", { resource: request.body.id });\nverifyDevice(request.deviceAttestation);\nreturn createFoo(CreateFooSchema.parse(request.body));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "secure-by-default",
+            "distinctFrom": [
+                {
+                    "id": "architecture:fail-secure",
+                    "reason": "Secure by default is the state settings ship in, while fail secure is the state a failed check leaves access in."
+                },
+                {
+                    "id": "lexicon:safe-defaults",
+                    "reason": "Secure by default restricts access in the shipped settings, while safe defaults avoid harm in the shipped behavior."
+                }
+            ],
+            "name": "Secure by Default",
+            "definition": "A design rule that every setting ships in its most restrictive safe state, and weakening one requires an explicit opt-in.",
+            "aliases": ["Secure Defaults"],
+            "type": "principle",
+            "scope": [
+                "configuration",
+                "API",
+                "product"
+            ],
+            "requires": ["Safe Defaults"],
+            "reinforces": ["Fail Secure"],
+            "enables": ["Reduced Misconfiguration Risk"],
+            "conflicts_with": ["Insecure Defaults"],
+            "tensions_with": ["Ease of Initial Use"],
+            "violated_by": ["lexicon:insecure-defaults"],
+            "detected_by": ["insecure default config"],
+            "measured_by": ["insecure default count"],
+            "refactored_by": ["lexicon:default-deny"],
+            "enforced_by": ["config policy"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const fooApi = createApi({ public: true, tls: false, audit: false });",
+                "after": "const fooApi = createApi({\n  public: false,\n  tls: \"required\",\n  authentication: \"required\",\n  audit: true,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "attack-surface-reduction",
+            "name": "Attack Surface Reduction",
+            "definition": "A design rule that endpoints, ports, features and permissions nothing uses are removed or disabled.",
+            "type": "principle",
+            "scope": [
+                "API",
+                "service",
+                "infrastructure"
+            ],
+            "requires": ["Minimal Exposure"],
+            "reinforces": ["Security by Design"],
+            "enables": ["Reduced Exploitability"],
+            "conflicts_with": ["Unnecessary Public Surface"],
+            "tensions_with": ["Feature Exposure"],
+            "violated_by": ["lexicon:unnecessary-public-surface"],
+            "detected_by": ["exposed unused routes/services"],
+            "measured_by": ["exposed surface count"],
+            "refactored_by": [
+                "lexicon:restrict-exports",
+                "architecture:access-control",
+                "architecture:feature-toggle"
+            ],
+            "enforced_by": ["attack surface scanning"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "app.enableDebugConsole();\napp.exposeAdminApi();\napp.loadAllPlugins();",
+                "after": "app.register(fooPublicApi);\napp.disable(\"debug-console\");\napp.disable(\"admin-api\");\napp.loadPlugins(approvedFooPlugins);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "threat-modeling",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:control-selection",
+                    "reason": "Threat modeling lists the assets, boundaries and threats, while control selection chooses the controls that answer them."
+                }
+            ],
+            "name": "Threat Modeling",
+            "definition": "The activity of listing a flow's assets, trust boundaries and threats, and choosing a mitigation for each threat.",
+            "type": "activity",
+            "scope": [
+                "feature",
+                "system",
+                "architecture"
+            ],
+            "requires": [
+                "Assets",
+                "Trust Boundaries",
+                "Threat Scenarios"
+            ],
+            "reinforces": [
+                "Security by Design",
+                "Risk Management"
+            ],
+            "enables": ["Control Selection"],
+            "conflicts_with": [
+                "Assumption-Driven Security",
+                "Security Theater"
+            ],
+            "tensions_with": ["Delivery Speed"],
+            "violated_by": ["lexicon:assumption-driven-security"],
+            "detected_by": ["missing threat model for sensitive flow"],
+            "measured_by": ["threat model coverage"],
+            "refactored_by": ["lexicon:mitigation-plan"],
+            "enforced_by": ["security review gates"],
+            "severity": "contextual",
+            "mandatoryFor": "sensitive systems",
+            "exemplar": {
+                "before": "designFooUpload();\nshipFooUpload();",
+                "after": "const threats = modelThreats(fooUploadFlow, [\"spoofing\", \"tampering\", \"repudiation\", \"disclosure\", \"denial\", \"elevation\"]);\nfor (const threat of threats) requireMitigation(threat);\nshipFooUpload();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "authentication",
+            "distinctFrom": [
+                {
+                    "id": "architecture:access-control",
+                    "reason": "Authentication verifies who the caller is, while access control decides what that caller may do."
+                },
+                {
+                    "id": "architecture:csrf-protection",
+                    "reason": "Authentication verifies an identity, while CSRF protection verifies that a request came from the site's own pages."
+                },
+                {
+                    "id": "architecture:session-management",
+                    "reason": "Authentication verifies a credential once, while session management keeps the result across requests."
+                }
+            ],
+            "name": "Authentication",
+            "definition": "A mechanism that verifies a caller's claimed identity from a credential before any protected action runs.",
+            "type": "mechanism",
+            "scope": [
+                "user",
+                "service",
+                "API"
+            ],
+            "requires": ["Identity Proof"],
+            "reinforces": ["Access Control"],
+            "enables": ["Identity-Aware Authorization"],
+            "conflicts_with": ["Anonymous Sensitive Access"],
+            "tensions_with": ["UX"],
+            "violated_by": ["lexicon:anonymous-sensitive-access"],
+            "detected_by": ["unauthenticated protected endpoints"],
+            "measured_by": ["auth coverage"],
+            "refactored_by": [],
+            "enforced_by": [
+                "route policies",
+                "tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const userId = request.headers.get(\"X-User-ID\");\nreturn loadFooFor(userId!);",
+                "after": "const credential = requireHeader(request, \"Authorization\");\nconst identity = await authenticator.verify(credential);\nif (!identity) throw new UnauthorizedError();\nreturn loadFooFor(identity.subject);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "authorization",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:remote-stub",
+                    "reason": "Authorization decides whether a principal may act, while a remote stub forwards calls to an object in another process."
+                }
+            ],
+            "name": "Authorization",
+            "definition": "A mechanism that decides, from a policy, whether an authenticated principal may perform an action on a resource.",
+            "type": "mechanism",
+            "scope": [
+                "API",
+                "domain action",
+                "data access"
+            ],
+            "requires": [
+                "Authenticated Principal",
+                "Policy"
+            ],
+            "reinforces": ["Least Privilege"],
+            "enables": ["Controlled Access"],
+            "conflicts_with": [
+                "Authenticated-Equals-Authorized",
+                "Authorization Scattering"
+            ],
+            "tensions_with": ["Policy Complexity"],
+            "violated_by": ["lexicon:unrestricted-access"],
+            "detected_by": ["protected operation without authz guard"],
+            "measured_by": ["authorization coverage"],
+            "refactored_by": [
+                "architecture:policy-enforcement",
+                "lexicon:centralize-policy"
+            ],
+            "enforced_by": [
+                "security tests",
+                "policy-as-code"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const identity = authenticate(request);\nreturn fooStore.delete(request.params.id);",
+                "after": "const identity = authenticate(request);\nauthorize(identity, \"foo:delete\", { fooId: request.params.id });\nreturn fooStore.delete(request.params.id);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "access-control",
+            "distinctFrom": [
+                {
+                    "id": "architecture:session-management",
+                    "reason": "Access control evaluates a policy per request, while session management keeps the authenticated session the request carries."
+                },
+                {
+                    "id": "lexicon:config-store",
+                    "reason": "Access control decides who may reach a resource, while a config store is one such resource, holding configuration for many services."
+                }
+            ],
+            "name": "Access Control",
+            "definition": "A mechanism that evaluates an access policy for each request to a resource and denies the request when the policy does not allow it.",
+            "canon": ["access-control"],
+            "type": "mechanism",
+            "scope": [
+                "API",
+                "data",
+                "infrastructure"
+            ],
+            "requires": ["Authorization Policy"],
+            "reinforces": ["Least Privilege"],
+            "enables": ["Resource Protection"],
+            "conflicts_with": ["Unrestricted Access"],
+            "tensions_with": ["Usability"],
+            "violated_by": ["lexicon:unrestricted-access"],
+            "detected_by": ["resource endpoint lacking policy"],
+            "measured_by": ["access control coverage"],
+            "refactored_by": [],
+            "enforced_by": ["policy tests"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "if (user.role === \"admin\") return fooStore.findAll();",
+                "after": "const decision = accessPolicy.evaluate({\n  subject: user,\n  action: \"foo:list\",\n  resource: { tenantId: request.tenantId },\n});\nif (!decision.allowed) throw new ForbiddenError();\nreturn fooStore.findAll(request.tenantId);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "role-based-access-control",
+            "name": "Role-Based Access Control (RBAC)",
+            "aliases": ["RBAC"],
+            "definition": "A conceptual representation of access control, Role-Based Access Control (RBAC), in which permissions attach to roles and users receive roles.",
+            "type": "model",
+            "scope": [
+                "user",
+                "role",
+                "resource"
+            ],
+            "requires": ["Role Definitions"],
+            "reinforces": ["Access Control"],
+            "enables": ["Coarse-Grained Permission Management"],
+            "conflicts_with": ["Ad-Hoc Permission Checks"],
+            "tensions_with": ["Role Explosion"],
+            "violated_by": ["lexicon:hardcoded-rules"],
+            "detected_by": ["scattered role checks"],
+            "measured_by": ["role-policy consistency"],
+            "refactored_by": ["lexicon:centralize-policy"],
+            "enforced_by": ["authorization tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "if (user.name === \"Developer\") allowDeleteFoo();",
+                "after": "const roles = new Map([\n  [\"foo-reader\", [\"foo:read\"]],\n  [\"foo-editor\", [\"foo:read\", \"foo:write\"]],\n  [\"foo-admin\", [\"foo:read\", \"foo:write\", \"foo:delete\"]],\n]);\nauthorizeRole(user.roles, \"foo:delete\", roles);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "attribute-based-access-control",
+            "name": "Attribute-Based Access Control (ABAC)",
+            "aliases": ["ABAC"],
+            "definition": "A conceptual representation of access control, Attribute-Based Access Control (ABAC), in which a policy decides from attributes of the subject, the resource and the environment.",
+            "type": "model",
+            "scope": [
+                "user",
+                "resource",
+                "context"
+            ],
+            "requires": [
+                "Attribute Definitions",
+                "Policy Engine"
+            ],
+            "reinforces": ["Fine-Grained Access Control"],
+            "enables": ["Context-Aware Authorization"],
+            "conflicts_with": ["Hardcoded Rules"],
+            "tensions_with": ["Policy Complexity"],
+            "violated_by": ["lexicon:hardcoded-rules"],
+            "detected_by": ["duplicated attribute checks in handlers"],
+            "measured_by": ["policy centralization"],
+            "refactored_by": [
+                "architecture:policy-as-code",
+                "lexicon:policy-engine"
+            ],
+            "enforced_by": ["policy-as-code"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "if (user.role === \"editor\") return updateFoo(foo);",
+                "after": "const decision = policy.evaluate({\n  subject: { id: user.id, department: user.department },\n  action: \"foo:update\",\n  resource: { ownerId: foo.ownerId, classification: foo.classification },\n  environment: { time: clock.now() },\n});\nif (!decision.allowed) throw new ForbiddenError();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "input-validation",
+            "name": "Input Validation",
+            "definition": "A mechanism that checks external input against a schema at the boundary before core logic uses it.",
+            "canon": ["input-validation"],
+            "type": "mechanism",
+            "scope": [
+                "API",
+                "boundary",
+                "function"
+            ],
+            "requires": [
+                "Validation Rules",
+                "Schema"
+            ],
+            "reinforces": [
+                "Security",
+                "Correctness"
+            ],
+            "enables": ["Fail Fast"],
+            "conflicts_with": ["Trusting External Input"],
+            "tensions_with": ["Input Flexibility"],
+            "violated_by": ["lexicon:trusting-external-input"],
+            "detected_by": ["missing boundary validators"],
+            "measured_by": ["validation coverage"],
+            "refactored_by": ["architecture:schema-validation"],
+            "enforced_by": [
+                "validation middleware",
+                "tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const input = request.body as Foo;\nfooStore.save(input);",
+                "after": "const input = CreateFooSchema.parse(request.body);\nfooStore.save(input);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "output-encoding",
+            "name": "Output Encoding",
+            "definition": "A mechanism that escapes values for the context they are written into, such as HTML, SQL or a shell.",
+            "type": "mechanism",
+            "scope": [
+                "UI",
+                "API",
+                "serialization"
+            ],
+            "requires": ["Context-Aware Encoding"],
+            "reinforces": ["Injection Prevention"],
+            "enables": ["Safe Rendering"],
+            "conflicts_with": ["Raw Output Rendering"],
+            "tensions_with": ["Formatting Flexibility"],
+            "violated_by": ["lexicon:raw-output-rendering"],
+            "detected_by": ["raw HTML/SQL/shell output paths"],
+            "measured_by": ["unsafe sink count"],
+            "refactored_by": ["lexicon:context-aware-encoding"],
+            "enforced_by": ["security linting"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "response.html(`<div>${foo.name}</div>`);",
+                "after": "response.html(`<div>${escapeHtml(foo.name)}</div>`);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "encryption-at-rest",
+            "name": "Encryption at Rest",
+            "definition": "A mechanism that encrypts stored data with managed keys, so the storage medium alone does not reveal it.",
+            "canon": ["encryption-at-rest"],
+            "type": "mechanism",
+            "scope": [
+                "storage",
+                "database",
+                "backups"
+            ],
+            "requires": ["Key Management"],
+            "reinforces": ["Data Protection"],
+            "enables": ["Confidentiality of Stored Data"],
+            "conflicts_with": ["Plaintext Sensitive Storage"],
+            "tensions_with": ["Key Operations"],
+            "violated_by": ["lexicon:plaintext-sensitive-storage"],
+            "detected_by": ["storage config scan"],
+            "measured_by": ["encrypted storage coverage"],
+            "refactored_by": ["lexicon:key-management"],
+            "enforced_by": ["infrastructure policy"],
+            "severity": "contextual",
+            "mandatoryFor": "sensitive data",
+            "exemplar": {
+                "before": "await disk.write(\"foos.json\", JSON.stringify(foos));",
+                "after": "const ciphertext = await keyManager.encrypt(\"foo-data-key\", JSON.stringify(foos));\nawait disk.write(\"foos.enc\", ciphertext);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "encryption-in-transit",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:tls-mtls",
+                    "reason": "Encryption in transit is the practice of encrypting traffic and verifying peers, while TLS and mutual TLS are the protocols that do it."
+                }
+            ],
+            "name": "Encryption in Transit",
+            "definition": "A mechanism that encrypts traffic between parties with TLS or mutual TLS and verifies the peer's certificate.",
+            "canon": ["encryption-in-transit"],
+            "type": "mechanism",
+            "scope": [
+                "network",
+                "service communication"
+            ],
+            "requires": ["TLS/mTLS"],
+            "reinforces": [
+                "Confidentiality",
+                "Integrity"
+            ],
+            "enables": ["Secure Communication"],
+            "conflicts_with": ["Plaintext Transport"],
+            "tensions_with": ["Certificate Management"],
+            "violated_by": ["lexicon:plaintext-transport"],
+            "detected_by": ["HTTP/plain socket usage"],
+            "measured_by": ["encrypted transport coverage"],
+            "refactored_by": ["lexicon:tls-mtls"],
+            "enforced_by": ["gateway/network policy"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const client = new HttpClient(\"http://foo.internal\");",
+                "after": "const client = new HttpClient(\"https://foo.internal\", {\n  tls: { minVersion: \"TLSv1.3\", verifyPeer: true },\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "secrets-management",
+            "name": "Secrets Management",
+            "definition": "The practice of keeping credentials in a secret store, reading them at runtime and rotating them on a schedule.",
+            "type": "activity",
+            "scope": [
+                "config",
+                "deployment",
+                "runtime"
+            ],
+            "requires": [
+                "Secret Store",
+                "Rotation Policy"
+            ],
+            "reinforces": ["Secure Configuration"],
+            "enables": ["Safe Credential Handling"],
+            "conflicts_with": [
+                "Hardcoded Secrets",
+                "Secret Sprawl"
+            ],
+            "tensions_with": ["Operational Complexity"],
+            "violated_by": [
+                "architecture:secret-sprawl",
+                "lexicon:hardcoded-secrets"
+            ],
+            "detected_by": ["secret scanning"],
+            "measured_by": ["secret exposure count"],
+            "refactored_by": ["lexicon:secret-rotation"],
+            "enforced_by": [
+                "secret scans",
+                "CI gates"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const fooClient = new FooClient({ apiKey: \"foo_live_abc123\" });",
+                "after": "const apiKey = await secretStore.read(\"services/foo/api-key\");\nif (!apiKey) throw new Error(\"missing foo api key\");\nconst fooClient = new FooClient({ apiKey });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "privacy-by-design",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:data-minimization",
+                    "reason": "Privacy by design covers collection, retention, visibility and defaults from the first version, while data minimization is its collection and retention part."
+                }
+            ],
+            "name": "Privacy by Design",
+            "definition": "A design rule that privacy protection is part of a system's design from its first version, covering which personal data it collects, how long it keeps it, who can see it and what its defaults expose.",
+            "type": "principle",
+            "scope": [
+                "data",
+                "product",
+                "system"
+            ],
+            "requires": [
+                "Data Minimization",
+                "Consent/Policy"
+            ],
+            "reinforces": [
+                "Compliance",
+                "Security"
+            ],
+            "enables": ["Privacy Compliance"],
+            "conflicts_with": [
+                "Unbounded Data Collection",
+                "Personal Data Oversharing"
+            ],
+            "tensions_with": ["Analytics/Personalization"],
+            "violated_by": ["architecture:personal-data-oversharing"],
+            "detected_by": ["personal-data flow without policy"],
+            "measured_by": [
+                "personal-data surface",
+                "retention compliance"
+            ],
+            "refactored_by": [
+                "lexicon:purpose-binding",
+                "lexicon:retention-policy"
+            ],
+            "enforced_by": [
+                "privacy review",
+                "policy-as-code"
+            ],
+            "severity": "contextual",
+            "mandatoryFor": "systems holding personal data",
+            "exemplar": {
+                "before": "auditLog.append({ user, request, foo, headers: request.headers });",
+                "after": "auditLog.append({\n  actorId: pseudonymize(user.id),\n  action: \"FOO_READ\",\n  fooId: foo.id,\n  purpose: \"support\",\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "compliance",
+            "name": "Compliance",
+            "definition": "A rule or precondition that a system implements the controls a regulation or standard requires, and keeps evidence of each one.",
+            "type": "constraint",
+            "scope": [
+                "system",
+                "organization",
+                "process"
+            ],
+            "requires": [
+                "Controls",
+                "Evidence",
+                "Auditability"
+            ],
+            "reinforces": [
+                "Governance",
+                "Risk Management"
+            ],
+            "enables": ["Regulatory Alignment"],
+            "conflicts_with": ["Uncontrolled Change"],
+            "tensions_with": ["Delivery Speed"],
+            "violated_by": ["lexicon:point-in-time-audit-only"],
+            "detected_by": ["compliance gap assessment"],
+            "measured_by": ["control pass rate"],
+            "refactored_by": [
+                "lexicon:controls",
+                "lexicon:evidence-citation"
+            ],
+            "enforced_by": ["compliance gates"],
+            "severity": "contextual",
+            "mandatoryFor": "regulated systems",
+            "exemplar": {
+                "before": "storeFooData(foo);",
+                "after": "const classified = classify(foo);\nconst controls = compliance.requirements(classified, \"foo-storage\");\nawait enforceControls(controls);\nawait storeFooData(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "governance",
+            "distinctFrom": [
+                {
+                    "id": "architecture:decentralization",
+                    "reason": "Governance holds decisions to shared policy, while decentralization leaves them with the owning teams."
+                },
+                {
+                    "id": "architecture:standardization",
+                    "reason": "Governance reviews and gates decisions against policy, while standardization is one policy it can enforce, one choice per concern."
+                }
+            ],
+            "name": "Governance",
+            "definition": "A design rule that architecture decisions are held to stated policies and standards, through review and automated gates.",
+            "type": "principle",
+            "scope": [
+                "organization",
+                "architecture",
+                "platform"
+            ],
+            "requires": [
+                "Policy",
+                "Standards",
+                "Review"
+            ],
+            "reinforces": [
+                "Compliance",
+                "Consistency"
+            ],
+            "enables": ["Controlled Evolution"],
+            "conflicts_with": ["Unbounded Autonomy"],
+            "tensions_with": ["Team Velocity"],
+            "violated_by": ["lexicon:uncontrolled-change"],
+            "detected_by": [
+                "standard violations",
+                "undocumented decisions"
+            ],
+            "measured_by": ["policy compliance"],
+            "refactored_by": [
+                "lexicon:standardize-the-interface",
+                "architecture:design-review"
+            ],
+            "enforced_by": [
+                "architecture board",
+                "policy-as-code"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "teams.defineFooApisIndependently();",
+                "after": "const governance = defineArchitecturePolicy({\n  apiVersioning: \"required\",\n  schemaRegistry: \"required\",\n  ownership: \"single-team\",\n});\narchitectureGate.enforce(governance);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "policy-enforcement",
+            "name": "Policy Enforcement",
+            "definition": "A mechanism that blocks an action a policy forbids at the point the action is attempted.",
+            "type": "mechanism",
+            "scope": [
+                "code",
+                "infrastructure",
+                "runtime"
+            ],
+            "requires": ["Defined Policy"],
+            "reinforces": [
+                "Compliance",
+                "Security"
+            ],
+            "enables": ["Automated Control"],
+            "conflicts_with": ["Manual-Only Review"],
+            "tensions_with": ["False Positives"],
+            "violated_by": ["architecture:manual-only-governance"],
+            "detected_by": ["policy drift"],
+            "measured_by": ["policy violation count"],
+            "refactored_by": [
+                "architecture:policy-as-code",
+                "architecture:fitness-functions"
+            ],
+            "enforced_by": [
+                "CI/CD",
+                "runtime policy engine"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "if (!policyAllows(user, foo)) fooLog.record(\"policy violation\");\nreturn updateFoo(foo);",
+                "after": "if (!policyAllows(user, foo)) throw new ForbiddenError();\nreturn updateFoo(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "policy-as-code",
+            "name": "Policy as Code",
+            "definition": "A mechanism that expresses policies as machine-readable rules which a pipeline or policy engine evaluates automatically.",
+            "type": "mechanism",
+            "scope": [
+                "infrastructure",
+                "deployment",
+                "security"
+            ],
+            "requires": ["Machine-Readable Policies"],
+            "reinforces": ["Continuous Compliance"],
+            "enables": ["Automated Enforcement"],
+            "conflicts_with": [
+                "Document-Only Policy",
+                "Manual-Only Governance"
+            ],
+            "tensions_with": ["Policy Maintenance"],
+            "violated_by": ["lexicon:manual-only-review"],
+            "detected_by": ["missing policy rule for known control"],
+            "measured_by": ["automated policy coverage"],
+            "refactored_by": ["architecture:fitness-functions"],
+            "enforced_by": ["policy engine"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "document.write(\"Only foo-admin may delete Foo\");",
+                "after": "const fooDeletePolicy = policy({\n  action: \"foo:delete\",\n  allow: input => input.subject.roles.includes(\"foo-admin\"),\n});\npolicyGate.enforce(fooDeletePolicy);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "risk-management",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:mitigation",
+                    "reason": "Risk management is the whole cycle of identifying, rating and owning risks, while mitigation is the step that reduces one."
+                },
+                {
+                    "id": "lexicon:risk-identification",
+                    "reason": "Risk management runs the whole cycle, while risk identification is its first step, finding the risks."
+                },
+                {
+                    "id": "architecture:threat-modeling",
+                    "reason": "Risk management covers every kind of risk, while threat modeling covers the security threats to one flow."
+                }
+            ],
+            "name": "Risk Management",
+            "definition": "The activity of identifying risks, rating their likelihood and impact, and assigning each one an owner and a mitigation.",
+            "type": "activity",
+            "scope": [
+                "architecture",
+                "security",
+                "delivery"
+            ],
+            "requires": [
+                "Risk Identification",
+                "Mitigation"
+            ],
+            "reinforces": [
+                "Compliance",
+                "Security by Design"
+            ],
+            "enables": ["Priority-Based Controls"],
+            "conflicts_with": [
+                "Unknown/Unowned Risk",
+                "Unowned Risk"
+            ],
+            "tensions_with": ["Speed"],
+            "violated_by": ["architecture:unowned-risk"],
+            "detected_by": ["risk register gaps"],
+            "measured_by": ["residual risk score"],
+            "refactored_by": [
+                "lexicon:mitigation-plan",
+                "lexicon:restrict-exports"
+            ],
+            "enforced_by": ["review gates"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "shipFooFeature();",
+                "after": "const risk = assessRisk(fooFeature, {\n  likelihood: 3,\n  impact: 5,\n  controls: [\"rate-limit\", \"audit\", \"rollback\"],\n});\nif (risk.residual > riskTolerance) throw new Error(\"risk not accepted\");\nshipFooFeature();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "continuous-compliance",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:evidence-automation",
+                    "reason": "Continuous compliance checks every change against policy, while evidence automation collects the proof that the checks ran."
+                },
+                {
+                    "id": "lexicon:ongoing-assurance",
+                    "reason": "Continuous compliance is checking on every change, while ongoing assurance is being able to show at any time that controls still work."
+                }
+            ],
+            "name": "Continuous Compliance",
+            "definition": "The ability to check compliance on every change, with automated policy gates and evidence capture.",
+            "type": "capability",
+            "scope": [
+                "CI/CD",
+                "infrastructure",
+                "codebase"
+            ],
+            "requires": [
+                "Policy as Code",
+                "Evidence Automation"
+            ],
+            "reinforces": [
+                "Compliance",
+                "Auditability"
+            ],
+            "enables": ["Ongoing Assurance"],
+            "conflicts_with": ["Point-in-Time Audit Only"],
+            "tensions_with": ["Pipeline Complexity"],
+            "violated_by": ["lexicon:point-in-time-audit-only"],
+            "detected_by": ["missing automated compliance checks"],
+            "measured_by": ["continuous control pass rate"],
+            "refactored_by": [
+                "lexicon:automated-enforcement",
+                "architecture:policy-as-code"
+            ],
+            "enforced_by": ["CI/CD controls"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "runComplianceAuditOncePerYear();",
+                "after": "pipeline.on(\"change\", async change => {\n  const result = await complianceScanner.evaluate(change);\n  if (!result.compliant) throw new ComplianceGateError(result.violations);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "csrf-protection",
+            "name": "CSRF Protection",
+            "aliases": ["Cross-Site Request Forgery Protection"],
+            "definition": "A mechanism that rejects state-changing requests which lack proof of coming from the site's own pages, such as an anti-forgery token.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "web",
+                "security"
+            ],
+            "requires": ["Request Origin Verification"],
+            "reinforces": [
+                "Authentication",
+                "Defense in Depth"
+            ],
+            "enables": ["Forged-Request Rejection"],
+            "conflicts_with": ["Ambient-Credential Trust"],
+            "tensions_with": ["Client Complexity"],
+            "violated_by": ["lexicon:ambient-credential-trust"],
+            "detected_by": ["no anti-forgery token on mutating endpoints"],
+            "measured_by": ["unprotected state-changing endpoint count"],
+            "refactored_by": [],
+            "enforced_by": ["security review"],
+            "severity": "contextual",
+            "mandatoryFor": "public APIs",
+            "exemplar": {
+                "before": "app.post(\"/foo/delete\", deleteFoo);",
+                "after": "app.post(\"/foo/delete\", verifyCsrfToken(), requireSameSite(), deleteFoo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "parameterized-queries",
+            "distinctFrom": [
+                {
+                    "id": "architecture:input-validation",
+                    "reason": "Parameterized queries keep values out of query syntax whatever they contain, while input validation checks what values contain before use."
+                }
+            ],
+            "name": "Parameterized Queries",
+            "definition": "A mechanism that sends query text and values to the database separately, so values are never parsed as query syntax.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "database",
+                "security"
+            ],
+            "requires": ["Query Parameter Binding"],
+            "reinforces": [
+                "Input Validation",
+                "Secure by Default"
+            ],
+            "enables": ["Injection-Safe Data Access"],
+            "conflicts_with": ["String-Concatenated SQL"],
+            "tensions_with": ["Dynamic Query Flexibility"],
+            "violated_by": ["lexicon:string-concatenated-sql"],
+            "detected_by": ["string interpolation into query text"],
+            "measured_by": ["concatenated-query count"],
+            "refactored_by": [],
+            "enforced_by": ["security review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "db.query(`select * from foos where id = '${id}'`);",
+                "after": "db.query(\"select * from foos where id = $1\", [id]);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "session-management",
+            "name": "Session Management",
+            "definition": "A mechanism that keeps authenticated sessions on the server, with expiry, rotation and revocation, and gives the client only an opaque identifier.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "authentication",
+                "security"
+            ],
+            "requires": ["Authentication"],
+            "reinforces": [
+                "Access Control",
+                "Least Privilege"
+            ],
+            "enables": [
+                "Bounded Session Lifetime",
+                "Revocable Access"
+            ],
+            "conflicts_with": ["Immortal Client-Trusted Session"],
+            "tensions_with": ["User Convenience"],
+            "violated_by": ["lexicon:immortal-client-trusted-session"],
+            "detected_by": ["no expiry/rotation/revocation on sessions"],
+            "measured_by": ["unbounded-session count"],
+            "refactored_by": [],
+            "enforced_by": ["security review"],
+            "severity": "contextual",
+            "mandatoryFor": "sensitive systems",
+            "exemplar": {
+                "before": "res.cookie(\"userId\", user.id);",
+                "after": "const session = await sessions.create(user.id, { ttlMs: 3_600_000, rotateOnAuth: true });\nres.cookie(\"sid\", session.id, { httpOnly: true, secure: true, sameSite: \"strict\" });",
+                "lang": "ts"
+            }
+        }
+    ]
+}

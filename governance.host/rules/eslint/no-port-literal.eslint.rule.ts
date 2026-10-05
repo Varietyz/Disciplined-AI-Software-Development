@@ -55,15 +55,26 @@ const isDigits = function isDigits(text: string): boolean {
     return text.length > 0;
 };
 
+const SYSTEM_ASSIGNED_TEXT = String(SYSTEM_ASSIGNED);
+
 const isPortLiteral = function isPortLiteral(node: AstNode | null): boolean {
     if (!isType(node, "Literal") && !isType(node, "TemplateLiteral")) {
         return false;
     }
-    if (numberAt(node, "value") !== null) {
-        return true;
+    const value = numberAt(node, "value");
+    if (value !== null) {
+        return value !== SYSTEM_ASSIGNED;
     }
     const text = staticTextOf(node);
-    return text !== null && isDigits(text);
+    return text !== null && isDigits(text) && text !== SYSTEM_ASSIGNED_TEXT;
+};
+
+const digitRunAt = function digitRunAt(text: string, start: number): string {
+    let end = start;
+    while (end < text.length && DIGITS.includes(text.charAt(end))) {
+        end += 1;
+    }
+    return text.slice(start, end);
 };
 
 const namesPort = function namesPort(node: AstNode | null): boolean {
@@ -82,8 +93,8 @@ const namesPort = function namesPort(node: AstNode | null): boolean {
 const hostPortIn = function hostPortIn(text: string): string | null {
     for (const mark of HOST_MARKS) {
         const at = text.indexOf(mark);
-        const next = at === -1 ? "" : text.charAt(at + mark.length);
-        if (next.length > 0 && DIGITS.includes(next)) {
+        const run = at === -1 ? "" : digitRunAt(text, at + mark.length);
+        if (run.length > 0 && run !== SYSTEM_ASSIGNED_TEXT) {
             return mark;
         }
     }
@@ -170,15 +181,15 @@ export default {
                 enforces: ["architecture:configuration-externalization"],
             }),
             description:
-                "A network port is never written in source. Every port is read from the root environment file through the environment loader, and a missing value stops the run instead of falling back. The rule refuses a port-named variable, property, assignment or call given a number or a digit string, a listen call given a port other than 0, which asks the system for a free one, a fallback between a port read and a literal, and a host with a port or a port flag written into a string. A name is port-named when one of its word segments is port, so report, import and support pass.",
+                "A network port is never written in source. Every port is read from the secret store through its typed accessor, and a missing value stops the run instead of falling back. The rule refuses a port-named variable, property, assignment or call given a number or a digit string, a listen call given a literal port, a fallback between a port read and a literal, and a host with a port or a port flag written into a string. Port 0 passes in every form, because it asks the system for a free port and names none. A name is port-named when one of its word segments is port, so report, import and support pass.",
         },
         messages: {
             hostPort:
-                "The string writes a port after '{{mark}}'. Build the address from the port the environment loader reads from the root environment file.",
+                "The string writes a port after '{{mark}}'. Build the address from the port the secret store's accessor returns.",
             portFallback:
-                "A port read falls back to a literal. Remove the fallback, because the environment loader stops the run when the root environment file does not set the port.",
+                "A port read falls back to a literal. Remove the fallback, because the secret store's accessor stops the run when the store does not hold the port.",
             portLiteral:
-                "{{name}} is given a port as a literal. Read the port from the root environment file through the environment loader, and add the variable there.",
+                "{{name}} is given a port as a literal. Read the port from the secret store through its typed accessor, and declare its key in the store's schema.",
         },
         schema: [],
         type: "problem",

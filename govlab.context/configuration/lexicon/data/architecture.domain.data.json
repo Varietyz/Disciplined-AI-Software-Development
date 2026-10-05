@@ -1,0 +1,203 @@
+{
+    "category": "domain-architecture",
+    "records": [
+        {
+            "name": "Anemic Transaction Script",
+            "kind": "anti-pattern",
+            "definition": "Implementing business logic as procedural scripts over data-only objects, with no rich domain model."
+        },
+        {
+            "name": "Implicit Integration",
+            "kind": "anti-pattern",
+            "definition": "Integrating contexts through undocumented, assumed connections instead of explicit, mapped relationships."
+        },
+        {
+            "name": "Shared Global Model",
+            "kind": "anti-pattern",
+            "definition": "Forcing one global model across the whole system, so unrelated parts are coupled through it."
+        },
+        {
+            "name": "Business Rule Encapsulation",
+            "kind": "capability",
+            "definition": "The ability to keep business rules inside the domain objects they govern."
+        },
+        {
+            "name": "Cross-Entity Domain Logic",
+            "kind": "capability",
+            "definition": "The ability to place logic that spans several entities in a dedicated domain service."
+        },
+        {
+            "name": "Domain Alignment",
+            "kind": "capability",
+            "definition": "The ability to keep the software model closely aligned with the business domain it serves."
+        },
+        {
+            "name": "Identity-Based Equality",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:lifecycle-tracking",
+                    "reason": "Identity-based equality compares two objects by identity, while lifecycle tracking follows one object through its changes."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to treat two objects as the same when they share an identity, regardless of their attributes."
+        },
+        {
+            "name": "Legacy/System Integration",
+            "kind": "capability",
+            "definition": "The ability to integrate a legacy or external system without letting its model corrupt the domain."
+        },
+        {
+            "name": "Lifecycle Tracking",
+            "kind": "capability",
+            "definition": "The ability to track an entity as the same thing through changes over its lifetime."
+        },
+        {
+            "name": "Root-Guarded Invariants",
+            "kind": "capability",
+            "definition": "The ability to enforce an aggregate's invariants by routing all changes through its root."
+        },
+        {
+            "name": "Self-Validating Values",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:side-effect-free-equality",
+                    "reason": "Self-validating values guarantee validity at construction, while side-effect-free equality compares values by content."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability for a value object to guarantee its own validity at construction."
+        },
+        {
+            "name": "Side-Effect-Free Equality",
+            "kind": "capability",
+            "definition": "The ability to compare value objects by their contents with no side effects."
+        },
+        {
+            "name": "Transactional Consistency Boundary",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:root-guarded-invariants",
+                    "reason": "The consistency boundary is the unit within which invariants hold atomically, while root-guarded invariants are enforced by routing every change through the root."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to treat an aggregate as the unit within which invariants hold atomically."
+        },
+        {
+            "name": "Explicit Boundary",
+            "kind": "constraint",
+            "definition": "The requirement that a clear boundary separate the domain from external systems it integrates with."
+        },
+        {
+            "name": "Relationship Semantics",
+            "kind": "constraint",
+            "definition": "The requirement that each relationship between bounded contexts carry a defined meaning."
+        },
+        {
+            "name": "Stable Identity",
+            "kind": "constraint",
+            "definition": "The requirement that an entity keep one stable identifier throughout its lifetime."
+        },
+        {
+            "name": "Value Equality",
+            "kind": "constraint",
+            "definition": "The requirement that two value objects be treated as equal when all their attributes match."
+        },
+        {
+            "name": "Translation Model",
+            "kind": "model",
+            "definition": "A mapping between an external system's concepts and the domain's own, keeping the two vocabularies separate."
+        },
+        {
+            "name": "Aggregate Size",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enlarging an aggregate to enforce invariants increases contention and load on it."
+        },
+        {
+            "name": "Cross-Context Reuse",
+            "kind": "quality-attribute",
+            "definition": "The degree to which isolating each context's model limits reusing models across contexts."
+        },
+        {
+            "name": "Documentation Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree of ongoing effort to document and maintain the map of relationships between contexts."
+        },
+        {
+            "name": "Domain Purity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which the domain model stays free of external and infrastructure concerns."
+        },
+        {
+            "name": "Integration Clarity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which relationships between contexts are made explicit and understandable."
+        },
+        {
+            "name": "Object Count",
+            "kind": "quality-attribute",
+            "definition": "The degree to which modeling many concepts as distinct value objects increases the number of objects."
+        },
+        {
+            "name": "Persistence Simplicity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a rich domain model complicates straightforward mapping to storage."
+        },
+        {
+            "name": "Simple CRUD",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a full domain model adds overhead where simple create-read-update-delete would suffice."
+        },
+        {
+            "name": "Map to Domain Model",
+            "kind": "technique",
+            "definition": "A technique for translating external or persistence data into domain types at the boundary."
+        },
+        {
+            "name": "Move Logic to the Domain",
+            "kind": "technique",
+            "definition": "A technique for moving business rules out of controllers, services and scripts into the domain objects they govern."
+        },
+        {
+            "name": "Extract Use Case",
+            "kind": "technique",
+            "definition": "A technique for moving one business operation into an application service that coordinates the domain and its ports."
+        },
+        {
+            "name": "Extract Domain Model",
+            "kind": "technique",
+            "definition": "A technique for turning procedural steps over data into domain types that hold their own rules."
+        },
+        {
+            "name": "Extract Query Service",
+            "kind": "technique",
+            "definition": "A technique for moving read-only, use-case-specific queries out of a repository into a query service."
+        },
+        {
+            "name": "Split Repository",
+            "kind": "technique",
+            "definition": "A technique for reducing a repository to persistence of one aggregate and moving everything else out of it."
+        },
+        {
+            "name": "Add Aggregate Invariant",
+            "kind": "technique",
+            "definition": "A technique for enforcing a rule across related entities inside the aggregate that owns them."
+        },
+        {
+            "name": "Split Bounded Context",
+            "kind": "technique",
+            "definition": "A technique for dividing a model that serves several meanings into contexts that each own one meaning of their terms."
+        },
+        {
+            "name": "Attribute-Compared Identity",
+            "kind": "anti-pattern",
+            "definition": "A defect in which two entities are judged to be the same by comparing their attributes instead of their identity."
+        },
+        {
+            "name": "Reachable Invalid State",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a domain object can be put into a state that breaks its own rules."
+        }
+    ]
+}

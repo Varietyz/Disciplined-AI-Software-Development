@@ -1,0 +1,57 @@
+{
+    "patternOperations": [
+        "detection",
+        "classification",
+        "explanation",
+        "prediction",
+        "generation"
+    ],
+    "invariants": {
+        "generative": [
+            "objects",
+            "relations",
+            "transformations",
+            "constraints",
+            "emergence"
+        ],
+        "systemic": [
+            "entity",
+            "relation",
+            "state",
+            "transformation",
+            "constraint",
+            "information",
+            "feedback",
+            "emergence"
+        ]
+    },
+    "foundations": {
+        "sequence": [
+            "logic-set-theory-axioms",
+            "structure",
+            "change",
+            "relationships",
+            "possibility",
+            "application"
+        ],
+        "layers": {
+            "structure": [
+                "algebra",
+                "geometry"
+            ],
+            "change": [
+                "analysis",
+                "dynamics"
+            ],
+            "relationships": [
+                "category-theory",
+                "information-theory"
+            ],
+            "possibility": [
+                "probability",
+                "computation",
+                "complexity"
+            ]
+        }
+    }
+}

@@ -1,0 +1,237 @@
+{
+    "immutability": {
+        "before": "type Foo = { name: string; tags: string[] };\n\nfunction addTag(foo: Foo, tag: string) {\n  foo.tags.push(tag);\n  return foo;\n}",
+        "after": "type Foo = Readonly<{ name: string; tags: readonly string[] }>;\n\nfunction addTag(foo: Foo, tag: string): Foo {\n  return { ...foo, tags: [...foo.tags, tag] };\n}",
+        "lang": "ts"
+    },
+    "input-validation": {
+        "before": "async function createFoo(request: Request) {\n  const body = await request.json() as any;\n  return fooDb.query(`insert into foo(name) values ('${body.name}')`);\n}",
+        "after": "type CreateFoo = { name: string };\n\nfunction parseCreateFoo(value: unknown): CreateFoo {\n  if (!value || typeof value !== \"object\") throw new Error(\"body must be an object\");\n  const name = (value as Record<string, unknown>).name;\n  if (typeof name !== \"string\" || name.length < 1 || name.length > 40) {\n    throw new Error(\"name must be 1..40 characters\");\n  }\n  return { name };\n}\n\nasync function createFoo(request: Request) {\n  const input = parseCreateFoo(await request.json());\n  return fooDb.query(\"insert into foo(name) values (?)\", input.name);\n}",
+        "lang": "ts"
+    },
+    "hardcoded-secret": {
+        "before": "const fooClient = new FooClient({\n  apiKey: \"foo_live_abc123\",\n});",
+        "after": "async function makeFooClient(secrets: SecretStore) {\n  const apiKey = await secrets.read(\"services/foo/api-key\");\n  if (!apiKey) throw new Error(\"missing services/foo/api-key\");\n  return new FooClient({ apiKey });\n}",
+        "lang": "ts"
+    },
+    "access-control": {
+        "before": "class FooJob {\n  constructor(private readonly admin: AdminDatabase) {}\n\n  run(foo: Foo) {\n    return this.admin.execute(`delete from bar; insert into foo values (?)`, foo);\n  }\n}",
+        "after": "interface FooWriter {\n  insert(foo: Foo): Promise<void>;\n}\n\nclass FooJob {\n  constructor(private readonly foos: FooWriter) {}\n\n  run(foo: Foo) {\n    return this.foos.insert(foo);\n  }\n}",
+        "lang": "ts"
+    },
+    "duplicate-code": {
+        "before": "function validateFoo(foo: Foo) {\n  if (!foo.name) throw new Error(\"foo.name required\");\n  if (foo.name.length > 40) throw new Error(\"foo.name too long\");\n}\nfunction validateBar(bar: Bar) {\n  if (!bar.name) throw new Error(\"bar.name required\");\n  if (bar.name.length > 40) throw new Error(\"bar.name too long\");\n}",
+        "after": "function requiredName(value: { name: string }, kind: string) {\n  if (!value.name) throw new Error(`${kind}.name required`);\n  if (value.name.length > 40) throw new Error(`${kind}.name too long`);\n}\n\nconst validateFoo = (foo: Foo) => requiredName(foo, \"foo\");\nconst validateBar = (bar: Bar) => requiredName(bar, \"bar\");",
+        "lang": "ts"
+    },
+    "error-handling": {
+        "before": "function parseFoo(raw: string): Foo | null {\n  try {\n    return JSON.parse(raw) as Foo;\n  } catch {\n    return null;\n  }\n}",
+        "after": "type ParseFooResult =\n  | { ok: true; value: Foo }\n  | { ok: false; error: { code: \"INVALID_JSON\" | \"INVALID_FOO\"; detail: string } };\n\nfunction parseFoo(raw: string): ParseFooResult {\n  try {\n    const value = JSON.parse(raw);\n    return isFoo(value)\n      ? { ok: true, value }\n      : { ok: false, error: { code: \"INVALID_FOO\", detail: \"schema mismatch\" } };\n  } catch (error) {\n    return { ok: false, error: { code: \"INVALID_JSON\", detail: String(error) } };\n  }\n}",
+        "lang": "ts"
+    },
+    "deprecated-api": {
+        "before": "class FooService {\n  makeFoo() { return this.createFoo(); }\n  createFoo() { return new Foo(); }\n}",
+        "after": "class FooService {\n  createFoo() { return new Foo(); }\n}",
+        "lang": "ts"
+    },
+    "env-access": {
+        "before": "const fooUrl = process.env.FOO_URL || \"http://localhost:3000\";\nconst retryCount = Number(process.env.FOO_RETRIES || \"3\");",
+        "after": "type AppConfig = Readonly<{ fooUrl: URL; retryCount: number }>;\n\nfunction loadConfig(env: NodeJS.ProcessEnv): AppConfig {\n  if (!env.FOO_URL) throw new Error(\"FOO_URL is required\");\n  if (!env.FOO_RETRIES) throw new Error(\"FOO_RETRIES is required\");\n  const retryCount = Number(env.FOO_RETRIES);\n  if (!Number.isInteger(retryCount) || retryCount < 0) throw new Error(\"invalid FOO_RETRIES\");\n  return Object.freeze({ fooUrl: new URL(env.FOO_URL), retryCount });\n}\n\nconst config = loadConfig(process.env);",
+        "lang": "ts"
+    },
+    "resource-leak": {
+        "before": "async function readFoo() {\n  const handle = await openFoo();\n  const foo = await handle.read();\n  await handle.close();\n  return foo;\n}",
+        "after": "async function readFoo() {\n  const handle = await openFoo();\n  try {\n    return await handle.read();\n  } finally {\n    await handle.close();\n  }\n}",
+        "lang": "ts"
+    },
+    "type-safety": {
+        "before": "async function loadFoo(response: Response): Promise<Foo> {\n  return await response.json() as Foo;\n}",
+        "after": "type Foo = Readonly<{ id: string; count: number }>;\n\nfunction decodeFoo(value: unknown): Foo {\n  if (!value || typeof value !== \"object\") throw new Error(\"Foo must be an object\");\n  const record = value as Record<string, unknown>;\n  if (typeof record.id !== \"string\") throw new Error(\"Foo.id must be a string\");\n  if (!Number.isInteger(record.count)) throw new Error(\"Foo.count must be an integer\");\n  return { id: record.id, count: record.count as number };\n}\n\nasync function loadFoo(response: Response): Promise<Foo> {\n  return decodeFoo(await response.json());\n}",
+        "lang": "ts"
+    },
+    "module-boundaries": {
+        "before": "function priceBar(foo: FooDatabaseRow) {\n  return foo.status === \"A\" ? 10 : 0;\n}",
+        "after": "type FooDatabaseRow = { id: string; status: \"A\" | \"D\" };\ntype BarEligibility = { fooId: string; eligible: boolean };\n\nfunction toBarEligibility(row: FooDatabaseRow): BarEligibility {\n  return { fooId: row.id, eligible: row.status === \"A\" };\n}\n\nfunction priceBar(input: BarEligibility) {\n  return input.eligible ? 10 : 0;\n}",
+        "lang": "ts"
+    },
+    "performance": {
+        "before": "const fooCache = new Map<string, Foo>();\n\nfunction getFoo(id: string) {\n  if (!fooCache.has(id)) fooCache.set(id, expensiveLookup(id));\n  return fooCache.get(id)!;\n}",
+        "after": "const profile = profiler.measure(\"foo.batch\", () => {\n  for (const id of fooIds) expensiveLookup(id);\n});\n\nif (profile.hotspot === \"repeated-foo-lookup\") {\n  const foos = fooStore.getMany(fooIds);\n  consume(foos);\n}",
+        "lang": "ts"
+    },
+    "encapsulation": {
+        "before": "import { globalFooStore } from \"./globals\";\n\nclass FooService {\n  save(foo: Foo) {\n    return globalFooStore.save(foo);\n  }\n}",
+        "after": "interface FooStore {\n  save(foo: Foo): Promise<void>;\n}\n\nclass FooService {\n  constructor(private readonly store: FooStore) {}\n\n  save(foo: Foo) {\n    return this.store.save(foo);\n  }\n}",
+        "lang": "ts"
+    },
+    "encoded-constraint": {
+        "before": "type FooId = string;\n\nfunction loadFoo(raw: string) {\n  return fooStore.get(raw as FooId);\n}",
+        "after": "type FooId = string & { readonly __brand: \"FooId\" };\n\nfunction fooId(raw: string): FooId {\n  if (!raw.startsWith(\"foo_\") || raw.length <= 4) throw new Error(`invalid FooId: ${raw}`);\n  return raw as FooId;\n}\n\nfunction loadFoo(id: FooId) {\n  return fooStore.get(id);\n}",
+        "lang": "ts"
+    },
+    "forward-compatibility": {
+        "before": "type FooInput = string | { name: string } | { label: string; flags?: string[] };\n\nfunction readFoo(input: FooInput) {\n  if (typeof input === \"string\") return { label: input, flags: [] };\n  if (\"name\" in input) return { label: input.name, flags: [] };\n  return { label: input.label, flags: input.flags ?? [] };\n}",
+        "after": "type FooEnvelope = {\n  kind: \"foo\";\n  label: string;\n  extensions: Readonly<Record<string, unknown>>;\n};\n\nfunction readFoo(input: FooEnvelope) {\n  return { label: input.label, extensions: input.extensions };\n\n}",
+        "lang": "ts"
+    },
+    "fail-fast": {
+        "before": "function makeFoo(config: { mode?: \"foo\" | \"bar\" }) {\n  const mode = config.mode ?? \"foo\";\n  return mode === \"foo\" ? new Foo() : new Bar();\n}",
+        "after": "type FooConfig = { mode: \"foo\" | \"bar\" };\n\nfunction makeFoo(config: FooConfig) {\n  if (!config.mode) throw new Error(\"FooConfig.mode is required\");\n  return config.mode === \"foo\" ? new Foo() : new Bar();\n}",
+        "lang": "ts"
+    },
+    "greenfield-migration": {
+        "before": "function calculateFoo(input: FooInput, legacyMode: boolean) {\n  if (legacyMode) return oldFooAlgorithm(input);\n  return newFooAlgorithm(input);\n}",
+        "after": "function calculateFoo(input: FooInput) {\n  return fooAlgorithm(input);\n}",
+        "lang": "ts"
+    },
+    "single-path": {
+        "before": "function saveFoo(foo: Foo, flags: { useNewStore: boolean }) {\n  return flags.useNewStore\n    ? newFooStore.save(foo)\n    : oldFooStore.save(foo);\n}",
+        "after": "function saveFoo(foo: Foo) {\n  return fooStore.save(foo);\n}",
+        "lang": "ts"
+    },
+    "immediate-completion": {
+        "before": "async function renameFoo(id: FooId, name: string) {\n  await fooStore.rename(id, name);\n\n}",
+        "after": "async function renameFoo(id: FooId, name: string) {\n  await transaction(async tx => {\n    await tx.foos.rename(id, name);\n    await tx.search.reindex(id, name);\n  });\n}",
+        "lang": "ts"
+    },
+    "mandatory-dependency": {
+        "before": "class FooService {\n  constructor(private readonly audit?: AuditSink) {}\n\n  create(foo: Foo) {\n    this.audit?.write({ type: \"foo.created\", foo });\n    return fooStore.save(foo);\n  }\n}",
+        "after": "class FooService {\n  constructor(private readonly audit: AuditSink) {}\n\n  create(foo: Foo) {\n    this.audit.write({ type: \"foo.created\", foo });\n    return fooStore.save(foo);\n  }\n}",
+        "lang": "ts"
+    },
+    "durable-implementation": {
+        "before": "class FooRepository {\n  private readonly data = new Map<string, Foo>();\n  save(foo: Foo) { this.data.set(foo.id, foo); }\n}",
+        "after": "class FooRepository {\n  constructor(private readonly db: Database) {}\n\n  save(foo: Foo) {\n    return this.db.execute(\"insert into foos(id, value) values (?, ?)\", foo.id, foo);\n  }\n}",
+        "lang": "ts"
+    },
+    "observed-execution": {
+        "before": "function publishFoo(foo: Foo) {\n  sendFoo(foo);\n}",
+        "after": "async function publishFoo(foo: Foo, telemetry: Telemetry) {\n  const span = telemetry.startSpan(\"foo.publish\", { fooId: foo.id });\n  try {\n    await sendFoo(foo);\n    span.end({ status: \"ok\" });\n  } catch (error) {\n    span.end({ status: \"error\", error });\n    throw error;\n  }\n}",
+        "lang": "ts"
+    },
+    "approved-evolution": {
+        "before": "class FooService {\n\n  private readonly barDb = connectDirectlyToBarDatabase();\n}",
+        "after": "type ArchitectureDecision = {\n  id: \"ADR-0042\";\n  status: \"approved\";\n  owner: \"foo-platform\";\n  allowedDependency: \"BarGateway\";\n};\n\nconst decision: ArchitectureDecision = approvedDecision(\"ADR-0042\");\nclass FooService {\n  constructor(private readonly bars: BarGateway, readonly adr = decision.id) {}\n}",
+        "lang": "ts"
+    },
+    "enforced-feedback": {
+        "before": "function ingestFoo(foo: Foo) {\n  if (foo.score < 0) console.warn(\"bad foo score\", foo.score);\n  return fooStore.save(foo);\n}",
+        "after": "function ingestFoo(foo: Foo) {\n  if (foo.score < 0) {\n    return { ok: false, error: { code: \"INVALID_SCORE\", value: foo.score } } as const;\n  }\n  fooStore.save(foo);\n  return { ok: true } as const;\n}",
+        "lang": "ts"
+    },
+    "single-owner": {
+        "before": "async function renameFoo(id: FooId, name: string) {\n  await fooService.rename(id, name);\n  await barService.patchFooName(id, name);\n}",
+        "after": "async function renameFoo(id: FooId, name: string) {\n  await fooService.rename(id, name);\n}\n\nfooEvents.on(\"FooRenamed\", event => {\n  barProjection.apply(event);\n});",
+        "lang": "ts"
+    },
+    "bounded-lifetime": {
+        "before": "const fooCache = new Map<string, Foo>();\n\nfunction rememberFoo(foo: Foo) {\n  fooCache.set(foo.id, foo);\n}",
+        "after": "class FooCache {\n  constructor(private readonly maxEntries: number) {}\n  private readonly values = new Map<string, Foo>();\n\n  set(foo: Foo) {\n    if (this.values.size >= this.maxEntries) {\n      const oldest = this.values.keys().next().value;\n      if (oldest !== undefined) this.values.delete(oldest);\n    }\n    this.values.set(foo.id, foo);\n  }\n\n  clear() { this.values.clear(); }\n}",
+        "lang": "ts"
+    },
+    "explicit-retention": {
+        "before": "const listeners: Array<() => void> = [];\n\nfunction watchFoo(foo: Foo) {\n  listeners.push(() => console.log(foo.id));\n}",
+        "after": "type Retention = { owner: string; release(): void };\n\nfunction retainFoo(foo: Foo, owner: string): Retention {\n  const token = fooRetentions.add({ foo, owner });\n  return {\n    owner,\n    release: () => fooRetentions.delete(token),\n  };\n}",
+        "lang": "ts"
+    },
+    "structural-release": {
+        "before": "async function useFoo() {\n  const foo = await acquireFoo();\n  await processFoo(foo);\n  await foo.release();\n}",
+        "after": "class FooLease implements Disposable {\n  [Symbol.dispose]() { releaseFoo(this); }\n}\n\nfunction useFoo() {\n  using foo = acquireFooLease();\n  processFoo(foo);\n}",
+        "lang": "ts"
+    },
+    "explicit-invalidity": {
+        "before": "type FooState = { count: number };\n\nfunction readFooCount(raw: unknown): FooState {\n  return { count: typeof raw === \"number\" ? raw : 0 };\n\n}",
+        "after": "type FooState =\n  | { status: \"valid\"; count: number }\n  | { status: \"invalid\"; reason: \"NOT_A_NUMBER\" };\n\nfunction readFooCount(raw: unknown): FooState {\n  return typeof raw === \"number\"\n    ? { status: \"valid\", count: raw }\n    : { status: \"invalid\", reason: \"NOT_A_NUMBER\" };\n}",
+        "lang": "ts"
+    },
+    "event-emission": {
+        "before": "class FooEditor {\n  constructor(private readonly onSaved: (foo: Foo) => void) {}\n\n  save(foo: Foo) {\n    fooStore.save(foo);\n    this.onSaved(foo);\n  }\n}",
+        "after": "class FooEditor {\n  constructor(private readonly events: EventSink) {}\n\n  save(foo: Foo) {\n    fooStore.save(foo);\n    this.events.emit({ type: \"FooSaved\", fooId: foo.id });\n  }\n}\n\nfooEvents.on(\"FooSaved\", event => refreshFooView(event.fooId));",
+        "lang": "ts"
+    },
+    "monotonic-growth": {
+        "before": "type FooIndex = Map<FooId, Foo>;\n\nfunction deleteFoo(index: FooIndex, id: FooId) {\n  index.delete(id);\n}",
+        "after": "type FooEvent =\n  | { seq: number; type: \"FooAdded\"; foo: Foo }\n  | { seq: number; type: \"FooRemoved\"; fooId: FooId };\n\nfunction removeFoo(log: FooEvent[], id: FooId) {\n  log.push({ seq: log.length + 1, type: \"FooRemoved\", fooId: id });\n}\n\nconst currentFoos = projectFoos(log);",
+        "lang": "ts"
+    },
+    "semantic-addressing": {
+        "before": "const foo = document.sections[2].items[4];\nconst reference = \"sections[2].items[4]\";",
+        "after": "type FooRef = { kind: \"foo\"; id: FooId };\n\nconst reference: FooRef = { kind: \"foo\", id: fooId(\"foo_primary\") };\nconst foo = document.foosById.get(reference.id);",
+        "lang": "ts"
+    },
+    "ordinal-time": {
+        "before": "type FooEvent = { at: number; value: string };\n\nconst events = received.map(value => ({ at: Date.now(), value }));\nevents.sort((a, b) => a.at - b.at);",
+        "after": "type FooEvent = { ordinal: bigint; value: string };\n\nfunction appendFoo(value: string): FooEvent {\n  return fooLog.append(nextOrdinal(), value);\n}\n\nconst events = fooLog.read().sort((a, b) => Number(a.ordinal - b.ordinal));",
+        "lang": "ts"
+    },
+    "homoiconicity": {
+        "before": "function calculateFoo(foo: Foo) {\n  return foo.value * 2;\n}\n\nconst fooRuleMetadata = {\n  operation: \"multiply\",\n  operand: 2,\n};",
+        "after": "type Expr =\n  | { op: \"value\"; key: keyof Foo }\n  | { op: \"const\"; value: number }\n  | { op: \"multiply\"; left: Expr; right: Expr };\n\nconst fooRule: Expr = {\n  op: \"multiply\",\n  left: { op: \"value\", key: \"value\" },\n  right: { op: \"const\", value: 2 },\n};\n\nconst result = evaluate(fooRule, foo);",
+        "lang": "ts"
+    },
+    "bounded-complexity": {
+        "before": "type FooRule = {\n  run(context: unknown): unknown;\n};\n\nfunction execute(rule: FooRule) {\n  return rule.run(globalThis);\n}",
+        "after": "type FooRule =\n  | { op: \"equals\"; field: \"name\" | \"kind\"; value: string }\n  | { op: \"all\"; rules: readonly FooRule[] };\n\nfunction validateRule(rule: FooRule, depth = 0): void {\n  if (depth > 5) throw new Error(\"FooRule depth exceeds 5\");\n  if (rule.op === \"all\") {\n    if (rule.rules.length > 10) throw new Error(\"FooRule fan-out exceeds 10\");\n    rule.rules.forEach(child => validateRule(child, depth + 1));\n  }\n}",
+        "lang": "ts"
+    },
+    "computed-health": {
+        "before": "function fooHealth(metrics: { errorRate: number; latencyMs: number }) {\n  return metrics.errorRate < 0.01 && metrics.latencyMs < 200 ? \"healthy\" : \"unhealthy\";\n}",
+        "after": "type FooHealth =\n  | { state: \"ready\" }\n  | { state: \"blocked\"; causes: readonly (\"STORE_UNREACHABLE\" | \"SCHEMA_MISMATCH\")[] };\n\nfunction fooHealth(status: { storeReachable: boolean; schemaCompatible: boolean }): FooHealth {\n  const causes = [\n    ...(!status.storeReachable ? [\"STORE_UNREACHABLE\" as const] : []),\n    ...(!status.schemaCompatible ? [\"SCHEMA_MISMATCH\" as const] : []),\n  ];\n  return causes.length ? { state: \"blocked\", causes } : { state: \"ready\" };\n}",
+        "lang": "ts"
+    },
+    "rule-as-code": {
+        "before": "import { sql } from \"../infrastructure/database\";\n\nexport function makeFoo() {\n  return sql(\"select * from foo\");\n}",
+        "after": "const architectureRule = forbidImports({\n  from: \"src/domain/**\",\n  to: \"src/infrastructure/**\",\n});\n\nfor (const violation of architectureRule.scan(projectGraph)) {\n  throw new Error(`forbidden dependency: ${violation.from} → ${violation.to}`);\n}",
+        "lang": "ts"
+    },
+    "design-by-contract": {
+        "before": "function divideFoo(total: number, count: number) {\n  return total / count;\n}",
+        "after": "function divideFoo(total: number, count: number): number {\n  if (!Number.isFinite(total)) throw new Error(\"pre: total must be finite\");\n  if (!Number.isInteger(count) || count <= 0) throw new Error(\"pre: count must be positive\");\n\n  const result = total / count;\n\n  if (!Number.isFinite(result)) throw new Error(\"post: result must be finite\");\n  return result;\n}",
+        "lang": "ts"
+    },
+    "versioned-evolution": {
+        "before": "app.get(\"/foo\", () => ({ label: \"Foo\", tags: [] }));",
+        "after": "app.get(\"/v1/foo\", () => ({ name: \"Foo\" }));\napp.get(\"/v2/foo\", () => ({ label: \"Foo\", tags: [] }));",
+        "lang": "ts"
+    },
+    "atomic-boundary": {
+        "before": "async function moveFoo(id: FooId, from: BarId, to: BarId) {\n  await barStore.removeFoo(from, id);\n  await barStore.addFoo(to, id);\n}",
+        "after": "async function moveFoo(id: FooId, from: BarId, to: BarId) {\n  await database.transaction(async tx => {\n    const removed = await tx.bars.removeFoo(from, id);\n    if (!removed) throw new Error(\"Foo is not owned by source Bar\");\n    await tx.bars.addFoo(to, id);\n  });\n}",
+        "lang": "ts"
+    },
+    "saga-compensation": {
+        "before": "async function createFooAndBar(foo: Foo, bar: Bar) {\n  const tx = await coordinator.begin();\n  await fooService.prepare(tx.id, foo);\n  await barService.prepare(tx.id, bar);\n  await coordinator.commit(tx.id);\n}",
+        "after": "async function createFooAndBar(foo: Foo, bar: Bar) {\n  const fooId = await fooService.create(foo);\n  try {\n    await barService.create({ ...bar, fooId });\n  } catch (error) {\n    await fooService.cancel(fooId);\n    throw error;\n  }\n}",
+        "lang": "ts"
+    },
+    "async-decoupling": {
+        "before": "async function createFoo(foo: Foo) {\n  const bar = await barServiceHttp.get(foo.barId);\n  await bazServiceHttp.validate(foo, bar);\n  return fooStore.save(foo);\n}",
+        "after": "async function createFoo(foo: Foo) {\n  await fooStore.transaction(async tx => {\n    await tx.foos.save(foo);\n    await tx.outbox.append({ type: \"FooCreated\", fooId: foo.id, barId: foo.barId });\n  });\n}\n\nfooEvents.on(\"FooCreated\", event => bazProjection.process(event));",
+        "lang": "ts"
+    },
+    "observable-signals": {
+        "before": "async function processFoo(foo: Foo) {\n  console.log(\"starting foo\");\n  await fooStore.save(foo);\n  console.log(\"done\");\n}",
+        "after": "async function processFoo(foo: Foo, telemetry: Telemetry) {\n  return telemetry.trace(\"foo.process\", { fooId: foo.id }, async span => {\n    const started = performance.now();\n    try {\n      await fooStore.save(foo);\n      telemetry.count(\"foo.processed\", 1, { result: \"ok\" });\n      span.event(\"foo.saved\", { durationMs: performance.now() - started });\n    } catch (error) {\n      telemetry.count(\"foo.processed\", 1, { result: \"error\" });\n      span.fail(error);\n      throw error;\n    }\n  });\n}",
+        "lang": "ts"
+    },
+    "convention-discovery": {
+        "before": "import { FooHandler } from \"./foo-handler\";\nimport { BarHandler } from \"./bar-handler\";\nimport { BazHandler } from \"./baz-handler\";\n\nconst handlers = [new FooHandler(), new BarHandler(), new BazHandler()];",
+        "after": "interface HandlerModule {\n  kind: string;\n  create(): Handler;\n}\n\nconst modules = await discover<HandlerModule>(\"./handlers/*.handler.js\");\nconst handlers = new Map(modules.map(module => [module.kind, module.create()]));",
+        "lang": "ts"
+    },
+    "declarative-config": {
+        "before": "const app = new FooApp();\napp.enableCache();\napp.setRetries(3);\nif (process.env.DEBUG) app.enableDebug();\napp.register(new BarPlugin());",
+        "after": "type FooConfig = Readonly<{\n  cache: { enabled: boolean };\n  retries: number;\n  debug: boolean;\n  plugins: readonly [\"bar\"];\n}>;\n\nconst config: FooConfig = {\n  cache: { enabled: true },\n  retries: 3,\n  debug: false,\n  plugins: [\"bar\"],\n};\n\nconst app = FooApp.fromConfig(validateFooConfig(config));",
+        "lang": "ts"
+    },
+    "injected-nondeterminism": {
+        "before": "function makeFoo(name: string): Foo {\n  return {\n    id: crypto.randomUUID(),\n    name,\n    createdAt: new Date(),\n  };\n}",
+        "after": "interface Clock { now(): Date; }\ninterface IdSource { nextFooId(): string; }\n\nfunction makeFoo(name: string, clock: Clock, ids: IdSource): Foo {\n  return {\n    id: ids.nextFooId(),\n    name,\n    createdAt: clock.now(),\n  };\n}",
+        "lang": "ts"
+    },
+    "force-driven-pattern": {
+        "before": "interface FooFactoryStrategy {\n  create(builder: FooAbstractBuilder, provider: FooProvider): Foo;\n}\n\nclass DefaultFooFactoryStrategy implements FooFactoryStrategy {\n  create(builder: FooAbstractBuilder, provider: FooProvider) {\n    return builder.withName(provider.getName()).build();\n  }\n}",
+        "after": "function makeFoo(name: string): Foo {\n  return { name };\n}",
+        "lang": "ts"
+    }
+}

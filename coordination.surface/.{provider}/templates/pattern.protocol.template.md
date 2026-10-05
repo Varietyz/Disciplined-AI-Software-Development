@@ -40,7 +40,7 @@ objective: create shared abstractions only on the highest-worth boundary-princip
            reversibly per target, and prove the old pattern is eliminated
 recursion_limit: 3
 
-# --- SLOT ABSENCES THIS TEMPLATE IS BOUND BY (declared once; honoured wherever they appear) --
+# --- SLOT ABSENCES THIS TEMPLATE IS BOUND BY (declared once, honored wherever they appear) ---
 #   An abstract {slot} resolves against the adapter binding. A slot with NO analogue resolves
 #   ABSENT, and the branch depending on it DOES NOT RUN — the absence is declared, never faked.
 #   ABSENT here: {project.architecture_registry} — nothing in this tree carries a class hierarchy
@@ -51,7 +51,7 @@ recursion_limit: 3
 #     one would demand evidence this tree cannot produce, which is satisfiable only by faking it.
 #   {limits.max_lines} — no size cap is declared, so the size branch and its admissibility check do
 #     not run; a base is bounded by the ONE reason it has to change instead of by a line count.
-#   HONOURING AN ABSENCE IS A PROPERTY OF THE BRANCH, NEVER OF THIS BLOCK. Declaring the absence
+#   HONORING AN ABSENCE IS A PROPERTY OF THE BRANCH, NEVER OF THIS BLOCK. Declaring the absence
 #     here and running the branch anyway is the defect this declaration exists to prevent: every
 #     step below that names one of these slots is guarded on it RESOLVING, and every gate reading
 #     one carries the same guard — a check that demands evidence from an absent slot is satisfiable
@@ -541,7 +541,7 @@ ALWAYS:
   - probe capabilities, measure the existing baseline, and frame the landscape by ontological dimension before proposing
   - score every candidate anti-pattern by impact - effort and gate on the highest-worth one + its highest-worth remediation (NODE 2)
   - run the four mandatory-always gates every distillation: tel-priority (NODE 2), constrain admissibility (NODE 7), ver-stop (NODE 8), ter-stop (NODE 10)
-  - type every decision to its yields-shape; elimination completeness is a number[0,1], the verdict a boundary judgement
+  - type every decision to its yields-shape; elimination completeness is a number[0,1], the verdict a boundary judgment
   - ground the base + migration order in the substrate genesis (existence->...->emergence); prove on simple targets first
   - require behavioral evidence for candidates; prefer composition/utility when the boundary isn't justified
   - split concrete vs abstract responsibilities; enforce base size limits; migrate low-complexity-first with checkpoint/restore

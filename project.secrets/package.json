@@ -1,0 +1,25 @@
+{
+    "name": "@ssot/secrets",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The typed schema of every value the workspace keeps out of its source, and the accessors that read each one from the Cerberus vault and refuse a missing or malformed value.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./*": "./*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@govlab/constants": "*",
+        "@ssot/paths": "*"
+    }
+}

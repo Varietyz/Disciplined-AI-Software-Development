@@ -1,0 +1,149 @@
+{
+    "check": {
+        "by": ["the test surfaces that list the technique, whose predicates decide what a run of the technique shows"],
+        "population": "every surface that lists the technique, and the code those surfaces cover",
+        "freshness": "a verdict stands until the technique, a surface that lists it or the covered code changes",
+        "refusal": "the gate fails a surface that lists an unknown technique, and a technique that states no way it fails",
+        "observation": "the technique's own runs, which locate failures; its fails field names the way it goes silent",
+        "evidence": "fires-and-accepts: one suite plants a surface that lists an unknown technique, another plants a technique that states no way it fails, and the bundled data validates clean",
+        "authority": "the technique record, which every surface that lists it cites"
+    },
+    "records": [
+        {
+            "id": "static-analysis",
+            "mode": "observation",
+            "principle": "Reads structure and types for defects before execution",
+            "principleRef": "static-analysis",
+            "fails": "Reports nothing when its rule never visits the construct, as with a misspelled visitor key"
+        },
+        {
+            "id": "unit-testing",
+            "mode": "comparison",
+            "principle": "Compares observed with expected results on an isolated unit",
+            "fails": "Passes when the doubles that isolate the unit no longer behave like the real collaborators"
+        },
+        {
+            "id": "integration-testing",
+            "mode": "comparison",
+            "principle": "Compares observed with expected results across cooperating parts",
+            "fails": "Passes on an environment that differs from production in the part that fails"
+        },
+        {
+            "id": "end-to-end-testing",
+            "mode": "comparison",
+            "principle": "Compares observed with expected results on the whole system",
+            "fails": "Is retried until it passes, so an intermittent failure is read as noise"
+        },
+        {
+            "id": "property-based-testing",
+            "mode": "classification",
+            "principle": "Asserts that an invariant holds across a generated input space",
+            "principleRef": "property-based-testing",
+            "fails": "Passes when the generator never produces the inputs that break the property"
+        },
+        {
+            "id": "differential-testing",
+            "mode": "comparison",
+            "principle": "Compares observed results with a reference implementation, the oracle",
+            "fails": "Passes when the reference implementation shares the defect"
+        },
+        {
+            "id": "contract-testing",
+            "mode": "comparison",
+            "principle": "Compares an observed interface with an agreed contract",
+            "fails": "Passes against a copy of the contract that drifted from the one the provider serves"
+        },
+        {
+            "id": "runtime-validation",
+            "mode": "observation",
+            "principle": "Checks boundary data against its declared shape at runtime",
+            "fails": "Never runs on a path that reaches the core without crossing the boundary"
+        },
+        {
+            "id": "assertion-checking",
+            "mode": "comparison",
+            "principle": "Checks a runtime condition against an assumed invariant",
+            "fails": "Is compiled out or disabled in the build that runs in production"
+        },
+        {
+            "id": "fuzz-testing",
+            "mode": "creation",
+            "principle": "Generates adversarial inputs to provoke unhandled failures",
+            "fails": "Stops before the generated inputs reach the failing region, and the run reports no crash"
+        },
+        {
+            "id": "load-testing",
+            "mode": "prediction",
+            "principle": "Projects behavior under expected demand",
+            "fails": "Runs a workload shaped unlike real demand"
+        },
+        {
+            "id": "stress-testing",
+            "mode": "prediction",
+            "principle": "Projects behavior past its limits to expose timing and ordering defects",
+            "fails": "Ends at a limit below the one production reaches"
+        },
+        {
+            "id": "profiling",
+            "mode": "observation",
+            "principle": "Measures the distribution of execution cost",
+            "principleRef": "profiling",
+            "fails": "Samples too coarsely to see a short, frequent cost"
+        },
+        {
+            "id": "heap-analysis",
+            "mode": "observation",
+            "principle": "Measures allocation and retention over time",
+            "fails": "Measures a run too short for retention to show"
+        },
+        {
+            "id": "tracing",
+            "mode": "description",
+            "principle": "Describes the runtime flow across components",
+            "fails": "Loses spans at an uninstrumented hop, and the trace reads as complete"
+        },
+        {
+            "id": "fault-injection",
+            "mode": "intervention",
+            "principle": "Induces a failure and observes the response",
+            "fails": "Injects only the faults the developer anticipated"
+        },
+        {
+            "id": "chaos-testing",
+            "mode": "intervention",
+            "principle": "Induces random failures and observes how the system recovers",
+            "fails": "Runs where the dependency that fails in production is absent"
+        },
+        {
+            "id": "model-checking",
+            "mode": "explanation",
+            "principle": "Proves that a property holds across the reachable state space",
+            "fails": "Proves the model while the code drifts away from it"
+        },
+        {
+            "id": "deterministic-replay",
+            "mode": "reflection",
+            "principle": "Reproduces a run to isolate a non-deterministic cause",
+            "fails": "Replays a recording that left out the source of the non-determinism"
+        },
+        {
+            "id": "monitoring",
+            "mode": "observation",
+            "principle": "Observes live behavior for deviations from normal",
+            "principleRef": "monitoring",
+            "fails": "Reports no deviation because the signal it watches was never emitted"
+        },
+        {
+            "id": "mutation-testing",
+            "mode": "intervention",
+            "principle": "Introduces a deliberate defect and checks that the tests or the rule report it",
+            "fails": "Counts a mutant as caught by a test that fails for an unrelated reason"
+        },
+        {
+            "id": "read-after-write-verification",
+            "mode": "comparison",
+            "principle": "Reads back what was written and compares it with what was meant to be written",
+            "fails": "Reads from a cache or a buffer instead of the store the write reached"
+        }
+    ]
+}

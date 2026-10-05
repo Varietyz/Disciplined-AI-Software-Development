@@ -1,0 +1,229 @@
+{
+    "check": {
+        "by": [
+            "the detectors each lens names, which resolve to algorithms records and scan code for the lens's duplication shapes",
+            "the test-surface catalog, which pairs each lens with a dimension"
+        ],
+        "population": "the code the lens's detectors scan, and every surface that names the lens",
+        "freshness": "a verdict stands until the scanned code, a detector or a surface changes",
+        "refusal": "the gate fails on a detector that resolves to no record, or a surface that names an unknown lens",
+        "observation": "none: a lens is a way of reading structure; its detectors read source, not a running system",
+        "evidence": "fires-and-accepts: one suite plants a surface whose lens does not exist, another plants a detector that resolves to no record, and the bundled data validates clean",
+        "authority": "the lens list and the algorithm records, which a surface and a detector cite"
+    },
+    "records": [
+        {
+            "id": "structure",
+            "label": "structural",
+            "question": "How are the parts organized?",
+            "nature": "arrangement",
+            "universalAxis": "arrangement",
+            "mathDomains": [
+                "algebra",
+                "category-theory"
+            ],
+            "mathFields": [],
+            "surfaces": [
+                "structural_duplication",
+                "copy_paste_duplication"
+            ],
+            "detectedBy": [
+                "algorithms:behavioral-signature-extraction",
+                "algorithms:cross-class-pattern-detection"
+            ]
+        },
+        {
+            "id": "time",
+            "label": "temporal",
+            "question": "How does it vary through time?",
+            "nature": "time",
+            "universalAxis": "dynamics",
+            "mathDomains": [],
+            "mathFields": [
+                "differential-equations",
+                "dynamical-systems"
+            ],
+            "surfaces": ["temporal_coupling"],
+            "detectedBy": ["algorithms:temporal-coupling-detection"]
+        },
+        {
+            "id": "space",
+            "label": "spatial",
+            "question": "How is it distributed in space?",
+            "nature": "location",
+            "universalAxis": "arrangement",
+            "mathDomains": [
+                "geometry",
+                "topology"
+            ],
+            "mathFields": []
+        },
+        {
+            "id": "statistical",
+            "question": "What regularities emerge from many observations?",
+            "nature": "distribution",
+            "universalAxis": "abstraction",
+            "mathDomains": ["probability"],
+            "mathFields": ["statistics"]
+        },
+        {
+            "id": "frequency",
+            "question": "What repeats, and how often?",
+            "nature": "recurrence",
+            "universalAxis": "dynamics",
+            "mathDomains": [],
+            "mathFields": ["harmonic-analysis"],
+            "surfaces": ["copy_paste_duplication"],
+            "detectedBy": ["algorithms:cross-class-pattern-detection"]
+        },
+        {
+            "id": "sequential",
+            "question": "In what order do things occur?",
+            "nature": "order",
+            "universalAxis": "dynamics",
+            "mathDomains": [
+                "logic",
+                "combinatorics"
+            ],
+            "mathFields": [],
+            "surfaces": ["sequential_duplication"],
+            "detectedBy": ["algorithms:sequential-chain-duplication"]
+        },
+        {
+            "id": "relation",
+            "label": "relational",
+            "question": "What connects what?",
+            "nature": "relationships",
+            "universalAxis": "interaction",
+            "mathDomains": [
+                "algebra",
+                "category-theory"
+            ],
+            "mathFields": [],
+            "surfaces": ["relational_duplication"],
+            "detectedBy": ["algorithms:relational-graph-duplication"]
+        },
+        {
+            "id": "behavior",
+            "label": "behavioral",
+            "question": "How does an entity tend to act?",
+            "nature": "action",
+            "universalAxis": "interaction",
+            "mathDomains": [],
+            "mathFields": ["dynamical-systems"],
+            "surfaces": ["behavioral_inconsistency"],
+            "detectedBy": [
+                "algorithms:behavioral-inconsistency",
+                "algorithms:behavioral-signature-extraction"
+            ]
+        },
+        {
+            "id": "function",
+            "label": "functional",
+            "question": "What role does something perform?",
+            "nature": "purpose",
+            "universalAxis": "abstraction",
+            "mathDomains": [],
+            "mathFields": ["functional-analysis"]
+        },
+        {
+            "id": "meaning",
+            "label": "semantic",
+            "question": "What meaning is conveyed?",
+            "nature": "meaning",
+            "universalAxis": "abstraction",
+            "mathDomains": [],
+            "mathFields": [],
+            "surfaces": ["conceptual_duplication"],
+            "detectedBy": ["algorithms:conceptual-duplication-detection"]
+        },
+        {
+            "id": "cause",
+            "label": "causal",
+            "question": "What produces what?",
+            "nature": "cause",
+            "universalAxis": "interaction",
+            "mathDomains": [],
+            "mathFields": ["mathematical-modeling"],
+            "surfaces": ["causal_duplication"],
+            "detectedBy": ["algorithms:causal-wiring-duplication"]
+        },
+        {
+            "id": "prediction",
+            "label": "predictive",
+            "question": "What usually follows?",
+            "nature": "expectation",
+            "universalAxis": "abstraction",
+            "mathDomains": [],
+            "mathFields": ["applied-mathematics"]
+        },
+        {
+            "id": "anomaly",
+            "question": "What breaks the normal pattern?",
+            "nature": "exception",
+            "universalAxis": "abstraction",
+            "mathDomains": [],
+            "mathFields": ["statistics"],
+            "surfaces": ["behavioral_inconsistency"],
+            "detectedBy": ["algorithms:anomaly-outlier-detection"]
+        },
+        {
+            "id": "change",
+            "label": "evolutionary",
+            "question": "How does the pattern itself change?",
+            "nature": "development",
+            "universalAxis": "dynamics",
+            "mathDomains": [],
+            "mathFields": ["dynamical-systems"]
+        },
+        {
+            "id": "fractal",
+            "question": "Does the same structure recur at different scales?",
+            "nature": "self-similarity",
+            "universalAxis": "abstraction",
+            "mathDomains": [],
+            "mathFields": [
+                "fractal-geometry",
+                "renormalization"
+            ],
+            "surfaces": ["scale_duplication"],
+            "detectedBy": ["algorithms:fractal-scale-duplication"]
+        },
+        {
+            "id": "transformation",
+            "label": "transformational",
+            "question": "How does one state become another?",
+            "nature": "transformation",
+            "universalAxis": "dynamics",
+            "mathDomains": [
+                "algebra",
+                "computation"
+            ],
+            "mathFields": []
+        },
+        {
+            "id": "invariant",
+            "question": "What remains unchanged?",
+            "nature": "invariance",
+            "universalAxis": "arrangement",
+            "mathDomains": ["topology"],
+            "mathFields": ["symmetry"]
+        },
+        {
+            "id": "optimization",
+            "question": "What is the best possible state?",
+            "nature": "selection",
+            "universalAxis": "abstraction",
+            "mathDomains": [],
+            "mathFields": ["operations-research"]
+        },
+        {
+            "id": "complexity",
+            "question": "How difficult is the transformation?",
+            "nature": "difficulty",
+            "universalAxis": "abstraction",
+            "mathDomains": [],
+            "mathFields": ["computation-theory"]
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "name": "@govlab/canonical-write",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "Canonical file writer — serialize data and write it to disk through prettier so generated files emit idempotent, canonical bytes.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./*": "./*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    }
+}

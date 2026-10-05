@@ -1,5 +1,5 @@
 import {
-    BEHAVIOUR_TREE_PLACEHOLDER,
+    BEHAVIOR_TREE_PLACEHOLDER,
     BOOTSTRAP_DOCUMENT,
     PACKAGE_MANIFEST,
     SURFACE_ROOT,
@@ -22,7 +22,7 @@ const inSurfaceRoot = function inSurfaceRoot(path: string): string {
 };
 
 const placeholderSources = function placeholderSources(context: RuleContext): Scanned[] {
-    const treeRoot = resolve(context.repoRoot, surfacePath("behaviour_tree"));
+    const treeRoot = resolve(context.repoRoot, surfacePath("behavior_tree"));
     const treeFiles = existsSync(treeRoot) ? walk({ extensions: [".md"], ignored: [], root: treeRoot }) : [];
     const manifest = resolve(context.repoRoot, inSurfaceRoot(PACKAGE_MANIFEST));
     const onDisk = [...treeFiles, ...(existsSync(manifest) ? [manifest] : [])].map((absolute) => ({
@@ -39,10 +39,10 @@ const placeholderSources = function placeholderSources(context: RuleContext): Sc
 };
 
 export const placeholderFindings = function placeholderFindings(context: RuleContext): Finding[] {
-    if (existsSync(resolve(context.repoRoot, inSurfaceRoot(BEHAVIOUR_TREE_PLACEHOLDER)))) {
+    if (existsSync(resolve(context.repoRoot, inSurfaceRoot(BEHAVIOR_TREE_PLACEHOLDER)))) {
         return [];
     }
     return placeholderSources(context)
-        .filter((entry) => entry.text.includes(BEHAVIOUR_TREE_PLACEHOLDER))
+        .filter((entry) => entry.text.includes(BEHAVIOR_TREE_PLACEHOLDER))
         .map((entry) => leftoverFinding(entry.path));
 };

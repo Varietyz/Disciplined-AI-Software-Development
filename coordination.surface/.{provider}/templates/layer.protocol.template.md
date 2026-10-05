@@ -22,7 +22,7 @@ objective: convert an executed document/prompt into a template that EMBODIES the
            derivation-loop, with every rule relocated to the node that owns its decision
 recursion_limit: 3
 
-# --- SLOT ABSENCES THIS TEMPLATE IS BOUND BY (declared once; honoured wherever they appear) --
+# --- SLOT ABSENCES THIS TEMPLATE IS BOUND BY (declared once, honored wherever they appear) ---
 #   An abstract {slot} resolves against the adapter binding. A slot with NO analogue resolves
 #   ABSENT, and the branch depending on it DOES NOT RUN — the absence is declared, never faked.
 #   ABSENT here: {model} — model selection belongs to the runtime and is NEVER named in an emitted
@@ -53,7 +53,7 @@ principle: a rule is only as strong as the node it is attached to — place each
 
 OPERATIONS: this process READs and SEARCHes the source and WRITEs the template through the adopted
 runtime's tools, mapped per runtime in BOOTSTRAP.md. The surfaces it names (the intel tree under
-{surface.behaviour_tree}, a host's on-write formatter where one runs) are the runtime's real surface, not
+{surface.behavior_tree}, a host's on-write formatter where one runs) are the runtime's real surface, not
 project bindings to abstract; keep them concrete.
 
 Each node declares its layer, axis, mathType, yields-shape, input, transformation, constraint set, and

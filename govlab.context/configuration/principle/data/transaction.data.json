@@ -1,0 +1,556 @@
+{
+    "category": "Transactions / State / Concurrency",
+    "check": {
+        "population": "every multi-step write, shared mutable state and retried side effect",
+        "freshness": "a verdict stands until the write path, the isolation level or the concurrency model changes",
+        "refusal": "the transaction or concurrency test fails a write path that loses an update, commits partially or repeats an effect",
+        "observation": "outcomes of concurrent and retried runs, plus the transaction boundaries read from source",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the transaction boundary and the isolation level, which every write path conforms to"
+    },
+    "records": [
+        {
+            "id": "idempotency",
+            "name": "Idempotency",
+            "aliases": ["Idempotence"],
+            "definition": "A design rule that repeating an operation with the same input has the same effect as running it once.",
+            "type": "principle",
+            "scope": [
+                "API",
+                "command",
+                "message handler"
+            ],
+            "requires": ["Idempotency Key or Deterministic Operation"],
+            "reinforces": [
+                "Retry Safety",
+                "Event-Driven Architecture"
+            ],
+            "enables": ["Safe Retries"],
+            "conflicts_with": ["Non-Repeatable Side Effects"],
+            "tensions_with": ["State Tracking"],
+            "violated_by": [
+                "lexicon:non-idempotent-operation",
+                "lexicon:duplicate-side-effects"
+            ],
+            "detected_by": ["side-effectful handlers without deduplication"],
+            "measured_by": ["duplicate-effect defect rate"],
+            "refactored_by": [
+                "lexicon:idempotency-key",
+                "architecture:idempotent-consumer"
+            ],
+            "enforced_by": [
+                "retry tests",
+                "API policy"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "app.post(\"/foo\", async request => fooStore.create(await request.json()));",
+                "after": "app.post(\"/foo\", async request => {\n  const key = requireHeader(request, \"Idempotency-Key\");\n  const body = await request.json();\n  return idempotency.execute(key, () => fooStore.create(body));\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "atomicity",
+            "name": "Atomicity",
+            "definition": "A design rule that the steps of a state change either all take effect or none do.",
+            "type": "principle",
+            "scope": [
+                "transaction",
+                "operation",
+                "workflow"
+            ],
+            "requires": ["Transaction Boundary"],
+            "reinforces": [
+                "Consistency",
+                "Correctness"
+            ],
+            "enables": ["All-or-Nothing State Change"],
+            "conflicts_with": ["Partial Commit"],
+            "tensions_with": ["Distributed Scalability"],
+            "violated_by": ["lexicon:partial-commit"],
+            "detected_by": ["multi-step writes without transaction/compensation"],
+            "measured_by": ["partial failure rate"],
+            "refactored_by": [
+                "lexicon:introduce-transaction-boundary",
+                "architecture:saga-pattern",
+                "architecture:compensating-transaction"
+            ],
+            "enforced_by": ["transaction tests"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "await fooStore.remove(from, foo.id);\nawait fooStore.add(to, foo.id);",
+                "after": "await database.transaction(async tx => {\n  await tx.foos.remove(from, foo.id);\n  await tx.foos.add(to, foo.id);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "acid",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:base-eventual-consistency",
+                    "reason": "ACID keeps each transaction atomic, consistent, isolated and durable, while BASE favors availability and lets replicas converge later."
+                }
+            ],
+            "name": "ACID",
+            "aliases": ["Atomicity, Consistency, Isolation, Durability"],
+            "definition": "A conceptual representation of the four guarantees of a database transaction: atomicity, consistency, isolation and durability.",
+            "type": "model",
+            "scope": [
+                "database",
+                "transaction"
+            ],
+            "requires": [
+                "Atomicity",
+                "Consistency",
+                "Isolation",
+                "Durability"
+            ],
+            "reinforces": ["Correctness"],
+            "enables": ["Strong Transactional Guarantees"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Distributed Availability",
+                "BASE/Eventual Consistency"
+            ],
+            "violated_by": ["lexicon:partial-commit"],
+            "detected_by": ["non-transactional multi-write invariants"],
+            "measured_by": ["transactional invariant defects"],
+            "refactored_by": [
+                "lexicon:introduce-transaction-boundary",
+                "lexicon:invariant-check"
+            ],
+            "enforced_by": [
+                "DB transactions",
+                "isolation tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await fooDb.write(foo);\nawait barDb.write(bar);",
+                "after": "await database.transaction({ isolation: \"serializable\" }, async tx => {\n  await tx.foos.save(foo);\n  await tx.bars.save(bar);\n  assertInvariant(foo, bar);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "transaction-boundary",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:consistency-rules",
+                    "reason": "A transaction boundary fixes which writes one transaction covers, while consistency rules are the invariants it must keep inside that scope."
+                }
+            ],
+            "name": "Transaction Boundary",
+            "definition": "A rule or precondition that a transaction covers exactly the writes of one unit of work inside one service.",
+            "type": "constraint",
+            "scope": [
+                "unit of work",
+                "aggregate",
+                "service"
+            ],
+            "requires": ["Consistency Rules"],
+            "reinforces": [
+                "Atomicity",
+                "Unit of Work"
+            ],
+            "enables": ["Safe State Mutation"],
+            "conflicts_with": ["Hidden Distributed Transaction"],
+            "tensions_with": ["Large Transaction Scope"],
+            "violated_by": ["lexicon:hidden-distributed-transaction"],
+            "detected_by": ["transaction scope leakage"],
+            "measured_by": ["transaction size/duration"],
+            "refactored_by": [
+                "lexicon:restrict-exports",
+                "architecture:saga-pattern"
+            ],
+            "enforced_by": ["transaction policy"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "await beginTransaction();\nawait controller.parse(request);\nawait service.validate(foo);\nawait repository.save(foo);\nawait commitTransaction();",
+                "after": "async function createFoo(input: CreateFoo) {\n  const foo = validateFoo(input);\n  return database.transaction(tx => new FooRepository(tx).save(foo));\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "unit-of-work-pattern",
+            "name": "Unit of Work Pattern",
+            "definition": "A design pattern that collects the changes of one use case and commits them together in a single transaction.",
+            "type": "pattern",
+            "aliases": ["Unit of Work"],
+            "scope": [
+                "application service",
+                "persistence"
+            ],
+            "requires": ["Transaction Boundary"],
+            "reinforces": [
+                "Atomicity",
+                "Consistency"
+            ],
+            "enables": ["Coordinated Persistence"],
+            "conflicts_with": ["Scattered Save Calls"],
+            "tensions_with": ["Repository Complexity"],
+            "violated_by": ["lexicon:scattered-save-calls"],
+            "detected_by": ["multiple independent saves in one use case"],
+            "measured_by": ["save coordination defects"],
+            "refactored_by": [],
+            "enforced_by": ["persistence conventions"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "await fooRepository.save(foo);\nawait barRepository.save(bar);\nawait eventRepository.save(event);",
+                "after": "const uow = unitOfWork.begin();\nuow.foos.save(foo);\nuow.bars.save(bar);\nuow.events.append(event);\nawait uow.commit();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "consistency",
+            "distinctFrom": [
+                {
+                    "id": "architecture:correctness",
+                    "reason": "Consistency is stored data satisfying its invariants, while correctness is code behavior matching its specification."
+                },
+                {
+                    "id": "architecture:fault-tolerance",
+                    "reason": "Consistency is data keeping its invariants, while fault tolerance is operation continuing through component failure."
+                },
+                {
+                    "id": "architecture:interoperability",
+                    "reason": "Consistency is data inside one system keeping its invariants, while interoperability is separate systems exchanging data."
+                },
+                {
+                    "id": "lexicon:always-fresh-reads",
+                    "reason": "Consistency is invariants holding after every change, while always-fresh reads is every read seeing the latest write."
+                },
+                {
+                    "id": "lexicon:availability",
+                    "reason": "Consistency is data keeping its invariants, while availability is the system answering at all."
+                },
+                {
+                    "id": "lexicon:durability",
+                    "reason": "Consistency is invariants holding after a change, while durability is a committed change surviving a crash."
+                },
+                {
+                    "id": "lexicon:maintainability",
+                    "reason": "Consistency is a property of stored data, while maintainability is a property of the code that changes it."
+                },
+                {
+                    "id": "architecture:scalability",
+                    "reason": "Consistency is invariants holding, while scalability is performance holding as load grows."
+                },
+                {
+                    "id": "lexicon:operational-complexity",
+                    "reason": "Consistency is invariants holding, while operational complexity is the effort of running the system in production."
+                },
+                {
+                    "id": "lexicon:quality",
+                    "reason": "Consistency is one property of stored data, while quality is how far a system meets all its expectations."
+                },
+                {
+                    "id": "lexicon:security",
+                    "reason": "Consistency is data keeping its invariants, while security is protection from misuse and attack."
+                },
+                {
+                    "id": "lexicon:simplicity",
+                    "reason": "Consistency is invariants holding, while simplicity is the absence of unneeded structure."
+                }
+            ],
+            "name": "Consistency",
+            "definition": "The degree to which stored data satisfies its invariants after every change.",
+            "type": "quality-attribute",
+            "scope": [
+                "data",
+                "transaction",
+                "distributed system"
+            ],
+            "requires": [
+                "Invariant",
+                "Validation"
+            ],
+            "reinforces": ["Correctness"],
+            "enables": ["Reliable State"],
+            "conflicts_with": ["Inconsistent Replicas/Models"],
+            "tensions_with": [
+                "Availability",
+                "Latency"
+            ],
+            "violated_by": ["lexicon:reachable-invalid-state"],
+            "detected_by": [
+                "data anomalies",
+                "failed invariant checks"
+            ],
+            "measured_by": ["consistency violation count"],
+            "refactored_by": [
+                "lexicon:invariant-check",
+                "lexicon:introduce-transaction-boundary",
+                "lexicon:reconciliation-job"
+            ],
+            "enforced_by": [
+                "database constraints",
+                "invariant tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "foo.total = foo.items.reduce((sum, item) => sum + item.value, 0);\nfoo.itemCount = externalCount;",
+                "after": "function rebuildFoo(items: readonly FooItem[]): Foo {\n  return { items, total: sum(items), itemCount: items.length };\n}\nconst foo = rebuildFoo(items);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "isolation",
+            "name": "Isolation",
+            "definition": "A rule or precondition that concurrent transactions do not see each other's uncommitted changes, to the degree the isolation level declares.",
+            "type": "constraint",
+            "scope": [
+                "database",
+                "transaction",
+                "concurrency"
+            ],
+            "requires": ["Concurrency Control"],
+            "reinforces": ["Correctness"],
+            "enables": ["Safe Concurrent Operations"],
+            "conflicts_with": ["Dirty Reads/Writes"],
+            "tensions_with": ["Throughput"],
+            "violated_by": ["lexicon:dirty-reads-writes"],
+            "detected_by": [
+                "concurrency tests",
+                "isolation anomalies"
+            ],
+            "measured_by": [
+                "anomaly rate",
+                "lock contention"
+            ],
+            "refactored_by": [
+                "architecture:pessimistic-locking",
+                "lexicon:transaction-isolation-level"
+            ],
+            "enforced_by": [
+                "DB isolation",
+                "concurrency tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await fooStore.find(id);\nfoo.count += 1;\nawait fooStore.save(foo);",
+                "after": "await database.transaction({ isolation: \"serializable\" }, async tx => {\n  const foo = await tx.foos.lock(id);\n  await tx.foos.save({ ...foo, count: foo.count + 1 });\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "concurrency-control",
+            "name": "Concurrency Control",
+            "definition": "A mechanism that coordinates concurrent access to shared state, through locks, versions or compare-and-swap.",
+            "type": "mechanism",
+            "scope": [
+                "transaction",
+                "memory",
+                "distributed system"
+            ],
+            "requires": ["Shared State Identification"],
+            "reinforces": [
+                "Isolation",
+                "Correctness"
+            ],
+            "enables": ["Safe Parallel Mutation"],
+            "conflicts_with": [
+                "Race Conditions",
+                "Lost Update"
+            ],
+            "tensions_with": ["Performance"],
+            "violated_by": ["lexicon:race-conditions"],
+            "detected_by": [
+                "race detectors",
+                "flaky concurrent tests"
+            ],
+            "measured_by": [
+                "race count",
+                "contention"
+            ],
+            "refactored_by": [
+                "architecture:pessimistic-locking",
+                "lexicon:make-immutable",
+                "architecture:optimistic-locking"
+            ],
+            "enforced_by": [
+                "thread-safety analysis",
+                "tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const foo = await fooStore.find(id);\nawait fooStore.save({ ...foo, count: foo.count + 1 });",
+                "after": "await fooStore.update(id, current => ({\n  ...current,\n  count: current.count + 1,\n}), { expectedVersion: foo.version });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "optimistic-locking",
+            "name": "Optimistic Locking",
+            "aliases": ["Own-Span Compare-and-Swap"],
+            "definition": "A design pattern that checks a record's version when it is written and rejects the write if another writer changed it first, comparing only the writer's own span where a surface is fenced per writer.",
+            "type": "pattern",
+            "scope": [
+                "persistence",
+                "transaction"
+            ],
+            "requires": ["Version Field"],
+            "reinforces": ["Concurrency Control"],
+            "enables": ["Conflict Detection"],
+            "conflicts_with": ["Blind Overwrite"],
+            "tensions_with": ["Retry Complexity"],
+            "violated_by": ["architecture:lost-update"],
+            "detected_by": ["updates without version check"],
+            "measured_by": ["conflict/retry rate"],
+            "refactored_by": [],
+            "enforced_by": [
+                "repository rules",
+                "integration tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await fooTable.update({ id: foo.id, name: foo.name });",
+                "after": "const updated = await fooTable.update({\n  id: foo.id,\n  expectedVersion: foo.version,\n  next: { ...foo, version: foo.version + 1 },\n});\nif (!updated) throw new ConflictError(foo.id);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "pessimistic-locking",
+            "name": "Pessimistic Locking",
+            "definition": "A design pattern that locks a record before reading it for update, so other writers wait until the transaction ends.",
+            "type": "pattern",
+            "scope": [
+                "persistence",
+                "critical section"
+            ],
+            "requires": ["Lock Ownership"],
+            "reinforces": ["Isolation"],
+            "enables": ["Strong Conflict Prevention"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Deadlocks",
+                "Latency",
+                "Lock-Free Throughput"
+            ],
+            "violated_by": ["lexicon:blind-overwrite"],
+            "detected_by": ["concurrent update conflicts"],
+            "measured_by": ["lock wait/deadlock rate"],
+            "refactored_by": ["lexicon:apply-concurrency-control"],
+            "enforced_by": ["transactional tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await fooTable.find(id);\nawait fooTable.save(change(foo));",
+                "after": "await database.transaction(async tx => {\n  const foo = await tx.foos.findForUpdate(id);\n  await tx.foos.save(change(foo));\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "state-isolation",
+            "name": "State Isolation",
+            "definition": "A design rule that each piece of mutable state belongs to one unit of concurrent execution, so no two units that run at the same time can write it.",
+            "type": "principle",
+            "scope": [
+                "function",
+                "component",
+                "service"
+            ],
+            "requires": [
+                "Encapsulation",
+                "Ownership"
+            ],
+            "reinforces": [
+                "Predictability",
+                "Concurrency Safety"
+            ],
+            "enables": ["Testability"],
+            "conflicts_with": ["Shared Mutable State"],
+            "tensions_with": ["Data Sharing"],
+            "violated_by": ["lexicon:global-mutable-state"],
+            "detected_by": [
+                "static mutable fields",
+                "shared caches without ownership"
+            ],
+            "measured_by": ["global state count"],
+            "refactored_by": [
+                "lexicon:encapsulate-state",
+                "lexicon:pass-context-explicitly",
+                "lexicon:make-immutable"
+            ],
+            "enforced_by": [
+                "lint rules",
+                "architecture tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const globalFooState: Foo[] = [];\nfunction addFoo(foo: Foo) { globalFooState.push(foo); }",
+                "after": "class FooSession {\n  #state: Foo[] = [];\n  add(foo: Foo) { this.#state = [...this.#state, foo]; }\n  snapshot() { return [...this.#state]; }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "controlled-side-effects",
+            "name": "Controlled Side Effects",
+            "definition": "A design rule that mutation, I/O and persistence happen at declared boundaries, around a core of pure functions.",
+            "type": "principle",
+            "scope": [
+                "function",
+                "module",
+                "boundary"
+            ],
+            "requires": ["Effect Boundaries"],
+            "reinforces": [
+                "Predictability",
+                "Testability"
+            ],
+            "enables": ["Pure Core / Imperative Shell"],
+            "conflicts_with": [
+                "Action at a Distance",
+                "Hidden Side Effect"
+            ],
+            "tensions_with": ["Performance Optimization"],
+            "violated_by": ["architecture:hidden-side-effect"],
+            "detected_by": ["side effects in domain/pure functions"],
+            "measured_by": ["side-effect boundary violations"],
+            "refactored_by": [
+                "lexicon:make-effects-explicit",
+                "lexicon:separate-query-from-command"
+            ],
+            "enforced_by": [
+                "effect linting",
+                "layer rules"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function calculateFoo(foo: Foo) {\n  foo.count += 1;\n  fooLog.record(foo);\n  fooDb.save(foo);\n  return foo.count;\n}",
+                "after": "function nextFoo(foo: Foo): Foo { return { ...foo, count: foo.count + 1 }; }\nasync function applyFoo(foo: Foo, store: FooStore, log: Log) {\n  const next = nextFoo(foo);\n  log.write(next);\n  await store.save(next);\n  return next;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "petri-nets",
+            "name": "Petri Nets",
+            "definition": "A conceptual representation of concurrent flow as places holding tokens and transitions that consume and produce them, which can be analyzed for deadlock.",
+            "type": "model",
+            "scope": [
+                "concurrency",
+                "workflow",
+                "verification"
+            ],
+            "requires": ["Places and Transitions"],
+            "reinforces": [
+                "Concurrency Correctness",
+                "Deadlock Freedom"
+            ],
+            "enables": [
+                "Concurrent-Flow Modeling",
+                "Reachability and Deadlock Analysis"
+            ],
+            "conflicts_with": ["Ad-Hoc Lock Ordering"],
+            "tensions_with": ["Modeling Overhead"],
+            "violated_by": ["lexicon:ad-hoc-lock-ordering"],
+            "detected_by": ["deadlocks or lost tokens found only at runtime"],
+            "measured_by": ["unreachable or deadlock-prone markings"],
+            "refactored_by": [],
+            "enforced_by": ["concurrency model review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "acquire(a); acquire(b); work(); release(b); release(a);",
+                "after": "const net = petriNet({\n  places: { idle: 1, aHeld: 0, bHeld: 0 },\n  transitions: [\n    { name: \"takeA\", consume: { idle: 1 }, produce: { aHeld: 1 } },\n    { name: \"takeB\", consume: { aHeld: 1 }, produce: { bHeld: 1 } },\n  ],\n});\nassertNoDeadlock(reachableMarkings(net));",
+                "lang": "ts"
+            }
+        }
+    ]
+}

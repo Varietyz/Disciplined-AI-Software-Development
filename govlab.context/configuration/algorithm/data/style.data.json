@@ -1,0 +1,443 @@
+{
+    "category": "css-cascade",
+    "tier": "leaf",
+    "check": {
+        "by": [
+            "the stylesheet linters and the element construction factory",
+            "the layer fitness functions that fail the build when the partition breaks"
+        ],
+        "population": "every stylesheet and every element the factory constructs",
+        "freshness": "a verdict stands until a stylesheet, the tokens or the factory change",
+        "refusal": "the lint stage fails an unlayered rule, a literal where a token exists, or appearance declared outside the global type rules",
+        "observation": "none: the cascade is decided statically",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the layer order and the token set, which every stylesheet conforms to"
+    },
+    "records": [
+        {
+            "id": "cascade-layer-partition",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Cascade Layer Partition",
+            "intent": "Declare one ordered set of named cascade layers once at the stylesheet root, assign every rule to exactly one layer, and let layer order — not selector specificity nor source order — decide precedence, so values, appearance, placement, and assembly can never fight for the same declaration.",
+            "invariant": "Style precedence must be a property of the layer a rule lives in, not of how specific its selector is; an unlayered rule silently outranks every layer and is therefore forbidden.",
+            "flow": [
+                "Root",
+                "LayerOrderDeclaration",
+                "PerFileLayerBinding",
+                "LayerPrecedence",
+                "DeterministicCascade"
+            ],
+            "productions": [
+                {
+                    "lhs": "CascadeLayerPartition",
+                    "rhs": "<LayerOrderDeclaration> \"→\" <LayeredBindingSet> \"→\" <PrecedencePolicy>"
+                },
+                {
+                    "lhs": "LayerOrderDeclaration",
+                    "rhs": "\"@layer\" \"tokens\" \",\" \"globals\" \",\" \"shell\" \",\" \"components\" \",\" \"app\""
+                },
+                {"lhs": "LayeredBinding",
+                    "rhs": "<StyleFile> \"assigned_to\" <ExactlyOneLayer>"},
+                {
+                    "lhs": "PrecedencePolicy",
+                    "rhs": "\"app_over_components_over_shell_over_globals_over_tokens\" \",\" \"layer_beats_specificity\" \",\" \"no_unlayered_rule\""
+                }
+            ],
+            "composes": [
+                "architectural-style-boundary",
+                "responsibility-boundary"
+            ],
+            "force": ["modularity"],
+            "exemplar": {
+                "before": ".foo { color: red; }\n#page .foo { color: blue; }",
+                "after": "@layer tokens, globals, components, app;\n@layer globals { [data-el=\"foo\"] { color: var(--fg); } }\n@layer app { .foo-view { gap: var(--space-4); } }",
+                "lang": "css",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "token-source-of-truth",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Token Source-of-Truth",
+            "intent": "Define every design primitive — color, space, radius, the type scale, size, duration, z-index — exactly once as a custom property in the tokens layer, and forbid any downstream literal where a token exists.",
+            "invariant": "Values are canonical data with a single source; a literal in globals, components, or app where a token exists is duplication, not styling.",
+            "flow": [
+                "Primitive",
+                "TokenDeclaration",
+                "DownstreamReference",
+                "NoLiteralWhereTokenExists"
+            ],
+            "productions": [
+                {
+                    "lhs": "TokenSourceOfTruth",
+                    "rhs": "<PrimitiveSet> \"→\" <TokenDeclarationSet> \"→\" <ReferenceOnlyDownstream>"
+                },
+                {
+                    "lhs": "TokenCategory",
+                    "rhs": "\"color\" | \"space\" | \"radius\" | \"type_scale\" | \"size\" | \"duration\" | \"z_index\""
+                },
+                {"lhs": "LiteralPolicy",
+                    "rhs": "\"reference_token\" | \"zero_value_exempt\""}
+            ],
+            "composes": ["canonical-data"],
+            "force": [
+                "semantic_consistency",
+                "performance_scaling"
+            ],
+            "exemplar": {
+                "before": ".foo { color: #33bb55; }\n.bar { color: #33bb55; }",
+                "after": "@layer tokens { :root { --foo: #33bb55; } }\n@layer globals { [data-el=\"foo\"], [data-el=\"bar\"] { color: var(--foo); } }",
+                "lang": "css",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "type-keyed-appearance",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Type-Keyed Appearance",
+            "intent": "In the globals layer, define how every element and component type looks, its size, and its spacing exactly once, keyed only by element tag, `data-el` custom type, and the orthogonal `data-*` axes (`data-variant` paint, `data-size` scale, `data-gap` child rhythm, `data-tone` palette, `data-measure` width); never key appearance by a purpose-class, and let every value be a token.",
+            "invariant": "Appearance is a contract owned by a type, not by a use-site; a purpose-class in globals fragments one type's look across many call-sites and is forbidden.",
+            "flow": [
+                "Type",
+                "GlobalAppearanceRule",
+                "DefinedOncePerType",
+                "TokenizedValues"
+            ],
+            "productions": [
+                {
+                    "lhs": "TypeKeyedAppearance",
+                    "rhs": "<TypeSelector> \"→\" <AppearanceRule> \"→\" <DefinedOncePerType>"
+                },
+                {
+                    "lhs": "TypeSelector",
+                    "rhs": "<ElementTag> | \"[data-el=\" <CustomType> \"]\" | <TypeSelector> \"[data-\" (\"variant\"|\"size\"|\"gap\"|\"tone\"|\"measure\"|\"layout\") \"=\" <Value> \"]\""
+                },
+                {
+                    "lhs": "AppearanceProperty",
+                    "rhs": "\"look\" | \"size\" | \"spacing\" | \"intrinsic_rendering_behavior\""
+                },
+                {"lhs": "ForbiddenKey",
+                    "rhs": "\"purpose_class\""}
+            ],
+            "composes": [
+                "canonical-data",
+                "domain-boundary"
+            ],
+            "force": ["contract_compatibility"],
+            "exemplar": {
+                "before": ".foo-label { font-size: 12px; color: gray; }",
+                "after": "@layer globals { [data-el=\"foo\"] { font-size: var(--text-sm); color: var(--fg-muted); } }",
+                "lang": "css",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "custom-type-registration",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Custom Type Registration",
+            "intent": "Extend the stylable element vocabulary beyond the native HTML tag set by registering each semantic type against a base tag and a `data-el` stamp; the registered type becomes a first-class node the globals layer binds one appearance contract to, so a concept no native tag can express — a field-label, an icon, a toast, an entry — is styled by its type, never by a class.",
+            "invariant": "The set of stylable types is open and self-registered, not limited to the HTML tag set; a new appearance contract is a newly registered type plus one global rule, never a new purpose-class.",
+            "flow": [
+                "SemanticConcept",
+                "DefineElement(type, baseTag, dataEl)",
+                "TypeRegistry",
+                "DataElStamp",
+                "GlobalAppearanceContract"
+            ],
+            "productions": [
+                {
+                    "lhs": "CustomTypeRegistration",
+                    "rhs": "<SemanticConcept> \"→\" <ElementDefinition> \"→\" <TypeRegistryEntry> \"→\" <RenderedTypeStamp> \"→\" <AppearanceBinding>"
+                },
+                {"lhs": "ElementDefinition",
+                    "rhs": "\"type\" \",\" \"baseTag\" \",\" \"dataElToken\""},
+                {"lhs": "RenderedTypeStamp",
+                    "rhs": "<BaseTag> \"carrying\" \"data-el=\" <DataElToken>"},
+                {
+                    "lhs": "AppearanceBinding",
+                    "rhs": "\"[data-el=\" <DataElToken> \"]\" \"owns_exactly_one_global_appearance_rule\""
+                }
+            ],
+            "composes": [
+                "extension-point",
+                "self-description-manifest"
+            ],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency"
+            ],
+            "exemplar": {
+                "before": "<span class=\"foo\">…</span>\n.foo { color: gray; }",
+                "after": "defineElement({ type: \"foo\", baseTag: \"output\", dataEl: \"foo\" });\n@layer globals { [data-el=\"foo\"] { color: var(--fg-muted); } }",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "governed-construction-boundary",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Governed Construction Boundary",
+            "intent": "Route all DOM creation through one governed factory that resolves a node spec of shape `{ el, variant, size, gap, tone, measure, layout, class, on, children }` against the type, handler, and component registries, maps each axis key to its `data-*` attribute, treats `class` as a gated hook (icon-font glyph, `u-*` utility, or `c-*` component — never bespoke, never appearance), throws on any unknown type, handler, or component, and refuses an inline `style` attribute.",
+            "invariant": "The construction surface must be structurally incapable of producing a node that is unstyled-by-type or carries an inline style; the illegal state is unrepresentable, not merely linted after the fact.",
+            "flow": [
+                "NodeSpec",
+                "RegistryResolution",
+                "ScalarMapping",
+                "UnknownReject|InlineStyleReject",
+                "GovernedNode"
+            ],
+            "productions": [
+                {
+                    "lhs": "GovernedConstruction",
+                    "rhs": "<NodeSpec> \"→\" <RegistryLookup> \"→\" <ScalarApplication> \"→\" <GuardSet> \"→\" <RenderedNode>"
+                },
+                {
+                    "lhs": "NodeSpec",
+                    "rhs": "\"el\" \",\" \"variant?\" \",\" \"size?\" \",\" \"gap?\" \",\" \"tone?\" \",\" \"measure?\" \",\" \"layout?\" \",\" \"class?\" \",\" \"on?\" \",\" \"children?\""
+                },
+                {
+                    "lhs": "ScalarApplication",
+                    "rhs": "\"each_axis_key→data-attr\" \",\" \"class=gated_iconfont_or_u_or_c\""
+                },
+                {
+                    "lhs": "GuardSet",
+                    "rhs": "\"throw_on_unknown_element\" \",\" \"throw_on_unknown_handler\" \",\" \"throw_on_unknown_component\" \",\" \"reject_style_attribute\""
+                }
+            ],
+            "composes": [
+                "construction-boundary",
+                "error-boundary",
+                "security-policy"
+            ],
+            "force": [
+                "modularity",
+                "object_creation"
+            ],
+            "exemplar": {
+                "before": "const n = document.createElement(\"div\");\nn.className = \"foo\";\nn.style.color = \"red\";",
+                "after": "const n = dom({ el: \"foo\", tone: \"bar\", children: [text] });",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "placement-isolation",
+            "mathType": "topology",
+            "yields": "boolean",
+            "title": "Placement Isolation",
+            "intent": "In the components layer, set only where a component sits — position, offsets, stacking, overlay — keyed by its type, and never its look, size, or spacing, which remain owned by globals.",
+            "invariant": "Placement and appearance are separate contracts; a placement rule that also sets a look re-opens a type's appearance outside its single global definition and breaks the layer partition.",
+            "flow": [
+                "ComponentType",
+                "PlacementRule",
+                "PositionStackingOverlayOnly",
+                "NoAppearanceLeak"
+            ],
+            "productions": [
+                {
+                    "lhs": "PlacementIsolation",
+                    "rhs": "<ComponentType> \"→\" <PlacementRule> \"→\" <ForbiddenAppearanceSet>"
+                },
+                {
+                    "lhs": "PlacementProperty",
+                    "rhs": "\"position\" | \"inset\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"z_index\" | \"float\" | \"clear\""
+                },
+                {
+                    "lhs": "ForbiddenInComponents",
+                    "rhs": "\"color\" | \"font\" | \"size\" | \"spacing\" | \"border\" | \"radius\""
+                }
+            ],
+            "composes": [
+                "responsibility-boundary",
+                "coupling-control"
+            ],
+            "force": ["contract_compatibility"],
+            "exemplar": {
+                "before": "@layer components { [data-el=\"foo\"] { position: fixed; inset-block-end: 1rem; color: white; } }",
+                "after": "@layer components { [data-el=\"foo\"] { position: fixed; inset-block-end: var(--space-4); z-index: var(--z-overlay); } }",
+                "lang": "css",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "assembly-composition",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Assembly Composition",
+            "intent": "In the app layer, compose views from structural containers and arrange their children with flex or grid and token-valued gaps, pad each container once so its children are full-width and fill the padded box, forbid horizontal margins, and never set or override any element's or component's look.",
+            "invariant": "Assembly arranges typed parts and owns child layout plus gutter discipline, but holds zero appearance authority, so a view can be recomposed without restyling a single type.",
+            "flow": [
+                "View",
+                "ContainerSet",
+                "ChildArrangement",
+                "GutterConvention",
+                "NoAppearanceOverride"
+            ],
+            "productions": [
+                {
+                    "lhs": "AssemblyComposition",
+                    "rhs": "<View> \"→\" <StructuralContainerSet> \"→\" <ChildArrangement> \"→\" <GutterConvention>"
+                },
+                {"lhs": "ChildArrangement",
+                    "rhs": "\"flex\" | \"grid\" | \"token_valued_gap\""},
+                {
+                    "lhs": "GutterConvention",
+                    "rhs": "\"container_pads_once\" \",\" \"child_width_100\" \",\" \"no_horizontal_margin\" \",\" \"narrower_via_explicit_width\" \",\" \"zero_margin_exempt\""
+                },
+                {"lhs": "AppearanceAuthority",
+                    "rhs": "\"none\""}
+            ],
+            "composes": ["responsibility-boundary"],
+            "force": ["modularity"],
+            "exemplar": {
+                "before": "@layer app { .foo-view .bar { margin: 0 12px; box-shadow: 0 1px 2px; } }",
+                "after": "@layer app { .foo-view { display: grid; gap: var(--space-4); padding-inline: var(--space-4); } }",
+                "lang": "css",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "layer-fitness-enforcement",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Layer Fitness Enforcement",
+            "intent": "Bind each layer invariant to a machine check — layer order declared once, placement properties barred from globals, class selectors barred from globals, literals barred where a token exists, no horizontal margin, all DOM through the factory, no inline style — run them as hard errors with no warn tier and no inline disables, and gate the push on a clean verdict.",
+            "invariant": "A layer contract holds only if a fitness function fails the build when it is broken; the factory makes appearance-by-type unrepresentable and the linters make any residue unshippable.",
+            "flow": [
+                "LayerInvariant",
+                "FitnessFunction",
+                "StaticCheck",
+                "HardErrorNoWarn",
+                "PushGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "LayerFitnessEnforcement",
+                    "rhs": "<InvariantSet> \"→\" <FitnessFunctionSet> \"→\" <VerdictGate>"
+                },
+                {
+                    "lhs": "CssFitnessRule",
+                    "rhs": "\"layer_order\" | \"no_appearance_in_components_or_app\" | \"no_class_in_globals\" | \"layered_class_format_c_or_u\" | \"no_bespoke_class\" | \"tokens_only\" | \"axis_value_validation\" | \"no_horizontal_margin\""
+                },
+                {"lhs": "DomFitnessRule",
+                    "rhs": "\"factory_only_creation\" | \"no_inline_style\""},
+                {
+                    "lhs": "GatePolicy",
+                    "rhs": "\"hard_error_no_warn_tier\" \",\" \"no_inline_disable\" \",\" \"block_push_on_fail\""
+                }
+            ],
+            "composes": ["verification-fitness"],
+            "force": [
+                "contract_compatibility",
+                "object_creation",
+                "architecture_evolution"
+            ],
+            "exemplar": {
+                "before": "reviewChecklist.push(\"no appearance in the app layer\");",
+                "after": "export const rules = { \"no-appearance-in-app\": \"error\", \"factory-only-creation\": \"error\" };",
+                "lang": "ts",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "type-migration-centralization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Type-Migration Centralization",
+            "intent": "To move an existing purpose-class or page-scoped stylesheet into this model, treat every appearance-bearing class rule as a migration unit, derive the element type it decorates, register a custom `data-el` type when no tag or variant expresses it, move its look, size, and spacing into one global rule keyed by that type, demote any residual position into components and any residual layout into app, and verify that zero appearance rule keyed by a purpose-class remains outside the globals layer.",
+            "invariant": "Migration is centralization by type: each scattered purpose-class appearance collapses into one type-keyed global rule, and completion is proven by the absence of appearance outside globals, not by a narrative claim.",
+            "flow": [
+                "PurposeClassRule",
+                "DeriveType",
+                "RegisterTypeIfNeeded",
+                "MoveAppearanceToGlobals",
+                "DemoteResidue",
+                "ZeroAppearanceClassOutsideGlobals"
+            ],
+            "productions": [
+                {
+                    "lhs": "TypeMigration",
+                    "rhs": "<LegacyAppearanceRuleSet> \"→\" <TypeDerivation> \"→\" <GlobalCentralization> \"→\" <ResidueDemotion> \"→\" <ZeroDuplicationVerdict>"
+                },
+                {
+                    "lhs": "TypeDerivation",
+                    "rhs": "\"existing_tag\" | \"existing_variant\" | \"register_new_data_el_type\""
+                },
+                {"lhs": "ResidueDemotion",
+                    "rhs": "\"placement→components\" \",\" \"layout→app\""},
+                {
+                    "lhs": "ZeroDuplicationVerdict",
+                    "rhs": "\"no_appearance_keyed_by_purpose_class_outside_globals\" | \"incomplete\""
+                }
+            ],
+            "composes": [
+                "centralization-kernel",
+                "architecture-evolution-governance"
+            ],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification",
+                "model_governance",
+                "architecture_evolution"
+            ],
+            "exemplar": {
+                "before": ".foo { color: white; background: blue; position: sticky; top: 0; }",
+                "after": "@layer globals { [data-el=\"foo\"] { color: var(--fg-on-accent); background: var(--bg-accent); } }\n@layer components { [data-el=\"foo\"] { position: sticky; top: 0; } }",
+                "lang": "css",
+                "medium": "code"
+            }
+        },
+        {
+            "id": "css-type-cascade-concern",
+            "principleRef": "single-source-of-truth",
+            "title": "CSS Type-Cascade Kernel",
+            "intent": "Declare one layer order, hold every value in tokens, key every appearance on a type — native or custom-registered — exactly once in globals, hold placement in components and assembly in app, create all DOM through a factory that stamps types and refuses inline style, and gate the whole contract behind machine fitness functions.",
+            "invariant": "Styling is reproducible when precedence is layer-decided, appearance is a per-type contract, the type vocabulary is open and factory-stamped, and every invariant has a build-failing check.",
+            "flow": [
+                "LayerOrder",
+                "Tokens",
+                "TypeKeyedGlobals",
+                "Placement",
+                "Assembly",
+                "GovernedFactory",
+                "Fitness"
+            ],
+            "productions": [
+                {
+                    "lhs": "CssTypeCascadeKernel",
+                    "rhs": "<CascadeLayerPartition> \"→\" <TokenSourceOfTruth> \"→\" <TypeKeyedAppearance> \"→\" <CustomTypeRegistration> \"→\" <GovernedConstruction> \"→\" <PlacementIsolation> \"→\" <AssemblyComposition> \"→\" <LayerFitnessEnforcement>"
+                },
+                {
+                    "lhs": "StylingBoundary",
+                    "rhs": "\"values_in_tokens\" \",\" \"appearance_by_type_in_globals\" \",\" \"app_frame_in_shell\" \",\" \"structure_in_components\" \",\" \"assembly_in_app\""
+                },
+                {"lhs": "OpenTypeVocabulary",
+                    "rhs": "\"native_tag\" | \"registered_data_el_custom_type\""},
+                {
+                    "lhs": "CascadeContract",
+                    "rhs": "\"layer_decides_precedence\" \",\" \"one_definition_per_property_per_type\" \",\" \"factory_and_linters_enforce\""
+                }
+            ],
+            "composes": [
+                "cascade-layer-partition",
+                "token-source-of-truth",
+                "type-keyed-appearance",
+                "custom-type-registration",
+                "placement-isolation",
+                "assembly-composition",
+                "layer-fitness-enforcement"
+            ],
+            "force": [
+                "contract_compatibility",
+                "object_creation",
+                "architecture_evolution"
+            ],
+            "meta": true
+        }
+    ]
+}

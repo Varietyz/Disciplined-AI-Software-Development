@@ -1,0 +1,93 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../../LICENSE.",
+    "check": {
+        "by": [
+            "the template round-trip check, which fills the template and validates the result against the grammar",
+            "the slot check, which requires every declared slot to appear in the body and every slot in the body to be declared"
+        ],
+        "population": "this template's body and slots, and every document created from it",
+        "freshness": "a verdict stands until the template, its document type or the grammar changes",
+        "refusal": "the gate fails on a dangling slot, an unregistered type, or a filled template that does not validate",
+        "observation": "none: a template is static text, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a slot the body never carries and a template of an unregistered type, another plants a retired head in a real template, and every filled template validates clean",
+        "authority": "the template's document type and the grammar, which every document created from the template conforms to"
+    },
+    "type": "TRANSLATION",
+    "title": "Translation Audit Meta-Template (four-gate adversarial per-line i18n auditor)",
+    "slots": [
+        {
+            "name": "project.dictionaries",
+            "description": "the per-locale dictionary directory (source-key to target-value)",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "project.i18n_config",
+            "description": "the i18n config supplying protected terms, RTL locales, and native names",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "project.audit_manifest",
+            "description": "the audit manifest holding each locale's rev and audited hash",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "project.i18n_audit_command",
+            "description": "the command that reports which locales are blocked or clean",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "project.i18n_audit_ok_command",
+            "description": "the command that signs off a locale (updates hash, increments rev)",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.protected_terms",
+            "description": "brand and technical tokens preserved verbatim in the original script",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.rtl_locales",
+            "description": "the locales for which the RTL/bidi lens is active",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "locale",
+            "description": "the locale code under audit (or every locale flagged blocked)",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "task_name",
+            "description": "kebab-case name for the output file",
+            "required": true,
+            "kind": "string"
+        }
+    ],
+    "constraints": [
+        "declaration_required",
+        "gate_per_node",
+        "contract_reads_prior_output",
+        "population_declared",
+        "refusal_before_write",
+        "invariant_has_objector",
+        "evidence_grounded",
+        "adversarial_translation_flawed_until_proven",
+        "source_key_and_catalog_fixed",
+        "every_entry_translated_and_untranslated_in_scope",
+        "method_research_or_first_principles_by_worth",
+        "four_gates_structural_adequacy_fluency_consistency",
+        "placeholders_and_protected_terms_verbatim",
+        "grammar_claim_referenced_or_first_principles_never_guessed",
+        "corrections_re_verified_against_their_own_gates",
+        "sign_off_only_at_zero_flawed",
+        "unknown_is_not_pass"
+    ],
+    "body": "---\nname: {task_name}\ntype: TRANSLATION\nversion: 1.0.0\n---\n\nTHIS TRANSLATION AUDITS each translated string in a locale dictionary against its fixed source through four gates, authoring corrections in place; a translation is presumed flawed until verification proves it sound.\n\n%% META %%:\n    priority: SOURCE_STRING > TARGET_VALUE > TASK\n    trust: source_string = FIXED, referenced_grammar = TRUSTED, fluent_appearance = UNTRUSTED, a_translation = FLAWED_UNTIL_PROVEN\n    objective: {locale}\n    jurisdiction: the {locale} dictionary under {project.dictionaries} | external: the source catalog, which is never altered\n    recursion_limit: 3\n\n# NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set]\n@purpose: \"load the dictionary, config and manifest, probe research, hold the linguistic reference, and kind every entry\"\n@genesis: existence\nCONTRACT:\n  input:     the {locale} dictionary\n  transform: READ_RESOURCE {project.dictionaries} INTO dictionary; READ_RESOURCE {project.i18n_config} INTO config; READ_RESOURCE {project.audit_manifest} INTO manifest; EXECUTE_TOOL <a research probe> WITH timeout: <bound> INTO research; FOR EACH entry IN dictionary: CLASSIFY entry BY <translated when the value differs from the source key, untranslated when it equals it>\n  constraints: the source key is fixed; the file is audited and authored in place; research availability is disclosed\n  output:    scope\nDECLARE scope: object\nSET scope = {dictionary: dictionary, protected: {convention.protected_terms}, rtl: <true when {locale} is in {convention.rtl_locales}>, manifest: manifest, research: research, reference: <the target language's morphology, syntax, register and terminology>, entries: <every entry with its kind>}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"ORIENT\"   yields: boolean\n  [check] the dictionary, config and manifest are loaded (evidence: scope.dictionary, protected and manifest)\n  [check] research availability is probed and disclosed (evidence: scope.research)\n  [check] every entry is kinded (evidence: scope.entries) over: dictionary entries measured: <kinded> / <entries>\n  refuse: a probe that would write the dictionary before EXECUTE_TOOL\n  result: pass → NODE 2 | dictionary unreadable → BLOCKED | unknown → BLOCKED\n\n# NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]\n@purpose: \"choose per entry the audit method, research or first principles, by worth, and order flawed and untranslated entries first\"\n@genesis: difference\n@mandatory\nCONTRACT:\n  input:     scope from NODE 1\n  transform: FOR EACH entry IN scope.entries: CALCULATE_METRIC uncertainty times visibility FROM entry INTO entry.worth; FOR EACH entry IN scope.entries: DETERMINE <research when worth is high and research is available, else first principles> INTO entry.method; ORDER scope.entries BY <flawed and untranslated first, then worth>\n  constraints: every entry is in scope, untranslated entries are gaps to fill; a high-visibility uncertain entry is never left to a cheap guess\n  output:    ordered\nDECLARE ordered: array\nSET ordered = <every entry with its worth, method and position>\nHANDOFF GATE (tel-priority injection-gate):\n  rule_id: \"INTENT\"   yields: boolean over ranking\n  [check] every entry carries a chosen method (evidence: ordered) over: scope.entries measured: <with method> / <entries>\n  [check] each method is the argmax of assurance times visibility minus research cost (evidence: the per-entry choice)\n  [check] no high-visibility uncertain entry is left to a cheap guess (evidence: the worth order against the methods)\n  result: pass → NODE 3 | guess on a high-worth entry → REPAIR (owner: NODE 2) | unknown → BLOCKED\n\n# NODE 3 — GATES   [epistemic · reasoning · logic · yields: set]\n@purpose: \"select the target language's linguistic lenses and derive the four gate requirements every entry must satisfy\"\n@genesis: relation\nCONTRACT:\n  input:     ordered from NODE 2\n  transform: DETERMINE <the lenses the target language exhibits: structural, semantic, relational, sequential, spatial only for an RTL locale, anomaly> INTO lenses; COMPOSE_ARTIFACT gates FROM lenses USING <A structural integrity, B adequacy, C fluency, D consistency>\n  constraints: the RTL lens is active if and only if {locale} is in {convention.rtl_locales}; a single failed gate means flawed\n  output:    gates\nDECLARE gates: object\nSET gates = {lenses: lenses, A: <placeholders verbatim once, protected terms verbatim, no leftover fragment or artifact>, B: <the same proposition, no dropped or added meaning>, C: <agreement, order, definiteness, particles, verb forms, script, RTL>, D: <one rendering per source term, conventional affordances, uniform tone>}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"GATES\"   yields: boolean\n  [check] the applicable lenses are selected (evidence: gates.lenses) over: the language's lenses measured: <selected> / <lenses>\n  [check] the RTL lens is active if and only if the locale is RTL (evidence: gates.lenses against scope.rtl)\n  [check] the four gates are bound to the lenses (evidence: gates.A through gates.D)\n  result: pass → NODE 4 | lens mismatch → REPAIR (owner: NODE 3) | unknown → BLOCKED\n\n# NODE 4 — AUDIT   [epistemic · formalization · analysis · yields: operation]\n@purpose: \"process every entry through the four gates in genesis order and author corrections and translations in place\"\n@genesis: transformation\nCONTRACT:\n  input:     gates from NODE 3\n  transform: ORDER ordered BY <genesis rank, consistency after the entries it depends on>; FOR EACH entry IN ordered: VALIDATE_ARTIFACT entry AGAINST gates INTO entry.finding; FOR EACH entry IN <flawed or untranslated>: COMPOSE_ARTIFACT value FROM entry USING <its method, protected terms and placeholders verbatim>; PERSIST_ARTIFACT value TO dictionary\n  constraints: the source key and the source catalog are never altered; a grammar claim carries a reference or a first-principles justification\n  preserves: every placeholder and every protected term, verbatim\n  output:    findings\nDECLARE findings: array\nSET findings = <one per entry: verdict, failing gates, justification with a reference when researched, correction>\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"AUDIT\"   yields: boolean\n  [check] every entry ran all four gates (evidence: findings) over: ordered measured: <audited> / <entries>\n  [check] no grammar claim lacks a reference or a first-principles justification (evidence: findings.justification)\n  [check] flawed and untranslated values are authored in place with the source key untouched (evidence: the dictionary read back against the source catalog)\n  refuse: a value that would alter a source key, a placeholder or a protected term before PERSIST_ARTIFACT\n  result: pass → NODE 5 | source touched → REPAIR (owner: NODE 4) | unknown → BLOCKED\n\n# NODE 5 — RE-VERIFY   [evaluative · verification · logic + probability · yields: number]\n@purpose: \"gate the corrections on integrity, then re-verify every correction against its own four gates until zero flawed remain\"\n@genesis: constraint\n@mandatory\nCONTRACT:\n  input:     findings from NODE 4\n  transform: FOR EACH correction IN <corrected or authored entries>: VALIDATE_ARTIFACT correction AGAINST <placeholders and protected terms exactly, source untouched> INTO integrity; FOR EACH correction IN <corrected or authored entries>: VALIDATE_ARTIFACT correction AGAINST gates INTO recheck; ANALYZE_CONTENT recheck FOR <the native error that would refute soundness> INTO refuter\n  constraints: a correction is flawed until proven by its own gates; fluency is not adequacy, so B and C both run; a claim that cannot be researched or first-principled leaves the entry flagged; repair is bounded by recursion_limit\n  output:    adjudication\nDECLARE adjudication: object\nSET adjudication = {integrity: integrity, recheck: recheck, remaining_flawed: <entries still flawed>, refuter: refuter}\nHANDOFF GATE (ver-stop gate):\n  rule_id: \"VERIFY\"   yields: boolean\n  [check] every correction preserves its placeholders and protected terms and the source is untouched (evidence: adjudication.integrity) over: corrections measured: <intact> / <corrections>\n  [check] gates B and C both ran on every correction and a refuter is named (evidence: adjudication.recheck and refuter)\n  [check] zero flawed remain (evidence: adjudication.remaining_flawed)\n  standing: moved-set <the dictionary re-read since NODE 4>\n  result: pass → NODE 6 | still flawed → REPAIR (owner: NODE 4) | unverifiable claim → BLOCKED | unknown → BLOCKED\n\n# NODE 6 — SIGN OFF   [evaluative · termination · set-theory · yields: artifact]\n@purpose: \"compose the report deduplicated, and sign off only on saturation and completion and verification, otherwise leave the locale blocked\"\n@genesis: emergence\n@mandatory\nCONTRACT:\n  input:     adjudication from NODE 5\n  transform: COMPOSE_ARTIFACT report FROM {findings, adjudication} USING <the counts and the full flawed table with justifications>; REDUCE report.rows TO <one per entry>; EXECUTE_TOOL {project.i18n_audit_ok_command} WITH timeout: <bound> INTO signed; EXECUTE_TOOL {project.i18n_audit_command} WITH timeout: <bound> INTO status; PERSIST_ARTIFACT report TO <{task_name} report>\n  constraints: sign-off runs only at zero flawed with every correction re-verified; the source is fixed and the translation bends; a self-assessed done is not ter-stop\n  output:    report\n  freshness: fingerprint(dictionary) + fingerprint(this document)\nHANDOFF GATE (ter-stop gate):\n  rule_id: \"TERMINATE\"   yields: boolean\n  [check] the report names the counts and the full flawed table, deduplicated (evidence: report) over: dictionary entries measured: <reported> / <entries>\n  [check] sign-off ran only at zero flawed and the audit command reports the locale clean (evidence: signed and status)\n  [check] exactly one terminal, signed off or blocked, within recursion_limit (evidence: report and the repair count)\n  refuse: a non-zero flawed count before EXECUTE_TOOL of the sign-off command\n  result: pass → TERMINATE | locale still blocked → BLOCKED | unknown → BLOCKED\n\n# CROSS-NODE INVARIANTS\nINVARIANT source-fixed: the source key and the source catalog are never altered over: every entry binds: the auditor objector: [check] the source key untouched at NODE 4\nINVARIANT flawed-until-proven: a translation and a correction are flawed until their own gates prove them sound over: every entry binds: the auditor objector: [check] zero flawed remain at NODE 5\nINVARIANT every-entry-in-scope: translated and untranslated entries are both audited over: dictionary entries binds: the auditor objector: [check] every entry ran all four gates at NODE 4\nINVARIANT verbatim-tokens: placeholders and protected terms survive every correction verbatim over: corrections binds: the auditor objector: [check] every correction preserves its placeholders at NODE 5\nINVARIANT referenced-grammar: a grammar claim carries a reference or a first-principles justification, never a guess over: every claim binds: the auditor objector: [check] no grammar claim lacks a justification at NODE 4\nINVARIANT sign-off-at-zero: a locale is signed off only at zero flawed over: every locale binds: the auditor objector: [check] sign-off ran only at zero flawed at NODE 6\n\nREPORT:\n  subject: NODE 6\n  verdict: pass | fail | unknown\n  domain: declared <entries> measured <audited>\n  populations: sound <n>, flawed <n>, corrected <n>, untranslated filled <n>\n  refusals: <n> [<reason>]\n  unresolved: <n> [<reason>]\n  completion: saturated <bool> complete <bool> verified <bool>\n"
+}

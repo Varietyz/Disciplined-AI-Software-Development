@@ -53,7 +53,7 @@ const WRITING_FORMS: Readonly<Record<string, FormAssessment>> = {
     },
     "--fixture": {
         effect: "write",
-        note: "WRITES a gate fixture entry carrying BOTH halves into the declared fixture set — the fired sample the certifier refuses a kind without, and the accepted one it refuses it without equally. It takes a witness read and refuses on a concurrent change, and it supplies the placement rather than the sample CONTENT, which is the author's judgement about what violates a kind and what a correct member of its population looks like",
+        note: "WRITES a gate fixture entry carrying BOTH halves into the declared fixture set — the fired sample the certifier refuses a kind without, and the accepted one it refuses it without equally. It takes a witness read and refuses on a concurrent change, and it supplies the placement rather than the sample CONTENT, which is the author's judgment about what violates a kind and what a correct member of its population looks like",
         reaches: { anyMember: true, member: null, operand: "entry", slots: ["fixtures"], venueOnly: false },
         region: "entry",
     },
@@ -179,7 +179,7 @@ export const TOOL_WRITTEN: readonly ToolForm[] = Object.values(ASSESSED_FORMS)
 
 export const RETRACTABLE: Readonly<Record<string, string>> = {
     deferral:
-        "a member of this region is COLLECTED WHOLESALE by a second form that takes no member argument, so an author who has withdrawn one cannot stop it travelling — the collector carries every member the region holds, and a withdrawal stated in prose beside it is invisible to the derivation the receiving edge joins on. VERIFIED at the collecting runner rather than inferred from the region's shape: the arrival computes its clause set from the whole section and reports what it carried, so a withdrawn member arrives indistinguishable from a live one and reaches a receiver who cannot tell it was retracted",
+        "a member of this region is COLLECTED WHOLESALE by a second form that takes no member argument, so an author who has withdrawn one cannot stop it traveling — the collector carries every member the region holds, and a withdrawal stated in prose beside it is invisible to the derivation the receiving edge joins on. VERIFIED at the collecting runner rather than inferred from the region's shape: the arrival computes its clause set from the whole section and reports what it carried, so a withdrawn member arrives indistinguishable from a live one and reaches a receiver who cannot tell it was retracted",
 };
 
 export const DELIBERATELY_UNPAIRED: Readonly<Record<string, string>> = {

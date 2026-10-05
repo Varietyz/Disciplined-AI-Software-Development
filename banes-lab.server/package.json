@@ -1,0 +1,8 @@
+{
+    "name": "@banes-lab/server",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The nginx configuration and the njs query script the droplet serves banes-lab.com with, plus the local backups of the live configuration.",
+    "license": "CC-BY-SA-4.0"
+}

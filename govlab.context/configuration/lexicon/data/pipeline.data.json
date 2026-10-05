@@ -1,0 +1,252 @@
+{
+    "category": "streaming-pipeline-dataflow-processing",
+    "records": [
+        {
+            "name": "Batch-Only Processing",
+            "kind": "approach",
+            "definition": "Processing data in scheduled batches rather than as a continuous low-latency stream."
+        },
+        {
+            "name": "Ordering/State",
+            "kind": "quality-attribute",
+            "definition": "The degree to which processing an unbounded stream complicates preserving event order and bounded state."
+        },
+        {
+            "name": "Forward-Only State Model",
+            "kind": "constraint",
+            "definition": "The requirement that processing keep only forward-moving state, never needing to revisit earlier input."
+        },
+        {
+            "name": "Global Optimization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which processing data in a single pass forgoes optimizations that need a full view of the data."
+        },
+        {
+            "name": "Multi-Pass Full Materialization",
+            "kind": "technique",
+            "definition": "Loading a full dataset into memory and traversing it in multiple passes, rather than in a single streaming pass."
+        },
+        {
+            "name": "Error Propagation/Debugging",
+            "kind": "quality-attribute",
+            "definition": "The degree to which splitting work into pipeline stages makes an error harder to trace back to its origin."
+        },
+        {
+            "name": "Monolithic Processing Function",
+            "kind": "anti-pattern",
+            "definition": "One large function that performs every processing step at once, so stages cannot be tested or reused independently."
+        },
+        {
+            "name": "Stage Contracts",
+            "kind": "constraint",
+            "definition": "The requirement that each pipeline stage declare a typed contract for what it consumes and produces."
+        },
+        {
+            "name": "Stepwise Transformation",
+            "kind": "capability",
+            "definition": "The ability to transform data through a sequence of small, composable stages."
+        },
+        {
+            "name": "Streaming",
+            "kind": "capability",
+            "definition": "The ability to process data continuously as it arrives rather than in complete batches."
+        },
+        {
+            "name": "Avoiding Unneeded Work",
+            "kind": "capability",
+            "definition": "The ability to skip computing results that are never used."
+        },
+        {
+            "name": "Debuggability/Resource Lifetime",
+            "kind": "quality-attribute",
+            "definition": "The degree to which deferring computation makes execution order harder to debug and resource lifetimes harder to reason about."
+        },
+        {
+            "name": "Deferred Execution Semantics",
+            "kind": "constraint",
+            "definition": "The requirement that a computation's semantics defer its work until the result is demanded."
+        },
+        {
+            "name": "Eager Full Materialization",
+            "kind": "technique",
+            "definition": "Computing and materializing a complete result up front, rather than deferring computation until parts are needed."
+        },
+        {
+            "name": "Large Data Processing",
+            "kind": "capability",
+            "definition": "The ability to process datasets larger than memory by reading them in order, a piece at a time."
+        },
+        {
+            "name": "Lookup Performance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which reading strictly in sequence makes locating a specific item by key slow."
+        },
+        {
+            "name": "Ordered Read Model",
+            "kind": "constraint",
+            "definition": "The requirement that data be read in a fixed forward order rather than by arbitrary index."
+        },
+        {
+            "name": "Random Access Requirement",
+            "kind": "constraint",
+            "definition": "A need to read arbitrary items by position or key on demand rather than strictly in sequence."
+        },
+        {
+            "name": "Backtracking Algorithm",
+            "kind": "technique",
+            "definition": "A method that explores options and reverts to an earlier point when one fails, requiring the ability to look back."
+        },
+        {
+            "name": "Complex Grammar/Global State",
+            "kind": "quality-attribute",
+            "definition": "The degree to which forbidding backtracking makes complex grammars or global-state logic hard to express."
+        },
+        {
+            "name": "Streaming Parsers",
+            "kind": "capability",
+            "definition": "The ability to parse input incrementally as it streams in, without buffering the whole document."
+        },
+        {
+            "name": "Control-Flow-Centric Monolith",
+            "kind": "anti-pattern",
+            "definition": "A monolith driven by imperative control flow rather than data dependencies, so stages cannot run or scale independently."
+        },
+        {
+            "name": "Data Dependencies",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:stages",
+                    "reason": "Data dependencies declare what each stage needs from others, while stages are the discrete steps themselves."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that the data each stage needs from others be declared as explicit dependencies."
+        },
+        {
+            "name": "Parallel/Stream Processing",
+            "kind": "capability",
+            "definition": "The ability to run independent stages in parallel or stream data between them as it is produced."
+        },
+        {
+            "name": "Stages",
+            "kind": "constraint",
+            "definition": "The requirement that processing be decomposed into discrete stages connected by data flow."
+        },
+        {
+            "name": "State Coordination",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a data-driven design must still coordinate shared state across concurrent stages."
+        },
+        {
+            "name": "No Hidden State",
+            "kind": "constraint",
+            "definition": "The requirement that a processor keep no state between invocations, so each call starts afresh from what it is given."
+        },
+        {
+            "name": "Parallel Processing",
+            "kind": "capability",
+            "definition": "The ability to process many records at once because each is handled independently of the others."
+        },
+        {
+            "name": "Stateful Business Rules",
+            "kind": "quality-attribute",
+            "definition": "The degree to which rules that inherently depend on accumulated state resist a purely stateless design."
+        },
+        {
+            "name": "Stateful Hidden Accumulation",
+            "kind": "anti-pattern",
+            "definition": "Accumulating state inside a processor across records, so results depend on invisible history."
+        },
+        {
+            "name": "Bounded Aggregation over Unbounded Streams",
+            "kind": "capability",
+            "definition": "The ability to aggregate an endless stream by grouping its events into bounded windows."
+        },
+        {
+            "name": "Bounded State",
+            "kind": "quality-attribute",
+            "definition": "The degree to which processing keeps its working state within a fixed bound regardless of input size."
+        },
+        {
+            "name": "Event Time",
+            "kind": "artifact",
+            "definition": "The time at which an event occurred, carried on the event and used to assign it to a window."
+        },
+        {
+            "name": "Late-Data Handling",
+            "kind": "quality-attribute",
+            "definition": "The degree to which windowing by event time must reckon with events that arrive after their window has closed."
+        },
+        {
+            "name": "Unbounded Accumulation",
+            "kind": "anti-pattern",
+            "definition": "Aggregating an endless stream into ever-growing state that eventually exhausts memory."
+        },
+        {
+            "name": "Parallel Branch Processing",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:result-aggregation",
+                    "reason": "Parallel branch processing fans work out, while result aggregation brings the outputs back into one."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to process independent branches of work simultaneously across workers."
+        },
+        {
+            "name": "Result Aggregation",
+            "kind": "capability",
+            "definition": "The ability to combine the outputs of parallel branches back into a single result."
+        },
+        {
+            "name": "Serial Item Processing",
+            "kind": "approach",
+            "definition": "Processing independent items one at a time in sequence, rather than in parallel."
+        },
+        {
+            "name": "Fitness for Purpose",
+            "kind": "quality-attribute",
+            "definition": "The degree to which the chosen processing model matches the latency and volume the problem needs."
+        },
+        {
+            "name": "Latency Requirement Clarity",
+            "kind": "constraint",
+            "definition": "The requirement that a workload's latency and freshness needs be made explicit before a processing model is chosen."
+        },
+        {
+            "name": "Latency-Appropriate Processing Model",
+            "kind": "capability",
+            "definition": "The ability to choose batch or stream processing to match a workload's latency needs."
+        },
+        {
+            "name": "One-Size-Fits-All Processing",
+            "kind": "anti-pattern",
+            "definition": "Forcing every workload through a single processing model regardless of its latency or volume needs."
+        },
+        {
+            "name": "Operational Duplication",
+            "kind": "quality-attribute",
+            "definition": "The degree to which supporting both batch and streaming paths duplicates operational effort and code."
+        },
+        {
+            "name": "Fuse Passes",
+            "kind": "technique",
+            "definition": "A technique for combining several passes over the same data into one."
+        },
+        {
+            "name": "Repeated Full Scan",
+            "kind": "anti-pattern",
+            "definition": "A defect in which large data is scanned or materialized several times where one pass would do."
+        },
+        {
+            "name": "Random Access over a Stream",
+            "kind": "anti-pattern",
+            "definition": "A defect in which code seeks or indexes into a source that can only be read in sequence."
+        },
+        {
+            "name": "Look-Back Buffering",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a whole stream is buffered so that one stage can look back or ahead."
+        }
+    ]
+}

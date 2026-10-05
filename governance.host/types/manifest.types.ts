@@ -12,3 +12,8 @@ export interface PunctuationPolicy {
 export interface OptionsCarrier {
     options: readonly unknown[];
 }
+
+export interface RuntimeBinding {
+    readonly pathKey: string;
+    readonly runtime: string;
+}

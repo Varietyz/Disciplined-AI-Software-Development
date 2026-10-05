@@ -1,0 +1,267 @@
+{
+    "category": "causality-ordering-distributed-time",
+    "records": [
+        {
+            "name": "Causation Tracking",
+            "kind": "activity",
+            "definition": "Recording which event caused which, so cause-and-effect chains can be reconstructed later."
+        },
+        {
+            "name": "Correct Workflow Reasoning",
+            "kind": "capability",
+            "definition": "The ability to reason correctly about a workflow's steps by knowing their causal relationships."
+        },
+        {
+            "name": "Unordered Side Effects",
+            "kind": "anti-pattern",
+            "definition": "Applying side effects in an order that ignores their causal dependencies, producing incorrect outcomes."
+        },
+        {
+            "name": "Arbitrary Reordering",
+            "distinctFrom": [
+                {
+                    "id": "architecture:read-your-writes-violation",
+                    "reason": "Arbitrary reordering lets any effect appear before its cause, while a read-your-writes violation is one writer reading back a stale copy of its own write."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Reordering causally related operations freely, so effects can appear before their causes."
+        },
+        {
+            "name": "Causal Ordering",
+            "kind": "constraint",
+            "definition": "The requirement that operations be applied in an order consistent with their cause-and-effect relationships."
+        },
+        {
+            "name": "Eventual Consistency Safety",
+            "kind": "quality-attribute",
+            "definition": "The degree to which replicas can converge over time without ever exposing a causally impossible state."
+        },
+        {
+            "name": "Latency/Availability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enforcing causal ordering across replicas costs added latency and reduced availability."
+        },
+        {
+            "name": "User-Visible Ordering Guarantees",
+            "kind": "capability",
+            "definition": "The ability to guarantee that users never observe an effect before its cause."
+        },
+        {
+            "name": "Causal Reasoning",
+            "kind": "activity",
+            "definition": "Reasoning about which events must precede others based on their causal relationships."
+        },
+        {
+            "name": "Ordering Semantics",
+            "kind": "constraint",
+            "definition": "The requirement that a defined semantics specify when one event is considered to happen before another."
+        },
+        {
+            "name": "Parallel Execution",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enforcing a happens-before order constrains how much work can run in parallel."
+        },
+        {
+            "name": "Race Detection",
+            "kind": "capability",
+            "definition": "The ability to detect data races by finding accesses with no happens-before ordering between them."
+        },
+        {
+            "name": "Correct Stateful Processing",
+            "kind": "capability",
+            "definition": "The ability to process a stream statefully with correct results by handling events in their proper order."
+        },
+        {
+            "name": "Ordering Key or Sequence",
+            "kind": "constraint",
+            "definition": "The requirement that each event carry a key or sequence number that fixes its position in order."
+        },
+        {
+            "name": "Unordered Parallel Consumption",
+            "kind": "anti-pattern",
+            "definition": "Consuming an ordered event stream in parallel without preserving order, so state is updated out of sequence."
+        },
+        {
+            "name": "Dependency Declaration",
+            "kind": "constraint",
+            "definition": "The requirement that each operation declare the operations it causally depends on."
+        },
+        {
+            "name": "Graph Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which tracking fine-grained causal dependencies grows the dependency graph large and hard to reason about."
+        },
+        {
+            "name": "Hidden Dependency",
+            "distinctFrom": [
+                {
+                    "id": "architecture:test-pyramid-inversion",
+                    "reason": "A hidden dependency is an undeclared requirement of a component or an operation, while test pyramid inversion is a suite weighted toward slow end-to-end tests."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "A dependency a component or an operation relies on without declaring it, so it surfaces only at runtime or when an unstated order is broken."
+        },
+        {
+            "name": "Cycle Detection",
+            "kind": "capability",
+            "definition": "The ability to detect cycles in a dependency graph before they cause deadlock or infinite resolution."
+        },
+        {
+            "name": "Dependency Extraction",
+            "kind": "constraint",
+            "definition": "The requirement that dependencies between units be discovered and represented explicitly as a graph."
+        },
+        {
+            "name": "Dynamic Loading",
+            "kind": "quality-attribute",
+            "definition": "The degree to which resolving dependencies dynamically at runtime undermines a statically analyzable dependency graph."
+        },
+        {
+            "name": "Bidirectional Collaboration",
+            "kind": "quality-attribute",
+            "definition": "The degree to which forbidding cycles prevents two components from depending on each other bidirectionally."
+        },
+        {
+            "name": "Build Order",
+            "kind": "capability",
+            "definition": "The ability to derive a correct build or execution order from a graph that contains no cycles."
+        },
+        {
+            "name": "Layering",
+            "kind": "style",
+            "definition": "A convention of organizing components into ordered layers where each may depend only on the layers beneath it."
+        },
+        {
+            "name": "Topological Ordering",
+            "kind": "capability",
+            "definition": "The ability to linearize a directed acyclic graph into an order where every node follows its dependencies."
+        },
+        {
+            "name": "Concurrent Update Detection",
+            "kind": "capability",
+            "definition": "The ability to detect when two updates happened concurrently rather than one causally after the other."
+        },
+        {
+            "name": "Metadata Size",
+            "kind": "quality-attribute",
+            "definition": "The degree to which carrying a per-node counter for every node grows the ordering metadata with cluster size."
+        },
+        {
+            "name": "Node Identity",
+            "kind": "constraint",
+            "definition": "The requirement that each participating node have a distinct identity to index its own counter."
+        },
+        {
+            "name": "Single Global Clock Assumption",
+            "kind": "anti-pattern",
+            "definition": "Assuming a single global clock orders all events, which fails across distributed nodes with independent clocks."
+        },
+        {
+            "name": "Version Vector",
+            "kind": "artifact",
+            "definition": "A set of per-node counters that together capture the causal history of a replicated item."
+        },
+        {
+            "name": "Happens-Before Reasoning",
+            "kind": "activity",
+            "definition": "Reasoning about event order using logical timestamps that respect the happens-before relation."
+        },
+        {
+            "name": "Logical Counter",
+            "kind": "mechanism",
+            "definition": "A monotonically increasing counter each process maintains to stamp events for logical ordering."
+        },
+        {
+            "name": "No Concurrent Causality Distinction",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a single logical counter cannot tell concurrent events apart from causally ordered ones."
+        },
+        {
+            "name": "Partial Ordering",
+            "kind": "capability",
+            "definition": "The ability to establish a consistent partial order over events without a shared physical clock."
+        },
+        {
+            "name": "Wall-Clock Ordering Assumption",
+            "kind": "anti-pattern",
+            "definition": "Ordering distributed events by wall-clock timestamps, which clock skew makes unreliable."
+        },
+        {
+            "name": "Clock Skew",
+            "kind": "quality-attribute",
+            "definition": "The degree to which physical clocks on different nodes drift apart, distorting time-based ordering."
+        },
+        {
+            "name": "Physical-Clock-Only Ordering",
+            "kind": "anti-pattern",
+            "definition": "Ordering events by physical clocks alone, which clock skew renders inconsistent across nodes."
+        },
+        {
+            "name": "Wall-Clock-Correlated Causal Order",
+            "kind": "capability",
+            "definition": "The ability to order events causally while keeping timestamps close to wall-clock time."
+        },
+        {
+            "name": "Commutative Merge",
+            "kind": "constraint",
+            "definition": "The requirement that concurrent updates merge in any order to the same result."
+        },
+        {
+            "name": "Conflict-Free Replica Convergence",
+            "kind": "capability",
+            "definition": "The ability for replicas to converge to one state automatically without conflict resolution."
+        },
+        {
+            "name": "Last-Write-Wins Overwrite",
+            "kind": "model",
+            "definition": "Resolving concurrent updates by keeping the most recent write, rather than merging all updates."
+        },
+        {
+            "name": "Metadata Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree to which the bookkeeping a conflict-free type carries per value adds storage and transmission cost."
+        },
+        {
+            "name": "Identical Delivery Order Across Nodes",
+            "kind": "capability",
+            "definition": "The ability to deliver messages to every node in the same total order."
+        },
+        {
+            "name": "Per-Node Independent Ordering",
+            "kind": "anti-pattern",
+            "definition": "Letting each node decide message order independently, so replicas diverge on sequence."
+        },
+        {
+            "name": "Assumed Total Consistency And Availability",
+            "kind": "anti-pattern",
+            "definition": "Assuming a distributed system can be fully consistent and available at once, ignoring partitions that force a choice."
+        },
+        {
+            "name": "Explicit Consistency/Availability Choice Under Partition",
+            "kind": "capability",
+            "definition": "The ability to choose deliberately between consistency and availability when a network partition occurs."
+        },
+        {
+            "name": "Network Partition Possibility",
+            "kind": "constraint",
+            "definition": "The requirement that a distributed design account for the possibility of network partitions."
+        },
+        {
+            "name": "Consistency Assumed Free When Healthy",
+            "kind": "anti-pattern",
+            "definition": "Assuming consistency carries no cost while the network is healthy, ignoring the latency it still imposes."
+        },
+        {
+            "name": "Latency-Consistency Trade-off When Healthy",
+            "kind": "capability",
+            "definition": "The ability to weigh the latency-versus-consistency trade-off that remains even when the network is healthy."
+        },
+        {
+            "name": "Reorder Buffer",
+            "kind": "technique",
+            "definition": "A technique for holding events that arrive early until the events before them arrive, then releasing them in order."
+        }
+    ]
+}

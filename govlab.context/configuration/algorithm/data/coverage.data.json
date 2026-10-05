@@ -1,0 +1,400 @@
+{
+    "category": "test-coverage",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the evidence verdict, which is pass or fail only against a non-empty evidence set",
+            "the covered-surfaces check on each module's declaration"
+        ],
+        "population": "every surface the unit can fail in",
+        "freshness": "a verdict stands until the unit's code or its tests change",
+        "refusal": "a required surface with no evidence stays unknown, and completion is refused while any required surface is unknown",
+        "observation": "the runtime techniques among the surfaces' lists, which locate failures without certifying their absence",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the evidence set, which a verdict is decided from, so a required surface without evidence stays unknown"
+    },
+    "records": [
+        {
+            "id": "coverage-workspace",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Coverage Workspace",
+            "exemplar": {
+                "before": "Testing starts from whatever surfaces come to mind, with no record of the full space a system can fail in.",
+                "after": "unit under test → load the test-surface catalog{dimension x lens → invariant, technique} → a coverage workspace enumerating every surface the unit can carry",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Establish the unit under test, load the test-surface catalog as the space of what can be wrong, and enumerate every surface the unit can carry, so coverage is measured against the full derivable space rather than an ad-hoc list.",
+            "invariant": "Coverage must be measured against the derivable surface space, not a remembered subset.",
+            "flow": [
+                "UnitUnderTest",
+                "SurfaceCatalog",
+                "CandidateSurfaceSet",
+                "CoverageWorkspace"
+            ],
+            "productions": [
+                {
+                    "lhs": "CoverageWorkspace",
+                    "rhs": "<UnitUnderTest> \"→\" <SurfaceCatalog> \"→\" <CandidateSurfaceSet>"
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "surface-grid-walk",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "grounds": [
+                "reasoning:anomaly",
+                "reasoning:semantic-correctness"
+            ],
+            "title": "Surface Grid Walk",
+            "exemplar": {
+                "before": "Coverage is asserted from the surfaces already tested, so the empty cells of the dimension x lens grid stay invisible.",
+                "after": "catalog → walk (dimension x lens) grid → present cells (a surface exists) vs empty cells (no surface) → the candidate-gap set the anomaly lens surfaces",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Walk the dimension-by-lens grid across the catalog, mark every cell that carries a surface, and surface the empty cells as candidate gaps using the anomaly lens, so a missing aspect is detected structurally rather than by recollection.",
+            "invariant": "An empty (dimension x lens) cell that can fail is an untested aspect until a surface is derived for it.",
+            "flow": [
+                "SurfaceCatalog",
+                "GridWalk",
+                "PresentCellSet",
+                "CandidateGapSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "SurfaceGridWalk",
+                    "rhs": "<CandidateSurfaceSet> \"→\" <DimensionLensGrid> \"→\" <PresentCellSet> \",\" <CandidateGapSet>"
+                },
+                {"lhs": "DimensionLensGrid",
+                    "rhs": "<OntologyDimension> \"x\" <AnalysisLens>"}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "uncovered-gap-derivation",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Uncovered Gap Derivation",
+            "exemplar": {
+                "before": "The gap set is treated as final, so cells that cannot fail for this unit are chased and the gaps that can fail are diluted.",
+                "after": "candidate gaps → keep only cells this unit can fail in → required-but-uncovered set = the surfaces still owed a test",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Reduce the candidate-gap set to the cells this unit can fail in, yielding the required-but-uncovered surfaces that still owe a test, so effort is spent on gaps that can fail rather than the full cartesian complement.",
+            "invariant": "A gap counts only where the unit can fail; the coverage obligation is the required set, not the whole grid.",
+            "flow": [
+                "CandidateGapSet",
+                "FailabilityFilter",
+                "RequiredUncoveredSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "UncoveredGapDerivation",
+                    "rhs": "<CandidateGapSet> \"→\" <FailabilityFilter> \"→\" <RequiredUncoveredSet>"
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "coverage-risk-prioritization",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Coverage Risk Prioritization",
+            "exemplar": {
+                "before": "Every uncovered surface is treated as equally urgent, so a rarely hit cosmetic gap competes with an unguarded security boundary.",
+                "after": "required-uncovered surfaces → failure-impact x reachability → priority → the highest-risk surfaces first",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Score each required-uncovered surface by failure impact and reachability, rank the surfaces, and address the highest-risk gaps first, so limited testing effort removes the most risk.",
+            "invariant": "The highest-risk uncovered surface is tested first.",
+            "flow": [
+                "RequiredUncoveredSet",
+                "RiskScore",
+                "PrioritizedSurfaceQueue"
+            ],
+            "productions": [
+                {
+                    "lhs": "CoverageRiskPrioritization",
+                    "rhs": "<RequiredUncoveredSet> \"→\" <RiskScoreSet> \"→\" <PrioritizedSurfaceQueue>"
+                },
+                {"lhs": "RiskScore",
+                    "rhs": "<FailureImpact> \"*\" <Reachability>"}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "technique-invariant-selection",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Technique and Invariant Selection",
+            "exemplar": {
+                "before": "A test is written before deciding what must hold or how to obtain evidence, so it asserts an accidental condition with the wrong technique.",
+                "after": "surface → state its invariant (the assertion) → pick the technique whose reasoning mode matches how the surface is observed → a matched (invariant, technique) plan",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each prioritized surface, state the invariant that must hold and select the technique whose reasoning mode matches how that surface is observed, so the test asserts the right property by the right method.",
+            "invariant": "The technique is chosen by matching its reasoning mode to the surface, and the assertion is the surface's invariant.",
+            "flow": [
+                "Surface",
+                "InvariantStatement",
+                "ModeMatchedTechnique",
+                "SurfacePlan"
+            ],
+            "productions": [
+                {
+                    "lhs": "TechniqueInvariantSelection",
+                    "rhs": "<Surface> \"→\" <Invariant> \",\" <ModeMatchedTechnique> \"→\" <SurfacePlan>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "contract_compatibility"
+            ]
+        },
+        {
+            "id": "test-authoring",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Test Authoring",
+            "exemplar": {
+                "before": "The plan stays a note; the predicate is never realized as an executable check that gathers evidence.",
+                "after": "surface plan → realize the predicate as an executable assertion → wire the evidence source the technique requires → a runnable test for the surface",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Realize each surface plan as an executable test: encode the predicate as an assertion and wire the evidence source the technique requires, producing a runnable test that covers the surface.",
+            "invariant": "A covered surface has an executable test whose predicate is checkable and whose evidence source is wired.",
+            "flow": [
+                "SurfacePlan",
+                "PredicateAssertion",
+                "EvidenceWiring",
+                "RunnableTest"
+            ],
+            "productions": [
+                {
+                    "lhs": "TestAuthoring",
+                    "rhs": "<SurfacePlan> \"→\" <PredicateAssertion> \",\" <EvidenceWiring> \"→\" <RunnableTest>"
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "evidence-verdict",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Evidence Verdict",
+            "exemplar": {
+                "before": "A surface with no run is silently treated as passing, so absence of evidence reads as evidence of correctness.",
+                "after": "run the test → gather evidence → non-empty evidence set: pass or fail; empty evidence set: unknown (the coverage-gap state), never pass",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Run each test, gather its evidence, and issue the verdict: pass or fail when the evidence set is non-empty, unknown when it is empty, so an untested or unrun surface reads as unknown rather than as a silent pass.",
+            "invariant": "A verdict is pass or fail only against a non-empty evidence set; no evidence yields unknown, never pass.",
+            "flow": [
+                "RunnableTest",
+                "EvidenceSet",
+                "Verdict"
+            ],
+            "productions": [
+                {"lhs": "EvidenceVerdict",
+                    "rhs": "<RunnableTest> \"→\" <EvidenceSet> \"→\" <Verdict>"},
+                {"lhs": "Verdict",
+                    "rhs": "\"pass\" | \"fail\" | \"unknown\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "coverage-ledger",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Coverage Ledger",
+            "exemplar": {
+                "before": "Each run forgets the last, so which surfaces are covered, uncovered, or unknown must be re-derived every time.",
+                "after": "verdicts → a durable coverage ledger{surface → verdict} + the residual uncovered/unknown set → reusable coverage state",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Record each surface's verdict in a durable coverage ledger together with the residual uncovered and unknown set, so coverage state is reusable evidence rather than a fact re-derived on every run.",
+            "invariant": "Coverage state is durable ledger evidence, not a per-run recomputation.",
+            "flow": [
+                "VerdictSet",
+                "CoverageLedger",
+                "ResidualGapSet"
+            ],
+            "productions": [
+                {"lhs": "CoverageLedger",
+                    "rhs": "<VerdictSet> \"→\" <SurfaceLedger> \"→\" <ResidualGapSet>"}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "coverage-completion",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Coverage Completion",
+            "exemplar": {
+                "before": "Coverage is declared done while required surfaces remain unknown, so the untested cells hide behind an aggregate percentage.",
+                "after": "ledger → every required surface carries a surface + technique + invariant AND a non-unknown verdict → complete; any required-unknown remains → incomplete",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Mark coverage complete only when every required surface carries a surface, a technique, and an invariant, and its verdict is non-unknown; any required surface still unknown leaves coverage incomplete.",
+            "invariant": "Completion is the absence of required-unknown surfaces, not an aggregate percentage.",
+            "flow": [
+                "CoverageLedger",
+                "RequiredSurfaceCheck",
+                "CompletionVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "CoverageCompletion",
+                    "rhs": "<CoverageLedger> \"→\" <RequiredSurfaceCheck> \"→\" <CompletionVerdict>"
+                },
+                {"lhs": "CompletionVerdict",
+                    "rhs": "\"coverage_complete\" | \"coverage_incomplete\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "test-coverage-kernel",
+            "principleRef": "specification-based-testing",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "coverage-workspace"},
+                {"stage": "see",
+                    "record": "surface-grid-walk"},
+                {"stage": "derive",
+                    "record": "uncovered-gap-derivation"},
+                {"stage": "intent",
+                    "record": "coverage-risk-prioritization"},
+                {"stage": "project",
+                    "record": "technique-invariant-selection"},
+                {"stage": "act",
+                    "record": "test-authoring"},
+                {"stage": "verify",
+                    "record": "evidence-verdict"},
+                {"stage": "commit",
+                    "record": "coverage-ledger"},
+                {"stage": "terminate",
+                    "record": "coverage-completion"}
+            ],
+            "title": "Test Coverage Kernel",
+            "exemplar": {
+                "before": "Coverage is pursued by intuition and reported as a percentage, so the space a system can fail in is never walked and unknown surfaces pass silently.",
+                "after": "workspace → grid walk → gap derivation → risk priority → technique+invariant → authored test → evidence verdict → ledger → completion",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load the surface catalog for a unit, walk the dimension-by-lens grid, derive the required-uncovered surfaces, prioritize them by risk, select a mode-matched technique and invariant per surface, author the test, issue an evidence verdict, ledger the state, and terminate only when no required surface remains unknown.",
+            "invariant": "Test coverage is a derivation from the surface space to a durable verdict ledger, complete only when no required surface is unknown.",
+            "flow": [
+                "Workspace",
+                "GridWalk",
+                "GapDerivation",
+                "RiskPriority",
+                "TechniqueInvariant",
+                "TestAuthoring",
+                "EvidenceVerdict",
+                "Ledger",
+                "Completion"
+            ],
+            "productions": [
+                {
+                    "lhs": "TestCoverageKernel",
+                    "rhs": "<CoverageWorkspace> \"→\" <SurfaceGridWalk> \"→\" <UncoveredGapDerivation> \"→\" <CoverageRiskPrioritization> \"→\" <TechniqueInvariantSelection> \"→\" <TestAuthoring> \"→\" <EvidenceVerdict> \"→\" <CoverageLedger> \"→\" <CoverageCompletion>"
+                }
+            ],
+            "composes": [
+                "coverage-workspace",
+                "surface-grid-walk",
+                "uncovered-gap-derivation",
+                "coverage-risk-prioritization",
+                "technique-invariant-selection",
+                "test-authoring",
+                "evidence-verdict",
+                "coverage-ledger",
+                "coverage-completion"
+            ],
+            "force": [
+                "correctness_verification",
+                "semantic_consistency",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "test-coverage-concern",
+            "title": "<Test Coverage Concern>",
+            "intent": "<Load the surface catalog for a unit> → <Walk the dimension x lens grid> → <Derive the required-uncovered surfaces> → <Prioritize by risk> → <Select a mode-matched technique and its invariant> → <Author the test> → <Issue an evidence verdict> → <Ledger the coverage state> → <Terminate when no required surface is unknown>",
+            "invariant": "Coverage is complete when every (dimension x lens) surface the unit can fail in carries a surface, a technique, and an invariant with a non-unknown verdict.",
+            "flow": [
+                "SurfaceSpace",
+                "GridWalk",
+                "RequiredGaps",
+                "Priority",
+                "TechniqueInvariant",
+                "AuthoredTest",
+                "Verdict",
+                "Ledger"
+            ],
+            "productions": [
+                {
+                    "lhs": "TestCoverageConcern",
+                    "rhs": "<SurfaceCatalog> \"→\" <DimensionLensGrid> \"→\" <RequiredUncoveredSet> \"→\" <PrioritizedSurfaceQueue> \"→\" <SurfacePlanSet> \"→\" <RunnableTestSet> \"→\" <VerdictSet> \"→\" <CoverageLedger>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "semantic_consistency"
+            ],
+            "meta": true
+        }
+    ]
+}

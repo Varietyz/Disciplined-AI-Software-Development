@@ -1,0 +1,392 @@
+{
+    "category": "Architectural Clusters",
+    "tier": "exempt",
+    "check": {
+        "by": ["the layer and tension join, which places every principle in a cluster and resolves every tension between clusters"],
+        "population": "every architecture and lexicon record the membership map places in the cluster",
+        "freshness": "a verdict stands until the membership map, the topology or a member record changes",
+        "refusal": "the gate fails on a tension with no resolution, or an override that matches no live edge",
+        "observation": "none: a cluster is a grouping of principles",
+        "evidence": "fires-and-accepts: a suite plants a tension between two principles no layer places, and the bundled tensions resolve with no dead override",
+        "authority": "the membership map and the topology, which a tension's resolution is derived from"
+    },
+    "records": [
+        {
+            "id": "structural-core",
+            "principleRef": "single-source-of-truth",
+            "title": "Structural Core",
+            "intent": "The architectural rules that preserve structural integrity — a single authoritative source, no shortcuts, no fallbacks, no duplication, no orphaned artifacts.",
+            "invariant": "Structure stays sound only when every element has one authoritative home and no debt-incurring escape hatch exists.",
+            "flow": [
+                "SingleSource",
+                "NoShortcut",
+                "NoFallback",
+                "NoOrphan"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "correctness-core",
+            "principleRef": "fail-fast",
+            "title": "Correctness Core",
+            "intent": "The rules ensuring behavioral correctness and validity — no silent failures, no hidden invalidity, feedback acted on, results observed.",
+            "invariant": "Correctness holds only when every failure is surfaced and every invalid state is unrepresentable.",
+            "flow": [
+                "SurfaceFailure",
+                "RejectInvalid",
+                "ActOnFeedback"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "evolution-principles",
+            "principleRef": "evolutionary-architecture",
+            "title": "Evolution Principles",
+            "intent": "The rules governing how a system changes over time — no backward-compat cruft, no deprecation debt, no legacy retention, no 'for now'.",
+            "invariant": "The system evolves cleanly only by deleting the superseded rather than accreting compatibility layers.",
+            "flow": [
+                "Supersede",
+                "Delete",
+                "NoLegacy"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "resource-core",
+            "principleRef": "state-isolation",
+            "title": "Resource Core",
+            "intent": "The rules governing resource lifecycle and ownership — bounded lifetime, single ownership, no leaks, no implicit retention.",
+            "invariant": "Every resource has one owner and a bounded lifetime; nothing is retained implicitly.",
+            "flow": [
+                "Acquire",
+                "Own",
+                "Bound",
+                "Release"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "execution-core",
+            "principleRef": "controlled-side-effects",
+            "title": "Execution Core",
+            "intent": "The rules governing execution flow — a single observable path, no deferring, no dual-path branching, nothing unobserved.",
+            "invariant": "Execution follows one observable path; nothing runs unobserved or deferred indefinitely.",
+            "flow": [
+                "SinglePath",
+                "Observe",
+                "NoDefer"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "computation-core",
+            "principleRef": "determinism",
+            "title": "Computation Core",
+            "intent": "The rules governing computation determinism and purity — no mutable shared state, no hidden nondeterminism, reproducible results.",
+            "invariant": "A computation is reproducible only when it has no hidden mutable or nondeterministic input.",
+            "flow": [
+                "Immutable",
+                "Deterministic",
+                "Reproducible"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "security-core",
+            "principleRef": "security-by-design",
+            "title": "Security Core",
+            "intent": "The rules governing security posture — no hardcoded secrets, validated input, least privilege, no insecure fallbacks.",
+            "invariant": "The system is secure only when every input is validated and every privilege is least and explicit.",
+            "flow": [
+                "ValidateInput",
+                "LeastPrivilege",
+                "NoSecretLeak"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "performance-core",
+            "principleRef": "performance-engineering",
+            "title": "Performance Core",
+            "intent": "The rules governing performance discipline — measured optimization, planned capacity, no guesswork.",
+            "invariant": "Performance is improved only by measuring first; no optimization is applied unmeasured.",
+            "flow": [
+                "Measure",
+                "Optimize",
+                "Verify"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "contracts-core",
+            "principleRef": "explicit-contracts",
+            "title": "Contracts Core",
+            "intent": "The rules governing interfaces and contracts — explicit typed boundaries, versioned change, no implicit or breaking contracts.",
+            "invariant": "A boundary is safe only when its contract is explicit, typed, and versioned.",
+            "flow": [
+                "ExplicitContract",
+                "TypedBoundary",
+                "VersionChange"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "causality-core",
+            "principleRef": "causality",
+            "title": "Causality Core",
+            "intent": "The rules governing causal ordering and time — logical ordering, retractable state, no wall-clock dependence.",
+            "invariant": "Order is well-defined only through logical causality, never wall-clock assumptions.",
+            "flow": [
+                "LogicalOrder",
+                "Retract",
+                "NoWallClock"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "declarative-core",
+            "principleRef": "declarative-configuration",
+            "title": "Declarative Core",
+            "intent": "The rules favoring declarative over imperative — declared configuration, separated concerns, no imperative wiring.",
+            "invariant": "Behavior is declared as data, not encoded imperatively.",
+            "flow": [
+                "Declare",
+                "Separate",
+                "NoImperativeConfig"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "extensibility-core",
+            "principleRef": "open-closed",
+            "title": "Extensibility Core",
+            "intent": "The rules governing extension — declarative discovered wiring over hardcoded, no imperative hardcoded registration.",
+            "invariant": "The system extends without modification only when wiring is declarative and discovered, not hardcoded.",
+            "flow": [
+                "DeclareWiring",
+                "Discover",
+                "Extend"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "observability",
+            "principleRef": "observability",
+            "title": "Observability",
+            "intent": "The rules ensuring a system is observable — emitted metrics and signals, no unobserved execution, no opaque runtime.",
+            "invariant": "A system is operable only when its behavior is observable through emitted signals.",
+            "flow": [
+                "Emit",
+                "Trace",
+                "NoOpaque"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "enforcement-core",
+            "principleRef": "fitness-functions",
+            "title": "Enforcement Core",
+            "intent": "The rules ensuring discipline is enforced programmatically — automated gates over convention, no discipline-only reliance.",
+            "invariant": "A rule holds only when a gate enforces it; a rule kept by convention alone drifts.",
+            "flow": [
+                "Gate",
+                "Automate",
+                "NoConventionOnly"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "atomic-boundary",
+            "principleRef": "atomicity",
+            "canon": ["atomic-boundary"],
+            "title": "Atomic Boundary",
+            "intent": "The rules governing atomicity — a transactional boundary that fully commits or fully rolls back, no partial commit, no deferring within.",
+            "invariant": "A boundary either fully commits or fully rolls back; no partial state escapes.",
+            "flow": [
+                "Begin",
+                "AllOrNothing",
+                "Commit"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "human-factors",
+            "principleRef": "principle-of-least-surprise",
+            "title": "Human Factors",
+            "intent": "The rules governing human ergonomics — bounded cognitive complexity, acted-on feedback, explicit approval, no unlimited options.",
+            "invariant": "A system is usable only when its cognitive load is bounded and its decisions are approved and reversible.",
+            "flow": [
+                "BoundComplexity",
+                "Approve",
+                "ActOnFeedback"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "domain-modeling",
+            "principleRef": "bounded-context",
+            "title": "Domain Modeling",
+            "intent": "The rules governing domain boundaries — bounded contexts, ubiquitous language, no leaky context.",
+            "invariant": "A domain model stays coherent only when its context boundaries do not leak.",
+            "flow": [
+                "BoundContext",
+                "NoLeak",
+                "UbiquitousLanguage"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "design-patterns-core",
+            "principleRef": "first-principles-design",
+            "title": "Design Patterns Core",
+            "intent": "The rules governing design-pattern use — patterns applied only to demonstrated recurrence, no speculative pattern application.",
+            "invariant": "A pattern is warranted only by demonstrated recurrence, never speculation.",
+            "flow": [
+                "ObserveRecurrence",
+                "ApplyPattern",
+                "NoSpeculation"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": true
+        },
+        {
+            "id": "state-pattern",
+            "title": "State Pattern",
+            "principleRef": "state-pattern",
+            "exemplar": {
+                "before": "State-dependent behavior scattered as if/else conditionals on a status flag.",
+                "after": "define state objects → delegate behavior to the current-state object → transition replaces the conditional branching",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "The State design pattern — encapsulate state-dependent behavior in distinct state objects so transitions replace conditional branching.",
+            "invariant": "State-dependent behavior is expressed by delegating to a current-state object, not by scattered conditionals.",
+            "flow": [
+                "DefineStates",
+                "DelegateBehavior",
+                "Transition"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": false
+        },
+        {
+            "id": "separation-of-concerns",
+            "canon": ["separation-of-concerns"],
+            "title": "Separation of Concerns",
+            "exemplar": {
+                "before": "One module mixes parsing, persistence, and rendering — a change in one ripples through all.",
+                "after": "identify concerns → separate each into one place → each concern changes independently",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "The principle of separating a system into distinct concerns so each is addressed and changed independently.",
+            "invariant": "Each concern is localized to one place and changes independently of the others.",
+            "flow": [
+                "IdentifyConcerns",
+                "Separate",
+                "IsolateChange"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": false
+        },
+        {
+            "id": "concurrency-correctness",
+            "title": "Concurrency Correctness",
+            "exemplar": {
+                "before": "Concurrent access with a data race; some interleaving violates the invariant.",
+                "after": "model interleavings → prevent races → verify every interleaving preserves the invariants",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "The rules ensuring correct concurrent behavior — no data races, well-defined interleavings, verified with models such as Petri nets.",
+            "invariant": "Concurrent correctness holds only when every interleaving preserves the invariants.",
+            "flow": [
+                "ModelInterleavings",
+                "PreventRaces",
+                "Verify"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": false
+        },
+        {
+            "id": "capacity-planning",
+            "title": "Capacity Planning",
+            "exemplar": {
+                "before": "Capacity guessed, then saturates under production load.",
+                "after": "model load → forecast demand → provision from measured/modeled load, not a guess",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "The activity of forecasting resource demand and provisioning capacity to meet it, informed by queuing theory.",
+            "invariant": "Capacity meets demand only when provisioning is derived from measured or modeled load, not guessed.",
+            "flow": [
+                "ModelLoad",
+                "Forecast",
+                "Provision"
+            ],
+            "productions": [],
+            "composes": [],
+            "force": [],
+            "meta": false
+        }
+    ]
+}

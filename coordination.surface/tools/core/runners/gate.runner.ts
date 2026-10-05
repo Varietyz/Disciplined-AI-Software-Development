@@ -26,7 +26,7 @@ interface RunnerReport {
 
 type Registered = Awaited<ReturnType<typeof discoverRules>>["rules"][number];
 
-interface RuleJudgement {
+interface RuleJudgment {
     readonly outcome: GateOutcome;
     readonly exposed: string[];
     readonly verdicts: [string, GateOutcome["state"]][];
@@ -38,7 +38,7 @@ const judgeRule = function judgeRule(
     registered: Registered,
     held: readonly GateFixture[],
     repoRoot: string,
-): RuleJudgement {
+): RuleJudgment {
     if (held.length === 0) {
         return { exposed: [], outcome: { ...UNTESTED, rule: registered.id }, verdicts: [] };
     }
@@ -69,16 +69,16 @@ export const runGates = async function runGates(repoRoot: string): Promise<Runne
     const fixtures = await discoverFixtures(repoRoot);
     const declared = fixtures.gates;
 
-    const judgements = registry.rules.map((registered) =>
+    const judgments = registry.rules.map((registered) =>
         judgeRule(
             registered,
             declared.filter((fixture) => fixture.rule === registered.id),
             repoRoot,
         ),
     );
-    const outcomes = judgements.map((judgement) => judgement.outcome);
-    const exposed = judgements.flatMap((judgement) => judgement.exposed);
-    const verdicts = worstVerdicts(judgements.flatMap((judgement) => judgement.verdicts));
+    const outcomes = judgments.map((judgment) => judgment.outcome);
+    const exposed = judgments.flatMap((judgment) => judgment.exposed);
+    const verdicts = worstVerdicts(judgments.flatMap((judgment) => judgment.verdicts));
     const movedVerdicts = movedOf(verdicts, priorKindVerdicts(repoRoot), exposed);
 
     const branches = fixtures.branches.map((fixture) => judgeBranch(fixture));

@@ -1,0 +1,23 @@
+{
+    "name": "@ssot/paths",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "Single derived-anchor source of truth for host-root workspace paths — resolves a relative path tree onto the load-time-derived repo root.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./anchor": "./core/resolvers/location.root.resolver.ts",
+        "./*": "./*"
+    },
+    "files": ["paths.yaml"],
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    }
+}

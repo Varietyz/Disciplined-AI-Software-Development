@@ -1,0 +1,31 @@
+{
+    "name": "@govlab/patterns",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The pattern analysis substrate: record, SVG and code ingestion into findings that carry a four-axis protocol coordinate.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#runtime/*": "./runtime/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./*": "./*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@govlab/code-parse": "*",
+        "@govlab/content-fingerprint": "*",
+        "@govlab/context": "*",
+        "@govlab/quality": "*",
+        "@ssot/paths": "*"
+    }
+}

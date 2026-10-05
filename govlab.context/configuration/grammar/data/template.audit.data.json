@@ -1,0 +1,98 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../../LICENSE.",
+    "check": {
+        "by": [
+            "the template round-trip check, which fills the template and validates the result against the grammar",
+            "the slot check, which requires every declared slot to appear in the body and every slot in the body to be declared"
+        ],
+        "population": "this template's body and slots, and every document created from it",
+        "freshness": "a verdict stands until the template, its document type or the grammar changes",
+        "refusal": "the gate fails on a dangling slot, an unregistered type, or a filled template that does not validate",
+        "observation": "none: a template is static text, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a slot the body never carries and a template of an unregistered type, another plants a retired head in a real template, and every filled template validates clean",
+        "authority": "the template's document type and the grammar, which every document created from the template conforms to"
+    },
+    "type": "AUDIT",
+    "title": "Agent Audit Meta-Template (universal-contract scoring + non-destructive correction generator)",
+    "slots": [
+        {
+            "name": "project.agent_registry",
+            "description": "the host agent registry discovered at orientation",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "project.governance_sources",
+            "description": "the host governance sources the contract is measured against",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "project.reasoning_oracle",
+            "description": "the reasoning oracle consulted to confirm a suspected deprecation",
+            "required": false,
+            "kind": "string"
+        },
+        {
+            "name": "self.definition",
+            "description": "this agent's own definition, the default target in self-audit mode",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "target_agent",
+            "description": "the agent under audit (a specified target, or self.definition)",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.dsl_min",
+            "description": "the minimum count of PAG DSL and semantic-operation markers",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.embodiment_threshold",
+            "description": "the minimum embodiment-marker fraction",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.audit_pass_threshold",
+            "description": "the overall score at or above which the agent is compliant",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "convention.audit_workspace",
+            "description": "the workspace the persisted audit record is written to",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "task_name",
+            "description": "kebab-case name for the output file",
+            "required": true,
+            "kind": "string"
+        }
+    ],
+    "constraints": [
+        "declaration_required",
+        "gate_per_node",
+        "contract_reads_prior_output",
+        "population_declared",
+        "refusal_before_write",
+        "invariant_has_objector",
+        "evidence_grounded",
+        "probe_by_capability_not_os_string",
+        "dimensions_weighted_by_worth_correction_scope_by_utility_minus_cost",
+        "deprecation_flagged_only_after_oracle_or_evidence",
+        "every_dimension_counted_and_thresholded_no_subjective_pass",
+        "external_correction_archived_and_verified_first",
+        "corrections_single_path_no_replacement_stub",
+        "corrected_artifact_re_audited_not_assumed_fixed",
+        "score_is_number_against_threshold",
+        "unknown_is_not_pass"
+    ],
+    "body": "---\nname: {task_name}\ntype: AUDIT\nversion: 1.0.0\n---\n\nTHIS AUDIT AUDITS a target agent against the universal agent contract, counting every dimension against a threshold and applying bounded non-destructive corrections toward the contract.\n\n%% META %%:\n    priority: EVIDENCE > UNIVERSAL_CONTRACT > TASK\n    trust: searched_evidence = TRUSTED, oracle_confirmation = TRUSTED, prior_knowledge = UNTRUSTED\n    objective: {target_agent}\n    jurisdiction: {target_agent} and {convention.audit_workspace} | external: every other agent in {project.agent_registry}\n    recursion_limit: 3\n\n# NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set]\n@purpose: \"load registries and governance, probe capabilities, and identify the target as self or specified before measuring\"\n@genesis: existence\nCONTRACT:\n  input:     {target_agent}\n  transform: READ_RESOURCE {project.agent_registry} INTO registry; READ_RESOURCE {project.governance_sources} INTO governance; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; DETERMINE <the target: {target_agent} when specified, else {self.definition} in self-audit mode> INTO target; READ_RESOURCE target INTO content\n  constraints: probing is by capability, never by an operating-system string; registries resolve through the adapter\n  output:    frame\nDECLARE frame: object\nSET frame = {registry: registry, governance: governance, capability: capability, target: target, content: content, self_audit: <true when the target is this agent>}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"ORIENT\"   yields: boolean\n  [check] the registry and governance sources are loaded (evidence: frame.registry and governance) over: the governance sources measured: <read> / <declared>\n  [check] capabilities are probed and classified (evidence: frame.capability)\n  [check] the target is identified and its content read (evidence: frame.target and content)\n  refuse: a probe that would mutate the target before EXECUTE_TOOL\n  result: pass → NODE 2 | capability blocked → BLOCKED | unknown → BLOCKED\n\n# NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]\n@purpose: \"weight the contract dimensions by worth and choose the correction scope by utility minus cost before measuring\"\n@genesis: difference\n@mandatory\nCONTRACT:\n  input:     frame from NODE 1\n  transform: FOR EACH dimension IN <prohibitions, dsl, embodiment, portability, capability, grounding>: CALCULATE_METRIC impact on compliance FROM dimension INTO dimension.weight; FOR EACH scope IN <report-only, correct-critical, correct-all>: CALCULATE_METRIC compliance gain minus mutation risk FROM scope INTO scope.worth; RANK scopes BY worth\n  constraints: an external target is higher-risk than self; correct-all is never selected when only a critical dimension is worth the blast radius\n  output:    plan\nDECLARE plan: object\nSET plan = {weights: <one per dimension>, scope: <the argmax admissible scope, or report-only when capabilities are too limited>}\nHANDOFF GATE (tel-priority injection-gate):\n  rule_id: \"INTENT\"   yields: boolean over ranking\n  [check] every dimension is weighted by worth (evidence: plan.weights) over: the contract dimensions measured: <weighted> / <dimensions>\n  [check] the scope is the argmax of compliance gain minus correction cost (evidence: the scope ranking)\n  [check] correct-all is not selected on a single critical dimension (evidence: the scope against the failing set)\n  result: pass → NODE 3 | no admissible scope → REPAIR (owner: NODE 1) | unknown → BLOCKED\n\n# NODE 3 — CONTRACT   [epistemic · reasoning · logic · yields: set]\n@purpose: \"confirm domain currency by evidence and oracle for an external target, and activate each contract dimension with a counted, thresholded decision test\"\n@genesis: relation\nCONTRACT:\n  input:     plan from NODE 2\n  transform: SEARCH_CONTENT <the target's domain best practice> FOR <suspected deprecations> INTO suspicions; FOR EACH suspicion IN suspicions: REQUEST_DECISION {project.reasoning_oracle} WITH options: [confirmed, refuted] INTO suspicion.verdict; FOR EACH dimension IN <the contract dimensions>: <bind its counted test and threshold: prohibitions at zero, dsl at {convention.dsl_min}, embodiment at {convention.embodiment_threshold}, portability at zero leaks, capability with graceful degradation, grounding with a verdict per claim>\n  constraints: a deprecation is flagged only after oracle or evidence confirmation; an unavailable oracle is disclosed as degraded, never assumed\n  output:    dimensions\nDECLARE dimensions: array\nSET dimensions = <each with a counted decision test, a threshold and its weight from NODE 2>\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"CONTRACT\"   yields: boolean\n  [check] every flagged deprecation carries an oracle or evidence confirmation (evidence: suspicions) over: suspicions measured: <confirmed or refuted> / <suspicions>\n  [check] every dimension binds a counted test and a threshold (evidence: dimensions)\n  [check] an unavailable oracle is disclosed as degraded (evidence: frame.capability)\n  result: pass → NODE 4 | unconfirmed flag → REPAIR (owner: NODE 3) | unknown → BLOCKED\n\n# NODE 4 — MEASURE   [epistemic · formalization · computation · yields: number]\n@purpose: \"count every dimension against the agent content, never judge, and compute the weighted score and recommendation\"\n@genesis: transformation\nCONTRACT:\n  input:     dimensions from NODE 3\n  transform: ORDER dimensions BY <verdict genesis then dependency>; FOR EACH dimension IN dimensions: CALCULATE_METRIC <its count> FROM frame.content INTO dimension.result; CALCULATE_METRIC weighted score FROM dimensions INTO score; DETERMINE <compliant at or above {convention.audit_pass_threshold}, else requires-correction> INTO recommendation\n  constraints: content matching is procedural; no dimension passes subjectively\n  output:    audit\nDECLARE audit: object\nSET audit = {results: <one counted, thresholded result per dimension>, score: score, recommendation: recommendation}\nHANDOFF GATE (evidence-bearing):\n  rule_id: \"MEASURE\"   yields: boolean\n  [check] every dimension is measured with a count against its threshold (evidence: audit.results) over: dimensions measured: <counted> / <dimensions>\n  [check] the score is computed from the NODE 2 weights (evidence: the weighted sum)\n  [check] the recommendation is compliant or requires-correction (evidence: audit.recommendation)\n  result: pass → NODE 5 | subjective result → REPAIR (owner: NODE 3) | unknown → BLOCKED\n\n# NODE 5 — CORRECT AND VERIFY   [evaluative · verification · logic + probability · yields: number]\n@purpose: \"gate any correction on admissibility, apply single-path corrections, re-measure, and judge the counted results\"\n@genesis: constraint\n@mandatory\nCONTRACT:\n  input:     audit from NODE 4\n  transform: COMPOSE_ARTIFACT corrections FROM <the failed dimensions within plan.scope> USING <remove a prohibited hit with no stub, replace a runtime leak with a semantic operation, strengthen a missing embodiment marker, replace a silent fallback with bounded recovery then fail-fast>; PERSIST_ARTIFACT <an archived copy of an external target> TO {convention.audit_workspace}; PERSIST_ARTIFACT corrections TO frame.target; CALCULATE_METRIC <the re-measured score> FROM frame.target INTO recheck\n  constraints: an external correction requires an archived and verified copy first; a correction that adds a fallback or a dual path is inadmissible; the corrected artifact is re-audited, never assumed fixed\n  output:    adjudication\nDECLARE adjudication: object\nSET adjudication = {corrections: corrections, recheck: recheck, refuter: <the count that would flip the verdict>, verdict: <pass when grounded and recheck meets the threshold>}\nHANDOFF GATE (ver-stop gate):\n  rule_id: \"VERIFY\"   yields: boolean\n  [check] every dimension is counted and thresholded with no subjective pass (evidence: audit.results) over: dimensions measured: <counted> / <dimensions>\n  [check] every correction is single-path with no replacement stub and an external target was archived first (evidence: adjudication.corrections and the archive read back)\n  [check] a refuter is named and the recheck score meets {convention.audit_pass_threshold} (evidence: adjudication.refuter and recheck)\n  refuse: an external target with no verified archive, or a correction adding a fallback, before PERSIST_ARTIFACT\n  standing: moved-set <the target re-read since NODE 4>\n  result: pass → NODE 6 | recheck below threshold → REPAIR (owner: NODE 5) | unknown → BLOCKED\n\n# NODE 6 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]\n@purpose: \"persist the scored report deduplicated, name every limitation, and stop only on saturation and completion and verification\"\n@genesis: emergence\n@mandatory\nCONTRACT:\n  input:     adjudication from NODE 5\n  transform: COMPOSE_ARTIFACT report FROM {audit, adjudication} USING <the score, every dimension, the corrections, the limitations and the oracle consultations>; REDUCE report.entries TO <one per finding>; PERSIST_ARTIFACT report TO {convention.audit_workspace}; REPORT_RESULT report TO <the parties whose next work it creates>\n  constraints: exactly one terminal; a self-assessed done is not ter-stop\n  output:    report\n  freshness: fingerprint(adjudication) + fingerprint(this document)\nHANDOFF GATE (ter-stop gate):\n  rule_id: \"TERMINATE\"   yields: boolean\n  [check] the report names the score, every dimension, the corrections and every limitation, deduplicated (evidence: report) over: dimensions measured: <reported> / <dimensions>\n  [check] success only when saturation and completion and verification all hold (evidence: the termination set)\n  [check] exactly one terminal and repair cycles within recursion_limit (evidence: report and the repair count)\n  refuse: a workspace destination that changed since it was read before PERSIST_ARTIFACT\n  result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED\n\n# CROSS-NODE INVARIANTS\nINVARIANT probe-by-capability: capability is probed, never inferred from an operating-system string over: every run binds: the auditor objector: [check] capabilities are probed at NODE 1\nINVARIANT count-never-judge: every dimension passes by a count against a threshold, never subjectively over: dimensions binds: the auditor objector: [check] every dimension is measured with a count at NODE 4\nINVARIANT confirm-before-flag: a deprecation is flagged only after oracle or evidence confirmation over: every flag binds: the auditor objector: [check] every flagged deprecation carries a confirmation at NODE 3\nINVARIANT archive-before-mutate: an external target is archived and verified before any correction over: external targets binds: the auditor objector: [check] an external target was archived first at NODE 5\nINVARIANT single-path: a correction deletes the offending path with no stub and no fallback over: corrections binds: the auditor objector: [check] every correction is single-path at NODE 5\nINVARIANT re-audit-not-assume: a corrected artifact is re-measured, never assumed fixed over: corrections binds: the auditor objector: [check] the recheck score meets the threshold at NODE 5\n\nREPORT:\n  subject: NODE 6\n  verdict: pass | fail | unknown\n  domain: declared <dimensions> measured <counted>\n  populations: dimensions passing <n>, corrections applied <n>, oracle consultations <n>\n  refusals: <n> [<reason>]\n  unresolved: <n> [<reason>]\n  completion: saturated <bool> complete <bool> verified <bool>\n"
+}

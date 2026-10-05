@@ -85,27 +85,27 @@ The derivation loop with its gates.
 
 ```mermaid
 flowchart TB
-n_orient["orient · ontology"]
-n_intent["intent · teleology"]
-n_see["see · analysis"]
-n_derive["derive · reasoning"]
-n_project["project · reasoning"]
-n_act["act · formalization"]
-n_constrain["constrain · teleology"]
-n_verify["verify · verification"]
-n_commit["commit · representation"]
-n_terminate["terminate · termination"]
-n_orient --> n_intent
-n_intent -- tel-priority --> n_see
-n_see --> n_derive
-n_derive --> n_project
-n_project --> n_act
-n_act --> n_constrain
-n_constrain --> n_verify
-n_verify -.-> n_derive
-n_verify --> n_commit
-n_commit --> n_terminate
-n_terminate --> n_orient
+    n_orient["orient · ontology"]
+    n_intent["intent · teleology"]
+    n_see["see · analysis"]
+    n_derive["derive · reasoning"]
+    n_project["project · reasoning"]
+    n_act["act · formalization"]
+    n_constrain["constrain · teleology"]
+    n_verify["verify · verification"]
+    n_commit["commit · representation"]
+    n_terminate["terminate · termination"]
+    n_orient --> n_intent
+    n_intent -- tel-priority --> n_see
+    n_see --> n_derive
+    n_derive --> n_project
+    n_project --> n_act
+    n_act --> n_constrain
+    n_constrain --> n_verify
+    n_verify -.-> n_derive
+    n_verify --> n_commit
+    n_commit --> n_terminate
+    n_terminate --> n_orient
 ```
 
 ### orient
@@ -305,7 +305,7 @@ Not answered
 Details
 
 Contracts
-[Portable Contract Composition](ALGORITHMS.md#algorithms-portable-contract-composition), [Adapter Rendering](ALGORITHMS.md#algorithms-adapter-rendering), [File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Document Responsibility](ALGORITHMS.md#algorithms-agent-document-responsibility), [Agent Activation Invocation](ALGORITHMS.md#algorithms-agent-activation-invocation), [Parallel Batch Execution](ALGORITHMS.md#algorithms-parallel-batch-execution), [Sequential Agent Execution](ALGORITHMS.md#algorithms-sequential-agent-execution), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Orchestrator Action](ALGORITHMS.md#algorithms-orchestrator-action), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Workflow Recovery Loop](ALGORITHMS.md#algorithms-workflow-recovery-loop), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Centralized Reference Resolver](ALGORITHMS.md#algorithms-centralized-reference-resolver), [Cache Invalidation Strategy](ALGORITHMS.md#algorithms-cache-invalidation-strategy), [Manual Fallback Preservation](ALGORITHMS.md#algorithms-manual-fallback-preservation), [Dynamic Failure Isolation](ALGORITHMS.md#algorithms-dynamic-failure-isolation), [Entry Point Migration](ALGORITHMS.md#algorithms-entry-point-migration), [Knowledge Capture](ALGORITHMS.md#algorithms-knowledge-capture), [Replacement Refactor](ALGORITHMS.md#algorithms-replacement-refactor), [Rollback-Centered Execution](ALGORITHMS.md#algorithms-rollback-centered-execution), [Compilation Stage](ALGORITHMS.md#algorithms-compilation-stage), [Codebase Pattern Enforcement](ALGORITHMS.md#algorithms-codebase-pattern-enforcement), [Verb Template Binding](ALGORITHMS.md#algorithms-verb-template-binding), [Task Atomization](ALGORITHMS.md#algorithms-task-atomization), [Ripple Chain Analysis](ALGORITHMS.md#algorithms-ripple-chain-analysis), [Validator Coverage](ALGORITHMS.md#algorithms-validator-coverage), [Structured Observability Context](ALGORITHMS.md#algorithms-structured-observability-context), [Cross-Cutting Surface Coverage](ALGORITHMS.md#algorithms-cross-cutting-surface-coverage), [Legacy Elimination](ALGORITHMS.md#algorithms-legacy-elimination), [Hierarchical Numbering](ALGORITHMS.md#algorithms-hierarchical-numbering), [File-Scoped Fix](ALGORITHMS.md#algorithms-file-scoped-fix), [File Limit Remediation](ALGORITHMS.md#algorithms-file-limit-remediation), [Import Boundary Remediation](ALGORITHMS.md#algorithms-import-boundary-remediation), [Naming Convention Remediation](ALGORITHMS.md#algorithms-naming-convention-remediation), [Base-Class Compliance Remediation](ALGORITHMS.md#algorithms-base-class-compliance-remediation), [CSS Token Remediation](ALGORITHMS.md#algorithms-css-token-remediation), [DOM Factory Remediation](ALGORITHMS.md#algorithms-dom-factory-remediation), [Console Usage Remediation](ALGORITHMS.md#algorithms-console-usage-remediation), [Lifecycle Symmetry Remediation](ALGORITHMS.md#algorithms-lifecycle-symmetry-remediation), [Stylelint Post-Fix](ALGORITHMS.md#algorithms-stylelint-post-fix), [File Modification Recovery](ALGORITHMS.md#algorithms-file-modification-recovery), [Defensive String Normalization](ALGORITHMS.md#algorithms-defensive-string-normalization), [Safe Arithmetic Contract](ALGORITHMS.md#algorithms-safe-arithmetic-contract), [Recursion Control](ALGORITHMS.md#algorithms-recursion-control), [Advanced Tool Escalation](ALGORITHMS.md#algorithms-advanced-tool-escalation), [Test Authoring](ALGORITHMS.md#algorithms-test-authoring), [PAG Explicit Control Flow](ALGORITHMS.md#algorithms-pag-explicit-control-flow), [PAG Semantic Operation](ALGORITHMS.md#algorithms-pag-tool-invocation), [Base Schematic Composition](ALGORITHMS.md#algorithms-base-schematic-composition), [Backup-Verified Migration](ALGORITHMS.md#algorithms-backup-verified-migration), [Registry Regeneration](ALGORITHMS.md#algorithms-registry-regeneration), [Anti-Reintroduction Gate](ALGORITHMS.md#algorithms-anti-reintroduction-gate), [Idempotent Merge](ALGORITHMS.md#algorithms-idempotent-merge), [Deterministic Merge Core](ALGORITHMS.md#algorithms-deterministic-merge-core), [Persistence Fork](ALGORITHMS.md#algorithms-persistence-fork), [Comment Normalization Remediation](ALGORITHMS.md#algorithms-comment-normalization-remediation), [Custom-Rule Derivation](ALGORITHMS.md#algorithms-custom-rule-derivation), [Composed Turn Contract](ALGORITHMS.md#algorithms-composed-turn-contract), [Container Reshape](ALGORITHMS.md#algorithms-container-reshape)
+[Portable Contract Composition](ALGORITHMS.md#algorithms-portable-contract-composition), [Adapter Rendering](ALGORITHMS.md#algorithms-adapter-rendering), [Agent Workflow File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Document Responsibility](ALGORITHMS.md#algorithms-agent-document-responsibility), [Agent Activation Invocation](ALGORITHMS.md#algorithms-agent-activation-invocation), [Parallel Batch Execution](ALGORITHMS.md#algorithms-parallel-batch-execution), [Sequential Agent Execution](ALGORITHMS.md#algorithms-sequential-agent-execution), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Orchestrator Action](ALGORITHMS.md#algorithms-orchestrator-action), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Workflow Recovery Loop](ALGORITHMS.md#algorithms-workflow-recovery-loop), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Centralized Reference Resolver](ALGORITHMS.md#algorithms-centralized-reference-resolver), [Cache Invalidation Strategy](ALGORITHMS.md#algorithms-cache-invalidation-strategy), [Manual Fallback Preservation](ALGORITHMS.md#algorithms-manual-fallback-preservation), [Dynamic Failure Isolation](ALGORITHMS.md#algorithms-dynamic-failure-isolation), [Entry Point Migration](ALGORITHMS.md#algorithms-entry-point-migration), [Knowledge Capture](ALGORITHMS.md#algorithms-knowledge-capture), [Replacement Refactor](ALGORITHMS.md#algorithms-replacement-refactor), [Rollback-Centered Execution](ALGORITHMS.md#algorithms-rollback-centered-execution), [Compilation Stage](ALGORITHMS.md#algorithms-compilation-stage), [Codebase Pattern Enforcement](ALGORITHMS.md#algorithms-codebase-pattern-enforcement), [Verb Template Binding](ALGORITHMS.md#algorithms-verb-template-binding), [Task Atomization](ALGORITHMS.md#algorithms-task-atomization), [Ripple Chain Analysis](ALGORITHMS.md#algorithms-ripple-chain-analysis), [Validator Coverage](ALGORITHMS.md#algorithms-validator-coverage), [Structured Observability Context](ALGORITHMS.md#algorithms-structured-observability-context), [Cross-Cutting Surface Coverage](ALGORITHMS.md#algorithms-cross-cutting-surface-coverage), [Legacy Elimination](ALGORITHMS.md#algorithms-legacy-elimination), [Hierarchical Numbering](ALGORITHMS.md#algorithms-hierarchical-numbering), [File-Scoped Fix](ALGORITHMS.md#algorithms-file-scoped-fix), [File Limit Remediation](ALGORITHMS.md#algorithms-file-limit-remediation), [Import Boundary Remediation](ALGORITHMS.md#algorithms-import-boundary-remediation), [Naming Convention Remediation](ALGORITHMS.md#algorithms-naming-convention-remediation), [Base-Class Compliance Remediation](ALGORITHMS.md#algorithms-base-class-compliance-remediation), [CSS Token Remediation](ALGORITHMS.md#algorithms-css-token-remediation), [DOM Factory Remediation](ALGORITHMS.md#algorithms-dom-factory-remediation), [Console Usage Remediation](ALGORITHMS.md#algorithms-console-usage-remediation), [Lifecycle Symmetry Remediation](ALGORITHMS.md#algorithms-lifecycle-symmetry-remediation), [Stylelint Post-Fix](ALGORITHMS.md#algorithms-stylelint-post-fix), [File Modification Recovery](ALGORITHMS.md#algorithms-file-modification-recovery), [Defensive String Normalization](ALGORITHMS.md#algorithms-defensive-string-normalization), [Safe Arithmetic Contract](ALGORITHMS.md#algorithms-safe-arithmetic-contract), [Recursion Control](ALGORITHMS.md#algorithms-recursion-control), [Advanced Tool Escalation](ALGORITHMS.md#algorithms-advanced-tool-escalation), [Test Authoring](ALGORITHMS.md#algorithms-test-authoring), [PAG Explicit Control Flow](ALGORITHMS.md#algorithms-pag-explicit-control-flow), [PAG Semantic Operation](ALGORITHMS.md#algorithms-pag-tool-invocation), [Base Schematic Composition](ALGORITHMS.md#algorithms-base-schematic-composition), [Backup-Verified Migration](ALGORITHMS.md#algorithms-backup-verified-migration), [Registry Regeneration](ALGORITHMS.md#algorithms-registry-regeneration), [Anti-Reintroduction Gate](ALGORITHMS.md#algorithms-anti-reintroduction-gate), [Idempotent Merge](ALGORITHMS.md#algorithms-idempotent-merge), [Deterministic Merge Core](ALGORITHMS.md#algorithms-deterministic-merge-core), [Persistence Fork](ALGORITHMS.md#algorithms-persistence-fork), [Comment Normalization Remediation](ALGORITHMS.md#algorithms-comment-normalization-remediation), [Custom-Rule Derivation](ALGORITHMS.md#algorithms-custom-rule-derivation), [Composed Turn Contract](ALGORITHMS.md#algorithms-composed-turn-contract), [Container Reshape](ALGORITHMS.md#algorithms-container-reshape)
 
 How it is checked
 
@@ -460,7 +460,7 @@ Not answered
 Details
 
 Contracts
-[Agent Generation Completion](ALGORITHMS.md#algorithms-agent-generation-completion), [First-Time Initiation](ALGORITHMS.md#algorithms-first-time-initiation), [Automation Completion Status](ALGORITHMS.md#algorithms-automation-completion-status), [Completion Truthfulness](ALGORITHMS.md#algorithms-completion-truthfulness), [Explicit Termination](ALGORITHMS.md#algorithms-explicit-termination), [Early Success Exit](ALGORITHMS.md#algorithms-early-success-exit), [Iteration Bound](ALGORITHMS.md#algorithms-iteration-bound), [Validation Gate](ALGORITHMS.md#algorithms-validation-gate), [Coverage Completion](ALGORITHMS.md#algorithms-coverage-completion), [PAG Well-Formedness Validation](ALGORITHMS.md#algorithms-pag-well-formedness-validation), [Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness), [Phase Close Gate](ALGORITHMS.md#algorithms-phase-close-gate), [Bounded Cascade Termination](ALGORITHMS.md#algorithms-bounded-cascade-termination), [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion)
+[Agent Generation Completion](ALGORITHMS.md#algorithms-agent-generation-completion), [First-Time Initiation](ALGORITHMS.md#algorithms-first-time-initiation), [Automation Completion Status](ALGORITHMS.md#algorithms-automation-completion-status), [Completion Truthfulness](ALGORITHMS.md#algorithms-completion-truthfulness), [Explicit Termination](ALGORITHMS.md#algorithms-explicit-termination), [Early Success Exit](ALGORITHMS.md#algorithms-early-success-exit), [Iteration Bound](ALGORITHMS.md#algorithms-iteration-bound), [Validation Gate](ALGORITHMS.md#algorithms-validation-gate), [Coverage Completion](ALGORITHMS.md#algorithms-coverage-completion), [PAG Well-Formedness Validation](ALGORITHMS.md#algorithms-pag-well-formedness-validation), [Pattern Distillation Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness), [Phase Close Gate](ALGORITHMS.md#algorithms-phase-close-gate), [Bounded Cascade Termination](ALGORITHMS.md#algorithms-bounded-cascade-termination), [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion)
 
 How it is checked
 
@@ -569,20 +569,20 @@ The substrate cycle and its recursion.
 
 ```mermaid
 flowchart LR
-n_existence["existence"]
-n_difference["difference"]
-n_relation["relation"]
-n_structure["structure"]
-n_transformation["transformation"]
-n_constraint["constraint"]
-n_emergence["emergence"]
-n_existence --> n_difference
-n_difference --> n_relation
-n_relation --> n_structure
-n_structure --> n_transformation
-n_transformation --> n_constraint
-n_constraint --> n_emergence
-n_emergence -.-> n_difference
+    n_existence["existence"]
+    n_difference["difference"]
+    n_relation["relation"]
+    n_structure["structure"]
+    n_transformation["transformation"]
+    n_constraint["constraint"]
+    n_emergence["emergence"]
+    n_existence --> n_difference
+    n_difference --> n_relation
+    n_relation --> n_structure
+    n_structure --> n_transformation
+    n_transformation --> n_constraint
+    n_constraint --> n_emergence
+    n_emergence -.-> n_difference
 ```
 
 ### Existence
@@ -1346,7 +1346,7 @@ Nodes
 [for-existence](REASONING.md#reasoning-node-for-existence), [for-structure](REASONING.md#reasoning-node-for-structure), [for-relation](REASONING.md#reasoning-node-for-relation), [for-space](REASONING.md#reasoning-node-for-space), [for-transformation](REASONING.md#reasoning-node-for-transformation), [for-invariance](REASONING.md#reasoning-node-for-invariance), [for-uncertainty](REASONING.md#reasoning-node-for-uncertainty), [for-computation](REASONING.md#reasoning-node-for-computation), [for-abstraction](REASONING.md#reasoning-node-for-abstraction), [for-creation](REASONING.md#reasoning-node-for-creation), [for-absence](REASONING.md#reasoning-node-for-absence)
 
 Contracts
-[Portable Contract Composition](ALGORITHMS.md#algorithms-portable-contract-composition), [Adapter Rendering](ALGORITHMS.md#algorithms-adapter-rendering), [File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Document Responsibility](ALGORITHMS.md#algorithms-agent-document-responsibility), [Agent Activation Invocation](ALGORITHMS.md#algorithms-agent-activation-invocation), [Parallel Batch Execution](ALGORITHMS.md#algorithms-parallel-batch-execution), [Sequential Agent Execution](ALGORITHMS.md#algorithms-sequential-agent-execution), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Orchestrator Action](ALGORITHMS.md#algorithms-orchestrator-action), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Workflow Recovery Loop](ALGORITHMS.md#algorithms-workflow-recovery-loop), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Centralized Reference Resolver](ALGORITHMS.md#algorithms-centralized-reference-resolver), [Cache Invalidation Strategy](ALGORITHMS.md#algorithms-cache-invalidation-strategy), [Manual Fallback Preservation](ALGORITHMS.md#algorithms-manual-fallback-preservation), [Dynamic Failure Isolation](ALGORITHMS.md#algorithms-dynamic-failure-isolation), [Entry Point Migration](ALGORITHMS.md#algorithms-entry-point-migration), [Knowledge Capture](ALGORITHMS.md#algorithms-knowledge-capture), [Replacement Refactor](ALGORITHMS.md#algorithms-replacement-refactor), [Rollback-Centered Execution](ALGORITHMS.md#algorithms-rollback-centered-execution), [Compilation Stage](ALGORITHMS.md#algorithms-compilation-stage), [Codebase Pattern Enforcement](ALGORITHMS.md#algorithms-codebase-pattern-enforcement), [Verb Template Binding](ALGORITHMS.md#algorithms-verb-template-binding), [Task Atomization](ALGORITHMS.md#algorithms-task-atomization), [Ripple Chain Analysis](ALGORITHMS.md#algorithms-ripple-chain-analysis), [Validator Coverage](ALGORITHMS.md#algorithms-validator-coverage), [Structured Observability Context](ALGORITHMS.md#algorithms-structured-observability-context), [Cross-Cutting Surface Coverage](ALGORITHMS.md#algorithms-cross-cutting-surface-coverage), [Legacy Elimination](ALGORITHMS.md#algorithms-legacy-elimination), [Hierarchical Numbering](ALGORITHMS.md#algorithms-hierarchical-numbering), [File-Scoped Fix](ALGORITHMS.md#algorithms-file-scoped-fix), [File Limit Remediation](ALGORITHMS.md#algorithms-file-limit-remediation), [Import Boundary Remediation](ALGORITHMS.md#algorithms-import-boundary-remediation), [Naming Convention Remediation](ALGORITHMS.md#algorithms-naming-convention-remediation), [Base-Class Compliance Remediation](ALGORITHMS.md#algorithms-base-class-compliance-remediation), [CSS Token Remediation](ALGORITHMS.md#algorithms-css-token-remediation), [DOM Factory Remediation](ALGORITHMS.md#algorithms-dom-factory-remediation), [Console Usage Remediation](ALGORITHMS.md#algorithms-console-usage-remediation), [Lifecycle Symmetry Remediation](ALGORITHMS.md#algorithms-lifecycle-symmetry-remediation), [Stylelint Post-Fix](ALGORITHMS.md#algorithms-stylelint-post-fix), [File Modification Recovery](ALGORITHMS.md#algorithms-file-modification-recovery), [Defensive String Normalization](ALGORITHMS.md#algorithms-defensive-string-normalization), [Safe Arithmetic Contract](ALGORITHMS.md#algorithms-safe-arithmetic-contract), [Recursion Control](ALGORITHMS.md#algorithms-recursion-control), [Advanced Tool Escalation](ALGORITHMS.md#algorithms-advanced-tool-escalation), [Test Authoring](ALGORITHMS.md#algorithms-test-authoring), [PAG Explicit Control Flow](ALGORITHMS.md#algorithms-pag-explicit-control-flow), [PAG Semantic Operation](ALGORITHMS.md#algorithms-pag-tool-invocation), [Base Schematic Composition](ALGORITHMS.md#algorithms-base-schematic-composition), [Backup-Verified Migration](ALGORITHMS.md#algorithms-backup-verified-migration), [Registry Regeneration](ALGORITHMS.md#algorithms-registry-regeneration), [Anti-Reintroduction Gate](ALGORITHMS.md#algorithms-anti-reintroduction-gate), [Idempotent Merge](ALGORITHMS.md#algorithms-idempotent-merge), [Deterministic Merge Core](ALGORITHMS.md#algorithms-deterministic-merge-core), [Persistence Fork](ALGORITHMS.md#algorithms-persistence-fork), [Comment Normalization Remediation](ALGORITHMS.md#algorithms-comment-normalization-remediation), [Custom-Rule Derivation](ALGORITHMS.md#algorithms-custom-rule-derivation), [Composed Turn Contract](ALGORITHMS.md#algorithms-composed-turn-contract), [Container Reshape](ALGORITHMS.md#algorithms-container-reshape)
+[Portable Contract Composition](ALGORITHMS.md#algorithms-portable-contract-composition), [Adapter Rendering](ALGORITHMS.md#algorithms-adapter-rendering), [Agent Workflow File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Document Responsibility](ALGORITHMS.md#algorithms-agent-document-responsibility), [Agent Activation Invocation](ALGORITHMS.md#algorithms-agent-activation-invocation), [Parallel Batch Execution](ALGORITHMS.md#algorithms-parallel-batch-execution), [Sequential Agent Execution](ALGORITHMS.md#algorithms-sequential-agent-execution), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Orchestrator Action](ALGORITHMS.md#algorithms-orchestrator-action), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Workflow Recovery Loop](ALGORITHMS.md#algorithms-workflow-recovery-loop), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Centralized Reference Resolver](ALGORITHMS.md#algorithms-centralized-reference-resolver), [Cache Invalidation Strategy](ALGORITHMS.md#algorithms-cache-invalidation-strategy), [Manual Fallback Preservation](ALGORITHMS.md#algorithms-manual-fallback-preservation), [Dynamic Failure Isolation](ALGORITHMS.md#algorithms-dynamic-failure-isolation), [Entry Point Migration](ALGORITHMS.md#algorithms-entry-point-migration), [Knowledge Capture](ALGORITHMS.md#algorithms-knowledge-capture), [Replacement Refactor](ALGORITHMS.md#algorithms-replacement-refactor), [Rollback-Centered Execution](ALGORITHMS.md#algorithms-rollback-centered-execution), [Compilation Stage](ALGORITHMS.md#algorithms-compilation-stage), [Codebase Pattern Enforcement](ALGORITHMS.md#algorithms-codebase-pattern-enforcement), [Verb Template Binding](ALGORITHMS.md#algorithms-verb-template-binding), [Task Atomization](ALGORITHMS.md#algorithms-task-atomization), [Ripple Chain Analysis](ALGORITHMS.md#algorithms-ripple-chain-analysis), [Validator Coverage](ALGORITHMS.md#algorithms-validator-coverage), [Structured Observability Context](ALGORITHMS.md#algorithms-structured-observability-context), [Cross-Cutting Surface Coverage](ALGORITHMS.md#algorithms-cross-cutting-surface-coverage), [Legacy Elimination](ALGORITHMS.md#algorithms-legacy-elimination), [Hierarchical Numbering](ALGORITHMS.md#algorithms-hierarchical-numbering), [File-Scoped Fix](ALGORITHMS.md#algorithms-file-scoped-fix), [File Limit Remediation](ALGORITHMS.md#algorithms-file-limit-remediation), [Import Boundary Remediation](ALGORITHMS.md#algorithms-import-boundary-remediation), [Naming Convention Remediation](ALGORITHMS.md#algorithms-naming-convention-remediation), [Base-Class Compliance Remediation](ALGORITHMS.md#algorithms-base-class-compliance-remediation), [CSS Token Remediation](ALGORITHMS.md#algorithms-css-token-remediation), [DOM Factory Remediation](ALGORITHMS.md#algorithms-dom-factory-remediation), [Console Usage Remediation](ALGORITHMS.md#algorithms-console-usage-remediation), [Lifecycle Symmetry Remediation](ALGORITHMS.md#algorithms-lifecycle-symmetry-remediation), [Stylelint Post-Fix](ALGORITHMS.md#algorithms-stylelint-post-fix), [File Modification Recovery](ALGORITHMS.md#algorithms-file-modification-recovery), [Defensive String Normalization](ALGORITHMS.md#algorithms-defensive-string-normalization), [Safe Arithmetic Contract](ALGORITHMS.md#algorithms-safe-arithmetic-contract), [Recursion Control](ALGORITHMS.md#algorithms-recursion-control), [Advanced Tool Escalation](ALGORITHMS.md#algorithms-advanced-tool-escalation), [Test Authoring](ALGORITHMS.md#algorithms-test-authoring), [PAG Explicit Control Flow](ALGORITHMS.md#algorithms-pag-explicit-control-flow), [PAG Semantic Operation](ALGORITHMS.md#algorithms-pag-tool-invocation), [Base Schematic Composition](ALGORITHMS.md#algorithms-base-schematic-composition), [Backup-Verified Migration](ALGORITHMS.md#algorithms-backup-verified-migration), [Registry Regeneration](ALGORITHMS.md#algorithms-registry-regeneration), [Anti-Reintroduction Gate](ALGORITHMS.md#algorithms-anti-reintroduction-gate), [Idempotent Merge](ALGORITHMS.md#algorithms-idempotent-merge), [Deterministic Merge Core](ALGORITHMS.md#algorithms-deterministic-merge-core), [Persistence Fork](ALGORITHMS.md#algorithms-persistence-fork), [Comment Normalization Remediation](ALGORITHMS.md#algorithms-comment-normalization-remediation), [Custom-Rule Derivation](ALGORITHMS.md#algorithms-custom-rule-derivation), [Composed Turn Contract](ALGORITHMS.md#algorithms-composed-turn-contract), [Container Reshape](ALGORITHMS.md#algorithms-container-reshape)
 
 How it is checked
 
@@ -1487,7 +1487,7 @@ Nodes
 [ter-completion](REASONING.md#reasoning-node-ter-completion), [ter-saturation](REASONING.md#reasoning-node-ter-saturation), [ter-diminishing-returns](REASONING.md#reasoning-node-ter-diminishing-returns), [ter-block](REASONING.md#reasoning-node-ter-block), [ter-stop](REASONING.md#reasoning-node-ter-stop), [ter-promotion](REASONING.md#reasoning-node-ter-promotion), [ter-publication](REASONING.md#reasoning-node-ter-publication)
 
 Contracts
-[Agent Generation Completion](ALGORITHMS.md#algorithms-agent-generation-completion), [First-Time Initiation](ALGORITHMS.md#algorithms-first-time-initiation), [Automation Completion Status](ALGORITHMS.md#algorithms-automation-completion-status), [Completion Truthfulness](ALGORITHMS.md#algorithms-completion-truthfulness), [Explicit Termination](ALGORITHMS.md#algorithms-explicit-termination), [Early Success Exit](ALGORITHMS.md#algorithms-early-success-exit), [Iteration Bound](ALGORITHMS.md#algorithms-iteration-bound), [Validation Gate](ALGORITHMS.md#algorithms-validation-gate), [Coverage Completion](ALGORITHMS.md#algorithms-coverage-completion), [PAG Well-Formedness Validation](ALGORITHMS.md#algorithms-pag-well-formedness-validation), [Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness), [Phase Close Gate](ALGORITHMS.md#algorithms-phase-close-gate), [Bounded Cascade Termination](ALGORITHMS.md#algorithms-bounded-cascade-termination), [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion)
+[Agent Generation Completion](ALGORITHMS.md#algorithms-agent-generation-completion), [First-Time Initiation](ALGORITHMS.md#algorithms-first-time-initiation), [Automation Completion Status](ALGORITHMS.md#algorithms-automation-completion-status), [Completion Truthfulness](ALGORITHMS.md#algorithms-completion-truthfulness), [Explicit Termination](ALGORITHMS.md#algorithms-explicit-termination), [Early Success Exit](ALGORITHMS.md#algorithms-early-success-exit), [Iteration Bound](ALGORITHMS.md#algorithms-iteration-bound), [Validation Gate](ALGORITHMS.md#algorithms-validation-gate), [Coverage Completion](ALGORITHMS.md#algorithms-coverage-completion), [PAG Well-Formedness Validation](ALGORITHMS.md#algorithms-pag-well-formedness-validation), [Pattern Distillation Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness), [Phase Close Gate](ALGORITHMS.md#algorithms-phase-close-gate), [Bounded Cascade Termination](ALGORITHMS.md#algorithms-bounded-cascade-termination), [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion)
 
 How it is checked
 
@@ -3715,9 +3715,6 @@ set
 Decision test
 every absence a later check must distinguish is represented as its own value
 
-Grounded by
-[SLOT](GRAMMAR.md#pag-keyword-node-slot)
-
 How it is checked
 
 Checked by
@@ -3758,7 +3755,7 @@ Question
 What is the objective?
 
 Grounded by
-[META](GRAMMAR.md#pag-keyword-meta-meta), [USE](GRAMMAR.md#pag-keyword-meta-use), [TEMPLATE](GRAMMAR.md#pag-keyword-meta-template), [CUE](GRAMMAR.md#pag-keyword-meta-cue), [PURPOSE](GRAMMAR.md#pag-keyword-meta-purpose), [meta_block](GRAMMAR.md#pag-production-meta-block), [meta_field](GRAMMAR.md#pag-production-meta-field), [node_meta_tag](GRAMMAR.md#pag-production-node-meta-tag)
+[meta_block](GRAMMAR.md#pag-production-meta-block), [meta_field](GRAMMAR.md#pag-production-meta-field), [node_meta_tag](GRAMMAR.md#pag-production-node-meta-tag)
 
 How it is checked
 
@@ -3802,9 +3799,6 @@ How much does this advance the objective?
 Answer shape
 number
 
-Grounded by
-[PRIORITY](GRAMMAR.md#pag-keyword-priority-queue-priority)
-
 How it is checked
 
 Checked by
@@ -3846,9 +3840,6 @@ What does this cost?
 
 Answer shape
 number
-
-Grounded by
-[PRIORITY](GRAMMAR.md#pag-keyword-priority-queue-priority)
 
 How it is checked
 
@@ -3899,7 +3890,7 @@ Role
 injection-gate
 
 Grounded by
-[Adaptive Phase Boundary](ALGORITHMS.md#algorithms-adaptive-phase-boundary), [Automation Priority Ordering](ALGORITHMS.md#algorithms-automation-priority-ordering), [Developer Decision Gate](ALGORITHMS.md#algorithms-developer-decision-gate), [Teleological Intent Gate](ALGORITHMS.md#algorithms-teleological-intent-gate), [Severity Assignment](ALGORITHMS.md#algorithms-severity-assignment), [Severity Failure Routing](ALGORITHMS.md#algorithms-severity-failure-routing), [Severity-Ordered Remediation](ALGORITHMS.md#algorithms-severity-ordered-remediation), [Coverage Risk Prioritization](ALGORITHMS.md#algorithms-coverage-risk-prioritization), [Anti-Pattern Priority Matrix](ALGORITHMS.md#algorithms-anti-pattern-priority-matrix), [Reshape Risk Priority](ALGORITHMS.md#algorithms-reshape-risk-priority), [Vocabulary Admission Gate](ALGORITHMS.md#algorithms-vocabulary-admission-gate), [RANK](GRAMMAR.md#pag-keyword-action-rank), [PRIORITY_QUEUE](GRAMMAR.md#pag-keyword-priority-queue-priority-queue), [PEEK](GRAMMAR.md#pag-keyword-priority-queue-peek), [REQUEST_DECISION](GRAMMAR.md#pag-keyword-semantic-operation-request-decision), [priority_queue_declaration](GRAMMAR.md#pag-production-priority-queue-declaration)
+[Adaptive Phase Boundary](ALGORITHMS.md#algorithms-adaptive-phase-boundary), [Automation Priority Ordering](ALGORITHMS.md#algorithms-automation-priority-ordering), [Developer Decision Gate](ALGORITHMS.md#algorithms-developer-decision-gate), [Teleological Intent Gate](ALGORITHMS.md#algorithms-teleological-intent-gate), [Severity Assignment](ALGORITHMS.md#algorithms-severity-assignment), [Severity Failure Routing](ALGORITHMS.md#algorithms-severity-failure-routing), [Severity-Ordered Remediation](ALGORITHMS.md#algorithms-severity-ordered-remediation), [Coverage Risk Prioritization](ALGORITHMS.md#algorithms-coverage-risk-prioritization), [Anti-Pattern Priority Matrix](ALGORITHMS.md#algorithms-anti-pattern-priority-matrix), [Reshape Risk Priority](ALGORITHMS.md#algorithms-reshape-risk-priority), [Vocabulary Admission Gate](ALGORITHMS.md#algorithms-vocabulary-admission-gate), [priority_queue_declaration](GRAMMAR.md#pag-production-priority-queue-declaration)
 
 How it is checked
 
@@ -3950,7 +3941,7 @@ Role
 both
 
 Grounded by
-[semantic-correctness](REASONING.md#reasoning-test-surface-semantic-correctness), [functional-correctness](REASONING.md#reasoning-test-surface-functional-correctness), [state-correctness](REASONING.md#reasoning-test-surface-state-correctness), [interface-correctness](REASONING.md#reasoning-test-surface-interface-correctness), [interaction-correctness](REASONING.md#reasoning-test-surface-interaction-correctness), [temporal-correctness](REASONING.md#reasoning-test-surface-temporal-correctness), [concurrency-correctness](REASONING.md#reasoning-test-surface-concurrency-correctness), [memory-correctness](REASONING.md#reasoning-test-surface-memory-correctness), [resource-correctness](REASONING.md#reasoning-test-surface-resource-correctness), [performance-correctness](REASONING.md#reasoning-test-surface-performance-correctness), [reliability-correctness](REASONING.md#reasoning-test-surface-reliability-correctness), [availability-correctness](REASONING.md#reasoning-test-surface-availability-correctness), [consistency-correctness](REASONING.md#reasoning-test-surface-consistency-correctness), [data-correctness](REASONING.md#reasoning-test-surface-data-correctness), [numerical-correctness](REASONING.md#reasoning-test-surface-numerical-correctness), [security-correctness](REASONING.md#reasoning-test-surface-security-correctness), [determinism-correctness](REASONING.md#reasoning-test-surface-determinism-correctness), [protocol-correctness](REASONING.md#reasoning-test-surface-protocol-correctness), [configuration-correctness](REASONING.md#reasoning-test-surface-configuration-correctness), [observability-correctness](REASONING.md#reasoning-test-surface-observability-correctness), [Evidence Grounding Validation](ALGORITHMS.md#algorithms-evidence-grounding-validation), [Workflow Validation Gate](ALGORITHMS.md#algorithms-workflow-validation-gate), [Additive Debt Gate](ALGORITHMS.md#algorithms-additive-debt-gate), [Zero-Duplication Verification](ALGORITHMS.md#algorithms-zero-duplication-verification), [Evidence-Based Claim Verification](ALGORITHMS.md#algorithms-evidence-based-claim-verification), [Verification Execution](ALGORITHMS.md#algorithms-verification-execution), [Reverification Gate](ALGORITHMS.md#algorithms-reverification-gate), [Evidence-Gated Claim Verification](ALGORITHMS.md#algorithms-evidence-gated-claim-verification), [Environment Capability Verification](ALGORITHMS.md#algorithms-environment-capability-verification), [Recursive Self-Verification](ALGORITHMS.md#algorithms-recursive-self-verification), [Evidence Verdict](ALGORITHMS.md#algorithms-evidence-verdict), [PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [Anti-Pattern Elimination Verification](ALGORITHMS.md#algorithms-anti-pattern-elimination-verification), [Plan Phase Verification](ALGORITHMS.md#algorithms-plan-phase-verification), [Machine Verdict Derivation](ALGORITHMS.md#algorithms-machine-verdict-derivation), [Mode Contract Validation](ALGORITHMS.md#algorithms-mode-contract-validation), [Discovery Verification](ALGORITHMS.md#algorithms-discovery-verification), [VALIDATE](GRAMMAR.md#pag-keyword-action-validate), [VERIFY](GRAMMAR.md#pag-keyword-action-verify), [REPORT](GRAMMAR.md#pag-keyword-action-report), [EVIDENCE](GRAMMAR.md#pag-keyword-action-evidence), [ASSERT](GRAMMAR.md#pag-keyword-validation-assert), [REQUIRE](GRAMMAR.md#pag-keyword-validation-require), [CHECK](GRAMMAR.md#pag-keyword-validation-check), [RULE_ID](GRAMMAR.md#pag-keyword-validation-rule-id), [VERDICT](GRAMMAR.md#pag-keyword-report-verdict), [VALIDATE_ARTIFACT](GRAMMAR.md#pag-keyword-semantic-operation-validate-artifact), [handoff_gate](GRAMMAR.md#pag-production-handoff-gate), [check_line](GRAMMAR.md#pag-production-check-line), [check_marker](GRAMMAR.md#pag-production-check-marker), [report_block](GRAMMAR.md#pag-production-report-block)
+[semantic-correctness](REASONING.md#reasoning-test-surface-semantic-correctness), [functional-correctness](REASONING.md#reasoning-test-surface-functional-correctness), [state-correctness](REASONING.md#reasoning-test-surface-state-correctness), [interface-correctness](REASONING.md#reasoning-test-surface-interface-correctness), [interaction-correctness](REASONING.md#reasoning-test-surface-interaction-correctness), [temporal-correctness](REASONING.md#reasoning-test-surface-temporal-correctness), [concurrency-correctness](REASONING.md#reasoning-test-surface-concurrency-correctness), [memory-correctness](REASONING.md#reasoning-test-surface-memory-correctness), [resource-correctness](REASONING.md#reasoning-test-surface-resource-correctness), [performance-correctness](REASONING.md#reasoning-test-surface-performance-correctness), [reliability-correctness](REASONING.md#reasoning-test-surface-reliability-correctness), [availability-correctness](REASONING.md#reasoning-test-surface-availability-correctness), [consistency-correctness](REASONING.md#reasoning-test-surface-consistency-correctness), [data-correctness](REASONING.md#reasoning-test-surface-data-correctness), [numerical-correctness](REASONING.md#reasoning-test-surface-numerical-correctness), [security-correctness](REASONING.md#reasoning-test-surface-security-correctness), [determinism-correctness](REASONING.md#reasoning-test-surface-determinism-correctness), [protocol-correctness](REASONING.md#reasoning-test-surface-protocol-correctness), [configuration-correctness](REASONING.md#reasoning-test-surface-configuration-correctness), [observability-correctness](REASONING.md#reasoning-test-surface-observability-correctness), [Evidence Grounding Validation](ALGORITHMS.md#algorithms-evidence-grounding-validation), [Workflow Validation Gate](ALGORITHMS.md#algorithms-workflow-validation-gate), [Additive Debt Gate](ALGORITHMS.md#algorithms-additive-debt-gate), [Zero-Duplication Verification](ALGORITHMS.md#algorithms-zero-duplication-verification), [Evidence-Based Claim Verification](ALGORITHMS.md#algorithms-evidence-based-claim-verification), [Verification Execution](ALGORITHMS.md#algorithms-verification-execution), [Reverification Gate](ALGORITHMS.md#algorithms-reverification-gate), [Evidence-Gated Claim Verification](ALGORITHMS.md#algorithms-evidence-gated-claim-verification), [Environment Capability Verification](ALGORITHMS.md#algorithms-environment-capability-verification), [Recursive Self-Verification](ALGORITHMS.md#algorithms-recursive-self-verification), [Evidence Verdict](ALGORITHMS.md#algorithms-evidence-verdict), [PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [Anti-Pattern Elimination Verification](ALGORITHMS.md#algorithms-anti-pattern-elimination-verification), [Plan Phase Verification](ALGORITHMS.md#algorithms-plan-phase-verification), [Machine Verdict Derivation](ALGORITHMS.md#algorithms-machine-verdict-derivation), [Mode Contract Validation](ALGORITHMS.md#algorithms-mode-contract-validation), [Discovery Verification](ALGORITHMS.md#algorithms-discovery-verification), [handoff_gate](GRAMMAR.md#pag-production-handoff-gate), [check_line](GRAMMAR.md#pag-production-check-line), [check_marker](GRAMMAR.md#pag-production-check-marker), [report_block](GRAMMAR.md#pag-production-report-block)
 
 How it is checked
 
@@ -3992,7 +3983,7 @@ Question
 Is it true against reality, not merely coherent?
 
 Grounded by
-[semantic-correctness](REASONING.md#reasoning-test-surface-semantic-correctness), [functional-correctness](REASONING.md#reasoning-test-surface-functional-correctness), [state-correctness](REASONING.md#reasoning-test-surface-state-correctness), [interface-correctness](REASONING.md#reasoning-test-surface-interface-correctness), [interaction-correctness](REASONING.md#reasoning-test-surface-interaction-correctness), [temporal-correctness](REASONING.md#reasoning-test-surface-temporal-correctness), [concurrency-correctness](REASONING.md#reasoning-test-surface-concurrency-correctness), [memory-correctness](REASONING.md#reasoning-test-surface-memory-correctness), [resource-correctness](REASONING.md#reasoning-test-surface-resource-correctness), [performance-correctness](REASONING.md#reasoning-test-surface-performance-correctness), [reliability-correctness](REASONING.md#reasoning-test-surface-reliability-correctness), [availability-correctness](REASONING.md#reasoning-test-surface-availability-correctness), [consistency-correctness](REASONING.md#reasoning-test-surface-consistency-correctness), [data-correctness](REASONING.md#reasoning-test-surface-data-correctness), [numerical-correctness](REASONING.md#reasoning-test-surface-numerical-correctness), [security-correctness](REASONING.md#reasoning-test-surface-security-correctness), [determinism-correctness](REASONING.md#reasoning-test-surface-determinism-correctness), [protocol-correctness](REASONING.md#reasoning-test-surface-protocol-correctness), [configuration-correctness](REASONING.md#reasoning-test-surface-configuration-correctness), [observability-correctness](REASONING.md#reasoning-test-surface-observability-correctness), [TRUST](GRAMMAR.md#pag-keyword-meta-trust)
+[semantic-correctness](REASONING.md#reasoning-test-surface-semantic-correctness), [functional-correctness](REASONING.md#reasoning-test-surface-functional-correctness), [state-correctness](REASONING.md#reasoning-test-surface-state-correctness), [interface-correctness](REASONING.md#reasoning-test-surface-interface-correctness), [interaction-correctness](REASONING.md#reasoning-test-surface-interaction-correctness), [temporal-correctness](REASONING.md#reasoning-test-surface-temporal-correctness), [concurrency-correctness](REASONING.md#reasoning-test-surface-concurrency-correctness), [memory-correctness](REASONING.md#reasoning-test-surface-memory-correctness), [resource-correctness](REASONING.md#reasoning-test-surface-resource-correctness), [performance-correctness](REASONING.md#reasoning-test-surface-performance-correctness), [reliability-correctness](REASONING.md#reasoning-test-surface-reliability-correctness), [availability-correctness](REASONING.md#reasoning-test-surface-availability-correctness), [consistency-correctness](REASONING.md#reasoning-test-surface-consistency-correctness), [data-correctness](REASONING.md#reasoning-test-surface-data-correctness), [numerical-correctness](REASONING.md#reasoning-test-surface-numerical-correctness), [security-correctness](REASONING.md#reasoning-test-surface-security-correctness), [determinism-correctness](REASONING.md#reasoning-test-surface-determinism-correctness), [protocol-correctness](REASONING.md#reasoning-test-surface-protocol-correctness), [configuration-correctness](REASONING.md#reasoning-test-surface-configuration-correctness), [observability-correctness](REASONING.md#reasoning-test-surface-observability-correctness)
 
 How it is checked
 
@@ -4034,7 +4025,7 @@ Question
 What would refute it?
 
 Grounded by
-[OBJECTOR](GRAMMAR.md#pag-keyword-invariant-objector), [invariant_record](GRAMMAR.md#pag-production-invariant-record)
+[invariant_record](GRAMMAR.md#pag-production-invariant-record)
 
 How it is checked
 
@@ -4082,7 +4073,7 @@ Decision test
 confidence is at or above the threshold
 
 Grounded by
-[UNKNOWN](GRAMMAR.md#pag-keyword-validation-unknown), [verdict](GRAMMAR.md#pag-production-verdict)
+[verdict](GRAMMAR.md#pag-production-verdict)
 
 How it is checked
 
@@ -4124,7 +4115,7 @@ Question
 Does refutation outweigh support?
 
 Grounded by
-[REFUTES](GRAMMAR.md#pag-keyword-coordination-refutes), [RESULT](GRAMMAR.md#pag-keyword-validation-result), [REPAIR](GRAMMAR.md#pag-keyword-validation-repair), [result_line](GRAMMAR.md#pag-production-result-line), [repair_edge](GRAMMAR.md#pag-production-repair-edge)
+[result_line](GRAMMAR.md#pag-production-result-line), [repair_edge](GRAMMAR.md#pag-production-repair-edge)
 
 How it is checked
 
@@ -4175,7 +4166,7 @@ Role
 both
 
 Grounded by
-[PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [POPULATION](GRAMMAR.md#pag-keyword-validation-population), [DOMAIN](GRAMMAR.md#pag-keyword-report-domain), [POPULATIONS](GRAMMAR.md#pag-keyword-report-populations), [OVER](GRAMMAR.md#pag-keyword-invariant-over), [population_clause](GRAMMAR.md#pag-production-population-clause), [report_field](GRAMMAR.md#pag-production-report-field)
+[PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [population_clause](GRAMMAR.md#pag-production-population-clause), [report_field](GRAMMAR.md#pag-production-report-field)
 
 How it is checked
 
@@ -4223,7 +4214,7 @@ Decision test
 the fingerprint of the inputs and the code matches the output's declared derivation
 
 Grounded by
-[FRESHNESS](GRAMMAR.md#pag-keyword-validation-freshness), [INPUTS](GRAMMAR.md#pag-keyword-report-inputs), [CODE](GRAMMAR.md#pag-keyword-report-code), [OUTPUT](GRAMMAR.md#pag-keyword-report-output), [freshness_clause](GRAMMAR.md#pag-production-freshness-clause), [report_field](GRAMMAR.md#pag-production-report-field)
+[freshness_clause](GRAMMAR.md#pag-production-freshness-clause), [report_field](GRAMMAR.md#pag-production-report-field)
 
 How it is checked
 
@@ -4271,7 +4262,7 @@ Decision test
 the moved set is empty
 
 Grounded by
-[PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [STANDING](GRAMMAR.md#pag-keyword-validation-standing), [standing_line](GRAMMAR.md#pag-production-standing-line)
+[PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [standing_line](GRAMMAR.md#pag-production-standing-line)
 
 How it is checked
 
@@ -4322,7 +4313,7 @@ Role
 injection-gate
 
 Grounded by
-[PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [DELETE](GRAMMAR.md#pag-keyword-action-delete), [MOVE](GRAMMAR.md#pag-keyword-action-move), [FAIL](GRAMMAR.md#pag-keyword-action-fail), [REFUSE](GRAMMAR.md#pag-keyword-validation-refuse), [REFUSALS](GRAMMAR.md#pag-keyword-report-refusals), [PERSIST_ARTIFACT](GRAMMAR.md#pag-keyword-semantic-operation-persist-artifact), [refusal_line](GRAMMAR.md#pag-production-refusal-line)
+[PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [refusal_line](GRAMMAR.md#pag-production-refusal-line)
 
 How it is checked
 
@@ -4370,7 +4361,7 @@ Decision test
 every observed location is reported as located, and no observed absence is reported as verified
 
 Grounded by
-[OBSERVED](GRAMMAR.md#pag-keyword-report-observed), [report_field](GRAMMAR.md#pag-production-report-field)
+[report_field](GRAMMAR.md#pag-production-report-field)
 
 How it is checked
 
@@ -4420,9 +4411,6 @@ every task is done
 Role
 completion-marker
 
-Grounded by
-[RETURN](GRAMMAR.md#pag-keyword-action-return), [FINALIZE](GRAMMAR.md#pag-keyword-action-finalize), [COMPLETION](GRAMMAR.md#pag-keyword-report-completion)
-
 How it is checked
 
 Checked by
@@ -4470,9 +4458,6 @@ no open items remain
 
 Role
 both
-
-Grounded by
-[COMPLETION](GRAMMAR.md#pag-keyword-report-completion)
 
 How it is checked
 
@@ -4522,9 +4507,6 @@ progress is unchanged across a bounded window
 Role
 injection-gate
 
-Grounded by
-[RETRY](GRAMMAR.md#pag-keyword-coordination-retry), [RECURSION_LIMIT](GRAMMAR.md#pag-keyword-meta-recursion-limit)
-
 How it is checked
 
 Checked by
@@ -4568,7 +4550,7 @@ Answer shape
 boolean
 
 Grounded by
-[PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [WAIT](GRAMMAR.md#pag-keyword-action-wait), [AWAIT](GRAMMAR.md#pag-keyword-coordination-await), [WAIT](GRAMMAR.md#pag-keyword-coordination-wait), [UNKNOWN](GRAMMAR.md#pag-keyword-validation-unknown), [BLOCKED](GRAMMAR.md#pag-keyword-validation-blocked), [RESULT](GRAMMAR.md#pag-keyword-validation-result), [UNRESOLVED](GRAMMAR.md#pag-keyword-report-unresolved), [result_line](GRAMMAR.md#pag-production-result-line), [wait_statement](GRAMMAR.md#pag-production-wait-statement)
+[PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [result_line](GRAMMAR.md#pag-production-result-line), [wait_statement](GRAMMAR.md#pag-production-wait-statement)
 
 How it is checked
 
@@ -4619,7 +4601,7 @@ Role
 completion-marker
 
 Grounded by
-[Agent Generation Completion](ALGORITHMS.md#algorithms-agent-generation-completion), [First-Time Initiation](ALGORITHMS.md#algorithms-first-time-initiation), [Automation Completion Status](ALGORITHMS.md#algorithms-automation-completion-status), [Completion Truthfulness](ALGORITHMS.md#algorithms-completion-truthfulness), [Explicit Termination](ALGORITHMS.md#algorithms-explicit-termination), [Iteration Bound](ALGORITHMS.md#algorithms-iteration-bound), [Validation Gate](ALGORITHMS.md#algorithms-validation-gate), [Coverage Completion](ALGORITHMS.md#algorithms-coverage-completion), [Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness), [Phase Close Gate](ALGORITHMS.md#algorithms-phase-close-gate), [Bounded Cascade Termination](ALGORITHMS.md#algorithms-bounded-cascade-termination), [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion), [EXIT](GRAMMAR.md#pag-keyword-action-exit), [STOP](GRAMMAR.md#pag-keyword-control-flow-stop), [HANDOFF](GRAMMAR.md#pag-keyword-validation-handoff), [GATE](GRAMMAR.md#pag-keyword-validation-gate), [COMPLETION](GRAMMAR.md#pag-keyword-report-completion), [report_field](GRAMMAR.md#pag-production-report-field)
+[Agent Generation Completion](ALGORITHMS.md#algorithms-agent-generation-completion), [First-Time Initiation](ALGORITHMS.md#algorithms-first-time-initiation), [Automation Completion Status](ALGORITHMS.md#algorithms-automation-completion-status), [Completion Truthfulness](ALGORITHMS.md#algorithms-completion-truthfulness), [Explicit Termination](ALGORITHMS.md#algorithms-explicit-termination), [Iteration Bound](ALGORITHMS.md#algorithms-iteration-bound), [Validation Gate](ALGORITHMS.md#algorithms-validation-gate), [Coverage Completion](ALGORITHMS.md#algorithms-coverage-completion), [Pattern Distillation Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness), [Phase Close Gate](ALGORITHMS.md#algorithms-phase-close-gate), [Bounded Cascade Termination](ALGORITHMS.md#algorithms-bounded-cascade-termination), [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion), [report_field](GRAMMAR.md#pag-production-report-field)
 
 How it is checked
 
@@ -4666,9 +4648,6 @@ boolean
 Decision test
 a clean verdict precedes the move into accepted state
 
-Grounded by
-[BACKUP](GRAMMAR.md#pag-keyword-action-backup), [RESTORE](GRAMMAR.md#pag-keyword-action-restore), [PROMOTE](GRAMMAR.md#pag-keyword-validation-promote)
-
 How it is checked
 
 Checked by
@@ -4713,9 +4692,6 @@ boolean
 
 Decision test
 the publication gate names its party
-
-Grounded by
-[PUBLISH](GRAMMAR.md#pag-keyword-validation-publish), [REQUEST_DECISION](GRAMMAR.md#pag-keyword-semantic-operation-request-decision)
 
 How it is checked
 
@@ -4815,7 +4791,7 @@ Yields shape
 boolean
 
 Contracts
-[Semantic Operation Boundary](ALGORITHMS.md#algorithms-semantic-operation-boundary), [Domain Cache Validation](ALGORITHMS.md#algorithms-domain-cache-validation), [Principle Extraction](ALGORITHMS.md#algorithms-principle-extraction), [Phase Validation Requirement](ALGORITHMS.md#algorithms-phase-validation-requirement), [Validation Strategy Composition](ALGORITHMS.md#algorithms-validation-strategy-composition), [Semantic Compliance Validation](ALGORITHMS.md#algorithms-semantic-compliance-validation), [Algorithmic Embodiment Validation](ALGORITHMS.md#algorithms-algorithmic-embodiment-validation), [Agent Generation Completion](ALGORITHMS.md#algorithms-agent-generation-completion), [Hybrid Workflow Orchestration](ALGORITHMS.md#algorithms-hybrid-workflow-orchestration), [Context Forking Configuration](ALGORITHMS.md#algorithms-context-forking-configuration), [Verb-Based Execution Classification](ALGORITHMS.md#algorithms-verb-based-execution-classification), [Workflow Type Document Selection](ALGORITHMS.md#algorithms-workflow-type-document-selection), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Orchestrator Action](ALGORITHMS.md#algorithms-orchestrator-action), [Workflow Principles Mapping](ALGORITHMS.md#algorithms-workflow-principles-mapping), [Workflow Validation Gate](ALGORITHMS.md#algorithms-workflow-validation-gate), [Anti-Pattern Inversion](ALGORITHMS.md#algorithms-anti-pattern-inversion), [Architecture Smell Record](ALGORITHMS.md#algorithms-architecture-smell-record), [Document Truth Alignment](ALGORITHMS.md#algorithms-document-truth-alignment), [Interface Contract](ALGORITHMS.md#algorithms-interface-contract), [Substitutability](ALGORITHMS.md#algorithms-substitutability), [Extension Point](ALGORITHMS.md#algorithms-extension-point), [Behavioral Dispatch](ALGORITHMS.md#algorithms-behavioral-dispatch), [Port Adapter](ALGORITHMS.md#algorithms-port-adapter), [Transaction Boundary](ALGORITHMS.md#algorithms-transaction-boundary), [Idempotent Side Effect](ALGORITHMS.md#algorithms-idempotent-side-effect), [Deterministic Core](ALGORITHMS.md#algorithms-deterministic-core), [Error Boundary](ALGORITHMS.md#algorithms-error-boundary), [Cache Correctness](ALGORITHMS.md#algorithms-cache-correctness), [Security Policy](ALGORITHMS.md#algorithms-security-policy), [Control Plane](ALGORITHMS.md#algorithms-control-plane), [Universal Architectural Concern Template](ALGORITHMS.md#algorithms-universal-architectural-concern-template), [Consumer Config SSOT](ALGORITHMS.md#algorithms-consumer-config-ssot), [Architectural Force Classification](ALGORITHMS.md#algorithms-architectural-force-classification), [Conflict and Tension Resolution](ALGORITHMS.md#algorithms-conflict-and-tension-resolution), [Violation Detection](ALGORITHMS.md#algorithms-violation-detection), [Enforcement Gate](ALGORITHMS.md#algorithms-enforcement-gate), [Modular Boundary Compliance](ALGORITHMS.md#algorithms-modular-boundary-compliance), [Contract Compatibility](ALGORITHMS.md#algorithms-contract-compatibility), [Runtime Extensibility](ALGORITHMS.md#algorithms-runtime-extensibility), [Event and Messaging Consistency](ALGORITHMS.md#algorithms-event-and-messaging-consistency), [State and Transaction Safety](ALGORITHMS.md#algorithms-state-and-transaction-safety), [Correctness Verification](ALGORITHMS.md#algorithms-correctness-verification), [Resilience Policy](ALGORITHMS.md#algorithms-resilience-policy), [Security Governance](ALGORITHMS.md#algorithms-security-governance), [Control Plane Coordination](ALGORITHMS.md#algorithms-control-plane-coordination), [Metaprogramming Safety](ALGORITHMS.md#algorithms-metaprogramming-safety), [Model Lifecycle Governance](ALGORITHMS.md#algorithms-model-lifecycle-governance), [Relationship Schema Validation](ALGORITHMS.md#algorithms-relationship-schema-validation), [Constraints Over Shortcuts](ALGORITHMS.md#algorithms-no-shortcuts), [Forward Compatibility Over Backward Compatibility](ALGORITHMS.md#algorithms-no-backward-compat), [Fail-Fast Over Fallback](ALGORITHMS.md#algorithms-no-fallback), [Explicit Removal Over Deprecation](ALGORITHMS.md#algorithms-no-deprecation), [Greenfield Over Legacy](ALGORITHMS.md#algorithms-no-legacy), [Single-Path Determinism Over Dual-Path](ALGORITHMS.md#algorithms-no-dual-path), [Immediacy Over Deferring](ALGORITHMS.md#algorithms-no-deferring), [Mandatory Over Optional](ALGORITHMS.md#algorithms-no-optional), [Now Over For-Now](ALGORITHMS.md#algorithms-no-for-now), [Observed Execution Over Unobserved](ALGORITHMS.md#algorithms-no-unobserved), [Compression Over Repetition](ALGORITHMS.md#algorithms-no-uncompressed), [Approved Evolution Over Unapproved](ALGORITHMS.md#algorithms-no-unapproved), [Enforced Feedback Over Ignored](ALGORITHMS.md#algorithms-no-ignored-feedback), [Single Owner Over Shared Ownership](ALGORITHMS.md#algorithms-no-shared-ownership), [Bounded Lifetime Over Unbounded](ALGORITHMS.md#algorithms-no-unbounded), [Enforced Symmetry Over Asymmetric Lifecycle](ALGORITHMS.md#algorithms-no-asymmetric), [Explicit Retention Over Implicit](ALGORITHMS.md#algorithms-no-implicit-retention), [Structural Release Over Discipline](ALGORITHMS.md#algorithms-no-discipline-release), [Immutable Data Over Mutable State](ALGORITHMS.md#algorithms-no-mutable), [Errors As Language Over Silent Errors](ALGORITHMS.md#algorithms-no-silent), [Explicit Invalidity Over Hidden](ALGORITHMS.md#algorithms-no-hidden-invalidity), [Event Emission Over Parent Callbacks](ALGORITHMS.md#algorithms-no-callbacks), [Monotonic Growth Over Retraction](ALGORITHMS.md#algorithms-no-retraction), [Semantic Addressing Over Location Addressing](ALGORITHMS.md#algorithms-no-location), [Ordinal Time Over Timestamps](ALGORITHMS.md#algorithms-no-timestamps), [Homoiconicity Over Separation](ALGORITHMS.md#algorithms-no-separation), [Bounded Complexity Over Unlimited](ALGORITHMS.md#algorithms-no-unlimited), [Computed Health Over Metric Health](ALGORITHMS.md#algorithms-no-metrics), [Secret Store Over Hardcoded Secrets](ALGORITHMS.md#algorithms-no-hardcoded-secrets), [Boundary Validation Over Unvalidated Input](ALGORITHMS.md#algorithms-no-unvalidated-input), [Least Privilege Over Broad Privilege](ALGORITHMS.md#algorithms-no-broad-privilege), [Config Externalization Over Env Fallback](ALGORITHMS.md#algorithms-no-env-fallback), [Profile-First Over Unmeasured Optimization](ALGORITHMS.md#algorithms-no-unmeasured-optimization), [Rule As Code Over Convention](ALGORITHMS.md#algorithms-no-convention-enforcement), [Design By Contract Over Implicit Contract](ALGORITHMS.md#algorithms-no-implicit-contract), [Versioned Evolution Over Breaking Change](ALGORITHMS.md#algorithms-no-breaking-change), [Schema-Validated Boundary Over Untyped](ALGORITHMS.md#algorithms-no-untyped-boundary), [Atomic Boundary Over Partial Commit](ALGORITHMS.md#algorithms-no-partial-commit), [Saga Compensation Over Distributed 2PC](ALGORITHMS.md#algorithms-no-distributed-2pc), [Async Events Over Synchronous Cross-Boundary](ALGORITHMS.md#algorithms-no-sync-cross-boundary), [Observable Signals Over Opaque Runtime](ALGORITHMS.md#algorithms-no-opaque-runtime), [Injected Dependency Over Hidden](ALGORITHMS.md#algorithms-no-hidden-dependency), [Convention Discovery Over Hardcoded Wiring](ALGORITHMS.md#algorithms-no-hardcoded-wiring), [Declarative Config Over Imperative](ALGORITHMS.md#algorithms-no-imperative-config), [Anti-Corruption Layer Over Cross-Context Leak](ALGORITHMS.md#algorithms-no-leaky-context), [Injected Nondeterminism Over Hidden](ALGORITHMS.md#algorithms-no-hidden-nondeterminism), [Pattern By Fit Over Speculative Pattern](ALGORITHMS.md#algorithms-no-speculative-pattern), [Runtime-Neutral Automation Boundary](ALGORITHMS.md#algorithms-runtime-neutral-automation-boundary), [Intentional Static Separation](ALGORITHMS.md#algorithms-intentional-static-separation), [Extension Interface Discovery](ALGORITHMS.md#algorithms-extension-interface-discovery), [Performance-Aware Discovery Design](ALGORITHMS.md#algorithms-performance-aware-discovery-design), [Dynamic Extension Architecture](ALGORITHMS.md#algorithms-dynamic-extension-architecture), [Cache Invalidation Strategy](ALGORITHMS.md#algorithms-cache-invalidation-strategy), [Dynamic Failure Isolation](ALGORITHMS.md#algorithms-dynamic-failure-isolation), [Measured-vs-Estimated Validation](ALGORITHMS.md#algorithms-measured-vs-estimated-validation), [Architecture Validation Before Persistence](ALGORITHMS.md#algorithms-architecture-validation-before-persistence), [Automation Completion Status](ALGORITHMS.md#algorithms-automation-completion-status), [Runtime-Agnostic Adapter Boundary](ALGORITHMS.md#algorithms-runtime-agnostic-adapter-boundary), [Pattern Classification](ALGORITHMS.md#algorithms-pattern-classification), [Refactor Intent Classification](ALGORITHMS.md#algorithms-refactor-intent-classification), [Architecture Compliance Targeting](ALGORITHMS.md#algorithms-architecture-compliance-targeting), [Existing Solution Conflict](ALGORITHMS.md#algorithms-existing-solution-conflict), [Additive Debt Gate](ALGORITHMS.md#algorithms-additive-debt-gate), [Pattern-Specific Validation](ALGORITHMS.md#algorithms-pattern-specific-validation), [Zero-Duplication Verification](ALGORITHMS.md#algorithms-zero-duplication-verification), [Completion Truthfulness](ALGORITHMS.md#algorithms-completion-truthfulness), [Trust Anchor](ALGORITHMS.md#algorithms-trust-anchor), [Intent & Directionality Normalization](ALGORITHMS.md#algorithms-intent-directionality-normalization), [Planning Stage](ALGORITHMS.md#algorithms-planning-stage), [Principle Activation](ALGORITHMS.md#algorithms-principle-activation), [Protocol Semantic Selection](ALGORITHMS.md#algorithms-protocol-semantic-selection), [Loop Class Labeling](ALGORITHMS.md#algorithms-loop-class-labeling), [Codebase Pattern Enforcement](ALGORITHMS.md#algorithms-codebase-pattern-enforcement), [Validator Coverage](ALGORITHMS.md#algorithms-validator-coverage), [Structured Observability Context](ALGORITHMS.md#algorithms-structured-observability-context), [Cross-Cutting Surface Coverage](ALGORITHMS.md#algorithms-cross-cutting-surface-coverage), [Legacy Elimination](ALGORITHMS.md#algorithms-legacy-elimination), [Validation Stage](ALGORITHMS.md#algorithms-validation-stage), [Semantic Debt Policy](ALGORITHMS.md#algorithms-semantic-debt-policy), [Evidence-Based Claim Verification](ALGORITHMS.md#algorithms-evidence-based-claim-verification), [Validation Suite Battery](ALGORITHMS.md#algorithms-validation-suite-battery), [Verification Execution](ALGORITHMS.md#algorithms-verification-execution), [Violation Classification](ALGORITHMS.md#algorithms-violation-classification), [Reverification Gate](ALGORITHMS.md#algorithms-reverification-gate), [Evidence-Gated Claim Verification](ALGORITHMS.md#algorithms-evidence-gated-claim-verification), [Environment Capability Verification](ALGORITHMS.md#algorithms-environment-capability-verification), [Behavioral Self-Test](ALGORITHMS.md#algorithms-behavioral-self-test), [Adversarial Input Testing](ALGORITHMS.md#algorithms-adversarial-input-testing), [Safe Arithmetic Contract](ALGORITHMS.md#algorithms-safe-arithmetic-contract), [Invocation Join](ALGORITHMS.md#algorithms-invocation-join), [Uncovered Gap Derivation](ALGORITHMS.md#algorithms-uncovered-gap-derivation), [Evidence Verdict](ALGORITHMS.md#algorithms-evidence-verdict), [Coverage Completion](ALGORITHMS.md#algorithms-coverage-completion), [PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [PAG Explicit Control Flow](ALGORITHMS.md#algorithms-pag-explicit-control-flow), [PAG Ambiguity Reduction](ALGORITHMS.md#algorithms-pag-ambiguity-reduction), [PAG Well-Formedness Validation](ALGORITHMS.md#algorithms-pag-well-formedness-validation), [Anti-Pattern Classification](ALGORITHMS.md#algorithms-anti-pattern-classification), [Abstraction Boundary Principle](ALGORITHMS.md#algorithms-abstraction-boundary-principle), [Base-Class Candidate Selection](ALGORITHMS.md#algorithms-base-class-candidate-selection), [Anti-Pattern Elimination Verification](ALGORITHMS.md#algorithms-anti-pattern-elimination-verification), [Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness), [Delta Capture](ALGORITHMS.md#algorithms-delta-capture), [Plan Phase Verification](ALGORITHMS.md#algorithms-plan-phase-verification), [Canonical Config Resolution](ALGORITHMS.md#algorithms-canonical-config-resolution), [Machine Verdict Derivation](ALGORITHMS.md#algorithms-machine-verdict-derivation), [Mode Contract Validation](ALGORITHMS.md#algorithms-mode-contract-validation), [Type-Keyed Appearance](ALGORITHMS.md#algorithms-type-keyed-appearance), [Concern Classification](ALGORITHMS.md#algorithms-concern-classification), [Discovery Verification](ALGORITHMS.md#algorithms-discovery-verification), [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion), [Container Ladder](ALGORITHMS.md#algorithms-container-ladder), [Export Triage Ladder](ALGORITHMS.md#algorithms-export-triage-ladder), [Alignment Cadence](ALGORITHMS.md#algorithms-alignment-cadence)
+[Semantic Operation Boundary](ALGORITHMS.md#algorithms-semantic-operation-boundary), [Domain Cache Validation](ALGORITHMS.md#algorithms-domain-cache-validation), [Principle Extraction](ALGORITHMS.md#algorithms-principle-extraction), [Phase Validation Requirement](ALGORITHMS.md#algorithms-phase-validation-requirement), [Validation Strategy Composition](ALGORITHMS.md#algorithms-validation-strategy-composition), [Semantic Compliance Validation](ALGORITHMS.md#algorithms-semantic-compliance-validation), [Algorithmic Embodiment Validation](ALGORITHMS.md#algorithms-algorithmic-embodiment-validation), [Agent Generation Completion](ALGORITHMS.md#algorithms-agent-generation-completion), [Hybrid Workflow Orchestration](ALGORITHMS.md#algorithms-hybrid-workflow-orchestration), [Context Forking Configuration](ALGORITHMS.md#algorithms-context-forking-configuration), [Verb-Based Execution Classification](ALGORITHMS.md#algorithms-verb-based-execution-classification), [Workflow Type Document Selection](ALGORITHMS.md#algorithms-workflow-type-document-selection), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Orchestrator Action](ALGORITHMS.md#algorithms-orchestrator-action), [Workflow Principles Mapping](ALGORITHMS.md#algorithms-workflow-principles-mapping), [Workflow Validation Gate](ALGORITHMS.md#algorithms-workflow-validation-gate), [Anti-Pattern Inversion](ALGORITHMS.md#algorithms-anti-pattern-inversion), [Architecture Smell Record](ALGORITHMS.md#algorithms-architecture-smell-record), [Document Truth Alignment](ALGORITHMS.md#algorithms-document-truth-alignment), [Interface Contract](ALGORITHMS.md#algorithms-interface-contract), [Substitutability](ALGORITHMS.md#algorithms-substitutability), [Extension Point](ALGORITHMS.md#algorithms-extension-point), [Behavioral Dispatch](ALGORITHMS.md#algorithms-behavioral-dispatch), [Port Adapter](ALGORITHMS.md#algorithms-port-adapter), [Transaction Boundary](ALGORITHMS.md#algorithms-transaction-boundary), [Idempotent Side Effect](ALGORITHMS.md#algorithms-idempotent-side-effect), [Deterministic Core](ALGORITHMS.md#algorithms-deterministic-core), [Error Boundary](ALGORITHMS.md#algorithms-error-boundary), [Cache Correctness](ALGORITHMS.md#algorithms-cache-correctness), [Security Policy](ALGORITHMS.md#algorithms-security-policy), [Control Plane](ALGORITHMS.md#algorithms-control-plane), [Universal Architectural Concern Template](ALGORITHMS.md#algorithms-universal-architectural-concern-template), [Consumer Config SSOT](ALGORITHMS.md#algorithms-consumer-config-ssot), [Architectural Force Classification](ALGORITHMS.md#algorithms-architectural-force-classification), [Conflict and Tension Resolution](ALGORITHMS.md#algorithms-conflict-and-tension-resolution), [Violation Detection](ALGORITHMS.md#algorithms-violation-detection), [Enforcement Gate](ALGORITHMS.md#algorithms-enforcement-gate), [Modular Boundary Compliance](ALGORITHMS.md#algorithms-modular-boundary-compliance), [Contract Compatibility](ALGORITHMS.md#algorithms-contract-compatibility), [Runtime Extensibility](ALGORITHMS.md#algorithms-runtime-extensibility), [Event and Messaging Consistency](ALGORITHMS.md#algorithms-event-and-messaging-consistency), [State and Transaction Safety](ALGORITHMS.md#algorithms-state-and-transaction-safety), [Correctness Verification](ALGORITHMS.md#algorithms-correctness-verification), [Resilience Policy](ALGORITHMS.md#algorithms-resilience-policy), [Security Governance](ALGORITHMS.md#algorithms-security-governance), [Control Plane Coordination](ALGORITHMS.md#algorithms-control-plane-coordination), [Metaprogramming Safety](ALGORITHMS.md#algorithms-metaprogramming-safety), [Model Lifecycle Governance](ALGORITHMS.md#algorithms-model-lifecycle-governance), [Relationship Schema Validation](ALGORITHMS.md#algorithms-relationship-schema-validation), [Constraints Over Shortcuts](ALGORITHMS.md#algorithms-no-shortcuts), [Forward Compatibility Over Backward Compatibility](ALGORITHMS.md#algorithms-no-backward-compat), [Fail-Fast Over Fallback](ALGORITHMS.md#algorithms-no-fallback), [Explicit Removal Over Deprecation](ALGORITHMS.md#algorithms-no-deprecation), [Greenfield Over Legacy](ALGORITHMS.md#algorithms-no-legacy), [Single-Path Determinism Over Dual-Path](ALGORITHMS.md#algorithms-no-dual-path), [Immediacy Over Deferring](ALGORITHMS.md#algorithms-no-deferring), [Mandatory Over Optional](ALGORITHMS.md#algorithms-no-optional), [Now Over For-Now](ALGORITHMS.md#algorithms-no-for-now), [Observed Execution Over Unobserved](ALGORITHMS.md#algorithms-no-unobserved), [Compression Over Repetition](ALGORITHMS.md#algorithms-no-uncompressed), [Approved Evolution Over Unapproved](ALGORITHMS.md#algorithms-no-unapproved), [Enforced Feedback Over Ignored](ALGORITHMS.md#algorithms-no-ignored-feedback), [Single Owner Over Shared Ownership](ALGORITHMS.md#algorithms-no-shared-ownership), [Bounded Lifetime Over Unbounded](ALGORITHMS.md#algorithms-no-unbounded), [Enforced Symmetry Over Asymmetric Lifecycle](ALGORITHMS.md#algorithms-no-asymmetric), [Explicit Retention Over Implicit](ALGORITHMS.md#algorithms-no-implicit-retention), [Structural Release Over Discipline](ALGORITHMS.md#algorithms-no-discipline-release), [Immutable Data Over Mutable State](ALGORITHMS.md#algorithms-no-mutable), [Errors As Language Over Silent Errors](ALGORITHMS.md#algorithms-no-silent), [Explicit Invalidity Over Hidden](ALGORITHMS.md#algorithms-no-hidden-invalidity), [Event Emission Over Parent Callbacks](ALGORITHMS.md#algorithms-no-callbacks), [Monotonic Growth Over Retraction](ALGORITHMS.md#algorithms-no-retraction), [Semantic Addressing Over Location Addressing](ALGORITHMS.md#algorithms-no-location), [Ordinal Time Over Timestamps](ALGORITHMS.md#algorithms-no-timestamps), [Homoiconicity Over Separation](ALGORITHMS.md#algorithms-no-separation), [Bounded Complexity Over Unlimited](ALGORITHMS.md#algorithms-no-unlimited), [Computed Health Over Metric Health](ALGORITHMS.md#algorithms-no-metrics), [Secret Store Over Hardcoded Secrets](ALGORITHMS.md#algorithms-no-hardcoded-secrets), [Boundary Validation Over Unvalidated Input](ALGORITHMS.md#algorithms-no-unvalidated-input), [Least Privilege Over Broad Privilege](ALGORITHMS.md#algorithms-no-broad-privilege), [Config Externalization Over Env Fallback](ALGORITHMS.md#algorithms-no-env-fallback), [Profile-First Over Unmeasured Optimization](ALGORITHMS.md#algorithms-no-unmeasured-optimization), [Rule As Code Over Convention](ALGORITHMS.md#algorithms-no-convention-enforcement), [Design By Contract Over Implicit Contract](ALGORITHMS.md#algorithms-no-implicit-contract), [Versioned Evolution Over Breaking Change](ALGORITHMS.md#algorithms-no-breaking-change), [Schema-Validated Boundary Over Untyped](ALGORITHMS.md#algorithms-no-untyped-boundary), [Atomic Boundary Over Partial Commit](ALGORITHMS.md#algorithms-no-partial-commit), [Saga Compensation Over Distributed 2PC](ALGORITHMS.md#algorithms-no-distributed-2pc), [Async Events Over Synchronous Cross-Boundary](ALGORITHMS.md#algorithms-no-sync-cross-boundary), [Observable Signals Over Opaque Runtime](ALGORITHMS.md#algorithms-no-opaque-runtime), [Injected Dependency Over Hidden](ALGORITHMS.md#algorithms-no-hidden-dependency), [Convention Discovery Over Hardcoded Wiring](ALGORITHMS.md#algorithms-no-hardcoded-wiring), [Declarative Config Over Imperative](ALGORITHMS.md#algorithms-no-imperative-config), [Anti-Corruption Layer Over Cross-Context Leak](ALGORITHMS.md#algorithms-no-leaky-context), [Injected Nondeterminism Over Hidden](ALGORITHMS.md#algorithms-no-hidden-nondeterminism), [Pattern By Fit Over Speculative Pattern](ALGORITHMS.md#algorithms-no-speculative-pattern), [Runtime-Neutral Automation Boundary](ALGORITHMS.md#algorithms-runtime-neutral-automation-boundary), [Intentional Static Separation](ALGORITHMS.md#algorithms-intentional-static-separation), [Extension Interface Discovery](ALGORITHMS.md#algorithms-extension-interface-discovery), [Performance-Aware Discovery Design](ALGORITHMS.md#algorithms-performance-aware-discovery-design), [Dynamic Extension Architecture](ALGORITHMS.md#algorithms-dynamic-extension-architecture), [Cache Invalidation Strategy](ALGORITHMS.md#algorithms-cache-invalidation-strategy), [Dynamic Failure Isolation](ALGORITHMS.md#algorithms-dynamic-failure-isolation), [Measured-vs-Estimated Validation](ALGORITHMS.md#algorithms-measured-vs-estimated-validation), [Architecture Validation Before Persistence](ALGORITHMS.md#algorithms-architecture-validation-before-persistence), [Automation Completion Status](ALGORITHMS.md#algorithms-automation-completion-status), [Runtime-Agnostic Adapter Boundary](ALGORITHMS.md#algorithms-runtime-agnostic-adapter-boundary), [Pattern Classification](ALGORITHMS.md#algorithms-pattern-classification), [Refactor Intent Classification](ALGORITHMS.md#algorithms-refactor-intent-classification), [Architecture Compliance Targeting](ALGORITHMS.md#algorithms-architecture-compliance-targeting), [Existing Solution Conflict](ALGORITHMS.md#algorithms-existing-solution-conflict), [Additive Debt Gate](ALGORITHMS.md#algorithms-additive-debt-gate), [Pattern-Specific Validation](ALGORITHMS.md#algorithms-pattern-specific-validation), [Zero-Duplication Verification](ALGORITHMS.md#algorithms-zero-duplication-verification), [Completion Truthfulness](ALGORITHMS.md#algorithms-completion-truthfulness), [Trust Anchor](ALGORITHMS.md#algorithms-trust-anchor), [Intent & Directionality Normalization](ALGORITHMS.md#algorithms-intent-directionality-normalization), [Planning Stage](ALGORITHMS.md#algorithms-planning-stage), [Principle Activation](ALGORITHMS.md#algorithms-principle-activation), [Protocol Semantic Selection](ALGORITHMS.md#algorithms-protocol-semantic-selection), [Loop Class Labeling](ALGORITHMS.md#algorithms-loop-class-labeling), [Codebase Pattern Enforcement](ALGORITHMS.md#algorithms-codebase-pattern-enforcement), [Validator Coverage](ALGORITHMS.md#algorithms-validator-coverage), [Structured Observability Context](ALGORITHMS.md#algorithms-structured-observability-context), [Cross-Cutting Surface Coverage](ALGORITHMS.md#algorithms-cross-cutting-surface-coverage), [Legacy Elimination](ALGORITHMS.md#algorithms-legacy-elimination), [Validation Stage](ALGORITHMS.md#algorithms-validation-stage), [Semantic Debt Policy](ALGORITHMS.md#algorithms-semantic-debt-policy), [Evidence-Based Claim Verification](ALGORITHMS.md#algorithms-evidence-based-claim-verification), [Validation Suite Battery](ALGORITHMS.md#algorithms-validation-suite-battery), [Verification Execution](ALGORITHMS.md#algorithms-verification-execution), [Violation Classification](ALGORITHMS.md#algorithms-violation-classification), [Reverification Gate](ALGORITHMS.md#algorithms-reverification-gate), [Evidence-Gated Claim Verification](ALGORITHMS.md#algorithms-evidence-gated-claim-verification), [Environment Capability Verification](ALGORITHMS.md#algorithms-environment-capability-verification), [Behavioral Self-Test](ALGORITHMS.md#algorithms-behavioral-self-test), [Adversarial Input Testing](ALGORITHMS.md#algorithms-adversarial-input-testing), [Safe Arithmetic Contract](ALGORITHMS.md#algorithms-safe-arithmetic-contract), [Invocation Join](ALGORITHMS.md#algorithms-invocation-join), [Uncovered Gap Derivation](ALGORITHMS.md#algorithms-uncovered-gap-derivation), [Evidence Verdict](ALGORITHMS.md#algorithms-evidence-verdict), [Coverage Completion](ALGORITHMS.md#algorithms-coverage-completion), [PAG Handoff Gate](ALGORITHMS.md#algorithms-pag-validation-gate), [PAG Explicit Control Flow](ALGORITHMS.md#algorithms-pag-explicit-control-flow), [PAG Ambiguity Reduction](ALGORITHMS.md#algorithms-pag-ambiguity-reduction), [PAG Well-Formedness Validation](ALGORITHMS.md#algorithms-pag-well-formedness-validation), [Anti-Pattern Classification](ALGORITHMS.md#algorithms-anti-pattern-classification), [Abstraction Boundary Principle](ALGORITHMS.md#algorithms-abstraction-boundary-principle), [Base-Class Candidate Selection](ALGORITHMS.md#algorithms-base-class-candidate-selection), [Anti-Pattern Elimination Verification](ALGORITHMS.md#algorithms-anti-pattern-elimination-verification), [Pattern Distillation Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness), [Delta Capture](ALGORITHMS.md#algorithms-delta-capture), [Plan Phase Verification](ALGORITHMS.md#algorithms-plan-phase-verification), [Canonical Config Resolution](ALGORITHMS.md#algorithms-canonical-config-resolution), [Machine Verdict Derivation](ALGORITHMS.md#algorithms-machine-verdict-derivation), [Mode Contract Validation](ALGORITHMS.md#algorithms-mode-contract-validation), [Type-Keyed Appearance](ALGORITHMS.md#algorithms-type-keyed-appearance), [Concern Classification](ALGORITHMS.md#algorithms-concern-classification), [Discovery Verification](ALGORITHMS.md#algorithms-discovery-verification), [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion), [Container Ladder](ALGORITHMS.md#algorithms-container-ladder), [Export Triage Ladder](ALGORITHMS.md#algorithms-export-triage-ladder), [Alignment Cadence](ALGORITHMS.md#algorithms-alignment-cadence)
 
 How it is checked
 
@@ -5196,7 +5172,7 @@ Yields shape
 procedure
 
 Contracts
-[Portable Contract Composition](ALGORITHMS.md#algorithms-portable-contract-composition), [Adapter Rendering](ALGORITHMS.md#algorithms-adapter-rendering), [Agent Creator Kernel](ALGORITHMS.md#algorithms-agent-creator-kernel), [File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Document Responsibility](ALGORITHMS.md#algorithms-agent-document-responsibility), [Agent Activation Invocation](ALGORITHMS.md#algorithms-agent-activation-invocation), [Parallel Batch Execution](ALGORITHMS.md#algorithms-parallel-batch-execution), [Sequential Agent Execution](ALGORITHMS.md#algorithms-sequential-agent-execution), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Workflow Creation Kernel](ALGORITHMS.md#algorithms-workflow-creation-kernel), [Anti-Pattern Rule Compiler](ALGORITHMS.md#algorithms-anti-pattern-rule-compiler), [Architectural Contract Kernel](ALGORITHMS.md#algorithms-architectural-contract-kernel), [Construction Boundary](ALGORITHMS.md#algorithms-construction-boundary), [Saga Compensation](ALGORITHMS.md#algorithms-saga-compensation), [Declarative Metaprogramming](ALGORITHMS.md#algorithms-declarative-metaprogramming), [Manifest-Driven Documentation](ALGORITHMS.md#algorithms-manifest-driven-documentation), [Architecture Fitness Function Generation](ALGORITHMS.md#algorithms-architecture-fitness-function-generation), [Architecture Catalog Compiler](ALGORITHMS.md#algorithms-architecture-catalog-compiler), [Master Architecture Governance Kernel](ALGORITHMS.md#algorithms-master-architecture-governance-kernel), [Centralized Reference Resolver](ALGORITHMS.md#algorithms-centralized-reference-resolver), [Manual Fallback Preservation](ALGORITHMS.md#algorithms-manual-fallback-preservation), [Entry Point Migration](ALGORITHMS.md#algorithms-entry-point-migration), [Knowledge Capture](ALGORITHMS.md#algorithms-knowledge-capture), [Automation Kernel](ALGORITHMS.md#algorithms-automation-kernel), [Replacement Refactor](ALGORITHMS.md#algorithms-replacement-refactor), [Rollback-Centered Execution](ALGORITHMS.md#algorithms-rollback-centered-execution), [Centralization Kernel](ALGORITHMS.md#algorithms-centralization-kernel), [Dynamic Discovery Pattern Generation](ALGORITHMS.md#algorithms-dynamic-discovery-pattern-generation), [Compilation Stage](ALGORITHMS.md#algorithms-compilation-stage), [Verb Template Binding](ALGORITHMS.md#algorithms-verb-template-binding), [Task Atomization](ALGORITHMS.md#algorithms-task-atomization), [Checklist Creation Kernel](ALGORITHMS.md#algorithms-checklist-creation-kernel), [File-Scoped Fix](ALGORITHMS.md#algorithms-file-scoped-fix), [File Limit Remediation](ALGORITHMS.md#algorithms-file-limit-remediation), [Import Boundary Remediation](ALGORITHMS.md#algorithms-import-boundary-remediation), [Naming Convention Remediation](ALGORITHMS.md#algorithms-naming-convention-remediation), [Base-Class Compliance Remediation](ALGORITHMS.md#algorithms-base-class-compliance-remediation), [CSS Token Remediation](ALGORITHMS.md#algorithms-css-token-remediation), [DOM Factory Remediation](ALGORITHMS.md#algorithms-dom-factory-remediation), [Console Usage Remediation](ALGORITHMS.md#algorithms-console-usage-remediation), [Lifecycle Symmetry Remediation](ALGORITHMS.md#algorithms-lifecycle-symmetry-remediation), [Stylelint Post-Fix](ALGORITHMS.md#algorithms-stylelint-post-fix), [Codebase Verification Kernel](ALGORITHMS.md#algorithms-codebase-verification-kernel), [File Modification Recovery](ALGORITHMS.md#algorithms-file-modification-recovery), [Defensive String Normalization](ALGORITHMS.md#algorithms-defensive-string-normalization), [Advanced Tool Escalation](ALGORITHMS.md#algorithms-advanced-tool-escalation), [Contract-Based Verification Kernel](ALGORITHMS.md#algorithms-contract-based-verification-kernel), [Convergence Walk](ALGORITHMS.md#algorithms-convergence-walk), [Test Authoring](ALGORITHMS.md#algorithms-test-authoring), [Test Coverage Kernel](ALGORITHMS.md#algorithms-test-coverage-kernel), [PAG Semantic Operation](ALGORITHMS.md#algorithms-pag-tool-invocation), [PAG Authoring Kernel](ALGORITHMS.md#algorithms-pag-authoring-kernel), [Base Schematic Composition](ALGORITHMS.md#algorithms-base-schematic-composition), [Backup-Verified Migration](ALGORITHMS.md#algorithms-backup-verified-migration), [Registry Regeneration](ALGORITHMS.md#algorithms-registry-regeneration), [Anti-Reintroduction Gate](ALGORITHMS.md#algorithms-anti-reintroduction-gate), [Pattern Distiller Kernel](ALGORITHMS.md#algorithms-pattern-distiller-kernel), [Idempotent Merge](ALGORITHMS.md#algorithms-idempotent-merge), [Deterministic Merge Core](ALGORITHMS.md#algorithms-deterministic-merge-core), [Persistence Fork](ALGORITHMS.md#algorithms-persistence-fork), [Living Profile Kernel](ALGORITHMS.md#algorithms-living-profile-kernel), [Governed Autonomous Plan Loop](ALGORITHMS.md#algorithms-governed-autonomous-plan-loop), [Quality Governance Loop](ALGORITHMS.md#algorithms-quality-governance-loop), [Comment Normalization Remediation](ALGORITHMS.md#algorithms-comment-normalization-remediation), [Custom-Rule Derivation](ALGORITHMS.md#algorithms-custom-rule-derivation), [Composed Turn Contract](ALGORITHMS.md#algorithms-composed-turn-contract), [Loop-Owned Mode Selection](ALGORITHMS.md#algorithms-loop-owned-mode-selection), [Governed Construction Boundary](ALGORITHMS.md#algorithms-governed-construction-boundary), [Type-Migration Centralization](ALGORITHMS.md#algorithms-type-migration-centralization), [Container Reshape](ALGORITHMS.md#algorithms-container-reshape), [Taxonomy Kernel](ALGORITHMS.md#algorithms-taxonomy-kernel)
+[Portable Contract Composition](ALGORITHMS.md#algorithms-portable-contract-composition), [Adapter Rendering](ALGORITHMS.md#algorithms-adapter-rendering), [Agent Creator Kernel](ALGORITHMS.md#algorithms-agent-creator-kernel), [Agent Workflow File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Document Responsibility](ALGORITHMS.md#algorithms-agent-document-responsibility), [Agent Activation Invocation](ALGORITHMS.md#algorithms-agent-activation-invocation), [Parallel Batch Execution](ALGORITHMS.md#algorithms-parallel-batch-execution), [Sequential Agent Execution](ALGORITHMS.md#algorithms-sequential-agent-execution), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Workflow Creation Kernel](ALGORITHMS.md#algorithms-workflow-creation-kernel), [Anti-Pattern Rule Compiler](ALGORITHMS.md#algorithms-anti-pattern-rule-compiler), [Architectural Contract Kernel](ALGORITHMS.md#algorithms-architectural-contract-kernel), [Construction Boundary](ALGORITHMS.md#algorithms-construction-boundary), [Saga Compensation](ALGORITHMS.md#algorithms-saga-compensation), [Declarative Metaprogramming](ALGORITHMS.md#algorithms-declarative-metaprogramming), [Manifest-Driven Documentation](ALGORITHMS.md#algorithms-manifest-driven-documentation), [Architecture Fitness Function Generation](ALGORITHMS.md#algorithms-architecture-fitness-function-generation), [Architecture Catalog Compiler](ALGORITHMS.md#algorithms-architecture-catalog-compiler), [Master Architecture Governance Kernel](ALGORITHMS.md#algorithms-master-architecture-governance-kernel), [Centralized Reference Resolver](ALGORITHMS.md#algorithms-centralized-reference-resolver), [Manual Fallback Preservation](ALGORITHMS.md#algorithms-manual-fallback-preservation), [Entry Point Migration](ALGORITHMS.md#algorithms-entry-point-migration), [Knowledge Capture](ALGORITHMS.md#algorithms-knowledge-capture), [Automation Kernel](ALGORITHMS.md#algorithms-automation-kernel), [Replacement Refactor](ALGORITHMS.md#algorithms-replacement-refactor), [Rollback-Centered Execution](ALGORITHMS.md#algorithms-rollback-centered-execution), [Centralization Kernel](ALGORITHMS.md#algorithms-centralization-kernel), [Dynamic Discovery Pattern Generation](ALGORITHMS.md#algorithms-dynamic-discovery-pattern-generation), [Compilation Stage](ALGORITHMS.md#algorithms-compilation-stage), [Verb Template Binding](ALGORITHMS.md#algorithms-verb-template-binding), [Task Atomization](ALGORITHMS.md#algorithms-task-atomization), [Checklist Creation Kernel](ALGORITHMS.md#algorithms-checklist-creation-kernel), [File-Scoped Fix](ALGORITHMS.md#algorithms-file-scoped-fix), [File Limit Remediation](ALGORITHMS.md#algorithms-file-limit-remediation), [Import Boundary Remediation](ALGORITHMS.md#algorithms-import-boundary-remediation), [Naming Convention Remediation](ALGORITHMS.md#algorithms-naming-convention-remediation), [Base-Class Compliance Remediation](ALGORITHMS.md#algorithms-base-class-compliance-remediation), [CSS Token Remediation](ALGORITHMS.md#algorithms-css-token-remediation), [DOM Factory Remediation](ALGORITHMS.md#algorithms-dom-factory-remediation), [Console Usage Remediation](ALGORITHMS.md#algorithms-console-usage-remediation), [Lifecycle Symmetry Remediation](ALGORITHMS.md#algorithms-lifecycle-symmetry-remediation), [Stylelint Post-Fix](ALGORITHMS.md#algorithms-stylelint-post-fix), [Codebase Verification Kernel](ALGORITHMS.md#algorithms-codebase-verification-kernel), [File Modification Recovery](ALGORITHMS.md#algorithms-file-modification-recovery), [Defensive String Normalization](ALGORITHMS.md#algorithms-defensive-string-normalization), [Advanced Tool Escalation](ALGORITHMS.md#algorithms-advanced-tool-escalation), [Contract-Based Verification Kernel](ALGORITHMS.md#algorithms-contract-based-verification-kernel), [Convergence Walk](ALGORITHMS.md#algorithms-convergence-walk), [Test Authoring](ALGORITHMS.md#algorithms-test-authoring), [Test Coverage Kernel](ALGORITHMS.md#algorithms-test-coverage-kernel), [PAG Semantic Operation](ALGORITHMS.md#algorithms-pag-tool-invocation), [PAG Authoring Kernel](ALGORITHMS.md#algorithms-pag-authoring-kernel), [Base Schematic Composition](ALGORITHMS.md#algorithms-base-schematic-composition), [Backup-Verified Migration](ALGORITHMS.md#algorithms-backup-verified-migration), [Registry Regeneration](ALGORITHMS.md#algorithms-registry-regeneration), [Anti-Reintroduction Gate](ALGORITHMS.md#algorithms-anti-reintroduction-gate), [Pattern Distiller Kernel](ALGORITHMS.md#algorithms-pattern-distiller-kernel), [Idempotent Merge](ALGORITHMS.md#algorithms-idempotent-merge), [Deterministic Merge Core](ALGORITHMS.md#algorithms-deterministic-merge-core), [Persistence Fork](ALGORITHMS.md#algorithms-persistence-fork), [Living Profile Kernel](ALGORITHMS.md#algorithms-living-profile-kernel), [Governed Autonomous Plan Loop](ALGORITHMS.md#algorithms-governed-autonomous-plan-loop), [Quality Governance Loop](ALGORITHMS.md#algorithms-quality-governance-loop), [Comment Normalization Remediation](ALGORITHMS.md#algorithms-comment-normalization-remediation), [Custom-Rule Derivation](ALGORITHMS.md#algorithms-custom-rule-derivation), [Composed Turn Contract](ALGORITHMS.md#algorithms-composed-turn-contract), [Loop-Owned Mode Selection](ALGORITHMS.md#algorithms-loop-owned-mode-selection), [Governed Construction Boundary](ALGORITHMS.md#algorithms-governed-construction-boundary), [Type-Migration Centralization](ALGORITHMS.md#algorithms-type-migration-centralization), [Container Reshape](ALGORITHMS.md#algorithms-container-reshape), [Taxonomy Kernel](ALGORITHMS.md#algorithms-taxonomy-kernel)
 
 How it is checked
 
@@ -7076,7 +7052,7 @@ Question
 Does the same structure recur at different scales?
 
 Fields
-fractal-geometry, renormalisation
+fractal-geometry, renormalization
 
 Surfaces
 scale_duplication
@@ -12293,7 +12269,7 @@ Invariant
 Every representation in jurisdiction has a computable check
 
 Grounded by
-[JURISDICTION](GRAMMAR.md#pag-keyword-meta-jurisdiction), [INVARIANT](GRAMMAR.md#pag-keyword-invariant-invariant), [meta_field](GRAMMAR.md#pag-production-meta-field)
+[meta_field](GRAMMAR.md#pag-production-meta-field)
 
 How it is checked
 
@@ -12330,9 +12306,6 @@ Details
 
 Invariant
 A check's domain is explicit and reported beside its verdict
-
-Grounded by
-[POPULATION](GRAMMAR.md#pag-keyword-validation-population)
 
 How it is checked
 
@@ -12371,7 +12344,7 @@ Invariant
 A dependency is declared by the referent, never inferred from a name
 
 Grounded by
-[LINK](GRAMMAR.md#pag-keyword-action-link), [PROPAGATE](GRAMMAR.md#pag-keyword-action-propagate), [RENAME](GRAMMAR.md#pag-keyword-action-rename), [DAG](GRAMMAR.md#pag-keyword-dag-dag), [DEPENDS_ON](GRAMMAR.md#pag-keyword-dag-depends-on), [dag_declaration](GRAMMAR.md#pag-production-dag-declaration), [edge_clause](GRAMMAR.md#pag-production-edge-clause)
+[dag_declaration](GRAMMAR.md#pag-production-dag-declaration), [edge_clause](GRAMMAR.md#pag-production-edge-clause)
 
 How it is checked
 
@@ -12410,7 +12383,7 @@ Invariant
 A verdict is itself a representation and has a reachable check of its own
 
 Grounded by
-[VERDICT](GRAMMAR.md#pag-keyword-report-verdict), [report_block](GRAMMAR.md#pag-production-report-block)
+[report_block](GRAMMAR.md#pag-production-report-block)
 
 How it is checked
 
@@ -12449,7 +12422,7 @@ Invariant
 A lowering keeps every distinction a later check needs
 
 Grounded by
-[CONVERT](GRAMMAR.md#pag-keyword-action-convert), [PRESERVES](GRAMMAR.md#pag-keyword-node-preserves), [preserves_clause](GRAMMAR.md#pag-production-preserves-clause)
+[preserves_clause](GRAMMAR.md#pag-production-preserves-clause)
 
 How it is checked
 
@@ -12487,9 +12460,6 @@ Details
 Invariant
 A check reads a representation derived after the last relevant mutator
 
-Grounded by
-[FRESHNESS](GRAMMAR.md#pag-keyword-validation-freshness)
-
 How it is checked
 
 Checked by
@@ -12525,9 +12495,6 @@ Details
 
 Invariant
 One canonical question has one authoritative derivation
-
-Grounded by
-[COPY](GRAMMAR.md#pag-keyword-action-copy)
 
 How it is checked
 
@@ -12565,9 +12532,6 @@ Details
 Invariant
 A chain is as certain as its least certain link, and a link below the floor is removed from the chain
 
-Grounded by
-[PRIORITY](GRAMMAR.md#pag-keyword-meta-priority)
-
 How it is checked
 
 Checked by
@@ -12604,9 +12568,6 @@ Details
 Invariant
 Dynamic observation locates a failure and never certifies absence
 
-Grounded by
-[OBSERVED](GRAMMAR.md#pag-keyword-report-observed)
-
 How it is checked
 
 Checked by
@@ -12642,9 +12603,6 @@ Details
 
 Invariant
 A run stops when saturation, completion and verification all hold, or when it is blocked on something outside it
-
-Grounded by
-[COMPLETION](GRAMMAR.md#pag-keyword-report-completion)
 
 How it is checked
 
@@ -12834,7 +12792,7 @@ Breaks
 [epi-declared-dependency](REASONING.md#reasoning-invariant-epi-declared-dependency)
 
 Seen in
-[Hidden Dependencies](LEXICON.md#lexicon-hidden-dependencies)
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Refused by rules
 None, because a join on spelling reads like any other string comparison in source

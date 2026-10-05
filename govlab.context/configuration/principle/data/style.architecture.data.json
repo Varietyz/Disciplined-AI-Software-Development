@@ -1,0 +1,399 @@
+{
+    "category": "Codebase / System Architecture Styles",
+    "check": {
+        "population": "every import, package and service boundary the style's dependency rules range over",
+        "freshness": "a verdict stands until an import, a package boundary or a deployment unit changes",
+        "refusal": "the layer or dependency rule fails the build on an edge the style forbids",
+        "observation": "the import graph and the deployment topology, read from source and configuration",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the style's declared dependency rules, which every import and deployment edge conforms to"
+    },
+    "records": [
+        {
+            "id": "ports-and-adapters-architecture",
+            "distinctFrom": [
+                {
+                    "id": "architecture:clean-architecture",
+                    "reason": "Ports and adapters isolates the core behind ports, while clean architecture arranges concentric layers whose dependencies point inward."
+                }
+            ],
+            "name": "Ports and Adapters Architecture",
+            "aliases": [
+                "Hexagonal Architecture",
+                "Ports and Adapters"
+            ],
+            "definition": "A convention of keeping a domain core free of framework and data types, with every external dependency behind a port the application owns and implemented by an adapter outside it.",
+            "type": "style",
+            "scope": [
+                "application",
+                "service",
+                "component"
+            ],
+            "requires": [
+                "Ports",
+                "Adapters",
+                "DIP",
+                "Domain Core"
+            ],
+            "reinforces": [
+                "Replaceability",
+                "Testability",
+                "Clean Architecture"
+            ],
+            "enables": [
+                "Infrastructure Independence",
+                "External System Isolation"
+            ],
+            "conflicts_with": ["Framework Leakage"],
+            "tensions_with": [
+                "Boilerplate",
+                "Initial Complexity"
+            ],
+            "violated_by": [
+                "architecture:concrete-coupling",
+                "architecture:framework-leakage"
+            ],
+            "detected_by": [
+                "inward/outward dependency violations",
+                "dependency direction violations"
+            ],
+            "measured_by": [
+                "adapter coverage",
+                "boundary purity",
+                "core purity score"
+            ],
+            "refactored_by": [
+                "lexicon:introduce-port",
+                "lexicon:extract-adapter",
+                "lexicon:move-framework-outward"
+            ],
+            "enforced_by": [
+                "layer dependency rules",
+                "architecture tests"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooService {\n  save(foo: Foo) { return sql.query(\"insert into foo values (?)\", foo); }\n}",
+                "after": "interface SaveFooPort { save(foo: Foo): Promise<void>; }\nclass FooService {\n  constructor(private readonly port: SaveFooPort) {}\n  save(foo: Foo) { return this.port.save(foo); }\n}\nclass SqlFooAdapter implements SaveFooPort { save(foo: Foo) { return sqlFooStore.save(foo); } }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "clean-architecture",
+            "name": "Clean Architecture",
+            "definition": "A convention of concentric layers in which source dependencies point only inward, towards the use cases and entities.",
+            "type": "style",
+            "scope": [
+                "application",
+                "system"
+            ],
+            "requires": [
+                "Dependency Rule",
+                "Use Cases",
+                "Boundaries"
+            ],
+            "reinforces": [
+                "DIP",
+                "Testability"
+            ],
+            "enables": ["Framework Independence"],
+            "conflicts_with": ["Layer Leakage"],
+            "tensions_with": ["Boilerplate"],
+            "violated_by": ["lexicon:layer-leakage"],
+            "detected_by": ["dependency rule violations"],
+            "measured_by": ["inward dependency compliance"],
+            "refactored_by": [
+                "lexicon:move-logic-to-the-domain",
+                "lexicon:extract-interface",
+                "lexicon:extract-adapter"
+            ],
+            "enforced_by": ["dependency graph rules"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooController {\n  async create(request: Request) { return orm.foo.create(await request.json()); }\n}",
+                "after": "interface CreateFooGateway { save(foo: Foo): Promise<void>; }\nclass CreateFooInteractor {\n  constructor(private readonly gateway: CreateFooGateway) {}\n  execute(input: CreateFooInput) { return this.gateway.save(Foo.create(input)); }\n}\nclass FooController { constructor(private readonly useCase: CreateFooInteractor) {} }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "layered-architecture",
+            "name": "Layered Architecture",
+            "aliases": ["N-Tier Architecture"],
+            "definition": "A convention of stacking presentation, application and persistence layers, each calling only the layer below it.",
+            "type": "style",
+            "scope": [
+                "application",
+                "system"
+            ],
+            "requires": ["Layer Separation"],
+            "reinforces": ["Separation of Concerns"],
+            "enables": ["Structured Code Organization"],
+            "conflicts_with": ["Layer Skipping"],
+            "tensions_with": ["Anemic Layers"],
+            "violated_by": ["lexicon:layer-skipping"],
+            "detected_by": ["forbidden layer imports"],
+            "measured_by": ["layer violation count"],
+            "refactored_by": [
+                "lexicon:move-behavior-to-its-owner",
+                "lexicon:introduce-port"
+            ],
+            "enforced_by": ["layer rules"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function createFoo(request: Request) {\n  return sql.query(\"insert into foo values (?)\", JSON.parse(request.body));\n}",
+                "after": "class FooController { constructor(private readonly service: FooService) {} }\nclass FooService { constructor(private readonly repository: FooRepository) {} }\nclass SqlFooRepository implements FooRepository { save(foo: Foo) { return fooTable.insert(foo); } }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "component-based-architecture",
+            "name": "Component-Based Architecture",
+            "definition": "A convention of building a system from components that declare what they export and what they require.",
+            "type": "style",
+            "scope": [
+                "component",
+                "system"
+            ],
+            "requires": [
+                "Component Boundaries",
+                "Contracts"
+            ],
+            "reinforces": [
+                "Modularity",
+                "Composability"
+            ],
+            "enables": [
+                "Reuse",
+                "Replaceability"
+            ],
+            "conflicts_with": ["Big Ball of Mud"],
+            "tensions_with": ["Integration Overhead"],
+            "violated_by": ["lexicon:exposed-internals"],
+            "detected_by": ["boundary import violations"],
+            "measured_by": ["component cohesion/coupling"],
+            "refactored_by": [
+                "lexicon:extract-module",
+                "lexicon:define-contract"
+            ],
+            "enforced_by": ["component ownership rules"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const app = {\n  createFoo,\n  createBar,\n  renderFoo,\n  saveBar,\n  publishBaz,\n};",
+                "after": "const fooComponent = defineComponent({\n  name: \"foo\",\n  exports: { createFoo, FooView },\n  requires: { FooStore, EventBus },\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "package-by-feature",
+            "name": "Package by Feature",
+            "definition": "A design rule that code is grouped by the feature it serves, so one change stays inside one package.",
+            "type": "principle",
+            "scope": [
+                "package",
+                "module"
+            ],
+            "requires": ["Feature Cohesion"],
+            "reinforces": [
+                "Modularity",
+                "Bounded Context"
+            ],
+            "enables": ["Locality of Change"],
+            "conflicts_with": ["Package by Technical Layer Only"],
+            "tensions_with": ["Shared Technical Concerns"],
+            "violated_by": ["lexicon:package-by-technical-layer-only"],
+            "detected_by": ["change sets spanning many layer packages"],
+            "measured_by": ["change locality"],
+            "refactored_by": [
+                "lexicon:repackage-by-feature",
+                "lexicon:extract-module"
+            ],
+            "enforced_by": ["package conventions"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "src/controllers/foo.ts\nsrc/controllers/bar.ts\nsrc/services/foo.ts\nsrc/services/bar.ts\nsrc/repositories/foo.ts\nsrc/repositories/bar.ts",
+                "after": "src/foo/controller.ts\nsrc/foo/service.ts\nsrc/foo/repository.ts\nsrc/bar/controller.ts\nsrc/bar/service.ts\nsrc/bar/repository.ts",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "microservices",
+            "name": "Microservices",
+            "aliases": ["Microservice Architecture"],
+            "definition": "A convention of splitting a system into services that each own their data and deploy independently.",
+            "type": "style",
+            "scope": [
+                "system",
+                "service",
+                "deployment"
+            ],
+            "requires": [
+                "Service Autonomy",
+                "Independent Deployment"
+            ],
+            "reinforces": [
+                "Scalability",
+                "Bounded Context"
+            ],
+            "enables": ["Decentralized Ownership"],
+            "conflicts_with": ["Distributed Monolith"],
+            "tensions_with": [
+                "Operational Complexity",
+                "Consistency"
+            ],
+            "violated_by": [
+                "lexicon:shared-database",
+                "architecture:synchronous-chain-trap"
+            ],
+            "detected_by": [
+                "deployment coupling",
+                "cross-service transactions"
+            ],
+            "measured_by": [
+                "deploy independence",
+                "coupling metrics"
+            ],
+            "refactored_by": [
+                "lexicon:split-bounded-context",
+                "lexicon:own-data-per-service",
+                "architecture:domain-events"
+            ],
+            "enforced_by": [
+                "service ownership",
+                "API contracts"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class SharedApplication {\n  createFoo(foo: Foo) { return sharedDb.insert(\"foo\", foo); }\n  createBar(bar: Bar) { return sharedDb.insert(\"bar\", bar); }\n}",
+                "after": "class FooService {\n  constructor(private readonly fooStore: FooStore, private readonly outbox: Outbox) {}\n  create(foo: Foo) { return transact(() => [this.fooStore.save(foo), this.outbox.append(fooCreated(foo))]); }\n}\nclass BarService { constructor(private readonly barStore: BarStore) {} }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "monolith-architecture",
+            "name": "Monolith Architecture",
+            "aliases": ["Monolith"],
+            "definition": "A convention of deploying a system as one unit, with its modules kept apart by internal boundaries.",
+            "type": "style",
+            "scope": [
+                "application",
+                "deployment"
+            ],
+            "requires": ["Unified Deployment Boundary"],
+            "reinforces": ["Operational Simplicity"],
+            "enables": ["Transactional Simplicity"],
+            "conflicts_with": ["Big Ball of Mud"],
+            "tensions_with": [
+                "Team Autonomy",
+                "Independent Scaling"
+            ],
+            "violated_by": ["architecture:big-ball-of-mud"],
+            "detected_by": [
+                "cyclic packages",
+                "high global coupling"
+            ],
+            "measured_by": ["module boundary health"],
+            "refactored_by": ["lexicon:define-module-boundaries"],
+            "enforced_by": ["modular monolith rules"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await http.post(\"foo-service\", foo);\nawait http.post(\"bar-service\", bar);\nawait http.post(\"baz-service\", baz);",
+                "after": "class ModularMonolith {\n  constructor(readonly foo: FooModule, readonly bar: BarModule, readonly baz: BazModule) {}\n}\nawait app.foo.create(foo);\nawait app.bar.create(bar);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "pipes-and-filters",
+            "name": "Pipes and Filters",
+            "definition": "A convention of processing data through independent stages that share one input and output interface.",
+            "type": "style",
+            "scope": [
+                "application",
+                "data processing",
+                "composition"
+            ],
+            "requires": ["Uniform Stage Interface"],
+            "reinforces": [
+                "Single Responsibility Principle (SRP)",
+                "Composability"
+            ],
+            "enables": [
+                "Reorderable Stages",
+                "Independent Stage Testing"
+            ],
+            "conflicts_with": ["Monolithic Transform Function"],
+            "tensions_with": ["End-to-End Traceability"],
+            "violated_by": ["lexicon:monolithic-transform-function"],
+            "detected_by": ["long sequential transform bodies"],
+            "measured_by": ["transform-step count per function"],
+            "refactored_by": ["architecture:pipeline-architecture"],
+            "enforced_by": ["design review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function processFoo(raw: string) {\n  const parsed = parseFoo(raw);\n  const cleaned = cleanFoo(parsed);\n  return enrichFoo(cleaned);\n}",
+                "after": "const filters: FooFilter[] = [parseFoo, cleanFoo, enrichFoo];\nconst fooPipeline = connect(filters);\nfooPipeline.run(raw);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "service-oriented-architecture",
+            "name": "Service-Oriented Architecture",
+            "aliases": ["SOA"],
+            "definition": "A convention of exposing each business capability as a service governed by a published contract.",
+            "type": "style",
+            "scope": [
+                "application",
+                "service",
+                "integration"
+            ],
+            "requires": ["Service Contract"],
+            "reinforces": [
+                "Service Autonomy",
+                "Loose Coupling"
+            ],
+            "enables": ["Contract-Governed Service Reuse"],
+            "conflicts_with": ["Shared Monolithic Application"],
+            "tensions_with": ["Operational Overhead"],
+            "violated_by": ["lexicon:shared-monolithic-application"],
+            "detected_by": ["unrelated operations sharing one class/module"],
+            "measured_by": ["capability cohesion per module"],
+            "refactored_by": [],
+            "enforced_by": ["architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class Application {\n  createFoo() {}\n  createBar() {}\n  createBaz() {}\n}",
+                "after": "const fooService = registerService(\"FooService\", { create: createFoo }, { contract: FooServiceContract });\nserviceBus.expose(fooService);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "space-based-architecture",
+            "name": "Space-Based Architecture",
+            "definition": "A convention of holding working state in a replicated in-memory space, so no central database limits scaling.",
+            "type": "style",
+            "scope": [
+                "application",
+                "scalability",
+                "distributed state"
+            ],
+            "requires": ["Replicated In-Memory State"],
+            "reinforces": [
+                "Horizontal Scaling",
+                "Elasticity"
+            ],
+            "enables": ["Database-Bottleneck Removal"],
+            "conflicts_with": ["Central Database Bottleneck"],
+            "tensions_with": ["Consistency"],
+            "violated_by": ["lexicon:central-database-bottleneck"],
+            "detected_by": ["single datastore as the scaling limit"],
+            "measured_by": ["central-datastore contention rate"],
+            "refactored_by": [],
+            "enforced_by": ["architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await centralDatabase.find(id);",
+                "after": "const foo = await fooSpace.read(id);\nfooSpace.on(\"write\", replicateToPeers);",
+                "lang": "ts"
+            }
+        }
+    ]
+}

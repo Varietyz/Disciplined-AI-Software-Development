@@ -1,0 +1,1067 @@
+{
+    "category": "Scalability / Performance / Optimization",
+    "check": {
+        "population": "every performance-sensitive path, resource and scaling policy under a declared workload",
+        "freshness": "a verdict stands for the measured workload and build, and goes stale when either changes",
+        "refusal": "the load test, benchmark or SLO gate fails the change that breaks its budget",
+        "observation": "profiles, benchmark results, load-test metrics and production telemetry measured against their budgets",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the declared budget, which every measurement is compared against"
+    },
+    "records": [
+        {
+            "id": "scalability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:elasticity",
+                    "reason": "Scalability is keeping throughput as load grows by adding resources, while elasticity is those resources following demand automatically in both directions."
+                },
+                {
+                    "id": "architecture:low-coupling",
+                    "reason": "Scalability is growing with load, while low coupling is changing without ripple."
+                },
+                {
+                    "id": "architecture:memory-efficiency",
+                    "reason": "Scalability is growth by adding resources, while memory efficiency is bounded use of the resources one process has."
+                },
+                {
+                    "id": "architecture:resilience",
+                    "reason": "Scalability is holding performance under load, while resilience is containing and recovering from failure."
+                },
+                {
+                    "id": "architecture:testability",
+                    "reason": "Scalability is growing with load, while testability is running code in isolation."
+                },
+                {
+                    "id": "lexicon:cost-efficiency",
+                    "reason": "Scalability is keeping throughput as load grows, while cost efficiency is the resource cost of the work."
+                },
+                {
+                    "id": "lexicon:resource-efficiency",
+                    "reason": "Scalability adds resources to meet load, while resource efficiency uses as few as possible for the same work."
+                },
+                {
+                    "id": "lexicon:simplicity",
+                    "reason": "Scalability is growth with load, while simplicity is the absence of the structure that growth tends to add."
+                },
+                {
+                    "id": "lexicon:availability",
+                    "reason": "Scalability is performance under growing load, while availability is the share of time the system serves at all."
+                }
+            ],
+            "name": "Scalability",
+            "definition": "The degree to which a system keeps its throughput and latency as load grows, by adding resources.",
+            "type": "quality-attribute",
+            "scope": [
+                "service",
+                "system",
+                "infrastructure"
+            ],
+            "requires": [
+                "Load Model",
+                "Bottleneck Awareness"
+            ],
+            "reinforces": ["Performance Engineering"],
+            "enables": ["Growth Handling"],
+            "conflicts_with": ["Fixed-Capacity Design"],
+            "tensions_with": [
+                "Simplicity",
+                "Consistency"
+            ],
+            "violated_by": ["lexicon:bottlenecks"],
+            "detected_by": ["saturation under load test"],
+            "measured_by": ["throughput under increasing load"],
+            "refactored_by": [
+                "architecture:caching",
+                "architecture:partitioning",
+                "lexicon:introduce-async-event",
+                "architecture:horizontal-scaling"
+            ],
+            "enforced_by": [
+                "load tests",
+                "SLO gates"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class FooServer {\n  private readonly foos = new Map<FooId, Foo>();\n  handle(request: FooRequest) { return processFoo(request, this.foos); }\n}",
+                "after": "class FooServer {\n  constructor(private readonly store: DistributedFooStore) {}\n  handle(request: FooRequest) { return processFoo(request, this.store); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "horizontal-scaling",
+            "name": "Horizontal Scaling",
+            "definition": "A technique for adding capacity by running more stateless instances of a service behind a load balancer.",
+            "type": "technique",
+            "scope": [
+                "service",
+                "infrastructure"
+            ],
+            "requires": ["Statelessness or Shared State Strategy"],
+            "reinforces": [
+                "Elasticity",
+                "Availability"
+            ],
+            "enables": ["Scale-Out"],
+            "conflicts_with": ["Instance-Local State"],
+            "tensions_with": ["Distributed Coordination"],
+            "violated_by": ["lexicon:instance-affinity"],
+            "detected_by": ["local session/state coupling"],
+            "measured_by": ["scale-out efficiency"],
+            "refactored_by": [
+                "lexicon:externalize-session-state",
+                "architecture:load-balancing"
+            ],
+            "enforced_by": ["deployment tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "deployFoo({ replicas: 1, cpu: 32, memoryGb: 128 });",
+                "after": "deployFoo({ replicas: 12, cpu: 2, memoryGb: 4, stateless: true });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "vertical-scaling",
+            "name": "Vertical Scaling",
+            "definition": "A technique for adding capacity by giving one instance more CPU, memory or I/O.",
+            "type": "technique",
+            "scope": [
+                "infrastructure",
+                "process"
+            ],
+            "requires": ["Resource Headroom"],
+            "reinforces": ["Simplicity"],
+            "enables": ["Capacity Increase without Distribution"],
+            "conflicts_with": ["Hard Resource Ceiling"],
+            "tensions_with": ["Cost/Limit"],
+            "violated_by": ["lexicon:hard-resource-ceiling"],
+            "detected_by": ["resource saturation trends"],
+            "measured_by": ["utilization/headroom"],
+            "refactored_by": [
+                "architecture:profiling",
+                "architecture:horizontal-scaling"
+            ],
+            "enforced_by": ["capacity planning"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "deployFoo({ cpu: 1, memoryGb: 1 });\nqueueFooWhenSaturated();",
+                "after": "deployFoo({ cpu: 8, memoryGb: 32 });\nverifyFooCapacity({ targetConcurrency: 200 });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "elasticity",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:availability",
+                    "reason": "Elasticity is capacity following demand, while availability is the share of time the system can serve."
+                },
+                {
+                    "id": "lexicon:cost-efficiency",
+                    "reason": "Elasticity is capacity following demand, while cost efficiency is the work done per unit of resource cost."
+                },
+                {
+                    "id": "lexicon:warm-up-latency",
+                    "reason": "Elasticity adds capacity when demand rises, while warm-up latency is the delay before that capacity can serve."
+                }
+            ],
+            "name": "Elasticity",
+            "definition": "The degree to which a system's provisioned capacity follows demand up and down automatically.",
+            "type": "quality-attribute",
+            "scope": [
+                "deployment",
+                "infrastructure"
+            ],
+            "requires": [
+                "Auto-Scaling",
+                "Metrics"
+            ],
+            "reinforces": [
+                "Scalability",
+                "Cost Efficiency"
+            ],
+            "enables": ["Dynamic Capacity"],
+            "conflicts_with": ["Fixed Provisioning"],
+            "tensions_with": ["Warm-Up Latency"],
+            "violated_by": ["lexicon:fixed-provisioning"],
+            "detected_by": ["under/over-provisioning patterns"],
+            "measured_by": [
+                "scale response time",
+                "utilization"
+            ],
+            "refactored_by": [
+                "lexicon:autoscaling-policy",
+                "lexicon:externalize-session-state"
+            ],
+            "enforced_by": ["infrastructure policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "deployFooWorkers({ replicas: 10 });",
+                "after": "deployFooWorkers({\n  minReplicas: 2,\n  maxReplicas: 50,\n  target: { queueDepthPerReplica: 100 },\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "load-balancing",
+            "name": "Load Balancing",
+            "definition": "A mechanism that spreads incoming requests across healthy instances of a service.",
+            "type": "mechanism",
+            "scope": [
+                "traffic",
+                "service"
+            ],
+            "requires": [
+                "Multiple Targets",
+                "Health Checks"
+            ],
+            "reinforces": [
+                "Availability",
+                "Scalability"
+            ],
+            "enables": ["Traffic Distribution"],
+            "conflicts_with": ["Single Target Routing"],
+            "tensions_with": ["Session Affinity"],
+            "violated_by": ["lexicon:single-target-routing"],
+            "detected_by": ["skewed instance utilization"],
+            "measured_by": [
+                "request distribution",
+                "latency"
+            ],
+            "refactored_by": ["lexicon:externalize-session-state"],
+            "enforced_by": ["infrastructure config checks"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const endpoint = fooServers[0];\nendpoint.handle(request);",
+                "after": "const endpoint = fooLoadBalancer.next({ key: request.fooId });\nendpoint.handle(request);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "sharding",
+            "name": "Sharding",
+            "definition": "A design pattern that splits a dataset across separate stores by a shard key, and routes each request to the shard that holds its key.",
+            "type": "pattern",
+            "scope": [
+                "database",
+                "storage",
+                "messaging"
+            ],
+            "requires": ["Partition Key"],
+            "reinforces": ["Horizontal Scaling"],
+            "enables": ["Large Dataset Scaling"],
+            "conflicts_with": ["Single Monolithic Store"],
+            "tensions_with": ["Cross-Shard Queries"],
+            "violated_by": ["lexicon:single-monolithic-store"],
+            "detected_by": [
+                "hotspot partitions",
+                "storage bottleneck"
+            ],
+            "measured_by": [
+                "shard balance",
+                "query fan-out"
+            ],
+            "refactored_by": ["architecture:partitioning"],
+            "enforced_by": ["data architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await singleFooDatabase.find(id);",
+                "after": "const shard = fooShardMap.resolve(id);\nconst foo = await shard.find(id);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "partitioning",
+            "distinctFrom": [
+                {
+                    "id": "architecture:parallelism",
+                    "reason": "Partitioning divides data or work by a key, while parallelism runs the independent parts at the same time."
+                }
+            ],
+            "name": "Partitioning",
+            "definition": "A technique for dividing data or work into independent partitions by a key, so each can be processed in parallel.",
+            "type": "technique",
+            "scope": [
+                "data",
+                "workload",
+                "service"
+            ],
+            "requires": ["Partition Strategy"],
+            "reinforces": [
+                "Scalability",
+                "Isolation"
+            ],
+            "enables": ["Parallelism"],
+            "conflicts_with": ["Global Shared State"],
+            "tensions_with": ["Rebalancing Complexity"],
+            "violated_by": ["lexicon:single-monolithic-store"],
+            "detected_by": ["hotspot resource usage"],
+            "measured_by": ["partition balance"],
+            "refactored_by": [],
+            "enforced_by": ["architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const events = await fooLog.readAll();",
+                "after": "const partition = hash(fooId) % partitionCount;\nconst events = await fooLog.readPartition(partition);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "caching",
+            "name": "Caching",
+            "definition": "A design pattern that stores the result of an expensive read or computation under a key derived from every input it depends on, and serves it again while that key matches.",
+            "type": "pattern",
+            "scope": [
+                "data access",
+                "computation",
+                "API"
+            ],
+            "requires": ["Invalidation Policy"],
+            "reinforces": [
+                "Latency Reduction",
+                "Scalability"
+            ],
+            "enables": ["Reduced Load"],
+            "conflicts_with": ["Cache Poisoning by Design"],
+            "tensions_with": [
+                "Consistency",
+                "Always-Fresh Reads"
+            ],
+            "violated_by": ["lexicon:repeated-stable-computation"],
+            "detected_by": [
+                "hot repeated reads",
+                "high latency calls"
+            ],
+            "measured_by": [
+                "hit ratio",
+                "stale read rate"
+            ],
+            "refactored_by": [
+                "lexicon:context-keyed-cache",
+                "lexicon:cache-invalidation-on-write"
+            ],
+            "enforced_by": ["performance tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "async function loadFoo(id: FooId) { return fooStore.find(id); }",
+                "after": "async function loadFoo(id: FooId) {\n  const key = fingerprint(id, await fooStore.versionOf(id));\n  const cached = await fooCache.get(key);\n  if (cached) return cached;\n  const foo = await fooStore.find(id);\n  if (foo) await fooCache.set(key, foo);\n  return foo;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "statelessness",
+            "name": "Statelessness",
+            "definition": "A design rule that a handler keeps no request state between calls, so any instance can serve any request.",
+            "type": "principle",
+            "scope": [
+                "service",
+                "process",
+                "handler"
+            ],
+            "requires": ["Externalized State"],
+            "reinforces": [
+                "Horizontal Scaling",
+                "Resilience"
+            ],
+            "enables": [
+                "Load Balancing",
+                "Auto-Scaling"
+            ],
+            "conflicts_with": [
+                "Instance Affinity",
+                "Temporal Coupling"
+            ],
+            "tensions_with": ["State Access Latency"],
+            "violated_by": ["lexicon:instance-local-state"],
+            "detected_by": ["mutable static/session-local state"],
+            "measured_by": ["state externalization coverage"],
+            "refactored_by": [
+                "lexicon:externalize-session-state",
+                "architecture:session-management"
+            ],
+            "enforced_by": ["architecture tests"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooHandler {\n  private currentUser?: User;\n  handle(request: Request) {\n    this.currentUser = request.user;\n    return processFoo(request, this.currentUser);\n  }\n}",
+                "after": "class FooHandler {\n  handle(request: Request) {\n    return processFoo(request, request.user);\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "concurrency",
+            "name": "Concurrency",
+            "definition": "A conceptual representation of several tasks in progress over overlapping time, with their access to shared state coordinated.",
+            "canon": ["concurrency"],
+            "type": "model",
+            "scope": [
+                "runtime",
+                "service",
+                "algorithm"
+            ],
+            "requires": ["Concurrency Control"],
+            "reinforces": ["Throughput"],
+            "enables": ["Overlapping Work"],
+            "conflicts_with": ["Race Conditions"],
+            "tensions_with": ["Complexity"],
+            "violated_by": ["lexicon:race-conditions"],
+            "detected_by": [
+                "data races",
+                "flaky concurrent tests"
+            ],
+            "measured_by": [
+                "throughput",
+                "race count"
+            ],
+            "refactored_by": [
+                "lexicon:apply-concurrency-control",
+                "lexicon:make-immutable"
+            ],
+            "enforced_by": [
+                "race detectors",
+                "tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "for (const foo of foos) await processFoo(foo);",
+                "after": "await Promise.all(foos.map(foo => processFoo(foo)));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "parallelism",
+            "name": "Parallelism",
+            "definition": "A technique for running independent units of work at the same time on several cores or workers.",
+            "type": "technique",
+            "scope": [
+                "algorithm",
+                "processing",
+                "runtime"
+            ],
+            "requires": ["Independent Work Units"],
+            "reinforces": [
+                "Throughput",
+                "Performance"
+            ],
+            "enables": ["Multi-Core Utilization"],
+            "conflicts_with": ["Sequential Bottleneck"],
+            "tensions_with": ["Coordination Overhead"],
+            "violated_by": ["lexicon:sequential-bottleneck"],
+            "detected_by": ["CPU bottlenecks with independent work"],
+            "measured_by": [
+                "speedup",
+                "utilization"
+            ],
+            "refactored_by": [],
+            "enforced_by": ["performance benchmarks"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const results = foos.map(foo => cpuHeavyFoo(foo));",
+                "after": "const results = await workerPool.map(foos, foo => cpuHeavyFoo(foo));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "throughput",
+            "distinctFrom": [
+                {
+                    "id": "architecture:latency",
+                    "reason": "Throughput counts completions per unit of time, while latency measures the time of one request."
+                }
+            ],
+            "name": "Throughput",
+            "definition": "The rate at which a system completes requests, messages or items, counted per unit of time.",
+            "type": "metric",
+            "scope": [
+                "service",
+                "pipeline",
+                "system"
+            ],
+            "requires": ["Capacity Model"],
+            "reinforces": ["Scalability"],
+            "enables": ["Load Handling"],
+            "conflicts_with": ["Bottlenecks"],
+            "tensions_with": ["Latency"],
+            "violated_by": ["lexicon:bottlenecks"],
+            "detected_by": ["load test failures"],
+            "measured_by": ["requests/messages/items per second"],
+            "refactored_by": [
+                "architecture:bottleneck-analysis",
+                "architecture:parallelism",
+                "architecture:horizontal-scaling"
+            ],
+            "enforced_by": ["performance gates"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "for (const foo of foos) await fooStore.save(foo);",
+                "after": "for (const batch of chunk(foos, 500)) await fooStore.saveBatch(batch);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "latency",
+            "name": "Latency",
+            "definition": "A measure of the time between a request and its response, usually reported at percentiles.",
+            "type": "metric",
+            "scope": [
+                "API",
+                "service",
+                "user flow"
+            ],
+            "requires": ["Time Budget"],
+            "reinforces": [
+                "User Experience",
+                "Performance Engineering"
+            ],
+            "enables": ["Responsiveness"],
+            "conflicts_with": ["Long Blocking Work"],
+            "tensions_with": ["Throughput/Batching"],
+            "violated_by": ["lexicon:long-blocking-work"],
+            "detected_by": ["trace span delays"],
+            "measured_by": ["p50/p95/p99 latency"],
+            "refactored_by": [
+                "architecture:caching",
+                "lexicon:introduce-async-event",
+                "lexicon:add-index"
+            ],
+            "enforced_by": ["SLO gates"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "async function renderFoo(id: FooId) {\n  const foo = await fooStore.find(id);\n  const bar = await barStore.find(foo.barId);\n  const baz = await bazStore.find(foo.bazId);\n  return render(foo, bar, baz);\n}",
+                "after": "async function renderFoo(id: FooId) {\n  const foo = await fooStore.find(id);\n  const [bar, baz] = await Promise.all([\n    barStore.find(foo.barId),\n    bazStore.find(foo.bazId),\n  ]);\n  return render(foo, bar, baz);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "performance-engineering",
+            "distinctFrom": [
+                {
+                    "id": "architecture:benchmarking",
+                    "reason": "Performance engineering is the practice that sets budgets and acts on measurements, while benchmarking is the controlled timing it measures with."
+                }
+            ],
+            "name": "Performance Engineering",
+            "definition": "The practice of setting performance budgets, measuring against a representative workload and changing code only where a measurement points.",
+            "aliases": ["Evidence-Based Optimization"],
+            "type": "activity",
+            "scope": [
+                "codebase",
+                "service",
+                "system"
+            ],
+            "requires": [
+                "Profiling",
+                "Benchmarking"
+            ],
+            "reinforces": [
+                "Scalability",
+                "Resource Efficiency"
+            ],
+            "enables": [],
+            "conflicts_with": ["Guess-Based Optimization"],
+            "tensions_with": ["Maintainability"],
+            "violated_by": ["lexicon:guess-based-optimization"],
+            "detected_by": ["performance changes lacking benchmark"],
+            "measured_by": [
+                "benchmark trend",
+                "SLO compliance"
+            ],
+            "refactored_by": [
+                "architecture:profiling",
+                "architecture:bottleneck-analysis",
+                "architecture:benchmarking"
+            ],
+            "enforced_by": ["performance CI"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "optimizeFooCode();",
+                "after": "const budget = { p95LatencyMs: 150, throughputPerSecond: 1000 } as const;\nconst profile = await measureFooWorkload(representativeLoad);\nconst change = optimize(profile.hotspot);\nassertPerformance(change, budget);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "algorithmic-efficiency",
+            "name": "Algorithmic Efficiency",
+            "definition": "A design rule that an algorithm and its data structures are chosen for how their cost grows with input size.",
+            "type": "principle",
+            "scope": [
+                "algorithm",
+                "data structure"
+            ],
+            "requires": ["Complexity Awareness"],
+            "reinforces": ["Scalability"],
+            "enables": ["Efficient Processing"],
+            "conflicts_with": [
+                "Inefficient Algorithm Choice",
+                "N Plus One Query"
+            ],
+            "tensions_with": ["Implementation Simplicity"],
+            "violated_by": ["lexicon:inefficient-algorithm-choice"],
+            "detected_by": [
+                "complexity analysis",
+                "benchmark slope"
+            ],
+            "measured_by": ["time/space complexity"],
+            "refactored_by": [
+                "lexicon:replace-algorithm",
+                "lexicon:add-index"
+            ],
+            "enforced_by": [
+                "review",
+                "benchmarks"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function hasFoo(foos: Foo[], id: FooId) {\n  return foos.some(foo => foo.id === id);\n}",
+                "after": "function indexFoos(foos: readonly Foo[]) {\n  return new Map(foos.map(foo => [foo.id, foo]));\n}\nconst hasFoo = (index: ReadonlyMap<FooId, Foo>, id: FooId) => index.has(id);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "time-complexity",
+            "name": "Time Complexity",
+            "definition": "A measure of how an algorithm's running time grows as its input grows.",
+            "type": "metric",
+            "scope": [
+                "algorithm",
+                "function"
+            ],
+            "requires": ["Input Size Model"],
+            "reinforces": ["Algorithmic Efficiency"],
+            "enables": ["Scalability Analysis"],
+            "conflicts_with": ["Unbounded Runtime Growth"],
+            "tensions_with": ["Space Complexity"],
+            "violated_by": ["lexicon:inefficient-algorithm-choice"],
+            "detected_by": [
+                "nested loops over large inputs",
+                "benchmark slope"
+            ],
+            "measured_by": [
+                "Big O",
+                "runtime scaling"
+            ],
+            "refactored_by": [
+                "lexicon:replace-algorithm",
+                "lexicon:add-index",
+                "architecture:caching"
+            ],
+            "enforced_by": ["benchmark thresholds"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function duplicateFooIds(foos: Foo[]) {\n  return foos.filter((foo, index) => foos.findIndex(x => x.id === foo.id) !== index);\n}",
+                "after": "function duplicateFooIds(foos: readonly Foo[]) {\n  const seen = new Set<FooId>();\n  return foos.filter(foo => seen.has(foo.id) || !seen.add(foo.id));\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "space-complexity",
+            "distinctFrom": [
+                {
+                    "id": "architecture:resource-utilization",
+                    "reason": "Space complexity is how an algorithm's memory grows with input, while resource utilization is how much provisioned capacity is in use now."
+                },
+                {
+                    "id": "architecture:time-complexity",
+                    "reason": "Space complexity measures memory growth, while time complexity measures running-time growth."
+                }
+            ],
+            "name": "Space Complexity",
+            "definition": "A measure of how an algorithm's memory use grows as its input grows.",
+            "type": "metric",
+            "scope": [
+                "algorithm",
+                "process"
+            ],
+            "requires": ["Memory Model"],
+            "reinforces": ["Resource Utilization"],
+            "enables": ["Memory Scalability"],
+            "conflicts_with": ["Unbounded Memory Growth"],
+            "tensions_with": ["Time Complexity"],
+            "violated_by": ["lexicon:unbounded-memory-growth"],
+            "detected_by": [
+                "memory profiling",
+                "full materialization"
+            ],
+            "measured_by": [
+                "Big O space",
+                "peak memory"
+            ],
+            "refactored_by": [
+                "architecture:sequential-access",
+                "architecture:iterator-pattern",
+                "lexicon:chunked-processing"
+            ],
+            "enforced_by": ["memory benchmarks"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function processFoos(stream: AsyncIterable<Foo>) {\n  return collectAll(stream).then(foos => foos.map(transformFoo));\n}",
+                "after": "async function* processFoos(stream: AsyncIterable<Foo>) {\n  for await (const foo of stream) yield transformFoo(foo);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "big-o-notation",
+            "name": "Big O Notation",
+            "definition": "A method for classifying an algorithm by the upper bound on how its cost grows with input size, ignoring constant factors.",
+            "type": "technique",
+            "scope": ["algorithm"],
+            "requires": ["Complexity Model"],
+            "reinforces": ["Algorithmic Efficiency"],
+            "enables": ["Comparative Analysis"],
+            "conflicts_with": ["Anecdotal Performance Claims"],
+            "tensions_with": ["Constant-Factor Practicality"],
+            "violated_by": ["lexicon:inefficient-algorithm-choice"],
+            "detected_by": ["missing complexity note for critical algorithm"],
+            "measured_by": ["asymptotic classification"],
+            "refactored_by": ["lexicon:replace-algorithm"],
+            "enforced_by": ["review checklist"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function pairFoosWithBars(foos: Foo[], bars: Bar[]) {\n  return foos.flatMap(foo => bars.filter(bar => bar.fooId === foo.id).map(bar => [foo, bar]));\n}",
+                "after": "function pairFoosWithBars(foos: readonly Foo[], bars: readonly Bar[]) {\n  const barsByFoo = groupBy(bars, bar => bar.fooId);\n  return foos.flatMap(foo => (barsByFoo.get(foo.id) ?? []).map(bar => [foo, bar]));\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "optimization",
+            "distinctFrom": [
+                {
+                    "id": "architecture:bottleneck-analysis",
+                    "reason": "Optimization changes the code at a bottleneck, while bottleneck analysis finds where it is."
+                },
+                {
+                    "id": "architecture:performance-engineering",
+                    "reason": "Optimization is one change at a located bottleneck, while performance engineering is the whole practice of budgets, measurement and change."
+                }
+            ],
+            "name": "Optimization",
+            "definition": "The activity of changing code or configuration to reduce the cost of a bottleneck that a measurement has located.",
+            "type": "activity",
+            "scope": [
+                "code",
+                "database",
+                "system"
+            ],
+            "requires": [
+                "Profiling",
+                "Bottleneck Evidence"
+            ],
+            "reinforces": ["Performance Engineering"],
+            "enables": ["Resource Efficiency"],
+            "conflicts_with": ["Premature Optimization"],
+            "tensions_with": ["Readability/Maintainability"],
+            "violated_by": ["lexicon:premature-optimization"],
+            "detected_by": ["complex code without performance evidence"],
+            "measured_by": [
+                "benchmark delta",
+                "SLO improvement"
+            ],
+            "refactored_by": [
+                "architecture:bottleneck-analysis",
+                "lexicon:cleanup-simplification"
+            ],
+            "enforced_by": ["benchmark review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const fooCache = new Map<FooId, Foo>();\nfunction loadFoo(id: FooId) { return fooCache.get(id) ?? expensiveLoad(id); }",
+                "after": "const profile = profiler.measure(\"foo.load\", representativeFooIds);\nif (profile.hotspot === \"foo-store-read\") {\n  enableBoundedFooCache({ maxEntries: 10_000, keyBy: fooVersionFingerprint });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "profiling",
+            "name": "Profiling",
+            "definition": "A technique for measuring where a running program spends its time and memory under a representative workload.",
+            "type": "technique",
+            "scope": [
+                "runtime",
+                "code path"
+            ],
+            "requires": ["Representative Workload"],
+            "reinforces": ["Performance Engineering"],
+            "enables": ["Bottleneck Detection"],
+            "conflicts_with": ["Guesswork"],
+            "tensions_with": ["Measurement Overhead"],
+            "violated_by": ["lexicon:guesswork"],
+            "detected_by": ["missing profile evidence"],
+            "measured_by": ["hotspot attribution"],
+            "refactored_by": [],
+            "enforced_by": ["performance review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "rewriteFooParserForSpeed();",
+                "after": "const profile = await profiler.capture(() => parseFooBatch(batch));\nconst hotspot = profile.topFrame();\noptimizeFooFrame(hotspot);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "benchmarking",
+            "name": "Benchmarking",
+            "definition": "The activity of timing a fixed workload repeatedly in a controlled environment, so results can be compared across changes.",
+            "type": "activity",
+            "scope": [
+                "function",
+                "service",
+                "system"
+            ],
+            "requires": ["Repeatable Test Environment"],
+            "reinforces": [
+                "Reproducibility",
+                "Performance Engineering"
+            ],
+            "enables": ["Regression Detection"],
+            "conflicts_with": ["Anecdotal Timing"],
+            "tensions_with": ["Environment Drift"],
+            "violated_by": ["lexicon:anecdotal-performance-claims"],
+            "detected_by": ["missing benchmark for perf-sensitive changes"],
+            "measured_by": ["benchmark score/trend"],
+            "refactored_by": ["architecture:immutable-infrastructure"],
+            "enforced_by": ["benchmark CI"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const start = clock.now();\nrunFoo();\nreport(clock.now() - start);",
+                "after": "benchmark(\"foo.parse\", {\n  warmup: 100,\n  iterations: 10_000,\n  run: () => parseFoo(fixture),\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "bottleneck-analysis",
+            "name": "Bottleneck Analysis",
+            "definition": "The activity of finding the stage that limits a system's overall throughput or latency, from traces and profiles.",
+            "type": "activity",
+            "scope": [
+                "code path",
+                "system"
+            ],
+            "requires": [
+                "Profiling",
+                "Metrics"
+            ],
+            "reinforces": ["Optimization"],
+            "enables": ["Targeted Improvement"],
+            "conflicts_with": ["Local Micro-Optimization"],
+            "tensions_with": ["Distributed Complexity"],
+            "violated_by": ["lexicon:local-micro-optimization"],
+            "detected_by": ["performance work without hotspot evidence"],
+            "measured_by": ["bottleneck contribution percentage"],
+            "refactored_by": [
+                "architecture:parallelism",
+                "architecture:caching"
+            ],
+            "enforced_by": ["performance review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "addMoreFooWorkers();",
+                "after": "const trace = await measureFooPipeline();\nconst bottleneck = trace.stages.sort((a, b) => b.waitMs - a.waitMs)[0];\nremoveBottleneck(bottleneck);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "resource-utilization",
+            "name": "Resource Utilization",
+            "definition": "A measure of how much of the provisioned CPU, memory, I/O and network capacity is in use.",
+            "type": "metric",
+            "scope": [
+                "CPU",
+                "memory",
+                "IO",
+                "network"
+            ],
+            "requires": ["Monitoring"],
+            "reinforces": ["Performance Engineering"],
+            "enables": ["Capacity Planning"],
+            "conflicts_with": ["Resource Waste/Saturation"],
+            "tensions_with": ["Over-Provisioning"],
+            "violated_by": ["lexicon:resource-waste-saturation"],
+            "detected_by": ["monitoring metrics"],
+            "measured_by": ["CPU/memory/IO/network utilization"],
+            "refactored_by": [
+                "architecture:profiling",
+                "architecture:horizontal-scaling",
+                "lexicon:externalize-configuration"
+            ],
+            "enforced_by": ["SLO/capacity policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "deployFoo({ cpu: 16, memoryGb: 64 });",
+                "after": "const sizing = rightSizeFoo({\n  cpuP95: metrics.cpu(\"foo\", \"p95\"),\n  memoryP95: metrics.memory(\"foo\", \"p95\"),\n  headroom: 0.25,\n});\ndeployFoo(sizing);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "rate-limiting",
+            "name": "Rate Limiting",
+            "definition": "A mechanism that caps how many requests a caller can make in a time window and rejects the excess.",
+            "type": "mechanism",
+            "scope": [
+                "API",
+                "service",
+                "queue"
+            ],
+            "requires": ["Quota Policy"],
+            "reinforces": [
+                "Backpressure",
+                "Security"
+            ],
+            "enables": ["Abuse/Overload Protection"],
+            "conflicts_with": ["Unbounded Access"],
+            "tensions_with": ["User Experience"],
+            "violated_by": ["lexicon:unbounded-access"],
+            "detected_by": ["missing rate limiter on public/expensive endpoints"],
+            "measured_by": [
+                "limit hit rate",
+                "overload incidents"
+            ],
+            "refactored_by": [],
+            "enforced_by": ["API gateway/policy"],
+            "severity": "contextual",
+            "mandatoryFor": "public APIs",
+            "exemplar": {
+                "before": "app.post(\"/foo\", createFoo);",
+                "after": "app.post(\"/foo\", rateLimit({\n  key: request => request.identity.id,\n  limit: 100,\n  windowMs: 60_000,\n}), createFoo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "memory-efficiency",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:cpu-cost",
+                    "reason": "Memory efficiency bounds the memory a process uses, while CPU cost is the processor time that streaming or chunking may add."
+                }
+            ],
+            "name": "Memory Efficiency",
+            "definition": "The degree to which a process handles its input with bounded memory, by streaming or chunking instead of loading it whole.",
+            "type": "quality-attribute",
+            "scope": [
+                "algorithm",
+                "process",
+                "stream"
+            ],
+            "requires": ["Space Complexity Awareness"],
+            "reinforces": ["Scalability"],
+            "enables": ["Large Input Handling"],
+            "conflicts_with": ["Full Materialization"],
+            "tensions_with": ["CPU Cost"],
+            "violated_by": ["lexicon:unbounded-memory-growth"],
+            "detected_by": ["memory profile spikes"],
+            "measured_by": [
+                "peak memory",
+                "allocation rate"
+            ],
+            "refactored_by": [
+                "architecture:event-stream",
+                "lexicon:chunked-processing",
+                "architecture:iterator-pattern"
+            ],
+            "enforced_by": ["memory benchmarks"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const copies = foos.map(foo => structuredClone(foo));",
+                "after": "function* fooViews(foos: readonly Foo[]) {\n  for (const foo of foos) yield { id: foo.id, name: foo.name };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "cdn-edge-caching",
+            "name": "CDN / Edge Caching",
+            "aliases": ["Content Delivery Network"],
+            "definition": "A mechanism that serves cacheable content from servers near the requester, keyed by a fingerprint of the content.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "infrastructure",
+                "latency"
+            ],
+            "requires": ["Cacheable Content"],
+            "reinforces": [
+                "Caching",
+                "Latency"
+            ],
+            "enables": [
+                "Origin Offload",
+                "Geographically-Local Delivery"
+            ],
+            "conflicts_with": ["Origin-Only Serving"],
+            "tensions_with": ["Cache Invalidation"],
+            "violated_by": ["lexicon:origin-only-serving"],
+            "detected_by": ["static assets served from origin per request"],
+            "measured_by": ["origin request rate / cache hit ratio"],
+            "refactored_by": [],
+            "enforced_by": ["performance review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "app.get(\"/foo/:id/avatar\", serveFooAvatarFromOrigin);",
+                "after": "app.get(\"/foo/:id/avatar\",\n  edgeCache({ immutable: true, key: request => avatarFingerprint(request.params.id) }),\n  serveFooAvatarFromOrigin,\n);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "read-replica",
+            "distinctFrom": [
+                {
+                    "id": "architecture:horizontal-scaling",
+                    "reason": "A read replica scales database reads by copying data, while horizontal scaling adds stateless service instances behind a load balancer."
+                }
+            ],
+            "name": "Read Replica",
+            "definition": "A technique for routing read queries to replicated copies of a database, so the primary handles only writes.",
+            "type": "technique",
+            "scope": [
+                "service",
+                "database",
+                "scalability"
+            ],
+            "requires": ["Replication"],
+            "reinforces": [
+                "Horizontal Scaling",
+                "Load Balancing"
+            ],
+            "enables": ["Read Traffic Offload"],
+            "conflicts_with": ["Single-Primary Read Contention"],
+            "tensions_with": ["Read-Your-Writes Consistency"],
+            "violated_by": ["lexicon:single-primary-read-contention"],
+            "detected_by": ["read load saturating the write primary"],
+            "measured_by": ["primary read/write contention ratio"],
+            "refactored_by": [],
+            "enforced_by": ["database design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await primaryDb.query(fooQuery);\nawait primaryDb.write(fooCommand);",
+                "after": "const foo = await replicaRouter.read(fooQuery);\nawait primaryDb.write(fooCommand);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "queuing-theory",
+            "name": "Queuing Theory",
+            "definition": "A conceptual representation of a system as queues with arrival and service rates, used to predict waiting time and size capacity.",
+            "type": "model",
+            "scope": [
+                "performance",
+                "capacity",
+                "system"
+            ],
+            "requires": ["Arrival and Service Rates"],
+            "reinforces": [
+                "Capacity Planning",
+                "Latency"
+            ],
+            "enables": [
+                "Wait-Time Prediction",
+                "Utilization-Based Sizing"
+            ],
+            "conflicts_with": ["Guess-Based Capacity"],
+            "tensions_with": ["Model Assumptions"],
+            "violated_by": ["lexicon:guess-based-capacity"],
+            "detected_by": ["latency collapsing as utilization approaches saturation"],
+            "measured_by": ["predicted vs actual queue depth and wait time"],
+            "refactored_by": [],
+            "enforced_by": ["capacity review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const workers = 4;",
+                "after": "const rho = arrivalRate / (workers * serviceRate);\nif (rho >= 1) throw new Error(\"unstable queue: utilization >= 1\");\nconst avgWaitMs = mm1WaitTime({ arrivalRate, serviceRate, servers: workers });",
+                "lang": "ts"
+            }
+        }
+    ]
+}

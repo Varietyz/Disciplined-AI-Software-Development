@@ -1,0 +1,50 @@
+{
+    "name": "@govlab/quality",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The one code-quality module — the single SSOT for every quality ecosystem. Holds the custom eslint/stylelint rules, context-lint, the rule catalog + emitters, the language-agnostic engine, the consumer-config framework, the installer, and the unified meta-linter runner that detects ecosystems and runs every tool from one govlab.config.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#runtime/*": "./runtime/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./config": "./index.ts",
+        "./relations": "./core/factories/quality.factory.ts",
+        "./eslint-plugin": "./core/plugins/eslint.plugin.ts",
+        "./stylelint-plugin": "./core/plugins/stylelint.plugin.ts",
+        "./context-lint": "./core/plugins/context.plugin.ts",
+        "./*": "./*"
+    },
+    "bin": {
+        "govlab": "./runtime/entrypoints/invocation.entrypoint.ts",
+        "govlab-clean-comments": "./runtime/entrypoints/comment.entrypoint.ts",
+        "govlab-es-target": "./runtime/entrypoints/target.entrypoint.ts",
+        "govlab-quality-gate": "./runtime/entrypoints/validation.entrypoint.ts",
+        "govlab-canon-validate": "./runtime/entrypoints/canon.entrypoint.ts"
+    },
+    "files": [
+        "configuration",
+        "core",
+        "runtime",
+        "types"
+    ],
+    "scripts": {
+        "catalog:regenerate": "node runtime/entrypoints/catalog.entrypoint.ts",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@govlab/constants": "*",
+        "@govlab/context": "*",
+        "@govlab/code-parse": "*",
+        "@govlab/content-fingerprint": "*",
+        "@ssot/paths": "*"
+    }
+}

@@ -1,0 +1,181 @@
+{
+    "category": "Creational Patterns",
+    "check": {
+        "population": "every construction site of the types the pattern governs",
+        "freshness": "a verdict stands until a constructor, a variant or the composition root changes",
+        "refusal": "the review or the construction test rejects a construction that bypasses the creational owner",
+        "observation": "constructor call sites and their argument counts, read from source",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the creational owner, which every construction site goes through"
+    },
+    "records": [
+        {
+            "id": "factory-pattern",
+            "name": "Factory Pattern",
+            "definition": "A design pattern that moves the construction of an object and its defaults into one function or object.",
+            "type": "pattern",
+            "scope": [
+                "object_creation",
+                "module"
+            ],
+            "requires": ["Creation Variation"],
+            "reinforces": [
+                "OCP",
+                "Encapsulation"
+            ],
+            "enables": ["Polymorphic Construction"],
+            "conflicts_with": ["Scattered Construction Logic"],
+            "tensions_with": ["Simplicity"],
+            "violated_by": ["lexicon:scattered-construction-logic"],
+            "detected_by": ["repeated constructors/switches"],
+            "measured_by": ["construction duplication count"],
+            "refactored_by": [],
+            "enforced_by": ["creation policy review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const foo = new Foo(\"foo\", 0, [], new Date(), \"draft\");",
+                "after": "function makeFoo(name: string): Foo {\n  return new Foo(fooId(), name, 0, [], clock.now(), \"draft\");\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "factory-method-pattern",
+            "name": "Factory Method Pattern",
+            "aliases": ["Virtual Constructor"],
+            "definition": "A design pattern in which a base class calls an overridable method to create the objects its workflow uses.",
+            "type": "pattern",
+            "scope": [
+                "class hierarchy",
+                "framework"
+            ],
+            "requires": ["Subclass-Controlled Creation"],
+            "reinforces": ["OCP"],
+            "enables": ["Deferred Instantiation"],
+            "conflicts_with": ["Concrete Constructor Coupling"],
+            "tensions_with": ["Inheritance Complexity"],
+            "violated_by": ["lexicon:concrete-constructor-coupling"],
+            "detected_by": ["base class directly instantiates variant"],
+            "measured_by": ["variant construction duplication"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class FooImporter {\n  import(raw: string) { return new JsonFooParser().parse(raw); }\n}",
+                "after": "abstract class FooImporter {\n  protected abstract parser(): FooParser;\n  import(raw: string) { return this.parser().parse(raw); }\n}\nclass JsonFooImporter extends FooImporter {\n  protected parser() { return new JsonFooParser(); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "abstract-factory-pattern",
+            "name": "Abstract Factory Pattern",
+            "definition": "A design pattern that creates a whole family of related objects through one interface, so the members always match.",
+            "type": "pattern",
+            "scope": [
+                "product family",
+                "component"
+            ],
+            "requires": ["Related Product Variants"],
+            "reinforces": ["Interchangeability"],
+            "enables": ["Family-Level Replacement"],
+            "conflicts_with": ["Mixed Product Families"],
+            "tensions_with": ["Boilerplate"],
+            "violated_by": ["lexicon:mixed-product-families"],
+            "detected_by": ["manual selection of related product classes"],
+            "measured_by": ["family mismatch defects"],
+            "refactored_by": [],
+            "enforced_by": ["factory conformance tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const store = env === \"test\" ? new MemoryFooStore() : new SqlFooStore();\nconst bus = env === \"test\" ? new MemoryFooBus() : new KafkaFooBus();",
+                "after": "interface FooPlatformFactory {\n  store(): FooStore;\n  bus(): FooBus;\n}\nclass TestFooPlatformFactory implements FooPlatformFactory {\n  store() { return new MemoryFooStore(); }\n  bus() { return new MemoryFooBus(); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "builder-pattern",
+            "name": "Builder Pattern",
+            "definition": "A design pattern that assembles a complex object step by step through named calls and validates it when it is built.",
+            "type": "pattern",
+            "scope": [
+                "object construction",
+                "API"
+            ],
+            "requires": ["Complex Construction"],
+            "reinforces": ["Intent-Revealing Interface"],
+            "enables": ["Valid Object Creation"],
+            "conflicts_with": ["Telescoping Constructor"],
+            "tensions_with": ["Boilerplate"],
+            "violated_by": ["lexicon:telescoping-constructor"],
+            "detected_by": ["high-arity constructors"],
+            "measured_by": ["constructor parameter count"],
+            "refactored_by": [],
+            "enforced_by": ["API review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const foo = new Foo(\"foo_1\", \"Foo\", [], 0, false, undefined, \"draft\");",
+                "after": "const foo = new FooBuilder()\n  .withId(\"foo_1\")\n  .withName(\"Foo\")\n  .withStatus(\"draft\")\n  .build();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "prototype-pattern",
+            "name": "Prototype Pattern",
+            "definition": "A design pattern that creates new objects by cloning a prepared template and applying overrides.",
+            "type": "pattern",
+            "scope": [
+                "object_creation",
+                "runtime"
+            ],
+            "requires": ["Cloneable Template Object"],
+            "reinforces": ["Runtime Extensibility"],
+            "enables": ["Dynamic Object Creation"],
+            "conflicts_with": ["Complex Factory Hierarchies"],
+            "tensions_with": ["Copy Semantics"],
+            "violated_by": ["lexicon:repeated-expensive-setup"],
+            "detected_by": ["duplicate initialization flows"],
+            "measured_by": ["initialization duplication/cost"],
+            "refactored_by": [],
+            "enforced_by": ["clone tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function copyFoo(foo: Foo) {\n  return new Foo(foo.id, foo.name, [...foo.tags], foo.settings.theme, foo.settings.mode);\n}",
+                "after": "class FooPrototype {\n  constructor(private readonly base: Foo) {}\n  clone(overrides: Partial<Foo> = {}): Foo {\n    return structuredClone({ ...this.base, ...overrides });\n  }\n}\nconst template = new FooPrototype(await buildExpensiveFoo());\nconst draft = template.clone({ name: \"quick\" });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "singleton-pattern",
+            "name": "Singleton Pattern",
+            "aliases": ["Singleton"],
+            "definition": "A design pattern that restricts a class to one instance, reached through a global access point.",
+            "type": "pattern",
+            "scope": [
+                "object_creation",
+                "lifetime",
+                "composition root"
+            ],
+            "requires": ["Single-Instance Need"],
+            "reinforces": ["Controlled Instantiation"],
+            "enables": ["Shared Resource Access"],
+            "conflicts_with": ["Global Mutable State"],
+            "tensions_with": [
+                "Testability",
+                "Dependency Injection"
+            ],
+            "violated_by": ["lexicon:global-mutable-state"],
+            "detected_by": ["static global access to a shared service"],
+            "measured_by": ["global-instance reach-in count"],
+            "refactored_by": [
+                "lexicon:composition-root",
+                "architecture:dependency-injection"
+            ],
+            "enforced_by": ["composition-root review"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "let instance: FooService | undefined;\nfunction getFooService() { return instance ??= new FooService(); }",
+                "after": "class FooService {}\nexport function composeApp() {\n  const fooService = new FooService();\n  return { fooService, fooController: new FooController(fooService) };\n}",
+                "lang": "ts"
+            }
+        }
+    ]
+}

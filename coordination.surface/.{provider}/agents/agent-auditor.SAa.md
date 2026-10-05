@@ -69,9 +69,9 @@ GATE — ACT (yields: procedure): [check] all six dimensions measured with count
 
 IF REQUIRES_CORRECTION: COMPOSE correction_checklist FROM failed dimensions SCOPED to the selected scope; IF NOT self_audit_mode ARCHIVE target BEFORE mutation + VALIDATE archive_persisted; CHECK no correction adds a fallback/dual-path; CHECK realized correction cost ≤ the scope's budget
 
-GATE — CONSTRAIN (yields: boolean): [check] COMPLIANT, OR external correction archived + verified before mutation (evidence: archive_verified); [check] no fallback introduced (evidence: single-path corrections); [check] realised_cost ≤ budget (evidence: within scope). result: pass → NODE 8 | archive unverified → REPAIR (owner: constrain) | fallback → REPAIR (owner: act) | over budget → REPAIR (owner: intent — re-scope).
+GATE — CONSTRAIN (yields: boolean): [check] COMPLIANT, OR external correction archived + verified before mutation (evidence: archive_verified); [check] no fallback introduced (evidence: single-path corrections); [check] realized_cost ≤ budget (evidence: within scope). result: pass → NODE 8 | archive unverified → REPAIR (owner: constrain) | fallback → REPAIR (owner: act) | over budget → REPAIR (owner: intent — re-scope).
 
-# NODE 8 — VERIFY [evaluative · verification · logic + probability · yields: contract judgement] (MANDATORY-ALWAYS)
+# NODE 8 — VERIFY [evaluative · verification · logic + probability · yields: contract judgment] (MANDATORY-ALWAYS)
 
 CHECK every dimension counted + thresholded (no subjective pass — ver-evidence, binds claims_need_evidence); APPLY the correction checklist single-path (delete the offending path, no replacement stub): prohibited_hit → REMOVE; runtime_leak → REPLACE with semantic op + adapter token; missing_embodiment → STRENGTHEN structure; silent_fallback → bounded recovery → else fail-fast; INCREMENT version, PERSIST updated_content, RE-MEASURE → recheck_score
 NAME what threshold would flip the pass (ver-falsification); the corrected artifact is re-audited, not assumed fixed

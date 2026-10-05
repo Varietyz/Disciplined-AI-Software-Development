@@ -1,0 +1,31 @@
+{
+    "name": "@govlab/docs",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The one documentation module — placement, validation, and manifest-driven generation. Computes each authored doc's deterministic doc-arch home, gates its stated facts against the code, and generates module READMEs and typed documents from _manifest.json plus the derived .d.ts surface.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#runtime/*": "./runtime/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./*": "./*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@govlab/constants": "*",
+        "@govlab/content-fingerprint": "*",
+        "@govlab/context": "*",
+        "@govlab/quality": "*",
+        "@ssot/paths": "*"
+    }
+}

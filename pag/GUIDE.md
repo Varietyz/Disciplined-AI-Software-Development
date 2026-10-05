@@ -39,22 +39,22 @@ A1·a node shape
 @mandatory                # present on a node of the conative or evaluative layer · it never folds
 
 CONTRACT:
-input:        <the prior node's output, and nothing else>
-transform:    <what this node does to it, as a chain of semantic operations>
-constraints:  <what binds the transform>
-output:       <the one record the next node reads>
-handoff:      <the condition that closes it, and the shape its decision yields>
+  input:        <the prior node's output, and nothing else>
+  transform:    <what this node does to it, as a chain of semantic operations>
+  constraints:  <what binds the transform>
+  output:       <the one record the next node reads>
+  handoff:      <the condition that closes it, and the shape its decision yields>
 
 # OUTPUT CONTRACT
 SET <output> = <the transform applied>
 
 HANDOFF GATE (evidence-bearing):
-rule_id: "<NAME>"   yields: <shape>
-[check] <a claim about the output> (evidence: <what settles it>) over: <the set it ranged over> measured: <n> / <N>
-[check] <a claim about the output> (evidence: <what settles it>)
-[check] <a claim about the output> (evidence: <what settles it>)
-refuse: <the condition that stops it> before <the irreversible write>   # on a node that writes
-result: pass → NODE <n+1> | <named failure> → REPAIR (owner: <the earliest node that can supply the evidence>) | unknown → BLOCKED
+  rule_id: "<NAME>"   yields: <shape>
+  [check] <a claim about the output> (evidence: <what settles it>) over: <the set it ranged over> measured: <n> / <N>
+  [check] <a claim about the output> (evidence: <what settles it>)
+  [check] <a claim about the output> (evidence: <what settles it>)
+  refuse: <the condition that stops it> before <the irreversible write>   # on a node that writes
+  result: pass → NODE <n+1> | <named failure> → REPAIR (owner: <the earliest node that can supply the evidence>) | unknown → BLOCKED
 ```
 
 A1·b directive shape
@@ -77,50 +77,50 @@ A1·c catalog and flow
 # declaration precedes use · a catalog is data a node reads, a function is a transform it names
 DECLARE <catalog>: array
 SET <catalog> = [
-{id: <member>, asks: "<the question it answers>", yields: <shape>},
-{id: <member>, asks: "<the question it answers>", yields: <shape>}
+  {id: <member>, asks: "<the question it answers>", yields: <shape>},
+  {id: <member>, asks: "<the question it answers>", yields: <shape>}
 ]
 
 FUNCTION <transform>(<input>):
-DECLARE <out>: array
-SET <out> = []
-FOR EACH <item> IN <input>:
-ANALYZE_CONTENT <item> AGAINST <catalog> INTO <fit>
-IF <fit>.<applies>: APPEND {item: <item>, kind: <fit>.<id>} TO <out>
-RETURN <out>
+  DECLARE <out>: array
+  SET <out> = []
+  FOR EACH <item> IN <input>:
+    ANALYZE_CONTENT <item> AGAINST <catalog> INTO <fit>
+    IF <fit>.<applies>: APPEND {item: <item>, kind: <fit>.<id>} TO <out>
+  RETURN <out>
 
 # branching ends in a colon, iteration names its collection, failure has a recovery
 IF <condition>:
-EXECUTE_TOOL <next>
+    EXECUTE_TOOL <next>
 ELSE IF <recoverable>:
-ATTEMPT <retry>
+    ATTEMPT <retry>
 ELSE:
-REPORT_RESULT "<the blocker, named>"
+    REPORT_RESULT "<the blocker, named>"
 ```
 
 A1·d five questions
 
 ```mermaid
 flowchart TB
-purpose["What is this for? · the objective, one sentence"]
-nodes["What does each node decide? · its purpose and its yield"]
-reads["What does each node read? · only the prior node's output"]
-fails["What can fail, and who repairs it? · the result line"]
-done["How will I know a node closed? · its gate, with evidence"]
-write["Then write the document"]
-purpose --> nodes --> reads --> fails --> done --> write
+    purpose["What is this for? · the objective, one sentence"]
+    nodes["What does each node decide? · its purpose and its yield"]
+    reads["What does each node read? · only the prior node's output"]
+    fails["What can fail, and who repairs it? · the result line"]
+    done["How will I know a node closed? · its gate, with evidence"]
+    write["Then write the document"]
+    purpose --> nodes --> reads --> fails --> done --> write
 ```
 
 A1·e directive slots
 
 ```mermaid
 flowchart LR
-op["OPERATION · what happens"]
-target["target · what it happens to"]
-prep["PREPOSITION · the relation"]
-source["source · where it comes from"]
-into["INTO destination · where the result lands"]
-op --> target --> prep --> source --> into
+    op["OPERATION · what happens"]
+    target["target · what it happens to"]
+    prep["PREPOSITION · the relation"]
+    source["source · where it comes from"]
+    into["INTO destination · where the result lands"]
+    op --> target --> prep --> source --> into
 ```
 
 ## Document structure
@@ -151,11 +151,11 @@ version: 1.0.0
 THIS WORKFLOW EXECUTES <what it is for>
 
 %% META %%:
-priority: <what outranks what when two sources disagree>
-trust: <what is trusted> = TRUSTED, <what is not> = UNTRUSTED
-objective: "<what finished looks like, checkable>"
-jurisdiction: <what the document may touch> | external: <what it declares outside itself>
-recursion_limit: <a bound on repair>
+    priority: <what outranks what when two sources disagree>
+    trust: <what is trusted> = TRUSTED, <what is not> = UNTRUSTED
+    objective: "<what finished looks like, checkable>"
+    jurisdiction: <what the document may touch> | external: <what it declares outside itself>
+    recursion_limit: <a bound on repair>
 
 # THE FOUR LAYERS · each answers one question about this document
 #   substrate  — how does the artifact come to be        grounds the order of the nodes, named on each by @genesis
@@ -179,10 +179,10 @@ recursion_limit: <a bound on repair>
 INVARIANT <name>: <a property that could be false> over: <the set it ranges over> binds: <the parties it constrains> objector: <the check that would disagree | none>
 
 REPORT:
-subject: <the terminal node>
-verdict: pass | fail | unknown
-domain: declared <N> measured <n>
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: <the terminal node>
+  verdict: pass | fail | unknown
+  domain: declared <N> measured <n>
+  completion: saturated <bool> complete <bool> verified <bool>
 ```
 
 B1·b the types
@@ -218,31 +218,31 @@ B1·c parts in order
 
 ```mermaid
 flowchart TB
-front["Header block · name, type, version"]
-decl["Declaration · THIS TYPE VERB description"]
-meta["META · priority, trust, objective, bounds"]
-frame["The four layers, the shape legend, the operation boundary"]
-substrate["The substrate · how the artifact comes to be"]
-spine["The spine · transitions declared once"]
-nodes["Nodes · each with a contract and one gate"]
-repair["The repair edge · bounded"]
-rules["Cross-node invariants · one record each"]
-report["The report · what was measured, over what, and whether the three conditions coincide"]
-front --> decl --> meta --> frame --> substrate --> spine --> nodes --> repair --> rules --> report
+    front["Header block · name, type, version"]
+    decl["Declaration · THIS TYPE VERB description"]
+    meta["META · priority, trust, objective, bounds"]
+    frame["The four layers, the shape legend, the operation boundary"]
+    substrate["The substrate · how the artifact comes to be"]
+    spine["The spine · transitions declared once"]
+    nodes["Nodes · each with a contract and one gate"]
+    repair["The repair edge · bounded"]
+    rules["Cross-node invariants · one record each"]
+    report["The report · what was measured, over what, and whether the three conditions coincide"]
+    front --> decl --> meta --> frame --> substrate --> spine --> nodes --> repair --> rules --> report
 ```
 
 B1·d what a type fixes
 
 ```mermaid
 flowchart LR
-type["The declared type"]
-verb["Its default verb"]
-model["The reasoning model that walks it"]
-axis["The axis of the loop it sits on"]
-reader["A reader knows what kind of instruction this is, and what will walk it"]
-type --> verb --> reader
-type --> model --> reader
-type --> axis --> reader
+    type["The declared type"]
+    verb["Its default verb"]
+    model["The reasoning model that walks it"]
+    axis["The axis of the loop it sits on"]
+    reader["A reader knows what kind of instruction this is, and what will walk it"]
+    type --> verb --> reader
+    type --> model --> reader
+    type --> axis --> reader
 ```
 
 ## Semantic operations
@@ -293,14 +293,14 @@ READ_RESOURCE {project.governance_policy} INTO <policy>
 EXECUTE_TOOL {toolchain.verify_command} INTO <verdict>
 
 adapter:
-DISCOVER_RESOURCES → <the harness's discovery tool>
-READ_RESOURCE      → <the harness's read tool>
-SEARCH_CONTENT     → <the harness's search tool>
-EXECUTE_TOOL       → <the harness's shell>
-PERSIST_ARTIFACT   → <the harness's write tool>
-REQUEST_DECISION   → <the harness's question surface, or ABSENT for a bounded reader>
-{project.governance_policy} → <the path in this tree>
-{toolchain.verify_command}  → <the command in this tree, or ABSENT>
+    DISCOVER_RESOURCES → <the harness's discovery tool>
+    READ_RESOURCE      → <the harness's read tool>
+    SEARCH_CONTENT     → <the harness's search tool>
+    EXECUTE_TOOL       → <the harness's shell>
+    PERSIST_ARTIFACT   → <the harness's write tool>
+    REQUEST_DECISION   → <the harness's question surface, or ABSENT for a bounded reader>
+    {project.governance_policy} → <the path in this tree>
+    {toolchain.verify_command}  → <the command in this tree, or ABSENT>
 ```
 
 C1·c invocation forms
@@ -316,27 +316,27 @@ C1·d one adapter per harness
 
 ```mermaid
 flowchart TB
-doc["The document · semantic operations and {slots}"]
-adapter["One adapter per harness"]
-harnessA["Harness A · its read tool, its shell, its question surface"]
-harnessB["Harness B · different tools, same document"]
-absent["A slot with no analogue · declared ABSENT, the branch does not run"]
-doc --> adapter
-adapter --> harnessA
-adapter --> harnessB
-adapter -. no analogue .-> absent
+    doc["The document · semantic operations and {slots}"]
+    adapter["One adapter per harness"]
+    harnessA["Harness A · its read tool, its shell, its question surface"]
+    harnessB["Harness B · different tools, same document"]
+    absent["A slot with no analogue · declared ABSENT, the branch does not run"]
+    doc --> adapter
+    adapter --> harnessA
+    adapter --> harnessB
+    adapter -. no analogue .-> absent
 ```
 
 C1·e invocation parts
 
 ```mermaid
 flowchart LR
-op["Operation · what happens"]
-target["Target · what it acts on"]
-params["WITH · named parameters"]
-result["INTO or arrow · where the result lands"]
-addressable["An effect the adapter can perform and the next line can read"]
-op --> target --> params --> result --> addressable
+    op["Operation · what happens"]
+    target["Target · what it acts on"]
+    params["WITH · named parameters"]
+    result["INTO or arrow · where the result lands"]
+    addressable["An effect the adapter can perform and the next line can read"]
+    op --> target --> params --> result --> addressable
 ```
 
 ## Node design
@@ -360,38 +360,38 @@ D1·a three granularities
 ```pag
 # too fine · a node per directive, a gate that checks one line ran
 # NODE 1 — READ
-READ_RESOURCE <config> INTO <held>
+    READ_RESOURCE <config> INTO <held>
 # NODE 2 — PICK
-SET <name> = <held>.<field>
+    SET <name> = <held>.<field>
 
 # too coarse · one node, no recovery point, no gate until the end
 # NODE 1 — EVERYTHING
-READ_RESOURCE <config> INTO <held>
-READ_RESOURCE <records> INTO <rows>
-FOR EACH <row> IN <rows>:
-COMPOSE_ARTIFACT <shaped> FROM <row> USING <held>.<rules>
-PERSIST_ARTIFACT <shaped> TO <output>
+    READ_RESOURCE <config> INTO <held>
+    READ_RESOURCE <records> INTO <rows>
+    FOR EACH <row> IN <rows>:
+        COMPOSE_ARTIFACT <shaped> FROM <row> USING <held>.<rules>
+        PERSIST_ARTIFACT <shaped> TO <output>
 
 # bounded · one decision per node, a gate at each boundary
 # NODE 1 — CONFIGURATION   [epistemic · analysis · set-theory · yields: set]
 CONTRACT:
-input:   <the declaration's objective>
-output:  <config>, validated
+  input:   <the declaration's objective>
+  output:  <config>, validated
 HANDOFF GATE:
-[check] <config> read (evidence: the read returned content)
-[check] <config> conforms (evidence: VALIDATE_ARTIFACT against <schema> passed)
-[check] <config>.<rules> is non-empty (evidence: a count above zero)
-result: pass → NODE 2 | nonconforming → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  [check] <config> read (evidence: the read returned content)
+  [check] <config> conforms (evidence: VALIDATE_ARTIFACT against <schema> passed)
+  [check] <config>.<rules> is non-empty (evidence: a count above zero)
+  result: pass → NODE 2 | nonconforming → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — TRANSFORMATION  [epistemic · formalization · computation · yields: procedure]
 CONTRACT:
-input:   <config> from NODE 1, and nothing else
-output:  <shaped-records>
+  input:   <config> from NODE 1, and nothing else
+  output:  <shaped-records>
 HANDOFF GATE:
-[check] one entry per <record> (evidence: the two counts match) over: <records> measured: <shaped> / <records>
-[check] every entry conforms to <config>.<rules> (evidence: VALIDATE_ARTIFACT passed on each)
-[check] <records> unchanged (evidence: a witness read after the transform)
-result: pass → NODE 3 | count mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  [check] one entry per <record> (evidence: the two counts match) over: <records> measured: <shaped> / <records>
+  [check] every entry conforms to <config>.<rules> (evidence: VALIDATE_ARTIFACT passed on each)
+  [check] <records> unchanged (evidence: a witness read after the transform)
+  result: pass → NODE 3 | count mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
 ```
 
 D1·b contracts in order
@@ -400,40 +400,40 @@ D1·b contracts in order
 # NODE 1 — DISCOVERY   [epistemic · analysis · set-theory · yields: set]
 @genesis: existence
 CONTRACT:
-input:     <the objective's pattern>
-transform: DISCOVER_RESOURCES "<pattern>" INTO <files>
-output:    <files>
+  input:     <the objective's pattern>
+  transform: DISCOVER_RESOURCES "<pattern>" INTO <files>
+  output:    <files>
 HANDOFF GATE:
-[check] <files> is non-empty (evidence: a count above zero)
-[check] every <file> matches <pattern> (evidence: the discovery's own filter) over: <files> measured: <matching> / <files>
-[check] no <file> lies outside <root> (evidence: every path prefixed by <root>)
-result: pass → NODE 2 | empty set → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  [check] <files> is non-empty (evidence: a count above zero)
+  [check] every <file> matches <pattern> (evidence: the discovery's own filter) over: <files> measured: <matching> / <files>
+  [check] no <file> lies outside <root> (evidence: every path prefixed by <root>)
+  result: pass → NODE 2 | empty set → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — ANALYSIS     [epistemic · reasoning · logic · yields: boolean]
 @genesis: difference
 CONTRACT:
-input:     <files> from NODE 1
-transform: FOR EACH <file> IN <files>: READ_RESOURCE <file> INTO <content>; ANALYZE_CONTENT <content> AGAINST <pattern> INTO <finding>; APPEND <finding> TO <findings>
-output:    <findings>
+  input:     <files> from NODE 1
+  transform: FOR EACH <file> IN <files>: READ_RESOURCE <file> INTO <content>; ANALYZE_CONTENT <content> AGAINST <pattern> INTO <finding>; APPEND <finding> TO <findings>
+  output:    <findings>
 HANDOFF GATE:
-[check] every <file> read (evidence: one content per file) over: <files> measured: <read> / <files>
-[check] one <finding> per <file> (evidence: the two counts match)
-[check] every <finding> names its <file> (evidence: no finding with an empty source)
-result: pass → NODE 3 | unread file → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  [check] every <file> read (evidence: one content per file) over: <files> measured: <read> / <files>
+  [check] one <finding> per <file> (evidence: the two counts match)
+  [check] every <finding> names its <file> (evidence: no finding with an empty source)
+  result: pass → NODE 3 | unread file → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — REPORTING    [evaluative · representation · information-theory · yields: artifact]
 @genesis: structure
 CONTRACT:
-input:     <findings> from NODE 2 · never anything a later node produces
-transform: COMPOSE_ARTIFACT <report> FROM <findings> USING <shape>; PERSIST_ARTIFACT <report> TO <destination>
-output:    <report>
-freshness: fingerprint(<findings>) + fingerprint(this document)
+  input:     <findings> from NODE 2 · never anything a later node produces
+  transform: COMPOSE_ARTIFACT <report> FROM <findings> USING <shape>; PERSIST_ARTIFACT <report> TO <destination>
+  output:    <report>
+  freshness: fingerprint(<findings>) + fingerprint(this document)
 HANDOFF GATE:
-[check] <report> names every entry in <findings> (evidence: each finding's id present) over: <findings> measured: <named> / <findings>
-[check] <report> persisted (evidence: a read of <destination> returns it)
-[check] <findings> unchanged since NODE 2 (evidence: a witness read)
-refuse: <destination> changed since it was read before PERSIST_ARTIFACT
-result: pass → TERMINATE | missing entry → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  [check] <report> names every entry in <findings> (evidence: each finding's id present) over: <findings> measured: <named> / <findings>
+  [check] <report> persisted (evidence: a read of <destination> returns it)
+  [check] <findings> unchanged since NODE 2 (evidence: a witness read)
+  refuse: <destination> changed since it was read before PERSIST_ARTIFACT
+  result: pass → TERMINATE | missing entry → REPAIR (owner: NODE 3) | unknown → BLOCKED
 ```
 
 D1·c verb to stage
@@ -457,37 +457,37 @@ D1·d split or combine
 
 ```mermaid
 flowchart TB
-split{"Split here?"}
-output["The next node needs this node's output"]
-retry["This part is repaired on its own"]
-human["The developer decides before it continues"]
-persist["The result is persisted before it continues"]
-verify["A condition must hold before the next node"]
-combine{"Combine here?"}
-atomic["The steps succeed or fail together"]
-partial["A partial result has no value"]
-shared["The steps share values that must not outlive them"]
-coupled["Separating adds noise, not clarity"]
-split --> output
-split --> retry
-split --> human
-split --> persist
-split --> verify
-combine --> atomic
-combine --> partial
-combine --> shared
-combine --> coupled
+    split{"Split here?"}
+    output["The next node needs this node's output"]
+    retry["This part is repaired on its own"]
+    human["The developer decides before it continues"]
+    persist["The result is persisted before it continues"]
+    verify["A condition must hold before the next node"]
+    combine{"Combine here?"}
+    atomic["The steps succeed or fail together"]
+    partial["A partial result has no value"]
+    shared["The steps share values that must not outlive them"]
+    coupled["Separating adds noise, not clarity"]
+    split --> output
+    split --> retry
+    split --> human
+    split --> persist
+    split --> verify
+    combine --> atomic
+    combine --> partial
+    combine --> shared
+    combine --> coupled
 ```
 
 D1·e forward flow
 
 ```mermaid
 flowchart LR
-n1["Node 1 · existence · yields files"]
-n2["Node 2 · difference · reads files, yields findings"]
-n3["Node 3 · structure · reads findings"]
-n1 -- gate --> n2 -- gate --> n3
-n3 -. never a forward reference, never an earlier genesis .-> n1
+    n1["Node 1 · existence · yields files"]
+    n2["Node 2 · difference · reads files, yields findings"]
+    n3["Node 3 · structure · reads findings"]
+    n1 -- gate --> n2 -- gate --> n3
+    n3 -. never a forward reference, never an earlier genesis .-> n1
 ```
 
 ## Writing constraints
@@ -551,56 +551,56 @@ version: 1.0.0
 THIS WORKFLOW EXECUTES validation and transformation of <records>
 
 %% META %%:
-objective: "An <output> whose entry count matches the conforming input"
-jurisdiction: <source> and <output> | external: every other file
-recursion_limit: 2
+    objective: "An <output> whose entry count matches the conforming input"
+    jurisdiction: <source> and <output> | external: every other file
+    recursion_limit: 2
 
 ON ERROR <write-failed>:
 TRY:
-RENAME <file> TO <file>.bak
-PERSIST_ARTIFACT <content> TO <file>
-DELETE <file>.bak
+    RENAME <file> TO <file>.bak
+    PERSIST_ARTIFACT <content> TO <file>
+    DELETE <file>.bak
 CATCH:
-RENAME <file>.bak TO <file>
+    RENAME <file>.bak TO <file>
 
 # NODE 1 — INPUT VALIDATION   [epistemic · analysis · logic · yields: boolean]
 @genesis: existence
 CONTRACT:
-input:     <source>
-transform: READ_RESOURCE <source> INTO <input>; FOR EACH <row> IN <input>.<rows>: VALIDATE_ARTIFACT <row> AGAINST <schema>; IF <row>.<conforms>: APPEND <row> TO <valid> ELSE: REPORT_RESULT "<which row, which field>"
-output:    <valid>
+  input:     <source>
+  transform: READ_RESOURCE <source> INTO <input>; FOR EACH <row> IN <input>.<rows>: VALIDATE_ARTIFACT <row> AGAINST <schema>; IF <row>.<conforms>: APPEND <row> TO <valid> ELSE: REPORT_RESULT "<which row, which field>"
+  output:    <valid>
 HANDOFF GATE:
-[check] <input> read (evidence: the read returned rows)
-[check] every <row> validated (evidence: one verdict per row) over: <input>.<rows> measured: <validated> / <rows>
-[check] every non-conforming <row> reported with its field (evidence: the report names a field per rejection)
-result: pass → NODE 2 | unread → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  [check] <input> read (evidence: the read returned rows)
+  [check] every <row> validated (evidence: one verdict per row) over: <input>.<rows> measured: <validated> / <rows>
+  [check] every non-conforming <row> reported with its field (evidence: the report names a field per rejection)
+  result: pass → NODE 2 | unread → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — TRANSFORMATION     [epistemic · formalization · computation · yields: procedure]
 @genesis: transformation
 CONTRACT:
-input:     <valid> from NODE 1
-transform: FOR EACH <row> IN <valid>: COMPOSE_ARTIFACT <entry> FROM <row> USING <mapping>; APPEND <entry> TO <shaped>
-preserves: the source row of every entry
-output:    <shaped>
+  input:     <valid> from NODE 1
+  transform: FOR EACH <row> IN <valid>: COMPOSE_ARTIFACT <entry> FROM <row> USING <mapping>; APPEND <entry> TO <shaped>
+  preserves: the source row of every entry
+  output:    <shaped>
 HANDOFF GATE:
-[check] one <entry> per <row> in <valid> (evidence: the two counts match) over: <valid> measured: <shaped> / <rows>
-[check] every <entry> conforms to <mapping> (evidence: VALIDATE_ARTIFACT passed on each)
-[check] <valid> unchanged (evidence: a witness read after the transform)
-result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  [check] one <entry> per <row> in <valid> (evidence: the two counts match) over: <valid> measured: <shaped> / <rows>
+  [check] every <entry> conforms to <mapping> (evidence: VALIDATE_ARTIFACT passed on each)
+  [check] <valid> unchanged (evidence: a witness read after the transform)
+  result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — OUTPUT             [evaluative · representation · information-theory · yields: artifact]
 @genesis: emergence
 CONTRACT:
-input:     <shaped> from NODE 2
-transform: PERSIST_ARTIFACT <shaped> TO <output>
-output:    <output>
-freshness: fingerprint(<shaped>) + fingerprint(this document)
+  input:     <shaped> from NODE 2
+  transform: PERSIST_ARTIFACT <shaped> TO <output>
+  output:    <output>
+  freshness: fingerprint(<shaped>) + fingerprint(this document)
 HANDOFF GATE:
-[check] <output> persisted (evidence: a read of <output> returns it)
-[check] entry count of <output> matches <shaped> (evidence: the two counts match) over: <shaped> measured: <persisted> / <entries>
-[check] <source> unchanged (evidence: a witness read)
-refuse: <output> changed since it was read before PERSIST_ARTIFACT
-result: pass → TERMINATE | loss → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  [check] <output> persisted (evidence: a read of <output> returns it)
+  [check] entry count of <output> matches <shaped> (evidence: the two counts match) over: <shaped> measured: <persisted> / <entries>
+  [check] <source> unchanged (evidence: a witness read)
+  refuse: <output> changed since it was read before PERSIST_ARTIFACT
+  result: pass → TERMINATE | loss → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT validate-before-transform: every row is validated before any transform reads it over: every node binds: the reader objector: [check] every <row> validated at NODE 1
@@ -609,42 +609,42 @@ INVARIANT source-untouched: <source> is never modified over: <source> binds: the
 INVARIANT non-empty-input: the run does not proceed with zero conforming rows over: every run binds: the reader objector: [check] every <row> validated at NODE 1 over a non-empty set
 
 REPORT:
-subject: NODE 3
-verdict: pass | fail | unknown
-domain: declared <rows> measured <validated>
-populations: conforming <n>, rejected <n>, persisted <n>
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 3
+  verdict: pass | fail | unknown
+  domain: declared <rows> measured <validated>
+  populations: conforming <n>, rejected <n>, persisted <n>
+  completion: saturated <bool> complete <bool> verified <bool>
 ```
 
 E1·d exhortation or record
 
 ```mermaid
 flowchart TB
-rule["A rule"]
-exhort["An exhortation · be careful, handle properly"]
-judged["Judged by the model, differently each run"]
-specific["A record · property, set, parties, objector"]
-checkable["Checked by the objector, or declared unwatched"]
-quoted["Quoted back by the model when it applies"]
-rule --> exhort --> judged
-rule --> specific --> checkable
-specific --> quoted
+    rule["A rule"]
+    exhort["An exhortation · be careful, handle properly"]
+    judged["Judged by the model, differently each run"]
+    specific["A record · property, set, parties, objector"]
+    checkable["Checked by the objector, or declared unwatched"]
+    quoted["Quoted back by the model when it applies"]
+    rule --> exhort --> judged
+    rule --> specific --> checkable
+    specific --> quoted
 ```
 
 E1·e four slots
 
 ```mermaid
 flowchart LR
-property["The property · could be false"]
-set["over · the set it ranges over, the whole document or one context"]
-parties["binds · who must receive it"]
-objector["objector · what would disagree, or none"]
-property --> set --> parties --> objector
+    property["The property · could be false"]
+    set["over · the set it ranges over, the whole document or one context"]
+    parties["binds · who must receive it"]
+    objector["objector · what would disagree, or none"]
+    property --> set --> parties --> objector
 ```
 
 ## Well-formedness
 
-This section covers the [static analysis](../ontology/PRINCIPLES.md#architecture-static-analysis) that decides whether a document can be trusted; [F1·e two routes to trust](#well-formedness-panel-e) contrasts it with trusting a document because it reads fluently, and [F1·d the scan](#well-formedness-panel-d) shows the scan. Each defect is named for the shape it catches and has one fix, as paired in [F1·a defect set](#well-formedness-panel-a) and reported in [F1·b scan result](#well-formedness-panel-b). The syntactic defects are a missing declaration, a bare iteration, a lowercase [keyword](KEYWORDS.md#keyword-ontology), a conditional with no colon, a malformed node tag, and a node declared twice. The epistemic defects are a node with no gate, a gate with fewer than three or more than five checks, a check that is a judgement, a check with no evidence, a gate with no population or an empty one, and an unknown left unrouted. The remaining defects are a write with no refusal, an artifact with no freshness, an input that names no source, an invariant missing its set, its parties or its objector, and a bare invariant block. The scan is the terminate stage applied to the document itself: it yields one boolean, and because it reads tokens rather than patterns, its verdict has [repeatability](../ontology/PRINCIPLES.md#architecture-repeatability).
+This section covers the [static analysis](../ontology/PRINCIPLES.md#architecture-static-analysis) that decides whether a document can be trusted; [F1·e two routes to trust](#well-formedness-panel-e) contrasts it with trusting a document because it reads fluently, and [F1·d the scan](#well-formedness-panel-d) shows the scan. Each defect is named for the shape it catches and has one fix, as paired in [F1·a defect set](#well-formedness-panel-a) and reported in [F1·b scan result](#well-formedness-panel-b). The syntactic defects are a missing declaration, a bare iteration, a lowercase [keyword](KEYWORDS.md#keyword-ontology), a conditional with no colon, a malformed node tag, and a node declared twice. The epistemic defects are a node with no gate, a gate with fewer than three or more than five checks, a check that is a judgment, a check with no evidence, a gate with no population or an empty one, and an unknown left unrouted. The remaining defects are a write with no refusal, an artifact with no freshness, an input that names no source, an invariant missing its set, its parties or its objector, and a bare invariant block. The scan is the terminate stage applied to the document itself: it yields one boolean, and because it reads tokens rather than patterns, its verdict has [repeatability](../ontology/PRINCIPLES.md#architecture-repeatability).
 
 ### The defect set and the scan
 
@@ -675,16 +675,16 @@ IF <condition>:
 
 # a node with no gate · a unit nothing can prove closed
 # NODE 2 — CONVERT   [epistemic · formalization · computation · yields: procedure]
-COMPOSE_ARTIFACT <shaped> FROM <row> USING <rules>
+    COMPOSE_ARTIFACT <shaped> FROM <row> USING <rules>
 # NODE 2 — CONVERT   [epistemic · formalization · computation · yields: procedure]
-COMPOSE_ARTIFACT <shaped> FROM <row> USING <rules>
-HANDOFF GATE:
-[check] every <row> converted (evidence: one <shaped> per row) over: <rows> measured: <converted> / <rows>
-[check] <shaped> holds one entry per <row> (evidence: the two counts match)
-[check] every entry conforms to <rules> (evidence: VALIDATE_ARTIFACT passed on each)
-result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
+    COMPOSE_ARTIFACT <shaped> FROM <row> USING <rules>
+    HANDOFF GATE:
+      [check] every <row> converted (evidence: one <shaped> per row) over: <rows> measured: <converted> / <rows>
+      [check] <shaped> holds one entry per <row> (evidence: the two counts match)
+      [check] every entry conforms to <rules> (evidence: VALIDATE_ARTIFACT passed on each)
+      result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
-# a vague check · a judgement in a gate
+# a vague check · a judgment in a gate
 [check] data looks good
 [check] <data>.<field> matches <pattern> (evidence: the match returned true)
 
@@ -710,7 +710,7 @@ INVARIANT one-writer: a record has exactly one writer over: every record binds: 
 
 # a bare invariant block · a bullet under a head, with no set, no parties, no objector
 ALWAYS:
-- VALIDATE at node boundaries
+  - VALIDATE at node boundaries
 INVARIANT validate-at-boundary: every node validates its output over: every node binds: the reader objector: [check] the gate ran
 
 # a prose directive · an instruction the model must interpret
@@ -723,29 +723,29 @@ F1·b scan result
 
 ```text
 document: <name>
-defect      for_without_each
-locus       NODE 2, line 4
-found       FOR <item> IN <collection>:
-expected    FOR EACH <item> IN <collection>:
-fix         insert EACH after FOR
+  defect      for_without_each
+  locus       NODE 2, line 4
+  found       FOR <item> IN <collection>:
+  expected    FOR EACH <item> IN <collection>:
+  fix         insert EACH after FOR
 
-defect      gate_without_population
-locus       NODE 3, gate
-found       three checks, none with a set
-expected    at least one check measured over a declared set
-fix         name the set and the count measured over it
+  defect      gate_without_population
+  locus       NODE 3, gate
+  found       three checks, none with a set
+  expected    at least one check measured over a declared set
+  fix         name the set and the count measured over it
 
-defect      unknown_unrouted
-locus       NODE 3, result line
-found       pass and failure arms only
-expected    an unknown arm routed to BLOCKED
-fix         add the third arm
+  defect      unknown_unrouted
+  locus       NODE 3, result line
+  found       pass and failure arms only
+  expected    an unknown arm routed to BLOCKED
+  fix         add the third arm
 
-defect      invariant_without_objector
-locus       cross-node invariants, one-writer
-found       a property with no objector
-expected    the check that would disagree, or none as declared debt
-fix         name the objector
+  defect      invariant_without_objector
+  locus       cross-node invariants, one-writer
+  found       a property with no objector
+  expected    the check that would disagree, or none as declared debt
+  fix         name the objector
 
 verdict: ill_formed
 ```
@@ -756,57 +756,57 @@ F1·c gate failures
 # a value undefined in a later node
 # cause · declared inside a branch, so it exists only there
 IF <condition>:
-DECLARE <result>: object
+    DECLARE <result>: object
 
 DECLARE <result>: object
 IF <condition>:
-SET <result>.<value> = <data>
+    SET <result>.<value> = <data>
 
 # a gate that always fails
 # cause · the check names a value the node never produced
-APPEND <item> TO <processed-items>
+    APPEND <item> TO <processed-items>
 HANDOFF GATE:
-[check] <processed-list> populated (evidence: a count above zero)
+    [check] <processed-list> populated (evidence: a count above zero)
 
-APPEND <item> TO <processed-items>
+    APPEND <item> TO <processed-items>
 HANDOFF GATE:
-[check] <processed-items> populated (evidence: a count above zero)
+    [check] <processed-items> populated (evidence: a count above zero)
 
 # a contract that reads forward
 # cause · the input names an output a later node yields
 # NODE 2 — ANALYSIS
 CONTRACT:
-input: <report> from NODE 3
+  input: <report> from NODE 3
 
 # NODE 2 — ANALYSIS
 CONTRACT:
-input: <files> from NODE 1
+  input: <files> from NODE 1
 ```
 
 F1·d the scan
 
 ```mermaid
 flowchart TB
-doc["A document"]
-scan["A deterministic scan · tokens, never patterns"]
-defects["The defect set · each named for the shape it catches"]
-well["well_formed"]
-ill["ill_formed · each defect with its locus and its fix"]
-doc --> scan --> defects
-defects -- empty --> well
-defects -- non-empty --> ill
+    doc["A document"]
+    scan["A deterministic scan · tokens, never patterns"]
+    defects["The defect set · each named for the shape it catches"]
+    well["well_formed"]
+    ill["ill_formed · each defect with its locus and its fix"]
+    doc --> scan --> defects
+    defects -- empty --> well
+    defects -- non-empty --> ill
 ```
 
 F1·e two routes to trust
 
 ```mermaid
 flowchart LR
-fluent["Reads fluently"]
-trusted1["Trusted · and wrong in the details that went unread"]
-scanned["Passes the scan"]
-trusted2["Trusted · because a mechanism said so"]
-fluent -. the tempting path .-> trusted1
-scanned --> trusted2
+    fluent["Reads fluently"]
+    trusted1["Trusted · and wrong in the details that went unread"]
+    scanned["Passes the scan"]
+    trusted2["Trusted · because a mechanism said so"]
+    fluent -. the tempting path .-> trusted1
+    scanned --> trusted2
 ```
 
 ---

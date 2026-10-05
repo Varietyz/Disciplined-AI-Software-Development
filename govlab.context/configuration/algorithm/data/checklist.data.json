@@ -1,0 +1,1537 @@
+{
+    "category": "checklist-creation",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the generator's validation stage and its validation suite",
+            "the structured-document validator over the checklist template"
+        ],
+        "population": "every phase and task the generated checklist carries",
+        "freshness": "a verdict stands until the plan, its sources or the codebase it targets change",
+        "refusal": "the generator renders no checklist while a blocker or error finding remains, and terminates blocked past its repair bound",
+        "observation": "none: a checklist is verified before execution; its tasks name the checks that observe execution",
+        "evidence": "fires-and-accepts: a suite plants a retired head in a real template and validates the unplanted templates clean, while the generator's own stage is stated as a class",
+        "authority": "the plan and its sources, which the checklist is derived from"
+    },
+    "records": [
+        {
+            "id": "orientation-stage",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Orientation Stage",
+            "exemplar": {
+                "before": "Planning starts from the task text alone — prior model knowledge treated as current system truth.",
+                "after": "raw task + governing docs → load authority → discover current system → normalize intent + change_relation → context_bundle{evidence_inventory non-empty}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Establish authority, trust, intent, and change-directionality, and gather current-system evidence before any planning, emitting a context bundle that is the sole artifact the planning stage reads.",
+            "invariant": "Prior knowledge is untrusted; discover before assume; read authority before analysis; a resolved change-direction and a non-empty evidence inventory are the handoff precondition.",
+            "flow": [
+                "RawTask + GoverningDocs",
+                "AuthorityLoad",
+                "ContextDiscovery",
+                "IntentNormalization",
+                "ContextBundle|RepairRoute"
+            ],
+            "productions": [
+                {
+                    "lhs": "OrientationStage",
+                    "rhs": "<RawTaskText> \",\" <HostGoverningDocs> \"→\" <AuthorityLoad> \"→\" <CurrentSystemDiscovery> \"→\" <IntentDirectionalityNormalization> \"→\" <ContextBundle>"
+                },
+                {
+                    "lhs": "ContextBundle",
+                    "rhs": "<NormalizedIntent> \",\" <ChangeRelation> \",\" <AuthoritativeSourceSet> \",\" <TrustAnchor> \",\" <PriorityStack> \",\" <DiscoveredArtifacts> \",\" <EvidenceInventory> \",\" <UnresolvedQuestions>"
+                },
+                {
+                    "lhs": "OrientationHandoff",
+                    "rhs": "\"authority_loaded\" \",\" \"intent_and_change_direction_resolved\" \",\" \"evidence_inventory_non_empty\" \"→\" \"pass_to_planning\" | \"repair_owner_orientation\""
+                }
+            ],
+            "composes": [
+                "authoritative-source-loading",
+                "trust-anchor",
+                "intent-directionality-normalization",
+                "skeptical-context-acquisition",
+                "dynamic-discovery-pattern-generation"
+            ],
+            "force": [
+                "metaprogramming_modeling",
+                "correctness_verification",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "authoritative-source-loading",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Authoritative Source Loading",
+            "exemplar": {
+                "before": "Decomposition grounded in memory, not the host's rules; a missing source is discovered too late.",
+                "after": "task → always-read core{governance, principle-ontology} + triggered{architecture, design, component} → read before analysis → block on a missing required source",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Resolve the always-read core sources plus the conditional sources whose triggers appear in the task, read them before analysis, and block with a blocker finding if any required source is missing.",
+            "invariant": "Task decomposition is grounded in authoritative host rules read before analysis; a missing required source blocks at the orientation owner.",
+            "flow": [
+                "TaskDescription",
+                "CoreSources + TriggeredSources",
+                "SourceRead",
+                "LoadedContext|BlockMissing"
+            ],
+            "productions": [
+                {
+                    "lhs": "AuthoritativeSourceLoading",
+                    "rhs": "<TaskDescription> \"→\" <CoreSourceSet> \",\" <TriggeredSourceSet> \"→\" <SourceReadSet> \"→\" <SourceValidationGate>"
+                },
+                {
+                    "lhs": "SourceSelection",
+                    "rhs": "\"always_read_core\" \",\" \"read_conditional_source_when_trigger_present\""
+                },
+                {"lhs": "SourceValidationGate",
+                    "rhs": "\"all_required_sources_loaded\" | \"blocked_missing_source\""}
+            ],
+            "composes": [],
+            "force": [
+                "metaprogramming_modeling",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "trust-anchor",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Trust Anchor",
+            "exemplar": {
+                "before": "Every input trusted equally — a narrative doc grounds a task the same as a build result.",
+                "after": "inputs → trusted{source files, schema/config, build/validator output, tool output} vs untrusted{narrative docs, comments, prior knowledge} → untrusted requires verification before it grounds a task",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Classify every input by trust level — source files, schema/config/data, build and validator output, tool output, and structured logs are trusted; narrative docs, comments, prior codebase knowledge, and unverified claims are untrusted and require verification before use.",
+            "invariant": "Planning reliability depends on explicit source trust; untrusted input cannot ground a task until it is verified.",
+            "flow": [
+                "InputSource",
+                "TrustClassification",
+                "UsagePolicy"
+            ],
+            "productions": [
+                {
+                    "lhs": "TrustAnchor",
+                    "rhs": "<InputSourceSet> \"→\" <TrustedSourceSet> \",\" <UntrustedSourceSet> \"→\" <UsagePolicy>"
+                },
+                {"lhs": "UsagePolicy",
+                    "rhs": "\"trusted_can_ground_tasks\" | \"untrusted_requires_verification\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "security_governance"
+            ]
+        },
+        {
+            "id": "intent-directionality-normalization",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Intent & Directionality Normalization",
+            "exemplar": {
+                "before": "'update Foo' planned without resolving whether Foo is introduced, retained, or removed.",
+                "after": "task → outcome + actions + entities → change_relation{introduce|retain|remove|analyze|mention} → unknown direction recorded as an unresolved question, never assumed",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Normalize the task into a requested outcome, actions, and entities, and resolve the change relation — introduce, retain, remove, analyze, or mention — that later stages key their semantic policy on; an unresolved direction is recorded as ambiguity, never silently assumed.",
+            "invariant": "The change relation is explicit before planning; an unknown direction is surfaced as an unresolved question.",
+            "flow": [
+                "TaskDescription",
+                "IntentExtraction",
+                "DirectionalityAnalysis",
+                "NormalizedIntent + Ambiguity"
+            ],
+            "productions": [
+                {
+                    "lhs": "IntentDirectionalityNormalization",
+                    "rhs": "<TaskDescription> \",\" <ExplicitConstraints> \"→\" <RequestedOutcome> \",\" <RequestedActions> \",\" <Entities> \"→\" <ChangeRelation> \",\" <AmbiguitySet>"
+                },
+                {
+                    "lhs": "ChangeRelation",
+                    "rhs": "\"introduce\" | \"retain\" | \"remove\" | \"analyze\" | \"mention\" | \"unknown\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "skeptical-context-acquisition",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Skeptical Context Acquisition",
+            "exemplar": {
+                "before": "New work redefines a Foo abstraction that already exists, unseen.",
+                "after": "normalized intent → keywords → dynamic discovery probes → discovered artifacts{base classes, implementations, registrations} + evidence, before any architecture assumption",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Extract task keywords, generate discovery probes dynamically, inspect the existing implementation, and prevent new work from redefining architecture that already exists.",
+            "invariant": "Planning discovers current artifacts before making architecture assumptions.",
+            "flow": [
+                "NormalizedIntent",
+                "Keywords",
+                "DiscoveryProbes",
+                "DiscoveredArtifacts + Evidence"
+            ],
+            "productions": [
+                {
+                    "lhs": "SkepticalContextAcquisition",
+                    "rhs": "<NormalizedIntent> \"→\" <KeywordExtraction> \"→\" <DiscoveryPatternGeneration> \"→\" <ContextDiscovery> \"→\" <EvidenceInventory>"
+                },
+                {
+                    "lhs": "KeywordExtraction",
+                    "rhs": "\"technical_nouns\" \",\" \"action_verbs\" \",\" \"file_refs\" \",\" \"folders\""
+                },
+                {
+                    "lhs": "DiscoveredArtifacts",
+                    "rhs": "\"base_classes\" \",\" \"implementations\" \",\" \"registrations\" \",\" \"migrations\" \",\" \"signatures\""
+                }
+            ],
+            "composes": ["dynamic-discovery-pattern-generation"],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "dynamic-discovery-pattern-generation",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Dynamic Discovery Pattern Generation",
+            "exemplar": {
+                "before": "Discovery runs a fixed checklist of globs, blind to the task's own nouns.",
+                "after": "keywords{nouns, verbs, folders, file-refs} → generated globs + greps + target-files from the task's own language, not a fixed enumeration",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Convert extracted nouns, verbs, folders, and file references into glob, grep, and target-file probes generated from the task's own language rather than a fixed enumeration.",
+            "invariant": "Discovery probes are generated from task keywords, never from a fixed assumption list.",
+            "flow": [
+                "Keywords",
+                "Globs + Greps + Targets",
+                "ProbeExecution"
+            ],
+            "productions": [
+                {
+                    "lhs": "DynamicDiscoveryPatternGeneration",
+                    "rhs": "<KeywordSet> \"→\" <GlobPatternSet> \",\" <GrepPatternSet> \",\" <TargetFileSet>"
+                },
+                {"lhs": "DiscoveryProbe",
+                    "rhs": "<ProbeTool> \",\" <Pattern> \",\" <Purpose>"},
+                {"lhs": "ProbeTool",
+                    "rhs": "\"Glob\" | \"Grep\" | \"Read\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "metaprogramming_modeling"
+            ]
+        },
+        {
+            "id": "teleological-intent-gate",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Teleological Intent Gate",
+            "exemplar": {
+                "before": "Decomposition begins on the first approach that comes to mind — no worth comparison, so effort is spent before the objective is ranked.",
+                "after": "context_bundle → enumerate admissible decomposition branches → score utility - cost → select the argmax → WORTH_BEFORE_WORK gate before any planning",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Resolve what the checklist is for before planning it: enumerate the admissible decomposition branches, score each by utility minus cost against the normalized intent and change relation, and gate on the highest-worth admissible branch before any seeing or deriving.",
+            "invariant": "Teleology is mandatory-always: planning never proceeds on a branch that is not the argmax(utility - cost) over admissible branches; no admissible branch routes to a blocked report, never a guess.",
+            "flow": [
+                "ContextBundle",
+                "AdmissibleBranchEnumeration",
+                "UtilityCostScoring",
+                "ArgmaxSelection|Blocked"
+            ],
+            "productions": [
+                {
+                    "lhs": "TeleologicalIntentGate",
+                    "rhs": "<ContextBundle> \"→\" <AdmissibleBranchSet> \"→\" <UtilityCostScoring> \"→\" <SelectedBranch> | <BlockedNoAdmissibleBranch>"
+                },
+                {
+                    "lhs": "BranchSelection",
+                    "rhs": "\"argmax_utility_minus_cost_over_admissible\" | \"blocked_no_admissible_branch\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "planning-stage",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Planning Stage",
+            "exemplar": {
+                "before": "Phases grouped under SPRINT: CRITICAL headers; a protocol picked from a trigger word.",
+                "after": "context_bundle → activate principles (each binds a decision-test + validator) → select protocols by semantic fit → decompose → 4D graph → linearize by dependency (severity is metadata)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Activate the principles that govern the current decision surfaces, select protocols by semantic fit against the requested transition, decompose them into phases, build the four-dimensional graph, and linearize the phases by dependency.",
+            "invariant": "Order is by dependency, never by severity; every active principle binds a decision test and a validator; a protocol is never selected from a trigger word alone.",
+            "flow": [
+                "ContextBundle",
+                "ActivePrinciples",
+                "SelectedProtocols",
+                "PhaseGraph",
+                "LinearizedPhases|CycleRepair"
+            ],
+            "productions": [
+                {
+                    "lhs": "PlanningStage",
+                    "rhs": "<ContextBundle> \"→\" <PrincipleActivation> \"→\" <ProtocolSemanticSelection> \"→\" <PhaseDecomposition> \"→\" <FourDPhaseGraph> \"→\" <DependencyLinearization>"
+                },
+                {
+                    "lhs": "PlanningHandoff",
+                    "rhs": "\"z_graph_acyclic\" \",\" \"every_phase_has_inputs_outputs_four_axes\" \",\" \"order_topological_severity_metadata_only\" \",\" \"every_mandatory_principle_binds_a_validator\" \"→\" \"pass_to_compilation\" | \"repair_owner_planning\""
+                }
+            ],
+            "composes": [
+                "principle-activation",
+                "protocol-semantic-selection",
+                "phase-decomposition",
+                "four-dimensional-phase-graph",
+                "dependency-linearization",
+                "severity-assignment",
+                "loop-class-labeling"
+            ],
+            "force": [
+                "correctness_verification",
+                "architecture_evolution",
+                "control_coordination",
+                "modularity"
+            ]
+        },
+        {
+            "id": "principle-activation",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Principle Activation",
+            "exemplar": {
+                "before": "'SRP applies' asserted as a label, with no decision-test and nothing that enforces it.",
+                "after": "decision surfaces → test each principle{applies|uncertain|not-applicable + reason} → bind validator + severity → a label alone is never proof reasoning occurred",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Test each principle in the ontology catalog against the current decision surfaces, mark it applies, uncertain, or not-applicable with a reason, and bind every applied principle to a decision test, a validator, and a severity that later routes its repair.",
+            "invariant": "A principle is activated only with an explicit applicability decision and a bound validator; a label alone is never proof that local reasoning occurred.",
+            "flow": [
+                "ContextBundle",
+                "DecisionSurfaces",
+                "PrincipleFit",
+                "ActivePrincipleSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "PrincipleActivation",
+                    "rhs": "<DecisionSurfaceSet> \"→\" <PrincipleCatalogTest> \"→\" <ApplicabilityDisposition> \",\" <ValidatorBinding> \",\" <Severity>"
+                },
+                {"lhs": "ApplicabilityDisposition",
+                    "rhs": "\"applies\" | \"uncertain\" | \"not_applicable\""},
+                {"lhs": "Severity",
+                    "rhs": "\"mandatory\" | \"recommended\" | \"contextual\" | \"discouraged\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "architecture_evolution",
+                "contract_compatibility"
+            ]
+        },
+        {
+            "id": "protocol-semantic-selection",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Protocol Semantic Selection",
+            "exemplar": {
+                "before": "The word 'secure' in the task auto-selects the security protocol.",
+                "after": "requested transition + surfaces → semantic-fit match against the protocol library → selected set → the mandatory verification protocol always injected",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Match the requested state transition and architecture surfaces semantically against the protocol library, select every protocol whose use-condition fits, and always inject the mandatory verification protocol.",
+            "invariant": "Protocols are selected by semantic fit against the requested transition, never from a trigger word; the verification protocol is always included.",
+            "flow": [
+                "ContextBundle + ActivePrinciples",
+                "SemanticMatch",
+                "SelectedProtocols",
+                "VerificationInjected"
+            ],
+            "productions": [
+                {
+                    "lhs": "ProtocolSemanticSelection",
+                    "rhs": "<RequestedTransition> \",\" <ArchitectureSurfaceSet> \",\" <ActivePrincipleSet> \"→\" <SemanticFitMatch> \"→\" <SelectedProtocolSet> \"→\" <MandatoryVerificationInjection>"
+                },
+                {
+                    "lhs": "Protocol",
+                    "rhs": "\"module-separation\" | \"extension-no-modify\" | \"dependency-inversion\" | \"intention-emission\" | \"invariant-inheritance\" | \"registry-resolution\" | \"security-hardening\" | \"performance-eng\" | \"infra-provisioning\" | \"resilience-recovery\" | \"replacement-elim\" | \"enforcement-authoring\" | \"verification-gate\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "semantic_consistency",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "phase-decomposition",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Phase Decomposition",
+            "exemplar": {
+                "before": "A protocol's steps emitted as a flat task list with no inputs, outputs, or dependency metadata.",
+                "after": "selected protocols → verb chains → phases annotated{id, verb, objective, inputs, outputs, principles, severity, loop_class, 4D graph}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Expand each selected protocol's verb chain into phases, and annotate every phase with an id, verb, objective, preconditions, inputs, outputs, affected artifacts, local principles, severity, loop class, and a four-dimensional graph.",
+            "invariant": "A phase is a protocol step enriched with inputs, outputs, validation, severity, and dependency metadata, ordered by dependency and never by severity.",
+            "flow": [
+                "SelectedProtocols",
+                "VerbChains",
+                "PhaseSet",
+                "AnnotatedPhases"
+            ],
+            "productions": [
+                {
+                    "lhs": "PhaseDecomposition",
+                    "rhs": "<SelectedProtocolSet> \"→\" <VerbChainSet> \"→\" <PhaseSet> \"→\" <PhaseAnnotationSet>"
+                },
+                {
+                    "lhs": "PhaseAnnotation",
+                    "rhs": "\"id\" \",\" \"verb\" \",\" \"objective\" \",\" \"inputs\" \",\" \"outputs\" \",\" \"affected_artifacts\" \",\" \"principles\" \",\" \"severity\" \",\" \"loop_class\" \",\" \"graph_4d\""
+                }
+            ],
+            "composes": [
+                "four-dimensional-phase-graph",
+                "severity-assignment",
+                "loop-class-labeling"
+            ],
+            "force": [
+                "correctness_verification",
+                "metaprogramming_modeling",
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "four-dimensional-phase-graph",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Four-Dimensional Phase Graph",
+            "exemplar": {
+                "before": "A phase records only its order — its downstream ripple is invisible.",
+                "after": "phase → Z{prior required phases} + X{independent peers} + Y{shared-data} + W{superseded state, propagated contracts, breaks-if-omitted}; empty W carries no-consumer evidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For every phase, model the sequential dependency axis, the lateral independent-peer axis, the diagonal shared-data axis, and the propagation axis carrying superseded state, propagated contracts, and what breaks if the edge is omitted.",
+            "invariant": "A phase exposes not only order but ripple; an empty propagation axis carries explicit no-downstream-consumer evidence.",
+            "flow": [
+                "Phase",
+                "Z + X + Y + W Graph"
+            ],
+            "productions": [
+                {
+                    "lhs": "FourDPhaseGraph",
+                    "rhs": "<Phase> \"→\" <SequentialAxis> \",\" <LateralAxis> \",\" <DiagonalAxis> \",\" <PropagationAxis>"
+                },
+                {"lhs": "SequentialAxis",
+                    "rhs": "\"Z: prior_required_phases\""},
+                {"lhs": "LateralAxis",
+                    "rhs": "\"X: independent_peer_phases\""},
+                {"lhs": "DiagonalAxis",
+                    "rhs": "\"Y: shared_data_or_output_relationships\""},
+                {"lhs": "PropagationAxis",
+                    "rhs": "\"W: superseded_state, propagated_contracts, breaks_if_omitted\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "model_governance",
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "dependency-linearization",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Dependency Linearization",
+            "exemplar": {
+                "before": "Phases ordered by priority label; a hidden cycle ships undetected.",
+                "after": "phase graph → detect Z-cycles (block on any) → topological Z-order with a stable tie-breaker; severity never controls order",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect cycles in the sequential Z-graph, block if any exist, and otherwise order the phases in topological Z-order with a stable tie-breaker so execution order is fixed by dependency alone.",
+            "invariant": "Phases are linearized by topological dependency order; severity never controls order; a cycle blocks and routes to planning repair.",
+            "flow": [
+                "PhaseGraph",
+                "CycleCheck",
+                "TopologicalOrder|BlockedCycle"
+            ],
+            "productions": [
+                {
+                    "lhs": "DependencyLinearization",
+                    "rhs": "<PhaseGraph> \"→\" <CycleDetection> \"→\" <TopologicalOrder> | <BlockedCycleSet>"
+                },
+                {"lhs": "LinearizationResult",
+                    "rhs": "\"pass_topological_order\" | \"blocked_cycle\""}
+            ],
+            "composes": [],
+            "force": [
+                "causality_ordering",
+                "control_coordination",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "severity-assignment",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Severity Assignment",
+            "exemplar": {
+                "before": "Severity used as a section header that groups the phases.",
+                "after": "phase → worst severity of its governing principles → per-phase metadata that routes the repair, never a grouping or ordering axis",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Derive each phase's severity from the worst severity of its governing principles; severity is per-phase metadata that selects the repair route, while execution order stays linear by dependency.",
+            "invariant": "Severity reflects principle risk and is metadata that routes failure; it is never a grouping or ordering axis.",
+            "flow": [
+                "Phase",
+                "LocalPrinciples",
+                "WorstSeverity"
+            ],
+            "productions": [
+                {
+                    "lhs": "SeverityAssignment",
+                    "rhs": "<Phase> \"→\" <LocalPrincipleSet> \"→\" <WorstSeverityResolution> \"→\" <Severity>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "loop-class-labeling",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Loop Class Labeling",
+            "exemplar": {
+                "before": "A phase's cognitive role is implicit in its verb.",
+                "after": "verb → loop class{Construction|Perceptual|Cognitive|Executive|Linking} → the phase's cognitive role made explicit",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Classify each phase by its verb into a construction, perceptual, cognitive, executive, or linking loop class so the phase's cognitive role is explicit.",
+            "invariant": "Every phase carries an explicit cognitive loop class derived from its verb.",
+            "flow": [
+                "Verb",
+                "LoopClass",
+                "LoopPattern"
+            ],
+            "productions": [
+                {"lhs": "LoopClassLabeling",
+                    "rhs": "<Verb> \"→\" <LoopClass> \"→\" <LoopPattern>"},
+                {
+                    "lhs": "LoopClass",
+                    "rhs": "\"Construction\" | \"Perceptual\" | \"Cognitive\" | \"Executive\" | \"Linking\""
+                }
+            ],
+            "composes": [],
+            "force": ["control_coordination"]
+        },
+        {
+            "id": "compilation-stage",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Compilation Stage",
+            "exemplar": {
+                "before": "Phases emitted as vague tasks with count-only ripple ('touches 3 consumers').",
+                "after": "phase records → bind verb templates + codebase-pattern constraints → atomize → attach 9-dimension named ripple chain → number N.N.N",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compile each phase into atomic, target-specific tasks under binding codebase-pattern execution constraints, attach a full nine-dimension named ripple chain to every task, and number the hierarchy N.N.N.",
+            "invariant": "Every emitted task is atomic and target-specific with an evidence contract, and carries all nine ripple dimensions expressed as names, never counts.",
+            "flow": [
+                "PhaseRecords",
+                "TaskTemplates + PatternConstraints",
+                "AtomicTasks",
+                "RippleChains + Numbering"
+            ],
+            "productions": [
+                {
+                    "lhs": "CompilationStage",
+                    "rhs": "<PhaseRecordSet> \"→\" <VerbTemplateBinding> \",\" <CodebasePatternEnforcement> \"→\" <TaskAtomization> \"→\" <RippleChainAnalysis> \"→\" <HierarchicalNumbering>"
+                },
+                {
+                    "lhs": "CompilationHandoff",
+                    "rhs": "\"every_task_atomic_and_target_specific\" \",\" \"every_task_has_evidence_contract\" \",\" \"nine_ripple_dimensions_with_names\" \"→\" \"pass_to_validation\" | \"repair_owner_compilation\""
+                }
+            ],
+            "composes": [
+                "verb-template-binding",
+                "codebase-pattern-enforcement",
+                "task-atomization",
+                "ripple-chain-analysis",
+                "validator-coverage",
+                "structured-observability-context",
+                "cross-cutting-surface-coverage",
+                "legacy-elimination",
+                "hierarchical-numbering"
+            ],
+            "force": [
+                "correctness_verification",
+                "control_coordination",
+                "architecture_evolution",
+                "object_creation"
+            ]
+        },
+        {
+            "id": "codebase-pattern-enforcement",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Codebase Pattern Enforcement",
+            "exemplar": {
+                "before": "A task says 'construct Foo' with no required pattern — direct instantiation slips through.",
+                "after": "task → scan forbidden forms → rewrite each to its required form{factory, DI, registry, events, ports, contract-first, fail-fast, secrets} before emit",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Bind every emitted step to the required architecture pattern for its concern — factory construction, dependency injection, registry discovery, event emission, ports and adapters, contract-first boundaries, encapsulation, structured observability, bounded complexity, secrets management, input validation, least privilege, config externalization, fail-fast, legacy elimination, and enforcement authoring — rewriting each forbidden form into its required form.",
+            "invariant": "Codebase patterns are binding execution constraints; a forbidden form is rewritten to its required form before the task is emitted.",
+            "flow": [
+                "Task",
+                "PatternViolationScan",
+                "RequiredRewrite",
+                "CompliantTask"
+            ],
+            "productions": [
+                {
+                    "lhs": "CodebasePatternEnforcement",
+                    "rhs": "<Task> \"→\" <ForbiddenPatternSet> \"→\" <ViolationSet> \"→\" <CompliantRewrite>"
+                },
+                {
+                    "lhs": "PatternDomain",
+                    "rhs": "\"factory_creation\" | \"dependency_injection\" | \"registry_discovery\" | \"event_emission\" | \"ports_adapters\" | \"contract_first\" | \"encapsulation\" | \"structured_observability\" | \"bounded_complexity\" | \"secrets_management\" | \"input_validation\" | \"least_privilege\" | \"config_externalization\" | \"fail_fast\" | \"legacy_elimination\" | \"enforcement_rule\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "architecture_evolution",
+                "object_creation",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "verb-template-binding",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Verb Template Binding",
+            "exemplar": {
+                "before": "'CREATE Foo' becomes a task with no tools and no way to validate it.",
+                "after": "verb → task pattern + tool set + blocking validation command → a verb becomes a task only through a validated template",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Map each execution verb to a task pattern, a tool set, and a blocking validation command, so a verb becomes a checklist task only through a validated template.",
+            "invariant": "An execution verb becomes a task only through a template that binds its tools and a blocking validation command.",
+            "flow": [
+                "Verb",
+                "TaskPattern",
+                "Tools",
+                "ValidationCommand"
+            ],
+            "productions": [
+                {
+                    "lhs": "VerbTemplateBinding",
+                    "rhs": "<Verb> \"→\" <TaskPattern> \",\" <ToolSet> \",\" <ValidationCommand>"
+                },
+                {
+                    "lhs": "Verb",
+                    "rhs": "\"ANALYZE\" | \"FIND\" | \"EXTRACT\" | \"CREATE\" | \"VERIFY\" | \"FILTER\" | \"EXECUTE\" | \"WRITE\" | \"READ\" | \"LINK\" | \"ITERATE\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "metaprogramming_modeling",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "task-atomization",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Task Atomization",
+            "exemplar": {
+                "before": "One coarse task 'refactor the Foo module' — too big to execute or validate.",
+                "after": "phase → task groups → atomic actions (gated by codebase patterns) → each carries an evidence contract + validation method + done-condition",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Extract atomic, target-specific actions from each phase group, gate every action through the codebase-pattern constraints, and attach an evidence contract, local principle checks, a validation method, and a done-condition to each.",
+            "invariant": "A task is small enough to execute and strict enough to validate, carrying its own evidence contract and done-condition.",
+            "flow": [
+                "Phase",
+                "TaskGroups",
+                "AtomicActions + Gates",
+                "AtomicTasks"
+            ],
+            "productions": [
+                {
+                    "lhs": "TaskAtomization",
+                    "rhs": "<Phase> \"→\" <TaskGroupSet> \"→\" <AtomicActionSet> \"→\" <CodebasePatternEnforcement> \"→\" <AtomicTaskSet>"
+                },
+                {
+                    "lhs": "AtomicTask",
+                    "rhs": "<Action> \",\" <Target> \",\" <ExpectedEvidence> \",\" <ValidationMethod> \",\" <DoneCondition>"
+                }
+            ],
+            "composes": ["codebase-pattern-enforcement"],
+            "force": [
+                "correctness_verification",
+                "control_coordination",
+                "modularity"
+            ]
+        },
+        {
+            "id": "ripple-chain-analysis",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Ripple Chain Analysis",
+            "exemplar": {
+                "before": "Impact recorded as a count ('affects 4 things'), filtered to the first match.",
+                "after": "task → 9 dims{registry, contracts, persistence, security, infrastructure, performance, observability, enforcement, consumers} → every named downstream impact + consequence-if-omitted; empty dim carries applicability evidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Analyze each task across nine impact dimensions — registry, contracts, persistence, security, infrastructure, performance, observability, enforcement, and consumers — and record every named downstream effect with its consequence-if-omitted rather than a count, retaining an empty dimension with explicit applicability evidence.",
+            "invariant": "Every task exposes all nine downstream dimensions as named impacts; ripple is never count-only and never filtered to the first match.",
+            "flow": [
+                "Task",
+                "RippleDimensions",
+                "NamedImpacts",
+                "DownstreamChain"
+            ],
+            "productions": [
+                {
+                    "lhs": "RippleChainAnalysis",
+                    "rhs": "<Task> \"→\" <RippleDimensionSet> \"→\" <ImpactSet> \"→\" <DownstreamEffectSet>"
+                },
+                {
+                    "lhs": "RippleDimensionSet",
+                    "rhs": "\"registry\" \",\" \"contracts\" \",\" \"persistence\" \",\" \"security\" \",\" \"infrastructure\" \",\" \"performance\" \",\" \"observability\" \",\" \"enforcement\" \",\" \"consumers\""
+                },
+                {"lhs": "ImpactSet",
+                    "rhs": "<NamedImpact> | \"none_with_applicability_evidence\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "validator-coverage",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Validator Coverage",
+            "exemplar": {
+                "before": "A new Foo invariant protected by a convention no check enforces.",
+                "after": "pattern → discover a detector or author one → register + regenerate the catalog → the rule becomes an active gate, not a convention",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For every architectural pattern introduced or referenced, discover an existing detector or author a new one, register it, and regenerate the catalog so the rule becomes an active enforcement gate rather than a convention.",
+            "invariant": "A new or changed architectural invariant is protected by an automated detector that is registered and active — never convention-only.",
+            "flow": [
+                "Pattern",
+                "DetectorDiscovery",
+                "AuthorOrUpdate",
+                "RegisterAndRegenerate",
+                "EnforcementActive"
+            ],
+            "productions": [
+                {
+                    "lhs": "ValidatorCoverage",
+                    "rhs": "<ArchitecturalPattern> \"→\" <DetectorDiscovery> \"→\" <CoverageDecision> \"→\" <RegisterAndRegenerate> \"→\" <EnforcementActive>"
+                },
+                {"lhs": "CoverageDecision",
+                    "rhs": "\"update_existing_detector\" | \"author_new_detector\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "structured-observability-context",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Structured Observability Context",
+            "exemplar": {
+                "before": "An error task emits a stringified blob instead of queryable context.",
+                "after": "task → observability trigger{error|violation|event|lifecycle|contract} → required schema-complete, machine-queryable context matched to the concern",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect whether a task touches errors, contract or invariant violations, events, or resource lifecycle, and require the matching structured, machine-queryable observability context instead of a free-form message.",
+            "invariant": "An observability task carries schema-complete, queryable context matched to its concern, never a stringified blob.",
+            "flow": [
+                "Task",
+                "ObservabilityTrigger",
+                "RequiredContext",
+                "SchemaValidation"
+            ],
+            "productions": [
+                {
+                    "lhs": "StructuredObservabilityContext",
+                    "rhs": "<Task> \"→\" <ObservabilityTriggerSet> \"→\" <RequiredContextSet> \"→\" <ObservabilitySchema>"
+                },
+                {
+                    "lhs": "RequiredContext",
+                    "rhs": "\"error\" | \"violation\" | \"event\" | \"lifecycle\" | \"contract\""
+                }
+            ],
+            "composes": [],
+            "force": ["observability_traceability"]
+        },
+        {
+            "id": "cross-cutting-surface-coverage",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Cross-Cutting Surface Coverage",
+            "exemplar": {
+                "before": "A change gated only on structure; its threat, budget, and failure consequences uncovered.",
+                "after": "task → surfaces{security, performance, infrastructure, resilience} → a gate per surface → coverage beyond structure verified",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Gate the software surface beyond structure — security, performance, infrastructure and deployment, and resilience — so a change's threat, budget, config, and failure consequences are covered, not only its structural ones.",
+            "invariant": "A change is not covered until its security, performance, infrastructure, and resilience consequences are gated, not only its structural ones.",
+            "flow": [
+                "Task",
+                "SurfaceDetection",
+                "SurfaceGates",
+                "CoverageVerification"
+            ],
+            "productions": [
+                {
+                    "lhs": "CrossCuttingSurfaceCoverage",
+                    "rhs": "<Task> \"→\" <SurfaceSet> \"→\" <SurfaceGateSet> \"→\" <CoverageGate>"
+                },
+                {"lhs": "SurfaceSet",
+                    "rhs": "\"security\" | \"performance\" | \"infrastructure\" | \"resilience\""}
+            ],
+            "composes": [],
+            "force": [
+                "security_governance",
+                "performance_scaling",
+                "resilience_recovery",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "legacy-elimination",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Legacy Elimination",
+            "exemplar": {
+                "before": "A replaced Foo path left behind beside its successor as a dual path 'for now'.",
+                "after": "change → detect superseded{dual-path, fallback, deprecated, dead code, orphaned export} → delete in the same change → exactly one live path remains",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For any change that touches a replaced, deprecated, dual-path, or fallback code path, delete the superseded path and its orphaned exports in the same completed change so exactly one forward path remains.",
+            "invariant": "There is exactly one live path; dead, dual, deprecated, and fallback code is removed in the same change, never deferred.",
+            "flow": [
+                "Change",
+                "SupersededDetection",
+                "SamePassRemoval",
+                "SinglePathGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "LegacyElimination",
+                    "rhs": "<Change> \"→\" <SupersededPathSet> \"→\" <SamePassDeletion> \"→\" <SinglePathGate>"
+                },
+                {
+                    "lhs": "SupersededPathSet",
+                    "rhs": "\"dual_path\" | \"fallback\" | \"deprecated\" | \"dead_code\" | \"orphaned_export\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "architecture_evolution",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "hierarchical-numbering",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Hierarchical Numbering",
+            "exemplar": {
+                "before": "Tasks numbered before the phase order is stable, so ids churn.",
+                "after": "stable order → Phase N → Task N.N → Subtask N.N.N → addressable coordinates assigned only after order is fixed",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Render addressable coordinates — Phase N, Task N.N, Subtask N.N.N — assigned only after the phase order is stable.",
+            "invariant": "Checklist execution requires stable, addressable task coordinates numbered after order is fixed.",
+            "flow": [
+                "Phases",
+                "Tasks",
+                "Subtasks",
+                "N.N.N Coordinates"
+            ],
+            "productions": [
+                {
+                    "lhs": "HierarchicalNumbering",
+                    "rhs": "<PhaseIndex> \"→\" <TaskIndex> \"→\" <SubtaskIndex> \"→\" <HierarchicalId>"
+                },
+                {"lhs": "HierarchicalId",
+                    "rhs": "\"N\" | \"N.N\" | \"N.N.N\""}
+            ],
+            "composes": [],
+            "force": [
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "admissibility-constraint-stage",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Admissibility Constraint Gate",
+            "exemplar": {
+                "before": "The compiled plan goes straight to verification — its realized cost is never checked against the selected branch's budget, so an over-budget or off-branch plan is verified and shipped anyway.",
+                "after": "task_records + phase_records → sum realized cost → compare to branch budget + hard limits → every task traces to the selected branch → ADMISSIBLE_BEFORE_VERIFY gate | route back to intent/act",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Gate the formalized plan on teleological admissibility before verification: sum the realized cost, compare it to the selected branch's budget and hard limits, and confirm every task traces to the selected branch — an over-budget, limit-breaching, or off-branch plan is inadmissible and routes back rather than being silently accepted.",
+            "invariant": "Teleology is mandatory-always: a plan is verified only after realized cost is within budget, every hard limit holds, and every task traces to the selected branch; the cost is never silently accepted.",
+            "flow": [
+                "TaskRecords + PhaseRecords + SelectedBranch",
+                "RealizedCostSum",
+                "BudgetAndLimitCheck",
+                "Admissible|RouteBack"
+            ],
+            "productions": [
+                {
+                    "lhs": "AdmissibilityConstraintGate",
+                    "rhs": "<TaskRecordSet> \",\" <PhaseRecordSet> \",\" <SelectedBranch> \"→\" <RealizedCostSum> \"→\" <BudgetAndLimitCheck> \"→\" <AdmissibilityVerdict>"
+                },
+                {
+                    "lhs": "AdmissibilityVerdict",
+                    "rhs": "\"admissible_within_budget_and_limits\" | \"inadmissible_route_to_intent\" | \"limit_breach_route_to_act\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "validation-stage",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Validation Stage",
+            "exemplar": {
+                "before": "A claim marked supported because no contradiction was found; policy enforced by banning a word.",
+                "after": "context + phases + tasks → GV-* suites → verify every claim by evidence → semantic-debt rubric (relation to a concept) → validation report",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Judge the generated reasoning — not the future implementation — against evidence and semantic policy: run the governance validation suites, verify every material claim by evidence, and apply the semantic-debt rubric before rendering.",
+            "invariant": "A claim is supported only with evidence, never because no contradiction was found; policy is semantic on the relation to a concept, never a substring ban.",
+            "flow": [
+                "ContextBundle + Phases + Tasks",
+                "ValidationSuites",
+                "ClaimVerification",
+                "SemanticPolicy",
+                "ValidationReport"
+            ],
+            "productions": [
+                {
+                    "lhs": "ValidationStage",
+                    "rhs": "<ContextBundle> \",\" <PhaseRecordSet> \",\" <TaskRecordSet> \"→\" <ValidationSuiteBattery> \",\" <EvidenceBasedClaimVerification> \",\" <SemanticDebtPolicy> \"→\" <ValidationReport>"
+                },
+                {"lhs": "ValidationReport",
+                    "rhs": "\"pass\" | \"repair_required\" | \"blocked\""}
+            ],
+            "composes": [
+                "validation-suite-battery",
+                "evidence-based-claim-verification",
+                "semantic-debt-policy"
+            ],
+            "force": [
+                "correctness_verification",
+                "model_governance",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "semantic-debt-policy",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Semantic Debt Policy",
+            "exemplar": {
+                "before": "A substring ban blocks the word 'fallback' but the fallback design passes by renaming.",
+                "after": "content → match a controlled concept → classify the relation{introduce|retain → violation; mention|analyze|remove → allowed} → a renamed prohibited design still fails",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Classify the relation a task holds to each controlled debt concept — backward-compatibility path, failure-masking fallback, deprecated or dual production path, deferred required work, shortcut debt, and unsupported superlative claim — blocking only the introduce and retain relations while allowing mention, analysis, quotation, and removal.",
+            "invariant": "Policy keys on the relation to a concept, so a prohibited design cannot pass by renaming and legitimately mentioning, analyzing, or removing debt is never blocked.",
+            "flow": [
+                "Content",
+                "ConceptMatch",
+                "RelationClassification",
+                "Allowed|Violation|Investigate"
+            ],
+            "productions": [
+                {
+                    "lhs": "SemanticDebtPolicy",
+                    "rhs": "<Content> \"→\" <ControlledConceptMatch> \"→\" <ConceptRelation> \"→\" <PolicyDecision>"
+                },
+                {
+                    "lhs": "ConceptRelation",
+                    "rhs": "\"introduce\" | \"retain\" | \"remove\" | \"analyze\" | \"mention\" | \"assert\""
+                },
+                {"lhs": "PolicyDecision",
+                    "rhs": "\"allowed\" | \"violation\" | \"investigate\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "evidence-based-claim-verification",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Evidence-Based Claim Verification",
+            "exemplar": {
+                "before": "'Foo has no other consumers' asserted with no search recorded.",
+                "after": "records → material claims → weigh supporting vs contradicting evidence → verdict{supported|contradicted|not-applicable|unsupported}; a zero-result claim records its searched scope",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Extract every material claim from the generated records, weigh supporting against contradicting evidence in the inventory, and classify each as supported, contradicted, not-applicable, or unsupported — recording the searched scope for a zero-result claim.",
+            "invariant": "A material claim is supported only with evidence whose scope matches it; absence of contradiction is never treated as support.",
+            "flow": [
+                "Records",
+                "MaterialClaims",
+                "EvidenceWeighing",
+                "ClaimVerdicts"
+            ],
+            "productions": [
+                {
+                    "lhs": "EvidenceBasedClaimVerification",
+                    "rhs": "<RecordSet> \"→\" <MaterialClaimSet> \"→\" <EvidenceWeighing> \"→\" <ClaimVerdictSet>"
+                },
+                {
+                    "lhs": "ClaimVerdict",
+                    "rhs": "\"supported\" | \"contradicted\" | \"not_applicable\" | \"unsupported\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "validation-suite-battery",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Validation Suite Battery",
+            "exemplar": {
+                "before": "A validation gate is a bare checkmark that names no evidence.",
+                "after": "records → GV-STATE/AUTHORITY/ACTIVATION/PLAN/TASKS/RIPPLE/SEMANTIC/EVIDENCE/OUTPUT → each finding names what it examined + an owner stage → zero blocker/error is the only pass",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Run the governance validation suites over the generated context, phases, tasks, and claims — state integrity, authority, principle activation, plan graph, tasks, ripple, semantic policy, evidence, and output serializability — and emit findings that each name what was examined and carry an owner stage.",
+            "invariant": "Every gate names the evidence it examined and carries an owner stage; zero blocker or error findings is the sole pass condition.",
+            "flow": [
+                "GeneratedRecords",
+                "SuiteChecks",
+                "OwnedFindings",
+                "Pass|RepairRequired"
+            ],
+            "productions": [
+                {
+                    "lhs": "ValidationSuiteBattery",
+                    "rhs": "<GeneratedRecordSet> \"→\" <SuiteCheckSet> \"→\" <OwnedFindingSet> \"→\" <SuiteVerdict>"
+                },
+                {
+                    "lhs": "ValidationSuite",
+                    "rhs": "\"GV-STATE\" | \"GV-AUTHORITY\" | \"GV-ACTIVATION\" | \"GV-PLAN\" | \"GV-TASKS\" | \"GV-RIPPLE\" | \"GV-SEMANTIC\" | \"GV-EVIDENCE\" | \"GV-OUTPUT\""
+                },
+                {"lhs": "SuiteVerdict",
+                    "rhs": "\"pass\" | \"repair_required\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "observability_traceability",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "repair-stage",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Repair Stage",
+            "exemplar": {
+                "before": "A finding patched at the last stage; upstream cause left intact, downstream records stale.",
+                "after": "findings → earliest responsible owner stage → apply fix → invalidate every dependent downstream → re-run from that stage (bounded to 3 cycles)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Route every finding to its earliest responsible owner stage, apply the fix, invalidate every dependent record downstream, and re-run from that stage — bounded to a fixed number of cycles, after which the run terminates as blocked with the remaining findings.",
+            "invariant": "Repair originates at the earliest invalid stage, cascades invalidation forward only, and is bounded; a downstream record is never restored after an upstream repair.",
+            "flow": [
+                "Findings",
+                "EarliestOwner",
+                "Invalidate + Rerun",
+                "Repaired|Blocked"
+            ],
+            "productions": [
+                {
+                    "lhs": "RepairStage",
+                    "rhs": "<FindingSet> \"→\" <EarliestOwnerStage> \"→\" <SeverityFailureRouting> \"→\" <DependentInvalidation> \"→\" <RerunFromOwner>"
+                },
+                {"lhs": "RepairTermination",
+                    "rhs": "\"status_pass_to_rendering\" | \"cycle_exceeds_max_blocked\""}
+            ],
+            "composes": [
+                "severity-failure-routing",
+                "bounded-repair-loop"
+            ],
+            "force": [
+                "resilience_recovery",
+                "control_coordination",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "bounded-repair-loop",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Bounded Repair Loop",
+            "exemplar": {
+                "before": "Repair loops unbounded, re-deriving forever on an unfixable finding.",
+                "after": "repair-required → cycle guard → invalidate + regenerate downstream → exceeding max_cycles terminates as blocked with the remaining findings",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Cap the repair loop at a fixed cycle limit, and on each cycle repair from the earliest invalid stage, invalidate all downstream records, and regenerate them; exceeding the limit sets the run blocked with the remaining findings.",
+            "invariant": "The repair loop is bounded by a fixed cycle limit; exceeding it terminates as blocked rather than looping unbounded.",
+            "flow": [
+                "RepairRequired",
+                "CycleGuard",
+                "InvalidateAndRegenerate",
+                "Pass|Blocked"
+            ],
+            "productions": [
+                {
+                    "lhs": "BoundedRepairLoop",
+                    "rhs": "<RepairRequired> \"→\" <CycleGuard> \"→\" <InvalidateDependents> \",\" <RegenerateDownstream> \"→\" <BoundedTermination>"
+                },
+                {"lhs": "BoundedTermination",
+                    "rhs": "\"repaired_pass\" | \"repair_limit_exceeded_blocked\""}
+            ],
+            "composes": [],
+            "force": [
+                "resilience_recovery",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "severity-failure-routing",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Severity Failure Routing",
+            "exemplar": {
+                "before": "Every finding blocks the same way, regardless of severity.",
+                "after": "finding → severity → route{blocker → block+repair; error → repair; warning → disposition; lower → investigate} → severity routes failure, never phase order",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Use each finding's severity to choose its repair route — a blocker blocks and repairs, an error repairs, a warning requires a disposition, and anything lower is investigated.",
+            "invariant": "Severity governs the failure route, not the phase order; each severity maps to exactly one route.",
+            "flow": [
+                "Finding",
+                "Severity",
+                "RepairRoute"
+            ],
+            "productions": [
+                {"lhs": "SeverityFailureRouting",
+                    "rhs": "<Finding> \"→\" <Severity> \"→\" <RepairRoute>"},
+                {
+                    "lhs": "RepairRoute",
+                    "rhs": "\"block_and_repair\" | \"repair\" | \"disposition_required\" | \"investigate\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "resilience_recovery",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "rendering-stage",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Rendering Stage",
+            "exemplar": {
+                "before": "Rendering invents a new architecture decision and pre-checks future execution boxes.",
+                "after": "validated records | blocked report → deterministic render → exactly one terminal{success artifact | blocked report}; future execution checkboxes left unchecked",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Serialize only validated records into the checklist deterministically, or render the blocked report, emitting exactly one terminal — success or blocked — with future execution checkboxes left unchecked, and stop within the cycle bound.",
+            "invariant": "Rendering adds no new architecture decision, leaves future execution gates unchecked, and terminates exactly once; it never stops prematurely while repairable nor loops beyond the cycle bound.",
+            "flow": [
+                "ValidatedRecords|BlockedReport",
+                "DeterministicRender",
+                "SuccessArtifact|BlockedArtifact"
+            ],
+            "productions": [
+                {
+                    "lhs": "RenderingStage",
+                    "rhs": "<ValidatedRecordSet> | <BlockedValidationReport> \"→\" <DeterministicRender> \"→\" <GenerationResult>"
+                },
+                {"lhs": "GenerationResult",
+                    "rhs": "\"success_output_file\" | \"blocked_output_file\""}
+            ],
+            "composes": [
+                "checklist-output-rendering",
+                "explicit-termination"
+            ],
+            "force": [
+                "correctness_verification",
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "checklist-output-rendering",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Checklist Output Rendering",
+            "exemplar": {
+                "before": "The checklist drops ripple impacts to counts and renders inactive principles as mandatory.",
+                "after": "context → principle disposition → phases in Z-order{loop class, severity, 4D graph, named ripple} → N.N.N tasks with evidence contracts → per-phase gate → appendices → final blocking gate (all unchecked)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Emit the markdown checklist — governing context, principle disposition, phases in Z-topological order with loop class, severity, four-dimensional graph, and named ripple chains, hierarchically numbered tasks with evidence contracts, per-phase execution gates, appendices, and a final blocking execution gate — all left unchecked for future execution.",
+            "invariant": "The rendered artifact preserves linear execution order, dependency topology, and every ripple impact by name, and leaves every future execution checkbox unchecked.",
+            "flow": [
+                "Context + Phases + Graphs + Ripples + Gates",
+                "ChecklistMarkdown"
+            ],
+            "productions": [
+                {
+                    "lhs": "ChecklistOutputRendering",
+                    "rhs": "<GoverningContext> \"→\" <PrincipleDisposition> \"→\" <LinearOrderedPhaseSet> \"→\" <PerPhaseGraphAndRipple> \"→\" <TaskHierarchy> \"→\" <AppendixSet> \"→\" <FinalExecutionGate>"
+                },
+                {
+                    "lhs": "AppendixSet",
+                    "rhs": "\"file_organization\" \",\" \"evidence_inventory\" \",\" \"registry_contract_enforcement_changes\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "observability_traceability",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "explicit-termination",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Explicit Termination",
+            "exemplar": {
+                "before": "The generator stops while the status is still repairable, or loops past its bound.",
+                "after": "validation status → terminal selection{write success artifact | write blocked report} → render-integrity check → exactly one written artifact, no premature stop, no unbounded loop",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Guarantee the generator stops with exactly one terminal — a written success artifact whose rendering integrity is verified, or a written blocked report — never a premature stop while the status is repairable and never a loop beyond the cycle bound.",
+            "invariant": "Termination is explicit and bounded: one of success or blocked, no premature stop, no unbounded loop.",
+            "flow": [
+                "ValidationStatus",
+                "TerminalSelection",
+                "WrittenArtifact"
+            ],
+            "productions": [
+                {
+                    "lhs": "ExplicitTermination",
+                    "rhs": "<ValidationStatus> \"→\" <TerminalSelection> \"→\" <RenderIntegrityCheck> \"→\" <WrittenArtifact>"
+                },
+                {"lhs": "TerminalSelection",
+                    "rhs": "\"write_success_artifact\" | \"write_blocked_report\""}
+            ],
+            "composes": [],
+            "force": [
+                "resilience_recovery",
+                "control_coordination",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "cross-stage-invariants",
+            "title": "Cross-Stage Invariants",
+            "exemplar": {
+                "before": "Each stage guards its own rules; a global always/never guarantee is nowhere enforced.",
+                "after": "every stage bound by ALWAYS{authority-first, discover-before-assume, principle-bound-to-validator, dependency-order, single-output handoff, 4D + ripple, evidence-for-claims, repair-from-earliest} + NEVER{prior-knowledge-as-evidence, protocol-from-trigger-word, substring-ban, severity-grouping}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Bind every stage to the always-and-never rules of the generator — resolve authority and directionality before planning, discover before assuming, activate principles with a bound validator, order by dependency with severity as routing metadata, read only the prior stage's output contract through one evidence-bearing handoff, represent all four graph axes, require evidence for every claim, separate generation gates from future execution gates, repair from the earliest invalid stage, and render deterministically.",
+            "invariant": "The generator's cross-stage guarantees hold in every stage; violating any one invalidates the run regardless of local stage success.",
+            "flow": [
+                "EveryStage",
+                "AlwaysRules + NeverRules",
+                "BoundGenerator"
+            ],
+            "productions": [
+                {
+                    "lhs": "CrossStageInvariants",
+                    "rhs": "<AlwaysRuleSet> \",\" <NeverRuleSet> \"→\" <BoundGeneratorContract>"
+                },
+                {
+                    "lhs": "InvariantClass",
+                    "rhs": "\"authority_and_directionality_first\" | \"discover_before_assume\" | \"principle_bound_to_validator\" | \"dependency_order_severity_routes\" | \"single_output_contract_handoff\" | \"four_axis_graph_with_ripple\" | \"evidence_for_every_claim\" | \"generation_gate_not_execution_gate\" | \"repair_from_earliest_invalid_stage\" | \"deterministic_render_no_new_decision\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "correctness_verification",
+                "architecture_evolution",
+                "control_coordination"
+            ],
+            "meta": true
+        },
+        {
+            "id": "checklist-creation-kernel",
+            "principleRef": "directed-acyclic-graph",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "orientation-stage"},
+                {"stage": "intent",
+                    "record": "teleological-intent-gate"},
+                {"stage": "derive",
+                    "record": "planning-stage"},
+                {"stage": "project",
+                    "record": "phase-decomposition"},
+                {"stage": "act",
+                    "record": "compilation-stage"},
+                {"stage": "constrain",
+                    "record": "admissibility-constraint-stage"},
+                {"stage": "verify",
+                    "record": "validation-stage"},
+                {"stage": "commit",
+                    "record": "rendering-stage"},
+                {"stage": "terminate",
+                    "record": "explicit-termination"}
+            ],
+            "title": "Checklist Creation Kernel",
+            "exemplar": {
+                "before": "A task compiled straight into a flat checklist, ungated and unordered.",
+                "after": "orientation → planning → compilation → validation → repair → rendering, bound by cross-stage invariants → a validated dependency-ordered checklist or an evidence-bearing blocked report",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Run the six-stage generator in order — orientation, planning, compilation, validation, repair, and rendering — bound by the cross-stage invariants, compiling a task description into a validated, dependency-aware execution checklist or an evidence-bearing blocked report.",
+            "invariant": "Checklist creation is a governance compiler: each of framing, decomposition, tasks, gates, repair, and termination is produced and gated by the stage that owns that decision, under one set of cross-stage invariants.",
+            "flow": [
+                "Orientation",
+                "Planning",
+                "Compilation",
+                "Validation",
+                "Repair",
+                "Rendering"
+            ],
+            "productions": [
+                {
+                    "lhs": "ChecklistCreationKernel",
+                    "rhs": "<OrientationStage> \"→\" <PlanningStage> \"→\" <CompilationStage> \"→\" <ValidationStage> \"→\" <RepairStage> \"→\" <RenderingStage>"
+                }
+            ],
+            "composes": [
+                "orientation-stage",
+                "teleological-intent-gate",
+                "planning-stage",
+                "compilation-stage",
+                "admissibility-constraint-stage",
+                "validation-stage",
+                "repair-stage",
+                "rendering-stage",
+                "cross-stage-invariants"
+            ],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification",
+                "security_governance",
+                "architecture_evolution",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "checklist-governance-concern",
+            "title": "<Checklist Governance Concern>",
+            "intent": "<Orient on authority + evidence> → <Plan principles + protocols + dependency graph> → <Compile atomic tasks + ripple chains> → <Validate reasoning by evidence + semantic policy> → <Repair from the earliest invalid stage> → <Render one bounded terminal>",
+            "invariant": "Any implementation checklist is generated as a validated, dependency-ordered execution graph whose every decision is owned and gated by a stage, not as a flat task list.",
+            "flow": [
+                "Authority",
+                "Evidence",
+                "Principles",
+                "Phases",
+                "Graph",
+                "Ripples",
+                "Validation",
+                "Repair",
+                "Terminal"
+            ],
+            "productions": [
+                {
+                    "lhs": "ChecklistGovernanceConcern",
+                    "rhs": "<OrientationContext> \"→\" <PlanningGraph> \"→\" <CompiledTaskSet> \"→\" <ValidationVerdict> \"→\" <BoundedRepair> \"→\" <RenderedTerminal>"
+                },
+                {
+                    "lhs": "CompletionCondition",
+                    "rhs": "\"authority_and_directionality_resolved\" \",\" \"phases_dependency_ordered_with_4d_graph\" \",\" \"tasks_atomic_with_named_ripple_chains\" \",\" \"claims_evidence_backed\" \",\" \"semantic_policy_satisfied\" \",\" \"bounded_repair_converged\" \",\" \"single_terminal_emitted\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification",
+                "security_governance",
+                "architecture_evolution",
+                "model_governance"
+            ],
+            "meta": true
+        }
+    ]
+}

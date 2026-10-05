@@ -18,7 +18,7 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { landWitnessed, refuse } from "../writers/board.writer.ts";
 import { BLOCKING_SUFFIX } from "../constants/blocking.constants.ts";
 import type { CompressOutcome } from "../types/board.types.ts";
-import { JUDGEMENT_KIND } from "../constants/board.constants.ts";
+import { JUDGMENT_KIND } from "../constants/board.constants.ts";
 import { blockOf } from "../transformers/board.transformer.ts";
 import { citedAbsolute } from "../validators/claim.validator.ts";
 import { fieldKeyAt } from "../analyzers/board.analyzer.ts";
@@ -142,7 +142,7 @@ export const runItem = function runItem(request: ItemRequest): CompressOutcome {
     const landed = {
         code: 0,
         excised: [],
-        message: `${itemAdded(key, request.target)}${kindEcho(request.kind, request.kind === JUDGEMENT_KIND)}`,
+        message: `${itemAdded(key, request.target)}${kindEcho(request.kind, request.kind === JUDGMENT_KIND)}`,
         write: written,
     };
 

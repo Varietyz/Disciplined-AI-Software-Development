@@ -1,0 +1,328 @@
+{
+    "category": "correctness-determinism-verification",
+    "records": [
+        {
+            "name": "Assumption-Driven Delivery",
+            "kind": "anti-pattern",
+            "definition": "Shipping on untested assumptions about behavior instead of validating that requirements are met."
+        },
+        {
+            "name": "Environment-Sensitive Behavior",
+            "kind": "anti-pattern",
+            "definition": "Behavior that changes with the host environment, so the same run yields different results elsewhere."
+        },
+        {
+            "name": "Example-Only Testing",
+            "kind": "anti-pattern",
+            "definition": "Testing only a few hand-picked examples instead of properties that must hold across all inputs."
+        },
+        {
+            "name": "Floating Dependencies",
+            "distinctFrom": [
+                {
+                    "id": "architecture:flaky-test-normalization",
+                    "reason": "Floating dependencies make builds unreproducible through unpinned versions, while flaky test normalization accepts intermittent failures by rerunning them."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Depending on unpinned, floating dependency versions, so builds are not reproducible."
+        },
+        {
+            "name": "Hidden Behavior",
+            "kind": "anti-pattern",
+            "definition": "Behavior triggered by hidden state or side effects, so outcomes surprise callers."
+        },
+        {
+            "name": "Hidden IO",
+            "kind": "anti-pattern",
+            "definition": "Performing input/output inside a supposedly pure function, hiding side effects from callers."
+        },
+        {
+            "name": "Hidden Time/Randomness/Global State",
+            "kind": "anti-pattern",
+            "definition": "Reading the clock, randomness, or global state inside a computation, making its output nondeterministic."
+        },
+        {
+            "name": "Implementation-Only Testing",
+            "distinctFrom": [
+                {
+                    "id": "architecture:mock-mirage",
+                    "reason": "Implementation-only testing checks today's behavior instead of the contract, while a mock mirage checks calls on mocks instead of behavior."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Testing only against the current implementation's behavior rather than the specified contract."
+        },
+        {
+            "name": "Informal Validation Only",
+            "kind": "anti-pattern",
+            "definition": "Relying only on informal checks and testing where a formal proof of correctness is warranted."
+        },
+        {
+            "name": "Side Effects",
+            "kind": "anti-pattern",
+            "definition": "Producing observable side effects in an expression, so it cannot be replaced by its value."
+        },
+        {
+            "name": "Unchecked Dynamic Code",
+            "kind": "anti-pattern",
+            "definition": "Running dynamically generated or evaluated code that static analysis cannot inspect for defects."
+        },
+        {
+            "name": "Undefined Behavior",
+            "kind": "anti-pattern",
+            "definition": "Relying on operations whose result is unspecified, so outcomes vary unpredictably across runs or platforms."
+        },
+        {
+            "name": "Untested Implementation",
+            "kind": "anti-pattern",
+            "definition": "Shipping code with no tests, so its conformance to the specification is unverified."
+        },
+        {
+            "name": "Behavior Validation",
+            "kind": "capability",
+            "definition": "The ability to confirm a system behaves as its specification requires."
+        },
+        {
+            "name": "Broad Input Exploration",
+            "kind": "capability",
+            "definition": "The ability to exercise a function across a wide, generated range of inputs."
+        },
+        {
+            "name": "Mathematical Assurance",
+            "kind": "capability",
+            "definition": "The ability to prove mathematically that a system meets its specification."
+        },
+        {
+            "name": "Regression Safety",
+            "kind": "capability",
+            "definition": "The ability to catch regressions when code changes by re-running tests."
+        },
+        {
+            "name": "Reliable Automation",
+            "kind": "capability",
+            "definition": "The ability to automate a process reliably because it repeats identically each run."
+        },
+        {
+            "name": "Reliable Testing",
+            "kind": "capability",
+            "definition": "The ability to test dependably because the same inputs always produce the same outputs."
+        },
+        {
+            "name": "Safe Operation",
+            "kind": "capability",
+            "definition": "The ability to operate without producing incorrect or harmful results."
+        },
+        {
+            "name": "Safe Sharing",
+            "kind": "capability",
+            "definition": "The ability to share data freely across threads because it cannot be modified."
+        },
+        {
+            "name": "Specification Compliance",
+            "kind": "capability",
+            "definition": "The ability to confirm an implementation conforms to its specification."
+        },
+        {
+            "name": "Formal Specification",
+            "kind": "artifact",
+            "definition": "A precise, mathematical statement of what a system must do, against which it is proven."
+        },
+        {
+            "name": "Ruleset",
+            "kind": "artifact",
+            "definition": "The set of rules a static analyzer checks source code against."
+        },
+        {
+            "name": "Tests",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:specification",
+                    "reason": "Tests are executable checks, while a specification is the description of required behavior they check against."
+                },
+                {
+                    "id": "lexicon:test-tag",
+                    "reason": "Tests are the executable checks, while the test marker names the file that holds one."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "Executable checks that assert a system behaves as intended."
+        },
+        {
+            "name": "Controlled State",
+            "kind": "constraint",
+            "definition": "The requirement that all inputs and state affecting a computation be fixed, bounded or fully specified, so its behavior is reproducible.",
+            "aliases": ["Controlled Inputs"]
+        },
+        {
+            "name": "Deterministic Behavior",
+            "kind": "constraint",
+            "definition": "The requirement that the code under test produce the same result for the same inputs."
+        },
+        {
+            "name": "No Side Effects",
+            "kind": "constraint",
+            "definition": "The requirement that a function compute its result without observable side effects."
+        },
+        {
+            "name": "Properties/Invariants",
+            "kind": "constraint",
+            "definition": "The requirement that the general properties or invariants a function must satisfy be defined."
+        },
+        {
+            "name": "Value Semantics",
+            "kind": "constraint",
+            "definition": "The requirement that values be compared and copied by content rather than by reference identity."
+        },
+        {
+            "name": "Versioned Inputs",
+            "kind": "constraint",
+            "definition": "The requirement that all inputs to a build or computation be pinned to specific versions."
+        },
+        {
+            "name": "Allocation Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree of extra memory allocation incurred by creating new immutable values instead of mutating in place."
+        },
+        {
+            "name": "Continuous Updates",
+            "kind": "quality-attribute",
+            "definition": "The degree to which pinning everything for reproducibility conflicts with continuously updating dependencies."
+        },
+        {
+            "name": "Cost/Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of cost and complexity added by formally proving a system correct."
+        },
+        {
+            "name": "Dynamic Runtime Behavior",
+            "kind": "quality-attribute",
+            "definition": "The degree to which runtime-adaptive behavior undermines a system's predictability."
+        },
+        {
+            "name": "Encapsulation Extremes",
+            "kind": "quality-attribute",
+            "definition": "The degree to which hiding internals too strictly makes a unit's behavior hard to observe in tests."
+        },
+        {
+            "name": "Fitness for Use",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a product meets the needs of its users."
+        },
+        {
+            "name": "Real-World Variability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which controlling conditions for repeatability diverges from real-world variability."
+        },
+        {
+            "name": "Runtime Adaptivity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which making behavior deterministic limits adapting dynamically at runtime."
+        },
+        {
+            "name": "Shrinking/Debug Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which reducing a failing generated case to a minimal example adds debugging complexity."
+        },
+        {
+            "name": "Spec Maintenance",
+            "kind": "quality-attribute",
+            "definition": "The degree of ongoing effort to keep a specification current as the system evolves."
+        },
+        {
+            "name": "Stateful IO",
+            "kind": "quality-attribute",
+            "definition": "The degree to which stateful input/output conflicts with expressions being replaceable by their values."
+        },
+        {
+            "name": "Stateful Operations",
+            "kind": "quality-attribute",
+            "definition": "The degree to which operations that depend on or mutate state conflict with purity."
+        },
+        {
+            "name": "Thread Safety",
+            "kind": "quality-attribute",
+            "definition": "The degree to which data can be accessed concurrently without corruption."
+        },
+        {
+            "name": "Make Effects Explicit",
+            "kind": "technique",
+            "definition": "A technique for moving input, output and mutation to named boundary operations, so the code between them stays pure."
+        },
+        {
+            "name": "Pass Context Explicitly",
+            "kind": "technique",
+            "definition": "A technique for passing request, user or tenant context as a parameter or scoped object instead of reading it from global state."
+        },
+        {
+            "name": "Inject Clock and Randomness",
+            "kind": "technique",
+            "definition": "A technique for supplying time and random values through parameters, so the code under test runs the same way every time."
+        },
+        {
+            "name": "Test Observable Behavior",
+            "kind": "technique",
+            "definition": "A technique for asserting on a unit's outputs and effects instead of on the internal calls it makes."
+        },
+        {
+            "name": "Fake at the Boundary",
+            "kind": "technique",
+            "definition": "A technique for replacing an external dependency in tests with a working in-memory implementation of its port."
+        },
+        {
+            "name": "Unit Tests",
+            "kind": "technique",
+            "definition": "A technique for testing one unit of behavior in isolation, fast enough to run on every change."
+        },
+        {
+            "name": "Component Tests",
+            "kind": "technique",
+            "definition": "A technique for testing one deployable component through its public interface with its dependencies replaced."
+        },
+        {
+            "name": "Isolate Test State",
+            "kind": "technique",
+            "definition": "A technique for giving each test its own data and resources, so tests pass in any order."
+        },
+        {
+            "name": "Validate at the Boundary",
+            "kind": "technique",
+            "definition": "A technique for rejecting malformed input where it enters the system, so the core receives only valid values."
+        },
+        {
+            "name": "Encapsulate Validation",
+            "kind": "technique",
+            "definition": "A technique for placing a value's validation in the type that holds it, so every instance is valid."
+        },
+        {
+            "name": "Validate as a Group",
+            "kind": "technique",
+            "definition": "A technique for validating fields that depend on each other together, in the object that groups them."
+        },
+        {
+            "name": "Precondition Check",
+            "kind": "technique",
+            "definition": "A technique for checking at the start of an operation that the state and arguments it requires hold."
+        },
+        {
+            "name": "Invariant Check",
+            "kind": "technique",
+            "definition": "A technique for checking after each change that the rules a state must always satisfy still hold."
+        },
+        {
+            "name": "Postcondition Check",
+            "kind": "technique",
+            "definition": "A technique for checking at the end of an operation that the result and state it promises hold."
+        },
+        {
+            "name": "Pin Versions",
+            "kind": "technique",
+            "definition": "A technique for recording exact versions of dependencies and tools, so every build uses the same inputs."
+        },
+        {
+            "name": "Ignored Analyzer Findings",
+            "kind": "anti-pattern",
+            "definition": "A defect in which static analysis findings are left unresolved until the analyzer's output stops being read."
+        }
+    ]
+}

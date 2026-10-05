@@ -1,0 +1,484 @@
+{
+    "category": "Causality / Ordering / Distributed Time",
+    "check": {
+        "population": "every event, replica update and dependency edge whose order affects the result",
+        "freshness": "a verdict stands until the event schema, the ordering key or the replication protocol changes",
+        "refusal": "the ordering or consistency test fails, or the graph check rejects the edge that breaks the order",
+        "observation": "causation metadata on events, ordering-anomaly counts from tests, and the extracted dependency graph",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the ordering key and the replication protocol, which every event and replica update conforms to"
+    },
+    "records": [
+        {
+            "id": "causality",
+            "name": "Causality",
+            "definition": "A design rule that every effect records the event that caused it, so its order can be reasoned about.",
+            "type": "principle",
+            "scope": [
+                "event",
+                "workflow",
+                "distributed state"
+            ],
+            "requires": ["Causation Tracking"],
+            "reinforces": [
+                "Traceability",
+                "Event Ordering"
+            ],
+            "enables": ["Correct Workflow Reasoning"],
+            "conflicts_with": ["Unordered Side Effects"],
+            "tensions_with": ["Parallelism"],
+            "violated_by": ["lexicon:unlinked-events"],
+            "detected_by": ["missing causation/correlation metadata"],
+            "measured_by": ["causal trace completeness"],
+            "refactored_by": [
+                "architecture:causation-id",
+                "lexicon:make-order-explicit"
+            ],
+            "enforced_by": ["event schema and workflow tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "events.push({ type: \"BarCreated\", at: Date.now() });\nevents.push({ type: \"FooCreated\", at: Date.now() });",
+                "after": "const fooCreated = append({ type: \"FooCreated\" });\nappend({ type: \"BarCreated\", causedBy: fooCreated.id });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "causal-consistency",
+            "name": "Causal Consistency",
+            "definition": "A conceptual representation of a consistency guarantee in which no reader sees an effect before its cause.",
+            "type": "model",
+            "scope": [
+                "distributed data",
+                "events"
+            ],
+            "requires": ["Causal Ordering"],
+            "reinforces": ["Eventual Consistency Safety"],
+            "enables": ["User-Visible Ordering Guarantees"],
+            "conflicts_with": [
+                "Arbitrary Reordering",
+                "Read-Your-Writes Violation"
+            ],
+            "tensions_with": ["Latency/Availability"],
+            "violated_by": ["lexicon:arbitrary-reordering"],
+            "detected_by": ["order anomaly tests"],
+            "measured_by": ["causal anomaly rate"],
+            "refactored_by": [
+                "architecture:causation-id",
+                "lexicon:read-from-primary-after-write"
+            ],
+            "enforced_by": ["consistency tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "replica.apply(barCreated);\nreplica.apply(fooCreated);",
+                "after": "replica.applyWhenReady(barCreated, {\n  requires: [fooCreated.id],\n});\nreplica.apply(fooCreated);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "happens-before-relationship",
+            "name": "Happens-Before Relationship",
+            "definition": "A conceptual representation of the partial order in which one operation is known to precede another.",
+            "type": "model",
+            "scope": [
+                "concurrency",
+                "distributed events"
+            ],
+            "requires": ["Ordering Semantics"],
+            "reinforces": [
+                "Correctness",
+                "Causal Reasoning"
+            ],
+            "enables": ["Race Detection"],
+            "conflicts_with": ["Race Conditions"],
+            "tensions_with": ["Parallel Execution"],
+            "violated_by": ["lexicon:race-conditions"],
+            "detected_by": [
+                "race detectors",
+                "missing synchronization"
+            ],
+            "measured_by": ["ordering violation count"],
+            "refactored_by": [
+                "lexicon:apply-concurrency-control",
+                "lexicon:make-order-explicit"
+            ],
+            "enforced_by": ["concurrency tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const a = { id: \"a\", at: Date.now() };\nconst b = { id: \"b\", at: Date.now() };",
+                "after": "const a = { id: \"a\", ordinal: 1 };\nconst b = { id: \"b\", ordinal: 2, after: [a.id] };\nassert(happensBefore(a, b));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "event-ordering",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:ordering-key-or-sequence",
+                    "reason": "Event ordering binds the consumer to process one key's events in order, while the ordering key is the field on each event that makes the order known."
+                }
+            ],
+            "name": "Event Ordering",
+            "definition": "A rule or precondition that a stateful consumer processes the events of one key in their sequence order.",
+            "type": "constraint",
+            "scope": [
+                "stream",
+                "queue",
+                "consumer"
+            ],
+            "requires": ["Ordering Key or Sequence"],
+            "reinforces": ["Causality"],
+            "enables": ["Correct Stateful Processing"],
+            "conflicts_with": ["Unordered Parallel Consumption"],
+            "tensions_with": ["Throughput"],
+            "violated_by": ["lexicon:unordered-parallel-consumption"],
+            "detected_by": ["missing ordering key/sequence checks"],
+            "measured_by": ["out-of-order rate"],
+            "refactored_by": [
+                "architecture:partitioning",
+                "lexicon:logical-counter",
+                "lexicon:reorder-buffer"
+            ],
+            "enforced_by": [
+                "stream config",
+                "consumer tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "events.sort((a, b) => a.timestamp - b.timestamp);",
+                "after": "events.sort((a, b) => a.streamOrdinal - b.streamOrdinal);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "causal-dependency",
+            "name": "Causal Dependency",
+            "definition": "A conceptual representation of one step or event that cannot proceed until another has happened.",
+            "type": "model",
+            "scope": [
+                "event",
+                "workflow",
+                "module"
+            ],
+            "requires": ["Dependency Declaration"],
+            "reinforces": [
+                "Causality",
+                "Traceability"
+            ],
+            "enables": ["Impact Analysis"],
+            "conflicts_with": ["Hidden Dependency"],
+            "tensions_with": ["Graph Complexity"],
+            "violated_by": ["lexicon:hidden-dependency"],
+            "detected_by": ["undocumented call/event dependency"],
+            "measured_by": ["hidden dependency count"],
+            "refactored_by": [
+                "lexicon:explicit-dependency",
+                "architecture:causation-id"
+            ],
+            "enforced_by": ["dependency graph checks"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "processBar(barEvent);",
+                "after": "if (!projection.has(barEvent.fooEventId)) defer(barEvent);\nelse processBar(barEvent);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "dependency-graph",
+            "name": "Dependency Graph",
+            "definition": "Descriptive data about which modules, tasks or services depend on which, extracted as a directed graph.",
+            "type": "artifact",
+            "scope": [
+                "codebase",
+                "runtime",
+                "deployment"
+            ],
+            "requires": ["Dependency Extraction"],
+            "reinforces": ["Architecture Compliance"],
+            "enables": [
+                "Cycle Detection",
+                "Impact Analysis"
+            ],
+            "conflicts_with": ["Hidden Dependency"],
+            "tensions_with": ["Dynamic Loading"],
+            "violated_by": ["lexicon:hidden-dependency"],
+            "detected_by": ["graph extraction mismatch"],
+            "measured_by": [
+                "cycle count",
+                "graph density"
+            ],
+            "refactored_by": ["lexicon:invert-dependency"],
+            "enforced_by": ["dependency graph CI checks"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const tasks = [loadFoo, buildBar, publishBaz];\nawait Promise.all(tasks.map(task => task()));",
+                "after": "const graph = new DependencyGraph();\ngraph.add(\"buildBar\", { dependsOn: [\"loadFoo\"] });\ngraph.add(\"publishBaz\", { dependsOn: [\"buildBar\"] });\nawait graph.execute();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "directed-acyclic-graph",
+            "name": "Directed Acyclic Graph (DAG)",
+            "definition": "A rule or precondition that every dependency points one way and the graph they form has no cycle, so its nodes can be put in topological order.",
+            "aliases": ["Directed Dependencies"],
+            "type": "constraint",
+            "scope": [
+                "dependency graph",
+                "workflow",
+                "build"
+            ],
+            "requires": [],
+            "reinforces": [
+                "Layering",
+                "Build Order"
+            ],
+            "enables": ["Topological Ordering"],
+            "conflicts_with": ["Circular Dependency"],
+            "tensions_with": ["Bidirectional Collaboration"],
+            "violated_by": ["architecture:circular-dependency"],
+            "detected_by": ["cycle detection"],
+            "measured_by": ["cycle count"],
+            "refactored_by": [
+                "lexicon:invert-dependency",
+                "lexicon:extract-interface",
+                "lexicon:split-module"
+            ],
+            "enforced_by": ["graph checks"],
+            "severity": "contextual",
+            "mandatoryFor": "dependency architecture",
+            "exemplar": {
+                "before": "graph.addEdge(\"foo\", \"bar\");\ngraph.addEdge(\"bar\", \"foo\");",
+                "after": "const dag = new Dag();\ndag.addEdge(\"foo\", \"bar\");\nif (dag.wouldCreateCycle(\"bar\", \"foo\")) throw new Error(\"cycle rejected\");",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "vector-clocks",
+            "name": "Vector Clocks",
+            "definition": "A mechanism that keeps one counter per node on each update, so two updates can be compared as ordered or concurrent.",
+            "type": "mechanism",
+            "scope": [
+                "distributed events",
+                "replication"
+            ],
+            "requires": [
+                "Node Identity",
+                "Version Vector"
+            ],
+            "reinforces": ["Causal Consistency"],
+            "enables": ["Concurrent Update Detection"],
+            "conflicts_with": ["Single Global Clock Assumption"],
+            "tensions_with": ["Metadata Size"],
+            "violated_by": ["architecture:lost-update"],
+            "detected_by": ["lost causality in distributed updates"],
+            "measured_by": ["conflict detection accuracy"],
+            "refactored_by": [],
+            "enforced_by": ["replication protocol tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const winner = a.updatedAt > b.updatedAt ? a : b;",
+                "after": "const relation = compareVectorClocks(a.clock, b.clock);\nif (relation === \"concurrent\") return mergeFoo(a, b);\nreturn relation === \"after\" ? a : b;",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "lamport-clocks",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:logical-counter",
+                    "reason": "Lamport clocks are the whole stamping scheme, advanced on every send and receive, while the logical counter is the value each process keeps."
+                }
+            ],
+            "name": "Lamport Clocks",
+            "definition": "A mechanism that stamps each event with a logical counter, advanced on every send and receive, to give a partial order.",
+            "type": "mechanism",
+            "scope": ["distributed events"],
+            "requires": ["Logical Counter"],
+            "reinforces": ["Happens-Before Reasoning"],
+            "enables": ["Partial Ordering"],
+            "conflicts_with": ["Wall-Clock Ordering Assumption"],
+            "tensions_with": ["No Concurrent Causality Distinction"],
+            "violated_by": ["lexicon:wall-clock-ordering-assumption"],
+            "detected_by": ["timestamp ordering anomalies"],
+            "measured_by": ["ordering anomaly rate"],
+            "refactored_by": [],
+            "enforced_by": ["protocol tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const event = { at: Date.now(), value: foo };",
+                "after": "const event = { logicalTime: lamport.tick(), value: foo };\nlamport.observe(remoteEvent.logicalTime);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "hybrid-logical-clocks",
+            "name": "Hybrid Logical Clocks",
+            "definition": "A mechanism that combines physical time with a logical counter, so timestamps follow causal order and stay close to wall-clock time.",
+            "type": "mechanism",
+            "scope": [
+                "event",
+                "distributed state",
+                "time"
+            ],
+            "requires": ["Happens-Before Relationship"],
+            "reinforces": [
+                "Causal Consistency",
+                "Event Ordering"
+            ],
+            "enables": ["Wall-Clock-Correlated Causal Order"],
+            "conflicts_with": ["Physical-Clock-Only Ordering"],
+            "tensions_with": ["Clock Skew"],
+            "violated_by": ["lexicon:physical-clock-only-ordering"],
+            "detected_by": ["last-writer-wins on physical time"],
+            "measured_by": ["out-of-causal-order event rate"],
+            "refactored_by": [],
+            "enforced_by": ["distributed-systems review"],
+            "severity": "contextual",
+            "mandatoryFor": "distributed systems",
+            "exemplar": {
+                "before": "const event = { at: Date.now(), value: foo };",
+                "after": "const event = { hlc: hlc.now(), value: foo };\nhlc.update(remoteEvent.hlc);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "crdts",
+            "name": "CRDTs",
+            "aliases": ["Conflict-Free Replicated Data Types"],
+            "definition": "A mechanism that stores replicated state in data types whose merge is commutative, so replicas converge without coordination.",
+            "type": "mechanism",
+            "scope": [
+                "distributed state",
+                "replication",
+                "convergence"
+            ],
+            "requires": ["Commutative Merge"],
+            "reinforces": [
+                "Eventual Consistency",
+                "Causal Consistency"
+            ],
+            "enables": ["Conflict-Free Replica Convergence"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Metadata Overhead",
+                "Last-Write-Wins Overwrite"
+            ],
+            "violated_by": ["architecture:lost-update"],
+            "detected_by": ["lost updates under concurrent replication"],
+            "measured_by": ["merge-conflict data-loss rate"],
+            "refactored_by": [],
+            "enforced_by": ["replication design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "foo.tags = incoming.updatedAt > foo.updatedAt ? incoming.tags : foo.tags;",
+                "after": "foo.tags = orSet.merge(foo.tags, incoming.tags);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "total-order-broadcast",
+            "name": "Total-Order Broadcast",
+            "definition": "A mechanism that delivers every message to every node in the same order, agreed by consensus.",
+            "type": "mechanism",
+            "scope": [
+                "event",
+                "distributed state",
+                "ordering"
+            ],
+            "requires": ["Consensus"],
+            "reinforces": [
+                "Event Ordering",
+                "Consistency"
+            ],
+            "enables": ["Identical Delivery Order Across Nodes"],
+            "conflicts_with": ["Per-Node Independent Ordering"],
+            "tensions_with": ["Latency"],
+            "violated_by": ["lexicon:per-node-independent-ordering"],
+            "detected_by": ["state divergence across nodes given same events"],
+            "measured_by": ["cross-node order divergence rate"],
+            "refactored_by": [],
+            "enforced_by": ["distributed-systems review"],
+            "severity": "contextual",
+            "mandatoryFor": "distributed systems",
+            "exemplar": {
+                "before": "replica.apply(event);",
+                "after": "const sequenced = await totalOrder.broadcast(event);\nreplica.applyInOrder(sequenced.sequence, sequenced.event);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "cap-theorem",
+            "distinctFrom": [
+                {
+                    "id": "architecture:causal-consistency",
+                    "reason": "The CAP theorem states the trade-off a store makes during a partition, while causal consistency is one guarantee a store can offer."
+                },
+                {
+                    "id": "architecture:eventual-consistency",
+                    "reason": "The CAP theorem is the trade-off, while eventual consistency is the guarantee an available store settles for."
+                },
+                {
+                    "id": "architecture:pacelc-theorem",
+                    "reason": "The CAP theorem covers only a partition, while PACELC adds the latency and consistency trade-off of a healthy network."
+                }
+            ],
+            "name": "CAP Theorem",
+            "definition": "A conceptual representation of the choice a distributed store makes during a network partition, between consistency and availability.",
+            "type": "model",
+            "scope": [
+                "distributed state",
+                "consistency",
+                "availability"
+            ],
+            "requires": ["Network Partition Possibility"],
+            "reinforces": [
+                "Causal Consistency",
+                "Eventual Consistency"
+            ],
+            "enables": ["Explicit Consistency/Availability Choice Under Partition"],
+            "conflicts_with": ["Assumed Total Consistency And Availability"],
+            "tensions_with": ["Latency"],
+            "violated_by": ["lexicon:assumed-total-consistency-and-availability"],
+            "detected_by": ["split-brain writes or stalls during network partitions"],
+            "measured_by": ["consistency/availability violations during partition events"],
+            "refactored_by": [],
+            "enforced_by": ["distributed-systems review"],
+            "severity": "contextual",
+            "mandatoryFor": "distributed systems",
+            "exemplar": {
+                "before": "await Promise.all(replicas.map(r => r.write(foo)));\nreturn \"always consistent and available\";",
+                "after": "const policy = partitionPolicyFor(foo.class);\nreturn policy === \"CP\"\n  ? writeWithQuorum(foo)\n  : writeAvailableAndReconcile(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "pacelc-theorem",
+            "name": "PACELC Theorem",
+            "definition": "A conceptual representation that extends the CAP theorem with the trade-off a healthy network still forces, between latency and consistency.",
+            "type": "model",
+            "scope": [
+                "distributed state",
+                "consistency",
+                "latency"
+            ],
+            "requires": ["CAP Theorem"],
+            "reinforces": [
+                "CAP Theorem",
+                "Latency"
+            ],
+            "enables": ["Latency-Consistency Trade-off When Healthy"],
+            "conflicts_with": ["Consistency Assumed Free When Healthy"],
+            "tensions_with": ["Throughput"],
+            "violated_by": ["lexicon:consistency-assumed-free-when-healthy"],
+            "detected_by": ["tail latency driven by synchronous cross-region consistency during normal operation"],
+            "measured_by": ["latency-vs-staleness tradeoff per read class"],
+            "refactored_by": [],
+            "enforced_by": ["distributed-systems review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await readFromAllRegionsStrongly(id);",
+                "after": "const foo = tolerateStaleness(id.class)\n  ? await readLocalReplica(id)\n  : await readStronglyAcrossRegions(id);",
+                "lang": "ts"
+            }
+        }
+    ]
+}

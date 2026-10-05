@@ -1,0 +1,90 @@
+{
+    "check": {
+        "by": [
+            "the model-step check, which holds every step to the model's declared step kind",
+            "the document-type check, which requires every structured document type to name a model"
+        ],
+        "population": "every model, its steps, and every document type that names it",
+        "freshness": "a verdict stands until the model, its step kind or a document type that names it changes",
+        "refusal": "the gate fails on a step outside the declared kind, or a document type whose model does not resolve",
+        "observation": "none: a model is a sequence of reasoning steps, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a step outside the model's step kind, another plants a document type whose model does not resolve, and the bundled data validates clean",
+        "authority": "the model's declared step kind, which each step conforms to, and the model, which a document type cites"
+    },
+    "records": [
+        {
+            "id": "ontogenesis",
+            "question": "How does a pattern come to be?",
+            "stepKind": "substrate-node",
+            "sequence": [
+                "existence",
+                "difference",
+                "relation",
+                "structure",
+                "transformation",
+                "constraint",
+                "emergence"
+            ],
+            "recursion": {"from": "emergence",
+                "to": "difference"}
+        },
+        {
+            "id": "epistemology",
+            "question": "How is a pattern known?",
+            "stepKind": "mode",
+            "sequence": [
+                "observation",
+                "description",
+                "comparison",
+                "classification",
+                "explanation",
+                "prediction",
+                "intervention",
+                "creation",
+                "reflection"
+            ]
+        },
+        {
+            "id": "cognition",
+            "question": "How does a system perceive, act, and adapt?",
+            "stepKind": "label",
+            "sequence": [
+                "existence",
+                "difference",
+                "relation",
+                "structure",
+                "transformation",
+                "constraint",
+                "emergence",
+                "representation",
+                "memory",
+                "prediction",
+                "action",
+                "feedback",
+                "evolution"
+            ],
+            "recursion": {"from": "evolution",
+                "to": "difference"}
+        },
+        {
+            "id": "pattern-cycle",
+            "question": "How does pattern-work proceed?",
+            "stepKind": "label",
+            "sequence": [
+                "exist",
+                "differentiate",
+                "relate",
+                "organize",
+                "transform",
+                "constrain",
+                "stabilize",
+                "represent",
+                "reasoning",
+                "predict",
+                "create"
+            ],
+            "recursion": {"from": "create",
+                "to": "exist"}
+        }
+    ]
+}

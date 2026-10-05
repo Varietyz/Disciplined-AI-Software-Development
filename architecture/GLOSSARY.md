@@ -38,76 +38,76 @@ A1·a The principle architecture: the four core layers, the observe and feedback
 
 ```mermaid
 flowchart TB
-subgraph core["The four core layers"]
-direction TB
-computation["COMPUTATION · stateless · data flows through, outputs are frozen"]
-resource["RESOURCE · stateful · owned, tracked, explicitly released"]
-execution["EXECUTION · how computation and resources interact"]
-structural["STRUCTURAL · applies to all code · observes itself"]
-end
-human["HUMAN FACTORS · cognitive and discipline constraints"]
-evolution["EVOLUTION · change over time"]
-resource -- observe --> computation
-computation --> execution
-resource --> execution
-execution -- feeds --> structural
-structural -- feedback --> execution
-structural --> human
-structural --> evolution
+    subgraph core["The four core layers"]
+        direction TB
+        computation["COMPUTATION · stateless · data flows through, outputs are frozen"]
+        resource["RESOURCE · stateful · owned, tracked, explicitly released"]
+        execution["EXECUTION · how computation and resources interact"]
+        structural["STRUCTURAL · applies to all code · observes itself"]
+    end
+    human["HUMAN FACTORS · cognitive and discipline constraints"]
+    evolution["EVOLUTION · change over time"]
+    resource -- observe --> computation
+    computation --> execution
+    resource --> execution
+    execution -- feeds --> structural
+    structural -- feedback --> execution
+    structural --> human
+    structural --> evolution
 ```
 
 A1·b Stateless against stateful: each pair is resolved by scope, and the edge names the boundary that separates them.
 
 ```mermaid
 flowchart LR
-subgraph stateless["COMPUTATION · stateless"]
-direction TB
-s1["Statelessness"]
-s2["Immutability"]
-s3["Explicit Invalidity"]
-s4["Deliberate Under-Specification"]
-s5["Homoiconicity"]
-end
-subgraph stateful["RESOURCE · stateful"]
-direction TB
-r1["State-Before-Mutation"]
-r2["State Over Code"]
-r3["Fail Fast"]
-r4["YAGNI"]
-r5["Single Owner"]
-end
-s1 -- data flows through · a resource is snapshotted before it changes --- r1
-s2 -- computed data is frozen · resource state is mutable but managed --- r2
-s3 -- a computation uncertainty is marked · a resource invariant halts --- r3
-s4 -- interfaces stay open · implementation is not built ahead --- r4
-s5 -- definitions are shared freely · runtime resources have one owner --- r5
+    subgraph stateless["COMPUTATION · stateless"]
+        direction TB
+        s1["Statelessness"]
+        s2["Immutability"]
+        s3["Explicit Invalidity"]
+        s4["Deliberate Under-Specification"]
+        s5["Homoiconicity"]
+    end
+    subgraph stateful["RESOURCE · stateful"]
+        direction TB
+        r1["State-Before-Mutation"]
+        r2["State Over Code"]
+        r3["Fail Fast"]
+        r4["YAGNI"]
+        r5["Single Owner"]
+    end
+    s1 -- data flows through · a resource is snapshotted before it changes --- r1
+    s2 -- computed data is frozen · resource state is mutable but managed --- r2
+    s3 -- a computation uncertainty is marked · a resource invariant halts --- r3
+    s4 -- interfaces stay open · implementation is not built ahead --- r4
+    s5 -- definitions are shared freely · runtime resources have one owner --- r5
 ```
 
 A1·c Inside a boundary against across boundaries: the distributed pairs, each labeled with the mechanism that resolves it.
 
 ```mermaid
 flowchart LR
-subgraph inside["INSIDE ONE BOUNDARY"]
-direction TB
-i1["Consistency"]
-i2["Asynchronous Communication"]
-i3["Canonical Model"]
-i4["Normalization"]
-i5["Do Not Repeat Yourself"]
-end
-subgraph across["ACROSS BOUNDARIES"]
-direction TB
-a1["Availability"]
-a2["Immediate consistency"]
-a3["Bounded context autonomy"]
-a4["Query performance"]
-a5["Locality of behavior"]
-end
-i1 -- traded · strong inside a transaction, eventual across autonomy boundaries --- a1
-i2 -- traded · synchronous inside a trust boundary, asynchronous across autonomy boundaries --- a2
-i3 -- traded · one model where contexts share meaning, a translation where they do not --- a3
-i4 -- by scope · the canonical store is normalized, derived read models are denormalised --- a4
-i5 -- by rule · semantics are centralised, incidental co-occurrence stays local --- a5
+    subgraph inside["INSIDE ONE BOUNDARY"]
+        direction TB
+        i1["Consistency"]
+        i2["Asynchronous Communication"]
+        i3["Canonical Model"]
+        i4["Normalization"]
+        i5["Do Not Repeat Yourself"]
+    end
+    subgraph across["ACROSS BOUNDARIES"]
+        direction TB
+        a1["Availability"]
+        a2["Immediate consistency"]
+        a3["Bounded context autonomy"]
+        a4["Query performance"]
+        a5["Locality of behavior"]
+    end
+    i1 -- traded · strong inside a transaction, eventual across autonomy boundaries --- a1
+    i2 -- traded · synchronous inside a trust boundary, asynchronous across autonomy boundaries --- a2
+    i3 -- traded · one model where contexts share meaning, a translation where they do not --- a3
+    i4 -- by scope · the canonical store is normalized, derived read models are denormalized --- a4
+    i5 -- by rule · semantics are centralized, incidental co-occurrence stays local --- a5
 ```
 
 ## Architectural rules and principles
@@ -144,7 +144,7 @@ A bounded context is a boundary inside which one model and one language hold, an
 
 **Bounded Lifetime · Resource Core**
 
-A resource lives no longer than its owner, and every open has its close. An unbounded lifetime is a leak waiting to be found.
+A resource lives no longer than its owner, and every open has its close.
 
 ## C
 
@@ -220,7 +220,7 @@ The same inputs give the same outputs, and every source of nondeterminism is iso
 
 **Do Not Repeat Yourself · DRY · principle · Structural Core**
 
-A piece of logic or knowledge has one definition, and a repetition is compressed by its type, such as a literal into a constant, a structure into a composition, a behavior into one orchestrator and a rule into one predicate. Mitigated against [locality of behavior](../ontology/LEXICON.md#lexicon-locality-of-behavior) by a [rule that names the discriminator](../ontology/SCHEMA.md#tension-do-not-repeat-yourself-dry-locality-of-behavior): semantics are centralised, incidental textual likeness stays local.
+A piece of logic or knowledge has one definition, and a repetition is compressed by its type, such as a literal into a constant, a structure into a composition, a behavior into one orchestrator and a rule into one predicate. Mitigated against [locality of behavior](../ontology/LEXICON.md#lexicon-locality-of-behavior) by a [rule that names the discriminator](../ontology/SCHEMA.md#tension-do-not-repeat-yourself-dry-locality-of-behavior): semantics are centralized, incidental textual likeness stays local.
 
 **Domain-Driven Design · DDD · style · Domain Modeling**
 
@@ -276,7 +276,7 @@ Code, data and state share one representation, so a definition can be inspected 
 
 **Idempotency · principle · Atomic Boundary**
 
-Repeating an operation produces the same result as running it once, so a retry is safe and a duplicate delivery has one effect.
+Repeating an operation produces the same result as running it once, so a [retry](../ontology/PRINCIPLES.md#architecture-retry-pattern) is safe and a duplicate delivery has one effect.
 
 **Immutability · principle · Computation Core**
 
@@ -352,7 +352,7 @@ New behavior arrives as a plugin at a declared [extension point](../ontology/PRI
 
 **Policy as Code · mechanism · Security Core**
 
-An architectural invariant is a rule that runs, never a convention that is hoped for, so every stated rule has an executable check that fails the build when it is broken.
+Every stated architectural invariant has an executable check that fails the build when it is broken.
 
 **Ports and Adapters Architecture · style · Structural Core**
 
@@ -408,11 +408,11 @@ Every resource has exactly one owner responsible for its release, and every othe
 
 **Single Responsibility Principle · SRP · principle · Structural Core**
 
-A unit has one reason to change, and that reason is derived from an invariant it protects rather than from a feature it serves. Features cut across units; invariants belong to one. Traded against [excessive fragmentation](../ontology/LEXICON.md#lexicon-excessive-fragmentation): units [split finer than their invariants](../ontology/SCHEMA.md#tension-excessive-fragmentation-single-responsibility-principle-srp) scatter one reason to change across many files.
+A unit has one reason to change, and that reason is derived from an invariant it protects rather than from a feature it serves. Features cut across units, and an invariant belongs to one. Traded against [excessive fragmentation](../ontology/LEXICON.md#lexicon-excessive-fragmentation): units [split finer than their invariants](../ontology/SCHEMA.md#tension-excessive-fragmentation-single-responsibility-principle-srp) scatter one reason to change across many files.
 
 **Single Source of Truth · principle · Contracts Core**
 
-Every fact has one canonical, queryable home, and every other place it appears is a derivation of that home. A parallel truth is a copy waiting to disagree. Resolved by scope against [Decentralisation](../ontology/SCHEMA.md#tension-decentralization-single-source-of-truth): the truth is one, and the parties that read it are many.
+Every fact has one canonical, queryable home, and every other place it appears is a derivation of that home. Resolved by scope against [Decentralization](../ontology/SCHEMA.md#tension-decentralization-single-source-of-truth): the truth is one, and the parties that read it are many.
 
 **State Isolation · principle · Atomic Boundary**
 

@@ -1,0 +1,83 @@
+{
+    "category": "runtime-discovery-dynamic-binding",
+    "records": [
+        {
+            "name": "Closed Static Core",
+            "kind": "anti-pattern",
+            "definition": "A core fixed at build time that cannot accept new capabilities without being recompiled."
+        },
+        {
+            "name": "Compile-Time Binding",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:manual-registration",
+                    "reason": "Compile-time binding fixes the choice in the build, while manual registration lists each component by hand at runtime."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Fixing at build time which implementation a call uses or how components are wired together, so neither can vary or be discovered at runtime.",
+            "aliases": [
+                "Early Binding",
+                "Static Wiring",
+                "Static Linking"
+            ]
+        },
+        {
+            "name": "Hardcoded Endpoints",
+            "kind": "anti-pattern",
+            "definition": "Hardcoding service network addresses instead of discovering them dynamically."
+        },
+        {
+            "name": "Manual Registration",
+            "kind": "anti-pattern",
+            "definition": "Requiring each component to be registered by hand instead of being discovered automatically."
+        },
+        {
+            "name": "Capability Addition without Core Modification",
+            "kind": "capability",
+            "definition": "The ability to add new capabilities at runtime without modifying the core."
+        },
+        {
+            "name": "Deferred Implementation Choice",
+            "kind": "capability",
+            "definition": "The ability to postpone choosing a concrete implementation until runtime, so each environment can assemble its own.",
+            "aliases": ["Environment-Specific Composition"]
+        },
+        {
+            "name": "Dynamic Routing",
+            "kind": "capability",
+            "definition": "The ability to route requests to service instances discovered at runtime."
+        },
+        {
+            "name": "Self-Registration",
+            "kind": "capability",
+            "definition": "The ability for a component to register itself on load without external wiring."
+        },
+        {
+            "name": "Replace Conditional with Polymorphism",
+            "kind": "technique",
+            "definition": "Replacing a branching conditional on type with polymorphic dispatch through a shared interface."
+        },
+        {
+            "name": "Runtime Resolution",
+            "kind": "constraint",
+            "definition": "The requirement that a symbol's concrete binding be resolved, by discovery or from configuration, during execution rather than at compile time.",
+            "aliases": ["Runtime Discovery or Configuration"]
+        },
+        {
+            "name": "Extensibility",
+            "kind": "quality-attribute",
+            "definition": "The degree to which new behavior can be added with minimal change to existing code."
+        },
+        {
+            "name": "Startup Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree to which scanning for components at startup slows the system's initialization."
+        },
+        {
+            "name": "Discovery Validation",
+            "kind": "technique",
+            "definition": "A technique for checking at startup that every discovered component declares the contract it claims."
+        }
+    ]
+}

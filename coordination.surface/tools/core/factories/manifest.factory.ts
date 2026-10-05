@@ -42,7 +42,7 @@ export const reachFinding = function reachFinding(manifestPath: string, name: st
         path: manifestPath,
         remediation: {
             action: "declare",
-            decide: "a declared dependency nothing reaches makes the dependency set claim a coverage it does not have, and the claim is read by installers rather than by readers — so it costs an install on every consumer and buys nothing. Reach it from source or configuration, or remove the declaration. THE REACH CORPUS IS SOURCE AND CONFIGURATION ONLY, because a package NAMED in prose is being discussed rather than invoked, and a check counting a report about an unused dependency as evidence that it is used measures the opposite of its own question. This does not heal: whether a declaration is premature or obsolete is a judgement about intent that no artifact carries",
+            decide: "a declared dependency nothing reaches makes the dependency set claim a coverage it does not have, and the claim is read by installers rather than by readers — so it costs an install on every consumer and buys nothing. Reach it from source or configuration, or remove the declaration. THE REACH CORPUS IS SOURCE AND CONFIGURATION ONLY, because a package NAMED in prose is being discussed rather than invoked, and a check counting a report about an unused dependency as evidence that it is used measures the opposite of its own question. This does not heal: whether a declaration is premature or obsolete is a judgment about intent that no artifact carries",
             deterministic: false,
             from: name,
             target: manifestPath,

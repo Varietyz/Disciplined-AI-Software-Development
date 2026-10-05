@@ -1,0 +1,569 @@
+{
+    "category": "Model Architecture",
+    "check": {
+        "population": "every model call, model version, prompt, retrieval index and agent tool in a model-backed system",
+        "freshness": "a verdict stands for one model version, prompt version and dataset, and goes stale when any of them changes",
+        "refusal": "the evaluation gate or the governance gate blocks a model, prompt or index that fails its thresholds or lacks approval",
+        "observation": "evaluation reports, registry entries and live output metrics recorded against the model version",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the evaluation thresholds and the approval record, which a model, prompt or index is compared against"
+    },
+    "records": [
+        {
+            "id": "artificial-intelligence-architecture",
+            "name": "Artificial Intelligence Architecture",
+            "definition": "A conceptual representation of a system that calls a model behind validated inputs, grounded context, schema-checked outputs and governance.",
+            "type": "model",
+            "scope": [
+                "model-backed system",
+                "application",
+                "platform"
+            ],
+            "requires": [
+                "Model Governance",
+                "Data/Model Boundaries"
+            ],
+            "reinforces": [
+                "Model Evaluation",
+                "Model Safety"
+            ],
+            "enables": ["Model-Integrated Systems"],
+            "conflicts_with": ["Opaque Ungoverned Model Use"],
+            "tensions_with": [
+                "Determinism",
+                "Explainability"
+            ],
+            "violated_by": ["lexicon:opaque-ungoverned-model-use"],
+            "detected_by": [
+                "model calls without tests",
+                "logging",
+                "fallback",
+                "policy"
+            ],
+            "measured_by": ["model quality/safety/evaluation coverage"],
+            "refactored_by": [
+                "lexicon:evaluation-suite",
+                "lexicon:introduce-port",
+                "lexicon:guardrails"
+            ],
+            "enforced_by": ["model governance gates"],
+            "severity": "contextual",
+            "mandatoryFor": "model-backed systems",
+            "exemplar": {
+                "before": "async function answerFoo(prompt: string) {\n  return model.generate(prompt);\n}",
+                "after": "async function answerFoo(request: FooRequest) {\n  const input = FooRequestSchema.parse(request);\n  const context = await fooRetriever.retrieve(input.query);\n  const output = await fooModel.generate(buildFooPrompt(input, context));\n  return FooResponseSchema.parse(output);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "machine-learning-architecture",
+            "name": "Machine Learning Architecture",
+            "definition": "A conceptual representation of a model's lifecycle as versioned data, feature, training, evaluation and serving stages.",
+            "type": "model",
+            "scope": [
+                "ML pipeline",
+                "model serving",
+                "data"
+            ],
+            "requires": [
+                "Data Pipeline",
+                "Training/Inference Separation"
+            ],
+            "reinforces": [
+                "Reproducibility",
+                "Model Governance"
+            ],
+            "enables": ["Reliable Model Lifecycle"],
+            "conflicts_with": ["Ad-Hoc Notebook-to-Production"],
+            "tensions_with": ["Experimentation Speed"],
+            "violated_by": ["architecture:model-version-ambiguity"],
+            "detected_by": [
+                "missing lineage",
+                "untracked training inputs"
+            ],
+            "measured_by": [
+                "reproducibility",
+                "drift",
+                "evaluation metrics"
+            ],
+            "refactored_by": [
+                "lexicon:data-pipeline",
+                "lexicon:prompt-versioning"
+            ],
+            "enforced_by": ["MLOps gates"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const model = trainFoo(loadAllData());\nserve(model);",
+                "after": "const dataset = datasetRegistry.load(\"foo\", \"v3\");\nconst features = fooFeaturePipeline.transform(dataset);\nconst model = trainFoo(features, versionedTrainingConfig);\nmodelRegistry.register(model, evaluateFooModel(model, validationSet));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "model-governance",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:evaluation",
+                    "reason": "Model governance registers and approves versions, while evaluation is the assessment it relies on."
+                }
+            ],
+            "name": "Model Governance",
+            "definition": "The activity of registering, evaluating and approving each model version before it is deployed.",
+            "type": "activity",
+            "scope": [
+                "model lifecycle",
+                "model-backed system"
+            ],
+            "requires": [
+                "Model Registry",
+                "Evaluation",
+                "Approval Policy"
+            ],
+            "reinforces": [
+                "Compliance",
+                "Model Safety"
+            ],
+            "enables": ["Controlled Model Deployment"],
+            "conflicts_with": [
+                "Unapproved Model Deployment",
+                "Model Version Ambiguity"
+            ],
+            "tensions_with": ["Experiment Velocity"],
+            "violated_by": ["lexicon:unapproved-model-deployment"],
+            "detected_by": ["model without lineage/approval/eval"],
+            "measured_by": ["governance coverage"],
+            "refactored_by": [
+                "architecture:registry-pattern",
+                "lexicon:evaluation-suite"
+            ],
+            "enforced_by": ["CI/CD model gates"],
+            "severity": "contextual",
+            "mandatoryFor": "production models",
+            "exemplar": {
+                "before": "deployModel(newestModelFile());",
+                "after": "const candidate = modelRegistry.get(\"foo-model\", \"1.4.0\");\nrequireApproval(candidate, [\"model-owner\", \"risk-owner\"]);\nrequirePolicyCompliance(candidate, fooModelPolicies);\ndeployModel(candidate);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "model-evaluation",
+            "name": "Model Evaluation",
+            "definition": "The activity of measuring a model against datasets, metrics and slices, and comparing the results with acceptance thresholds.",
+            "type": "activity",
+            "scope": [
+                "model",
+                "model-backed feature",
+                "pipeline"
+            ],
+            "requires": [
+                "Dataset",
+                "Metrics",
+                "Acceptance Criteria"
+            ],
+            "reinforces": [
+                "Model Safety",
+                "Correctness"
+            ],
+            "enables": ["Model Selection/Regression Detection"],
+            "conflicts_with": ["Untested Model Deployment"],
+            "tensions_with": ["Metric Completeness"],
+            "violated_by": ["lexicon:untested-model-deployment"],
+            "detected_by": ["missing eval report/gate"],
+            "measured_by": [
+                "task metrics",
+                "safety metrics",
+                "regression rate"
+            ],
+            "refactored_by": ["lexicon:evaluation-suite"],
+            "enforced_by": ["model CI gates"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "if (model.accuracy > 0.8) deploy(model);",
+                "after": "const evaluation = evaluateModel(model, {\n  datasets: [fooValidationSet, fooStressSet],\n  metrics: [precision, recall, calibration, latencyP95],\n  slices: [\"foo-kind\", \"foo-region\"],\n});\nrequireThresholds(evaluation, fooModelThresholds);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "model-inference",
+            "name": "Model Inference",
+            "definition": "The ability to run a trained model on validated input at runtime and return a checked prediction or generation.",
+            "aliases": ["Runtime Prediction/Generation"],
+            "type": "capability",
+            "scope": [
+                "service",
+                "model serving"
+            ],
+            "requires": [
+                "Model Artifact",
+                "Input/Output Contract"
+            ],
+            "reinforces": ["artificial-intelligence-architecture"],
+            "enables": [],
+            "conflicts_with": ["Training-Time-Only Model Logic"],
+            "tensions_with": ["Latency/Cost"],
+            "violated_by": ["lexicon:opaque-ungoverned-model-use"],
+            "detected_by": ["raw model calls in business logic"],
+            "measured_by": [
+                "latency",
+                "error rate",
+                "output quality"
+            ],
+            "refactored_by": [
+                "lexicon:extract-module",
+                "lexicon:extract-adapter"
+            ],
+            "enforced_by": ["serving standards"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const output = model.predict(input as any);",
+                "after": "const input = FooInferenceSchema.parse(rawInput);\nconst output = await inferenceRuntime.predict(fooModelVersion, input, {\n  timeoutMs: 500,\n  traceId,\n});\nreturn FooPredictionSchema.parse(output);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "retrieval-augmented-generation",
+            "aliases": ["RAG"],
+            "name": "Retrieval-Augmented Generation (RAG)",
+            "definition": "A design pattern that retrieves relevant documents for a question and passes them to the model, so the answer can cite its sources.",
+            "type": "pattern",
+            "scope": [
+                "language-model system",
+                "knowledge retrieval"
+            ],
+            "requires": [
+                "Retriever",
+                "Document Store",
+                "Grounding Strategy"
+            ],
+            "reinforces": [
+                "Explainability",
+                "Knowledge Freshness"
+            ],
+            "enables": ["Contextual Generation"],
+            "conflicts_with": ["Ungrounded Generation"],
+            "tensions_with": ["Retrieval Quality/Latency"],
+            "violated_by": ["lexicon:ungrounded-generation"],
+            "detected_by": ["missing citations/context in grounded tasks"],
+            "measured_by": [
+                "retrieval precision/recall",
+                "groundedness"
+            ],
+            "refactored_by": [
+                "lexicon:retriever",
+                "lexicon:evidence-citation"
+            ],
+            "enforced_by": ["RAG evals"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const answer = await model.generate(`Answer: ${question}`);",
+                "after": "const query = normalizeFooQuery(question);\nconst documents = await fooRetriever.search(query, { topK: 8 });\nconst groundedPrompt = buildGroundedFooPrompt(question, documents);\nconst answer = await model.generate(groundedPrompt);\nreturn attachCitations(answer, documents);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "vector-search",
+            "name": "Vector Search",
+            "definition": "A mechanism that finds records whose embeddings lie close to a query's embedding.",
+            "type": "mechanism",
+            "scope": [
+                "retrieval",
+                "search",
+                "RAG"
+            ],
+            "requires": [
+                "Embeddings",
+                "Vector Index"
+            ],
+            "reinforces": [
+                "RAG",
+                "Semantic Search"
+            ],
+            "enables": ["Similarity Retrieval"],
+            "conflicts_with": ["Exact Keyword Search Only"],
+            "tensions_with": ["Explainability/Recall"],
+            "violated_by": ["lexicon:exact-keyword-search-only"],
+            "detected_by": ["poor semantic recall"],
+            "measured_by": [
+                "retrieval metrics",
+                "latency"
+            ],
+            "refactored_by": ["lexicon:evaluation-suite"],
+            "enforced_by": ["retrieval evaluation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const results = foos.filter(foo => foo.text.includes(query));",
+                "after": "const queryVector = await embedder.embed(query);\nconst results = await fooVectorIndex.search(queryVector, {\n  topK: 10,\n  filter: { tenantId },\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "knowledge-graphs",
+            "name": "Knowledge Graphs",
+            "definition": "A design pattern that stores knowledge as typed entities and named relations, validated against a schema, so queries can traverse them.",
+            "type": "pattern",
+            "scope": [
+                "knowledge modeling",
+                "retrieval",
+                "reasoning"
+            ],
+            "requires": [
+                "Entities",
+                "Relations",
+                "Schema/Ontology"
+            ],
+            "reinforces": [
+                "Semantic Consistency",
+                "Explainability"
+            ],
+            "enables": ["Relationship-Aware Retrieval/Reasoning"],
+            "conflicts_with": ["Flat Document-Only Knowledge"],
+            "tensions_with": ["Curation Cost"],
+            "violated_by": ["lexicon:flat-document-only-knowledge"],
+            "detected_by": ["repeated need for entity relationship traversal"],
+            "measured_by": [
+                "graph coverage",
+                "query accuracy"
+            ],
+            "refactored_by": [],
+            "enforced_by": ["schema/ontology validation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const fooLinks = new Map<string, string[]>();\nfooLinks.set(foo.id, [bar.id, baz.id]);",
+                "after": "const graph = new KnowledgeGraph();\ngraph.addNode(foo.id, \"Foo\", foo);\ngraph.addNode(bar.id, \"Bar\", bar);\ngraph.addEdge(foo.id, \"DEPENDS_ON\", bar.id);\ngraph.addEdge(bar.id, \"PRODUCES\", baz.id);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "explainability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:model-safety",
+                    "reason": "Explainability is a decision arriving with its evidence, while model safety is harmful inputs, outputs and actions being prevented."
+                },
+                {
+                    "id": "architecture:traceability",
+                    "reason": "Explainability is why one model decision was made, while traceability is following a request or change end to end."
+                },
+                {
+                    "id": "lexicon:knowledge-freshness",
+                    "reason": "Explainability is showing the evidence behind a decision, while knowledge freshness is that evidence being current."
+                },
+                {
+                    "id": "lexicon:model-complexity",
+                    "reason": "Explainability is understanding a decision, while model complexity is the intricacy that makes it harder."
+                },
+                {
+                    "id": "lexicon:trust",
+                    "reason": "Explainability is the evidence a reviewer can inspect, while trust is how far users rely on the outputs."
+                },
+                {
+                    "id": "architecture:semantic-consistency",
+                    "reason": "Explainability concerns a model's decisions, while semantic consistency concerns names keeping one meaning."
+                }
+            ],
+            "name": "Explainability",
+            "definition": "The degree to which a model's decision comes with the evidence or attribution a reviewer needs to understand it.",
+            "type": "quality-attribute",
+            "scope": [
+                "model",
+                "model-backed system",
+                "decision flow"
+            ],
+            "requires": [
+                "Traceability",
+                "Rationale/Evidence"
+            ],
+            "reinforces": [
+                "Governance",
+                "Trust"
+            ],
+            "enables": ["Audit and Debugging"],
+            "conflicts_with": ["Opaque Black-Box Decisions"],
+            "tensions_with": ["Model Complexity"],
+            "violated_by": ["lexicon:opaque-black-box-decisions"],
+            "detected_by": ["missing rationale/feature attribution/citations"],
+            "measured_by": ["explanation coverage/quality"],
+            "refactored_by": ["lexicon:evidence-citation"],
+            "enforced_by": ["model governance gates"],
+            "severity": "contextual",
+            "mandatoryFor": "regulated domains",
+            "exemplar": {
+                "before": "return model.predict(foo.features);",
+                "after": "const prediction = await model.predict(foo.features);\nconst explanation = await explainer.explain({\n  modelVersion: model.version,\n  input: foo.features,\n  prediction,\n});\nreturn { prediction, explanation };",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "model-safety",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:capability-utility",
+                    "reason": "Model safety is harm being prevented, while capability is the usefulness that strict limits can constrain."
+                }
+            ],
+            "name": "Model Safety",
+            "definition": "The degree to which a model-backed system prevents harmful inputs, outputs and actions through evaluation, guardrails and monitoring.",
+            "type": "quality-attribute",
+            "scope": [
+                "model-backed system",
+                "model",
+                "application"
+            ],
+            "requires": [
+                "Evaluation",
+                "Guardrails",
+                "Monitoring"
+            ],
+            "reinforces": [
+                "Model Governance",
+                "Security"
+            ],
+            "enables": ["Safe Model Deployment"],
+            "conflicts_with": ["Unguarded Model Autonomy"],
+            "tensions_with": ["Capability/Utility"],
+            "violated_by": ["lexicon:unguarded-model-autonomy"],
+            "detected_by": [
+                "safety eval failures",
+                "missing policy filters"
+            ],
+            "measured_by": [
+                "safety incident rate",
+                "eval pass rate"
+            ],
+            "refactored_by": [
+                "lexicon:guardrails",
+                "architecture:code-review",
+                "lexicon:evaluation-suite"
+            ],
+            "enforced_by": [
+                "safety gates",
+                "runtime monitors"
+            ],
+            "severity": "contextual",
+            "mandatoryFor": "model-backed systems",
+            "exemplar": {
+                "before": "return model.generate(userPrompt);",
+                "after": "const input = await safety.validateInput(userPrompt);\nconst draft = await model.generate(input);\nconst checked = await safety.validateOutput(draft, { policy: \"foo-assistant-v2\" });\nif (!checked.allowed) return safeRefusal(checked.reasons);\nreturn checked.output;",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "prompt-engineering",
+            "name": "Prompt Engineering",
+            "definition": "A technique for writing model instructions as versioned templates with fixed parameters and an evaluation for each change.",
+            "type": "technique",
+            "scope": [
+                "model-backed system",
+                "language-model system",
+                "application"
+            ],
+            "requires": ["Model Inference"],
+            "reinforces": [
+                "Model Evaluation",
+                "Reproducibility"
+            ],
+            "enables": ["Structured, Versioned Prompts"],
+            "conflicts_with": ["Prompt Sprawl"],
+            "tensions_with": ["Robustness"],
+            "violated_by": ["architecture:prompt-sprawl"],
+            "detected_by": ["scattered prompt string literals"],
+            "measured_by": ["duplicated prompt count"],
+            "refactored_by": ["lexicon:prompt-registry"],
+            "enforced_by": ["model design review"],
+            "severity": "contextual",
+            "mandatoryFor": "model-backed systems",
+            "exemplar": {
+                "before": "const answer = await model.generate(\"summarize: \" + text);",
+                "after": "const prompt = fooPromptTemplate.render({ task: \"summarize\", input: text, format: \"bullet-points\", maxWords: 100 });\nconst answer = await model.generate(prompt, { temperature: 0, stop: [\"\\n\\n\"] });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "model-drift-monitoring",
+            "distinctFrom": [
+                {
+                    "id": "architecture:model-evaluation",
+                    "reason": "Drift monitoring watches a deployed model over time, while evaluation measures a model against fixed datasets and thresholds."
+                },
+                {
+                    "id": "architecture:model-governance",
+                    "reason": "Drift monitoring runs after deployment, while governance approves each version before it is deployed."
+                }
+            ],
+            "name": "Model Drift Monitoring",
+            "definition": "The activity of tracking a deployed model's inputs and output quality over time and alerting when they move past a threshold.",
+            "type": "activity",
+            "scope": [
+                "model-backed system",
+                "model lifecycle",
+                "operations"
+            ],
+            "requires": ["Model Evaluation"],
+            "reinforces": [
+                "Observability",
+                "Model Governance"
+            ],
+            "enables": [
+                "Degradation Detection",
+                "Retraining Triggers"
+            ],
+            "conflicts_with": [
+                "Deploy-and-Forget Models",
+                "Model Drift"
+            ],
+            "tensions_with": ["Monitoring Cost"],
+            "violated_by": ["lexicon:deploy-and-forget-models"],
+            "detected_by": ["no ongoing evaluation of live model outputs"],
+            "measured_by": ["drift in accuracy/quality metrics over time"],
+            "refactored_by": [],
+            "enforced_by": ["model governance review"],
+            "severity": "contextual",
+            "mandatoryFor": "production models",
+            "exemplar": {
+                "before": "serveModel(fooModel);",
+                "after": "monitor.track(fooModel, {\n  metrics: [inputDistribution, predictionConfidence, groundTruthLag],\n  alertOn: { populationStabilityIndex: 0.2 },\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "agentic-architecture",
+            "name": "Agentic Architecture",
+            "definition": "A design pattern in which the model chooses actions from a scoped set of tools, within a step limit and under review.",
+            "type": "pattern",
+            "scope": [
+                "model-backed system",
+                "reasoning",
+                "decision flow"
+            ],
+            "requires": [
+                "Model Inference",
+                "Tool Interface"
+            ],
+            "reinforces": [
+                "Explainability",
+                "Model Safety"
+            ],
+            "enables": [
+                "Bounded Tool-Using Agents",
+                "Governed Autonomy"
+            ],
+            "conflicts_with": ["Ungrounded Content"],
+            "tensions_with": ["Determinism"],
+            "violated_by": ["lexicon:unbounded-autonomy"],
+            "detected_by": ["agent actions without tool scoping or step limits"],
+            "measured_by": ["unguarded agent action rate"],
+            "refactored_by": [
+                "lexicon:guardrails",
+                "architecture:rate-limiting",
+                "architecture:code-review"
+            ],
+            "enforced_by": ["model safety review"],
+            "severity": "contextual",
+            "mandatoryFor": "regulated domains",
+            "exemplar": {
+                "before": "const answer = await model.generate(question);",
+                "after": "const agent = createFooAgent({ tools: [searchFoos, calculator, fooStore], maxSteps: 8 });\nconst answer = await agent.run(question);",
+                "lang": "ts"
+            }
+        }
+    ]
+}

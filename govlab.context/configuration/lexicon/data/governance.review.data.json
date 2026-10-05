@@ -1,0 +1,462 @@
+{
+    "category": "architecture-review-evolution-governance",
+    "records": [
+        {
+            "name": "Ad-Hoc Design",
+            "kind": "anti-pattern",
+            "definition": "Designing by improvisation with no deliberate structure or review, so the architecture accretes inconsistently."
+        },
+        {
+            "name": "Ad-Hoc Pattern Mixing",
+            "kind": "anti-pattern",
+            "definition": "Combining unrelated design patterns arbitrarily with no coherent rationale, producing an inconsistent structure."
+        },
+        {
+            "name": "Analysis Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree to which analyzing the impact of every change before making it adds effort and slows delivery."
+        },
+        {
+            "name": "Architecture Criteria",
+            "kind": "constraint",
+            "definition": "The requirement that explicit criteria define what a review judges an architecture against."
+        },
+        {
+            "name": "Architecture Drift",
+            "kind": "anti-pattern",
+            "definition": "Gradual divergence of an implementation from its intended architecture as unreviewed changes accumulate."
+        },
+        {
+            "name": "Architecture Foundation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system rests on a sound, deliberately designed architectural base rather than accreted structure."
+        },
+        {
+            "name": "Architecture Rules",
+            "kind": "constraint",
+            "definition": "The requirement that explicit, checkable rules govern how the architecture may be structured and evolved."
+        },
+        {
+            "name": "Assumption-Based Judgment",
+            "kind": "anti-pattern",
+            "definition": "Judging an architecture from untested assumptions instead of measured evidence, yielding unreliable conclusions."
+        },
+        {
+            "name": "Attribute Scenarios",
+            "kind": "artifact",
+            "definition": "A concrete scenario specifying how a quality attribute should hold under defined conditions and stimuli."
+        },
+        {
+            "name": "Automated Architecture Compliance",
+            "kind": "capability",
+            "definition": "The ability to verify conformance to architectural rules automatically rather than by manual review."
+        },
+        {
+            "name": "Blind Change",
+            "kind": "anti-pattern",
+            "definition": "Changing a system without analyzing what the change affects, so unintended consequences go unseen."
+        },
+        {
+            "name": "Change Safety",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a change can be made with confidence that its effects are understood and contained."
+        },
+        {
+            "name": "Clean Boundary Design",
+            "kind": "capability",
+            "definition": "The ability to define clear component boundaries from the outset, free of legacy entanglement."
+        },
+        {
+            "name": "Competing Attributes",
+            "kind": "quality-attribute",
+            "definition": "The degree to which improving one quality attribute forces a trade-off against another."
+        },
+        {
+            "name": "Consequences",
+            "kind": "artifact",
+            "definition": "A recorded account of the trade-offs and downstream effects that follow from an architectural decision."
+        },
+        {
+            "name": "Continuous Improvement",
+            "kind": "activity",
+            "definition": "Iteratively refining a system's design in small, ongoing steps rather than in large infrequent overhauls."
+        },
+        {
+            "name": "Controlled Architecture Evolution",
+            "kind": "capability",
+            "definition": "The ability to let an architecture change over time within deliberate guardrails rather than drifting freely."
+        },
+        {
+            "name": "Criteria",
+            "kind": "constraint",
+            "definition": "The requirement that explicit, agreed measures define how an assessment reaches its verdict."
+        },
+        {
+            "name": "Current State",
+            "kind": "model",
+            "definition": "A conceptual representation of how a system is presently structured and behaves, used as the baseline for analysis."
+        },
+        {
+            "name": "Decision",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:consequences",
+                    "reason": "The decision records what was chosen, while the consequences record what follows from choosing it."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A recorded architectural choice capturing what was chosen and the context in which it was made."
+        },
+        {
+            "name": "Decision History",
+            "kind": "capability",
+            "definition": "The ability to trace why past architectural choices were made by consulting their recorded rationale."
+        },
+        {
+            "name": "Defect Detection",
+            "kind": "capability",
+            "definition": "The ability to find defects in a change before it is merged or shipped."
+        },
+        {
+            "name": "Design Criteria",
+            "kind": "constraint",
+            "definition": "The requirement that explicit criteria define what a design review evaluates a proposal against."
+        },
+        {
+            "name": "Direct-to-main Unreviewed Change",
+            "kind": "anti-pattern",
+            "definition": "Pushing changes straight to the main branch with no review, so unvetted code lands directly in production."
+        },
+        {
+            "name": "Documentation Maintenance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which keeping decision records current adds ongoing upkeep effort."
+        },
+        {
+            "name": "Early Defect Prevention",
+            "kind": "capability",
+            "definition": "The ability to catch design flaws during review before they are built into the system."
+        },
+        {
+            "name": "Early Delivery with Guardrails",
+            "kind": "capability",
+            "definition": "The ability to ship a minimal architecture quickly while keeping essential safeguards in place."
+        },
+        {
+            "name": "Easier Refactoring",
+            "kind": "capability",
+            "definition": "The ability to restructure code more safely because consistent patterns make change predictable."
+        },
+        {
+            "name": "Essential Quality Attributes",
+            "kind": "constraint",
+            "definition": "The requirement that the few quality attributes critical to viability be satisfied before any others."
+        },
+        {
+            "name": "Fit-for-Purpose Architecture",
+            "kind": "capability",
+            "definition": "The ability to shape an architecture to the problem it solves rather than to convention."
+        },
+        {
+            "name": "Future Scalability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a design can grow to meet higher future demand without rework."
+        },
+        {
+            "name": "Governance Discipline",
+            "kind": "quality-attribute",
+            "definition": "The degree to which evolving an architecture continuously demands sustained governance to prevent uncontrolled drift."
+        },
+        {
+            "name": "Innovation/Autonomy",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enforcing standards constrains teams' freedom to innovate independently."
+        },
+        {
+            "name": "Legacy Constraints",
+            "kind": "constraint",
+            "definition": "A binding limitation imposed by pre-existing legacy systems that a new design must accommodate."
+        },
+        {
+            "name": "Local Autonomy",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enforcing architectural consistency limits individual teams' freedom to make local choices."
+        },
+        {
+            "name": "Local Optimization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enforcing shared patterns sacrifices locally optimal one-off solutions."
+        },
+        {
+            "name": "Manual Architecture Review Only",
+            "kind": "anti-pattern",
+            "definition": "Relying solely on human review to police architecture, with no automated checks, so violations slip through."
+        },
+        {
+            "name": "Measurable Architecture Rule",
+            "kind": "constraint",
+            "definition": "The requirement that an architectural rule be expressed as an objective, automatically checkable measure."
+        },
+        {
+            "name": "Naming/Structure Conventions",
+            "kind": "style",
+            "definition": "A convention of naming and structuring code uniformly across a codebase so its shape is predictable."
+        },
+        {
+            "name": "Operability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system is easy to run, monitor, and keep healthy in production."
+        },
+        {
+            "name": "Predictable Evolution",
+            "kind": "capability",
+            "definition": "The ability to change a system with confidence that consistent structure keeps outcomes foreseeable."
+        },
+        {
+            "name": "Prioritized Refactoring",
+            "kind": "capability",
+            "definition": "The ability to rank refactoring work by assessed impact so effort targets the highest-value fixes."
+        },
+        {
+            "name": "Problem Decomposition",
+            "kind": "activity",
+            "definition": "Breaking a problem into fundamental sub-problems that can be reasoned about independently."
+        },
+        {
+            "name": "Quality",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system meets its functional and non-functional expectations."
+        },
+        {
+            "name": "Quality Goals",
+            "kind": "constraint",
+            "definition": "The requirement that target levels for key quality attributes be defined for an architecture to meet."
+        },
+        {
+            "name": "Regression Scope Selection",
+            "kind": "capability",
+            "definition": "The ability to select exactly which tests a change requires by analyzing what it affects."
+        },
+        {
+            "name": "Remediation Planning",
+            "kind": "capability",
+            "definition": "The ability to plan the steps that close the gap between a system's current and target states."
+        },
+        {
+            "name": "Reusable Architecture Guidance",
+            "kind": "artifact",
+            "definition": "A body of proven architectural guidance packaged for reuse across projects."
+        },
+        {
+            "name": "Reuse of Established Patterns",
+            "kind": "quality-attribute",
+            "definition": "The degree to which designing from first principles forgoes the leverage of reusing proven patterns."
+        },
+        {
+            "name": "Review Standards",
+            "kind": "constraint",
+            "definition": "The requirement that agreed standards define what a code review checks for."
+        },
+        {
+            "name": "Risk Detection",
+            "kind": "capability",
+            "definition": "The ability to surface architectural risks early by reviewing structure before it is built."
+        },
+        {
+            "name": "Standard Patterns",
+            "kind": "pattern",
+            "definition": "A canonical, widely agreed reusable solution that a reference architecture prescribes for a recurring problem."
+        },
+        {
+            "name": "Standards Definition",
+            "kind": "artifact",
+            "definition": "A defined, authoritative set of standards that units are expected to conform to."
+        },
+        {
+            "name": "Target State",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:current-state",
+                    "reason": "The target state is where the system is steered, while the current state is the baseline it starts from."
+                }
+            ],
+            "kind": "model",
+            "definition": "A conceptual representation of the desired future structure a system is being steered toward."
+        },
+        {
+            "name": "Trade-Off Analysis",
+            "kind": "capability",
+            "definition": "The ability to weigh competing quality attributes and choose a balanced compromise between them."
+        },
+        {
+            "name": "Tribal Knowledge",
+            "kind": "anti-pattern",
+            "definition": "Critical architectural knowledge held only in the developers' heads and never recorded, lost when they leave."
+        },
+        {
+            "name": "Uncoordinated Divergence",
+            "kind": "anti-pattern",
+            "definition": "Teams independently diverging from a shared reference architecture, fragmenting the system into incompatible variants."
+        },
+        {
+            "name": "Unbounded Variation",
+            "kind": "anti-pattern",
+            "definition": "Allowing unlimited variation in how the same problem is solved, so the system sprawls into inconsistent one-offs."
+        },
+        {
+            "name": "Unknown Requirements",
+            "kind": "quality-attribute",
+            "definition": "The degree to which starting on a clean slate forces early decisions while requirements are still unknown."
+        },
+        {
+            "name": "Unreviewed Structural Change",
+            "kind": "anti-pattern",
+            "definition": "Merging changes to architectural structure without review, letting unvetted design decisions into the system."
+        },
+        {
+            "name": "Incremental Change",
+            "kind": "constraint",
+            "definition": "The requirement that a system evolve in small, reversible increments rather than large risky leaps."
+        },
+        {
+            "name": "Rule Maintenance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which keeping fitness-function rules current adds ongoing upkeep effort."
+        },
+        {
+            "name": "Undefined Target",
+            "kind": "anti-pattern",
+            "definition": "Attempting to close a gap toward a goal that was never clearly defined, so progress cannot be judged."
+        },
+        {
+            "name": "Delete After Evidence",
+            "kind": "technique",
+            "definition": "A technique for removing code once measurement shows nothing calls it."
+        },
+        {
+            "name": "Deprecation Plan",
+            "kind": "technique",
+            "definition": "A technique for recording for each obsolete path its owner, its replacement and its removal date."
+        },
+        {
+            "name": "Assign Owner",
+            "kind": "technique",
+            "definition": "A technique for recording a named owner for each module, risk or rule, who decides on its changes."
+        },
+        {
+            "name": "Severity Classification",
+            "kind": "technique",
+            "definition": "A technique for ranking each finding or risk on a declared scale that sets how soon it is handled."
+        },
+        {
+            "name": "Mitigation Plan",
+            "kind": "technique",
+            "definition": "A technique for recording the actions that reduce a risk, with an owner and a date for each."
+        },
+        {
+            "name": "Accepted Risk Record",
+            "kind": "technique",
+            "definition": "A technique for recording a decision to accept a risk with who accepted it and when it is reviewed again."
+        },
+        {
+            "name": "Scheduled Review",
+            "kind": "technique",
+            "definition": "A technique for setting a date on which a decision, risk or exception is examined again."
+        },
+        {
+            "name": "Risk Register",
+            "kind": "technique",
+            "definition": "A technique for keeping every known risk in one list with its owner, severity, mitigation and review date."
+        },
+        {
+            "name": "Decision Record with Alternatives",
+            "kind": "technique",
+            "definition": "A technique for recording a decision together with the options rejected and the forces that decided it."
+        },
+        {
+            "name": "Force Analysis",
+            "kind": "technique",
+            "definition": "A technique for listing the pressures a design must balance before choosing a pattern for it."
+        },
+        {
+            "name": "Trade-Off Matrix",
+            "kind": "technique",
+            "definition": "A technique for scoring candidate designs against the quality attributes that matter for the decision."
+        },
+        {
+            "name": "Quality Scenarios",
+            "kind": "technique",
+            "definition": "A technique for stating each quality attribute as a stimulus, a response and a measure the design must meet."
+        },
+        {
+            "name": "Decision Review",
+            "kind": "technique",
+            "definition": "A technique for re-examining recorded decisions when the evidence behind them changes."
+        },
+        {
+            "name": "Vertical Slice Proof",
+            "kind": "technique",
+            "definition": "A technique for proving a design by building one end-to-end path through every layer before generalizing it."
+        },
+        {
+            "name": "Defer Generalization",
+            "kind": "technique",
+            "definition": "A technique for keeping concrete code until a second real variation shows what the abstraction must cover."
+        },
+        {
+            "name": "Validate Required Forces",
+            "kind": "technique",
+            "definition": "A technique for checking that a pattern in use has the boundary rules and contracts the pattern requires."
+        },
+        {
+            "name": "Track Rule Metrics",
+            "kind": "technique",
+            "definition": "A technique for counting violations of each architecture rule over time, so recurrence is visible."
+        },
+        {
+            "name": "Architecture Test",
+            "kind": "technique",
+            "definition": "A technique for expressing a structural rule, such as a dependency direction, as a test that runs in the build."
+        },
+        {
+            "name": "Remove Pattern Shell",
+            "kind": "technique",
+            "definition": "A technique for deleting the structure of a pattern whose forces are absent, leaving the plain code it wrapped."
+        },
+        {
+            "name": "Duplicate Until the Pattern Stabilizes",
+            "kind": "technique",
+            "definition": "A technique for tolerating a small duplication until enough cases exist to show the shared shape."
+        },
+        {
+            "name": "Measure Delivery Cost",
+            "kind": "technique",
+            "definition": "A technique for measuring the time and effort an abstraction adds to delivering a change."
+        },
+        {
+            "name": "Anchor to Use Cases",
+            "kind": "technique",
+            "definition": "A technique for justifying each component by a concrete use case it serves."
+        },
+        {
+            "name": "Contextual Pattern Selection",
+            "kind": "technique",
+            "definition": "A technique for choosing a pattern by the forces of the problem at hand instead of by familiarity."
+        },
+        {
+            "name": "Dead Code Check",
+            "kind": "technique",
+            "definition": "A technique for failing the build on exports and branches that nothing reaches."
+        },
+        {
+            "name": "Archive Reference",
+            "kind": "technique",
+            "definition": "A technique for keeping removed code reachable in history or an archive instead of in the live tree."
+        },
+        {
+            "name": "Inconsistent Conventions",
+            "kind": "anti-pattern",
+            "definition": "A defect in which parts of one project use different structures, formats, tools or patterns for the same kind of thing."
+        }
+    ]
+}

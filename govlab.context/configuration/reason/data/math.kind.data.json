@@ -1,0 +1,93 @@
+{
+    "check": {
+        "by": [
+            "the yields check, which holds every algorithm's yields and every node's answer shape within the math type's shapes",
+            "the ontology resolution gate over every record that names the math type"
+        ],
+        "population": "every algorithm record, node, axis and substrate node that names the math type",
+        "freshness": "a verdict stands until the math type's shapes or a record that names it changes",
+        "refusal": "the gate fails on a yield or answer shape outside the type's shapes, or a reference to a type that does not exist",
+        "observation": "none: a math type is a family of answers, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a node with a dangling math type, another plants an answer shape outside the type's shapes, and the bundled data validates clean",
+        "authority": "the math type's shapes, which every yield and answer shape conforms to"
+    },
+    "records": [
+        {
+            "id": "set-theory",
+            "domains": ["set-theory"],
+            "question": "What members exist?",
+            "predicateFamily": "membership · cardinality · emptiness",
+            "yieldsShape": "set | boolean | ratio"
+        },
+        {
+            "id": "logic",
+            "domains": ["logic"],
+            "question": "Does it hold, and what follows from it?",
+            "predicateFamily": "boolean predicate",
+            "yieldsShape": "boolean"
+        },
+        {
+            "id": "graph",
+            "domains": ["category-theory"],
+            "question": "What connects what?",
+            "predicateFamily": "reachability · coverage · degree",
+            "yieldsShape": "edge-list"
+        },
+        {
+            "id": "algebra",
+            "domains": ["algebra"],
+            "question": "How are parts arranged under laws?",
+            "predicateFamily": "composition · ordering invariant",
+            "yieldsShape": "ordered-structure"
+        },
+        {
+            "id": "analysis",
+            "domains": ["analysis"],
+            "question": "How do states vary?",
+            "predicateFamily": "operation applied to state",
+            "yieldsShape": "operation"
+        },
+        {
+            "id": "optimization",
+            "domains": [],
+            "question": "What is admissible or best?",
+            "predicateFamily": "validation · threshold · argmax",
+            "yieldsShape": "boolean | ranking | number"
+        },
+        {
+            "id": "topology",
+            "domains": ["topology"],
+            "question": "What is preserved under change?",
+            "predicateFamily": "invariant / symmetry",
+            "yieldsShape": "boolean"
+        },
+        {
+            "id": "probability",
+            "domains": ["probability"],
+            "question": "How certain or likely is it?",
+            "predicateFamily": "confidence · distribution · counter",
+            "yieldsShape": "number[0,1]"
+        },
+        {
+            "id": "information-theory",
+            "domains": ["information-theory"],
+            "question": "What is novel, and how compressible is it?",
+            "predicateFamily": "novelty · dedup · hash",
+            "yieldsShape": "hash | novelty-score | boolean"
+        },
+        {
+            "id": "computation",
+            "domains": ["computation"],
+            "question": "What procedure produces it?",
+            "predicateFamily": "algorithm / loop",
+            "yieldsShape": "procedure"
+        },
+        {
+            "id": "dynamical-systems",
+            "domains": [],
+            "question": "What stable pattern arises, and has it converged?",
+            "predicateFamily": "fixed-point · convergence · oscillation",
+            "yieldsShape": "boolean | counter"
+        }
+    ]
+}

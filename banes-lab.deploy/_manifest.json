@@ -1,0 +1,82 @@
+{
+    "label": "Bane's Lab Deploy",
+    "summary": "Ships the built site to the droplet over SSH with rolling backups and rollback, syncs the nginx configuration both ways, and reports every run to Discord.",
+    "maturity": "experimental",
+    "domains": [
+        {"meta": "devops",
+            "sub": "deployment"},
+        {"meta": "communication",
+            "sub": "notifications"}
+    ],
+    "ecosystem": "typescript",
+    "visibility": {"private": true,
+        "hidden": false},
+    "capabilities": [
+        "build-and-upload-the-site",
+        "archive-and-restore-the-remote-site",
+        "sync-nginx-configuration",
+        "verify-nginx-after-reload",
+        "report-runs-to-discord"
+    ],
+    "governedBy": [
+        "separation-of-concerns",
+        "type-safety"
+    ],
+    "entries": ["runtime/entrypoints/*.entrypoint.ts"],
+    "docs": {
+        "overview": "The member has a deployment entry point and an nginx entry point. `runtime/entrypoints/deployment.entrypoint.ts` builds the site with Vite, connects to the droplet, archives the live site into the directory declared as `app.backups`, prunes old archives, uploads the build output and reports the outcome. A failure restores the archive it just took. `runtime/entrypoints/nginx.entrypoint.ts` pushes the managed nginx files from the directory declared as `app.nginx` to the droplet, tests and reloads nginx and verifies it is active. It can also pull the live configuration into a local backup. Every remote action goes through `core/adapters/shell.adapter.ts`, every Discord message through `core/adapters/webhook.adapter.ts`, and every location through `@ssot/paths`.",
+        "whenToUse": [
+            "Publishing the site. `npm run deploy` runs from this member after the gate is green.",
+            "Changing nginx. Edit the files under the directory declared as `app.nginx`, then run `npm run nginx`.",
+            "Inspecting the live nginx configuration with `npm run nginx -- pull` or `pull-full`."
+        ],
+        "whenNotToUse": [
+            "Building for local preview. The web member's own `npm run build` does that without touching the droplet.",
+            "Provisioning a new droplet. This member assumes nginx, the site directory and the SSH key already exist."
+        ],
+        "install": "Hoisted from the root workspace. Secrets are read from the vault through `@ssot/secrets`, which needs the vault open: `DEPLOY_HOST`, `DEPLOY_DISCORD_WEBHOOK_URL` and `NGINX_DISCORD_WEBHOOK_URL` (required) and `SSH_PASSPHRASE` (optional). The SSH key is read from the developer's `.ssh` directory.",
+        "quickStart": [
+            {"intent": "Deploy the site",
+                "lang": "bash",
+                "code": "npm run deploy --workspace @banes-lab/deploy"},
+            {
+                "intent": "Push the nginx configuration",
+                "lang": "bash",
+                "code": "npm run nginx --workspace @banes-lab/deploy -- push"
+            }
+        ],
+        "configuration": [
+            {
+                "option": "configuration/constants/deployment.constants.ts",
+                "note": "the remote site directory, backup retention, upload concurrency and the monitoring links."
+            },
+            {
+                "option": "configuration/constants/nginx.constants.ts",
+                "note": "the remote nginx locations and the test, reload and status commands."
+            },
+            {"option": "configuration/constants/ssh.constants.ts",
+                "note": "the droplet user and the key file name."}
+        ],
+        "disposal": [
+            "Remove the member's workspace entry from the root `package.json`.",
+            "Remove its governed-root entry from `containers` and `specialContainers` in `.govlab/shared/configs/taxonomy.config.ts`.",
+            "Remove the `deploy`, `nginx`, `nginxSite`, `server` and `backups` keys from the `app` branch of `project.paths/paths.yaml`, and the deploy keys from the `@ssot/secrets` schema and the vault when no other member reads them.",
+            "Delete the directory, reinstall, run the gate."
+        ],
+        "apiNotes": [
+            {
+                "name": "createShell",
+                "note": "Wraps one `node-ssh` session. Every method except `connect` throws until `connect` has resolved, so a step can never run against a closed session."
+            },
+            {
+                "name": "archiveSite",
+                "note": "Creates the archive on the droplet, downloads it, then removes the remote copy. The returned name is what `restoreSite` takes back."
+            }
+        ],
+        "aiContext": [
+            "No step spells a location. Local paths resolve through `@ssot/paths`, and remote paths are constants in `configuration/constants/`.",
+            "A step never talks to the network directly. It takes the `Shell` and reports through the `Journal`.",
+            "Copy shown to the developer or posted to Discord lives in `configuration/strings/`."
+        ]
+    }
+}

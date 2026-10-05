@@ -1,0 +1,228 @@
+builds:
+    root: _builds
+    web: web
+
+methodology:
+    root: disciplined.methodology
+    wiki: .wiki
+    coordination: coordination.surface
+    configs: tool.configs
+    governance: governance.host
+    build-scripts: banes-lab.build.scripts
+    deploy: banes-lab.deploy
+    server: banes-lab.server
+    social-share: banes-lab.social-share
+    testing: codebase.testing
+    constants: govlab.constants
+    context: govlab.context
+    docs: govlab.docs
+    patterns: govlab.patterns
+    pipeline: govlab.pipeline
+    quality: govlab.quality
+    stats: govlab.stats
+    argv: govlab.argv
+    canonical-write: govlab.canonical-write
+    code-parse: govlab.code-parse
+    content-fingerprint: govlab.content-fingerprint
+    paths: project.paths
+    scripts: project.scripts
+    secrets: project.secrets
+
+thirdParty: _third-party
+projectInfo:
+    root: _project.info.generated
+    findings: FINDINGS.generated.json
+    index:
+        markdown: INDEX.generated.md
+        json: INDEX.generated.json
+claudePolicy: CLAUDE.md
+toolCache: node_modules/.cache/govlab
+viteCache:
+    root: node_modules/.cache/vite
+    web: web
+    social: social
+    modules: modules
+drafts: _excluded.drafts
+scratch: _tmp
+docArch:
+    root: doc-arch
+    generated: generated
+    index: _index
+    system: generated/system-architecture.govlab.generated.md
+    references: references
+    templates: templates
+
+moduleInfo:
+    root: _code.info.generated
+    svg: svg
+    charts: mermaid-charts.generated.md
+    analysis: analysis.generated.json
+    findings: findings.generated.json
+    report: report.generated.json
+    code: code.generated.html
+
+claude:
+    root: .claude
+    agents: agents
+    register: rules/register.md
+
+govlabHost:
+    root: .govlab
+    rules: rules/eslint
+    stylelintRules: rules/stylelint
+    plugins: rules/plugins
+    indexer: rules/entrypoints/index.entrypoint.ts
+    shared: shared
+    generated: shared/generated
+    checks: shared/generated/check-index.generated.json
+    codemods: codemods
+    config: govlab.config.ts
+    taxonomy: shared/configs/taxonomy.config.ts
+    reports:
+        root: _quality.reports.generated
+        verify: verify.report.generated.json
+        violations: violations.report.generated.json
+        duplication: jscpd.report.generated.json
+        lint:
+            root: lint
+            closureGraph: closure-graph.generated.json
+            test: test.report.generated.json
+            purgecss: purgecss.report.generated.json
+            loc: loc.report.generated.json
+        content:
+            root: content
+            inventory: rule-inventory.generated.json
+            seeds: lesson-seeds.generated.json
+            tone: tone-baseline.generated.json
+            leaks: leak-set.generated.json
+            linkSet: link-set.generated.json
+            closure: link-closure.generated.json
+            graph: relation-graph.generated.json
+
+project:
+    paths: project.paths
+    scripts: project.scripts
+    secrets:
+        root: project.secrets
+        detectors: core/predicates
+
+codebase:
+    testing:
+        root: codebase.testing
+        app: "test.web"
+        deploy: test.deploy
+        scripts: test.scripts
+        build: test.build
+        rules: test.rules
+        govlab: test.govlab
+        content: test.content
+        social: test.social
+        coordination: test.coordination
+        server: test.server
+        paths: test.paths
+        secrets: test.secrets
+
+app:
+    root: "banes-lab.root"
+    member: "banes-lab.web"
+    deploy: "banes-lab.deploy"
+    content: "banes-lab.content"
+    coordination: "banes-lab.coordination"
+    social: "banes-lab.social-share"
+    build: "banes-lab.build.scripts"
+    buildSteps: "banes-lab.build.scripts/core/steps"
+    graphProducers: "banes-lab.build.scripts/core/producers"
+    shares: "banes-lab.public/static/card/generated"
+    cardRenders: "banes-lab.social-share/cards/generated"
+    shareMap: "banes-lab.web/core/generated/share.generated.ts"
+    shareLedger: "banes-lab.social-share/configuration/generated/share.generated.json"
+    public: "banes-lab.public"
+    server: "banes-lab.server"
+    nginx: "banes-lab.server/configuration/configs"
+    nginxMain: "banes-lab.server/configuration/configs/nginx.config.conf"
+    nginxSite: "banes-lab.server/configuration/configs/site.config.conf"
+    nginxScripts: "banes-lab.server/runtime/entrypoints"
+    backups: "banes-lab.server/runtime/backups"
+    certificates: "banes-lab.web/.certificates"
+    diagrams: "banes-lab.public/static/diagram/generated"
+    ontology: "banes-lab.web/core/generated/ontology.generated.ts"
+    vocabulary: "banes-lab.web/core/generated/vocabulary.generated.ts"
+    pages: "banes-lab.web/core/generated"
+    reference: "banes-lab.web/core/generated/reference.generated.ts"
+    graph: "banes-lab.web/core/generated/graph.generated.ts"
+    search: "banes-lab.web/core/generated/search.generated.ts"
+    anatomy: "banes-lab.web/core/generated/anatomy.generated.ts"
+    anatomyTrees: "banes-lab.web/core/generated/anatomy.trees.generated.ts"
+    sitemap: "banes-lab.web/core/generated/sitemap.generated.json"
+    journal: "banes-lab.web/core/generated/journal.generated.json"
+    baseline: "banes-lab.web/core/generated/baseline.generated.json"
+    learning: "banes-lab.web/core/generated/learning.generated.ts"
+    tabs: "banes-lab.web/core/generated/tab.generated.ts"
+    metric: "banes-lab.web/core/generated/metric.generated.ts"
+    walks: "banes-lab.public/static/walk/generated"
+    sources: "banes-lab.public/static/source/generated"
+    surfaces: "banes-lab.public/static/surface/generated"
+    configs: "banes-lab.public/static/tool/generated"
+    fonts: "banes-lab.public/static/fonts"
+    iconFont: "banes-lab.public/static/font/generated"
+    tokens: "banes-lab.web/presentation/tokens/base.tokens.css"
+    icons: "banes-lab.web/presentation/generated/icon.tokens.generated.css"
+    glyphs: "banes-lab.web/core/generated/glyph.generated.ts"
+
+govlab:
+    root: govlab.root
+    constants: govlab.constants
+    context:
+        root: govlab.context
+        algorithms: configuration/algorithm/data
+        entrypoints: runtime/entrypoints
+        grammar: configuration/grammar/data
+        layers: configuration/layer/data
+        lexicon: configuration/lexicon/data
+        principles: configuration/principle/data
+        reasoning: configuration/reason/data
+        symbols: configuration/algorithm/generated/symbol.generated.json
+    docs:
+        root: govlab.docs
+        entrypoints: runtime/entrypoints
+        plugins: core/plugins
+    patterns:
+        root: govlab.patterns
+        axis: configuration/generated/axis.generated.ts
+        entrypoints: runtime/entrypoints
+        plugins: core/plugins
+    pipeline: govlab.pipeline
+    quality:
+        root: govlab.quality
+        adapters: core/adapters
+        entrypoints: runtime/entrypoints
+        formatters: core/formatters
+        producers: core/producers
+        steps: core/steps
+        validators: core/validators
+        eslintRules: core/quality/eslint
+        contextRules: core/fragment/eslint
+        stylelintRules: core/stylelint
+        allowlists: configuration/allowlists
+        catalog:
+            root: configuration/catalog
+            data: data
+            generated: generated
+        ecosystemRules: configuration/rule/generated
+        generated:
+            root: configuration/quality/generated
+            canon: canon.generated.ts
+            concepts: canonical-index.generated.json
+            rules: all-rules.generated.json
+        data:
+            root: configuration/quality/data
+            registry: dependency.data.json
+    stats: govlab.stats
+    utils:
+        root: govlab.utils
+        argv: argv
+        canonicalWrite: canonical-write
+        codeParse:
+            root: code-parse
+            generated: core/generated
+        contentFingerprint: content-fingerprint

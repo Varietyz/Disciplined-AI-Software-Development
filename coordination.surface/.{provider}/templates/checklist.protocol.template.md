@@ -40,7 +40,7 @@ objective: a dependency-ordered checklist whose framing, worth, seeing, derivati
            and gated by the derivation-loop node that owns that decision
 recursion_limit: 3
 
-# --- SLOT ABSENCES THIS TEMPLATE IS BOUND BY (declared once; honoured wherever they appear) --
+# --- SLOT ABSENCES THIS TEMPLATE IS BOUND BY (declared once, honored wherever they appear) ---
 #   An abstract {slot} resolves against the adapter binding. A slot with NO analogue resolves
 #   ABSENT, and the branch depending on it DOES NOT RUN — the absence is declared, never faked.
 #   Reading an ABSENT slot as though it resolved manufactures a demand nothing can satisfy, and a

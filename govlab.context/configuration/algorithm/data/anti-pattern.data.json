@@ -1,0 +1,293 @@
+{
+    "category": "anti-patterns",
+    "tier": "leaf",
+    "check": {
+        "by": [
+            "the quality rules compiled from the smell catalog",
+            "the cross-file quality gate"
+        ],
+        "population": "every source file the rules lint",
+        "freshness": "a verdict stands until the linted source or a rule changes",
+        "refusal": "a compiled rule fails the lint stage on the smell's signature",
+        "observation": "none: these records describe decay paths found in source, not signals of a running system",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the smell catalog, which the compiled rules are derived from and the source is held to"
+    },
+    "records": [
+        {
+            "id": "anti-pattern-inversion",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Anti-Pattern Inversion",
+            "intent": "Take any desired architectural principle, invert its invariants, identify the recurring violation shape, model its propagation mechanism, define detection signals, and derive its remediation inverse.",
+            "invariant": "Every anti-pattern is a stable failure algorithm created by repeated violation of an architectural contract.",
+            "flow": [
+                "Principle",
+                "Invariant",
+                "Violation",
+                "Propagation",
+                "Detection",
+                "Remediation"
+            ],
+            "productions": [
+                {
+                    "lhs": "AntiPatternInversion",
+                    "rhs": "<HealthyPrinciple> \"→\" <RequiredInvariant> \"→\" <InvariantViolation> \"→\" <FailurePropagation> \"→\" <DetectionSignalSet> \"→\" <RemediationInverse>"
+                },
+                {
+                    "lhs": "AntiPatternRecord",
+                    "rhs": "<Name> \",\" <TriggerCondition> \",\" <DegenerationPath> \",\" <DetectionSignals> \",\" <DamageModel> \",\" <RemediationInverse>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "model_governance"
+            ],
+            "exemplar": {
+                "before": "Principle: Low Coupling — stated as a goal only; its violations are noticed ad hoc, named inconsistently, and caught late, with no derived failure algorithm.",
+                "after": "Low Coupling → invariant{no bidirectional dependency} → violation{Cyclic Dependency} → propagation{a convenience import closes a cycle, then spreads across modules} → detection{dependency-cycle scan} → remediation{invert the dependency / introduce a port}",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "anti-pattern-propagation-kernel",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Anti-Pattern Propagation Kernel",
+            "intent": "Start with a local shortcut, repeat it under delivery pressure, normalize it as convention, allow dependent code to form around it, then make remediation expensive through coupling and hidden assumptions.",
+            "invariant": "Most architecture anti-patterns become dangerous when a shortcut becomes infrastructure.",
+            "flow": [
+                "Shortcut",
+                "Repetition",
+                "Normalization",
+                "DependencyFormation",
+                "Institutionalization",
+                "HighCostRepair"
+            ],
+            "productions": [
+                {
+                    "lhs": "AntiPatternPropagation",
+                    "rhs": "<LocalShortcut> \"→\" <RepeatedUse> \"→\" <ImplicitConvention> \"→\" <DependentCodeFormation> \"→\" <ArchitecturalDebt> \"→\" <RemediationCostIncrease>"
+                },
+                {
+                    "lhs": "DebtAmplifier",
+                    "rhs": "\"copy_paste\" | \"missing_contract\" | \"missing_owner\" | \"missing_metric\" | \"missing_boundary\" | \"missing_version\" | \"missing_observability\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "correctness_verification"
+            ],
+            "exemplar": {
+                "before": "A one-off shortcut — inline a secret to ship a fix — treated as an isolated, cheap, local choice.",
+                "after": "Shortcut{inline secret} → repetition{reused under deadline} → normalization{becomes the team convention} → dependency-formation{configs read it directly} → institutionalization{deploy scripts assume it} → high-cost-repair{rotate the secret and rewire every dependent}",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "anti-pattern-remediation-algebra",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Anti-Pattern Remediation Algebra",
+            "intent": "For each anti-pattern, identify the missing architectural control, introduce the inverse control, migrate existing dependents, verify absence of the old failure shape, and enforce recurrence prevention.",
+            "invariant": "Anti-pattern repair is not complete until the propagation path is blocked.",
+            "flow": [
+                "AntiPattern",
+                "MissingControl",
+                "InverseControl",
+                "Migration",
+                "AbsenceCheck",
+                "PreventionGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "AntiPatternRemediationAlgebra",
+                    "rhs": "<AntiPatternRecord> \"→\" <MissingControl> \"→\" <InverseArchitecturalControl> \"→\" <MigrationPlan> \"→\" <EliminationVerification> \"→\" <RecurrencePrevention>"
+                },
+                {
+                    "lhs": "MissingControl",
+                    "rhs": "\"boundary\" | \"contract\" | \"owner\" | \"version\" | \"telemetry\" | \"schema\" | \"policy\" | \"state_isolation\" | \"dependency_rule\""
+                },
+                {
+                    "lhs": "RecurrencePrevention",
+                    "rhs": "\"static_check\" | \"contract_test\" | \"schema_gate\" | \"architecture_test\" | \"policy_as_code\" | \"review_gate\" | \"runtime_monitor\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"],
+            "exemplar": {
+                "before": "The anti-pattern is deleted at one call site; the propagation path stays open, so it reappears elsewhere next sprint.",
+                "after": "Secret Sprawl → missing-control{no secret authority} → inverse-control{central store + injected access} → migration{repoint every reader} → absence-check{scan finds zero inline secrets} → prevention-gate{lint rule rejects new inline secrets}",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "architecture-smell-record",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Architecture Smell Record",
+            "intent": "Model every smell as a recurring degeneration path with trigger conditions, enabling conditions, detection signals, damage model, remediation inverse, and prevention gate.",
+            "invariant": "A smell becomes enforceable when it is represented as a measurable failure contract.",
+            "flow": [
+                "Smell",
+                "Trigger",
+                "Degeneration",
+                "Detection",
+                "Measurement",
+                "Remediation",
+                "Prevention"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureSmellRecord",
+                    "rhs": "<SmellName> \",\" <TriggerCondition> \",\" <EnablingConditionSet> \",\" <DegenerationPath> \",\" <DetectionSignalSet> \",\" <MetricSet> \",\" <DamageModel> \",\" <RemediationInverse> \",\" <PreventionGate>"
+                },
+                {
+                    "lhs": "PreventionGate",
+                    "rhs": "\"static_check\" | \"architecture_test\" | \"contract_test\" | \"schema_gate\" | \"review_gate\" | \"fitness_function\" | \"runtime_monitor\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "model_governance"
+            ],
+            "exemplar": {
+                "before": "Smell described in prose ('this class is too big') — unmeasurable, unenforceable, re-argued case by case.",
+                "after": "God Object : trigger{unrelated methods accrete} → degeneration{fan-in/out grows} → detection{LCOM + responsibility count} → measurement{cohesion score below threshold} → remediation{Extract Class} → prevention{architecture test on cohesion}",
+                "lang": "record",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "anti-pattern-rule-compiler",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Anti-Pattern Rule Compiler",
+            "intent": "Convert each smell record into detection checks, measurable thresholds, severity policy, remediation hints, and recurrence-prevention gates.",
+            "invariant": "A smell catalog is enforced only once it compiles into rules.",
+            "flow": [
+                "SmellRecord",
+                "DetectionRule",
+                "MetricThreshold",
+                "Severity",
+                "RefactorHint",
+                "Gate"
+            ],
+            "productions": [
+                {
+                    "lhs": "AntiPatternRuleCompiler",
+                    "rhs": "<ArchitectureSmellRecordSet> \"→\" <DetectionRuleSet> \"→\" <MetricThresholdSet> \"→\" <SeverityPolicy> \"→\" <RemediationPlaybookSet> \"→\" <PreventionGateSet>"
+                },
+                {
+                    "lhs": "CompiledRule",
+                    "rhs": "<RuleName> \",\" <Scope> \",\" <Detector> \",\" <Threshold> \",\" <PriorityRank> \",\" <FailureMessage> \",\" <RefactorHint> \",\" <PreventionGate>"
+                }
+            ],
+            "composes": ["severity-policy"],
+            "force": ["correctness_verification"],
+            "exemplar": {
+                "before": "A smell catalog read by the developer — each entry is advice that nothing executes.",
+                "after": "SmellRecord{God Object} → detection-rule{find unrelated method clusters} → metric-threshold{LCOM > 0.7} → severity{error} → refactor-hint{Extract Class} → gate{fails the build}",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "smell-taxonomy",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Smell Taxonomy",
+            "intent": "Group smells by missing control so detection and remediation can be generalized.",
+            "invariant": "Most bad practices are symptoms of a missing architectural control.",
+            "flow": [
+                "Smell",
+                "MissingControl",
+                "RuleFamily",
+                "RemediationFamily"
+            ],
+            "productions": [
+                {
+                    "lhs": "SmellTaxonomy",
+                    "rhs": "<SmellSet> \"→\" <MissingControlClassification> \"→\" <RuleFamilySet> \"→\" <RemediationFamilySet>"
+                },
+                {
+                    "lhs": "MissingControlClassification",
+                    "rhs": "\"missing_boundary\" | \"missing_contract\" | \"missing_type\" | \"missing_owner\" | \"missing_version\" | \"missing_validation\" | \"missing_observability\" | \"missing_state_control\" | \"missing_release_control\" | \"missing_security_control\" | \"missing_evidence\" | \"excessive_abstraction\" | \"excessive_coupling\" | \"excessive_manual_process\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"],
+            "exemplar": {
+                "before": "Dozens of smells listed flat, each handed its own bespoke, unrelated fix.",
+                "after": "smell-set{Magic Value, Secret Sprawl, Hardcoded Path} → missing-control{single source of truth} → rule-family{no-inline-authority checks} → remediation-family{centralize then inject}",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "anti-pattern-relationship-record",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Anti-Pattern Relationship Record",
+            "intent": "Model every anti-pattern as a typed relationship record: name, scope, causal links, conflicts, degradations, enabled failures, detection signals, measurement, remediation inverse, prevention, and severity.",
+            "invariant": "An anti-pattern is enforceable only when it is represented as a typed relationship record.",
+            "flow": [],
+            "productions": [
+                {
+                    "lhs": "AntiPatternRelationshipRecord",
+                    "rhs": "<AntiPatternName> \":\" \"Anti-Pattern\" \",\" <scope> \",\" <caused_by> \",\" <conflicts_with> \",\" <degrades> \",\" <enables_failure> \",\" <detected_by> \",\" <measured_by> \",\" <refactored_by> \",\" <prevented_by> \",\" <severity>"
+                }
+            ],
+            "composes": [],
+            "force": ["architecture_evolution"],
+            "exemplar": {
+                "before": "An anti-pattern named as free text with no typed edges — not resolvable, not gate-checkable, not linkable to the principle it violates.",
+                "after": "Cyclic Dependency : Anti-Pattern, scope{module}, caused_by{convenience import}, conflicts_with{Low Coupling}, degrades{modularity}, enables_failure{build deadlock}, detected_by{cycle scan}, refactored_by{invert dependency}, prevented_by{dependency rule}, severity{mandatory}",
+                "lang": "record",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "architecture-anti-pattern",
+            "principleRef": "big-ball-of-mud",
+            "title": "<Architecture Anti-Pattern>",
+            "intent": "<Local shortcut> → <Missing control> → <Repeated usage> → <Implicit dependency> → <Boundary/contract erosion> → <Systemic fragility> → <Expensive remediation>",
+            "invariant": "Every architecture anti-pattern is a reproducible decay path caused by the absence of a specific control: boundary, contract, ownership, versioning, observability, state isolation, or enforcement.",
+            "flow": [
+                "Shortcut",
+                "Drift",
+                "Coupling",
+                "Fragility",
+                "Detection",
+                "Inversion"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureAntiPattern",
+                    "rhs": "<TriggerCondition> \"→\" <MissingControl> \"→\" <DegenerationPath> \"→\" <DamageModel> \"→\" <DetectionSignalSet> \"→\" <RemediationInverse> \"→\" <PreventionGate>"
+                },
+                {
+                    "lhs": "RemediationInverse",
+                    "rhs": "\"introduce_boundary\" | \"declare_contract\" | \"centralize_authority\" | \"assign_owner\" | \"version_change\" | \"add_observability\" | \"isolate_state\" | \"enforce_policy\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "correctness_verification",
+                "observability_traceability"
+            ],
+            "meta": true
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "@govlab/stats",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "Codebase-wide statistics derivation — the census the gate runs last.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#runtime/*": "./runtime/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "exports": {
+        "./*": "./*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@govlab/pipeline": "*",
+        "@govlab/quality": "*",
+        "@ssot/govlab": "*",
+        "@ssot/paths": "*"
+    }
+}

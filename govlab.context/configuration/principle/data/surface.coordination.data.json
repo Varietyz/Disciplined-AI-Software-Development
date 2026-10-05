@@ -1,0 +1,945 @@
+{
+    "category": "Coordination Surfaces",
+    "check": {
+        "population": "every coordination surface, record, run declaration and shared measurement a governed tree carries",
+        "freshness": "a verdict stands until a surface's schema, a record's writer or subject, or a run's declared scope changes",
+        "refusal": "the coordination rules fail a surface whose records name no writer or subject, a run with no declared write scope, and an index that disagrees with the directory it indexes",
+        "observation": "each surface's records compared against its declared schema, and each run's writes compared against its declared scope",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the declared schema and lifetime of each surface, which every record and every mechanism acting on it conforms to"
+    },
+    "records": [
+        {
+            "id": "stated-invariant",
+            "name": "Stated Invariant",
+            "definition": "A design rule that an invariant a topology relies on is written with its property in a form that could be false, the set it ranges over, the parties it binds and the thing that would object if it stopped holding.",
+            "type": "principle",
+            "scope": [
+                "topology",
+                "coordination"
+            ],
+            "requires": ["Coordination Surface"],
+            "reinforces": ["Fitness Functions"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": ["Contradicted Invariant"],
+            "tensions_with": [],
+            "violated_by": [
+                "lexicon:unobjected-invariant",
+                "lexicon:unreceived-invariant"
+            ],
+            "detected_by": ["an invariant with no objector, or one that names no set or no bound party"],
+            "measured_by": ["invariants stated without an objector and not marked unheld"],
+            "refactored_by": [
+                "lexicon:name-the-objector",
+                "lexicon:mark-the-invariant-unheld"
+            ],
+            "enforced_by": ["coordination review"],
+            "expressedBy": [
+                "pag:keyword:INVARIANT",
+                "pag:production:invariant_record",
+                "pag:production:invariant_block"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "every surface has one writer → nothing counts writers → a second writer lands and every guarantee resting on the first still reads as sound",
+                "after": "property: one writer per record → set: every record on a coordination surface → parties: every writer → objector: a check failing a record whose fence names two writers",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "derived-record-state",
+            "name": "Derived Record State",
+            "definition": "A design rule that a record's state is a query over the edges it carries, open while its satisfying artifact is unresolved, blocked while a blocker is open and absorbed once the artifact exists, so no party writes a state.",
+            "type": "principle",
+            "scope": [
+                "record",
+                "coordination"
+            ],
+            "requires": [
+                "Coordination Record",
+                "Acknowledger"
+            ],
+            "reinforces": ["Single Source of Truth"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": ["Written Status Marker"],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "architecture:single-source-of-truth",
+                    "reason": "Derived record state applies one owning source to a record's status, while a single source of truth covers any fact, rule or configuration value."
+                }
+            ],
+            "violated_by": ["architecture:written-status-marker"],
+            "detected_by": ["a record carrying a state that its edges no longer support"],
+            "measured_by": ["records whose written state differs from the derived one"],
+            "refactored_by": ["lexicon:derive-state-from-edges"],
+            "enforced_by": ["the coordination closure check, which refuses a judgment closure that cites an artifact and an artifact closure that cites none"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "a record reads status: done → its artifact was later deleted → the marker still asserts done",
+                "after": "the record cites satisfied-by: <artifact> → the artifact resolves: absorbed → the artifact is gone: open, with no field anyone has to remember to change",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "declared-subject",
+            "name": "Declared Subject",
+            "definition": "A rule or precondition that a record carries an allocated id and a declared subject key as two fields, so a moved surface keeps the id, a renamed subject keeps the key, and two records sharing a key are a finding.",
+            "type": "constraint",
+            "scope": [
+                "record",
+                "identity"
+            ],
+            "requires": ["Coordination Record"],
+            "reinforces": ["Stable Identity"],
+            "enables": ["Rederivation Detection"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "lexicon:stable-identity",
+                    "reason": "A declared subject keeps a record's id and its subject as two fields that survive different renames, while stable identity requires only that one identifier last the entity's lifetime."
+                }
+            ],
+            "violated_by": ["lexicon:location-derived-identity"],
+            "detected_by": ["a record whose id changes when its surface moves, or two records about one subject"],
+            "measured_by": ["records sharing a subject key"],
+            "refactored_by": [
+                "lexicon:allocate-identity-once",
+                "lexicon:declare-the-subject-beside-the-id"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "record id = <surface-path>-<ordinal> → the surface moves → every id changes and every edge citing one dangles",
+                "after": "id = <surface-key>-<ordinal>, allocated once → subject = <declared> → a second record declaring the same subject is reported",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "write-barrier",
+            "name": "Write Barrier",
+            "definition": "A mechanism that lets a planned exclusive write to a shared surface proceed only once every peer is observed parked, beside a compare-and-swap that covers every other write.",
+            "type": "mechanism",
+            "scope": [
+                "surface",
+                "concurrency"
+            ],
+            "requires": ["Coordination Surface"],
+            "reinforces": ["Optimistic Locking"],
+            "enables": ["Single-Writer Coordination"],
+            "conflicts_with": ["Lost Update"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:whole-surface-rewrite"],
+            "detected_by": ["content a peer wrote missing after an exclusive write that reported success"],
+            "measured_by": ["exclusive writes taken without every peer observed parked"],
+            "refactored_by": [
+                "lexicon:hold-the-barrier-for-planned-writes",
+                "architecture:optimistic-locking"
+            ],
+            "enforced_by": ["coordination review"],
+            "expressedBy": ["pag:production:refusal_line"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "a tool rewrites the board whole → a peer's record written a moment earlier is gone → every check passes",
+                "after": "planned rewrite → wait until every peer is parked → write → any other write: re-read, compare its own span, refuse with the diff on an overlap",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "operand-free-outcome-surface",
+            "name": "Operand-Free Outcome Surface",
+            "definition": "A rule or precondition that a surface carrying one jointly authored product declares that one writer per record has no operand there, and settles a collision by announcement and by each author cutting its own duplicate.",
+            "type": "constraint",
+            "scope": [
+                "surface",
+                "authorship"
+            ],
+            "requires": ["Outcome Surface"],
+            "reinforces": ["Stated Invariant"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": ["Contradicted Invariant"],
+            "tensions_with": [],
+            "violated_by": [
+                "lexicon:assumed-single-writer",
+                "lexicon:fenced-joint-surface"
+            ],
+            "detected_by": ["an outcome surface with no declaration that the invariant has no operand there"],
+            "measured_by": ["outcome surfaces missing the declaration"],
+            "refactored_by": [
+                "lexicon:declare-the-missing-operand",
+                "lexicon:settle-collisions-by-announcement"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "mandatory",
+            "distinctFrom": [
+                {
+                    "id": "architecture:stated-invariant",
+                    "reason": "An operand-free outcome surface declares where one invariant cannot apply, while a stated invariant is the form every invariant is written in."
+                }
+            ],
+            "exemplar": {
+                "before": "a class statement written by several parties → the one-writer invariant is assumed to hold → nothing objects when two parties write the same clause",
+                "after": "the surface declares: one writer per record has no operand here → a collision is announced → each author cuts its own duplicate",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "projection-channel",
+            "name": "Projection Channel",
+            "definition": "A rule or precondition that the projection a host injects into every bounded reader is refreshed in the same change as the fact it carries, in a shape a check reads.",
+            "type": "constraint",
+            "scope": [
+                "context",
+                "reader"
+            ],
+            "requires": [
+                "Host Projection",
+                "Bounded Reader"
+            ],
+            "reinforces": ["Single Source of Truth"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "violated_by": [
+                "lexicon:deferred-projection",
+                "lexicon:overgrown-projection"
+            ],
+            "detected_by": ["a projection line that disagrees with the surface it summarizes"],
+            "measured_by": ["changes that moved a projected fact without the projection"],
+            "refactored_by": [
+                "lexicon:refresh-the-projection-in-the-same-change",
+                "lexicon:check-the-projection-s-shape"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "a seat goes inactive on the board → the injected line still lists it → every spawned reader plans around a party that is gone",
+                "after": "the board write and the projection write land in one change → a check reads the projection's declared shape",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "two-direction-index",
+            "name": "Two-Direction Index",
+            "definition": "A mechanism that generates an index from the directory on every run and checks it both ways, reporting an entry with no file and a file with no entry, with every scan independent of depth.",
+            "type": "mechanism",
+            "scope": [
+                "index",
+                "directory"
+            ],
+            "requires": ["Coordination Surface"],
+            "reinforces": ["Single Source of Truth"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": ["Hand-Kept Index"],
+            "tensions_with": [],
+            "violated_by": [
+                "architecture:hand-kept-index",
+                "lexicon:one-way-index-check"
+            ],
+            "detected_by": ["an index entry that resolves to no file, or a file no entry names"],
+            "measured_by": ["index entries and files missing their counterpart"],
+            "refactored_by": [
+                "lexicon:generate-the-index-from-the-directory",
+                "lexicon:check-both-directions"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "the agent index is edited by hand → a seat is added without an entry → the scan covers fewer seats than it claims",
+                "after": "the index is generated from the directory → an entry with no file fails → a file with no entry fails",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "independent-lifetime-axes",
+            "name": "Independent Lifetime Axes",
+            "definition": "A design rule that a surface's lifetime is declared on three independent axes, retention, mutability and removal authority, each taking a value from a closed set, so no single word stands for all three.",
+            "type": "principle",
+            "scope": [
+                "surface",
+                "lifetime"
+            ],
+            "requires": [
+                "Retention",
+                "Mutability",
+                "Removal Authority"
+            ],
+            "reinforces": ["Immutability"],
+            "enables": ["Governed Removal"],
+            "conflicts_with": ["Destructive Closure"],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "architecture:immutability",
+                    "reason": "Independent lifetime axes declare mutability as one of three questions about a surface, while immutability is the single rule that a value never changes after it is created."
+                }
+            ],
+            "violated_by": ["lexicon:single-word-lifetime"],
+            "detected_by": ["a surface whose lifetime names retention alone"],
+            "measured_by": ["surfaces missing a value on any axis"],
+            "refactored_by": ["lexicon:declare-all-three-lifetime-axes"],
+            "enforced_by": ["the coordination declaration check, which reports a mechanism named for a lifetime axis that never reads that axis"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "lifetime: deleted on close → a sweep implements it faithfully → the argument behind a ruling is destroyed",
+                "after": "retention: kept → mutability: frozen → removal authority: nobody → closing moves the surface to the archive",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "section-lifetime-divergence",
+            "name": "Section Lifetime Divergence",
+            "definition": "A rule or precondition that a file states a default lifetime and each section declares only the axes on which it differs, since the narrower unit is the more constrained one.",
+            "type": "constraint",
+            "scope": [
+                "surface",
+                "section"
+            ],
+            "requires": [
+                "Retention",
+                "Mutability"
+            ],
+            "reinforces": ["Independent Lifetime Axes"],
+            "enables": ["Governed Removal"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "violated_by": ["lexicon:file-wide-lifetime"],
+            "detected_by": ["an operation permitted by the file's lifetime acting on a section whose own lifetime forbids it"],
+            "measured_by": ["divergent sections carrying no declaration"],
+            "refactored_by": [
+                "lexicon:declare-the-file-default",
+                "lexicon:declare-each-divergent-section"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "a document declares owner-rewritable → its contract block is rewritten by a sweep that the file's word allowed",
+                "after": "file default: owner-rewritable → contract block: mutability frozen → the sweep skips the block",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "write-scope-and-read-population",
+            "name": "Write Scope and Read Population",
+            "definition": "A design rule that a run declares the paths it writes and publishes the set it read as two declarations, because collision is decided by the first and a published result's validity by the second.",
+            "type": "principle",
+            "scope": [
+                "run",
+                "invocation"
+            ],
+            "requires": [
+                "Write Scope",
+                "Read Population"
+            ],
+            "reinforces": ["Determinism"],
+            "enables": ["Shared Invocation"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "architecture:determinism",
+                    "reason": "Write scope and read population separate what a run touches from what it read, while determinism requires that the same inputs produce the same result."
+                }
+            ],
+            "violated_by": ["lexicon:conflated-scope"],
+            "detected_by": ["a run that reads more than it writes and publishes only its write scope"],
+            "measured_by": ["runs publishing no read population"],
+            "refactored_by": [
+                "lexicon:declare-the-write-scope",
+                "lexicon:publish-the-read-population"
+            ],
+            "enforced_by": ["the coordination writer check, which fails a writer a run reaches outside the sanctioned set"],
+            "expressedBy": ["pag:production:population_clause"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "a run declares scope: <subtree> → it also reads a sibling tree → a later caller reuses its result for the sibling and gets a verdict nobody measured",
+                "after": "write scope: <subtree> → read population: <subtree> + <sibling> → the collision test reads the first, the coverage test reads the second",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "read-time-join",
+            "name": "Read-Time Join",
+            "definition": "A mechanism that lets a caller whose question a live declared scope already covers read that run's published result and its standing, writing nothing, so it cannot deadlock, be orphaned or need cleanup.",
+            "type": "mechanism",
+            "scope": [
+                "run",
+                "invocation"
+            ],
+            "requires": [
+                "Joiner",
+                "Read Population"
+            ],
+            "reinforces": ["Write Scope and Read Population"],
+            "enables": ["Shared Invocation"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "violated_by": [
+                "lexicon:attached-second-caller",
+                "lexicon:duplicate-covered-run"
+            ],
+            "detected_by": ["two runs over one covered question, or a caller waiting on another run's handle"],
+            "measured_by": ["duplicate runs a live scope covered"],
+            "refactored_by": [
+                "lexicon:test-coverage-first",
+                "lexicon:join-by-reading-the-published-result"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "recommended",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:joiner",
+                    "reason": "A read-time join is the mechanism that serves a covered question from a published result, while a joiner is the caller that uses it."
+                }
+            ],
+            "exemplar": {
+                "before": "a second caller starts the same measurement → both write the same report → the second waits on the first's lock",
+                "after": "caller → does a live scope cover the question? yes: read the published result and its standing, write nothing → no: start, and only then enter the collision comparison",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "one-sided-liveness",
+            "name": "One-Sided Liveness",
+            "definition": "A design rule that a process's absence proves it is dead while its presence proves nothing, so liveness is derived once, from the witness first and from a generous window only where the witness cannot decide.",
+            "type": "principle",
+            "scope": [
+                "process",
+                "liveness"
+            ],
+            "requires": ["Liveness Witness"],
+            "reinforces": ["Determinism"],
+            "enables": ["Shared Invocation"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "architecture:determinism",
+                    "reason": "One-sided liveness decides what a process's presence can prove, while determinism requires that the same inputs produce the same result."
+                }
+            ],
+            "violated_by": [
+                "lexicon:presence-as-liveness",
+                "lexicon:per-consumer-liveness"
+            ],
+            "detected_by": ["two consumers of one liveness question reaching different answers"],
+            "measured_by": ["liveness derivations outside the single one"],
+            "refactored_by": [
+                "lexicon:derive-liveness-once",
+                "lexicon:witness-first",
+                "lexicon:window-second"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "a process id is present → the claim is kept → the id was reused by an unrelated process and the claim never expires",
+                "after": "id absent: dead → id present: undecided → fall to the window, set long, because too short loses a write and too long costs one re-run",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "reversible-channel-encoding",
+            "name": "Reversible Channel Encoding",
+            "definition": "A rule or precondition that a channel name is a total and invertible encoding of the scope it belongs to, with an alphabet that excludes the separator, so a retention check can read the scope back out of the name.",
+            "type": "constraint",
+            "scope": [
+                "channel",
+                "naming"
+            ],
+            "requires": ["Write Scope"],
+            "reinforces": ["Stable Identity"],
+            "enables": ["Governed Removal"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "lexicon:stable-identity",
+                    "reason": "A reversible channel encoding lets the owning scope be read back out of a name, while stable identity requires only that the name not change."
+                }
+            ],
+            "violated_by": ["lexicon:digest-named-channel"],
+            "detected_by": ["a channel whose name decodes to no scope"],
+            "measured_by": ["channels no remover can attribute to a scope"],
+            "refactored_by": [
+                "lexicon:encode-the-scope-reversibly",
+                "lexicon:declare-the-remover"
+            ],
+            "enforced_by": ["the coordination channel check, which reports a channel whose decoded scope resolves to nothing"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "channel = digest(<scope>) → channels never collide → no check can tell which channel is stale",
+                "after": "channel = encode(<scope>), invertible → decode(channel) resolves to nothing → the declared remover deletes it",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "declare-before-read-order",
+            "name": "Declare-Before-Read Order",
+            "definition": "A mechanism that orders two simultaneous starters without a lock by writing each entry before reading the set, with the start stamp and then the party identity breaking a tie.",
+            "type": "mechanism",
+            "scope": [
+                "run",
+                "concurrency"
+            ],
+            "requires": ["Write Scope"],
+            "reinforces": ["Determinism"],
+            "enables": ["Shared Invocation"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "violated_by": ["lexicon:read-before-declare"],
+            "detected_by": ["two runs over one scope that both proceeded"],
+            "measured_by": ["simultaneous starters that both proceeded"],
+            "refactored_by": ["lexicon:write-the-entry-before-reading-the-set"],
+            "enforced_by": ["coordination review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "starter A reads: nobody → starter B reads: nobody → both write → both proceed",
+                "after": "A writes its entry → B writes its entry → each reads both → the earlier stamp proceeds, the other exits without writing",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "period-decided-disposition",
+            "name": "Period-Decided Disposition",
+            "definition": "A design rule that a duplicate is first counted by its distinguished copies and then read by the period of each derivation edge, so a periodic copy owes a comparator and a one-shot copy is a record whose source is repaired instead.",
+            "type": "principle",
+            "scope": [
+                "duplicate",
+                "derivation"
+            ],
+            "requires": [
+                "Distinguished Copy",
+                "Derivation Period"
+            ],
+            "reinforces": ["Single Source of Truth"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": ["Cyclic Tiebreak"],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "architecture:single-source-of-truth",
+                    "reason": "Period-decided disposition decides what to do with the copies a fact already has, while a single source of truth is the state it restores."
+                }
+            ],
+            "violated_by": ["lexicon:blanket-collapse"],
+            "detected_by": ["a collapse that removed a copy written once against an earlier state of its source"],
+            "measured_by": ["copies collapsed across one-shot edges"],
+            "refactored_by": [
+                "lexicon:count-distinguished-copies",
+                "lexicon:read-each-period",
+                "lexicon:repair-the-source"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "a rule stated in code and in several documents → every document copy is rewritten to match → the record of what each surface said when it was written is gone",
+                "after": "one distinguished copy: a direction → every other edge one-shot: diagnose the copies, repair the source → a copy no party reaches: add it",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "derived-party-count",
+            "name": "Derived Party Count",
+            "definition": "A design rule that the number of parties a body of work implies is derived from how the work is partitioned into concerns, so two parties holding one partition reach one count.",
+            "type": "principle",
+            "scope": [
+                "allocation",
+                "coordination"
+            ],
+            "requires": ["Concern Partition"],
+            "reinforces": ["Determinism"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "architecture:determinism",
+                    "reason": "A derived party count ties allocation to a partition of the work, while determinism requires that the same inputs produce the same result."
+                }
+            ],
+            "violated_by": ["lexicon:preferred-party-count"],
+            "detected_by": ["a count that moved while no partition moved"],
+            "measured_by": ["counts proposed with no partition behind them"],
+            "refactored_by": [
+                "lexicon:derive-the-partition",
+                "lexicon:count-the-partition-s-concerns"
+            ],
+            "enforced_by": ["none: no mechanism derives the partition, so the count rests on review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "the work gets a fixed number of parties → surfaces are split to give each one something → contradictions pile up on the shared ones",
+                "after": "coupling relation → connected components → concerns → floor: concerns that must contradict each other → ceiling: the worst fan-in",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "fan-in-ceiling",
+            "name": "Fan-In Ceiling",
+            "definition": "A rule or precondition that the useful number of parties is bounded by the fan-in of the most contended surface, where claims resting on it go stale faster than they help.",
+            "type": "constraint",
+            "scope": [
+                "allocation",
+                "surface"
+            ],
+            "requires": ["Fan-In"],
+            "reinforces": ["Derived Party Count"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "violated_by": ["lexicon:crowded-surface"],
+            "detected_by": ["a surface whose claims are answered more often than they are used"],
+            "measured_by": ["stale claims published per surface"],
+            "refactored_by": [
+                "lexicon:mark-claims-with-their-read-moment",
+                "lexicon:partition-the-surface"
+            ],
+            "enforced_by": ["none: no mechanism counts fan-in, so the bound rests on review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "more parties join → each composes claims about one shared surface → every stale claim is read and answered by every other party",
+                "after": "fan-in measured from recorded authorship and citations → the surface above the ceiling is split or its claims arrive marked stale",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "state-arity-limit",
+            "name": "State-Arity Limit",
+            "definition": "A rule or precondition that a property relating two states of content, such as growing but never shrinking, is enforced only by a mechanism holding both readings, in the layer that already spans runs.",
+            "type": "constraint",
+            "scope": [
+                "check",
+                "state"
+            ],
+            "requires": ["Coordination Surface"],
+            "reinforces": ["Fitness Functions"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "violated_by": [
+                "lexicon:single-state-change-check",
+                "lexicon:remembering-checker"
+            ],
+            "detected_by": ["content removed from a required section while every single-state check passes"],
+            "measured_by": ["change rules held only by single-state checks"],
+            "refactored_by": [
+                "lexicon:retain-the-prior-state-in-the-spanning-layer",
+                "lexicon:compare-the-two-readings"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "a check requires the section → it passes from empty to full and from full to empty alike",
+                "after": "the spanning layer records the section's extent per run → the next run compares → shortened: refuse → the sets differ: not comparable, refuse rather than compute",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "carrier-and-payload-split",
+            "name": "Carrier and Payload Split",
+            "definition": "A design rule that a surface read through a tool types the fields a mechanism joins on and leaves the fields only a reader consumes as prose, deciding the line per field.",
+            "type": "principle",
+            "scope": [
+                "surface",
+                "field"
+            ],
+            "requires": [
+                "Carrier Field",
+                "Payload Field"
+            ],
+            "reinforces": ["Closed Vocabulary"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "distinctFrom": [
+                {
+                    "id": "architecture:closed-vocabulary",
+                    "reason": "The carrier and payload split decides which fields are typed at all, while a closed vocabulary governs the words a typed name slot may take."
+                }
+            ],
+            "violated_by": [
+                "lexicon:prose-parsing-mechanism",
+                "lexicon:restating-payload"
+            ],
+            "detected_by": ["a mechanism parsing a prose field, or a carrier and a payload that answer one question differently"],
+            "measured_by": ["fields no declaration assigns to either side"],
+            "refactored_by": [
+                "lexicon:type-the-carrier",
+                "lexicon:leave-the-payload-prose",
+                "lexicon:remove-the-restating-payload"
+            ],
+            "enforced_by": ["none: whether a value is resolvable is a judgment at authoring, so the split rests on review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "a status sentence is parsed for the word done → a reader edits the sentence → the parse misreads it",
+                "after": "state: <closed value> as the carrier → reason: <prose> as the payload → the mechanism reads the key and never the sentence",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "joinable-mandated-field",
+            "name": "Joinable Mandated Field",
+            "definition": "A rule or precondition that a mandated field takes a value from a closed set or an identifier, or declares that it is written for readers, so a governed surface never looks measured on a property nothing can read.",
+            "type": "constraint",
+            "scope": [
+                "field",
+                "schema"
+            ],
+            "requires": ["Carrier Field"],
+            "reinforces": ["Carrier and Payload Split"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "violated_by": ["lexicon:unread-prose-mandate"],
+            "detected_by": ["a mandated prose field that no declaration marks as written for readers"],
+            "measured_by": ["mandated fields in neither a resolvable form nor declared for readers"],
+            "refactored_by": [
+                "lexicon:draw-the-value-from-a-closed-set",
+                "lexicon:declare-the-field-for-readers"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "every record must carry a lifetime paragraph → each author writes one → nothing can join on it",
+                "after": "lifetime: retention <value>, mutability <value>, removal authority <value> → a check joins on the three values",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "single-aggregate",
+            "name": "Single Aggregate",
+            "definition": "A rule or precondition that a shared measurement keeps one aggregate, overwritten by each run that can honestly replace it, while a run that cannot streams its verdict instead of writing a second report.",
+            "type": "constraint",
+            "scope": [
+                "measurement",
+                "report"
+            ],
+            "requires": ["Read Population"],
+            "reinforces": ["Single Source of Truth"],
+            "enables": ["Traceable Guarantee"],
+            "conflicts_with": [
+                "Invocation-Keyed Report",
+                "Narrowed Aggregate"
+            ],
+            "tensions_with": [],
+            "violated_by": [
+                "architecture:invocation-keyed-report",
+                "architecture:narrowed-aggregate"
+            ],
+            "detected_by": ["a second report describing the aggregate's subject"],
+            "measured_by": ["reports beside the aggregate"],
+            "refactored_by": [
+                "lexicon:write-the-aggregate-only-from-a-full-run",
+                "lexicon:stream-narrowed-verdicts"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "a narrowed run writes report.<scope>.json → the directory fills with reports each true of one moment → none of them is the state",
+                "after": "a full run overwrites the aggregate → a narrowed run prints its verdict and writes nothing",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "contradicted-invariant",
+            "name": "Contradicted Invariant",
+            "definition": "A defect in which one surface states the opposite of an invariant another relies on, so every mechanism faithfully implementing either statement stays green while the invariant is violated.",
+            "type": "anti-pattern",
+            "scope": ["topology"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "restating an invariant in a second surface and changing only one of the copies",
+            "detected_by": ["two statements of one invariant that no single query ranges over"],
+            "measured_by": ["invariants whose copies disagree"],
+            "refactored_by": [
+                "lexicon:treat-the-statements-as-one-unit",
+                "lexicon:re-derive-every-copy-on-change"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "the model states one writer per record → a template states one writer per file → a tool built from the template rewrites whole files and every check passes",
+                "after": "every copy of the invariant is listed → a change re-derives the set → the most delivered copy is updated first",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "written-status-marker",
+            "name": "Written Status Marker",
+            "definition": "A defect in which a party writes a record's state as a marker instead of deriving it from the record's edges, so the marker goes stale and asserts a state that no longer holds.",
+            "type": "anti-pattern",
+            "scope": ["record"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "adding a status field that parties are trusted to keep current",
+            "detected_by": ["a status field whose value the record's edges contradict"],
+            "measured_by": ["records carrying a written state"],
+            "refactored_by": ["lexicon:derive-state-from-edges"],
+            "enforced_by": ["coordination review"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "status: absorbed is written and left in place → the record rests there as a marker",
+                "after": "absorbed is a transition → extract to the accumulator → delete in the same change",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "invocation-keyed-report",
+            "name": "Invocation-Keyed Report",
+            "definition": "A defect in which a run writes its result under a name derived from how it was invoked, beside the shared aggregate, so documents accumulate that each describe a moment and none the state.",
+            "type": "anti-pattern",
+            "scope": ["report"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "keying a report's filename on the scope, the caller or the flags of a run",
+            "detected_by": ["a report whose name carries a scope or caller segment"],
+            "measured_by": ["keyed reports beside the aggregate"],
+            "refactored_by": [
+                "lexicon:stream-narrowed-verdicts",
+                "lexicon:keep-one-aggregate"
+            ],
+            "enforced_by": ["coordination review"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "report.<member>.json, report.<caller>.json → nobody prunes them → a reader cannot tell which is current",
+                "after": "one aggregate report → narrowed runs print their verdict",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "narrowed-aggregate",
+            "distinctFrom": [
+                {
+                    "id": "architecture:invocation-keyed-report",
+                    "reason": "A narrowed aggregate overwrites the one aggregate with a partial result, while an invocation-keyed report writes a second document beside it."
+                }
+            ],
+            "name": "Narrowed Aggregate",
+            "definition": "A defect in which a run over a narrowed scope overwrites the whole-scope aggregate, so the aggregate reports a smaller population as though it were the whole.",
+            "type": "anti-pattern",
+            "scope": ["report"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "writing the aggregate from a run that measured part of its population",
+            "detected_by": ["an aggregate whose recorded population is smaller than the declared one"],
+            "measured_by": ["aggregate writes from narrowed runs"],
+            "refactored_by": ["lexicon:write-the-aggregate-only-from-a-full-run"],
+            "enforced_by": ["coordination review"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "a run over one member writes the aggregate → the aggregate now reads clean for the whole tree",
+                "after": "the narrowed run streams its verdict → the aggregate keeps the last full run's result",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "cyclic-tiebreak",
+            "name": "Cyclic Tiebreak",
+            "definition": "A defect in which a tiebreak picks a source among copies none of which is distinguished, turning a correct refusal into a direction no copy supports.",
+            "type": "anti-pattern",
+            "scope": ["duplicate"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "breaking a tie by recency, path order or authorship when no copy derives from another and none is resolved",
+            "detected_by": ["a collapse direction chosen over a set with no distinguished copy"],
+            "measured_by": ["collapses directed by a tiebreak"],
+            "refactored_by": ["lexicon:refuse-and-name-the-cycle"],
+            "enforced_by": ["coordination review"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "no copy is the source → the newest file wins → every other copy is rewritten toward a value nobody decided",
+                "after": "no distinguished copy → refuse as a cycle → the decision stays with the party who holds the information",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "destructive-closure",
+            "name": "Destructive Closure",
+            "definition": "A defect in which closing a converged venue deletes it instead of moving it to the archive, keeping the outcome and destroying the argument it came from.",
+            "type": "anti-pattern",
+            "scope": ["venue"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "implementing a lifetime stated as deleted by removing the venue from the repository",
+            "detected_by": ["a closed venue that exists in neither the active surface nor the archive"],
+            "measured_by": ["venues closed by deletion"],
+            "refactored_by": ["lexicon:archive-the-absorbed-venue"],
+            "enforced_by": ["coordination review"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "the venue converges → it is deleted → a later reader holds the ruling and cannot tell it from a preference",
+                "after": "the venue converges → its outcome is absorbed → the venue moves to the archive with every position intact",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "hand-kept-index",
+            "name": "Hand-Kept Index",
+            "definition": "A defect in which an index is written by hand beside what it indexes, so it drifts silently because nothing compares the two.",
+            "type": "anti-pattern",
+            "scope": ["index"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "adding and removing index entries by hand",
+            "detected_by": ["an index entry with no file, or a file with no entry"],
+            "measured_by": ["entries and files missing their counterpart"],
+            "refactored_by": ["lexicon:generate-the-index-from-the-directory"],
+            "enforced_by": ["coordination review"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "a seat file is added → the index is not edited → the scan resolves fewer seats than it reports",
+                "after": "the index is regenerated from the directory on every run",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        }
+    ]
+}

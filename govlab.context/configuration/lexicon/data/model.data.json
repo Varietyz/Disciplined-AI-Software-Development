@@ -1,0 +1,375 @@
+{
+    "category": "model-architecture",
+    "records": [
+        {
+            "name": "Ad-Hoc Notebook-to-Production",
+            "kind": "anti-pattern",
+            "definition": "Promoting exploratory notebook code straight to production without engineering it into a reliable pipeline."
+        },
+        {
+            "name": "Deploy-and-Forget Models",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:model-drift",
+                    "reason": "Deploy-and-forget is never watching a model after release, while model drift is the loss of fidelity that goes unseen as a result."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Deploying a model and never monitoring it, so degradation as the data drifts goes unnoticed."
+        },
+        {
+            "name": "Exact Keyword Search Only",
+            "kind": "anti-pattern",
+            "definition": "Relying solely on exact keyword matching for retrieval, missing semantically related results."
+        },
+        {
+            "name": "Flat Document-Only Knowledge",
+            "kind": "anti-pattern",
+            "definition": "Representing knowledge as unlinked flat documents, losing the relationships a graph would capture."
+        },
+        {
+            "name": "Opaque Black-Box Decisions",
+            "kind": "anti-pattern",
+            "definition": "Producing model decisions with no explanation, so their reasoning cannot be inspected or trusted."
+        },
+        {
+            "name": "Opaque Ungoverned Model Use",
+            "kind": "anti-pattern",
+            "definition": "Using models with no governance or oversight, leaving their behavior and risks unmanaged."
+        },
+        {
+            "name": "Training-Time-Only Model Logic",
+            "kind": "anti-pattern",
+            "definition": "Building logic that exists only during training, with no counterpart to serve predictions at inference."
+        },
+        {
+            "name": "Unapproved Model Deployment",
+            "distinctFrom": [
+                {
+                    "id": "architecture:model-version-ambiguity",
+                    "reason": "Unapproved deployment skips the approval gate, while version ambiguity loses track of which version and configuration is running."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Deploying a model to production without passing the required review and approval gates."
+        },
+        {
+            "name": "Ungrounded Generation",
+            "kind": "anti-pattern",
+            "definition": "Generating output from a model alone without grounding it in retrieved facts, inviting hallucination."
+        },
+        {
+            "name": "Unguarded Model Autonomy",
+            "kind": "anti-pattern",
+            "definition": "Letting a model act autonomously with no safety guardrails on what it can do."
+        },
+        {
+            "name": "Untested Model Deployment",
+            "kind": "anti-pattern",
+            "definition": "Deploying a model without evaluating it, so its real-world quality is unknown until it fails."
+        },
+        {
+            "name": "Approval Policy",
+            "kind": "constraint",
+            "definition": "The declared rules and gates a model must pass before it may be deployed."
+        },
+        {
+            "name": "Document Store",
+            "kind": "artifact",
+            "definition": "The body of documents a retrieval system searches to ground a model's generation."
+        },
+        {
+            "name": "Data Pipeline",
+            "kind": "mechanism",
+            "definition": "The stages that ingest, clean, and transform data into a form suitable for training or inference."
+        },
+        {
+            "name": "Data/Model Boundaries",
+            "kind": "constraint",
+            "definition": "The lines separating data preparation, model training, and serving so each concern stays isolated."
+        },
+        {
+            "name": "Dataset",
+            "kind": "artifact",
+            "definition": "A curated collection of examples used to train or evaluate a model."
+        },
+        {
+            "name": "Embeddings",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:vector-index",
+                    "reason": "Embeddings are the vectors themselves, while a vector index organizes them for nearest-neighbor lookup."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "Numeric vector representations of data that place semantically similar items near each other."
+        },
+        {
+            "name": "Entities",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:relations",
+                    "reason": "Entities are a knowledge graph's nodes, while relations are its edges."
+                },
+                {
+                    "id": "lexicon:schema-ontology",
+                    "reason": "Entities are the instances in the graph, while the schema defines the entity types they belong to."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "The distinct things, such as people, places or concepts, that a knowledge graph represents as nodes."
+        },
+        {
+            "name": "Grounding Strategy",
+            "kind": "approach",
+            "definition": "A scheme for anchoring a model's output in retrieved, authoritative sources rather than its parameters alone."
+        },
+        {
+            "name": "Guardrails",
+            "kind": "mechanism",
+            "definition": "Constraints and filters that bound what a model is permitted to output or do at runtime."
+        },
+        {
+            "name": "Input/Output Contract",
+            "kind": "constraint",
+            "definition": "The agreed schema of the inputs a model accepts and the outputs it returns."
+        },
+        {
+            "name": "Model Artifact",
+            "kind": "artifact",
+            "definition": "The trained model file, with its learned weights, that is loaded to serve predictions."
+        },
+        {
+            "name": "Model Registry",
+            "kind": "artifact",
+            "definition": "A catalog that tracks model versions, their metadata, and their deployment status."
+        },
+        {
+            "name": "Rationale/Evidence",
+            "kind": "artifact",
+            "definition": "The reasons and supporting evidence recorded for a model's decision."
+        },
+        {
+            "name": "Relations",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:schema-ontology",
+                    "reason": "Relations are the edges present in the graph, while the schema defines the relationship types allowed."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "The typed connections between entities that a knowledge graph represents as edges."
+        },
+        {
+            "name": "Retriever",
+            "kind": "mechanism",
+            "definition": "A component that finds and returns the most relevant documents for a query."
+        },
+        {
+            "name": "Schema/Ontology",
+            "kind": "artifact",
+            "definition": "A formal definition of the entity types and relationship types a knowledge graph may contain."
+        },
+        {
+            "name": "Tool Interface",
+            "kind": "constraint",
+            "definition": "The defined contract through which an agent invokes external tools and receives their results."
+        },
+        {
+            "name": "Training/Inference Separation",
+            "kind": "constraint",
+            "definition": "The requirement that model training and prediction serving be distinct, separately-managed phases."
+        },
+        {
+            "name": "Vector Index",
+            "kind": "artifact",
+            "definition": "A data structure that organizes embedding vectors for fast nearest-neighbor lookup."
+        },
+        {
+            "name": "Retraining Triggers",
+            "kind": "mechanism",
+            "definition": "Signals that automatically initiate model retraining when measured drift crosses a threshold."
+        },
+        {
+            "name": "Model-Integrated Systems",
+            "kind": "capability",
+            "definition": "The ability of a software system to incorporate models as integral parts of its behavior."
+        },
+        {
+            "name": "Audit and Debugging",
+            "kind": "capability",
+            "definition": "The ability to inspect and trace a model's decisions for auditing and debugging."
+        },
+        {
+            "name": "Bounded Tool-Using Agents",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:governed-autonomy",
+                    "reason": "Bounded tool use limits which tools an agent may call, while governed autonomy limits which decisions it may take without approval."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to run agents that use external tools within defined, safe limits."
+        },
+        {
+            "name": "Contextual Generation",
+            "kind": "capability",
+            "definition": "The ability to generate output informed by retrieved, task-specific context."
+        },
+        {
+            "name": "Controlled Model Deployment",
+            "kind": "capability",
+            "definition": "The ability to release models through a governed, approved process."
+        },
+        {
+            "name": "Degradation Detection",
+            "kind": "capability",
+            "definition": "The ability to detect when a model's accuracy declines as data shifts."
+        },
+        {
+            "name": "Governed Autonomy",
+            "kind": "capability",
+            "definition": "The ability to let an agent act autonomously within enforced governance limits."
+        },
+        {
+            "name": "Model Selection/Regression Detection",
+            "kind": "capability",
+            "definition": "The ability to compare models and catch quality regressions before deployment."
+        },
+        {
+            "name": "Relationship-Aware Retrieval/Reasoning",
+            "kind": "capability",
+            "definition": "The ability to retrieve and reason over the relationships between entities, not just isolated facts."
+        },
+        {
+            "name": "Reliable Model Lifecycle",
+            "kind": "capability",
+            "definition": "The ability to manage a model's data, training, deployment and monitoring reliably and repeatably."
+        },
+        {
+            "name": "Safe Model Deployment",
+            "kind": "capability",
+            "definition": "The ability to deploy models with safeguards that bound their behavior."
+        },
+        {
+            "name": "Semantic Search",
+            "kind": "capability",
+            "definition": "The ability to find results by meaning and similarity rather than exact keyword match."
+        },
+        {
+            "name": "Similarity Retrieval",
+            "kind": "capability",
+            "definition": "The ability to retrieve items nearest to a query in an embedding space."
+        },
+        {
+            "name": "Structured, Versioned Prompts",
+            "kind": "artifact",
+            "definition": "Prompts authored as structured, version-controlled artifacts rather than ad-hoc strings."
+        },
+        {
+            "name": "Knowledge Freshness",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system's knowledge reflects current rather than stale information."
+        },
+        {
+            "name": "Trust",
+            "kind": "quality-attribute",
+            "definition": "The degree to which users are willing to rely on a system's outputs."
+        },
+        {
+            "name": "Capability/Utility",
+            "kind": "quality-attribute",
+            "definition": "The degree of usefulness a model offers, which strict safety limits can constrain."
+        },
+        {
+            "name": "Curation Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree of ongoing effort required to build and maintain a curated knowledge graph."
+        },
+        {
+            "name": "Experiment Velocity",
+            "kind": "metric",
+            "definition": "The rate at which model experiments can be run and iterated, which governance can slow."
+        },
+        {
+            "name": "Experimentation Speed",
+            "kind": "metric",
+            "definition": "The rate at which new modeling ideas can be tried and evaluated."
+        },
+        {
+            "name": "Explainability/Recall",
+            "kind": "quality-attribute",
+            "definition": "The degree to which retrieval stays explainable and complete, traded against pure similarity ranking."
+        },
+        {
+            "name": "Latency/Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree of latency and expense incurred to serve model predictions."
+        },
+        {
+            "name": "Metric Completeness",
+            "kind": "quality-attribute",
+            "definition": "The degree to which evaluation metrics capture every dimension of a model's quality."
+        },
+        {
+            "name": "Model Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of intricacy in a model, which raises accuracy but lowers explainability."
+        },
+        {
+            "name": "Monitoring Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree of ongoing expense of continuously monitoring a deployed model."
+        },
+        {
+            "name": "Retrieval Quality/Latency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which retrieval must trade result quality against speed."
+        },
+        {
+            "name": "Prompt Registry",
+            "kind": "technique",
+            "definition": "A technique for keeping prompts in one versioned registry instead of as literals across the code."
+        },
+        {
+            "name": "Prompt Versioning",
+            "kind": "technique",
+            "definition": "A technique for giving each prompt, dataset and index a version that inference logs record."
+        },
+        {
+            "name": "Evaluation Suite",
+            "kind": "technique",
+            "definition": "A technique for scoring model output against a fixed set of cases on every change to the model, prompt or data."
+        },
+        {
+            "name": "Centralized Model Configuration",
+            "kind": "technique",
+            "definition": "A technique for holding model names, parameters and limits in one configuration read by every call site."
+        },
+        {
+            "name": "Inference Context Record",
+            "kind": "technique",
+            "definition": "A technique for logging with each model output the model version, prompt version and inputs that produced it."
+        },
+        {
+            "name": "Evidence Citation",
+            "kind": "technique",
+            "definition": "A technique for attaching to each generated claim the retrieved source that supports it."
+        },
+        {
+            "name": "Claim Validation",
+            "kind": "technique",
+            "definition": "A technique for checking generated claims against their cited sources before they are returned."
+        },
+        {
+            "name": "Abstain or Disclose Uncertainty",
+            "kind": "technique",
+            "definition": "A technique for having a model decline or state its uncertainty when the evidence does not support an answer."
+        },
+        {
+            "name": "Governance Log",
+            "kind": "technique",
+            "definition": "A technique for recording each approval, deployment and retirement of a model with who decided it."
+        }
+    ]
+}

@@ -75,7 +75,7 @@ const declarationFindings = function declarationFindings(repoRoot: string, path:
     const declaresStage = STAGES.some((stage) => contains(source, `"${stage}"`));
     const stage = declaresStage
         ? []
-        : [contractFinding(path, "stage", "unrecognised", `stage is one of ${STAGES.join(", ")}`, "unknown stage")];
+        : [contractFinding(path, "stage", "unrecognized", `stage is one of ${STAGES.join(", ")}`, "unknown stage")];
 
     return [
         ...unscoped,

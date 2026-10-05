@@ -4,6 +4,7 @@
     "private": true,
     "type": "module",
     "description": "The project's own governance host — the custom eslint rules the gate loads, the codemods it auto-fixes with, and the shared manifests and taxonomy config both derive their structural facts from.",
+    "license": "CC-BY-SA-4.0",
     "imports": {
         "#codemods/*": "./codemods/*.ts",
         "#rules/*": "./rules/*.ts",
@@ -27,6 +28,7 @@
         "@govlab/docs": "*",
         "@govlab/pipeline": "*",
         "@govlab/quality": "*",
-        "@ssot/paths": "*"
+        "@ssot/paths": "*",
+        "@ssot/secrets": "*"
     }
 }

@@ -1,0 +1,357 @@
+{
+    "category": "contracts-interfaces-compatibility",
+    "records": [
+        {
+            "name": "Ad-Hoc Endpoints",
+            "distinctFrom": [
+                {
+                    "id": "architecture:chatty-interface",
+                    "reason": "Ad-hoc endpoints are inconsistent one-off shapes, while a chatty interface is one operation needing many small calls."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Exposing inconsistent, one-off endpoints instead of a uniform interface, forcing clients to special-case each."
+        },
+        {
+            "name": "Ad-Hoc Payloads",
+            "kind": "anti-pattern",
+            "definition": "Sending payloads with no agreed schema, so consumers must guess at structure and break on change."
+        },
+        {
+            "name": "Breaking API Change",
+            "kind": "anti-pattern",
+            "definition": "Changing an API in a way that violates its published contract, breaking existing clients."
+        },
+        {
+            "name": "Breaking Change",
+            "kind": "anti-pattern",
+            "definition": "A change that violates a component's contract, forcing consumers to update to keep working."
+        },
+        {
+            "name": "External State Mutation",
+            "kind": "anti-pattern",
+            "definition": "Mutating state outside an object's own boundary, breaking the invariants it is supposed to guarantee."
+        },
+        {
+            "name": "Hidden Service Coupling",
+            "kind": "anti-pattern",
+            "definition": "An undeclared dependency between services that surfaces only at runtime, undermining independent evolution."
+        },
+        {
+            "name": "Implementation-First Integration",
+            "kind": "anti-pattern",
+            "definition": "Integrating against a concrete implementation before agreeing a contract, coupling consumers to internals."
+        },
+        {
+            "name": "Implicit Assumptions",
+            "kind": "anti-pattern",
+            "definition": "Relying on unstated preconditions a caller must satisfy, which break silently when they are violated."
+        },
+        {
+            "name": "Implicit Behavior",
+            "kind": "anti-pattern",
+            "definition": "Behavior a component performs that is not stated in its contract, surprising callers who come to depend on it."
+        },
+        {
+            "name": "Proprietary Coupling",
+            "kind": "anti-pattern",
+            "definition": "Binding to a vendor's proprietary interface, forfeiting interoperability and portability."
+        },
+        {
+            "name": "Proprietary Drift",
+            "kind": "anti-pattern",
+            "definition": "Extending a standard protocol with proprietary features until it no longer interoperates with others."
+        },
+        {
+            "name": "Silent Breaking Changes",
+            "kind": "anti-pattern",
+            "definition": "Shipping a breaking change with no version bump or notice, so consumers fail without warning."
+        },
+        {
+            "name": "Strict Fragile Parsers",
+            "kind": "anti-pattern",
+            "definition": "Parsers that reject any input deviating from an exact expectation, breaking on benign additions."
+        },
+        {
+            "name": "Undefined Results",
+            "kind": "anti-pattern",
+            "definition": "Returning results a contract never specifies for a given input, leaving callers with undefined behavior."
+        },
+        {
+            "name": "Compatibility Policy",
+            "kind": "constraint",
+            "definition": "The declared rules governing which changes are compatible and how versions are managed."
+        },
+        {
+            "name": "Consistent Semantics",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:stable-contracts",
+                    "reason": "Consistent semantics is one meaning across resources, while stable contracts are one shape over time."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that the same operation mean the same thing across every resource and endpoint."
+        },
+        {
+            "name": "Extensible Schema",
+            "kind": "constraint",
+            "definition": "A schema shaped so new fields can be added without breaking existing consumers."
+        },
+        {
+            "name": "Protocol Contract",
+            "kind": "constraint",
+            "definition": "The agreed rules of a protocol, such as its messages, formats and sequences, that both ends must honor."
+        },
+        {
+            "name": "Result Validation",
+            "kind": "activity",
+            "definition": "The activity of checking that an operation's result satisfies its promised postconditions."
+        },
+        {
+            "name": "Semantic Contract",
+            "kind": "constraint",
+            "definition": "An agreement specifying not just the shape of an interface but the meaning and behavior it guarantees."
+        },
+        {
+            "name": "API Usability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which an API is easy for developers to learn and use correctly."
+        },
+        {
+            "name": "Automated Validation",
+            "kind": "capability",
+            "definition": "The ability to check data automatically against a declared schema."
+        },
+        {
+            "name": "Client Compatibility",
+            "kind": "quality-attribute",
+            "definition": "The degree to which existing clients continue to work as an API evolves."
+        },
+        {
+            "name": "Consumer-Driven Development",
+            "kind": "capability",
+            "definition": "The ability to shape a provider's contract from the concrete needs of its consumers."
+        },
+        {
+            "name": "Consumer-Verified Compatibility",
+            "kind": "capability",
+            "definition": "The ability to verify a provider still satisfies the contracts its consumers depend on."
+        },
+        {
+            "name": "Contract Testing",
+            "kind": "activity",
+            "definition": "The activity of testing that an implementation honors the contract it declares."
+        },
+        {
+            "name": "Cross-System Communication",
+            "kind": "capability",
+            "definition": "The ability for independent systems to exchange and understand data with one another."
+        },
+        {
+            "name": "Incremental Deployment",
+            "kind": "capability",
+            "definition": "The ability to roll out changes gradually while old and new versions coexist."
+        },
+        {
+            "name": "Independent Consumers",
+            "kind": "capability",
+            "definition": "The ability for consumers to evolve on their own schedule because the interface stays stable."
+        },
+        {
+            "name": "Multi-Client Integration",
+            "kind": "capability",
+            "definition": "The ability to serve many different clients through one compatible protocol."
+        },
+        {
+            "name": "Provider Change Safety",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a provider can change without breaking its consumers, verified by their contracts."
+        },
+        {
+            "name": "Reliable Integration",
+            "kind": "quality-attribute",
+            "definition": "The degree to which systems integrate correctly because their shared meaning is agreed, not just their shape."
+        },
+        {
+            "name": "Rolling Upgrades",
+            "kind": "capability",
+            "definition": "The ability to upgrade instances one at a time while old and new versions interoperate."
+        },
+        {
+            "name": "Schema Evolution",
+            "kind": "capability",
+            "definition": "The ability to change a data schema over time without breaking existing readers or writers."
+        },
+        {
+            "name": "Consumer Safety",
+            "kind": "quality-attribute",
+            "definition": "The degree to which consumers are protected from breakage when a provider changes."
+        },
+        {
+            "name": "Data Quality",
+            "kind": "quality-attribute",
+            "definition": "The degree to which data is accurate, complete, and fit for its intended use."
+        },
+        {
+            "name": "Integration",
+            "kind": "quality-attribute",
+            "definition": "The degree to which separate systems are connected to operate as a unified whole."
+        },
+        {
+            "name": "Cleanup / Simplification",
+            "kind": "activity",
+            "definition": "The activity of removing obsolete code and structure, which backward compatibility can hold back."
+        },
+        {
+            "name": "Cross-Domain Translation",
+            "kind": "activity",
+            "definition": "The activity of mapping terms and structures between two domains that model the world differently."
+        },
+        {
+            "name": "Development Speed",
+            "kind": "metric",
+            "definition": "The rate at which new functionality is built, which upfront contract rigor can slow."
+        },
+        {
+            "name": "Distributed Evolution",
+            "kind": "quality-attribute",
+            "definition": "The degree to which services can evolve independently, constrained by the contracts binding them."
+        },
+        {
+            "name": "Domain-Specific Optimization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system is tuned for one domain, traded against broad interoperability."
+        },
+        {
+            "name": "Evolution",
+            "kind": "capability",
+            "definition": "The ability to change an interface over time, in tension with the stability its contract promises."
+        },
+        {
+            "name": "Evolution Speed",
+            "kind": "metric",
+            "definition": "The rate at which an interface can change, which a commitment to stability deliberately limits."
+        },
+        {
+            "name": "Flexibility",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a component permits varied use, in tension with the invariants it must uphold."
+        },
+        {
+            "name": "Flexible Ingestion",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system accepts loosely-structured input, in tension with a strict data contract."
+        },
+        {
+            "name": "Interface Overuse",
+            "kind": "quality-attribute",
+            "definition": "The degree to which excessive interface abstraction adds indirection without proportional benefit."
+        },
+        {
+            "name": "Permissive APIs",
+            "kind": "quality-attribute",
+            "definition": "The degree to which an API accepts loose or lenient input, in tension with strict preconditions."
+        },
+        {
+            "name": "Protocol Optimization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a protocol is tuned for performance, traded against broad compatibility."
+        },
+        {
+            "name": "Provider Autonomy",
+            "kind": "quality-attribute",
+            "definition": "The degree of freedom a provider retains to change, constrained by consumer-driven contracts."
+        },
+        {
+            "name": "Rapid Prototyping",
+            "kind": "activity",
+            "definition": "The activity of building quick throwaway prototypes, which explicit contracts can slow."
+        },
+        {
+            "name": "Runtime Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree of runtime overhead incurred by checking conditions on every call."
+        },
+        {
+            "name": "Schema Flexibility",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a schema tolerates variation, in tension with a strict contract."
+        },
+        {
+            "name": "Specialized Endpoints",
+            "kind": "quality-attribute",
+            "definition": "The degree to which purpose-built endpoints are offered, traded against a uniform interface."
+        },
+        {
+            "name": "Strong Validation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which input is strictly validated, in tension with tolerating unknown future fields."
+        },
+        {
+            "name": "Version Sprawl",
+            "kind": "quality-attribute",
+            "definition": "The degree to which many concurrent versions accumulate and must be maintained."
+        },
+        {
+            "name": "Standard Error Contract",
+            "kind": "technique",
+            "definition": "A technique for giving every error one published shape with a code, a message and its context."
+        },
+        {
+            "name": "Introduce Boundary DTO",
+            "kind": "technique",
+            "definition": "A technique for carrying data across a boundary in a transfer object, so internal models stay inside."
+        },
+        {
+            "name": "Coarse-Grained Endpoint",
+            "kind": "technique",
+            "definition": "A technique for serving one client operation with one call that returns everything the operation needs."
+        },
+        {
+            "name": "Backward-Compatible Change",
+            "kind": "technique",
+            "definition": "A technique for changing a contract only by additions that existing consumers can ignore."
+        },
+        {
+            "name": "Compatibility Adapter",
+            "kind": "technique",
+            "definition": "A technique for serving an old contract through an adapter over the new one while consumers migrate."
+        },
+        {
+            "name": "Gradual Deprecation",
+            "kind": "technique",
+            "definition": "A technique for announcing a removal with a date, warning the consumers still using it, and removing it after the date."
+        },
+        {
+            "name": "Migration Guide",
+            "kind": "technique",
+            "definition": "A technique for publishing the steps a consumer takes to move from one version of a contract to the next."
+        },
+        {
+            "name": "Version Bump",
+            "kind": "technique",
+            "definition": "A technique for raising a contract's version number by the rule that says which kind of change it carries."
+        },
+        {
+            "name": "Consumer-Driven Contract Tests",
+            "kind": "technique",
+            "definition": "A technique for having each consumer publish the responses it relies on and testing the provider against all of them before it releases."
+        },
+        {
+            "name": "Define Contract",
+            "kind": "technique",
+            "definition": "A technique for publishing the operations, shapes and guarantees of a boundary before implementing either side of it."
+        },
+        {
+            "name": "Standardize the Interface",
+            "kind": "technique",
+            "definition": "A technique for giving operations of one kind the same naming, shapes and conventions across a system."
+        },
+        {
+            "name": "Tolerant Reader",
+            "kind": "technique",
+            "definition": "A technique for reading only the fields a consumer needs and ignoring unknown ones, so additive changes do not break it."
+        }
+    ]
+}

@@ -1,0 +1,115 @@
+{
+    "label": "Bane's Lab Build Scripts",
+    "summary": "The build steps the site runs on every build and dev start.",
+    "maturity": "experimental",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "build-tooling"}
+    ],
+    "capabilities": [
+        "derive-the-ontology-snapshot",
+        "render-diagrams-to-vectors",
+        "prerender-pages-and-discovery-files",
+        "write-the-query-catalog",
+        "prune-unreachable-build-output",
+        "render-the-methodology-repository",
+        "derive-the-anatomy-snapshot",
+        "validate-the-built-site",
+        "supervise-the-dev-servers"
+    ],
+    "governedBy": [
+        "type-safety",
+        "separation-of-concerns"
+    ],
+    "visibility": {"private": true,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "entries": [
+        "runtime/entrypoints/*.entrypoint.ts",
+        "core/plugins/*.plugin.ts",
+        "core/pipelines/*.pipeline.ts",
+        "core/steps/*.step.ts",
+        "core/producers/*.producer.ts"
+    ],
+    "docs": {
+        "overview": "The web member's vite config registers one plugin, `sitePlugin` (`core/plugins/site.plugin.ts`), which runs every build step through the site pipeline (`core/pipelines/site.pipeline.ts`). Each build concern is a step file under `core/steps/` that registers itself through `defineStep` (`core/factories/step.factory.ts`) and drives a coordinator under `core/coordinators/` over the converters, formatters, loaders, persistence, resolvers and validators beside it. A step declares its phase, its modes, what it needs and what it gives. The pipeline derives the order from those contracts, runs the steps whose needs are met together, and refuses an unmet need, a key two steps give, a cycle and an undeclared result. The start phase runs at build start and at dev-server start, except the diagram step, which declares the build mode only. The close phase runs when the bundle closes in a build. Before the config resolves in a build, the config calls `deriveAnatomy` in `core/coordinators/anatomy.coordinator.ts`, which snapshots every tree the web member's tree registry declares for the anatomy page, and fails when a reference that resolved to one target in the last build does not resolve to it now. The graph step merges whatever the producer registry holds: each edge kind is a `*.producer.ts` file under `core/producers/` that registers itself through `defineProducer` (`core/factories/producer.factory.ts`). The dev server reads the diagram vectors and the anatomy files the last build wrote. The entry points under `runtime/entrypoints/` run on their own. `server.entrypoint.ts` supervises every dev server, and `validation.entrypoint.ts` validates the built site, which the gate runs as its discovery step.",
+        "whenToUse": [
+            "Adding a build step. The step is a `*.step.ts` file under `core/steps/` that calls `defineStep` with its phase, needs and gives, beside a coordinator that does the work. The pipeline finds it, and the vite config stays as it is.",
+            "Adding an edge kind to the site graph. The producer is a `*.producer.ts` file under `core/producers/` that calls `defineProducer` with its name and a `produce` function over the graph context, and its relation is one record in `RELATIONS` in the web member's graph constants.",
+            "Starting the local site with `npm run dev` from the workspace root.",
+            "Checking a build before a deploy by running the discovery validator over `_builds/web`."
+        ],
+        "whenNotToUse": [
+            "A standalone check the gate runs on its own belongs in `project.scripts`, since nothing in the application imports it.",
+            "A deploy step belongs in the deploy member."
+        ],
+        "install": "Hoisted from the root workspace. A build and the dev server need a Chrome or Edge binary for the diagram renderer.",
+        "quickStart": [
+            {"intent": "Start the dev servers",
+                "lang": "bash",
+                "code": "npm run dev"},
+            {
+                "intent": "Build the site through every step",
+                "lang": "bash",
+                "code": "npm run build -w @banes-lab/web"
+            },
+            {
+                "intent": "Validate the built site",
+                "lang": "bash",
+                "code": "node banes-lab.root/banes-lab.build.scripts/runtime/entrypoints/validation.entrypoint.ts"
+            }
+        ],
+        "configuration": [
+            {
+                "option": "configuration/constants/server.constants.ts",
+                "note": "the dev, social and capture ports and the dev command's declared arguments."
+            },
+            {
+                "option": "configuration/constants/diagram.constants.ts",
+                "note": "the diagram library and layout engine bundles, the stage page's routes, the fonts and theme tokens it loads, and the vector filename shape."
+            },
+            {
+                "option": "configuration/constants/catalog.constants.ts",
+                "note": "the query catalog's address segments and the segments it reserves."
+            },
+            {
+                "option": "configuration/constants/anatomy.constants.ts",
+                "note": "the tree options a build without the web member's resolvers falls back to. The trees themselves are declared in the web member's tree registry."
+            }
+        ],
+        "disposal": [
+            "Remove the `sitePlugin` import from the web member's vite config.",
+            "Remove the member's workspace entry from the root `package.json` and its `MEMBERS` row from the stage planner.",
+            "Remove its governed-root entry from `containers` and `specialContainers` in `.govlab/shared/configs/taxonomy.config.ts`, and the `app.build`, `app.buildSteps` and `app.graphProducers` keys from `project.paths/paths.yaml`.",
+            "Delete the directory, reinstall, run the gate."
+        ],
+        "apiNotes": [
+            {
+                "name": "deriveAnatomy",
+                "note": "Runs from the vite config before the config resolves, so the anatomy snapshot, walks and sources exist before vite indexes the public folder."
+            },
+            {
+                "name": "defineProducer",
+                "note": "Registers one graph producer under its name. The graph step imports every producer file and merges the graphs they return, so a producer holds only its own edges and nodes."
+            },
+            {
+                "name": "defineStep",
+                "note": "The base of every build step. It fills the defaults (both modes, no needs, and the step's own name as what it gives) and registers the step, so a step file holds only what differs."
+            },
+            {
+                "name": "runPhase",
+                "note": "Runs one phase of the registered steps. It derives the waves from the needs and gives, runs each wave's steps together over one build state, merges what each gives, and logs each step's time."
+            },
+            {
+                "name": "sitePlugin",
+                "note": "The one vite plugin. It discovers the steps when the config resolves, runs the start phase at build start and the close phase when the bundle closes, and serves the dev catalog and payloads."
+            }
+        ],
+        "aiContext": [
+            "A script the application imports or a package script runs belongs here, and a standalone check belongs in `project.scripts`.",
+            "Every location resolves through `@ssot/paths`, and every generated file is written through the canonical writer.",
+            "Copy printed by a step lives in `configuration/strings/`."
+        ]
+    }
+}

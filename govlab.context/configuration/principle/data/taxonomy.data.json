@@ -1,0 +1,903 @@
+{
+    "category": "Taxonomy / Classification / Naming",
+    "check": {
+        "population": "every folder and filename under a declared governed root, and every word in the declared vocabularies",
+        "freshness": "a verdict stands until a file is added, moved or renamed, or a vocabulary or root declaration changes",
+        "refusal": "the naming or placement gate fails the lint run on the file, naming the declared word that covers a refused one",
+        "observation": "each path parsed by position against the declared containers, depth cap and closed vocabularies",
+        "evidence": "fires-and-accepts: one suite lints a file whose tag is undeclared and one whose tag differs from its folder, another refuses a repeated role and a path past the depth cap, and both pass conforming paths",
+        "authority": "the declared vocabularies and roots, which every path conforms to, so an undeclared word is an approved edit to the declaration"
+    },
+    "records": [
+        {
+            "id": "closed-vocabulary",
+            "distinctFrom": [
+                {
+                    "id": "architecture:agnostic-first-vocabulary",
+                    "reason": "A closed vocabulary admits a word only by approved edit, while agnostic-first decides which words to admit, domain-neutral roles before domain ones."
+                }
+            ],
+            "name": "Closed Vocabulary",
+            "definition": "A design rule that every word in a name slot comes from a declared list, and a new word enters the list only by an approved edit.",
+            "type": "principle",
+            "scope": [
+                "repository",
+                "folder",
+                "filename"
+            ],
+            "requires": [
+                "Vocabulary Admission",
+                "Rejection Table"
+            ],
+            "reinforces": [
+                "Single Source of Truth",
+                "Ubiquitous Language"
+            ],
+            "enables": [
+                "Placement Predictability",
+                "Concern-Folder Correspondence"
+            ],
+            "conflicts_with": [
+                "Vocabulary Inflation",
+                "Nominalized Process Word",
+                "Adjective Slot Word",
+                "Plural Subject",
+                "Measurement Word",
+                "Instance Identifier Word"
+            ],
+            "tensions_with": ["Naming Expressiveness"],
+            "violated_by": ["lexicon:vocabulary-inflation"],
+            "detected_by": ["a name slot holding a word absent from its declared array"],
+            "measured_by": ["undeclared-word count per governed root"],
+            "refactored_by": [
+                "lexicon:rename-to-a-declared-word",
+                "lexicon:vocabulary-admission"
+            ],
+            "enforced_by": [
+                "registry-backed naming gate",
+                "developer approval"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<container>/managers/foo.manager.ts → neither \"managers\" nor \"manager\" is a declared word",
+                "after": "<container>/coordinators/foo.coordinator.ts → the declared concern that already covers the role",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "positional-slot-resolution",
+            "distinctFrom": [
+                {
+                    "id": "architecture:case-dialect",
+                    "reason": "Positional slot resolution reads slots from dot-separated segments, while a case dialect reads the same slots from word boundaries in another case."
+                },
+                {
+                    "id": "lexicon:subject-slot",
+                    "reason": "Positional slot resolution is the reading rule, while the subject slot is one position it reads."
+                },
+                {
+                    "id": "lexicon:variant-slot",
+                    "reason": "Positional slot resolution is the reading rule, while the variant slot is one position it reads."
+                }
+            ],
+            "name": "Positional Slot Resolution",
+            "definition": "A mechanism that reads each word of a path by the slot it lands in, so the last dot-segment before a file's extension is always its concern and a folder named after a concern tag resolves as the latest role its depth can legally take.",
+            "type": "mechanism",
+            "scope": [
+                "folder",
+                "filename"
+            ],
+            "requires": [
+                "Concern Tag",
+                "Subject Slot",
+                "Ordered Role Sequence"
+            ],
+            "reinforces": [
+                "Closed Vocabulary",
+                "Placement Predictability"
+            ],
+            "enables": [
+                "Variant Slot",
+                "Glob Resolvability",
+                "Concern-Folder Correspondence"
+            ],
+            "conflicts_with": [
+                "Concern-Swallowing Compound",
+                "Free-Form Folder Level"
+            ],
+            "tensions_with": [],
+            "violated_by": ["lexicon:vocabulary-bound-reading"],
+            "detected_by": ["a filename whose last segment before the extension is not a declared concern tag, or a folder carrying a concern tag's label that the resolver places in the subject role"],
+            "measured_by": ["unparseable filename count, and folders whose resolved role differs from the latest legal role for their word"],
+            "refactored_by": [
+                "lexicon:split-the-compound",
+                "lexicon:move-the-tag-to-the-concern-slot",
+                "lexicon:correct-the-resolver"
+            ],
+            "enforced_by": [
+                "filename parser",
+                "naming gate",
+                "placement gate"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "foo-registry.ts → one fused word, so neither slot resolves",
+                "after": "foo.registry.ts → subject \"foo\", concern \"registry\"; position decides, so a concern word is legal in the subject slot too",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "concern-folder-correspondence",
+            "name": "Concern-Folder Correspondence",
+            "definition": "A rule or precondition that a file's concern tag matches the label of the folder that holds it.",
+            "type": "constraint",
+            "scope": [
+                "folder",
+                "filename"
+            ],
+            "requires": [
+                "Concern Folder",
+                "Concern Tag",
+                "Collection Concern",
+                "Single-Unit Concern",
+                "Mass Concern"
+            ],
+            "reinforces": ["Glob Resolvability"],
+            "enables": ["Glob-Resolvable Tree"],
+            "conflicts_with": ["Free-Form Folder Level"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:tag-folder-mismatch"],
+            "detected_by": ["tag/folder mismatch on a filesystem walk"],
+            "measured_by": ["mismatched file count"],
+            "refactored_by": [
+                "lexicon:move-to-the-matching-concern-folder",
+                "lexicon:reclassify-the-file"
+            ],
+            "enforced_by": [
+                "placement gate",
+                "naming gate"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<container>/caches/foo.store.ts → the folder says cache, the tag says store",
+                "after": "<container>/stores/foo.store.ts → the tag terminates the name and names the parent folder",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "glob-resolvable-tree",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:shape-discovered-surface",
+                    "reason": "A glob-resolvable tree is the property that one pattern collects a concern at any depth, while a shape-discovered surface is a consumer that collects by such a pattern."
+                }
+            ],
+            "name": "Glob-Resolvable Tree",
+            "definition": "A mechanism that lets one unanchored pattern per concern collect every matching file or folder, at whatever depth it sits.",
+            "type": "mechanism",
+            "scope": ["repository"],
+            "requires": ["Concern-Folder Correspondence"],
+            "reinforces": [
+                "Discoverability",
+                "Glob Resolvability"
+            ],
+            "enables": ["Shape-Discovered Surface"],
+            "conflicts_with": ["Concern-Swallowing Compound"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:depth-anchored-discovery"],
+            "detected_by": ["a pattern that must enumerate depths to collect one concern"],
+            "measured_by": ["depth-anchored pattern count"],
+            "refactored_by": [
+                "lexicon:unanchor-the-pattern",
+                "lexicon:restore-the-terminating-tag"
+            ],
+            "enforced_by": [
+                "aggregator review",
+                "placement gate"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<root>/*/validators/*.ts and <root>/*/*/validators/*.ts → one pattern per depth, and a new grouping adds another",
+                "after": "**/*.validator.ts for the files, **/validators/ for the folders → two unanchored patterns resolve the concern tree-wide",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "declared-jurisdiction",
+            "name": "Declared Jurisdiction",
+            "definition": "A design rule that a naming gate reads from one declaration the roots it governs, the containers and buckets under each, the classes of file exempt from the grammar, and the trees another system authors or resolves by name, which are exempted once and never governed.",
+            "type": "principle",
+            "scope": [
+                "repository",
+                "root",
+                "file"
+            ],
+            "requires": [
+                "Governed Root",
+                "Container Level",
+                "Flat Bucket",
+                "Ignore Declaration",
+                "Ecosystem-Fixed Name",
+                "Structurally Exempt File",
+                "Compound Marker"
+            ],
+            "reinforces": [
+                "Explicit Boundaries",
+                "Single Source of Truth"
+            ],
+            "enables": [
+                "Bounded Nesting Depth",
+                "Glob-Resolvable Tree",
+                "Backward Compatibility"
+            ],
+            "conflicts_with": [
+                "Ignore-List Silencing",
+                "Depth-Relief Container",
+                "Claimed Foreign Tree",
+                "Duplicated Authority"
+            ],
+            "tensions_with": [],
+            "violated_by": [
+                "lexicon:shape-inferred-jurisdiction",
+                "lexicon:ignore-list-silencing",
+                "lexicon:per-check-exemption-list"
+            ],
+            "detected_by": [
+                "a folder at a governed root that is in neither the container nor the bucket declaration",
+                "an ignore entry naming authored source that belongs to no exempt class, or a declared root that holds another system's ownership marker"
+            ],
+            "measured_by": [
+                "undeclared root-level folder count",
+                "ignore entries outside the exempt classes, and exemptions held outside the one upstream declaration"
+            ],
+            "refactored_by": [
+                "lexicon:declare-the-root",
+                "lexicon:place-the-folder-in-an-existing-container",
+                "lexicon:remove-the-ignore-entry",
+                "lexicon:collapse-the-exemption-lists"
+            ],
+            "enforced_by": [
+                "jurisdiction gate",
+                "the taxonomy validator, which refuses an ignore entry of wildcards or of a whole extension, and the coordination member's declaration check, which resolves every declared upstream root against the disk and refuses a root carrying a foreign ownership marker"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "\"a folder holding no folders is a bucket\" → inferred, so a container that loses its last folder silently reclassifies and its next loose file passes",
+                "after": "containers{<root>: [...]} + specialContainers{<root>: [...]} → both kinds declared; a folder in neither is flagged",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "bounded-nesting-depth",
+            "distinctFrom": [
+                {
+                    "id": "architecture:backward-compatibility",
+                    "reason": "Bounded nesting depth limits a path, while backward compatibility keeps a new version working for old consumers."
+                },
+                {
+                    "id": "lexicon:depth-cap",
+                    "reason": "Bounded nesting depth joins two conditions on a path, while the depth cap is the first, the number of folders."
+                },
+                {
+                    "id": "lexicon:ordered-role-sequence",
+                    "reason": "Bounded nesting depth joins two conditions on a path, while the ordered role sequence is the second, the order of roles."
+                }
+            ],
+            "name": "Bounded Nesting Depth",
+            "definition": "A rule or precondition that a file sits within a fixed number of folders below its governed root, with each folder taking a later role than the one above it.",
+            "type": "constraint",
+            "scope": [
+                "folder",
+                "root"
+            ],
+            "requires": [
+                "Depth Cap",
+                "Ordered Role Sequence"
+            ],
+            "reinforces": ["Placement Predictability"],
+            "enables": ["Sideways Overflow"],
+            "conflicts_with": ["Downward Nesting"],
+            "tensions_with": ["Tree Compactness"],
+            "violated_by": ["lexicon:downward-nesting"],
+            "detected_by": ["a path over the cap, or a role repeated or revisited along it"],
+            "measured_by": ["over-cap path count"],
+            "refactored_by": [
+                "lexicon:take-the-variant-slot",
+                "lexicon:add-a-sibling-subject-folder"
+            ],
+            "enforced_by": ["placement gate"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<container>/foo/pools/lru/bar.pool.ts → one folder past the cap, and the extra level resolves to no role at all",
+                "after": "<container>/foo/pools/bar.lru.pool.ts → container, subject, concern, in order and at the cap; the discriminator moved into the variant slot",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "sideways-overflow",
+            "name": "Sideways Overflow",
+            "definition": "A design pattern that resolves a naming collision with the filename's variant slot and resolves breadth with a sibling subject folder.",
+            "type": "pattern",
+            "scope": [
+                "folder",
+                "filename"
+            ],
+            "requires": [
+                "Variant Slot",
+                "Subject Folder"
+            ],
+            "reinforces": ["Bounded Nesting Depth"],
+            "enables": ["Glob Resolvability"],
+            "conflicts_with": ["Downward Nesting"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:downward-nesting"],
+            "detected_by": ["a folder level introduced where a variant or a sibling subject folder resolves the collision"],
+            "measured_by": ["nesting-relief count"],
+            "refactored_by": [
+                "lexicon:take-the-variant-slot",
+                "lexicon:add-a-sibling-subject-folder"
+            ],
+            "enforced_by": [
+                "placement gate",
+                "reshape review"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<container>/caches/lru/foo.cache.ts beside <container>/caches/fifo/foo.cache.ts → the collision was relieved by a new level",
+                "after": "<container>/caches/foo.lru.cache.ts beside <container>/caches/foo.fifo.cache.ts → relieved by the variant slot, at the same depth",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "one-concern-per-file",
+            "distinctFrom": [
+                {
+                    "id": "architecture:collision-consolidation",
+                    "reason": "One concern per file splits a file that plays two roles, while collision consolidation merges two files that play one."
+                },
+                {
+                    "id": "architecture:narrowest-concern",
+                    "reason": "One concern per file requires a single role, while narrowest concern chooses which declared role names it."
+                }
+            ],
+            "name": "One Concern Per File",
+            "definition": "A design rule that each file plays exactly one declared role, and a file that plays two is split.",
+            "type": "principle",
+            "scope": ["file"],
+            "requires": ["Classification Judgment"],
+            "reinforces": ["Separation of Concerns"],
+            "enables": ["Narrowest Concern"],
+            "conflicts_with": [
+                "Multi-Role File",
+                "Sentence-Shaped Name"
+            ],
+            "tensions_with": [],
+            "violated_by": ["lexicon:multi-role-file"],
+            "detected_by": ["a file that classifies equally well under two declared concerns"],
+            "measured_by": ["split-candidate count"],
+            "refactored_by": ["lexicon:split-by-responsibility"],
+            "enforced_by": ["classification review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "foo.store.ts → holds the state AND validates every write, so its concern is two words",
+                "after": "foo.store.ts + foo.validator.ts → the ambiguity was the finding; the split is the fix",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "narrowest-concern",
+            "name": "Narrowest Concern",
+            "definition": "A design rule that a file is classified under the narrowest declared role that describes it accurately.",
+            "type": "principle",
+            "scope": ["file"],
+            "requires": ["Classification Judgment"],
+            "reinforces": ["Placement Predictability"],
+            "enables": ["Layer Spine Precedence"],
+            "conflicts_with": ["Saturated Role Tag"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:saturated-role-tag"],
+            "detected_by": ["one tag carrying files of several distinct roles"],
+            "measured_by": [
+                "files per tag",
+                "skew toward the broadest tags"
+            ],
+            "refactored_by": ["lexicon:reclassify-to-the-narrower-role"],
+            "enforced_by": ["classification review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "foo.manager.ts → names a stature, so it fits lifecycle owners, caches, registries and coordinators alike",
+                "after": "foo.coordinator.ts → the narrowest declared role that is accurate; a file that cannot choose is doing both",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "layer-spine-precedence",
+            "name": "Layer Spine Precedence",
+            "definition": "A mechanism that breaks an irreducible tie between two roles in favor of the one nearer the domain on the layer spine.",
+            "type": "mechanism",
+            "scope": ["file"],
+            "requires": ["Layer Spine"],
+            "reinforces": ["Narrowest Concern"],
+            "enables": ["Placement Predictability"],
+            "conflicts_with": ["Multi-Role File"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:spine-read-as-a-dependency-rule"],
+            "detected_by": ["an irreducible two-concern overlap resolved by preference rather than by layer"],
+            "measured_by": ["unresolved overlap count"],
+            "refactored_by": ["lexicon:apply-the-domain-ward-tie-break"],
+            "enforced_by": ["classification review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "a file that is irreducibly both is tagged by whichever word came to mind first",
+                "after": "model (domain) beats schema (infrastructure) → domain-ward wins, and only as a tie-break after the split test fails",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "agnostic-first-vocabulary",
+            "name": "Agnostic-First Vocabulary",
+            "definition": "A design rule that a domain-specific role word is admitted only where no domain-neutral role already covers it.",
+            "type": "principle",
+            "scope": [
+                "repository",
+                "vocabulary"
+            ],
+            "requires": [
+                "Is-A Test",
+                "Rejection Table"
+            ],
+            "reinforces": ["Closed Vocabulary"],
+            "enables": ["Discoverability"],
+            "conflicts_with": [
+                "Vocabulary Inflation",
+                "Nominalized Process Word",
+                "Saturated Role Tag"
+            ],
+            "tensions_with": [],
+            "violated_by": ["lexicon:domain-dialect-role"],
+            "detected_by": ["a domain tag whose role a declared agnostic concern already covers"],
+            "measured_by": ["domain-tag share of the vocabulary"],
+            "refactored_by": ["lexicon:classify-to-the-meta-concern"],
+            "enforced_by": [
+                "rejection table",
+                "developer approval"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<container>/managers/ and <container>/helpers/ → two catch-all words for roles the agnostic set already names",
+                "after": "<container>/coordinators/ and <container>/predicates/ → a domain tag is admitted only where no agnostic concern covers the role",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "guided-vocabulary-refusal",
+            "name": "Guided Vocabulary Refusal",
+            "definition": "A mechanism that answers a refused word with the declared word that covers its role, looked up in an indexed rejection table.",
+            "type": "mechanism",
+            "scope": [
+                "repository",
+                "vocabulary",
+                "tooling"
+            ],
+            "requires": [
+                "Rejection Table",
+                "Covering Concern",
+                "Reverse Coverage Resolution"
+            ],
+            "reinforces": [
+                "Closed Vocabulary",
+                "Agnostic-First Vocabulary"
+            ],
+            "enables": [
+                "Vocabulary Admission",
+                "Discoverability"
+            ],
+            "conflicts_with": [
+                "Unguided Refusal",
+                "Borrowed Synonymy"
+            ],
+            "tensions_with": [],
+            "violated_by": ["lexicon:unguided-refusal"],
+            "detected_by": ["a refusal message naming only the rejected word, and a rejection table readable by the developer but not by the gate"],
+            "measured_by": ["share of refusals carrying a resolved replacement"],
+            "refactored_by": [
+                "lexicon:index-the-rejection-table-by-refused-word",
+                "lexicon:name-the-covering-concern-in-the-refusal"
+            ],
+            "enforced_by": [
+                "registry-backed naming gate",
+                "rejection-table index drift-check"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "'foo.manager.ts' → \"'manager' is not a declared concern tag\" → the developer guesses again, and the table that already answered this sits in prose no gate reads",
+                "after": "refused word → rejection-table index → \"'manager' is covered by 'coordinator'\" → foo.coordinator.ts; coverage is decided by the role a file plays, never by a general-language synonym set",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "derived-naming-registry",
+            "name": "Derived Naming Registry",
+            "definition": "Descriptive data about the declared vocabulary and roots, derived from the naming document so a gate can read it, with the reasoning kept in the document.",
+            "type": "artifact",
+            "scope": [
+                "repository",
+                "tooling"
+            ],
+            "requires": ["Single Source of Truth"],
+            "reinforces": [
+                "Convention over Configuration",
+                "Self-Describing Structures"
+            ],
+            "enables": [
+                "Declared Jurisdiction",
+                "Placement Predictability"
+            ],
+            "conflicts_with": ["Reasoning in the Registry"],
+            "tensions_with": [],
+            "violated_by": [
+                "lexicon:prose-only-vocabulary",
+                "lexicon:reasoning-in-the-registry"
+            ],
+            "detected_by": ["a tag in the document and absent from the registry, or either way round"],
+            "measured_by": ["document/registry drift count"],
+            "refactored_by": [
+                "lexicon:derive-the-registry-from-the-document",
+                "lexicon:move-reasoning-back-to-the-document"
+            ],
+            "enforced_by": ["registry/document cross-check"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "the vocabulary lives only in prose, so every gate re-reads it by hand and a rule written into the config is read by no gate",
+                "after": "document holds the reasoning → registry holds the declarations → one gate and one classifier read the registry; drift either way is a bug",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "set-relative-member-name",
+            "name": "Set-Relative Member Name",
+            "definition": "A rule or precondition that a file inside a subject folder names only its own subject, because the folder already names the set.",
+            "type": "constraint",
+            "scope": ["filename"],
+            "requires": ["Subject Folder"],
+            "reinforces": ["Naming Consistency"],
+            "enables": ["Concise Naming"],
+            "conflicts_with": ["Restated Set Member"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:restated-set-member"],
+            "detected_by": ["a file subject equal to the subject folder above it"],
+            "measured_by": ["restated-member count"],
+            "refactored_by": ["lexicon:drop-the-redundant-head"],
+            "enforced_by": ["naming gate"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<container>/foo/behaviors/foo-bar.behavior.ts → restates what the folder already said",
+                "after": "<container>/foo/behaviors/bar.behavior.ts → the folder names the set, the file names the member",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "manual-identity-migration",
+            "name": "Manual Identity Migration",
+            "definition": "A technique for renaming files one container at a time by hand, re-pointing each pattern and comparing what each aggregator collects before and after.",
+            "type": "technique",
+            "scope": [
+                "repository",
+                "refactor"
+            ],
+            "requires": [
+                "Identity Migration",
+                "Shape-Discovered Surface",
+                "Conversion Record",
+                "Alignment Entry",
+                "Re-Alignment Cadence",
+                "Frozen Baseline",
+                "Unreferenced Export Triage"
+            ],
+            "reinforces": ["Container-by-Container Reshape"],
+            "enables": ["Maintainability"],
+            "conflicts_with": ["Automated Reshape"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:automated-reshape"],
+            "detected_by": ["a shape-discovered surface whose collected count changed across a rename"],
+            "measured_by": ["collected-member delta per aggregator"],
+            "refactored_by": [
+                "lexicon:re-point-the-pattern",
+                "lexicon:verify-the-collected-count"
+            ],
+            "enforced_by": [
+                "per-container reshape review",
+                "gate green between containers"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "a rename tool rewrites every literal path; **/*.validator.ts now collects nothing and the gate stays green because nothing is left to check",
+                "after": "one container → rename → update every importer → re-point every pattern → compare collected counts against the previous run → gate green before the next container",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "collision-consolidation",
+            "name": "Collision Consolidation",
+            "definition": "A design rule that a filename already held by another file is first read as a sign that both files do the same job, and a variant is added only after the code shows that their jobs differ.",
+            "type": "principle",
+            "scope": [
+                "folder",
+                "filename"
+            ],
+            "requires": [
+                "Variant Slot",
+                "One Concern Per File"
+            ],
+            "reinforces": ["Single Source of Truth"],
+            "enables": ["Placement Predictability"],
+            "conflicts_with": ["Variant-Masked Duplicate"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:variant-masked-duplicate"],
+            "detected_by": ["a variant whose sibling in the same folder shares its concern and one of its responsibilities"],
+            "measured_by": ["variants admitted without a consolidation verdict"],
+            "refactored_by": [
+                "lexicon:compare-both-files",
+                "lexicon:merge-one-job-or-name-the-facet"
+            ],
+            "enforced_by": [
+                "the duplicates verdict each conversion record carries",
+                "reviewed per file"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "foo.validator.ts exists → the new file becomes foo.extra.validator.ts, and both run the same checks under two names",
+                "after": "the name is taken → both files are read → one job: merged into foo.validator.ts; two jobs: the variant names the facet the code shows",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "mirrored-test-placement",
+            "name": "Mirrored Test Placement",
+            "definition": "A rule or precondition that a test sits in the concern folder of the file it tests, under a test root mirroring that file's governed root, and moves whenever that file moves.",
+            "type": "constraint",
+            "scope": [
+                "folder",
+                "file"
+            ],
+            "requires": [
+                "Compound Marker",
+                "Concern Folder"
+            ],
+            "reinforces": ["Discoverability"],
+            "enables": ["Identity Migration"],
+            "conflicts_with": ["Stranded Test"],
+            "tensions_with": [],
+            "violated_by": [
+                "lexicon:stranded-test",
+                "lexicon:shared-subject-test"
+            ],
+            "detected_by": ["a test whose path does not mirror the concern folder of the file it names"],
+            "measured_by": ["tests off their mirrored path"],
+            "refactored_by": [
+                "lexicon:move-the-test-with-its-subject",
+                "lexicon:split-one-test-per-subject"
+            ],
+            "enforced_by": ["the centralized-test and subjectless-test checks, and the taxonomy step's mirror check"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<root>/validators/foo.validator.ts moves to <root>/predicates/foo.predicate.ts → its test stays under the old validators mirror",
+                "after": "<test-root>/predicates/foo.predicate.test.ts → the test moves in the same pass and names the file it now covers",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "sanctioned-generic-subject",
+            "name": "Sanctioned Generic Subject",
+            "definition": "A rule or precondition that a file takes the one generic subject only when it is generic over its type parameters and names no domain noun anywhere in its source.",
+            "type": "constraint",
+            "scope": ["filename"],
+            "requires": ["Subject Slot"],
+            "reinforces": ["Closed Vocabulary"],
+            "enables": ["Placement Predictability"],
+            "conflicts_with": ["Grouping Label"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:generic-subject-over-a-domain-file"],
+            "detected_by": ["a file carrying the generic subject whose source names a domain noun"],
+            "measured_by": ["generic-subject files that fail either test"],
+            "refactored_by": ["lexicon:take-the-domain-noun-as-the-subject"],
+            "enforced_by": ["classification review"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "base.cache.ts → holds a cache typed to invoices and sessions, so the generic name hides two subjects",
+                "after": "base.lru.cache.ts for the cache generic over its keys and values, and invoice.cache.ts for the one that names invoices",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "conformance-at-creation",
+            "name": "Conformance at Creation",
+            "definition": "A design rule that a file created under a governed root is named and placed correctly when it is first written, so no conversion queue accumulates behind new work.",
+            "type": "principle",
+            "scope": ["file"],
+            "requires": [
+                "Governed Root",
+                "Classification Judgment"
+            ],
+            "reinforces": ["Placement Predictability"],
+            "enables": ["Glob-Resolvable Tree"],
+            "conflicts_with": ["Automated Reshape"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:provisional-name"],
+            "detected_by": ["a newly created file that the naming or placement gate refuses"],
+            "measured_by": ["new files refused on their first run"],
+            "refactored_by": ["lexicon:classify-before-the-first-write"],
+            "enforced_by": [
+                "naming gate",
+                "placement gate"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "a new helper lands as temp.ts, to be renamed later, and three importers bind to the temporary name",
+                "after": "the file is read into its role before it is written → foo.formatter.ts in formatters/ from the first commit",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "registry-held-order",
+            "distinctFrom": [
+                {
+                    "id": "architecture:declarative-configuration",
+                    "reason": "Registry-held order keeps sequence out of filenames, while declarative configuration keeps settings in validated data."
+                }
+            ],
+            "name": "Registry-Held Order",
+            "definition": "A design rule that load or execution order is held by an import list or a registry, so a filename carries no numeric prefix the grammar would have to parse.",
+            "type": "principle",
+            "scope": ["filename"],
+            "requires": ["Positional Slot Resolution"],
+            "reinforces": ["Declarative Configuration"],
+            "enables": ["Glob Resolvability"],
+            "conflicts_with": ["Numeric Order Prefix"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:numeric-order-prefix"],
+            "detected_by": ["a filename whose first segment is a number"],
+            "measured_by": ["numerically prefixed filenames"],
+            "refactored_by": [
+                "lexicon:move-the-order-into-the-registry",
+                "lexicon:drop-the-prefix"
+            ],
+            "enforced_by": ["naming gate"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "01-setup.step.ts, 02-build.step.ts → inserting a step renumbers every name after it",
+                "after": "setup.step.ts, build.step.ts, and the order held once in the registry that runs them",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "externally-resolved-slot",
+            "name": "Externally Resolved Slot",
+            "definition": "A mechanism that resolves a name slot whose words another source owns against that source, whether an index that allocates identities, an upstream key set or a field the file itself carries, so the closed vocabulary never holds a copy of them.",
+            "type": "mechanism",
+            "scope": [
+                "root",
+                "filename",
+                "vocabulary"
+            ],
+            "requires": [
+                "Variant Slot",
+                "Closed Vocabulary"
+            ],
+            "reinforces": [
+                "Single Source of Truth",
+                "Determinism"
+            ],
+            "enables": [
+                "Stable Identity",
+                "Glob Resolvability"
+            ],
+            "conflicts_with": [
+                "Vocabulary Inflation",
+                "Duplicated Authority"
+            ],
+            "tensions_with": [],
+            "violated_by": ["lexicon:copied-slot-word"],
+            "detected_by": ["a vocabulary entry that mirrors a row of an allocating index, or a corpus file whose facet segment differs from the facet its own field declares"],
+            "measured_by": ["slot words held both in the vocabulary and in the source that owns them"],
+            "refactored_by": [
+                "lexicon:resolve-the-slot-against-its-source",
+                "lexicon:remove-the-copies"
+            ],
+            "enforced_by": ["the coordination member's slot check, which resolves a seat letter against the index that allocates it"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "each new seat letter is added to the variants array → the array and the index disagree as soon as one moves",
+                "after": "the variant slot resolves against the index that allocates letters → a new seat needs no vocabulary edit",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "case-dialect",
+            "name": "Case Dialect",
+            "definition": "A mechanism that binds file extensions to the case their language names files in and reads the same subject, variant and concern slots from the stem's word boundaries.",
+            "type": "mechanism",
+            "scope": ["filename"],
+            "requires": [
+                "Word-Boundary Case",
+                "Positional Slot Resolution"
+            ],
+            "reinforces": [
+                "Closed Vocabulary",
+                "Portability"
+            ],
+            "enables": ["Glob Resolvability"],
+            "conflicts_with": ["Concern-Swallowing Compound"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:per-language-vocabulary"],
+            "detected_by": ["a dialect file whose trailing words are not a declared concern tag, or a dialect naming a case no splitter reads"],
+            "measured_by": ["dialect files that do not resolve to three declared slots"],
+            "refactored_by": [
+                "lexicon:declare-the-dialect",
+                "lexicon:rename-to-the-case-s-word-run"
+            ],
+            "enforced_by": ["naming gate, which parses a dialect's word run, and the taxonomy validator, which refuses a case no splitter reads"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "a language that names files in pascal case falls outside the grammar, so its files are ignored or forced into dotted kebab names its tools do not find",
+                "after": "SessionRefreshValidator.<ext> under a pascal dialect → words session, refresh, validator → subject session, variant refresh, concern validator, and its folder stays kebab",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        },
+        {
+            "id": "root-spine-files",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:governed-root",
+                    "reason": "Root spine files limit which files may sit at a governed root, while the governed root is the declaration that brings a tree under the taxonomy."
+                }
+            ],
+            "name": "Root Spine Files",
+            "definition": "A rule or precondition that a governed root carries only its entry document and its accumulators at the root, and every other file sits in a concern folder.",
+            "type": "constraint",
+            "scope": ["root"],
+            "requires": [
+                "Governed Root",
+                "Concern Folder"
+            ],
+            "reinforces": ["Placement Predictability"],
+            "enables": ["Discoverability"],
+            "conflicts_with": ["Free-Form Folder Level"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:loose-root-file"],
+            "detected_by": ["a loose file at a governed root"],
+            "measured_by": ["loose root files"],
+            "refactored_by": ["lexicon:move-the-file-into-its-concern-folder"],
+            "enforced_by": ["placement gate"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "<root>/notes.ts beside <root>/README.md → the loose file resolves to no role",
+                "after": "<root>/README.md and the underscore-marked accumulators stay; every other file moves to <root>/<container>/<concern>/",
+                "lang": "flow",
+                "medium": "composite"
+            }
+        }
+    ]
+}

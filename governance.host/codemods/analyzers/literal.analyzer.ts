@@ -3,8 +3,8 @@ import { disjoint, parsesAsJson, splice } from "../selectors/edit.selector.ts";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { MASTER_EXCLUDE_MARKERS } from "../../shared/generated/exclusions.generated.ts";
 import { ROOT } from "@ssot/paths";
-import { isExcludedPath } from "@govlab/quality/core/matchers/exclusions.matcher.ts";
 import path from "node:path";
+import { pathExclusion } from "@govlab/quality/core/matchers/exclusions.matcher.ts";
 import { relPath } from "../selectors/program.selector.ts";
 
 const JSON_EXTENSION = ".json";
@@ -56,9 +56,7 @@ export const literalFindingsIn = function literalFindingsIn(
     return found.map((finding) => ({ ...finding, reason }));
 };
 
-const isExcluded = function isExcluded(full: string): boolean {
-    return isExcludedPath(path.relative(ROOT, full), MASTER_EXCLUDE_MARKERS);
-};
+const isExcluded = pathExclusion(ROOT, MASTER_EXCLUDE_MARKERS);
 
 const filesUnder = function filesUnder(target: string): string[] {
     if (!statSync(target).isDirectory()) {

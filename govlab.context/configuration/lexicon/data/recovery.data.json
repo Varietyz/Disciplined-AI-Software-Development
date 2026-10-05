@@ -1,0 +1,305 @@
+{
+    "category": "self-healing-recovery-deployment-safety",
+    "records": [
+        {
+            "name": "Health Signal",
+            "kind": "artifact",
+            "definition": "A machine-readable signal that reports whether a component is currently healthy, or that a fault or anomaly in it has been detected.",
+            "aliases": ["Detection Signal"]
+        },
+        {
+            "name": "Reduced Mean Time to Recovery",
+            "kind": "capability",
+            "definition": "The ability to shorten the mean time to recover from a failure by acting automatically."
+        },
+        {
+            "name": "Blind Routing",
+            "kind": "anti-pattern",
+            "definition": "Routing traffic to instances without checking their health, so requests hit dead or degraded nodes."
+        },
+        {
+            "name": "Observable Health Criteria",
+            "kind": "constraint",
+            "definition": "The requirement that explicit, observable criteria define when a component counts as healthy."
+        },
+        {
+            "name": "Readiness/Liveness Routing",
+            "kind": "capability",
+            "definition": "The ability to route traffic only to instances that report themselves ready and alive."
+        },
+        {
+            "name": "Continuity During Failure",
+            "kind": "capability",
+            "definition": "The ability to keep serving requests by switching to a standby when the primary fails."
+        },
+        {
+            "name": "Health Detection",
+            "kind": "capability",
+            "definition": "The ability to detect that a component has failed so a switchover can be triggered."
+        },
+        {
+            "name": "Single Instance Dependency",
+            "kind": "anti-pattern",
+            "definition": "Depending on a single instance with no standby, so its failure takes down the whole service."
+        },
+        {
+            "name": "Replication or Alternate Capacity",
+            "kind": "constraint",
+            "definition": "The requirement that duplicate copies or spare capacity exist to take over when a component fails."
+        },
+        {
+            "name": "Consistency Lag",
+            "kind": "quality-attribute",
+            "definition": "The degree to which replicas trail the primary, so reads served from them may return stale data."
+        },
+        {
+            "name": "Consistency Policy",
+            "kind": "constraint",
+            "definition": "The requirement that a defined policy specify how and when replicas converge to a consistent state."
+        },
+        {
+            "name": "Read Scaling",
+            "kind": "capability",
+            "definition": "The ability to serve more read traffic by distributing it across replicas."
+        },
+        {
+            "name": "Single Copy State",
+            "kind": "anti-pattern",
+            "definition": "Keeping only one copy of state, so its loss or unavailability takes down the whole system."
+        },
+        {
+            "name": "Cost/Cold Start",
+            "kind": "quality-attribute",
+            "definition": "The degree to which scaling capacity up and down incurs added cost and cold-start latency."
+        },
+        {
+            "name": "Fixed Capacity",
+            "kind": "approach",
+            "definition": "Provisioning a fixed, preset amount of capacity, rather than adapting it to demand."
+        },
+        {
+            "name": "Horizontal Scalability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system can grow by adding more interchangeable instances rather than enlarging one."
+        },
+        {
+            "name": "Incident Reduction",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:reduced-mean-time-to-recovery",
+                    "reason": "Incident reduction lowers how many incidents reach a responder, while reduced mean time to recovery shortens each one that happens."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to reduce the number of incidents that reach human responders by fixing them automatically."
+        },
+        {
+            "name": "Manual Remediation",
+            "kind": "approach",
+            "definition": "Recovering from incidents through human-operated fixes, rather than automated remediation."
+        },
+        {
+            "name": "Remediation Workflow",
+            "kind": "activity",
+            "definition": "A defined corrective action, or sequence of steps, carried out to return a system to a healthy state after a fault is detected.",
+            "aliases": ["Remediation Action"]
+        },
+        {
+            "name": "Unsafe Automation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which automated remediation may take wrong or harmful corrective actions, for example on a faulty signal, faster than the developer can intervene.",
+            "aliases": [
+                "Automation Risk",
+                "False Recovery Actions"
+            ]
+        },
+        {
+            "name": "Data Migration Compatibility",
+            "kind": "quality-attribute",
+            "definition": "The degree to which reverting code is constrained by forward data migrations that cannot easily be undone."
+        },
+        {
+            "name": "Fast Failure Recovery",
+            "kind": "capability",
+            "definition": "The ability to recover quickly from a bad release by reverting to the last good version."
+        },
+        {
+            "name": "Irreversible Deployment",
+            "distinctFrom": [
+                {
+                    "id": "architecture:irreversible-migration",
+                    "reason": "An irreversible deployment cannot roll back a release, while an irreversible migration cannot roll back a schema or data change."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Deploying in a way that cannot be undone, so a bad release cannot be rolled back."
+        },
+        {
+            "name": "Reversible Deployment",
+            "kind": "constraint",
+            "definition": "The requirement that a deployment be structured so it can be safely reverted to a prior version."
+        },
+        {
+            "name": "Versioned Artifact",
+            "kind": "artifact",
+            "definition": "A build artifact tagged with a distinct version so a prior one can be redeployed."
+        },
+        {
+            "name": "In-Place Mutation Only",
+            "kind": "anti-pattern",
+            "definition": "Upgrading by mutating the running environment in place, with no parallel target to cut over to or fall back from."
+        },
+        {
+            "name": "Infrastructure Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree to which running two full parallel environments doubles infrastructure cost during a cutover."
+        },
+        {
+            "name": "Low-Risk Cutover",
+            "kind": "capability",
+            "definition": "The ability to switch traffic to a new version with low risk by keeping the old one ready to fall back to."
+        },
+        {
+            "name": "Parallel Environments",
+            "kind": "constraint",
+            "definition": "The requirement that two full production-equivalent environments run side by side for cutover."
+        },
+        {
+            "name": "Controlled Exposure",
+            "kind": "capability",
+            "definition": "The ability to expose a new version to a small, controlled fraction of traffic first."
+        },
+        {
+            "name": "Progressive Delivery",
+            "kind": "approach",
+            "definition": "A release strategy that rolls out changes gradually to widening audiences while monitoring for regressions."
+        },
+        {
+            "name": "Rollout Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which staging a release in gradual increments adds orchestration complexity."
+        },
+        {
+            "name": "Traffic Splitting",
+            "kind": "mechanism",
+            "definition": "A facility that routes a configurable proportion of traffic to different versions of a service."
+        },
+        {
+            "name": "Empirical Resilience Verification",
+            "kind": "capability",
+            "definition": "The ability to verify a system's resilience empirically by injecting faults and observing recovery."
+        },
+        {
+            "name": "Production Risk",
+            "kind": "quality-attribute",
+            "definition": "The degree to which deliberately injecting faults in production risks causing user-facing incidents."
+        },
+        {
+            "name": "Untested Failure Assumptions",
+            "kind": "anti-pattern",
+            "definition": "Assuming a system will survive failures without ever testing those assumptions against injected faults."
+        },
+        {
+            "name": "Connection Cleanup",
+            "kind": "capability",
+            "definition": "The ability to close open connections cleanly when a process shuts down."
+        },
+        {
+            "name": "Hard Process Kill",
+            "kind": "anti-pattern",
+            "definition": "Terminating a process abruptly without draining work, dropping in-flight requests and risking corrupt state."
+        },
+        {
+            "name": "In-Flight Work Drain",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:connection-cleanup",
+                    "reason": "Draining finishes or hands off work in progress, while connection cleanup closes the open connections."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to finish or safely hand off in-progress work before a process exits."
+        },
+        {
+            "name": "Lifecycle Signals",
+            "kind": "constraint",
+            "definition": "The requirement that a process receive lifecycle signals telling it when to start draining and stop."
+        },
+        {
+            "name": "Shutdown Latency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which draining in-flight work before exit lengthens the time a shutdown takes."
+        },
+        {
+            "name": "Disk-Failure Survival",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:parity-based-recovery",
+                    "reason": "Disk-failure survival is continuing to serve data after a disk is lost, while parity-based recovery is one way the lost data is rebuilt."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to keep serving data after one or more disks fail, by reconstructing from redundancy."
+        },
+        {
+            "name": "Multiple Physical Disks",
+            "kind": "constraint",
+            "definition": "The requirement that data span several physical disks so redundancy can survive a single-disk loss."
+        },
+        {
+            "name": "Parity-Based Recovery",
+            "kind": "capability",
+            "definition": "The ability to reconstruct lost data from parity information stored across the disk array."
+        },
+        {
+            "name": "Single-Disk Point of Failure",
+            "kind": "anti-pattern",
+            "definition": "Storing data on a single disk with no redundancy, so that one disk's failure loses everything."
+        },
+        {
+            "name": "Write Amplification",
+            "kind": "quality-attribute",
+            "definition": "The degree to which maintaining parity on writes multiplies the underlying disk writes for each logical write."
+        },
+        {
+            "name": "Recovery Policy",
+            "kind": "technique",
+            "definition": "A technique for declaring, per failure class, the action the system takes to restore service and who is told."
+        },
+        {
+            "name": "Expand-Contract Migration",
+            "kind": "technique",
+            "definition": "A technique for changing a schema in steps, adding the new shape, moving every reader and writer, then removing the old shape."
+        },
+        {
+            "name": "Dual Read and Write",
+            "kind": "technique",
+            "definition": "A technique for writing to both the old and the new store and comparing reads during a migration, until the new store is trusted."
+        },
+        {
+            "name": "Rollback Plan",
+            "kind": "technique",
+            "definition": "A technique for stating before a release how it is undone and testing that the undo works."
+        },
+        {
+            "name": "Small-Batch Release",
+            "kind": "technique",
+            "definition": "A technique for shipping changes in small increments, so each release has a small blast radius."
+        },
+        {
+            "name": "Backup",
+            "kind": "technique",
+            "definition": "A technique for copying data to separate storage on a schedule, so it can be restored after loss or corruption."
+        },
+        {
+            "name": "Automate the Runbook",
+            "kind": "technique",
+            "definition": "A technique for turning repeated manual operational steps into a script the system runs and logs."
+        },
+        {
+            "name": "Autoscaling Policy",
+            "kind": "technique",
+            "definition": "A technique for declaring the load signals and limits by which the number of instances grows and shrinks."
+        }
+    ]
+}

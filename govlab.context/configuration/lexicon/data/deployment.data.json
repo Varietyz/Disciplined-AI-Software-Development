@@ -1,0 +1,176 @@
+{
+    "category": "portability-infrastructure-deployment",
+    "records": [
+        {
+            "name": "Platform Migration",
+            "kind": "capability",
+            "definition": "The ability to move a system to a different platform with little or no rework."
+        },
+        {
+            "name": "Platform Optimization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which staying portable across platforms forgoes optimizations specific to any one of them."
+        },
+        {
+            "name": "Platform-Specific Coupling",
+            "kind": "anti-pattern",
+            "definition": "Binding code to one platform's APIs and assumptions, so it cannot run elsewhere without rewriting."
+        },
+        {
+            "name": "Cross-Platform Deployment",
+            "kind": "capability",
+            "definition": "The ability to deploy the same software unchanged across different operating systems and platforms."
+        },
+        {
+            "name": "Native Optimization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which staying platform-independent forgoes optimizations native to a specific platform."
+        },
+        {
+            "name": "OS/Vendor Lock-In",
+            "kind": "anti-pattern",
+            "definition": "Depending on one operating system or vendor's proprietary features, so switching away becomes costly or impossible."
+        },
+        {
+            "name": "Platform Abstraction",
+            "kind": "constraint",
+            "definition": "The requirement that platform-specific details sit behind an abstraction the rest of the system depends on."
+        },
+        {
+            "name": "Reliable Deployment",
+            "kind": "capability",
+            "definition": "The ability to deploy with confidence because every environment behaves the same way."
+        },
+        {
+            "name": "Snowflake Environments",
+            "kind": "anti-pattern",
+            "definition": "Environments each configured by hand into unique, unreproducible states, so what works in one fails in another."
+        },
+        {
+            "name": "Externalized Config",
+            "kind": "constraint",
+            "definition": "The requirement that configuration live outside the container image so one image runs in any environment."
+        },
+        {
+            "name": "Host-Coupled Deployment",
+            "kind": "anti-pattern",
+            "definition": "Deploying software that depends on specifics of its host machine, so it cannot be moved or reproduced elsewhere."
+        },
+        {
+            "name": "Image Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which packaging everything into a container image grows the image and its maintenance burden."
+        },
+        {
+            "name": "Image Definition",
+            "kind": "artifact",
+            "definition": "A declarative file specifying how a container image is built from a base and its dependencies."
+        },
+        {
+            "name": "Repeatable Runtime Packaging",
+            "kind": "capability",
+            "definition": "The ability to package an application and its runtime into one reproducible, portable unit."
+        },
+        {
+            "name": "Automated Provisioning",
+            "kind": "capability",
+            "definition": "The ability to create and configure infrastructure automatically from declarative definitions."
+        },
+        {
+            "name": "Manual Infrastructure Changes",
+            "kind": "anti-pattern",
+            "definition": "Changing infrastructure by hand instead of through code, so its state is undocumented and unreproducible."
+        },
+        {
+            "name": "Version Control",
+            "kind": "mechanism",
+            "definition": "A system that records changes to files over time so any version can be recovered, compared, or audited."
+        },
+        {
+            "name": "Applicable Standard",
+            "kind": "constraint",
+            "definition": "The requirement that the relevant external standard a system must meet be identified and adhered to."
+        },
+        {
+            "name": "Certification/Compatibility",
+            "kind": "capability",
+            "definition": "The ability to certify a system and interoperate with others by conforming to a shared standard."
+        },
+        {
+            "name": "Innovation/Flexibility",
+            "kind": "quality-attribute",
+            "definition": "The degree to which conforming to an external standard limits the freedom to innovate beyond it."
+        },
+        {
+            "name": "Proprietary Deviation",
+            "kind": "anti-pattern",
+            "definition": "Deviating from a shared standard with proprietary extensions, breaking interoperability with conformant systems."
+        },
+        {
+            "name": "Adapter/Port Abstraction",
+            "kind": "pattern",
+            "definition": "A boundary abstraction separating core logic from external protocols via port interfaces and pluggable adapters."
+        },
+        {
+            "name": "Protocol Swap",
+            "kind": "capability",
+            "definition": "The ability to switch the transport or wire protocol without changing core domain logic."
+        },
+        {
+            "name": "Protocol-Coupled Domain Logic",
+            "kind": "anti-pattern",
+            "definition": "Domain logic written directly against a specific protocol, so changing the protocol means rewriting the core."
+        },
+        {
+            "name": "Protocol-Specific Features",
+            "kind": "quality-attribute",
+            "definition": "The degree to which staying protocol-independent forgoes features unique to any one protocol."
+        },
+        {
+            "name": "Config Schema",
+            "kind": "artifact",
+            "definition": "A schema defining the structure, types, and defaults of a system's externalized configuration."
+        },
+        {
+            "name": "Config Sprawl",
+            "kind": "quality-attribute",
+            "definition": "The degree to which externalizing configuration across many sources scatters it and makes it hard to track."
+        },
+        {
+            "name": "Environment-Specific Deployment",
+            "kind": "capability",
+            "definition": "The ability to deploy one build into different environments by supplying environment-specific configuration."
+        },
+        {
+            "name": "Secure Config Handling",
+            "kind": "constraint",
+            "definition": "The requirement that secrets and sensitive configuration be stored and injected securely, never hardcoded."
+        },
+        {
+            "name": "Deploy Time",
+            "kind": "quality-attribute",
+            "definition": "The degree to which replacing whole instances rather than patching them in place lengthens deployment time."
+        },
+        {
+            "name": "Deterministic Redeploys",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:instance-replacement-over-mutation",
+                    "reason": "Deterministic redeploys are the identical result from one fixed definition, while replacement over mutation is the method of discarding instances instead of changing them."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to redeploy infrastructure identically every time from one fixed definition."
+        },
+        {
+            "name": "In-Place Server Mutation",
+            "kind": "anti-pattern",
+            "definition": "Modifying running servers in place over time, so their state drifts and can no longer be reproduced."
+        },
+        {
+            "name": "Instance Replacement over Mutation",
+            "kind": "capability",
+            "definition": "The ability to update infrastructure by replacing instances wholesale rather than mutating them in place."
+        }
+    ]
+}

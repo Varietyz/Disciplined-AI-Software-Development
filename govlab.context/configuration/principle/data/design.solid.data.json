@@ -1,0 +1,268 @@
+{
+    "category": "SOLID / Object-Oriented Design",
+    "check": {
+        "population": "every interface, class hierarchy and dependency edge in the object model",
+        "freshness": "a verdict stands until an interface, an override or a dependency changes",
+        "refusal": "the dependency rule or the contract test fails a change that breaks substitution, segregation or dependency direction",
+        "observation": "interface usage, override contracts and dependency direction, read from source and contract tests",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the interface contract, which every implementation and override conforms to"
+    },
+    "records": [
+        {
+            "id": "interface-segregation",
+            "aliases": [
+                "ISP",
+                "Interface Segregation Principle"
+            ],
+            "name": "Interface Segregation Principle (ISP)",
+            "definition": "A design rule that a client depends on an interface holding only the methods it uses.",
+            "type": "principle",
+            "scope": [
+                "interface",
+                "service",
+                "module"
+            ],
+            "requires": ["Role-Specific Interfaces"],
+            "reinforces": [
+                "SRP",
+                "Low Coupling"
+            ],
+            "enables": ["Consumer-Specific Contracts"],
+            "conflicts_with": [
+                "Fat Interface",
+                "Repository Dump"
+            ],
+            "tensions_with": ["Interface Proliferation"],
+            "violated_by": ["lexicon:fat-interface"],
+            "detected_by": ["unused interface method implementations"],
+            "measured_by": ["interface method usage ratio"],
+            "refactored_by": [
+                "lexicon:split-interface",
+                "lexicon:extract-role-interface"
+            ],
+            "enforced_by": [
+                "interface usage analysis",
+                "lint rules"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "interface FooWorker {\n  load(id: FooId): Foo;\n  save(foo: Foo): void;\n  delete(id: FooId): void;\n  export(): string;\n}\nclass FooReader implements FooWorker {}",
+                "after": "interface FooReader { load(id: FooId): Foo; }\ninterface FooWriter { save(foo: Foo): void; }\ninterface FooRemover { delete(id: FooId): void; }\nclass CachedFooReader implements FooReader {\n  load(id: FooId) { return fooCache.get(id)!; }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "dependency-inversion",
+            "distinctFrom": [
+                {
+                    "id": "architecture:inversion-of-control",
+                    "reason": "Dependency inversion fixes which side owns the abstraction, while inversion of control moves object creation and control flow to a framework or composition root."
+                }
+            ],
+            "aliases": [
+                "DIP",
+                "Dependency Inversion Principle"
+            ],
+            "name": "Dependency Inversion Principle (DIP)",
+            "definition": "A design rule that high-level policy and low-level detail both depend on an abstraction owned by the policy.",
+            "type": "principle",
+            "scope": [
+                "module",
+                "component",
+                "layer"
+            ],
+            "requires": [
+                "Abstraction",
+                "Stable Interfaces"
+            ],
+            "reinforces": [
+                "Low Coupling",
+                "Clean Architecture"
+            ],
+            "enables": [
+                "Dependency Injection",
+                "Ports and Adapters"
+            ],
+            "conflicts_with": ["Concrete Dependency"],
+            "tensions_with": ["Runtime Indirection"],
+            "violated_by": ["architecture:concrete-coupling"],
+            "detected_by": ["dependency direction violations"],
+            "measured_by": ["inward dependency ratio"],
+            "refactored_by": [
+                "lexicon:extract-interface",
+                "lexicon:introduce-port",
+                "architecture:dependency-injection"
+            ],
+            "enforced_by": [
+                "dependency graph rules",
+                "architecture tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooService {\n  private readonly store = new SqlFooStore();\n  save(foo: Foo) { return this.store.save(foo); }\n}",
+                "after": "interface FooStore { save(foo: Foo): Promise<void>; }\nclass FooService {\n  constructor(private readonly store: FooStore) {}\n  save(foo: Foo) { return this.store.save(foo); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "open-closed",
+            "distinctFrom": [
+                {
+                    "id": "architecture:composability",
+                    "reason": "The open/closed principle adds behavior without editing existing code, while composability combines parts through compatible interfaces."
+                }
+            ],
+            "aliases": [
+                "OCP",
+                "Open-Closed Principle"
+            ],
+            "name": "Open/Closed Principle (OCP)",
+            "definition": "A design rule that a module gains new behavior by adding code at an extension point, leaving its existing code unchanged.",
+            "canon": ["open-closed"],
+            "type": "principle",
+            "scope": [
+                "class",
+                "module",
+                "component"
+            ],
+            "requires": [
+                "Abstraction",
+                "Extension Points"
+            ],
+            "reinforces": [
+                "Plugin Architecture",
+                "Strategy Pattern"
+            ],
+            "enables": ["Feature Extension without Modification"],
+            "conflicts_with": ["Switch-Based Extension"],
+            "tensions_with": ["Simplicity"],
+            "violated_by": ["lexicon:switch-based-extension"],
+            "detected_by": [
+                "growing conditionals",
+                "repeated edits to central classes"
+            ],
+            "measured_by": ["modification frequency of core modules"],
+            "refactored_by": [
+                "architecture:strategy-pattern",
+                "architecture:extension-points",
+                "architecture:plugin-architecture"
+            ],
+            "enforced_by": [
+                "extension policies",
+                "change analysis"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function priceFoo(kind: string, value: number) {\n  if (kind === \"foo\") return value;\n  if (kind === \"bar\") return value * 2;\n  throw new Error(\"unknown kind\");\n}",
+                "after": "interface FooPricing { price(value: number): number; }\nconst registry = new Map<string, FooPricing>();\nexport function registerPricing(kind: string, pricing: FooPricing) { registry.set(kind, pricing); }\nexport function priceFoo(kind: string, value: number) {\n  const pricing = registry.get(kind);\n  if (!pricing) throw new Error(`unknown kind ${kind}`);\n  return pricing.price(value);\n}\nregisterPricing(\"bar\", { price: value => value * 2 });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "liskov-substitution",
+            "aliases": [
+                "LSP",
+                "Liskov Substitution Principle",
+                "Behavioral Subtyping"
+            ],
+            "name": "Liskov Substitution Principle (LSP)",
+            "definition": "A design rule that a subtype can replace its base type anywhere, because it keeps the base type's preconditions, postconditions and invariants.",
+            "type": "principle",
+            "scope": [
+                "class",
+                "interface",
+                "type hierarchy"
+            ],
+            "requires": [
+                "Contract Preservation",
+                "Preconditions",
+                "Postconditions",
+                "Invariant"
+            ],
+            "reinforces": [
+                "Polymorphism",
+                "Type Safety"
+            ],
+            "enables": [
+                "Safe Substitution",
+                "Substitutability"
+            ],
+            "conflicts_with": [
+                "Broken Inheritance",
+                "Incompatible Override"
+            ],
+            "tensions_with": ["Narrow Specialized Behavior"],
+            "violated_by": ["lexicon:broken-inheritance"],
+            "detected_by": ["overridden method contract divergence"],
+            "measured_by": ["contract test pass rate across subtypes"],
+            "refactored_by": [
+                "lexicon:replace-inheritance-with-delegation",
+                "lexicon:extract-interface",
+                "lexicon:split-hierarchy"
+            ],
+            "enforced_by": [
+                "contract tests",
+                "type tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooStore {\n  save(foo: Foo): Promise<Receipt> { return persist(foo); }\n}\nclass ReadOnlyFooStore extends FooStore {\n  save(): Promise<Receipt> { throw new Error(\"not supported\"); }\n}",
+                "after": "class FooStore {\n  save(foo: Foo): Promise<Receipt> { return persist(foo); }\n}\nclass AuditedFooStore extends FooStore {\n  async save(foo: Foo): Promise<Receipt> {\n    const receipt = await super.save(foo);\n    audit.record(receipt);\n    return receipt;\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "polymorphism",
+            "distinctFrom": [
+                {
+                    "id": "architecture:dynamic-dispatch",
+                    "reason": "Polymorphism is one interface with several implementations, while dynamic dispatch is the runtime selection of which one runs, from the receiver or a keyed table."
+                },
+                {
+                    "id": "architecture:type-safety",
+                    "reason": "Polymorphism varies the implementation behind a type, while type safety rejects operations on the wrong type."
+                }
+            ],
+            "name": "Polymorphism",
+            "definition": "A mechanism that lets one interface have several implementations, with the implementation chosen by the object that receives the call.",
+            "type": "mechanism",
+            "scope": [
+                "class",
+                "interface",
+                "runtime"
+            ],
+            "requires": [
+                "Abstraction",
+                "Substitutability"
+            ],
+            "reinforces": [
+                "OCP",
+                "Strategy Pattern"
+            ],
+            "enables": [
+                "Dynamic Dispatch",
+                "Interchangeability"
+            ],
+            "conflicts_with": ["Type Switching"],
+            "tensions_with": ["Traceability"],
+            "violated_by": ["lexicon:type-switching"],
+            "detected_by": [
+                "conditional type checks",
+                "duplicated branching"
+            ],
+            "measured_by": ["polymorphic dispatch ratio"],
+            "refactored_by": ["lexicon:replace-conditional-with-polymorphism"],
+            "enforced_by": [
+                "code review",
+                "static analysis rules"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function renderFoo(kind: string, foo: Foo) {\n  if (kind === \"text\") return foo.name;\n  if (kind === \"json\") return JSON.stringify(foo);\n  throw new Error(\"unknown renderer\");\n}",
+                "after": "interface FooRenderer { render(foo: Foo): string; }\nclass TextFooRenderer implements FooRenderer { render(foo: Foo) { return foo.name; } }\nclass JsonFooRenderer implements FooRenderer { render(foo: Foo) { return JSON.stringify(foo); } }\nfunction renderFoo(renderer: FooRenderer, foo: Foo) { return renderer.render(foo); }",
+                "lang": "ts"
+            }
+        }
+    ]
+}

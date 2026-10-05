@@ -1,0 +1,104 @@
+{
+    "label": "GovLab Stats",
+    "summary": "The codebase census. One filesystem walk routes every file through role and provenance classifiers, and one analyzer or loader per measurable surface feeds a single generated document that states facts as tables and carries no authored prose.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "linting-quality"},
+        {"meta": "developer-tooling",
+            "sub": "build-tooling"}
+    ],
+    "capabilities": [
+        "codebase-census",
+        "authored-versus-generated-separation",
+        "taxonomy-conformance-measurement",
+        "workspace-dependency-derivation",
+        "application-member-measurement",
+        "pipeline-health-derivation"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "type-safety",
+        "separation-of-concerns",
+        "duplicate-code"
+    ],
+    "visibility": {"private": true,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "entries": ["runtime/entrypoints/*.entrypoint.ts"],
+    "docs": {
+        "overview": "A generator in the gate's build stage. One filesystem walk classifies each file by role and provenance, separating authored source from generated and ingested content before anything is counted. On top of that walk sits one analyzer or loader per measurable surface:\n\n- taxonomy conformance and vocabulary use, judged by the gate's own filename parser for each governed root\n- application entry points, from the directories holding an entry document\n- the internal package graph, from the `workspaces` globs\n- the active rule set, from the `@govlab/quality/config` adapters\n- per-stage pass or fail, from the most recent recorded gate run\n\nReporters render the collected facts as tables into one generated document, which carries no authored prose.",
+        "whenToUse": [
+            "Adding a measurable surface to the census, as a new analyzer or loader plus its reporter.",
+            "Reading what the workspace contains, instead of what a document claims it contains.",
+            "Checking taxonomy conformance before or after a reshape, where the conformant share per governed root is the baseline."
+        ],
+        "whenNotToUse": [
+            "Enforcing anything. A threshold belongs in a lint rule or a pipeline validator, which report at the offending line.",
+            "Answering a question about one member's internals that the member can answer itself.",
+            "Deciding whether a name makes sense. The tooling counts and cross-checks, and it does not reason about a vocabulary."
+        ],
+        "quickStart": [
+            {"intent": "Regenerate the codebase census",
+                "lang": "sh",
+                "code": "npm run codebase:stats"},
+            {
+                "intent": "Add a measured surface as a loader plus its reporter",
+                "lang": "ts",
+                "code": "import { absolutePath } from \"@ssot/paths\";\n\nexport interface StyleStats {\n    files: number;\n}\n\nexport const collectStyles = function collectStyles(): StyleStats {\n    const root = absolutePath(\"app.root\");\n    return { files: countStylesUnder(root) };\n};"
+            }
+        ],
+        "configuration": "No config file and no tunable thresholds. Every root resolves through `@ssot/paths`. The governed roots and their vocabularies come from `@ssot/govlab`'s taxonomy manifest, the active tool configuration from the `@govlab/quality/config` adapters, and the gate outcome from the pipeline report artifact. The one output location is `doc-arch/generated/codebase-stats.project.generated.md`.",
+        "install": "A private workspace member resolved through the root `package.json` workspaces glob `govlab.root/govlab.*`. One `npm install` at the repo root is the whole setup. It declares `@govlab/argv`, `@govlab/canonical-write`, `@govlab/pipeline`, `@govlab/quality`, `@ssot/govlab` and `@ssot/paths`, and holds no third-party dependency of its own. There is no build step, and `npm run codebase:stats` runs `runtime/entrypoints/metric.entrypoint.ts`.",
+        "disposal": [
+            "Remove the census step from the verify orchestrator and the `codebase:stats` script from the root `package.json`.",
+            "Delete `doc-arch/generated/codebase-stats.project.generated.md`.",
+            "Remove `govlab.root/govlab.stats/`, its `containers` entry in `.govlab/shared/configs/taxonomy.config.ts` and its tests under `codebase.testing/test.govlab/stats/`."
+        ],
+        "aiContext": [
+            "Every fact is derived: workspace members from the `workspaces` globs, the governed roots and vocabularies from the gate's taxonomy manifest, application entry points from any directory holding an entry document, and tool metrics from the config adapters the tools run with. A literal path or tool name in an analyzer is a defect.",
+            "The entry point resolves one exclusion set and passes it to every walk, so no two surfaces skip different folders.",
+            "Generated and ingested content is excluded from every authored aggregate and reported as its own single metric.",
+            "A file is conformant exactly when the gate's `parseFilename` accepts it under its own root, so the census and the gate cannot disagree.",
+            "The pipeline report artifact is written on every exit path, fail-fast included, so a present artifact is not a passing one. Read `ok`, and expect a short step list when a fail-fast run halted early.",
+            "The output document carries no authored prose. State the shape in a table column and let the number derive again."
+        ],
+        "apiNotes": [
+            {
+                "name": "runtime/entrypoints/metric.entrypoint.ts",
+                "note": "the census entry point, which resolves the exclusion set once, runs every analyzer and loader, and writes the census through the canonical Markdown writer."
+            },
+            {
+                "name": "core/analyzers/source.analyzer.ts",
+                "note": "the single filesystem walk. It routes each file through role and provenance, so only authored source and prose reach the aggregates, and it returns fresh state on every call."
+            },
+            {
+                "name": "core/classifiers/source.classifier.ts",
+                "note": "maps an extension to a role: `source`, `prose`, `data` or `other`. An unmapped extension falls to `other` and is reported as unclassified."
+            },
+            {
+                "name": "core/predicates/source.predicate.ts",
+                "note": "generated-content detection: a `.generated.` name, a `generated` path segment, a do-not-edit head marker, a README beside a `_manifest.json`, or a lockfile."
+            },
+            {
+                "name": "core/analyzers/taxonomy.analyzer.ts",
+                "note": "conformance, coverage, vocabulary use, layer spine and depth distribution for every root the gate governs, imported roots included."
+            },
+            {
+                "name": "core/analyzers/site.analyzer.ts",
+                "note": "the application member. An entry point is any directory holding an entry document, the root entry is the shallowest, and nested entries are excluded from their parent's totals."
+            },
+            {
+                "name": "core/resolvers/package.resolver.ts",
+                "note": "the workspace packages, derived from the `workspaces` globs, so a new member is picked up with no edit here."
+            },
+            {
+                "name": "core/loaders/report.loader.ts",
+                "note": "reads the gate artifact back and reports per-stage pass or fail, or that no gate run was recorded."
+            }
+        ]
+    }
+}

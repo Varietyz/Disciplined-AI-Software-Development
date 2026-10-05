@@ -1,0 +1,92 @@
+{
+    "label": "Code Parse",
+    "summary": "Language-agnostic source parsing to a concrete syntax tree via tree-sitter, with comment-node extraction and extension/shebang language detection.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "linting-quality"},
+        {"meta": "platform",
+            "sub": "utilities"}
+    ],
+    "capabilities": [
+        "language-agnostic-code-parsing",
+        "tree-sitter-cst",
+        "comment-node-extraction",
+        "language-detection"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "type-safety",
+        "separation-of-concerns"
+    ],
+    "visibility": {"private": false,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "docs": {
+        "overview": "A dependency-light leaf that parses source code of any grammar-supported language into a concrete syntax tree using tree-sitter (`web-tree-sitter`, WASM). It ships pre-built grammar `.wasm` files, resolves the one for a file by extension or shebang, and exposes both an async (`parseCode`) and a preload-then-synchronous (`ensureLanguages` + `parseCodeSync`) parse path so callers bound to a synchronous contract can still parse. Generic AST helpers (`walk`, `commentNodes`) let consumers traverse the tree and locate node kinds deterministically. It is the shared parsing substrate for `@govlab/patterns`' code analysis and `@govlab/quality`'s comment cleaner.",
+        "whenToUse": [
+            "Any tool that needs a deterministic syntax tree for source code without hand-rolling a per-language lexer, such as comment stripping, symbol extraction or structural analysis.",
+            "Locating comment nodes (or any node type) with exact byte ranges for safe removal or rewriting, correct across string literals, heredocs, and regex literals by construction.",
+            "Detecting a file's language from its extension or shebang, validated against the grammars actually built."
+        ],
+        "whenNotToUse": [
+            "A single-language, syntax-trivial scan where a small string check is enough and a WASM parser is overkill.",
+            "Languages with no built tree-sitter grammar. `parseCode` returns null instead of guessing, so the grammar source goes into `configuration/configs/grammar.config.ts` first.",
+            "Semantic analysis needing types or cross-file resolution. The package is syntax-only (a concrete syntax tree), not a type checker."
+        ],
+        "install": "Part of the Govlab monorepo, with no standalone install. From the repo root, `npm install` provisions `web-tree-sitter`. The grammar build writes the `.wasm` files under `core/generated/`, the `govlab.utils.codeParse.generated` path key. They are committed and shipped in `files`. Rebuild or extend the grammar set with `npm run build:grammars --workspace @govlab/code-parse`.",
+        "quickStart": [
+            {
+                "intent": "Detect language, parse, and collect comment nodes",
+                "lang": "js",
+                "code": "import { detectLanguage, parseCode, commentNodes } from \"@govlab/code-parse\";\n\nconst lang = detectLanguage(\"main.go\");\nconst root = lang ? await parseCode(source, lang) : null;\nfor (const node of root ? commentNodes(root) : []) {\n    console.log(node.type, node.startIndex, node.endIndex, node.text);\n}"
+            },
+            {
+                "intent": "Preload grammars once, then parse synchronously inside a sync contract",
+                "lang": "js",
+                "code": "import { ensureLanguages, parseCodeSync, commentNodes } from \"@govlab/code-parse\";\n\nawait ensureLanguages([\"go\", \"typescript\", \"javascript\"]);\nfunction strip(source, lang) {\n    const root = parseCodeSync(source, lang);\n    return root ? commentNodes(root) : [];\n}"
+            }
+        ],
+        "configuration": "`parseCode` and `parseCodeSync` accept an options object with an optional `logger` whose `warn(message, detail?)` method receives parse diagnostics. Grammar filenames follow `<lang>.generated.wasm`, and the grammar folder resolves through the `govlab.utils.codeParse.generated` path key. `parseCodeSync` requires its language to have been preloaded through `ensureLanguages` and throws otherwise, while `parseCode` preloads on demand.",
+        "disposal": [
+            "Remove `govlab.root/govlab.utils/code-parse/`.",
+            "Drop `\"@govlab/code-parse\": \"*\"` from `govlab.root/govlab.quality/package.json` and `govlab.root/govlab.patterns/package.json`.",
+            "Remove every `import … from \"@govlab/code-parse\"` in consumers (`@govlab/patterns`' code ingestion, `@govlab/quality`'s comment cleaner) and restore their own parsing, or drop the feature."
+        ],
+        "aiContext": [
+            "tree-sitter parses to a concrete syntax tree, so comment nodes are located precisely in any string, heredoc or regex context, with no guessing at string delimiters.",
+            "The sync seam: `Parser.init` and `Language.load` are async and run once through `ensureLanguages`. The per-source `parseCodeSync` is then synchronous, so a synchronous caller, such as a native lint rule's `check` or `fix`, parses without going async.",
+            "`CstNode` carries `startIndex` and `endIndex` (source offsets) for range-based edits, and `startPosition.row` for line reporting. It is an adapted, plain-object snapshot of the tree-sitter node, safe to hold after the tree is freed.",
+            "Language coverage equals the grammars in `core/generated/` (`availableLanguages()`), and `detectLanguage` maps extensions and shebangs to those grammar names. Add a language by adding a source row to `configuration/configs/grammar.config.ts` and running `npm run build:grammars -w @govlab/code-parse`, which writes the extension map through `@govlab/canonical-write`.",
+            "Its third-party runtime dependency is `web-tree-sitter`. It reads its locations through `@ssot/paths`, and the grammar build declares its command line through `@govlab/argv`."
+        ],
+        "apiNotes": [
+            {
+                "name": "parseCode",
+                "note": "the async parse. It loads the grammar on demand and returns a CstNode root, or null when the language has no grammar or parsing fails."
+            },
+            {
+                "name": "parseCodeSync",
+                "note": "the synchronous parse, which requires the language preloaded through ensureLanguages and throws otherwise. It is the seam that keeps synchronous callers synchronous."
+            },
+            {
+                "name": "ensureLanguages",
+                "note": "async. It initializes the runtime and loads the given languages' grammars once (memoized), so later parseCodeSync calls are synchronous."
+            },
+            {
+                "name": "commentNodes",
+                "note": "walks a CstNode tree and returns every node whose type is a comment kind, with byte ranges for removal."
+            },
+            {"name": "walk",
+                "note": "depth-first CstNode traversal invoking a visitor per node."},
+            {
+                "name": "detectLanguage",
+                "note": "maps a filename extension (or shebang for extensionless scripts) to a tree-sitter grammar name, or null."
+            },
+            {"name": "availableLanguages",
+                "note": "the grammar names actually built under core/generated/, sorted."}
+        ]
+    }
+}

@@ -1,0 +1,1026 @@
+{
+    "category": "automation",
+    "tier": "process",
+    "check": {
+        "by": ["the automation kernel's gates on convention strength, fallback preservation, performance and validation before persistence"],
+        "population": "every static list, switch or registry the automation pass considers",
+        "freshness": "a verdict stands until the code or its conventions change",
+        "refusal": "the kernel refuses to automate a candidate whose convention, fallback or validation contract fails",
+        "observation": "the discovery and startup reports dynamic loading must emit, which locate an extension that failed to load",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the discovered convention, which replaces the static list and which the startup report is compared against"
+    },
+    "records": [
+        {
+            "id": "static-to-dynamic-readiness",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Static-to-Dynamic Readiness",
+            "exemplar": {
+                "before": "A static list rewritten as dynamic discovery on sight, adding fragility for no gain.",
+                "after": "static pattern → classify intentional vs problematic → maintainability pressure + convention strength → {automate | retain static | formalize convention first}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect static implementation patterns, classify whether they are intentional or problematic, measure maintainability pressure, verify convention strength, and automate only when stability or fallback exists.",
+            "invariant": "Static code is not debt by default; automation requires evidence that dynamism reduces maintenance risk without increasing fragility.",
+            "flow": [
+                "StaticPattern",
+                "Classification",
+                "PressureMetric",
+                "ConventionStrength",
+                "Automate|RetainStatic|DesignFallback"
+            ],
+            "productions": [
+                {
+                    "lhs": "AutomationReadiness",
+                    "rhs": "<StaticPattern> \"→\" <OpportunityClassification> \"→\" <MaintainabilityAssessment> \"→\" <ConventionAssessment> \"→\" <AutomationDecision>"
+                },
+                {
+                    "lhs": "AutomationDecision",
+                    "rhs": "\"automate\" | \"retain_static\" | \"formalize_convention_first\" | \"manual_fallback_required\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification",
+                "resilience_recovery"
+            ]
+        },
+        {
+            "id": "runtime-neutral-automation-boundary",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Runtime-Neutral Automation Boundary",
+            "exemplar": {
+                "before": "Automation logic hardcodes a runtime's glob and path, so it runs on one platform only.",
+                "after": "semantic op{DISCOVER/READ/SEARCH/VALIDATE/PERSIST} → adapter maps to the runtime → portable core, no platform mechanics inside",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Express discovery, reading, searching, validation, persistence, and reporting as semantic operations, then delegate concrete mechanics to runtime adapters.",
+            "invariant": "Dynamic architecture must be portable across runtimes by separating automation intent from platform execution.",
+            "flow": [
+                "SemanticVerb",
+                "AdapterCapability",
+                "RuntimeAction",
+                "Evidence"
+            ],
+            "productions": [
+                {
+                    "lhs": "RuntimeNeutralBoundary",
+                    "rhs": "<SemanticOperation> \"→\" <AdapterMapping> \"→\" <RuntimeExecution> \"→\" <EvidenceResult>"
+                },
+                {
+                    "lhs": "SemanticOperation",
+                    "rhs": "\"DISCOVER_RESOURCES\" | \"READ_RESOURCE\" | \"SEARCH_CONTENT\" | \"ANALYZE_CONTENT\" | \"VALIDATE_ARTIFACT\" | \"PERSIST_ARTIFACT\" | \"REPORT_RESULT\""
+                },
+                {
+                    "lhs": "AdapterMapping",
+                    "rhs": "<CapabilityStatus> \",\" <RuntimeConstraint> \",\" <FallbackPolicy>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "automation-operation-mode",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Automation Operation Mode",
+            "exemplar": {
+                "before": "Analysis silently mutates source; a design run also implements.",
+                "after": "detect mode{analysis | design | implementation | validation} → bind permissions → mutation only in implementation mode → mode-legal artifact",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect operation mode, bind allowed actions, prohibit source mutation outside implementation mode, and emit analysis, design, implementation, or validation artifacts accordingly.",
+            "invariant": "Automation design and automation execution are separate contracts.",
+            "flow": [
+                "DetectMode",
+                "BindPermissions",
+                "EnforceMutationGate",
+                "ExecuteAllowedScope",
+                "EmitArtifact"
+            ],
+            "productions": [
+                {
+                    "lhs": "AutomationMode",
+                    "rhs": "\"analysis_only\" | \"analysis_and_design\" | \"implementation\" | \"validation_only\""
+                },
+                {"lhs": "ModeExecution",
+                    "rhs": "<AutomationMode> \"→\" <PermissionSet> \"→\" <AllowedArtifact>"},
+                {
+                    "lhs": "PermissionSet",
+                    "rhs": "\"read_only\" | \"design_only\" | \"write_authorized\" | \"validate_only\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "state_transaction",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "capability-degradation",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Capability Degradation",
+            "exemplar": {
+                "before": "Automation assumes it can execute and persist, then fails silently when it can't.",
+                "after": "required capabilities → probe → {full | degraded | blocked} → execute | emulate | skip-with-disclosure | block",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Declare required capabilities, probe availability, emulate missing behavior where safe, disclose unavailable capability, and downgrade confidence or block dependent operations.",
+            "invariant": "Automation systems must not silently assume filesystem, execution, persistence, validation, or search capabilities.",
+            "flow": [
+                "CapabilityRequirement",
+                "Probe",
+                "Available|Emulated|Unavailable",
+                "ConfidencePolicy"
+            ],
+            "productions": [
+                {
+                    "lhs": "CapabilityDegradation",
+                    "rhs": "<RequiredCapabilitySet> \"→\" <CapabilityProbeSet> \"→\" <CapabilityVerdict> \"→\" <ExecutionPolicy>"
+                },
+                {"lhs": "CapabilityVerdict",
+                    "rhs": "\"full\" | \"degraded\" | \"blocked\""},
+                {"lhs": "ExecutionPolicy",
+                    "rhs": "\"execute\" | \"emulate\" | \"skip_with_disclosure\" | \"block\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "resilience_recovery"
+            ]
+        },
+        {
+            "id": "automation-opportunity-detection",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Automation Opportunity Detection",
+            "exemplar": {
+                "before": "Automation targets guessed instead of found from repeated manual coordination points.",
+                "after": "scope → detect{manual registration, hardcoded reference, static list, duplicated discovery} → classify{location, type, count, maintenance signal}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Search target scope for manual registries, hardcoded references, static lists, and duplicated discovery logic; then classify each finding with count, location, role, and maintenance signal.",
+            "invariant": "Automation candidates emerge from repeated manual coordination points.",
+            "flow": [
+                "TargetScope",
+                "DetectionProcedures",
+                "PatternGroups",
+                "ClassificationRegistry"
+            ],
+            "productions": [
+                {
+                    "lhs": "OpportunityDetection",
+                    "rhs": "<TargetScope> \"→\" <DetectionProcedureSet> \"→\" <PatternClassificationSet>"
+                },
+                {
+                    "lhs": "DetectionProcedureSet",
+                    "rhs": "\"manual_registration\" \",\" \"hardcoded_reference\" \",\" \"static_list\" \",\" \"duplicated_discovery\""
+                },
+                {
+                    "lhs": "OpportunityClassification",
+                    "rhs": "<Location> \",\" <PatternType> \",\" <Count> \",\" <MaintenanceEvidence>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "runtime_extensibility",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "intentional-static-separation",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Intentional Static Separation",
+            "exemplar": {
+                "before": "A small, stable, bounded static list flagged as debt and automated away.",
+                "after": "static finding → scale + change-frequency + risk → {intentionally-static candidate | automation candidate | needs more evidence}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each static pattern, compare size, frequency, stability, and risk; classify small or stable patterns as intentionally static candidates instead of automation debt.",
+            "invariant": "Keeping a static list may be correct when the domain is bounded and explicitness improves safety.",
+            "flow": [
+                "StaticFinding",
+                "ScaleCheck",
+                "ChangeFrequencyCheck",
+                "RiskCheck",
+                "IntentionalStatic|AutomationCandidate"
+            ],
+            "productions": [
+                {
+                    "lhs": "StaticSeparation",
+                    "rhs": "<StaticFinding> \"→\" <ScaleMetric> \"→\" <MutationEvidence> \"→\" <RiskAssessment> \"→\" <StaticVerdict>"
+                },
+                {
+                    "lhs": "StaticVerdict",
+                    "rhs": "\"intentionally_static_candidate\" | \"automation_candidate\" | \"needs_more_evidence\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "runtime_extensibility",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "breaking-point-calculation",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "analysis",
+            "yields": "operation",
+            "title": "Breaking Point Calculation",
+            "exemplar": {
+                "before": "Automation prioritized by aesthetic preference, not scale pressure.",
+                "after": "current count + growth rate + limits{cognitive, maintenance, duplication} → time until breach → severity",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Measure current item count, estimate growth rate, compare against cognitive and maintenance limits, compute time or units until threshold breach, and assign severity.",
+            "invariant": "Automation priority should be driven by scale pressure, not aesthetic preference.",
+            "flow": [
+                "CurrentScale + GrowthRate + Limits",
+                "BreakingPoint",
+                "Severity"
+            ],
+            "productions": [
+                {
+                    "lhs": "BreakingPoint",
+                    "rhs": "<CurrentCount> \",\" <GrowthRate> \",\" <LimitSet> \"→\" <ThresholdProjection> \"→\" <PriorityRank>"
+                },
+                {
+                    "lhs": "LimitSet",
+                    "rhs": "\"cognitive_limit\" \",\" \"maintenance_limit\" \",\" \"duplication_limit\""
+                },
+                {"lhs": "PriorityRank",
+                    "rhs": "\"critical\" | \"high\" | \"medium\" | \"low\""}
+            ],
+            "composes": [],
+            "force": ["performance_scaling"]
+        },
+        {
+            "id": "automation-priority-ordering",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Automation Priority Ordering",
+            "exemplar": {
+                "before": "Migrations tackled in arbitrary order, low-impact first.",
+                "after": "breaking points → urgency{severity + time-to-break + scope + maintenance cost} → sorted backlog",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Convert breaking points into urgency scores using severity, projected time-to-break, affected scope, and expected maintenance cost, then sort candidate migrations.",
+            "invariant": "Automation work should be sequenced by operational impact.",
+            "flow": [
+                "BreakingPoints",
+                "UrgencyMetric",
+                "ImpactMetric",
+                "PriorityOrder"
+            ],
+            "productions": [
+                {
+                    "lhs": "PriorityOrdering",
+                    "rhs": "<BreakingPointSet> \"→\" <PriorityScoreSet> \"→\" <SortedAutomationBacklog>"
+                },
+                {
+                    "lhs": "PriorityScore",
+                    "rhs": "<PriorityRank> \"+\" <TimeToBreak> \"+\" <AffectedScope> \"+\" <MaintenanceCost>"
+                }
+            ],
+            "composes": [],
+            "force": ["causality_ordering"]
+        },
+        {
+            "id": "convention-strength-analysis",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Convention Strength Analysis",
+            "exemplar": {
+                "before": "Auto-discovery built on a naming convention only 60% of files follow.",
+                "after": "related resources → naming tokens + organization → consistency % → {strong → auto-ready | moderate → formalize | weak → establish convention first}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Discover related resources, extract naming tokens and organization patterns, calculate consistency percentages, and mark auto-discovery readiness only when convention strength passes threshold.",
+            "invariant": "Convention-based discovery is safe only when conventions are measurable.",
+            "flow": [
+                "RelatedResources",
+                "TokenExtraction",
+                "ConsistencyMetric",
+                "Strength",
+                "Readiness"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConventionStrength",
+                    "rhs": "<ResourceSet> \"→\" <ConventionSignalSet> \"→\" <ConsistencyScore> \"→\" <StrengthVerdict>"
+                },
+                {"lhs": "StrengthVerdict",
+                    "rhs": "\"strong\" | \"moderate\" | \"weak\""},
+                {
+                    "lhs": "ReadinessRule",
+                    "rhs": "\"strong → auto_discovery_ready\" | \"moderate → formalize_first\" | \"weak → establish_convention_first\""
+                }
+            ],
+            "composes": [],
+            "force": ["runtime_extensibility"]
+        },
+        {
+            "id": "extension-interface-discovery",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Extension Interface Discovery",
+            "exemplar": {
+                "before": "Dynamic discovery attempted with no contract boundary to validate against.",
+                "after": "implementations → contract signals{inheritance, composition, common methods, common schema} → interface candidate when count exceeds threshold",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Search for inheritance, composition, shared method contracts, and shared schema contracts; group similar implementations; infer interface candidates when implementation count exceeds threshold.",
+            "invariant": "Dynamic discovery requires an explicit or inferable contract boundary.",
+            "flow": [
+                "ImplementationSet",
+                "ContractSignals",
+                "InterfaceCandidate",
+                "ExtensionContract"
+            ],
+            "productions": [
+                {
+                    "lhs": "ExtensionInterfaceDiscovery",
+                    "rhs": "<ImplementationPatternSet> \"→\" <ContractEvidence> \"→\" <InterfaceCandidateSet>"
+                },
+                {
+                    "lhs": "ContractEvidence",
+                    "rhs": "\"inheritance\" | \"composition\" | \"common_methods\" | \"common_schema\""
+                },
+                {
+                    "lhs": "InterfaceCandidate",
+                    "rhs": "<InterfaceName> \",\" <ImplementationCount> \",\" <RequiredContractEvidence>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "scalability-projection",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "analysis",
+            "yields": "operation",
+            "title": "Scalability Projection",
+            "exemplar": {
+                "before": "Automation judged against today's 5 items, not tomorrow's 500.",
+                "after": "current scale → 10x + 100x projection → manual feasibility → {manual ok | dynamic recommended | dynamic required}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Measure current resource counts, project tenfold and hundredfold growth, assess manual maintenance feasibility, and identify where dynamic discovery becomes necessary.",
+            "invariant": "Automation architecture should be evaluated against future scale, not only current scale.",
+            "flow": [
+                "CurrentScale",
+                "10xProjection",
+                "100xProjection",
+                "ManualFeasibility",
+                "DiscoveryNeed"
+            ],
+            "productions": [
+                {
+                    "lhs": "ScalabilityProjection",
+                    "rhs": "<CurrentScale> \"→\" <GrowthScenarioSet> \"→\" <MaintenanceFeasibilitySet> \"→\" <AutomationNeed>"
+                },
+                {"lhs": "GrowthScenarioSet",
+                    "rhs": "\"10x\" | \"100x\""},
+                {"lhs": "AutomationNeed",
+                    "rhs": "\"manual_ok\" | \"dynamic_recommended\" | \"dynamic_required\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "performance_scaling"
+            ]
+        },
+        {
+            "id": "performance-aware-discovery-design",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Performance-Aware Discovery Design",
+            "exemplar": {
+                "before": "Dynamic discovery ships, hiding a per-startup scan cost that grows with scale.",
+                "after": "item count → {discovery cost, loading cost, memory} vs targets → cache only when justified → failure modes recorded",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Estimate discovery and loading cost, compare large-scale cost against performance targets, introduce caching only when justified, and record failure modes.",
+            "invariant": "Dynamic discovery must not hide runtime performance debt.",
+            "flow": [
+                "ItemCount",
+                "DiscoveryCost",
+                "LoadingCost",
+                "CacheNeed",
+                "PerformanceVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "DiscoveryPerformanceDesign",
+                    "rhs": "<ScaleMetric> \"→\" <CostEstimateSet> \"→\" <CacheDecision> \"→\" <FailureModeSet>"
+                },
+                {
+                    "lhs": "CostEstimateSet",
+                    "rhs": "\"discovery_cost\" \",\" \"loading_cost\" \",\" \"memory_overhead\""
+                },
+                {"lhs": "CacheDecision",
+                    "rhs": "\"cache_required\" | \"cache_not_required\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "performance_scaling"
+            ]
+        },
+        {
+            "id": "dynamic-extension-architecture",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Dynamic Extension Architecture",
+            "exemplar": {
+                "before": "Implementations loaded dynamically with no contract validation, unobservable.",
+                "after": "contract → discovery → contract-validate → {load valid | skip invalid | manual override | isolate failure} → report{discovered, manual, skipped, failed}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Infer extension contracts, define discovery conventions, validate discovered implementations against the contract, preserve manual registration fallback, and report discovered, skipped, failed, and manual items.",
+            "invariant": "Dynamic loading must be contract-validated and observable.",
+            "flow": [
+                "Contract",
+                "Discovery",
+                "Filter",
+                "Validate",
+                "Load|Skip",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "DynamicExtensionArchitecture",
+                    "rhs": "<ExtensionContract> \"→\" <DiscoveryMechanism> \"→\" <ContractValidation> \"→\" <LoadingPolicy> \"→\" <ObservabilityReport>"
+                },
+                {
+                    "lhs": "LoadingPolicy",
+                    "rhs": "\"load_valid\" | \"skip_invalid\" | \"manual_override\" | \"isolate_failure\""
+                },
+                {
+                    "lhs": "ObservabilityReport",
+                    "rhs": "\"discovered_count\" \",\" \"manual_count\" \",\" \"skipped_count\" \",\" \"failed_count\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "resilience_recovery",
+                "observability_traceability"
+            ]
+        },
+        {
+            "id": "centralized-reference-resolver",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Centralized Reference Resolver",
+            "exemplar": {
+                "before": "The same hardcoded path duplicated at a dozen call sites.",
+                "after": "reference group → resolver → scope-safe rule → config override fallback → map each old reference to the resolver",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Group duplicated hardcoded references, derive resolver names, define scope-safe resolution rules, provide configuration override fallback, and map each old reference to a resolver migration.",
+            "invariant": "Hardcoded resource access should be centralized only through validated resolution boundaries.",
+            "flow": [
+                "HardcodedReferenceGroup",
+                "Resolver",
+                "ScopeValidation",
+                "OverrideFallback",
+                "MigrationMap"
+            ],
+            "productions": [
+                {
+                    "lhs": "ReferenceResolver",
+                    "rhs": "<ReferenceGroup> \"→\" <ResolverDefinition> \"→\" <ScopePolicy> \"→\" <FallbackOverride> \"→\" <ReplacementMap>"
+                },
+                {
+                    "lhs": "ScopePolicy",
+                    "rhs": "\"reject_outside_allowed_scope\" | \"require_explicit_approval_for_escape\""
+                },
+                {"lhs": "FallbackOverride",
+                    "rhs": "\"configuration_override\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "resilience_recovery",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "cache-invalidation-strategy",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Cache Invalidation Strategy",
+            "exemplar": {
+                "before": "Discovery results cached with no invalidation, serving stale data forever.",
+                "after": "cache subject → key{scope, convention, adapter version, identity} → invalidate on{resource change, explicit, time, implementation change}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Define cache keys by scope, convention, adapter version, and implementation identity; invalidate by resource change, explicit request, time expiry, or implementation version change.",
+            "invariant": "Caching dynamic discovery is safe only when invalidation semantics are explicit.",
+            "flow": [
+                "CacheSubject",
+                "CacheKey",
+                "Duration",
+                "InvalidationTrigger",
+                "Refresh"
+            ],
+            "productions": [
+                {
+                    "lhs": "CacheStrategy",
+                    "rhs": "<CacheSubject> \"→\" <CacheKey> \"→\" <CacheDuration> \"→\" <InvalidationPolicy>"
+                },
+                {
+                    "lhs": "CacheSubject",
+                    "rhs": "\"discovery_results\" | \"loaded_extensions\" | \"reference_resolution\""
+                },
+                {
+                    "lhs": "InvalidationPolicy",
+                    "rhs": "\"resource_change\" | \"explicit_invalidation\" | \"time_expiry\" | \"implementation_change\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "manual-fallback-preservation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Manual Fallback Preservation",
+            "exemplar": {
+                "before": "Auto-discovery removes the escape hatch — a non-conforming item can't be registered.",
+                "after": "auto-discovery + manual registration for exceptions → deterministic merge → manual items reported separately",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Keep explicit registration paths for non-conforming or exceptional implementations, order manual entries deterministically, and report manual items separately from auto-discovered items.",
+            "invariant": "Automation should reduce manual maintenance, not remove escape hatches.",
+            "flow": [
+                "AutoDiscovery",
+                "NonConformingItem",
+                "ManualRegistration",
+                "DeterministicMerge",
+                "Observability"
+            ],
+            "productions": [
+                {
+                    "lhs": "ManualFallback",
+                    "rhs": "<DiscoveredSet> \",\" <ManualSet> \"→\" <Validation> \"→\" <DeterministicMerge> \"→\" <FallbackReport>"
+                },
+                {"lhs": "ManualSet",
+                    "rhs": "<ExplicitRegistration> | <ExplicitRegistration> \",\" <ManualSet>"},
+                {"lhs": "FallbackReport",
+                    "rhs": "\"manual_items_listed_separately\""}
+            ],
+            "composes": [],
+            "force": ["resilience_recovery"]
+        },
+        {
+            "id": "dynamic-failure-isolation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Dynamic Failure Isolation",
+            "exemplar": {
+                "before": "One bad extension crashes the whole dynamic system.",
+                "after": "item failure{discovery | loading | validation} → isolate the item → continue with valid ones → report the failure; halt only if systemic or critical",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "On individual discovery, loading, or validation failure, isolate the failing item, continue with valid items where safe, and report the failed item with reason.",
+            "invariant": "One bad extension must not collapse the whole dynamic system unless marked critical.",
+            "flow": [
+                "ItemFailure",
+                "Isolate",
+                "ContinueSafeSubset",
+                "ReportFailure"
+            ],
+            "productions": [
+                {
+                    "lhs": "FailureIsolation",
+                    "rhs": "<ExtensionItem> \"→\" <FailureType> \"→\" <IsolationPolicy> \"→\" <ContinuationPolicy> \"→\" <FailureReport>"
+                },
+                {
+                    "lhs": "FailureType",
+                    "rhs": "\"discovery_failure\" | \"loading_failure\" | \"validation_failure\" | \"execution_failure\""
+                },
+                {
+                    "lhs": "ContinuationPolicy",
+                    "rhs": "\"continue\" | \"continue_with_warning\" | \"halt_if_systemic_or_critical\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "entry-point-migration",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Entry Point Migration",
+            "exemplar": {
+                "before": "Discovery registries built but the composition root still hardcodes registrations.",
+                "after": "composition roots → scan static patterns → update to discovery + resolver → validate → persist only in implementation mode",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Locate composition roots, identify manual registrations and hardcoded references, compose updates that use discovery registries and centralized resolvers, and apply only in implementation mode.",
+            "invariant": "Dynamic architecture takes effect at composition boundaries.",
+            "flow": [
+                "CompositionRoot",
+                "StaticPatternScan",
+                "UpdatePlan",
+                "Validate",
+                "ApplyOrPlan"
+            ],
+            "productions": [
+                {
+                    "lhs": "EntryPointMigration",
+                    "rhs": "<CompositionRootSet> \"→\" <StaticPatternSet> \"→\" <EntryPointUpdate> \"→\" <Validation> \"→\" <PersistencePolicy>"
+                },
+                {"lhs": "PersistencePolicy",
+                    "rhs": "\"persist_only_in_implementation_mode\" | \"emit_plan_only\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "runtime_extensibility",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "measured-vs-estimated-validation",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Measured-vs-Estimated Validation",
+            "exemplar": {
+                "before": "An estimated performance number reported as if it were measured.",
+                "after": "validation need → can measure? → {measured | estimated (labeled)} → estimated is never reported as measured",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Run validation when execution is available; otherwise estimate from static evidence, label the result as estimated, and never report estimated performance as measured.",
+            "invariant": "Validation truthfulness requires provenance on every metric.",
+            "flow": [
+                "ValidationNeed",
+                "CanMeasure?",
+                "MeasuredResult|EstimatedResult",
+                "ProvenanceLabel"
+            ],
+            "productions": [
+                {
+                    "lhs": "ValidationProvenance",
+                    "rhs": "<ValidationCheck> \"→\" <CapabilityCheck> \"→\" <ValidationResult> \"→\" <Provenance>"
+                },
+                {"lhs": "Provenance",
+                    "rhs": "\"measured\" | \"estimated\" | \"unavailable\""},
+                {"lhs": "Rule",
+                    "rhs": "\"estimated != measured\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification",
+                "performance_scaling"
+            ]
+        },
+        {
+            "id": "architecture-validation-before-persistence",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Architecture Validation Before Persistence",
+            "exemplar": {
+                "before": "A generated resolver saved before it is checked against the architecture rules.",
+                "after": "generated artifact → schema check → architecture check → {persist | reject | emit unpersisted}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Validate generated contracts, registries, resolvers, plans, and entry point updates against schemas and architectural rules before saving or modifying any artifact.",
+            "invariant": "Generated architecture must satisfy structure before it becomes state.",
+            "flow": [
+                "GeneratedArtifact",
+                "SchemaValidation",
+                "ArchitectureValidation",
+                "Persist|Reject"
+            ],
+            "productions": [
+                {
+                    "lhs": "PrePersistenceValidation",
+                    "rhs": "<GeneratedArtifact> \"→\" <SchemaCheck> \"→\" <ArchitectureCheck> \"→\" <PersistenceDecision>"
+                },
+                {"lhs": "PersistenceDecision",
+                    "rhs": "\"persist\" | \"reject\" | \"emit_unpersisted_artifact\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "knowledge-capture",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Knowledge Capture",
+            "exemplar": {
+                "before": "Each automation session forgets the last — the same analysis re-run.",
+                "after": "knowledge base + session findings → merge{detections, conventions, scale, designs, migration, validation} → persist when capability exists",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load or initialize the automation knowledge base, merge new detections, conventions, scalability concerns, architecture designs, migration history, and validation outcomes, then persist when capability exists.",
+            "invariant": "Automation systems improve when each session updates durable architectural memory.",
+            "flow": [
+                "SessionFindings",
+                "KnowledgeMerge",
+                "PersistenceCheck",
+                "Store|ReportPreparedUpdate"
+            ],
+            "productions": [
+                {
+                    "lhs": "KnowledgeCapture",
+                    "rhs": "<KnowledgeBase> \",\" <SessionFindings> \"→\" <MergedKnowledge> \"→\" <KnowledgePersistenceStatus>"
+                },
+                {
+                    "lhs": "SessionFindings",
+                    "rhs": "<PatternClassifications> \",\" <ConventionReport> \",\" <ScalabilityReport> \",\" <ArchitectureDesign> \",\" <MigrationStatus>"
+                },
+                {"lhs": "KnowledgePersistenceStatus",
+                    "rhs": "\"persisted\" | \"prepared_not_persisted\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "performance_scaling",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "automation-session-report",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Automation Session Report",
+            "exemplar": {
+                "before": "A report that conflates the design intent with what was applied.",
+                "after": "session → {detection, convention, scale, architecture, implementation, measured-vs-estimated validation, limitations} → report separating design from applied",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Summarize detected patterns, convention readiness, scalability pressure, dynamic architecture, generated artifacts, implementation status, measured versus estimated validation, and limitations.",
+            "invariant": "Automation reports must separate design intent from applied implementation and disclose degraded capability.",
+            "flow": [
+                "SessionArtifacts",
+                "Metrics",
+                "ValidationProvenance",
+                "Limitations",
+                "UserReport"
+            ],
+            "productions": [
+                {
+                    "lhs": "AutomationReport",
+                    "rhs": "<DetectionSummary> \",\" <ConventionSummary> \",\" <ScalabilitySummary> \",\" <ArchitectureSummary> \",\" <ImplementationSummary> \",\" <PerformanceValidationSummary> \",\" <KnowledgeUpdateSummary> \",\" <Limitations>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification",
+                "performance_scaling"
+            ]
+        },
+        {
+            "id": "automation-completion-status",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Automation Completion Status",
+            "exemplar": {
+                "before": "'Automated' declared while the convention was never formalized, no fallback was preserved, and the validation was estimated not measured.",
+                "after": "convention strong + fallback preserved + performance validated + architecture validated + capability disclosed → complete; else planned_only | blocked",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Mark the static-to-dynamic automation complete only when convention strength passed, a manual fallback is preserved, performance and architecture validation passed with measured provenance, and any degraded capability is disclosed; otherwise report planned-only or blocked.",
+            "invariant": "Automation completion is a verified terminal state — never a claim while convention, fallback, validation, or capability evidence is absent.",
+            "flow": [
+                "CompletionCriteria",
+                "EvidenceCheck",
+                "CapabilityDisclosure",
+                "Complete|PlannedOnly|Blocked"
+            ],
+            "productions": [
+                {
+                    "lhs": "AutomationCompletionStatus",
+                    "rhs": "<CompletionCriteriaSet> \"→\" <EvidenceSet> \"→\" <CompletionVerdict>"
+                },
+                {"lhs": "CompletionVerdict",
+                    "rhs": "\"automation_complete\" | \"planned_only\" | \"blocked\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "automation-kernel",
+            "principleRef": "convention-over-configuration",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "automation-opportunity-detection"},
+                {"stage": "see",
+                    "record": "convention-strength-analysis"},
+                {"stage": "derive",
+                    "record": "intentional-static-separation"},
+                {"stage": "intent",
+                    "record": "automation-priority-ordering"},
+                {"stage": "constrain",
+                    "record": "automation-operation-mode"},
+                {"stage": "project",
+                    "record": "dynamic-extension-architecture"},
+                {"stage": "act",
+                    "record": "entry-point-migration"},
+                {"stage": "verify",
+                    "record": "architecture-validation-before-persistence"},
+                {"stage": "commit",
+                    "record": "automation-session-report"},
+                {"stage": "terminate",
+                    "record": "automation-completion-status"}
+            ],
+            "title": "Automation Kernel",
+            "exemplar": {
+                "before": "A static pattern rewritten dynamic by intuition, with no convention, fallback, or validation.",
+                "after": "init → capabilities → detect → classify → conventions → scale → design → optional implement → validate → knowledge → report",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load configuration, verify capabilities, initialize knowledge, detect static patterns, classify automation opportunity, analyze conventions, assess scale and performance, design dynamic architecture, optionally implement, validate, update knowledge, and report.",
+            "invariant": "Static-to-dynamic refactoring is a gated evidence pipeline that only automates when convention, fallback, performance, and validation contracts are satisfied.",
+            "flow": [
+                "Init",
+                "Capabilities",
+                "Detect",
+                "Classify",
+                "Conventions",
+                "Scale",
+                "Design",
+                "Implement?",
+                "Validate",
+                "Knowledge",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "AutomationKernel",
+                    "rhs": "<Initialization> \"→\" <CapabilityDegradation> \"→\" <OpportunityDetection> \"→\" <StaticSeparation> \"→\" <BreakingPoint> \"→\" <ConventionStrength> \"→\" <ScalabilityProjection> \"→\" <DynamicExtensionArchitecture> \"→\" <ReferenceResolver> \"→\" <OptionalImplementation> \"→\" <ValidationProvenance> \"→\" <KnowledgeCapture> \"→\" <AutomationReport>"
+                },
+                {
+                    "lhs": "OptionalImplementation",
+                    "rhs": "\"skip_unless_implementation_mode\" | <EntryPointMigration>"
+                }
+            ],
+            "composes": [
+                "capability-degradation",
+                "scalability-projection",
+                "dynamic-extension-architecture",
+                "knowledge-capture",
+                "entry-point-migration",
+                "automation-completion-status"
+            ],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "resilience_recovery",
+                "performance_scaling",
+                "streaming_dataflow"
+            ]
+        },
+        {
+            "id": "automation-concern",
+            "title": "<Automation Concern>",
+            "intent": "<Detect static coordination point> → <Classify intentional vs problematic> → <Measure scale pressure> → <Verify convention strength> → <Design dynamic contract> → <Preserve fallback> → <Validate performance and architecture> → <Capture knowledge>",
+            "invariant": "Any static implementation should become dynamic only when the domain has stable conventions, bounded failure modes, observable discovery, and safe manual fallback.",
+            "flow": [
+                "Static",
+                "Evidence",
+                "Convention",
+                "Contract",
+                "Discovery",
+                "Fallback",
+                "Validation",
+                "Memory"
+            ],
+            "productions": [
+                {
+                    "lhs": "AutomationConcern",
+                    "rhs": "<StaticPattern> \"→\" <EvidenceClassification> \"→\" <ConventionReadiness> \"→\" <DynamicArchitecture> \"→\" <FallbackPolicy> \"→\" <PerformanceValidation> \"→\" <KnowledgeUpdate> \"→\" <Report>"
+                },
+                {
+                    "lhs": "DynamicArchitecture",
+                    "rhs": "<ExtensionContract> \",\" <DiscoveryMechanism> \",\" <CentralizedResolver> \",\" <CachingPolicy> \",\" <FailureIsolation>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "resilience_recovery",
+                "observability_traceability",
+                "performance_scaling",
+                "domain_boundary",
+                "control_coordination"
+            ],
+            "meta": true
+        }
+    ]
+}

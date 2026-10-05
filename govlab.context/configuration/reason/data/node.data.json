@@ -1,0 +1,595 @@
+{
+    "check": {
+        "by": ["the structured-document validator, which requires the gate clause each node grounds wherever a document writes, reads, stops or reports"],
+        "population": "every structured document whose constructs ground the node",
+        "freshness": "a verdict stands until the document, the grammar or the node changes",
+        "refusal": "the validator fails a gate that omits the clause the node asks for",
+        "observation": "none: a node is a question a gate asks; the answer comes from the check the gate runs",
+        "evidence": "fires-and-accepts: a suite plants a check with no evidence, a gate with no population, a write with no refusal and a node with no gate, and validates a well-formed document clean",
+        "authority": "the gate clause the node asks for, which every document's gate conforms to"
+    },
+    "records": [
+        {
+            "id": "ont-identity",
+            "name": "Identity",
+            "axis": "ontology",
+            "concept": "identity",
+            "mathType": "set-theory"
+        },
+        {
+            "id": "ont-composition",
+            "name": "Composition",
+            "axis": "ontology",
+            "concept": "composition",
+            "mathType": "set-theory"
+        },
+        {
+            "id": "ont-structure",
+            "name": "Structure",
+            "axis": "ontology",
+            "concept": "structure",
+            "mathType": "algebra"
+        },
+        {"id": "ont-relation",
+            "name": "Relation",
+            "axis": "ontology",
+            "concept": "relation",
+            "mathType": "graph"},
+        {"id": "ont-space",
+            "name": "Space",
+            "axis": "ontology",
+            "concept": "space",
+            "mathType": "topology"},
+        {"id": "ont-time",
+            "name": "Time",
+            "axis": "ontology",
+            "concept": "time",
+            "mathType": "analysis"},
+        {"id": "ont-state",
+            "name": "State",
+            "axis": "ontology",
+            "concept": "state",
+            "mathType": "set-theory"},
+        {"id": "ont-change",
+            "name": "Change",
+            "axis": "ontology",
+            "concept": "change",
+            "mathType": "analysis"},
+        {
+            "id": "ont-behavior",
+            "name": "Behavior",
+            "axis": "ontology",
+            "concept": "behavior",
+            "mathType": "dynamical-systems"
+        },
+        {"id": "ont-function",
+            "name": "Function",
+            "axis": "ontology",
+            "concept": "function",
+            "mathType": "analysis"},
+        {"id": "ont-cause",
+            "name": "Cause",
+            "axis": "ontology",
+            "concept": "cause",
+            "mathType": "analysis"},
+        {"id": "ont-meaning",
+            "name": "Meaning",
+            "axis": "ontology",
+            "concept": "meaning",
+            "mathType": "logic"},
+        {"id": "ont-scale",
+            "name": "Scale",
+            "axis": "ontology",
+            "concept": "scale",
+            "mathType": "topology"},
+        {
+            "id": "ont-probability",
+            "name": "Probability",
+            "axis": "ontology",
+            "concept": "probability",
+            "mathType": "probability"
+        },
+        {"id": "ont-novelty",
+            "name": "Novelty",
+            "axis": "ontology",
+            "concept": "novelty",
+            "mathType": "probability"},
+        {
+            "id": "ana-structural",
+            "name": "Structural Analysis",
+            "axis": "analysis",
+            "concept": "structure",
+            "mathType": "algebra"
+        },
+        {
+            "id": "ana-temporal",
+            "name": "Temporal Analysis",
+            "axis": "analysis",
+            "concept": "time",
+            "mathType": "analysis"
+        },
+        {
+            "id": "ana-spatial",
+            "name": "Spatial Analysis",
+            "axis": "analysis",
+            "concept": "space",
+            "mathType": "topology"
+        },
+        {
+            "id": "ana-statistical",
+            "name": "Statistical Analysis",
+            "axis": "analysis",
+            "concept": "statistical",
+            "mathType": "probability"
+        },
+        {
+            "id": "ana-frequency",
+            "name": "Frequency Analysis",
+            "axis": "analysis",
+            "concept": "frequency",
+            "mathType": "information-theory"
+        },
+        {
+            "id": "ana-sequential",
+            "name": "Sequential Analysis",
+            "axis": "analysis",
+            "concept": "sequential",
+            "mathType": "logic"
+        },
+        {
+            "id": "ana-relational",
+            "name": "Relational Analysis",
+            "axis": "analysis",
+            "concept": "relation",
+            "mathType": "graph"
+        },
+        {
+            "id": "ana-behavioral",
+            "name": "Behavioral Analysis",
+            "axis": "analysis",
+            "concept": "behavior",
+            "mathType": "dynamical-systems"
+        },
+        {
+            "id": "ana-functional",
+            "name": "Functional Analysis",
+            "axis": "analysis",
+            "concept": "function",
+            "mathType": "analysis"
+        },
+        {
+            "id": "ana-semantic",
+            "name": "Semantic Analysis",
+            "axis": "analysis",
+            "concept": "meaning",
+            "mathType": "logic"
+        },
+        {
+            "id": "ana-causal",
+            "name": "Causal Analysis",
+            "axis": "analysis",
+            "concept": "cause",
+            "mathType": "analysis"
+        },
+        {
+            "id": "ana-predictive",
+            "name": "Predictive Analysis",
+            "axis": "analysis",
+            "concept": "prediction",
+            "mathType": "probability"
+        },
+        {
+            "id": "ana-anomaly",
+            "name": "Anomaly Analysis",
+            "axis": "analysis",
+            "concept": "anomaly",
+            "mathType": "probability"
+        },
+        {
+            "id": "ana-evolutionary",
+            "name": "Evolutionary Analysis",
+            "axis": "analysis",
+            "concept": "change",
+            "mathType": "dynamical-systems"
+        },
+        {
+            "id": "ana-fractal",
+            "name": "Fractal Analysis",
+            "axis": "analysis",
+            "concept": "fractal",
+            "mathType": "topology"
+        },
+        {
+            "id": "rea-observation",
+            "name": "Observation",
+            "axis": "reasoning",
+            "concept": "observation",
+            "mathType": "set-theory"
+        },
+        {
+            "id": "rea-description",
+            "name": "Description",
+            "axis": "reasoning",
+            "concept": "description",
+            "mathType": "logic"
+        },
+        {
+            "id": "rea-comparison",
+            "name": "Comparison",
+            "axis": "reasoning",
+            "concept": "comparison",
+            "mathType": "logic"
+        },
+        {
+            "id": "rea-classification",
+            "name": "Classification",
+            "axis": "reasoning",
+            "concept": "classification",
+            "mathType": "set-theory"
+        },
+        {
+            "id": "rea-explanation",
+            "name": "Explanation",
+            "axis": "reasoning",
+            "concept": "explanation",
+            "mathType": "analysis"
+        },
+        {
+            "id": "rea-prediction",
+            "name": "Prediction",
+            "axis": "reasoning",
+            "concept": "prediction",
+            "mathType": "probability"
+        },
+        {
+            "id": "rea-intervention",
+            "name": "Intervention",
+            "axis": "reasoning",
+            "concept": "intervention",
+            "mathType": "analysis"
+        },
+        {
+            "id": "rea-creation",
+            "name": "Creation",
+            "axis": "reasoning",
+            "concept": "creation",
+            "mathType": "computation"
+        },
+        {
+            "id": "rea-reflection",
+            "name": "Reflection",
+            "axis": "reasoning",
+            "concept": "reflection",
+            "mathType": "topology"
+        },
+        {
+            "id": "rep-symbolic",
+            "name": "Symbolic Representation",
+            "axis": "representation",
+            "concept": "symbolic",
+            "question": "Is it encoded as equations or notation?",
+            "mathType": "algebra"
+        },
+        {
+            "id": "rep-numerical",
+            "name": "Numerical Representation",
+            "axis": "representation",
+            "concept": "number",
+            "question": "Is it encoded as quantities?",
+            "mathType": "probability"
+        },
+        {
+            "id": "rep-geometric",
+            "name": "Geometric Representation",
+            "axis": "representation",
+            "concept": "geometry",
+            "question": "Is it encoded as shapes or coordinates?",
+            "mathType": "topology"
+        },
+        {
+            "id": "rep-topological",
+            "name": "Topological Representation",
+            "axis": "representation",
+            "concept": "topology",
+            "question": "Is it encoded as connectivity or continuity?",
+            "mathType": "topology"
+        },
+        {
+            "id": "rep-information-theoretic",
+            "name": "Information-Theoretic Representation",
+            "axis": "representation",
+            "concept": "information-theory",
+            "question": "Is it encoded as entropy or compression?",
+            "mathType": "information-theory"
+        },
+        {
+            "id": "rep-probabilistic",
+            "name": "Probabilistic Representation",
+            "axis": "representation",
+            "concept": "probability",
+            "question": "Is it encoded as distributions?",
+            "mathType": "probability"
+        },
+        {
+            "id": "rep-dynamical",
+            "name": "Dynamical Representation",
+            "axis": "representation",
+            "concept": "dynamical-systems",
+            "question": "Is it encoded as state transitions?",
+            "mathType": "dynamical-systems"
+        },
+        {
+            "id": "rep-computational",
+            "name": "Computational Representation",
+            "axis": "representation",
+            "concept": "computation",
+            "question": "Is it encoded as an algorithm?",
+            "mathType": "computation"
+        },
+        {
+            "id": "for-existence",
+            "name": "Existence",
+            "axis": "formalization",
+            "question": "What object exists?",
+            "mathType": "set-theory"
+        },
+        {
+            "id": "for-structure",
+            "name": "Formal Structure",
+            "axis": "formalization",
+            "question": "What structure holds?",
+            "mathType": "algebra"
+        },
+        {
+            "id": "for-relation",
+            "name": "Mapping",
+            "axis": "formalization",
+            "question": "What mapping connects objects?",
+            "mathType": "graph"
+        },
+        {
+            "id": "for-space",
+            "name": "Environment",
+            "axis": "formalization",
+            "question": "What environment contains them?",
+            "mathType": "topology"
+        },
+        {
+            "id": "for-transformation",
+            "name": "Transformation",
+            "axis": "formalization",
+            "question": "What operation applies?",
+            "mathType": "analysis"
+        },
+        {
+            "id": "for-invariance",
+            "name": "Invariance",
+            "axis": "formalization",
+            "question": "What is preserved?",
+            "mathType": "topology"
+        },
+        {
+            "id": "for-uncertainty",
+            "name": "Uncertainty",
+            "axis": "formalization",
+            "question": "What is uncertain?",
+            "mathType": "probability"
+        },
+        {
+            "id": "for-computation",
+            "name": "Computability",
+            "axis": "formalization",
+            "question": "What is computable?",
+            "mathType": "computation"
+        },
+        {
+            "id": "for-abstraction",
+            "name": "Abstraction",
+            "axis": "formalization",
+            "question": "What generalizes?",
+            "mathType": "topology"
+        },
+        {
+            "id": "for-creation",
+            "name": "Emergence",
+            "axis": "formalization",
+            "question": "What new structure can emerge?",
+            "mathType": "computation"
+        },
+        {
+            "id": "for-absence",
+            "name": "Absence",
+            "axis": "formalization",
+            "question": "What is absent, and is it distinguished from unknown, omitted and zero?",
+            "mathType": "set-theory",
+            "answerShape": "set",
+            "decisionTest": "every absence a later check must distinguish is represented as its own value"
+        },
+        {
+            "id": "tel-objective",
+            "name": "Objective",
+            "axis": "teleology",
+            "question": "What is the objective?",
+            "mathType": "optimization"
+        },
+        {
+            "id": "tel-utility",
+            "name": "Branch Utility",
+            "axis": "teleology",
+            "question": "How much does this advance the objective?",
+            "mathType": "optimization",
+            "answerShape": "number"
+        },
+        {
+            "id": "tel-cost",
+            "name": "Branch Cost",
+            "axis": "teleology",
+            "question": "What does this cost?",
+            "mathType": "optimization",
+            "answerShape": "number"
+        },
+        {
+            "id": "tel-priority",
+            "name": "Branch Priority",
+            "axis": "teleology",
+            "question": "Is this the highest-worth admissible branch?",
+            "mathType": "optimization",
+            "answerShape": "boolean",
+            "decisionTest": "the branch has the highest utility minus cost among the admissible branches",
+            "role": "injection-gate"
+        },
+        {
+            "id": "ver-evidence",
+            "name": "Evidence",
+            "axis": "verification",
+            "question": "What evidence supports this?",
+            "mathType": "set-theory",
+            "answerShape": "set",
+            "decisionTest": "the evidence set is non-empty",
+            "role": "both"
+        },
+        {
+            "id": "ver-ground-truth",
+            "name": "Ground Truth",
+            "axis": "verification",
+            "question": "Is it true against reality, not merely coherent?",
+            "mathType": "logic"
+        },
+        {
+            "id": "ver-falsification",
+            "name": "Refutation Condition",
+            "axis": "verification",
+            "question": "What would refute it?",
+            "mathType": "logic"
+        },
+        {
+            "id": "ver-confidence",
+            "name": "Confidence",
+            "axis": "verification",
+            "question": "How confident is it, and is that enough?",
+            "mathType": "probability",
+            "answerShape": "number[0,1]",
+            "decisionTest": "confidence is at or above the threshold"
+        },
+        {
+            "id": "ver-refutation",
+            "name": "Support Against Refutation",
+            "axis": "verification",
+            "question": "Does refutation outweigh support?",
+            "mathType": "logic"
+        },
+        {
+            "id": "ver-population",
+            "name": "Population",
+            "axis": "verification",
+            "question": "Over what set was this checked?",
+            "mathType": "set-theory",
+            "answerShape": "ratio",
+            "decisionTest": "the declared population is non-empty and every member is measured or named absent",
+            "role": "both"
+        },
+        {
+            "id": "ver-freshness",
+            "name": "Freshness",
+            "axis": "verification",
+            "question": "Was the read derived after the last relevant mutator?",
+            "mathType": "information-theory",
+            "answerShape": "boolean",
+            "decisionTest": "the fingerprint of the inputs and the code matches the output's declared derivation"
+        },
+        {
+            "id": "ver-standing",
+            "name": "Standing",
+            "axis": "verification",
+            "question": "Did the read set move beneath the verdict?",
+            "mathType": "logic",
+            "answerShape": "boolean",
+            "decisionTest": "the moved set is empty"
+        },
+        {
+            "id": "ver-refusal",
+            "name": "Refusal",
+            "axis": "verification",
+            "question": "Where does this stage refuse to continue?",
+            "mathType": "set-theory",
+            "answerShape": "set",
+            "decisionTest": "a refusal condition is named before the irreversible write",
+            "role": "injection-gate"
+        },
+        {
+            "id": "ver-observation",
+            "name": "Located Observation",
+            "axis": "verification",
+            "question": "Does the observation locate a failure, or is an absence of failures read as proof?",
+            "mathType": "set-theory",
+            "answerShape": "set",
+            "decisionTest": "every observed location is reported as located, and no observed absence is reported as verified"
+        },
+        {
+            "id": "ter-completion",
+            "name": "Completion",
+            "axis": "termination",
+            "question": "Is every task done?",
+            "mathType": "set-theory",
+            "answerShape": "boolean",
+            "decisionTest": "every task is done",
+            "role": "completion-marker"
+        },
+        {
+            "id": "ter-saturation",
+            "name": "Saturation",
+            "axis": "termination",
+            "question": "Is nothing left to resolve?",
+            "mathType": "set-theory",
+            "answerShape": "boolean",
+            "decisionTest": "no open items remain",
+            "role": "both"
+        },
+        {
+            "id": "ter-diminishing-returns",
+            "name": "Diminishing Returns",
+            "axis": "termination",
+            "question": "Has progress stopped increasing?",
+            "mathType": "dynamical-systems",
+            "answerShape": "counter",
+            "decisionTest": "progress is unchanged across a bounded window",
+            "role": "injection-gate"
+        },
+        {
+            "id": "ter-block",
+            "name": "Blocked Run",
+            "axis": "termination",
+            "question": "Is it blocked on external input?",
+            "mathType": "logic",
+            "answerShape": "boolean"
+        },
+        {
+            "id": "ter-stop",
+            "name": "Stop Condition",
+            "axis": "termination",
+            "question": "Do saturation, completion and verification all hold, or is the run blocked?",
+            "mathType": "optimization",
+            "answerShape": "boolean",
+            "decisionTest": "saturation, completion and verification all hold, or ter-block holds",
+            "role": "completion-marker"
+        },
+        {
+            "id": "ter-promotion",
+            "name": "Promotion",
+            "axis": "termination",
+            "question": "Is the candidate promoted, or only produced?",
+            "mathType": "set-theory",
+            "answerShape": "boolean",
+            "decisionTest": "a clean verdict precedes the move into accepted state"
+        },
+        {
+            "id": "ter-publication",
+            "name": "Publication",
+            "axis": "termination",
+            "question": "Is the boundary to the external system explicit, and who crosses it?",
+            "mathType": "logic",
+            "answerShape": "boolean",
+            "decisionTest": "the publication gate names its party"
+        }
+    ]
+}

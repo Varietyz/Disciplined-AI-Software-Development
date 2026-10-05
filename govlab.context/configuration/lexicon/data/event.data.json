@@ -1,0 +1,440 @@
+{
+    "category": "event-messaging-async",
+    "records": [
+        {
+            "name": "CRUD-Only State Persistence",
+            "kind": "anti-pattern",
+            "definition": "Persisting only current state via create-read-update-delete, discarding the history that event sourcing preserves."
+        },
+        {
+            "name": "Direct Event Handler Calls",
+            "kind": "anti-pattern",
+            "definition": "Invoking event handlers by direct method call, coupling emitter to handler and defeating the event bus."
+        },
+        {
+            "name": "Direct Point-to-Point Calls",
+            "kind": "anti-pattern",
+            "definition": "Wiring services together with direct point-to-point calls, coupling each sender to specific receivers."
+        },
+        {
+            "name": "Duplicate Side Effects",
+            "kind": "anti-pattern",
+            "definition": "Reprocessing a message so its side effects run more than once, corrupting state when not idempotent."
+        },
+        {
+            "name": "Global ACID Transaction",
+            "kind": "anti-pattern",
+            "definition": "Attempting a single ACID transaction spanning multiple distributed services, creating tight coupling and availability loss."
+        },
+        {
+            "name": "Hidden Temporal Coupling",
+            "kind": "anti-pattern",
+            "definition": "An undocumented ordering requirement between operations that must run in a specific sequence to work correctly."
+        },
+        {
+            "name": "In-Memory Direct Invocation",
+            "kind": "anti-pattern",
+            "definition": "Calling a component directly in-process where a durable queue is needed, losing buffering and delivery guarantees."
+        },
+        {
+            "name": "In-Place Mutation",
+            "kind": "anti-pattern",
+            "definition": "Overwriting existing records in place where an append-only log is required, destroying history."
+        },
+        {
+            "name": "Infinite Redelivery Loop",
+            "kind": "anti-pattern",
+            "definition": "Endlessly redelivering a failing message with no dead-letter path, blocking the queue indefinitely."
+        },
+        {
+            "name": "Infrastructure Events in Domain",
+            "kind": "anti-pattern",
+            "definition": "Leaking infrastructure or technical events into the domain model, polluting it with concerns it should not hold."
+        },
+        {
+            "name": "Internal Domain Event Leakage",
+            "kind": "anti-pattern",
+            "definition": "Exposing internal domain events to external consumers, coupling them to private model details."
+        },
+        {
+            "name": "Irreversible Side Effects",
+            "kind": "anti-pattern",
+            "definition": "Performing side effects that cannot be undone within a workflow that may need to roll back."
+        },
+        {
+            "name": "Mutable State Only",
+            "kind": "anti-pattern",
+            "definition": "Keeping only mutable current state with no event record, so past states and changes cannot be recovered."
+        },
+        {
+            "name": "Point-to-Point Coupling",
+            "kind": "anti-pattern",
+            "definition": "Coupling a sender directly to a specific receiver, so adding a consumer requires changing the sender."
+        },
+        {
+            "name": "Shared Database",
+            "distinctFrom": [
+                {
+                    "id": "architecture:cyclic-deployment-dependency",
+                    "reason": "A shared database couples services through their data, while a cyclic deployment dependency couples them through their release order."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Multiple services reading and writing one shared database, coupling them and destroying service autonomy."
+        },
+        {
+            "name": "Single Serial Consumer",
+            "kind": "anti-pattern",
+            "definition": "Processing a queue with one consumer in series, so throughput cannot scale with load."
+        },
+        {
+            "name": "Unified CRUD Model",
+            "kind": "anti-pattern",
+            "definition": "Using one shared model for both reads and writes, preventing each from being optimized for its purpose."
+        },
+        {
+            "name": "Broker/Event Bus",
+            "kind": "mechanism",
+            "definition": "A runtime intermediary that routes messages between publishers and subscribers."
+        },
+        {
+            "name": "Command/Query Separation",
+            "kind": "principle",
+            "definition": "Separating operations that change state from those that return data, so each method has a single purpose."
+        },
+        {
+            "name": "Consumer",
+            "kind": "mechanism",
+            "definition": "A component that receives and processes messages from a queue or topic."
+        },
+        {
+            "name": "Deduplication Key",
+            "kind": "artifact",
+            "definition": "A stable identifier attached to a message that lets a consumer detect and drop duplicates."
+        },
+        {
+            "name": "Event Contract",
+            "kind": "constraint",
+            "definition": "The agreed schema and semantics of an event that publishers and subscribers both honor."
+        },
+        {
+            "name": "Event Schema",
+            "kind": "artifact",
+            "definition": "A formal definition of the structure and fields of an event's payload."
+        },
+        {
+            "name": "Event Semantics",
+            "kind": "constraint",
+            "definition": "The agreed meaning of what an event represents and the conditions under which it is emitted."
+        },
+        {
+            "name": "Events",
+            "kind": "artifact",
+            "definition": "Records of things that have happened in a system, emitted for other components to react to."
+        },
+        {
+            "name": "Immutable Events",
+            "kind": "constraint",
+            "definition": "The requirement that recorded events never change once written, only be appended to."
+        },
+        {
+            "name": "Local Transaction",
+            "kind": "model",
+            "definition": "A transaction confined to a single service's own datastore, the atomic unit a saga or outbox composes."
+        },
+        {
+            "name": "Message Relay",
+            "kind": "mechanism",
+            "definition": "A component that reads pending messages from an outbox and publishes them to the broker."
+        },
+        {
+            "name": "Ordered Log",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:event-schema",
+                    "reason": "An ordered log keeps records in write order, while an event schema defines what each record holds."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "An append-only sequence of records that preserves the order in which they were written."
+        },
+        {
+            "name": "Own Data",
+            "kind": "constraint",
+            "definition": "The requirement that each service alone own and control its data store."
+        },
+        {
+            "name": "Publisher",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:broker-event-bus",
+                    "reason": "A publisher emits messages, while the broker routes them between publishers and subscribers."
+                },
+                {
+                    "id": "lexicon:subscriber",
+                    "reason": "A publisher sends to a topic, while a subscriber receives from it."
+                }
+            ],
+            "kind": "mechanism",
+            "definition": "A component that emits messages to a topic or bus for subscribers to receive."
+        },
+        {
+            "name": "Reconciliation",
+            "kind": "activity",
+            "definition": "The activity of detecting and resolving divergence between replicas so they converge to a consistent state."
+        },
+        {
+            "name": "Reversible/Compensable Step",
+            "kind": "constraint",
+            "definition": "The requirement that each step in a distributed workflow can be undone by a compensating action."
+        },
+        {
+            "name": "Routing",
+            "kind": "capability",
+            "definition": "The ability to direct each message to its correct destination based on topic, key, or rule."
+        },
+        {
+            "name": "Subscriber",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:broker-event-bus",
+                    "reason": "A subscriber receives a topic's messages, while the broker routes them to it."
+                }
+            ],
+            "kind": "mechanism",
+            "definition": "A component that registers interest in a topic and receives its messages."
+        },
+        {
+            "name": "Subscriber Model",
+            "kind": "model",
+            "definition": "A representation of which consumers subscribe to which topics and how they receive messages."
+        },
+        {
+            "name": "User Expectations",
+            "kind": "constraint",
+            "definition": "The behavior users assume a system will exhibit, such as seeing their own writes immediately."
+        },
+        {
+            "name": "Asynchronous Processing",
+            "kind": "capability",
+            "definition": "The ability to handle work without blocking the caller, decoupling request from completion."
+        },
+        {
+            "name": "Atomic State Change + Message Publish",
+            "kind": "capability",
+            "definition": "The ability to commit a state change and publish its corresponding message as one atomic unit."
+        },
+        {
+            "name": "Consumer Elasticity",
+            "kind": "capability",
+            "definition": "The ability to add or remove consumers dynamically to match message volume."
+        },
+        {
+            "name": "Cross-Service Communication",
+            "kind": "capability",
+            "definition": "The ability for independent services to exchange information without direct coupling."
+        },
+        {
+            "name": "Decoupled Domain Reactions",
+            "kind": "capability",
+            "definition": "The ability for domain logic to react to events without the emitter knowing its consumers."
+        },
+        {
+            "name": "Decoupled Event Distribution",
+            "kind": "capability",
+            "definition": "The ability to distribute events to many consumers without the source depending on any of them."
+        },
+        {
+            "name": "Distributed Autonomy",
+            "kind": "capability",
+            "definition": "The ability for distributed nodes to operate and decide independently without central coordination."
+        },
+        {
+            "name": "Failure Recovery",
+            "kind": "capability",
+            "definition": "The ability to restore correct operation after a failure through compensation or retry."
+        },
+        {
+            "name": "Fan-Out Notification",
+            "kind": "capability",
+            "definition": "The ability to deliver one event to many interested subscribers at once."
+        },
+        {
+            "name": "Long-Running Transactions",
+            "kind": "capability",
+            "definition": "The ability to carry a business transaction across many steps and a long duration via compensation."
+        },
+        {
+            "name": "Parallel Message Processing",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:consumer-elasticity",
+                    "reason": "Parallel message processing is several consumers working at once, while consumer elasticity is changing how many there are to match volume."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability for multiple consumers to process messages from the same source at once."
+        },
+        {
+            "name": "Poison-Message Quarantine",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:reprocessing-after-fix",
+                    "reason": "Quarantine moves a failing message aside, while reprocessing after the fix sends it through again."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to divert a repeatedly-failing message to a separate queue so it stops blocking others."
+        },
+        {
+            "name": "Read/Write Model Optimization",
+            "kind": "capability",
+            "definition": "The ability to shape read and write models independently for their differing access patterns."
+        },
+        {
+            "name": "Reprocessing After Fix",
+            "kind": "capability",
+            "definition": "The ability to reprocess quarantined messages once the underlying defect is fixed."
+        },
+        {
+            "name": "Safe Message Redelivery",
+            "kind": "capability",
+            "definition": "The ability to redeliver a message without causing duplicate effects, given idempotent handling."
+        },
+        {
+            "name": "Temporal Modeling",
+            "kind": "capability",
+            "definition": "The ability to model how state evolved over time by preserving each change as an event."
+        },
+        {
+            "name": "Temporal Queries",
+            "kind": "capability",
+            "definition": "The ability to ask what a system's state was at any past point in time."
+        },
+        {
+            "name": "Work Distribution",
+            "kind": "capability",
+            "definition": "The ability to spread units of work across many workers via a broker."
+        },
+        {
+            "name": "At-Least-Once Delivery Safety",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a message is guaranteed to be delivered at least once, tolerating duplicates."
+        },
+        {
+            "name": "Event Reliability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which events are guaranteed to be delivered despite failures."
+        },
+        {
+            "name": "Business Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of domain intricacy that a coordination mechanism must accommodate."
+        },
+        {
+            "name": "Delivery Ordering",
+            "kind": "quality-attribute",
+            "definition": "The degree to which messages are delivered in a defined order, which broad fan-out can weaken."
+        },
+        {
+            "name": "Duplication with Domain Events",
+            "kind": "quality-attribute",
+            "definition": "The degree of overlap between integration events and domain events that must be kept in sync."
+        },
+        {
+            "name": "Event Granularity",
+            "kind": "quality-attribute",
+            "definition": "The degree of coarseness or fineness at which events are defined, trading detail against volume."
+        },
+        {
+            "name": "Event Storm / Traceability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a high volume of events makes end-to-end flows hard to trace."
+        },
+        {
+            "name": "Global Consistency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which all nodes reflect the same state at once, which service autonomy gives up."
+        },
+        {
+            "name": "Immediate Consistency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a read reflects the latest write instantly, which asynchronous processing defers."
+        },
+        {
+            "name": "Operational Dependency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system's operation depends on a message broker remaining available."
+        },
+        {
+            "name": "Query Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of difficulty of answering queries when state is stored as an event history rather than current rows."
+        },
+        {
+            "name": "Relay Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of added complexity of running a relay process that forwards messages from an outbox."
+        },
+        {
+            "name": "State Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree of extra state a consumer must retain to deduplicate or order messages."
+        },
+        {
+            "name": "Storage Growth",
+            "kind": "quality-attribute",
+            "definition": "The degree to which an append-only log's storage footprint grows unbounded over time."
+        },
+        {
+            "name": "Storage Volume",
+            "kind": "quality-attribute",
+            "definition": "The degree to which retaining a full event stream consumes large amounts of storage."
+        },
+        {
+            "name": "Strong Consistency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which all reads see the latest write, which event-driven asynchrony relaxes."
+        },
+        {
+            "name": "Strong Immediate Consistency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which every read reflects the most recent write without delay, which eventual consistency relaxes."
+        },
+        {
+            "name": "Workflow Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of intricacy of coordinating a multi-step distributed workflow."
+        },
+        {
+            "name": "Query Projection",
+            "kind": "technique",
+            "definition": "A technique for maintaining a read model shaped for one query, updated from the writes it depends on."
+        },
+        {
+            "name": "Introduce Async Event",
+            "kind": "technique",
+            "definition": "A technique for replacing a synchronous call that need not complete in the request with an event a consumer handles later."
+        },
+        {
+            "name": "Own Data per Service",
+            "kind": "technique",
+            "definition": "A technique for giving each service its own store and letting others reach the data only through its contract."
+        },
+        {
+            "name": "Offset Tracking",
+            "kind": "technique",
+            "definition": "A technique for recording how far each consumer has read in a stream, so it resumes there and can replay from earlier."
+        },
+        {
+            "name": "Snapshot Compaction",
+            "kind": "technique",
+            "definition": "A technique for periodically storing a snapshot of state derived from a log, so readers replay only the events after it."
+        },
+        {
+            "name": "Non-Replayable Processing",
+            "kind": "anti-pattern",
+            "definition": "A defect in which consumed events cannot be read again, so a consumer cannot rebuild its state or recover from a fault."
+        }
+    ]
+}

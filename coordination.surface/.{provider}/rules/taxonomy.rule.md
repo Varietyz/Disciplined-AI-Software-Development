@@ -112,7 +112,7 @@ index that allocates it and needs no vocabulary edit at all.
 nothing. One generic subject is sanctioned, and only where the file names no domain noun anywhere in its own
 source.
 
-## `classification_is_judgement` (LOCKED)
+## `classification_is_judgment` (LOCKED)
 
 The file is read, the narrowest accurate concern is named, the vocabulary is checked, and the name is
 verified against the content rather than against the current filename. One concern per file applies, and two
@@ -146,7 +146,7 @@ before the move rather than after it.
 The `reference` check holds the post-condition continuously. Every in-tree reference is re-resolved on every
 run, so a disconnection is caught at the next run rather than at the next read.
 
-## `slot_absence_is_honoured`
+## `slot_absence_is_honored`
 
 A consumer that names a slot the configuration resolves **ABSENT** declares that absence and does not run the
 branch depending on it. **Reading an ABSENT slot as though it resolved is the defect**, and it is invisible

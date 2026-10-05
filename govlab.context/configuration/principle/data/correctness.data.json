@@ -1,0 +1,720 @@
+{
+    "category": "Correctness / Determinism / Verification",
+    "check": {
+        "population": "every function, build and test run whose result the verification claims to hold",
+        "freshness": "a verdict stands for the code, inputs and dependency versions it ran against, and goes stale when any of them changes",
+        "refusal": "the failing test, proof or analyzer finding fails the gate",
+        "observation": "test, proof and analyzer results, plus reruns that show whether a result repeats",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the specification the test or proof encodes, which a result is compared against"
+    },
+    "records": [
+        {
+            "id": "determinism",
+            "distinctFrom": [
+                {
+                    "id": "architecture:referential-transparency",
+                    "reason": "Determinism is the same inputs giving the same result, while referential transparency is being able to replace an expression by its value."
+                }
+            ],
+            "name": "Determinism",
+            "definition": "A design rule that the same inputs and state always produce the same result, with time and randomness passed in as inputs.",
+            "type": "principle",
+            "scope": [
+                "function",
+                "process",
+                "build",
+                "test"
+            ],
+            "requires": [
+                "Controlled Inputs",
+                "Controlled State"
+            ],
+            "reinforces": [
+                "Predictability",
+                "Reproducibility"
+            ],
+            "enables": ["Reliable Testing"],
+            "conflicts_with": ["Hidden Time/Randomness/Global State"],
+            "tensions_with": ["Runtime Adaptivity"],
+            "violated_by": ["lexicon:hidden-time-randomness-global-state"],
+            "detected_by": [
+                "flaky tests",
+                "hidden random/time calls"
+            ],
+            "measured_by": [
+                "flake rate",
+                "reproducibility score"
+            ],
+            "refactored_by": [
+                "lexicon:inject-clock-and-randomness",
+                "lexicon:encapsulate-state"
+            ],
+            "enforced_by": ["deterministic test rules"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function makeFoo(name: string) {\n  return { id: crypto.randomUUID(), name, createdAt: new Date() };\n}",
+                "after": "function makeFoo(name: string, id: FooId, createdAt: Date): Foo {\n  return { id, name, createdAt };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "predictability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:correctness",
+                    "reason": "Predictability is foreseeing behavior from the contract, while correctness is the behavior matching its specification."
+                },
+                {
+                    "id": "architecture:pattern-consistency",
+                    "reason": "Predictability is foreseeing one operation, while pattern consistency is one problem solved one way across the codebase."
+                },
+                {
+                    "id": "architecture:interoperability",
+                    "reason": "Predictability is a caller foreseeing behavior, while interoperability is systems exchanging data."
+                },
+                {
+                    "id": "architecture:reproducibility",
+                    "reason": "Predictability is foreseeing what an operation does, while reproducibility is a run giving the same output from pinned inputs on another machine."
+                },
+                {
+                    "id": "architecture:testability",
+                    "reason": "Predictability is foreseeing behavior, while testability is exercising code in isolation."
+                },
+                {
+                    "id": "lexicon:concurrency-correctness",
+                    "reason": "Predictability is foreseeing behavior from a contract, while concurrency correctness is freedom from races when units run at once."
+                },
+                {
+                    "id": "lexicon:dynamic-runtime-behavior",
+                    "reason": "Predictability is foreseeable behavior, while dynamic runtime behavior is the adaptivity that undermines it."
+                },
+                {
+                    "id": "lexicon:maintainability",
+                    "reason": "Predictability is foreseeing behavior, while maintainability is the ease of changing it."
+                },
+                {
+                    "id": "lexicon:security",
+                    "reason": "Predictability is foreseeable behavior, while security is protection from misuse."
+                },
+                {
+                    "id": "lexicon:startup-cost",
+                    "reason": "Predictability is foreseeable behavior, while startup cost is the time discovery adds at initialization."
+                },
+                {
+                    "id": "architecture:repeatability",
+                    "reason": "Predictability is foreseeing an outcome from the contract, while repeatability is rerunning and observing the same outcome."
+                },
+                {
+                    "id": "architecture:runtime-extensibility",
+                    "reason": "Predictability is fixed, foreseeable behavior, while runtime extensibility is adding capability to a running system."
+                },
+                {
+                    "id": "lexicon:static-safety",
+                    "reason": "Predictability is a caller foreseeing behavior, while static safety is the compiler catching classes of error before the code runs."
+                },
+                {
+                    "id": "lexicon:thread-safety",
+                    "reason": "Predictability is foreseeing behavior from a contract, while thread safety is data surviving concurrent access uncorrupted."
+                }
+            ],
+            "name": "Predictability",
+            "definition": "The degree to which a caller can foresee what an operation does from its interface and contract.",
+            "type": "quality-attribute",
+            "scope": [
+                "API",
+                "module",
+                "runtime"
+            ],
+            "requires": [
+                "Determinism",
+                "Explicit Contracts"
+            ],
+            "reinforces": ["Principle of Least Surprise"],
+            "enables": ["Safe Refactoring"],
+            "conflicts_with": ["Hidden Behavior"],
+            "tensions_with": ["Dynamic Runtime Behavior"],
+            "violated_by": [
+                "architecture:hidden-side-effect",
+                "architecture:temporal-coupling"
+            ],
+            "detected_by": [
+                "nondeterministic tests",
+                "ambiguous APIs"
+            ],
+            "measured_by": ["flake/misuse rate"],
+            "refactored_by": [
+                "lexicon:declare-capability",
+                "lexicon:define-contract"
+            ],
+            "enforced_by": [
+                "tests",
+                "contracts",
+                "linting"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function saveFoo(foo: Foo) {\n  if (Math.random() > 0.5) return memoryStore.save(foo);\n  return sqlStore.save(foo);\n}",
+                "after": "function saveFoo(store: FooStore, foo: Foo) { return store.save(foo); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "referential-transparency",
+            "distinctFrom": [
+                {
+                    "id": "architecture:immutability",
+                    "reason": "Referential transparency lets an expression be replaced by its value, while immutability forbids a value from changing after creation."
+                }
+            ],
+            "name": "Referential Transparency",
+            "definition": "A design rule that an expression can be replaced by its value without changing the program's behavior.",
+            "type": "principle",
+            "scope": [
+                "function",
+                "expression"
+            ],
+            "requires": [
+                "Pure Functions",
+                "Immutability"
+            ],
+            "reinforces": [
+                "Determinism",
+                "Testability"
+            ],
+            "enables": ["Safe Substitution"],
+            "conflicts_with": ["Side Effects"],
+            "tensions_with": ["Stateful IO"],
+            "violated_by": ["lexicon:hidden-time-randomness-global-state"],
+            "detected_by": ["hidden dependency on time/random/global state"],
+            "measured_by": ["pure function coverage"],
+            "refactored_by": [
+                "architecture:pure-functions",
+                "architecture:dependency-injection"
+            ],
+            "enforced_by": [
+                "code review",
+                "functional boundaries"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function fooTotal(values: number[]) {\n  globalCounter += 1;\n  return values.reduce((a, b) => a + b, 0) + globalCounter;\n}",
+                "after": "function fooTotal(values: readonly number[]) {\n  return values.reduce((a, b) => a + b, 0);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "pure-functions",
+            "name": "Pure Functions",
+            "definition": "A technique for writing logic as functions whose result depends only on their arguments and which have no side effects.",
+            "type": "technique",
+            "scope": [
+                "function",
+                "domain logic"
+            ],
+            "requires": [
+                "No Side Effects",
+                "Explicit Inputs"
+            ],
+            "reinforces": [
+                "Testability",
+                "Determinism"
+            ],
+            "enables": ["Referential Transparency"],
+            "conflicts_with": ["Hidden IO"],
+            "tensions_with": ["Stateful Operations"],
+            "violated_by": [
+                "lexicon:side-effects",
+                "lexicon:hidden-io"
+            ],
+            "detected_by": ["side-effect calls inside pure layer"],
+            "measured_by": ["pure core ratio"],
+            "refactored_by": ["lexicon:pure-core-imperative-shell"],
+            "enforced_by": [
+                "layer rules",
+                "tests"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function normalizeFoo(foo: Foo) {\n  foo.name = foo.name.trim();\n  fooStore.save(foo);\n  return foo;\n}",
+                "after": "function normalizeFoo(foo: Foo): Foo {\n  return { ...foo, name: foo.name.trim() };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "immutability",
+            "name": "Immutability",
+            "definition": "A design rule that a value is never changed after it is created, and a change produces a new value.",
+            "canon": ["immutability"],
+            "type": "principle",
+            "scope": [
+                "data",
+                "value object",
+                "concurrency"
+            ],
+            "requires": ["Value Semantics"],
+            "reinforces": [
+                "Thread Safety",
+                "Predictability"
+            ],
+            "enables": ["Safe Sharing"],
+            "conflicts_with": ["Shared Mutable State"],
+            "tensions_with": ["Allocation Cost"],
+            "violated_by": [
+                "architecture:shared-mutable-state",
+                "lexicon:exposed-internals"
+            ],
+            "detected_by": [
+                "setters on value objects",
+                "mutable public fields"
+            ],
+            "measured_by": ["mutable state count"],
+            "refactored_by": ["lexicon:make-immutable"],
+            "enforced_by": [
+                "type system",
+                "lint rules"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "type Foo = { name: string; tags: string[] };\nfunction addTag(foo: Foo, tag: string) { foo.tags.push(tag); return foo; }",
+                "after": "type Foo = Readonly<{ name: string; tags: readonly string[] }>;\nfunction addTag(foo: Foo, tag: string): Foo { return { ...foo, tags: [...foo.tags, tag] }; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "reproducibility",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:continuous-updates",
+                    "reason": "Reproducibility pins every input, while continuous updates are the dependency changes that pinning holds back."
+                }
+            ],
+            "name": "Reproducibility",
+            "definition": "The degree to which a build, test or training run gives the same output from the same pinned inputs on another machine.",
+            "type": "quality-attribute",
+            "scope": [
+                "build",
+                "test",
+                "deployment",
+                "ML"
+            ],
+            "requires": [
+                "Determinism",
+                "Versioned Inputs"
+            ],
+            "reinforces": ["Auditability"],
+            "enables": [
+                "Debugging",
+                "Compliance"
+            ],
+            "conflicts_with": [
+                "Floating Dependencies",
+                "Flaky Test Normalization"
+            ],
+            "tensions_with": ["Continuous Updates"],
+            "violated_by": ["lexicon:floating-dependencies"],
+            "detected_by": ["build output drift"],
+            "measured_by": ["reproducible build/test pass rate"],
+            "refactored_by": ["lexicon:pin-versions"],
+            "enforced_by": [
+                "lockfiles",
+                "build verification"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const result = trainFoo(data, { seed: Math.random() });",
+                "after": "const config = { seed: 42, datasetVersion: \"foo-v3\", algorithmVersion: \"1.2.0\" } as const;\nconst result = trainFoo(data, config);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "repeatability",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:real-world-variability",
+                    "reason": "Repeatability is the same result from a controlled rerun, while real-world variability is how far those controlled conditions differ from production."
+                }
+            ],
+            "name": "Repeatability",
+            "definition": "The degree to which rerunning the same test or process in the same environment gives the same result.",
+            "type": "quality-attribute",
+            "scope": [
+                "test",
+                "build",
+                "process"
+            ],
+            "requires": ["Controlled Inputs"],
+            "reinforces": [
+                "Verification",
+                "Predictability"
+            ],
+            "enables": ["Reliable Automation"],
+            "conflicts_with": ["Environment-Sensitive Behavior"],
+            "tensions_with": ["Real-World Variability"],
+            "violated_by": ["lexicon:environment-sensitive-behavior"],
+            "detected_by": ["flaky test results"],
+            "measured_by": ["rerun consistency"],
+            "refactored_by": [
+                "architecture:containerization",
+                "lexicon:fake-at-the-boundary"
+            ],
+            "enforced_by": ["CI rerun policy"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "test(\"foo\", () => expect(runFoo(Date.now())).toEqual(snapshot()));",
+                "after": "test(\"foo\", () => {\n  const clock = new FixedClock(\"2026-01-01T00:00:00Z\");\n  expect(runFoo(clock)).toEqual(expectedFoo);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "correctness",
+            "distinctFrom": [
+                {
+                    "id": "architecture:interoperability",
+                    "reason": "Correctness is code matching its specification, while interoperability is separate systems exchanging data correctly."
+                },
+                {
+                    "id": "architecture:observability",
+                    "reason": "Correctness is matching the specification, while observability is inferring behavior from the signals a system emits."
+                },
+                {
+                    "id": "lexicon:maintainability",
+                    "reason": "Correctness is behaving as specified now, while maintainability is the ease of changing the behavior later."
+                },
+                {
+                    "id": "lexicon:robustness",
+                    "reason": "Correctness is behaving as specified for valid input, while robustness is continuing to operate under invalid input and stress."
+                },
+                {
+                    "id": "lexicon:simplicity",
+                    "reason": "Correctness is matching the specification, while simplicity is the absence of unneeded structure."
+                },
+                {
+                    "id": "architecture:model-safety",
+                    "reason": "Correctness is matching a specification, while model safety is preventing harmful model inputs, outputs and actions."
+                },
+                {
+                    "id": "architecture:resilience",
+                    "reason": "Correctness is right behavior, while resilience is containing failure and recovering from it."
+                },
+                {
+                    "id": "architecture:semantic-consistency",
+                    "reason": "Correctness is behavior matching the specification, while semantic consistency is one name keeping one meaning."
+                },
+                {
+                    "id": "lexicon:security",
+                    "reason": "Correctness is matching the specification, while security is protecting data and behavior from misuse."
+                }
+            ],
+            "name": "Correctness",
+            "definition": "The degree to which the behavior of code matches its specification.",
+            "type": "quality-attribute",
+            "scope": [
+                "function",
+                "module",
+                "system"
+            ],
+            "requires": [
+                "Specification",
+                "Validation",
+                "Tests"
+            ],
+            "reinforces": ["Design by Contract"],
+            "enables": ["Safe Operation"],
+            "conflicts_with": ["Undefined Behavior"],
+            "tensions_with": ["Delivery Speed"],
+            "violated_by": ["lexicon:undefined-behavior"],
+            "detected_by": [
+                "failing tests",
+                "invariant violations"
+            ],
+            "measured_by": [
+                "defect rate",
+                "spec coverage"
+            ],
+            "refactored_by": [
+                "lexicon:unit-tests",
+                "lexicon:define-contract"
+            ],
+            "enforced_by": [
+                "CI",
+                "formal/static checks"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function averageFoo(total: number, count: number) { return total / count; }",
+                "after": "function averageFoo(total: number, count: number) {\n  if (!Number.isFinite(total)) throw new Error(\"invalid total\");\n  if (!Number.isInteger(count) || count <= 0) throw new Error(\"invalid count\");\n  return total / count;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "formal-verification",
+            "name": "Formal Verification",
+            "definition": "The activity of proving, against a formal specification, that an algorithm or protocol keeps its invariants for every input.",
+            "type": "activity",
+            "scope": [
+                "algorithm",
+                "protocol",
+                "critical system"
+            ],
+            "requires": ["Formal Specification"],
+            "reinforces": ["Correctness"],
+            "enables": ["Mathematical Assurance"],
+            "conflicts_with": ["Informal Validation Only"],
+            "tensions_with": ["Cost/Complexity"],
+            "violated_by": ["lexicon:informal-validation-only"],
+            "detected_by": ["missing formal model for critical invariant"],
+            "measured_by": ["proven property coverage"],
+            "refactored_by": ["lexicon:formal-model"],
+            "enforced_by": ["proof tooling"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function transferFoo(a: FooBalance, b: FooBalance, amount: number) {\n  a.value -= amount;\n  b.value += amount;\n}",
+                "after": "function transferFoo(state: FooState, amount: PositiveAmount): FooState {\n  requires(state.from >= amount.value);\n  const next = { from: state.from - amount.value, to: state.to + amount.value };\n  ensures(next.from + next.to === state.from + state.to);\n  return next;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "specification-based-testing",
+            "name": "Specification-Based Testing",
+            "definition": "The activity of deriving tests from a specification's stated behavior, independently of how the code implements it.",
+            "type": "activity",
+            "scope": [
+                "function",
+                "API",
+                "module"
+            ],
+            "requires": ["Specification"],
+            "reinforces": [
+                "Correctness",
+                "Contracts"
+            ],
+            "enables": ["Behavior Validation"],
+            "conflicts_with": [
+                "Implementation-Only Testing",
+                "Mock Mirage"
+            ],
+            "tensions_with": ["Spec Maintenance"],
+            "violated_by": ["lexicon:implementation-only-testing"],
+            "detected_by": ["lack of spec-derived tests"],
+            "measured_by": ["spec coverage"],
+            "refactored_by": [],
+            "enforced_by": ["test gates"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "test(\"saveFoo\", async () => expect(await saveFoo(foo)).toBeTruthy());",
+                "after": "describeContract(\"FooStore\", store => {\n  it(\"returns the saved Foo\", async () => {\n    await store.save(foo);\n    expect(await store.find(foo.id)).toEqual(foo);\n  });\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "property-based-testing",
+            "name": "Property-Based Testing",
+            "definition": "The activity of checking that a stated property holds for many generated inputs, and shrinking each failure to a minimal counterexample.",
+            "type": "activity",
+            "scope": [
+                "function",
+                "algorithm",
+                "parser",
+                "domain invariant"
+            ],
+            "requires": ["Properties/Invariants"],
+            "reinforces": [
+                "Correctness",
+                "Robustness"
+            ],
+            "enables": ["Broad Input Exploration"],
+            "conflicts_with": ["Example-Only Testing"],
+            "tensions_with": ["Shrinking/Debug Complexity"],
+            "violated_by": ["lexicon:example-only-testing"],
+            "detected_by": ["missing generative tests for critical properties"],
+            "measured_by": [
+                "property coverage",
+                "counterexample count"
+            ],
+            "refactored_by": ["lexicon:code-generation"],
+            "enforced_by": ["property test suite"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "test(\"normalizeFoo\", () => expect(normalizeFoo({ name: \" Foo \" }).name).toBe(\"Foo\"));",
+                "after": "property(string(), name => {\n  const once = normalizeFoo({ name });\n  const twice = normalizeFoo(once);\n  expect(twice).toEqual(once);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "static-analysis",
+            "distinctFrom": [
+                {
+                    "id": "architecture:type-safety",
+                    "reason": "Static analysis checks source against any ruleset, while type safety is the compiler rejecting operations on values of the wrong type."
+                },
+                {
+                    "id": "lexicon:automated-enforcement",
+                    "reason": "Static analysis is one way to check source without running it, while automated enforcement is any machine check that rules hold."
+                }
+            ],
+            "name": "Static Analysis",
+            "definition": "A mechanism that checks source code against a ruleset without running it.",
+            "type": "mechanism",
+            "scope": [
+                "codebase",
+                "build"
+            ],
+            "requires": ["Ruleset"],
+            "reinforces": [
+                "Type Safety",
+                "Security",
+                "Architecture Compliance"
+            ],
+            "enables": ["Automated Enforcement"],
+            "conflicts_with": ["Unchecked Dynamic Code"],
+            "tensions_with": ["False Positives"],
+            "violated_by": ["lexicon:ignored-analyzer-findings"],
+            "detected_by": ["static analysis rule failures"],
+            "measured_by": [
+                "issue count",
+                "false-positive rate"
+            ],
+            "refactored_by": [
+                "lexicon:automated-enforcement",
+                "lexicon:track-rule-metrics"
+            ],
+            "enforced_by": ["CI quality gates"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const foo: any = loadFoo();\nfoo.nmae.toUpperCase();",
+                "after": "const foo: Foo = loadFoo();\nfoo.name.toUpperCase();\nrunTypeCheck({ noImplicitAny: true, strictNullChecks: true });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "testability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:high-cohesion",
+                    "reason": "Testability is running code in isolation, while high cohesion is its members sharing one purpose."
+                },
+                {
+                    "id": "lexicon:encapsulation-extremes",
+                    "reason": "Testability is observing a unit in a test, while encapsulation extremes are the hiding that makes it hard to observe."
+                },
+                {
+                    "id": "lexicon:explicit-dependencies",
+                    "reason": "Testability is supplying a unit's dependencies in a test, while explicit dependencies are those dependencies being visible in its signature."
+                }
+            ],
+            "name": "Testability",
+            "definition": "The degree to which code can be tested in isolation, with its dependencies, time and randomness supplied by the test.",
+            "type": "quality-attribute",
+            "scope": [
+                "class",
+                "module",
+                "service"
+            ],
+            "requires": [
+                "Low Coupling",
+                "Deterministic Behavior"
+            ],
+            "reinforces": [
+                "DIP",
+                "Pure Functions"
+            ],
+            "enables": ["Regression Safety"],
+            "conflicts_with": [
+                "Hidden Dependency",
+                "Test Pyramid Inversion"
+            ],
+            "tensions_with": ["Encapsulation Extremes"],
+            "violated_by": [
+                "lexicon:hidden-time-randomness-global-state",
+                "lexicon:hidden-dependency"
+            ],
+            "detected_by": [
+                "difficult setup",
+                "excessive mocking",
+                "flaky tests"
+            ],
+            "measured_by": [
+                "test setup complexity",
+                "coverage",
+                "flake rate"
+            ],
+            "refactored_by": [
+                "architecture:dependency-injection",
+                "lexicon:make-effects-explicit"
+            ],
+            "enforced_by": [
+                "test gates",
+                "architecture review"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function createFoo(name: string) {\n  return fooDb.save({ id: crypto.randomUUID(), name, createdAt: new Date() });\n}",
+                "after": "function createFoo(name: string, ids: IdSource, clock: Clock, store: FooStore) {\n  return store.save({ id: ids.nextFooId(), name, createdAt: clock.now() });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "validation",
+            "name": "Validation",
+            "definition": "The activity of checking that inputs and delivered behavior meet the acceptance criteria of their users.",
+            "type": "activity",
+            "scope": [
+                "input",
+                "behavior",
+                "requirement"
+            ],
+            "requires": ["Acceptance Criteria"],
+            "reinforces": ["Correctness"],
+            "enables": ["Fitness for Use"],
+            "conflicts_with": ["Assumption-Driven Delivery"],
+            "tensions_with": ["Iteration Speed"],
+            "violated_by": ["lexicon:assumption-driven-delivery"],
+            "detected_by": ["missing acceptance tests"],
+            "measured_by": ["acceptance coverage"],
+            "refactored_by": [
+                "lexicon:validate-at-the-boundary",
+                "lexicon:component-tests"
+            ],
+            "enforced_by": [
+                "CI gates",
+                "QA policy"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function createFoo(input: any) { return fooStore.save(input); }",
+                "after": "function createFoo(input: unknown) {\n  const foo = CreateFooSchema.parse(input);\n  return fooStore.save(foo);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "verification",
+            "name": "Verification",
+            "definition": "The activity of checking that an implementation conforms to its specification.",
+            "type": "activity",
+            "scope": [
+                "implementation",
+                "system"
+            ],
+            "requires": ["Specification"],
+            "reinforces": ["Correctness"],
+            "enables": ["Specification Compliance"],
+            "conflicts_with": ["Untested Implementation"],
+            "tensions_with": ["Cost"],
+            "violated_by": ["lexicon:untested-implementation"],
+            "detected_by": ["missing tests/static checks"],
+            "measured_by": ["verification coverage"],
+            "refactored_by": [
+                "lexicon:unit-tests",
+                "architecture:static-analysis"
+            ],
+            "enforced_by": ["CI gates"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "await fooStore.save(foo);\nreturn { ok: true };",
+                "after": "await fooStore.save(foo);\nconst persisted = await fooStore.find(foo.id);\nif (!persisted || persisted.version !== foo.version) throw new Error(\"verification failed\");\nreturn { ok: true } as const;",
+                "lang": "ts"
+            }
+        }
+    ]
+}

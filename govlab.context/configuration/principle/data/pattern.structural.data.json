@@ -1,0 +1,232 @@
+{
+    "category": "Structural Patterns",
+    "check": {
+        "population": "every boundary, wrapper and composite structure that sits between a caller and the objects it uses",
+        "freshness": "a verdict stands until the wrapped interface or its callers change",
+        "refusal": "the boundary import rule or the conformance test fails a caller that reaches past the structure",
+        "observation": "imports and call sites that cross the structure, read from source",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the structure's interface, which every caller goes through"
+    },
+    "records": [
+        {
+            "id": "adapter-pattern",
+            "distinctFrom": [
+                {
+                    "id": "architecture:anti-corruption-layer",
+                    "reason": "An adapter fits one incompatible interface to the one expected, while an anti-corruption layer translates a whole external model into the local domain's terms."
+                }
+            ],
+            "name": "Adapter Pattern",
+            "definition": "A design pattern that wraps a component with an incompatible interface so it implements the interface its callers expect.",
+            "type": "pattern",
+            "scope": [
+                "integration",
+                "boundary"
+            ],
+            "requires": ["Incompatible Interfaces"],
+            "reinforces": [
+                "Anti-Corruption Layer",
+                "Replaceability"
+            ],
+            "enables": ["Interoperability"],
+            "conflicts_with": ["Direct External Coupling"],
+            "tensions_with": ["Mapping Overhead"],
+            "violated_by": ["lexicon:direct-external-coupling"],
+            "detected_by": ["external SDK types in domain/application"],
+            "measured_by": ["external leakage count"],
+            "refactored_by": [
+                "lexicon:extract-adapter",
+                "architecture:anti-corruption-layer"
+            ],
+            "enforced_by": ["boundary import rules"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function saveFoo(foo: Foo) {\n  return legacyClient.put(foo.id, foo.name, foo.count);\n}",
+                "after": "class LegacyFooAdapter implements FooStore {\n  constructor(private readonly client: LegacyClient) {}\n  save(foo: Foo) { return this.client.put(foo.id, foo.name, foo.count); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "facade-pattern",
+            "name": "Facade Pattern",
+            "definition": "A design pattern that gives a subsystem one simple entry point, so callers do not depend on its parts.",
+            "type": "pattern",
+            "scope": [
+                "module",
+                "subsystem",
+                "API"
+            ],
+            "requires": ["Subsystem Complexity"],
+            "reinforces": [
+                "Encapsulation",
+                "Information Hiding"
+            ],
+            "enables": ["Simplified Access"],
+            "conflicts_with": ["Leaky Subsystem API"],
+            "tensions_with": ["Over-Centralization"],
+            "violated_by": ["lexicon:leaky-subsystem-api"],
+            "detected_by": ["broad dependency surface to subsystem"],
+            "measured_by": ["consumer dependency count"],
+            "refactored_by": [],
+            "enforced_by": ["API boundary rules"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const foo = fooValidator.validate(fooParser.parse(raw));\nawait fooStore.save(foo);\nawait fooEvents.publish(foo);",
+                "after": "class FooFacade {\n  async create(raw: string) {\n    const foo = fooValidator.validate(fooParser.parse(raw));\n    await fooStore.save(foo);\n    await fooEvents.publish(foo);\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "proxy-pattern",
+            "name": "Proxy Pattern",
+            "aliases": ["Surrogate"],
+            "definition": "A design pattern that places a stand-in with the same interface in front of an object, to control, defer or cache access to it.",
+            "type": "pattern",
+            "scope": [
+                "access control",
+                "remote access",
+                "lazy loading"
+            ],
+            "requires": ["Controlled Access"],
+            "reinforces": [
+                "Encapsulation",
+                "Security"
+            ],
+            "enables": [
+                "Lazy Load",
+                "Authorization",
+                "Remote Stub"
+            ],
+            "conflicts_with": ["Direct Access"],
+            "tensions_with": ["Transparency / Debugging"],
+            "violated_by": ["lexicon:direct-access"],
+            "detected_by": ["bypassed access wrapper"],
+            "measured_by": ["proxy bypass count"],
+            "refactored_by": [],
+            "enforced_by": ["access rules"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function loadFoo(id: FooId) { return remoteFooStore.find(id); }",
+                "after": "class CachingFooStoreProxy implements FooStore {\n  constructor(private readonly target: FooStore) {}\n  async find(id: FooId) {\n    const cached = fooCache.get(id);\n    if (cached) return cached;\n    const foo = await this.target.find(id);\n    fooCache.set(id, foo);\n    return foo;\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "bridge-pattern",
+            "name": "Bridge Pattern",
+            "aliases": ["Handle-Body"],
+            "definition": "A design pattern that separates two independent axes of variation into two hierarchies joined by composition.",
+            "type": "pattern",
+            "scope": [
+                "abstraction",
+                "implementation variation"
+            ],
+            "requires": ["Independent Variation Axes"],
+            "reinforces": ["Composition Over Inheritance"],
+            "enables": ["Implementation Swap"],
+            "conflicts_with": ["Cartesian Inheritance Explosion"],
+            "tensions_with": ["Indirection"],
+            "violated_by": ["lexicon:cartesian-inheritance-explosion"],
+            "detected_by": ["parallel hierarchies / deep variant classes"],
+            "measured_by": ["variant class count"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class SqlJsonFooExporter {}\nclass SqlCsvFooExporter {}\nclass MemoryJsonFooExporter {}\nclass MemoryCsvFooExporter {}",
+                "after": "interface FooSource { read(): Promise<readonly Foo[]>; }\ninterface FooFormat { encode(foos: readonly Foo[]): string; }\nclass FooExporter {\n  constructor(private readonly source: FooSource, private readonly format: FooFormat) {}\n  async export() { return this.format.encode(await this.source.read()); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "decorator-pattern",
+            "name": "Decorator Pattern",
+            "definition": "A design pattern that adds behavior to an object by wrapping it in another object with the same interface.",
+            "type": "pattern",
+            "scope": ["behavior composition"],
+            "requires": ["Common Interface"],
+            "reinforces": [
+                "OCP",
+                "Composability"
+            ],
+            "enables": ["Runtime Behavior Extension"],
+            "conflicts_with": ["Subclass Explosion"],
+            "tensions_with": ["Stack Debugging"],
+            "violated_by": ["lexicon:subclass-explosion"],
+            "detected_by": ["repeated wrapper-like subclasses"],
+            "measured_by": ["variant explosion count"],
+            "refactored_by": [],
+            "enforced_by": ["interface conformance tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class LoggedSqlFooStore extends SqlFooStore {\n  override save(foo: Foo) { logger.info(\"foo.saved\", { fooId: foo.id }); return super.save(foo); }\n}",
+                "after": "class LoggedFooStore implements FooStore {\n  constructor(private readonly inner: FooStore, private readonly log: Log) {}\n  save(foo: Foo) { this.log.write(foo.id); return this.inner.save(foo); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "composite-pattern",
+            "name": "Composite Pattern",
+            "definition": "A design pattern that gives leaves and groups one interface, so a tree is traversed without checking which kind each node is.",
+            "type": "pattern",
+            "scope": [
+                "structure",
+                "tree",
+                "hierarchy"
+            ],
+            "requires": ["Uniform Component Interface"],
+            "reinforces": [
+                "Uniform Interface",
+                "OCP"
+            ],
+            "enables": [
+                "Recursive Composition",
+                "Leaf/Composite Transparency"
+            ],
+            "conflicts_with": ["Leaf-vs-Container Special-Casing"],
+            "tensions_with": ["Type Safety"],
+            "violated_by": ["lexicon:leaf-vs-container-special-casing"],
+            "detected_by": ["isContainer/isLeaf conditionals during traversal"],
+            "measured_by": ["node-kind conditional count"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function totalFoo(item: Foo | FooGroup): number {\n  if (\"children\" in item) return item.children.reduce((sum, child) => sum + totalFoo(child), 0);\n  return item.value;\n}",
+                "after": "interface FooComponent { total(): number; }\nclass FooLeaf implements FooComponent {\n  constructor(private readonly value: number) {}\n  total() { return this.value; }\n}\nclass FooGroup implements FooComponent {\n  constructor(private readonly children: readonly FooComponent[]) {}\n  total() { return this.children.reduce((sum, child) => sum + child.total(), 0); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "flyweight-pattern",
+            "name": "Flyweight Pattern",
+            "definition": "A design pattern that shares one copy of immutable intrinsic state among many objects, each keeping only its own extrinsic state.",
+            "type": "pattern",
+            "scope": [
+                "structure",
+                "memory",
+                "sharing"
+            ],
+            "requires": ["Separable Intrinsic State"],
+            "reinforces": ["Memory Efficiency"],
+            "enables": [
+                "Shared Immutable State",
+                "High-Cardinality Object Reuse"
+            ],
+            "conflicts_with": ["Per-Instance Duplicate State"],
+            "tensions_with": ["Complexity"],
+            "violated_by": ["lexicon:per-instance-duplicate-state"],
+            "detected_by": ["repeated equal intrinsic state across objects"],
+            "measured_by": ["duplicate-state memory footprint"],
+            "refactored_by": [],
+            "enforced_by": ["profiling review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const icons = foos.map(foo => new FooIcon(foo.position, loadSprite(foo.kind)));",
+                "after": "const spriteCache = new Map<string, Sprite>();\nfunction fooSprite(kind: string) {\n  const cached = spriteCache.get(kind);\n  if (cached) return cached;\n  const sprite = loadSprite(kind);\n  spriteCache.set(kind, sprite);\n  return sprite;\n}\nconst icons = foos.map(foo => ({ position: foo.position, sprite: fooSprite(foo.kind) }));",
+                "lang": "ts"
+            }
+        }
+    ]
+}

@@ -1,0 +1,387 @@
+{
+    "category": "Metaprogramming / Language-Oriented Architecture",
+    "check": {
+        "population": "every generator, reflective access, evaluation site and language definition in the codebase",
+        "freshness": "a verdict stands until a generator, a grammar or the model it generates from changes",
+        "refusal": "the banned-API rule, the generator test or the grammar validation fails the change",
+        "observation": "eval and reflection call sites read from source, and generated output compared with its model",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the model and the grammar, which generated output is derived from and compared against"
+    },
+    "records": [
+        {
+            "id": "homoiconicity",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:readability",
+                    "reason": "Homoiconicity is programs held as data, while readability is how easily the developer reads the source that results."
+                }
+            ],
+            "name": "Homoiconicity",
+            "definition": "The degree to which a language represents its programs in its own data structures, so programs can be inspected and transformed as data.",
+            "canon": ["homoiconicity"],
+            "type": "quality-attribute",
+            "scope": [
+                "language",
+                "metaprogramming"
+            ],
+            "requires": ["Code-as-Data Representation"],
+            "reinforces": ["Metaprogramming"],
+            "enables": [
+                "Macro Systems",
+                "DSLs"
+            ],
+            "conflicts_with": ["Opaque Syntax Trees"],
+            "tensions_with": ["Readability"],
+            "violated_by": ["lexicon:string-based-code-generation"],
+            "detected_by": ["language capability check"],
+            "measured_by": ["macro/code-as-data usage"],
+            "refactored_by": ["lexicon:syntax-tree-generation"],
+            "enforced_by": ["language/tooling constraints"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function evaluateFoo(foo: Foo) { return foo.value * 2; }\nconst fooRule = { operation: \"multiply\", operand: 2 };",
+                "after": "type Expr =\n  | { op: \"value\"; key: keyof Foo }\n  | { op: \"const\"; value: number }\n  | { op: \"multiply\"; left: Expr; right: Expr };\nconst fooRule: Expr = { op: \"multiply\", left: { op: \"value\", key: \"value\" }, right: { op: \"const\", value: 2 } };\nconst result = evaluate(fooRule, foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "code-as-data",
+            "name": "Code as Data",
+            "definition": "A design rule that logic to be generated or transformed is held as a typed data structure, such as a syntax tree, that tools can inspect and rewrite.",
+            "type": "principle",
+            "scope": [
+                "language",
+                "compiler",
+                "runtime"
+            ],
+            "requires": ["AST or Data Representation"],
+            "reinforces": [
+                "Homoiconicity",
+                "Code Generation"
+            ],
+            "enables": ["Program Transformation"],
+            "conflicts_with": ["String-Based Code Generation"],
+            "tensions_with": ["Safety/Debuggability"],
+            "violated_by": ["lexicon:unchecked-dynamic-code"],
+            "detected_by": ["dynamic eval/string code construction"],
+            "measured_by": ["unsafe eval count"],
+            "refactored_by": [
+                "lexicon:syntax-tree-generation",
+                "architecture:domain-specific-language"
+            ],
+            "enforced_by": ["banned API rules"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function fooRule(foo: Foo) { return foo.count > 3 && foo.active; }",
+                "after": "const fooRule = {\n  op: \"and\",\n  args: [\n    { op: \"gt\", field: \"count\", value: 3 },\n    { op: \"eq\", field: \"active\", value: true },\n  ],\n} as const;\nexecuteRule(fooRule, foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "metaprogramming",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:dsls",
+                    "reason": "Metaprogramming is code that writes or transforms code, while a domain-specific language is a notation for one domain, which metaprogramming can build."
+                }
+            ],
+            "name": "Metaprogramming",
+            "definition": "A technique for writing programs that generate or transform other programs, at compile time or at runtime.",
+            "type": "technique",
+            "scope": [
+                "compile-time",
+                "runtime",
+                "framework"
+            ],
+            "requires": ["Reflection/AST/Code Generation"],
+            "reinforces": [
+                "DRY",
+                "DSLs"
+            ],
+            "enables": ["Boilerplate Elimination"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Debuggability",
+                "Static Analysis",
+                "Explicit Handwritten Code"
+            ],
+            "violated_by": ["lexicon:unchecked-dynamic-code"],
+            "detected_by": ["dynamic generation without tests/schema"],
+            "measured_by": [
+                "generated code coverage",
+                "complexity"
+            ],
+            "refactored_by": [
+                "lexicon:unit-tests",
+                "lexicon:declare-capability"
+            ],
+            "enforced_by": ["generator validation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class FooDto { id!: string; name!: string; }\nclass BarDto { id!: string; name!: string; }",
+                "after": "const entity = defineEntity({ id: string(), name: string() });\nconst FooDto = generateType(\"FooDto\", entity);\nconst BarDto = generateType(\"BarDto\", entity);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "reflection",
+            "distinctFrom": [
+                {
+                    "id": "architecture:dynamic-binding",
+                    "reason": "Reflection reads type metadata at runtime, while dynamic binding selects an implementation at runtime, with or without reflection."
+                },
+                {
+                    "id": "architecture:introspection",
+                    "reason": "Introspection only reads a type and its members, while reflection also acts on what it reads."
+                },
+                {
+                    "id": "architecture:static-analysis",
+                    "reason": "Reflection inspects structure while the program runs, while static analysis inspects source without running it."
+                }
+            ],
+            "name": "Reflection",
+            "definition": "A mechanism that lets a program read and act on type metadata about its own structure at runtime.",
+            "type": "mechanism",
+            "scope": [
+                "runtime",
+                "metadata",
+                "framework"
+            ],
+            "requires": ["Runtime Type Metadata"],
+            "reinforces": [
+                "Introspection",
+                "Runtime Discovery"
+            ],
+            "enables": ["Dynamic Binding"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Performance/Safety",
+                "Static Analysis"
+            ],
+            "violated_by": ["lexicon:reflective-contract-bypass"],
+            "detected_by": ["reflective access to internals"],
+            "measured_by": ["unsafe reflection count"],
+            "refactored_by": ["lexicon:declare-capability"],
+            "enforced_by": ["lint/security rules"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const fields = [\"id\", \"name\", \"count\"];\nfor (const field of fields) renderField(foo[field]);",
+                "after": "for (const [field, metadata] of reflect(FooSchema).entries()) {\n  renderField(field, metadata, foo[field]);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "introspection",
+            "name": "Introspection",
+            "definition": "A mechanism that lets a program query an object's type and public members at runtime without changing them.",
+            "type": "mechanism",
+            "scope": [
+                "runtime",
+                "metadata"
+            ],
+            "requires": ["Type Metadata"],
+            "reinforces": ["Self-Describing Systems"],
+            "enables": [
+                "Discovery",
+                "Diagnostics"
+            ],
+            "conflicts_with": [
+                "Opaque Runtime",
+                "Opaque Runtime Behavior"
+            ],
+            "tensions_with": ["Encapsulation"],
+            "violated_by": ["lexicon:exposed-internals"],
+            "detected_by": ["introspection of private internals"],
+            "measured_by": ["introspection usage risk"],
+            "refactored_by": ["lexicon:declare-capability"],
+            "enforced_by": ["API boundaries"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function supportsExport(plugin: any) {\n  try { plugin.exportFoo(foo); return true; } catch { return false; }\n}",
+                "after": "function supportsExport(plugin: Plugin) {\n  return introspect(plugin).methods.includes(\"exportFoo\");\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "compile-time-evaluation",
+            "name": "Compile-Time Evaluation",
+            "definition": "A mechanism that computes values, checks or generated code during the build, so the work and its errors happen before runtime.",
+            "type": "mechanism",
+            "scope": [
+                "compiler",
+                "build"
+            ],
+            "requires": ["Compile-Time Inputs"],
+            "reinforces": [
+                "Optimization",
+                "Type Safety"
+            ],
+            "enables": ["Early Error Detection"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Build Complexity",
+                "Runtime Dynamic Evaluation"
+            ],
+            "violated_by": ["lexicon:deferred-static-check"],
+            "detected_by": ["repeated runtime reflection/validation"],
+            "measured_by": ["compile-time coverage"],
+            "refactored_by": [],
+            "enforced_by": ["compiler plugins/build checks"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const fooRoutes = buildRoutesAtStartup(fooRouteDefinitions);",
+                "after": "const fooRoutes = compileTime(() => buildRoutes(fooRouteDefinitions));\nexport const routeTable = fooRoutes;",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "runtime-code-generation",
+            "name": "Runtime Code Generation",
+            "definition": "A mechanism that builds executable code while the program runs, from a specification such as a field mapping.",
+            "type": "mechanism",
+            "scope": [
+                "runtime",
+                "framework"
+            ],
+            "requires": ["Safe Generation Boundary"],
+            "reinforces": ["Runtime Extensibility"],
+            "enables": ["Dynamic Optimization/Adaptation"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Security/Debugging",
+                "Static Safety"
+            ],
+            "violated_by": ["lexicon:unchecked-dynamic-code"],
+            "detected_by": ["dynamic eval with external input"],
+            "measured_by": ["unsafe generation paths"],
+            "refactored_by": [
+                "lexicon:syntax-tree-generation",
+                "lexicon:sandboxing",
+                "architecture:compile-time-evaluation"
+            ],
+            "enforced_by": ["security policy"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function mapFoo(row: any) {\n  return { id: row[\"foo_id\"], name: row[\"foo_name\"], count: row[\"foo_count\"] };\n}",
+                "after": "const mapFoo = generateMapper<FooRow, Foo>({\n  foo_id: \"id\",\n  foo_name: \"name\",\n  foo_count: \"count\",\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "domain-specific-language",
+            "name": "Domain-Specific Language (DSL)",
+            "definition": "A design pattern that expresses a domain's rules or workflows in a small language with a defined grammar and a validator.",
+            "type": "pattern",
+            "scope": [
+                "domain",
+                "configuration",
+                "rules"
+            ],
+            "requires": ["Formal Grammar/Semantics"],
+            "reinforces": [
+                "Declarative Configuration",
+                "Ubiquitous Language"
+            ],
+            "enables": ["Domain Expressiveness"],
+            "conflicts_with": ["General-Purpose Boilerplate"],
+            "tensions_with": ["Tooling/Maintenance"],
+            "violated_by": ["lexicon:ad-hoc-mini-language"],
+            "detected_by": ["stringly-typed rules without parser/schema"],
+            "measured_by": ["DSL validation coverage"],
+            "refactored_by": ["lexicon:validate-at-the-boundary"],
+            "enforced_by": [
+                "DSL tests",
+                "schema/grammar checks"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "createWorkflow([\n  { type: \"validate\", target: \"foo\" },\n  { type: \"save\", target: \"foo\" },\n  { type: \"publish\", target: \"foo.created\" },\n]);",
+                "after": "fooWorkflow(\"create\", flow =>\n  flow.validate(FooSchema)\n      .save(\"FooStore\")\n      .publish(\"FooCreated\")\n);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "language-oriented-programming",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:one-size-general-purpose-code",
+                    "reason": "Language-oriented programming gives each domain its own language, while general-purpose code writes every domain in one language."
+                }
+            ],
+            "name": "Language-Oriented Programming",
+            "definition": "An approach in which each problem domain gets its own language, with a type checker and an evaluator, and solutions are written in it.",
+            "type": "approach",
+            "scope": [
+                "domain",
+                "platform",
+                "code generation"
+            ],
+            "requires": [
+                "DSLs",
+                "Code Generation or Interpreters"
+            ],
+            "reinforces": ["Domain Modeling"],
+            "enables": ["High-Level Domain Expression"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Toolchain Complexity",
+                "One-Size General-Purpose Code"
+            ],
+            "violated_by": ["lexicon:ad-hoc-mini-language"],
+            "detected_by": ["multiple inconsistent rule/config syntaxes"],
+            "measured_by": ["language consistency/tooling"],
+            "refactored_by": [
+                "architecture:domain-specific-language",
+                "lexicon:automated-enforcement"
+            ],
+            "enforced_by": ["grammar/schema validation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function processFoo(config: Record<string, unknown>) {\n  interpretAdHocConfig(config);\n}",
+                "after": "const FooPolicyLanguage = defineLanguage({\n  expressions: [\"field\", \"equals\", \"all\", \"any\"],\n  typeChecker: fooPolicyTypeChecker,\n  evaluator: fooPolicyEvaluator,\n});\nFooPolicyLanguage.run(fooPolicy, foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "model-driven-architecture",
+            "distinctFrom": [
+                {
+                    "id": "architecture:metadata-driven-design",
+                    "reason": "Model-driven architecture generates the implementation from a formal model by transformation rules, while metadata-driven design drives forms, routes or plugins from validated metadata."
+                }
+            ],
+            "name": "Model-Driven Architecture",
+            "aliases": ["MDA"],
+            "definition": "An approach in which a formal model is the source of truth and the implementation is generated from it by transformation rules.",
+            "type": "approach",
+            "scope": [
+                "system",
+                "code generation",
+                "domain model"
+            ],
+            "requires": [
+                "Formal Model",
+                "Transformation Rules"
+            ],
+            "reinforces": ["Metadata-Driven Design"],
+            "enables": ["Generated Implementations"],
+            "conflicts_with": ["Handwritten Divergence"],
+            "tensions_with": [],
+            "violated_by": ["lexicon:handwritten-divergence"],
+            "detected_by": ["model-code drift"],
+            "measured_by": ["generation conformance"],
+            "refactored_by": [
+                "lexicon:code-generation",
+                "architecture:model-evaluation"
+            ],
+            "enforced_by": ["generation CI"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class FooController {}\nclass FooService {}\nclass FooRepository {}\nclass FooDto {}",
+                "after": "const fooModel = defineModel({\n  entity: \"Foo\",\n  fields: { id: \"FooId\", name: \"string\" },\n  operations: [\"create\", \"read\", \"rename\"],\n});\ngenerateApplication(fooModel);",
+                "lang": "ts"
+            }
+        }
+    ]
+}

@@ -22,7 +22,7 @@ Architecture is usually a set of intentions, and an intention cannot be evaluate
 
 For this reason an architecture is its predicate set, and a predicate selects what to examine and marks when the concern is closed. The architecture is counted by what the gate refuses rather than by what the document states. In practice, every architectural intent is stated as a question about [what can drift, seen through how it drifts](COVERAGE.md#what-can-drift-seen-through-how-it-drifts), and the question is resolved to a type. What exists is a set, how parts are arranged is an ordering, what connects is a graph, and how sure you are is a number. The predicate is derived from the type and run over the tree as a check.
 
-To check this, list the architectural claims your system makes. Beside each, name the predicate that decides it and where that predicate runs. A claim with no predicate beside it is a sentence in a document, and the document is the only place it holds. [Determinism](../ontology/PRINCIPLES.md#architecture-determinism) lives in the predicate and never in the judgement that authored it. Which cells are worth watching is a decision, while whether a cell's predicate holds is a computation. The decision stays with the developer and the computation with the check, and a predicate never encodes taste.
+To check this, list the architectural claims your system makes. Beside each, name the predicate that decides it and where that predicate runs. A claim with no predicate beside it is a sentence in a document, and the document is the only place it holds. [Determinism](../ontology/PRINCIPLES.md#architecture-determinism) lives in the predicate and never in the judgment that authored it. Which cells are worth watching is a decision, while whether a cell's predicate holds is a computation. The decision stays with the developer and the computation with the check, and a predicate never encodes taste.
 
 ### A predicate does two jobs
 
@@ -38,37 +38,37 @@ A1·a intent to predicate
 
 ```mermaid
 flowchart TB
-intent["An architectural intent · a sentence about how the system should be"]
-question["A question · what can drift, seen through how it drifts"]
-type["A mathematical type · a set, an ordering, a graph, a number"]
-predicate["A predicate · computable over the tree"]
-selects["Selects what to examine next"]
-closes["Marks when the concern is closed"]
-habit["A habit · held while the developer remembers"]
-intent --> question --> type --> predicate
-predicate --> selects
-predicate --> closes
-intent -. without the walk .-> habit
+    intent["An architectural intent · a sentence about how the system should be"]
+    question["A question · what can drift, seen through how it drifts"]
+    type["A mathematical type · a set, an ordering, a graph, a number"]
+    predicate["A predicate · computable over the tree"]
+    selects["Selects what to examine next"]
+    closes["Marks when the concern is closed"]
+    habit["A habit · held while the developer remembers"]
+    intent --> question --> type --> predicate
+    predicate --> selects
+    predicate --> closes
+    intent -. without the walk .-> habit
 ```
 
 A1·b what is real
 
 ```mermaid
 flowchart TB
-design["A design"]
-intentions["Its intentions · what the author meant"]
-predicates["Its predicate set · what a check can decide"]
-author{"Who writes the code?"}
-person["The developer · intentions survive by attention, for a while"]
-model["A model · every intention with no predicate is absent"]
-real["The architecture that is real · the predicate set"]
-design --> intentions
-design --> predicates
-intentions --> author
-author -- developer --> person
-author -- model --> model
-predicates --> real
-model -. only this survives .-> real
+    design["A design"]
+    intentions["Its intentions · what the author meant"]
+    predicates["Its predicate set · what a check can decide"]
+    author{"Who writes the code?"}
+    person["The developer · intentions survive by attention, for a while"]
+    model["A model · every intention with no predicate is absent"]
+    real["The architecture that is real · the predicate set"]
+    design --> intentions
+    design --> predicates
+    intentions --> author
+    author -- developer --> person
+    author -- model --> model
+    predicates --> real
+    model -. only this survives .-> real
 ```
 
 ## What can drift, seen through how it drifts
@@ -97,39 +97,39 @@ B1·a two axes, one cell
 
 ```mermaid
 flowchart LR
-subgraph dimensions["What can drift"]
-identity["identity"]
-relation["relation"]
-change["change"]
-meaning["meaning"]
-end
-subgraph lenses["How it drifts"]
-structural["structurally"]
-relational["relationally"]
-sequential["sequentially"]
-semantic["semantically"]
-end
-cell["A cell · one invariant, watched, unwatched with a reason, or undecided"]
-identity --> cell
-relation --> cell
-change --> cell
-meaning --> cell
-structural --> cell
-relational --> cell
-sequential --> cell
-semantic --> cell
+    subgraph dimensions["What can drift"]
+        identity["identity"]
+        relation["relation"]
+        change["change"]
+        meaning["meaning"]
+    end
+    subgraph lenses["How it drifts"]
+        structural["structurally"]
+        relational["relationally"]
+        sequential["sequentially"]
+        semantic["semantically"]
+    end
+    cell["A cell · one invariant, watched, unwatched with a reason, or undecided"]
+    identity --> cell
+    relation --> cell
+    change --> cell
+    meaning --> cell
+    structural --> cell
+    relational --> cell
+    sequential --> cell
+    semantic --> cell
 ```
 
 B1·b a corner
 
 ```mermaid
 block-beta
-columns 5
-corner[" "] structural["structural"] relational["relational"] sequential["sequential"] semantic["semantic"]
-identity["identity"] i1["watched"] i2["unwatched · declared"] i3["undecided"] i4["watched"]
-relation["relation"] r1["watched"] r2["watched"] r3["undecided"] r4["unwatched · declared"]
-change["change"] c1["undecided"] c2["watched"] c3["watched"] c4["undecided"]
-meaning["meaning"] m1["unwatched · declared"] m2["undecided"] m3["watched"] m4["watched"]
+    columns 5
+    corner[" "] structural["structural"] relational["relational"] sequential["sequential"] semantic["semantic"]
+    identity["identity"] i1["watched"] i2["unwatched · declared"] i3["undecided"] i4["watched"]
+    relation["relation"] r1["watched"] r2["watched"] r3["undecided"] r4["unwatched · declared"]
+    change["change"] c1["undecided"] c2["watched"] c3["watched"] c4["undecided"]
+    meaning["meaning"] m1["unwatched · declared"] m2["undecided"] m3["watched"] m4["watched"]
 ```
 
 B1·c a rule surface
@@ -215,7 +215,7 @@ To check this, find an empty cell and try to state its invariant in one sentence
 
 Two invariants keep this a method rather than a rule pile. The first is that no rule exists without a consuming failure mode. A rule earns its place only if a real drift class fires it, because a rule nothing can violate is ceremony, and ceremony costs the same review attention as a real rule, which is how a rule set stops being read.
 
-The second is that the rule set is derived while the judgement that authored it is not. Which cells need watching is a deterministic function of the architecture's declared invariants, whether an invariant was worth declaring is a decision, and the [determinism](../ontology/PRINCIPLES.md#architecture-determinism) stays in the predicate rather than in the deciding.
+The second is that the rule set is derived while the judgment that authored it is not. Which cells need watching is a deterministic function of the architecture's declared invariants, whether an invariant was worth declaring is a decision, and the [determinism](../ontology/PRINCIPLES.md#architecture-determinism) stays in the predicate rather than in the deciding.
 
 ### The walk in the canon
 
@@ -227,18 +227,18 @@ C1·a the walk
 
 ```mermaid
 flowchart TB
-enumerate["Enumerate the checks that exist"]
-map["Map each to its cell · dimension by lens"]
-walk["Walk the grid"]
-empty{"Empty cell?"}
-name["Name the invariant that should hold there"]
-decide{"Can the invariant be stated?"}
-author["Author the predicate, or record the cell as deliberately unwatched"]
-undecided["An undecided intent · the finding is the design, never the rule"]
-enumerate --> map --> walk --> empty
-empty -- yes --> name --> decide
-decide -- yes --> author
-decide -- no --> undecided
+    enumerate["Enumerate the checks that exist"]
+    map["Map each to its cell · dimension by lens"]
+    walk["Walk the grid"]
+    empty{"Empty cell?"}
+    name["Name the invariant that should hold there"]
+    decide{"Can the invariant be stated?"}
+    author["Author the predicate, or record the cell as deliberately unwatched"]
+    undecided["An undecided intent · the finding is the design, never the rule"]
+    enumerate --> map --> walk --> empty
+    empty -- yes --> name --> decide
+    decide -- yes --> author
+    decide -- no --> undecided
 ```
 
 ## The honest gaps
@@ -269,15 +269,15 @@ D1·a running or absent
 
 ```mermaid
 flowchart TB
-called["A predicate the method calls for"]
-exists{"Does the tree run it?"}
-runs["Declared present · it runs in the chain"]
-absent["Declared absent · named in the one document that binds method to tree"]
-assumed["Assumed · the document describes an upgrade the tree never made"]
-called --> exists
-exists -- yes --> runs
-exists -- no --> absent
-exists -. neither written down .-> assumed
+    called["A predicate the method calls for"]
+    exists{"Does the tree run it?"}
+    runs["Declared present · it runs in the chain"]
+    absent["Declared absent · named in the one document that binds method to tree"]
+    assumed["Assumed · the document describes an upgrade the tree never made"]
+    called --> exists
+    exists -- yes --> runs
+    exists -- no --> absent
+    exists -. neither written down .-> assumed
 ```
 
 D1·b a rule entry

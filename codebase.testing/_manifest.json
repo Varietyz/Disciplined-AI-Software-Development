@@ -1,0 +1,83 @@
+{
+    "label": "Codebase Testing",
+    "summary": "The centralized test surface, holding every suite for the workspace members plus the single vitest config the whole workspace runs from. There is one runner, one config, one report and one place to look when something fails.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "testing"}
+    ],
+    "capabilities": [
+        "centralized-test-surface",
+        "single-vitest-config",
+        "workspace-wide-run",
+        "source-tree-mirroring",
+        "lint-rule-behavior-tests"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "separation-of-concerns",
+        "type-safety"
+    ],
+    "visibility": {"private": true,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "entries": [],
+    "docs": {
+        "overview": "Every suite in the workspace lives here. Each test root mirrors one source root, as `testMirrors` in `.govlab/shared/configs/taxonomy.config.ts` declares: `test.web/` mirrors the application, `test.rules/` the governance host, and each folder under `test.govlab/` one suite member. A test sits at its subject's folder path and is named for its subject with `.test` before the extension, so `test.build/core/converters/site.converter.test.ts` pins `banes-lab.root/banes-lab.build.scripts/core/converters/site.converter.ts`. A fixture carries the `fixture` marker and sits in the concern folder of its main consumers. A suite imports its subject by the owning package specifier, such as `@govlab/quality/core/parsers/tool.knip.parser.ts`, not by a relative climb. `closure-no-cross-member-relative` enforces the specifier, and its codemod rewrites a relative climb. One `vitest.config.ts` roots at the repo and collects every test under this root, so the whole workspace is one run, one report and one exit code.",
+        "whenToUse": [
+            "Adding any test for a workspace member. This root is the only place one may live.",
+            "Adding a fixture shared across suites, placed in the concern folder of its main consumers.",
+            "Testing a local lint rule's behavior against `RuleTester`, at the rule's mirrored path under `test.rules/rules/eslint/`."
+        ],
+        "whenNotToUse": [
+            "Placing a test beside its subject. `closure-tests-centralized` and the `Taxonomy` step both fail it.",
+            "Asserting against a fixture that only exists in another repository. A suite runs from a fresh checkout of this one."
+        ],
+        "quickStart": [
+            {
+                "intent": "Run everything, one file, or one test by name",
+                "lang": "sh",
+                "code": "npx vitest run --config codebase.testing/vitest.config.ts\nnpx vitest run --config codebase.testing/vitest.config.ts codebase.testing/test.build/core/converters/site.converter.test.ts\nnpx vitest run --config codebase.testing/vitest.config.ts -t \"replaces rather than duplicates\""
+            },
+            {
+                "intent": "A suite imports its subject by the package specifier of the member it covers",
+                "lang": "ts",
+                "code": "import { describe, expect, it } from \"vitest\";\nimport { createCapability, registerCapability, registeredCapabilities } from \"@banes-lab/web\";\n\ndescribe(\"capability registry\", () => {\n    it(\"replaces rather than duplicates on the same id\", () => {\n        registerCapability(createCapability(\"telemetry\"));\n        registerCapability(createCapability(\"telemetry\"));\n        expect(registeredCapabilities().filter((c) => c.id === \"telemetry\")).toHaveLength(1);\n    });\n});"
+            }
+        ],
+        "configuration": "`vitest.config.ts` sets `root` to the repo, includes `codebase.testing/**/*.test.ts`, and runs with `globals: false`, so every `describe`, `it` and `expect` is imported explicitly. It declares three projects: `node` for most suites, `web` in jsdom for the application's suites with the stylesheet fixture as its setup file, and `stage` in jsdom for the social-share renderer and timer suites. `tsconfig.json` relaxes `noPropertyAccessFromIndexSignature`, because a test indexes into fixtures constantly. It declares `types: [\"node\", \"vite/client\", \"@webgpu/types\"]`, so `import.meta.env` and `import.meta.glob` resolve in suites that import web source.",
+        "install": "A private workspace member resolved through the root `package.json` workspaces list. One `npm install` at the repo root is the whole setup, because `vitest` is hoisted there and this package declares only its workspace siblings. The gate runs it directly as `vitest run --config codebase.testing/vitest.config.ts`, never through an npm script name.",
+        "disposal": [
+            "Remove the testing stage from the verify orchestrator, including the test floor step (`coverage.entrypoint.ts` in the standalone scripts) that reads its report.",
+            "Delete `closure-tests-centralized` from `.govlab/rules/eslint/` and the `testMirrors` map from the taxonomy config.",
+            "Remove `codebase.testing/` and its workspace entry, after relocating any suite worth keeping beside its subject."
+        ],
+        "aiContext": [
+            "The `Taxonomy` step holds the mirror: it fails a test outside a mirror, a test with no subject at its mirrored path, and a file in a mirror that is neither a test nor a fixture. A test moves in the same change as its subject.",
+            "A fixture imported by a relative path breaks when either end moves. The relative-specifier codemod in the auto-fix stage repoints an import whose target moved to the one file in the member that carries its name, and fails on a name that matches none or several.",
+            "Prefer a fixture that already exists in the workspace over a synthetic stub. A suite asserting against a package that only exists in some other repository passes nothing and fails on a fresh checkout.",
+            "A slow test, such as a full TypeScript program plus a mermaid parse, needs an explicit timeout as its last argument. The 5s default is measured under full parallel load, so a suite that passes alone can still time out in the whole run."
+        ],
+        "apiNotes": [
+            {
+                "name": "vitest.config.ts",
+                "note": "the single config for the whole workspace. It roots at the repo, collects `codebase.testing/**/*.test.ts`, and splits the run into the node, web and stage projects."
+            },
+            {
+                "name": "test.web/",
+                "note": "the mirror of the application member, with each test at its subject's folder path."
+            },
+            {
+                "name": "test.govlab/",
+                "note": "one mirror per governance suite member, each holding the tests for that member's own subjects."
+            },
+            {
+                "name": "test.rules/rules/eslint/",
+                "note": "behavior tests for the local lint rules, one `<id>.eslint.rule.test.ts` per rule, importing it from `@ssot/govlab/rules/eslint/` and driving it through eslint RuleTester."
+            }
+        ]
+    }
+}

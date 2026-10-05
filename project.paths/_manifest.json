@@ -1,0 +1,84 @@
+{
+    "label": "GovLab Paths",
+    "summary": "The single derived-anchor source of truth for host-root workspace paths, which resolves a relative path tree onto the repo root derived at load time.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "platform",
+            "sub": "file-system"}
+    ],
+    "ecosystem": "javascript",
+    "visibility": {"private": true,
+        "hidden": false},
+    "capabilities": [
+        "derive-monorepo-root-at-load",
+        "resolve-workspace-paths-onto-root",
+        "centralize-host-root-path-tree",
+        "expose-relative-path-segments",
+        "freeze-resolved-path-tree"
+    ],
+    "repoMetrics": true,
+    "docs": {
+        "overview": "`@ssot/paths` is the single derived-anchor source of truth for workspace-root filesystem paths. `ROOT` is derived once at load by an upward walk from this package's own location to the workspace-root `package.json`, the one named `banes-lab` that carries a `workspaces` field. The relative path tree authored in `paths.yaml` is resolved onto it on demand. No source hardcodes a root-relative directory fragment, and call sites resolve through `ROOT`, `paths`, `absolutePath` and `relativePath`. The `@ssot/paths/anchor` subpath exposes `ROOT` alone with no parser dependency.",
+        "whenToUse": [
+            "Node-side code needs an absolute path into a workspace member, which is any key of the `paths.yaml` tree.",
+            "A `path.join(__dirname, ...)` climb or a root-relative string literal would otherwise appear. Resolve the path here instead.",
+            "The code needs the workspace-relative form of a path for display, config or a manifest entry. `relativePath(dottedKey)` returns it.",
+            "The code needs the derived repo root itself. Import `ROOT`, or import `ROOT` alone from `@ssot/paths/anchor` when the YAML parser is unwanted."
+        ],
+        "whenNotToUse": [
+            "Any runtime with no `node:fs` or `node:path`. `paths` and `absolutePath` are Node-only.",
+            "A package that must stay host-agnostic. Those receive paths by injection, never by importing this package.",
+            "A process with no workspace-root `package.json` above it. The walk throws there, since it is the only source of the root.",
+            "Remote or deployment targets. A server path is a runtime destination, not a local workspace path this tree describes."
+        ],
+        "install": "`@ssot/paths` is a private workspace package, resolved through the root `package.json` `workspaces` entry `project.paths`. A consumer declares it as a dependency and imports from the bare specifier `@ssot/paths`, or from `@ssot/paths/anchor` for the root-only, parser-free entry. The package is authored in TypeScript and resolved directly from its `.ts` barrel under Node's type stripping. No build step or compiled output stands between a consumer and the source.",
+        "quickStart": [
+            {
+                "intent": "Resolve workspace paths from the derived root: `paths` is the frozen absolute tree, `absolutePath` resolves a dotted key, and `relativePath` returns its relative segment",
+                "lang": "js",
+                "code": "import { ROOT, absolutePath, paths, relativePath } from \"@ssot/paths\";\n\npaths.app.root;\nabsolutePath(\"govlabHost.rules\");\nrelativePath(\"codebase.testing\");\nROOT;"
+            },
+            {
+                "intent": "Read the root without loading the YAML parser",
+                "lang": "js",
+                "code": "import { ROOT } from \"@ssot/paths/anchor\";\n\nprocess.chdir(ROOT);"
+            }
+        ],
+        "configuration": [
+            {
+                "option": "paths.yaml",
+                "note": "the authored tree of relative segments joined onto `ROOT`, and the one place a host-root path is written."
+            }
+        ],
+        "disposal": [
+            "Restore concrete path literals, or a re-homed resolver, at every consumer import of `@ssot/paths` and `@ssot/paths/anchor`.",
+            "Remove the `project.paths` entry from the root `package.json` `workspaces`.",
+            "Remove the paths gate, `closure-paths-via-ssot`, which flags a declared location spelled as a literal outside this package.",
+            "Delete the `project.paths` directory, reinstall to refresh the workspace links, then run the codebase verification gate to confirm no dangling imports remain."
+        ],
+        "apiNotes": [
+            {
+                "name": "ROOT",
+                "note": "the absolute workspace root, derived once at load by the upward walk. It throws when no matching `package.json` sits above the package."
+            },
+            {"name": "paths",
+                "note": "the whole tree with every leaf joined onto `ROOT`, frozen."},
+            {
+                "name": "absolutePath",
+                "note": "takes a dotted key and optional trailing segments, and returns the absolute path."
+            },
+            {
+                "name": "relativePath",
+                "note": "takes a dotted key and optional trailing segments, and returns the workspace-relative path with forward slashes."
+            }
+        ],
+        "aiContext": [
+            "`ROOT` is derived once at load: an upward walk from this package's own location to the workspace-root `package.json` named `banes-lab` that carries a `workspaces` field.",
+            "`paths` is the whole `paths.yaml` tree with every leaf joined onto `ROOT` and frozen. `absolutePath(dottedKey, ...segments)` returns an absolute path, and `relativePath(dottedKey, ...segments)` returns the relative segment string.",
+            "A branch that declares `root` resolves as a location, and every key beneath it resolves relative to that location. An unknown key, a branch with no `root`, and a key that steps through a leaf each throw.",
+            "Import `ROOT` alone from `@ssot/paths/anchor` to avoid loading the YAML parser. The anchor entry uses node builtins only.",
+            "This is workspace infrastructure, coupled to the `banes-lab` root. A package that must stay portable receives paths by injection instead.",
+            "Every workspace path lives in `paths.yaml` and nowhere else. The paths gate flags a declared location spelled as a literal anywhere in source, so a new path goes into the tree."
+        ]
+    }
+}

@@ -1,0 +1,91 @@
+{
+    "label": "Content Fingerprint",
+    "summary": "Deterministic content-hash fingerprinting and a per-key skip index for idempotent, selective regeneration.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "build-tooling"},
+        {"meta": "data",
+            "sub": "caching"}
+    ],
+    "capabilities": [
+        "content-hash-fingerprint",
+        "deterministic-file-set-hash",
+        "per-key-skip-index",
+        "regeneration-guard"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "type-safety",
+        "separation-of-concerns",
+        "immutability"
+    ],
+    "visibility": {"private": false,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "docs": {
+        "overview": "A dependency-free leaf that answers one question deterministically: have a generator's inputs changed since it last ran? It content-hashes a set of files (SHA-256 of bytes, order-independent), folds those hashes into a composite fingerprint, and persists a per-key index so a generator can skip the units whose inputs are unchanged and regenerate only those that moved.",
+        "whenToUse": [
+            "A code or doc generator that should skip regenerating an output whose precise inputs have not changed since the last run.",
+            "Per-unit selective regeneration: hash each unit's own inputs plus a shared-input hash, so a shared change invalidates every unit while a single-unit change invalidates only that unit.",
+            "Any build step wanting a deterministic, content-based (not mtime-based) up-to-date check with an ephemeral on-disk index."
+        ],
+        "whenNotToUse": [
+            "Cryptographic integrity or tamper-evidence. The package is a change-detection fingerprint, not a security primitive.",
+            "Detecting change in a live, in-memory object graph. The package hashes files on disk, so an in-memory hash cache fits better.",
+            "A hybrid generated-and-authored output whose file must never be overwritten. The index says what changed, and preserving authored content stays with the caller."
+        ],
+        "quickStart": [
+            {
+                "intent": "Skip a unit whose inputs are unchanged",
+                "lang": "js",
+                "code": "import { collectFiles, fingerprint, fingerprintOf, createFingerprintIndex, cacheFile } from \"@govlab/content-fingerprint\";\nimport { existsSync } from \"node:fs\";\n\nconst index = createFingerprintIndex({ file: cacheFile(\"module-docs\"), force: process.env.GOVLAB_NO_CACHE === \"1\" });\nconst shared = fingerprint([canonicalIndexPath, allRulesPath, govlabConfigPath]);\nfor (const unit of units) {\n    const own = fingerprint([...collectFiles(unit.dir, { include: (n) => n.endsWith(\".ts\") }), unit.manifest]);\n    const key = fingerprintOf([own, shared, GENERATOR_SOURCE]);\n    if (index.unchanged(unit.id, key) && existsSync(unit.output)) { continue; }\n    render(unit);\n    index.update(unit.id, key);\n}\nindex.flush();"
+            }
+        ],
+        "configuration": "No constructor options beyond the index file path and a `force` flag. Scalar knobs (hash algorithm, separators, index indent, default ignored directories, cache path segments) are package constants. The caller injects the cache file location through `cacheFile(name)`, which resolves the index under the consumer's `node_modules/.cache` (a govlab/fingerprint subfolder created on first write).",
+        "disposal": [
+            "Remove `govlab.root/govlab.utils/content-fingerprint/`.",
+            "Drop `\"@govlab/content-fingerprint\": \"*\"` from the `govlab.quality`, `govlab.patterns`, and `govlab.docs` package manifests.",
+            "Remove every `import … from \"@govlab/content-fingerprint\"` and inline or drop the skip check where still needed."
+        ],
+        "aiContext": [
+            "The fingerprint is content-based (SHA-256 of file bytes), never mtime-based, so it is deterministic across machines and reruns.",
+            "`fingerprint(files)` is order-independent (it sorts), while `fingerprintOf(parts)` is order-sensitive. The latter composes an own-hash, a shared-hash and the generator's own source hash into one key.",
+            "The index lives under `node_modules/.cache` and is ephemeral: a fresh checkout has no index, so every unit regenerates and the result is authoritative.",
+            "A correct per-unit key folds in every shared input (a change there must invalidate all units) and the generator's own source (a generator change must invalidate its outputs).",
+            "A pure leaf: zero `@govlab/*` sibling dependencies."
+        ],
+        "apiNotes": [
+            {
+                "name": "hashFile",
+                "note": "SHA-256 hex of a file's bytes, or the `absent` sentinel if the file does not exist. Any other read failure throws."
+            },
+            {
+                "name": "fingerprint",
+                "note": "the order-independent composite hash of a file set (path and content per file). A missing file hashes to the sentinel."
+            },
+            {
+                "name": "fingerprintOf",
+                "note": "the order-sensitive composite of already-computed hash strings, which folds the own, shared and generator-source hashes into one key."
+            },
+            {
+                "name": "digestOf",
+                "note": "SHA-256 hex of one string's exact bytes, with no separator added, so a reader can recompute it from the served body."
+            },
+            {
+                "name": "collectFiles",
+                "note": "deterministic sorted file list under a root, skipping the directories the caller names, with an optional name filter. An unreadable root yields an empty list."
+            },
+            {
+                "name": "createFingerprintIndex",
+                "note": "opens a per-key on-disk index exposing `unchanged`, `update` and `flush`, where `force` makes every key report changed."
+            },
+            {
+                "name": "cacheFile",
+                "note": "resolves an ephemeral index path under the consumer's node_modules/.cache/govlab/fingerprint/."
+            }
+        ]
+    }
+}

@@ -1,0 +1,1050 @@
+{
+    "category": "agent-creation",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the agent auditor, which walks a generated agent against the agent-quality dimensions",
+            "the structured-document validator, which holds every agent to the grammar's node form"
+        ],
+        "population": "every agent the creator generates, and the domain evidence each one cites",
+        "freshness": "a verdict stands until the agent, its evidence or the grammar changes",
+        "refusal": "the validator fails an agent with a malformed node or gate, and the creator persists no agent that fails its grounding or embodiment check",
+        "observation": "none: an agent contract is text; its runs are observed by the checks it declares",
+        "evidence": "fires-and-accepts: a suite plants a retired head in a real agent document and validates every agent on disk clean, while the auditor's walk is stated as a class",
+        "authority": "the grammar and the agent-quality dimensions, which every generated agent conforms to"
+    },
+    "records": [
+        {
+            "id": "evidence-before-generation",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Evidence-Before-Generation",
+            "exemplar": {
+                "before": "An agent generated from the request text and prior model knowledge, never inspecting the target.",
+                "after": "request → discover resources → inspect domain → extract facts → knowledge base → generate only from verified evidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Discover available context, inspect target-domain resources, extract concrete facts, construct a knowledge base, and generate only from verified evidence.",
+            "invariant": "Agent generation must be grounded in inspected domain structure, not assumptions.",
+            "flow": [
+                "Request",
+                "Discover",
+                "Inspect",
+                "ExtractFacts",
+                "KnowledgeBase",
+                "Generate"
+            ],
+            "productions": [
+                {
+                    "lhs": "EvidenceBeforeGeneration",
+                    "rhs": "<UserRequest> \"→\" <ResourceDiscovery> \"→\" <DomainInspection> \"→\" <FactExtraction> \"→\" <KnowledgeBase> \"→\" <GeneratedAgent>"
+                },
+                {"lhs": "GeneratedAgent",
+                    "rhs": "\"allowed_only_if_evidence_grounded\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "model_governance",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "semantic-operation-boundary",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Semantic Operation Boundary",
+            "exemplar": {
+                "before": "The agent core hardcodes a specific search command and an absolute path, so it only runs on one runtime.",
+                "after": "semantic op{DISCOVER/READ/SEARCH/ANALYZE} → adapter maps to the runtime → the core carries no runtime path or command",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Define required work as semantic operations, defer runtime execution details to adapters, and reject runtime-specific primitives from the portable core contract.",
+            "invariant": "The core agent contract describes what must happen; the adapter decides how it happens.",
+            "flow": [
+                "SemanticVerb",
+                "AdapterMapping",
+                "RuntimeAction",
+                "Result"
+            ],
+            "productions": [
+                {
+                    "lhs": "SemanticBoundary",
+                    "rhs": "<SemanticOperation> \"→\" <AdapterMapping> \"→\" <RuntimeExecution> \"→\" <EvidenceResult>"
+                },
+                {
+                    "lhs": "SemanticOperation",
+                    "rhs": "\"DECLARE_RESOURCE\" | \"DISCOVER_RESOURCES\" | \"READ_RESOURCE\" | \"SEARCH_CONTENT\" | \"ANALYZE_CONTENT\" | \"EXTRACT_FACTS\" | \"CALCULATE_METRIC\" | \"COMPOSE_ARTIFACT\" | \"VALIDATE_ARTIFACT\" | \"PERSIST_ARTIFACT\" | \"REPORT_RESULT\" | \"REQUEST_DECISION\""
+                },
+                {"lhs": "CoreConstraint",
+                    "rhs": "\"no_runtime_specific_paths_or_commands\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "semantic_consistency"
+            ]
+        },
+        {
+            "id": "capability-profile",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Capability Profile",
+            "exemplar": {
+                "before": "The agent assumes it can execute and write, then fails when it cannot.",
+                "after": "required capabilities{filesystem, search, execution, persistence, validation} → probe each → mode{full | degraded | blocked}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect filesystem, search, execution, persistence, validation, and user-interaction capabilities; mark unsupported capabilities; substitute where safe; block where required capability is non-substitutable.",
+            "invariant": "Generated workflows must know what their runtime can do.",
+            "flow": [
+                "CapabilitySet",
+                "Probe",
+                "Available|Unavailable|Substituted",
+                "RuntimeMode"
+            ],
+            "productions": [
+                {
+                    "lhs": "CapabilityProfile",
+                    "rhs": "<RequiredCapabilitySet> \"→\" <CapabilityProbeSet> \"→\" <CapabilityVerdict>"
+                },
+                {"lhs": "CapabilityVerdict",
+                    "rhs": "\"full\" | \"degraded\" | \"blocked\""},
+                {
+                    "lhs": "Capability",
+                    "rhs": "\"filesystem\" | \"search\" | \"execution\" | \"persistence\" | \"validation\" | \"user_interaction\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "creation-history-collision",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Creation History Collision",
+            "exemplar": {
+                "before": "A new agent silently overwrites an existing one of the same name.",
+                "after": "target name → existing registry → name/domain collision? → developer decision{CREATE|REFINE|RENAME|REPLACE|CANCEL}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load existing agent and invocation registries, map existing identities, compare target name and domain, and require the developer's decision before refinement, renaming, replacement, or cancellation.",
+            "invariant": "Agent creation must not silently duplicate or overwrite prior work.",
+            "flow": [
+                "TargetAgent",
+                "ExistingRegistry",
+                "NameCollision?",
+                "DomainCollision?",
+                "Decision"
+            ],
+            "productions": [
+                {
+                    "lhs": "CreationCollision",
+                    "rhs": "<TargetAgentName> \"→\" <ExistingAgentMap> \"→\" <CollisionCheck> \"→\" <AgentOperationMode>"
+                },
+                {
+                    "lhs": "AgentOperationMode",
+                    "rhs": "\"CREATE\" | \"REFINE\" | \"RENAME\" | \"REPLACE\" | \"CANCEL\""
+                },
+                {"lhs": "CollisionCheck",
+                    "rhs": "\"name_collision\" | \"domain_collision\" | \"none\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "domain-cache-validation",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Domain Cache Validation",
+            "exemplar": {
+                "before": "Stale cached domain intelligence reused as if it were current.",
+                "after": "domain path → normalize + hash → cache lookup → fingerprint of the domain's sources vs the entry's derivation fingerprint → {use cached | reject stale | investigate}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Normalize the domain path, compute a domain hash, search cache entries, fingerprint the domain's sources, and reuse cached knowledge only when the entry's identity matches and its derivation fingerprint equals the current one.",
+            "invariant": "Prior domain intelligence can be reused only when freshness and identity are verified.",
+            "flow": [
+                "DomainPath",
+                "Normalize",
+                "Hash",
+                "CacheLookup",
+                "FingerprintCheck",
+                "UseCache|Investigate"
+            ],
+            "productions": [
+                {
+                    "lhs": "DomainCache",
+                    "rhs": "<DomainPath> \"→\" <DomainHash> \"→\" <CacheEntry> \"→\" <SourceFingerprint> \"→\" <CacheDecision>"
+                },
+                {
+                    "lhs": "CacheDecision",
+                    "rhs": "\"use_cached_domain\" | \"reject_stale_cache\" | \"no_cache_investigate\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "scope-extraction",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Scope Extraction",
+            "exemplar": {
+                "before": "A repository investigated at single-file depth, missing every boundary.",
+                "after": "target → investigation depth{single-resource|directory|module|repository} → scope-matched facts{interfaces, deps, boundaries}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Determine whether the target is a resource, directory, module, repository, or unknown scope; then extract interfaces, declarations, dependencies, systems, or boundaries appropriate to that scope.",
+            "invariant": "Investigation depth must match target-domain shape.",
+            "flow": [
+                "TargetPath",
+                "InvestigationType",
+                "ScopeModel",
+                "ResourceSet",
+                "InterfaceFacts"
+            ],
+            "productions": [
+                {"lhs": "ScopeExtraction",
+                    "rhs": "<TargetPath> \"→\" <InvestigationDepth> \"→\" <DomainScope>"},
+                {
+                    "lhs": "InvestigationDepth",
+                    "rhs": "\"single-resource\" | \"directory\" | \"module\" | \"repository\" | \"auto\""
+                },
+                {
+                    "lhs": "DomainScope",
+                    "rhs": "<ResourceScope> | <DirectoryScope> | <ModuleScope> | <RepositoryScope>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "non-destructive-domain-investigation",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "analysis",
+            "yields": "operation",
+            "title": "Non-Destructive Domain Investigation",
+            "exemplar": {
+                "before": "Investigation runs a script that mutates the source it is inspecting.",
+                "after": "static plan (+ optional safe executable) → analyze, never mutate the source → observable output → domain knowledge",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Prepare static investigation, optionally prepare safe executable analysis, prohibit source mutation, execute or emulate analysis, and merge observable outputs into domain intelligence.",
+            "invariant": "Domain discovery may inspect and analyze, but must not mutate the source domain.",
+            "flow": [
+                "StaticPlan + OptionalExecutablePlan",
+                "Analyze",
+                "ExtractStructure",
+                "CacheResults"
+            ],
+            "productions": [
+                {
+                    "lhs": "DomainInvestigation",
+                    "rhs": "<InvestigationPlan> \"→\" <AnalysisExecution> \"→\" <DomainKnowledge>"
+                },
+                {"lhs": "InvestigationPlan",
+                    "rhs": "<StaticAnalysisPlan> \",\" <OptionalExecutableAnalysisPlan>"},
+                {
+                    "lhs": "ExecutionConstraint",
+                    "rhs": "\"non_destructive\" \",\" \"observable_output_required\" \",\" \"source_mutation_forbidden\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "state_transaction",
+                "observability_traceability",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "domain-knowledge-base",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Domain Knowledge Base",
+            "exemplar": {
+                "before": "Generation proceeds with no explicit evidence substrate to cite.",
+                "after": "domain facts + structure + purposes + deps + interfaces + patterns + statistics + evidence sources → reusable knowledge base",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Store target scope, discovered structure, purposes, dependencies, interfaces, patterns, statistics, timestamp, and evidence sources in a reusable knowledge object.",
+            "invariant": "Agent generation needs an explicit evidence substrate.",
+            "flow": [
+                "DomainFacts",
+                "Statistics",
+                "EvidenceSources",
+                "KnowledgeBase"
+            ],
+            "productions": [
+                {
+                    "lhs": "DomainKnowledgeBase",
+                    "rhs": "<DomainScope> \",\" <DomainStructure> \",\" <PurposeSet> \",\" <DependencyMap> \",\" <InterfaceSet> \",\" <PatternSet> \",\" <Statistics> \",\" <EvidenceSourceSet>"
+                },
+                {
+                    "lhs": "Statistics",
+                    "rhs": "\"resource_count\" \",\" \"interface_count\" \",\" \"dependency_count\" \",\" \"resource_types\" \",\" \"architectural_patterns\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "risk-complexity-reversibility",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "analysis",
+            "yields": "operation",
+            "title": "Risk Complexity Reversibility",
+            "exemplar": {
+                "before": "Every agent given the same phase count regardless of how risky its domain is.",
+                "after": "knowledge base → risk{low|medium|high} + complexity + reversibility{reversible|partial|irreversible} + uncertainty",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Analyze domain dependencies, side effects, resource count, interface count, dependency patterns, and uncertainty factors to assign risk, complexity, reversibility, and uncertainty.",
+            "invariant": "Phase rigor should be proportional to domain risk and complexity.",
+            "flow": [
+                "KnowledgeBase",
+                "RiskFactors",
+                "ComplexityScore",
+                "Reversibility",
+                "Uncertainty"
+            ],
+            "productions": [
+                {
+                    "lhs": "DomainCharacteristics",
+                    "rhs": "<RiskLevel> \",\" <ComplexityScore> \",\" <Reversibility> \",\" <UncertaintyLevel>"
+                },
+                {"lhs": "RiskLevel",
+                    "rhs": "\"low\" | \"medium\" | \"high\""},
+                {"lhs": "Reversibility",
+                    "rhs": "\"reversible\" | \"partially-reversible\" | \"irreversible\""},
+                {"lhs": "UncertaintyLevel",
+                    "rhs": "\"low\" | \"medium\" | \"high\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "existing-pattern-extraction",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Existing Pattern Extraction",
+            "exemplar": {
+                "before": "A new agent invented in a shape that ignores the local agent grammar.",
+                "after": "existing specs → count{phases, gates, semantic ops} → reusable structures → baseline conventions",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Inspect existing agent specifications, count phase markers, validation gates, and semantic operations, extract reusable structures, and derive baseline design conventions.",
+            "invariant": "New agents should conform to proven local agent grammar where evidence exists.",
+            "flow": [
+                "ExistingSpecs",
+                "PhaseCount",
+                "GateCount",
+                "OperationUsage",
+                "ReusablePatterns"
+            ],
+            "productions": [
+                {
+                    "lhs": "ExistingPatternExtraction",
+                    "rhs": "<ExistingAgentSpecSet> \"→\" <StructuralMetricSet> \"→\" <ReusablePatternSet>"
+                },
+                {
+                    "lhs": "StructuralMetricSet",
+                    "rhs": "\"phase_count\" \",\" \"validation_gate_count\" \",\" \"semantic_operation_count\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "knowledge-documentation-relevance",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Knowledge Documentation Relevance",
+            "exemplar": {
+                "before": "Every knowledge doc fed into reasoning, relevant or not.",
+                "after": "knowledge docs → read descriptions → score relevance vs domain → include relevant, exclude the rest",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Discover knowledge documents, read descriptions, compare them against domain characteristics, score relevance, and exclude irrelevant documents from core reasoning.",
+            "invariant": "Supporting documents should influence generation only when relevant to the target domain.",
+            "flow": [
+                "KnowledgeDocs",
+                "RelevanceAnalysis",
+                "RelevantDocs",
+                "PrincipleInput"
+            ],
+            "productions": [
+                {
+                    "lhs": "KnowledgeRelevance",
+                    "rhs": "<KnowledgeDocumentSet> \"→\" <RelevanceScoreSet> \"→\" <RelevantKnowledgeSet>"
+                },
+                {"lhs": "RelevanceDecision",
+                    "rhs": "\"include\" | \"exclude\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "principle-extraction",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Principle Extraction",
+            "exemplar": {
+                "before": "Runtime-specific principles baked into the portable core.",
+                "after": "structural candidates + domain docs → test applicability → core principles{phase-gated, validation-boundaries, declaration-before-use, evidence-before-composition, adapter-separation, auditability}; runtime-specific excluded",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Start from structural principles, test applicability against domain characteristics, add domain-specific principles from relevant documents, and exclude runtime-specific principles from the core.",
+            "invariant": "Generated agents should embody portable design principles selected from evidence.",
+            "flow": [
+                "StructuralPrinciples + DomainDocs",
+                "Applicability",
+                "CorePrinciples"
+            ],
+            "productions": [
+                {
+                    "lhs": "PrincipleExtraction",
+                    "rhs": "<CandidatePrincipleSet> \"→\" <ApplicabilityAnalysis> \"→\" <CorePrincipleSet>"
+                },
+                {
+                    "lhs": "CorePrinciple",
+                    "rhs": "\"phase_gated_execution\" | \"validation_boundaries\" | \"declaration_before_use\" | \"evidence_before_composition\" | \"adapter_separation\" | \"auditability\""
+                }
+            ],
+            "composes": [],
+            "force": ["domain_boundary"]
+        },
+        {
+            "id": "adaptive-phase-boundary",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Adaptive Phase Boundary",
+            "exemplar": {
+                "before": "A high-risk irreversible domain given a 3-phase agent.",
+                "after": "risk + complexity + uncertainty → phase count{3 | 5 | 7} → validation density proportional to difficulty",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Select phase count from risk and complexity, assign phase boundaries, and strengthen validation density for high-risk or high-complexity domains.",
+            "invariant": "Agent structure should scale with domain difficulty.",
+            "flow": [
+                "Risk + Complexity + Uncertainty",
+                "PhaseCount",
+                "PhaseBoundaries"
+            ],
+            "productions": [
+                {
+                    "lhs": "PhaseBoundarySelection",
+                    "rhs": "<RiskLevel> \",\" <ComplexityScore> \",\" <UncertaintyLevel> \"→\" <PhaseStructure>"
+                },
+                {"lhs": "PhaseStructure",
+                    "rhs": "<ThreePhase> | <FivePhase> | <SevenPhase>"},
+                {"lhs": "ThreePhase",
+                    "rhs": "\"Discovery\" \",\" \"Generation\" \",\" \"Verification\""},
+                {
+                    "lhs": "FivePhase",
+                    "rhs": "\"Discovery\" \",\" \"Analysis\" \",\" \"Generation\" \",\" \"Verification\" \",\" \"Finalization\""
+                },
+                {
+                    "lhs": "SevenPhase",
+                    "rhs": "\"Discovery\" \",\" \"Analysis\" \",\" \"Planning\" \",\" \"Validation\" \",\" \"Generation\" \",\" \"Verification\" \",\" \"Finalization\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification",
+                "performance_scaling",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "phase-validation-requirement",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Phase Validation Requirement",
+            "exemplar": {
+                "before": "A phase ends with no verifiable exit condition.",
+                "after": "phase → derive requirements{purpose, adapter-separation, evidence-grounding, safety} → a validation gate per phase",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For every phase boundary, generate explicit validation requirements from the phase purpose, adapter-separation needs, evidence-grounding needs, and safety constraints.",
+            "invariant": "Every phase must end with verifiable exit conditions.",
+            "flow": [
+                "PhaseSet",
+                "RequirementDerivation",
+                "ValidationGateSet"
+            ],
+            "productions": [
+                {
+                    "lhs": "PhaseValidation",
+                    "rhs": "<PhaseSet> \"→\" <ValidationRequirementSet> \"→\" <ValidationGateSet>"
+                },
+                {"lhs": "PhaseValidationGate",
+                    "rhs": "<PhaseName> \":\" <RequirementSet>"},
+                {"lhs": "RequirementSet",
+                    "rhs": "<Requirement> | <Requirement> \",\" <RequirementSet>"}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "portable-contract-composition",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Portable Contract Composition",
+            "exemplar": {
+                "before": "The agent authored directly as a runtime artifact, welded to one runtime.",
+                "after": "knowledge base + principles + phases → runtime-neutral contract{identity, purpose, domain model, capabilities, phase specs, validation strategy, constraints, outputs} = the canonical artifact",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compose identity, purpose, methodology, domain scope, characteristics, capabilities, phases, validation strategy, constraints, and required outputs into a runtime-neutral agent contract.",
+            "invariant": "The portable contract is the canonical artifact; adapter outputs are renderings.",
+            "flow": [
+                "KnowledgeBase + Principles + Phases",
+                "PortableContract"
+            ],
+            "productions": [
+                {
+                    "lhs": "PortableAgentContract",
+                    "rhs": "<Identity> \",\" <Purpose> \",\" <DomainModel> \",\" <CapabilityRequirements> \",\" <PhaseSpecifications> \",\" <ValidationStrategy> \",\" <SafetyConstraints> \",\" <OutputContract>"
+                },
+                {
+                    "lhs": "OutputContract",
+                    "rhs": "\"portable_agent_contract\" | \"invocation_contract\" | \"audit_report\" | \"final_report\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency",
+                "correctness_verification",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "validation-strategy-composition",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Validation Strategy Composition",
+            "exemplar": {
+                "before": "The artifact validated only after it is written, never during.",
+                "after": "pre{capabilities detected, history checked, knowledge available} + during{phase gates, evidence-grounded, adapter-separated} + post{schema valid, audit complete, no unsupported assumptions}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Define pre-generation, during-generation, and post-generation checks that enforce capabilities, creation history, evidence grounding, adapter separation, schema validity, and absence of unsupported assumptions.",
+            "invariant": "Generated artifacts must be validated throughout composition, not only afterward.",
+            "flow": [
+                "PreChecks",
+                "DuringChecks",
+                "PostChecks",
+                "ValidationStrategy"
+            ],
+            "productions": [
+                {
+                    "lhs": "GenerationValidationStrategy",
+                    "rhs": "<PreGenerationChecks> \",\" <DuringGenerationChecks> \",\" <PostGenerationChecks>"
+                },
+                {
+                    "lhs": "PreGenerationChecks",
+                    "rhs": "\"capabilities_detected\" \",\" \"history_checked\" \",\" \"domain_knowledge_available\""
+                },
+                {
+                    "lhs": "DuringGenerationChecks",
+                    "rhs": "\"phase_gates_enforced\" \",\" \"evidence_grounded_content\" \",\" \"adapter_separated\""
+                },
+                {
+                    "lhs": "PostGenerationChecks",
+                    "rhs": "\"schema_valid\" \",\" \"audit_complete\" \",\" \"unsupported_assumptions_absent\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "replacement-safety",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Replacement Safety",
+            "exemplar": {
+                "before": "An existing agent overwritten with no archive — the original is lost.",
+                "after": "REPLACE → require approval → archive existing → verify the archive → persist only if recoverable, else block",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "If replacing an existing artifact, require prior approval, archive existing artifacts, verify archive persistence, and block new persistence if archival cannot be confirmed.",
+            "invariant": "Destructive generation requires recoverability before mutation.",
+            "flow": [
+                "ReplaceIntent",
+                "Approval",
+                "ArchiveExisting",
+                "VerifyArchive",
+                "Persist|Block"
+            ],
+            "productions": [
+                {
+                    "lhs": "ReplacementSafety",
+                    "rhs": "<AgentOperationMode> \"→\" <ArchivePolicy> \"→\" <SafetyCheck> \"→\" <PersistenceDecision>"
+                },
+                {"lhs": "ArchivePolicy",
+                    "rhs": "\"archive_required_if_replace\" | \"archive_not_required\""},
+                {"lhs": "PersistenceDecision",
+                    "rhs": "\"safe_to_persist\" | \"blocked\""}
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "adapter-rendering",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Adapter Rendering",
+            "exemplar": {
+                "before": "The runtime artifact edited directly, diverging from the portable contract.",
+                "after": "portable contract → adapter schema → artifacts{agent spec, invocation contract, audit} → adapter may add metadata, never alter core intent",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Render the portable contract into runtime-specific agent specification, invocation contract, and audit artifacts only through adapter-defined schemas and destinations.",
+            "invariant": "Runtime-specific artifacts are projections of the portable contract, not replacements for it.",
+            "flow": [
+                "PortableContract",
+                "AdapterSchema",
+                "RenderedArtifact",
+                "Validate",
+                "Persist"
+            ],
+            "productions": [
+                {
+                    "lhs": "AdapterRendering",
+                    "rhs": "<PortableContract> \"→\" <AdapterConfig> \"→\" <ArtifactSet> \"→\" <AdapterValidation> \"→\" <Persistence>"
+                },
+                {
+                    "lhs": "ArtifactSet",
+                    "rhs": "\"agent_specification\" \",\" \"invocation_contract\" \",\" \"audit_report\""
+                },
+                {"lhs": "AdapterConstraint",
+                    "rhs": "\"adapter_may_add_metadata_but_not_alter_core_intent\""}
+            ],
+            "composes": [],
+            "force": ["contract_compatibility"]
+        },
+        {
+            "id": "audit-artifact",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Audit Artifact",
+            "exemplar": {
+                "before": "A generated agent with no provenance — no record of how or from what it was built.",
+                "after": "generation state → audit{identity, domain, mode, risk metrics, gates, evidence sources, capability profile, adapter identity, portability status}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Record agent name, domain, operation mode, runtime environment, risk, complexity, reversibility, uncertainty, phase count, validation gates, evidence sources, capability profile, adapter identity, portability status, and timestamp.",
+            "invariant": "Generated agents require an inspectable provenance trail.",
+            "flow": [
+                "GenerationState",
+                "AuditFields",
+                "AuditReport"
+            ],
+            "productions": [
+                {
+                    "lhs": "AuditReport",
+                    "rhs": "<AgentIdentity> \",\" <DomainReference> \",\" <AgentOperationMode> \",\" <RuntimeEnvironment> \",\" <RiskMetrics> \",\" <ValidationGateSet> \",\" <EvidenceSourceSet> \",\" <CapabilityProfile> \",\" <AdapterIdentity> \",\" <PortabilityStatus>"
+                }
+            ],
+            "composes": ["capability-profile"],
+            "force": [
+                "correctness_verification",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "semantic-compliance-validation",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Semantic Compliance Validation",
+            "exemplar": {
+                "before": "The in-memory plan judged compliant, but the stored artifact never re-checked.",
+                "after": "re-read persisted spec → search{semantic ops, phase markers, gates} + leakage check → compliant only if counts pass and zero runtime leakage",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Re-read the persisted agent specification, search for semantic operations, phase markers, validation gates, and runtime-specific leakage, then mark compliant only when required counts pass and leakage is absent.",
+            "invariant": "Persistence is not enough; the stored artifact must still satisfy semantic structure.",
+            "flow": [
+                "PersistedSpec",
+                "MarkerSearch",
+                "CountMetrics",
+                "LeakageCheck",
+                "ComplianceVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "SemanticCompliance",
+                    "rhs": "<PersistedArtifact> \"→\" <SemanticMarkerSet> \"→\" <MetricCheck> \"→\" <RuntimeLeakageCheck> \"→\" <ComplianceVerdict>"
+                },
+                {"lhs": "ComplianceVerdict",
+                    "rhs": "\"compliant\" | \"non_compliant\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "evidence-grounding-validation",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Evidence Grounding Validation",
+            "exemplar": {
+                "before": "The generated agent asserts architecture claims that trace to nothing.",
+                "after": "generated spec → find claims → compare against the knowledge base → grounding score → reject below threshold",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Search generated output for unsupported claims and evidence references, compare generated claims against the knowledge base, calculate grounding score, and reject artifacts below threshold.",
+            "invariant": "Generated architecture claims must trace back to evidence.",
+            "flow": [
+                "GeneratedSpec",
+                "UnsupportedClaimSearch",
+                "EvidenceReferenceCheck",
+                "GroundingScore",
+                "Accept|Reject"
+            ],
+            "productions": [
+                {
+                    "lhs": "EvidenceGrounding",
+                    "rhs": "<GeneratedArtifact> \"→\" <ClaimAnalysis> \"→\" <KnowledgeBaseComparison> \"→\" <GroundingVerdict>"
+                },
+                {
+                    "lhs": "GroundingVerdict",
+                    "rhs": "\"grounded\" | \"unsupported_claims_present\" | \"insufficient_evidence_references\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "observability_traceability",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "algorithmic-embodiment-validation",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Algorithmic Embodiment Validation",
+            "exemplar": {
+                "before": "The agent describes phase gates in prose but does not embody them.",
+                "after": "generated spec → markers{phase gates, declaration-before-use, calculated metrics, thresholds, iterative discovery} → embodied | insufficiently-embodied",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Verify that generated agents contain phase gates, declaration-before-use structure, calculated metrics, exact thresholds or comparisons, and iterative discovery patterns.",
+            "invariant": "The generated agent must embody the intended reasoning architecture, not merely describe it.",
+            "flow": [
+                "GeneratedSpec",
+                "EmbodimentMarkers",
+                "Score",
+                "Pass|Fail"
+            ],
+            "productions": [
+                {
+                    "lhs": "AlgorithmicEmbodiment",
+                    "rhs": "<GeneratedArtifact> \"→\" <EmbodimentMarkerSet> \"→\" <EmbodimentScore> \"→\" <EmbodimentVerdict>"
+                },
+                {
+                    "lhs": "EmbodimentMarkerSet",
+                    "rhs": "\"phase_gates\" \",\" \"declaration_before_use\" \",\" \"calculated_metrics\" \",\" \"thresholds\" \",\" \"iterative_discovery\""
+                },
+                {"lhs": "EmbodimentVerdict",
+                    "rhs": "\"embodied\" | \"insufficiently_embodied\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "final-generation-report",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Final Generation Report",
+            "exemplar": {
+                "before": "A report that conflates the artifact, its validation status, and its limitations.",
+                "after": "validation results + artifact refs + limitations{degraded mode, unsupported capabilities} → report distinguishing all three",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Summarize generated agent, target domain, operation mode, adapter, risk, complexity, reversibility, uncertainty, phase count, validation-gate count, compliance results, artifact references, degraded mode, and unsupported capabilities.",
+            "invariant": "The final report must distinguish generated artifacts, validation status, and limitations.",
+            "flow": [
+                "ValidationResults + ArtifactRefs + Limitations",
+                "FinalReport"
+            ],
+            "productions": [
+                {
+                    "lhs": "FinalGenerationReport",
+                    "rhs": "<GenerationSummary> \",\" <RiskSummary> \",\" <ComplianceSummary> \",\" <ArtifactReferences> \",\" <LimitationSet>"
+                },
+                {
+                    "lhs": "ComplianceSummary",
+                    "rhs": "\"semantic_operations\" \",\" \"adapter\" \",\" \"evidence_grounding\" \",\" \"algorithmic_embodiment\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "agent-generation-completion",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Agent Generation Completion",
+            "exemplar": {
+                "before": "A generated agent declared ready while its evidence-grounding failed and its algorithmic embodiment was insufficient.",
+                "after": "semantic compliance passed + evidence grounded above threshold + algorithmically embodied + audit recorded → agent_accepted; else regenerate | blocked",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Accept the generated agent as complete only when semantic-compliance, evidence-grounding above threshold, and algorithmic-embodiment all pass and the audit trail is recorded; otherwise route to regeneration or a blocked report.",
+            "invariant": "Agent generation terminates as accepted only on a full validation pass — never a claim while any compliance, grounding, or embodiment gate is unmet.",
+            "flow": [
+                "ValidationVerdicts",
+                "AuditPresence",
+                "Accept|Regenerate|Blocked"
+            ],
+            "productions": [
+                {
+                    "lhs": "AgentGenerationCompletion",
+                    "rhs": "<ValidationVerdictSet> \"→\" <AuditCheck> \"→\" <AcceptanceVerdict>"
+                },
+                {"lhs": "AcceptanceVerdict",
+                    "rhs": "\"agent_accepted\" | \"regenerate_required\" | \"blocked\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "agent-creator-kernel",
+            "principleRef": "ungrounded-content",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "evidence-before-generation"},
+                {"stage": "see",
+                    "record": "risk-complexity-reversibility"},
+                {"stage": "derive",
+                    "record": "principle-extraction"},
+                {"stage": "intent",
+                    "record": "adaptive-phase-boundary"},
+                {"stage": "constrain",
+                    "record": "creation-history-collision"},
+                {"stage": "project",
+                    "record": "phase-validation-requirement"},
+                {"stage": "act",
+                    "record": "adapter-rendering"},
+                {"stage": "verify",
+                    "record": "evidence-grounding-validation"},
+                {"stage": "commit",
+                    "record": "final-generation-report"},
+                {"stage": "terminate",
+                    "record": "agent-generation-completion"}
+            ],
+            "title": "Agent Creator Kernel",
+            "exemplar": {
+                "before": "A target domain turned straight into an agent by assumption, ungated.",
+                "after": "config → capabilities → history → cache → discover evidence → knowledge → risk analysis → principles → phases → portable contract → adapter render → validate{semantic/grounding/embodiment} → audit → report",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load configuration, detect capabilities, check creation history, validate cache, discover domain evidence, build knowledge base, analyze characteristics, extract principles, define phases, compose portable contract, render adapter artifacts, validate outputs, audit, and report.",
+            "invariant": "Agent creation is an evidence-gated compiler from target-domain structure into portable agent contracts.",
+            "flow": [
+                "Config",
+                "Capabilities",
+                "History",
+                "Cache",
+                "Discovery",
+                "Knowledge",
+                "Analysis",
+                "Principles",
+                "Phases",
+                "Contract",
+                "AdapterRender",
+                "Validate",
+                "Audit",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "AgentCreatorKernel",
+                    "rhs": "<ConfigurationLoad> \"→\" <CapabilityProfile> \"→\" <CreationCollision> \"→\" <DomainCache> \"→\" <ScopeExtraction> \"→\" <DomainInvestigation> \"→\" <DomainKnowledgeBase> \"→\" <DomainCharacteristics> \"→\" <PrincipleExtraction> \"→\" <PhaseBoundarySelection> \"→\" <PortableAgentContract> \"→\" <AdapterRendering> \"→\" <SemanticCompliance> \"→\" <EvidenceGrounding> \"→\" <AlgorithmicEmbodiment> \"→\" <AuditReport> \"→\" <FinalGenerationReport>"
+                }
+            ],
+            "composes": [
+                "capability-profile",
+                "scope-extraction",
+                "domain-knowledge-base",
+                "principle-extraction",
+                "adapter-rendering",
+                "final-generation-report",
+                "agent-generation-completion"
+            ],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "domain_boundary"
+            ]
+        },
+        {
+            "id": "agent-generation-concern",
+            "title": "<Agent Generation Concern>",
+            "intent": "<Load context> → <Detect capabilities> → <Check collisions> → <Discover domain evidence> → <Build knowledge> → <Analyze risk> → <Design phases> → <Compose portable contract> → <Render adapters> → <Validate grounding> → <Audit> → <Report>",
+            "invariant": "Any generated agent should be treated as a compiled artifact whose source is inspected domain evidence and whose target is a portable, adapter-renderable contract.",
+            "flow": [
+                "Context",
+                "Capability",
+                "History",
+                "Evidence",
+                "Knowledge",
+                "Risk",
+                "Phases",
+                "Contract",
+                "Adapter",
+                "Validation",
+                "Audit",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "AgentGenerationConcern",
+                    "rhs": "<ContextContract> \"→\" <CapabilityContract> \"→\" <CollisionPolicy> \"→\" <EvidenceModel> \"→\" <KnowledgeBase> \"→\" <PhaseDesign> \"→\" <PortableContract> \"→\" <AdapterArtifactSet> \"→\" <ValidationSet> \"→\" <AuditTrail> \"→\" <FinalReport>"
+                },
+                {
+                    "lhs": "ValidationSet",
+                    "rhs": "\"semantic_compliance\" \",\" \"adapter_compliance\" \",\" \"evidence_grounding\" \",\" \"algorithmic_embodiment\" \",\" \"runtime_specific_leakage_absent\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "model_governance",
+                "domain_boundary"
+            ],
+            "meta": true
+        }
+    ]
+}

@@ -1,0 +1,73 @@
+{
+    "label": "Secrets",
+    "summary": "The typed schema of every value the workspace keeps out of its source, and the accessors that read each value from the Cerberus vault and refuse a missing or malformed one.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "security",
+            "sub": "secrets-management"}
+    ],
+    "ecosystem": "javascript",
+    "visibility": {"private": true,
+        "hidden": false},
+    "capabilities": [
+        "declare-every-out-of-source-value-with-its-kind-and-scope",
+        "read-values-from-the-credential-vault-on-demand",
+        "refuse-a-missing-required-value",
+        "refuse-a-value-of-the-wrong-kind",
+        "type-each-accessor-by-the-keys-of-its-kind"
+    ],
+    "repoMetrics": true,
+    "docs": {
+        "overview": "`@ssot/secrets` is the one place the workspace reads a value it keeps out of its source: dev ports, the deploy host, webhook addresses, credentials and test fixture values. The values live in the Cerberus vault under the folder `banes-lab.com`, in one entry per scope (`Runtime` and `Tests`), each field labeled by its key. `configuration/schemas/environment.schema.ts` declares every key with its kind, its scope and whether it is required. An accessor lists the entry's field labels, reveals the one it needs through the `cerberus` command line, and checks the value against the kind's rule before returning it. A missing required key, a malformed value and a locked vault each stop the caller with a message that names the key and never the value.",
+        "whenToUse": [
+            "Code needs a port, a host, an address, a login user, a remote path or a credential. Declare its key in the schema and read it with `portOf`, `textOf` or `optionalTextOf`.",
+            "A test needs a value that must not appear in published source. Declare it with the `test` scope, so it lives in the `Tests` entry."
+        ],
+        "whenNotToUse": [
+            "A value that is part of the published product, such as a public site address or a route. Those stay in the members' own constants and assets.",
+            "A runtime with no `cerberus` binary on its path, such as a browser bundle. The accessors run the vault's command line and are Node-only.",
+            "A process that must start while the vault is locked. Every read fails until the vault is unlocked."
+        ],
+        "install": "`@ssot/secrets` is a private workspace package, resolved through the root `package.json` `workspaces` entry `project.secrets`. A consumer declares it as a dependency and imports from the bare specifier `@ssot/secrets`. It runs the `cerberus` binary that banes-lab.config's toolchains install, and reads only while the vault is open.",
+        "quickStart": [
+            {
+                "intent": "Read a required port, a required text value and an optional secret from the vault",
+                "lang": "js",
+                "code": "import { optionalTextOf, portOf, textOf } from \"@ssot/secrets\";\n\nconst port = portOf(\"SITE_DEV_PORT\");\nconst host = textOf(\"DEPLOY_HOST\");\nconst passphrase = optionalTextOf(\"SSH_PASSPHRASE\");"
+            }
+        ],
+        "configuration": [
+            {
+                "option": "configuration/schemas/environment.schema.ts",
+                "note": "every key with its kind (port, host, url, secret, user or path), its scope (runtime or test) and whether it is required."
+            },
+            {
+                "option": "configuration/constants/environment.constants.ts",
+                "note": "the vault folder, the entry of each scope and the rule each kind's value must meet."
+            }
+        ],
+        "disposal": [
+            "Move every consumer's reads to another store and remove its `@ssot/secrets` dependency.",
+            "Remove the `project.secrets` entry from the root `package.json` `workspaces`, its member registration and its taxonomy root.",
+            "Delete the `project.secrets` directory and its test mirror, reinstall to refresh the workspace links, then run the codebase verification gate."
+        ],
+        "apiNotes": [
+            {
+                "name": "portOf",
+                "note": "takes a required port key and returns its value as a number from 0 to 65535."
+            },
+            {"name": "textOf",
+                "note": "takes a required key of any other kind and returns its value."},
+            {
+                "name": "optionalTextOf",
+                "note": "takes a key declared not required and returns its value, or null when the entry holds no field of that label."
+            }
+        ],
+        "aiContext": [
+            "The model never reads a value. A value moves into the vault only through a script that pipes it to `cerberus field add … --secret` on standard input and compares the readback inside the script.",
+            "A key exists once, in `configuration/schemas/environment.schema.ts`. Its label in the vault is the key itself, and its variable name is the same key, so `cerberus run banes-lab.com/Runtime -- <command>` sets the same names.",
+            "An accessor's key type is derived from the schema, so a misspelled key or a port read as text fails to compile.",
+            "No accessor has a default. A missing required key throws, and an optional key returns null."
+        ]
+    }
+}

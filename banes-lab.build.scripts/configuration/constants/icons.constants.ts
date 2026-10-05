@@ -1,0 +1,11 @@
+export const ICONS_CONCERN = "icons";
+export const ICONS_SUFFIX = ".icons.ts";
+export const ICON_PREFIX = "bi-";
+export const ICON_BASE = "bi";
+export const FONT_FAMILY = "bootstrap-icons";
+export const FONT_FILE = "bootstrap-icons.woff2";
+export const SUBSET_FILE = "bootstrap-icons.generated.woff2";
+export const FONT_FORMAT = "woff2";
+export const CODEPOINTS_SPECIFIER = "bootstrap-icons/font/bootstrap-icons.json";
+export const FONT_FOLDER = "fonts/";
+export const FONT_ROUTE = "/static/font/generated/";

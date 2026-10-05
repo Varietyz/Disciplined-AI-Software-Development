@@ -1,0 +1,25 @@
+{
+    "check": {
+        "by": ["the ontology resolution gate, which requires every axis and substrate node that names a layer to resolve"],
+        "population": "every axis and substrate node that names the layer",
+        "freshness": "a verdict stands until the layer list or a record that names a layer changes",
+        "refusal": "the gate fails on an axis or substrate node that names a layer that does not exist",
+        "observation": "none: a layer is a grouping of axes, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: a suite plants an axis that names a missing layer, and the bundled references resolve",
+        "authority": "the layer list, which every axis and substrate node that names a layer cites"
+    },
+    "records": [
+        {"id": "substrate",
+            "label": "Substrate",
+            "question": "How does anything come to be?"},
+        {"id": "epistemic",
+            "label": "Epistemic",
+            "question": "How is it known?"},
+        {"id": "conative",
+            "label": "Conative",
+            "question": "What is worth doing?"},
+        {"id": "evaluative",
+            "label": "Evaluative",
+            "question": "Is it right, and is it done?"}
+    ]
+}

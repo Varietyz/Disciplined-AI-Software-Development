@@ -1,0 +1,243 @@
+{
+    "category": "domain-concerns",
+    "exampleShape": "placed-file",
+    "enforcedBy": ["the naming gate, which refuses a filename whose last segment before the extension is an undeclared tag or differs from its folder's tag"],
+    "check": {
+        "population": "every filename whose concern slot holds the tag, and the folder holding each such file",
+        "freshness": "a verdict stands until a file carrying the tag is created, moved or renamed, or the declared vocabulary changes",
+        "refusal": "the lint run fails a file whose tag is undeclared or disagrees with its folder",
+        "observation": "each filename parsed by position against the declared concern vocabulary",
+        "evidence": "fires-and-accepts: a suite lints a file whose tag is undeclared and one whose tag differs from its folder, and passes a conforming file",
+        "authority": "the declared concern vocabulary, which a filename's tag and its folder conform to"
+    },
+    "records": [
+        {
+            "name": "Model Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds a conceptual representation of what the system is about, filed in a models folder.",
+            "example": "models/order.model.ts"
+        },
+        {
+            "name": "Entity Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a domain object with an identity that persists while its attributes change, filed in an entities folder.",
+            "example": "entities/customer.entity.ts"
+        },
+        {
+            "name": "Value-Object Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a domain value compared by its contents rather than by an identity, filed in a value-objects folder.",
+            "example": "value-objects/money.value-object.ts"
+        },
+        {
+            "name": "Aggregate Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a cluster of domain objects changed together through one root, filed in an aggregates folder.",
+            "example": "aggregates/cart.aggregate.ts"
+        },
+        {
+            "name": "Invariant Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that states a property the domain must keep true across every change, filed in an invariants folder.",
+            "example": "invariants/balance.invariant.ts"
+        },
+        {
+            "name": "Rule Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds one business or governance rule as a unit, filed in a rules folder.",
+            "example": "rules/discount.rule.ts"
+        },
+        {
+            "name": "Constraint Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares a limit a domain value or operation must stay within, filed in a constraints folder.",
+            "example": "constraints/quantity.constraint.ts"
+        },
+        {
+            "name": "Domain-Event Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines something meaningful that happened in the domain, filed in a domain-events folder.",
+            "example": "domain-events/order-placed.domain-event.ts"
+        },
+        {
+            "name": "Specification Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:behavior-tag",
+                    "reason": "A specification only declares a required state or rule as data, while a behavior decides what an agent does next."
+                },
+                {
+                    "id": "lexicon:specification",
+                    "reason": "A specification is the description of required behavior, while the specification tag names the file concern that declares one as data."
+                },
+                {
+                    "id": "lexicon:template-tag",
+                    "reason": "A specification declares a rule other code evaluates, while a template declares a shape whose slots are filled."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares a required end state or a selection rule as data other code evaluates, filed in a specifications folder.",
+            "example": "specifications/overdue-invoice.specification.ts",
+            "seeAlso": ["specification"]
+        },
+        {
+            "name": "Policy Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that chooses among admissible behaviors by a stated rule, filed in a policies folder.",
+            "example": "policies/refund.policy.ts",
+            "seeAlso": ["policy"]
+        },
+        {
+            "name": "Use-Case Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that carries one interaction the system offers from its trigger to its outcome, filed in a use-cases folder.",
+            "example": "use-cases/checkout.use-case.ts",
+            "seeAlso": ["use-cases"]
+        },
+        {
+            "name": "Resource Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines an addressable piece of data the system exposes or consumes, filed in a resources folder.",
+            "example": "resources/product.resource.ts"
+        },
+        {
+            "name": "Record Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one structured entry of data with named fields, filed in a records folder.",
+            "example": "records/shipment.record.ts"
+        },
+        {
+            "name": "Payload Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines the body a message or request carries, filed in a payloads folder.",
+            "example": "payloads/signup.payload.ts"
+        },
+        {
+            "name": "Envelope Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines the wrapper carrying a payload's routing and metadata, filed in an envelopes folder.",
+            "example": "envelopes/message.envelope.ts"
+        },
+        {
+            "name": "Collection Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a grouped set of domain members and the operations over the set, filed in a collections folder.",
+            "example": "collections/playlist.collection.ts"
+        },
+        {
+            "name": "Buffer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds data temporarily between a producer and a consumer, filed in a buffers folder.",
+            "example": "buffers/audio.buffer.ts"
+        },
+        {
+            "name": "Snapshot Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that captures the state of something at one moment so it can be read or restored later, filed in a snapshots folder.",
+            "example": "snapshots/editor.snapshot.ts"
+        },
+        {
+            "name": "Checkpoint Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that records a point a long process can resume from, filed in a checkpoints folder.",
+            "example": "checkpoints/import.checkpoint.ts"
+        },
+        {
+            "name": "Event Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:events",
+                    "reason": "Events are the records of what happened, while the event tag names the file concern that defines one."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a notification of something that happened, filed in an events folder.",
+            "example": "events/payment.event.ts",
+            "seeAlso": ["events"]
+        },
+        {
+            "name": "Projection Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that derives a read model from a stream of events, filed in a projections folder.",
+            "example": "projections/sales.projection.ts"
+        },
+        {
+            "name": "Level Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one stage of a world a simulation or game advances through, filed in a levels folder.",
+            "example": "levels/forest.level.ts"
+        },
+        {
+            "name": "Wave Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one timed group of arrivals within a level, filed in a waves folder.",
+            "example": "waves/boss.wave.ts"
+        },
+        {
+            "name": "Progression Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines how a participant advances through unlocks and thresholds, filed in a progression folder.",
+            "example": "progression/player.progression.ts"
+        },
+        {
+            "name": "Quest Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one objective with its conditions and its reward, filed in a quests folder.",
+            "example": "quests/rescue.quest.ts"
+        },
+        {
+            "name": "Achievement Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a recognized milestone and the condition that grants it, filed in an achievements folder.",
+            "example": "achievements/first-win.achievement.ts"
+        },
+        {
+            "name": "Skill Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one ability a participant can train and use, filed in a skills folder.",
+            "example": "skills/archery.skill.ts"
+        },
+        {
+            "name": "Inventory Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines what a participant holds and the rules for adding and removing it, filed in an inventories folder.",
+            "example": "inventories/backpack.inventory.ts"
+        },
+        {
+            "name": "Item Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one kind of object a participant can own or use, filed in an items folder.",
+            "example": "items/sword.item.ts"
+        },
+        {
+            "name": "Pickup Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines an object placed in a world that grants something when collected, filed in a pickups folder.",
+            "example": "pickups/health.pickup.ts"
+        },
+        {
+            "name": "Drop-Table Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines the weighted outcomes a source can yield, filed in a drop-tables folder.",
+            "example": "drop-tables/goblin.drop-table.ts"
+        },
+        {
+            "name": "Shop Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines an exchange of currency for items with its stock and prices, filed in a shops folder.",
+            "example": "shops/blacksmith.shop.ts"
+        },
+        {
+            "name": "Currency Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a unit of value participants earn and spend, filed in a currencies folder.",
+            "example": "currencies/gold.currency.ts"
+        },
+        {
+            "name": "Reward Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines what a participant receives for completing something, filed in a rewards folder.",
+            "example": "rewards/daily-login.reward.ts"
+        }
+    ]
+}

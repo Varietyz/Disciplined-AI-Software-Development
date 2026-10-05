@@ -1,0 +1,77 @@
+{
+    "check": {
+        "by": ["the ontology resolution gate, which requires every node, loop stage and grammar ground that names an axis to resolve"],
+        "population": "every reasoning node, loop stage and algorithm record that names the axis",
+        "freshness": "a verdict stands until the axis list or a record that names an axis changes",
+        "refusal": "the gate fails on a node, stage or ground that names an axis that does not exist",
+        "observation": "none: an axis is a category of question, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: a suite plants a node whose axis does not exist and a staged record whose axis is not its stage's axis, and the bundled records validate clean",
+        "authority": "the axis list, which every node, stage and ground that names an axis cites"
+    },
+    "records": [
+        {
+            "id": "ontology",
+            "layer": "epistemic",
+            "question": "What is it?",
+            "mandatory": "when-relevant",
+            "primaryMathType": "set-theory",
+            "selectable": true
+        },
+        {
+            "id": "analysis",
+            "layer": "epistemic",
+            "question": "How is it to be seen?",
+            "mandatory": "when-relevant",
+            "primaryMathType": "graph",
+            "selectable": true
+        },
+        {
+            "id": "reasoning",
+            "layer": "epistemic",
+            "question": "Why, and what follows?",
+            "mandatory": "when-relevant",
+            "primaryMathType": "logic",
+            "selectable": true
+        },
+        {
+            "id": "representation",
+            "layer": "epistemic",
+            "question": "How is it encoded?",
+            "mandatory": "when-relevant",
+            "primaryMathType": "information-theory",
+            "selectable": true
+        },
+        {
+            "id": "formalization",
+            "layer": "epistemic",
+            "question": "What does it resolve to?",
+            "mandatory": "when-relevant",
+            "primaryMathType": "computation",
+            "selectable": true
+        },
+        {
+            "id": "teleology",
+            "layer": "conative",
+            "question": "What is it for?",
+            "mandatory": "always",
+            "primaryMathType": "optimization",
+            "selectable": false
+        },
+        {
+            "id": "verification",
+            "layer": "evaluative",
+            "question": "Is it real?",
+            "mandatory": "always",
+            "primaryMathType": "logic",
+            "selectable": false
+        },
+        {
+            "id": "termination",
+            "layer": "evaluative",
+            "question": "Is it done?",
+            "mandatory": "always",
+            "primaryMathType": "set-theory",
+            "selectable": false
+        }
+    ]
+}

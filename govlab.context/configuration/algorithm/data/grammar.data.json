@@ -1,0 +1,552 @@
+{
+    "category": "pag",
+    "tier": "process",
+    "check": {
+        "by": ["the structured-document validator, whose defect set is the grammar's failure taxonomy"],
+        "population": "every agent and template document written in the grammar",
+        "freshness": "a verdict stands until a document or the grammar changes",
+        "refusal": "the validation stage fails on any defect code",
+        "observation": "none: a document is verified before any run",
+        "evidence": "fires-and-accepts: a suite plants each defect code in a node-form document and validates a well-formed document clean",
+        "authority": "the grammar, which every document conforms to"
+    },
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, licensed CC BY-SA 4.0. Incorporated into GovLab with the author's explicit permission; Bane's Lab retains copyright and this attribution must be preserved in this module and any derivative or implementing package (e.g. @govlab/pag-grammar).",
+    "records": [
+        {
+            "id": "pag-document-declaration",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "PAG Document Declaration",
+            "exemplar": {
+                "before": "A document instructs with no declared type — its semantic contract, its authority and its jurisdiction are implicit.",
+                "after": "frontmatter → THIS {AGENT|WORKFLOW|CHECKLIST} {IS|EXECUTES|ENFORCES} description → META block{objective, priority, trust, jurisdiction, recursion_limit} → declared contract",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Bind a document to a declared type and its default verb (THIS <TYPE> <VERB> <description>) after the YAML frontmatter and before any node, then declare in the meta block what the document is for, which sources ground which, what it trusts, what it may touch and what it declares outside itself, and how far repair may recurse.",
+            "invariant": "A PAG document announces what kind of instruction it is, and what it may touch, before it instructs.",
+            "flow": [
+                "Frontmatter",
+                "TypeDeclaration",
+                "DefaultVerb",
+                "MetaBlock",
+                "Jurisdiction",
+                "DeclaredContract"
+            ],
+            "productions": [
+                {
+                    "lhs": "PagDocumentDeclaration",
+                    "rhs": "<Frontmatter> \"→\" <TypeDeclaration> \"→\" <MetaBlock> \"→\" <DeclaredContract>"
+                },
+                {
+                    "lhs": "PagDocumentType",
+                    "rhs": "\"AGENT\" | \"WORKFLOW\" | \"PROTOCOL\" | \"POLICY\" | \"CHECKLIST\" | \"TEMPLATE\" | \"TASK\" | \"INSTRUCTION\" | \"PROMPT\" | \"COMMAND\" | \"TEST\" | \"DEBUG\" | \"VERIFICATION\" | \"DISTILLATION\" | \"AUDIT\" | \"TRANSLATION\" | \"COMPOSITION\""
+                },
+                {
+                    "lhs": "PagDocumentVerb",
+                    "rhs": "\"IS\" | \"ENFORCES\" | \"EXECUTES\" | \"PERFORMS\" | \"PROVIDES\" | \"IMPLEMENTS\" | \"DEFINES\" | \"MANAGES\" | \"COORDINATES\" | \"HAS\" | \"GENERATES\" | \"RESOLVES\" | \"FINDS\" | \"FIXES\" | \"VERIFIES\" | \"CLASSIFIES\" | \"DISTILLS\" | \"ABSTRACTS\" | \"ELIMINATES\" | \"AUDITS\" | \"MEASURES\" | \"SCORES\" | \"CORRECTS\" | \"RENDERS\" | \"COMPOSES\" | \"FOLDS\""
+                },
+                {
+                    "lhs": "PagMetaField",
+                    "rhs": "\"objective\" | \"priority\" | \"trust\" | \"jurisdiction\" | \"recursion_limit\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "contract_compatibility",
+                "metaprogramming_modeling"
+            ]
+        },
+        {
+            "id": "pag-keyword-ontology",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "PAG Keyword Ontology",
+            "exemplar": {
+                "before": "'Get the data and check it' — prose the model must interpret.",
+                "after": "prose intent → uppercase token{READ_RESOURCE|ANALYZE_CONTENT|VALIDATE_ARTIFACT} + preposition{FROM|INTO|AGAINST} → structured directive, low interpretive variance",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Draw every operative token from a fixed, uppercase, code-frequent vocabulary partitioned into semantic categories, each token grounded to a record in the reasoning ontology, and bind targets to sources through explicit prepositions, so the model completes recognized structured patterns rather than interpreting prose.",
+            "invariant": "Explicit high-frequency uppercase tokens, each grounded to a reasoning record, reduce interpretive variance; prose does not.",
+            "flow": [
+                "ProseIntent",
+                "KeywordCategory",
+                "UppercaseToken",
+                "ReasoningGround",
+                "PrepositionBinding",
+                "StructuredDirective"
+            ],
+            "productions": [
+                {
+                    "lhs": "PagKeywordOntology",
+                    "rhs": "<KeywordCategory> \"→\" <KeywordToken> \"→\" <ReasoningGround> \"→\" <PrepositionBinding> \"→\" <StructuredDirective>"
+                },
+                {
+                    "lhs": "PagKeywordCategory",
+                    "rhs": "\"semantic_operation\" | \"node\" | \"action\" | \"control_flow\" | \"declaration\" | \"modifier\" | \"coordination\" | \"state_machine\" | \"dag\" | \"priority_queue\" | \"flowchart\" | \"document_type\" | \"document_verb\" | \"meta\" | \"validation\" | \"report\" | \"invariant\" | \"contextual\""
+                },
+                {
+                    "lhs": "PagPreposition",
+                    "rhs": "\"FROM\" | \"TO\" | \"INTO\" | \"WITH\" | \"USING\" | \"AGAINST\" | \"IN\" | \"AS\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "metaprogramming_modeling",
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "pag-node-decomposition",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "PAG Node Decomposition",
+            "exemplar": {
+                "before": "Directives poured in one flat block, forward-referencing later work, with no statement of what each block decides or what shape its decision takes.",
+                "after": "directives → nodes{# NODE n — NAME [layer · axis · math type · yields: shape], @genesis, CONTRACT input/transform/output, one gate} → a node reads only the prior node's output → explicit data flow",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Group directives into nodes, each one decision on one reasoning axis, headed by its layer, axis, math type and the shape its decision yields, tagged with the substrate stage its artifact comes to be at, and contracted so that its input names the prior node's output or a declared slot, its transform is stated in semantic operations, and its output is the one record the next node reads.",
+            "invariant": "Each node is one bounded decision whose data flow from the prior node is declared by identity, never inferred from a name.",
+            "flow": [
+                "DirectiveSet",
+                "NodeHeader",
+                "GenesisStage",
+                "Contract",
+                "DeclaredInput",
+                "NodeOutput"
+            ],
+            "productions": [
+                {"lhs": "PagNodeDecomposition",
+                    "rhs": "<DirectiveSet> \"→\" <NodeSet> \"→\" <DataFlowGraph>"},
+                {
+                    "lhs": "PagNodeHeader",
+                    "rhs": "\"#\" \"NODE\" <NodeNumber> \"—\" <NodeTitle> \"[\" <Layer> \"·\" <Axis> \"·\" <MathType> \"·\" \"yields:\" <Shape> \"]\""
+                },
+                {
+                    "lhs": "PagNodeContract",
+                    "rhs": "\"CONTRACT:\" \"input:\" <PriorOutputOrSlot> \"transform:\" <SemanticOperations> \"output:\" <NodeOutput> <OptionalFreshness>"
+                },
+                {
+                    "lhs": "PagScopeRule",
+                    "rhs": "\"declare_before_use\" \",\" \"document_wide_scope\" \",\" \"prior_output_only\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "domain_boundary",
+                "contract_compatibility"
+            ]
+        },
+        {
+            "id": "pag-validation-gate",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": [
+                "reasoning:ver-evidence",
+                "reasoning:ver-population",
+                "reasoning:ver-refusal",
+                "reasoning:ver-standing",
+                "reasoning:ter-block"
+            ],
+            "title": "PAG Handoff Gate",
+            "exemplar": {
+                "before": "A node ends with 'looks good' — a vague assertion with no evidence, no population, no refusal, and only two verdicts.",
+                "after": "node output → 3-5 checks{[check] claim (evidence: what settles it) over: set measured: n / N} + refuse: condition before write + standing: moved-set + result: pass → next | failure → REPAIR (owner) | unknown → BLOCKED",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Close every node with a handoff gate of three-to-five checks, each a claim about the output with the evidence that settles it and the population it was measured over, a refusal condition named before any irreversible write, the standing of the read set beside the verdict, and a result line that routes pass to the next node, each failure to the earliest node that owns its repair, and unknown to blocked.",
+            "invariant": "A node boundary is trusted only when its checks carry evidence and a population, its writes are refused before they land, and its unknown is routed; unknown is not pass.",
+            "flow": [
+                "NodeOutput",
+                "CheckWithEvidence",
+                "Population",
+                "Refusal",
+                "Standing",
+                "ThreeVerdicts",
+                "ResultLine"
+            ],
+            "productions": [
+                {
+                    "lhs": "PagHandoffGate",
+                    "rhs": "<NodeOutput> \"→\" <CheckLineSet> \"→\" <OptionalRefusal> \"→\" <OptionalStanding> \"→\" <ResultLine>"
+                },
+                {
+                    "lhs": "PagCheckLine",
+                    "rhs": "\"[check]\" <Claim> \"(evidence:\" <Evidence> \")\" \"over:\" <Set> \"measured:\" <Count> \"/\" <Count>"
+                },
+                {"lhs": "PagVerdict",
+                    "rhs": "\"pass\" | \"fail\" | \"unknown\""},
+                {
+                    "lhs": "PagResultLine",
+                    "rhs": "\"result:\" \"pass\" \"→\" <NextNode> \"|\" <Failure> \"→\" \"REPAIR\" \"(owner:\" <Node> \")\" \"|\" \"unknown\" \"→\" \"BLOCKED\""
+                },
+                {
+                    "lhs": "PagGateConstraint",
+                    "rhs": "\"evidence_per_check\" \",\" \"population_declared\" \",\" \"three_to_five_checks\" \",\" \"refusal_before_write\" \",\" \"unknown_routed\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "model_governance",
+                "modularity"
+            ]
+        },
+        {
+            "id": "pag-explicit-control-flow",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "PAG Explicit Control Flow",
+            "exemplar": {
+                "before": "Branching and iteration inferred from prose order; a bare FOR, a missing colon.",
+                "after": "IF/ELSE IF/ELSE + FOR EACH x IN collection + TRY/CATCH → every conditional colon-terminated, complete branch directives",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Express branching with IF / ELSE IF / ELSE, iteration with FOR EACH over a collection (never a bare FOR), and failure handling with TRY / CATCH, every conditional colon-terminated and every branch a complete directive sequence.",
+            "invariant": "Control flow is explicit and colon-delimited so the model does not infer structure from prose sequence.",
+            "flow": [
+                "Condition",
+                "BranchSet",
+                "IterationForm",
+                "FailureForm",
+                "DeterministicPath"
+            ],
+            "productions": [
+                {"lhs": "PagControlFlow",
+                    "rhs": "<Conditional> | <Iteration> | <FailureHandling>"},
+                {
+                    "lhs": "PagIteration",
+                    "rhs": "\"FOR\" \"EACH\" <Iterator> \"IN\" <Collection> \":\" <DirectiveSet>"
+                },
+                {
+                    "lhs": "PagControlConstraint",
+                    "rhs": "\"colon_terminated\" \",\" \"for_each_not_for\" \",\" \"complete_branch_directives\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "pag-constraint-boundary",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "PAG Invariant Record",
+            "exemplar": {
+                "before": "Behavioral rules as a bullet list under ALWAYS and NEVER — no set the rule ranges over, no party it binds, nothing that would disagree if it stopped holding.",
+                "after": "INVARIANT name: property over: set binds: parties objector: check | none → each invariant stated in a form that could be false, with what watches it",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "State every behavioral invariant as a record with four slots: the property in a form that could be false, the set it quantifies over, the parties it binds, and the objector, the check that would disagree if the property stopped holding or none as declared debt, so an unwatched invariant is visible rather than assumed.",
+            "invariant": "An invariant is stated with its property, its set, its parties and its objector, or it is indistinguishable from a property a reader happened to infer.",
+            "flow": [
+                "BehaviorPolicy",
+                "Property",
+                "Set",
+                "Parties",
+                "Objector",
+                "InvariantRecord"
+            ],
+            "productions": [
+                {"lhs": "PagInvariantBlock",
+                    "rhs": "\"#\" \"CROSS-NODE\" \"INVARIANTS\" <InvariantRecord>+"},
+                {
+                    "lhs": "PagInvariantRecord",
+                    "rhs": "\"INVARIANT\" <Name> \":\" <Property> \"over:\" <Set> \"binds:\" <Parties> \"objector:\" (<CheckRef> | \"none\")"
+                },
+                {
+                    "lhs": "PagInvariantQuality",
+                    "rhs": "\"falsifiable\" \",\" \"quantified\" \",\" \"delivered\" \",\" \"watched\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "security_governance",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "pag-tool-invocation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "PAG Semantic Operation",
+            "exemplar": {
+                "before": "An external effect described in prose, or named by one host's tool, so the document runs in one place only.",
+                "after": "semantic operation{READ_RESOURCE|PERSIST_ARTIFACT|EXECUTE_TOOL|REQUEST_DECISION} + WITH/USING params + INTO/→ result → a named effect the adapter binds to a host's tool",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Name every external effect as one of the semantic operations (discover, read, search, analyze, extract, calculate, compose, validate, persist, execute, request a decision, report) with a uniform WITH / USING parameter clause and an INTO / arrow result binding, so the document names what it does and an adapter binding resolves how, and no host's tool name enters the document.",
+            "invariant": "Every external effect is a semantic operation with explicit parameters and an explicit result binding, and the host's tools are the adapter's data.",
+            "flow": [
+                "SemanticOperation",
+                "OperationTarget",
+                "ParameterClause",
+                "ResultBinding",
+                "AdapterBinding"
+            ],
+            "productions": [
+                {
+                    "lhs": "PagToolInvocation",
+                    "rhs": "<SemanticOperation> <OperationTarget> <OptionalParamClause> <OptionalResultClause>"
+                },
+                {
+                    "lhs": "PagSemanticOperation",
+                    "rhs": "\"DISCOVER_RESOURCES\" | \"READ_RESOURCE\" | \"SEARCH_CONTENT\" | \"ANALYZE_CONTENT\" | \"EXTRACT_FACTS\" | \"CALCULATE_METRIC\" | \"COMPOSE_ARTIFACT\" | \"VALIDATE_ARTIFACT\" | \"PERSIST_ARTIFACT\" | \"EXECUTE_TOOL\" | \"REQUEST_DECISION\" | \"REPORT_RESULT\""
+                },
+                {"lhs": "PagResultBinding",
+                    "rhs": "\"INTO\" <Identifier> | \"→\" <Identifier> | \"AS\" <Identifier>"}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "pag-coordination-construct",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "PAG Structure Declaration",
+            "exemplar": {
+                "before": "Concurrency, ordering, lifetimes and ownership implied by the order sentences appear in.",
+                "after": "a declared structure → DAG{dependency graph} | STATE_MACHINE{lifetime, derived states} | PRIORITY_QUEUE{ranking} | FLOWCHART{rendered projection} | SURFACE{RECORD, ITEM, typed edges, WAIT} → the structure is explicit and a check can read it",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Make a document's structure explicit with the declaration that names it: a DAG for a dependency graph, a STATE_MACHINE for a lifetime or a set of derived states, a PRIORITY_QUEUE for a ranking, a FLOWCHART for the rendered projection of a declared structure, and for a shared surface the coordination model's SURFACE, RECORD and ITEM with their typed edges, derived states and the one post-and-wait operation, so ordering, ownership and state are declared as structure rather than narrated as prose.",
+            "invariant": "Ordering, ownership and state are declared through explicit structure constructs a check can read, never implied by textual order.",
+            "flow": [
+                "StructureNeed",
+                "StructureDeclaration",
+                "DeclaredEdges",
+                "DerivedState",
+                "ReadableStructure"
+            ],
+            "productions": [
+                {"lhs": "PagStructure",
+                    "rhs": "<Dag> | <StateMachine> | <PriorityQueue> | <Flowchart> | <Surface>"},
+                {
+                    "lhs": "PagStructureForm",
+                    "rhs": "\"DAG\" | \"STATE_MACHINE\" | \"PRIORITY_QUEUE\" | \"FLOWCHART\" | \"SURFACE\""
+                },
+                {
+                    "lhs": "PagSurface",
+                    "rhs": "\"SURFACE\" <SurfaceKey> \":\" (\"RECORD\" <RecordId> \"subject:\" <SubjectKey> <EdgeClause>*)+"
+                },
+                {
+                    "lhs": "PagEdgeKind",
+                    "rhs": "\"PARENT\" | \"SATISFIED_BY\" | \"BLOCKS\" | \"ANSWERS\" | \"REFUTES\" | \"SUPERSEDES\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "control_coordination",
+                "event_messaging",
+                "causality_ordering"
+            ]
+        },
+        {
+            "id": "pag-ambiguity-reduction",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "PAG Ambiguity Reduction",
+            "exemplar": {
+                "before": "Prose intent claimed to guarantee deterministic model output.",
+                "after": "prose → structured tokens → reduced interpretation load; input-shaping only, output stays probabilistic (less variance, never deterministic)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Replace interpretive prose with explicit structured tokens so the model completes recognized patterns, while accepting that output stays probabilistic: the grammar reduces input ambiguity, it does not constrain output tokens or guarantee determinism.",
+            "invariant": "PAG shapes the input toward consistent completion and does not always apply; it reduces the variance of the output without making it deterministic.",
+            "flow": [
+                "ProseAmbiguity",
+                "TokenStructure",
+                "PatternRecognition",
+                "ReducedVariance"
+            ],
+            "productions": [
+                {
+                    "lhs": "PagAmbiguityReduction",
+                    "rhs": "<ProseIntent> \"→\" <StructuredPattern> \"→\" <ReducedInterpretationLoad>"
+                },
+                {
+                    "lhs": "PagApplicabilityBound",
+                    "rhs": "\"input_shaping_only\" \",\" \"probabilistic_output\" \",\" \"not_always_applicable\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "pag-authoring-kernel",
+            "principleRef": "explicit-contracts",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "pag-document-declaration"},
+                {"stage": "see",
+                    "record": "pag-keyword-ontology"},
+                {"stage": "project",
+                    "record": "pag-node-decomposition"},
+                {"stage": "constrain",
+                    "record": "pag-constraint-boundary"},
+                {"stage": "act",
+                    "record": "pag-tool-invocation"},
+                {"stage": "verify",
+                    "record": "pag-validation-gate"},
+                {"stage": "terminate",
+                    "record": "pag-well-formedness-validation"}
+            ],
+            "title": "PAG Authoring Kernel",
+            "exemplar": {
+                "before": "An instruction written as prose, ungated, untyped and unwatched.",
+                "after": "frontmatter + typed declaration → meta block with jurisdiction → nodes each headed, contracted and closed by a handoff gate → directives{semantic operations, control flow, structure declarations} → INVARIANT records → REPORT",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compose a PAG document as frontmatter and typed declaration, then a meta block with jurisdiction, then nodes each headed by its layer, axis, math type and yields, contracted to read the prior node's output, and closed by a handoff gate with evidence, population, refusal and the three verdicts, drawing directives from the semantic operations, control flow and structure declarations, and closing with invariant records and a report.",
+            "invariant": "A well-formed PAG document is a node-gated, keyword-typed, invariant-bounded instruction contract whose every verdict carries its population.",
+            "flow": [
+                "Declaration",
+                "MetaBlock",
+                "Nodes",
+                "Gates",
+                "Directives",
+                "Invariant",
+                "Report",
+                "PagDocument"
+            ],
+            "productions": [
+                {
+                    "lhs": "PagAuthoringKernel",
+                    "rhs": "<PagDocumentDeclaration> \"→\" <PagKeywordOntology> \"→\" <PagNodeDecomposition> \"→\" <PagHandoffGate> \"→\" <PagControlFlow> \"→\" <PagToolInvocation> \"→\" <PagStructure> \"→\" <PagInvariantBlock>"
+                }
+            ],
+            "composes": [
+                "pag-document-declaration",
+                "pag-keyword-ontology",
+                "pag-node-decomposition",
+                "pag-validation-gate",
+                "pag-explicit-control-flow",
+                "pag-tool-invocation",
+                "pag-coordination-construct",
+                "pag-constraint-boundary"
+            ],
+            "force": [
+                "metaprogramming_modeling",
+                "model_governance",
+                "contract_compatibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "pag-well-formedness-validation",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "PAG Well-Formedness Validation",
+            "exemplar": {
+                "before": "A PAG document trusted because it reads fluently.",
+                "after": "document → defect scan{retired unit head, node without gate, check without evidence, gate without population, empty population, unknown unrouted, write without refusal, artifact without freshness, node declared twice, input without source, invariant without set/parties/objector, bare invariant block, lowercase keyword, for without each, missing colon, vague condition} → well-formed | ill-formed",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Scan a PAG document for structural and epistemic defects, each named for the shape it catches — a retired unit head, a node without a gate, a check without evidence, a gate without a population or with an empty one, an unknown left unrouted, a write without a refusal, an artifact without freshness, a node declared twice, an input naming no source, an invariant missing its set, parties or objector, a bare invariant block, a lowercase keyword, a bare FOR, a missing colon, a vague condition — and emit a token-based, regex-free verdict.",
+            "invariant": "A PAG document is trusted only after a deterministic well-formedness scan whose defect set is the epistemology's failure taxonomy, never because it reads fluently.",
+            "flow": [
+                "PagDocument",
+                "DefectScan",
+                "DefectSet",
+                "WellFormednessVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "PagWellFormedness",
+                    "rhs": "<PagDocument> \"→\" <DefectScanSet> \"→\" <WellFormednessVerdict>"
+                },
+                {
+                    "lhs": "PagDefect",
+                    "rhs": "\"retired_unit_head\" | \"node_without_gate\" | \"node_tag_malformed\" | \"node_declared_twice\" | \"input_without_source\" | \"check_without_evidence\" | \"gate_without_population\" | \"empty_population\" | \"result_missing\" | \"unknown_unrouted\" | \"write_without_refusal\" | \"artifact_without_freshness\" | \"invariant_without_set\" | \"invariant_without_parties\" | \"invariant_without_objector\" | \"bare_invariant_block\" | \"gate_too_few_conditions\" | \"gate_too_many_conditions\" | \"vague_condition\" | \"for_without_each\" | \"lowercase_keyword\" | \"missing_colon\" | \"no_declaration\""
+                },
+                {"lhs": "PagWellFormednessVerdict",
+                    "rhs": "\"well_formed\" | \"ill_formed\""}
+            ],
+            "composes": [
+                "pag-validation-gate",
+                "pag-explicit-control-flow"
+            ],
+            "force": [
+                "correctness_verification",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "pag-instruction-concern",
+            "title": "<PAG Instruction Concern>",
+            "intent": "<Declare document type and jurisdiction> → <Draw grounded uppercase directives> → <Decompose into headed, contracted, gated nodes> → <Bind semantic operations and structure declarations> → <Bound with invariant records> → <Validate well-formedness against the failure taxonomy>",
+            "invariant": "Any PAG artifact should be treated as a structured instruction contract whose tokens are drawn from a fixed ontology grounded in the reasoning collection, whose nodes are closed by evidence-bearing gates that carry their population and route unknown to blocked, and whose invariants name their objector, reducing interpretive ambiguity without guaranteeing deterministic output.",
+            "flow": [
+                "DocumentType",
+                "Keywords",
+                "Nodes",
+                "Gates",
+                "OperationsAndStructure",
+                "Invariant",
+                "WellFormedness"
+            ],
+            "productions": [
+                {
+                    "lhs": "PagInstructionConcern",
+                    "rhs": "<PagDocumentDeclaration> \"→\" <PagKeywordOntology> \"→\" <PagNodeDecomposition> \"→\" <PagHandoffGate> \"→\" <PagToolInvocation> \"→\" <PagStructure> \"→\" <PagInvariantBlock> \"→\" <PagWellFormedness>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "metaprogramming_modeling",
+                "model_governance",
+                "semantic_consistency",
+                "correctness_verification"
+            ],
+            "meta": true
+        }
+    ]
+}

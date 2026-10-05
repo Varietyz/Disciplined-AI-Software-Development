@@ -1,0 +1,334 @@
+{
+    "category": "Plugin / Extensibility / IoC",
+    "check": {
+        "population": "every extension point, plugin, registration and dependency construction site",
+        "freshness": "a verdict stands until a plugin, a registration or the composition root changes",
+        "refusal": "the dependency rule, plugin contract test or banned-API rule fails a change that hardcodes an extension or hides a dependency",
+        "observation": "imports from the core to plugins, construction sites and registry contents, read from source and at startup",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the extension contract, which every plugin conforms to while the core names no plugin"
+    },
+    "records": [
+        {
+            "id": "plugin-architecture",
+            "name": "Plugin Architecture",
+            "definition": "A convention of building a small core that discovers and loads plugins through declared extension points.",
+            "type": "style",
+            "scope": [
+                "component",
+                "runtime",
+                "system"
+            ],
+            "requires": [
+                "Extension Points",
+                "Stable Interfaces",
+                "Discovery"
+            ],
+            "reinforces": [
+                "OCP",
+                "Modularity"
+            ],
+            "enables": ["Runtime Extensibility"],
+            "conflicts_with": ["Hardcoded Extensions"],
+            "tensions_with": [
+                "Static Analysis",
+                "Security"
+            ],
+            "violated_by": ["lexicon:hardcoded-extensions"],
+            "detected_by": [
+                "direct plugin imports",
+                "central switch for plugins"
+            ],
+            "measured_by": ["plugin isolation score"],
+            "refactored_by": [
+                "architecture:extension-points",
+                "architecture:registry-pattern"
+            ],
+            "enforced_by": [
+                "plugin contract tests",
+                "dependency rules"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "class FooApp {\n  run() { new FooExport().run(); new BarExport().run(); }\n}",
+                "after": "interface FooPlugin { name: string; setup(app: FooApp): void; }\nclass FooApp {\n  constructor(private readonly plugins: readonly FooPlugin[]) {}\n  run() { this.plugins.forEach(plugin => plugin.setup(this)); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "extension-points",
+            "name": "Extension Points",
+            "definition": "A mechanism that exposes named hooks or interfaces where new behavior can be added without editing the core.",
+            "type": "mechanism",
+            "scope": [
+                "framework",
+                "plugin",
+                "module"
+            ],
+            "requires": [
+                "Stable Interfaces",
+                "Contracts"
+            ],
+            "reinforces": [
+                "OCP",
+                "Plugin Architecture"
+            ],
+            "enables": ["Third-Party Extension"],
+            "conflicts_with": ["Closed Core"],
+            "tensions_with": ["API Surface Growth"],
+            "violated_by": ["lexicon:closed-core"],
+            "detected_by": ["repeated core edits for variants"],
+            "measured_by": ["extension coverage"],
+            "refactored_by": ["lexicon:extract-interface"],
+            "enforced_by": [
+                "extension tests",
+                "API review"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function saveFoo(foo: Foo) {\n  validateFoo(foo);\n  fooStore.save(foo);\n  sendFooEmail(foo);\n}",
+                "after": "type FooHooks = { beforeSave: Array<(foo: Foo) => void>; afterSave: Array<(foo: Foo) => void> };\nfunction saveFoo(foo: Foo, hooks: FooHooks) {\n  hooks.beforeSave.forEach(hook => hook(foo));\n  fooStore.save(foo);\n  hooks.afterSave.forEach(hook => hook(foo));\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "inversion-of-control",
+            "name": "Inversion of Control (IoC)",
+            "definition": "A design rule that a framework or composition root owns object creation and control flow, and application code supplies the parts it calls.",
+            "type": "principle",
+            "scope": [
+                "framework",
+                "runtime",
+                "component"
+            ],
+            "requires": [
+                "Abstraction",
+                "Composition Root"
+            ],
+            "reinforces": [
+                "DIP",
+                "Dependency Injection"
+            ],
+            "enables": [
+                "Framework Control Flow",
+                "Plugins"
+            ],
+            "conflicts_with": ["Direct Control Ownership"],
+            "tensions_with": ["Traceability"],
+            "violated_by": ["lexicon:direct-control-ownership"],
+            "detected_by": ["scattered object lifecycle construction"],
+            "measured_by": ["composition centralization"],
+            "refactored_by": [
+                "architecture:dependency-injection",
+                "lexicon:composition-root"
+            ],
+            "enforced_by": ["lifecycle rules"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooJob {\n  run() {\n    const store = new SqlFooStore();\n    return store.save(makeFoo());\n  }\n}",
+                "after": "class FooJob {\n  constructor(private readonly make: () => Foo, private readonly store: FooStore) {}\n  run() { return this.store.save(this.make()); }\n}\ncontainer.run(FooJob);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "dependency-injection",
+            "distinctFrom": [
+                {
+                    "id": "architecture:adapter-pattern",
+                    "reason": "Dependency injection supplies a dependency from outside, while an adapter makes an incompatible interface fit the one expected."
+                },
+                {
+                    "id": "lexicon:composition-root",
+                    "reason": "Dependency injection is passing dependencies in, while the composition root is the one place where they are wired."
+                },
+                {
+                    "id": "architecture:ports-and-adapters-architecture",
+                    "reason": "Dependency injection is how one object receives its dependencies, while ports and adapters is how a whole core is isolated from its technologies."
+                },
+                {
+                    "id": "architecture:singleton-pattern",
+                    "reason": "Dependency injection passes a dependency in, while a singleton is reached through a global access point."
+                }
+            ],
+            "name": "Dependency Injection",
+            "aliases": ["DI"],
+            "definition": "A design pattern that passes an object its dependencies from outside, usually through its constructor.",
+            "type": "pattern",
+            "scope": [
+                "class",
+                "module",
+                "component"
+            ],
+            "requires": [
+                "Abstraction",
+                "Composition Root"
+            ],
+            "reinforces": [
+                "DIP",
+                "Testability"
+            ],
+            "enables": [
+                "Mocking",
+                "Replaceability"
+            ],
+            "conflicts_with": [
+                "Hardcoded Instantiation",
+                "Ambient Context"
+            ],
+            "tensions_with": ["Constructor Complexity"],
+            "violated_by": ["lexicon:hardcoded-instantiation"],
+            "detected_by": ["direct construction of external dependencies"],
+            "measured_by": ["injected dependency ratio"],
+            "refactored_by": ["architecture:factory-pattern"],
+            "enforced_by": [
+                "lint rules",
+                "dependency review"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooService {\n  private readonly clock = new SystemClock();\n  private readonly store = new SqlFooStore();\n}",
+                "after": "class FooService {\n  constructor(private readonly clock: Clock, private readonly store: FooStore) {}\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "service-registry",
+            "distinctFrom": [
+                {
+                    "id": "architecture:health-checks",
+                    "reason": "A service registry resolves a key to a registered service, while health checks report whether an instance is ready to serve."
+                }
+            ],
+            "name": "Service Registry",
+            "definition": "A mechanism where services or plugins register under a key and are resolved by that key at runtime.",
+            "type": "mechanism",
+            "scope": [
+                "runtime",
+                "service",
+                "plugin"
+            ],
+            "requires": ["Registration Protocol"],
+            "reinforces": [
+                "Discovery",
+                "Runtime Binding"
+            ],
+            "enables": ["Dynamic Resolution"],
+            "conflicts_with": ["Hardcoded Lookup"],
+            "tensions_with": ["Registry Availability"],
+            "violated_by": ["lexicon:hardcoded-lookup"],
+            "detected_by": ["static lookup tables"],
+            "measured_by": ["registry coverage"],
+            "refactored_by": ["architecture:service-discovery"],
+            "enforced_by": [
+                "startup checks",
+                "health checks"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const fooService = new FooService(new SqlFooStore());\nconst barService = new BarService(new SqlBarStore());",
+                "after": "const services = new ServiceRegistry();\nservices.register(\"FooStore\", () => new SqlFooStore());\nservices.register(\"FooService\", r => new FooService(r.resolve(\"FooStore\")));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "registry-pattern",
+            "distinctFrom": [
+                {
+                    "id": "architecture:factory-pattern",
+                    "reason": "A registry replaces a conditional over kinds with a keyed table, while a factory owns how one object and its defaults are built."
+                }
+            ],
+            "name": "Registry Pattern",
+            "definition": "A design pattern that replaces a conditional over kinds with a keyed table that each kind registers itself into.",
+            "type": "pattern",
+            "scope": [
+                "runtime",
+                "module",
+                "plugin"
+            ],
+            "requires": ["Keyed Registration"],
+            "reinforces": [
+                "Discovery",
+                "Factory Pattern"
+            ],
+            "enables": ["Dynamic Lookup"],
+            "conflicts_with": ["Direct Reference"],
+            "tensions_with": ["Global State"],
+            "violated_by": ["lexicon:ungoverned-global-registry"],
+            "detected_by": ["mutable global maps without lifecycle"],
+            "measured_by": ["registry consistency"],
+            "refactored_by": ["lexicon:narrow-type"],
+            "enforced_by": ["registry validation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function makeFoo(kind: string) {\n  if (kind === \"foo\") return new Foo1();\n  if (kind === \"bar\") return new Bar();\n  throw new Error(\"unknown kind\");\n}",
+                "after": "type FooFactory = () => Foo;\nconst registry = new Map<string, FooFactory>();\nexport const registerFoo = (kind: string, factory: FooFactory) => registry.set(kind, factory);\nexport const makeFoo = (kind: string) => registry.get(kind)?.() ?? fail(`unknown ${kind}`);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "service-locator-pattern",
+            "name": "Service Locator Pattern",
+            "definition": "A design pattern in which code fetches its dependencies from a global registry at the point of use.",
+            "type": "pattern",
+            "scope": [
+                "runtime",
+                "dependency access"
+            ],
+            "requires": ["Registry"],
+            "reinforces": ["Runtime Lookup"],
+            "enables": ["Late Resolution"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Testability",
+                "DIP",
+                "Explicit Dependencies"
+            ],
+            "violated_by": ["lexicon:hidden-dependency"],
+            "detected_by": ["service locator calls inside domain logic"],
+            "measured_by": ["hidden dependency count"],
+            "refactored_by": ["architecture:dependency-injection"],
+            "enforced_by": ["banned API rules"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class FooController {\n  save(foo: Foo) {\n    const store = serviceLocator.resolve<FooStore>(\"FooStore\");\n    return store.save(foo);\n  }\n}",
+                "after": "class FooController {\n  constructor(private readonly store: FooStore) {}\n  save(foo: Foo) { return this.store.save(foo); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "feature-toggle",
+            "name": "Feature Toggle",
+            "aliases": ["Feature Flag"],
+            "definition": "A mechanism that switches a code path on or off at runtime from externally held flag state, so a release can happen without a deploy.",
+            "type": "mechanism",
+            "scope": [
+                "application",
+                "release",
+                "runtime"
+            ],
+            "requires": ["Externalized Flag State"],
+            "reinforces": [
+                "Continuous Delivery",
+                "Runtime Extensibility"
+            ],
+            "enables": [
+                "Decoupled Deploy and Release",
+                "Gradual Rollout"
+            ],
+            "conflicts_with": ["Hardcoded Branch Constant"],
+            "tensions_with": ["Flag Debt"],
+            "violated_by": ["lexicon:hardcoded-branch-constant"],
+            "detected_by": ["compile-time flags requiring redeploy to flip"],
+            "measured_by": ["redeploys per behavior change"],
+            "refactored_by": [],
+            "enforced_by": ["release review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "if (NEW_FOO_FLOW_ENABLED) runNewFooFlow();\nelse runOldFooFlow();",
+                "after": "if (featureFlags.enabled(\"new-foo-flow\", { user, percentage: 10 })) runNewFooFlow();\nelse runOldFooFlow();",
+                "lang": "ts"
+            }
+        }
+    ]
+}

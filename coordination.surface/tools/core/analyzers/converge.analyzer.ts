@@ -69,7 +69,7 @@ const receiverOf = function receiverOf(line: string): string {
     return (comma === -1 ? rest : rest.slice(0, comma)).trim();
 };
 
-const unemphasised = function unemphasised(text: string): string {
+const unemphasized = function unemphasized(text: string): string {
     let held = text;
     for (const mark of EMPHASIS) {
         held = held.replaceAll(mark, "");
@@ -93,7 +93,7 @@ export const sectionBound = function sectionBound(venue: string, heading: string
 
 const clauseOf = function clauseOf(trimmed: string): string {
     const arrow = trimmed.indexOf(CLAUSE_ARROW);
-    return unemphasised(arrow === -1 ? trimmed.slice(LIST_ITEM.length) : trimmed.slice(LIST_ITEM.length, arrow));
+    return unemphasized(arrow === -1 ? trimmed.slice(LIST_ITEM.length) : trimmed.slice(LIST_ITEM.length, arrow));
 };
 
 const isStatedClause = function isStatedClause(clause: string): boolean {

@@ -1,0 +1,2125 @@
+[
+    {
+        "cwe": [
+            "89",
+            "564"
+        ],
+        "dimension": "security",
+        "id": "sql-injection",
+        "phrases": [
+            "sql injection",
+            "sqli"
+        ],
+        "words": ["sqli"]
+    },
+    {
+        "cwe": [
+            "77",
+            "78"
+        ],
+        "dimension": "security",
+        "id": "command-injection",
+        "phrases": [
+            "command injection",
+            "os command inject",
+            "shell injection",
+            "arbitrary command",
+            "argument injection",
+            "command built from user",
+            "user-controlled command"
+        ]
+    },
+    {
+        "cwe": [
+            "94",
+            "95",
+            "96"
+        ],
+        "dimension": "security",
+        "id": "code-injection",
+        "phrases": [
+            "code injection",
+            "arbitrary code execution",
+            "arbitrary code",
+            "eval injection"
+        ]
+    },
+    {
+        "cwe": [
+            "79",
+            "80",
+            "83"
+        ],
+        "dimension": "security",
+        "id": "xss",
+        "phrases": [
+            "cross-site scripting",
+            "cross site scripting",
+            "xss"
+        ],
+        "words": ["xss"]
+    },
+    {
+        "cwe": [
+            "22",
+            "23",
+            "36"
+        ],
+        "dimension": "security",
+        "id": "path-traversal",
+        "phrases": [
+            "path traversal",
+            "directory traversal",
+            "path injection",
+            "zip slip"
+        ]
+    },
+    {
+        "cwe": ["918"],
+        "dimension": "security",
+        "id": "ssrf",
+        "phrases": [
+            "server-side request forgery",
+            "server side request forgery",
+            "ssrf"
+        ],
+        "words": ["ssrf"]
+    },
+    {
+        "cwe": [
+            "611",
+            "827"
+        ],
+        "dimension": "security",
+        "id": "xxe",
+        "phrases": [
+            "xml external entity",
+            "xxe"
+        ],
+        "words": ["xxe"]
+    },
+    {
+        "cwe": ["502"],
+        "dimension": "security",
+        "id": "insecure-deserialization",
+        "phrases": [
+            "insecure deserialization",
+            "unsafe deserialization",
+            "deserialization of untrusted",
+            "unpickling",
+            "unsafe yaml",
+            "unsafe unmarshal"
+        ]
+    },
+    {
+        "cwe": [
+            "259",
+            "321",
+            "798"
+        ],
+        "dimension": "security",
+        "exclude": [
+            "policy",
+            "requires ",
+            "minimum length",
+            "expiration",
+            "expires",
+            "rotation",
+            "must contain",
+            "at least one",
+            "reuse",
+            "history",
+            "lockout",
+            "complexity requirement"
+        ],
+        "id": "hardcoded-secret",
+        "phrases": [
+            "hardcoded password",
+            "hard-coded password",
+            "hard coded password",
+            "hardcoded secret",
+            "hard-coded secret",
+            "hardcoded credential",
+            "hard-coded credential",
+            "hardcoded api key",
+            "hardcoded private key",
+            "hardcoded token",
+            "hardcoded key",
+            "hardcoded aws",
+            "hardcoded access key",
+            "plaintext password",
+            "cleartext password",
+            "clear text password",
+            "password in source",
+            "secret in source code",
+            "embedded credential",
+            "exposed secret",
+            "leaked credential"
+        ]
+    },
+    {
+        "cwe": [
+            "327",
+            "328",
+            "326"
+        ],
+        "dimension": "security",
+        "exclude": [
+            "node",
+            "cluster",
+            "kubernetes",
+            "minor version",
+            "auto upgrade",
+            "private ip",
+            "backup",
+            "monitoring",
+            "scale"
+        ],
+        "id": "weak-crypto",
+        "phrases": [
+            "weak cipher",
+            "weak hash",
+            "insecure hash",
+            "broken crypto",
+            "weak crypto",
+            "insecure cipher",
+            "weak encryption",
+            "insecure hashing",
+            "deprecated hash",
+            "weak cryptographic",
+            "insecure algorithm",
+            "weak signature",
+            "broken hash",
+            "ecb mode",
+            "des algorithm",
+            "3des",
+            "rc4"
+        ],
+        "words": [
+            "md5",
+            "sha1",
+            "rc4"
+        ]
+    },
+    {
+        "cwe": [
+            "330",
+            "338"
+        ],
+        "dimension": "security",
+        "id": "insecure-random",
+        "phrases": [
+            "insecure random",
+            "weak random",
+            "predictable random",
+            "insecure prng",
+            "cryptographically weak random",
+            "math.random",
+            "not cryptographically secure"
+        ]
+    },
+    {
+        "cwe": ["601"],
+        "dimension": "security",
+        "id": "open-redirect",
+        "phrases": [
+            "open redirect",
+            "unvalidated redirect"
+        ]
+    },
+    {
+        "cwe": ["352"],
+        "dimension": "security",
+        "id": "csrf",
+        "phrases": [
+            "cross-site request forgery",
+            "cross site request forgery",
+            "csrf"
+        ],
+        "words": ["csrf"]
+    },
+    {
+        "cwe": ["295"],
+        "dimension": "security",
+        "id": "tls-verification",
+        "phrases": [
+            "certificate verification",
+            "verify=false",
+            "insecure tls",
+            "disable ssl verification",
+            "hostname verification",
+            "trust all certificate",
+            "skip tls verify",
+            "insecure ssl"
+        ]
+    },
+    {"cwe": ["117"],
+        "dimension": "security",
+        "id": "log-injection",
+        "phrases": [
+            "log injection",
+            "log forging"
+        ]},
+    {
+        "cwe": ["1333"],
+        "dimension": "security",
+        "id": "regex-dos",
+        "phrases": [
+            "regular expression denial",
+            "redos",
+            "catastrophic backtracking",
+            "inefficient regular expression"
+        ],
+        "words": ["redos"]
+    },
+    {
+        "cwe": [
+            "643",
+            "90",
+            "917"
+        ],
+        "dimension": "security",
+        "id": "xpath-injection",
+        "phrases": [
+            "xpath injection",
+            "ldap injection",
+            "expression language injection",
+            "template injection"
+        ]
+    },
+    {
+        "cwe": [
+            "20",
+            "89",
+            "564",
+            "77",
+            "78",
+            "79",
+            "80",
+            "83",
+            "94",
+            "95",
+            "96",
+            "90",
+            "91",
+            "643",
+            "917",
+            "611",
+            "827",
+            "22",
+            "23",
+            "36",
+            "502",
+            "918",
+            "601",
+            "117"
+        ],
+        "dimension": "security",
+        "id": "input-validation",
+        "phrases": [
+            "input validation",
+            "validate input",
+            "unvalidated input",
+            "sanitize input",
+            "untrusted input",
+            "user-controlled",
+            "user controlled",
+            "tainted",
+            "improper input",
+            "missing input validation",
+            "unsanitized",
+            "improper validation"
+        ]
+    },
+    {
+        "cwe": [
+            "89",
+            "564",
+            "77",
+            "78",
+            "94",
+            "95",
+            "96",
+            "79",
+            "80",
+            "83",
+            "22",
+            "23",
+            "36",
+            "918",
+            "611",
+            "827",
+            "502",
+            "643",
+            "90",
+            "917",
+            "601",
+            "117",
+            "1333"
+        ],
+        "dimension": "security",
+        "id": "injection",
+        "phrases": [
+            "injection",
+            "injected",
+            "user-controlled",
+            "tainted",
+            "untrusted input"
+        ]
+    },
+    {
+        "cwe": [
+            "327",
+            "328",
+            "326",
+            "311",
+            "312",
+            "319",
+            "330",
+            "338",
+            "295",
+            "916",
+            "780"
+        ],
+        "dimension": "security",
+        "id": "cryptography",
+        "phrases": [
+            "cryptograph",
+            "encryption",
+            "encrypted",
+            "cipher",
+            "hashing algorithm",
+            "certificate validation",
+            "random number",
+            "in transit",
+            "at rest"
+        ]
+    },
+    {
+        "cwe": [
+            "732",
+            "269",
+            "250",
+            "266",
+            "668",
+            "308",
+            "284",
+            "285",
+            "862",
+            "863"
+        ],
+        "dimension": "security",
+        "id": "access-control",
+        "phrases": [
+            "access control",
+            "authorization",
+            "authoriz",
+            "privilege",
+            "permission",
+            "public access",
+            "publicly accessible",
+            "least privilege",
+            "multi-factor"
+        ]
+    },
+    {
+        "cwe": [
+            "259",
+            "321",
+            "798",
+            "522",
+            "521",
+            "256",
+            "257"
+        ],
+        "dimension": "security",
+        "id": "credentials",
+        "phrases": [
+            "credential",
+            "password",
+            "secret key",
+            "api key",
+            "private key",
+            "access token",
+            "auth token",
+            "plaintext password",
+            "secrets manager",
+            "secret management"
+        ]
+    },
+    {
+        "cwe": ["668"],
+        "dimension": "infrastructure",
+        "id": "public-exposure",
+        "phrases": [
+            "publicly accessible",
+            "public access",
+            "publicly exposed",
+            "0.0.0.0",
+            "anonymous access",
+            "public read",
+            "public write",
+            "exposed to the internet",
+            "open to the internet",
+            "publicly readable",
+            "public ip address",
+            "allow public",
+            "public network access",
+            "publicly available"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "infrastructure",
+        "id": "open-ingress",
+        "phrases": [
+            "security group",
+            "unrestricted ingress",
+            "ingress rule",
+            "open port",
+            "0.0.0.0/0",
+            "inbound rule",
+            "network acl",
+            "unrestricted access",
+            "allows all traffic",
+            "firewall rule",
+            "all ports open",
+            "unrestricted egress",
+            "port is exposed",
+            "wide open"
+        ]
+    },
+    {
+        "cwe": [
+            "311",
+            "312"
+        ],
+        "dimension": "infrastructure",
+        "id": "encryption-at-rest",
+        "phrases": [
+            "encryption at rest",
+            "encrypted at rest",
+            "unencrypted",
+            "not encrypted",
+            "encryption is disabled",
+            "encryption disabled",
+            "encryption not enabled",
+            "server-side encryption",
+            "storage encryption",
+            "disk encryption",
+            "volume encryption",
+            "ebs encryption",
+            "encryption enabled",
+            "kms key",
+            "sse-kms",
+            "sse-s3",
+            "customer managed key",
+            "encryption key"
+        ]
+    },
+    {
+        "cwe": ["319"],
+        "dimension": "infrastructure",
+        "id": "encryption-in-transit",
+        "phrases": [
+            "encryption in transit",
+            "in transit",
+            "insecure protocol",
+            "http instead of https",
+            "https only",
+            "minimum tls",
+            "cleartext transmission",
+            "unencrypted transport",
+            "ssl policy",
+            "enforce https",
+            "require ssl",
+            "require tls"
+        ]
+    },
+    {
+        "cwe": ["778"],
+        "dimension": "infrastructure",
+        "id": "logging-disabled",
+        "phrases": [
+            "logging is disabled",
+            "logging not enabled",
+            "logging disabled",
+            "access logging",
+            "audit logging",
+            "cloudtrail",
+            "flow logs",
+            "enable logging",
+            "logging should be enabled",
+            "monitoring is disabled",
+            "log retention",
+            "logging enabled",
+            "audit log",
+            "logging and monitoring"
+        ]
+    },
+    {
+        "cwe": [
+            "732",
+            "269",
+            "250",
+            "266"
+        ],
+        "dimension": "infrastructure",
+        "id": "iam-over-permissive",
+        "phrases": [
+            "overly permissive",
+            "least privilege",
+            "privilege escalation",
+            "admin privileges",
+            "full access",
+            "iam policy",
+            "iam role",
+            "assume role",
+            "administratoraccess",
+            "excessive permissions",
+            "resource policy allows",
+            "trust policy",
+            "allow all actions",
+            "policy allows",
+            "wildcard permission",
+            "wildcard principal",
+            "wildcard action",
+            "wildcard resource",
+            "iam user"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "infrastructure",
+        "id": "backup-disabled",
+        "phrases": [
+            "backup is disabled",
+            "backup not enabled",
+            "point-in-time recovery",
+            "deletion protection",
+            "backup retention",
+            "enable backup",
+            "recovery point",
+            "backup and recovery"
+        ]
+    },
+    {
+        "cwe": ["308"],
+        "dimension": "infrastructure",
+        "id": "mfa-disabled",
+        "phrases": [
+            "multi-factor authentication",
+            "multi factor authentication",
+            "mfa is disabled",
+            "mfa not enabled",
+            "require mfa",
+            "mfa should be enabled"
+        ],
+        "words": ["mfa"]
+    },
+    {
+        "cwe": [],
+        "dimension": "infrastructure",
+        "id": "versioning-disabled",
+        "phrases": [
+            "versioning is disabled",
+            "versioning not enabled",
+            "object versioning",
+            "enable versioning",
+            "bucket versioning",
+            "versioning should be enabled"
+        ]
+    },
+    {
+        "cwe": ["561"],
+        "dimension": "correctness",
+        "id": "no-unused",
+        "phrases": [
+            "unused variable",
+            "unused import",
+            "unused parameter",
+            "unused local",
+            "unused private",
+            "unused method",
+            "unused function",
+            "unused field",
+            "unused assignment",
+            "unused catch",
+            "unused lambda",
+            "unused try",
+            "never used",
+            "dead code",
+            "unreachable code",
+            "unreachable statement",
+            "unreachable branch",
+            "unreachable",
+            "dead store",
+            "value is never read",
+            "never read",
+            "assigned but never"
+        ],
+        "words": ["unused"]
+    },
+    {
+        "cwe": ["476"],
+        "dimension": "correctness",
+        "id": "null-dereference",
+        "phrases": [
+            "null pointer",
+            "null dereference",
+            "nil dereference",
+            "none dereference",
+            "possible null",
+            "nullpointerexception",
+            "dereference of null",
+            "nil pointer dereference"
+        ]
+    },
+    {
+        "cwe": [
+            "404",
+            "772"
+        ],
+        "dimension": "correctness",
+        "id": "resource-leak",
+        "phrases": [
+            "resource leak",
+            "not closed",
+            "unclosed resource",
+            "stream not closed",
+            "connection leak",
+            "file descriptor leak",
+            "leaked resource",
+            "must be closed"
+        ]
+    },
+    {
+        "cwe": ["369"],
+        "dimension": "correctness",
+        "id": "division-by-zero",
+        "phrases": [
+            "division by zero",
+            "divide by zero",
+            "zero division",
+            "modulo by zero"
+        ]
+    },
+    {
+        "cwe": [
+            "390",
+            "396",
+            "397"
+        ],
+        "dimension": "correctness",
+        "id": "exception-handling",
+        "phrases": [
+            "empty catch",
+            "swallow exception",
+            "ignored exception",
+            "bare except",
+            "broad except",
+            "catch generic exception",
+            "catch throwable",
+            "rethrow",
+            "exception not rethrown",
+            "overly broad"
+        ]
+    },
+    {
+        "cwe": [
+            "362",
+            "366",
+            "367",
+            "833"
+        ],
+        "dimension": "correctness",
+        "id": "concurrency",
+        "phrases": [
+            "race condition",
+            "data race",
+            "thread safety",
+            "not thread-safe",
+            "deadlock",
+            "atomicity violation",
+            "unsynchronized access",
+            "concurrent modification"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "cyclomatic-complexity",
+        "phrases": [
+            "cyclomatic complexity",
+            "too complex",
+            "complexity of the",
+            "high complexity"
+        ]
+    },
+    {"cwe": [],
+        "dimension": "complexity",
+        "id": "cognitive-complexity",
+        "phrases": ["cognitive complexity"]},
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "exclude": [
+            "per line",
+            "per-line",
+            "single line",
+            "lines per file",
+            "in a file"
+        ],
+        "id": "long-function",
+        "phrases": [
+            "method length",
+            "function length",
+            "too many lines",
+            "long method",
+            "long function",
+            "excessive lines",
+            "method too long",
+            "function too long",
+            "too many statements",
+            "number of statements",
+            "statements allowed",
+            "statements per function",
+            "statements per type",
+            "complex block",
+            "lines of code in a function",
+            "lines in a function",
+            "lines per function"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "too-many-params",
+        "phrases": [
+            "too many arguments",
+            "too many parameters",
+            "long parameter list",
+            "argument-limit",
+            "max-params",
+            "excessive parameter"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "deep-nesting",
+        "phrases": [
+            "deeply nested",
+            "nesting depth",
+            "too deeply",
+            "nested block depth",
+            "excessive nesting",
+            "nested block",
+            "nested for",
+            "nested try",
+            "nested if",
+            "blocks can be nested",
+            "maximum block depth",
+            "nesting level",
+            "depth of nesting"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "number-precision",
+        "phrases": [
+            "number precision",
+            "decimal precision",
+            "fractional digits",
+            "maximum precision",
+            "precision of numbers"
+        ]
+    },
+    {"cwe": [],
+        "dimension": "complexity",
+        "id": "selector-id-budget",
+        "phrases": [
+            "id selectors",
+            "number of id"
+        ]},
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "selector-type-budget",
+        "phrases": [
+            "type selectors",
+            "number of type"
+        ]
+    },
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-class-naming",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-custom-property-naming",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-keyframes-naming",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-qualifying-type",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-important",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-hex-length",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "correctness",
+        "id": "css-font-duplicate",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-url-quotes",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "correctness",
+        "id": "css-duplicate-custom-property",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-property-vendor-prefix",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "style",
+        "id": "css-value-vendor-prefix",
+        "phrases": []},
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "duplicate-code",
+        "phrases": [
+            "duplicate code",
+            "duplicated code",
+            "copy-paste",
+            "duplicate branch",
+            "identical branches",
+            "duplicated block"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "naming-convention",
+        "phrases": [
+            "naming convention",
+            "should match the",
+            "invalid name",
+            "name convention",
+            "does not conform to naming",
+            "must be in",
+            "should be camelcase",
+            "should be snake_case",
+            "should be pascalcase",
+            "constant name",
+            "variable name",
+            "class name",
+            "method name"
+        ],
+        "words": [
+            "camelcase",
+            "snake_case",
+            "pascalcase"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "format",
+        "id": "line-length",
+        "phrases": [
+            "line too long",
+            "line length",
+            "max-len",
+            "line exceeds",
+            "maximum line length",
+            "line is longer",
+            "lines should not be too long",
+            "line is too long",
+            "lines too long"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "format",
+        "id": "indentation",
+        "phrases": [
+            "indentation",
+            "bad indent",
+            "wrong indent",
+            "inconsistent indent",
+            "expected indentation"
+        ],
+        "words": ["indent"]
+    },
+    {
+        "cwe": [],
+        "dimension": "format",
+        "id": "quote-style",
+        "phrases": [
+            "single quote",
+            "double quote",
+            "quote style",
+            "prefer single quotes",
+            "prefer double quotes"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "format",
+        "id": "trailing-whitespace",
+        "phrases": [
+            "trailing whitespace",
+            "trailing space"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "missing-docs",
+        "phrases": [
+            "missing docstring",
+            "missing documentation",
+            "missing javadoc",
+            "public docstring",
+            "undocumented",
+            "missing doc comment",
+            "documentation comment",
+            "javadoc",
+            "doc comment"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "debug-print",
+        "phrases": [
+            "console.log",
+            "no-console",
+            "print statement",
+            "debug print",
+            "print-stdout",
+            "print statements",
+            "leftover debug",
+            "debugger statement",
+            "println for debug"
+        ],
+        "words": ["debugger"]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "todo-comment",
+        "phrases": [
+            "todo comment",
+            "fixme comment",
+            "todo/fixme",
+            "leftover todo"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "magic-number",
+        "phrases": [
+            "magic number",
+            "magic-number",
+            "no-magic-number"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "empty-block",
+        "phrases": [
+            "empty block",
+            "empty body",
+            "empty function",
+            "empty method",
+            "empty statement",
+            "empty if",
+            "empty loop"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "dependency",
+        "id": "vulnerable-dependency",
+        "phrases": [
+            "vulnerable dependency",
+            "known vulnerability",
+            "outdated dependency",
+            "vulnerable version",
+            "security advisory",
+            "cve-"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "dependency",
+        "id": "license-policy",
+        "phrases": [
+            "disallowed license",
+            "license policy",
+            "prohibited license",
+            "gpl license"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "accessibility",
+        "id": "accessibility",
+        "phrases": [
+            "aria-",
+            "aria attribute",
+            "aria role",
+            "alt text",
+            "alternative text",
+            "screen reader",
+            "tabindex",
+            "keyboard accessible",
+            "wai-aria",
+            "no-redundant-roles",
+            "accessible emoji",
+            "img redundant alt"
+        ],
+        "words": ["aria"]
+    },
+    {
+        "cwe": [],
+        "dimension": "performance",
+        "id": "performance",
+        "phrases": [
+            "inefficient",
+            "performance issue",
+            "unnecessary allocation",
+            "expensive operation",
+            "should be lazy",
+            "avoid unnecessary copy",
+            "quadratic",
+            "reallocat",
+            "unnecessary clone",
+            "memory allocation",
+            "avoid allocation",
+            "prefer to iterate"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "testing",
+        "id": "test-quality",
+        "phrases": [
+            "assertion",
+            "disabled test",
+            "focused test",
+            "skipped test",
+            "test double",
+            "flaky test",
+            "identical test",
+            "no assertion",
+            "empty test",
+            "test should",
+            "conditional in test",
+            "commented-out test"
+        ]
+    },
+    {
+        "cwe": [
+            "595",
+            "597"
+        ],
+        "dimension": "correctness",
+        "id": "equality",
+        "phrases": [
+            "reference equality",
+            "loose equality",
+            "strict equality",
+            "equals and hashcode",
+            "hashcode",
+            "compareto",
+            "identity comparison",
+            "use ===",
+            "object equality",
+            "structural equality"
+        ]
+    },
+    {
+        "cwe": [
+            "704",
+            "843",
+            "197",
+            "681"
+        ],
+        "dimension": "correctness",
+        "id": "type-safety",
+        "phrases": [
+            "unsafe cast",
+            "type confusion",
+            "loss of precision",
+            "implicit conversion",
+            "type mismatch",
+            "unchecked cast",
+            "narrowing conversion",
+            "unsafe downcast"
+        ]
+    },
+    {
+        "cwe": ["134"],
+        "dimension": "correctness",
+        "id": "format-string",
+        "phrases": [
+            "format string",
+            "printf",
+            "format specifier",
+            "unused format argument",
+            "invalid format",
+            "format argument"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "correctness",
+        "id": "shell-quoting",
+        "phrases": [
+            "word splitting",
+            "globbing",
+            "quote to prevent",
+            "double quote to prevent",
+            "prevent word splitting",
+            "unquoted variable",
+            "unquoted shell",
+            "missing quotes around"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "immutability",
+        "phrases": [
+            "should be final",
+            "should be immutable",
+            "prefer const",
+            "mutable default",
+            "prefer readonly",
+            "declared final",
+            "avoid reassign",
+            "reassignment of",
+            "final parameter",
+            "final class",
+            "final field",
+            "final local"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "redundant-code",
+        "phrases": [
+            "redundant code",
+            "is redundant",
+            "redundant condition",
+            "redundant cast",
+            "redundant expression",
+            "redundant modifier",
+            "redundant parenthes",
+            "redundant boolean",
+            "redundant type",
+            "redundant qualifier",
+            "unnecessary",
+            "useless",
+            "no-op",
+            "always true",
+            "always false",
+            "constant condition",
+            "tautolog",
+            "superfluous",
+            "pointless",
+            "needless",
+            "has no effect",
+            "can be removed"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "unsafe-api",
+        "phrases": [
+            "banned api",
+            "dangerous function",
+            "forbidden function",
+            "disallowed method",
+            "unsafe function",
+            "insecure function",
+            "prohibited function",
+            "restricted import",
+            "should not be used",
+            "must not be used",
+            "avoid the use of",
+            "banned method",
+            "dangerous api",
+            "avoid using",
+            "avoid usage of",
+            "do not use",
+            "should be avoided"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "correctness",
+        "id": "no-shadow",
+        "phrases": [
+            "variable shadowing",
+            "shadowing",
+            "shadows a",
+            "shadows an outer",
+            "hides a field",
+            "name shadowing",
+            "builtin shadowing",
+            "hides an outer",
+            "shadows the",
+            "shadows outer",
+            "hidden field"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "format",
+        "id": "spacing",
+        "phrases": [
+            "whitespace",
+            "blank line",
+            "missing space",
+            "extra space",
+            "spaces around",
+            "space before",
+            "space after",
+            "empty line",
+            "consecutive spaces",
+            "spacing around"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "type-annotation",
+        "phrases": [
+            "type annotation",
+            "missing type annotation",
+            "type hint",
+            "missing return type",
+            "explicit type",
+            "untyped",
+            "missing type declaration",
+            "implicit any"
+        ]
+    },
+    {
+        "cwe": ["477"],
+        "dimension": "best-practice",
+        "id": "deprecated-api",
+        "phrases": [
+            "deprecated api",
+            "use of deprecated",
+            "calls a deprecated",
+            "deprecated method",
+            "deprecated function",
+            "deprecated class",
+            "deprecated module",
+            "obsolete api",
+            "no longer supported",
+            "uses deprecated",
+            "deprecated feature"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "global-scope",
+        "phrases": [
+            "global variable",
+            "avoid global",
+            "implicit global",
+            "pollutes the global",
+            "global scope",
+            "leaking global"
+        ]
+    },
+    {
+        "cwe": ["521"],
+        "dimension": "security",
+        "id": "password-policy",
+        "phrases": [
+            "password policy",
+            "password length",
+            "password expiration",
+            "password complexity",
+            "minimum password",
+            "password rotation",
+            "password reuse",
+            "password requirement",
+            "password must contain",
+            "weak password"
+        ]
+    },
+    {
+        "cwe": ["252"],
+        "dimension": "correctness",
+        "id": "return-value",
+        "phrases": [
+            "return value is ignored",
+            "ignored return value",
+            "unused return value",
+            "return value should",
+            "unchecked return",
+            "result is unused",
+            "must use the return",
+            "return value not checked",
+            "discarded return",
+            "ignoring return value"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "regex-usage",
+        "phrases": [
+            "invalid regular expression",
+            "regex syntax",
+            "useless regex",
+            "unnecessary regex",
+            "control character in regex",
+            "unnecessary escape in regex",
+            "prefer string over regex",
+            "regex flag",
+            "empty regex",
+            "duplicate regex"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "idiomatic-preference",
+        "phrases": [
+            "prefer ",
+            "instead of",
+            "used instead",
+            "prefer using",
+            "prefer to",
+            "rather than",
+            "more idiomatic",
+            "modernize",
+            "outdated pattern",
+            "legacy pattern",
+            "should be replaced with",
+            "declarations or expressions",
+            "consistent use of either function",
+            "can be simplified",
+            "could be written",
+            "manual implementation",
+            "more concise"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "central-config",
+        "phrases": [
+            "centralize config",
+            "central config",
+            "exported config constant",
+            "hardcoded configuration value",
+            "configuration constant"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "file-length",
+        "phrases": [
+            "file too long",
+            "maximum file length",
+            "file exceeds",
+            "too many lines per file",
+            "file line count",
+            "lines per file",
+            "number of lines per file",
+            "lines in a file"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "comments",
+        "phrases": [
+            "non-documentation comment",
+            "commented-out code",
+            "commented out code",
+            "leftover comment",
+            "redundant comment"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "content-strings",
+        "phrases": [
+            "user-facing string",
+            "inline content string",
+            "hardcoded ui string",
+            "string catalog",
+            "untranslated string"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "i18n",
+        "phrases": [
+            "internationalization",
+            "localization",
+            "translatable string"
+        ],
+        "words": ["i18n"]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "env-access",
+        "phrases": [
+            "environment variable access",
+            "direct process.env",
+            "env var in client",
+            "frontend environment access"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "separation-of-concerns",
+        "phrases": [
+            "separation of concerns",
+            "mixed concerns",
+            "single responsibility",
+            "god object",
+            "god class",
+            "god method",
+            "too many responsibilities"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "design-tokens",
+        "phrases": [
+            "design token",
+            "css custom property value",
+            "use a token instead",
+            "hardcoded css value",
+            "css variable token"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "css-architecture",
+        "phrases": [
+            "css architecture",
+            "stylesheet organization",
+            "css layer structure",
+            "css file structure"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "css-layout",
+        "phrases": [
+            "css layout",
+            "horizontal margin",
+            "layout property",
+            "flex or grid layout"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "layer-cascade",
+        "phrases": [
+            "cascade layer",
+            "css cascade order",
+            "layer order",
+            "at-layer"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "responsive-design",
+        "phrases": [
+            "responsive design",
+            "media query",
+            "mobile-first",
+            "responsive unit",
+            "breakpoint"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "encapsulation",
+        "phrases": [
+            "encapsulation",
+            "information hiding",
+            "reach into internals",
+            "access private member",
+            "bypass the public api"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "dom",
+        "phrases": [
+            "direct dom manipulation",
+            "createelement",
+            "innerhtml assignment",
+            "raw dom api"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "accessibility",
+        "id": "ai-metadata",
+        "phrases": [
+            "ai metadata",
+            "machine-readable metadata",
+            "data-action attribute",
+            "semantic metadata for agents"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "module-boundaries",
+        "phrases": [
+            "module boundary",
+            "barrel re-export",
+            "public module surface",
+            "cross-module import"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "circular-dependency",
+        "phrases": [
+            "circular dependency",
+            "cyclic import",
+            "import cycle",
+            "dependency cycle"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "layering",
+        "phrases": [
+            "architectural layer",
+            "layer violation",
+            "upward dependency",
+            "layered architecture"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "open-closed",
+        "phrases": [
+            "open/closed principle",
+            "open-closed principle",
+            "closed for modification",
+            "modify to extend",
+            "hardcoded dispatch",
+            "flat sequential pipeline",
+            "should be extensible via registration"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "security",
+        "id": "csp",
+        "phrases": [
+            "content security policy",
+            "inline event handler",
+            "inline style attribute",
+            "unsafe-inline",
+            "unsafe-eval",
+            "csp violation"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "serialization",
+        "phrases": [
+            "json serialization",
+            "serialize object",
+            "deep clone via json",
+            "json.stringify misuse"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "module-structure",
+        "phrases": [
+            "files per folder",
+            "too many files in",
+            "folder file count",
+            "module folder structure"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "identifier-length",
+        "phrases": [
+            "identifier length",
+            "identifier lengths",
+            "minimum and maximum identifier",
+            "short variable name",
+            "short identifier",
+            "name is too short",
+            "variable name is too short",
+            "excessively long name"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "sort-order",
+        "phrases": [
+            "to be sorted",
+            "should be sorted",
+            "must be sorted",
+            "sorted alphabetically",
+            "alphabetical order",
+            "in alphabetical",
+            "in sorted order",
+            "keys to be sorted",
+            "not sorted",
+            "unsorted",
+            "sorted import",
+            "sort import",
+            "declaration order",
+            "import order",
+            "member order",
+            "in the correct order"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "ternary-conditional",
+        "phrases": [
+            "ternary operator",
+            "ternary operators",
+            "ternary expression",
+            "nested ternary",
+            "prefer ternary",
+            "multiline ternary"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "correctness",
+        "id": "async-await",
+        "phrases": [
+            "await expression",
+            "async function",
+            "async method",
+            "missing await",
+            "unused async",
+            "redundant async",
+            "await holding",
+            "no await expression"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "declaration-grouping",
+        "phrases": [
+            "declared either together or separately",
+            "one variable declaration",
+            "multiple variable declarations",
+            "combine variable declarations",
+            "multiple declarations on",
+            "one var per"
+        ]
+    },
+    {"cwe": [],
+        "dimension": "best-practice",
+        "id": "destructuring",
+        "phrases": [
+            "destructuring",
+            "destructure"
+        ]},
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "string-literal",
+        "phrases": [
+            "string literal",
+            "string literals",
+            "duplicate string",
+            "multiple string literal",
+            "magic string",
+            "repeated string"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "complexity",
+        "id": "return-count",
+        "phrases": [
+            "return statements",
+            "return count",
+            "too many return",
+            "multiple return",
+            "single return",
+            "number of return",
+            "one return",
+            "multiple exit"
+        ]
+    },
+    {"cwe": [],
+        "dimension": "correctness",
+        "id": "side-effects",
+        "phrases": [
+            "side effect",
+            "side effects"
+        ]},
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "boolean-expression",
+        "phrases": [
+            "boolean expression",
+            "simplify boolean",
+            "boolean complexity",
+            "negated boolean",
+            "double negation",
+            "redundant boolean",
+            "boolean literal"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "braces-style",
+        "phrases": [
+            "curly brace",
+            "curly braces",
+            "need braces",
+            "needs braces",
+            "right curly",
+            "left curly",
+            "missing braces",
+            "block without braces",
+            "braces around",
+            "brace should"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "visibility-modifier",
+        "phrases": [
+            "visibility modifier",
+            "package-private",
+            "package private",
+            "access modifier",
+            "member visibility",
+            "protected member",
+            "public member",
+            "field should be private"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "wildcard-import",
+        "phrases": [
+            "star import",
+            "wildcard import",
+            "import on demand",
+            "avoid star",
+            "redundant import",
+            "unused import"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "annotation-style",
+        "phrases": [
+            "annotation location",
+            "annotation use",
+            "annotation on same",
+            "missing annotation",
+            "annotation style",
+            "annotation should"
+        ]
+    },
+    {
+        "cwe": [
+            "252",
+            "391"
+        ],
+        "dimension": "correctness",
+        "id": "error-handling",
+        "phrases": [
+            "error is not checked",
+            "unhandled error",
+            "ignored error",
+            "error not checked",
+            "unchecked error",
+            "must handle error",
+            "errors should be handled",
+            "ignoring returned error",
+            "return value of the error",
+            "not check the return value"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "correctness",
+        "id": "switch-default",
+        "phrases": [
+            "default case",
+            "missing default",
+            "default label",
+            "default clause",
+            "switch without default",
+            "default comes last",
+            "switch statement is missing"
+        ]
+    },
+    {
+        "cwe": [
+            "190",
+            "191"
+        ],
+        "dimension": "correctness",
+        "id": "integer-overflow",
+        "phrases": [
+            "integer overflow",
+            "arithmetic overflow",
+            "numeric overflow",
+            "signed overflow",
+            "wraparound",
+            "overflow when",
+            "may overflow"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "comparison-style",
+        "phrases": [
+            "yoda condition",
+            "compare to zero",
+            "comparison to null",
+            "constant on the left",
+            "single-operand comparison",
+            "float equality",
+            "compare float",
+            "comparison with a boolean"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "style",
+        "id": "statements-per-line",
+        "phrases": [
+            "statements per line",
+            "statement per line",
+            "one statement per",
+            "multiple statements on",
+            "statements allowed per line"
+        ]
+    },
+    {
+        "cwe": [],
+        "dimension": "best-practice",
+        "id": "operator-style",
+        "phrases": [
+            "bitwise operator",
+            "void operator",
+            "comma operator",
+            "sequence expression",
+            "exponentiation operator",
+            "negated condition",
+            "implicit coercion",
+            "logical assignment operator",
+            "increment and decrement",
+            "unary operators"
+        ]
+    },
+    {"cwe": [],
+        "dimension": "best-practice",
+        "id": "boolean-trap",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "concrete-coupling",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "encoded-constraint",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "forward-compatibility",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "fail-fast",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "greenfield-migration",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "single-path",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "immediate-completion",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "mandatory-dependency",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "durable-implementation",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "observed-execution",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "approved-evolution",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "enforced-feedback",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "single-owner",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "bounded-lifetime",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "explicit-retention",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "structural-release",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "explicit-invalidity",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "event-emission",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "monotonic-growth",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "semantic-addressing",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "ordinal-time",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "homoiconicity",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "bounded-complexity",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "computed-health",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "rule-as-code",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "design-by-contract",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "versioned-evolution",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "atomic-boundary",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "saga-compensation",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "async-decoupling",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "observable-signals",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "convention-discovery",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "declarative-config",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "injected-nondeterminism",
+        "phrases": []},
+    {"cwe": [],
+        "dimension": "architecture",
+        "id": "force-driven-pattern",
+        "phrases": []}
+]

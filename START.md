@@ -38,42 +38,42 @@ A1·a ten nodes
 
 ```mermaid
 flowchart TB
-subgraph epistemic["Epistemic · how is it known?"]
-orient["Orient · name the subject, read from the tree"]
-see["See · look through the lenses the subject warrants"]
-derive["Derive · a claim grounded in what was seen"]
-project["Project · the next admissible move"]
-act["Act · apply the operation to the state"]
-end
-subgraph conative["Conative · what is worth doing?"]
-intent["Intent · the objective, and the highest-worth branch"]
-constrain["Constrain · is the operation admissible?"]
-end
-subgraph evaluative["Evaluative · is it right, and are we done?"]
-verify["Verify · is the evidence set non-empty?"]
-commit["Commit · externalize the result as inspectable state"]
-terminate["Terminate · saturated, complete and verified?"]
-end
-orient --> intent
-intent -- gate: worth before work --> see
-see --> derive --> project --> act --> constrain
-constrain -- gate: admissible --> verify
-verify -- gate: evidence --> commit --> terminate
-verify -. refuted, back with the evidence .-> derive
-terminate -- gate: stop --> orient
+    subgraph epistemic["Epistemic · how is it known?"]
+        orient["Orient · name the subject, read from the tree"]
+        see["See · look through the lenses the subject warrants"]
+        derive["Derive · a claim grounded in what was seen"]
+        project["Project · the next admissible move"]
+        act["Act · apply the operation to the state"]
+    end
+    subgraph conative["Conative · what is worth doing?"]
+        intent["Intent · the objective, and the highest-worth branch"]
+        constrain["Constrain · is the operation admissible?"]
+    end
+    subgraph evaluative["Evaluative · is it right, and are we done?"]
+        verify["Verify · is the evidence set non-empty?"]
+        commit["Commit · externalize the result as inspectable state"]
+        terminate["Terminate · saturated, complete and verified?"]
+    end
+    orient --> intent
+    intent -- gate: worth before work --> see
+    see --> derive --> project --> act --> constrain
+    constrain -- gate: admissible --> verify
+    verify -- gate: evidence --> commit --> terminate
+    verify -. refuted, back with the evidence .-> derive
+    terminate -- gate: stop --> orient
 ```
 
 A1·b four sizes
 
 ```mermaid
 flowchart TB
-fix["A one-line fix · one traversal, minutes"]
-task["A task · one traversal, an afternoon"]
-phase["A phase · one traversal that holds many tasks"]
-plan["A plan · one traversal that holds many phases"]
-fix --- task --- phase --- plan
-plan -. each phase walks the loop again inside .-> phase
-phase -. each task walks the loop again inside .-> task
+    fix["A one-line fix · one traversal, minutes"]
+    task["A task · one traversal, an afternoon"]
+    phase["A phase · one traversal that holds many tasks"]
+    plan["A plan · one traversal that holds many phases"]
+    fix --- task --- phase --- plan
+    plan -. each phase walks the loop again inside .-> phase
+    phase -. each task walks the loop again inside .-> task
 ```
 
 ## Who does what
@@ -96,22 +96,22 @@ B1·a three parties
 
 ```mermaid
 flowchart TB
-subgraph tooling["The tooling"]
-detect["Detection · every rule, on every change, the same way"]
-heal["Healing · what a fixer can restore, it restores"]
-end
-subgraph model["The model"]
-repair["Repair · what the fixers left, one finding at a time"]
-end
-subgraph developer["The developer"]
-govern["Governance · what the work is for, and what finished means"]
-end
-detect --> heal
-heal -- the findings left --> repair
-repair -- a changed tree --> detect
-govern -- rules and objectives --> detect
-govern -- corrections --> repair
-repair -. questions .-> govern
+    subgraph tooling["The tooling"]
+        detect["Detection · every rule, on every change, the same way"]
+        heal["Healing · what a fixer can restore, it restores"]
+    end
+    subgraph model["The model"]
+        repair["Repair · what the fixers left, one finding at a time"]
+    end
+    subgraph developer["The developer"]
+        govern["Governance · what the work is for, and what finished means"]
+    end
+    detect --> heal
+    heal -- the findings left --> repair
+    repair -- a changed tree --> detect
+    govern -- rules and objectives --> detect
+    govern -- corrections --> repair
+    repair -. questions .-> govern
 ```
 
 ## The stance
@@ -138,30 +138,30 @@ C1·a claim to evidence
 
 ```mermaid
 flowchart TB
-claim["A claim about the tree"]
-read{"Read in this session?"}
-lead["A lead · follow it to the file"]
-evidence["Evidence · the path and the line"]
-act["Act on it"]
-claim --> read
-read -- no --> lead
-read -- yes --> evidence
-lead --> read
-evidence --> act
+    claim["A claim about the tree"]
+    read{"Read in this session?"}
+    lead["A lead · follow it to the file"]
+    evidence["Evidence · the path and the line"]
+    act["Act on it"]
+    claim --> read
+    read -- no --> lead
+    read -- yes --> evidence
+    lead --> read
+    evidence --> act
 ```
 
 C1·b agreement outruns
 
 ```mermaid
 flowchart TB
-claim["A claim is written"]
-agree1["A peer agrees · one read of the sentence"]
-agree2["A second peer agrees · one read of the agreement"]
-plan["It becomes a plan row"]
-open["A reader opens the file"]
-refuted["Refuted · the file moved before the claim was written"]
-claim --> agree1 --> agree2 --> plan
-claim -. costs one read of the operand .-> open --> refuted
+    claim["A claim is written"]
+    agree1["A peer agrees · one read of the sentence"]
+    agree2["A second peer agrees · one read of the agreement"]
+    plan["It becomes a plan row"]
+    open["A reader opens the file"]
+    refuted["Refuted · the file moved before the claim was written"]
+    claim --> agree1 --> agree2 --> plan
+    claim -. costs one read of the operand .-> open --> refuted
 ```
 
 ## Adversarial by default
@@ -188,7 +188,7 @@ For this reason I treat the structure behind a request as what is being asked ab
 
 To check this, take a reply and ask which of the fifteen questions it rests on. A reply that skipped one is incomplete rather than concise, and the question it skipped is where its mistake will be. The questions scale with the request. A one-line request that comes down to one file and one edit still goes through them, but they take a moment and most of the answers are empty; an empty answer is still an answer, not a skipped question.
 
-The fifteen questions are what turn this kind of judgement into something a check can enforce, because each one has a defined kind of answer. [Identity](ontology/REASONING.md#reasoning-node-ont-identity) asks what exists, and the answer is a set. [Structure](ontology/REASONING.md#reasoning-node-ont-structure) asks how the parts are arranged, and the answer is an ordering. [Relation](ontology/REASONING.md#reasoning-node-ont-relation) asks what a thing connects to, and the answer is a graph. [Probability](ontology/REASONING.md#reasoning-node-ont-probability) asks how sure each reading is, and the answer is a number between zero and one. The others, [composition](ontology/REASONING.md#reasoning-node-ont-composition), [space](ontology/REASONING.md#reasoning-node-ont-space), [time](ontology/REASONING.md#reasoning-node-ont-time), [state](ontology/REASONING.md#reasoning-node-ont-state), [change](ontology/REASONING.md#reasoning-node-ont-change), [behavior](ontology/REASONING.md#reasoning-node-ont-behavior), [function](ontology/REASONING.md#reasoning-node-ont-function), [cause](ontology/REASONING.md#reasoning-node-ont-cause), [meaning](ontology/REASONING.md#reasoning-node-ont-meaning), [scale](ontology/REASONING.md#reasoning-node-ont-scale) and [novelty](ontology/REASONING.md#reasoning-node-ont-novelty), each have a kind of answer of their own.
+The fifteen questions are what turn this kind of judgment into something a check can enforce, because each one has a defined kind of answer. [Identity](ontology/REASONING.md#reasoning-node-ont-identity) asks what exists, and the answer is a set. [Structure](ontology/REASONING.md#reasoning-node-ont-structure) asks how the parts are arranged, and the answer is an ordering. [Relation](ontology/REASONING.md#reasoning-node-ont-relation) asks what a thing connects to, and the answer is a graph. [Probability](ontology/REASONING.md#reasoning-node-ont-probability) asks how sure each reading is, and the answer is a number between zero and one. The others, [composition](ontology/REASONING.md#reasoning-node-ont-composition), [space](ontology/REASONING.md#reasoning-node-ont-space), [time](ontology/REASONING.md#reasoning-node-ont-time), [state](ontology/REASONING.md#reasoning-node-ont-state), [change](ontology/REASONING.md#reasoning-node-ont-change), [behavior](ontology/REASONING.md#reasoning-node-ont-behavior), [function](ontology/REASONING.md#reasoning-node-ont-function), [cause](ontology/REASONING.md#reasoning-node-ont-cause), [meaning](ontology/REASONING.md#reasoning-node-ont-meaning), [scale](ontology/REASONING.md#reasoning-node-ont-scale) and [novelty](ontology/REASONING.md#reasoning-node-ont-novelty), each have a kind of answer of their own.
 
 A question with a defined kind of answer can be turned into a condition that a check can test. What that condition does from there is described in [from intent to predicate](architecture/COVERAGE.md#an-architecture-is-its-predicate-set), on the architecture page, and that is how a reading the developer did once becomes a check that runs every time.
 
@@ -198,26 +198,26 @@ E1·a the readings
 
 ```mermaid
 flowchart TB
-message["A message arrives"]
-subgraph readings["Read whole, in order"]
-identity["What exists"]
-composition["What it is made of"]
-structure["How the parts are arranged"]
-relation["What it connects to"]
-space["Where it sits"]
-time["When it happens"]
-state["The condition it is in"]
-change["How it is already moving"]
-behavior["What it does"]
-function["The role that doing serves"]
-cause["Why it happens"]
-meaning["What it signifies"]
-scale["The level it lives at"]
-probability["How sure each reading is"]
-novelty["What cuts against expectation"]
-end
-reply["The reply is that understanding, made explicit"]
-message --> identity --> composition --> structure --> relation --> space --> time --> state --> change --> behavior --> function --> cause --> meaning --> scale --> probability --> novelty --> reply
+    message["A message arrives"]
+    subgraph readings["Read whole, in order"]
+        identity["What exists"]
+        composition["What it is made of"]
+        structure["How the parts are arranged"]
+        relation["What it connects to"]
+        space["Where it sits"]
+        time["When it happens"]
+        state["The condition it is in"]
+        change["How it is already moving"]
+        behavior["What it does"]
+        function["The role that doing serves"]
+        cause["Why it happens"]
+        meaning["What it signifies"]
+        scale["The level it lives at"]
+        probability["How sure each reading is"]
+        novelty["What cuts against expectation"]
+    end
+    reply["The reply is that understanding, made explicit"]
+    message --> identity --> composition --> structure --> relation --> space --> time --> state --> change --> behavior --> function --> cause --> meaning --> scale --> probability --> novelty --> reply
 ```
 
 ## Three encodings
@@ -244,44 +244,44 @@ F1·a three encodings
 
 ```mermaid
 flowchart TB
-subgraph mechanical["Mechanical rules · what the tree must be"]
-checks["Checks, fixers, validators, generators"]
-end
-subgraph behavioral["Behavioral rules · how the agent is asked to work"]
-policy["One-line rules with stable names"]
-end
-subgraph context["Context architecture · what the agent knows and where"]
-cores["Agnostic cores · ontologies, templates, the standard"]
-adapter["One adapter · binds every slot to this tree"]
-digests["Digests · one concern each, expanding a rule"]
-memory["Memory · one fact per file, reference never authority"]
-end
-tree["The tree"]
-checks -- findings, healed or not --> policy
-policy -- a correction hardens into a rule --> policy
-policy -- a pattern stated twice becomes a check --> checks
-cores -- read through --> adapter
-adapter -- resolved slots --> policy
-digests -- expand --> policy
-memory -. recalled, then verified against .-> tree
-checks -- read and heal --> tree
-policy -- edits --> tree
+    subgraph mechanical["Mechanical rules · what the tree must be"]
+        checks["Checks, fixers, validators, generators"]
+    end
+    subgraph behavioral["Behavioral rules · how the agent is asked to work"]
+        policy["One-line rules with stable names"]
+    end
+    subgraph context["Context architecture · what the agent knows and where"]
+        cores["Agnostic cores · ontologies, templates, the standard"]
+        adapter["One adapter · binds every slot to this tree"]
+        digests["Digests · one concern each, expanding a rule"]
+        memory["Memory · one fact per file, reference never authority"]
+    end
+    tree["The tree"]
+    checks -- findings, healed or not --> policy
+    policy -- a correction hardens into a rule --> policy
+    policy -- a pattern stated twice becomes a check --> checks
+    cores -- read through --> adapter
+    adapter -- resolved slots --> policy
+    digests -- expand --> policy
+    memory -. recalled, then verified against .-> tree
+    checks -- read and heal --> tree
+    policy -- edits --> tree
 ```
 
 F1·b precedence
 
 ```mermaid
 flowchart TB
-policy["The behavior policy"]
-contract["The codebase contract"]
-boundary["A member's own boundary document"]
-digests["The per-concern digests"]
-canon["The document canon"]
-source["Source files"]
-memory["Memory"]
-tree["The tree on disk"]
-policy --> contract --> boundary --> digests --> canon --> source --> memory
-tree -. wins over every document, and the document is fixed the same turn .-> policy
+    policy["The behavior policy"]
+    contract["The codebase contract"]
+    boundary["A member's own boundary document"]
+    digests["The per-concern digests"]
+    canon["The document canon"]
+    source["Source files"]
+    memory["Memory"]
+    tree["The tree on disk"]
+    policy --> contract --> boundary --> digests --> canon --> source --> memory
+    tree -. wins over every document, and the document is fixed the same turn .-> policy
 ```
 
 ## Where a rule lives
@@ -304,18 +304,18 @@ G1·a two homes
 
 ```mermaid
 flowchart TB
-rule["A rule"]
-conversation["Held in the conversation"]
-restated["Restated every session"]
-fades["Fades as the context fills"]
-defaults["The model is back to its defaults"]
-tree["Held in the tree"]
-policy["A policy file given to the model every session"]
-check["A check that runs on every change"]
-holds["Held by the tree, not by memory"]
-rule --> conversation --> restated --> fades --> defaults
-rule --> tree --> policy --> holds
-tree --> check --> holds
+    rule["A rule"]
+    conversation["Held in the conversation"]
+    restated["Restated every session"]
+    fades["Fades as the context fills"]
+    defaults["The model is back to its defaults"]
+    tree["Held in the tree"]
+    policy["A policy file given to the model every session"]
+    check["A check that runs on every change"]
+    holds["Held by the tree, not by memory"]
+    rule --> conversation --> restated --> fades --> defaults
+    rule --> tree --> policy --> holds
+    tree --> check --> holds
 ```
 
 ## Rules with names
@@ -382,15 +382,15 @@ H1·c a correction hardens
 
 ```mermaid
 flowchart TB
-correction["A correction arrives"]
-classify["Classified to one encoding"]
-rule["One line · slug, directive, gate"]
-reason["Its reason · why it exists"]
-application["Its application · how it applies"]
-memory["A memory file · the fact, its why, its how"]
-search["Verified by search, never by recollection"]
-correction --> classify --> rule --> reason --> application --> memory --> search
-rule -. the class, never the instance .-> rule
+    correction["A correction arrives"]
+    classify["Classified to one encoding"]
+    rule["One line · slug, directive, gate"]
+    reason["Its reason · why it exists"]
+    application["Its application · how it applies"]
+    memory["A memory file · the fact, its why, its how"]
+    search["Verified by search, never by recollection"]
+    correction --> classify --> rule --> reason --> application --> memory --> search
+    rule -. the class, never the instance .-> rule
 ```
 
 ## A seat is a contract
@@ -517,62 +517,62 @@ J1·b delivery order
 
 ```mermaid
 flowchart TB
-subgraph resident["Resident · in force before the task is known"]
-axiom["The axiom · the stance, the readings, the hard prohibitions"]
-set["The document set · what governs what, and the precedence"]
-startup["Startup · what is read first, and in which order"]
-always["Rules that bite every turn"]
-end
-subgraph referenced["Referenced · presupposes a known task"]
-situational["Rules that fire on a matching task"]
-exceptions["Declared exceptions"]
-verify["How the work is verified · one chain"]
-tooling["How the tree is looked at"]
-notes["What the tree is"]
-digests["Digests · one concern each, expanding a rule"]
-end
-test{"Does it tell you how to find out what you are doing?"}
-test -- yes --> resident
-test -- no --> referenced
-axiom --> set --> startup --> always
-situational --> exceptions --> verify --> tooling --> notes
-resident -- delivery order --> referenced
-situational -. needs room .-> digests
+    subgraph resident["Resident · in force before the task is known"]
+        axiom["The axiom · the stance, the readings, the hard prohibitions"]
+        set["The document set · what governs what, and the precedence"]
+        startup["Startup · what is read first, and in which order"]
+        always["Rules that bite every turn"]
+    end
+    subgraph referenced["Referenced · presupposes a known task"]
+        situational["Rules that fire on a matching task"]
+        exceptions["Declared exceptions"]
+        verify["How the work is verified · one chain"]
+        tooling["How the tree is looked at"]
+        notes["What the tree is"]
+        digests["Digests · one concern each, expanding a rule"]
+    end
+    test{"Does it tell you how to find out what you are doing?"}
+    test -- yes --> resident
+    test -- no --> referenced
+    axiom --> set --> startup --> always
+    situational --> exceptions --> verify --> tooling --> notes
+    resident -- delivery order --> referenced
+    situational -. needs room .-> digests
 ```
 
 J1·c one binding per harness
 
 ```mermaid
 flowchart TB
-policy["The behavior document"]
-operations["Semantic operations · discover, read, search, analyze, execute, persist, report"]
-slots["Slots · the gate, the rule host, the test root, the depth cap"]
-binding["One binding per harness"]
-toolsA["Harness A · its tools, its file name"]
-toolsB["Harness B · its tools, its file name"]
-model["The model · an absent slot by construction"]
-policy --> operations --> binding
-policy --> slots --> binding
-binding --> toolsA
-binding --> toolsB
-policy -. names nothing about .-> model
+    policy["The behavior document"]
+    operations["Semantic operations · discover, read, search, analyze, execute, persist, report"]
+    slots["Slots · the gate, the rule host, the test root, the depth cap"]
+    binding["One binding per harness"]
+    toolsA["Harness A · its tools, its file name"]
+    toolsB["Harness B · its tools, its file name"]
+    model["The model · an absent slot by construction"]
+    policy --> operations --> binding
+    policy --> slots --> binding
+    binding --> toolsA
+    binding --> toolsB
+    policy -. names nothing about .-> model
 ```
 
 J1·d reader classes
 
 ```mermaid
 flowchart TB
-doc["The behavior document · delivered once, at startup"]
-seat["A seat"]
-bounded["A bounded invocation"]
-board["The board · delivered whole every round"]
-line["One projection line · the only board it ever sees"]
-invert["Turn-owning rules invert · returning is its contract"]
-routed["A change to the document is routed to the running parties"]
-doc --> seat --> board
-doc --> bounded --> line
-bounded --> invert
-doc -. an edit mid-session does not reach running parties .-> routed
+    doc["The behavior document · delivered once, at startup"]
+    seat["A seat"]
+    bounded["A bounded invocation"]
+    board["The board · delivered whole every round"]
+    line["One projection line · the only board it ever sees"]
+    invert["Turn-owning rules invert · returning is its contract"]
+    routed["A change to the document is routed to the running parties"]
+    doc --> seat --> board
+    doc --> bounded --> line
+    bounded --> invert
+    doc -. an edit mid-session does not reach running parties .-> routed
 ```
 
 ## The drop-in
@@ -609,35 +609,35 @@ K1·a a drop-in
 
 ```mermaid
 flowchart TB
-subgraph governance["The governance folder · copied whole, never edited for a feature"]
-policy["The behavior policy · named rules given to the model first"]
-checks["The checks · one file per rule, each proven to fire"]
-cores["The cores · reasoning that names no project"]
-binding["The binding · the one file that names this tree"]
-end
-code["The code · shaped by the grammar the checks parse"]
-command["The one command · every check, fixer, generator and validator"]
-binding -. resolves every slot the cores name .-> cores
-checks -. parse .-> code
-command --> checks
-policy -. governs .-> code
+    subgraph governance["The governance folder · copied whole, never edited for a feature"]
+        policy["The behavior policy · named rules given to the model first"]
+        checks["The checks · one file per rule, each proven to fire"]
+        cores["The cores · reasoning that names no project"]
+        binding["The binding · the one file that names this tree"]
+    end
+    code["The code · shaped by the grammar the checks parse"]
+    command["The one command · every check, fixer, generator and validator"]
+    binding -. resolves every slot the cores name .-> cores
+    checks -. parse .-> code
+    command --> checks
+    policy -. governs .-> code
 ```
 
 K1·b slot states
 
 ```mermaid
 flowchart LR
-core["A core names a slot"]
-binding{"What does the binding say?"}
-resolved["Resolved · the branch runs against this tree's value"]
-absent["Absent · the branch does not run, and says so"]
-deferred["Deferred · the branch is blocked until the value exists"]
-faked["Nothing declared · the branch runs against a guess"]
-core --> binding
-binding -- a value --> resolved
-binding -- declared absent --> absent
-binding -- declared deferred --> deferred
-binding -. no declaration .-> faked
+    core["A core names a slot"]
+    binding{"What does the binding say?"}
+    resolved["Resolved · the branch runs against this tree's value"]
+    absent["Absent · the branch does not run, and says so"]
+    deferred["Deferred · the branch is blocked until the value exists"]
+    faked["Nothing declared · the branch runs against a guess"]
+    core --> binding
+    binding -- a value --> resolved
+    binding -- declared absent --> absent
+    binding -- declared deferred --> deferred
+    binding -. no declaration .-> faked
 ```
 
 K1·c a binding

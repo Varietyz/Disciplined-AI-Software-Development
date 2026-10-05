@@ -386,10 +386,10 @@ export function lifetimeOf(target: string): Lifetime | null {
     return null;
 }
 
-const BEHAVIOUR_TREE = ".{provider}";
+const BEHAVIOR_TREE = ".{provider}";
 
-const inBehaviourTree = function inBehaviourTree(path: string): string {
-    return `${BEHAVIOUR_TREE}/${path}`;
+const inBehaviorTree = function inBehaviorTree(path: string): string {
+    return `${BEHAVIOR_TREE}/${path}`;
 };
 
 export const config: SurfaceConfig = defineSurfaceConfig({
@@ -535,8 +535,8 @@ export const config: SurfaceConfig = defineSurfaceConfig({
             "AGENTS.md",
             "the package's OWN axis document: the paste block, where every rule this package declares states the check enforcing it. It sits at the package root under the name agent runtimes read without configuration, so no runtime's own folder is needed to find it. It is distinct from the host's governance policy, which is where the PROJECTION is written. One is what this package declares and the other is what the host declares, and a single slot serving both makes the coverage check measure the host's rules against this package's checks.",
         ),
-        behaviour_tree: resolved(
-            BEHAVIOUR_TREE,
+        behavior_tree: resolved(
+            BEHAVIOR_TREE,
             "the package's own behavior tree: the rule digests, the reasoning protocols, the skills and the agent specifications. It ships under a placeholder name in slot syntax, and adoption renames the folder to the one the adopting runtime reads and replaces the placeholder wherever the package spells it, as BOOTSTRAP.md states. Every check reads this value rather than a literal, and the reference check fails a document path still naming the placeholder, so a partial adoption is a loud failure instead of a silent unresolved reference.",
         ),
         principle_canon: resolved(
@@ -548,7 +548,7 @@ export const config: SurfaceConfig = defineSurfaceConfig({
             "the naming and placement vocabulary, with its cross-slot agreement asserted at compile time. A finding about a declared root or container is reported against this file, because that is where the declaration lives.",
         ),
         checklist_template: resolved(
-            inBehaviourTree("templates/checklist.protocol.template.md"),
+            inBehaviorTree("templates/checklist.protocol.template.md"),
             "the planning protocol a checklist is executed from. The checklist gate DERIVES its contract from this file on every run rather than transcribing it, so the gate cannot drift from the protocol it enforces.",
         ),
         archive: resolved(
@@ -568,15 +568,15 @@ export const config: SurfaceConfig = defineSurfaceConfig({
             "the LIVE agenda: every planned invariant, what it must establish, and its current state. It is named for the function it performs, because a surface a mechanism parses POSITIONALLY cannot carry a name promising a reader they may annotate, reorder or append to it freely. The name and the parse would be two contracts over one file, and every defect found on this one was what a reader following the other name produces. It is declared because a successor is DECLARED by name rather than derived from an ordinal, so a declaration departing from the planned set displaces a subject, and without the agenda the only thing that catches such a departure is a seat noticing. Both operands are files, so the comparison is decidable and the surface has to be reachable by the walk that decides it.",
         ),
         rule_digests: resolved(
-            inBehaviourTree("rules"),
+            inBehaviorTree("rules"),
             "the digests that expand a declared rule, and a surface class that DIVIDES: its directive text is current truth and overwritten as enforcement changes, while a measured clause the rule DEPENDS ON is evidence nothing else in the tree holds a copy of. It is declared so the divide is stated where a mechanism reads it rather than only in the rule permitting the measurement, which is the same composition the roles root already carries. Present-tense and overwrite are each correct here and compose into a license to delete the only copy of a measurement.",
         ),
         agents: resolved(
-            inBehaviourTree("agents"),
+            inBehaviorTree("agents"),
             "the persisted agent specifications the agent template raises. Declared because it is the seeded end of a seeds relation: a template holds no content of its own and declares a lifetime FOR AN INSTANCE, so the seeded identity must resolve, or the seed points at nothing and reads exactly like one that resolved.",
         ),
         agent_template: resolved(
-            inBehaviourTree("templates/agent.protocol.template.md"),
+            inBehaviorTree("templates/agent.protocol.template.md"),
             "the shape a persisted agent specification is raised from.",
         ),
         model_template: resolved(
@@ -600,7 +600,7 @@ export const config: SurfaceConfig = defineSurfaceConfig({
             "the shape the workspace index is raised from. It carries no seeds entry for the same reason the document template does not.",
         ),
         conduct_roster: resolved(
-            inBehaviourTree("rules/conduct.rule.md"),
+            inBehaviorTree("rules/conduct.rule.md"),
             "the roster of rules no construct observes, and a MANDATED-WRITE surface: a registered walk refuses a row carrying no third cell, so every cell on it is a party write. It is declared because a mandate reaches only surfaces this configuration names. An undeclared target sits outside every walk built to observe exactly that, including the one whose subject it is, and such a walk can only ever report a mandate whose slot fails to RESOLVE rather than one whose surface has no slot at all.",
         ),
         fixtures: resolved(
@@ -608,7 +608,7 @@ export const config: SurfaceConfig = defineSurfaceConfig({
             "the proving samples every registered kind is certified against, and a MANDATED-WRITE surface for the same reason: the certifier counts an unproven kind into its open total, so a fixture pair naming the fired and the accepted member is a party write the pipeline requires. It is declared so that requirement is reachable by the walk that observes mandated writes, and so a lifetime resolves for every sample beneath it rather than for the directory alone.",
         ),
         binding: resolved(
-            inBehaviourTree("bindings/adapter.binding.md"),
+            inBehaviorTree("bindings/adapter.binding.md"),
             "the rendered prose face of this configuration. It is GENERATED, so the values live here, and a hand-edited binding is a second truth that disagrees the moment one moves.",
         ),
     },

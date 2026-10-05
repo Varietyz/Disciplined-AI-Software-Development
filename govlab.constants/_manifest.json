@@ -1,0 +1,83 @@
+{
+    "label": "GovLab Constants",
+    "summary": "The closed vocabularies more than one member reads: the ontology face and relation ids, the character classes with their predicates, and the American spelling table. It is one dependency-free package addressed by specifier, so no member restates a vocabulary another member owns.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "platform",
+            "sub": "utilities"},
+        {"meta": "developer-tooling",
+            "sub": "linting-quality"}
+    ],
+    "capabilities": [
+        "ontology-face-vocabulary",
+        "ontology-relation-vocabulary",
+        "character-class-predicates",
+        "american-spelling-table",
+        "specifier-addressed-constants"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "immutability",
+        "duplicate-code",
+        "separation-of-concerns"
+    ],
+    "visibility": {"private": true,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "docs": {
+        "overview": "A dependency-free package holding the vocabularies that cross a member boundary. The ontology constants name each collection face (`ARCH_FACE`, `REASON_FACE` and their peers), the separator a face-qualified reference splits on, and each relation id an ontology edge carries. The character constants list the letters, digits and whitespace a scanner tests against, and the character predicates answer membership through a set lookup, so no consumer writes a regex. The word constants hold the British-to-American spelling table the word codemod and the site search both read.",
+        "whenToUse": [
+            "Two or more members agree on the same closed set of strings, and duplicating it would let the copies drift.",
+            "A scanner needs to test whether a character is a letter, a digit, whitespace or part of an identifier.",
+            "A member builds or splits a face-qualified ontology reference, or names an ontology relation."
+        ],
+        "whenNotToUse": [
+            "A constant only one member reads. It stays in that member's own constants folder.",
+            "A tunable a consumer should be able to override. It belongs in `.govlab/govlab.config.ts`, not in a shipped closed set.",
+            "Behavior beyond a membership test. The predicates are the only functions here."
+        ],
+        "quickStart": [
+            {
+                "intent": "Split a face-qualified reference and test a character",
+                "lang": "ts",
+                "code": "import { FACE_SEPARATOR, ONTOLOGY_FACES, isDigit } from \"@govlab/constants\";\n\nconst [face] = \"architecture:single-source-of-truth\".split(FACE_SEPARATOR);\nONTOLOGY_FACES.has(face ?? \"\");\nisDigit(\"7\");"
+            },
+            {
+                "intent": "Read the spelling table",
+                "lang": "ts",
+                "code": "import { AMERICAN_WORDS } from \"@govlab/constants\";\n\nAMERICAN_WORDS[\"behaviour\"];"
+            }
+        ],
+        "configuration": "None. The package exposes no options and reads no config.",
+        "install": "A private workspace package resolved through the root `package.json` workspaces glob `govlab.root/govlab.*`. One `npm install` at the repo root links it. It has no build step and no runtime dependency, so importing `@govlab/constants` is the whole integration.",
+        "disposal": [
+            "Move each vocabulary into the member that owns it, and point every other reader at that member's specifier.",
+            "Drop `@govlab/constants` from every package's `dependencies`.",
+            "Remove `govlab.root/govlab.constants/`, its `containers` entry in `.govlab/shared/configs/taxonomy.config.ts` and its tests under `codebase.testing/test.govlab/constants/`."
+        ],
+        "aiContext": [
+            "Import by the specifier `@govlab/constants`, never by relative path. Inside the package, a file reaches another through its `#configuration/*` and `#core/*` imports map.",
+            "The constants live in `configuration/constants/` and the predicates in `core/predicates/`, so a constant file carries no function.",
+            "These are closed vocabularies, and adding an entry to make a check pass is banned. Add a word that names something that exists, or rename the thing."
+        ],
+        "apiNotes": [
+            {"name": "ONTOLOGY_FACES",
+                "note": "every declared face, the set a reference prefix is checked against."},
+            {
+                "name": "FACE_SEPARATOR",
+                "note": "the character that separates a face from the record id in a qualified reference."
+            },
+            {
+                "name": "isIdentifierChar",
+                "note": "true for a single letter, digit or joiner, and false for anything longer than one character."
+            },
+            {
+                "name": "AMERICAN_WORDS",
+                "note": "each British spelling mapped to its American form. `IZE_STEMS` and `IZE_SUFFIXES` cover the -ise family by rule instead of by word."
+            }
+        ]
+    }
+}

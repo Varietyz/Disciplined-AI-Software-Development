@@ -1,0 +1,804 @@
+{
+    "category": "codebase-verification",
+    "tier": "process",
+    "check": {
+        "by": ["the authoritative verification suite, whose output is the only completion signal"],
+        "population": "every file the suite checks",
+        "freshness": "a verdict stands until the code changes or a fix is applied",
+        "refusal": "the loop reports no completion until the suite passes, and stops at its iteration bound with the residue reported",
+        "observation": "none: compliance is decided on the suite's output",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the suite's output, which a completion claim cites"
+    },
+    "records": [
+        {
+            "id": "verification-loop",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Verification Loop",
+            "exemplar": {
+                "before": "A one-shot fix attempt, unverified — some violations remain, and neither the developer nor the model notices.",
+                "after": "init → verify → classify failures → fix → re-verify → repeat until pass or iteration limit",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Initialize verification context, execute the verification suite, classify failures, remediate violations, and repeat until pass or iteration limit.",
+            "invariant": "Architectural compliance is achieved through bounded verify-classify-fix cycles, not one-shot remediation.",
+            "flow": [
+                "Init",
+                "Verify",
+                "Classify",
+                "Fix",
+                "Reverify",
+                "Pass|Limit"
+            ],
+            "productions": [
+                {
+                    "lhs": "VerificationLoop",
+                    "rhs": "<Initialization> \"→\" <VerificationRun> \"→\" (<PassReport> | <ViolationClassification> \"→\" <RemediationCycle> \"→\" <VerificationLoop>)"
+                },
+                {"lhs": "LoopExit",
+                    "rhs": "\"passed\" | \"max_iterations_reached\""}
+            ],
+            "composes": ["violation-classification"],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "context-initialization",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Context Initialization",
+            "exemplar": {
+                "before": "Failures interpreted with no known rule context, so fixes miss the point.",
+                "after": "discover architecture docs + design guidance → init result containers + iteration counter + max attempts",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Discover architecture documents, load design guidance, initialize result containers, set iteration counters, and define maximum remediation attempts.",
+            "invariant": "Verification requires a known rule context before failures can be interpreted.",
+            "flow": [
+                "DiscoverRules",
+                "LoadGuidance",
+                "InitializeState",
+                "SetBounds"
+            ],
+            "productions": [
+                {
+                    "lhs": "ContextInitialization",
+                    "rhs": "<RuleDiscovery> \"→\" <GuidanceLoad> \"→\" <VerificationState> \"→\" <IterationBound>"
+                },
+                {
+                    "lhs": "VerificationState",
+                    "rhs": "\"verification_results\" \",\" \"iteration_count\" \",\" \"max_iterations\""
+                }
+            ],
+            "composes": ["iteration-bound"],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "verification-execution",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Verification Execution",
+            "exemplar": {
+                "before": "Compliance asserted from confidence, not from the verifier's output.",
+                "after": "run verification suite → capture raw output → parse errors + warnings → pass = errors.length == 0",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Run the configured verification procedure, capture raw output, parse errors and warnings, and derive pass status from zero-error condition.",
+            "invariant": "Compliance status must be based on executable verification output, not inferred confidence.",
+            "flow": [
+                "ExecuteSuite",
+                "CaptureOutput",
+                "ParseErrors",
+                "ParseWarnings",
+                "PassBoolean"
+            ],
+            "productions": [
+                {
+                    "lhs": "VerificationExecution",
+                    "rhs": "<VerificationCommand> \"→\" <RawOutput> \"→\" <ParsedResult>"
+                },
+                {"lhs": "ParsedResult",
+                    "rhs": "<ErrorSet> \",\" <WarningSet> \",\" <PassStatus>"},
+                {"lhs": "PassStatus",
+                    "rhs": "\"errors.length == 0\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "early-success-exit",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Early Success Exit",
+            "exemplar": {
+                "before": "A clean verification result still triggers unnecessary remediation.",
+                "after": "parsed result → is pass? → report zero-violations success and terminate, no mutation",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "If verification has no errors, report successful compliance and terminate without remediation.",
+            "invariant": "A clean verification result is terminal and must not trigger unnecessary mutation.",
+            "flow": [
+                "VerificationResult",
+                "IsPass?",
+                "ReportSuccess|Continue"
+            ],
+            "productions": [
+                {"lhs": "EarlyExit",
+                    "rhs": "<ParsedResult> \"→\" <PassCheck> \"→\" <SuccessReport>"},
+                {"lhs": "PassCheck",
+                    "rhs": "\"true\" | \"false\""},
+                {"lhs": "SuccessReport",
+                    "rhs": "\"zero_violations\""}
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "violation-classification",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Violation Classification",
+            "exemplar": {
+                "before": "Errors fixed by ad hoc text editing, not by their semantics.",
+                "after": "each error → category{file_limit | import | naming | base_class | css_token | dom_factory | console | lifecycle} → matching strategy",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each verification error, classify the violation into a known remediation category and attach the matching strategy.",
+            "invariant": "Fixes must be selected by violation semantics, not by ad hoc text editing.",
+            "flow": [
+                "Error",
+                "Category",
+                "Strategy"
+            ],
+            "productions": [
+                {"lhs": "ViolationClassification",
+                    "rhs": "<ErrorSet> \"→\" <CategorizedViolationSet>"},
+                {
+                    "lhs": "Category",
+                    "rhs": "\"file_limit\" | \"import_pattern\" | \"naming\" | \"base_class\" | \"css_token\" | \"dom_factory\" | \"console\" | \"lifecycle\" | \"unknown\""
+                },
+                {"lhs": "CategorizedViolation",
+                    "rhs": "<Error> \",\" <Category> \",\" <RemediationStrategy>"}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "severity-ordered-remediation",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Severity-Ordered Remediation",
+            "exemplar": {
+                "before": "A cosmetic warning fixed before a structural blocker.",
+                "after": "classified violations → group by category → order by severity → fix highest architectural risk first",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Group classified violations by category, order groups by severity, and apply fixes from highest architectural risk to lowest.",
+            "invariant": "Remediation should resolve structural blockers before cosmetic or secondary violations.",
+            "flow": [
+                "CategorizedViolations",
+                "SeveritySort",
+                "OrderedFixQueue"
+            ],
+            "productions": [
+                {
+                    "lhs": "SeverityOrdering",
+                    "rhs": "<ViolationCategorySet> \"→\" <SeverityRank> \"→\" <OrderedViolationQueue>"
+                },
+                {"lhs": "SeverityRank",
+                    "rhs": "\"critical\" | \"high\" | \"medium\" | \"low\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "iteration-bound",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Iteration Bound",
+            "exemplar": {
+                "before": "Automated remediation loops forever on an unfixable violation.",
+                "after": "increment iteration → compare to max → {continue | stop, manual review required}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Increment iteration count before remediation, compare it to the maximum allowed attempts, and stop with partial success when the bound is exceeded.",
+            "invariant": "Automated remediation must be bounded to avoid infinite repair loops.",
+            "flow": [
+                "Increment",
+                "CompareLimit",
+                "Continue|PartialExit"
+            ],
+            "productions": [
+                {
+                    "lhs": "IterationBound",
+                    "rhs": "<IterationCount> \"→\" <Increment> \"→\" <LimitCheck> \"→\" <LoopDecision>"
+                },
+                {"lhs": "LoopDecision",
+                    "rhs": "\"continue_remediation\" | \"stop_manual_review_required\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "file-scoped-fix",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "File-Scoped Fix",
+            "exemplar": {
+                "before": "A fix edits broadly, breaking things the verifier didn't flag.",
+                "after": "violation → read file → analyze → transform per design guidance → write updated content",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Read the violating file, analyze the violation type, transform content according to design guidance, write the updated content, and preserve compatibility with verification rules.",
+            "invariant": "Each fix is a localized transformation constrained by architectural guidance.",
+            "flow": [
+                "ReadFile",
+                "AnalyzeViolation",
+                "Transform",
+                "WriteFile"
+            ],
+            "productions": [
+                {
+                    "lhs": "FileScopedFix",
+                    "rhs": "<Violation> \"→\" <FileRead> \"→\" <ViolationAnalysis> \"→\" <DesignGuidedTransformation> \"→\" <FileWrite>"
+                },
+                {
+                    "lhs": "DesignGuidedTransformation",
+                    "rhs": "<CurrentContent> \",\" <ViolationType> \",\" <DesignGuide> \"→\" <UpdatedContent>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "file-limit-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "File Limit Remediation",
+            "exemplar": {
+                "before": "An oversized file trimmed by deleting code instead of splitting responsibility.",
+                "after": "oversized file → split responsibilities into compliant artifacts → preserve imports/exports → rewire references → size <= limit",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "When a file exceeds the allowed size, split responsibilities into smaller compliant artifacts, preserve imports and exports, and rewire references.",
+            "invariant": "Size violations usually indicate excessive responsibility concentration.",
+            "flow": [
+                "OversizedFile",
+                "ResponsibilitySplit",
+                "NewArtifacts",
+                "ReferenceUpdate",
+                "SizeCheck"
+            ],
+            "productions": [
+                {
+                    "lhs": "FileLimitFix",
+                    "rhs": "<OversizedArtifact> \"→\" <ResponsibilityPartition> \"→\" <ArtifactSplit> \"→\" <ReferenceRewrite> \"→\" <LineLimitValidation>"
+                },
+                {"lhs": "LineLimitValidation",
+                    "rhs": "\"line_count <= configured_limit\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "import-boundary-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Import Boundary Remediation",
+            "exemplar": {
+                "before": "A cross-boundary import error silenced without restoring the boundary.",
+                "after": "invalid import → boundary rule{same-module | shared | adapter} → approved path → rewrite → verify dependency direction",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect invalid cross-boundary imports, locate the approved dependency path or shared abstraction, rewrite imports, and verify dependency direction.",
+            "invariant": "Import fixes must restore architectural boundaries rather than merely silence errors.",
+            "flow": [
+                "InvalidImport",
+                "BoundaryRule",
+                "ApprovedPath",
+                "RewriteImport",
+                "DependencyCheck"
+            ],
+            "productions": [
+                {
+                    "lhs": "ImportBoundaryFix",
+                    "rhs": "<ImportViolation> \"→\" <BoundaryPolicy> \"→\" <AllowedReference> \"→\" <ImportRewrite> \"→\" <DependencyValidation>"
+                },
+                {
+                    "lhs": "BoundaryPolicy",
+                    "rhs": "\"same_module_only\" | \"shared_boundary_required\" | \"adapter_boundary_required\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "naming-convention-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Naming Convention Remediation",
+            "exemplar": {
+                "before": "A file renamed but its references left dangling.",
+                "after": "invalid name → naming rule → compliant identifier → rename → update all references (identity migration)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compare file, folder, class, or symbol names against naming rules, derive compliant names, rename artifacts, and update all references.",
+            "invariant": "Naming remediation requires identity migration, not isolated renaming.",
+            "flow": [
+                "InvalidName",
+                "NamingRule",
+                "NewName",
+                "Rename",
+                "ReferenceUpdate"
+            ],
+            "productions": [
+                {
+                    "lhs": "NamingFix",
+                    "rhs": "<NamingViolation> \"→\" <NamingConvention> \"→\" <CompliantIdentifier> \"→\" <RenameOperation> \"→\" <ReferenceConsistencyCheck>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "base-class-compliance-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Base-Class Compliance Remediation",
+            "exemplar": {
+                "before": "A class missing its required base 'fixed' by silencing the rule.",
+                "after": "class role → expected base → refactor inheritance/composition → migrate duplicated lifecycle into hooks → verify behavior represented",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect classes missing required base abstraction, refactor inheritance or composition according to role rules, migrate duplicated lifecycle logic into hooks, and verify behavior remains represented.",
+            "invariant": "Base-class violations are architectural adoption failures.",
+            "flow": [
+                "NonCompliantClass",
+                "ExpectedBase",
+                "RefactorExtension",
+                "HookMigration",
+                "Verify"
+            ],
+            "productions": [
+                {
+                    "lhs": "BaseClassFix",
+                    "rhs": "<ClassRole> \"→\" <ExpectedBaseAbstraction> \"→\" <InheritanceOrCompositionUpdate> \"→\" <LifecycleHookMigration> \"→\" <ComplianceCheck>"
+                },
+                {
+                    "lhs": "ComplianceCheck",
+                    "rhs": "\"class_extends_expected_base\" | \"uses_required_composition_boundary\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "css-token-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "CSS Token Remediation",
+            "exemplar": {
+                "before": "A hardcoded color left in place, the rule disabled instead.",
+                "after": "hardcoded style value → resolve design token{existing | new | manual review} → replace → style validation",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Replace hardcoded style values with approved design tokens, verify token availability, and run style validation.",
+            "invariant": "Presentation constants should resolve through design-system tokens.",
+            "flow": [
+                "HardcodedStyle",
+                "TokenLookup",
+                "Replacement",
+                "StyleValidation"
+            ],
+            "productions": [
+                {
+                    "lhs": "CssTokenFix",
+                    "rhs": "<HardcodedStyleValue> \"→\" <DesignTokenResolution> \"→\" <TokenReplacement> \"→\" <StyleValidation>"
+                },
+                {
+                    "lhs": "DesignTokenResolution",
+                    "rhs": "\"existing_token\" | \"new_token_required\" | \"manual_review_required\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "dom-factory-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "DOM Factory Remediation",
+            "exemplar": {
+                "before": "Direct document.createElement kept, the rule ignored.",
+                "after": "direct DOM{querySelector, createElement, innerHTML, direct event} → approved creation boundary → factory rewrite → lifecycle check",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Replace direct DOM manipulation with the approved DOM factory, component factory, or rendering abstraction.",
+            "invariant": "DOM creation must flow through the sanctioned construction boundary.",
+            "flow": [
+                "DirectDOM",
+                "FactoryBoundary",
+                "Rewrite",
+                "BehaviorCheck"
+            ],
+            "productions": [
+                {
+                    "lhs": "DomFactoryFix",
+                    "rhs": "<DirectDomUsage> \"→\" <ApprovedCreationBoundary> \"→\" <FactoryRewrite> \"→\" <LifecycleCompatibilityCheck>"
+                },
+                {
+                    "lhs": "DirectDomUsage",
+                    "rhs": "\"document.querySelector\" | \"document.createElement\" | \"innerHTML\" | \"direct_event_binding\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification",
+                "object_creation"
+            ]
+        },
+        {
+            "id": "console-usage-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Console Usage Remediation",
+            "exemplar": {
+                "before": "A console.log left in and the rule bypassed.",
+                "after": "console call → logger severity mapping{log→info, warn→warn, error→error} → replace → verify no direct console remains",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Replace direct console calls with the approved logging abstraction, preserve severity and message context, and verify no direct console usage remains.",
+            "invariant": "Observability should be centralized behind a logging contract.",
+            "flow": [
+                "ConsoleCall",
+                "LoggerMapping",
+                "Replacement",
+                "SearchNoConsole"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConsoleFix",
+                    "rhs": "<ConsoleUsage> \"→\" <LoggerSeverityMapping> \"→\" <LoggerReplacement> \"→\" <ConsoleAbsenceCheck>"
+                },
+                {
+                    "lhs": "LoggerSeverityMapping",
+                    "rhs": "\"console.log→info\" | \"console.warn→warn\" | \"console.error→error\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency",
+                "correctness_verification",
+                "observability_traceability",
+                "event_messaging"
+            ]
+        },
+        {
+            "id": "lifecycle-symmetry-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Lifecycle Symmetry Remediation",
+            "exemplar": {
+                "before": "A resource acquired with no release path, leaking.",
+                "after": "lifecycle violation → acquired resources → add destroy/teardown → verify created == destroyed",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect resources created without corresponding cleanup, add destroy or teardown paths, and verify create/destroy symmetry.",
+            "invariant": "Lifecycle compliance requires every acquired resource to have a release path.",
+            "flow": [
+                "AcquireResource",
+                "MissingRelease?",
+                "AddCleanup",
+                "SymmetryCheck"
+            ],
+            "productions": [
+                {
+                    "lhs": "LifecycleFix",
+                    "rhs": "<LifecycleViolation> \"→\" <AcquiredResourceSet> \"→\" <CleanupRequirementSet> \"→\" <DestroyPathUpdate> \"→\" <SymmetryValidation>"
+                },
+                {"lhs": "SymmetryValidation",
+                    "rhs": "\"created_resources == destroyed_resources\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "stylelint-post-fix",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Stylelint Post-Fix",
+            "exemplar": {
+                "before": "The next architectural cycle runs on style-broken code.",
+                "after": "remediation → run style validation → fix style errors → block re-verification until style passes",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "After remediation, run style validation, parse style errors, apply style-specific corrections, and block re-verification until style checks pass or are reported.",
+            "invariant": "Syntax and style conformance must be restored before the next architectural verification cycle.",
+            "flow": [
+                "Remediation",
+                "Stylelint",
+                "StyleErrors?",
+                "FixStyle",
+                "Continue"
+            ],
+            "productions": [
+                {
+                    "lhs": "StylePostValidation",
+                    "rhs": "<RemediatedArtifacts> \"→\" <StyleValidationRun> \"→\" (<StylePass> | <StyleFixCycle>)"
+                },
+                {
+                    "lhs": "StyleFixCycle",
+                    "rhs": "<StyleErrorSet> \"→\" <StyleCorrectionSet> \"→\" <StyleValidationRun>"
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "reverification-gate",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Reverification Gate",
+            "exemplar": {
+                "before": "Local corrections trusted as global compliance.",
+                "after": "fixes applied → local validation → rerun the full authoritative verification suite",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "After fixes and style validation, rerun the full verification suite rather than trusting local corrections.",
+            "invariant": "Only the authoritative verification suite can confirm global compliance.",
+            "flow": [
+                "FixesApplied",
+                "LocalValidation",
+                "FullVerification"
+            ],
+            "productions": [
+                {
+                    "lhs": "ReverificationGate",
+                    "rhs": "<RemediationResult> \"→\" <PostFixValidation> \"→\" <VerificationExecution>"
+                }
+            ],
+            "composes": ["verification-execution"],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "partial-success-reporting",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Partial Success Reporting",
+            "exemplar": {
+                "before": "Iteration bound hit and the run silently reports success.",
+                "after": "max iterations → remaining violations categorized → mark result manual-review-required (visible, actionable residue)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "When iteration bounds are exhausted, report remaining violations, categorize unresolved issues, and mark the result as requiring manual review.",
+            "invariant": "Bounded automation should fail visibly with actionable residue.",
+            "flow": [
+                "MaxIterations",
+                "RemainingViolations",
+                "ManualReviewReport"
+            ],
+            "productions": [
+                {
+                    "lhs": "PartialSuccessReport",
+                    "rhs": "<IterationLimitReached> \"→\" <RemainingViolationSet> \"→\" <ManualReviewRequired>"
+                },
+                {
+                    "lhs": "ManualReviewRequired",
+                    "rhs": "\"remaining_errors\" \",\" \"remaining_warnings\" \",\" \"blocked_categories\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "completion-report",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Completion Report",
+            "exemplar": {
+                "before": "A report that mixes fixed violations with tolerated warnings.",
+                "after": "final state → {total iterations, fixed count, remaining warnings, final status{passed | partial | failed}}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Report total iterations, fixed error count, remaining warnings, and final verification status.",
+            "invariant": "Completion output should separate fixed violations from tolerated or remaining warnings.",
+            "flow": [
+                "FinalState",
+                "Iterations",
+                "FixedCount",
+                "WarningCount",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "CompletionReport",
+                    "rhs": "<FinalVerificationState> \",\" <IterationCount> \",\" <FixedCount> \",\" <RemainingWarningCount>"
+                },
+                {"lhs": "FinalVerificationState",
+                    "rhs": "\"passed\" | \"partial_success\" | \"failed\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "codebase-verification-kernel",
+            "principleRef": "verification",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "context-initialization"},
+                {"stage": "derive",
+                    "record": "violation-classification"},
+                {"stage": "intent",
+                    "record": "severity-ordered-remediation"},
+                {"stage": "act",
+                    "record": "file-scoped-fix"},
+                {"stage": "verify",
+                    "record": "verification-execution"},
+                {"stage": "commit",
+                    "record": "completion-report"},
+                {"stage": "terminate",
+                    "record": "iteration-bound"}
+            ],
+            "title": "Codebase Verification Kernel",
+            "exemplar": {
+                "before": "Compliance claimed after one edit, never re-verified.",
+                "after": "context → verify → parse → pass? → classify → severity-order fix → style validate → reverify → repeat until zero errors or bound",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load compliance context, run verification, parse results, exit on pass, classify violations on failure, remediate by severity, run post-fix style validation, and repeat until zero errors or iteration limit.",
+            "invariant": "Codebase verification is a bounded remediation state machine driven by authoritative compliance output.",
+            "flow": [
+                "Context",
+                "Verify",
+                "Parse",
+                "Pass?",
+                "Classify",
+                "Fix",
+                "StyleValidate",
+                "Reverify",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "CodebaseVerificationKernel",
+                    "rhs": "<ContextInitialization> \"→\" <VerificationExecution> \"→\" (<EarlyExit> | <ViolationClassification> \"→\" <IterationBound> \"→\" <SeverityOrdering> \"→\" <FileScopedFix> \"→\" <StylePostValidation> \"→\" <ReverificationGate>) \"→\" <CompletionReport>"
+                },
+                {"lhs": "SuccessCondition",
+                    "rhs": "\"verification_errors == 0\""},
+                {"lhs": "FailureBound",
+                    "rhs": "\"iteration_count > max_iterations\""}
+            ],
+            "composes": [
+                "context-initialization",
+                "verification-execution",
+                "violation-classification",
+                "iteration-bound",
+                "file-scoped-fix",
+                "reverification-gate",
+                "completion-report"
+            ],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "compliance-verification-concern",
+            "title": "<Compliance Verification Concern>",
+            "intent": "<Load rules> → <Run authoritative verifier> → <Parse failures> → <Classify by violation type> → <Apply bounded fixes> → <Run local post-fix validation> → <Rerun verifier> → <Exit on pass or bound>",
+            "invariant": "Any programmatic compliance workflow should be treated as a bounded verification-remediation loop whose only completion signal is the authoritative verifier passing.",
+            "flow": [
+                "Rules",
+                "Verify",
+                "Errors",
+                "Categories",
+                "Fixes",
+                "LocalValidation",
+                "Reverify",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "ComplianceConcern",
+                    "rhs": "<RuleContext> \"→\" <AuthoritativeVerification> \"→\" <ViolationRegistry> \"→\" <RemediationQueue> \"→\" <BoundedMutationCycle> \"→\" <Reverification> \"→\" <FinalStatus>"
+                },
+                {"lhs": "FinalStatus",
+                    "rhs": "\"passed\" | \"partial_success_manual_review\" | \"failed\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"],
+            "meta": true
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../../LICENSE.",
+    "check": {
+        "by": [
+            "the template round-trip check, which fills the template and validates the result against the grammar",
+            "the slot check, which requires every declared slot to appear in the body and every slot in the body to be declared"
+        ],
+        "population": "this template's body and slots, and every document created from it",
+        "freshness": "a verdict stands until the template, its document type or the grammar changes",
+        "refusal": "the gate fails on a dangling slot, an unregistered type, or a filled template that does not validate",
+        "observation": "none: a template is static text, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a slot the body never carries and a template of an unregistered type, another plants a retired head in a real template, and every filled template validates clean",
+        "authority": "the template's document type and the grammar, which every document created from the template conforms to"
+    },
+    "type": "WORKFLOW",
+    "title": "Workflow Meta-Template",
+    "slots": [
+        {"name": "WORKFLOW_NAME",
+            "description": "kebab-case workflow name",
+            "required": true,
+            "kind": "string"},
+        {
+            "name": "WORKFLOW_PURPOSE",
+            "description": "one-line statement of what the workflow orchestrates",
+            "required": true,
+            "kind": "string"
+        },
+        {"name": "WORKFLOW_INTENT",
+            "description": "the workflow's intent",
+            "required": true,
+            "kind": "string"},
+        {"name": "OBJECTIVE",
+            "description": "measurable success criteria",
+            "required": true,
+            "kind": "string"},
+        {
+            "name": "NODE_ONE_TITLE",
+            "description": "title of the discovery/input node",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "INPUT_SOURCE",
+            "description": "where the workflow reads its input",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "ANALYSIS_TARGET",
+            "description": "what the input is analyzed for",
+            "required": true,
+            "kind": "string"
+        },
+        {"name": "NODE_TWO_TITLE",
+            "description": "title of the transform node",
+            "required": true,
+            "kind": "string"},
+        {
+            "name": "TRANSFORM_RULE",
+            "description": "the rule each item is transformed by",
+            "required": true,
+            "kind": "string"
+        },
+        {"name": "OUTPUT_TARGET",
+            "description": "where results are written",
+            "required": true,
+            "kind": "string"}
+    ],
+    "constraints": [
+        "declaration_required",
+        "gate_per_node",
+        "contract_reads_prior_output",
+        "population_declared",
+        "refusal_before_write",
+        "invariant_has_objector",
+        "no_autonomous_spawn",
+        "single_source_of_truth"
+    ],
+    "body": "---\nname: {WORKFLOW_NAME}\ntype: WORKFLOW\nversion: 1.0.0\n---\n\nTHIS WORKFLOW EXECUTES {WORKFLOW_PURPOSE}\n\n%% META %%:\n    intent: \"{WORKFLOW_INTENT}\"\n    objective: \"{OBJECTIVE}\"\n    jurisdiction: {INPUT_SOURCE} and {OUTPUT_TARGET} | external: every other surface\n    recursion_limit: 2\n\n# NODE 1 — {NODE_ONE_TITLE}   [epistemic · analysis · set-theory · yields: set]\n@purpose: \"read the input and see it through the analysis the workflow is for\"\n@genesis: existence\nCONTRACT:\n  input:     {INPUT_SOURCE}\n  transform: READ_RESOURCE {INPUT_SOURCE} INTO input; ANALYZE_CONTENT input AGAINST {ANALYSIS_TARGET} INTO analysis\n  output:    analysis\nHANDOFF GATE (evidence-bearing):\n  [check] input read from {INPUT_SOURCE} (evidence: the read returned content) over: {INPUT_SOURCE} measured: <read> / <declared>\n  [check] analysis produced (evidence: a count above zero)\n  [check] every entry of analysis names its source in input (evidence: no entry with an empty source)\n  result: pass → NODE 2 | empty → REPAIR (owner: NODE 1) | unknown → BLOCKED\n\n# NODE 2 — {NODE_TWO_TITLE}   [epistemic · formalization · computation · yields: procedure]\n@purpose: \"transform every item by one rule, preserving what the next node needs\"\n@genesis: transformation\nCONTRACT:\n  input:     analysis from NODE 1\n  transform: FOR EACH item IN analysis: COMPOSE_ARTIFACT result FROM item USING {TRANSFORM_RULE}; APPEND result TO results\n  preserves: the source of every item\n  output:    results\nHANDOFF GATE:\n  [check] one result per item (evidence: the two counts match) over: analysis measured: <transformed> / <items>\n  [check] every result conforms to {TRANSFORM_RULE} (evidence: VALIDATE_ARTIFACT passed on each)\n  [check] analysis unchanged (evidence: a witness read)\n  result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED\n\n# NODE 3 — FINALIZATION   [evaluative · representation · information-theory · yields: artifact]\n@purpose: \"persist the results once, refuse a stale destination, and report to the parties whose next work they create\"\n@genesis: constraint\nCONTRACT:\n  input:     results from NODE 2\n  transform: PERSIST_ARTIFACT results TO {OUTPUT_TARGET}; REPORT_RESULT completion TO <the parties whose next work it creates>\n  output:    {OUTPUT_TARGET}\n  freshness: fingerprint(results) + fingerprint(this document)\nHANDOFF GATE:\n  [check] {OUTPUT_TARGET} persisted (evidence: a read returns it) over: results measured: <persisted> / <results>\n  [check] completion reported (evidence: the report)\n  [check] entry count of {OUTPUT_TARGET} matches results (evidence: the two numbers)\n  refuse: {OUTPUT_TARGET} changed since it was read before PERSIST_ARTIFACT\n  standing: moved-set none\n  result: pass → TERMINATE | loss → REPAIR (owner: NODE 3) | unknown → BLOCKED\n\n# CROSS-NODE INVARIANTS\nINVARIANT prior-output-only: a node reads only the prior node's output over: every node binds: the workflow objector: [check] input names NODE n-1 or a slot\nINVARIANT one-truth: one fact has one home across the nodes over: every artifact binds: the workflow objector: [check] entry count of the output matches results\nINVARIANT no-spawn: no autonomous party is spawned over: every node binds: the workflow objector: none\n\nREPORT:\n  subject: NODE 3\n  verdict: pass | fail | unknown\n  domain: declared <results> measured <persisted>\n  completion: saturated <bool> complete <bool> verified <bool>\n"
+}

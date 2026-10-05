@@ -1,0 +1,277 @@
+{
+    "category": "schema-canonical-data-semantics",
+    "records": [
+        {
+            "name": "Flexible Input",
+            "kind": "quality-attribute",
+            "definition": "The degree to which strictly validating every payload rejects the loosely-shaped input a caller might legitimately send."
+        },
+        {
+            "name": "Untyped Payloads",
+            "kind": "anti-pattern",
+            "definition": "Accepting data at a boundary with no schema, so malformed or unexpected shapes flow in unchecked."
+        },
+        {
+            "name": "Dynamic Untyped Boundaries",
+            "distinctFrom": [
+                {
+                    "id": "architecture:stringly-typed-programming",
+                    "reason": "Untyped boundaries pass untyped values between modules, while stringly typed programming encodes states and types as strings anywhere in the code."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Passing untyped values across module or service boundaries, so type errors surface only at runtime."
+        },
+        {
+            "name": "Explicit Types",
+            "kind": "constraint",
+            "definition": "The requirement that values crossing a boundary carry explicit, declared types rather than open-ended ones."
+        },
+        {
+            "name": "Rapid Scripting",
+            "kind": "quality-attribute",
+            "definition": "The degree to which requiring explicit types slows the quick, exploratory coding that dynamic typing allows."
+        },
+        {
+            "name": "Bounded Context Autonomy",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enforcing one canonical model limits each bounded context's freedom to model its own domain."
+        },
+        {
+            "name": "Multiple Competing Models",
+            "kind": "anti-pattern",
+            "definition": "Several inconsistent models of the same concept coexisting, so translations between them drift and conflict."
+        },
+        {
+            "name": "Normalized Translation",
+            "kind": "capability",
+            "definition": "The ability to translate between systems through one shared canonical form rather than many pairwise mappings."
+        },
+        {
+            "name": "Bounded Context Purity",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:local-model-autonomy",
+                    "reason": "Bounded context purity is each context's concepts staying clean, while local model autonomy is each context being free to evolve its own model."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The degree to which sharing one enterprise data model erodes the conceptual purity of each bounded context."
+        },
+        {
+            "name": "Cross-System Mapping",
+            "kind": "capability",
+            "definition": "The ability to map data between systems through a single shared canonical representation."
+        },
+        {
+            "name": "Local Model Autonomy",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a bounded context is free to define and evolve its own data model independently of a shared canonical one."
+        },
+        {
+            "name": "Service-Specific Schemas",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a shared canonical schema competes with each service's need for its own tailored schema."
+        },
+        {
+            "name": "Ambiguous Encoding",
+            "kind": "anti-pattern",
+            "definition": "Representing the same value in multiple encodings without normalizing, so equal values compare as different."
+        },
+        {
+            "name": "Canonical Format",
+            "kind": "constraint",
+            "definition": "The requirement that a single normalized form be defined for values before they are compared or stored."
+        },
+        {
+            "name": "Deduplication",
+            "kind": "capability",
+            "definition": "The ability to recognize and collapse values that are equivalent once reduced to canonical form."
+        },
+        {
+            "name": "Lossless Preservation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which reducing values to a canonical form can discard distinctions the original preserved."
+        },
+        {
+            "name": "Security Checks",
+            "kind": "capability",
+            "definition": "The ability to apply security checks reliably by first reducing input to one unambiguous form."
+        },
+        {
+            "name": "Canonical Definition",
+            "kind": "constraint",
+            "definition": "The requirement that each fact have one authoritative definition that all consumers reference."
+        },
+        {
+            "name": "Duplicated Authority",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:claimed-foreign-tree",
+                    "reason": "Duplicated authority is two owners for one fact, while a claimed foreign tree is governing names another runtime owns."
+                },
+                {
+                    "id": "lexicon:depth-relief-container",
+                    "reason": "Duplicated authority is two owners for one fact, while a depth-relief container is a container declared to shorten a path."
+                },
+                {
+                    "id": "architecture:magic-value",
+                    "reason": "Duplicated authority is two owning copies of a fact, while a magic value is a fact written as an unexplained literal, however many times."
+                },
+                {
+                    "id": "lexicon:ignore-list-silencing",
+                    "reason": "Duplicated authority is two owners for one fact, while ignore-list silencing removes a file from the taxonomy to hide a finding."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Two or more places each claiming to own the same fact, so they drift and disagree over time."
+        },
+        {
+            "name": "Data Semantics",
+            "kind": "constraint",
+            "definition": "The requirement that the meaning and dependencies of data be understood before it is decomposed into relations."
+        },
+        {
+            "name": "Denormalized Read Models",
+            "kind": "pattern",
+            "definition": "A read-optimized model that deliberately duplicates data to serve queries fast, trading storage and write cost for read speed."
+        },
+        {
+            "name": "Non-Redundant Storage",
+            "kind": "capability",
+            "definition": "The ability to store each fact once, so it cannot drift out of sync with copies and no update anomaly can arise.",
+            "aliases": ["Update-Anomaly Elimination"]
+        },
+        {
+            "name": "Query Performance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which splitting data across normalized relations forces costly joins on read."
+        },
+        {
+            "name": "Reduced Redundancy",
+            "kind": "capability",
+            "definition": "The ability to eliminate duplicated facts by referencing a single stored copy."
+        },
+        {
+            "name": "Disambiguation",
+            "kind": "capability",
+            "definition": "The ability to give each concept one unambiguous name and meaning across a domain."
+        },
+        {
+            "name": "Polysemy Across Contexts",
+            "kind": "quality-attribute",
+            "definition": "The degree to which one term legitimately carries different meanings in different bounded contexts."
+        },
+        {
+            "name": "Cross-Context Terminology",
+            "kind": "quality-attribute",
+            "definition": "The degree to which agreeing on shared terms strains against the distinct vocabularies different contexts need."
+        },
+        {
+            "name": "Domain Collaboration",
+            "kind": "constraint",
+            "definition": "The requirement that domain experts and developers collaborate to agree on shared terminology."
+        },
+        {
+            "name": "Technical/Domain Mismatch",
+            "kind": "anti-pattern",
+            "definition": "Naming code in technical terms disconnected from the domain, so experts and developers talk past each other."
+        },
+        {
+            "name": "Ambiguous API",
+            "distinctFrom": [
+                {
+                    "id": "architecture:boolean-trap",
+                    "reason": "An ambiguous API hides what an interface does by any means, while a boolean trap is the case of boolean parameters hiding intent at the call site."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "An interface whose names and parameters hide what it does, so callers must guess or read the implementation."
+        },
+        {
+            "name": "Clear Semantics",
+            "kind": "constraint",
+            "definition": "The requirement that an interface's names convey what each operation does and expects."
+        },
+        {
+            "name": "Concise Naming",
+            "kind": "quality-attribute",
+            "definition": "The degree to which naming an interface fully for clarity works against keeping names short."
+        },
+        {
+            "name": "Correct Usage",
+            "kind": "capability",
+            "definition": "The ability of callers to use an interface correctly because its names reveal its intent."
+        },
+        {
+            "name": "Naming Consistency",
+            "distinctFrom": [
+                {
+                    "id": "architecture:set-relative-member-name",
+                    "reason": "Naming consistency is one name per concept across an interface, while a set-relative member name leaves out what its folder already says."
+                },
+                {
+                    "id": "lexicon:clear-semantics",
+                    "reason": "Naming consistency is the same concept always getting the same name, while clear semantics is each name saying what the operation does."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that names for the same concept be used consistently across an interface."
+        },
+        {
+            "name": "Clever Abstractions",
+            "kind": "quality-attribute",
+            "definition": "The degree to which clever, non-obvious abstractions trade familiarity for surprise to the reader."
+        },
+        {
+            "name": "Convention",
+            "kind": "constraint",
+            "definition": "The requirement that a design follow shared naming, placement and behavior conventions, so its parts can be found automatically and behave as expected."
+        },
+        {
+            "name": "Safe Use",
+            "kind": "capability",
+            "definition": "The ability to use an interface safely because it behaves the way its name and shape suggest."
+        },
+        {
+            "name": "Duplicated Denormalized Columns",
+            "kind": "anti-pattern",
+            "definition": "The same fact copied into many columns and rows, so updates must touch every copy or leave them inconsistent."
+        },
+        {
+            "name": "Functional Dependencies",
+            "kind": "constraint",
+            "definition": "The requirement that the dependencies determining which attributes fix others be identified before decomposing a schema."
+        },
+        {
+            "name": "Read Performance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which normalizing a schema into many relations forces joins that slow reads."
+        },
+        {
+            "name": "Introduce Discriminated Union",
+            "kind": "technique",
+            "definition": "A technique for modeling a value that takes one of several shapes as a union whose variants carry a tag the type checker reads."
+        },
+        {
+            "name": "Narrow Type",
+            "kind": "technique",
+            "definition": "A technique for replacing a broad type with one that admits only the values the domain allows."
+        },
+        {
+            "name": "Define Absence Semantics",
+            "kind": "technique",
+            "definition": "A technique for choosing one representation for a missing value and stating what it means at the boundary."
+        },
+        {
+            "name": "Binary Schema Encoding",
+            "kind": "technique",
+            "definition": "A technique for serializing messages in a compact binary format whose schema the reader and writer share."
+        },
+        {
+            "name": "Schema Registry",
+            "kind": "technique",
+            "definition": "A technique for storing every published schema and its versions in one registry that producers and consumers check against."
+        }
+    ]
+}

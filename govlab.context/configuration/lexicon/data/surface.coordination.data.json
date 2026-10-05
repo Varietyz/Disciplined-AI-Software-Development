@@ -1,0 +1,570 @@
+{
+    "category": "coordination-surfaces",
+    "enforcedBy": ["the coordination member's surface, record and declaration rules"],
+    "records": [
+        {
+            "name": "Coordination Surface",
+            "kind": "artifact",
+            "definition": "A formal definition of a file that parties read and write to coordinate work, carrying a declared key and scope in its header and records each owned by one writer."
+        },
+        {
+            "name": "Coordination Record",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:acknowledger",
+                    "reason": "A coordination record is the claim itself, while the acknowledger is the party a record names to close it."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of one addressable claim inside a coordination surface, carrying its schema fields, its edges, an allocated id, a declared subject and the one writer it names."
+        },
+        {
+            "name": "Outcome Surface",
+            "kind": "artifact",
+            "definition": "A formal definition of a surface that carries one product authored jointly, such as a contract or a class statement, with no per-party unit an ownership fence could range over."
+        },
+        {
+            "name": "Participant",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:bounded-reader",
+                    "reason": "A participant owns surfaces and waits between turns, while a bounded reader owns nothing and ends by returning."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of a reader that owns surfaces and an inbox, receives both, and waits between turns instead of ending."
+        },
+        {
+            "name": "Bounded Reader",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:host-projection",
+                    "reason": "A bounded reader is the party spawned for a task, while the host projection is the one line of context it receives about the surfaces."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of a reader handed a task and whatever its host injects, never a coordination surface, which ends by returning its result."
+        },
+        {
+            "name": "Host Projection",
+            "kind": "artifact",
+            "definition": "Descriptive data about the coordination graph that a host injects into every bounded reader's context, the only channel through which such a reader learns anything about the surfaces."
+        },
+        {
+            "name": "Venue",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:outcome-surface",
+                    "reason": "A venue holds the discussion and leaves the active surface once its outcome is absorbed, while the outcome surface is where the agreed result survives."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of a surface opened for one discussion, which declares its own exit condition and moves to the archive once the outcome it produced has landed."
+        },
+        {
+            "name": "Accumulator",
+            "kind": "artifact",
+            "definition": "A formal definition of a surface that receives what a record extracts before the record is deleted, so a deletion loses nothing a later reader needs."
+        },
+        {
+            "name": "Retention",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:mutability",
+                    "reason": "Retention states what ends a piece of content, while mutability states whether landed content may be rewritten."
+                },
+                {
+                    "id": "lexicon:removal-authority",
+                    "reason": "Retention states what ends a piece of content, while removal authority states who may take it out."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the lifetime axis that states what ends a piece of content, whether nothing, a newer version of itself, the completion of what it asked for, or its producer regenerating the whole surface."
+        },
+        {
+            "name": "Mutability",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:removal-authority",
+                    "reason": "Mutability states whether landed content may be rewritten, while removal authority states who may take it out."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the lifetime axis that states whether a landed statement may be rewritten, and by whom, its own writer or nobody."
+        },
+        {
+            "name": "Removal Authority",
+            "kind": "artifact",
+            "definition": "A formal definition of the lifetime axis that states who may take content out, whether nobody at any point, its writer, the party that discharged it, or the mechanism that regenerates it."
+        },
+        {
+            "name": "Write Scope",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:read-population",
+                    "reason": "A write scope decides whether two runs may proceed at once, while a read population decides whether a published result answers a later question."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the set of paths a run declares it may write, compared by declaration before the run begins to decide whether two runs collide."
+        },
+        {
+            "name": "Read Population",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:joiner",
+                    "reason": "A read population is what a run measured, while a joiner is the later caller that relies on it."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the set a run read and publishes with its result, which a later caller tests to decide whether that result answers its own question."
+        },
+        {
+            "name": "Joiner",
+            "kind": "artifact",
+            "definition": "A formal definition of a caller that reads a live run's published result and its standing instead of starting a run of its own, with an empty write set."
+        },
+        {
+            "name": "Liveness Witness",
+            "kind": "mechanism",
+            "definition": "A facility that answers whether a process is still running by checking that the process is present, so its absence proves death while its presence proves nothing."
+        },
+        {
+            "name": "Distinguished Copy",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:derivation-period",
+                    "reason": "A distinguished copy gives a set of copies its direction, while the derivation period decides what the other copies are."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the one copy of a fact that every other copy derives from, or the one copy a mechanism resolves, which gives a set of copies its direction."
+        },
+        {
+            "name": "Derivation Period",
+            "kind": "artifact",
+            "definition": "A formal definition of how often a derivation edge runs, on every read, between stores or once at creation, which decides whether a copy is stale or is a record."
+        },
+        {
+            "name": "Carrier Field",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:payload-field",
+                    "reason": "A carrier field is read by mechanisms, while a payload field is read only by a reader."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of a field whose consumers are mechanisms and whose value is drawn from a closed set or is an identifier."
+        },
+        {
+            "name": "Payload Field",
+            "kind": "artifact",
+            "definition": "A formal definition of a field whose only consumer is a reader and which no parser reaches without a heuristic."
+        },
+        {
+            "name": "Concern Partition",
+            "kind": "artifact",
+            "definition": "A formal definition of how a body of work divides into concerns, derived from a coupling relation that joins two surfaces when a change to one forces a change to the other."
+        },
+        {
+            "name": "Fan-In",
+            "kind": "metric",
+            "definition": "A measure of how many parties' claims rest on one surface, read from who authored each claim, whom it addressed and which surfaces it cites."
+        },
+        {
+            "name": "Acknowledger",
+            "kind": "artifact",
+            "definition": "A formal definition of the party a record names to close it when its satisfaction is a judgment, required where no artifact resolves the record and forbidden where one does."
+        },
+        {
+            "name": "Stall Bound",
+            "kind": "constraint",
+            "definition": "A rule or precondition that a record satisfied by judgment and left unacknowledged past a declared number of rounds is a finding, a bound on its lifetime rather than its size."
+        },
+        {
+            "name": "Deferred Setting",
+            "kind": "artifact",
+            "definition": "A formal definition of a host setting declared as given later, which blocks every check that depends on it until it is given, while an absent setting turns those checks off."
+        },
+        {
+            "name": "Traceable Guarantee",
+            "kind": "capability",
+            "definition": "The ability to trace every guarantee a topology offers back to a stated property and the mechanism that would object if it stopped holding."
+        },
+        {
+            "name": "Rederivation Detection",
+            "kind": "capability",
+            "definition": "The ability to catch a record written a second time about a subject another record already holds."
+        },
+        {
+            "name": "Governed Removal",
+            "kind": "capability",
+            "definition": "The ability to remove content only where its declared lifetime names the party or mechanism allowed to remove it."
+        },
+        {
+            "name": "Shared Invocation",
+            "kind": "capability",
+            "definition": "The ability for several callers to share one run of a measurement, each either joining a live run that covers its question or starting one that no live run covers."
+        },
+        {
+            "name": "Name the Objector",
+            "kind": "technique",
+            "definition": "A technique for naming, for each stated invariant, the party or check that objects when it stops holding."
+        },
+        {
+            "name": "Mark the Invariant Unheld",
+            "kind": "technique",
+            "definition": "A technique for marking an invariant that nothing enforces as unheld, together with every derivation that rests on it."
+        },
+        {
+            "name": "Derive State from Edges",
+            "kind": "technique",
+            "definition": "A technique for removing a written status field and computing a record's state from the edges that connect it."
+        },
+        {
+            "name": "Allocate Identity Once",
+            "kind": "technique",
+            "definition": "A technique for assigning a record its id when it is created and never deriving it again from its location or subject."
+        },
+        {
+            "name": "Declare the Subject Beside the Id",
+            "kind": "technique",
+            "definition": "A technique for recording a record's subject as a declared field next to its id, so either can change without breaking the other."
+        },
+        {
+            "name": "Hold the Barrier for Planned Writes",
+            "kind": "technique",
+            "definition": "A technique for taking an exclusive write on a shared surface only after every peer is observed parked."
+        },
+        {
+            "name": "Declare the Missing Operand",
+            "kind": "technique",
+            "definition": "A technique for declaring on a jointly authored surface that the one-writer invariant has no operand there."
+        },
+        {
+            "name": "Settle Collisions by Announcement",
+            "kind": "technique",
+            "definition": "A technique for resolving concurrent work on a jointly authored surface by each party announcing its claim before acting."
+        },
+        {
+            "name": "Refresh the Projection in the Same Change",
+            "kind": "technique",
+            "definition": "A technique for updating a projection in the same change that moves the fact it summarizes."
+        },
+        {
+            "name": "Check the Projection's Shape",
+            "kind": "technique",
+            "definition": "A technique for checking that a projection holds only the shape its name claims."
+        },
+        {
+            "name": "Generate the Index from the Directory",
+            "kind": "technique",
+            "definition": "A technique for producing an index by reading the directory it describes instead of editing entries by hand."
+        },
+        {
+            "name": "Check Both Directions",
+            "kind": "technique",
+            "definition": "A technique for checking that every index entry resolves to a file and that every file has an entry."
+        },
+        {
+            "name": "Declare All Three Lifetime Axes",
+            "kind": "technique",
+            "definition": "A technique for declaring each surface's lifetime with a value from the closed set of every axis, so no axis is inferred."
+        },
+        {
+            "name": "Declare the File Default",
+            "kind": "technique",
+            "definition": "A technique for stating the lifetime a file's sections take unless a section declares its own."
+        },
+        {
+            "name": "Declare Each Divergent Section",
+            "kind": "technique",
+            "definition": "A technique for declaring the lifetime of every section that lives differently from its file's default."
+        },
+        {
+            "name": "Declare the Write Scope",
+            "kind": "technique",
+            "definition": "A technique for publishing the part of a surface a run writes, so overlapping runs are detected."
+        },
+        {
+            "name": "Publish the Read Population",
+            "kind": "technique",
+            "definition": "A technique for publishing what a run read, so a later question can tell whether the run's result answers it."
+        },
+        {
+            "name": "Test Coverage First",
+            "kind": "technique",
+            "definition": "A technique for checking whether a live run's scope already covers a question before starting a new run."
+        },
+        {
+            "name": "Join by Reading the Published Result",
+            "kind": "technique",
+            "definition": "A technique for waiting on another run by reading the result it publishes instead of attaching to its process."
+        },
+        {
+            "name": "Derive Liveness Once",
+            "kind": "technique",
+            "definition": "A technique for computing liveness in one place that every consumer reads."
+        },
+        {
+            "name": "Witness First",
+            "kind": "technique",
+            "definition": "A technique for deciding liveness from a witness the process writes, never from the process being present."
+        },
+        {
+            "name": "Window Second",
+            "kind": "technique",
+            "definition": "A technique for applying a time window to a liveness witness only after the witness is read."
+        },
+        {
+            "name": "Encode the Scope Reversibly",
+            "kind": "technique",
+            "definition": "A technique for naming a channel by an encoding of its scope that can be decoded back to the scope."
+        },
+        {
+            "name": "Declare the Remover",
+            "kind": "technique",
+            "definition": "A technique for recording which party removes a channel, so every channel has a party that can attribute it."
+        },
+        {
+            "name": "Write the Entry Before Reading the Set",
+            "kind": "technique",
+            "definition": "A technique for writing a run's own entry before reading the set of live runs, so two starters see each other."
+        },
+        {
+            "name": "Count Distinguished Copies",
+            "kind": "technique",
+            "definition": "A technique for counting the copies that differ from their source before deciding which way to collapse them."
+        },
+        {
+            "name": "Read Each Period",
+            "kind": "technique",
+            "definition": "A technique for checking, for each copy, whether the edge that produced it runs again or ran once against an earlier state."
+        },
+        {
+            "name": "Repair the Source",
+            "kind": "technique",
+            "definition": "A technique for fixing a defect at the source every copy derives from instead of in the copies."
+        },
+        {
+            "name": "Derive the Partition",
+            "kind": "technique",
+            "definition": "A technique for deriving the partition of work from the surfaces involved before choosing how many parties take part."
+        },
+        {
+            "name": "Count the Partition's Concerns",
+            "kind": "technique",
+            "definition": "A technique for setting the party count to the number of concerns the derived partition holds."
+        },
+        {
+            "name": "Mark Claims with Their Read Moment",
+            "kind": "technique",
+            "definition": "A technique for stamping each claim with the moment its surface was read, so a stale claim is recognized."
+        },
+        {
+            "name": "Partition the Surface",
+            "kind": "technique",
+            "definition": "A technique for dividing a surface that too many parties reason about into surfaces with fewer readers each."
+        },
+        {
+            "name": "Retain the Prior State in the Spanning Layer",
+            "kind": "technique",
+            "definition": "A technique for keeping the earlier state of content in the layer that spans both states, so a change rule can compare them."
+        },
+        {
+            "name": "Compare the Two Readings",
+            "kind": "technique",
+            "definition": "A technique for enforcing a change rule by comparing the content before and after the change."
+        },
+        {
+            "name": "Type the Carrier",
+            "kind": "technique",
+            "definition": "A technique for giving the fields a mechanism reads a resolvable typed form."
+        },
+        {
+            "name": "Leave the Payload Prose",
+            "kind": "technique",
+            "definition": "A technique for keeping the fields only people read as prose that no mechanism parses."
+        },
+        {
+            "name": "Remove the Restating Payload",
+            "kind": "technique",
+            "definition": "A technique for deleting payload text that restates what its carrier already answers."
+        },
+        {
+            "name": "Draw the Value from a Closed Set",
+            "kind": "technique",
+            "definition": "A technique for making a mandated field take a value from a declared closed set that a consumer can join on."
+        },
+        {
+            "name": "Declare the Field for Readers",
+            "kind": "technique",
+            "definition": "A technique for declaring that a mandated prose field is written for people, so no consumer is assumed to read it."
+        },
+        {
+            "name": "Write the Aggregate Only from a Full Run",
+            "kind": "technique",
+            "definition": "A technique for overwriting an aggregate report only from a run that measured its whole population."
+        },
+        {
+            "name": "Stream Narrowed Verdicts",
+            "kind": "technique",
+            "definition": "A technique for returning the verdicts of a narrowed run to its caller instead of writing them as a report."
+        },
+        {
+            "name": "Keep One Aggregate",
+            "kind": "technique",
+            "definition": "A technique for holding one aggregate report per subject, with no report named for a scope or caller beside it."
+        },
+        {
+            "name": "Treat the Statements as One Unit",
+            "kind": "technique",
+            "definition": "A technique for treating every statement of one invariant as a single unit that one query ranges over."
+        },
+        {
+            "name": "Re-Derive Every Copy on Change",
+            "kind": "technique",
+            "definition": "A technique for regenerating every copy of an invariant from its source whenever the source changes."
+        },
+        {
+            "name": "Refuse and Name the Cycle",
+            "kind": "technique",
+            "definition": "A technique for refusing to collapse a set of copies with no distinguished member and reporting the cycle by name."
+        },
+        {
+            "name": "Archive the Absorbed Venue",
+            "kind": "technique",
+            "definition": "A technique for moving a closed venue to the archive once its outcome is absorbed, instead of deleting it."
+        },
+        {
+            "name": "Unobjected Invariant",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a system relies on a property that nothing would notice losing."
+        },
+        {
+            "name": "Unreceived Invariant",
+            "kind": "anti-pattern",
+            "definition": "A defect in which an invariant is stated in a surface its bound parties never receive."
+        },
+        {
+            "name": "Location-Derived Identity",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a record's identity is derived from its location or its subject, so renaming either one breaks it."
+        },
+        {
+            "name": "Whole-Surface Rewrite",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a shared surface is rewritten whole while a peer is still active on it."
+        },
+        {
+            "name": "Assumed Single Writer",
+            "kind": "anti-pattern",
+            "definition": "A defect in which the one-writer invariant is assumed to cover a jointly authored surface."
+        },
+        {
+            "name": "Fenced Joint Surface",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a jointly authored surface is fenced into per-party spans."
+        },
+        {
+            "name": "Deferred Projection",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a surface is updated and its projection is left for a later change."
+        },
+        {
+            "name": "Overgrown Projection",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a projection grows past the shape its name claims."
+        },
+        {
+            "name": "One-Way Index Check",
+            "kind": "anti-pattern",
+            "definition": "A defect in which an index is checked in one direction only, so an entry with no file or a file with no entry goes unnoticed."
+        },
+        {
+            "name": "Single-Word Lifetime",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a lifetime is declared as one word, so a reader infers its other two axes."
+        },
+        {
+            "name": "File-Wide Lifetime",
+            "kind": "anti-pattern",
+            "definition": "A defect in which one lifetime is stated for a file whose sections live differently, so the file's word authorizes operations on a part that forbids them."
+        },
+        {
+            "name": "Conflated Scope",
+            "kind": "anti-pattern",
+            "definition": "A defect in which one declared scope is used both to detect collisions and to decide whether a result answers a later question."
+        },
+        {
+            "name": "Attached Second Caller",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a second caller attaches to a running process instead of reading the result that process publishes."
+        },
+        {
+            "name": "Duplicate Covered Run",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a run is started for a question a live run's scope already covers."
+        },
+        {
+            "name": "Presence as Liveness",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a process that is present is treated as alive."
+        },
+        {
+            "name": "Per-Consumer Liveness",
+            "kind": "anti-pattern",
+            "definition": "A defect in which each consumer computes liveness separately, so two consumers of one question reach different answers."
+        },
+        {
+            "name": "Digest-Named Channel",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a channel is named by a digest of its scope, which separates channels but cannot be decoded."
+        },
+        {
+            "name": "Read Before Declare",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a run reads the set of live runs before writing its own entry, so two starters each see an empty set."
+        },
+        {
+            "name": "Blanket Collapse",
+            "kind": "anti-pattern",
+            "definition": "A defect in which every copy is collapsed toward its source without asking whether any edge ever runs again."
+        },
+        {
+            "name": "Preferred Party Count",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a party count is chosen as a preference and work is allocated to fit it."
+        },
+        {
+            "name": "Crowded Surface",
+            "kind": "anti-pattern",
+            "definition": "A defect in which parties are added who all reason about the same surface."
+        },
+        {
+            "name": "Single-State Change Check",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a rule about how content changes is enforced by a check that reads one state."
+        },
+        {
+            "name": "Remembering Checker",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a checker keeps its own prior output to judge a change."
+        },
+        {
+            "name": "Prose-Parsing Mechanism",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a mechanism interprets prose to compute a fact."
+        },
+        {
+            "name": "Restating Payload",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a payload restates a question its carrier already answers."
+        },
+        {
+            "name": "Unread Prose Mandate",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a field is mandated as free prose while a consumer is assumed to read it."
+        }
+    ]
+}

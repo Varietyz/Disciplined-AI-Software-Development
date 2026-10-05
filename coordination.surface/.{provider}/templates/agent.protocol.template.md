@@ -39,7 +39,7 @@ objective: compose a task-specific agent from inspected domain evidence into a r
            portable contract, render it through an adapter, and prove the artifact is grounded and embodied
 recursion_limit: 3
 
-# --- SLOT ABSENCES THIS TEMPLATE IS BOUND BY (declared once; honoured wherever they appear) --
+# --- SLOT ABSENCES THIS TEMPLATE IS BOUND BY (declared once, honored wherever they appear) ---
 #   An abstract {slot} resolves against the adapter binding. A slot with NO analogue resolves
 #   ABSENT, and the branch depending on it DOES NOT RUN — the absence is declared, never faked.
 #   Reading an ABSENT slot as though it resolved manufactures a demand nothing can satisfy, and a
@@ -67,7 +67,7 @@ recursion_limit: 3
 #     the package points at, and only where NEITHER resolves does the extraction draw on the domain evidence alone. The two
 #     slots sit BESIDE each other rather than one defaulting the other, because defaulting would make an
 #     absent host catalog indistinguishable from a chosen one.
-#   HONOURING AN ABSENCE IS A PROPERTY OF THE BRANCH, NEVER OF THIS BLOCK. Every step below that names
+#   HONORING AN ABSENCE IS A PROPERTY OF THE BRANCH, NEVER OF THIS BLOCK. Every step below that names
 #     one of these slots is guarded on it RESOLVING, and every gate reading one carries the same guard —
 #     declaring the absence here and running the branch anyway is the defect the declaration prevents.
 #   AND A SLOT NAMES ITS SECTION. The seat index, the roles and the board live in the SURFACE section

@@ -40,27 +40,27 @@ A1·a a decay path
 
 ```mermaid
 flowchart TB
-control["A control is absent · boundary, contract, ownership, versioning, observability, state isolation, enforcement"]
-step1["A local shortcut lands · nothing refuses it"]
-step2["It is repeated under pressure and becomes convention"]
-step3["Dependent code forms around it · a boundary or contract erodes"]
-presents["Systemic fragility · the anti-pattern, reproducible, named, detectable"]
-repair["The repair · install the inverse control, migrate the dependents, check the absence, gate the recurrence"]
-control --> step1 --> step2 --> step3 --> presents --> repair
+    control["A control is absent · boundary, contract, ownership, versioning, observability, state isolation, enforcement"]
+    step1["A local shortcut lands · nothing refuses it"]
+    step2["It is repeated under pressure and becomes convention"]
+    step3["Dependent code forms around it · a boundary or contract erodes"]
+    presents["Systemic fragility · the anti-pattern, reproducible, named, detectable"]
+    repair["The repair · install the inverse control, migrate the dependents, check the absence, gate the recurrence"]
+    control --> step1 --> step2 --> step3 --> presents --> repair
 ```
 
 A1·b the propagation
 
 ```mermaid
 stateDiagram-v2
-[*] --> Shortcut : a control is absent
-Shortcut --> Repetition : nothing refuses it
-Repetition --> Convention : delivery pressure
-Convention --> Dependency : code forms around it
-Dependency --> Fragility : the boundary erodes
-Fragility --> Repair : the pattern is named
-Repair --> [*] : inverse control installed · dependents migrated · recurrence gated
-Repair --> Shortcut : one call site removed · the path stays open
+    [*] --> Shortcut : a control is absent
+    Shortcut --> Repetition : nothing refuses it
+    Repetition --> Convention : delivery pressure
+    Convention --> Dependency : code forms around it
+    Dependency --> Fragility : the boundary erodes
+    Fragility --> Repair : the pattern is named
+    Repair --> [*] : inverse control installed · dependents migrated · recurrence gated
+    Repair --> Shortcut : one call site removed · the path stays open
 ```
 
 ## Seven controls, seven classes
@@ -97,21 +97,21 @@ B1·a seven controls
 
 ```mermaid
 flowchart LR
-boundary["boundary absent · a foreign model leaks in"]
-contract["contract absent · a consumer depends on a promise that was never made"]
-ownership["ownership absent · two writers, the last one wins"]
-versioning["versioning absent · a breaking change ships as ordinary"]
-observability["observability absent · the first signal is a customer"]
-isolation["state isolation absent · a side effect crosses a boundary"]
-enforcement["enforcement absent · a rule decays at the rate of attention"]
-decay["One decay class per control · placed by what was missing, never by how it looked"]
-boundary --> decay
-contract --> decay
-ownership --> decay
-versioning --> decay
-observability --> decay
-isolation --> decay
-enforcement --> decay
+    boundary["boundary absent · a foreign model leaks in"]
+    contract["contract absent · a consumer depends on a promise that was never made"]
+    ownership["ownership absent · two writers, the last one wins"]
+    versioning["versioning absent · a breaking change ships as ordinary"]
+    observability["observability absent · the first signal is a customer"]
+    isolation["state isolation absent · a side effect crosses a boundary"]
+    enforcement["enforcement absent · a rule decays at the rate of attention"]
+    decay["One decay class per control · placed by what was missing, never by how it looked"]
+    boundary --> decay
+    contract --> decay
+    ownership --> decay
+    versioning --> decay
+    observability --> decay
+    isolation --> decay
+    enforcement --> decay
 ```
 
 B1·b an anti-pattern record
@@ -133,7 +133,7 @@ export const PROPAGATION = [
   "repetition",
   "normalization",
   "dependency-formation",
-  "institutionalisation",
+  "institutionalization",
   "high-cost-repair",
 ] as const;
 export type Stage = (typeof PROPAGATION)[number];
@@ -167,7 +167,7 @@ This section covers why every avoidance rule is written as a pair, as shown in [
 
 ### Half a rule
 
-Avoidance rules written as a list of don'ts are obeyed until the first moment the don't is convenient. A rule says no fallbacks, a value is missing at boot, the author has nowhere to go, and the fallback is written with a comment apologising for it. A prohibition without its replacement names what to avoid and not what to do, so under pressure the avoided thing is the only thing the developer or the model knows how to write.
+Avoidance rules written as a list of don'ts are obeyed until the first moment the don't is convenient. A rule says no fallbacks, a value is missing at boot, the author has nowhere to go, and the fallback is written with a comment apologizing for it. A prohibition without its replacement names what to avoid and not what to do, so under pressure the avoided thing is the only thing the developer or the model knows how to write.
 
 For this reason an avoidance rule is an inversion that pairs a refused construct and the debt it borrows against with a required construct and the leverage it buys. The replacement is written before the prohibition, so the rule is never a bare never. In practice, the consequences are kept as the rule's reason, so the rule carries its own justification and is never re-argued. A check reports the refused construct where it lands and names the required one as the remediation, and what the replacement supersedes is deleted in the same change, because a marker on the old path keeps two paths alive under one label.
 
@@ -189,14 +189,14 @@ C1·a one inversion
 
 ```mermaid
 flowchart TB
-refused["A construct is refused · with the debt it borrows against"]
-required["Its replacement is required · with the leverage it buys"]
-refused -- one inversion, two consequences --> required
-check["A check reports the refused construct where it lands"]
-refused -.-> check
-remedy["The finding names the required construct as its remediation"]
-check --> remedy
-required -.-> remedy
+    refused["A construct is refused · with the debt it borrows against"]
+    required["Its replacement is required · with the leverage it buys"]
+    refused -- one inversion, two consequences --> required
+    check["A check reports the refused construct where it lands"]
+    refused -.-> check
+    remedy["The finding names the required construct as its remediation"]
+    check --> remedy
+    required -.-> remedy
 ```
 
 ## Debt and leverage
@@ -227,20 +227,20 @@ D1·a lender and replacement
 
 ```mermaid
 flowchart TB
-construct["A construct under review"]
-lender{"Whom does it borrow from?"}
-reader["the next reader"]
-developer["the developer, later and elsewhere"]
-change["every future change"]
-nobody["no lender · it is not a debt"]
-replacement["What stands in its place, and what does that buy?"]
-rule["A rule · two constructs, two consequences"]
-construct --> lender
-lender --> reader --> replacement
-lender --> developer --> replacement
-lender --> change --> replacement
-lender --> nobody
-replacement --> rule
+    construct["A construct under review"]
+    lender{"Whom does it borrow from?"}
+    reader["the next reader"]
+    developer["the developer, later and elsewhere"]
+    change["every future change"]
+    nobody["no lender · it is not a debt"]
+    replacement["What stands in its place, and what does that buy?"]
+    rule["A rule · two constructs, two consequences"]
+    construct --> lender
+    lender --> reader --> replacement
+    lender --> developer --> replacement
+    lender --> change --> replacement
+    lender --> nobody
+    replacement --> rule
 ```
 
 D1·b an inversion record

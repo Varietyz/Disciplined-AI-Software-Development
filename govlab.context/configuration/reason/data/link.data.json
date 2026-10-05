@@ -1,0 +1,12 @@
+{
+    "records": [
+        {"from": "ver-evidence",
+            "label": "an unverified claim carries no weight"},
+        {"from": "constrain",
+            "to": "algorithms:governed-autonomous-plan-loop"},
+        {"from": "derivation-loop",
+            "to": "algorithms:checklist-creation-kernel"},
+        {"from": "derivation-loop",
+            "to": "pag:template:checklist"}
+    ]
+}

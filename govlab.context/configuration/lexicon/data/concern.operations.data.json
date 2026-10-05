@@ -1,0 +1,151 @@
+{
+    "category": "operations-concerns",
+    "exampleShape": "placed-file",
+    "enforcedBy": ["the naming gate, which refuses a filename whose last segment before the extension is an undeclared tag or differs from its folder's tag"],
+    "check": {
+        "population": "every filename whose concern slot holds the tag, and the folder holding each such file",
+        "freshness": "a verdict stands until a file carrying the tag is created, moved or renamed, or the declared vocabulary changes",
+        "refusal": "the lint run fails a file whose tag is undeclared or disagrees with its folder",
+        "observation": "each filename parsed by position against the declared concern vocabulary",
+        "evidence": "fires-and-accepts: a suite lints a file whose tag is undeclared and one whose tag differs from its folder, and passes a conforming file",
+        "authority": "the declared concern vocabulary, which a filename's tag and its folder conform to"
+    },
+    "records": [
+        {
+            "name": "Error Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines the errors a unit can raise and what each carries, filed in an errors folder.",
+            "example": "errors/payment.error.ts"
+        },
+        {
+            "name": "Exception Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a thrown condition that interrupts normal flow, filed in an exceptions folder.",
+            "example": "exceptions/timeout.exception.ts"
+        },
+        {
+            "name": "Fault Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that describes a defect in a component that can cause failures, filed in a faults folder.",
+            "example": "faults/disk.fault.ts"
+        },
+        {
+            "name": "Failure Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that describes how an operation failed so its caller can decide what to do, filed in a failures folder.",
+            "example": "failures/upload.failure.ts"
+        },
+        {
+            "name": "Result Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a return value carrying either a success or a failure, filed in a results folder.",
+            "example": "results/login.result.ts"
+        },
+        {
+            "name": "Error-Code Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares the stable codes callers match failures on, filed in an error-codes folder.",
+            "example": "error-codes/billing.error-code.ts"
+        },
+        {
+            "name": "Error-Boundary Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that contains a failure within one part so the rest keeps running, filed in an error-boundaries folder.",
+            "example": "error-boundaries/dashboard.error-boundary.ts"
+        },
+        {
+            "name": "Recovery Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that returns a failed part to a working state, filed in a recovery folder.",
+            "example": "recovery/connection.recovery.ts",
+            "seeAlso": ["recovery"]
+        },
+        {
+            "name": "Fallback Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that supplies a declared substitute when the primary path fails, filed in a fallbacks folder.",
+            "example": "fallbacks/avatar.fallback.ts",
+            "seeAlso": ["fallback"]
+        },
+        {
+            "name": "Error-Reporting Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that sends failures with their context to where they are tracked, filed in an error-reporting folder.",
+            "example": "error-reporting/crash.error-reporting.ts"
+        },
+        {
+            "name": "Resilience Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that keeps an operation working through transient failures of what it depends on, filed in a resilience folder.",
+            "example": "resilience/inventory-api.resilience.ts"
+        },
+        {
+            "name": "Throttling Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:timer-tag",
+                    "reason": "Throttling limits how often an operation may run, while a timer runs work after a delay or at a fixed rate."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that limits how often an operation may run, filed in a throttling folder.",
+            "example": "throttling/login-attempt.throttling.ts"
+        },
+        {
+            "name": "Deduplication Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that recognizes a repeated request or record and processes it once, filed in a deduplication folder.",
+            "example": "deduplication/webhook-delivery.deduplication.ts",
+            "seeAlso": ["deduplication"]
+        },
+        {
+            "name": "Cancellation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that stops work in progress when its caller no longer needs the result, filed in a cancellation folder.",
+            "example": "cancellation/download.cancellation.ts"
+        },
+        {
+            "name": "Metric Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines and records a measured quantity over time, filed in a metrics folder.",
+            "example": "metrics/request-latency.metric.ts",
+            "seeAlso": ["metrics"]
+        },
+        {
+            "name": "Counter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that counts occurrences of one kind of event, filed in a counters folder.",
+            "example": "counters/signup.counter.ts"
+        },
+        {
+            "name": "Reporter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that renders findings or measurements for the party that asked for them, filed in a reporters folder.",
+            "example": "reporters/test-run.reporter.ts"
+        },
+        {
+            "name": "Health Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that answers whether a component is able to do its work, filed in a health folder.",
+            "example": "health/database.health.ts"
+        },
+        {
+            "name": "Probe Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that observes a running system and records what it finds without changing it, filed in a probes folder.",
+            "example": "probes/queue-depth.probe.ts"
+        },
+        {
+            "name": "Alert Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a condition that warrants attention and who is told, filed in an alerts folder.",
+            "example": "alerts/error-rate.alert.ts"
+        },
+        {
+            "name": "Notification Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that delivers a message to a participant through a declared channel, filed in a notifications folder.",
+            "example": "notifications/password-reset.notification.ts"
+        }
+    ]
+}

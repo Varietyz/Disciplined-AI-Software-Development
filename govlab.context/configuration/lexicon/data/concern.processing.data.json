@@ -1,0 +1,291 @@
+{
+    "category": "processing-concerns",
+    "exampleShape": "placed-file",
+    "enforcedBy": ["the naming gate, which refuses a filename whose last segment before the extension is an undeclared tag or differs from its folder's tag"],
+    "check": {
+        "population": "every filename whose concern slot holds the tag, and the folder holding each such file",
+        "freshness": "a verdict stands until a file carrying the tag is created, moved or renamed, or the declared vocabulary changes",
+        "refusal": "the lint run fails a file whose tag is undeclared or disagrees with its folder",
+        "observation": "each filename parsed by position against the declared concern vocabulary",
+        "evidence": "fires-and-accepts: a suite lints a file whose tag is undeclared and one whose tag differs from its folder, and passes a conforming file",
+        "authority": "the declared concern vocabulary, which a filename's tag and its folder conform to"
+    },
+    "records": [
+        {
+            "name": "Reader Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that reads a stored or external format into structure the system works with, filed in a readers folder.",
+            "example": "readers/csv.reader.ts"
+        },
+        {
+            "name": "Writer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that writes structure out to a stored or external format, filed in a writers folder.",
+            "example": "writers/spreadsheet.writer.ts"
+        },
+        {
+            "name": "Converter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that turns one representation into another of the same content, filed in a converters folder.",
+            "example": "converters/temperature.converter.ts"
+        },
+        {
+            "name": "Formatter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that lays data out as text in a target format such as Markdown, JSON or source code, filed in a formatters folder.",
+            "example": "formatters/receipt.formatter.ts"
+        },
+        {
+            "name": "Normalizer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that brings varied input to one canonical form before it is compared or stored, filed in a normalizers folder.",
+            "example": "normalizers/phone-number.normalizer.ts"
+        },
+        {
+            "name": "Sanitizer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that removes or escapes the parts of untrusted input that could do harm, filed in a sanitizers folder.",
+            "example": "sanitizers/comment-html.sanitizer.ts"
+        },
+        {
+            "name": "Mapper Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that maps the fields of one model onto another, filed in a mappers folder.",
+            "example": "mappers/customer-row.mapper.ts"
+        },
+        {
+            "name": "Transformer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that maps an input state to an output state, including a fix that rewrites a file, filed in a transformers folder.",
+            "example": "transformers/import-sort.transformer.ts"
+        },
+        {
+            "name": "Pipeline Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that chains processing stages so each consumes the one before, filed in a pipelines folder.",
+            "example": "pipelines/image-upload.pipeline.ts"
+        },
+        {
+            "name": "Source Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that produces the records a pipeline starts from, filed in a sources folder.",
+            "example": "sources/sensor-feed.source.ts"
+        },
+        {
+            "name": "Sink Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that receives the records a pipeline ends with, filed in a sinks folder.",
+            "example": "sinks/warehouse.sink.ts"
+        },
+        {
+            "name": "Processor Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that applies one processing operation to each item that passes through it, filed in a processors folder.",
+            "example": "processors/thumbnail.processor.ts"
+        },
+        {
+            "name": "Filter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that keeps the items meeting a condition and drops the rest, filed in a filters folder.",
+            "example": "filters/profanity.filter.ts"
+        },
+        {
+            "name": "Validator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that decides whether its input is valid and reports why it is not, filed in a validators folder.",
+            "example": "validators/password.validator.ts"
+        },
+        {
+            "name": "Matcher Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that tests whether a value fits a shape and reports what it matched, filed in a matchers folder.",
+            "example": "matchers/url-pattern.matcher.ts"
+        },
+        {
+            "name": "Aggregator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that combines many items into one summary value, filed in an aggregators folder.",
+            "example": "aggregators/daily-revenue.aggregator.ts"
+        },
+        {
+            "name": "Comparator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that decides the order or the difference between two values, filed in a comparators folder.",
+            "example": "comparators/semver.comparator.ts"
+        },
+        {
+            "name": "Sorter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that arranges a set of items in an order a comparison defines, filed in a sorters folder.",
+            "example": "sorters/leaderboard.sorter.ts"
+        },
+        {
+            "name": "Iterator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that yields the members of a set one at a time, filed in an iterators folder.",
+            "example": "iterators/directory-tree.iterator.ts"
+        },
+        {
+            "name": "Generator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that produces values or files from a description of them, filed in a generators folder.",
+            "example": "generators/api-client.generator.ts"
+        },
+        {
+            "name": "Analyzer Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:inspector-tag",
+                    "reason": "An analyzer derives facts across a body of material, while an inspector reports what one artifact holds."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that reads a body of material and derives facts about it without judging it, filed in an analyzers folder.",
+            "example": "analyzers/bundle-size.analyzer.ts"
+        },
+        {
+            "name": "Inspector Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that looks into one artifact and reports what it holds, filed in an inspectors folder.",
+            "example": "inspectors/archive.inspector.ts"
+        },
+        {
+            "name": "Key Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that creates, holds or rotates cryptographic keys, filed in a keys folder.",
+            "example": "keys/signing.key.ts"
+        },
+        {
+            "name": "Hashing Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that computes fixed-size fingerprints of content, filed in a hashing folder.",
+            "example": "hashing/password.hashing.ts"
+        },
+        {
+            "name": "Digest Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that computes a cryptographic summary of content for integrity checks, filed in a digests folder.",
+            "example": "digests/download.digest.ts"
+        },
+        {
+            "name": "Randomness Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that supplies random values from a declared and, where needed, seeded source, filed in a randomness folder.",
+            "example": "randomness/dice.randomness.ts"
+        },
+        {
+            "name": "Lexer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that splits source text into tokens, filed in a lexers folder.",
+            "example": "lexers/json.lexer.ts"
+        },
+        {
+            "name": "Parser Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that builds a syntax tree from tokens by a grammar, filed in a parsers folder.",
+            "example": "parsers/expression.parser.ts"
+        },
+        {
+            "name": "Grammar Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares the productions a language is parsed by, filed in a grammars folder.",
+            "example": "grammars/sql.grammar.ts"
+        },
+        {
+            "name": "Visitor Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that walks a syntax tree and acts on each node kind it meets, filed in a visitors folder.",
+            "example": "visitors/unused-import.visitor.ts"
+        },
+        {
+            "name": "Pass Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that performs one full traversal of a program or a frame to transform or render it, filed in a passes folder.",
+            "example": "passes/shadow.pass.ts"
+        },
+        {
+            "name": "Extractor Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that pulls the records a transformation needs out of a larger source, filed in an extractors folder.",
+            "example": "extractors/invoice-line.extractor.ts"
+        },
+        {
+            "name": "Partition Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that splits a data set into parts processed or stored separately, filed in a partitions folder.",
+            "example": "partitions/event-month.partition.ts"
+        },
+        {
+            "name": "Grid Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a regular division of space into cells, filed in a grids folder.",
+            "example": "grids/chessboard.grid.ts"
+        },
+        {
+            "name": "Tile Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one cell of a tiled world and what occupies it, filed in a tiles folder.",
+            "example": "tiles/water.tile.ts"
+        },
+        {
+            "name": "Collider Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a shape used to detect when two objects touch, filed in a colliders folder.",
+            "example": "colliders/capsule.collider.ts"
+        },
+        {
+            "name": "Bounds Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that computes the extents enclosing an object or a region, filed in a bounds folder.",
+            "example": "bounds/viewport.bounds.ts"
+        },
+        {
+            "name": "Raycast Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that finds what a line through space hits first, filed in a raycasts folder.",
+            "example": "raycasts/line-of-sight.raycast.ts"
+        },
+        {
+            "name": "Animation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines how a value or a pose changes over a span of time, filed in an animations folder.",
+            "example": "animations/walk-cycle.animation.ts"
+        },
+        {
+            "name": "Easing Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that maps linear progress onto a curve of acceleration and deceleration, filed in an easings folder.",
+            "example": "easings/bounce.easing.ts"
+        },
+        {
+            "name": "Curve Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a parametric path or response curve, filed in a curves folder.",
+            "example": "curves/volume.curve.ts"
+        },
+        {
+            "name": "Tween Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that interpolates a value between two endpoints over time, filed in a tweens folder.",
+            "example": "tweens/menu-slide.tween.ts"
+        },
+        {
+            "name": "Trajectory Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that computes the path a moving object follows under its forces, filed in a trajectories folder.",
+            "example": "trajectories/arrow.trajectory.ts"
+        },
+        {
+            "name": "Path Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that finds or defines a route between two points, filed in a paths folder.",
+            "example": "paths/delivery.path.ts"
+        },
+        {
+            "name": "Formation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that arranges a group of agents in a shape relative to a leader, filed in a formations folder.",
+            "example": "formations/wedge.formation.ts"
+        }
+    ]
+}

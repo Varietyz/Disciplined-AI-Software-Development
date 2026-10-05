@@ -1,0 +1,636 @@
+{
+    "category": "security-privacy-compliance",
+    "records": [
+        {
+            "name": "Ad-Hoc Permission Checks",
+            "kind": "anti-pattern",
+            "definition": "Authorization logic scattered inline throughout the codebase instead of centralized, leaving checks inconsistent and easy to omit."
+        },
+        {
+            "name": "Ambient-Credential Trust",
+            "kind": "anti-pattern",
+            "definition": "Treating any request that carries ambient credentials, such as a session cookie, as legitimate without verifying its origin or intent."
+        },
+        {
+            "name": "Anonymous Sensitive Access",
+            "kind": "anti-pattern",
+            "definition": "Permitting access to sensitive resources without first establishing the caller's identity."
+        },
+        {
+            "name": "Assumption-Driven Security",
+            "distinctFrom": [
+                {
+                    "id": "architecture:security-theater",
+                    "reason": "Assumption-driven security defends against threats nobody analyzed, while security theater shows controls that do not reduce the real threat."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Designing defenses around assumed threats rather than a deliberate analysis of realistic attack vectors."
+        },
+        {
+            "name": "Authenticated-Equals-Authorized",
+            "distinctFrom": [
+                {
+                    "id": "architecture:authorization-scattering",
+                    "reason": "Authenticated-equals-authorized skips the permission check, while authorization scattering spreads the checks with no central policy."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Conflating authentication with authorization, so any authenticated caller is granted access without a permission check."
+        },
+        {
+            "name": "Broad Admin Access",
+            "kind": "anti-pattern",
+            "definition": "Granting sweeping administrative privileges by default instead of the least access each role requires."
+        },
+        {
+            "name": "Hardcoded Rules",
+            "kind": "anti-pattern",
+            "definition": "Embedding access rules directly in code, so changing policy requires a code change and cannot respond to runtime attributes."
+        },
+        {
+            "name": "Hardcoded Secrets",
+            "distinctFrom": [
+                {
+                    "id": "architecture:secret-sprawl",
+                    "reason": "Hardcoded secrets are credentials embedded in source, while secret sprawl is credentials scattered across code, logs and configuration."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Embedding credentials, keys, or tokens directly in source or configuration, exposing them to anyone who can read it."
+        },
+        {
+            "name": "Immortal Client-Trusted Session",
+            "kind": "anti-pattern",
+            "definition": "A session that never expires and is trusted from client-supplied state alone, so a captured token grants indefinite access."
+        },
+        {
+            "name": "Insecure Defaults",
+            "kind": "anti-pattern",
+            "definition": "Shipping default settings that favor convenience over safety, leaving a system exposed unless it is explicitly hardened."
+        },
+        {
+            "name": "Manual-Only Review",
+            "kind": "anti-pattern",
+            "definition": "Relying solely on human review to catch policy violations, which neither scales nor reliably covers every case."
+        },
+        {
+            "name": "Plaintext Sensitive Storage",
+            "kind": "anti-pattern",
+            "definition": "Storing sensitive data unencrypted at rest, exposing it to anyone who reaches the underlying storage."
+        },
+        {
+            "name": "Plaintext Transport",
+            "kind": "anti-pattern",
+            "definition": "Sending data over an unencrypted channel, exposing it to interception and tampering in transit."
+        },
+        {
+            "name": "Point-in-Time Audit Only",
+            "kind": "anti-pattern",
+            "definition": "Verifying compliance only at isolated audit moments, leaving the intervals between checks unmonitored for drift."
+        },
+        {
+            "name": "Raw Output Rendering",
+            "kind": "anti-pattern",
+            "definition": "Emitting untrusted data into output without encoding it for its context, enabling injection attacks such as cross-site scripting."
+        },
+        {
+            "name": "Security as Afterthought",
+            "kind": "anti-pattern",
+            "definition": "Deferring security concerns until late in development, when vulnerabilities are costly and difficult to remediate."
+        },
+        {
+            "name": "Single Control Reliance",
+            "kind": "anti-pattern",
+            "definition": "Depending on one security control with no layered defenses, so a single bypass compromises the whole system."
+        },
+        {
+            "name": "String-Concatenated SQL",
+            "kind": "anti-pattern",
+            "definition": "Assembling SQL queries by concatenating untrusted input into strings, opening the system to SQL injection."
+        },
+        {
+            "name": "Trusted Internal Network Assumption",
+            "kind": "anti-pattern",
+            "definition": "Assuming that traffic originating inside the network perimeter is inherently trustworthy, ignoring insider and lateral-movement threats."
+        },
+        {
+            "name": "Trusting External Input",
+            "kind": "anti-pattern",
+            "definition": "Accepting external input as well-formed and safe without validating it, exposing the system to malformed or malicious data."
+        },
+        {
+            "name": "Unbounded Autonomy",
+            "kind": "anti-pattern",
+            "definition": "Allowing an actor or component to act without governance limits, so unsafe or unauthorized actions go unchecked."
+        },
+        {
+            "name": "Uncontrolled Change",
+            "kind": "anti-pattern",
+            "definition": "Permitting changes to a controlled system without review, approval, or record, undermining compliance and traceability."
+        },
+        {
+            "name": "Unnecessary Public Surface",
+            "kind": "anti-pattern",
+            "definition": "Exposing more endpoints, ports, or interfaces publicly than the function requires, enlarging the attack surface."
+        },
+        {
+            "name": "Unrestricted Access",
+            "kind": "anti-pattern",
+            "definition": "Permitting access to a resource with no controls, so any caller can invoke any operation."
+        },
+        {
+            "name": "Assets",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:threat-scenarios",
+                    "reason": "Assets are the things worth protecting, while threat scenarios are the ways an attacker might reach them."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "The data, systems, and capabilities of value that a threat model enumerates as the things worth protecting."
+        },
+        {
+            "name": "Attribute Definitions",
+            "kind": "artifact",
+            "definition": "Declared descriptions of the subject, resource, action, and environment attributes that an access policy evaluates."
+        },
+        {
+            "name": "Authenticated Principal",
+            "kind": "model",
+            "definition": "The verified identity of the user or service on whose behalf a request executes, against which permissions are checked."
+        },
+        {
+            "name": "Authorization Policy",
+            "kind": "constraint",
+            "definition": "The declared set of rules determining which principals may perform which actions on which resources."
+        },
+        {
+            "name": "Consent/Policy",
+            "kind": "constraint",
+            "definition": "The recorded permission and governing rules under which personal data may lawfully be collected and processed."
+        },
+        {
+            "name": "Context-Aware Encoding",
+            "kind": "technique",
+            "definition": "Choosing an output encoding matched to the destination context, such as HTML, an attribute, a URL or a script, so data is neutralized wherever it lands."
+        },
+        {
+            "name": "Continuous Authorization",
+            "kind": "activity",
+            "definition": "The practice of re-verifying a caller's authorization on every request rather than trusting a single earlier check."
+        },
+        {
+            "name": "Controls",
+            "kind": "mechanism",
+            "definition": "The safeguards and countermeasures put in place to reduce security or compliance risk to an acceptable level."
+        },
+        {
+            "name": "Data Minimization",
+            "kind": "principle",
+            "definition": "Collecting and retaining only the personal data strictly necessary for a stated purpose."
+        },
+        {
+            "name": "Defined Policy",
+            "kind": "constraint",
+            "definition": "An explicit, declared set of rules specifying what is permitted or denied, against which enforcement acts."
+        },
+        {
+            "name": "Evidence Automation",
+            "kind": "capability",
+            "definition": "The ability to generate and collect compliance evidence automatically from live systems rather than assembling it by hand."
+        },
+        {
+            "name": "Identity Proof",
+            "kind": "artifact",
+            "definition": "The evidence a principal presents to establish its identity, such as a password, token, or certificate."
+        },
+        {
+            "name": "Key Management",
+            "kind": "activity",
+            "definition": "The activity of generating, distributing, rotating, and revoking cryptographic keys across their lifecycle."
+        },
+        {
+            "name": "Layered Controls",
+            "kind": "constraint",
+            "definition": "The requirement that multiple independent safeguards protect a resource, so no single failure exposes it."
+        },
+        {
+            "name": "Machine-Readable Policies",
+            "kind": "artifact",
+            "definition": "Security or compliance policies expressed in a structured, executable format that tools can evaluate directly."
+        },
+        {
+            "name": "Minimal Exposure",
+            "kind": "constraint",
+            "definition": "The condition of exposing only the endpoints, ports, and capabilities strictly required."
+        },
+        {
+            "name": "Minimal Permissions",
+            "kind": "constraint",
+            "definition": "The requirement that each principal hold only the permissions its function needs."
+        },
+        {
+            "name": "Mitigation",
+            "kind": "activity",
+            "definition": "The activity of reducing a risk's likelihood or impact through deliberate countermeasures."
+        },
+        {
+            "name": "Policy Engine",
+            "kind": "mechanism",
+            "definition": "A runtime component that evaluates access requests against declared policies and returns permit or deny decisions."
+        },
+        {
+            "name": "Query Parameter Binding",
+            "kind": "technique",
+            "definition": "Passing query values as bound parameters separate from the query text, so input can never alter the query structure."
+        },
+        {
+            "name": "Request Origin Verification",
+            "kind": "technique",
+            "definition": "Confirming that a state-changing request originates from a trusted client, typically via a token or origin check."
+        },
+        {
+            "name": "Review",
+            "kind": "activity",
+            "definition": "The activity of examining a change or artifact against standards before it is accepted."
+        },
+        {
+            "name": "Risk Identification",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:mitigation",
+                    "reason": "Risk identification finds the risks, while mitigation reduces them."
+                }
+            ],
+            "kind": "activity",
+            "definition": "The activity of discovering and cataloguing the risks that could affect a system or objective."
+        },
+        {
+            "name": "Role Definitions",
+            "kind": "artifact",
+            "definition": "Declared sets of permissions grouped into named roles that are assigned to principals."
+        },
+        {
+            "name": "Rotation Policy",
+            "kind": "constraint",
+            "definition": "The specified interval and procedure by which secrets or keys must be replaced to limit the value of any single compromise."
+        },
+        {
+            "name": "Secret Store",
+            "kind": "artifact",
+            "definition": "A dedicated, access-controlled repository that holds credentials and keys outside of application code."
+        },
+        {
+            "name": "Threat Scenarios",
+            "kind": "artifact",
+            "definition": "Concrete descriptions of how an attacker might attempt to compromise a system, enumerated during threat modeling."
+        },
+        {
+            "name": "TLS/mTLS",
+            "kind": "mechanism",
+            "definition": "Transport-layer protocols that encrypt a connection and, with mutual TLS, mutually authenticate both endpoints."
+        },
+        {
+            "name": "Trust Boundaries",
+            "kind": "model",
+            "definition": "The demarcations in a system where the level of trust changes and data crossing them must be validated."
+        },
+        {
+            "name": "Strong Identity",
+            "kind": "constraint",
+            "definition": "The requirement that every actor prove a strong, verified identity before any access is granted."
+        },
+        {
+            "name": "Validation Rules",
+            "kind": "constraint",
+            "definition": "Declared constraints that input must satisfy, such as type, range, format and length, before it is accepted."
+        },
+        {
+            "name": "Automated Control",
+            "kind": "capability",
+            "definition": "The ability to enforce rules automatically at runtime without manual intervention."
+        },
+        {
+            "name": "Bounded Session Lifetime",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a session's validity is time-limited so that access does not persist indefinitely."
+        },
+        {
+            "name": "Coarse-Grained Permission Management",
+            "kind": "capability",
+            "definition": "The ability to manage access by assigning broad, role-level permission sets rather than per-individual grants."
+        },
+        {
+            "name": "Compromise Containment",
+            "kind": "capability",
+            "definition": "The ability to keep a breach confined to one layer or segment so it cannot spread system-wide."
+        },
+        {
+            "name": "Confidentiality",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:integrity",
+                    "reason": "Confidentiality keeps data from being read, while integrity keeps it from being altered."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The degree to which data is kept secret from all but authorized parties."
+        },
+        {
+            "name": "Confidentiality of Stored Data",
+            "kind": "quality-attribute",
+            "definition": "The degree to which data held at rest remains unreadable to anyone without authorized access."
+        },
+        {
+            "name": "Context-Aware Authorization",
+            "kind": "capability",
+            "definition": "The ability to base access decisions on the runtime context of a request, such as its attributes, its environment and the resource's state."
+        },
+        {
+            "name": "Control Selection",
+            "kind": "activity",
+            "definition": "The activity of choosing which security controls to apply based on identified threats and their priority."
+        },
+        {
+            "name": "Data Protection",
+            "kind": "capability",
+            "definition": "The ability to safeguard data against unauthorized access, loss, or disclosure throughout its lifecycle."
+        },
+        {
+            "name": "Fine-Grained Access Control",
+            "kind": "capability",
+            "definition": "The ability to grant or deny access at a precise level using specific attributes rather than broad roles."
+        },
+        {
+            "name": "Forged-Request Rejection",
+            "kind": "capability",
+            "definition": "The ability to detect and reject requests that a user did not intentionally initiate."
+        },
+        {
+            "name": "Identity-Aware Authorization",
+            "kind": "capability",
+            "definition": "The ability to make access decisions grounded in a verified caller identity."
+        },
+        {
+            "name": "Injection Prevention",
+            "kind": "capability",
+            "definition": "The ability to stop untrusted input from being interpreted as executable code or commands."
+        },
+        {
+            "name": "Injection-Safe Data Access",
+            "kind": "capability",
+            "definition": "The ability to query data such that input can never be interpreted as part of the query structure."
+        },
+        {
+            "name": "Integrity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which data is protected from unauthorized or undetected alteration."
+        },
+        {
+            "name": "Ongoing Assurance",
+            "kind": "capability",
+            "definition": "The ability to demonstrate continuously that controls remain effective, rather than only at audit time."
+        },
+        {
+            "name": "Perimeterless Security",
+            "kind": "approach",
+            "definition": "A security model that trusts no network location implicitly and verifies every request regardless of origin."
+        },
+        {
+            "name": "Priority-Based Controls",
+            "kind": "capability",
+            "definition": "The ability to apply controls in order of risk priority, addressing the greatest exposure first."
+        },
+        {
+            "name": "Privacy Compliance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system meets the privacy obligations imposed by law and policy."
+        },
+        {
+            "name": "Proactive Risk Reduction",
+            "kind": "capability",
+            "definition": "The ability to reduce risk by designing safeguards in from the start rather than patching flaws later."
+        },
+        {
+            "name": "Reduced Blast Radius",
+            "kind": "quality-attribute",
+            "definition": "The degree to which the impact of a compromise is confined to a limited scope."
+        },
+        {
+            "name": "Reduced Exploitability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which fewer exposed features leave a system harder to exploit."
+        },
+        {
+            "name": "Reduced Misconfiguration Risk",
+            "kind": "quality-attribute",
+            "definition": "The degree to which safe defaults lower the chance of an insecure configuration."
+        },
+        {
+            "name": "Regulatory Alignment",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system conforms to the laws and regulations that govern it."
+        },
+        {
+            "name": "Resource Protection",
+            "kind": "capability",
+            "definition": "The ability to ensure that only permitted operations reach a protected resource."
+        },
+        {
+            "name": "Revocable Access",
+            "kind": "capability",
+            "definition": "The ability to withdraw a principal's access immediately when a session or grant is terminated."
+        },
+        {
+            "name": "Safe Credential Handling",
+            "kind": "capability",
+            "definition": "The ability to store, transmit, and use credentials without exposing them."
+        },
+        {
+            "name": "Safe Rendering",
+            "kind": "capability",
+            "definition": "The ability to display untrusted data without allowing it to execute as markup or script."
+        },
+        {
+            "name": "Secure Communication",
+            "kind": "capability",
+            "definition": "The ability to exchange data over a channel protected from interception and tampering."
+        },
+        {
+            "name": "Secure Configuration",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system's settings and secrets are arranged to minimize exposure."
+        },
+        {
+            "name": "Zero Trust",
+            "kind": "approach",
+            "definition": "A security stance that grants no implicit trust and continuously verifies every access request regardless of its source."
+        },
+        {
+            "name": "Analytics/Personalization",
+            "kind": "capability",
+            "definition": "The ability to analyze collected data and tailor experiences to individuals, in tension with strict data minimization."
+        },
+        {
+            "name": "Certificate Management",
+            "kind": "activity",
+            "definition": "The activity of issuing, deploying, renewing, and revoking the digital certificates that transport encryption depends on."
+        },
+        {
+            "name": "Client Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of additional effort a protective measure imposes on client implementations."
+        },
+        {
+            "name": "Developer Ergonomics",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system is convenient and pleasant for developers to work with."
+        },
+        {
+            "name": "Dynamic Query Flexibility",
+            "kind": "quality-attribute",
+            "definition": "The degree of freedom to vary a query's structure at runtime, constrained when inputs must be bound as parameters."
+        },
+        {
+            "name": "Ease of Initial Use",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system is easy to start using without upfront configuration."
+        },
+        {
+            "name": "Feature Exposure",
+            "kind": "quality-attribute",
+            "definition": "The degree to which functionality is made accessible, which broadens capability but enlarges the attack surface."
+        },
+        {
+            "name": "Formatting Flexibility",
+            "kind": "quality-attribute",
+            "definition": "The degree of latitude to present output in varied formats, constrained when encoding must be strict."
+        },
+        {
+            "name": "Input Flexibility",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system accepts varied or loosely-structured input, in tension with strict validation."
+        },
+        {
+            "name": "Key Operations",
+            "kind": "quality-attribute",
+            "definition": "The degree of operational burden imposed by generating, rotating, and safeguarding cryptographic keys."
+        },
+        {
+            "name": "Latency/Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of added latency and complexity introduced by verifying every request rather than trusting a perimeter."
+        },
+        {
+            "name": "Operational Convenience",
+            "kind": "quality-attribute",
+            "definition": "The degree to which broad access makes day-to-day operations easier, in tension with least privilege."
+        },
+        {
+            "name": "Pipeline Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of intricacy added to a delivery pipeline by embedding continuous checks within it."
+        },
+        {
+            "name": "Policy Maintenance",
+            "kind": "activity",
+            "definition": "The activity of keeping codified policies correct and current as requirements evolve."
+        },
+        {
+            "name": "Role Explosion",
+            "kind": "quality-attribute",
+            "definition": "The degree to which roles proliferate into many narrow definitions as access requirements grow."
+        },
+        {
+            "name": "Speed",
+            "kind": "quality-attribute",
+            "definition": "The degree to which delivery proceeds rapidly, in tension with the caution that managing risk requires."
+        },
+        {
+            "name": "Team Velocity",
+            "kind": "metric",
+            "definition": "The rate at which a team delivers completed work, which governance overhead can slow."
+        },
+        {
+            "name": "Usability",
+            "kind": "quality-attribute",
+            "definition": "The ease with which users can accomplish their goals with a system."
+        },
+        {
+            "name": "User Convenience",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system minimizes friction and effort for its users."
+        },
+        {
+            "name": "Remove Secret from Code",
+            "kind": "technique",
+            "definition": "A technique for deleting a credential from source and history and reading it from a secret store instead."
+        },
+        {
+            "name": "Secret Rotation",
+            "kind": "technique",
+            "definition": "A technique for replacing credentials on a schedule and after any exposure, so a leaked secret stops working."
+        },
+        {
+            "name": "Least-Privilege Credential",
+            "kind": "technique",
+            "definition": "A technique for issuing each caller a credential that grants only the operations it performs."
+        },
+        {
+            "name": "Centralize Policy",
+            "kind": "technique",
+            "definition": "A technique for evaluating every authorization decision through one policy model instead of scattered checks."
+        },
+        {
+            "name": "Server-Side Enforcement",
+            "kind": "technique",
+            "definition": "A technique for enforcing every security rule on the server, whatever the client checks."
+        },
+        {
+            "name": "Penetration Testing",
+            "kind": "technique",
+            "definition": "A technique for attacking a system under agreement to find the paths that bypass its controls."
+        },
+        {
+            "name": "Authorization Tests",
+            "kind": "technique",
+            "definition": "A technique for testing each protected operation with permitted and refused identities."
+        },
+        {
+            "name": "Field Redaction",
+            "kind": "technique",
+            "definition": "A technique for removing or masking sensitive fields before data is logged, exported or displayed."
+        },
+        {
+            "name": "Purpose Binding",
+            "kind": "technique",
+            "definition": "A technique for tagging personal data with the purpose it was collected for and refusing uses outside it."
+        },
+        {
+            "name": "Retention Policy",
+            "kind": "technique",
+            "definition": "A technique for declaring how long each class of data is kept and deleting it when the period ends."
+        },
+        {
+            "name": "Repository Secret Scan",
+            "kind": "technique",
+            "definition": "A technique for scanning source and history for credentials before a change is accepted."
+        },
+        {
+            "name": "Default Deny",
+            "kind": "technique",
+            "definition": "A technique for refusing every access that no rule explicitly allows."
+        },
+        {
+            "name": "Sandboxing",
+            "kind": "technique",
+            "definition": "A technique for running untrusted code with only the resources and permissions it is granted."
+        },
+        {
+            "name": "Network Segmentation",
+            "kind": "technique",
+            "definition": "A technique for dividing a network into zones whose traffic between them passes declared controls."
+        }
+    ]
+}

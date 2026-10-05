@@ -1,0 +1,293 @@
+{
+    "category": "error-handling-resilience",
+    "records": [
+        {
+            "name": "All-Or-Nothing Failure",
+            "kind": "anti-pattern",
+            "definition": "Failing the entire system when one part fails instead of degrading to reduced but working service."
+        },
+        {
+            "name": "Brittle Architecture",
+            "kind": "anti-pattern",
+            "definition": "A fragile design that breaks entirely under any condition it was not explicitly built for."
+        },
+        {
+            "name": "Exception Swallowing",
+            "distinctFrom": [
+                {
+                    "id": "architecture:exception-control-flow",
+                    "reason": "Exception swallowing discards a real failure, while exception control flow uses exceptions for cases that are not failures."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Catching an exception and silently discarding it, hiding the failure from callers and logs."
+        },
+        {
+            "name": "Fail Open",
+            "kind": "anti-pattern",
+            "definition": "Granting access or continuing when a security check fails, exposing the system on error."
+        },
+        {
+            "name": "Failure Propagation",
+            "kind": "anti-pattern",
+            "definition": "Letting a failure spread unchecked across component boundaries instead of containing it."
+        },
+        {
+            "name": "Fragile Parsing",
+            "kind": "anti-pattern",
+            "definition": "Parsing input so rigidly that any minor deviation causes a failure."
+        },
+        {
+            "name": "Non-Idempotent Operation",
+            "kind": "anti-pattern",
+            "definition": "An operation whose repetition changes the result, making it unsafe to retry."
+        },
+        {
+            "name": "Shared Resource Pool",
+            "kind": "anti-pattern",
+            "definition": "Serving all work from one shared resource pool, so one overloaded consumer starves the rest."
+        },
+        {
+            "name": "Single Behavior Path",
+            "kind": "anti-pattern",
+            "definition": "Providing only one execution path with no fallback, so any failure in it fails the whole request."
+        },
+        {
+            "name": "Trusting Invalid Inputs",
+            "kind": "anti-pattern",
+            "definition": "Assuming inputs are valid and using them without checking, so bad data flows through unguarded."
+        },
+        {
+            "name": "Unbounded Retry",
+            "distinctFrom": [
+                {
+                    "id": "architecture:retry-storm",
+                    "reason": "Unbounded retry is one caller retrying with no limit, while a retry storm is many callers whose combined retries prolong the failure, bounded or not."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Retrying a failing operation endlessly with no limit, amplifying load and delaying recovery."
+        },
+        {
+            "name": "Unsafe Default Continuation",
+            "kind": "anti-pattern",
+            "definition": "Continuing in an unsafe default state after a failure instead of stopping in a safe one."
+        },
+        {
+            "name": "Blast-Radius Reduction",
+            "kind": "capability",
+            "definition": "The ability to contain a failure so it affects only one isolated partition."
+        },
+        {
+            "name": "Bounded Waiting",
+            "kind": "capability",
+            "definition": "The ability to guarantee an operation waits no longer than a set limit."
+        },
+        {
+            "name": "Cascading Failure Prevention",
+            "kind": "capability",
+            "definition": "The ability to stop one component's failure from cascading through its callers."
+        },
+        {
+            "name": "Continued Operation Under Failure",
+            "kind": "capability",
+            "definition": "The ability to keep operating correctly despite the failure of some components."
+        },
+        {
+            "name": "Controlled Failure",
+            "kind": "capability",
+            "definition": "The ability to fail in a defined, handled way rather than crashing unpredictably."
+        },
+        {
+            "name": "Deny-by-Default Behavior",
+            "kind": "capability",
+            "definition": "The ability to default to denying access when a security check cannot complete."
+        },
+        {
+            "name": "Early Defect Detection",
+            "kind": "capability",
+            "definition": "The ability to surface a defect immediately at its source rather than letting it propagate."
+        },
+        {
+            "name": "Localized Recovery",
+            "kind": "capability",
+            "definition": "The ability to recover from a failure within its boundary without restarting the whole system."
+        },
+        {
+            "name": "Overload Protection",
+            "kind": "capability",
+            "definition": "The ability to protect a system from being overwhelmed by shedding or slowing incoming load."
+        },
+        {
+            "name": "Safe Failure",
+            "kind": "capability",
+            "definition": "The ability to fail without corrupting state or causing further damage."
+        },
+        {
+            "name": "Stability Under Stress",
+            "kind": "capability",
+            "definition": "The ability to keep functioning under load spikes and adverse conditions."
+        },
+        {
+            "name": "Transient Failure Recovery",
+            "kind": "capability",
+            "definition": "The ability to recover from short-lived failures by retrying the operation."
+        },
+        {
+            "name": "Backoff",
+            "kind": "technique",
+            "definition": "Progressively increasing the wait between retries to avoid overwhelming a recovering dependency."
+        },
+        {
+            "name": "Error Model",
+            "kind": "model",
+            "definition": "A structured representation of the kinds of errors a system can raise and how they are categorized."
+        },
+        {
+            "name": "Alternate Behavior",
+            "kind": "constraint",
+            "definition": "The requirement that a defined alternate behavior exist to use when the primary path fails."
+        },
+        {
+            "name": "Capacity Signaling",
+            "kind": "constraint",
+            "definition": "The requirement that downstream capacity be signaled upstream so producers adjust their rate."
+        },
+        {
+            "name": "Failure Isolation",
+            "kind": "constraint",
+            "definition": "The requirement that a failure be contained within a boundary so it cannot spread."
+        },
+        {
+            "name": "Failure Threshold",
+            "kind": "constraint",
+            "definition": "The requirement of a defined failure count or rate at which a circuit breaker trips."
+        },
+        {
+            "name": "Feature Isolation",
+            "kind": "constraint",
+            "definition": "The requirement that individual features be isolated so one can be disabled without taking down others."
+        },
+        {
+            "name": "Resource Isolation",
+            "kind": "constraint",
+            "definition": "The requirement that resources be partitioned so exhaustion in one pool cannot starve others."
+        },
+        {
+            "name": "Strict Output",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:tolerant-input",
+                    "reason": "Strict output governs what a component emits, while tolerant input governs what it accepts."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that a component emit only strictly conformant, well-formed output."
+        },
+        {
+            "name": "Timeout",
+            "kind": "constraint",
+            "definition": "The requirement that an operation be given a maximum time to complete before being abandoned."
+        },
+        {
+            "name": "Tolerant Input",
+            "kind": "constraint",
+            "definition": "The requirement that a component accept and cope with input that deviates from the ideal format."
+        },
+        {
+            "name": "Availability of Degraded Dependency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which tripping a breaker to protect the system also cuts off a still-partly-working dependency."
+        },
+        {
+            "name": "Consistency / Feature Completeness",
+            "kind": "quality-attribute",
+            "definition": "The degree to which serving reduced functionality during failure sacrifices full consistency or completeness."
+        },
+        {
+            "name": "Hidden Errors",
+            "kind": "quality-attribute",
+            "definition": "The degree to which catching failures at a boundary can obscure the underlying errors from view."
+        },
+        {
+            "name": "Load Amplification",
+            "kind": "quality-attribute",
+            "definition": "The degree to which retrying failed operations multiplies load on an already-struggling dependency."
+        },
+        {
+            "name": "Slow Operation Tolerance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which enforcing timeouts sacrifices tolerance for legitimately slow operations."
+        },
+        {
+            "name": "Stability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system keeps operating steadily without collapsing under load."
+        },
+        {
+            "name": "Stale/Reduced Results",
+            "kind": "quality-attribute",
+            "definition": "The degree to which serving a fallback yields stale or reduced-quality results."
+        },
+        {
+            "name": "Strict Validation",
+            "kind": "quality-attribute",
+            "definition": "The degree to which rejecting deviant input conflicts with accepting it tolerantly."
+        },
+        {
+            "name": "Verbosity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which pervasive defensive checks add verbosity and clutter to the code."
+        },
+        {
+            "name": "Introduce Typed Result",
+            "kind": "technique",
+            "definition": "A technique for returning success or a typed error as a value, so callers handle failure through the type system."
+        },
+        {
+            "name": "Translate Errors at the Boundary",
+            "kind": "technique",
+            "definition": "A technique for converting vendor and infrastructure errors into the core's own error types where they enter."
+        },
+        {
+            "name": "Idempotency Key",
+            "kind": "technique",
+            "definition": "A technique for tagging each request with a unique key, so a repeated request is recognized and applied once."
+        },
+        {
+            "name": "Bounded Retry",
+            "kind": "technique",
+            "definition": "A technique for retrying a failed call a limited number of times with growing delays before giving up."
+        },
+        {
+            "name": "Jitter",
+            "kind": "technique",
+            "definition": "A technique for adding a random offset to retry delays, so clients that failed together do not retry together."
+        },
+        {
+            "name": "Deadline Propagation",
+            "kind": "technique",
+            "definition": "A technique for passing the time left for a request to every call it makes, so downstream work stops when the caller has given up."
+        },
+        {
+            "name": "Cancellation",
+            "kind": "technique",
+            "definition": "A technique for letting a caller stop work it no longer needs, releasing the resources that work holds."
+        },
+        {
+            "name": "Load Shedding",
+            "kind": "technique",
+            "definition": "A technique for refusing part of the incoming work when load passes capacity, so the work already accepted completes."
+        },
+        {
+            "name": "Bounded Queue",
+            "kind": "technique",
+            "definition": "A technique for giving a queue a fixed capacity, so producers are slowed or refused instead of exhausting memory."
+        },
+        {
+            "name": "Fail Fast or Fall Back",
+            "kind": "technique",
+            "definition": "A technique for deciding per failure whether to stop with an error at once or to continue on a declared fallback."
+        }
+    ]
+}

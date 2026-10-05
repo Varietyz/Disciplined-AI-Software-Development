@@ -2,7 +2,7 @@ import { DIGEST_ROOT, INTEL_ROOT } from "../constants/template.constants.ts";
 import { citationKindUnknown, citationUnresolved, citationUntyped } from "../strings/reference.strings.ts";
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { BEHAVIOUR_DOCUMENT } from "../constants/path.constants.ts";
+import { BEHAVIOR_DOCUMENT } from "../constants/path.constants.ts";
 import type { Citation } from "../types/reference.types.ts";
 import { join } from "node:path";
 import { surfacePath } from "../../../config/surface.config.ts";
@@ -95,7 +95,7 @@ export const resolvesCitation = function resolvesCitation(root: string, archive:
     }
 
     if (citation.kind === "rule") {
-        const behavior = join(root, BEHAVIOUR_DOCUMENT);
+        const behavior = join(root, BEHAVIOR_DOCUMENT);
         const held = (existsSync(behavior) ? readFileSync(behavior, "utf8") : "") + joinedDirectory(root, RULES_DIR);
         return held.includes(citation.member);
     }

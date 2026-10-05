@@ -1,0 +1,111 @@
+{
+    "label": "GovLab Pipeline",
+    "summary": "The staged gate. A plan of ordered stages of shell steps, built for the workspace members, and a runner that executes it live and aborts on the first failure, or captures every step into an aggregated report. The runner supports parallel step groups, per-stage bypass and selection, and a failure summary that names the command, the elapsed time and the steps that did not run.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "build-tooling"},
+        {"meta": "developer-tooling",
+            "sub": "cli"}
+    ],
+    "capabilities": [
+        "staged-gate-execution",
+        "parallel-step-groups",
+        "abort-on-first-failure",
+        "aggregated-report-mode",
+        "stage-bypass-and-selection",
+        "member-scoped-runs",
+        "violation-count-parsing",
+        "workspace-verify-orchestration"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "separation-of-concerns",
+        "type-safety"
+    ],
+    "visibility": {"private": true,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "entries": ["runtime/entrypoints/*.entrypoint.ts"],
+    "docs": {
+        "overview": "`runStages(label, stages, context)` in `core/coordinators/stage.coordinator.ts` runs an ordered stage list. A stage is `{ label, slug, bypass, steps }`, and a step is either one shell command or a `parallel` group of them. In the default live mode each step streams to the terminal and the first failure aborts, printing the command, the elapsed seconds and the count of steps that did not run. Under `--report` every step runs captured, each result is parsed for a trailing violation count, and the run ends with a per-stage table. The workspace gate is the plan `stagesFor` builds in `core/factories/plan.factory.ts` from the `STAGES` builders, and `runtime/entrypoints/validation.entrypoint.ts` hands it to the runner for `npm run verify`.",
+        "whenToUse": [
+            "Composing a multi-stage gate whose ordering carries meaning, such as a generator that runs before the readers of what it generates.",
+            "Running independent checks concurrently while keeping one aggregated pass or fail for the whole run.",
+            "Wanting a gate that reports how many of its steps did not run."
+        ],
+        "whenNotToUse": [
+            "A single command. Invoke it directly.",
+            "Work needing branching between steps. A stage list is declarative and ordered, with no conditionals and no data flowing from one step to the next.",
+            "A watch loop or any long-lived process, because every step is expected to exit."
+        ],
+        "quickStart": [
+            {
+                "intent": "Declare and run a staged gate",
+                "lang": "ts",
+                "code": "import { argvOf } from \"@govlab/argv\";\nimport { GATE_ARGV } from \"@govlab/pipeline/configuration/configs/invocation.config.ts\";\nimport { runStages } from \"@govlab/pipeline/core/coordinators/stage.coordinator.ts\";\nimport { shellFor } from \"@govlab/pipeline/core/resolvers/shell.resolver.ts\";\nimport { stageArgsOf } from \"@govlab/pipeline/core/converters/invocation.converter.ts\";\n\nawait runStages(\n    \"verify-codebase\",\n    [\n        {\n            bypass: false,\n            label: \"Prepare\",\n            slug: \"prepare\",\n            steps: [{ label: \"Typecheck\", run: \"npx tsc --noEmit -p tsconfig.json\" }],\n        },\n    ],\n    {\n        args: stageArgsOf(argvOf(GATE_ARGV, [\"--report\"])),\n        options: {},\n        shell: shellFor(process.platform, process.env.ComSpec),\n    },\n);"
+            },
+            {
+                "intent": "Select or skip stages at invocation, and switch to report mode",
+                "lang": "sh",
+                "code": "npm run verify -- --bypass linting        # everything except one stage\nnpm run verify:code                       # everything except the steps tagged docs\nnpm run verify -- --only \"Lint surfaces\"  # one step by label\nnpm run verify                            # every step, in report mode"
+            },
+            {
+                "intent": "Gate one workspace member instead of the whole tree",
+                "lang": "sh",
+                "code": "npm run verify -- --member app               # one member\nnpm run verify -- --member quality,pipeline  # several members in one run\nnpm run verify                               # every gated member, plus the repo-wide steps"
+            }
+        ],
+        "configuration": "The stage plan is the configuration. `configuration/configs/invocation.config.ts` declares the command line as `GATE_ARGV`: `--bypass <slug>`, `--run <slug>`, `--member <id>`, `--only <label>`, `--tag <tag>`, `--skip-tag <tag>` and `--report`, each repeatable. `--help` prints the contract, and an undeclared flag or a bare argument is refused. `configuration/configs/package.config.ts` declares `MEMBERS`, the registry `--member` resolves against. `runStages` takes a context of the parsed arguments, the report options `{ reportPath, violationsPath, writeReport }` and the shell, and writes both artifacts on every exit path. Every step runs through a shell from the repo root, so a relative path in a command resolves against the workspace root.",
+        "install": "A private workspace package resolved through the root `package.json` workspaces glob `govlab.root/govlab.*`. It declares `@govlab/argv`, `@govlab/canonical-write`, `@govlab/quality` and `@ssot/paths`, and holds no third-party dependency of its own. There is no build step, and the root `verify` scripts run `govlab.root/govlab.pipeline/runtime/entrypoints/validation.entrypoint.ts`.",
+        "disposal": [
+            "Replace the root `verify` scripts with a direct invocation of each check, accepting the loss of ordering, aggregation and the not-run count.",
+            "Repoint the consumers of `stagesFor` and `stageLabels` in the build, content and host members.",
+            "Remove `govlab.root/govlab.pipeline/` and its workspace entry."
+        ],
+        "aiContext": [
+            "Stage order is enforced only by position in `STAGES`. Auto-fix precedes linting, which reads the closure graph auto-fix writes, and nothing asserts that dependency.",
+            "A step's `run` is a shell command string executed from the repo root, so relative paths resolve against the workspace root.",
+            "**The gate never invokes an npm script.** Every step is a direct binary or `node <script>` call, and a step reading `npm run <name>` is a defect.",
+            "A `parallel` group is a barrier. Every member runs, then the group aborts if any failed, printing each failure's captured output. Independent checks share a group, and dependent ones are separate steps.",
+            "`bypass: true` on a stage makes it opt-in, so it runs only when `--run <slug>` names it. No stage in this workspace ships that way.",
+            "Report mode runs every step and surveys a broken tree, and the live mode gates work. Both report artifacts are written in either mode and flushed before every abort, so a present artifact does not mean a passing run.",
+            "`--member <id>` is an inner-loop convenience. A scoped run narrows every step that takes a path and drops the steps that scan the tree as a whole: lockfile integrity, prune, knip, catalog and document generation, and the validators. Those are named on stdout before the run starts. Work merges on a green unscoped `npm run verify`.",
+            "Each stage builder keeps the repo-wide command for every step that has one and switches to per-member commands only under `--member`, so an unscoped `npm run verify` keeps its coverage.",
+            "The entry point is the only file that reads `process.env` or `process.argv`. The runner receives the shell and the parsed flags in its context."
+        ],
+        "apiNotes": [
+            {
+                "name": "runStages",
+                "note": "the runner, in `core/coordinators/stage.coordinator.ts`. It takes a label, an ordered stage list and a context, rejects an unknown stage slug before any step, runs live by default and switches to captured aggregation under `--report`."
+            },
+            {
+                "name": "stagesFor",
+                "note": "builds the gate's plan from the `STAGES` builders for a scope of member ids, and names each repo-wide step a scoped run skips."
+            },
+            {
+                "name": "stageLabels",
+                "note": "lists every stage label, slug and step label of a plan, which the content member reads into the leak set."
+            },
+            {
+                "name": "stageArgsOf",
+                "note": "turns the flags parsed against `GATE_ARGV` into one set per axis, splitting comma lists and dropping empty entries."
+            },
+            {
+                "name": "lastCount",
+                "note": "extracts a trailing violation count from a step's captured output, so the report can total findings per stage."
+            },
+            {
+                "name": "buildViolations",
+                "note": "groups the findings of every failed step by file into the violations artifact, and keeps unparsable output under its step."
+            },
+            {
+                "name": "runCaptured",
+                "note": "with `runLive` and `runTee` in `core/adapters/shell.adapter.ts`: `runLive` streams to the terminal and returns an exit code, `runCaptured` buffers stdout and stderr together, and `runTee` does both."
+            }
+        ]
+    }
+}

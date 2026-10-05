@@ -145,7 +145,7 @@ one call, while a no-wait flag posts alone.
 
 ```text
 Flags:   —
-         ┌─── AGENT <letter>-<ordinal> ─── kind:<artifact | judgement> at:<ms> to:<letters | *>
+         ┌─── AGENT <letter>-<ordinal> ─── kind:<artifact | judgment> at:<ms> to:<letters | *>
          To <letter>[, <letter>][ AND <letter>] — the argument, across as many lines as it needs.
          └─── END AGENT <letter>-<ordinal>
 ```

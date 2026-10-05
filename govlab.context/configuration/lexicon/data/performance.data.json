@@ -1,0 +1,539 @@
+{
+    "category": "scalability-performance-optimization",
+    "records": [
+        {
+            "name": "Anecdotal Performance Claims",
+            "kind": "anti-pattern",
+            "definition": "Asserting performance characteristics from anecdote or intuition rather than measured evidence."
+        },
+        {
+            "name": "Anecdotal Timing",
+            "kind": "anti-pattern",
+            "definition": "Judging how fast code runs from casual observation instead of controlled measurement."
+        },
+        {
+            "name": "Bottlenecks",
+            "kind": "anti-pattern",
+            "definition": "A single stage that constrains overall throughput because all work must pass through it."
+        },
+        {
+            "name": "Fixed Provisioning",
+            "kind": "anti-pattern",
+            "definition": "Allocating a static amount of capacity regardless of demand, so the system is either starved or wasteful."
+        },
+        {
+            "name": "Fixed-Capacity Design",
+            "kind": "anti-pattern",
+            "definition": "Building a system around a fixed capacity ceiling that cannot grow when load increases."
+        },
+        {
+            "name": "Full Materialization",
+            "kind": "anti-pattern",
+            "definition": "Loading an entire dataset into memory at once when streaming or chunking would suffice, risking exhaustion."
+        },
+        {
+            "name": "Global Shared State",
+            "kind": "anti-pattern",
+            "definition": "A single mutable state shared across all workers, forcing coordination and preventing independent scaling."
+        },
+        {
+            "name": "Guess-Based Capacity",
+            "kind": "anti-pattern",
+            "definition": "Sizing capacity from guesswork rather than a model of arrival and service rates."
+        },
+        {
+            "name": "Guess-Based Optimization",
+            "kind": "anti-pattern",
+            "definition": "Optimizing based on assumptions about where time is spent rather than profiling evidence."
+        },
+        {
+            "name": "Guesswork",
+            "kind": "anti-pattern",
+            "definition": "Deciding where to optimize by intuition instead of measured profiling data."
+        },
+        {
+            "name": "Hard Resource Ceiling",
+            "kind": "anti-pattern",
+            "definition": "A fixed upper bound on a single machine's resources that caps how far vertical scaling can go."
+        },
+        {
+            "name": "Inefficient Algorithm Choice",
+            "distinctFrom": [
+                {
+                    "id": "architecture:n-plus-one-query",
+                    "reason": "An inefficient algorithm scales poorly in its own complexity, while an N plus one query issues one extra query per item fetched."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Selecting an algorithm whose complexity scales poorly for the expected input size."
+        },
+        {
+            "name": "Instance Affinity",
+            "distinctFrom": [
+                {
+                    "id": "architecture:temporal-coupling",
+                    "reason": "Instance affinity ties a client to one server's state, while temporal coupling requires operations in an undocumented order."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Binding a client to a specific server instance for its state, preventing free rebalancing across instances."
+        },
+        {
+            "name": "Instance-Local State",
+            "kind": "anti-pattern",
+            "definition": "Holding request-spanning state on one instance, so requests cannot be served by any other instance."
+        },
+        {
+            "name": "Local Micro-Optimization",
+            "kind": "anti-pattern",
+            "definition": "Tuning a non-bottleneck section for marginal gains while the constraint that limits performance goes unaddressed."
+        },
+        {
+            "name": "Long Blocking Work",
+            "kind": "anti-pattern",
+            "definition": "Performing lengthy synchronous work on a request path, blocking it and inflating latency."
+        },
+        {
+            "name": "Origin-Only Serving",
+            "kind": "anti-pattern",
+            "definition": "Serving all content directly from the origin with no edge caching, concentrating load and adding distance latency."
+        },
+        {
+            "name": "Premature Optimization",
+            "kind": "anti-pattern",
+            "definition": "Optimizing code before evidence shows it matters, adding complexity for gains that may never be needed."
+        },
+        {
+            "name": "Resource Waste/Saturation",
+            "kind": "anti-pattern",
+            "definition": "Running resources far below or far above healthy utilization, either wasting capacity or saturating it."
+        },
+        {
+            "name": "Sequential Bottleneck",
+            "kind": "anti-pattern",
+            "definition": "A portion of work that must run serially, capping the speedup that parallelism can achieve."
+        },
+        {
+            "name": "Single Monolithic Store",
+            "kind": "anti-pattern",
+            "definition": "Concentrating all data in one store that cannot be partitioned, capping write and storage scalability."
+        },
+        {
+            "name": "Single Target Routing",
+            "kind": "anti-pattern",
+            "definition": "Directing all traffic to one target instead of distributing it, wasting capacity and creating a bottleneck."
+        },
+        {
+            "name": "Single-Primary Read Contention",
+            "kind": "anti-pattern",
+            "definition": "Serving all reads from the single primary, so read load contends with writes and limits throughput."
+        },
+        {
+            "name": "Unbounded Access",
+            "kind": "anti-pattern",
+            "definition": "Permitting callers to make unlimited requests with no rate limit, allowing overload and abuse."
+        },
+        {
+            "name": "Unbounded Memory Growth",
+            "kind": "anti-pattern",
+            "definition": "Accumulating state without bound so memory usage grows until the process exhausts it."
+        },
+        {
+            "name": "Unbounded Runtime Growth",
+            "kind": "anti-pattern",
+            "definition": "An algorithm whose running time grows without bound as input scales, becoming infeasible at size."
+        },
+        {
+            "name": "Arrival and Service Rates",
+            "kind": "metric",
+            "definition": "The measured rates at which requests arrive and at which a server completes them, the inputs a queuing model needs."
+        },
+        {
+            "name": "Bottleneck Awareness",
+            "kind": "capability",
+            "definition": "The ability to recognize which component limits a system's overall throughput."
+        },
+        {
+            "name": "Bottleneck Evidence",
+            "kind": "artifact",
+            "definition": "Measured data identifying which component constrains performance, justifying where to optimize."
+        },
+        {
+            "name": "Cacheable Content",
+            "kind": "constraint",
+            "definition": "The requirement that content be stable enough to serve from a cache without harmful staleness."
+        },
+        {
+            "name": "Capacity Model",
+            "kind": "model",
+            "definition": "A representation of how a system's capacity responds to load, used to predict its limits."
+        },
+        {
+            "name": "Complexity Awareness",
+            "kind": "capability",
+            "definition": "The ability to reason about how an algorithm's cost grows with input size."
+        },
+        {
+            "name": "Complexity Model",
+            "kind": "model",
+            "definition": "A representation of how an algorithm's resource use scales with input size."
+        },
+        {
+            "name": "Externalized State",
+            "kind": "constraint",
+            "definition": "The requirement that session or request state be held outside the serving instance, in a shared store."
+        },
+        {
+            "name": "Input Size Model",
+            "kind": "model",
+            "definition": "A representation of the input dimension against which an algorithm's running time is measured."
+        },
+        {
+            "name": "Invalidation Policy",
+            "kind": "constraint",
+            "definition": "The rules determining when cached entries are considered stale and must be refreshed or evicted."
+        },
+        {
+            "name": "Load Model",
+            "kind": "model",
+            "definition": "A representation of the expected volume and pattern of demand a system must handle."
+        },
+        {
+            "name": "Memory Model",
+            "kind": "model",
+            "definition": "A representation of how an algorithm's memory use grows with input size."
+        },
+        {
+            "name": "Multiple Targets",
+            "kind": "constraint",
+            "definition": "The precondition that more than one interchangeable backend exists across which traffic can be spread."
+        },
+        {
+            "name": "Partition Key",
+            "kind": "artifact",
+            "definition": "The field whose value determines which shard or partition a record belongs to."
+        },
+        {
+            "name": "Partition Strategy",
+            "kind": "approach",
+            "definition": "A scheme for dividing data or work across independent partitions to distribute load and enable parallelism."
+        },
+        {
+            "name": "Quota Policy",
+            "kind": "constraint",
+            "definition": "The declared limits on how many requests a caller may make within a time window."
+        },
+        {
+            "name": "Repeatable Test Environment",
+            "kind": "constraint",
+            "definition": "A controlled, reproducible environment in which measurements can be compared meaningfully across runs."
+        },
+        {
+            "name": "Representative Workload",
+            "kind": "constraint",
+            "definition": "A workload that reflects production usage closely enough that measurements generalize."
+        },
+        {
+            "name": "Resource Headroom",
+            "kind": "quality-attribute",
+            "definition": "The degree of spare capacity remaining on a machine before its resource ceiling is reached."
+        },
+        {
+            "name": "Space Complexity Awareness",
+            "kind": "capability",
+            "definition": "The ability to reason about how an algorithm's memory use grows with input size."
+        },
+        {
+            "name": "Statelessness or Shared State Strategy",
+            "kind": "approach",
+            "definition": "A decision to make instances stateless or externalize state to a shared store, so any instance can serve any request."
+        },
+        {
+            "name": "Abuse/Overload Protection",
+            "kind": "capability",
+            "definition": "The ability to shield a system from abusive or excessive request volume."
+        },
+        {
+            "name": "Bottleneck Detection",
+            "kind": "capability",
+            "definition": "The ability to locate the component that most constrains overall performance."
+        },
+        {
+            "name": "Capacity Increase without Distribution",
+            "kind": "capability",
+            "definition": "The ability to raise capacity by enlarging a single machine rather than adding more machines."
+        },
+        {
+            "name": "Comparative Analysis",
+            "kind": "capability",
+            "definition": "The ability to compare algorithms by how their cost grows, independent of hardware."
+        },
+        {
+            "name": "Cost Efficiency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system delivers its work at the lowest resource cost."
+        },
+        {
+            "name": "Dynamic Capacity",
+            "kind": "capability",
+            "definition": "The ability to add or remove capacity automatically as demand rises and falls."
+        },
+        {
+            "name": "Efficient Processing",
+            "kind": "capability",
+            "definition": "The ability to complete work using the fewest operations and least resource for the input."
+        },
+        {
+            "name": "Geographically-Local Delivery",
+            "kind": "capability",
+            "definition": "The ability to serve content from a location near the user, cutting distance latency."
+        },
+        {
+            "name": "Growth Handling",
+            "kind": "capability",
+            "definition": "The ability to absorb increasing load without redesign."
+        },
+        {
+            "name": "Large Dataset Scaling",
+            "kind": "capability",
+            "definition": "The ability to grow storage and throughput by spreading a dataset across many shards."
+        },
+        {
+            "name": "Latency Reduction",
+            "kind": "capability",
+            "definition": "The ability to lower response time by serving results from a nearer or faster source."
+        },
+        {
+            "name": "Load Handling",
+            "kind": "capability",
+            "definition": "The ability to process a high volume of work without degrading."
+        },
+        {
+            "name": "Memory Scalability",
+            "kind": "capability",
+            "definition": "The ability to handle larger inputs without memory use growing prohibitively."
+        },
+        {
+            "name": "Multi-Core Utilization",
+            "kind": "capability",
+            "definition": "The ability to use multiple processor cores simultaneously for a single workload."
+        },
+        {
+            "name": "Origin Offload",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:geographically-local-delivery",
+                    "reason": "Origin offload relieves the origin server, while local delivery cuts the distance to the user."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to relieve the origin server by serving cached copies from the edge."
+        },
+        {
+            "name": "Overlapping Work",
+            "kind": "capability",
+            "definition": "The ability to make progress on multiple tasks over the same period by interleaving them."
+        },
+        {
+            "name": "Read Traffic Offload",
+            "kind": "capability",
+            "definition": "The ability to divert read queries to replicas, relieving the primary."
+        },
+        {
+            "name": "Reduced Load",
+            "kind": "capability",
+            "definition": "The ability to lessen work reaching a backend by serving repeat results from a cache."
+        },
+        {
+            "name": "Regression Detection",
+            "kind": "capability",
+            "definition": "The ability to catch a performance regression by comparing measurements against a baseline."
+        },
+        {
+            "name": "Responsiveness",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system reacts quickly to user actions or requests."
+        },
+        {
+            "name": "Scalability Analysis",
+            "kind": "activity",
+            "definition": "The activity of assessing how a system's cost grows as load or input increases."
+        },
+        {
+            "name": "Scale-Out",
+            "kind": "capability",
+            "definition": "The ability to add capacity by adding more machines that share the load."
+        },
+        {
+            "name": "Targeted Improvement",
+            "kind": "capability",
+            "definition": "The ability to direct optimization effort at the specific constraint that limits performance."
+        },
+        {
+            "name": "Traffic Distribution",
+            "kind": "capability",
+            "definition": "The ability to spread incoming requests across multiple backends evenly."
+        },
+        {
+            "name": "Utilization-Based Sizing",
+            "kind": "capability",
+            "definition": "The ability to size capacity from measured utilization and wait-time targets."
+        },
+        {
+            "name": "Wait-Time Prediction",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:utilization-based-sizing",
+                    "reason": "Wait-time prediction forecasts how long work waits, while utilization-based sizing chooses capacity from measured load and a wait-time target."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to predict how long work will wait given arrival and service rates."
+        },
+        {
+            "name": "Always-Fresh Reads",
+            "kind": "quality-attribute",
+            "definition": "The degree to which every read returns the most recent write, which caching trades away for speed."
+        },
+        {
+            "name": "Cache Invalidation",
+            "kind": "activity",
+            "definition": "The activity of removing or refreshing cached entries so stale data is not served."
+        },
+        {
+            "name": "Constant-Factor Practicality",
+            "kind": "quality-attribute",
+            "definition": "The degree to which constant factors, ignored by asymptotic analysis, affect measured performance."
+        },
+        {
+            "name": "Cost/Limit",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a bigger single machine costs disproportionately more and eventually hits a hard limit."
+        },
+        {
+            "name": "CPU Cost",
+            "kind": "quality-attribute",
+            "definition": "The degree of processor time a technique consumes, often traded against memory savings."
+        },
+        {
+            "name": "Cross-Shard Queries",
+            "kind": "quality-attribute",
+            "definition": "The degree of difficulty and cost of a query that must gather data from multiple shards."
+        },
+        {
+            "name": "Distributed Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of intricacy introduced by spreading work across distributed nodes."
+        },
+        {
+            "name": "Distributed Coordination",
+            "kind": "quality-attribute",
+            "definition": "The degree of coordination overhead required to keep distributed instances consistent."
+        },
+        {
+            "name": "Environment Drift",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a test or runtime environment diverges from a reference over time, undermining comparability."
+        },
+        {
+            "name": "Implementation Simplicity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which code stays simple and clear, sometimes traded against maximal efficiency."
+        },
+        {
+            "name": "Measurement Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree of performance cost that the act of measuring imposes on the system being measured."
+        },
+        {
+            "name": "Model Assumptions",
+            "kind": "constraint",
+            "definition": "The simplifying premises a performance model depends on, which limit how well it matches reality."
+        },
+        {
+            "name": "Over-Provisioning",
+            "kind": "quality-attribute",
+            "definition": "The degree to which allocated capacity exceeds demand, trading waste for safety margin."
+        },
+        {
+            "name": "Read-Your-Writes Consistency",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a client is guaranteed to see its own prior writes, which replica lag can break."
+        },
+        {
+            "name": "Readability/Maintainability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which code stays readable and maintainable, sometimes sacrificed for performance."
+        },
+        {
+            "name": "Rebalancing Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of difficulty of redistributing data when partitions are added or removed."
+        },
+        {
+            "name": "Session Affinity",
+            "kind": "technique",
+            "definition": "Routing all of a client's requests to the same server instance so its session state stays local."
+        },
+        {
+            "name": "State Access Latency",
+            "kind": "quality-attribute",
+            "definition": "The degree of added latency incurred when state is fetched from an external store rather than held locally."
+        },
+        {
+            "name": "Throughput/Batching",
+            "kind": "quality-attribute",
+            "definition": "The degree to which batching work raises throughput at the cost of per-item latency."
+        },
+        {
+            "name": "Warm-Up Latency",
+            "kind": "quality-attribute",
+            "definition": "The degree of delay before newly-added capacity becomes ready to serve traffic."
+        },
+        {
+            "name": "Cache Contract",
+            "kind": "technique",
+            "definition": "A technique for declaring what a cache entry is keyed by, how long it lives and what invalidates it."
+        },
+        {
+            "name": "Context-Keyed Cache",
+            "kind": "technique",
+            "definition": "A technique for including tenant, identity, version and every input that changes the result in a cache key."
+        },
+        {
+            "name": "Cache Invalidation on Write",
+            "kind": "technique",
+            "definition": "A technique for removing or refreshing cached entries in the same change that writes the data behind them."
+        },
+        {
+            "name": "Batch Fetch",
+            "kind": "technique",
+            "definition": "A technique for loading the related data for many items in one query or call instead of one per item."
+        },
+        {
+            "name": "Externalize Session State",
+            "kind": "technique",
+            "definition": "A technique for moving per-user or per-request state out of instance memory into a shared store."
+        },
+        {
+            "name": "Replace Algorithm",
+            "kind": "technique",
+            "definition": "A technique for swapping an algorithm or data structure for one with better complexity for the inputs at hand."
+        },
+        {
+            "name": "Add Index",
+            "kind": "technique",
+            "definition": "A technique for adding an index on the fields a slow query filters or sorts by."
+        },
+        {
+            "name": "Chunked Processing",
+            "kind": "technique",
+            "definition": "A technique for processing large data in fixed-size pieces, so memory use stays bounded."
+        },
+        {
+            "name": "Repeated Stable Computation",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a costly computation or query whose result does not change is repeated on every request."
+        }
+    ]
+}

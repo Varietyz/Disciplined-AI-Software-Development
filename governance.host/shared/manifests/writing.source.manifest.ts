@@ -46,10 +46,19 @@ export const SOURCE_RULES: readonly CanonRule[] = [
         why: "A draft with bullets for a one-paragraph slot misstates the change.",
     },
     {
-        bans: [],
+        bans: ["a question that hands the developer the read of a section the model changed"],
         checks: [],
-        conditions: ["the developer pastes the page's full Markdown alternate, which is quicker than fetching it"],
-        examples: [],
+        conditions: [
+            "the developer pastes the page's full Markdown alternate, which is quicker than fetching it",
+            "a reading sign-off records the model's own read of a changed section, and the model writes it once the section passes the canon",
+        ],
+        examples: [
+            {
+                rejected: "The sign-off records that you read the current text, so the model can't sign for you.",
+                repaired: null,
+                why: "The sign-off records the model's read after its last change, and the question handed that read to the developer.",
+            },
+        ],
         gate: null,
         id: "prose.read-the-page",
         rule: "The model reads a page whole before its first change and again after its last.",

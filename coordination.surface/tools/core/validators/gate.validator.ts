@@ -7,7 +7,7 @@ import {
     healedNothing,
     healedSuffix,
     healerThrew,
-    judgementAstray,
+    judgmentAstray,
     kindProven,
     ruleThrew,
     violatingSilent,
@@ -140,7 +140,7 @@ const astrayOutcome = function astrayOutcome(id: string, fired: readonly Finding
     const astray = misdirected(fired);
     return astray === null
         ? null
-        : { detail: judgementAstray(astray.remediation.target, astray.path), rule: id, state: "noisy" };
+        : { detail: judgmentAstray(astray.remediation.target, astray.path), rule: id, state: "noisy" };
 };
 
 const provenOutcome = function provenOutcome(id: string, fixture: GateFixture, fired: number): GateOutcome {

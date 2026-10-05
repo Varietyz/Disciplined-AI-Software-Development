@@ -1,0 +1,105 @@
+{
+    "label": "GovLab Docs",
+    "summary": "The one documentation module, covering placement, validation and manifest-driven generation over the manifest system that is the document source of truth. A document's location is a pure function of its form, concern and member, and its prose is gated against spine, convention, path, reference and history-smell rules. Module READMEs, typed documents and architecture charts are generated from `_manifest.json` and the derived source surface. The manifest registry validates every `_manifest.json` against the plugins discovered under `core/plugins/` and derives the catalog.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "documentation-generation"}
+    ],
+    "capabilities": [
+        "doc-location-router",
+        "doc-form-registry",
+        "doc-concern-registry",
+        "doc-boundary-classifier",
+        "doc-dependency-graph",
+        "doc-spine-gate",
+        "doc-convention-gate",
+        "doc-drift-gate",
+        "module-readme-generator",
+        "typed-document-generator",
+        "manifest-governance-gate",
+        "manifest-schema-validator",
+        "manifest-plugin-registry",
+        "module-discovery-registry",
+        "workspace-catalog-source"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "missing-docs",
+        "separation-of-concerns",
+        "type-safety"
+    ],
+    "visibility": {"private": false,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "entries": [
+        "index.ts",
+        "runtime/entrypoints/*.entrypoint.ts"
+    ],
+    "docs": {
+        "overview": "The single documentation module for the workspace, spanning placement, validation and generation of one concern, laid out in the `configuration`, `core` and `runtime` containers with a flat `types` bucket.\n\n- **Placement:** `computeLocation` in `core/resolvers/location.resolver.ts` routes every authored, non-boundary document to one deterministic path from its form, concern and member, and `isBoundaryFilename` classifies the co-located boundary set. The engine owns both vocabularies, `DOC_FORMS` and the default `DOC_CONCERNS`, under `configuration/constants/`.\n- **Validation:** spine, conventions, path references, reference constructs, banned language, section schema, Mermaid hardening and syntax, and a document-dependency graph that catches dead edges, cycles and duplicate names. `analyzeSync` in `core/analyzers/document.analyzer.ts` runs the synchronous gates, and `DocValidator` in `core/coordinators/validation.coordinator.ts` adds the ones that read files or parse diagrams.\n- **Generation:** `createModuleDocs` in `core/factories/document.factory.ts` renders a module's README and its declared typed documents from the `_manifest.json` `docs` and `documents[]` blocks plus the derived source surface, and the chart engine renders `_code.info.generated/mermaid-charts.generated.md` from the code graph.\n\nThe engine is pure and injection-based, and the entry points under `runtime/entrypoints/` supply the host specifics.",
+        "whenToUse": [
+            "You want deterministic placement: every authored non-boundary document lives at a path computed from its form, concern and member, and a stray document is a finding rather than a silent scatter.",
+            "You want documentation gated the way code is: a malformed spine, an unlabeled code fence, a bare path in prose, a broken path reference, an unresolved reference construct, or history-smell language is a build failure.",
+            "You want a module's README, typed documents and architecture charts generated from its manifest and its source, so the prose is authored once and the API surface, dependencies and governance are derived from the code.",
+            "You want a resolvable document graph, with `depends-on`, `links`, `supersedes` and `governs` edges keyed on doc name, and with dead edges, cycles and duplicate names surfaced."
+        ],
+        "whenNotToUse": [
+            "As a general markdown renderer or a static-site generator. It places, validates and generates governed workspace documents, nothing more.",
+            "When a project will not commit to a closed form set and a concern taxonomy. The router needs both registries to compute a location.",
+            "For prose that has no manifest backing it. The engine places and validates a hand-authored `doc-arch` document, but the developer or the model writes its content, and nothing generates it."
+        ],
+        "quickStart": [
+            {
+                "intent": "Route a document from its form, concern and member",
+                "lang": "ts",
+                "code": "import { DOC_CONCERNS, DOC_FORMS, computeLocation } from \"@govlab/docs\";\n\nconst registries = { concerns: DOC_CONCERNS, forms: DOC_FORMS, owners: [\"project\"] };\nconst result = computeLocation({ concern: \"scaling\", form: \"guide\", member: \"project\", name: \"scale-web\", registries });\nconsole.log(result.ok ? result.path : result.detail);"
+            },
+            {
+                "intent": "Gate a document's prose",
+                "lang": "ts",
+                "code": "import { conventionHits, pathReferences, validateSpine } from \"@govlab/docs\";\n\nconst source = \"---\\ntype: guide\\nname: scale-web\\nsummary: How to scale.\\n---\\n\\n# Scale web\\n\";\nconst spine = validateSpine(source, [\"type\", \"name\", \"summary\"], { requireFrontmatter: true, requireTitle: true });\nconsole.log(spine.length, conventionHits(source).length, pathReferences(source).length);"
+            },
+            {
+                "intent": "Run the documentation verbs",
+                "lang": "sh",
+                "code": "npm run docs:validate\nnpm run docs:generate\nnpm run docs:fix\nnpm run docs:new -- --type guide --concern scaling --member project --subject web"
+            }
+        ],
+        "configuration": "`computeLocation(request)` is a pure total router over `{ form, concern, name, member?, generated?, registries, options? }`, where `registries` is `{ forms, concerns, owners? }` and `options` is `{ rootPrefix?, resolveOwner? }`. The gates are pure functions over a source string. `createModuleDocs(options)` takes `{ docConcerns, docForms?, docMembers?, consumerRoot, hostTokens, archRelations, conceptMap, deriveGovernedBy, deriveRepoMetrics? }`, so every host specific is injected and the engine imports no consumer state. The host side reads the `docs` section of `govlab.config` through `docsHostFor`: `members`, `ignore`, `boundaryDocs`, `hostTokens` and `harness`. Every entry point declares its command line through `@govlab/argv` in `configuration/configs/invocation.config.ts`, so `--help` prints the contract and an undeclared flag is refused.",
+        "disposal": [
+            "Remove the package directory `govlab.root/govlab.docs/` and every `docs:*` script from the root `package.json`.",
+            "Remove every import site in consumers and the gate steps that call `runtime/entrypoints/invocation.entrypoint.ts`.",
+            "Remove the injected concern registry and canonical catalog wiring. Documents then revert to hand-maintained prose with no placement, convention gate or generation."
+        ],
+        "install": "A private workspace package resolved through the root `package.json` `workspaces` globs. It imports `@govlab/argv`, `@govlab/canonical-write`, `@govlab/constants`, `@govlab/content-fingerprint`, `@govlab/context`, `@govlab/quality` and `@ssot/paths`, all workspace siblings hoisted into the single root `node_modules`. It is authored in TypeScript and runs directly from source through the root `docs:*` scripts, with no build step.",
+        "aiContext": [
+            "The one documentation module: placement, validation and manifest-driven generation of the same governed workspace documents. Placement routes every authored non-boundary document to a deterministic `doc-arch` path from its form, concern and member. Validation gates prose against spine, conventions, path references, reference constructs, banned language, section schema, Mermaid rules and a document-dependency graph. Generation renders module READMEs, typed documents and architecture charts.",
+            "The engine under `core/` is pure and injection-based: `createModuleDocs` takes an `@govlab/context` port, the canonical concept map and a governance deriver as options, so it reaches into no consumer state. The entry points under `runtime/entrypoints/` are the thin compositions that supply those host specifics.",
+            "Every extension seam is a file in `core/plugins/`, discovered by the export it carries: `plugin` for a manifest section, `diagram` for a chart kind, `analyzer` for a code language and `recognizer` for a syntax classifier. Adding a capability adds a file, and no list is edited.",
+            "A consumer extends the vocabularies without editing the package: forms, concerns, reference verbs and manifest plugins in the `doc-forms`, `doc-concerns`, `doc-verbs` and `manifest-plugins` folders of its govlab extension host are discovered and merged into the registries the entry points use.",
+            "Generate and verify with the root scripts: `npm run docs:generate` writes every derived document, and `npm run docs:validate` runs every gate, including the drift check that regenerates each output and compares it with the file on disk."
+        ],
+        "apiNotes": [
+            {
+                "name": "computeLocation",
+                "note": "the pure total router, returning `{ ok: true, path }` or `{ ok: false, reason, detail }` from a location request."
+            },
+            {
+                "name": "createModuleDocs",
+                "note": "the manifest-driven generator factory. It returns `generateReadme`, `renderDeclaredDoc`, `declaredDocLocation` and the `govern*` gates, with every host specific injected."
+            },
+            {
+                "name": "docsHostFor",
+                "note": "builds the validation host for a workspace root from its `govlab.config`: the registries, the harness profiles, the file index and the walk every document gate uses."
+            },
+            {
+                "name": "diagramContextFor",
+                "note": "derives a module's chart context from its code graph, type graph and package scripts, or null when nothing in the module is analyzable."
+            }
+        ]
+    }
+}

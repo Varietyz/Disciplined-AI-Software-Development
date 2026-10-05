@@ -1,0 +1,143 @@
+{
+    "label": "Bane's Lab Social Share",
+    "summary": "Renders the site's social share images by code. Each card is a drop-in folder whose plugin registers a typed spec of layers, placements, styles, effects, WGSL shaders and animated images, with every animatable field an expression of the frame. A live preview stage shows every card at every profile during editing. The export captures the same stage frame by frame into PNG stills, animated GIFs, animated WebPs and MP4 loops at each output scale, then writes the page-to-image map the site's head reads.",
+    "maturity": "experimental",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "code-generation"}
+    ],
+    "ecosystem": "typescript",
+    "visibility": {"private": true,
+        "hidden": false},
+    "capabilities": [
+        "register-share-card",
+        "preview-share-cards",
+        "render-share-images",
+        "validate-share-cards",
+        "write-share-map"
+    ],
+    "governedBy": [
+        "separation-of-concerns",
+        "type-safety"
+    ],
+    "entries": ["runtime/entrypoints/*.entrypoint.ts"],
+    "docs": {
+        "overview": "The entry points live under `runtime/entrypoints/`.\n\n`stage.entrypoint.ts` is the browser entry of the stage page. With no query, it lays out every registered card at every profile it declares and plays each timeline at the output frame rate, with hot reload on every plugin, stylesheet, shader, helper and config edit. With `?card=<id>&profile=<id>`, it mounts one card at full size and exposes a frame hook for capture.\n\n`card.entrypoint.ts` validates every card, opens the same stage over HTTPS in a headless browser, resamples each timeline at the output rate by evaluating the expressions at fractional frames, and captures every sample. It encodes the frames into one lossless master video through ffmpeg. From the master it derives, at each output scale per profile, an animated GIF with a palette built for that loop and a playable MP4. Beside them it writes a PNG still of the key frame and an animated WebP, all named `<card>-w<width>-h<height>.<profile>.generated.<ext>` under the public share folder. An MP4 takes the nearest even size its codec requires.\n\nThe export records each card and profile's spec hash in the share ledger and writes the page-to-image map the web member's head reads. Each page links the largest GIF of its card's share profile, at or below three-quarter size, that fits the share size limit. It declares no video, because a platform shows a declared video as a player behind a play button, while an animated GIF plays in the preview on its own. The MP4 stays in the share folder for posting by hand.\n\n`validation.entrypoint.ts` is the gate step. It validates every spec on every frame and holds every looping card to a loop with no visible seam. It holds every page the site registers to exactly one card, and every card to its page's tone, headline, tagline and the site marks. It then reports a missing image, an orphan image, a ledger hash that differs from the current spec's hash, and a stale share map.\n\nCards live in `cards/<id>/`, one folder per page holding a `plugins/<id>.plugin.ts` that calls `registerCard(createPageCard({ id, page }), import.meta.url)`, plus any styles and shaders of its own. The page template reads the page's accent, icon, headline and tagline from the web member's page record, so every card shares one composition in its own tone. The barrel under `core/plugins/` discovers the plugins by glob, and the folder name is the card id.\n\nEvery failure is loud:\n\n- an unknown curve, effect, anchor, card or profile throws\n- a shader that fails to compile throws with its compiler messages\n- a stage error fails the capture\n- a missing ffmpeg names the install\n- a browser call that errors, closes or stalls rejects",
+        "rendering-and-healing": [
+            "Each card and profile is fingerprinted from its resolved frames, the encoding settings, the bytes of the images it shows and the stylesheets the stage loads. The ledger records the fingerprint each pair was rendered from.",
+            "`npm run social` renders only the pairs whose fingerprint changed or whose files are missing, and reports the rest as up to date. `--force` renders every pair, and `--card <id>` narrows to one card.",
+            "The gate's validation step heals outdated outputs on its own: with valid specs it renders exactly the outdated pairs, rewrites the ledger and the share map, checks again, and fails on anything still out of date. A spec finding is reported, never healed."
+        ],
+        "whenToUse": [
+            "Giving a new page the share image the gate demands. Declare the page's accent and share copy on its record, and add a card folder whose plugin calls the page template with the page id. Preview it with `npm run social:dev`, then export with `npm run social`.",
+            "Changing how an existing card looks or moves. Edit its plugin, stylesheet, shader or layout data while the preview runs, then export again so the gate's hash check passes.",
+            "Adding a target size or platform. Add a profile to the output config, and every card that lists it renders at it on the next export."
+        ],
+        "whenNotToUse": [
+            "Designing a one-off share image outside the brand. Every card is built from the page template, and the gate reports a card that leaves its page's tone or drops a brand part.",
+            "Rendering images at request time. The export is deterministic and on demand, and the site serves only the committed files."
+        ],
+        "install": "A private workspace member resolved through the root `package.json` workspaces list. One `npm install` at the repo root is the whole setup. It declares its `@banes-lab/*`, `@govlab/*`, `@project/*` and `@ssot/*` siblings and no third-party dependency of its own, because the image encoder and the WebGPU types are root dependencies. The export and the gate step need a Chrome or Edge binary, a card with a shader layer renders on the GPU, and the export needs an `ffmpeg` binary on the path.",
+        "quickStart": [
+            {"intent": "Preview every card live while editing",
+                "lang": "sh",
+                "code": "npm run social:dev"},
+            {
+                "intent": "Export every card's stills, animations, videos and the share map",
+                "lang": "sh",
+                "code": "npm run social"
+            },
+            {"intent": "Export one card",
+                "lang": "sh",
+                "code": "npm run social -- --card grammar"},
+            {
+                "intent": "Check every card and its exported images the way the gate does",
+                "lang": "sh",
+                "code": "node banes-lab.root/banes-lab.social-share/runtime/entrypoints/validation.entrypoint.ts"
+            },
+            {
+                "intent": "Register a page's card from its plugin, with the brand mark its page declares",
+                "lang": "ts",
+                "code": "import { FAQ_CARD } from \"#core/ids/card.ids\";\nimport { FAQ_PAGE } from \"@banes-lab/web/core/ids/page.ids.ts\";\nimport { createPageCard } from \"#core/factories/page.factory\";\nimport { registerCard } from \"#core/registries/card.registry\";\n\nregisterCard(createPageCard({ id: FAQ_CARD, page: FAQ_PAGE }), import.meta.url);"
+            }
+        ],
+        "configuration": [
+            {
+                "option": "configuration/configs/card.config.ts",
+                "note": "the target profiles and their pixel sizes, the profile and scale the site links, the share size limit, the default timeline, the output frame duration, the output scales, the GIF dither, palette mode and palette size, the video quality and the WebP quality."
+            },
+            {
+                "option": "configuration/constants/card.constants.ts",
+                "note": "the timeline bounds, the shader uniform slots, the loop seam tolerances, the stage's class names, query parameters and page hooks, and the output and work file names."
+            },
+            {
+                "option": "core/schemas/card.schema.ts",
+                "note": "the style keys a layer may set and the bounds a placement and an opacity must stay inside on every frame."
+            },
+            {
+                "option": "configuration/data/page.data.ts",
+                "note": "the page template's timeline, its wide and square layout for the mark, the byline and the address, the text column's sizes, leading and gaps, and the motion values of the title glow, the rule shimmer and the pools."
+            },
+            {
+                "option": "configuration/data/site.data.ts",
+                "note": "the site host and the text marks every card must show: the site name and the author's byline."
+            }
+        ],
+        "disposal": [
+            "Remove the member's workspace entry and its `social` and `social:dev` scripts from the root `package.json`, and its `social` id from the docs members list in the governance config.",
+            "Remove its governed-root entry from `containers` and `specialContainers` in `.govlab/shared/configs/taxonomy.config.ts`.",
+            "Remove the `social`, `shares`, `shareMap` and `shareLedger` keys from the `app` branch and the `social` key from the testing branch of `project.paths/paths.yaml`.",
+            "Remove the share map import from the web member's page renderer, the member row and the social validation step from the gate's stage list, delete the directory and the share folder, reinstall, run the gate."
+        ],
+        "apiNotes": [
+            {
+                "name": "createPageCard",
+                "note": "The page template every plugin calls. It looks the page up in the web member's registry and throws for an unregistered id. It takes the tone, brand mark, headline and tagline from the page record, and lays out the shared composition with the byline and the page's own address in the footer. A card passes its own mark, its own field, an extra stylesheet or a timeline only where it differs."
+            },
+            {
+                "name": "createCard",
+                "note": "The spec factory under the template. It fills the profiles with every configured profile and merges the timeline over the default. It never validates, because validation runs over the whole registry at once."
+            },
+            {
+                "name": "columnOf",
+                "note": "Flows the text column: counts each row's wrapped lines from the column width and the monospace advance, stacks the rows with their gaps, and centers the block on the column's anchor."
+            },
+            {
+                "name": "registerCard",
+                "note": "Records the card with the plugin's own location, which the validator reads to hold the folder name to the card id. A second registration of one id is kept and reported as repeated rather than overwriting silently."
+            },
+            {
+                "name": "resolveCard",
+                "note": "Evaluates every expression of every layer at one frame. The frame may be fractional, which lets the export resample a timeline to the output rate."
+            },
+            {
+                "name": "placeAt",
+                "note": "Places a layer from the card's oriented layout, picking the wide or the square slot from the frame's profile, keeping a square slot square on any profile, and applying a lift or a growth expression on top."
+            },
+            {
+                "name": "validateCards",
+                "note": "Reports a registered page with no card or with two, a card out of its page's tone or missing a brand part, an unknown profile or page, a missing share profile, out-of-range timelines, and empty or duplicate layers. On every frame it reports a non-finite value, an off-canvas placement, an out-of-range opacity, a disallowed style key, too many uniforms, a shader with no entry and an expression that threw. For a looping card, it also names every layer that breaks the seam."
+            },
+            {
+                "name": "loopFindings",
+                "note": "Holds a looping card to a loop with no visible seam: the frame after the last must equal the first, the step entering the seam must match the step leaving it, and no shader may read the unbounded frame time. Motion built from whole cycles of the loop passes by construction."
+            },
+            {
+                "name": "animationFindings",
+                "note": "Reads each animation layer's image with its own frame delays and reports a looping card whose duration is not a whole number of that image's loops."
+            },
+            {
+                "name": "captureCards",
+                "note": "Launches the browser on the GPU when any card has a shader, captures every sample and the key frame per profile in sequence, encodes the master video and every size through ffmpeg, and rejects on any stage error, navigation failure, empty screenshot, encoder failure or protocol error."
+            }
+        ],
+        "aiContext": [
+            "The preview and the export run the same stage page, so a card looks the same in both by construction.",
+            "An animation layer never plays on its own clock: the stage decodes its image and draws the frame the card's time selects, so the capture is deterministic and the loop stays in step.",
+            "The share ledger holds one spec hash per card and profile. The file names carry no hash, so the gate reads the ledger to tell a current image from a stale one.",
+            "Card ids, page ids and the copy a reader sees come from the web member's ids, records and strings modules, and a plugin never spells them.",
+            "A card serves exactly one page by its type, so the page-to-card mapping cannot fan out. The gate closes the other direction by demanding one card for every registered page.",
+            "A new card id outside the closed subject vocabulary is a maintainer-approved taxonomy edit before its folder exists."
+        ]
+    }
+}

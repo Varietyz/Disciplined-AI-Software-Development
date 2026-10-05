@@ -1,0 +1,3080 @@
+{
+    "category": "anti-patterns",
+    "check": {
+        "population": "every module, boundary and change the anti-pattern's detection signals scan",
+        "freshness": "a verdict stands until the scanned code or the enforcing rule changes",
+        "refusal": "the enforcing check fails the gate on a new instance, so a closed decay path cannot re-enter",
+        "observation": "the detection signals the record lists, read from source or from runtime telemetry as each signal requires",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the principle the anti-pattern conflicts with, which the enforcing check holds new code to"
+    },
+    "records": [
+        {
+            "id": "big-ball-of-mud",
+            "name": "Big Ball of Mud",
+            "definition": "A defect in which a system has no discernible boundaries, so any part can depend on and change any other.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "state_transaction"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Allow boundaries to remain implicit, permit unrestricted dependencies, mix concerns freely, share mutable state broadly, and accumulate changes without architectural segmentation.",
+            "detected_by": [
+                "cyclic_dependencies",
+                "high_graph_density",
+                "unowned_modules",
+                "cross_layer_imports",
+                "large_change_blast_radius"
+            ],
+            "measured_by": [
+                "dependency-cycle count",
+                "graph density",
+                "share of modules without an owner"
+            ],
+            "refactored_by": [
+                "lexicon:define-module-boundaries",
+                "lexicon:split-module",
+                "lexicon:architecture-test",
+                "lexicon:assign-owner",
+                "architecture:fitness-functions"
+            ],
+            "enforced_by": [
+                "dependency rules",
+                "architecture fitness functions",
+                "module ownership map"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function handle(req) {\n  const foo = db.query(req.body.sql);\n  render(foo); email(foo); audit(foo); cache(foo);\n}",
+                "after": "class CreateFoo {\n  constructor(private readonly foos: FooRepository, private readonly events: EventPublisher) {}\n  execute(input: CreateFooInput) { const foo = Foo.create(input); this.foos.save(foo); this.events.publish(fooCreated(foo)); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "god-object",
+            "distinctFrom": [
+                {
+                    "id": "architecture:divergent-change",
+                    "reason": "A god object is one object holding many responsibilities, while divergent change is the symptom of one module changing for many reasons."
+                },
+                {
+                    "id": "architecture:shotgun-surgery",
+                    "reason": "A god object concentrates responsibilities in one place, while shotgun surgery scatters one responsibility across many."
+                },
+                {
+                    "id": "architecture:utility-dump",
+                    "reason": "A god object is a domain object that absorbs every change, while a utility dump is a generic helper module that no one owns."
+                }
+            ],
+            "name": "God Object",
+            "definition": "A defect in which one object accumulates unrelated responsibilities and becomes the default place for every change.",
+            "aliases": [
+                "Blob Class",
+                "God Class"
+            ],
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "semantic_consistency",
+                "domain_boundary",
+                "control_coordination"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Centralize unrelated responsibilities into one object, route unrelated behavior through it, accumulate state and dependencies, and make the object the default modification point.",
+            "detected_by": [
+                "large_class",
+                "many_unrelated_methods",
+                "many_dependencies",
+                "high_fan_in",
+                "multiple_reasons_to_change"
+            ],
+            "measured_by": [
+                "methods and dependencies per class",
+                "fan-in",
+                "distinct reasons to change"
+            ],
+            "refactored_by": [
+                "lexicon:extract-class",
+                "lexicon:move-behavior-to-its-owner",
+                "architecture:domain-service",
+                "architecture:facade-pattern"
+            ],
+            "enforced_by": [
+                "class size and responsibility limits in lint",
+                "design review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class FooManager {\n  createFoo() {} priceFoo() {} renderFoo() {} emailFoo() {} auditFoo() {} shipFoo() {}\n}",
+                "after": "class FooFactory { create(input: CreateFooInput): Foo {} }\nclass FooPricer { price(foo: Foo): Money {} }\nclass FooShipper { ship(foo: Foo): void {} }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "concrete-coupling",
+            "distinctFrom": [
+                {
+                    "id": "architecture:middle-man",
+                    "reason": "Concrete coupling depends on an implementation instead of an abstraction, while a middle man is a layer of indirection that adds nothing."
+                }
+            ],
+            "name": "Concrete Coupling",
+            "aliases": ["Concrete Dependency"],
+            "definition": "A defect in which high-level policy depends directly on concrete implementations instead of on abstractions.",
+            "canon": ["concrete-coupling"],
+            "type": "anti-pattern",
+            "scope": ["modularity"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Let high-level policy depend directly on low-level implementations, vendor APIs, framework classes, or concrete constructors, then spread those concrete assumptions across the core.",
+            "detected_by": [
+                "domain_imports_infrastructure",
+                "vendor_sdk_in_core",
+                "new_dependency_inside_business_logic",
+                "missing_interface_boundary"
+            ],
+            "measured_by": ["concrete infrastructure imports in core modules"],
+            "refactored_by": [
+                "lexicon:extract-interface",
+                "lexicon:introduce-port",
+                "lexicon:extract-adapter",
+                "architecture:dependency-injection",
+                "lexicon:invert-dependency"
+            ],
+            "enforced_by": [
+                "import rules that forbid infrastructure in the core",
+                "architecture tests"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class FooService {\n  private readonly store = new SqlFooStore();\n}",
+                "after": "class FooService {\n  constructor(private readonly store: FooStore) {}\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "schema-drift",
+            "name": "Schema Drift",
+            "definition": "A defect in which the producers, consumers and stores of one payload evolve its shape independently until its meaning diverges.",
+            "type": "anti-pattern",
+            "scope": [
+                "contract_compatibility",
+                "security_governance",
+                "model_governance"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Allow producers, consumers, storage models, and documentation to evolve independently without versioned schema governance, then let payload meaning diverge over time.",
+            "detected_by": [
+                "schema_diff_failure",
+                "missing_schema_registry",
+                "consumer_parse_errors",
+                "undocumented_field_changes",
+                "nullability_mismatch"
+            ],
+            "measured_by": ["schema diff failures and consumer parse errors per release"],
+            "refactored_by": [
+                "lexicon:define-contract",
+                "architecture:versioning",
+                "lexicon:contract-testing",
+                "lexicon:schema-registry",
+                "architecture:schema-validation"
+            ],
+            "enforced_by": [
+                "schema registry",
+                "compatibility tests in the build"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "type FooApi = { id: string; label: string };\ntype FooDb = { id: string; name: string; extra: string };",
+                "after": "const FooSchema = schema({ id: fooIdSchema, name: nonEmptyString });\ntype Foo = Infer<typeof FooSchema>;\nfooApi.use(FooSchema);\nfooDb.use(FooSchema);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "implicit-contract",
+            "name": "Implicit Contract",
+            "definition": "A defect in which a boundary's assumptions, including the shape and meaning of the data it passes, live in behavior, naming or ordering rather than in a declared contract.",
+            "aliases": ["Implicit Payloads"],
+            "type": "anti-pattern",
+            "scope": [
+                "contract_compatibility",
+                "causality_ordering"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Encode assumptions in code behavior, naming, ordering, timing, side effects, or undocumented payload shapes instead of declaring them as explicit contracts.",
+            "detected_by": [
+                "public_API_without_schema",
+                "undocumented_side_effect",
+                "dynamic_map_boundary",
+                "tests_depend_on_internal_behavior",
+                "tribal_knowledge_required"
+            ],
+            "measured_by": ["public operations without a declared schema"],
+            "refactored_by": [
+                "lexicon:define-contract",
+                "lexicon:precondition-check",
+                "lexicon:postcondition-check",
+                "architecture:schema-validation",
+                "lexicon:contract-testing"
+            ],
+            "enforced_by": [
+                "contract tests",
+                "schema validation at public boundaries"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function saveFoo(foo) { return db.insert(foo); }",
+                "after": "interface Foo { id: FooId; name: NonEmptyString; }\nfunction saveFoo(foo: Foo): Promise<void> { return fooStore.save(foo); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "hardcoded-configuration",
+            "name": "Hardcoded Configuration",
+            "definition": "A defect in which environment, credential or policy values are written into code instead of being supplied as configuration.",
+            "type": "anti-pattern",
+            "scope": [
+                "semantic_consistency",
+                "state_transaction"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Embed environment, path, credential, feature, service endpoint, or policy values directly into code, then duplicate those assumptions across runtime contexts.",
+            "detected_by": [
+                "hardcoded_URL",
+                "hardcoded_path",
+                "hardcoded_secret",
+                "environment_branching_in_code",
+                "duplicated_config_literal"
+            ],
+            "measured_by": ["configuration literals and secrets found in source"],
+            "refactored_by": [
+                "lexicon:externalize-configuration",
+                "lexicon:configuration-schema",
+                "architecture:centralized-configuration",
+                "lexicon:remove-secret-from-code"
+            ],
+            "enforced_by": [
+                "configuration and secret scans",
+                "a configuration schema validated at startup"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const client = new FooClient(\"https://foo.prod.example\", \"sk_live_abc123\");",
+                "after": "const config = FooConfigSchema.parse({ url: process.env.FOO_URL, key: process.env.FOO_KEY });\nconst client = new FooClient(config);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "shared-mutable-state",
+            "name": "Shared Mutable State",
+            "definition": "A defect in which writable state is shared across modules with no owner and no synchronization.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "state_transaction"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Expose writable state across modules, allow multiple actors to mutate it, omit ownership and synchronization, and let behavior depend on mutation order.",
+            "detected_by": [
+                "global_mutable_object",
+                "public_mutable_fields",
+                "shared_cache_without_policy",
+                "race_condition",
+                "order_dependent_tests"
+            ],
+            "measured_by": [
+                "writable state reachable from more than one module",
+                "race-detector findings"
+            ],
+            "refactored_by": [
+                "lexicon:encapsulate-state",
+                "lexicon:assign-owner",
+                "lexicon:make-immutable",
+                "lexicon:introduce-transaction-boundary",
+                "lexicon:apply-concurrency-control"
+            ],
+            "enforced_by": [
+                "immutability and visibility lint rules",
+                "concurrency tests"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "let currentFoo = null;\nfunction setFoo(f) { currentFoo = f; }\nfunction useFoo() { return currentFoo.name; }",
+                "after": "class FooContext {\n  constructor(private readonly foo: Foo) {}\n  name() { return this.foo.name; }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "boundary-leakage",
+            "name": "Boundary Leakage",
+            "definition": "A defect in which internal, persistence or vendor types cross an architectural boundary.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "model_governance"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Permit internal models, infrastructure types, persistence structures, or private module APIs to cross intended architectural boundaries.",
+            "detected_by": [
+                "internal_package_imported_externally",
+                "database_entity_exposed_as_API",
+                "vendor_type_in_domain",
+                "private_module_used_by_other_module"
+            ],
+            "measured_by": ["internal types exposed across boundaries"],
+            "refactored_by": [
+                "lexicon:restrict-exports",
+                "lexicon:introduce-boundary-dto",
+                "lexicon:extract-adapter",
+                "architecture:facade-pattern",
+                "lexicon:architecture-test"
+            ],
+            "enforced_by": [
+                "export and import restrictions",
+                "boundary architecture tests"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "app.get(\"/foo/:id\", async (req, res) => res.json(await ormFoo.findByPk(req.params.id)));",
+                "after": "app.get(\"/foo/:id\", async (req, res) => res.json(toFooDto(await getFoo.execute(req.params.id))));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "manual-only-governance",
+            "name": "Manual-Only Governance",
+            "definition": "A defect in which architecture rules or security policies exist only in documents or in reviewers' memory, with no executable check, so they drift from what the system does.",
+            "aliases": ["Document-Only Policy"],
+            "type": "anti-pattern",
+            "scope": [
+                "correctness_verification",
+                "security_governance"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Encode architecture rules in documents, meetings, or reviewer memory without executable checks, metrics, or automated enforcement.",
+            "detected_by": [
+                "rule_exists_only_in_docs",
+                "no_CI_gate",
+                "reviewer_specific_enforcement",
+                "repeated_same_violation",
+                "missing_fitness_function"
+            ],
+            "measured_by": [
+                "stated rules without an executable check",
+                "repeat violations of one rule"
+            ],
+            "refactored_by": [
+                "architecture:fitness-functions",
+                "architecture:static-analysis",
+                "architecture:policy-as-code",
+                "lexicon:architecture-test",
+                "lexicon:track-rule-metrics"
+            ],
+            "enforced_by": ["a rule-coverage check that requires every stated rule to name its executable gate"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const CONVENTION = \"remember to prefix every foo id with foo_\";",
+                "after": "export const rule = { id: \"valid-foo-id\", check: (id: string) => id.startsWith(\"foo_\") };",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "opaque-runtime-behavior",
+            "name": "Opaque Runtime Behavior",
+            "definition": "A defect in which runtime behavior emerges from hidden reflection, registration or binding that nothing reports, so the runtime's structure and state cannot be inspected.",
+            "aliases": ["Opaque Runtime"],
+            "type": "anti-pattern",
+            "scope": [
+                "runtime_extensibility",
+                "metaprogramming_modeling"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Let runtime behavior emerge from hidden reflection, implicit registration, undocumented configuration, side effects, or untraced dynamic binding.",
+            "detected_by": [
+                "dynamic_binding_without_manifest",
+                "missing_startup_report",
+                "unlogged_plugin_loading",
+                "implicit_reflection_scan",
+                "untraceable_side_effect"
+            ],
+            "measured_by": ["dynamic bindings without a manifest entry"],
+            "refactored_by": [
+                "architecture:manifest-based-design",
+                "lexicon:binding-decision-log",
+                "lexicon:runtime-topology-report",
+                "lexicon:declare-capability",
+                "lexicon:discovery-validation"
+            ],
+            "enforced_by": [
+                "manifest validation",
+                "a startup report that lists every binding"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function processFoo(foo) { doWork(foo); }",
+                "after": "function processFoo(foo: Foo) {\n  logger.info(\"foo.process.start\", { fooId: foo.id });\n  const result = doWork(foo);\n  logger.info(\"foo.process.done\", { fooId: foo.id, outcome: result.status });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "unowned-risk",
+            "name": "Unowned Risk",
+            "definition": "A defect in which a risk is never identified, or is identified and has no owner, severity, mitigation or review date.",
+            "aliases": ["Unknown/Unowned Risk"],
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Identify a risk without assigning owner, severity, mitigation, review date, acceptance status, or escalation path.",
+            "detected_by": [
+                "risk_without_owner",
+                "ADR_missing_consequence_owner",
+                "security_finding_unassigned",
+                "known_gap_without_due_date",
+                "accepted_risk_without_expiry"
+            ],
+            "measured_by": [
+                "risks without an owner",
+                "reviews past their date"
+            ],
+            "refactored_by": [
+                "lexicon:assign-owner",
+                "lexicon:severity-classification",
+                "lexicon:mitigation-plan",
+                "lexicon:accepted-risk-record",
+                "lexicon:scheduled-review"
+            ],
+            "enforced_by": [
+                "a risk register whose entries are validated for owner",
+                "severity and review date"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "risks.push({ title: \"the foo store has no backup\" });",
+                "after": "risks.push({ title: \"the foo store has no backup\", owner: \"storage team\", severity: \"high\", mitigation: \"nightly snapshot\", reviewBy: \"2026-12-01\" });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "unobservable-failure",
+            "name": "Unobservable Failure",
+            "definition": "A defect in which an operation can fail without leaving a log, metric, trace or error contract.",
+            "aliases": ["Opaque System"],
+            "type": "anti-pattern",
+            "scope": ["contract_compatibility"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Permit operations to fail without structured logs, metrics, alerts, traces, audit records, or user-visible error contracts.",
+            "detected_by": [
+                "empty_catch",
+                "swallowed_exception",
+                "missing_error_log",
+                "no_alert_on_critical_path",
+                "missing_trace_span",
+                "missing_audit_record"
+            ],
+            "measured_by": [
+                "swallowed exceptions",
+                "critical paths without error telemetry"
+            ],
+            "refactored_by": [
+                "architecture:error-boundaries",
+                "lexicon:structured-log",
+                "lexicon:metrics",
+                "lexicon:alert-on-critical-failure",
+                "lexicon:trace-span",
+                "architecture:audit-logging"
+            ],
+            "enforced_by": [
+                "lint rules against empty and swallowing catch blocks",
+                "telemetry coverage checks"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "try { await ship(foo); } catch { }",
+                "after": "try { await ship(foo); } catch (error) { logger.error(\"foo.ship.failed\", error); metrics.increment(\"foo.ship.failure\"); throw new ShipFailedError(foo.id); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "unversioned-breaking-change",
+            "name": "Unversioned Breaking Change",
+            "definition": "A defect in which a public contract changes incompatibly without a version, a deprecation path or a compatibility test.",
+            "type": "anti-pattern",
+            "scope": [
+                "contract_compatibility",
+                "event_messaging",
+                "architecture_evolution"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Change a public API, schema, event, protocol, behavior, or package contract incompatibly without version bump, deprecation path, compatibility test, or migration notice.",
+            "detected_by": [
+                "API_diff_breaking",
+                "schema_field_removed",
+                "type_narrowed",
+                "event_semantics_changed",
+                "no_version_bump",
+                "no_deprecation_window"
+            ],
+            "measured_by": ["breaking diffs released without a version bump"],
+            "refactored_by": [
+                "lexicon:version-bump",
+                "lexicon:compatibility-adapter",
+                "lexicon:gradual-deprecation",
+                "lexicon:contract-testing",
+                "lexicon:migration-guide"
+            ],
+            "enforced_by": ["API and schema diff gates in the release pipeline"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "app.get(\"/foo\", () => ({ label: foo.name }));",
+                "after": "app.get(\"/v2/foo\", () => ({ name: foo.name }));\napp.get(\"/v1/foo\", () => ({ label: foo.name }));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "distributed-monolith",
+            "name": "Distributed Monolith",
+            "definition": "A defect in which services are deployed separately but still share data, transactions and release cycles.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "contract_compatibility",
+                "state_transaction"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Split deployment units without splitting data ownership, transaction boundaries, failure isolation, contracts, or autonomous release capability.",
+            "detected_by": [
+                "shared_database",
+                "cross_service_transactions",
+                "lockstep_deployments",
+                "deep_sync_call_chain",
+                "shared_business_logic_package",
+                "consumer_breakage_on_service_change"
+            ],
+            "measured_by": [
+                "shared databases",
+                "lockstep deployments",
+                "cross-service transactions"
+            ],
+            "refactored_by": [
+                "lexicon:own-data-per-service",
+                "lexicon:define-contract",
+                "architecture:domain-events",
+                "architecture:outbox-pattern",
+                "lexicon:split-bounded-context",
+                "lexicon:backward-compatible-change"
+            ],
+            "enforced_by": [
+                "service-ownership rules",
+                "contract tests",
+                "independent-deployment checks"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "async function createFoo(foo) {\n  await http.post(\"bar-service/validate\", foo);\n  await http.post(\"baz-service/price\", foo);\n  await http.post(\"qux-service/save\", foo);\n}",
+                "after": "async function createFoo(input: CreateFooInput) {\n  const foo = Foo.create(input);\n  await fooStore.save(foo);\n  await outbox.append(fooCreated(foo));\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "shotgun-surgery",
+            "name": "Shotgun Surgery",
+            "definition": "A defect in which one responsibility is scattered so that a single change needs edits in many files.",
+            "type": "anti-pattern",
+            "scope": ["modularity"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Scatter one conceptual responsibility across many files so one change requires many coordinated edits.",
+            "detected_by": [
+                "same_change_touches_many_files",
+                "repeated_commit_cochanges",
+                "duplicated_rule_fragments"
+            ],
+            "measured_by": [
+                "files touched per logical change",
+                "co-change frequency"
+            ],
+            "refactored_by": [
+                "lexicon:centralize-the-rule",
+                "lexicon:extract-module",
+                "lexicon:move-behavior-to-its-owner"
+            ],
+            "enforced_by": [
+                "duplication detection",
+                "change-coupling review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const taxA = value * 0.2;\nconst taxB = other * 0.2;\nconst taxC = more * 0.2;",
+                "after": "const FOO_TAX_RATE = 0.2;\nfunction taxFoo(value: number) { return value * FOO_TAX_RATE; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "divergent-change",
+            "name": "Divergent Change",
+            "definition": "A defect in which one module changes for many unrelated reasons.",
+            "type": "anti-pattern",
+            "scope": ["modularity"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Place unrelated responsibilities in the same module so unrelated change reasons repeatedly modify one artifact.",
+            "detected_by": [
+                "unrelated_commits_touch_same_file",
+                "mixed_methods",
+                "mixed_dependencies"
+            ],
+            "measured_by": ["distinct reasons to change per module in the change history"],
+            "refactored_by": [
+                "lexicon:split-module",
+                "lexicon:extract-class",
+                "lexicon:move-behavior-to-its-owner"
+            ],
+            "enforced_by": [
+                "module cohesion limits",
+                "design review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class Foo {\n  renderHtml() {} saveToSql() {} sendEmail() {} parseCsv() {}\n}",
+                "after": "class Foo {}\nclass FooView { render(foo: Foo): string {} }\nclass FooStore { save(foo: Foo): Promise<void> {} }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "feature-envy",
+            "name": "Feature Envy",
+            "definition": "A defect in which one module mostly works on another module's data instead of its own.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "contract_compatibility"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Let one module repeatedly inspect or manipulate another module’s data instead of moving behavior to the data owner.",
+            "detected_by": [
+                "many_getters_from_other_object",
+                "logic_using_foreign_fields",
+                "domain_rule_outside_owner"
+            ],
+            "measured_by": ["foreign field accesses per method"],
+            "refactored_by": [
+                "lexicon:move-behavior-to-its-owner",
+                "lexicon:encapsulate-state",
+                "lexicon:move-logic-to-the-domain",
+                "lexicon:extract-use-case"
+            ],
+            "enforced_by": [
+                "coupling analysis in lint",
+                "design review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function totalFoo(bar: Bar) { return bar.items.reduce((s, i) => s + i.price * i.qty, 0); }",
+                "after": "class Bar { total(): Money { return this.items.reduce((s, i) => s + i.subtotal(), 0); } }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "inappropriate-intimacy",
+            "distinctFrom": [
+                {
+                    "id": "architecture:message-chain",
+                    "reason": "Inappropriate intimacy reads another module's internals, while a message chain navigates a chain of public references."
+                }
+            ],
+            "name": "Inappropriate Intimacy",
+            "definition": "A defect in which modules depend on each other's internal structure or private state.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "contract_compatibility"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Allow modules or classes to rely on each other’s internals, private structure, lifecycle, or undocumented state.",
+            "detected_by": [
+                "friend-like access",
+                "private API usage",
+                "tests_reach_internals",
+                "internal_package_import"
+            ],
+            "measured_by": ["private-member accesses across modules"],
+            "refactored_by": [
+                "lexicon:restrict-exports",
+                "lexicon:define-contract",
+                "architecture:facade-pattern"
+            ],
+            "enforced_by": [
+                "visibility and export rules",
+                "tests limited to public interfaces"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "bar.foo._internalState.status = \"ready\";",
+                "after": "bar.foo.markReady();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "message-chain",
+            "name": "Message Chain",
+            "aliases": ["Train Wreck"],
+            "definition": "A defect in which a client navigates a chain of objects to reach the behavior it needs.",
+            "type": "anti-pattern",
+            "scope": ["event_messaging"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Require clients to traverse a chain of objects to reach behavior or data, exposing internal object graph structure.",
+            "detected_by": [
+                "a.getB().getC().doX",
+                "deep_property_access",
+                "repeated_navigation_paths"
+            ],
+            "measured_by": ["member-access chain depth at call sites"],
+            "refactored_by": [
+                "lexicon:hide-delegate",
+                "lexicon:move-behavior-to-its-owner"
+            ],
+            "enforced_by": ["a lint rule on member-access chain depth"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const city = foo.getOwner().getAddress().getCity().getName();",
+                "after": "const city = foo.ownerCityName();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "middle-man",
+            "name": "Middle Man",
+            "definition": "A defect in which a module delegates almost every call without adding behavior of its own.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "correctness_verification",
+                "control_coordination"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Insert a module that delegates almost everything without adding policy, abstraction, validation, orchestration, or simplification.",
+            "detected_by": [
+                "thin_methods_only_delegate",
+                "low_logic_density",
+                "one_to_one_wrapper_methods"
+            ],
+            "measured_by": ["share of methods that only delegate"],
+            "refactored_by": [
+                "lexicon:collapse-layers",
+                "lexicon:inline-abstraction",
+                "architecture:facade-pattern"
+            ],
+            "enforced_by": [
+                "delegation-ratio analysis",
+                "design review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class FooService {\n  save(foo: Foo) { return this.store.save(foo); }\n  find(id: FooId) { return this.store.find(id); }\n}",
+                "after": "const fooStore: FooStore = new SqlFooStore();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "data-clumps",
+            "distinctFrom": [
+                {
+                    "id": "architecture:long-parameter-list",
+                    "reason": "Data clumps are one group of values traveling together unnamed, while a long parameter list is one signature with too many parameters of any kind."
+                }
+            ],
+            "name": "Data Clumps",
+            "definition": "A defect in which the same group of values travels together without being named as one type.",
+            "type": "anti-pattern",
+            "scope": ["contract_compatibility"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Pass the same group of fields together repeatedly without naming the group as a value object or contract.",
+            "detected_by": [
+                "same_parameters_repeated",
+                "same_fields_appear_together",
+                "DTO_shape_duplicated"
+            ],
+            "measured_by": ["repeated parameter groups across signatures"],
+            "refactored_by": [
+                "architecture:value-object",
+                "lexicon:introduce-boundary-dto",
+                "lexicon:name-the-concept",
+                "lexicon:validate-as-a-group"
+            ],
+            "enforced_by": ["duplicate parameter-group detection in lint"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function shipFoo(street: string, city: string, zip: string, country: string) {}",
+                "after": "interface Address { street: string; city: string; zip: string; country: string; }\nfunction shipFoo(address: Address) {}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "primitive-obsession",
+            "distinctFrom": [
+                {
+                    "id": "architecture:data-clumps",
+                    "reason": "Primitive obsession holds one concept in a raw primitive, while data clumps are several values that belong together as one type."
+                },
+                {
+                    "id": "architecture:long-parameter-list",
+                    "reason": "Primitive obsession is about the type of one value, while a long parameter list is about the number of parameters in one signature."
+                }
+            ],
+            "name": "Primitive Obsession",
+            "definition": "A defect in which domain concepts are held in raw primitives with no type or validation.",
+            "type": "anti-pattern",
+            "scope": [
+                "correctness_verification",
+                "domain_boundary"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Represent meaningful domain concepts as raw strings, numbers, booleans, or maps without type, validation, or behavior.",
+            "detected_by": [
+                "many_string_ids",
+                "repeated_validation",
+                "boolean_flags",
+                "magic_values"
+            ],
+            "measured_by": ["domain concepts held in primitive types"],
+            "refactored_by": [
+                "architecture:value-object",
+                "lexicon:narrow-type",
+                "lexicon:replace-boolean-with-enum",
+                "lexicon:encapsulate-validation"
+            ],
+            "enforced_by": ["type checks and a lint rule against primitive-typed domain identifiers"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function transfer(fooId: string, amount: number, currency: string) {}",
+                "after": "class Money { constructor(readonly amount: number, readonly currency: Currency) {} }\nfunction transfer(fooId: FooId, money: Money) {}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "stringly-typed-programming",
+            "name": "Stringly Typed Programming",
+            "definition": "A defect in which states, types or permissions are encoded as unchecked strings.",
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Encode behavior, types, states, permissions, or protocols as unchecked strings.",
+            "detected_by": [
+                "string_mode_switch",
+                "repeated_string_constants",
+                "string_permissions",
+                "string_status_values"
+            ],
+            "measured_by": ["string comparisons against values of a closed set"],
+            "refactored_by": [
+                "lexicon:replace-boolean-with-enum",
+                "lexicon:introduce-discriminated-union",
+                "lexicon:centralize-the-rule",
+                "architecture:schema-validation"
+            ],
+            "enforced_by": ["lint rules that require an enum or a discriminated union for a closed set"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "if (foo.status === \"reddy\") ship(foo);",
+                "after": "enum FooStatus { Ready, Shipped }\nif (foo.status === FooStatus.Ready) ship(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "boolean-trap",
+            "name": "Boolean Trap",
+            "aliases": ["Flag Argument"],
+            "definition": "A defect in which boolean parameters hide the intent of a call site.",
+            "canon": ["boolean-trap"],
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Use boolean parameters or flags that hide intent and create ambiguous call sites or combinatorial behavior.",
+            "detected_by": [
+                "method(true,false)",
+                "multiple_boolean_params",
+                "flag_argument_controls_behavior"
+            ],
+            "measured_by": ["calls that pass more than one boolean literal"],
+            "refactored_by": [
+                "lexicon:replace-boolean-with-enum",
+                "lexicon:split-method",
+                "lexicon:introduce-parameter-object",
+                "lexicon:name-the-concept"
+            ],
+            "enforced_by": ["a lint rule against positional boolean parameters"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "createFoo(true, false, true);",
+                "after": "createFoo({ active: true, archived: false, notify: true });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "long-parameter-list",
+            "name": "Long Parameter List",
+            "definition": "A defect in which a signature grows so many parameters that a caller can no longer read or validate it.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "contract_compatibility",
+                "correctness_verification",
+                "object_creation"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Grow function or constructor signatures until related inputs, optional modes, and dependencies become hard to understand or validate.",
+            "detected_by": [
+                "arity_above_threshold",
+                "repeated_parameter_groups",
+                "many_optional_params"
+            ],
+            "measured_by": ["parameters per signature above the threshold"],
+            "refactored_by": [
+                "lexicon:introduce-parameter-object",
+                "architecture:builder-pattern",
+                "architecture:value-object",
+                "architecture:dependency-injection"
+            ],
+            "enforced_by": ["a lint rule on parameter count"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function makeFoo(a, b, c, d, e, f, g) {}",
+                "after": "interface MakeFooInput { a: A; b: B; c: C; d: D; e: E; f: F; g: G; }\nfunction makeFoo(input: MakeFooInput) {}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "magic-value",
+            "name": "Magic Value",
+            "aliases": ["Magic Number"],
+            "definition": "A defect in which policy, thresholds or states are written as unexplained literals.",
+            "type": "anti-pattern",
+            "scope": ["domain_boundary"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Encode policy, thresholds, status, timing, permissions, or domain rules as unexplained literals.",
+            "detected_by": [
+                "repeated_number_literal",
+                "unexplained_string_literal",
+                "inline_threshold",
+                "hidden_timeout"
+            ],
+            "measured_by": ["unnamed literals in conditions"],
+            "refactored_by": [
+                "lexicon:name-constant",
+                "lexicon:centralize-the-rule",
+                "lexicon:externalize-configuration",
+                "lexicon:name-the-concept"
+            ],
+            "enforced_by": ["a lint rule against unnamed numeric and string literals in logic"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "if (foo.retries > 3) fail(foo);",
+                "after": "const MAX_FOO_RETRIES = 3;\nif (foo.retries > MAX_FOO_RETRIES) fail(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "speculative-generality",
+            "name": "Speculative Generality",
+            "definition": "A defect in which abstractions are built for variation that has no evidence of arriving.",
+            "type": "anti-pattern",
+            "scope": ["runtime_extensibility"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Build abstractions, extension points, layers, or configuration for variation that has no evidence of existing or near-term need.",
+            "detected_by": [
+                "single_implementation_interface",
+                "unused_extension_point",
+                "config_never_varies",
+                "abstract_base_without_variants"
+            ],
+            "measured_by": [
+                "interfaces with one implementation",
+                "unused extension points"
+            ],
+            "refactored_by": [
+                "lexicon:inline-abstraction",
+                "lexicon:defer-generalization",
+                "architecture:minimum-viable-architecture"
+            ],
+            "enforced_by": [
+                "dead-code and single-implementation analysis",
+                "design review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "abstract class AbstractFooProviderFactoryBase<T> { abstract create(): T; }",
+                "after": "function createFoo(input: CreateFooInput): Foo { return Foo.create(input); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "premature-abstraction",
+            "distinctFrom": [
+                {
+                    "id": "architecture:zombie-code",
+                    "reason": "Premature abstraction extracts shared code too early, while zombie code leaves dead code in place."
+                }
+            ],
+            "name": "Premature Abstraction",
+            "definition": "A defect in which a shared abstraction is extracted before its variation is understood, so it fits no caller well.",
+            "type": "anti-pattern",
+            "scope": ["modularity"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Extract a shared abstraction before variation is understood, causing the abstraction to fit no use case well.",
+            "detected_by": [
+                "many_flags_in_shared_abstraction",
+                "subclasses_override_most_behavior",
+                "callers_work_around_abstraction"
+            ],
+            "measured_by": ["flags and overrides per shared abstraction"],
+            "refactored_by": [
+                "lexicon:duplicate-until-the-pattern-stabilizes",
+                "lexicon:split-abstraction",
+                "lexicon:defer-generalization"
+            ],
+            "enforced_by": ["design review against evidence of recurrence"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "interface FooStrategy { run(): void; }\nclass OnlyFooStrategy implements FooStrategy { run() {} }",
+                "after": "function runFoo() {}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "over-abstraction",
+            "distinctFrom": [
+                {
+                    "id": "architecture:speculative-generality",
+                    "reason": "Over-abstraction is the state of having more layers than variation, while speculative generality is the cause, building for variation not yet seen."
+                }
+            ],
+            "name": "Over-Abstraction",
+            "definition": "A defect in which layers, interfaces and factories outnumber the variation they serve.",
+            "type": "anti-pattern",
+            "scope": ["contract_compatibility"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Add too many interfaces, layers, factories, adapters, or generic types relative to actual variability.",
+            "detected_by": [
+                "deep_call_stack_for_simple_task",
+                "one_method_interfaces",
+                "factory_of_factory",
+                "abstraction_ratio_too_high"
+            ],
+            "measured_by": [
+                "indirection depth for simple operations",
+                "abstraction-to-implementation ratio"
+            ],
+            "refactored_by": [
+                "lexicon:collapse-layers",
+                "lexicon:inline-abstraction",
+                "lexicon:preserve-only-real-boundaries"
+            ],
+            "enforced_by": [
+                "abstraction-ratio analysis",
+                "design review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const foo = fooFactoryProvider.getFactory().createBuilder().build();",
+                "after": "const foo = Foo.create(input);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "golden-hammer",
+            "name": "Golden Hammer",
+            "aliases": ["Law of the Instrument"],
+            "definition": "A defect in which one familiar solution is applied to problems regardless of fit.",
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Apply a familiar pattern, framework, architecture style, or technology to problems regardless of fit.",
+            "detected_by": [
+                "same_pattern_everywhere",
+                "solution_precedes_problem",
+                "ADR_missing_alternatives",
+                "high_workaround_count"
+            ],
+            "measured_by": ["decisions recorded without alternatives"],
+            "refactored_by": [
+                "lexicon:force-analysis",
+                "lexicon:trade-off-matrix",
+                "lexicon:decision-record-with-alternatives",
+                "lexicon:contextual-pattern-selection"
+            ],
+            "enforced_by": ["decision records that require alternatives and the forces they answer"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const config = parseFooConfig(runRegexOverEverything(rawYaml));",
+                "after": "const config = FooConfigSchema.parse(yaml.load(rawYaml));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "pattern-cargo-cult",
+            "distinctFrom": [
+                {
+                    "id": "architecture:golden-hammer",
+                    "reason": "A cargo cult copies a pattern's shape without its forces, while a golden hammer applies one familiar solution to every problem."
+                }
+            ],
+            "name": "Pattern Cargo Cult",
+            "definition": "A defect in which a pattern's name and shape are copied without the forces, contracts and checks that make it work.",
+            "aliases": ["Cargo-Cult Pattern Use"],
+            "type": "anti-pattern",
+            "scope": [
+                "contract_compatibility",
+                "correctness_verification"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Copy named patterns or architecture styles without implementing their required forces, contracts, constraints, or validation gates.",
+            "detected_by": [
+                "ports_without_boundary_rules",
+                "plugins_without_contracts",
+                "events_without_idempotency",
+                "microservices_without_autonomy"
+            ],
+            "measured_by": ["patterns missing their required boundary rules or contracts"],
+            "refactored_by": [
+                "lexicon:validate-required-forces",
+                "lexicon:define-contract",
+                "lexicon:name-the-concept",
+                "lexicon:remove-pattern-shell"
+            ],
+            "enforced_by": ["architecture tests that check each named pattern's required contracts"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class FooSingletonFactoryObserverProxy {}",
+                "after": "class FooService { constructor(private readonly store: FooStore) {} }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "lava-flow",
+            "distinctFrom": [
+                {
+                    "id": "architecture:premature-abstraction",
+                    "reason": "Lava flow is obsolete code kept too long, while premature abstraction is shared code extracted too early."
+                },
+                {
+                    "id": "architecture:zombie-code",
+                    "reason": "Lava flow is code that may still run and whose purpose nobody records, while zombie code is unreachable or disabled."
+                }
+            ],
+            "name": "Lava Flow",
+            "definition": "A defect in which obsolete or half-migrated code survives because nothing records whether it is still needed.",
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Preserve obsolete, half-migrated, or unexplained code paths because no record says whether they are still needed.",
+            "detected_by": [
+                "old_paths_never_called",
+                "deprecated_code_without_removal_date",
+                "feature_flags_stuck_on_or_off",
+                "comments_say_do_not_touch"
+            ],
+            "measured_by": [
+                "code paths with no runtime hits",
+                "deprecated code past its removal date"
+            ],
+            "refactored_by": [
+                "lexicon:usage-instrumentation",
+                "lexicon:assign-owner",
+                "lexicon:deprecation-plan",
+                "lexicon:delete-after-evidence"
+            ],
+            "enforced_by": [
+                "dead-code analysis",
+                "removal dates on deprecated paths"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function saveFoo(foo) {\n  legacySaveV1(foo);\n  if (false) legacySaveV2(foo);\n  newSave(foo);\n}",
+                "after": "function saveFoo(foo: Foo) { return fooStore.save(foo); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "zombie-code",
+            "name": "Zombie Code",
+            "aliases": ["Dead Code"],
+            "definition": "A defect in which unreachable or disabled code stays in the system and misleads the developer and the model.",
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Leave unreachable, unused, or disabled code in the system where it keeps misleading the developer and the model, and can be reactivated by accident.",
+            "detected_by": [
+                "unused_exports",
+                "unreachable_branches",
+                "dead_feature_flags",
+                "zero_runtime_hits"
+            ],
+            "measured_by": [
+                "unused exports",
+                "unreachable branches"
+            ],
+            "refactored_by": [
+                "lexicon:delete-after-evidence",
+                "lexicon:archive-reference",
+                "lexicon:restrict-exports",
+                "lexicon:dead-code-check"
+            ],
+            "enforced_by": ["unused-export and unreachable-code checks in the build"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function computeFoo() {}\nfunction computeFooOld() {}\nfunction computeFooDeprecated() {}",
+                "after": "function computeFoo() {}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "temporal-coupling",
+            "name": "Temporal Coupling",
+            "definition": "A defect in which operations must be called in an undocumented order to work.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "contract_compatibility",
+                "correctness_verification",
+                "causality_ordering"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Require operations to be called in a specific undocumented order for correctness.",
+            "detected_by": [
+                "must_call_initialize_first",
+                "method_fails_before_setup",
+                "order_dependent_tests",
+                "state_machine_hidden_in_calls"
+            ],
+            "measured_by": ["operations that fail when called out of order"],
+            "refactored_by": [
+                "lexicon:encode-state-machine",
+                "lexicon:constructor-valid-state",
+                "lexicon:make-order-explicit",
+                "lexicon:precondition-check"
+            ],
+            "enforced_by": [
+                "types or constructors that only produce valid states",
+                "precondition checks"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "foo.init();\nfoo.configure();\nfoo.start();",
+                "after": "const foo = Foo.start(config);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "hidden-side-effect",
+            "distinctFrom": [
+                {
+                    "id": "architecture:action-at-a-distance",
+                    "reason": "A hidden side effect is a query that writes, while action at a distance is one part changing behavior elsewhere through globals or listeners."
+                }
+            ],
+            "name": "Hidden Side Effect",
+            "definition": "A defect in which an operation that looks like a query mutates state or performs I/O that its name and signature do not show.",
+            "type": "anti-pattern",
+            "scope": ["event_messaging"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Make an operation appear like a query or pure function while it mutates state, performs I/O, emits events, or changes global context.",
+            "detected_by": [
+                "getter_mutates_state",
+                "query_writes",
+                "function_emits_event_unexpectedly",
+                "global_context_modified"
+            ],
+            "measured_by": ["queries that write or emit"],
+            "refactored_by": [
+                "lexicon:separate-query-from-command",
+                "lexicon:make-effects-explicit"
+            ],
+            "enforced_by": [
+                "command–query separation rules in lint",
+                "effect-boundary review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function getFoo(id: FooId) { audit.log(id); return fooStore.find(id); }",
+                "after": "function getFoo(id: FooId) { return fooStore.find(id); }\nfunction auditFooAccess(id: FooId) { audit.log(id); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "action-at-a-distance",
+            "name": "Action at a Distance",
+            "definition": "A defect in which one part of the system changes behavior elsewhere through globals, patches or implicit listeners.",
+            "type": "anti-pattern",
+            "scope": ["event_messaging"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Let one part of the system change behavior far away through globals, monkey patches, shared registries, ambient context, or implicit event listeners.",
+            "detected_by": [
+                "monkey_patch",
+                "global_registry_mutation",
+                "ambient_context_write",
+                "implicit_subscriber_side_effect"
+            ],
+            "measured_by": ["global mutations and implicit listener registrations"],
+            "refactored_by": [
+                "lexicon:explicit-dependency",
+                "lexicon:localize-effect",
+                "lexicon:causation-tracing",
+                "lexicon:restrict-global-mutation"
+            ],
+            "enforced_by": ["lint rules against global mutation and monkey patching"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "globalThis.fooFlag = true;\nfunction runFoo() { if (globalThis.fooFlag) go(); }",
+                "after": "function runFoo(options: { enabled: boolean }) { if (options.enabled) go(); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "ambient-context",
+            "name": "Ambient Context",
+            "definition": "A defect in which request, tenant or user state is read from implicit global context.",
+            "type": "anti-pattern",
+            "scope": ["state_transaction"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Read user, tenant, locale, transaction, permissions, or request state from implicit global context instead of explicit parameters or scoped context objects.",
+            "detected_by": [
+                "global_current_user",
+                "thread_local_business_data",
+                "implicit_tenant_lookup",
+                "hidden_transaction_context"
+            ],
+            "measured_by": ["global context reads outside infrastructure code"],
+            "refactored_by": ["lexicon:pass-context-explicitly"],
+            "enforced_by": ["lint rules against global context reads in business logic"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function saveFoo(foo) { return CurrentTenant.get().db.save(foo); }",
+                "after": "function saveFoo(foo: Foo, tenant: Tenant) { return tenant.db.save(foo); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "inconsistent-error-model",
+            "name": "Inconsistent Error Model",
+            "definition": "A defect in which one class of failure is reported through several incompatible shapes.",
+            "type": "anti-pattern",
+            "scope": ["model_governance"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Mix exceptions, nulls, booleans, strings, partial objects, console logging, and silent failure for the same error class.",
+            "detected_by": [
+                "same_error_returns_null_or_throws",
+                "mixed_error_shapes",
+                "string_errors",
+                "partial_success_without_contract"
+            ],
+            "measured_by": ["distinct error shapes per error class"],
+            "refactored_by": [
+                "lexicon:introduce-typed-result",
+                "lexicon:standard-error-contract",
+                "architecture:error-boundaries"
+            ],
+            "enforced_by": [
+                "a typed error contract held by the type checker",
+                "lint rules against thrown strings"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function a() { return null; }\nfunction b() { throw \"bad\"; }\nfunction c() { return { error: true }; }",
+                "after": "function a(): Result<Foo, FooError> {}\nfunction b(): Result<Bar, FooError> {}\nfunction c(): Result<Baz, FooError> {}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "exception-control-flow",
+            "name": "Exception Control Flow",
+            "definition": "A defect in which exceptions carry expected branching or normal absence.",
+            "type": "anti-pattern",
+            "scope": ["correctness_verification"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Use exceptions for expected branching, normal absence, validation alternatives, or loop control.",
+            "detected_by": [
+                "try_catch_for_lookup_absence",
+                "exceptions_in_hot_loop",
+                "catch_chooses_normal_path"
+            ],
+            "measured_by": ["catch blocks on expected-absence paths"],
+            "refactored_by": [
+                "lexicon:introduce-typed-result",
+                "lexicon:precondition-check"
+            ],
+            "enforced_by": ["lint rules against catch blocks that choose the normal path"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "try {\n  return await fooStore.find(id);\n} catch (notFound) {\n  return fooStore.create(id);\n}",
+                "after": "const foo = await fooStore.find(id);\nreturn foo ?? fooStore.create(id);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "null-semantics-drift",
+            "name": "Null Semantics Drift",
+            "definition": "A defect in which null, empty, zero and missing are used interchangeably for one field.",
+            "type": "anti-pattern",
+            "scope": ["semantic_consistency"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Use null, undefined, empty string, zero, false, missing field, and empty collection interchangeably.",
+            "detected_by": [
+                "null_and_empty_string_same_field",
+                "optional_field_without_semantics",
+                "truthy_checks_for_domain_state"
+            ],
+            "measured_by": ["fields with more than one representation of absence"],
+            "refactored_by": [
+                "lexicon:define-absence-semantics",
+                "lexicon:introduce-typed-result",
+                "architecture:canonicalization"
+            ],
+            "enforced_by": [
+                "schema nullability rules",
+                "strict null checking"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const foo = find(id);\nif (foo) use(foo);",
+                "after": "const foo = find(id) ?? Foo.none();\nfoo.use();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "anemic-domain-model",
+            "name": "Anemic Domain Model",
+            "aliases": ["Anemic Model"],
+            "definition": "A defect in which domain objects hold data only, while their rules live in services and handlers.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "contract_compatibility",
+                "semantic_consistency",
+                "model_governance",
+                "domain_boundary"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Store domain data in passive objects while business rules live in services, controllers, handlers, or scripts.",
+            "detected_by": [
+                "entities_with_getters_setters_only",
+                "services_contain_all_rules",
+                "validation_outside_aggregate"
+            ],
+            "measured_by": [
+                "domain types without behavior",
+                "rules outside their aggregate"
+            ],
+            "refactored_by": [
+                "lexicon:move-logic-to-the-domain",
+                "architecture:value-object",
+                "lexicon:add-aggregate-invariant",
+                "lexicon:encapsulate-state"
+            ],
+            "enforced_by": [
+                "architecture tests that locate domain rules",
+                "design review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class Foo { status: string; }\nfunction shipFoo(foo: Foo) { if (foo.status === \"ready\") foo.status = \"shipped\"; }",
+                "after": "class Foo {\n  private status = FooStatus.Ready;\n  ship() { if (this.status !== FooStatus.Ready) throw new NotReadyError(); this.status = FooStatus.Shipped; }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "transaction-script-sprawl",
+            "name": "Transaction Script Sprawl",
+            "definition": "A defect in which business processes are procedural scripts that coordinate validation, persistence and decisions directly.",
+            "type": "anti-pattern",
+            "scope": [
+                "state_transaction",
+                "correctness_verification",
+                "domain_boundary",
+                "control_coordination"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Encode business processes as procedural scripts that directly coordinate validation, persistence, external calls, and domain decisions.",
+            "detected_by": [
+                "large_service_method",
+                "business_rules_in_controller",
+                "repeated_procedure_blocks"
+            ],
+            "measured_by": [
+                "procedure length",
+                "business rules in handlers"
+            ],
+            "refactored_by": [
+                "lexicon:extract-domain-model",
+                "lexicon:extract-use-case",
+                "lexicon:introduce-port",
+                "lexicon:move-logic-to-the-domain"
+            ],
+            "enforced_by": [
+                "architecture tests on layer responsibilities",
+                "method size limits"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function createFooHandler(req) {\n  validate(req); price(req); tax(req); persist(req); notify(req);\n}",
+                "after": "class CreateFoo {\n  constructor(private readonly foos: FooRepository) {}\n  execute(input: CreateFooInput) { const foo = Foo.create(input); return this.foos.save(foo); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "fat-controller",
+            "distinctFrom": [
+                {
+                    "id": "architecture:transaction-script-sprawl",
+                    "reason": "A fat controller puts business logic in the request handler, while transaction script sprawl writes business processes as procedural scripts wherever they live."
+                }
+            ],
+            "name": "Fat Controller",
+            "definition": "A defect in which controllers hold validation, business rules, persistence and response formatting.",
+            "type": "anti-pattern",
+            "scope": [
+                "correctness_verification",
+                "security_governance",
+                "control_coordination"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Put validation, business rules, persistence orchestration, mapping, authorization, and response formatting in the controller layer.",
+            "detected_by": [
+                "controller_method_too_large",
+                "repository_calls_plus_business_rules",
+                "domain_logic_in_route_handler"
+            ],
+            "measured_by": [
+                "controller method size",
+                "repository calls from controllers"
+            ],
+            "refactored_by": [
+                "lexicon:extract-use-case",
+                "lexicon:move-logic-to-the-domain",
+                "lexicon:map-to-domain-model"
+            ],
+            "enforced_by": [
+                "layer rules that keep domain logic out of controllers",
+                "size limits"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class FooController {\n  create(req) { const foo = { ...req.body }; if (!foo.name) throw 0; db.insert(foo); email(foo); }\n}",
+                "after": "class FooController {\n  constructor(private readonly createFoo: CreateFoo) {}\n  create(req: Request) { return this.createFoo.execute(req.body); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "repository-dump",
+            "name": "Repository Dump",
+            "definition": "A defect in which a repository accumulates business queries, policy and orchestration until it is a second service layer.",
+            "type": "anti-pattern",
+            "scope": [
+                "correctness_verification",
+                "domain_boundary",
+                "control_coordination"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Place business-specific querying, orchestration, mapping, caching, validation, and policy into a repository until it becomes a second service layer.",
+            "detected_by": [
+                "repository_methods_encode_business_process",
+                "authorization_in_repository",
+                "repository_calls_external_services"
+            ],
+            "measured_by": ["business-specific methods per repository"],
+            "refactored_by": [
+                "lexicon:extract-query-service",
+                "lexicon:move-logic-to-the-domain",
+                "lexicon:split-repository",
+                "lexicon:introduce-port"
+            ],
+            "enforced_by": [
+                "persistence-boundary rules",
+                "design review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class FooRepository { findActiveFoosForBarInRegionSortedByBaz() {} }",
+                "after": "class FooRepository { find(spec: FooSpecification): Foo[] { return this.query(spec.toQuery()); } }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "utility-dump",
+            "distinctFrom": [
+                {
+                    "id": "architecture:shotgun-surgery",
+                    "reason": "A utility dump gathers unrelated helpers in one module, while shotgun surgery spreads one responsibility across many files."
+                }
+            ],
+            "name": "Utility Dump",
+            "definition": "A defect in which unrelated helpers accumulate in a generic utility module that no one owns.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "domain_boundary"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Accumulate unrelated helper functions in generic utility modules without ownership, cohesion, or domain language.",
+            "detected_by": [
+                "utils_file_growth",
+                "unrelated_helpers",
+                "many_modules_import_same_dump",
+                "generic_names"
+            ],
+            "measured_by": [
+                "unrelated functions per utility module",
+                "importers per utility module"
+            ],
+            "refactored_by": [
+                "lexicon:move-behavior-to-its-owner",
+                "lexicon:split-by-domain",
+                "architecture:value-object",
+                "lexicon:name-the-concept"
+            ],
+            "enforced_by": [
+                "naming rules that reject catch-all module names",
+                "cohesion analysis"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "export function formatFoo() {}\nexport function parseBar() {}\nexport function hashBaz() {}",
+                "after": "export const fooFormatter = { format(foo: Foo): string {} };\nexport const barParser = { parse(raw: string): Bar {} };",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "framework-leakage",
+            "name": "Framework Leakage",
+            "definition": "A defect in which framework or infrastructure types, annotations or lifecycles enter core domain logic, so business rules depend on technical specifics.",
+            "aliases": [
+                "Infrastructure-Centric Design",
+                "Framework-Centric Core"
+            ],
+            "type": "anti-pattern",
+            "scope": ["domain_boundary"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Let framework classes, decorators, lifecycle assumptions, request objects, ORM entities, or infrastructure annotations enter core domain logic.",
+            "detected_by": [
+                "request_object_in_domain",
+                "ORM_entity_as_domain",
+                "framework_annotation_in_core",
+                "container_lookup_in_business_logic"
+            ],
+            "measured_by": ["framework imports in core modules"],
+            "refactored_by": [
+                "lexicon:extract-adapter",
+                "lexicon:map-to-domain-model",
+                "lexicon:introduce-port",
+                "lexicon:move-framework-outward"
+            ],
+            "enforced_by": ["import rules that keep framework packages out of the core"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class Foo { @Column() name: string; @OneToMany() bars: Bar[]; }",
+                "after": "class Foo { constructor(readonly name: string, readonly bars: readonly Bar[]) {} }\nclass FooEntity { @Column() name: string; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "vendor-lock-in-leakage",
+            "name": "Vendor Lock-In Leakage",
+            "definition": "A defect in which an external system's or a vendor's APIs, errors and models spread through application and domain code, so their changes ripple across it.",
+            "aliases": ["Shared Model Coupling"],
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "model_governance",
+                "domain_boundary"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Spread vendor-specific APIs, models, exceptions, identifiers, or configuration throughout application and domain code.",
+            "detected_by": [
+                "vendor_imports_outside_adapter",
+                "vendor_error_types_in_domain",
+                "vendor_schema_as_canonical_model"
+            ],
+            "measured_by": ["vendor imports outside adapters"],
+            "refactored_by": [
+                "lexicon:extract-adapter",
+                "lexicon:introduce-port",
+                "lexicon:translate-errors-at-the-boundary",
+                "architecture:canonical-data-model"
+            ],
+            "enforced_by": ["import rules that confine vendor packages to adapters"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "import { BlobStore } from \"acme-blob-sdk\";\nfunction saveFoo(foo) { return new BlobStore().putObject(foo); }",
+                "after": "interface FooBlobStore { put(foo: Foo): Promise<void>; }\nfunction saveFoo(foo: Foo, store: FooBlobStore) { return store.put(foo); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "circular-dependency",
+            "distinctFrom": [
+                {
+                    "id": "architecture:inappropriate-intimacy",
+                    "reason": "A circular dependency is a cycle in the dependency graph, while inappropriate intimacy is a dependency on another module's internals, with or without a cycle."
+                },
+                {
+                    "id": "architecture:message-chain",
+                    "reason": "A circular dependency is a cycle between modules, while a message chain is a client walking a chain of objects."
+                }
+            ],
+            "name": "Circular Dependency",
+            "definition": "A defect in which modules depend on each other, directly or through others, so none can change alone.",
+            "aliases": ["Cyclic Dependencies"],
+            "canon": ["circular-dependency"],
+            "type": "anti-pattern",
+            "scope": ["modularity"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Allow modules to depend on each other directly or indirectly until no module can change, test, deploy, or initialize independently.",
+            "detected_by": [
+                "dependency_cycle",
+                "mutual_imports",
+                "bootstrap_order_hacks",
+                "bidirectional_service_calls"
+            ],
+            "measured_by": ["dependency cycles and their length"],
+            "refactored_by": [
+                "lexicon:invert-dependency",
+                "lexicon:extract-interface",
+                "lexicon:split-interface",
+                "architecture:domain-events",
+                "architecture:mediator-pattern"
+            ],
+            "enforced_by": ["a dependency-cycle check in the build"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "import { bar } from \"./bar\";\nexport const foo = () => bar();\nimport { foo } from \"./foo\";\nexport const bar = () => foo();",
+                "after": "export const foo = (run: () => void) => run();\nexport const bar = () => {};\nfoo(bar);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "cyclic-deployment-dependency",
+            "name": "Cyclic Deployment Dependency",
+            "definition": "A defect in which services must deploy in lockstep because each depends on the other's current version.",
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Require two or more services or packages to deploy in lockstep because each depends on the other’s current behavior.",
+            "detected_by": [
+                "coordinated_release_required",
+                "consumer_breaks_without_provider_release",
+                "mutual_contract_change"
+            ],
+            "measured_by": ["releases that required coordinated deployment"],
+            "refactored_by": [
+                "architecture:versioning",
+                "lexicon:backward-compatible-change",
+                "lexicon:consumer-driven-contract-tests",
+                "lexicon:compatibility-adapter"
+            ],
+            "enforced_by": [
+                "consumer-driven contract tests",
+                "independent-deployment checks"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "fooService.callsAtStartup(barService);\nbarService.callsAtStartup(fooService);",
+                "after": "fooService.publishes(fooReady);\nbarService.subscribes(fooReady);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "synchronous-chain-trap",
+            "name": "Synchronous Chain Trap",
+            "definition": "A defect in which one request depends on a deep chain of blocking synchronous remote calls, so one slow link stalls the whole request.",
+            "aliases": ["Blocking Synchronous Chains"],
+            "type": "anti-pattern",
+            "scope": ["modularity"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Build deep request-time chains across services or modules, making latency, availability, and failure behavior multiplicative.",
+            "detected_by": [
+                "sync_depth_above_threshold",
+                "request_path_many_remote_calls",
+                "cascading_timeout"
+            ],
+            "measured_by": ["synchronous call depth per request path"],
+            "refactored_by": [
+                "lexicon:coarse-grained-endpoint",
+                "lexicon:introduce-async-event",
+                "lexicon:query-projection",
+                "architecture:timeout-pattern",
+                "architecture:bulkhead-pattern"
+            ],
+            "enforced_by": [
+                "call-depth limits in architecture review",
+                "timeout and bulkhead policies"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const foo = await a();\nconst bar = await b(foo);\nconst baz = await c(bar);\nreturn slowSyncCall(a, b, c);",
+                "after": "const [foo, bar, baz] = await Promise.all([a(), b(), c()]);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "chatty-interface",
+            "name": "Chatty Interface",
+            "definition": "A defect in which one operation needs many small remote calls.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "contract_compatibility"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Require many small remote calls to complete one user or business operation.",
+            "detected_by": [
+                "N_plus_1_API_calls",
+                "many_calls_per_screen",
+                "loop_contains_remote_call"
+            ],
+            "measured_by": ["remote calls per user operation"],
+            "refactored_by": [
+                "lexicon:coarse-grained-endpoint",
+                "lexicon:query-projection",
+                "lexicon:batch-fetch"
+            ],
+            "enforced_by": [
+                "API review",
+                "performance tests that bound call counts"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const results = [];\nfor (const id of fooIds) results.push(await fooApi.get(id));",
+                "after": "const results = await fooApi.getMany(fooIds);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "n-plus-one-query",
+            "name": "N Plus One Query",
+            "aliases": ["N+1 Query"],
+            "definition": "A defect in which a collection is fetched and then one further query is issued per item.",
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Fetch a collection, then issue one query or remote call per item rather than fetching required related data intentionally.",
+            "detected_by": [
+                "query_inside_loop",
+                "remote_call_inside_loop",
+                "query_count_scales_with_rows"
+            ],
+            "measured_by": ["queries per request as the row count grows"],
+            "refactored_by": [
+                "lexicon:batch-fetch",
+                "lexicon:query-projection"
+            ],
+            "enforced_by": ["query-count assertions in integration tests"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const foos = await fooStore.all();\nfor (const foo of foos) foo.bar = await barStore.find(foo.barId);",
+                "after": "const foos = await fooStore.all();\nconst bars = await barStore.findMany(foos.map(f => f.barId));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "cache-poisoning-by-design",
+            "name": "Cache Poisoning by Design",
+            "definition": "A defect in which a cache key omits an input the entry depends on, so one request is served another's result.",
+            "type": "anti-pattern",
+            "scope": [
+                "correctness_verification",
+                "security_governance"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Cache data without key correctness, tenant isolation, authorization context, invalidation, or schema version, or key the entry by time or lifetime alone.",
+            "detected_by": [
+                "cache_key_missing_user_or_tenant",
+                "cache_without_version",
+                "cache_keyed_by_time",
+                "no_invalidation",
+                "authorization_not_in_cache_key"
+            ],
+            "measured_by": [
+                "cache keys missing tenant",
+                "identity or version"
+            ],
+            "refactored_by": [
+                "lexicon:cache-contract",
+                "lexicon:context-keyed-cache",
+                "lexicon:cache-invalidation-on-write",
+                "architecture:versioning"
+            ],
+            "enforced_by": [
+                "cache-key review",
+                "tests that vary tenant and version"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "fooCache.set(request.path, response);",
+                "after": "if (response.ok && response.cacheable) {\n  fooCache.set(cacheKey(request.identity, request.path, fingerprint(request.inputs, SCHEMA_VERSION)), response);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "retry-storm",
+            "name": "Retry Storm",
+            "definition": "A defect in which clients retry a failing dependency so aggressively that the retries prolong the failure.",
+            "type": "anti-pattern",
+            "scope": ["resilience_recovery"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Allow many clients or workers to retry failed dependencies aggressively and synchronously, increasing pressure on the failing system.",
+            "detected_by": [
+                "no_backoff",
+                "no_jitter",
+                "unbounded_retries",
+                "retry_on_non_idempotent_operation"
+            ],
+            "measured_by": [
+                "retries per failed call",
+                "retry share of load during incidents"
+            ],
+            "refactored_by": [
+                "lexicon:bounded-retry",
+                "lexicon:backoff",
+                "lexicon:jitter",
+                "architecture:circuit-breaker-pattern",
+                "lexicon:idempotency-key"
+            ],
+            "enforced_by": ["a resilience policy that requires bounded retries with backoff and jitter"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "while (true) { try { return await call(); } catch { } }",
+                "after": "return retry(call, { attempts: 5, backoff: exponentialJitter(), giveUp: dlq });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "timeout-omission",
+            "name": "Timeout Omission",
+            "definition": "A defect in which calls to external systems carry no timeout, cancellation or deadline, so a caller can wait for ever on work that never completes.",
+            "aliases": ["Infinite Wait"],
+            "type": "anti-pattern",
+            "scope": ["resilience_recovery"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Call external systems without explicit timeouts, cancellation, or deadline propagation.",
+            "detected_by": [
+                "HTTP_call_without_timeout",
+                "DB_query_without_timeout",
+                "missing_cancellation_token",
+                "no_deadline_propagation"
+            ],
+            "measured_by": ["outbound calls without a timeout"],
+            "refactored_by": [
+                "architecture:timeout-pattern",
+                "lexicon:deadline-propagation",
+                "lexicon:cancellation",
+                "lexicon:fail-fast-or-fall-back"
+            ],
+            "enforced_by": ["a lint rule that requires a timeout on outbound calls"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const foo = await fetch(fooUrl);",
+                "after": "const foo = await fetch(fooUrl, { signal: AbortSignal.timeout(5000) });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "missing-backpressure",
+            "name": "Missing Backpressure",
+            "definition": "A defect in which a system accepts work faster than it can process it, with no limit or shedding.",
+            "aliases": ["Unbounded Ingestion"],
+            "type": "anti-pattern",
+            "scope": ["resilience_recovery"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Accept work faster than the system can process it without queue limits, admission control, rate limits, or shedding.",
+            "detected_by": [
+                "unbounded_queue",
+                "no_rate_limit",
+                "no_admission_control",
+                "memory_grows_with_load"
+            ],
+            "measured_by": ["queue depth and memory growth under load"],
+            "refactored_by": [
+                "lexicon:bounded-queue",
+                "architecture:rate-limiting",
+                "lexicon:load-shedding",
+                "architecture:backpressure"
+            ],
+            "enforced_by": [
+                "load tests",
+                "checks that every queue is configured with a bound"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "stream.on(\"data\", d => queue.push(process(d)));",
+                "after": "stream.pipe(new BoundedFooProcessor({ highWaterMark: 100 }));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "silent-data-corruption",
+            "name": "Silent Data Corruption",
+            "definition": "A defect in which invalid data is accepted, transformed or stored without any check noticing.",
+            "type": "anti-pattern",
+            "scope": [
+                "contract_compatibility",
+                "correctness_verification"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Accept, transform, or persist invalid data without validation, checksums, invariants, reconciliation, or audit.",
+            "detected_by": [
+                "missing_boundary_validation",
+                "no_invariant_check",
+                "impossible_state_in_database",
+                "reconciliation_failures"
+            ],
+            "measured_by": ["invariant violations and reconciliation mismatches"],
+            "refactored_by": [
+                "lexicon:validate-at-the-boundary",
+                "lexicon:invariant-check",
+                "lexicon:reconciliation-job",
+                "lexicon:data-change-audit"
+            ],
+            "enforced_by": [
+                "boundary validation",
+                "invariant checks",
+                "reconciliation jobs"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const total = Number(a) + Number(b);\nsave(total);",
+                "after": "const total = Money.add(Money.parse(a), Money.parse(b));\nsave(total);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "lost-update",
+            "name": "Lost Update",
+            "aliases": ["Whole-File Write Race"],
+            "definition": "A defect in which concurrent writers overwrite each other's changes without a version check.",
+            "type": "anti-pattern",
+            "scope": ["state_transaction"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Allow concurrent writers to overwrite each other without version checks, locks, compare-and-swap, or transaction isolation.",
+            "detected_by": [
+                "last_write_wins_without_version",
+                "no_optimistic_lock",
+                "concurrent_update_defects"
+            ],
+            "measured_by": ["concurrent update conflicts found in tests"],
+            "refactored_by": [
+                "architecture:optimistic-locking",
+                "architecture:pessimistic-locking",
+                "lexicon:merge-policy",
+                "lexicon:transaction-isolation-level"
+            ],
+            "enforced_by": [
+                "optimistic-locking checks",
+                "concurrency tests"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const foo = await load(id);\nfoo.count += 1;\nawait save(foo);",
+                "after": "await fooStore.update(id, { count: increment(1) }, { expectedVersion: foo.version });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "dual-write",
+            "name": "Dual Write",
+            "definition": "A defect in which related state is written to two systems with no atomicity or compensation.",
+            "type": "anti-pattern",
+            "scope": ["event_messaging"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Write related state to two systems without atomicity, outbox, saga, reconciliation, or compensation.",
+            "detected_by": [
+                "database_write_then_message_publish",
+                "two_databases_updated_without_transaction_or_outbox",
+                "manual_repair_needed"
+            ],
+            "measured_by": ["writes to two systems outside one transaction or outbox"],
+            "refactored_by": [
+                "architecture:outbox-pattern",
+                "architecture:saga-pattern",
+                "architecture:idempotent-consumer",
+                "lexicon:reconciliation-job"
+            ],
+            "enforced_by": [
+                "an outbox or saga",
+                "verified by integration tests"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "await db.save(foo);\nawait searchIndex.add(foo);",
+                "after": "await db.save(foo);\nawait outbox.append(fooCreatedEvent(foo));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "read-your-writes-violation",
+            "name": "Read-Your-Writes Violation",
+            "definition": "A defect in which a writer reads back a stale copy of what it has just written.",
+            "type": "anti-pattern",
+            "scope": ["contract_compatibility"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Let users or processes perform a write and then read from a stale replica, cache, projection, or eventually consistent view without explicit consistency contract.",
+            "detected_by": [
+                "write_then_stale_read_defect",
+                "cache_not_invalidated_after_write",
+                "replica_read_after_write"
+            ],
+            "measured_by": ["stale reads observed after writes"],
+            "refactored_by": [
+                "lexicon:read-from-primary-after-write",
+                "lexicon:cache-invalidation-on-write",
+                "lexicon:consistency-contract"
+            ],
+            "enforced_by": ["consistency-contract tests that read after a write"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "await primaryDb.write(foo);\nconst view = await replicaDb.read(foo.id);",
+                "after": "await primaryDb.write(foo);\nconst view = await readAfterWrite(foo.id, { consistency: \"read-your-writes\" });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "security-theater",
+            "name": "Security Theater",
+            "definition": "A defect in which visible security controls leave the real threat unreduced, or can be bypassed.",
+            "type": "anti-pattern",
+            "scope": [
+                "security_governance",
+                "model_governance"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Add visible security controls that do not reduce the actual threat model or can be bypassed by alternate paths.",
+            "detected_by": [
+                "control_not_linked_to_threat",
+                "bypass_endpoint",
+                "client_only_security",
+                "audit_passes_but_attack_succeeds"
+            ],
+            "measured_by": [
+                "controls not linked to a threat",
+                "bypass paths found"
+            ],
+            "refactored_by": [
+                "architecture:threat-modeling",
+                "lexicon:server-side-enforcement",
+                "lexicon:penetration-testing",
+                "architecture:policy-as-code"
+            ],
+            "enforced_by": [
+                "threat-model review",
+                "penetration tests"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "if (password.length > 0) grantFooAccess(user);",
+                "after": "const verified = await verifyPassword(password, user.passwordHash);\nif (!verified) throw new UnauthorizedError();\ngrantFooAccess(user);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "authorization-scattering",
+            "name": "Authorization Scattering",
+            "definition": "A defect in which authorization checks are spread across layers with no central policy.",
+            "type": "anti-pattern",
+            "scope": [
+                "security_governance",
+                "model_governance"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Spread authorization checks across controllers, services, repositories, UI, and ad hoc conditionals without a central policy model.",
+            "detected_by": [
+                "repeated_role_checks",
+                "missing_policy_engine",
+                "endpoint_without_authz",
+                "inconsistent_resource_access"
+            ],
+            "measured_by": [
+                "endpoints without a policy check",
+                "duplicated role checks"
+            ],
+            "refactored_by": [
+                "lexicon:centralize-policy",
+                "architecture:policy-as-code",
+                "architecture:attribute-based-access-control",
+                "architecture:role-based-access-control",
+                "lexicon:authorization-tests"
+            ],
+            "enforced_by": ["a policy engine, with authorization tests per endpoint"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "if (user.role === \"admin\") deleteFoo();\nif (user.role === \"admin\" || user.id === foo.owner) editFoo();",
+                "after": "if (policy.can(user, \"delete\", foo)) deleteFoo();\nif (policy.can(user, \"edit\", foo)) editFoo();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "secret-sprawl",
+            "name": "Secret Sprawl",
+            "definition": "A defect in which credentials and keys are stored across code, logs and configuration.",
+            "type": "anti-pattern",
+            "scope": [
+                "modularity",
+                "security_governance"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Store credentials, tokens, keys, certificates, or sensitive configuration across code, config files, logs, tickets, and local environments.",
+            "detected_by": [
+                "secret_in_repo",
+                "secret_in_log",
+                "shared_static_token",
+                "manual_secret_distribution"
+            ],
+            "measured_by": ["secrets found in source and logs"],
+            "refactored_by": [
+                "architecture:secrets-management",
+                "lexicon:secret-rotation",
+                "lexicon:repository-secret-scan",
+                "lexicon:least-privilege-credential"
+            ],
+            "enforced_by": [
+                "secret scanning in the build",
+                "a secret store"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const key = \"sk_live_abc123\";\nconst dbPass = \"hunter2\";",
+                "after": "const key = await secrets.get(\"foo.api.key\");\nconst dbPass = await secrets.get(\"foo.db.password\");",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "personal-data-oversharing",
+            "name": "Personal Data Oversharing",
+            "definition": "A defect in which more personal data is collected, kept, logged or exposed than the declared purpose needs.",
+            "aliases": ["Unbounded Data Collection"],
+            "type": "anti-pattern",
+            "scope": ["architecture_evolution"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Collect, store, log, transmit, or expose more personal data than needed for the declared purpose.",
+            "detected_by": [
+                "personal_data_in_logs",
+                "unused_sensitive_fields",
+                "broad_export",
+                "missing_data_minimization"
+            ],
+            "measured_by": ["personal-data fields in logs and exports"],
+            "refactored_by": [
+                "lexicon:purpose-binding",
+                "lexicon:field-redaction",
+                "lexicon:retention-policy"
+            ],
+            "enforced_by": [
+                "privacy review",
+                "log redaction rules"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "logger.info(\"created foo\", { email: user.email, ssn: user.ssn });",
+                "after": "logger.info(\"created foo\", { userId: user.id });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "observability-noise",
+            "name": "Observability Noise",
+            "definition": "A defect in which logs, metrics and alerts are too many and too low in signal to act on.",
+            "type": "anti-pattern",
+            "scope": ["observability_traceability"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Emit excessive, low-signal logs, metrics, traces, or alerts without severity, ownership, cardinality control, or actionability.",
+            "detected_by": [
+                "high_alert_ack_without_action",
+                "high_cardinality_metrics",
+                "logs_without_context",
+                "duplicate_alerts"
+            ],
+            "measured_by": [
+                "alerts acknowledged without action",
+                "high-cardinality metrics"
+            ],
+            "refactored_by": [
+                "lexicon:define-signal-quality",
+                "lexicon:cardinality-reduction",
+                "lexicon:runbook-owner",
+                "lexicon:sampling-and-aggregation"
+            ],
+            "enforced_by": [
+                "alert-ownership rules",
+                "metric cardinality limits"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "logger.info(\"entering loop\");\nfor (const f of foos) logger.info(\"iter\", f);",
+                "after": "logger.info(\"foo.batch.processed\", { count: foos.length, durationMs });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "log-as-control-flow",
+            "name": "Log-as-Control-Flow",
+            "definition": "A defect in which a failure is logged as though logging handled it, and execution continues.",
+            "type": "anti-pattern",
+            "scope": [
+                "correctness_verification",
+                "resilience_recovery"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Log errors or warnings as if logging itself handles the failure, while the system continues without recovery, propagation, or safe fallback.",
+            "detected_by": [
+                "catch_log_continue",
+                "logged_error_without_return_or_throw",
+                "critical_log_no_alert"
+            ],
+            "measured_by": ["catch blocks that log and continue"],
+            "refactored_by": [
+                "lexicon:introduce-typed-result",
+                "lexicon:fail-fast-or-fall-back",
+                "lexicon:recovery-policy",
+                "lexicon:alert-on-critical-failure"
+            ],
+            "enforced_by": ["a lint rule against catch blocks that only log"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "try { await chargeFoo(foo); } catch (error) { logger.error(\"foo.charge.failed\", error); }\nshipFoo(foo);",
+                "after": "const outcome = await chargeFoo(foo);\nif (!outcome.ok) throw new ChargeFailedError(foo.id, outcome.error);\nshipFoo(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "manual-runbook-dependency",
+            "name": "Manual Runbook Dependency",
+            "definition": "A defect in which repeatable operational steps, such as detecting a failure and recovering from it, are performed by hand during incidents and deploys, so recovery waits on a person.",
+            "aliases": [
+                "Manual-Only Recovery",
+                "Manual Intervention Dependency"
+            ],
+            "type": "anti-pattern",
+            "scope": ["resilience_recovery"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Perform by hand the repeatable operational actions during incidents, deploys, migrations, or recovery.",
+            "detected_by": [
+                "same_manual_incident_steps",
+                "manual_migration_sequence",
+                "operator_specific_knowledge"
+            ],
+            "measured_by": ["manual steps repeated across incidents"],
+            "refactored_by": [
+                "lexicon:automate-the-runbook",
+                "lexicon:guardrails",
+                "lexicon:precondition-check",
+                "lexicon:execution-log"
+            ],
+            "enforced_by": ["operations review of manual steps repeated across incidents"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const RUNBOOK = \"on failure, ssh in and run restart-foo.sh\";",
+                "after": "health.onUnhealthy(() => orchestrator.restart(\"foo\"));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "big-bang-release",
+            "name": "Big-Bang Release",
+            "definition": "A defect in which a large, irreversible change reaches every user at once, with no staged rollout.",
+            "aliases": ["Big-Bang Deployment"],
+            "type": "anti-pattern",
+            "scope": ["state_transaction"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Ship a large, irreversible, all-user change without staged rollout, feature flags, canary, rollback, or blast-radius control.",
+            "detected_by": [
+                "no_canary",
+                "no_feature_flag",
+                "no_rollback_plan",
+                "large_release_batch"
+            ],
+            "measured_by": [
+                "release batch size",
+                "releases without a rollback path"
+            ],
+            "refactored_by": [
+                "architecture:feature-toggle",
+                "architecture:canary-deployment",
+                "architecture:blue-green-deployment",
+                "lexicon:rollback-plan",
+                "lexicon:small-batch-release"
+            ],
+            "enforced_by": ["release gates that require a canary or a feature flag and a rollback plan"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "deployEverything(\"foo\", \"bar\", \"baz\");",
+                "after": "release(\"foo\", { strategy: canary(0.1) });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "irreversible-migration",
+            "name": "Irreversible Migration",
+            "definition": "A defect in which a schema or data change can neither run beside the old version nor be rolled back.",
+            "type": "anti-pattern",
+            "scope": [
+                "contract_compatibility",
+                "architecture_evolution"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Apply schema, data, or infrastructure changes that cannot safely run alongside old versions or be rolled back.",
+            "detected_by": [
+                "drop_column_before_consumers_removed",
+                "destructive_data_transform_no_backup",
+                "no_backward_compatible_phase"
+            ],
+            "measured_by": ["migrations without a down step or a compatible phase"],
+            "refactored_by": [
+                "lexicon:expand-contract-migration",
+                "lexicon:backup",
+                "lexicon:dual-read-and-write",
+                "lexicon:rollback-plan"
+            ],
+            "enforced_by": [
+                "migration review",
+                "rollback tests"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "await db.exec(\"ALTER TABLE foo DROP COLUMN legacy_name\");",
+                "after": "await migrate({ up: addFooName, down: restoreFooName });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "big-upfront-frozen-architecture",
+            "distinctFrom": [
+                {
+                    "id": "architecture:lava-flow",
+                    "reason": "Frozen architecture fixes decisions too early, while lava flow keeps obsolete code too long."
+                },
+                {
+                    "id": "architecture:premature-abstraction",
+                    "reason": "Frozen architecture fixes system-level decisions early, while premature abstraction extracts one shared abstraction early."
+                },
+                {
+                    "id": "architecture:zombie-code",
+                    "reason": "Frozen architecture is a decision made too early, while zombie code is dead code left behind."
+                }
+            ],
+            "name": "Big-Upfront Frozen Architecture",
+            "definition": "A defect in which major architectural decisions are fixed before the forces they answer are known.",
+            "type": "anti-pattern",
+            "scope": ["domain_boundary"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Lock in major architectural decisions before validating domain forces, quality attributes, operational realities, and change vectors.",
+            "detected_by": [
+                "heavy_architecture_before_usage",
+                "ADR_without_evidence",
+                "future-proofing_without_feedback"
+            ],
+            "measured_by": ["decisions recorded without evidence"],
+            "refactored_by": [
+                "architecture:minimum-viable-architecture",
+                "architecture:evolutionary-architecture",
+                "architecture:fitness-functions",
+                "lexicon:decision-review"
+            ],
+            "enforced_by": [
+                "decision records that require evidence",
+                "periodic decision review"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const ARCHITECTURE = designAllModulesForNextFiveYears();",
+                "after": "const foo = defineModule(\"foo\", { exports: { createFoo } });\nregistry.add(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "architecture-astronaut",
+            "distinctFrom": [
+                {
+                    "id": "architecture:over-abstraction",
+                    "reason": "An astronaut builds frameworks for needs that have not arrived, while over-abstraction adds layers beyond the variation that exists."
+                },
+                {
+                    "id": "architecture:speculative-generality",
+                    "reason": "An astronaut builds whole frameworks and meta-models, while speculative generality is one abstraction built for variation with no evidence of arriving."
+                }
+            ],
+            "name": "Architecture Astronaut",
+            "definition": "A defect in which abstract frameworks, meta-models and architectural structure are built ahead of the concrete needs they should serve.",
+            "aliases": ["Over-Architecture"],
+            "type": "anti-pattern",
+            "scope": [
+                "model_governance",
+                "domain_boundary"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Prefer abstract frameworks, taxonomies, meta-models, and generic engines over concrete user, domain, and operational needs.",
+            "detected_by": [
+                "generic_platform_before_product_need",
+                "few_real_consumers",
+                "high_framework_workaround_count"
+            ],
+            "measured_by": ["generic components with few real consumers"],
+            "refactored_by": [
+                "lexicon:anchor-to-use-cases",
+                "lexicon:vertical-slice-proof",
+                "lexicon:inline-abstraction",
+                "lexicon:measure-delivery-cost"
+            ],
+            "enforced_by": ["design review against real use cases"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "class AbstractFooMetaStrategyOrchestrationEngineFactory {}",
+                "after": "class CreateFoo { execute(input: CreateFooInput): Foo {} }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "feature-only-design",
+            "name": "Feature-Only Design",
+            "definition": "A defect in which architecture serves immediate features while its quality attributes go unaddressed.",
+            "type": "anti-pattern",
+            "scope": [
+                "security_governance",
+                "performance_scaling"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Optimize architecture for immediate feature delivery while ignoring quality attributes such as security, operability, scalability, maintainability, and evolvability.",
+            "detected_by": [
+                "no_SLOs",
+                "no_security_review",
+                "no_operability_requirements",
+                "quality_attribute_absent_from_ADR"
+            ],
+            "measured_by": [
+                "quality attributes absent from decisions",
+                "services without SLOs"
+            ],
+            "refactored_by": [
+                "lexicon:quality-scenarios",
+                "architecture:fitness-functions",
+                "architecture:architecture-review",
+                "lexicon:risk-register"
+            ],
+            "enforced_by": [
+                "architecture review with quality scenarios",
+                "SLO gates"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "function addFooFeature() { hack(); patch(); bypassLint(); }",
+                "after": "function addFooFeature(input: CreateFooInput) { return createFoo.execute(input); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "test-pyramid-inversion",
+            "name": "Test Pyramid Inversion",
+            "definition": "A defect in which a test suite relies mainly on slow end-to-end tests, with few unit and contract tests.",
+            "type": "anti-pattern",
+            "scope": ["contract_compatibility"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Rely mainly on slow, brittle end-to-end tests while unit, contract, component, and property tests are sparse.",
+            "detected_by": [
+                "high_E2E_ratio",
+                "slow_CI",
+                "flaky_integration_tests",
+                "low_unit_contract_coverage"
+            ],
+            "measured_by": [
+                "share of end-to-end tests",
+                "suite duration"
+            ],
+            "refactored_by": [
+                "lexicon:unit-tests",
+                "lexicon:contract-testing",
+                "lexicon:component-tests",
+                "architecture:property-based-testing"
+            ],
+            "enforced_by": [
+                "test-suite composition review",
+                "limits on CI duration"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "test.e2e(\"create foo\", fullBrowserFlow);\ntest.e2e(\"rename foo\", fullBrowserFlow);\ntest.e2e(\"delete foo\", fullBrowserFlow);",
+                "after": "test.unit(\"FooValidator rejects an empty name\", () => expect(() => validateFoo({ name: \"\" })).toThrow());\ntest.integration(\"FooRepository persists a Foo\", async () => {\n  await fooRepository.save(foo);\n  expect(await fooRepository.find(foo.id)).toEqual(foo);\n});\ntest.e2e(\"the critical signup path\", criticalPathOnly);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "mock-mirage",
+            "name": "Mock Mirage",
+            "definition": "A defect in which tests assert calls on mocks rather than observable behavior or contracts.",
+            "type": "anti-pattern",
+            "scope": [
+                "contract_compatibility",
+                "correctness_verification",
+                "observability_traceability"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Overuse mocks so tests verify internal calls rather than observable behavior or contracts.",
+            "detected_by": [
+                "tests_fail_on_refactor_without_behavior_change",
+                "assert_called_everywhere",
+                "no_contract_tests"
+            ],
+            "measured_by": ["tests that break on refactors with no change in behavior"],
+            "refactored_by": [
+                "lexicon:test-observable-behavior",
+                "lexicon:contract-testing",
+                "lexicon:fake-at-the-boundary"
+            ],
+            "enforced_by": [
+                "contract tests",
+                "review of mock usage"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const store = { save: fn(), find: fn().returns(foo) };",
+                "after": "const store = new InMemoryFooStore();\nrunFooStoreContract(store);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "flaky-test-normalization",
+            "name": "Flaky Test Normalization",
+            "definition": "A defect in which intermittent test failures are accepted and rerun until they pass.",
+            "type": "anti-pattern",
+            "scope": [
+                "semantic_consistency",
+                "correctness_verification"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Accept intermittent test failures as normal and rerun until green instead of fixing nondeterminism or isolation defects.",
+            "detected_by": [
+                "rerun_to_pass",
+                "quarantined_tests_never_fixed",
+                "time_order_random_test_failures"
+            ],
+            "measured_by": [
+                "rerun rate",
+                "quarantined tests past their fix date"
+            ],
+            "refactored_by": [
+                "lexicon:isolate-test-state",
+                "lexicon:inject-clock-and-randomness",
+                "lexicon:fix-the-race",
+                "lexicon:fake-at-the-boundary"
+            ],
+            "enforced_by": ["a CI policy that fails on a retried test and tracks every quarantined one"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "test.retry(5)(\"foo works sometimes\", async () => { await sleep(random()); expect(await getFoo()).toBeTruthy(); });",
+                "after": "test(\"foo is created deterministically\", async () => { const foo = await createFoo.execute(input); expect(foo.id).toBe(expectedId); });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "prompt-sprawl",
+            "name": "Prompt Sprawl",
+            "definition": "A defect in which prompts, model parameters and output schemas are scattered through code without versions or evaluation.",
+            "type": "anti-pattern",
+            "scope": [
+                "contract_compatibility",
+                "model_governance"
+            ],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Scatter prompts, retrieval rules, model parameters, safety instructions, and output schemas across code without versioning, evaluation, or ownership.",
+            "detected_by": [
+                "prompt_literals_in_many_files",
+                "no_prompt_registry",
+                "no_eval_for_prompt_change",
+                "model_params_scattered"
+            ],
+            "measured_by": ["prompt literals outside the registry"],
+            "refactored_by": [
+                "lexicon:prompt-registry",
+                "lexicon:prompt-versioning",
+                "lexicon:evaluation-suite",
+                "lexicon:centralized-model-configuration"
+            ],
+            "enforced_by": ["a prompt registry, with an evaluation required on every change"],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const a = model.run(\"summarize this foo: \" + foo);\nconst b = model.run(\"pls summarize foo \" + foo);",
+                "after": "const summary = model.run(FOO_PROMPTS.summarize({ foo }));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "ungrounded-content",
+            "name": "Ungrounded Content",
+            "definition": "A defect in which the model produces answers or decisions without retrieved evidence or disclosed uncertainty.",
+            "type": "anti-pattern",
+            "scope": ["model_governance"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Generate answers, classifications, plans, or decisions without evidence retrieval, source references, confidence limits, or unsupported-claim handling.",
+            "detected_by": [
+                "answer_without_sources_when_sources_required",
+                "no_retrieval_trace",
+                "unsupported_claims",
+                "confidence_not_disclosed"
+            ],
+            "measured_by": ["answers without a source where one is required"],
+            "refactored_by": [
+                "architecture:retrieval-augmented-generation",
+                "lexicon:evidence-citation",
+                "lexicon:claim-validation",
+                "lexicon:abstain-or-disclose-uncertainty"
+            ],
+            "enforced_by": [
+                "retrieval evaluation",
+                "claim validation against the retrieved sources"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const answer = await model.run(question);\nreturn answer;",
+                "after": "const context = await retrieve(question);\nconst answer = await model.run(FOO_PROMPTS.answer({ question, context }));\nreturn withCitations(answer, context);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "model-version-ambiguity",
+            "name": "Model Version Ambiguity",
+            "definition": "A defect in which models, prompts or indexes are used without recording their version and configuration.",
+            "type": "anti-pattern",
+            "scope": ["model_governance"],
+            "requires": [],
+            "reinforces": [],
+            "enables": [],
+            "conflicts_with": [],
+            "tensions_with": [],
+            "formed_by": "Use models, embeddings, prompts, or evaluation artifacts without recording version, configuration, dataset, or inference context.",
+            "detected_by": [
+                "model_name_missing_version",
+                "embedding_index_unversioned",
+                "eval_results_without_config",
+                "prompt_not_versioned"
+            ],
+            "measured_by": ["inferences logged without a model version"],
+            "refactored_by": [
+                "lexicon:model-registry",
+                "lexicon:prompt-versioning",
+                "lexicon:inference-context-record",
+                "lexicon:governance-log"
+            ],
+            "enforced_by": [
+                "a model registry",
+                "inference logging that requires a version"
+            ],
+            "severity": "discouraged",
+            "exemplar": {
+                "before": "const result = await model.run(prompt);",
+                "after": "const result = await model.run(prompt, { model: \"foo-llm-2024-06\", temperature: 0 });\nlogger.info(\"foo.inference\", { model: result.model });",
+                "lang": "ts"
+            }
+        }
+    ]
+}

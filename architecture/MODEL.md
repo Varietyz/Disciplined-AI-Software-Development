@@ -46,69 +46,69 @@ A1·a the four parts
 
 ```mermaid
 flowchart TB
-components["Components · the nodes"]
-relations["Relations · the edges"]
-schema["The evaluative schema · applied to the graph"]
-propagation["The propagation topology · how a change travels"]
-rest["The graph at rest · what the system is"]
-motion["Propagation · the system in motion"]
-healthy{"Is the behavior derivable from the self-description?"}
-yes["Healthy"]
-fracture["A fracture · dual write, hidden side effect, schema drift, manual-only governance"]
-components --> rest
-relations --> rest
-schema --> rest
-propagation --> motion
-rest --> healthy
-motion --> healthy
-healthy -- yes --> yes
-healthy -- no --> fracture
+    components["Components · the nodes"]
+    relations["Relations · the edges"]
+    schema["The evaluative schema · applied to the graph"]
+    propagation["The propagation topology · how a change travels"]
+    rest["The graph at rest · what the system is"]
+    motion["Propagation · the system in motion"]
+    healthy{"Is the behavior derivable from the self-description?"}
+    yes["Healthy"]
+    fracture["A fracture · dual write, hidden side effect, schema drift, manual-only governance"]
+    components --> rest
+    relations --> rest
+    schema --> rest
+    propagation --> motion
+    rest --> healthy
+    motion --> healthy
+    healthy -- yes --> yes
+    healthy -- no --> fracture
 ```
 
 A1·b one feature
 
 ```mermaid
 flowchart LR
-subgraph domain["domain"]
-model["order model"]
-policy["pricing policy"]
-end
-subgraph application["application"]
-coordinator["checkout coordinator"]
-store["cart store"]
-end
-subgraph processing["processing"]
-converter["order converter"]
-validator["order validator"]
-end
-subgraph product["product"]
-view["checkout view"]
-end
-view --> coordinator
-coordinator --> store
-coordinator --> converter
-converter --> model
-validator --> model
-validator --> policy
-coordinator --> validator
-policy -. circular dependency .-> coordinator
+    subgraph domain["domain"]
+        model["order model"]
+        policy["pricing policy"]
+    end
+    subgraph application["application"]
+        coordinator["checkout coordinator"]
+        store["cart store"]
+    end
+    subgraph processing["processing"]
+        converter["order converter"]
+        validator["order validator"]
+    end
+    subgraph product["product"]
+        view["checkout view"]
+    end
+    view --> coordinator
+    coordinator --> store
+    coordinator --> converter
+    converter --> model
+    validator --> model
+    validator --> policy
+    coordinator --> validator
+    policy -. circular dependency .-> coordinator
 ```
 
 A1·c the four fractures
 
 ```mermaid
 flowchart LR
-test{"Can the system observe this value in its own self-description?"}
-dual["Dual write · one fact declared twice"]
-hidden["Hidden side effect · a value nothing reads back"]
-drift["Schema drift · a description the system cannot check"]
-manual["Manual-only governance · a step the description does not contain"]
-closed["Closed · one declaration, derived everywhere"]
-test -- no --> dual
-test -- no --> hidden
-test -- no --> drift
-test -- no --> manual
-test -- yes --> closed
+    test{"Can the system observe this value in its own self-description?"}
+    dual["Dual write · one fact declared twice"]
+    hidden["Hidden side effect · a value nothing reads back"]
+    drift["Schema drift · a description the system cannot check"]
+    manual["Manual-only governance · a step the description does not contain"]
+    closed["Closed · one declaration, derived everywhere"]
+    test -- no --> dual
+    test -- no --> hidden
+    test -- no --> drift
+    test -- no --> manual
+    test -- yes --> closed
 ```
 
 ## Definitions own what, code owns how
@@ -121,7 +121,7 @@ Code that restates a definition looks complete on the day it is written and beco
 
 For this reason definitions own what, code owns how, and a fact with two declarations and no derivation between them is a fracture. The definition is read at the site rather than restated there, even where reading costs more on the day. In practice, every fact is assigned to the side that owns it. A fact about what exists goes into a definition the code reads, and the code derives the rest from it, such as the list of variants, the shape of a record and the surface of a module. Where a fact already has a definition, the copy in the code is deleted. Where the code holds a fact nothing declares, the declaration is written and the code derives the fact from it, because a fact that lives only in behavior cannot be checked without running the behavior.
 
-To check this, take any fact the system carries and count the places it is stated. The target is one statement plus derivations. Two statements with no edge between them will disagree, and the only open question is when the disagreement is noticed. A definition declares what and never how. A schema that carries a validation routine, or a manifest that carries a build step, has crossed into code and gained a second implementation of something the code already does. The split holds only while each side stays on its own side.
+To check this, take any fact the system carries and count the places it is stated. The target is one statement plus derivations. Two statements with no edge between them will disagree. A definition declares what and never how. A schema that carries a validation routine, or a manifest that carries a build step, has crossed into code and gained a second implementation of something the code already does.
 
 ### The patterns that keep the split
 
@@ -145,13 +145,13 @@ B1·a derivation or restatement
 
 ```mermaid
 flowchart LR
-definition["A definition · what exists"]
-code["Code · how it behaves"]
-derived["A derivation · read from the definition"]
-restated["A restatement · written twice"]
-definition --> derived --> code
-definition -. never .-> restated
-restated -. disagrees the moment either copy moves .-> code
+    definition["A definition · what exists"]
+    code["Code · how it behaves"]
+    derived["A derivation · read from the definition"]
+    restated["A restatement · written twice"]
+    definition --> derived --> code
+    definition -. never .-> restated
+    restated -. disagrees the moment either copy moves .-> code
 ```
 
 B1·b the model typed
@@ -209,13 +209,13 @@ This section covers the layer spine, the one axis along which systems decompose,
 
 Layering is usually a diagram, and neither the developer nor the model can say which layer a given file is on, because the layer was never derived from anything the file declares. A converter sits in a folder named for the feature it serves, the feature is renamed, and every rule that keyed on the folder now sees a file of no layer at all. A layer inferred from a folder name changes when the folder is renamed, and a layer inferred from a file's importance is argued at every review, so only a layer derived from the concern stays true without attention.
 
-For this reason classification rests on kind, which a [closed vocabulary](../ontology/PRINCIPLES.md#architecture-closed-vocabulary) can decide, instead of on location, which a rename can change. A kind decides placement on the spine, rather than a folder path or a ranking. In practice, every concern in the vocabulary is tagged to one layer of the spine, and a file's layer follows from its concern. A file is classified by what it does, never by the folder it happens to sit in, and a file that fits two concerns equally well is treated as two files rather than as a tie to break. The tagging is held in data a check reads, so a layer is a derivation from the concern and never a fact the developer or the model has to remember.
+For this reason classification rests on kind, which a [closed vocabulary](../ontology/PRINCIPLES.md#architecture-closed-vocabulary) can decide, instead of on location, which a rename can change. Layer membership goes by type, rather than by directory or by status. In practice, every concern in the vocabulary is tagged to one layer of the spine, and a file's layer follows from its concern. A file is classified by what it does, never by the folder it happens to sit in, and a file that fits two concerns equally well is treated as two files rather than as a tie to break. The tagging is held in data a check reads, so a layer is a derivation from the concern and never a fact the developer or the model has to remember.
 
 To check this, take a file and derive its layer from its concern tag alone, without opening it. A file whose layer cannot be derived is outside the model, and a file whose derived layer surprises you is misclassified, or is two files. The spine orders kinds of thing and never orders importance. A product-layer file is not lower than a domain-layer file, and a layer is never a folder. Two files in one concern folder sit on the same layer because their concern does, whatever the folder above them is called.
 
 ### Belonging by kind, never by folder
 
-Every [layered architecture](../ontology/PRINCIPLES.md#architecture-layered-architecture) has to answer what makes a thing belong to a layer, and most answer it by folder. A folder is a rule about placement and says nothing about kind, so the layer of a file is whatever its author believed on the day. [Clean architecture](../ontology/PRINCIPLES.md#architecture-clean-architecture) and [hexagonal architecture](../ontology/PRINCIPLES.md#architecture-hexagonal-architecture) answer the direction question well and leave this one to taste.
+Every [layered architecture](../ontology/PRINCIPLES.md#architecture-layered-architecture) has to answer what makes a thing belong to a layer, and most answer it by folder. A folder is a rule about placement and says nothing about kind, so the layer of a file is whatever its author believed on the day. [Clean architecture](../ontology/PRINCIPLES.md#architecture-clean-architecture) and [hexagonal architecture](../ontology/PRINCIPLES.md#architecture-ports-and-adapters-architecture) answer the direction question well and leave this one to taste.
 
 The spine answers it by kind. Every concern in a closed vocabulary is tagged to one layer, the concern is decided by reading what the file does under [one concern per file](../ontology/PRINCIPLES.md#architecture-one-concern-per-file) and the [narrowest concern](../ontology/PRINCIPLES.md#architecture-narrowest-concern) that fits, and the layer is a derivation. [Concern-folder correspondence](../ontology/PRINCIPLES.md#architecture-concern-folder-correspondence) makes the derivation visible in the tree, because the folder names the concern and the concern names the layer, so nothing has to be remembered.
 
@@ -225,7 +225,7 @@ The seven layers map onto how a system decomposes rather than onto how a team is
 
 Runtime holds what runs and when, such as entrypoints, lifecycles, timers and pools. Infrastructure holds what everything else stands on, such as registries, factories, adapters, resolvers, constants, schemas and the vocabulary itself. Operations holds observation and upkeep, such as probes, counters and reporters. Product holds what a customer meets, such as views, components, renderers, styles and the strings.
 
-A concern belongs to exactly one layer, and a concern whose layer is contested is two concerns. A file with two concerns is a split, never a tie to break. [Layer spine precedence](../ontology/PRINCIPLES.md#architecture-layer-spine-precedence) is the one tie-break the canon holds, and it applies only to an irreducible overlap between two tags for one concern. In that case the file classifies to the domain-ward tag, and the rule stays a classification rule, never a dependency rule.
+A concern belongs to exactly one layer, and a concern whose layer is contested is two concerns. [Layer spine precedence](../ontology/PRINCIPLES.md#architecture-layer-spine-precedence) is the one tie-break the canon holds, and it applies only to an irreducible overlap between two tags for one concern. In that case the file classifies to the domain-ward tag, and the rule stays a classification rule, never a dependency rule.
 
 ### A converter, placed twice
 
@@ -237,28 +237,28 @@ C1·a the spine
 
 ```mermaid
 block-beta
-columns 1
-domain["domain · what the system is about"]
-application["application · what it does with that"]
-processing["processing · how data is transformed"]
-runtime["runtime · what runs and when"]
-infrastructure["infrastructure · what everything else stands on"]
-operations["operations · how it is observed and kept alive"]
-product["product · what a customer meets"]
+    columns 1
+    domain["domain · what the system is about"]
+    application["application · what it does with that"]
+    processing["processing · how data is transformed"]
+    runtime["runtime · what runs and when"]
+    infrastructure["infrastructure · what everything else stands on"]
+    operations["operations · how it is observed and kept alive"]
+    product["product · what a customer meets"]
 ```
 
 C1·b concerns to layers
 
 ```mermaid
 flowchart LR
-converter["converter"] --> processing["processing"]
-validator["validator"] --> processing
-registry["registry"] --> infrastructure["infrastructure"]
-factory["factory"] --> infrastructure
-view["view"] --> product["product"]
-renderer["renderer"] --> product
-model["model"] --> domain["domain"]
-policy["policy"] --> domain
+    converter["converter"] --> processing["processing"]
+    validator["validator"] --> processing
+    registry["registry"] --> infrastructure["infrastructure"]
+    factory["factory"] --> infrastructure
+    view["view"] --> product["product"]
+    renderer["renderer"] --> product
+    model["model"] --> domain["domain"]
+    policy["policy"] --> domain
 ```
 
 ## The direction axis
@@ -267,7 +267,7 @@ This section covers the direction axis, which says who may depend on whom, as sh
 
 ### Engine and consumer
 
-Nothing refuses the import that crosses the wrong way, so the engine slowly learns about its consumers one convenient import at a time. A shared module gains one import from a page, the page changes, the module now breaks on every page, and the layering that was supposed to prevent that never had a rule behind it. A dependency rule that has no check behind it is a diagram, and the first import that crosses the wrong way is the one that was convenient that afternoon.
+Nothing refuses the import that crosses the wrong way, so the engine slowly learns about its consumers one convenient import at a time. A shared module gains one import from a page, the page changes, the module now breaks on every page, and the layering that was supposed to prevent that never had a rule behind it. A dependency rule with no check refuses nothing, so the first import that crosses the wrong way is the one that was convenient that afternoon.
 
 For this reason the dependency direction is an orthogonal axis that runs one way, from consumer to engine, and is held by its own check. Engine and consumer are assigned by prefix and data, rather than judged from how general the code appears. In practice, one tier is named the engine and the other the consumer. Each container is classified by prefix, and only the trees a prefix cannot decide are classified per file. Both classifications feed the check, which refuses an import that runs from the engine toward a consumer.
 
@@ -275,7 +275,7 @@ To check this, take any import and ask which tier each end is on. An import whos
 
 ### One rule, many pictures
 
-The direction rule is the [dependency inversion principle](../ontology/PRINCIPLES.md#architecture-dependency-inversion) drawn at the scale of a whole tree, and the canon's architecture styles are each one way of drawing it. [Hexagonal architecture](../ontology/PRINCIPLES.md#architecture-hexagonal-architecture), [ports and adapters architecture](../ontology/PRINCIPLES.md#architecture-ports-and-adapters-architecture) and [clean architecture](../ontology/PRINCIPLES.md#architecture-clean-architecture) put the thing that knows nothing at the center and let everything specific depend inward. [Layered architecture](../ontology/PRINCIPLES.md#architecture-layered-architecture) draws the same arrow downward.
+The direction rule is the [dependency inversion principle](../ontology/PRINCIPLES.md#architecture-dependency-inversion) drawn at the scale of a whole tree, and the canon's architecture styles are each one way of drawing it. [Hexagonal architecture](../ontology/PRINCIPLES.md#architecture-ports-and-adapters-architecture) and [clean architecture](../ontology/PRINCIPLES.md#architecture-clean-architecture) put the thing that knows nothing at the center and let everything specific depend inward. [Layered architecture](../ontology/PRINCIPLES.md#architecture-layered-architecture) draws the same arrow downward.
 
 What they share is one direction and one rule. What they differ on is a picture, and the picture is not the mechanism. The mechanism is a tier declared for every file, a check that reads the [dependency graph](../ontology/PRINCIPLES.md#architecture-dependency-graph) and refuses an edge from the engine toward a consumer, and a repair that is always a move.
 
@@ -297,16 +297,16 @@ D1·a one way
 
 ```mermaid
 flowchart TB
-engine["The engine tier · knows nothing about any consumer"]
-consumer["The consumer tier · depends on the engine"]
-consumer -- imports --> engine
-engine -. never .-> consumer
-prefix["Classified by container prefix"]
-override["Two trees a prefix cannot decide · classified per file"]
-prefix --> engine
-prefix --> consumer
-override --> engine
-override --> consumer
+    engine["The engine tier · knows nothing about any consumer"]
+    consumer["The consumer tier · depends on the engine"]
+    consumer -- imports --> engine
+    engine -. never .-> consumer
+    prefix["Classified by container prefix"]
+    override["Two trees a prefix cannot decide · classified per file"]
+    prefix --> engine
+    prefix --> consumer
+    override --> engine
+    override --> consumer
 ```
 
 D1·b two axes
@@ -351,13 +351,13 @@ D1·c the repair
 
 ```mermaid
 flowchart LR
-edge["An edge from the engine toward a consumer"]
-trick["A trick · lazy import, direct path, re-export, sort order"]
-move["A move · to the module whose layer and entry point satisfy every dependency"]
-lies["The graph passes and the structure stays wrong"]
-holds["The graph and the structure agree"]
-edge -. tempting .-> trick --> lies
-edge --> move --> holds
+    edge["An edge from the engine toward a consumer"]
+    trick["A trick · lazy import, direct path, re-export, sort order"]
+    move["A move · to the module whose layer and entry point satisfy every dependency"]
+    lies["The graph passes and the structure stays wrong"]
+    holds["The graph and the structure agree"]
+    edge -. tempting .-> trick --> lies
+    edge --> move --> holds
 ```
 
 ---

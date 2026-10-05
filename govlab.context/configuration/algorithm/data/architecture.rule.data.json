@@ -1,0 +1,1417 @@
+{
+    "category": "Architectural Rules",
+    "tier": "leaf",
+    "check": {
+        "by": [
+            "the quality rules and auto-fixes that refuse the shortcut each architectural rule forbids",
+            "the cross-file quality gate"
+        ],
+        "population": "every source file under a governed root",
+        "freshness": "a verdict stands until the source or the rule changes",
+        "refusal": "a rule that fires fails the lint stage, and an auto-fix rewrites the shortcut where the fix is deterministic",
+        "observation": "the telemetry a runtime rule requires, such as observed execution, which locates a path that runs unobserved",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the architectural rule, which the source conforms to and an auto-fix rewrites toward"
+    },
+    "records": [
+        {
+            "id": "no-shortcuts",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Constraints Over Shortcuts",
+            "intent": "Replace a debt-incurring shortcut with an encoded constraint that makes the invalid state unrepresentable, so the rule holds without relying on discipline.",
+            "invariant": "A value that could be constructed invalidly is instead constructed only through a validating boundary.",
+            "flow": [
+                "ShortcutTaken",
+                "IdentifyInvariant",
+                "EncodeConstraint",
+                "RouteThroughBoundary",
+                "LeverageGained"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoShortcuts",
+                    "rhs": "<ShortcutTaken> \"→\" <IdentifyInvariant> \"→\" <EncodeConstraint> \"→\" <RouteThroughBoundary> \"→\" <LeverageGained>"
+                }
+            ],
+            "composes": [
+                "Structural Core",
+                "coupling-control"
+            ],
+            "force": ["shortcuts (debt)"],
+            "exemplar": {
+                "before": "type FooId = string;\n\nfunction loadFoo(raw: string) {\n  return fooStore.get(raw as FooId);\n}",
+                "after": "type FooId = string & { readonly __brand: \"FooId\" };\n\nfunction fooId(raw: string): FooId {\n  if (!raw.startsWith(\"foo_\") || raw.length <= 4) throw new Error(`invalid FooId: ${raw}`);\n  return raw as FooId;\n}\n\nfunction loadFoo(id: FooId) {\n  return fooStore.get(id);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-backward-compat",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Forward Compatibility Over Backward Compatibility",
+            "intent": "Replace accreted legacy input shapes with one forward-compatible envelope that carries extensions, so evolution compounds instead of branching.",
+            "invariant": "One canonical shape with an open extension slot subsumes every prior variant; no shape-discriminating branch remains.",
+            "flow": [
+                "ManyVariants",
+                "DefineEnvelope",
+                "MapToCanonical",
+                "OpenExtensionSlot",
+                "RemoveVariantBranches"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoBackwardCompat",
+                    "rhs": "<ManyVariants> \"→\" <DefineEnvelope> \"→\" <MapToCanonical> \"→\" <OpenExtensionSlot> \"→\" <RemoveVariantBranches>"
+                }
+            ],
+            "composes": [
+                "Evolution Principles",
+                "Structural Core"
+            ],
+            "force": ["backward_compatibility (debt)"],
+            "exemplar": {
+                "before": "type FooInput = string | { name: string } | { label: string; flags?: string[] };\n\nfunction readFoo(input: FooInput) {\n  if (typeof input === \"string\") return { label: input, flags: [] };\n  if (\"name\" in input) return { label: input.name, flags: [] };\n  return { label: input.label, flags: input.flags ?? [] };\n}",
+                "after": "type FooEnvelope = {\n  kind: \"foo\";\n  label: string;\n  extensions: Readonly<Record<string, unknown>>;\n};\n\nfunction readFoo(input: FooEnvelope) {\n  return { label: input.label, extensions: input.extensions };\n\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-fallback",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Fail-Fast Over Fallback",
+            "intent": "Replace a silent fallback default with a required input that halts loudly when absent, so missing configuration surfaces at the boundary.",
+            "invariant": "Every required input is present and validated before use; absence throws rather than defaulting.",
+            "flow": [
+                "OptionalInput",
+                "MarkRequired",
+                "ValidateAtBoundary",
+                "HaltOnAbsence",
+                "ClarityGained"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoFallback",
+                    "rhs": "<OptionalInput> \"→\" <MarkRequired> \"→\" <ValidateAtBoundary> \"→\" <HaltOnAbsence> \"→\" <ClarityGained>"
+                }
+            ],
+            "composes": [
+                "Resource Core",
+                "Structural Core"
+            ],
+            "force": ["fallback (debt)"],
+            "exemplar": {
+                "before": "function makeFoo(config: { mode?: \"foo\" | \"bar\" }) {\n  const mode = config.mode ?? \"foo\";\n  return mode === \"foo\" ? new Foo() : new Bar();\n}",
+                "after": "type FooConfig = { mode: \"foo\" | \"bar\" };\n\nfunction makeFoo(config: FooConfig) {\n  if (!config.mode) throw new Error(\"FooConfig.mode is required\");\n  return config.mode === \"foo\" ? new Foo() : new Bar();\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-deprecation",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Explicit Removal Over Deprecation",
+            "intent": "Replace a deprecated alias kept for compatibility with outright removal, so the single current name is the only path.",
+            "invariant": "No symbol exists solely to forward to another; every callsite targets the canonical name.",
+            "flow": [
+                "DeprecatedAlias",
+                "MigrateCallsites",
+                "DeleteAlias",
+                "SinglePathRemains"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoDeprecation",
+                    "rhs": "<DeprecatedAlias> \"→\" <MigrateCallsites> \"→\" <DeleteAlias> \"→\" <SinglePathRemains>"
+                }
+            ],
+            "composes": [
+                "Evolution Principles",
+                "Structural Core"
+            ],
+            "force": ["deprecation (debt)"],
+            "exemplar": {
+                "before": "class FooService {\n  makeFoo() { return this.createFoo(); }\n  createFoo() { return new Foo(); }\n}",
+                "after": "class FooService {\n  createFoo() { return new Foo(); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-legacy",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Greenfield Over Legacy",
+            "intent": "Replace a legacy-mode branch with one current algorithm, deleting the old path rather than gating it behind a flag.",
+            "invariant": "A single implementation serves the concern; no legacy-mode conditional selects behavior.",
+            "flow": [
+                "LegacyBranch",
+                "ExtractCurrentPath",
+                "DeleteLegacyPath",
+                "RemoveFlag"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoLegacy",
+                    "rhs": "<LegacyBranch> \"→\" <ExtractCurrentPath> \"→\" <DeleteLegacyPath> \"→\" <RemoveFlag>"
+                }
+            ],
+            "composes": [
+                "Evolution Principles",
+                "Structural Core"
+            ],
+            "force": ["legacy (debt)"],
+            "exemplar": {
+                "before": "function calculateFoo(input: FooInput, legacyMode: boolean) {\n  if (legacyMode) return oldFooAlgorithm(input);\n  return newFooAlgorithm(input);\n}",
+                "after": "function calculateFoo(input: FooInput) {\n  return fooAlgorithm(input);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-dual-path",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Single-Path Determinism Over Dual-Path",
+            "intent": "Collapse a flag-selected dual path into one deterministic path, removing the branch and the flag that caused ambiguity.",
+            "invariant": "Exactly one code path handles the operation; no runtime flag chooses between equivalent implementations.",
+            "flow": [
+                "DualPath",
+                "ChooseCanonical",
+                "MigrateConsumers",
+                "DeleteAlternate",
+                "DeterminismGained"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoDualPath",
+                    "rhs": "<DualPath> \"→\" <ChooseCanonical> \"→\" <MigrateConsumers> \"→\" <DeleteAlternate> \"→\" <DeterminismGained>"
+                }
+            ],
+            "composes": [
+                "Structural Core",
+                "Execution Core"
+            ],
+            "force": ["dual-path (confusion)"],
+            "exemplar": {
+                "before": "function saveFoo(foo: Foo, flags: { useNewStore: boolean }) {\n  return flags.useNewStore\n    ? newFooStore.save(foo)\n    : oldFooStore.save(foo);\n}",
+                "after": "function saveFoo(foo: Foo) {\n  return fooStore.save(foo);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-deferring",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Immediacy Over Deferring",
+            "intent": "Replace a deferred follow-up with an atomic action that completes every coupled effect now, so nothing is forgotten.",
+            "invariant": "Coupled effects commit together within one boundary; no effect is left as an implicit later step.",
+            "flow": [
+                "PartialAction",
+                "IdentifyCoupledEffects",
+                "WrapInTransaction",
+                "CommitTogether"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoDeferring",
+                    "rhs": "<PartialAction> \"→\" <IdentifyCoupledEffects> \"→\" <WrapInTransaction> \"→\" <CommitTogether>"
+                }
+            ],
+            "composes": [
+                "Execution Core",
+                "Atomic Boundary"
+            ],
+            "force": ["deferring (forgetting)"],
+            "exemplar": {
+                "before": "async function renameFoo(id: FooId, name: string) {\n  await fooStore.rename(id, name);\n\n}",
+                "after": "async function renameFoo(id: FooId, name: string) {\n  await transaction(async tx => {\n    await tx.foos.rename(id, name);\n    await tx.search.reindex(id, name);\n  });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-optional",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Mandatory Over Optional",
+            "intent": "Replace an optional dependency with a mandatory one, removing the null-guarded branch so behavior is system-defined not caller-defined.",
+            "invariant": "A dependency the behavior relies on is always supplied; no optional-chaining guards its use.",
+            "flow": [
+                "OptionalDependency",
+                "MakeRequired",
+                "InjectAlways",
+                "RemoveGuards"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoOptional",
+                    "rhs": "<OptionalDependency> \"→\" <MakeRequired> \"→\" <InjectAlways> \"→\" <RemoveGuards>"
+                }
+            ],
+            "composes": [
+                "Human Factors",
+                "Resource Core"
+            ],
+            "force": ["optional (user-orientation)"],
+            "exemplar": {
+                "before": "class FooService {\n  constructor(private readonly audit?: AuditSink) {}\n\n  create(foo: Foo) {\n    this.audit?.write({ type: \"foo.created\", foo });\n    return fooStore.save(foo);\n  }\n}",
+                "after": "class FooService {\n  constructor(private readonly audit: AuditSink) {}\n\n  create(foo: Foo) {\n    this.audit.write({ type: \"foo.created\", foo });\n    return fooStore.save(foo);\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-for-now",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Now Over For-Now",
+            "intent": "Replace a temporary in-memory placeholder with the real durable implementation immediately, so the stopgap never ossifies.",
+            "invariant": "State that must survive restarts is persisted through the real store, not a transient map.",
+            "flow": [
+                "TemporaryStub",
+                "IdentifyDurabilityNeed",
+                "WireRealStore",
+                "DeleteStub"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoForNow",
+                    "rhs": "<TemporaryStub> \"→\" <IdentifyDurabilityNeed> \"→\" <WireRealStore> \"→\" <DeleteStub>"
+                }
+            ],
+            "composes": [
+                "Resource Core",
+                "Evolution Principles"
+            ],
+            "force": ["for_now (deferring)"],
+            "exemplar": {
+                "before": "class FooRepository {\n  private readonly data = new Map<string, Foo>();\n  save(foo: Foo) { this.data.set(foo.id, foo); }\n}",
+                "after": "class FooRepository {\n  constructor(private readonly db: Database) {}\n\n  save(foo: Foo) {\n    return this.db.execute(\"insert into foos(id, value) values (?, ?)\", foo.id, foo);\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-unobserved",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Observed Execution Over Unobserved",
+            "intent": "Wrap an unobserved effect in structured telemetry so every execution emits a learnable signal on success and failure.",
+            "invariant": "Every significant effect opens and closes a span carrying its outcome; no path executes blind.",
+            "flow": [
+                "BlindEffect",
+                "OpenSpan",
+                "ExecuteWithinSpan",
+                "RecordOutcome"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoUnobserved",
+                    "rhs": "<BlindEffect> \"→\" <OpenSpan> \"→\" <ExecuteWithinSpan> \"→\" <RecordOutcome>"
+                }
+            ],
+            "composes": [
+                "Observability",
+                "Execution Core"
+            ],
+            "force": ["unobserved-execution (missed-learning)"],
+            "exemplar": {
+                "before": "function publishFoo(foo: Foo) {\n  sendFoo(foo);\n}",
+                "after": "async function publishFoo(foo: Foo, telemetry: Telemetry) {\n  const span = telemetry.startSpan(\"foo.publish\", { fooId: foo.id });\n  try {\n    await sendFoo(foo);\n    span.end({ status: \"ok\" });\n  } catch (error) {\n    span.end({ status: \"error\", error });\n    throw error;\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-uncompressed",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Compression Over Repetition",
+            "intent": "Extract a repeated pattern into one parameterized form, so the behavior lives once and duplication cannot drift.",
+            "invariant": "A behavior expressed more than once is factored to a single definition parameterized over its variation.",
+            "flow": [
+                "DuplicatedPattern",
+                "IdentifyVariation",
+                "ExtractParameterized",
+                "RedirectCallsites"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoUncompressed",
+                    "rhs": "<DuplicatedPattern> \"→\" <IdentifyVariation> \"→\" <ExtractParameterized> \"→\" <RedirectCallsites>"
+                }
+            ],
+            "composes": [
+                "Structural Core",
+                "Evolution Principles"
+            ],
+            "force": ["pattern-without-compression (inefficiency)"],
+            "exemplar": {
+                "before": "function validateFoo(foo: Foo) {\n  if (!foo.name) throw new Error(\"foo.name required\");\n  if (foo.name.length > 40) throw new Error(\"foo.name too long\");\n}\nfunction validateBar(bar: Bar) {\n  if (!bar.name) throw new Error(\"bar.name required\");\n  if (bar.name.length > 40) throw new Error(\"bar.name too long\");\n}",
+                "after": "function requiredName(value: { name: string }, kind: string) {\n  if (!value.name) throw new Error(`${kind}.name required`);\n  if (value.name.length > 40) throw new Error(`${kind}.name too long`);\n}\n\nconst validateFoo = (foo: Foo) => requiredName(foo, \"foo\");\nconst validateBar = (bar: Bar) => requiredName(bar, \"bar\");",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-unapproved",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Approved Evolution Over Unapproved",
+            "intent": "Gate a structural dependency behind a recorded architecture decision, so evolution proceeds only through approved boundaries.",
+            "invariant": "Every cross-boundary dependency traces to an approved decision record naming the allowed gateway.",
+            "flow": [
+                "UnapprovedDependency",
+                "RaiseDecision",
+                "RecordApproval",
+                "WireApprovedGateway"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoUnapproved",
+                    "rhs": "<UnapprovedDependency> \"→\" <RaiseDecision> \"→\" <RecordApproval> \"→\" <WireApprovedGateway>"
+                }
+            ],
+            "composes": [
+                "Evolution Principles",
+                "Human Factors"
+            ],
+            "force": ["evolution-without-approval (architectural-drift)"],
+            "exemplar": {
+                "before": "class FooService {\n\n  private readonly barDb = connectDirectlyToBarDatabase();\n}",
+                "after": "type ArchitectureDecision = {\n  id: \"ADR-0042\";\n  status: \"approved\";\n  owner: \"foo-platform\";\n  allowedDependency: \"BarGateway\";\n};\n\nconst decision: ArchitectureDecision = approvedDecision(\"ADR-0042\");\nclass FooService {\n  constructor(private readonly bars: BarGateway, readonly adr = decision.id) {}\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-ignored-feedback",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Enforced Feedback Over Ignored",
+            "intent": "Turn a logged-and-ignored warning into an enforced result, so negative feedback changes control flow instead of scrolling past.",
+            "invariant": "A detected invalid condition returns a typed failure; it is never merely logged and continued.",
+            "flow": [
+                "WarnAndContinue",
+                "ModelFailureResult",
+                "ReturnTypedError",
+                "HaltHappyPath"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoIgnoredFeedback",
+                    "rhs": "<WarnAndContinue> \"→\" <ModelFailureResult> \"→\" <ReturnTypedError> \"→\" <HaltHappyPath>"
+                }
+            ],
+            "composes": [
+                "Human Factors",
+                "Correctness Core"
+            ],
+            "force": ["feedback-ignored (stagnation)"],
+            "exemplar": {
+                "before": "function ingestFoo(foo: Foo) {\n  if (foo.score < 0) console.warn(\"bad foo score\", foo.score);\n  return fooStore.save(foo);\n}",
+                "after": "function ingestFoo(foo: Foo) {\n  if (foo.score < 0) {\n    return { ok: false, error: { code: \"INVALID_SCORE\", value: foo.score } } as const;\n  }\n  fooStore.save(foo);\n  return { ok: true } as const;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-shared-ownership",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Single Owner Over Shared Ownership",
+            "intent": "Give one service authority over a piece of state and propagate to others by event, removing multi-writer ambiguity.",
+            "invariant": "Exactly one service mutates a given entity; peers react to its events rather than co-writing it.",
+            "flow": [
+                "MultiWriter",
+                "AssignOwner",
+                "EmitEvent",
+                "ProjectDownstream"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoSharedOwnership",
+                    "rhs": "<MultiWriter> \"→\" <AssignOwner> \"→\" <EmitEvent> \"→\" <ProjectDownstream>"
+                }
+            ],
+            "composes": [
+                "Resource Core",
+                "Execution Core"
+            ],
+            "force": ["shared-ownership (ambiguity)"],
+            "exemplar": {
+                "before": "async function renameFoo(id: FooId, name: string) {\n  await fooService.rename(id, name);\n  await barService.patchFooName(id, name);\n}",
+                "after": "async function renameFoo(id: FooId, name: string) {\n  await fooService.rename(id, name);\n}\n\nfooEvents.on(\"FooRenamed\", event => {\n  barProjection.apply(event);\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-unbounded",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Bounded Lifetime Over Unbounded",
+            "intent": "Replace an unbounded cache with a capacity-bounded structure that evicts and clears, so memory release is deterministic.",
+            "invariant": "Every retained collection has an explicit bound and an eviction policy; growth cannot be unlimited.",
+            "flow": [
+                "UnboundedStore",
+                "SetCapacity",
+                "AddEviction",
+                "ExposeClear"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoUnbounded",
+                    "rhs": "<UnboundedStore> \"→\" <SetCapacity> \"→\" <AddEviction> \"→\" <ExposeClear>"
+                }
+            ],
+            "composes": ["Resource Core"],
+            "force": ["unbounded-lifetime (leaks)"],
+            "exemplar": {
+                "before": "const fooCache = new Map<string, Foo>();\n\nfunction rememberFoo(foo: Foo) {\n  fooCache.set(foo.id, foo);\n}",
+                "after": "class FooCache {\n  constructor(private readonly maxEntries: number) {}\n  private readonly values = new Map<string, Foo>();\n\n  set(foo: Foo) {\n    if (this.values.size >= this.maxEntries) {\n      const oldest = this.values.keys().next().value;\n      if (oldest !== undefined) this.values.delete(oldest);\n    }\n    this.values.set(foo.id, foo);\n  }\n\n  clear() { this.values.clear(); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-asymmetric",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Enforced Symmetry Over Asymmetric Lifecycle",
+            "intent": "Pair every acquire with a guaranteed release via try/finally, so a fault mid-use cannot leak the resource.",
+            "invariant": "Acquisition and release are structurally symmetric; release runs on every exit path.",
+            "flow": [
+                "UnbalancedAcquire",
+                "WrapTryFinally",
+                "ReleaseInFinally",
+                "GuaranteedCleanup"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoAsymmetric",
+                    "rhs": "<UnbalancedAcquire> \"→\" <WrapTryFinally> \"→\" <ReleaseInFinally> \"→\" <GuaranteedCleanup>"
+                }
+            ],
+            "composes": ["Resource Core"],
+            "force": ["asymmetric-lifecycle (resource-leaks)"],
+            "exemplar": {
+                "before": "async function readFoo() {\n  const handle = await openFoo();\n  const foo = await handle.read();\n  await handle.close();\n  return foo;\n}",
+                "after": "async function readFoo() {\n  const handle = await openFoo();\n  try {\n    return await handle.read();\n  } finally {\n    await handle.close();\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-implicit-retention",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Explicit Retention Over Implicit",
+            "intent": "Replace an anonymous listener push with an explicit retention token that names its owner and exposes release.",
+            "invariant": "Every retained reference is held through an ownership token that can be observed and released.",
+            "flow": [
+                "AnonymousRetention",
+                "MintToken",
+                "NameOwner",
+                "ExposeRelease"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoImplicitRetention",
+                    "rhs": "<AnonymousRetention> \"→\" <MintToken> \"→\" <NameOwner> \"→\" <ExposeRelease>"
+                }
+            ],
+            "composes": ["Resource Core"],
+            "force": ["implicit-retention (hidden-leaks)"],
+            "exemplar": {
+                "before": "const listeners: Array<() => void> = [];\n\nfunction watchFoo(foo: Foo) {\n  listeners.push(() => console.log(foo.id));\n}",
+                "after": "type Retention = { owner: string; release(): void };\n\nfunction retainFoo(foo: Foo, owner: string): Retention {\n  const token = fooRetentions.add({ foo, owner });\n  return {\n    owner,\n    release: () => fooRetentions.delete(token),\n  };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-discipline-release",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Structural Release Over Discipline",
+            "intent": "Replace manual release calls with a language disposal scope, so cleanup is enforced structurally, not by the developer's memory.",
+            "invariant": "Resource cleanup is bound to scope exit by the language, not to a manually written release call.",
+            "flow": [
+                "ManualRelease",
+                "ImplementDisposable",
+                "UseScopedBinding",
+                "AutomaticCleanup"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoDisciplineRelease",
+                    "rhs": "<ManualRelease> \"→\" <ImplementDisposable> \"→\" <UseScopedBinding> \"→\" <AutomaticCleanup>"
+                }
+            ],
+            "composes": [
+                "Resource Core",
+                "Enforcement Core"
+            ],
+            "force": ["discipline-release (human-error)"],
+            "exemplar": {
+                "before": "async function useFoo() {\n  const foo = await acquireFoo();\n  await processFoo(foo);\n  await foo.release();\n}",
+                "after": "class FooLease implements Disposable {\n  [Symbol.dispose]() { releaseFoo(this); }\n}\n\nfunction useFoo() {\n  using foo = acquireFooLease();\n  processFoo(foo);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-mutable",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Immutable Data Over Mutable State",
+            "intent": "Replace in-place mutation with a pure transform returning new data, so state transitions are reproducible.",
+            "invariant": "Data is readonly; a change produces a new value rather than mutating the existing one.",
+            "flow": [
+                "InPlaceMutation",
+                "MarkReadonly",
+                "ReturnNewValue",
+                "ReproducibilityGained"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoMutable",
+                    "rhs": "<InPlaceMutation> \"→\" <MarkReadonly> \"→\" <ReturnNewValue> \"→\" <ReproducibilityGained>"
+                }
+            ],
+            "composes": ["Computation Core"],
+            "force": ["mutable-state (unpredictability)"],
+            "exemplar": {
+                "before": "type Foo = { name: string; tags: string[] };\n\nfunction addTag(foo: Foo, tag: string) {\n  foo.tags.push(tag);\n  return foo;\n}",
+                "after": "type Foo = Readonly<{ name: string; tags: readonly string[] }>;\n\nfunction addTag(foo: Foo, tag: string): Foo {\n  return { ...foo, tags: [...foo.tags, tag] };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-silent",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Errors As Language Over Silent Errors",
+            "intent": "Replace a null-on-failure return with a typed result union, so failure is machine-processable rather than swallowed.",
+            "invariant": "A fallible operation returns a discriminated ok/error result; failure carries a typed code.",
+            "flow": [
+                "NullOnFailure",
+                "DefineResultUnion",
+                "ReturnTypedError",
+                "ForceHandling"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoSilent",
+                    "rhs": "<NullOnFailure> \"→\" <DefineResultUnion> \"→\" <ReturnTypedError> \"→\" <ForceHandling>"
+                }
+            ],
+            "composes": [
+                "Computation Core",
+                "Correctness Core"
+            ],
+            "force": ["silent-errors (unknown-failure)"],
+            "exemplar": {
+                "before": "function parseFoo(raw: string): Foo | null {\n  try {\n    return JSON.parse(raw) as Foo;\n  } catch {\n    return null;\n  }\n}",
+                "after": "type ParseFooResult =\n  | { ok: true; value: Foo }\n  | { ok: false; error: { code: \"INVALID_JSON\" | \"INVALID_FOO\"; detail: string } };\n\nfunction parseFoo(raw: string): ParseFooResult {\n  try {\n    const value = JSON.parse(raw);\n    return isFoo(value)\n      ? { ok: true, value }\n      : { ok: false, error: { code: \"INVALID_FOO\", detail: \"schema mismatch\" } };\n  } catch (error) {\n    return { ok: false, error: { code: \"INVALID_JSON\", detail: String(error) } };\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-hidden-invalidity",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Explicit Invalidity Over Hidden",
+            "intent": "Model invalid state as an explicit variant rather than coercing to a plausible default that hides uncertainty.",
+            "invariant": "Validity is a represented state; invalid inputs map to an invalid variant, never a silent valid default.",
+            "flow": [
+                "CoercedDefault",
+                "AddInvalidVariant",
+                "MapInvalidInputs",
+                "HonestUncertainty"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoHiddenInvalidity",
+                    "rhs": "<CoercedDefault> \"→\" <AddInvalidVariant> \"→\" <MapInvalidInputs> \"→\" <HonestUncertainty>"
+                }
+            ],
+            "composes": [
+                "Computation Core",
+                "Correctness Core"
+            ],
+            "force": ["hidden-invalidity (false-consistency)"],
+            "exemplar": {
+                "before": "type FooState = { count: number };\n\nfunction readFooCount(raw: unknown): FooState {\n  return { count: typeof raw === \"number\" ? raw : 0 };\n\n}",
+                "after": "type FooState =\n  | { status: \"valid\"; count: number }\n  | { status: \"invalid\"; reason: \"NOT_A_NUMBER\" };\n\nfunction readFooCount(raw: unknown): FooState {\n  return typeof raw === \"number\"\n    ? { status: \"valid\", count: raw }\n    : { status: \"invalid\", reason: \"NOT_A_NUMBER\" };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-callbacks",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Event Emission Over Parent Callbacks",
+            "intent": "Replace a parent-supplied callback with an emitted event, decoupling the producer from its consumers.",
+            "invariant": "A component announces facts via events; it holds no reference to who reacts.",
+            "flow": [
+                "ParentCallback",
+                "DefineEvent",
+                "EmitFact",
+                "SubscribeExternally"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoCallbacks",
+                    "rhs": "<ParentCallback> \"→\" <DefineEvent> \"→\" <EmitFact> \"→\" <SubscribeExternally>"
+                }
+            ],
+            "composes": [
+                "Execution Core",
+                "coupling-control"
+            ],
+            "force": ["parent-callbacks (tight-coupling)"],
+            "exemplar": {
+                "before": "class FooEditor {\n  constructor(private readonly onSaved: (foo: Foo) => void) {}\n\n  save(foo: Foo) {\n    fooStore.save(foo);\n    this.onSaved(foo);\n  }\n}",
+                "after": "class FooEditor {\n  constructor(private readonly events: EventSink) {}\n\n  save(foo: Foo) {\n    fooStore.save(foo);\n    this.events.emit({ type: \"FooSaved\", fooId: foo.id });\n  }\n}\n\nfooEvents.on(\"FooSaved\", event => refreshFooView(event.fooId));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-retraction",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Monotonic Growth Over Retraction",
+            "intent": "Replace destructive deletion with an append-only removal event, so history is monotonic and projectable.",
+            "invariant": "State changes append events; nothing is deleted in place, and current state is a projection.",
+            "flow": [
+                "DestructiveDelete",
+                "DefineEventLog",
+                "AppendRemoval",
+                "ProjectCurrent"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoRetraction",
+                    "rhs": "<DestructiveDelete> \"→\" <DefineEventLog> \"→\" <AppendRemoval> \"→\" <ProjectCurrent>"
+                }
+            ],
+            "composes": [
+                "Execution Core",
+                "Causality Core"
+            ],
+            "force": ["retraction (complexity)"],
+            "exemplar": {
+                "before": "type FooIndex = Map<FooId, Foo>;\n\nfunction deleteFoo(index: FooIndex, id: FooId) {\n  index.delete(id);\n}",
+                "after": "type FooEvent =\n  | { seq: number; type: \"FooAdded\"; foo: Foo }\n  | { seq: number; type: \"FooRemoved\"; fooId: FooId };\n\nfunction removeFoo(log: FooEvent[], id: FooId) {\n  log.push({ seq: log.length + 1, type: \"FooRemoved\", fooId: id });\n}\n\nconst currentFoos = projectFoos(log);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-location",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Semantic Addressing Over Location Addressing",
+            "intent": "Replace positional path addressing with a semantic identity reference, so references survive structural change.",
+            "invariant": "An entity is referenced by stable identity, never by its position within a container.",
+            "flow": [
+                "PositionalRef",
+                "AssignIdentity",
+                "ReferenceById",
+                "ResolveByLookup"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoLocation",
+                    "rhs": "<PositionalRef> \"→\" <AssignIdentity> \"→\" <ReferenceById> \"→\" <ResolveByLookup>"
+                }
+            ],
+            "composes": ["Structural Core"],
+            "force": ["location-addressing (brittleness)"],
+            "exemplar": {
+                "before": "const foo = document.sections[2].items[4];\nconst reference = \"sections[2].items[4]\";",
+                "after": "type FooRef = { kind: \"foo\"; id: FooId };\n\nconst reference: FooRef = { kind: \"foo\", id: fooId(\"foo_primary\") };\nconst foo = document.foosById.get(reference.id);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-timestamps",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Ordinal Time Over Timestamps",
+            "intent": "Replace wall-clock ordering with an ordinal sequence, so event order is logical and clock-independent.",
+            "invariant": "Ordering derives from a monotonic ordinal, not a physical timestamp subject to skew.",
+            "flow": [
+                "WallClockOrder",
+                "AssignOrdinal",
+                "AppendWithOrdinal",
+                "SortByOrdinal"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoTimestamps",
+                    "rhs": "<WallClockOrder> \"→\" <AssignOrdinal> \"→\" <AppendWithOrdinal> \"→\" <SortByOrdinal>"
+                }
+            ],
+            "composes": [
+                "Causality Core",
+                "Execution Core"
+            ],
+            "force": ["timestamp-ordering (wall-clock-dependency)"],
+            "exemplar": {
+                "before": "type FooEvent = { at: number; value: string };\n\nconst events = received.map(value => ({ at: Date.now(), value }));\nevents.sort((a, b) => a.at - b.at);",
+                "after": "type FooEvent = { ordinal: bigint; value: string };\n\nfunction appendFoo(value: string): FooEvent {\n  return fooLog.append(nextOrdinal(), value);\n}\n\nconst events = fooLog.read().sort((a, b) => Number(a.ordinal - b.ordinal));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-separation",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Homoiconicity Over Separation",
+            "intent": "Fuse behavior and its separate metadata into one homoiconic data structure that is both the rule and its description.",
+            "invariant": "A rule is represented as data that is directly evaluated; no parallel metadata can drift from it.",
+            "flow": [
+                "CodeAndMetadata",
+                "DefineExprData",
+                "EvaluateData",
+                "SingleSource"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoSeparation",
+                    "rhs": "<CodeAndMetadata> \"→\" <DefineExprData> \"→\" <EvaluateData> \"→\" <SingleSource>"
+                }
+            ],
+            "composes": [
+                "Structural Core",
+                "Declarative Core"
+            ],
+            "force": ["separation (duplication)"],
+            "exemplar": {
+                "before": "function calculateFoo(foo: Foo) {\n  return foo.value * 2;\n}\n\nconst fooRuleMetadata = {\n  operation: \"multiply\",\n  operand: 2,\n};",
+                "after": "type Expr =\n  | { op: \"value\"; key: keyof Foo }\n  | { op: \"const\"; value: number }\n  | { op: \"multiply\"; left: Expr; right: Expr };\n\nconst fooRule: Expr = {\n  op: \"multiply\",\n  left: { op: \"value\", key: \"value\" },\n  right: { op: \"const\", value: 2 },\n};\n\nconst result = evaluate(fooRule, foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-unlimited",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Bounded Complexity Over Unlimited",
+            "intent": "Constrain an open-ended rule surface to a bounded grammar with depth and fan-out limits, capping cognitive load.",
+            "invariant": "A rule structure has enforced maximum depth and breadth; unbounded nesting is rejected.",
+            "flow": [
+                "OpenEndedRule",
+                "DefineBoundedGrammar",
+                "ValidateDepth",
+                "ValidateFanOut"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoUnlimited",
+                    "rhs": "<OpenEndedRule> \"→\" <DefineBoundedGrammar> \"→\" <ValidateDepth> \"→\" <ValidateFanOut>"
+                }
+            ],
+            "composes": [
+                "Human Factors",
+                "Structural Core"
+            ],
+            "force": ["unlimited-complexity (cognitive-overload)"],
+            "exemplar": {
+                "before": "type FooRule = {\n  run(context: unknown): unknown;\n};\n\nfunction execute(rule: FooRule) {\n  return rule.run(globalThis);\n}",
+                "after": "type FooRule =\n  | { op: \"equals\"; field: \"name\" | \"kind\"; value: string }\n  | { op: \"all\"; rules: readonly FooRule[] };\n\nfunction validateRule(rule: FooRule, depth = 0): void {\n  if (depth > 5) throw new Error(\"FooRule depth exceeds 5\");\n  if (rule.op === \"all\") {\n    if (rule.rules.length > 10) throw new Error(\"FooRule fan-out exceeds 10\");\n    rule.rules.forEach(child => validateRule(child, depth + 1));\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-metrics",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Computed Health Over Metric Health",
+            "intent": "Replace threshold-on-metrics health with a symbolic diagnosis that names the causes of an unready state.",
+            "invariant": "Health is a computed state naming concrete blocking causes, not a boolean over numeric thresholds.",
+            "flow": [
+                "MetricThreshold",
+                "EnumerateCauses",
+                "ComputeState",
+                "NameBlockers"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoMetrics",
+                    "rhs": "<MetricThreshold> \"→\" <EnumerateCauses> \"→\" <ComputeState> \"→\" <NameBlockers>"
+                }
+            ],
+            "composes": [
+                "Observability",
+                "Correctness Core"
+            ],
+            "force": ["metric-health (symptom-tracking)"],
+            "exemplar": {
+                "before": "function fooHealth(metrics: { errorRate: number; latencyMs: number }) {\n  return metrics.errorRate < 0.01 && metrics.latencyMs < 200 ? \"healthy\" : \"unhealthy\";\n}",
+                "after": "type FooHealth =\n  | { state: \"ready\" }\n  | { state: \"blocked\"; causes: readonly (\"STORE_UNREACHABLE\" | \"SCHEMA_MISMATCH\")[] };\n\nfunction fooHealth(status: { storeReachable: boolean; schemaCompatible: boolean }): FooHealth {\n  const causes = [\n    ...(!status.storeReachable ? [\"STORE_UNREACHABLE\" as const] : []),\n    ...(!status.schemaCompatible ? [\"SCHEMA_MISMATCH\" as const] : []),\n  ];\n  return causes.length ? { state: \"blocked\", causes } : { state: \"ready\" };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-hardcoded-secrets",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Secret Store Over Hardcoded Secrets",
+            "intent": "Replace an inline secret with a resolved read from a secret store that fails fast when the secret is absent.",
+            "invariant": "No secret literal appears in source; secrets are read at runtime from a store and validated present.",
+            "flow": [
+                "InlineSecret",
+                "MoveToStore",
+                "ResolveAtRuntime",
+                "FailIfMissing"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoHardcodedSecrets",
+                    "rhs": "<InlineSecret> \"→\" <MoveToStore> \"→\" <ResolveAtRuntime> \"→\" <FailIfMissing>"
+                }
+            ],
+            "composes": ["Security Core"],
+            "force": ["hardcoded-secrets (exposure)"],
+            "principleRef": "secrets-management",
+            "exemplar": {
+                "before": "const fooClient = new FooClient({\n  apiKey: \"foo_live_abc123\",\n});",
+                "after": "async function makeFooClient(secrets: SecretStore) {\n  const apiKey = await secrets.read(\"services/foo/api-key\");\n  if (!apiKey) throw new Error(\"missing services/foo/api-key\");\n  return new FooClient({ apiKey });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-unvalidated-input",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Boundary Validation Over Unvalidated Input",
+            "intent": "Parse and validate untrusted input at the boundary into a typed shape, failing fast on malformed data.",
+            "invariant": "Input crosses the boundary only after schema validation; no raw external value reaches the core.",
+            "flow": [
+                "RawInput",
+                "ParseAtBoundary",
+                "ValidateSchema",
+                "PassTypedValue"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoUnvalidatedInput",
+                    "rhs": "<RawInput> \"→\" <ParseAtBoundary> \"→\" <ValidateSchema> \"→\" <PassTypedValue>"
+                }
+            ],
+            "composes": [
+                "Security Core",
+                "Correctness Core"
+            ],
+            "force": ["unvalidated-input (injection)"],
+            "principleRef": "input-validation",
+            "exemplar": {
+                "before": "async function createFoo(request: Request) {\n  const body = await request.json() as any;\n  return fooDb.query(`insert into foo(name) values ('${body.name}')`);\n}",
+                "after": "type CreateFoo = { name: string };\n\nfunction parseCreateFoo(value: unknown): CreateFoo {\n  if (!value || typeof value !== \"object\") throw new Error(\"body must be an object\");\n  const name = (value as Record<string, unknown>).name;\n  if (typeof name !== \"string\" || name.length < 1 || name.length > 40) {\n    throw new Error(\"name must be 1..40 characters\");\n  }\n  return { name };\n}\n\nasync function createFoo(request: Request) {\n  const input = parseCreateFoo(await request.json());\n  return fooDb.query(\"insert into foo(name) values (?)\", input.name);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-broad-privilege",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Least Privilege Over Broad Privilege",
+            "intent": "Narrow a broad capability to the minimal typed interface a task needs, shrinking the blast radius.",
+            "invariant": "A component receives only the narrow capability its task requires, never an ambient broad authority.",
+            "flow": [
+                "BroadCapability",
+                "DefineNarrowInterface",
+                "InjectMinimal",
+                "DenyRest"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoBroadPrivilege",
+                    "rhs": "<BroadCapability> \"→\" <DefineNarrowInterface> \"→\" <InjectMinimal> \"→\" <DenyRest>"
+                }
+            ],
+            "composes": [
+                "Security Core",
+                "coupling-control"
+            ],
+            "force": ["broad-privilege (blast-radius)"],
+            "principleRef": "least-privilege",
+            "exemplar": {
+                "before": "class FooJob {\n  constructor(private readonly admin: AdminDatabase) {}\n\n  run(foo: Foo) {\n    return this.admin.execute(`delete from bar; insert into foo values (?)`, foo);\n  }\n}",
+                "after": "interface FooWriter {\n  insert(foo: Foo): Promise<void>;\n}\n\nclass FooJob {\n  constructor(private readonly foos: FooWriter) {}\n\n  run(foo: Foo) {\n    return this.foos.insert(foo);\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-env-fallback",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Config Externalization Over Env Fallback",
+            "intent": "Replace env-var-or-default reads with a validated config loaded at boot that fails fast on missing values.",
+            "invariant": "Configuration is parsed and validated once at startup; a missing required var halts boot.",
+            "flow": [
+                "EnvOrDefault",
+                "DefineConfigSchema",
+                "LoadAtBoot",
+                "FailIfIncomplete"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoEnvFallback",
+                    "rhs": "<EnvOrDefault> \"→\" <DefineConfigSchema> \"→\" <LoadAtBoot> \"→\" <FailIfIncomplete>"
+                }
+            ],
+            "composes": [
+                "Security Core",
+                "Resource Core"
+            ],
+            "force": ["env-fallback-default (silent-misconfig)"],
+            "exemplar": {
+                "before": "const fooUrl = process.env.FOO_URL || \"http://localhost:3000\";\nconst retryCount = Number(process.env.FOO_RETRIES || \"3\");",
+                "after": "type AppConfig = Readonly<{ fooUrl: URL; retryCount: number }>;\n\nfunction loadConfig(env: NodeJS.ProcessEnv): AppConfig {\n  if (!env.FOO_URL) throw new Error(\"FOO_URL is required\");\n  if (!env.FOO_RETRIES) throw new Error(\"FOO_RETRIES is required\");\n  const retryCount = Number(env.FOO_RETRIES);\n  if (!Number.isInteger(retryCount) || retryCount < 0) throw new Error(\"invalid FOO_RETRIES\");\n  return Object.freeze({ fooUrl: new URL(env.FOO_URL), retryCount });\n}\n\nconst config = loadConfig(process.env);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-unmeasured-optimization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Profile-First Over Unmeasured Optimization",
+            "intent": "Gate any optimization behind a measured profile, so effort is evidence-driven rather than speculative.",
+            "invariant": "A performance change is justified by a before/after measurement of the actual bottleneck.",
+            "flow": [
+                "SuspectedHotspot",
+                "Profile",
+                "IdentifyBottleneck",
+                "OptimizeMeasured",
+                "Verify"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoUnmeasuredOptimization",
+                    "rhs": "<SuspectedHotspot> \"→\" <Profile> \"→\" <IdentifyBottleneck> \"→\" <OptimizeMeasured> \"→\" <Verify>"
+                }
+            ],
+            "composes": ["Performance Core"],
+            "force": ["unmeasured-optimization (guesswork)"],
+            "exemplar": {
+                "before": "const fooCache = new Map<string, Foo>();\n\nfunction getFoo(id: string) {\n  if (!fooCache.has(id)) fooCache.set(id, expensiveLookup(id));\n  return fooCache.get(id)!;\n}",
+                "after": "const profile = profiler.measure(\"foo.batch\", () => {\n  for (const id of fooIds) expensiveLookup(id);\n});\n\nif (profile.hotspot === \"repeated-foo-lookup\") {\n  const foos = fooStore.getMany(fooIds);\n  consume(foos);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-convention-enforcement",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Rule As Code Over Convention",
+            "intent": "Replace a written convention with an automated gate, so the invariant is enforced by code not by memory.",
+            "invariant": "Every stated invariant has an executable check that fails the build on violation.",
+            "flow": [
+                "WrittenConvention",
+                "EncodeCheck",
+                "WireGate",
+                "FailOnViolation"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoConventionEnforcement",
+                    "rhs": "<WrittenConvention> \"→\" <EncodeCheck> \"→\" <WireGate> \"→\" <FailOnViolation>"
+                }
+            ],
+            "composes": [
+                "Enforcement Core",
+                "Structural Core"
+            ],
+            "force": ["convention-only-enforcement (drift)"],
+            "exemplar": {
+                "before": "import { sql } from \"../infrastructure/database\";\n\nexport function makeFoo() {\n  return sql(\"select * from foo\");\n}",
+                "after": "const architectureRule = forbidImports({\n  from: \"src/domain/**\",\n  to: \"src/infrastructure/**\",\n});\n\nfor (const violation of architectureRule.scan(projectGraph)) {\n  throw new Error(`forbidden dependency: ${violation.from} → ${violation.to}`);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-implicit-contract",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Design By Contract Over Implicit Contract",
+            "intent": "State pre-conditions, post-conditions, and invariants explicitly, so a boundary's contract is checkable not assumed.",
+            "invariant": "A boundary declares and enforces its pre/post/invariant conditions; callers are not left to guess.",
+            "flow": [
+                "ImplicitAssumption",
+                "StatePreconditions",
+                "StatePostconditions",
+                "EnforceInvariants"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoImplicitContract",
+                    "rhs": "<ImplicitAssumption> \"→\" <StatePreconditions> \"→\" <StatePostconditions> \"→\" <EnforceInvariants>"
+                }
+            ],
+            "composes": [
+                "Contracts Core",
+                "Correctness Core"
+            ],
+            "force": ["implicit-contract (silent-breakage)"],
+            "exemplar": {
+                "before": "function divideFoo(total: number, count: number) {\n  return total / count;\n}",
+                "after": "function divideFoo(total: number, count: number): number {\n  if (!Number.isFinite(total)) throw new Error(\"pre: total must be finite\");\n  if (!Number.isInteger(count) || count <= 0) throw new Error(\"pre: count must be positive\");\n\n  const result = total / count;\n\n  if (!Number.isFinite(result)) throw new Error(\"post: result must be finite\");\n  return result;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-breaking-change",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Versioned Evolution Over Breaking Change",
+            "intent": "Introduce change behind a version so existing consumers keep a stable contract while new ones adopt the new shape.",
+            "invariant": "A contract change is additive or versioned; no in-place change breaks an existing consumer silently.",
+            "flow": [
+                "InPlaceChange",
+                "IntroduceVersion",
+                "RunBothContracts",
+                "MigrateConsumers"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoBreakingChange",
+                    "rhs": "<InPlaceChange> \"→\" <IntroduceVersion> \"→\" <RunBothContracts> \"→\" <MigrateConsumers>"
+                }
+            ],
+            "composes": [
+                "Contracts Core",
+                "Evolution Principles"
+            ],
+            "force": ["unversioned-breaking-change (consumer-breakage)"],
+            "principleRef": "versioning",
+            "exemplar": {
+                "before": "app.get(\"/foo\", () => ({ label: \"Foo\", tags: [] }));",
+                "after": "app.get(\"/v1/foo\", () => ({ name: \"Foo\" }));\napp.get(\"/v2/foo\", () => ({ label: \"Foo\", tags: [] }));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-untyped-boundary",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Schema-Validated Boundary Over Untyped",
+            "intent": "Type and schema-validate every boundary crossing, so invalid state cannot enter the typed core.",
+            "invariant": "Data entering the system is validated against a schema; untyped values never propagate inward.",
+            "flow": [
+                "UntypedBoundary",
+                "DefineSchema",
+                "ValidateOnEntry",
+                "PropagateTyped"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoUntypedBoundary",
+                    "rhs": "<UntypedBoundary> \"→\" <DefineSchema> \"→\" <ValidateOnEntry> \"→\" <PropagateTyped>"
+                }
+            ],
+            "composes": [
+                "Contracts Core",
+                "Correctness Core"
+            ],
+            "force": ["untyped-boundary (invalid-state)"],
+            "exemplar": {
+                "before": "async function loadFoo(response: Response): Promise<Foo> {\n  return await response.json() as Foo;\n}",
+                "after": "type Foo = Readonly<{ id: string; count: number }>;\n\nfunction decodeFoo(value: unknown): Foo {\n  if (!value || typeof value !== \"object\") throw new Error(\"Foo must be an object\");\n  const record = value as Record<string, unknown>;\n  if (typeof record.id !== \"string\") throw new Error(\"Foo.id must be a string\");\n  if (!Number.isInteger(record.count)) throw new Error(\"Foo.count must be an integer\");\n  return { id: record.id, count: record.count as number };\n}\n\nasync function loadFoo(response: Response): Promise<Foo> {\n  return decodeFoo(await response.json());\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-partial-commit",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Atomic Boundary Over Partial Commit",
+            "intent": "Wrap coupled writes in an all-or-nothing boundary, so a fault cannot leave state half-applied.",
+            "invariant": "Coupled state changes either all commit or all roll back; no partial application persists.",
+            "flow": [
+                "CoupledWrites",
+                "OpenTransaction",
+                "ApplyAll",
+                "CommitOrRollback"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoPartialCommit",
+                    "rhs": "<CoupledWrites> \"→\" <OpenTransaction> \"→\" <ApplyAll> \"→\" <CommitOrRollback>"
+                }
+            ],
+            "composes": [
+                "Atomic Boundary",
+                "Resource Core"
+            ],
+            "force": ["partial-commit (corruption)"],
+            "exemplar": {
+                "before": "async function moveFoo(id: FooId, from: BarId, to: BarId) {\n  await barStore.removeFoo(from, id);\n  await barStore.addFoo(to, id);\n}",
+                "after": "async function moveFoo(id: FooId, from: BarId, to: BarId) {\n  await database.transaction(async tx => {\n    const removed = await tx.bars.removeFoo(from, id);\n    if (!removed) throw new Error(\"Foo is not owned by source Bar\");\n    await tx.bars.addFoo(to, id);\n  });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-distributed-2pc",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Saga Compensation Over Distributed 2PC",
+            "intent": "Replace a cross-service two-phase commit with a saga of compensable steps, preserving service autonomy.",
+            "invariant": "Cross-service consistency is achieved by compensating actions, not a distributed lock across services.",
+            "flow": [
+                "CrossServiceLock",
+                "DefineSteps",
+                "DefineCompensations",
+                "RunSaga"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoDistributed2pc",
+                    "rhs": "<CrossServiceLock> \"→\" <DefineSteps> \"→\" <DefineCompensations> \"→\" <RunSaga>"
+                }
+            ],
+            "composes": [
+                "Execution Core",
+                "coupling-control"
+            ],
+            "force": ["cross-service-2PC (coupling)"],
+            "exemplar": {
+                "before": "async function createFooAndBar(foo: Foo, bar: Bar) {\n  const tx = await coordinator.begin();\n  await fooService.prepare(tx.id, foo);\n  await barService.prepare(tx.id, bar);\n  await coordinator.commit(tx.id);\n}",
+                "after": "async function createFooAndBar(foo: Foo, bar: Bar) {\n  const fooId = await fooService.create(foo);\n  try {\n    await barService.create({ ...bar, fooId });\n  } catch (error) {\n    await fooService.cancel(fooId);\n    throw error;\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-sync-cross-boundary",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Async Events Over Synchronous Cross-Boundary",
+            "intent": "Replace a synchronous call across an autonomy boundary with an asynchronous event, decoupling in time.",
+            "invariant": "Calls across autonomy boundaries are asynchronous; no boundary blocks on another's synchronous response.",
+            "flow": [
+                "SyncCrossCall",
+                "DefineEvent",
+                "EmitAsync",
+                "ConsumeIndependently"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoSyncCrossBoundary",
+                    "rhs": "<SyncCrossCall> \"→\" <DefineEvent> \"→\" <EmitAsync> \"→\" <ConsumeIndependently>"
+                }
+            ],
+            "composes": [
+                "Execution Core",
+                "coupling-control"
+            ],
+            "force": ["synchronous-cross-autonomy-boundary (fragility)"],
+            "exemplar": {
+                "before": "async function createFoo(foo: Foo) {\n  const bar = await barServiceHttp.get(foo.barId);\n  await bazServiceHttp.validate(foo, bar);\n  return fooStore.save(foo);\n}",
+                "after": "async function createFoo(foo: Foo) {\n  await fooStore.transaction(async tx => {\n    await tx.foos.save(foo);\n    await tx.outbox.append({ type: \"FooCreated\", fooId: foo.id, barId: foo.barId });\n  });\n}\n\nfooEvents.on(\"FooCreated\", event => bazProjection.process(event));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-opaque-runtime",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Observable Signals Over Opaque Runtime",
+            "intent": "Emit structured signals around runtime behavior, so operation is observable rather than blind.",
+            "invariant": "Runtime paths emit structured telemetry sufficient to reconstruct what happened.",
+            "flow": [
+                "OpaqueRuntime",
+                "InstrumentSignals",
+                "EmitStructured",
+                "EnableReconstruction"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoOpaqueRuntime",
+                    "rhs": "<OpaqueRuntime> \"→\" <InstrumentSignals> \"→\" <EmitStructured> \"→\" <EnableReconstruction>"
+                }
+            ],
+            "composes": [
+                "Observability",
+                "Execution Core"
+            ],
+            "force": ["opaque-runtime (blind-operation)"],
+            "exemplar": {
+                "before": "async function processFoo(foo: Foo) {\n  console.log(\"starting foo\");\n  await fooStore.save(foo);\n  console.log(\"done\");\n}",
+                "after": "async function processFoo(foo: Foo, telemetry: Telemetry) {\n  return telemetry.trace(\"foo.process\", { fooId: foo.id }, async span => {\n    const started = performance.now();\n    try {\n      await fooStore.save(foo);\n      telemetry.count(\"foo.processed\", 1, { result: \"ok\" });\n      span.event(\"foo.saved\", { durationMs: performance.now() - started });\n    } catch (error) {\n      telemetry.count(\"foo.processed\", 1, { result: \"error\" });\n      span.fail(error);\n      throw error;\n    }\n  });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-hidden-dependency",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Injected Dependency Over Hidden",
+            "intent": "Surface a concealed dependency as a constructor parameter, inverting control and revealing coupling.",
+            "invariant": "Every dependency is injected and visible in the signature; none is reached for ambiently.",
+            "flow": [
+                "HiddenDependency",
+                "LiftToParameter",
+                "InjectAtComposition",
+                "RevealCoupling"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoHiddenDependency",
+                    "rhs": "<HiddenDependency> \"→\" <LiftToParameter> \"→\" <InjectAtComposition> \"→\" <RevealCoupling>"
+                }
+            ],
+            "composes": [
+                "coupling-control",
+                "Structural Core"
+            ],
+            "force": ["hidden-dependency (concealed-coupling)"],
+            "exemplar": {
+                "before": "import { globalFooStore } from \"./globals\";\n\nclass FooService {\n  save(foo: Foo) {\n    return globalFooStore.save(foo);\n  }\n}",
+                "after": "interface FooStore {\n  save(foo: Foo): Promise<void>;\n}\n\nclass FooService {\n  constructor(private readonly store: FooStore) {}\n\n  save(foo: Foo) {\n    return this.store.save(foo);\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-hardcoded-wiring",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Convention Discovery Over Hardcoded Wiring",
+            "intent": "Replace enumerated wiring with convention-based discovery, so new components register without editing a central list.",
+            "invariant": "Components are discovered by convention at runtime; no central switch enumerates each one.",
+            "flow": [
+                "HardcodedList",
+                "DefineConvention",
+                "DiscoverAtRuntime",
+                "SelfRegister"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoHardcodedWiring",
+                    "rhs": "<HardcodedList> \"→\" <DefineConvention> \"→\" <DiscoverAtRuntime> \"→\" <SelfRegister>"
+                }
+            ],
+            "composes": [
+                "Extensibility Core",
+                "Structural Core"
+            ],
+            "force": ["hardcoded-wiring (rigidity)"],
+            "exemplar": {
+                "before": "import { FooHandler } from \"./foo-handler\";\nimport { BarHandler } from \"./bar-handler\";\nimport { BazHandler } from \"./baz-handler\";\n\nconst handlers = [new FooHandler(), new BarHandler(), new BazHandler()];",
+                "after": "interface HandlerModule {\n  kind: string;\n  create(): Handler;\n}\n\nconst modules = await discover<HandlerModule>(\"./handlers/*.handler.js\");\nconst handlers = new Map(modules.map(module => [module.kind, module.create()]));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-imperative-config",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Declarative Config Over Imperative",
+            "intent": "Replace imperative setup steps with declarative configuration describing the desired state.",
+            "invariant": "Configuration declares the target state; it is not a sequence of mutation calls.",
+            "flow": [
+                "ImperativeSetup",
+                "DescribeDesiredState",
+                "ApplyDeclaratively",
+                "ConvergeToState"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoImperativeConfig",
+                    "rhs": "<ImperativeSetup> \"→\" <DescribeDesiredState> \"→\" <ApplyDeclaratively> \"→\" <ConvergeToState>"
+                }
+            ],
+            "composes": [
+                "Declarative Core",
+                "Extensibility Core"
+            ],
+            "force": ["imperative-config (drift)"],
+            "exemplar": {
+                "before": "const app = new FooApp();\napp.enableCache();\napp.setRetries(3);\nif (process.env.DEBUG) app.enableDebug();\napp.register(new BarPlugin());",
+                "after": "type FooConfig = Readonly<{\n  cache: { enabled: boolean };\n  retries: number;\n  debug: boolean;\n  plugins: readonly [\"bar\"];\n}>;\n\nconst config: FooConfig = {\n  cache: { enabled: true },\n  retries: 3,\n  debug: false,\n  plugins: [\"bar\"],\n};\n\nconst app = FooApp.fromConfig(validateFooConfig(config));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-leaky-context",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Anti-Corruption Layer Over Cross-Context Leak",
+            "intent": "Insert an anti-corruption layer at a context boundary, so a foreign model cannot corrupt the local one.",
+            "invariant": "A foreign model is translated at the boundary; its shape never leaks into the local bounded context.",
+            "flow": [
+                "ForeignModelLeak",
+                "DefineTranslation",
+                "TranslateAtBoundary",
+                "ProtectLocalModel"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoLeakyContext",
+                    "rhs": "<ForeignModelLeak> \"→\" <DefineTranslation> \"→\" <TranslateAtBoundary> \"→\" <ProtectLocalModel>"
+                }
+            ],
+            "composes": [
+                "Domain Modeling",
+                "coupling-control"
+            ],
+            "force": ["cross-context-leak (model-corruption)"],
+            "principleRef": "anti-corruption-layer",
+            "exemplar": {
+                "before": "function priceBar(foo: FooDatabaseRow) {\n  return foo.status === \"A\" ? 10 : 0;\n}",
+                "after": "type FooDatabaseRow = { id: string; status: \"A\" | \"D\" };\ntype BarEligibility = { fooId: string; eligible: boolean };\n\nfunction toBarEligibility(row: FooDatabaseRow): BarEligibility {\n  return { fooId: row.id, eligible: row.status === \"A\" };\n}\n\nfunction priceBar(input: BarEligibility) {\n  return input.eligible ? 10 : 0;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-hidden-nondeterminism",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Injected Nondeterminism Over Hidden",
+            "intent": "Inject clocks, randomness, and IO so the core is deterministic and testable, isolating nondeterminism at the edge.",
+            "invariant": "Sources of nondeterminism are injected; the core computes deterministically given its inputs.",
+            "flow": [
+                "HiddenClockOrRandom",
+                "DefinePort",
+                "InjectSource",
+                "DeterministicCore"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoHiddenNondeterminism",
+                    "rhs": "<HiddenClockOrRandom> \"→\" <DefinePort> \"→\" <InjectSource> \"→\" <DeterministicCore>"
+                }
+            ],
+            "composes": [
+                "Computation Core",
+                "Correctness Core"
+            ],
+            "force": ["hidden-nondeterminism (unreproducible)"],
+            "exemplar": {
+                "before": "function makeFoo(name: string): Foo {\n  return {\n    id: crypto.randomUUID(),\n    name,\n    createdAt: new Date(),\n  };\n}",
+                "after": "interface Clock { now(): Date; }\ninterface IdSource { nextFooId(): string; }\n\nfunction makeFoo(name: string, clock: Clock, ids: IdSource): Foo {\n  return {\n    id: ids.nextFooId(),\n    name,\n    createdAt: clock.now(),\n  };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "no-speculative-pattern",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Pattern By Fit Over Speculative Pattern",
+            "intent": "Introduce a pattern only when a present force demands it, avoiding accidental complexity from anticipated needs.",
+            "invariant": "Every abstraction traces to a current force; none exists solely for a hypothesized future.",
+            "flow": [
+                "SpeculativeAbstraction",
+                "IdentifyPresentForces",
+                "MatchPatternToForce",
+                "RemoveUnforced"
+            ],
+            "productions": [
+                {
+                    "lhs": "NoSpeculativePattern",
+                    "rhs": "<SpeculativeAbstraction> \"→\" <IdentifyPresentForces> \"→\" <MatchPatternToForce> \"→\" <RemoveUnforced>"
+                }
+            ],
+            "composes": [
+                "Evolution Principles",
+                "Design Patterns Core"
+            ],
+            "force": ["speculative-pattern (accidental-complexity)"],
+            "exemplar": {
+                "before": "interface FooFactoryStrategy {\n  create(builder: FooAbstractBuilder, provider: FooProvider): Foo;\n}\n\nclass DefaultFooFactoryStrategy implements FooFactoryStrategy {\n  create(builder: FooAbstractBuilder, provider: FooProvider) {\n    return builder.withName(provider.getName()).build();\n  }\n}",
+                "after": "function makeFoo(name: string): Foo {\n  return { name };\n}",
+                "lang": "ts"
+            }
+        }
+    ]
+}

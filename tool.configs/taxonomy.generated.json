@@ -286,7 +286,14 @@
     "product"
   ],
   "taxonomy": {
-    "excluded": { "trees": ["doc-arch", ".claude", "disciplined.methodology"] },
+    "excluded": {
+      "trees": [
+        "doc-arch",
+        ".claude",
+        "disciplined.methodology",
+        "_third-party"
+      ]
+    },
     "ignored": {
       "foldersFiles": [
         "index.ts",
@@ -300,8 +307,6 @@
         "_manifest.json",
         "paths.yaml",
         "govlab.config.ts",
-        ".env",
-        ".env.template",
         "favicon.ico",
         ".gitignore",
         ".git",
@@ -466,7 +471,8 @@
       ],
       "govlab.root/govlab.utils/content-fingerprint": ["configuration", "core"],
       "project.paths": ["configuration", "core"],
-      "project.scripts": ["configuration", "core", "runtime"]
+      "project.scripts": ["configuration", "core", "runtime"],
+      "project.secrets": ["configuration", "core"]
     },
     "testMirrors": {
       "codebase.testing/test.build": "{app.root}/banes-lab.build.scripts",
@@ -487,6 +493,7 @@
       "codebase.testing/test.paths": "project.paths",
       "codebase.testing/test.rules": ".govlab",
       "codebase.testing/test.scripts": "project.scripts",
+      "codebase.testing/test.secrets": "project.secrets",
       "codebase.testing/test.server": "{app.root}/banes-lab.server",
       "codebase.testing/test.social": "{app.root}/banes-lab.social-share",
       "codebase.testing/test.web": "{app.root}/banes-lab.web"
@@ -550,12 +557,15 @@
       "govlab.root/govlab.utils/code-parse": ["types"],
       "govlab.root/govlab.utils/content-fingerprint": ["types"],
       "project.paths": ["types"],
-      "project.scripts": ["types"]
+      "project.scripts": ["types"],
+      "project.secrets": ["types"]
     },
     "subjects": [
       "access",
+      "address",
       "agent",
       "algorithm",
+      "alias",
       "anatomy",
       "anchor",
       "anti-pattern",
@@ -566,6 +576,7 @@
       "barrel",
       "base",
       "baseline",
+      "bearer",
       "binding",
       "block",
       "blueprint",
@@ -600,12 +611,15 @@
       "coordination",
       "correctness",
       "coverage",
+      "credential",
       "css",
+      "database",
       "definition",
       "dependency",
       "deployment",
       "derivation",
       "design",
+      "detector",
       "diagram",
       "dimension",
       "discord",
@@ -617,6 +631,7 @@
       "environment",
       "event",
       "evidence",
+      "exclusion",
       "exemplar",
       "export",
       "failure",
@@ -654,6 +669,8 @@
       "invocation",
       "jetbrains-mono",
       "journal",
+      "jwt",
+      "key",
       "keyword",
       "kind",
       "knob",
@@ -713,6 +730,7 @@
       "registrar",
       "release",
       "remote",
+      "repair",
       "report",
       "representation",
       "resource",
@@ -753,10 +771,12 @@
       "tension",
       "terms",
       "text",
+      "token",
       "tone",
       "tool",
       "tracking",
       "transaction",
+      "tree",
       "troubleshooting",
       "validation",
       "vcs",
@@ -875,7 +895,6 @@
       "tflint",
       "toml",
       "translation",
-      "tree",
       "trivy",
       "ts-prune",
       "typescript",

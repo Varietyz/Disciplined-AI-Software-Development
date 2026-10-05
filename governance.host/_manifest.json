@@ -1,5 +1,5 @@
 {
-    "label": "Govlab Extension Host",
+    "label": "GovLab Extension Host",
     "summary": "The consumer-side extension host govlab loads by convention: the local lint rules and the workspace plugins that gate this repo's architecture, the checker-driven codemods that apply the fixes a linter cannot apply safely, and the doc-verb registry govlab.docs reads. Govlab discovers it by directory shape instead of a registration list, so dropping a file in is the whole wiring.",
     "maturity": "stable",
     "domains": [

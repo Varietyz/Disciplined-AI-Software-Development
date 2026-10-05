@@ -12,7 +12,7 @@ The ontology is a queryable canon of software architecture. It holds every princ
 
 # Principles
 
-477 of 477 shown
+476 of 476 shown
 
 ## Sections
 
@@ -57,84 +57,84 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_big_ball_of_mud["Big Ball of Mud"]
-n_god_object["God Object"]
-n_concrete_coupling["Concrete Coupling"]
-n_schema_drift["Schema Drift"]
-n_implicit_contract["Implicit Contract"]
-n_hardcoded_configuration["Hardcoded Configuration"]
-n_shared_mutable_state["Shared Mutable State"]
-n_boundary_leakage["Boundary Leakage"]
-n_manual_only_governance["Manual-Only Governance"]
-n_opaque_runtime_behavior["Opaque Runtime Behavior"]
-n_unowned_risk["Unowned Risk"]
-n_unobservable_failure["Unobservable Failure"]
-n_unversioned_breaking_change["Unversioned Breaking Change"]
-n_distributed_monolith["Distributed Monolith"]
-n_shotgun_surgery["Shotgun Surgery"]
-n_divergent_change["Divergent Change"]
-n_feature_envy["Feature Envy"]
-n_inappropriate_intimacy["Inappropriate Intimacy"]
-n_message_chain["Message Chain"]
-n_middle_man["Middle Man"]
-n_data_clumps["Data Clumps"]
-n_primitive_obsession["Primitive Obsession"]
-n_stringly_typed_programming["Stringly Typed Programming"]
-n_boolean_trap["Boolean Trap"]
-n_long_parameter_list["Long Parameter List"]
-n_magic_value["Magic Value"]
-n_speculative_generality["Speculative Generality"]
-n_premature_abstraction["Premature Abstraction"]
-n_over_abstraction["Over-Abstraction"]
-n_golden_hammer["Golden Hammer"]
-n_pattern_cargo_cult["Pattern Cargo Cult"]
-n_lava_flow["Lava Flow"]
-n_zombie_code["Zombie Code"]
-n_temporal_coupling["Temporal Coupling"]
-n_hidden_side_effect["Hidden Side Effect"]
-n_action_at_a_distance["Action at a Distance"]
-n_ambient_context["Ambient Context"]
-n_inconsistent_error_model["Inconsistent Error Model"]
-n_exception_control_flow["Exception Control Flow"]
-n_null_semantics_drift["Null Semantics Drift"]
-n_anemic_domain_model["Anemic Domain Model"]
-n_transaction_script_sprawl["Transaction Script Sprawl"]
-n_fat_controller["Fat Controller"]
-n_repository_dump["Repository Dump"]
-n_utility_dump["Utility Dump"]
-n_framework_leakage["Framework Leakage"]
-n_vendor_lock_in_leakage["Vendor Lock-In Leakage"]
-n_circular_dependency["Circular Dependency"]
-n_cyclic_deployment_dependency["Cyclic Deployment Dependency"]
-n_synchronous_chain_trap["Synchronous Chain Trap"]
-n_chatty_interface["Chatty Interface"]
-n_n_plus_one_query["N Plus One Query"]
-n_cache_poisoning_by_design["Cache Poisoning by Design"]
-n_retry_storm["Retry Storm"]
-n_timeout_omission["Timeout Omission"]
-n_missing_backpressure["Missing Backpressure"]
-n_silent_data_corruption["Silent Data Corruption"]
-n_lost_update["Lost Update"]
-n_dual_write["Dual Write"]
-n_read_your_writes_violation["Read-Your-Writes Violation"]
-n_security_theater["Security Theater"]
-n_authorization_scattering["Authorization Scattering"]
-n_secret_sprawl["Secret Sprawl"]
-n_personal_data_oversharing["Personal Data Oversharing"]
-n_observability_noise["Observability Noise"]
-n_log_as_control_flow["Log-as-Control-Flow"]
-n_manual_runbook_dependency["Manual Runbook Dependency"]
-n_big_bang_release["Big-Bang Release"]
-n_irreversible_migration["Irreversible Migration"]
-n_big_upfront_frozen_architecture["Big-Upfront Frozen Architecture"]
-n_architecture_astronaut["Architecture Astronaut"]
-n_feature_only_design["Feature-Only Design"]
-n_test_pyramid_inversion["Test Pyramid Inversion"]
-n_mock_mirage["Mock Mirage"]
-n_flaky_test_normalization["Flaky Test Normalization"]
-n_prompt_sprawl["Prompt Sprawl"]
-n_ungrounded_content["Ungrounded Content"]
-n_model_version_ambiguity["Model Version Ambiguity"]
+    n_big_ball_of_mud["Big Ball of Mud"]
+    n_god_object["God Object"]
+    n_concrete_coupling["Concrete Coupling"]
+    n_schema_drift["Schema Drift"]
+    n_implicit_contract["Implicit Contract"]
+    n_hardcoded_configuration["Hardcoded Configuration"]
+    n_shared_mutable_state["Shared Mutable State"]
+    n_boundary_leakage["Boundary Leakage"]
+    n_manual_only_governance["Manual-Only Governance"]
+    n_opaque_runtime_behavior["Opaque Runtime Behavior"]
+    n_unowned_risk["Unowned Risk"]
+    n_unobservable_failure["Unobservable Failure"]
+    n_unversioned_breaking_change["Unversioned Breaking Change"]
+    n_distributed_monolith["Distributed Monolith"]
+    n_shotgun_surgery["Shotgun Surgery"]
+    n_divergent_change["Divergent Change"]
+    n_feature_envy["Feature Envy"]
+    n_inappropriate_intimacy["Inappropriate Intimacy"]
+    n_message_chain["Message Chain"]
+    n_middle_man["Middle Man"]
+    n_data_clumps["Data Clumps"]
+    n_primitive_obsession["Primitive Obsession"]
+    n_stringly_typed_programming["Stringly Typed Programming"]
+    n_boolean_trap["Boolean Trap"]
+    n_long_parameter_list["Long Parameter List"]
+    n_magic_value["Magic Value"]
+    n_speculative_generality["Speculative Generality"]
+    n_premature_abstraction["Premature Abstraction"]
+    n_over_abstraction["Over-Abstraction"]
+    n_golden_hammer["Golden Hammer"]
+    n_pattern_cargo_cult["Pattern Cargo Cult"]
+    n_lava_flow["Lava Flow"]
+    n_zombie_code["Zombie Code"]
+    n_temporal_coupling["Temporal Coupling"]
+    n_hidden_side_effect["Hidden Side Effect"]
+    n_action_at_a_distance["Action at a Distance"]
+    n_ambient_context["Ambient Context"]
+    n_inconsistent_error_model["Inconsistent Error Model"]
+    n_exception_control_flow["Exception Control Flow"]
+    n_null_semantics_drift["Null Semantics Drift"]
+    n_anemic_domain_model["Anemic Domain Model"]
+    n_transaction_script_sprawl["Transaction Script Sprawl"]
+    n_fat_controller["Fat Controller"]
+    n_repository_dump["Repository Dump"]
+    n_utility_dump["Utility Dump"]
+    n_framework_leakage["Framework Leakage"]
+    n_vendor_lock_in_leakage["Vendor Lock-In Leakage"]
+    n_circular_dependency["Circular Dependency"]
+    n_cyclic_deployment_dependency["Cyclic Deployment Dependency"]
+    n_synchronous_chain_trap["Synchronous Chain Trap"]
+    n_chatty_interface["Chatty Interface"]
+    n_n_plus_one_query["N Plus One Query"]
+    n_cache_poisoning_by_design["Cache Poisoning by Design"]
+    n_retry_storm["Retry Storm"]
+    n_timeout_omission["Timeout Omission"]
+    n_missing_backpressure["Missing Backpressure"]
+    n_silent_data_corruption["Silent Data Corruption"]
+    n_lost_update["Lost Update"]
+    n_dual_write["Dual Write"]
+    n_read_your_writes_violation["Read-Your-Writes Violation"]
+    n_security_theater["Security Theater"]
+    n_authorization_scattering["Authorization Scattering"]
+    n_secret_sprawl["Secret Sprawl"]
+    n_personal_data_oversharing["Personal Data Oversharing"]
+    n_observability_noise["Observability Noise"]
+    n_log_as_control_flow["Log-as-Control-Flow"]
+    n_manual_runbook_dependency["Manual Runbook Dependency"]
+    n_big_bang_release["Big-Bang Release"]
+    n_irreversible_migration["Irreversible Migration"]
+    n_big_upfront_frozen_architecture["Big-Upfront Frozen Architecture"]
+    n_architecture_astronaut["Architecture Astronaut"]
+    n_feature_only_design["Feature-Only Design"]
+    n_test_pyramid_inversion["Test Pyramid Inversion"]
+    n_mock_mirage["Mock Mirage"]
+    n_flaky_test_normalization["Flaky Test Normalization"]
+    n_prompt_sprawl["Prompt Sprawl"]
+    n_ungrounded_content["Ungrounded Content"]
+    n_model_version_ambiguity["Model Version Ambiguity"]
 ```
 
 ### Big Ball of Mud
@@ -166,12 +166,12 @@ Conflicts with
 none
 
 Referenced by
-[Modularity](PRINCIPLES.md#architecture-modularity), [Component-Based Architecture](PRINCIPLES.md#architecture-component-based-architecture)
+[Modularity](PRINCIPLES.md#architecture-modularity), [Component-Based Architecture](PRINCIPLES.md#architecture-component-based-architecture), [Monolith Architecture](PRINCIPLES.md#architecture-monolith-architecture)
 
 Contracts
 [<Architecture Anti-Pattern>](ALGORITHMS.md#algorithms-architecture-anti-pattern)
 
-Violated by
+Formed by
 Allow boundaries to remain implicit, permit unrestricted dependencies, mix concerns freely, share mutable state broadly, and accumulate changes without architectural segmentation.
 
 Detected by
@@ -181,7 +181,7 @@ Measured by
 dependency-cycle count, graph density, share of modules without an owner
 
 Refactored by
-define_boundaries, split_modules, enforce_dependency_rules, assign_ownership, add_fitness_functions
+[Define Module Boundaries](LEXICON.md#lexicon-define-module-boundaries), [Split Module](LEXICON.md#lexicon-split-module), [Architecture Test](LEXICON.md#lexicon-architecture-test), [Assign Owner](LEXICON.md#lexicon-assign-owner), [Fitness Functions](PRINCIPLES.md#architecture-fitness-functions)
 
 Enforced by
 dependency rules, architecture fitness functions, module ownership map
@@ -249,7 +249,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [modularity](SCHEMA.md#force-modularity), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [domain_boundary](SCHEMA.md#force-domain-boundary), [control_coordination](SCHEMA.md#force-control-coordination)
-- Aliases: Blob Class
+- Aliases: Blob Class, God Class
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -284,7 +284,7 @@ Distinct from
 Distinct from
 [Utility Dump](PRINCIPLES.md#architecture-utility-dump): A god object is a domain object that absorbs every change, while a utility dump is a generic helper module that no one owns.
 
-Violated by
+Formed by
 Centralize unrelated responsibilities into one object, route unrelated behavior through it, accumulate state and dependencies, and make the object the default modification point.
 
 Detected by
@@ -294,7 +294,7 @@ Measured by
 methods and dependencies per class, [fan-in](LEXICON.md#lexicon-fan-in), distinct reasons to change
 
 Refactored by
-extract_class, split_responsibilities, move_method, extract_domain_service, introduce_facade_only_if_boundary_needed
+[Extract Class](LEXICON.md#lexicon-extract-class), [Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner), [Domain Service](PRINCIPLES.md#architecture-domain-service), [Facade Pattern](PRINCIPLES.md#architecture-facade-pattern)
 
 Enforced by
 class size and responsibility limits in lint, [design review](PRINCIPLES.md#architecture-design-review)
@@ -361,6 +361,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [modularity](SCHEMA.md#force-modularity)
+- Aliases: Concrete Dependency
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -384,12 +385,12 @@ Conflicts with
 none
 
 Referenced by
-[Interface-Based Design](PRINCIPLES.md#architecture-interface-based-design), [Abstraction](PRINCIPLES.md#architecture-abstraction), [Replaceability](PRINCIPLES.md#architecture-replaceability)
+[Interface-Based Design](PRINCIPLES.md#architecture-interface-based-design), [Abstraction](PRINCIPLES.md#architecture-abstraction), [Replaceability](PRINCIPLES.md#architecture-replaceability), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion)
 
 Distinct from
 [Middle Man](PRINCIPLES.md#architecture-middle-man): Concrete coupling depends on an implementation instead of an abstraction, while a middle man is a layer of indirection that adds nothing.
 
-Violated by
+Formed by
 Let high-level policy depend directly on low-level implementations, vendor APIs, framework classes, or concrete constructors, then spread those concrete assumptions across the core.
 
 Detected by
@@ -399,7 +400,7 @@ Measured by
 concrete infrastructure imports in core modules
 
 Refactored by
-extract_interface, introduce_port, extract_adapter, inject_dependency, apply_DIP
+[Extract Interface](LEXICON.md#lexicon-extract-interface), [Introduce Port](LEXICON.md#lexicon-introduce-port), [Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Invert Dependency](LEXICON.md#lexicon-invert-dependency)
 
 Enforced by
 import rules that forbid infrastructure in the core, architecture tests
@@ -483,7 +484,7 @@ none
 Referenced by
 [Data Contract](PRINCIPLES.md#architecture-data-contract), [Canonical Schema](PRINCIPLES.md#architecture-canonical-schema)
 
-Violated by
+Formed by
 Allow producers, consumers, storage models, and documentation to evolve independently without versioned schema governance, then let payload meaning diverge over time.
 
 Detected by
@@ -493,10 +494,10 @@ Measured by
 schema diff failures and consumer parse errors per release
 
 Refactored by
-define_schema_contract, version_schema, add_compatibility_tests, centralize_schema_registry, validate_payloads
+[Define Contract](LEXICON.md#lexicon-define-contract), [Versioning](PRINCIPLES.md#architecture-versioning), [Contract Testing](LEXICON.md#lexicon-contract-testing), [Schema Registry](LEXICON.md#lexicon-schema-registry), [Schema Validation](PRINCIPLES.md#architecture-schema-validation)
 
 Enforced by
-schema registry, compatibility tests in the build
+[schema registry](LEXICON.md#lexicon-schema-registry), compatibility tests in the build
 
 Before
 
@@ -575,7 +576,7 @@ none
 Referenced by
 [Explicit Contracts](PRINCIPLES.md#architecture-explicit-contracts)
 
-Violated by
+Formed by
 Encode assumptions in code behavior, naming, ordering, timing, side effects, or undocumented payload shapes instead of declaring them as explicit contracts.
 
 Detected by
@@ -585,7 +586,7 @@ Measured by
 public operations without a declared schema
 
 Refactored by
-add_explicit_contract, define_preconditions, define_postconditions, add_schema, add_contract_tests
+[Define Contract](LEXICON.md#lexicon-define-contract), [Precondition Check](LEXICON.md#lexicon-precondition-check), [Postcondition Check](LEXICON.md#lexicon-postcondition-check), [Schema Validation](PRINCIPLES.md#architecture-schema-validation), [Contract Testing](LEXICON.md#lexicon-contract-testing)
 
 Enforced by
 contract tests, schema validation at public boundaries
@@ -670,7 +671,7 @@ none
 Referenced by
 [Configuration Externalization](PRINCIPLES.md#architecture-configuration-externalization), [Declarative Configuration](PRINCIPLES.md#architecture-declarative-configuration)
 
-Violated by
+Formed by
 Embed environment, path, credential, feature, service endpoint, or policy values directly into code, then duplicate those assumptions across runtime contexts.
 
 Detected by
@@ -680,7 +681,7 @@ Measured by
 configuration literals and secrets found in source
 
 Refactored by
-externalize_configuration, add_config_schema, centralize_config_source, validate_environment, remove_secret_from_code
+[Externalize Configuration](LEXICON.md#lexicon-externalize-configuration), [Configuration Schema](LEXICON.md#lexicon-configuration-schema), [Centralized Configuration](PRINCIPLES.md#architecture-centralized-configuration), [Remove Secret from Code](LEXICON.md#lexicon-remove-secret-from-code)
 
 Enforced by
 configuration and secret scans, a configuration schema validated at startup
@@ -761,7 +762,7 @@ none
 Referenced by
 [Immutability](PRINCIPLES.md#architecture-immutability), [State Isolation](PRINCIPLES.md#architecture-state-isolation)
 
-Violated by
+Formed by
 Expose writable state across modules, allow multiple actors to mutate it, omit ownership and synchronization, and let behavior depend on mutation order.
 
 Detected by
@@ -771,7 +772,7 @@ Measured by
 writable state reachable from more than one module, race-detector findings
 
 Refactored by
-encapsulate_state, assign_owner, make_immutable, add_transaction_boundary, apply_concurrency_control
+[Encapsulate State](LEXICON.md#lexicon-encapsulate-state), [Assign Owner](LEXICON.md#lexicon-assign-owner), [Make Immutable](LEXICON.md#lexicon-make-immutable), [Introduce Transaction Boundary](LEXICON.md#lexicon-introduce-transaction-boundary), [Apply Concurrency Control](LEXICON.md#lexicon-apply-concurrency-control)
 
 Enforced by
 immutability and visibility lint rules, concurrency tests
@@ -859,7 +860,7 @@ none
 Referenced by
 [Explicit Boundaries](PRINCIPLES.md#architecture-explicit-boundaries)
 
-Violated by
+Formed by
 Permit internal models, infrastructure types, persistence structures, or private module APIs to cross intended architectural boundaries.
 
 Detected by
@@ -869,7 +870,7 @@ Measured by
 internal types exposed across boundaries
 
 Refactored by
-restrict_exports, introduce_DTO, add_adapter, add_facade, enforce_import_rules
+[Restrict Exports](LEXICON.md#lexicon-restrict-exports), [Introduce Boundary DTO](LEXICON.md#lexicon-introduce-boundary-dto), [Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Facade Pattern](PRINCIPLES.md#architecture-facade-pattern), [Architecture Test](LEXICON.md#lexicon-architecture-test)
 
 Enforced by
 export and import restrictions, boundary architecture tests
@@ -954,7 +955,7 @@ Referenced by
 Contracts
 [Quality Governance Loop](ALGORITHMS.md#algorithms-quality-governance-loop)
 
-Violated by
+Formed by
 Encode architecture rules in documents, meetings, or reviewer memory without executable checks, metrics, or automated enforcement.
 
 Detected by
@@ -964,7 +965,7 @@ Measured by
 stated rules without an executable check, repeat violations of one rule
 
 Refactored by
-create_fitness_function, add_static_check, add_policy_as_code, add_architecture_test, track_rule_metrics
+[Fitness Functions](PRINCIPLES.md#architecture-fitness-functions), [Static Analysis](PRINCIPLES.md#architecture-static-analysis), [Policy as Code](PRINCIPLES.md#architecture-policy-as-code), [Architecture Test](LEXICON.md#lexicon-architecture-test), [Track Rule Metrics](LEXICON.md#lexicon-track-rule-metrics)
 
 Enforced by
 a rule-coverage check that requires every stated rule to name its executable gate
@@ -1045,7 +1046,7 @@ none
 Referenced by
 [Introspection](PRINCIPLES.md#architecture-introspection)
 
-Violated by
+Formed by
 Let runtime behavior emerge from hidden reflection, implicit registration, undocumented configuration, side effects, or untraced dynamic binding.
 
 Detected by
@@ -1055,7 +1056,7 @@ Measured by
 dynamic bindings without a manifest entry
 
 Refactored by
-add_manifest, log_binding_decisions, emit_runtime_topology, add_capability_declaration, add_discovery_validation
+[Manifest-Based Design](PRINCIPLES.md#architecture-manifest-based-design), [Binding Decision Log](LEXICON.md#lexicon-binding-decision-log), [Runtime Topology Report](LEXICON.md#lexicon-runtime-topology-report), [Declare Capability](LEXICON.md#lexicon-declare-capability), [Discovery Validation](LEXICON.md#lexicon-discovery-validation)
 
 Enforced by
 manifest validation, a startup report that lists every binding
@@ -1139,7 +1140,7 @@ none
 Referenced by
 [Risk Management](PRINCIPLES.md#architecture-risk-management)
 
-Violated by
+Formed by
 Identify a risk without assigning owner, severity, mitigation, review date, acceptance status, or escalation path.
 
 Detected by
@@ -1149,7 +1150,7 @@ Measured by
 risks without an owner, reviews past their date
 
 Refactored by
-assign_owner, classify_severity, define_mitigation, record_acceptance, schedule_review
+[Assign Owner](LEXICON.md#lexicon-assign-owner), [Severity Classification](LEXICON.md#lexicon-severity-classification), [Mitigation Plan](LEXICON.md#lexicon-mitigation-plan), [Accepted Risk Record](LEXICON.md#lexicon-accepted-risk-record), [Scheduled Review](LEXICON.md#lexicon-scheduled-review)
 
 Enforced by
 a risk register whose entries are validated for owner, severity and review date
@@ -1233,7 +1234,7 @@ none
 Referenced by
 [Observability](PRINCIPLES.md#architecture-observability)
 
-Violated by
+Formed by
 Permit operations to fail without structured logs, metrics, alerts, traces, audit records, or user-visible error contracts.
 
 Detected by
@@ -1243,7 +1244,7 @@ Measured by
 swallowed exceptions, critical paths without error telemetry
 
 Refactored by
-add_error_boundary, emit_structured_log, add_metric, add_alert, add_trace_span, add_audit_log
+[Error Boundaries](PRINCIPLES.md#architecture-error-boundaries), [Structured Log](LEXICON.md#lexicon-structured-log), [Metrics](LEXICON.md#lexicon-metrics), [Alert on Critical Failure](LEXICON.md#lexicon-alert-on-critical-failure), [Trace Span](LEXICON.md#lexicon-trace-span), [Audit Logging](PRINCIPLES.md#architecture-audit-logging)
 
 Enforced by
 lint rules against empty and swallowing catch blocks, telemetry coverage checks
@@ -1328,7 +1329,7 @@ none
 Referenced by
 [Consumer-Driven Contracts](PRINCIPLES.md#architecture-consumer-driven-contracts)
 
-Violated by
+Formed by
 Change a public API, schema, event, protocol, behavior, or package contract incompatibly without version bump, deprecation path, compatibility test, or migration notice.
 
 Detected by
@@ -1338,7 +1339,7 @@ Measured by
 breaking diffs released without a version bump
 
 Refactored by
-bump_version, add_compatibility_adapter, deprecate_gradually, add_contract_tests, publish_migration_guide
+[Version Bump](LEXICON.md#lexicon-version-bump), [Compatibility Adapter](LEXICON.md#lexicon-compatibility-adapter), [Gradual Deprecation](LEXICON.md#lexicon-gradual-deprecation), [Contract Testing](LEXICON.md#lexicon-contract-testing), [Migration Guide](LEXICON.md#lexicon-migration-guide)
 
 Enforced by
 API and schema diff gates in the release pipeline
@@ -1416,7 +1417,7 @@ none
 Referenced by
 [Microservices](PRINCIPLES.md#architecture-microservices)
 
-Violated by
+Formed by
 Split deployment units without splitting data ownership, transaction boundaries, failure isolation, contracts, or autonomous release capability.
 
 Detected by
@@ -1426,7 +1427,7 @@ Measured by
 shared databases, lockstep deployments, cross-service transactions
 
 Refactored by
-own_data_per_service, define_service_contracts, introduce_events, add_outbox, split_bounded_context, enable_independent_deployment
+[Own Data per Service](LEXICON.md#lexicon-own-data-per-service), [Define Contract](LEXICON.md#lexicon-define-contract), [Domain Events](PRINCIPLES.md#architecture-domain-events), [Outbox Pattern](PRINCIPLES.md#architecture-outbox-pattern), [Split Bounded Context](LEXICON.md#lexicon-split-bounded-context), [Backward-Compatible Change](LEXICON.md#lexicon-backward-compatible-change)
 
 Enforced by
 service-ownership rules, contract tests, independent-deployment checks
@@ -1511,7 +1512,7 @@ none
 Referenced by
 [High Cohesion](PRINCIPLES.md#architecture-high-cohesion)
 
-Violated by
+Formed by
 Scatter one conceptual responsibility across many files so one change requires many coordinated edits.
 
 Detected by
@@ -1521,7 +1522,7 @@ Measured by
 files touched per logical change, co-change frequency
 
 Refactored by
-centralize_rule, extract_module, move_behavior_to_owner, add_single_source_of_truth
+[Centralize the Rule](LEXICON.md#lexicon-centralize-the-rule), [Extract Module](LEXICON.md#lexicon-extract-module), [Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner)
 
 Enforced by
 duplication detection, change-coupling review
@@ -1603,7 +1604,7 @@ none
 Referenced by
 [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility)
 
-Violated by
+Formed by
 Place unrelated responsibilities in the same module so unrelated change reasons repeatedly modify one artifact.
 
 Detected by
@@ -1613,7 +1614,7 @@ Measured by
 distinct reasons to change per module in the change history
 
 Refactored by
-split_module, extract_class, separate_concerns, move_method
+[Split Module](LEXICON.md#lexicon-split-module), [Extract Class](LEXICON.md#lexicon-extract-class), [Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner)
 
 Enforced by
 module cohesion limits, [design review](PRINCIPLES.md#architecture-design-review)
@@ -1701,7 +1702,7 @@ none
 Referenced by
 [Encapsulation](PRINCIPLES.md#architecture-encapsulation)
 
-Violated by
+Formed by
 Let one module repeatedly inspect or manipulate another module’s data instead of moving behavior to the data owner.
 
 Detected by
@@ -1711,7 +1712,7 @@ Measured by
 foreign field accesses per method
 
 Refactored by
-move_method, encapsulate_state, add_domain_behavior, introduce_service_boundary
+[Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner), [Encapsulate State](LEXICON.md#lexicon-encapsulate-state), [Move Logic to the Domain](LEXICON.md#lexicon-move-logic-to-the-domain), [Extract Use Case](LEXICON.md#lexicon-extract-use-case)
 
 Enforced by
 coupling analysis in lint, [design review](PRINCIPLES.md#architecture-design-review)
@@ -1797,7 +1798,7 @@ Referenced by
 Distinct from
 [Message Chain](PRINCIPLES.md#architecture-message-chain): Inappropriate intimacy reads another module's internals, while a message chain navigates a chain of public references.
 
-Violated by
+Formed by
 Allow modules or classes to rely on each other’s internals, private structure, lifecycle, or undocumented state.
 
 Detected by
@@ -1807,7 +1808,7 @@ Measured by
 private-member accesses across modules
 
 Refactored by
-hide_internal, introduce_public_contract, add_facade, restrict_exports
+[Restrict Exports](LEXICON.md#lexicon-restrict-exports), [Define Contract](LEXICON.md#lexicon-define-contract), [Facade Pattern](PRINCIPLES.md#architecture-facade-pattern)
 
 Enforced by
 visibility and export rules, tests limited to public interfaces
@@ -1859,6 +1860,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [event_messaging](SCHEMA.md#force-event-messaging)
+- Aliases: Train Wreck
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -1884,7 +1886,7 @@ none
 Referenced by
 [Low Coupling](PRINCIPLES.md#architecture-low-coupling)
 
-Violated by
+Formed by
 Require clients to traverse a chain of objects to reach behavior or data, exposing internal object graph structure.
 
 Detected by
@@ -1894,7 +1896,7 @@ Measured by
 member-access chain depth at call sites
 
 Refactored by
-hide_delegate, introduce_facade_method, move_behavior_to_owner
+[Hide Delegate](LEXICON.md#lexicon-hide-delegate), [Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner)
 
 Enforced by
 a lint rule on member-access chain depth
@@ -1971,7 +1973,7 @@ none
 Referenced by
 [Abstraction](PRINCIPLES.md#architecture-abstraction)
 
-Violated by
+Formed by
 Insert a module that delegates almost everything without adding policy, abstraction, validation, orchestration, or simplification.
 
 Detected by
@@ -1981,7 +1983,7 @@ Measured by
 share of methods that only delegate
 
 Refactored by
-remove_layer, inline_delegate, promote_to_real_facade_if_boundary_needed
+[Collapse Layers](LEXICON.md#lexicon-collapse-layers), [Inline Abstraction](LEXICON.md#lexicon-inline-abstraction), [Facade Pattern](PRINCIPLES.md#architecture-facade-pattern)
 
 Enforced by
 delegation-ratio analysis, [design review](PRINCIPLES.md#architecture-design-review)
@@ -2066,9 +2068,9 @@ Referenced by
 [Value Object](PRINCIPLES.md#architecture-value-object)
 
 Distinct from
-[Long Parameter List](PRINCIPLES.md#architecture-long-parameter-list): Data clumps are one group of values travelling together unnamed, while a long parameter list is one signature with too many parameters of any kind.
+[Long Parameter List](PRINCIPLES.md#architecture-long-parameter-list): Data clumps are one group of values traveling together unnamed, while a long parameter list is one signature with too many parameters of any kind.
 
-Violated by
+Formed by
 Pass the same group of fields together repeatedly without naming the group as a value object or contract.
 
 Detected by
@@ -2078,7 +2080,7 @@ Measured by
 repeated parameter groups across signatures
 
 Refactored by
-introduce_value_object, add_DTO, name_concept, validate_as_group
+[Value Object](PRINCIPLES.md#architecture-value-object), [Introduce Boundary DTO](LEXICON.md#lexicon-introduce-boundary-dto), [Name the Concept](LEXICON.md#lexicon-name-the-concept), [Validate as a Group](LEXICON.md#lexicon-validate-as-a-group)
 
 Enforced by
 duplicate parameter-group detection in lint
@@ -2167,7 +2169,7 @@ Distinct from
 Distinct from
 [Long Parameter List](PRINCIPLES.md#architecture-long-parameter-list): Primitive obsession is about the type of one value, while a long parameter list is about the number of parameters in one signature.
 
-Violated by
+Formed by
 Represent meaningful domain concepts as raw strings, numbers, booleans, or maps without type, validation, or behavior.
 
 Detected by
@@ -2177,7 +2179,7 @@ Measured by
 domain concepts held in primitive types
 
 Refactored by
-introduce_value_object, narrow_type, add_enum, encapsulate_validation
+[Value Object](PRINCIPLES.md#architecture-value-object), [Narrow Type](LEXICON.md#lexicon-narrow-type), [Replace Boolean with Enum](LEXICON.md#lexicon-replace-boolean-with-enum), [Encapsulate Validation](LEXICON.md#lexicon-encapsulate-validation)
 
 Enforced by
 type checks and a lint rule against primitive-typed domain identifiers
@@ -2260,7 +2262,7 @@ none
 Referenced by
 [Type Safety](PRINCIPLES.md#architecture-type-safety)
 
-Violated by
+Formed by
 Encode behavior, types, states, permissions, or protocols as unchecked strings.
 
 Detected by
@@ -2270,7 +2272,7 @@ Measured by
 string comparisons against values of a closed set
 
 Refactored by
-add_enum, add_discriminated_union, centralize_constants, schema_validate
+[Replace Boolean with Enum](LEXICON.md#lexicon-replace-boolean-with-enum), [Introduce Discriminated Union](LEXICON.md#lexicon-introduce-discriminated-union), [Centralize the Rule](LEXICON.md#lexicon-centralize-the-rule), [Schema Validation](PRINCIPLES.md#architecture-schema-validation)
 
 Enforced by
 lint rules that require an enum or a discriminated union for a closed set
@@ -2326,6 +2328,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+- Aliases: Flag Argument
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -2351,17 +2354,17 @@ none
 Referenced by
 [Intent-Revealing Interface](PRINCIPLES.md#architecture-intent-revealing-interface)
 
-Violated by
+Formed by
 Use boolean parameters or flags that hide intent and create ambiguous call sites or combinatorial behavior.
 
 Detected by
-method(true, false), multiple_boolean_params, flag_argument_controls_behavior
+method(true,false), multiple_boolean_params, flag_argument_controls_behavior
 
 Measured by
 calls that pass more than one boolean literal
 
 Refactored by
-replace_boolean_with_enum, split_method, introduce_options_object, name_intent
+[Replace Boolean with Enum](LEXICON.md#lexicon-replace-boolean-with-enum), [Split Method](LEXICON.md#lexicon-split-method), [Introduce Parameter Object](LEXICON.md#lexicon-introduce-parameter-object), [Name the Concept](LEXICON.md#lexicon-name-the-concept)
 
 Enforced by
 a lint rule against positional boolean parameters
@@ -2441,7 +2444,7 @@ none
 Referenced by
 [Value Object](PRINCIPLES.md#architecture-value-object)
 
-Violated by
+Formed by
 Grow function or constructor signatures until related inputs, optional modes, and dependencies become hard to understand or validate.
 
 Detected by
@@ -2451,7 +2454,7 @@ Measured by
 parameters per signature above the threshold
 
 Refactored by
-introduce_parameter_object, builder, [value_object](PRINCIPLES.md#architecture-value-object), dependency_container
+[Introduce Parameter Object](LEXICON.md#lexicon-introduce-parameter-object), [Builder Pattern](PRINCIPLES.md#architecture-builder-pattern), [Value Object](PRINCIPLES.md#architecture-value-object), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
 
 Enforced by
 a lint rule on parameter count
@@ -2512,6 +2515,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [domain_boundary](SCHEMA.md#force-domain-boundary)
+- Aliases: Magic Number
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -2537,7 +2541,7 @@ none
 Referenced by
 [Single Source of Truth](PRINCIPLES.md#architecture-single-source-of-truth)
 
-Violated by
+Formed by
 Encode policy, thresholds, status, timing, permissions, or domain rules as unexplained literals.
 
 Detected by
@@ -2547,7 +2551,7 @@ Measured by
 unnamed literals in conditions
 
 Refactored by
-name_constant, centralize_rule, externalize_config_if_runtime_variable, document_semantics
+[Name Constant](LEXICON.md#lexicon-name-constant), [Centralize the Rule](LEXICON.md#lexicon-centralize-the-rule), [Externalize Configuration](LEXICON.md#lexicon-externalize-configuration), [Name the Concept](LEXICON.md#lexicon-name-the-concept)
 
 Enforced by
 a lint rule against unnamed numeric and string literals in logic
@@ -2625,7 +2629,7 @@ none
 Referenced by
 [Minimum Viable Architecture](PRINCIPLES.md#architecture-minimum-viable-architecture)
 
-Violated by
+Formed by
 Build abstractions, extension points, layers, or configuration for variation that has no evidence of existing or near-term need.
 
 Detected by
@@ -2635,7 +2639,7 @@ Measured by
 interfaces with one implementation, unused extension points
 
 Refactored by
-inline_abstraction, remove_unused_extension, defer_generalization, apply_minimum_viable_architecture
+[Inline Abstraction](LEXICON.md#lexicon-inline-abstraction), [Defer Generalization](LEXICON.md#lexicon-defer-generalization), [Minimum Viable Architecture](PRINCIPLES.md#architecture-minimum-viable-architecture)
 
 Enforced by
 dead-code and single-implementation analysis, [design review](PRINCIPLES.md#architecture-design-review)
@@ -2722,7 +2726,7 @@ Contracts
 Distinct from
 [Zombie Code](PRINCIPLES.md#architecture-zombie-code): Premature abstraction extracts shared code too early, while zombie code leaves dead code in place.
 
-Violated by
+Formed by
 Extract a shared abstraction before variation is understood, causing the abstraction to fit no use case well.
 
 Detected by
@@ -2732,7 +2736,7 @@ Measured by
 flags and overrides per shared abstraction
 
 Refactored by
-duplicate_until_pattern_stabilizes, split_abstraction, extract_later_from_evidence
+[Duplicate Until the Pattern Stabilizes](LEXICON.md#lexicon-duplicate-until-the-pattern-stabilizes), [Split Abstraction](LEXICON.md#lexicon-split-abstraction), [Defer Generalization](LEXICON.md#lexicon-defer-generalization)
 
 Enforced by
 design review against evidence of recurrence
@@ -2817,7 +2821,7 @@ Referenced by
 Distinct from
 [Speculative Generality](PRINCIPLES.md#architecture-speculative-generality): Over-abstraction is the state of having more layers than variation, while speculative generality is the cause, building for variation not yet seen.
 
-Violated by
+Formed by
 Add too many interfaces, layers, factories, adapters, or generic types relative to actual variability.
 
 Detected by
@@ -2827,7 +2831,7 @@ Measured by
 indirection depth for simple operations, abstraction-to-implementation ratio
 
 Refactored by
-collapse_layers, inline_interface, remove_unused_indirection, preserve_only_real_boundaries
+[Collapse Layers](LEXICON.md#lexicon-collapse-layers), [Inline Abstraction](LEXICON.md#lexicon-inline-abstraction), [Preserve Only Real Boundaries](LEXICON.md#lexicon-preserve-only-real-boundaries)
 
 Enforced by
 abstraction-ratio analysis, [design review](PRINCIPLES.md#architecture-design-review)
@@ -2879,6 +2883,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+- Aliases: Law of the Instrument
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -2904,7 +2909,7 @@ none
 Referenced by
 [First-Principles Design](PRINCIPLES.md#architecture-first-principles-design)
 
-Violated by
+Formed by
 Apply a familiar pattern, framework, architecture style, or technology to problems regardless of fit.
 
 Detected by
@@ -2914,7 +2919,7 @@ Measured by
 decisions recorded without alternatives
 
 Refactored by
-force_analysis, tradeoff_matrix, ADR_with_alternatives, contextual_pattern_selection
+[Force Analysis](LEXICON.md#lexicon-force-analysis), [Trade-Off Matrix](LEXICON.md#lexicon-trade-off-matrix), [Decision Record with Alternatives](LEXICON.md#lexicon-decision-record-with-alternatives), [Contextual Pattern Selection](LEXICON.md#lexicon-contextual-pattern-selection)
 
 Enforced by
 decision records that require alternatives and the forces they answer
@@ -2995,7 +3000,7 @@ Referenced by
 Distinct from
 [Golden Hammer](PRINCIPLES.md#architecture-golden-hammer): A cargo cult copies a pattern's shape without its forces, while a golden hammer applies one familiar solution to every problem.
 
-Violated by
+Formed by
 Copy named patterns or architecture styles without implementing their required forces, contracts, constraints, or validation gates.
 
 Detected by
@@ -3005,7 +3010,7 @@ Measured by
 patterns missing their required boundary rules or contracts
 
 Refactored by
-validate_required_forces, add_missing_contracts, rename_if_not_pattern, remove_pattern_shell
+[Validate Required Forces](LEXICON.md#lexicon-validate-required-forces), [Define Contract](LEXICON.md#lexicon-define-contract), [Name the Concept](LEXICON.md#lexicon-name-the-concept), [Remove Pattern Shell](LEXICON.md#lexicon-remove-pattern-shell)
 
 Enforced by
 architecture tests that check each named pattern's required contracts
@@ -3090,7 +3095,7 @@ Distinct from
 Distinct from
 [Zombie Code](PRINCIPLES.md#architecture-zombie-code): Lava flow is code that may still run and whose purpose nobody records, while zombie code is unreachable or disabled.
 
-Violated by
+Formed by
 Preserve obsolete, half-migrated, or unexplained code paths because no record says whether they are still needed.
 
 Detected by
@@ -3100,7 +3105,7 @@ Measured by
 code paths with no runtime hits, deprecated code past its removal date
 
 Refactored by
-usage_instrumentation, owner_assignment, deprecation_plan, delete_after_evidence
+[Usage Instrumentation](LEXICON.md#lexicon-usage-instrumentation), [Assign Owner](LEXICON.md#lexicon-assign-owner), [Deprecation Plan](LEXICON.md#lexicon-deprecation-plan), [Delete After Evidence](LEXICON.md#lexicon-delete-after-evidence)
 
 Enforced by
 dead-code analysis, removal dates on deprecated paths
@@ -3158,6 +3163,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+- Aliases: Dead Code
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -3183,7 +3189,7 @@ none
 Referenced by
 [Evolutionary Architecture](PRINCIPLES.md#architecture-evolutionary-architecture)
 
-Violated by
+Formed by
 Leave unreachable, unused, or disabled code in the system where it keeps misleading the developer and the model, and can be reactivated by accident.
 
 Detected by
@@ -3193,7 +3199,7 @@ Measured by
 unused exports, unreachable branches
 
 Refactored by
-delete_code, archive_reference, remove_exports, add_dead_code_check
+[Delete After Evidence](LEXICON.md#lexicon-delete-after-evidence), [Archive Reference](LEXICON.md#lexicon-archive-reference), [Restrict Exports](LEXICON.md#lexicon-restrict-exports), [Dead Code Check](LEXICON.md#lexicon-dead-code-check)
 
 Enforced by
 unused-export and unreachable-code checks in the build
@@ -3272,7 +3278,7 @@ none
 Referenced by
 [Statelessness](PRINCIPLES.md#architecture-statelessness)
 
-Violated by
+Formed by
 Require operations to be called in a specific undocumented order for correctness.
 
 Detected by
@@ -3282,7 +3288,7 @@ Measured by
 operations that fail when called out of order
 
 Refactored by
-encode_state_machine, constructor_valid_state, make_order_explicit, add_precondition
+[Encode State Machine](LEXICON.md#lexicon-encode-state-machine), [Constructor-Valid State](LEXICON.md#lexicon-constructor-valid-state), [Make Order Explicit](LEXICON.md#lexicon-make-order-explicit), [Precondition Check](LEXICON.md#lexicon-precondition-check)
 
 Enforced by
 types or constructors that only produce valid states, precondition checks
@@ -3336,7 +3342,6 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [event_messaging](SCHEMA.md#force-event-messaging)
-- Aliases: Hidden Side Effects
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -3365,7 +3370,7 @@ Referenced by
 Distinct from
 [Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance): A hidden side effect is a query that writes, while action at a distance is one part changing behavior elsewhere through globals or listeners.
 
-Violated by
+Formed by
 Make an operation appear like a query or pure function while it mutates state, performs I/O, emits events, or changes global context.
 
 Detected by
@@ -3375,7 +3380,7 @@ Measured by
 queries that write or emit
 
 Refactored by
-rename_command, separate_query_from_command, make_effect_explicit, move_to_effect_boundary
+[Separate Query from Command](LEXICON.md#lexicon-separate-query-from-command), [Make Effects Explicit](LEXICON.md#lexicon-make-effects-explicit)
 
 Enforced by
 command–query separation rules in lint, effect-boundary review
@@ -3460,7 +3465,7 @@ none
 Referenced by
 [Controlled Side Effects](PRINCIPLES.md#architecture-controlled-side-effects)
 
-Violated by
+Formed by
 Let one part of the system change behavior far away through globals, monkey patches, shared registries, ambient context, or implicit event listeners.
 
 Detected by
@@ -3470,7 +3475,7 @@ Measured by
 global mutations and implicit listener registrations
 
 Refactored by
-explicit_dependency, localize_effect, trace_causation, restrict_global_mutation
+[Explicit Dependency](LEXICON.md#lexicon-explicit-dependency), [Localize Effect](LEXICON.md#lexicon-localize-effect), [Causation Tracing](LEXICON.md#lexicon-causation-tracing), [Restrict Global Mutation](LEXICON.md#lexicon-restrict-global-mutation)
 
 Enforced by
 lint rules against global mutation and monkey patching
@@ -3552,7 +3557,7 @@ none
 Referenced by
 [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
 
-Violated by
+Formed by
 Read user, tenant, locale, transaction, permissions, or request state from implicit global context instead of explicit parameters or scoped context objects.
 
 Detected by
@@ -3562,7 +3567,7 @@ Measured by
 global context reads outside infrastructure code
 
 Refactored by
-pass_context_explicitly, scope_context_object, inject_request_context, limit_ambient_use_to_infrastructure
+[Pass Context Explicitly](LEXICON.md#lexicon-pass-context-explicitly)
 
 Enforced by
 lint rules against global context reads in business logic
@@ -3643,7 +3648,7 @@ none
 Referenced by
 [Semantic Consistency](PRINCIPLES.md#architecture-semantic-consistency)
 
-Violated by
+Formed by
 Mix exceptions, nulls, booleans, strings, partial objects, console logging, and silent failure for the same error class.
 
 Detected by
@@ -3653,7 +3658,7 @@ Measured by
 distinct error shapes per error class
 
 Refactored by
-typed_result, standard_error_contract, [error_boundary](ALGORITHMS.md#algorithms-error-boundary), normalize_failure_modes
+[Introduce Typed Result](LEXICON.md#lexicon-introduce-typed-result), [Standard Error Contract](LEXICON.md#lexicon-standard-error-contract), [Error Boundaries](PRINCIPLES.md#architecture-error-boundaries)
 
 Enforced by
 a typed error contract held by the type checker, lint rules against thrown strings
@@ -3740,7 +3745,7 @@ none
 Referenced by
 [Error Handling](PRINCIPLES.md#architecture-error-handling)
 
-Violated by
+Formed by
 Use exceptions for expected branching, normal absence, validation alternatives, or loop control.
 
 Detected by
@@ -3750,7 +3755,7 @@ Measured by
 catch blocks on expected-absence paths
 
 Refactored by
-return_result_type, use_option_type, validate_before_call, branch_explicitly
+[Introduce Typed Result](LEXICON.md#lexicon-introduce-typed-result), [Precondition Check](LEXICON.md#lexicon-precondition-check)
 
 Enforced by
 lint rules against catch blocks that choose the normal path
@@ -3832,7 +3837,7 @@ none
 Referenced by
 [Null Object Pattern](PRINCIPLES.md#architecture-null-object-pattern)
 
-Violated by
+Formed by
 Use null, undefined, empty string, zero, false, missing field, and empty collection interchangeably.
 
 Detected by
@@ -3842,7 +3847,7 @@ Measured by
 fields with more than one representation of absence
 
 Refactored by
-define_absence_semantics, use_option_result, schema_nullability, normalize_input
+[Define Absence Semantics](LEXICON.md#lexicon-define-absence-semantics), [Introduce Typed Result](LEXICON.md#lexicon-introduce-typed-result), [Canonicalization](PRINCIPLES.md#architecture-canonicalization)
 
 Enforced by
 schema nullability rules, strict null checking
@@ -3896,6 +3901,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [modularity](SCHEMA.md#force-modularity), [contract_compatibility](SCHEMA.md#force-contract-compatibility), [semantic_consistency](SCHEMA.md#force-semantic-consistency), [model_governance](SCHEMA.md#force-model-governance), [domain_boundary](SCHEMA.md#force-domain-boundary)
+- Aliases: Anemic Model
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -3919,9 +3925,9 @@ Conflicts with
 none
 
 Referenced by
-[Aggregate](PRINCIPLES.md#architecture-aggregate), [Entity](PRINCIPLES.md#architecture-entity)
+[Domain Model](PRINCIPLES.md#architecture-domain-model), [Aggregate](PRINCIPLES.md#architecture-aggregate), [Entity](PRINCIPLES.md#architecture-entity)
 
-Violated by
+Formed by
 Store domain data in passive objects while business rules live in services, controllers, handlers, or scripts.
 
 Detected by
@@ -3931,7 +3937,7 @@ Measured by
 domain types without behavior, rules outside their aggregate
 
 Refactored by
-move_behavior_to_domain, add_value_object, add_aggregate_invariant, encapsulate_state
+[Move Logic to the Domain](LEXICON.md#lexicon-move-logic-to-the-domain), [Value Object](PRINCIPLES.md#architecture-value-object), [Add Aggregate Invariant](LEXICON.md#lexicon-add-aggregate-invariant), [Encapsulate State](LEXICON.md#lexicon-encapsulate-state)
 
 Enforced by
 architecture tests that locate domain rules, [design review](PRINCIPLES.md#architecture-design-review)
@@ -4019,7 +4025,7 @@ none
 Referenced by
 [Domain Service](PRINCIPLES.md#architecture-domain-service)
 
-Violated by
+Formed by
 Encode business processes as procedural scripts that directly coordinate validation, persistence, external calls, and domain decisions.
 
 Detected by
@@ -4029,7 +4035,7 @@ Measured by
 procedure length, business rules in handlers
 
 Refactored by
-extract_domain_model, extract_use_case, separate_ports, move_rules_to_domain
+[Extract Domain Model](LEXICON.md#lexicon-extract-domain-model), [Extract Use Case](LEXICON.md#lexicon-extract-use-case), [Introduce Port](LEXICON.md#lexicon-introduce-port), [Move Logic to the Domain](LEXICON.md#lexicon-move-logic-to-the-domain)
 
 Enforced by
 architecture tests on layer responsibilities, method size limits
@@ -4121,7 +4127,7 @@ Referenced by
 Distinct from
 [Transaction Script Sprawl](PRINCIPLES.md#architecture-transaction-script-sprawl): A fat controller puts business logic in the request handler, while transaction script sprawl writes business processes as procedural scripts wherever they live.
 
-Violated by
+Formed by
 Put validation, business rules, persistence orchestration, mapping, authorization, and response formatting in the controller layer.
 
 Detected by
@@ -4131,7 +4137,7 @@ Measured by
 controller method size, repository calls from controllers
 
 Refactored by
-extract_use_case, move_domain_logic, add_request_mapper, add_application_service
+[Extract Use Case](LEXICON.md#lexicon-extract-use-case), [Move Logic to the Domain](LEXICON.md#lexicon-move-logic-to-the-domain), [Map to Domain Model](LEXICON.md#lexicon-map-to-domain-model)
 
 Enforced by
 layer rules that keep domain logic out of controllers, size limits
@@ -4220,7 +4226,7 @@ none
 Referenced by
 [Interface Segregation Principle (ISP)](PRINCIPLES.md#architecture-interface-segregation)
 
-Violated by
+Formed by
 Place business-specific querying, orchestration, mapping, caching, validation, and policy into a repository until it becomes a second service layer.
 
 Detected by
@@ -4230,7 +4236,7 @@ Measured by
 business-specific methods per repository
 
 Refactored by
-extract_query_service, move_policy_to_domain_or_use_case, split_repository, define_persistence_contract
+[Extract Query Service](LEXICON.md#lexicon-extract-query-service), [Move Logic to the Domain](LEXICON.md#lexicon-move-logic-to-the-domain), [Split Repository](LEXICON.md#lexicon-split-repository), [Introduce Port](LEXICON.md#lexicon-introduce-port)
 
 Enforced by
 persistence-boundary rules, [design review](PRINCIPLES.md#architecture-design-review)
@@ -4316,7 +4322,7 @@ Referenced by
 Distinct from
 [Shotgun Surgery](PRINCIPLES.md#architecture-shotgun-surgery): A utility dump gathers unrelated helpers in one module, while shotgun surgery spreads one responsibility across many files.
 
-Violated by
+Formed by
 Accumulate unrelated helper functions in generic utility modules without ownership, cohesion, or domain language.
 
 Detected by
@@ -4326,7 +4332,7 @@ Measured by
 unrelated functions per utility module, importers per utility module
 
 Refactored by
-move_helper_to_owner, split_by_domain, extract_value_object, name_concept
+[Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner), [Split by Domain](LEXICON.md#lexicon-split-by-domain), [Value Object](PRINCIPLES.md#architecture-value-object), [Name the Concept](LEXICON.md#lexicon-name-the-concept)
 
 Enforced by
 naming rules that reject catch-all module names, cohesion analysis
@@ -4381,7 +4387,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [domain_boundary](SCHEMA.md#force-domain-boundary)
-- Aliases: Infrastructure-Centric Design
+- Aliases: Infrastructure-Centric Design, Framework-Centric Core
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -4407,7 +4413,7 @@ none
 Referenced by
 [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
-Violated by
+Formed by
 Let framework classes, decorators, lifecycle assumptions, request objects, ORM entities, or infrastructure annotations enter core domain logic.
 
 Detected by
@@ -4417,7 +4423,7 @@ Measured by
 framework imports in core modules
 
 Refactored by
-add_adapter, map_to_domain_model, introduce_port, move_framework_outward
+[Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Map to Domain Model](LEXICON.md#lexicon-map-to-domain-model), [Introduce Port](LEXICON.md#lexicon-introduce-port), [Move Framework Outward](LEXICON.md#lexicon-move-framework-outward)
 
 Enforced by
 import rules that keep framework packages out of the core
@@ -4506,7 +4512,7 @@ none
 Referenced by
 [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer)
 
-Violated by
+Formed by
 Spread vendor-specific APIs, models, exceptions, identifiers, or configuration throughout application and domain code.
 
 Detected by
@@ -4516,7 +4522,7 @@ Measured by
 vendor imports outside adapters
 
 Refactored by
-extract_vendor_adapter, define_port, translate_errors, own_canonical_model
+[Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Introduce Port](LEXICON.md#lexicon-introduce-port), [Translate Errors at the Boundary](LEXICON.md#lexicon-translate-errors-at-the-boundary), [Canonical Data Model](PRINCIPLES.md#architecture-canonical-data-model)
 
 Enforced by
 import rules that confine vendor packages to adapters
@@ -4608,7 +4614,7 @@ Distinct from
 Distinct from
 [Message Chain](PRINCIPLES.md#architecture-message-chain): A circular dependency is a cycle between modules, while a message chain is a client walking a chain of objects.
 
-Violated by
+Formed by
 Allow modules to depend on each other directly or indirectly until no module can change, test, deploy, or initialize independently.
 
 Detected by
@@ -4618,7 +4624,7 @@ Measured by
 dependency cycles and their length
 
 Refactored by
-invert_dependency, extract_interface, split_shared_contract, introduce_event_or_mediator
+[Invert Dependency](LEXICON.md#lexicon-invert-dependency), [Extract Interface](LEXICON.md#lexicon-extract-interface), [Split Interface](LEXICON.md#lexicon-split-interface), [Domain Events](PRINCIPLES.md#architecture-domain-events), [Mediator Pattern](PRINCIPLES.md#architecture-mediator-pattern)
 
 Enforced by
 a dependency-cycle check in the build
@@ -4703,7 +4709,7 @@ none
 Referenced by
 [Autonomy](PRINCIPLES.md#architecture-autonomy)
 
-Violated by
+Formed by
 Require two or more services or packages to deploy in lockstep because each depends on the other’s current behavior.
 
 Detected by
@@ -4713,10 +4719,10 @@ Measured by
 releases that required coordinated deployment
 
 Refactored by
-version_contract, backward_compatible_change, consumer_driven_contract_tests, adapter_phase_migration
+[Versioning](PRINCIPLES.md#architecture-versioning), [Backward-Compatible Change](LEXICON.md#lexicon-backward-compatible-change), [Consumer-Driven Contract Tests](LEXICON.md#lexicon-consumer-driven-contract-tests), [Compatibility Adapter](LEXICON.md#lexicon-compatibility-adapter)
 
 Enforced by
-consumer-driven contract tests, independent-deployment checks
+[consumer-driven contract tests](LEXICON.md#lexicon-consumer-driven-contract-tests), independent-deployment checks
 
 Before
 
@@ -4793,7 +4799,7 @@ none
 Referenced by
 [Asynchronous Communication](PRINCIPLES.md#architecture-asynchronous-communication)
 
-Violated by
+Formed by
 Build deep request-time chains across services or modules, making latency, availability, and failure behavior multiplicative.
 
 Detected by
@@ -4803,7 +4809,7 @@ Measured by
 synchronous call depth per request path
 
 Refactored by
-collapse_reads, introduce_async_event, cache_read_model, apply_timeout_bulkhead
+[Coarse-Grained Endpoint](LEXICON.md#lexicon-coarse-grained-endpoint), [Introduce Async Event](LEXICON.md#lexicon-introduce-async-event), [Query Projection](LEXICON.md#lexicon-query-projection), [Timeout Pattern](PRINCIPLES.md#architecture-timeout-pattern), [Bulkhead Pattern](PRINCIPLES.md#architecture-bulkhead-pattern)
 
 Enforced by
 call-depth limits in architecture review, timeout and bulkhead policies
@@ -4883,7 +4889,7 @@ none
 Referenced by
 [Uniform Interface](PRINCIPLES.md#architecture-uniform-interface)
 
-Violated by
+Formed by
 Require many small remote calls to complete one user or business operation.
 
 Detected by
@@ -4893,7 +4899,7 @@ Measured by
 remote calls per user operation
 
 Refactored by
-coarse_grained_endpoint, batch_api, query_projection, data_loader
+[Coarse-Grained Endpoint](LEXICON.md#lexicon-coarse-grained-endpoint), [Query Projection](LEXICON.md#lexicon-query-projection), [Batch Fetch](LEXICON.md#lexicon-batch-fetch)
 
 Enforced by
 API review, performance tests that bound call counts
@@ -4946,6 +4952,7 @@ Shape it refuses
 - Category: [anti-patterns](PRINCIPLES.md#architecture-category-anti-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [architecture_evolution](SCHEMA.md#force-architecture-evolution)
+- Aliases: N+1 Query
 - Layer: [Enforcement Core](SCHEMA.md#layer-enforcement-core)
 
 Details
@@ -4971,7 +4978,7 @@ none
 Referenced by
 [Algorithmic Efficiency](PRINCIPLES.md#architecture-algorithmic-efficiency)
 
-Violated by
+Formed by
 Fetch a collection, then issue one query or remote call per item rather than fetching required related data intentionally.
 
 Detected by
@@ -4981,7 +4988,7 @@ Measured by
 queries per request as the row count grows
 
 Refactored by
-batch_fetch, join_or_include, preload, cache_projection
+[Batch Fetch](LEXICON.md#lexicon-batch-fetch), [Query Projection](LEXICON.md#lexicon-query-projection)
 
 Enforced by
 query-count assertions in integration tests
@@ -5060,7 +5067,7 @@ none
 Referenced by
 [Caching](PRINCIPLES.md#architecture-caching)
 
-Violated by
+Formed by
 Cache data without key correctness, tenant isolation, authorization context, invalidation, or schema version, or key the entry by time or lifetime alone.
 
 Detected by
@@ -5070,7 +5077,7 @@ Measured by
 cache keys missing tenant, identity or version
 
 Refactored by
-define_cache_contract, include_context_in_key, key_by_input_fingerprint, add_invalidation, add_schema_version
+[Cache Contract](LEXICON.md#lexicon-cache-contract), [Context-Keyed Cache](LEXICON.md#lexicon-context-keyed-cache), [Cache Invalidation on Write](LEXICON.md#lexicon-cache-invalidation-on-write), [Versioning](PRINCIPLES.md#architecture-versioning)
 
 Enforced by
 cache-key review, tests that vary tenant and version
@@ -5156,7 +5163,7 @@ none
 Referenced by
 [Circuit Breaker Pattern](PRINCIPLES.md#architecture-circuit-breaker-pattern)
 
-Violated by
+Formed by
 Allow many clients or workers to retry failed dependencies aggressively and synchronously, increasing pressure on the failing system.
 
 Detected by
@@ -5166,7 +5173,7 @@ Measured by
 retries per failed call, retry share of load during incidents
 
 Refactored by
-bounded_retry, exponential_backoff, jitter, circuit_breaker, idempotency_key
+[Bounded Retry](LEXICON.md#lexicon-bounded-retry), [Backoff](LEXICON.md#lexicon-backoff), [Jitter](LEXICON.md#lexicon-jitter), [Circuit Breaker Pattern](PRINCIPLES.md#architecture-circuit-breaker-pattern), [Idempotency Key](LEXICON.md#lexicon-idempotency-key)
 
 Enforced by
 a resilience policy that requires bounded retries with backoff and jitter
@@ -5248,7 +5255,7 @@ none
 Referenced by
 [Timeout Pattern](PRINCIPLES.md#architecture-timeout-pattern)
 
-Violated by
+Formed by
 Call external systems without explicit timeouts, cancellation, or deadline propagation.
 
 Detected by
@@ -5258,7 +5265,7 @@ Measured by
 outbound calls without a timeout
 
 Refactored by
-add_timeout, propagate_deadline, add_cancellation, fallback_or_failfast
+[Timeout Pattern](PRINCIPLES.md#architecture-timeout-pattern), [Deadline Propagation](LEXICON.md#lexicon-deadline-propagation), [Cancellation](LEXICON.md#lexicon-cancellation), [Fail Fast or Fall Back](LEXICON.md#lexicon-fail-fast-or-fall-back)
 
 Enforced by
 a lint rule that requires a timeout on outbound calls
@@ -5336,7 +5343,7 @@ none
 Referenced by
 [Backpressure](PRINCIPLES.md#architecture-backpressure)
 
-Violated by
+Formed by
 Accept work faster than the system can process it without queue limits, admission control, rate limits, or shedding.
 
 Detected by
@@ -5346,7 +5353,7 @@ Measured by
 queue depth and memory growth under load
 
 Refactored by
-bounded_queue, rate_limit, load_shed, apply_backpressure_signal
+[Bounded Queue](LEXICON.md#lexicon-bounded-queue), [Rate Limiting](PRINCIPLES.md#architecture-rate-limiting), [Load Shedding](LEXICON.md#lexicon-load-shedding), [Backpressure](PRINCIPLES.md#architecture-backpressure)
 
 Enforced by
 load tests, checks that every queue is configured with a bound
@@ -5423,7 +5430,7 @@ none
 Referenced by
 [Fail Fast](PRINCIPLES.md#architecture-fail-fast)
 
-Violated by
+Formed by
 Accept, transform, or persist invalid data without validation, checksums, invariants, reconciliation, or audit.
 
 Detected by
@@ -5433,7 +5440,7 @@ Measured by
 invariant violations and reconciliation mismatches
 
 Refactored by
-validate_at_boundary, add_invariants, add_reconciliation, audit_data_changes
+[Validate at the Boundary](LEXICON.md#lexicon-validate-at-the-boundary), [Invariant Check](LEXICON.md#lexicon-invariant-check), [Reconciliation Job](LEXICON.md#lexicon-reconciliation-job), [Data Change Audit](LEXICON.md#lexicon-data-change-audit)
 
 Enforced by
 boundary validation, invariant checks, reconciliation jobs
@@ -5513,7 +5520,7 @@ none
 Referenced by
 [Write Barrier](PRINCIPLES.md#architecture-write-barrier), [Concurrency Control](PRINCIPLES.md#architecture-concurrency-control)
 
-Violated by
+Formed by
 Allow concurrent writers to overwrite each other without version checks, locks, compare-and-swap, or transaction isolation.
 
 Detected by
@@ -5523,7 +5530,7 @@ Measured by
 concurrent update conflicts found in tests
 
 Refactored by
-[optimistic_locking](PRINCIPLES.md#architecture-optimistic-locking), [pessimistic_locking](PRINCIPLES.md#architecture-pessimistic-locking), merge_policy, transaction_isolation
+[Optimistic Locking](PRINCIPLES.md#architecture-optimistic-locking), [Pessimistic Locking](PRINCIPLES.md#architecture-pessimistic-locking), [Merge Policy](LEXICON.md#lexicon-merge-policy), [Transaction Isolation Level](LEXICON.md#lexicon-transaction-isolation-level)
 
 Enforced by
 optimistic-locking checks, concurrency tests
@@ -5606,7 +5613,7 @@ none
 Referenced by
 [Outbox Pattern](PRINCIPLES.md#architecture-outbox-pattern)
 
-Violated by
+Formed by
 Write related state to two systems without atomicity, outbox, saga, reconciliation, or compensation.
 
 Detected by
@@ -5616,7 +5623,7 @@ Measured by
 writes to two systems outside one transaction or outbox
 
 Refactored by
-transactional_outbox, [saga](LEXICON.md#lexicon-saga), [idempotent_consumer](PRINCIPLES.md#architecture-idempotent-consumer), reconciliation_job
+[Outbox Pattern](PRINCIPLES.md#architecture-outbox-pattern), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern), [Idempotent Consumer](PRINCIPLES.md#architecture-idempotent-consumer), [Reconciliation Job](LEXICON.md#lexicon-reconciliation-job)
 
 Enforced by
 an outbox or saga, verified by integration tests
@@ -5695,7 +5702,7 @@ none
 Referenced by
 [Causal Consistency](PRINCIPLES.md#architecture-causal-consistency)
 
-Violated by
+Formed by
 Let users or processes perform a write and then read from a stale replica, cache, projection, or eventually consistent view without explicit consistency contract.
 
 Detected by
@@ -5705,7 +5712,7 @@ Measured by
 stale reads observed after writes
 
 Refactored by
-read_from_primary_after_write, invalidate_cache, show_pending_state, define_consistency_contract
+[Read From Primary After Write](LEXICON.md#lexicon-read-from-primary-after-write), [Cache Invalidation on Write](LEXICON.md#lexicon-cache-invalidation-on-write), [Consistency Contract](LEXICON.md#lexicon-consistency-contract)
 
 Enforced by
 consistency-contract tests that read after a write
@@ -5784,7 +5791,7 @@ none
 Referenced by
 [Threat Modeling](PRINCIPLES.md#architecture-threat-modeling)
 
-Violated by
+Formed by
 Add visible security controls that do not reduce the actual threat model or can be bypassed by alternate paths.
 
 Detected by
@@ -5794,7 +5801,7 @@ Measured by
 controls not linked to a threat, bypass paths found
 
 Refactored by
-threat_model, server_side_enforcement, penetration_test, [policy_as_code](PRINCIPLES.md#architecture-policy-as-code)
+[Threat Modeling](PRINCIPLES.md#architecture-threat-modeling), [Server-Side Enforcement](LEXICON.md#lexicon-server-side-enforcement), [Penetration Testing](LEXICON.md#lexicon-penetration-testing), [Policy as Code](PRINCIPLES.md#architecture-policy-as-code)
 
 Enforced by
 threat-model review, penetration tests
@@ -5873,7 +5880,7 @@ none
 Referenced by
 [Authorization](PRINCIPLES.md#architecture-authorization)
 
-Violated by
+Formed by
 Spread authorization checks across controllers, services, repositories, UI, and ad hoc conditionals without a central policy model.
 
 Detected by
@@ -5883,7 +5890,7 @@ Measured by
 endpoints without a policy check, duplicated role checks
 
 Refactored by
-centralize_policy, [policy_as_code](PRINCIPLES.md#architecture-policy-as-code), ABAC_or_RBAC_model, authorization_tests
+[Centralize Policy](LEXICON.md#lexicon-centralize-policy), [Policy as Code](PRINCIPLES.md#architecture-policy-as-code), [Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control), [Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control), [Authorization Tests](LEXICON.md#lexicon-authorization-tests)
 
 Enforced by
 a policy engine, with authorization tests per endpoint
@@ -5962,7 +5969,7 @@ none
 Referenced by
 [Secrets Management](PRINCIPLES.md#architecture-secrets-management)
 
-Violated by
+Formed by
 Store credentials, tokens, keys, certificates, or sensitive configuration across code, config files, logs, tickets, and local environments.
 
 Detected by
@@ -5972,7 +5979,7 @@ Measured by
 secrets found in source and logs
 
 Refactored by
-secret_manager, rotate_secret, scan_repository, least_privilege_credential
+[Secrets Management](PRINCIPLES.md#architecture-secrets-management), [Secret Rotation](LEXICON.md#lexicon-secret-rotation), [Repository Secret Scan](LEXICON.md#lexicon-repository-secret-scan), [Least-Privilege Credential](LEXICON.md#lexicon-least-privilege-credential)
 
 Enforced by
 secret scanning in the build, a secret store
@@ -6052,7 +6059,7 @@ none
 Referenced by
 [Privacy by Design](PRINCIPLES.md#architecture-privacy-by-design)
 
-Violated by
+Formed by
 Collect, store, log, transmit, or expose more personal data than needed for the declared purpose.
 
 Detected by
@@ -6062,7 +6069,7 @@ Measured by
 personal-data fields in logs and exports
 
 Refactored by
-[data_minimization](LEXICON.md#lexicon-data-minimization), field_redaction, purpose_binding, retention_policy
+[Purpose Binding](LEXICON.md#lexicon-purpose-binding), [Field Redaction](LEXICON.md#lexicon-field-redaction), [Retention Policy](LEXICON.md#lexicon-retention-policy)
 
 Enforced by
 privacy review, log redaction rules
@@ -6139,7 +6146,7 @@ none
 Referenced by
 [Alerting](PRINCIPLES.md#architecture-alerting)
 
-Violated by
+Formed by
 Emit excessive, low-signal logs, metrics, traces, or alerts without severity, ownership, cardinality control, or actionability.
 
 Detected by
@@ -6149,7 +6156,7 @@ Measured by
 alerts acknowledged without action, high-cardinality metrics
 
 Refactored by
-define_signal_quality, reduce_cardinality, add_runbook_owner, sample_or_aggregate
+[Define Signal Quality](LEXICON.md#lexicon-define-signal-quality), [Cardinality Reduction](LEXICON.md#lexicon-cardinality-reduction), [Runbook Owner](LEXICON.md#lexicon-runbook-owner), [Sampling and Aggregation](LEXICON.md#lexicon-sampling-and-aggregation)
 
 Enforced by
 alert-ownership rules, metric cardinality limits
@@ -6227,7 +6234,7 @@ none
 Referenced by
 [Logging](PRINCIPLES.md#architecture-logging)
 
-Violated by
+Formed by
 Log errors or warnings as if logging itself handles the failure, while the system continues without recovery, propagation, or safe fallback.
 
 Detected by
@@ -6237,7 +6244,7 @@ Measured by
 catch blocks that log and continue
 
 Refactored by
-return_typed_error, fail_fast_or_fallback, add_recovery_policy, alert_critical_failure
+[Introduce Typed Result](LEXICON.md#lexicon-introduce-typed-result), [Fail Fast or Fall Back](LEXICON.md#lexicon-fail-fast-or-fall-back), [Recovery Policy](LEXICON.md#lexicon-recovery-policy), [Alert on Critical Failure](LEXICON.md#lexicon-alert-on-critical-failure)
 
 Enforced by
 a lint rule against catch blocks that only log
@@ -6322,7 +6329,7 @@ none
 Referenced by
 [Self-Healing Architecture](PRINCIPLES.md#architecture-self-healing-architecture), [Auto-Remediation](PRINCIPLES.md#architecture-auto-remediation)
 
-Violated by
+Formed by
 Perform by hand the repeatable operational actions during incidents, deploys, migrations, or recovery.
 
 Detected by
@@ -6332,7 +6339,7 @@ Measured by
 manual steps repeated across incidents
 
 Refactored by
-automate_runbook, add_guardrails, validate_preconditions, record_execution_log
+[Automate the Runbook](LEXICON.md#lexicon-automate-the-runbook), [Guardrails](LEXICON.md#lexicon-guardrails), [Precondition Check](LEXICON.md#lexicon-precondition-check), [Execution Log](LEXICON.md#lexicon-execution-log)
 
 Enforced by
 operations review of manual steps repeated across incidents
@@ -6410,7 +6417,7 @@ none
 Referenced by
 [Canary Deployment](PRINCIPLES.md#architecture-canary-deployment)
 
-Violated by
+Formed by
 Ship a large, irreversible, all-user change without staged rollout, feature flags, canary, rollback, or blast-radius control.
 
 Detected by
@@ -6420,7 +6427,7 @@ Measured by
 release batch size, releases without a rollback path
 
 Refactored by
-feature_flag, canary_deploy, blue_green, rollback_plan, small_batch_release
+[Feature Toggle](PRINCIPLES.md#architecture-feature-toggle), [Canary Deployment](PRINCIPLES.md#architecture-canary-deployment), [Blue-Green Deployment](PRINCIPLES.md#architecture-blue-green-deployment), [Rollback Plan](LEXICON.md#lexicon-rollback-plan), [Small-Batch Release](LEXICON.md#lexicon-small-batch-release)
 
 Enforced by
 release gates that require a canary or a feature flag and a rollback plan
@@ -6497,7 +6504,7 @@ none
 Referenced by
 [Rollback](PRINCIPLES.md#architecture-rollback)
 
-Violated by
+Formed by
 Apply schema, data, or infrastructure changes that cannot safely run alongside old versions or be rolled back.
 
 Detected by
@@ -6507,7 +6514,7 @@ Measured by
 migrations without a down step or a compatible phase
 
 Refactored by
-expand_contract_migration, backup, dual_read_write_temporarily, rollback_test
+[Expand-Contract Migration](LEXICON.md#lexicon-expand-contract-migration), [Backup](LEXICON.md#lexicon-backup), [Dual Read and Write](LEXICON.md#lexicon-dual-read-and-write), [Rollback Plan](LEXICON.md#lexicon-rollback-plan)
 
 Enforced by
 migration review, rollback tests
@@ -6593,7 +6600,7 @@ Distinct from
 Distinct from
 [Zombie Code](PRINCIPLES.md#architecture-zombie-code): Frozen architecture is a decision made too early, while zombie code is dead code left behind.
 
-Violated by
+Formed by
 Lock in major architectural decisions before validating domain forces, quality attributes, operational realities, and change vectors.
 
 Detected by
@@ -6603,7 +6610,7 @@ Measured by
 decisions recorded without evidence
 
 Refactored by
-[minimum_viable_architecture](PRINCIPLES.md#architecture-minimum-viable-architecture), [evolutionary_architecture](PRINCIPLES.md#architecture-evolutionary-architecture), [fitness_functions](PRINCIPLES.md#architecture-fitness-functions), decision_review
+[Minimum Viable Architecture](PRINCIPLES.md#architecture-minimum-viable-architecture), [Evolutionary Architecture](PRINCIPLES.md#architecture-evolutionary-architecture), [Fitness Functions](PRINCIPLES.md#architecture-fitness-functions), [Decision Review](LEXICON.md#lexicon-decision-review)
 
 Enforced by
 decision records that require evidence, periodic decision review
@@ -6688,7 +6695,7 @@ Distinct from
 Distinct from
 [Speculative Generality](PRINCIPLES.md#architecture-speculative-generality): An astronaut builds whole frameworks and meta-models, while speculative generality is one abstraction built for variation with no evidence of arriving.
 
-Violated by
+Formed by
 Prefer abstract frameworks, taxonomies, meta-models, and generic engines over concrete user, domain, and operational needs.
 
 Detected by
@@ -6698,7 +6705,7 @@ Measured by
 generic components with few real consumers
 
 Refactored by
-anchor_to_use_cases, prove_with_vertical_slice, delete_unused_generality, measure_delivery_cost
+[Anchor to Use Cases](LEXICON.md#lexicon-anchor-to-use-cases), [Vertical Slice Proof](LEXICON.md#lexicon-vertical-slice-proof), [Inline Abstraction](LEXICON.md#lexicon-inline-abstraction), [Measure Delivery Cost](LEXICON.md#lexicon-measure-delivery-cost)
 
 Enforced by
 design review against real use cases
@@ -6777,7 +6784,7 @@ none
 Referenced by
 [Quality Attributes](PRINCIPLES.md#architecture-quality-attributes)
 
-Violated by
+Formed by
 Optimize architecture for immediate feature delivery while ignoring quality attributes such as security, operability, scalability, maintainability, and evolvability.
 
 Detected by
@@ -6787,7 +6794,7 @@ Measured by
 quality attributes absent from decisions, services without SLOs
 
 Refactored by
-define_quality_scenarios, add_fitness_functions, [architecture_review](PRINCIPLES.md#architecture-architecture-review), risk_register
+[Quality Scenarios](LEXICON.md#lexicon-quality-scenarios), [Fitness Functions](PRINCIPLES.md#architecture-fitness-functions), [Architecture Review](PRINCIPLES.md#architecture-architecture-review), [Risk Register](LEXICON.md#lexicon-risk-register)
 
 Enforced by
 architecture review with quality scenarios, SLO gates
@@ -6870,7 +6877,7 @@ none
 Referenced by
 [Testability](PRINCIPLES.md#architecture-testability)
 
-Violated by
+Formed by
 Rely mainly on slow, brittle end-to-end tests while unit, contract, component, and property tests are sparse.
 
 Detected by
@@ -6880,7 +6887,7 @@ Measured by
 share of end-to-end tests, suite duration
 
 Refactored by
-add_unit_tests, contract_tests, component_tests, property_tests, reduce_E2E_scope
+[Unit Tests](LEXICON.md#lexicon-unit-tests), [Contract Testing](LEXICON.md#lexicon-contract-testing), [Component Tests](LEXICON.md#lexicon-component-tests), [Property-Based Testing](PRINCIPLES.md#architecture-property-based-testing)
 
 Enforced by
 test-suite composition review, limits on CI duration
@@ -6966,7 +6973,7 @@ none
 Referenced by
 [Specification-Based Testing](PRINCIPLES.md#architecture-specification-based-testing)
 
-Violated by
+Formed by
 Overuse mocks so tests verify internal calls rather than observable behavior or contracts.
 
 Detected by
@@ -6976,7 +6983,7 @@ Measured by
 tests that break on refactors with no change in behavior
 
 Refactored by
-test_observable_behavior, contract_test, use_fake_at_boundary, reduce_internal_mocks
+[Test Observable Behavior](LEXICON.md#lexicon-test-observable-behavior), [Contract Testing](LEXICON.md#lexicon-contract-testing), [Fake at the Boundary](LEXICON.md#lexicon-fake-at-the-boundary)
 
 Enforced by
 contract tests, review of mock usage
@@ -7054,7 +7061,7 @@ none
 Referenced by
 [Reproducibility](PRINCIPLES.md#architecture-reproducibility)
 
-Violated by
+Formed by
 Accept intermittent test failures as normal and rerun until green instead of fixing nondeterminism or isolation defects.
 
 Detected by
@@ -7064,7 +7071,7 @@ Measured by
 rerun rate, quarantined tests past their fix date
 
 Refactored by
-isolate_state, control_time_randomness, fix_race, remove_external_dependency
+[Isolate Test State](LEXICON.md#lexicon-isolate-test-state), [Inject Clock and Randomness](LEXICON.md#lexicon-inject-clock-and-randomness), [Fix the Race](LEXICON.md#lexicon-fix-the-race), [Fake at the Boundary](LEXICON.md#lexicon-fake-at-the-boundary)
 
 Enforced by
 a CI policy that fails on a retried test and tracks every quarantined one
@@ -7147,7 +7154,7 @@ none
 Referenced by
 [Prompt Engineering](PRINCIPLES.md#architecture-prompt-engineering)
 
-Violated by
+Formed by
 Scatter prompts, retrieval rules, model parameters, safety instructions, and output schemas across code without versioning, evaluation, or ownership.
 
 Detected by
@@ -7157,7 +7164,7 @@ Measured by
 prompt literals outside the registry
 
 Refactored by
-prompt_registry, version_prompt, add_eval_suite, centralize_model_config
+[Prompt Registry](LEXICON.md#lexicon-prompt-registry), [Prompt Versioning](LEXICON.md#lexicon-prompt-versioning), [Evaluation Suite](LEXICON.md#lexicon-evaluation-suite), [Centralized Model Configuration](LEXICON.md#lexicon-centralized-model-configuration)
 
 Enforced by
 a prompt registry, with an evaluation required on every change
@@ -7238,7 +7245,7 @@ Referenced by
 Contracts
 [Agent Creator Kernel](ALGORITHMS.md#algorithms-agent-creator-kernel)
 
-Violated by
+Formed by
 Generate answers, classifications, plans, or decisions without evidence retrieval, source references, confidence limits, or unsupported-claim handling.
 
 Detected by
@@ -7248,7 +7255,7 @@ Measured by
 answers without a source where one is required
 
 Refactored by
-RAG_boundary, evidence_citation, claim_validation, abstain_or_disclose_uncertainty
+[Retrieval-Augmented Generation (RAG)](PRINCIPLES.md#architecture-retrieval-augmented-generation), [Evidence Citation](LEXICON.md#lexicon-evidence-citation), [Claim Validation](LEXICON.md#lexicon-claim-validation), [Abstain or Disclose Uncertainty](LEXICON.md#lexicon-abstain-or-disclose-uncertainty)
 
 Enforced by
 retrieval evaluation, claim validation against the retrieved sources
@@ -7328,7 +7335,7 @@ none
 Referenced by
 [Model Governance](PRINCIPLES.md#architecture-model-governance)
 
-Violated by
+Formed by
 Use models, embeddings, prompts, or evaluation artifacts without recording version, configuration, dataset, or inference context.
 
 Detected by
@@ -7338,7 +7345,7 @@ Measured by
 inferences logged without a model version
 
 Refactored by
-[model_registry](LEXICON.md#lexicon-model-registry), version_prompt_dataset_index, record_inference_context, governance_log
+[Model Registry](LEXICON.md#lexicon-model-registry), [Prompt Versioning](LEXICON.md#lexicon-prompt-versioning), [Inference Context Record](LEXICON.md#lexicon-inference-context-record), [Governance Log](LEXICON.md#lexicon-governance-log)
 
 Enforced by
 a model registry, inference logging that requires a version
@@ -7398,28 +7405,28 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_domain_driven_design["Domain-Driven Design (DDD)"]
-n_domain_model["Domain Model"]
-n_bounded_context["Bounded Context"]
-n_context_mapping["Context Mapping"]
-n_anti_corruption_layer["Anti-Corruption Layer"]
-n_explicit_boundaries["Explicit Boundaries"]
-n_aggregate["Aggregate"]
-n_value_object["Value Object"]
-n_entity["Entity"]
-n_domain_service["Domain Service"]
-n_domain_driven_design --> n_bounded_context
-n_domain_driven_design --> n_domain_model
-n_bounded_context --> n_explicit_boundaries
-n_bounded_context --> n_context_mapping
-n_context_mapping --> n_bounded_context
-n_context_mapping --> n_explicit_boundaries
-n_context_mapping --> n_anti_corruption_layer
-n_aggregate --> n_explicit_boundaries
-n_entity --> n_domain_model
-n_entity -.-> n_value_object
-n_domain_service --> n_domain_model
-n_domain_service -.-> n_aggregate
+    n_domain_driven_design["Domain-Driven Design (DDD)"]
+    n_domain_model["Domain Model"]
+    n_bounded_context["Bounded Context"]
+    n_context_mapping["Context Mapping"]
+    n_anti_corruption_layer["Anti-Corruption Layer"]
+    n_explicit_boundaries["Explicit Boundaries"]
+    n_aggregate["Aggregate"]
+    n_value_object["Value Object"]
+    n_entity["Entity"]
+    n_domain_service["Domain Service"]
+    n_domain_driven_design --> n_bounded_context
+    n_domain_driven_design --> n_domain_model
+    n_bounded_context --> n_explicit_boundaries
+    n_bounded_context --> n_context_mapping
+    n_context_mapping --> n_bounded_context
+    n_context_mapping --> n_explicit_boundaries
+    n_context_mapping --> n_anti_corruption_layer
+    n_aggregate --> n_explicit_boundaries
+    n_entity --> n_domain_model
+    n_entity -.-> n_value_object
+    n_domain_service --> n_domain_model
+    n_domain_service -.-> n_aggregate
 ```
 
 ### Domain-Driven Design (DDD)
@@ -7461,7 +7468,7 @@ Distinct from
 [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture): Domain-driven design models software on the domain's language, while event-driven architecture connects services through published events.
 
 Violated by
-domain logic in infrastructure/controllers
+[Anemic Domain Model](PRINCIPLES.md#architecture-anemic-domain-model), [Fat Controller](PRINCIPLES.md#architecture-fat-controller)
 
 Detected by
 anemic models, scattered business rules
@@ -7470,7 +7477,7 @@ Measured by
 domain logic locality
 
 Refactored by
-Extract Domain Model, Add Aggregate, Split Context
+[Extract Domain Model](LEXICON.md#lexicon-extract-domain-model), [Aggregate](PRINCIPLES.md#architecture-aggregate), [Split Bounded Context](LEXICON.md#lexicon-split-bounded-context)
 
 Enforced by
 layer rules, domain tests
@@ -7555,7 +7562,7 @@ In tension with
 [Persistence Simplicity](LEXICON.md#lexicon-persistence-simplicity)
 
 Conflicts with
-[Anemic Model](LEXICON.md#lexicon-anemic-model)
+[Anemic Domain Model](PRINCIPLES.md#architecture-anemic-domain-model)
 
 Referenced by
 [Domain-Driven Design (DDD)](PRINCIPLES.md#architecture-domain-driven-design), [Entity](PRINCIPLES.md#architecture-entity), [Domain Service](PRINCIPLES.md#architecture-domain-service), [Semantic Contracts](PRINCIPLES.md#architecture-semantic-contracts), [Domain Events](PRINCIPLES.md#architecture-domain-events)
@@ -7564,7 +7571,7 @@ Tensions
 [Domain Model / Persistence Simplicity](SCHEMA.md#tension-domain-model-persistence-simplicity)
 
 Violated by
-business rules outside domain objects/services
+[Anemic Domain Model](PRINCIPLES.md#architecture-anemic-domain-model)
 
 Detected by
 procedural domain logic in services/controllers
@@ -7573,7 +7580,7 @@ Measured by
 rule locality, invariant coverage
 
 Refactored by
-Move Logic to Domain, Add Value Object, Add Aggregate
+[Move Logic to the Domain](LEXICON.md#lexicon-move-logic-to-the-domain), [Value Object](PRINCIPLES.md#architecture-value-object), [Aggregate](PRINCIPLES.md#architecture-aggregate)
 
 Enforced by
 domain layer rules, [tests](LEXICON.md#lexicon-tests)
@@ -7626,7 +7633,7 @@ Depends on
 [Ubiquitous Language](PRINCIPLES.md#architecture-ubiquitous-language), [Invariant](PRINCIPLES.md#architecture-invariant), [Correctness](PRINCIPLES.md#architecture-correctness), [Semantic Contracts](PRINCIPLES.md#architecture-semantic-contracts), [Business Rule Encapsulation](LEXICON.md#lexicon-business-rule-encapsulation)
 
 Shape it refuses
-[Anemic Model](LEXICON.md#lexicon-anemic-model)
+[Anemic Domain Model](PRINCIPLES.md#architecture-anemic-domain-model)
 
 ### Bounded Context
 
@@ -7634,7 +7641,6 @@ Shape it refuses
 - Category: [Domain Architecture](PRINCIPLES.md#architecture-category-domain-architecture)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: domain, service, team
-- Aliases: Bounded Contexts
 - Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
 
 Details
@@ -7670,7 +7676,7 @@ Distinct from
 [Relationship Semantics](LEXICON.md#lexicon-relationship-semantics): A bounded context fixes meaning inside one boundary, while relationship semantics fixes the meaning of each link between boundaries.
 
 Violated by
-cross-context model leakage
+[Shared Global Model](LEXICON.md#lexicon-shared-global-model)
 
 Detected by
 shared domain entities across contexts
@@ -7679,7 +7685,7 @@ Measured by
 context coupling
 
 Refactored by
-Split Model, Add Anti-Corruption Layer, Define Context Map
+[Split Bounded Context](LEXICON.md#lexicon-split-bounded-context), [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer), [Context Mapping](PRINCIPLES.md#architecture-context-mapping)
 
 Enforced by
 package/service boundaries
@@ -7767,7 +7773,7 @@ Tensions
 [Context Mapping / Documentation Overhead](SCHEMA.md#tension-context-mapping-documentation-overhead)
 
 Violated by
-undocumented service/domain relationships
+[Implicit Integration](LEXICON.md#lexicon-implicit-integration)
 
 Detected by
 unclear ownership, ambiguous integration flows
@@ -7776,7 +7782,7 @@ Measured by
 undocumented dependency count
 
 Refactored by
-Define Context Map, Classify Upstream/Downstream
+none
 
 Enforced by
 architecture docs, dependency reviews
@@ -7866,7 +7872,7 @@ Tensions
 [Anti-Corruption Layer / Mapping Overhead](SCHEMA.md#tension-anti-corruption-layer-mapping-overhead)
 
 Violated by
-external model leaking into domain
+[Direct External Coupling](LEXICON.md#lexicon-direct-external-coupling)
 
 Detected by
 external DTOs used in domain layer
@@ -7875,7 +7881,7 @@ Measured by
 leakage count, adapter coverage
 
 Refactored by
-Add Translator, Add Adapter, Introduce Boundary DTO
+[Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Introduce Boundary DTO](LEXICON.md#lexicon-introduce-boundary-dto)
 
 Enforced by
 import rules, layer tests
@@ -7989,7 +7995,7 @@ Distinct from
 [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility): Explicit boundaries declare interfaces, while single responsibility limits what sits behind one to one reason to change.
 
 Violated by
-internal imports, shared mutable internals
+[Boundary Leakage](PRINCIPLES.md#architecture-boundary-leakage), [Inappropriate Intimacy](PRINCIPLES.md#architecture-inappropriate-intimacy)
 
 Detected by
 forbidden imports, [cyclic dependencies](PRINCIPLES.md#architecture-circular-dependency)
@@ -7998,7 +8004,7 @@ Measured by
 boundary violation count
 
 Refactored by
-Move Code, Extract API, Restrict Exports
+[Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner), [Define Contract](LEXICON.md#lexicon-define-contract), [Restrict Exports](LEXICON.md#lexicon-restrict-exports)
 
 Enforced by
 module rules, architecture tests
@@ -8087,7 +8093,7 @@ Tensions
 [Aggregate / Aggregate Size](SCHEMA.md#tension-aggregate-aggregate-size)
 
 Violated by
-invariants enforced by services outside the entity cluster
+[Anemic Domain Model](PRINCIPLES.md#architecture-anemic-domain-model)
 
 Detected by
 cross-entity invariant checks scattered in services
@@ -8096,7 +8102,7 @@ Measured by
 out-of-aggregate invariant enforcement count
 
 Refactored by
-Define Aggregate Root, Enforce Invariants Within
+[Add Aggregate Invariant](LEXICON.md#lexicon-add-aggregate-invariant)
 
 Enforced by
 domain model review
@@ -8185,7 +8191,7 @@ Tensions
 [Value Object / Object Count](SCHEMA.md#tension-object-count-value-object)
 
 Violated by
-domain concepts carried as bare primitives
+[Primitive Obsession](PRINCIPLES.md#architecture-primitive-obsession)
 
 Detected by
 repeated validation of the same primitive shape
@@ -8194,7 +8200,7 @@ Measured by
 primitive-typed domain concept count
 
 Refactored by
-Introduce Value Object
+none
 
 Enforced by
 domain model review
@@ -8292,7 +8298,7 @@ Distinct from
 [Value Object](PRINCIPLES.md#architecture-value-object): An entity is known by an identity that outlives its attributes, while a value object is known only by its attributes.
 
 Violated by
-identity equated by attribute comparison
+[Attribute-Compared Identity](LEXICON.md#lexicon-attribute-compared-identity)
 
 Detected by
 equality by field value where identity is meant
@@ -8301,7 +8307,7 @@ Measured by
 attribute-equality misuse count
 
 Refactored by
-Model Identity Explicitly
+none
 
 Enforced by
 domain model review
@@ -8395,7 +8401,7 @@ Distinct from
 [Aggregate](PRINCIPLES.md#architecture-aggregate): A domain service holds a stateless rule spanning entities, while an aggregate holds entities and their invariants under one root.
 
 Violated by
-multi-entity domain rules living in controllers
+[Fat Controller](PRINCIPLES.md#architecture-fat-controller)
 
 Detected by
 domain logic in application/transport layers
@@ -8404,7 +8410,7 @@ Measured by
 misplaced domain-rule count
 
 Refactored by
-Extract Domain Service
+none
 
 Enforced by
 domain model review
@@ -8470,14 +8476,14 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_runtime_discovery["Runtime Discovery"]
-n_service_discovery["Service Discovery"]
-n_dynamic_binding["Dynamic Binding"]
-n_dynamic_dispatch["Dynamic Dispatch"]
-n_runtime_extensibility["Runtime Extensibility"]
-n_runtime_discovery --> n_runtime_extensibility
-n_runtime_discovery --> n_service_discovery
-n_dynamic_binding --> n_runtime_extensibility
+    n_runtime_discovery["Runtime Discovery"]
+    n_service_discovery["Service Discovery"]
+    n_dynamic_binding["Dynamic Binding"]
+    n_dynamic_dispatch["Dynamic Dispatch"]
+    n_runtime_extensibility["Runtime Extensibility"]
+    n_runtime_discovery --> n_runtime_extensibility
+    n_runtime_discovery --> n_service_discovery
+    n_dynamic_binding --> n_runtime_extensibility
 ```
 
 ### Runtime Discovery
@@ -8495,7 +8501,7 @@ Definition
 A mechanism that finds the available handlers, plugins or services at startup by matching a naming convention, a file pattern or metadata, and registers each one it finds in place of a hand-written list.
 
 Requires
-[Metadata](LEXICON.md#lexicon-metadata), [Conventions](LEXICON.md#lexicon-conventions)
+[Metadata](LEXICON.md#lexicon-metadata), [Convention](LEXICON.md#lexicon-convention)
 
 Reinforces
 [Runtime Extensibility](PRINCIPLES.md#architecture-runtime-extensibility)
@@ -8534,7 +8540,7 @@ Distinct from
 [Static Analysis](PRINCIPLES.md#architecture-static-analysis): Runtime discovery decides the component set as the program starts, while static analysis reasons about source that has not run.
 
 Violated by
-hardcoded dependency discovery
+[Manual Registration](LEXICON.md#lexicon-manual-registration)
 
 Detected by
 manual class/service lists
@@ -8543,7 +8549,7 @@ Measured by
 discovery coverage
 
 Refactored by
-Add Registry, Add Scanner, Add Manifest
+[Registry Pattern](PRINCIPLES.md#architecture-registry-pattern), [Static Analysis](PRINCIPLES.md#architecture-static-analysis), [Manifest-Based Design](PRINCIPLES.md#architecture-manifest-based-design)
 
 Enforced by
 startup validation
@@ -8587,7 +8593,7 @@ Authoritative side
 The modules on disk and the configuration, which the bindings reported at startup are compared against
 
 Depends on
-[Metadata](LEXICON.md#lexicon-metadata), [Conventions](LEXICON.md#lexicon-conventions), [Runtime Extensibility](PRINCIPLES.md#architecture-runtime-extensibility), [Plugin Architecture](PRINCIPLES.md#architecture-plugin-architecture), [Service Discovery](PRINCIPLES.md#architecture-service-discovery), [Self-Registration](LEXICON.md#lexicon-self-registration)
+[Metadata](LEXICON.md#lexicon-metadata), [Convention](LEXICON.md#lexicon-convention), [Runtime Extensibility](PRINCIPLES.md#architecture-runtime-extensibility), [Plugin Architecture](PRINCIPLES.md#architecture-plugin-architecture), [Service Discovery](PRINCIPLES.md#architecture-service-discovery), [Self-Registration](LEXICON.md#lexicon-self-registration)
 
 Shape it refuses
 [Compile-Time Binding](LEXICON.md#lexicon-compile-time-binding), [Manual Registration](LEXICON.md#lexicon-manual-registration)
@@ -8636,7 +8642,7 @@ Distinct from
 [Service Registry](PRINCIPLES.md#architecture-service-registry): Service discovery is the lookup at call time, while the service registry is the table the lookup reads.
 
 Violated by
-fixed service addresses in code
+[Hardcoded Endpoints](LEXICON.md#lexicon-hardcoded-endpoints)
 
 Detected by
 hardcoded URLs, missing registry lookup
@@ -8645,7 +8651,7 @@ Measured by
 dynamic resolution coverage
 
 Refactored by
-Introduce Discovery Client, Externalize Endpoint
+none
 
 Enforced by
 config scans, deployment policy
@@ -8738,7 +8744,7 @@ Distinct from
 [Service Registry](PRINCIPLES.md#architecture-service-registry): Dynamic binding is the choice made at runtime, while a service registry is the keyed table it can choose from.
 
 Violated by
-fixed concrete binding where runtime selection required
+[Compile-Time Binding](LEXICON.md#lexicon-compile-time-binding)
 
 Detected by
 hardcoded implementation selection
@@ -8747,7 +8753,7 @@ Measured by
 runtime binding coverage
 
 Refactored by
-Introduce Factory, [Registry](LEXICON.md#lexicon-registry), Strategy
+[Factory Pattern](PRINCIPLES.md#architecture-factory-pattern), [Registry](LEXICON.md#lexicon-registry), [Strategy Pattern](PRINCIPLES.md#architecture-strategy-pattern)
 
 Enforced by
 integration tests
@@ -8822,7 +8828,7 @@ In tension with
 [Traceability](PRINCIPLES.md#architecture-traceability)
 
 Conflicts with
-[Type-Switch Dispatch](LEXICON.md#lexicon-type-switch-dispatch)
+[Type Switching](LEXICON.md#lexicon-type-switching)
 
 Referenced by
 [Polymorphism](PRINCIPLES.md#architecture-polymorphism)
@@ -8831,7 +8837,7 @@ Tensions
 [Dynamic Dispatch / Traceability](SCHEMA.md#tension-dynamic-dispatch-traceability)
 
 Violated by
-manual dispatch over concrete type
+[Type Switching](LEXICON.md#lexicon-type-switching)
 
 Detected by
 switch/if chains on type
@@ -8840,7 +8846,7 @@ Measured by
 conditional dispatch count
 
 Refactored by
-Introduce Polymorphic Method, Strategy
+[Replace Conditional with Polymorphism](LEXICON.md#lexicon-replace-conditional-with-polymorphism), [Strategy Pattern](PRINCIPLES.md#architecture-strategy-pattern)
 
 Enforced by
 lint rules, [review](LEXICON.md#lexicon-review)
@@ -8895,7 +8901,7 @@ Depends on
 [Polymorphism](PRINCIPLES.md#architecture-polymorphism), [Open/Closed Principle (OCP)](PRINCIPLES.md#architecture-open-closed), [Replace Conditional with Polymorphism](LEXICON.md#lexicon-replace-conditional-with-polymorphism)
 
 Shape it refuses
-[Type-Switch Dispatch](LEXICON.md#lexicon-type-switch-dispatch)
+[Type Switching](LEXICON.md#lexicon-type-switching)
 
 ### Runtime Extensibility
 
@@ -8941,7 +8947,7 @@ Distinct from
 [Extensibility](LEXICON.md#lexicon-extensibility): Extensibility is adding behavior with little change to existing code, while runtime extensibility adds it to a system that is already running.
 
 Violated by
-modifying core for every extension
+[Closed Core](LEXICON.md#lexicon-closed-core)
 
 Detected by
 repeated core changes for variants
@@ -8950,7 +8956,7 @@ Measured by
 extension/core-change ratio
 
 Refactored by
-Add Extension Point, Add Plugin Interface
+[Extension Points](PRINCIPLES.md#architecture-extension-points)
 
 Enforced by
 extension conformance tests
@@ -9014,32 +9020,32 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_causality["Causality"]
-n_causal_consistency["Causal Consistency"]
-n_happens_before_relationship["Happens-Before Relationship"]
-n_event_ordering["Event Ordering"]
-n_causal_dependency["Causal Dependency"]
-n_dependency_graph["Dependency Graph"]
-n_directed_acyclic_graph["Directed Acyclic Graph (DAG)"]
-n_vector_clocks["Vector Clocks"]
-n_lamport_clocks["Lamport Clocks"]
-n_hybrid_logical_clocks["Hybrid Logical Clocks"]
-n_crdts["CRDTs"]
-n_total_order_broadcast["Total-Order Broadcast"]
-n_cap_theorem["CAP Theorem"]
-n_pacelc_theorem["PACELC Theorem"]
-n_causality --> n_event_ordering
-n_event_ordering --> n_causality
-n_causal_dependency --> n_causality
-n_vector_clocks --> n_causal_consistency
-n_hybrid_logical_clocks --> n_happens_before_relationship
-n_hybrid_logical_clocks --> n_causal_consistency
-n_hybrid_logical_clocks --> n_event_ordering
-n_crdts --> n_causal_consistency
-n_total_order_broadcast --> n_event_ordering
-n_cap_theorem --> n_causal_consistency
-n_pacelc_theorem --> n_cap_theorem
-n_pacelc_theorem --> n_cap_theorem
+    n_causality["Causality"]
+    n_causal_consistency["Causal Consistency"]
+    n_happens_before_relationship["Happens-Before Relationship"]
+    n_event_ordering["Event Ordering"]
+    n_causal_dependency["Causal Dependency"]
+    n_dependency_graph["Dependency Graph"]
+    n_directed_acyclic_graph["Directed Acyclic Graph (DAG)"]
+    n_vector_clocks["Vector Clocks"]
+    n_lamport_clocks["Lamport Clocks"]
+    n_hybrid_logical_clocks["Hybrid Logical Clocks"]
+    n_crdts["CRDTs"]
+    n_total_order_broadcast["Total-Order Broadcast"]
+    n_cap_theorem["CAP Theorem"]
+    n_pacelc_theorem["PACELC Theorem"]
+    n_causality --> n_event_ordering
+    n_event_ordering --> n_causality
+    n_causal_dependency --> n_causality
+    n_vector_clocks --> n_causal_consistency
+    n_hybrid_logical_clocks --> n_happens_before_relationship
+    n_hybrid_logical_clocks --> n_causal_consistency
+    n_hybrid_logical_clocks --> n_event_ordering
+    n_crdts --> n_causal_consistency
+    n_total_order_broadcast --> n_event_ordering
+    n_cap_theorem --> n_causal_consistency
+    n_pacelc_theorem --> n_cap_theorem
+    n_pacelc_theorem --> n_cap_theorem
 ```
 
 ### Causality
@@ -9080,7 +9086,7 @@ Tensions
 [Causality / Parallelism](SCHEMA.md#tension-causality-parallelism)
 
 Violated by
-processing effects without known cause/order
+[Unlinked Events](LEXICON.md#lexicon-unlinked-events)
 
 Detected by
 missing causation/correlation metadata
@@ -9089,7 +9095,7 @@ Measured by
 causal trace completeness
 
 Refactored by
-Add Causation ID, Add Ordering Rules
+[Causation ID](PRINCIPLES.md#architecture-causation-id), [Make Order Explicit](LEXICON.md#lexicon-make-order-explicit)
 
 Enforced by
 event schema and workflow tests
@@ -9172,7 +9178,7 @@ Tensions
 [Causal Consistency / Latency/Availability](SCHEMA.md#tension-causal-consistency-latency-availability)
 
 Violated by
-observing effect before cause
+[Arbitrary Reordering](LEXICON.md#lexicon-arbitrary-reordering)
 
 Detected by
 order anomaly tests
@@ -9181,7 +9187,7 @@ Measured by
 causal anomaly rate
 
 Refactored by
-Add Causal Metadata, Enforce Read-Your-Writes
+[Causation ID](PRINCIPLES.md#architecture-causation-id), [Read From Primary After Write](LEXICON.md#lexicon-read-from-primary-after-write)
 
 Enforced by
 consistency tests
@@ -9266,7 +9272,7 @@ Tensions
 [Happens-Before Relationship / Parallel Execution](SCHEMA.md#tension-happens-before-relationship-parallel-execution)
 
 Violated by
-assuming unordered operations are ordered
+[Race Conditions](LEXICON.md#lexicon-race-conditions)
 
 Detected by
 race detectors, missing synchronization
@@ -9275,7 +9281,7 @@ Measured by
 ordering violation count
 
 Refactored by
-Add Synchronization, Add Ordering Constraint
+[Apply Concurrency Control](LEXICON.md#lexicon-apply-concurrency-control), [Make Order Explicit](LEXICON.md#lexicon-make-order-explicit)
 
 Enforced by
 concurrency tests
@@ -9362,7 +9368,7 @@ Distinct from
 [Ordering Key or Sequence](LEXICON.md#lexicon-ordering-key-or-sequence): Event ordering binds the consumer to process one key's events in order, while the ordering key is the field on each event that makes the order known.
 
 Violated by
-stateful consumers processing out of order
+[Unordered Parallel Consumption](LEXICON.md#lexicon-unordered-parallel-consumption)
 
 Detected by
 missing ordering key/sequence checks
@@ -9371,7 +9377,7 @@ Measured by
 out-of-order rate
 
 Refactored by
-Add Partition Key, Sequence Number, Reorder Buffer
+[Partitioning](PRINCIPLES.md#architecture-partitioning), [Logical Counter](LEXICON.md#lexicon-logical-counter), [Reorder Buffer](LEXICON.md#lexicon-reorder-buffer)
 
 Enforced by
 stream config, consumer tests
@@ -9449,7 +9455,7 @@ Tensions
 [Causal Dependency / Graph Complexity](SCHEMA.md#tension-causal-dependency-graph-complexity)
 
 Violated by
-implicit dependency not represented in workflow/event metadata
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Detected by
 undocumented call/event dependency
@@ -9458,7 +9464,7 @@ Measured by
 hidden dependency count
 
 Refactored by
-Declare Dependency, Add Causation Link
+[Explicit Dependency](LEXICON.md#lexicon-explicit-dependency), [Causation ID](PRINCIPLES.md#architecture-causation-id)
 
 Enforced by
 dependency graph checks
@@ -9531,7 +9537,7 @@ In tension with
 [Dynamic Loading](LEXICON.md#lexicon-dynamic-loading)
 
 Conflicts with
-[Hidden Dependencies](LEXICON.md#lexicon-hidden-dependencies)
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Referenced by
 [Impact Analysis](PRINCIPLES.md#architecture-impact-analysis)
@@ -9540,7 +9546,7 @@ Tensions
 [Dependency Graph / Dynamic Loading](SCHEMA.md#tension-dependency-graph-dynamic-loading)
 
 Violated by
-undeclared dependencies
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Detected by
 graph extraction mismatch
@@ -9549,7 +9555,7 @@ Measured by
 cycle count, graph density
 
 Refactored by
-Break Cycle, Invert Dependency
+[Invert Dependency](LEXICON.md#lexicon-invert-dependency)
 
 Enforced by
 dependency graph CI checks
@@ -9597,7 +9603,7 @@ Depends on
 [Dependency Extraction](LEXICON.md#lexicon-dependency-extraction), [Architecture Compliance](LEXICON.md#lexicon-architecture-compliance), [Cycle Detection](LEXICON.md#lexicon-cycle-detection), [Impact Analysis](PRINCIPLES.md#architecture-impact-analysis)
 
 Shape it refuses
-[Hidden Dependencies](LEXICON.md#lexicon-hidden-dependencies)
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 ### Directed Acyclic Graph (DAG)
 
@@ -9636,7 +9642,7 @@ Tensions
 [Directed Acyclic Graph (DAG) / Bidirectional Collaboration](SCHEMA.md#tension-bidirectional-collaboration-directed-acyclic-graph-dag)
 
 Violated by
-dependency cycle
+[Circular Dependency](PRINCIPLES.md#architecture-circular-dependency)
 
 Detected by
 [cycle detection](LEXICON.md#lexicon-cycle-detection)
@@ -9645,7 +9651,7 @@ Measured by
 cycle count
 
 Refactored by
-Invert Dependency, Extract Interface, Split Module
+[Invert Dependency](LEXICON.md#lexicon-invert-dependency), [Extract Interface](LEXICON.md#lexicon-extract-interface), [Split Module](LEXICON.md#lexicon-split-module)
 
 Enforced by
 graph checks
@@ -9726,7 +9732,7 @@ Tensions
 [Vector Clocks / Metadata Size](SCHEMA.md#tension-metadata-size-vector-clocks)
 
 Violated by
-unresolved concurrent writes
+[Lost Update](PRINCIPLES.md#architecture-lost-update)
 
 Detected by
 lost causality in distributed updates
@@ -9735,7 +9741,7 @@ Measured by
 conflict detection accuracy
 
 Refactored by
-Add Version Vector
+none
 
 Enforced by
 replication protocol tests
@@ -9818,7 +9824,7 @@ Distinct from
 [Logical Counter](LEXICON.md#lexicon-logical-counter): Lamport clocks are the whole stamping scheme, advanced on every send and receive, while the logical counter is the value each process keeps.
 
 Violated by
-ordering by unsynchronized wall clocks
+[Wall-Clock Ordering Assumption](LEXICON.md#lexicon-wall-clock-ordering-assumption)
 
 Detected by
 timestamp ordering anomalies
@@ -9827,7 +9833,7 @@ Measured by
 ordering anomaly rate
 
 Refactored by
-Add Logical Clock
+none
 
 Enforced by
 protocol tests
@@ -9907,7 +9913,7 @@ Tensions
 [Hybrid Logical Clocks / Clock Skew](SCHEMA.md#tension-clock-skew-hybrid-logical-clocks)
 
 Violated by
-ordering events solely by wall-clock timestamps
+[Physical-Clock-Only Ordering](LEXICON.md#lexicon-physical-clock-only-ordering)
 
 Detected by
 last-writer-wins on physical time
@@ -9916,7 +9922,7 @@ Measured by
 out-of-causal-order event rate
 
 Refactored by
-Adopt Hybrid Logical Clocks
+none
 
 Enforced by
 distributed-systems review
@@ -9996,7 +10002,7 @@ Tensions
 [CRDTs / Metadata Overhead](SCHEMA.md#tension-crdts-metadata-overhead), [CRDTs / Last-Write-Wins Overwrite](SCHEMA.md#tension-crdts-last-write-wins-overwrite)
 
 Violated by
-concurrent replica edits silently overwriting each other
+[Lost Update](PRINCIPLES.md#architecture-lost-update)
 
 Detected by
 lost updates under concurrent replication
@@ -10005,7 +10011,7 @@ Measured by
 merge-conflict data-loss rate
 
 Refactored by
-Model State as a CRDT
+none
 
 Enforced by
 replication design review
@@ -10084,7 +10090,7 @@ Tensions
 [Total-Order Broadcast / Latency](SCHEMA.md#tension-latency-total-order-broadcast)
 
 Violated by
-replicas applying events in divergent orders
+[Per-Node Independent Ordering](LEXICON.md#lexicon-per-node-independent-ordering)
 
 Detected by
 state divergence across nodes given same events
@@ -10093,7 +10099,7 @@ Measured by
 cross-node order divergence rate
 
 Refactored by
-Introduce Total-Order Broadcast
+none
 
 Enforced by
 distributed-systems review
@@ -10185,7 +10191,7 @@ Distinct from
 [PACELC Theorem](PRINCIPLES.md#architecture-pacelc-theorem): The CAP theorem covers only a partition, while PACELC adds the latency and consistency trade-off of a healthy network.
 
 Violated by
-a distributed store assumed to be both strongly consistent and fully available under partition
+[Assumed Total Consistency And Availability](LEXICON.md#lexicon-assumed-total-consistency-and-availability)
 
 Detected by
 split-brain writes or stalls during network partitions
@@ -10194,7 +10200,7 @@ Measured by
 consistency/availability violations during partition events
 
 Refactored by
-Choose CP or AP explicitly per data class under partition
+none
 
 Enforced by
 distributed-systems review
@@ -10274,7 +10280,7 @@ Tensions
 [PACELC Theorem / Throughput](SCHEMA.md#tension-pacelc-theorem-throughput)
 
 Violated by
-consistency treated as free when the network is healthy, ignoring the latency it costs
+[Consistency Assumed Free When Healthy](LEXICON.md#lexicon-consistency-assumed-free-when-healthy)
 
 Detected by
 tail latency driven by synchronous cross-region consistency during normal operation
@@ -10283,7 +10289,7 @@ Measured by
 latency-vs-staleness tradeoff per read class
 
 Refactored by
-Decide else-branch latency-vs-consistency per read class (PACELC)
+none
 
 Enforced by
 distributed-systems review
@@ -10341,56 +10347,56 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_design_by_contract["Design by Contract"]
-n_explicit_contracts["Explicit Contracts"]
-n_stable_interfaces["Stable Interfaces"]
-n_interface_based_design["Interface-Based Design"]
-n_contract_first_design["Contract-First Design"]
-n_api_contract["API Contract"]
-n_service_contract["Service Contract"]
-n_data_contract["Data Contract"]
-n_schema_contract["Schema Contract"]
-n_semantic_contracts["Semantic Contracts"]
-n_preconditions["Preconditions"]
-n_postconditions["Postconditions"]
-n_invariant["Invariant"]
-n_backward_compatibility["Backward Compatibility"]
-n_forward_compatibility["Forward Compatibility"]
-n_versioning["Versioning"]
-n_protocol_compatibility["Protocol Compatibility"]
-n_interoperability["Interoperability"]
-n_uniform_interface["Uniform Interface"]
-n_consumer_driven_contracts["Consumer-Driven Contracts"]
-n_design_by_contract --> n_preconditions
-n_design_by_contract --> n_postconditions
-n_design_by_contract --> n_invariant
-n_explicit_contracts --> n_stable_interfaces
-n_explicit_contracts --> n_interoperability
-n_explicit_contracts --> n_contract_first_design
-n_stable_interfaces --> n_versioning
-n_stable_interfaces --> n_backward_compatibility
-n_interface_based_design --> n_stable_interfaces
-n_contract_first_design --> n_explicit_contracts
-n_contract_first_design --> n_schema_contract
-n_contract_first_design --> n_interoperability
-n_contract_first_design --> n_backward_compatibility
-n_api_contract --> n_versioning
-n_api_contract --> n_stable_interfaces
-n_api_contract --> n_interoperability
-n_service_contract --> n_api_contract
-n_data_contract --> n_interoperability
-n_schema_contract --> n_data_contract
-n_preconditions --> n_design_by_contract
-n_postconditions --> n_invariant
-n_backward_compatibility --> n_versioning
-n_backward_compatibility --> n_stable_interfaces
-n_versioning --> n_stable_interfaces
-n_versioning --> n_backward_compatibility
-n_protocol_compatibility --> n_versioning
-n_protocol_compatibility --> n_interoperability
-n_consumer_driven_contracts --> n_explicit_contracts
-n_consumer_driven_contracts --> n_backward_compatibility
-n_consumer_driven_contracts --> n_contract_first_design
+    n_design_by_contract["Design by Contract"]
+    n_explicit_contracts["Explicit Contracts"]
+    n_stable_interfaces["Stable Interfaces"]
+    n_interface_based_design["Interface-Based Design"]
+    n_contract_first_design["Contract-First Design"]
+    n_api_contract["API Contract"]
+    n_service_contract["Service Contract"]
+    n_data_contract["Data Contract"]
+    n_schema_contract["Schema Contract"]
+    n_semantic_contracts["Semantic Contracts"]
+    n_preconditions["Preconditions"]
+    n_postconditions["Postconditions"]
+    n_invariant["Invariant"]
+    n_backward_compatibility["Backward Compatibility"]
+    n_forward_compatibility["Forward Compatibility"]
+    n_versioning["Versioning"]
+    n_protocol_compatibility["Protocol Compatibility"]
+    n_interoperability["Interoperability"]
+    n_uniform_interface["Uniform Interface"]
+    n_consumer_driven_contracts["Consumer-Driven Contracts"]
+    n_design_by_contract --> n_preconditions
+    n_design_by_contract --> n_postconditions
+    n_design_by_contract --> n_invariant
+    n_explicit_contracts --> n_stable_interfaces
+    n_explicit_contracts --> n_interoperability
+    n_explicit_contracts --> n_contract_first_design
+    n_stable_interfaces --> n_versioning
+    n_stable_interfaces --> n_backward_compatibility
+    n_interface_based_design --> n_stable_interfaces
+    n_contract_first_design --> n_explicit_contracts
+    n_contract_first_design --> n_schema_contract
+    n_contract_first_design --> n_interoperability
+    n_contract_first_design --> n_backward_compatibility
+    n_api_contract --> n_versioning
+    n_api_contract --> n_stable_interfaces
+    n_api_contract --> n_interoperability
+    n_service_contract --> n_api_contract
+    n_data_contract --> n_interoperability
+    n_schema_contract --> n_data_contract
+    n_preconditions --> n_design_by_contract
+    n_postconditions --> n_invariant
+    n_backward_compatibility --> n_versioning
+    n_backward_compatibility --> n_stable_interfaces
+    n_versioning --> n_stable_interfaces
+    n_versioning --> n_backward_compatibility
+    n_protocol_compatibility --> n_versioning
+    n_protocol_compatibility --> n_interoperability
+    n_consumer_driven_contracts --> n_explicit_contracts
+    n_consumer_driven_contracts --> n_backward_compatibility
+    n_consumer_driven_contracts --> n_contract_first_design
 ```
 
 ### Design by Contract
@@ -10399,6 +10405,7 @@ n_consumer_driven_contracts --> n_contract_first_design
 - Category: [Contracts / Interfaces / Compatibility](PRINCIPLES.md#architecture-category-contracts-interfaces-compatibility)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: API, function, class, service
+- Aliases: DbC
 - Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
 
 Details
@@ -10434,7 +10441,7 @@ Distinct from
 [Liskov Substitution Principle (LSP)](PRINCIPLES.md#architecture-liskov-substitution): Design by contract states each operation's conditions, while Liskov substitution requires a subtype to keep the conditions of its base type.
 
 Violated by
-undocumented assumptions, unchecked inputs
+[Implicit Assumptions](LEXICON.md#lexicon-implicit-assumptions), [Trusting Invalid Inputs](LEXICON.md#lexicon-trusting-invalid-inputs)
 
 Detected by
 missing assertions, missing validation, vague public APIs
@@ -10443,7 +10450,7 @@ Measured by
 contract coverage
 
 Refactored by
-Add Preconditions, Add Postconditions, Add Invariants
+[Precondition Check](LEXICON.md#lexicon-precondition-check), [Postcondition Check](LEXICON.md#lexicon-postcondition-check), [Invariant Check](LEXICON.md#lexicon-invariant-check)
 
 Enforced by
 assertions, contract tests, [static analysis](REASONING.md#reasoning-technique-static-analysis)
@@ -10548,7 +10555,7 @@ Distinct from
 [Independence](PRINCIPLES.md#architecture-independence): Explicit contracts declare boundaries, while independence lets a module be tested and deployed without its neighbors.
 
 Violated by
-untyped boundaries, undocumented payloads
+[Dynamic Untyped Boundaries](LEXICON.md#lexicon-dynamic-untyped-boundaries), [Untyped Payloads](LEXICON.md#lexicon-untyped-payloads)
 
 Detected by
 public methods without DTO/schema, dynamic maps at boundaries
@@ -10557,7 +10564,7 @@ Measured by
 boundary contract coverage
 
 Refactored by
-Add DTO, Add Schema, Add Interface
+[Introduce Boundary DTO](LEXICON.md#lexicon-introduce-boundary-dto), [Schema Validation](PRINCIPLES.md#architecture-schema-validation), [Extract Interface](LEXICON.md#lexicon-extract-interface)
 
 Enforced by
 [schema validation](PRINCIPLES.md#architecture-schema-validation), API linting
@@ -10616,7 +10623,6 @@ Shape it refuses
 - Category: [Contracts / Interfaces / Compatibility](PRINCIPLES.md#architecture-category-contracts-interfaces-compatibility)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: API, module, service
-- Aliases: Stable Interface
 - Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
 
 Details
@@ -10637,7 +10643,7 @@ In tension with
 [Evolution Speed](LEXICON.md#lexicon-evolution-speed)
 
 Conflicts with
-[Breaking Changes](LEXICON.md#lexicon-breaking-changes)
+[Breaking Change](LEXICON.md#lexicon-breaking-change)
 
 Referenced by
 [Explicit Boundaries](PRINCIPLES.md#architecture-explicit-boundaries), [Runtime Extensibility](PRINCIPLES.md#architecture-runtime-extensibility), [Explicit Contracts](PRINCIPLES.md#architecture-explicit-contracts), [Interface-Based Design](PRINCIPLES.md#architecture-interface-based-design), [API Contract](PRINCIPLES.md#architecture-api-contract), [Backward Compatibility](PRINCIPLES.md#architecture-backward-compatibility), [Versioning](PRINCIPLES.md#architecture-versioning), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Encapsulation](PRINCIPLES.md#architecture-encapsulation), [Composability](PRINCIPLES.md#architecture-composability), [Replaceability](PRINCIPLES.md#architecture-replaceability), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Plugin Architecture](PRINCIPLES.md#architecture-plugin-architecture), [Extension Points](PRINCIPLES.md#architecture-extension-points), [Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise)
@@ -10646,7 +10652,7 @@ Tensions
 [Stable Interfaces / Evolution Speed](SCHEMA.md#tension-evolution-speed-stable-interfaces)
 
 Violated by
-signature churn, [schema drift](PRINCIPLES.md#architecture-schema-drift)
+[Unversioned Breaking Change](PRINCIPLES.md#architecture-unversioned-breaking-change), [Schema Drift](PRINCIPLES.md#architecture-schema-drift)
 
 Detected by
 incompatible API diffs
@@ -10655,7 +10661,7 @@ Measured by
 breaking-change frequency
 
 Refactored by
-Add Version, Add Adapter, Deprecate Gradually
+[Versioning](PRINCIPLES.md#architecture-versioning), [Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Gradual Deprecation](LEXICON.md#lexicon-gradual-deprecation)
 
 Enforced by
 API diff checks, contract tests
@@ -10708,7 +10714,7 @@ Depends on
 [Versioning](PRINCIPLES.md#architecture-versioning), [Backward Compatibility](PRINCIPLES.md#architecture-backward-compatibility), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Replaceability](PRINCIPLES.md#architecture-replaceability), [Independent Consumers](LEXICON.md#lexicon-independent-consumers)
 
 Shape it refuses
-[Breaking Changes](LEXICON.md#lexicon-breaking-changes)
+[Breaking Change](LEXICON.md#lexicon-breaking-change)
 
 ### Interface-Based Design
 
@@ -10751,7 +10757,7 @@ Distinct from
 [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion): Interface-based design depends on interfaces supplied from outside, while dependency inversion also fixes that the policy side owns the interface.
 
 Violated by
-direct dependency on implementations
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling)
 
 Detected by
 concrete constructor dependencies
@@ -10760,7 +10766,7 @@ Measured by
 interface-to-implementation boundary ratio
 
 Refactored by
-Extract Interface, Inject Dependency
+[Extract Interface](LEXICON.md#lexicon-extract-interface), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
 
 Enforced by
 dependency rules
@@ -10848,7 +10854,7 @@ Tensions
 [Contract-First Design / Iteration Speed](SCHEMA.md#tension-contract-first-design-iteration-speed)
 
 Violated by
-generated contracts from unstable implementation
+[Implementation-First Integration](LEXICON.md#lexicon-implementation-first-integration)
 
 Detected by
 absent contract before implementation
@@ -10857,7 +10863,7 @@ Measured by
 contract-first coverage
 
 Refactored by
-Define Contract, Generate Stubs, Add Contract Tests
+[Define Contract](LEXICON.md#lexicon-define-contract), [Code Generation](LEXICON.md#lexicon-code-generation), [Contract Testing](LEXICON.md#lexicon-contract-testing)
 
 Enforced by
 CI contract gates
@@ -10947,7 +10953,7 @@ Distinct from
 [Semantic Contract](LEXICON.md#lexicon-semantic-contract): An API contract declares the shapes of requests, responses and errors, while a semantic contract declares what the operations mean.
 
 Violated by
-undocumented endpoints, inconsistent status/error formats
+[Ad-Hoc Endpoints](LEXICON.md#lexicon-ad-hoc-endpoints), [Inconsistent Error Model](PRINCIPLES.md#architecture-inconsistent-error-model)
 
 Detected by
 OpenAPI drift, missing endpoint schemas
@@ -10956,7 +10962,7 @@ Measured by
 contract coverage, breaking diff count
 
 Refactored by
-Add OpenAPI, Normalize Responses, Version API
+[Define Contract](LEXICON.md#lexicon-define-contract), [Standard Error Contract](LEXICON.md#lexicon-standard-error-contract), [Versioning](PRINCIPLES.md#architecture-versioning)
 
 Enforced by
 OpenAPI linting, contract tests
@@ -11049,7 +11055,7 @@ Distinct from
 [Semantic Contract](LEXICON.md#lexicon-semantic-contract): A service contract covers one service's whole surface, while a semantic contract is the meaning part of any interface's contract.
 
 Violated by
-undocumented side effects, unstable service behavior
+[Hidden Service Coupling](LEXICON.md#lexicon-hidden-service-coupling), [Silent Breaking Changes](LEXICON.md#lexicon-silent-breaking-changes)
 
 Detected by
 consumer failures after service changes
@@ -11058,7 +11064,7 @@ Measured by
 consumer contract pass rate
 
 Refactored by
-Add Consumer Contract, Define SLA, Version Service
+[Consumer-Driven Contract Tests](LEXICON.md#lexicon-consumer-driven-contract-tests), [Service Level Objectives](LEXICON.md#lexicon-service-level-objectives), [Versioning](PRINCIPLES.md#architecture-versioning)
 
 Enforced by
 contract tests, deployment gates
@@ -11150,7 +11156,7 @@ Tensions
 [Data Contract / Flexible Ingestion](SCHEMA.md#tension-data-contract-flexible-ingestion)
 
 Violated by
-untyped maps, implicit fields, undocumented nullability
+[Untyped Payloads](LEXICON.md#lexicon-untyped-payloads), [Null Semantics Drift](PRINCIPLES.md#architecture-null-semantics-drift)
 
 Detected by
 data validation failures, schema mismatch
@@ -11159,10 +11165,10 @@ Measured by
 schema conformance rate
 
 Refactored by
-Add DTO, Add Schema, Normalize Field Semantics
+[Introduce Boundary DTO](LEXICON.md#lexicon-introduce-boundary-dto), [Schema Validation](PRINCIPLES.md#architecture-schema-validation), [Canonical Data Model](PRINCIPLES.md#architecture-canonical-data-model)
 
 Enforced by
-schema registry, validation gates
+[schema registry](LEXICON.md#lexicon-schema-registry), validation gates
 
 Before
 
@@ -11250,7 +11256,7 @@ Distinct from
 [Data Contract](PRINCIPLES.md#architecture-data-contract): A data contract declares the fields, types and meaning of exchanged data, while a schema contract validates each payload against a schema at the boundary.
 
 Violated by
-unvalidated payloads, undocumented field changes
+[Ad-Hoc Payloads](LEXICON.md#lexicon-ad-hoc-payloads), [Schema Drift](PRINCIPLES.md#architecture-schema-drift)
 
 Detected by
 schema diff failures
@@ -11259,10 +11265,10 @@ Measured by
 schema validation coverage
 
 Refactored by
-Add JSON Schema, Protobuf, Avro, OpenAPI
+[Schema Validation](PRINCIPLES.md#architecture-schema-validation), [Binary Schema Encoding](LEXICON.md#lexicon-binary-schema-encoding), [Define Contract](LEXICON.md#lexicon-define-contract)
 
 Enforced by
-schema registry, CI schema checks
+[schema registry](LEXICON.md#lexicon-schema-registry), CI schema checks
 
 Before
 
@@ -11341,7 +11347,7 @@ Tensions
 [Semantic Contracts / Cross-Domain Translation](SCHEMA.md#tension-cross-domain-translation-semantic-contracts)
 
 Violated by
-same term with different meanings
+[Ambiguous Naming](LEXICON.md#lexicon-ambiguous-naming)
 
 Detected by
 conflicting field meanings, overloaded names
@@ -11350,7 +11356,7 @@ Measured by
 semantic conflict count
 
 Refactored by
-Rename, Introduce Bounded Context, Add Anti-Corruption Layer
+[Name the Concept](LEXICON.md#lexicon-name-the-concept), [Split Bounded Context](LEXICON.md#lexicon-split-bounded-context), [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer)
 
 Enforced by
 domain glossary, contract review
@@ -11442,7 +11448,7 @@ Distinct from
 [Postconditions](PRINCIPLES.md#architecture-postconditions): A precondition is checked before an operation runs, while a postcondition is guaranteed when it returns.
 
 Violated by
-accepting invalid state/input
+[Trusting Invalid Inputs](LEXICON.md#lexicon-trusting-invalid-inputs)
 
 Detected by
 missing validation before state transition
@@ -11451,7 +11457,7 @@ Measured by
 invalid-input handling coverage
 
 Refactored by
-Add Guard Clause, Add Validator
+[Precondition Check](LEXICON.md#lexicon-precondition-check), [Schema Validation](PRINCIPLES.md#architecture-schema-validation)
 
 Enforced by
 [validation rules](LEXICON.md#lexicon-validation-rules), [static analysis](REASONING.md#reasoning-technique-static-analysis)
@@ -11541,7 +11547,7 @@ Distinct from
 [Invariant](PRINCIPLES.md#architecture-invariant): A postcondition holds when one operation returns, while an invariant holds in every state an entity can reach.
 
 Violated by
-returning invalid output state
+[Undefined Results](LEXICON.md#lexicon-undefined-results)
 
 Detected by
 missing assertions on results
@@ -11550,7 +11556,7 @@ Measured by
 property test coverage
 
 Refactored by
-Add Assertions, Add Result Type, Add Contract Tests
+[Invariant Check](LEXICON.md#lexicon-invariant-check), [Introduce Typed Result](LEXICON.md#lexicon-introduce-typed-result), [Contract Testing](LEXICON.md#lexicon-contract-testing)
 
 Enforced by
 property tests, invariant checks
@@ -11638,7 +11644,7 @@ Tensions
 [Invariant / Flexibility](SCHEMA.md#tension-flexibility-invariant)
 
 Violated by
-invalid domain states, broken aggregate rules
+[Reachable Invalid State](LEXICON.md#lexicon-reachable-invalid-state)
 
 Detected by
 mutable public state, missing invariant checks
@@ -11647,7 +11653,7 @@ Measured by
 invariant test coverage
 
 Refactored by
-Encapsulate State, Add Factory, Add Validation
+[Encapsulate State](LEXICON.md#lexicon-encapsulate-state), [Factory Pattern](PRINCIPLES.md#architecture-factory-pattern), [Validate at the Boundary](LEXICON.md#lexicon-validate-at-the-boundary)
 
 Enforced by
 domain tests, constructors, type system
@@ -11743,7 +11749,7 @@ Distinct from
 [Consumer-Driven Contracts](PRINCIPLES.md#architecture-consumer-driven-contracts): Backward compatibility is the property a new version keeps, while consumer-driven contracts are how a provider verifies it against recorded expectations.
 
 Violated by
-removing fields, changing semantics, narrowing types
+[Breaking Change](LEXICON.md#lexicon-breaking-change)
 
 Detected by
 API/schema diff
@@ -11752,7 +11758,7 @@ Measured by
 breaking-change count
 
 Refactored by
-Add Version, Deprecate, Add Adapter
+[Versioning](PRINCIPLES.md#architecture-versioning), [Gradual Deprecation](LEXICON.md#lexicon-gradual-deprecation), [Extract Adapter](LEXICON.md#lexicon-extract-adapter)
 
 Enforced by
 compatibility tests, API diff gates
@@ -11835,7 +11841,7 @@ Distinct from
 [Extensible Schema](LEXICON.md#lexicon-extensible-schema): Forward compatibility is the reader tolerating unknown fields, while an extensible schema is the writer's shape that lets fields be added.
 
 Violated by
-rejecting unknown safe fields
+[Strict Fragile Parsers](LEXICON.md#lexicon-strict-fragile-parsers)
 
 Detected by
 parser failures on additive changes
@@ -11844,7 +11850,7 @@ Measured by
 forward-compatibility test pass rate
 
 Refactored by
-Add Extension Points, Ignore Unknown Fields Safely
+[Extension Points](PRINCIPLES.md#architecture-extension-points), [Tolerant Reader](LEXICON.md#lexicon-tolerant-reader)
 
 Enforced by
 compatibility test matrix
@@ -11937,7 +11943,7 @@ Tensions
 [Versioning / Version Sprawl](SCHEMA.md#tension-version-sprawl-versioning)
 
 Violated by
-unversioned breaking changes
+[Unversioned Breaking Change](PRINCIPLES.md#architecture-unversioned-breaking-change)
 
 Detected by
 incompatible diff without version bump
@@ -11946,7 +11952,7 @@ Measured by
 version compliance, deprecation window
 
 Refactored by
-Add Semantic Versioning, Add API Version
+none
 
 Enforced by
 release gates, API checks
@@ -12031,7 +12037,7 @@ Distinct from
 [Protocol Contract](LEXICON.md#lexicon-protocol-contract): Protocol compatibility is both ends agreeing on a supported version, while the protocol contract is the set of messages and sequences that version defines.
 
 Violated by
-unsupported protocol changes
+[Proprietary Drift](LEXICON.md#lexicon-proprietary-drift)
 
 Detected by
 protocol conformance failure
@@ -12040,7 +12046,7 @@ Measured by
 conformance test pass rate
 
 Refactored by
-Add Adapter, Normalize Protocol
+[Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface)
 
 Enforced by
 conformance tests
@@ -12145,7 +12151,7 @@ Distinct from
 [Discoverability](LEXICON.md#lexicon-discoverability): Interoperability is exchanging data correctly, while discoverability is how easily a component's capabilities are found.
 
 Violated by
-incompatible formats, hidden assumptions
+[Proprietary Coupling](LEXICON.md#lexicon-proprietary-coupling), [Implicit Assumptions](LEXICON.md#lexicon-implicit-assumptions)
 
 Detected by
 integration test failures
@@ -12154,7 +12160,7 @@ Measured by
 interoperability test coverage
 
 Refactored by
-Standardize Format, Add Adapter, Add Schema
+[Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface), [Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Schema Validation](PRINCIPLES.md#architecture-schema-validation)
 
 Enforced by
 contract tests, standards checks
@@ -12242,7 +12248,7 @@ Distinct from
 [Stable Contracts](LEXICON.md#lexicon-stable-contracts): A uniform interface is sameness across resources, while stable contracts are sameness over time.
 
 Violated by
-inconsistent verbs, response shapes, error formats
+[Ambiguous API](LEXICON.md#lexicon-ambiguous-api), [Inconsistent Error Model](PRINCIPLES.md#architecture-inconsistent-error-model)
 
 Detected by
 API lint violations
@@ -12251,7 +12257,7 @@ Measured by
 endpoint consistency score
 
 Refactored by
-Normalize API, Standardize Error Model
+[Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface), [Standard Error Contract](LEXICON.md#lexicon-standard-error-contract)
 
 Enforced by
 API style guide, OpenAPI linting
@@ -12333,7 +12339,7 @@ Tensions
 [Consumer-Driven Contracts / Provider Autonomy](SCHEMA.md#tension-consumer-driven-contracts-provider-autonomy)
 
 Violated by
-providers changing responses with no consumer expectation check
+[Silent Breaking Changes](LEXICON.md#lexicon-silent-breaking-changes)
 
 Detected by
 integration breaks discovered only in production
@@ -12342,7 +12348,7 @@ Measured by
 consumer-break incident rate
 
 Refactored by
-Introduce Consumer-Driven Contract tests
+[Consumer-Driven Contract Tests](LEXICON.md#lexicon-consumer-driven-contract-tests)
 
 Enforced by
 contract test gate
@@ -12401,20 +12407,20 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_control_plane["Control Plane"]
-n_orchestration["Orchestration"]
-n_centralized_configuration["Centralized Configuration"]
-n_centralized_authentication["Centralized Authentication"]
-n_centralized_logging["Centralized Logging"]
-n_decentralization["Decentralization"]
-n_leader_election["Leader Election"]
-n_consensus["Consensus"]
-n_choreography["Choreography"]
-n_control_plane --> n_orchestration
-n_orchestration --> n_control_plane
-n_leader_election --> n_consensus
-n_leader_election --> n_control_plane
-n_choreography --> n_decentralization
+    n_control_plane["Control Plane"]
+    n_orchestration["Orchestration"]
+    n_centralized_configuration["Centralized Configuration"]
+    n_centralized_authentication["Centralized Authentication"]
+    n_centralized_logging["Centralized Logging"]
+    n_decentralization["Decentralization"]
+    n_leader_election["Leader Election"]
+    n_consensus["Consensus"]
+    n_choreography["Choreography"]
+    n_control_plane --> n_orchestration
+    n_orchestration --> n_control_plane
+    n_leader_election --> n_consensus
+    n_leader_election --> n_control_plane
+    n_choreography --> n_decentralization
 ```
 
 ### Control Plane
@@ -12455,7 +12461,7 @@ Tensions
 [Control Plane / Availability](SCHEMA.md#tension-availability-control-plane)
 
 Violated by
-unmanaged distributed configuration/control
+[Scattered Configuration](LEXICON.md#lexicon-scattered-configuration)
 
 Detected by
 manual node/service control
@@ -12464,7 +12470,7 @@ Measured by
 control coverage, control-plane availability
 
 Refactored by
-Add Control Plane, Externalize Policy
+[Management API](LEXICON.md#lexicon-management-api), [Policy as Code](PRINCIPLES.md#architecture-policy-as-code)
 
 Enforced by
 platform architecture
@@ -12533,7 +12539,7 @@ Requires
 [Coordinator](LEXICON.md#lexicon-coordinator)
 
 Reinforces
-[Control Plane](PRINCIPLES.md#architecture-control-plane), [Saga](LEXICON.md#lexicon-saga)
+[Control Plane](PRINCIPLES.md#architecture-control-plane), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
 
 Enables
 [Ordered Multi-Step Execution](LEXICON.md#lexicon-ordered-multi-step-execution)
@@ -12557,7 +12563,7 @@ Distinct from
 [Coordinator](LEXICON.md#lexicon-coordinator): Orchestration is the mechanism of driving a workflow from one place, while the coordinator is the component that plays that role.
 
 Violated by
-implicit fragile workflow spread across services
+[Pure Choreography](LEXICON.md#lexicon-pure-choreography)
 
 Detected by
 unclear workflow ownership
@@ -12566,7 +12572,7 @@ Measured by
 workflow observability/completion
 
 Refactored by
-Add Orchestrator, Define Workflow
+none
 
 Enforced by
 workflow tests
@@ -12615,7 +12621,7 @@ Authoritative side
 The control plane's recorded state, which each participant's reported state is compared against
 
 Depends on
-[Coordinator](LEXICON.md#lexicon-coordinator), [Control Plane](PRINCIPLES.md#architecture-control-plane), [Saga](LEXICON.md#lexicon-saga), [Ordered Multi-Step Execution](LEXICON.md#lexicon-ordered-multi-step-execution)
+[Coordinator](LEXICON.md#lexicon-coordinator), [Control Plane](PRINCIPLES.md#architecture-control-plane), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern), [Ordered Multi-Step Execution](LEXICON.md#lexicon-ordered-multi-step-execution)
 
 Shape it refuses
 [Pure Choreography](LEXICON.md#lexicon-pure-choreography)
@@ -12652,7 +12658,7 @@ Tensions
 [Centralized Configuration / Central Dependency Risk](SCHEMA.md#tension-central-dependency-risk-centralized-configuration)
 
 Violated by
-duplicated divergent configs
+[Scattered Configuration](LEXICON.md#lexicon-scattered-configuration)
 
 Detected by
 config drift
@@ -12661,7 +12667,7 @@ Measured by
 config drift count
 
 Refactored by
-Move to Central Config, Add Schema
+[Schema Validation](PRINCIPLES.md#architecture-schema-validation)
 
 Enforced by
 config policy
@@ -12744,7 +12750,7 @@ Tensions
 [Centralized Authentication / Identity Provider Availability](SCHEMA.md#tension-centralized-authentication-identity-provider-availability)
 
 Violated by
-custom auth per service without federation
+[Scattered Auth Implementations](LEXICON.md#lexicon-scattered-auth-implementations)
 
 Detected by
 duplicated credential stores
@@ -12753,7 +12759,7 @@ Measured by
 auth centralization coverage
 
 Refactored by
-Introduce IdP, Federate Auth
+[Identity Provider](LEXICON.md#lexicon-identity-provider)
 
 Enforced by
 [security policy](ALGORITHMS.md#algorithms-security-policy)
@@ -12836,7 +12842,7 @@ Tensions
 [Centralized Logging / Cost/Personal Data Exposure](SCHEMA.md#tension-centralized-logging-cost-personal-data-exposure)
 
 Violated by
-logs only available per instance
+[Local-Only Logs](LEXICON.md#lexicon-local-only-logs)
 
 Detected by
 missing log shipping
@@ -12845,7 +12851,7 @@ Measured by
 log ingestion coverage
 
 Refactored by
-Add Log Forwarder, Standardize Fields
+[Log Aggregation](LEXICON.md#lexicon-log-aggregation), [Canonical Data Model](PRINCIPLES.md#architecture-canonical-data-model)
 
 Enforced by
 observability policy
@@ -12931,7 +12937,7 @@ Tensions
 [Decentralization / Governance](SCHEMA.md#tension-decentralization-governance), [Decentralization / Consistency](SCHEMA.md#tension-consistency-decentralization)
 
 Violated by
-central bottleneck for independent decisions/runtime
+[Centralized Control](LEXICON.md#lexicon-centralized-control)
 
 Detected by
 centralized team/service dependency
@@ -12940,7 +12946,7 @@ Measured by
 decision/deployment dependency count
 
 Refactored by
-Delegate Ownership, Split Service/Control
+[Assign Owner](LEXICON.md#lexicon-assign-owner), [Management API](LEXICON.md#lexicon-management-api)
 
 Enforced by
 ownership model
@@ -13022,7 +13028,7 @@ Tensions
 [Leader Election / Availability](SCHEMA.md#tension-availability-leader-election)
 
 Violated by
-multiple nodes assuming the coordinator role at once
+[Split-Brain Coordination](LEXICON.md#lexicon-split-brain-coordination)
 
 Detected by
 concurrent leader actions / split-brain
@@ -13031,7 +13037,7 @@ Measured by
 split-brain incident rate
 
 Refactored by
-Introduce Leader Election
+none
 
 Enforced by
 distributed-systems review
@@ -13123,7 +13129,7 @@ Distinct from
 [Total-Order Broadcast](PRINCIPLES.md#architecture-total-order-broadcast): Consensus agrees on one value, while total-order broadcast agrees on the order of every message.
 
 Violated by
-nodes committing values without quorum agreement
+[Independent Node Decisions](LEXICON.md#lexicon-independent-node-decisions)
 
 Detected by
 divergent committed state across replicas
@@ -13132,7 +13138,7 @@ Measured by
 agreement-violation rate
 
 Refactored by
-Adopt a Consensus Protocol
+none
 
 Enforced by
 distributed-systems review
@@ -13213,7 +13219,7 @@ Tensions
 [Choreography / Traceability](SCHEMA.md#tension-choreography-traceability)
 
 Violated by
-one orchestrator commanding every step of a cross-service flow
+[Central Orchestrator Bottleneck](LEXICON.md#lexicon-central-orchestrator-bottleneck)
 
 Detected by
 a central coordinator coupled to all participants
@@ -13222,7 +13228,7 @@ Measured by
 orchestrator fan-out coupling
 
 Refactored by
-Coordinate via Choreographed Events
+none
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -13283,42 +13289,42 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_determinism["Determinism"]
-n_predictability["Predictability"]
-n_referential_transparency["Referential Transparency"]
-n_pure_functions["Pure Functions"]
-n_immutability["Immutability"]
-n_reproducibility["Reproducibility"]
-n_repeatability["Repeatability"]
-n_correctness["Correctness"]
-n_formal_verification["Formal Verification"]
-n_specification_based_testing["Specification-Based Testing"]
-n_property_based_testing["Property-Based Testing"]
-n_static_analysis["Static Analysis"]
-n_testability["Testability"]
-n_validation["Validation"]
-n_verification["Verification"]
-n_determinism --> n_predictability
-n_determinism --> n_reproducibility
-n_predictability --> n_determinism
-n_referential_transparency --> n_pure_functions
-n_referential_transparency --> n_immutability
-n_referential_transparency --> n_determinism
-n_referential_transparency --> n_testability
-n_pure_functions --> n_testability
-n_pure_functions --> n_determinism
-n_pure_functions --> n_referential_transparency
-n_immutability --> n_predictability
-n_reproducibility --> n_determinism
-n_repeatability --> n_verification
-n_repeatability --> n_predictability
-n_correctness --> n_validation
-n_formal_verification --> n_correctness
-n_specification_based_testing --> n_correctness
-n_property_based_testing --> n_correctness
-n_testability --> n_pure_functions
-n_validation --> n_correctness
-n_verification --> n_correctness
+    n_determinism["Determinism"]
+    n_predictability["Predictability"]
+    n_referential_transparency["Referential Transparency"]
+    n_pure_functions["Pure Functions"]
+    n_immutability["Immutability"]
+    n_reproducibility["Reproducibility"]
+    n_repeatability["Repeatability"]
+    n_correctness["Correctness"]
+    n_formal_verification["Formal Verification"]
+    n_specification_based_testing["Specification-Based Testing"]
+    n_property_based_testing["Property-Based Testing"]
+    n_static_analysis["Static Analysis"]
+    n_testability["Testability"]
+    n_validation["Validation"]
+    n_verification["Verification"]
+    n_determinism --> n_predictability
+    n_determinism --> n_reproducibility
+    n_predictability --> n_determinism
+    n_referential_transparency --> n_pure_functions
+    n_referential_transparency --> n_immutability
+    n_referential_transparency --> n_determinism
+    n_referential_transparency --> n_testability
+    n_pure_functions --> n_testability
+    n_pure_functions --> n_determinism
+    n_pure_functions --> n_referential_transparency
+    n_immutability --> n_predictability
+    n_reproducibility --> n_determinism
+    n_repeatability --> n_verification
+    n_repeatability --> n_predictability
+    n_correctness --> n_validation
+    n_formal_verification --> n_correctness
+    n_specification_based_testing --> n_correctness
+    n_property_based_testing --> n_correctness
+    n_testability --> n_pure_functions
+    n_validation --> n_correctness
+    n_verification --> n_correctness
 ```
 
 ### Determinism
@@ -13362,7 +13368,7 @@ Distinct from
 [Referential Transparency](PRINCIPLES.md#architecture-referential-transparency): Determinism is the same inputs giving the same result, while referential transparency is being able to replace an expression by its value.
 
 Violated by
-nondeterministic behavior without explicit source
+[Hidden Time/Randomness/Global State](LEXICON.md#lexicon-hidden-time-randomness-global-state)
 
 Detected by
 flaky tests, hidden random/time calls
@@ -13371,7 +13377,7 @@ Measured by
 flake rate, reproducibility score
 
 Refactored by
-Inject Clock/RNG, Control State
+[Inject Clock and Randomness](LEXICON.md#lexicon-inject-clock-and-randomness), [Encapsulate State](LEXICON.md#lexicon-encapsulate-state)
 
 Enforced by
 deterministic test rules
@@ -13498,7 +13504,7 @@ Distinct from
 [Thread Safety](LEXICON.md#lexicon-thread-safety): Predictability is foreseeing behavior from a contract, while thread safety is data surviving concurrent access uncorrupted.
 
 Violated by
-surprising side effects, implicit ordering
+[Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect), [Temporal Coupling](PRINCIPLES.md#architecture-temporal-coupling)
 
 Detected by
 nondeterministic tests, ambiguous APIs
@@ -13507,7 +13513,7 @@ Measured by
 flake/misuse rate
 
 Refactored by
-Make Behavior Explicit, Add Contracts
+[Declare Capability](LEXICON.md#lexicon-declare-capability), [Define Contract](LEXICON.md#lexicon-define-contract)
 
 Enforced by
 [tests](LEXICON.md#lexicon-tests), [contracts](LEXICON.md#lexicon-contracts), linting
@@ -13596,7 +13602,7 @@ Distinct from
 [Immutability](PRINCIPLES.md#architecture-immutability): Referential transparency lets an expression be replaced by its value, while immutability forbids a value from changing after creation.
 
 Violated by
-same input producing different output
+[Hidden Time/Randomness/Global State](LEXICON.md#lexicon-hidden-time-randomness-global-state)
 
 Detected by
 hidden dependency on time/random/global state
@@ -13605,7 +13611,7 @@ Measured by
 pure function coverage
 
 Refactored by
-Extract Pure Function, Inject Dependency
+[Pure Functions](PRINCIPLES.md#architecture-pure-functions), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
 
 Enforced by
 [code review](PRINCIPLES.md#architecture-code-review), functional boundaries
@@ -13691,7 +13697,7 @@ Tensions
 [Pure Functions / Stateful Operations](SCHEMA.md#tension-pure-functions-stateful-operations)
 
 Violated by
-mutation, IO, global reads/writes
+[Side Effects](LEXICON.md#lexicon-side-effects), [Hidden IO](LEXICON.md#lexicon-hidden-io)
 
 Detected by
 side-effect calls inside pure layer
@@ -13700,7 +13706,7 @@ Measured by
 pure core ratio
 
 Refactored by
-Extract Pure Logic, Move IO Outward
+[Pure Core / Imperative Shell](LEXICON.md#lexicon-pure-core-imperative-shell)
 
 Enforced by
 layer rules, [tests](LEXICON.md#lexicon-tests)
@@ -13787,7 +13793,7 @@ Tensions
 [Immutability / Allocation Cost](SCHEMA.md#tension-allocation-cost-immutability)
 
 Violated by
-mutating value objects, exposed mutable collections
+[Shared Mutable State](PRINCIPLES.md#architecture-shared-mutable-state), [Exposed Internals](LEXICON.md#lexicon-exposed-internals)
 
 Detected by
 setters on value objects, mutable public fields
@@ -13796,7 +13802,7 @@ Measured by
 mutable state count
 
 Refactored by
-Make Immutable, Copy-on-Write
+[Make Immutable](LEXICON.md#lexicon-make-immutable)
 
 Enforced by
 type system, lint rules
@@ -13890,7 +13896,7 @@ Distinct from
 [Continuous Updates](LEXICON.md#lexicon-continuous-updates): Reproducibility pins every input, while continuous updates are the dependency changes that pinning holds back.
 
 Violated by
-unpinned dependencies, nondeterministic builds
+[Floating Dependencies](LEXICON.md#lexicon-floating-dependencies)
 
 Detected by
 build output drift
@@ -13899,7 +13905,7 @@ Measured by
 reproducible build/test pass rate
 
 Refactored by
-Pin Versions, Lock Inputs, Capture Environment
+[Pin Versions](LEXICON.md#lexicon-pin-versions)
 
 Enforced by
 lockfiles, build verification
@@ -13985,7 +13991,7 @@ Distinct from
 [Real-World Variability](LEXICON.md#lexicon-real-world-variability): Repeatability is the same result from a controlled rerun, while real-world variability is how far those controlled conditions differ from production.
 
 Violated by
-tests depending on ordering/time/external state
+[Environment-Sensitive Behavior](LEXICON.md#lexicon-environment-sensitive-behavior)
 
 Detected by
 flaky test results
@@ -13994,7 +14000,7 @@ Measured by
 rerun consistency
 
 Refactored by
-Isolate Environment, Mock External Inputs
+[Containerization](PRINCIPLES.md#architecture-containerization), [Fake at the Boundary](LEXICON.md#lexicon-fake-at-the-boundary)
 
 Enforced by
 CI rerun policy
@@ -14105,7 +14111,7 @@ Distinct from
 [Security](LEXICON.md#lexicon-security): Correctness is matching the specification, while security is protecting data and behavior from misuse.
 
 Violated by
-behavior diverging from specification
+[Undefined Behavior](LEXICON.md#lexicon-undefined-behavior)
 
 Detected by
 failing tests, invariant violations
@@ -14114,7 +14120,7 @@ Measured by
 defect rate, spec coverage
 
 Refactored by
-Add Tests, Fix Logic, Add Contracts
+[Unit Tests](LEXICON.md#lexicon-unit-tests), [Define Contract](LEXICON.md#lexicon-define-contract)
 
 Enforced by
 CI, formal/static checks
@@ -14198,7 +14204,7 @@ Tensions
 [Formal Verification / Cost/Complexity](SCHEMA.md#tension-cost-complexity-formal-verification)
 
 Violated by
-critical logic without proof where required
+[Informal Validation Only](LEXICON.md#lexicon-informal-validation-only)
 
 Detected by
 missing formal model for critical invariant
@@ -14207,7 +14213,7 @@ Measured by
 proven property coverage
 
 Refactored by
-Specify Model, Prove Invariant
+[Formal Model](LEXICON.md#lexicon-formal-model)
 
 Enforced by
 proof tooling
@@ -14296,7 +14302,7 @@ Tensions
 [Specification-Based Testing / Spec Maintenance](SCHEMA.md#tension-spec-maintenance-specification-based-testing)
 
 Violated by
-tests coupled to implementation details
+[Implementation-Only Testing](LEXICON.md#lexicon-implementation-only-testing)
 
 Detected by
 lack of spec-derived tests
@@ -14305,7 +14311,7 @@ Measured by
 spec coverage
 
 Refactored by
-Add Spec Tests
+none
 
 Enforced by
 test gates
@@ -14388,7 +14394,7 @@ Tensions
 [Property-Based Testing / Shrinking/Debug Complexity](SCHEMA.md#tension-property-based-testing-shrinking-debug-complexity)
 
 Violated by
-invariant-heavy code with only example tests
+[Example-Only Testing](LEXICON.md#lexicon-example-only-testing)
 
 Detected by
 missing generative tests for critical properties
@@ -14397,7 +14403,7 @@ Measured by
 property coverage, counterexample count
 
 Refactored by
-Define Property, Add Generator
+[Code Generation](LEXICON.md#lexicon-code-generation)
 
 Enforced by
 property test suite
@@ -14489,7 +14495,7 @@ Distinct from
 [Automated Enforcement](LEXICON.md#lexicon-automated-enforcement): Static analysis is one way to check source without running it, while automated enforcement is any machine check that rules hold.
 
 Violated by
-ignored analyzer findings
+[Ignored Analyzer Findings](LEXICON.md#lexicon-ignored-analyzer-findings)
 
 Detected by
 static analysis rule failures
@@ -14498,7 +14504,7 @@ Measured by
 issue count, false-positive rate
 
 Refactored by
-Fix Violations, Tune Rules
+[Automated Enforcement](LEXICON.md#lexicon-automated-enforcement), [Track Rule Metrics](LEXICON.md#lexicon-track-rule-metrics)
 
 Enforced by
 CI quality gates
@@ -14573,10 +14579,10 @@ In tension with
 [Encapsulation Extremes](LEXICON.md#lexicon-encapsulation-extremes)
 
 Conflicts with
-[Hidden Dependencies](LEXICON.md#lexicon-hidden-dependencies), [Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion)
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency), [Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion)
 
 Referenced by
-[Interface-Based Design](PRINCIPLES.md#architecture-interface-based-design), [Postconditions](PRINCIPLES.md#architecture-postconditions), [Referential Transparency](PRINCIPLES.md#architecture-referential-transparency), [Pure Functions](PRINCIPLES.md#architecture-pure-functions), [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility), [High Cohesion](PRINCIPLES.md#architecture-high-cohesion), [Singleton Pattern](PRINCIPLES.md#architecture-singleton-pattern), [Stateless Processing](PRINCIPLES.md#architecture-stateless-processing), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Service Locator Pattern](PRINCIPLES.md#architecture-service-locator-pattern), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture), [Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture), [State Isolation](PRINCIPLES.md#architecture-state-isolation), [Controlled Side Effects](PRINCIPLES.md#architecture-controlled-side-effects)
+[Interface-Based Design](PRINCIPLES.md#architecture-interface-based-design), [Postconditions](PRINCIPLES.md#architecture-postconditions), [Referential Transparency](PRINCIPLES.md#architecture-referential-transparency), [Pure Functions](PRINCIPLES.md#architecture-pure-functions), [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility), [High Cohesion](PRINCIPLES.md#architecture-high-cohesion), [Singleton Pattern](PRINCIPLES.md#architecture-singleton-pattern), [Stateless Processing](PRINCIPLES.md#architecture-stateless-processing), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Service Locator Pattern](PRINCIPLES.md#architecture-service-locator-pattern), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture), [State Isolation](PRINCIPLES.md#architecture-state-isolation), [Controlled Side Effects](PRINCIPLES.md#architecture-controlled-side-effects)
 
 Tensions
 [Testability / Encapsulation Extremes](SCHEMA.md#tension-encapsulation-extremes-testability)
@@ -14591,7 +14597,7 @@ Distinct from
 [Explicit Dependencies](LEXICON.md#lexicon-explicit-dependencies): Testability is supplying a unit's dependencies in a test, while explicit dependencies are those dependencies being visible in its signature.
 
 Violated by
-hardcoded dependencies, [global state](LEXICON.md#lexicon-global-state), nondeterminism
+[Hidden Time/Randomness/Global State](LEXICON.md#lexicon-hidden-time-randomness-global-state), [Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Detected by
 difficult setup, excessive mocking, flaky tests
@@ -14600,7 +14606,7 @@ Measured by
 test setup complexity, coverage, flake rate
 
 Refactored by
-Inject Dependencies, Isolate Side Effects
+[Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Make Effects Explicit](LEXICON.md#lexicon-make-effects-explicit)
 
 Enforced by
 test gates, [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -14648,7 +14654,7 @@ Depends on
 [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Deterministic Behavior](LEXICON.md#lexicon-deterministic-behavior), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Pure Functions](PRINCIPLES.md#architecture-pure-functions), [Regression Safety](LEXICON.md#lexicon-regression-safety)
 
 Shape it refuses
-[Hidden Dependencies](LEXICON.md#lexicon-hidden-dependencies), [Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion)
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency), [Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion)
 
 ### Validation
 
@@ -14685,7 +14691,7 @@ Tensions
 [Validation / Iteration Speed](SCHEMA.md#tension-iteration-speed-validation)
 
 Violated by
-unvalidated user/system assumptions
+[Assumption-Driven Delivery](LEXICON.md#lexicon-assumption-driven-delivery)
 
 Detected by
 missing acceptance tests
@@ -14694,7 +14700,7 @@ Measured by
 acceptance coverage
 
 Refactored by
-Add Validation Rules, Add Acceptance Tests
+[Validate at the Boundary](LEXICON.md#lexicon-validate-at-the-boundary), [Component Tests](LEXICON.md#lexicon-component-tests)
 
 Enforced by
 CI gates, QA policy
@@ -14783,7 +14789,7 @@ Tensions
 [Verification / Cost](SCHEMA.md#tension-cost-verification)
 
 Violated by
-code lacking spec conformance checks
+[Untested Implementation](LEXICON.md#lexicon-untested-implementation)
 
 Detected by
 missing tests/static checks
@@ -14792,7 +14798,7 @@ Measured by
 verification coverage
 
 Refactored by
-Add Tests, Add Static Checks
+[Unit Tests](LEXICON.md#lexicon-unit-tests), [Static Analysis](PRINCIPLES.md#architecture-static-analysis)
 
 Enforced by
 CI gates
@@ -14853,25 +14859,25 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_portability["Portability"]
-n_platform_independence["Platform Independence"]
-n_environment_parity["Environment Parity"]
-n_containerization["Containerization"]
-n_infrastructure_as_code["Infrastructure as Code"]
-n_standards_compliance["Standards Compliance"]
-n_protocol_independence["Protocol Independence"]
-n_configuration_externalization["Configuration Externalization"]
-n_immutable_infrastructure["Immutable Infrastructure"]
-n_platform_independence --> n_portability
-n_environment_parity --> n_configuration_externalization
-n_environment_parity --> n_infrastructure_as_code
-n_containerization --> n_portability
-n_containerization --> n_environment_parity
-n_protocol_independence --> n_portability
-n_configuration_externalization --> n_portability
-n_configuration_externalization --> n_environment_parity
-n_immutable_infrastructure --> n_infrastructure_as_code
-n_immutable_infrastructure --> n_environment_parity
+    n_portability["Portability"]
+    n_platform_independence["Platform Independence"]
+    n_environment_parity["Environment Parity"]
+    n_containerization["Containerization"]
+    n_infrastructure_as_code["Infrastructure as Code"]
+    n_standards_compliance["Standards Compliance"]
+    n_protocol_independence["Protocol Independence"]
+    n_configuration_externalization["Configuration Externalization"]
+    n_immutable_infrastructure["Immutable Infrastructure"]
+    n_platform_independence --> n_portability
+    n_environment_parity --> n_configuration_externalization
+    n_environment_parity --> n_infrastructure_as_code
+    n_containerization --> n_portability
+    n_containerization --> n_environment_parity
+    n_protocol_independence --> n_portability
+    n_configuration_externalization --> n_portability
+    n_configuration_externalization --> n_environment_parity
+    n_immutable_infrastructure --> n_infrastructure_as_code
+    n_immutable_infrastructure --> n_environment_parity
 ```
 
 ### Portability
@@ -14915,7 +14921,7 @@ Distinct from
 [Platform Optimization](LEXICON.md#lexicon-platform-optimization): Portability is running anywhere unchanged, while platform optimization is the tuning for one platform that it gives up.
 
 Violated by
-direct dependency on non-abstracted platform APIs
+[Platform-Specific Coupling](LEXICON.md#lexicon-platform-specific-coupling)
 
 Detected by
 platform-specific imports in core
@@ -14924,7 +14930,7 @@ Measured by
 portability violation count
 
 Refactored by
-Add Adapter, Externalize Platform Dependency
+[Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Introduce Port](LEXICON.md#lexicon-introduce-port)
 
 Enforced by
 dependency rules
@@ -15004,7 +15010,7 @@ Tensions
 [Platform Independence / Native Optimization](SCHEMA.md#tension-native-optimization-platform-independence)
 
 Violated by
-hardcoded platform assumptions
+[OS/Vendor Lock-In](LEXICON.md#lexicon-os-vendor-lock-in)
 
 Detected by
 OS-specific paths/APIs in portable layers
@@ -15013,7 +15019,7 @@ Measured by
 cross-platform test pass rate
 
 Refactored by
-Abstract Platform API, Normalize Paths
+[Introduce Port](LEXICON.md#lexicon-introduce-port), [Canonicalization](PRINCIPLES.md#architecture-canonicalization)
 
 Enforced by
 cross-platform CI
@@ -15104,7 +15110,7 @@ Distinct from
 [Configuration Externalization](PRINCIPLES.md#architecture-configuration-externalization): Environment parity runs the same build everywhere, while configuration externalization is how the differences are kept outside that build.
 
 Violated by
-environment-specific behavior not config-driven
+[Snowflake Environments](LEXICON.md#lexicon-snowflake-environments)
 
 Detected by
 works-in-dev-only defects
@@ -15113,7 +15119,7 @@ Measured by
 [environment drift](LEXICON.md#lexicon-environment-drift)
 
 Refactored by
-Containerize, Externalize Config, Use IaC
+[Containerization](PRINCIPLES.md#architecture-containerization), [Externalize Configuration](LEXICON.md#lexicon-externalize-configuration), [Infrastructure as Code](PRINCIPLES.md#architecture-infrastructure-as-code)
 
 Enforced by
 environment drift checks
@@ -15194,7 +15200,7 @@ Tensions
 [Containerization / Image Complexity](SCHEMA.md#tension-containerization-image-complexity)
 
 Violated by
-undeclared host dependency
+[Host-Coupled Deployment](LEXICON.md#lexicon-host-coupled-deployment)
 
 Detected by
 manual host setup requirements
@@ -15203,7 +15209,7 @@ Measured by
 image reproducibility
 
 Refactored by
-Add Containerfile, Externalize Runtime Dependencies
+[Externalize Configuration](LEXICON.md#lexicon-externalize-configuration)
 
 Enforced by
 image scans, build pipeline
@@ -15291,7 +15297,7 @@ Tensions
 [Infrastructure as Code / Tooling Complexity](SCHEMA.md#tension-infrastructure-as-code-tooling-complexity)
 
 Violated by
-untracked manual infra mutation
+[Manual Infrastructure Changes](LEXICON.md#lexicon-manual-infrastructure-changes)
 
 Detected by
 drift between code and live infra
@@ -15300,7 +15306,7 @@ Measured by
 drift count, IaC coverage
 
 Refactored by
-Codify Resource, Import State
+none
 
 Enforced by
 [policy-as-code](PRINCIPLES.md#architecture-policy-as-code), drift detection
@@ -15390,7 +15396,7 @@ Distinct from
 [Applicable Standard](LEXICON.md#lexicon-applicable-standard): Standards compliance is conforming, while the applicable standard is the one standard identified to conform to.
 
 Violated by
-nonconforming implementation
+[Proprietary Deviation](LEXICON.md#lexicon-proprietary-deviation)
 
 Detected by
 conformance test failure
@@ -15399,7 +15405,7 @@ Measured by
 standard compliance score
 
 Refactored by
-Align Implementation, Add Conformance Tests
+[Contract Testing](LEXICON.md#lexicon-contract-testing)
 
 Enforced by
 standards checks
@@ -15480,7 +15486,7 @@ Tensions
 [Protocol Independence / Protocol-Specific Features](SCHEMA.md#tension-protocol-independence-protocol-specific-features)
 
 Violated by
-HTTP/gRPC/etc. types in domain core
+[Protocol-Coupled Domain Logic](LEXICON.md#lexicon-protocol-coupled-domain-logic)
 
 Detected by
 protocol imports in core layer
@@ -15489,7 +15495,7 @@ Measured by
 protocol leakage count
 
 Refactored by
-Add Port, Add Protocol Adapter
+[Introduce Port](LEXICON.md#lexicon-introduce-port), [Extract Adapter](LEXICON.md#lexicon-extract-adapter)
 
 Enforced by
 import rules
@@ -15552,6 +15558,7 @@ Shape it refuses
 - Category: [Portability / Infrastructure / Deployment](PRINCIPLES.md#architecture-category-portability-infrastructure-deployment)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: application, deployment, runtime
+- Aliases: Externalized Configuration
 - Layer: [Resource Core](SCHEMA.md#layer-resource-core)
 
 Details
@@ -15581,7 +15588,7 @@ Tensions
 [Configuration Externalization / Config Sprawl](SCHEMA.md#tension-config-sprawl-configuration-externalization)
 
 Violated by
-environment values hardcoded in code
+[Hardcoded Configuration](PRINCIPLES.md#architecture-hardcoded-configuration)
 
 Detected by
 hardcoded URLs/secrets/paths
@@ -15590,7 +15597,7 @@ Measured by
 externalized config coverage
 
 Refactored by
-Move to Config, Add Validation
+[Externalize Configuration](LEXICON.md#lexicon-externalize-configuration), [Validate at the Boundary](LEXICON.md#lexicon-validate-at-the-boundary)
 
 Enforced by
 secret/config scans
@@ -15676,7 +15683,7 @@ Tensions
 [Immutable Infrastructure / Deploy Time](SCHEMA.md#tension-deploy-time-immutable-infrastructure)
 
 Violated by
-patching running servers in place
+[In-Place Server Mutation](LEXICON.md#lexicon-in-place-server-mutation)
 
 Detected by
 SSH mutation of live instances
@@ -15685,7 +15692,7 @@ Measured by
 config drift across instances
 
 Refactored by
-Replace Instances from Immutable Images
+none
 
 Enforced by
 deployment review
@@ -15742,66 +15749,66 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_single_responsibility["Single Responsibility Principle (SRP)"]
-n_separation_of_concerns["Separation of Concerns"]
-n_duplicate_code["Do Not Repeat Yourself (DRY)"]
-n_high_cohesion["High Cohesion"]
-n_low_coupling["Low Coupling"]
-n_encapsulation["Encapsulation"]
-n_information_hiding["Information Hiding"]
-n_abstraction["Abstraction"]
-n_modularity["Modularity"]
-n_composability["Composability"]
-n_composition_over_inheritance["Composition Over Inheritance"]
-n_reusability["Reusability"]
-n_replaceability["Replaceability"]
-n_interchangeability["Interchangeability"]
-n_independence["Independence"]
-n_autonomy["Autonomy"]
-n_single_responsibility --> n_high_cohesion
-n_single_responsibility --> n_separation_of_concerns
-n_single_responsibility --> n_modularity
-n_single_responsibility --> n_replaceability
-n_single_responsibility --> n_reusability
-n_separation_of_concerns --> n_abstraction
-n_separation_of_concerns --> n_single_responsibility
-n_separation_of_concerns --> n_modularity
-n_separation_of_concerns --> n_replaceability
-n_duplicate_code --> n_abstraction
-n_duplicate_code --> n_reusability
-n_high_cohesion --> n_single_responsibility
-n_high_cohesion --> n_modularity
-n_high_cohesion --> n_encapsulation
-n_high_cohesion --> n_replaceability
-n_low_coupling --> n_abstraction
-n_low_coupling --> n_modularity
-n_low_coupling --> n_replaceability
-n_encapsulation --> n_information_hiding
-n_encapsulation --> n_abstraction
-n_encapsulation --> n_low_coupling
-n_information_hiding --> n_encapsulation
-n_information_hiding --> n_low_coupling
-n_information_hiding --> n_replaceability
-n_abstraction --> n_low_coupling
-n_abstraction --> n_replaceability
-n_modularity --> n_high_cohesion
-n_modularity --> n_low_coupling
-n_modularity --> n_separation_of_concerns
-n_modularity --> n_composability
-n_modularity --> n_replaceability
-n_composability --> n_low_coupling
-n_composability --> n_modularity
-n_composability --> n_reusability
-n_composition_over_inheritance --> n_low_coupling
-n_composition_over_inheritance --> n_replaceability
-n_reusability --> n_abstraction
-n_reusability --> n_duplicate_code
-n_reusability --> n_composability
-n_replaceability --> n_low_coupling
-n_interchangeability --> n_replaceability
-n_independence --> n_low_coupling
-n_independence --> n_autonomy
-n_autonomy --> n_independence
+    n_single_responsibility["Single Responsibility Principle (SRP)"]
+    n_separation_of_concerns["Separation of Concerns"]
+    n_duplicate_code["Do Not Repeat Yourself (DRY)"]
+    n_high_cohesion["High Cohesion"]
+    n_low_coupling["Low Coupling"]
+    n_encapsulation["Encapsulation"]
+    n_information_hiding["Information Hiding"]
+    n_abstraction["Abstraction"]
+    n_modularity["Modularity"]
+    n_composability["Composability"]
+    n_composition_over_inheritance["Composition Over Inheritance"]
+    n_reusability["Reusability"]
+    n_replaceability["Replaceability"]
+    n_interchangeability["Interchangeability"]
+    n_independence["Independence"]
+    n_autonomy["Autonomy"]
+    n_single_responsibility --> n_high_cohesion
+    n_single_responsibility --> n_separation_of_concerns
+    n_single_responsibility --> n_modularity
+    n_single_responsibility --> n_replaceability
+    n_single_responsibility --> n_reusability
+    n_separation_of_concerns --> n_abstraction
+    n_separation_of_concerns --> n_single_responsibility
+    n_separation_of_concerns --> n_modularity
+    n_separation_of_concerns --> n_replaceability
+    n_duplicate_code --> n_abstraction
+    n_duplicate_code --> n_reusability
+    n_high_cohesion --> n_single_responsibility
+    n_high_cohesion --> n_modularity
+    n_high_cohesion --> n_encapsulation
+    n_high_cohesion --> n_replaceability
+    n_low_coupling --> n_abstraction
+    n_low_coupling --> n_modularity
+    n_low_coupling --> n_replaceability
+    n_encapsulation --> n_information_hiding
+    n_encapsulation --> n_abstraction
+    n_encapsulation --> n_low_coupling
+    n_information_hiding --> n_encapsulation
+    n_information_hiding --> n_low_coupling
+    n_information_hiding --> n_replaceability
+    n_abstraction --> n_low_coupling
+    n_abstraction --> n_replaceability
+    n_modularity --> n_high_cohesion
+    n_modularity --> n_low_coupling
+    n_modularity --> n_separation_of_concerns
+    n_modularity --> n_composability
+    n_modularity --> n_replaceability
+    n_composability --> n_low_coupling
+    n_composability --> n_modularity
+    n_composability --> n_reusability
+    n_composition_over_inheritance --> n_low_coupling
+    n_composition_over_inheritance --> n_replaceability
+    n_reusability --> n_abstraction
+    n_reusability --> n_duplicate_code
+    n_reusability --> n_composability
+    n_replaceability --> n_low_coupling
+    n_interchangeability --> n_replaceability
+    n_independence --> n_low_coupling
+    n_independence --> n_autonomy
+    n_autonomy --> n_independence
 ```
 
 ### Single Responsibility Principle (SRP)
@@ -15810,7 +15817,7 @@ n_autonomy --> n_independence
 - Category: [Core Modular Design](PRINCIPLES.md#architecture-category-core-modular-design)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: class, module, service
-- Aliases: SRP, Single Responsibility Principle (SRP)
+- Aliases: SRP, Single Responsibility Principle
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -15852,7 +15859,7 @@ Distinct from
 [Separation of Concerns](PRINCIPLES.md#architecture-separation-of-concerns): Single responsibility is one reason to change per class or module, while separation of concerns separates the named concerns of a system.
 
 Violated by
-Mixed Responsibilities, Multi-Reason Change
+[God Object](PRINCIPLES.md#architecture-god-object), [Divergent Change](PRINCIPLES.md#architecture-divergent-change)
 
 Detected by
 high fan-in/fan-out, unrelated methods, unrelated dependencies
@@ -15861,7 +15868,7 @@ Measured by
 cohesion score, responsibility count, change-coupling
 
 Refactored by
-Extract Class, Extract Module, Split Service, Move Method
+[Extract Class](LEXICON.md#lexicon-extract-class), [Extract Module](LEXICON.md#lexicon-extract-module), [Split Bounded Context](LEXICON.md#lexicon-split-bounded-context), [Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner)
 
 Enforced by
 architecture tests, package boundaries, [static analysis](REASONING.md#reasoning-technique-static-analysis)
@@ -15937,6 +15944,7 @@ Shape it refuses
 - Category: [Core Modular Design](PRINCIPLES.md#architecture-category-core-modular-design)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: module, package, component, system
+- Aliases: SoC
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -15975,7 +15983,7 @@ Distinct from
 [Composability](PRINCIPLES.md#architecture-composability): Separation of concerns keeps concerns apart, while composability lets parts combine.
 
 Violated by
-business logic in controllers, persistence logic in domain
+[Mixed Layers](LEXICON.md#lexicon-mixed-layers)
 
 Detected by
 layer imports, mixed naming roles, cross-boundary logic
@@ -15984,7 +15992,7 @@ Measured by
 dependency direction, layer purity, concern overlap
 
 Refactored by
-Extract Layer, Move Logic, Introduce Boundary
+[Extract Module](LEXICON.md#lexicon-extract-module), [Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner), [Define Module Boundaries](LEXICON.md#lexicon-define-module-boundaries)
 
 Enforced by
 import rules, dependency graph checks
@@ -16051,7 +16059,7 @@ Shape it refuses
 - Category: [Core Modular Design](PRINCIPLES.md#architecture-category-core-modular-design)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: function, module, domain
-- Aliases: DRY
+- Aliases: DRY, Do Not Repeat Yourself, Don't Repeat Yourself
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -16081,7 +16089,7 @@ Tensions
 [Do Not Repeat Yourself (DRY) / Locality of Behavior](SCHEMA.md#tension-do-not-repeat-yourself-dry-locality-of-behavior), [Do Not Repeat Yourself (DRY) / Simplicity](SCHEMA.md#tension-do-not-repeat-yourself-dry-simplicity)
 
 Violated by
-duplicated logic, duplicated constants, duplicated schemas
+[Copy-Paste Programming](LEXICON.md#lexicon-copy-paste-programming)
 
 Detected by
 clone detection, duplicated branches, repeated literals
@@ -16090,7 +16098,7 @@ Measured by
 duplication percentage, clone count
 
 Refactored by
-Extract Function, Extract Module, Parameterize, Centralize Rule
+[Extract Function](LEXICON.md#lexicon-extract-function), [Extract Module](LEXICON.md#lexicon-extract-module), [Introduce Parameter Object](LEXICON.md#lexicon-introduce-parameter-object), [Centralize the Rule](LEXICON.md#lexicon-centralize-the-rule)
 
 Enforced by
 clone analyzers, lint rules, review gates
@@ -16190,7 +16198,7 @@ Distinct from
 [Over-Specialization](LEXICON.md#lexicon-over-specialization): High cohesion is members sharing one purpose, while over-specialization is the reuse lost by narrowing that purpose too far.
 
 Violated by
-unrelated methods, unrelated fields, unstable responsibility grouping
+[Divergent Change](PRINCIPLES.md#architecture-divergent-change)
 
 Detected by
 low LCOM, scattered dependencies, unrelated public API
@@ -16199,7 +16207,7 @@ Measured by
 cohesion metrics, change locality
 
 Refactored by
-Extract Class, Split Module, Move Method
+[Extract Class](LEXICON.md#lexicon-extract-class), [Split Module](LEXICON.md#lexicon-split-module), [Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner)
 
 Enforced by
 module ownership, [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -16329,7 +16337,7 @@ Distinct from
 [Domain Purity](LEXICON.md#lexicon-domain-purity): Low coupling applies between any modules, while domain purity keeps the domain model free of infrastructure concerns.
 
 Violated by
-concrete imports, [global state](LEXICON.md#lexicon-global-state), bidirectional dependencies
+[Tight Coupling](LEXICON.md#lexicon-tight-coupling), [Circular Dependency](PRINCIPLES.md#architecture-circular-dependency)
 
 Detected by
 dependency cycles, high afferent/efferent coupling
@@ -16338,7 +16346,7 @@ Measured by
 coupling metrics, dependency graph density
 
 Refactored by
-Introduce Interface, [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), Adapter Extraction
+[Extract Interface](LEXICON.md#lexicon-extract-interface), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Extract Adapter](LEXICON.md#lexicon-extract-adapter)
 
 Enforced by
 dependency rules, architecture fitness tests
@@ -16448,7 +16456,7 @@ Distinct from
 [State Isolation](PRINCIPLES.md#architecture-state-isolation): Encapsulation limits writes to an object's own operations, while state isolation limits writes to one unit of concurrent execution.
 
 Violated by
-public mutable fields, leaky getters, direct state mutation
+[Exposed Internals](LEXICON.md#lexicon-exposed-internals), [Shared Mutable State](PRINCIPLES.md#architecture-shared-mutable-state)
 
 Detected by
 public state, excessive setters, external invariant manipulation
@@ -16457,7 +16465,7 @@ Measured by
 public surface area, mutation exposure
 
 Refactored by
-Hide Field, Introduce Method, Restrict Visibility
+[Encapsulate State](LEXICON.md#lexicon-encapsulate-state), [Extract Function](LEXICON.md#lexicon-extract-function), [Restrict Exports](LEXICON.md#lexicon-restrict-exports)
 
 Enforced by
 visibility rules, linting, API review
@@ -16553,7 +16561,7 @@ Tensions
 [Information Hiding / Observability](SCHEMA.md#tension-information-hiding-observability)
 
 Violated by
-exposing implementation details, shared internals
+[Leaky Abstraction](LEXICON.md#lexicon-leaky-abstraction), [Exposed Internals](LEXICON.md#lexicon-exposed-internals)
 
 Detected by
 internal packages imported externally, exposed persistence models
@@ -16562,7 +16570,7 @@ Measured by
 internal API exposure, dependency leakage
 
 Refactored by
-Introduce Facade, Hide Module, Restrict Exports
+[Facade Pattern](PRINCIPLES.md#architecture-facade-pattern), [Restrict Exports](LEXICON.md#lexicon-restrict-exports)
 
 Enforced by
 package visibility, module export rules
@@ -16676,7 +16684,7 @@ Distinct from
 [Separation of Concerns](PRINCIPLES.md#architecture-separation-of-concerns): Abstraction separates what from how, while separation of concerns separates parsing, logic, persistence and presentation.
 
 Violated by
-hardcoded implementation dependency, implementation leakage
+[Leaky Abstraction](LEXICON.md#lexicon-leaky-abstraction), [Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling)
 
 Detected by
 concrete type usage across boundaries
@@ -16685,7 +16693,7 @@ Measured by
 abstraction ratio, interface stability
 
 Refactored by
-Extract Interface, Introduce Port, Generalize Dependency
+[Extract Interface](LEXICON.md#lexicon-extract-interface), [Introduce Port](LEXICON.md#lexicon-introduce-port), [Invert Dependency](LEXICON.md#lexicon-invert-dependency)
 
 Enforced by
 architecture tests, dependency inversion rules
@@ -16810,7 +16818,7 @@ Distinct from
 [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility): Modularity is the division of a system, while single responsibility limits one class or module to one reason to change.
 
 Violated by
-[cyclic dependencies](PRINCIPLES.md#architecture-circular-dependency), [shared mutable state](PRINCIPLES.md#architecture-shared-mutable-state), [boundary leakage](PRINCIPLES.md#architecture-boundary-leakage)
+[Circular Dependency](PRINCIPLES.md#architecture-circular-dependency), [Shared Mutable State](PRINCIPLES.md#architecture-shared-mutable-state), [Boundary Leakage](PRINCIPLES.md#architecture-boundary-leakage)
 
 Detected by
 dependency cycles, unstable module graph
@@ -16819,7 +16827,7 @@ Measured by
 modularity score, graph density, instability
 
 Refactored by
-Split Module, Introduce Boundary, Invert Dependency
+[Split Module](LEXICON.md#lexicon-split-module), [Define Module Boundaries](LEXICON.md#lexicon-define-module-boundaries), [Invert Dependency](LEXICON.md#lexicon-invert-dependency)
 
 Enforced by
 module rules, package ownership, [fitness functions](PRINCIPLES.md#architecture-fitness-functions)
@@ -16915,7 +16923,7 @@ Distinct from
 [Do Not Repeat Yourself (DRY)](PRINCIPLES.md#architecture-duplicate-code): Composability lets parts combine through compatible interfaces, while DRY keeps one source for each piece of logic.
 
 Violated by
-[hidden side effects](PRINCIPLES.md#architecture-hidden-side-effect), [incompatible interfaces](LEXICON.md#lexicon-incompatible-interfaces)
+[Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect), [Implementation-Specific Contracts](LEXICON.md#lexicon-implementation-specific-contracts)
 
 Detected by
 non-chainable APIs, incompatible contracts
@@ -16924,7 +16932,7 @@ Measured by
 composition count, interface compatibility
 
 Refactored by
-Normalize Interface, Extract Component, Introduce Adapter
+[Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface), [Extract Module](LEXICON.md#lexicon-extract-module), [Adapter Pattern](PRINCIPLES.md#architecture-adapter-pattern)
 
 Enforced by
 contract tests, type checks
@@ -16983,6 +16991,7 @@ Shape it refuses
 - Category: [Core Modular Design](PRINCIPLES.md#architecture-category-core-modular-design)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: class, component
+- Aliases: Composite Reuse Principle
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -17012,7 +17021,7 @@ Tensions
 [Composition Over Inheritance / Simplicity for Trivial Reuse](SCHEMA.md#tension-composition-over-inheritance-simplicity-for-trivial-reuse)
 
 Violated by
-fragile base class, inherited behavior misuse
+[Deep Inheritance Hierarchy](LEXICON.md#lexicon-deep-inheritance-hierarchy), [Broken Inheritance](LEXICON.md#lexicon-broken-inheritance)
 
 Detected by
 inheritance depth, overridden behavior conflicts
@@ -17021,7 +17030,7 @@ Measured by
 inheritance depth, composition ratio
 
 Refactored by
-Replace Inheritance with Delegation, Extract Strategy
+[Replace Inheritance with Delegation](LEXICON.md#lexicon-replace-inheritance-with-delegation), [Strategy Pattern](PRINCIPLES.md#architecture-strategy-pattern)
 
 Enforced by
 inheritance depth limits, review rules
@@ -17129,7 +17138,7 @@ Distinct from
 [Over-Generalization](LEXICON.md#lexicon-over-generalization): Reusability serves new callers unchanged, while over-generalization is the clarity lost by making code serve every case.
 
 Violated by
-hardcoded context, hidden assumptions
+[Context-Specific Coupling](LEXICON.md#lexicon-context-specific-coupling)
 
 Detected by
 environment-specific logic in reusable code
@@ -17138,7 +17147,7 @@ Measured by
 reuse count, dependency portability
 
 Refactored by
-Parameterize, Extract Library, Remove Context Coupling
+[Introduce Parameter Object](LEXICON.md#lexicon-introduce-parameter-object), [Extract Module](LEXICON.md#lexicon-extract-module), [Pass Context Explicitly](LEXICON.md#lexicon-pass-context-explicitly)
 
 Enforced by
 API review, dependency rules
@@ -17210,7 +17219,7 @@ Requires
 [Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Low Coupling](PRINCIPLES.md#architecture-low-coupling)
 
 Reinforces
-[Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Ports and Adapters](LEXICON.md#lexicon-ports-and-adapters)
+[Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
 Enables
 [Vendor Swap](LEXICON.md#lexicon-vendor-swap), [Plugin Architecture](PRINCIPLES.md#architecture-plugin-architecture)
@@ -17249,7 +17258,7 @@ Distinct from
 [Maintainability](LEXICON.md#lexicon-maintainability): Replaceability makes one kind of change cheap, while maintainability is the ease of every kind of correction and extension.
 
 Violated by
-direct vendor SDK usage in domain/application
+[Vendor Lock-In Leakage](PRINCIPLES.md#architecture-vendor-lock-in-leakage)
 
 Detected by
 infrastructure imports in core layers
@@ -17258,7 +17267,7 @@ Measured by
 adapter coverage, boundary purity
 
 Refactored by
-Introduce Port, Extract Adapter, Invert Dependency
+[Introduce Port](LEXICON.md#lexicon-introduce-port), [Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Invert Dependency](LEXICON.md#lexicon-invert-dependency)
 
 Enforced by
 import restrictions, adapter tests
@@ -17314,7 +17323,7 @@ Authoritative side
 The declared module boundary, which every import and export conforms to
 
 Depends on
-[Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Ports and Adapters](LEXICON.md#lexicon-ports-and-adapters), [Vendor Swap](LEXICON.md#lexicon-vendor-swap), [Plugin Architecture](PRINCIPLES.md#architecture-plugin-architecture)
+[Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture), [Vendor Swap](LEXICON.md#lexicon-vendor-swap), [Plugin Architecture](PRINCIPLES.md#architecture-plugin-architecture)
 
 Shape it refuses
 [Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling)
@@ -17357,7 +17366,7 @@ Distinct from
 [Specialized Optimization](LEXICON.md#lexicon-specialized-optimization): Interchangeability lets implementations be swapped, while specialized optimization is the tuning for one implementation that it gives up.
 
 Violated by
-non-conforming substitutes
+[Implementation-Specific Contracts](LEXICON.md#lexicon-implementation-specific-contracts)
 
 Detected by
 contract test failure, incompatible schema
@@ -17366,7 +17375,7 @@ Measured by
 conformance score, compatibility tests
 
 Refactored by
-Normalize Interface, Add Adapter, Align Contract
+[Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface), [Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Contract Testing](LEXICON.md#lexicon-contract-testing)
 
 Enforced by
 contract tests, [schema validation](PRINCIPLES.md#architecture-schema-validation)
@@ -17455,7 +17464,7 @@ Tensions
 [Independence / Coordination Cost](SCHEMA.md#tension-coordination-cost-independence)
 
 Violated by
-shared database coupling, synchronous dependency chains
+[Shared Database](LEXICON.md#lexicon-shared-database), [Synchronous Chain Trap](PRINCIPLES.md#architecture-synchronous-chain-trap)
 
 Detected by
 shared mutable resources, deployment coupling
@@ -17464,7 +17473,7 @@ Measured by
 independent deployability, dependency count
 
 Refactored by
-Split Boundary, Introduce Events, Decouple Persistence
+[Split Bounded Context](LEXICON.md#lexicon-split-bounded-context), [Domain Events](PRINCIPLES.md#architecture-domain-events), [Introduce Port](LEXICON.md#lexicon-introduce-port)
 
 Enforced by
 deployment rules, service ownership
@@ -17576,7 +17585,7 @@ Distinct from
 [Independence](PRINCIPLES.md#architecture-independence): Autonomy is ownership, while independence is being tested and deployed without the neighboring modules.
 
 Violated by
-cross-service database writes, shared business logic ownership
+[Shared Database](LEXICON.md#lexicon-shared-database), [Distributed Monolith](PRINCIPLES.md#architecture-distributed-monolith)
 
 Detected by
 external writes to owned data, cross-team coupling
@@ -17585,7 +17594,7 @@ Measured by
 ownership clarity, deployment independence
 
 Refactored by
-[Own Data](LEXICON.md#lexicon-own-data), Split Context, Introduce Events
+[Own Data per Service](LEXICON.md#lexicon-own-data-per-service), [Split Bounded Context](LEXICON.md#lexicon-split-bounded-context), [Domain Events](PRINCIPLES.md#architecture-domain-events)
 
 Enforced by
 ownership boundaries, API policies
@@ -17648,13 +17657,13 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_interface_segregation["Interface Segregation Principle (ISP)"]
-n_dependency_inversion["Dependency Inversion Principle (DIP)"]
-n_open_closed["Open/Closed Principle (OCP)"]
-n_liskov_substitution["Liskov Substitution Principle (LSP)"]
-n_polymorphism["Polymorphism"]
-n_liskov_substitution --> n_polymorphism
-n_polymorphism --> n_open_closed
+    n_interface_segregation["Interface Segregation Principle (ISP)"]
+    n_dependency_inversion["Dependency Inversion Principle (DIP)"]
+    n_open_closed["Open/Closed Principle (OCP)"]
+    n_liskov_substitution["Liskov Substitution Principle (LSP)"]
+    n_polymorphism["Polymorphism"]
+    n_liskov_substitution --> n_polymorphism
+    n_polymorphism --> n_open_closed
 ```
 
 ### Interface Segregation Principle (ISP)
@@ -17663,6 +17672,7 @@ n_polymorphism --> n_open_closed
 - Category: [SOLID / Object-Oriented Design](PRINCIPLES.md#architecture-category-solid-object-oriented-design)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: interface, service, module
+- Aliases: ISP, Interface Segregation Principle
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -17689,7 +17699,7 @@ Tensions
 [Interface Segregation Principle (ISP) / Interface Proliferation](SCHEMA.md#tension-interface-proliferation-interface-segregation-principle-isp)
 
 Violated by
-clients depending on unused methods
+[Fat Interface](LEXICON.md#lexicon-fat-interface)
 
 Detected by
 unused interface method implementations
@@ -17698,7 +17708,7 @@ Measured by
 interface method usage ratio
 
 Refactored by
-Split Interface, Extract Role Interface
+[Split Interface](LEXICON.md#lexicon-split-interface), [Extract Role Interface](LEXICON.md#lexicon-extract-role-interface)
 
 Enforced by
 interface usage analysis, lint rules
@@ -17769,7 +17779,7 @@ Shape it refuses
 - Category: [SOLID / Object-Oriented Design](PRINCIPLES.md#architecture-category-solid-object-oriented-design)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: module, component, layer
-- Aliases: DIP
+- Aliases: DIP, Dependency Inversion Principle
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -17784,13 +17794,13 @@ Reinforces
 [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture)
 
 Enables
-[Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Ports and Adapters](LEXICON.md#lexicon-ports-and-adapters)
+[Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
 In tension with
 [Runtime Indirection](LEXICON.md#lexicon-runtime-indirection)
 
 Conflicts with
-[Concrete Dependency](LEXICON.md#lexicon-concrete-dependency)
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling)
 
 Referenced by
 [Interface-Based Design](PRINCIPLES.md#architecture-interface-based-design), [Testability](PRINCIPLES.md#architecture-testability), [Abstraction](PRINCIPLES.md#architecture-abstraction), [Replaceability](PRINCIPLES.md#architecture-replaceability), [Inversion of Control (IoC)](PRINCIPLES.md#architecture-inversion-of-control), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Service Locator Pattern](PRINCIPLES.md#architecture-service-locator-pattern), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture)
@@ -17802,7 +17812,7 @@ Distinct from
 [Inversion of Control (IoC)](PRINCIPLES.md#architecture-inversion-of-control): Dependency inversion fixes which side owns the abstraction, while inversion of control moves object creation and control flow to a framework or composition root.
 
 Violated by
-domain importing infrastructure
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling)
 
 Detected by
 dependency direction violations
@@ -17811,7 +17821,7 @@ Measured by
 inward dependency ratio
 
 Refactored by
-Extract Interface, Introduce Port, Inject Dependency
+[Extract Interface](LEXICON.md#lexicon-extract-interface), [Introduce Port](LEXICON.md#lexicon-introduce-port), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
 
 Enforced by
 dependency graph rules, architecture tests
@@ -17865,10 +17875,10 @@ Authoritative side
 The interface contract, which every implementation and override conforms to
 
 Depends on
-[Abstraction](PRINCIPLES.md#architecture-abstraction), [Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Ports and Adapters](LEXICON.md#lexicon-ports-and-adapters)
+[Abstraction](PRINCIPLES.md#architecture-abstraction), [Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
 Shape it refuses
-[Concrete Dependency](LEXICON.md#lexicon-concrete-dependency)
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling)
 
 ### Open/Closed Principle (OCP)
 
@@ -17876,7 +17886,7 @@ Shape it refuses
 - Category: [SOLID / Object-Oriented Design](PRINCIPLES.md#architecture-category-solid-object-oriented-design)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: class, module, component
-- Aliases: OCP
+- Aliases: OCP, Open-Closed Principle
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -17912,7 +17922,7 @@ Distinct from
 [Composability](PRINCIPLES.md#architecture-composability): The open/closed principle adds behavior without editing existing code, while composability combines parts through compatible interfaces.
 
 Violated by
-repeated modification of stable core for variants
+[Switch-Based Extension](LEXICON.md#lexicon-switch-based-extension)
 
 Detected by
 growing conditionals, repeated edits to central classes
@@ -17921,7 +17931,7 @@ Measured by
 modification frequency of core modules
 
 Refactored by
-Extract Strategy, Add Extension Point, Introduce Plugin
+[Strategy Pattern](PRINCIPLES.md#architecture-strategy-pattern), [Extension Points](PRINCIPLES.md#architecture-extension-points), [Plugin Architecture](PRINCIPLES.md#architecture-plugin-architecture)
 
 Enforced by
 extension policies, change analysis
@@ -17992,7 +18002,7 @@ Shape it refuses
 - Category: [SOLID / Object-Oriented Design](PRINCIPLES.md#architecture-category-solid-object-oriented-design)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: class, interface, type hierarchy
-- Aliases: LSP
+- Aliases: LSP, Liskov Substitution Principle, Behavioral Subtyping
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -18022,7 +18032,7 @@ Tensions
 [Liskov Substitution Principle (LSP) / Narrow Specialized Behavior](SCHEMA.md#tension-liskov-substitution-principle-lsp-narrow-specialized-behavior)
 
 Violated by
-subclass weakening postconditions or strengthening preconditions
+[Broken Inheritance](LEXICON.md#lexicon-broken-inheritance)
 
 Detected by
 overridden method contract divergence
@@ -18031,7 +18041,7 @@ Measured by
 contract test pass rate across subtypes
 
 Refactored by
-Replace Inheritance, Extract Interface, Split Hierarchy
+[Replace Inheritance with Delegation](LEXICON.md#lexicon-replace-inheritance-with-delegation), [Extract Interface](LEXICON.md#lexicon-extract-interface), [Split Hierarchy](LEXICON.md#lexicon-split-hierarchy)
 
 Enforced by
 contract tests, type tests
@@ -18138,7 +18148,7 @@ Distinct from
 [Type Safety](PRINCIPLES.md#architecture-type-safety): Polymorphism varies the implementation behind a type, while type safety rejects operations on the wrong type.
 
 Violated by
-instanceof/switch dispatch over types
+[Type Switching](LEXICON.md#lexicon-type-switching)
 
 Detected by
 conditional type checks, duplicated branching
@@ -18222,41 +18232,46 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_event_driven_architecture["Event-Driven Architecture"]
-n_publish_subscribe_pattern["Publish/Subscribe Pattern"]
-n_message_queue["Message Queue"]
-n_message_broker["Message Broker"]
-n_event_bus["Event Bus"]
-n_event_stream["Event Stream"]
-n_event_sourcing["Event Sourcing"]
-n_command_query_responsibility_segregation["CQRS"]
-n_domain_events["Domain Events"]
-n_integration_events["Integration Events"]
-n_asynchronous_communication["Asynchronous Communication"]
-n_eventual_consistency["Eventual Consistency"]
-n_saga_pattern["Saga Pattern"]
-n_outbox_pattern["Outbox Pattern"]
-n_compensating_transaction["Compensating Transaction"]
-n_append_only_log["Append-Only Log"]
-n_dead_letter_queue["Dead-Letter Queue"]
-n_idempotent_consumer["Idempotent Consumer"]
-n_competing_consumers["Competing Consumers"]
-n_event_driven_architecture --> n_asynchronous_communication
-n_event_driven_architecture --> n_event_sourcing
-n_event_driven_architecture --> n_command_query_responsibility_segregation
-n_event_bus --> n_event_driven_architecture
-n_event_sourcing --> n_append_only_log
-n_event_sourcing --> n_domain_events
-n_command_query_responsibility_segregation --> n_event_sourcing
-n_command_query_responsibility_segregation -.-> n_eventual_consistency
-n_domain_events --> n_event_driven_architecture
-n_asynchronous_communication --> n_event_driven_architecture
-n_saga_pattern --> n_eventual_consistency
-n_compensating_transaction --> n_saga_pattern
-n_append_only_log --> n_event_sourcing
-n_dead_letter_queue --> n_message_queue
-n_idempotent_consumer --> n_eventual_consistency
-n_competing_consumers --> n_message_queue
+    n_event_driven_architecture["Event-Driven Architecture"]
+    n_publish_subscribe_pattern["Publish/Subscribe Pattern"]
+    n_message_queue["Message Queue"]
+    n_message_broker["Message Broker"]
+    n_event_bus["Event Bus"]
+    n_event_stream["Event Stream"]
+    n_event_sourcing["Event Sourcing"]
+    n_command_query_responsibility_segregation["Command Query Responsibility Segregation (CQRS)"]
+    n_domain_events["Domain Events"]
+    n_integration_events["Integration Events"]
+    n_asynchronous_communication["Asynchronous Communication"]
+    n_eventual_consistency["Eventual Consistency"]
+    n_saga_pattern["Saga Pattern"]
+    n_outbox_pattern["Outbox Pattern"]
+    n_compensating_transaction["Compensating Transaction"]
+    n_append_only_log["Append-Only Log"]
+    n_dead_letter_queue["Dead-Letter Queue"]
+    n_idempotent_consumer["Idempotent Consumer"]
+    n_competing_consumers["Competing Consumers"]
+    n_event_driven_architecture --> n_asynchronous_communication
+    n_event_driven_architecture --> n_event_sourcing
+    n_event_driven_architecture --> n_command_query_responsibility_segregation
+    n_event_driven_architecture --> n_saga_pattern
+    n_message_broker --> n_message_queue
+    n_message_broker --> n_publish_subscribe_pattern
+    n_event_bus --> n_publish_subscribe_pattern
+    n_event_bus --> n_event_driven_architecture
+    n_event_sourcing --> n_append_only_log
+    n_event_sourcing --> n_domain_events
+    n_command_query_responsibility_segregation --> n_event_sourcing
+    n_command_query_responsibility_segregation -.-> n_eventual_consistency
+    n_domain_events --> n_event_driven_architecture
+    n_asynchronous_communication --> n_event_driven_architecture
+    n_saga_pattern --> n_compensating_transaction
+    n_saga_pattern --> n_eventual_consistency
+    n_compensating_transaction --> n_saga_pattern
+    n_append_only_log --> n_event_sourcing
+    n_dead_letter_queue --> n_message_queue
+    n_idempotent_consumer --> n_eventual_consistency
+    n_competing_consumers --> n_message_queue
 ```
 
 ### Event-Driven Architecture
@@ -18265,6 +18280,7 @@ n_competing_consumers --> n_message_queue
 - Category: [Event / Messaging / Asynchronous Architecture](PRINCIPLES.md#architecture-category-event-messaging-asynchronous-architecture)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: service, integration, system
+- Aliases: EDA
 - Layer: [Execution Core](SCHEMA.md#layer-execution-core)
 
 Details
@@ -18279,7 +18295,7 @@ Reinforces
 [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Asynchronous Communication](PRINCIPLES.md#architecture-asynchronous-communication)
 
 Enables
-[Event Sourcing](PRINCIPLES.md#architecture-event-sourcing), [CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Saga](LEXICON.md#lexicon-saga)
+[Event Sourcing](PRINCIPLES.md#architecture-event-sourcing), [Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
 
 In tension with
 [Debuggability](LEXICON.md#lexicon-debuggability), [Strong Consistency](LEXICON.md#lexicon-strong-consistency)
@@ -18294,7 +18310,7 @@ Tensions
 [Event-Driven Architecture / Debuggability](SCHEMA.md#tension-debuggability-event-driven-architecture), [Event-Driven Architecture / Strong Consistency](SCHEMA.md#tension-event-driven-architecture-strong-consistency)
 
 Violated by
-non-idempotent consumers, undocumented event schemas
+[Non-Idempotent Operation](LEXICON.md#lexicon-non-idempotent-operation), [Ad-Hoc Payloads](LEXICON.md#lexicon-ad-hoc-payloads)
 
 Detected by
 missing correlation IDs, direct synchronous chains
@@ -18303,10 +18319,10 @@ Measured by
 event contract coverage, [retry safety](LEXICON.md#lexicon-retry-safety)
 
 Refactored by
-Publish Event, Add Outbox, Add Consumer Contract
+[Domain Events](PRINCIPLES.md#architecture-domain-events), [Outbox Pattern](PRINCIPLES.md#architecture-outbox-pattern), [Consumer-Driven Contract Tests](LEXICON.md#lexicon-consumer-driven-contract-tests)
 
 Enforced by
-schema registry, idempotency tests
+[schema registry](LEXICON.md#lexicon-schema-registry), idempotency tests
 
 Before
 
@@ -18353,7 +18369,7 @@ Authoritative side
 The published schema and the delivery guarantee, which every producer and consumer conforms to
 
 Depends on
-[Events](LEXICON.md#lexicon-events), [Message Contract](LEXICON.md#lexicon-message-contract), [Idempotency](PRINCIPLES.md#architecture-idempotency), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Asynchronous Communication](PRINCIPLES.md#architecture-asynchronous-communication), [Event Sourcing](PRINCIPLES.md#architecture-event-sourcing), [CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Saga](LEXICON.md#lexicon-saga)
+[Events](LEXICON.md#lexicon-events), [Message Contract](LEXICON.md#lexicon-message-contract), [Idempotency](PRINCIPLES.md#architecture-idempotency), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Asynchronous Communication](PRINCIPLES.md#architecture-asynchronous-communication), [Event Sourcing](PRINCIPLES.md#architecture-event-sourcing), [Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
 
 Shape it refuses
 [Hidden Temporal Coupling](LEXICON.md#lexicon-hidden-temporal-coupling)
@@ -18364,6 +18380,7 @@ Shape it refuses
 - Category: [Event / Messaging / Asynchronous Architecture](PRINCIPLES.md#architecture-category-event-messaging-asynchronous-architecture)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: integration, eventing
+- Aliases: Pub/Sub
 - Layer: [Execution Core](SCHEMA.md#layer-execution-core)
 
 Details
@@ -18386,11 +18403,14 @@ In tension with
 Conflicts with
 [Direct Point-to-Point Calls](LEXICON.md#lexicon-direct-point-to-point-calls)
 
+Referenced by
+[Message Broker](PRINCIPLES.md#architecture-message-broker), [Event Bus](PRINCIPLES.md#architecture-event-bus)
+
 Tensions
 [Publish/Subscribe Pattern / Delivery Ordering](SCHEMA.md#tension-delivery-ordering-publish-subscribe-pattern)
 
 Violated by
-publisher knowing all subscribers
+[Point-to-Point Coupling](LEXICON.md#lexicon-point-to-point-coupling)
 
 Detected by
 direct calls to subscriber list
@@ -18399,7 +18419,7 @@ Measured by
 publisher-subscriber coupling
 
 Refactored by
-Introduce Topic/Event Bus
+[Event Bus](PRINCIPLES.md#architecture-event-bus)
 
 Enforced by
 messaging contracts
@@ -18480,7 +18500,7 @@ Conflicts with
 [In-Memory Direct Invocation](LEXICON.md#lexicon-in-memory-direct-invocation)
 
 Referenced by
-[Dead-Letter Queue](PRINCIPLES.md#architecture-dead-letter-queue), [Competing Consumers](PRINCIPLES.md#architecture-competing-consumers)
+[Message Broker](PRINCIPLES.md#architecture-message-broker), [Dead-Letter Queue](PRINCIPLES.md#architecture-dead-letter-queue), [Competing Consumers](PRINCIPLES.md#architecture-competing-consumers)
 
 Tensions
 [Message Queue / Latency](SCHEMA.md#tension-latency-message-queue)
@@ -18489,7 +18509,7 @@ Distinct from
 [Consumer](LEXICON.md#lexicon-consumer): A message queue holds messages until they are acknowledged, while the consumer is the component that takes and processes them.
 
 Violated by
-unbounded in-memory work queues
+[Missing Backpressure](PRINCIPLES.md#architecture-missing-backpressure)
 
 Detected by
 synchronous blocking chains for async work
@@ -18498,7 +18518,7 @@ Measured by
 queue depth, retry/dead-letter rates
 
 Refactored by
-Introduce Queue, Add Worker
+[Competing Consumers](PRINCIPLES.md#architecture-competing-consumers)
 
 Enforced by
 infrastructure policy, load tests
@@ -18559,13 +18579,13 @@ Definition
 Descriptive data about topics, queues and routing rules, held by an intermediary service that delivers messages between producers and consumers.
 
 Requires
-[Message Queue/Topics](LEXICON.md#lexicon-message-queue-topics), [Routing](LEXICON.md#lexicon-routing)
+[Message Queue](PRINCIPLES.md#architecture-message-queue), [Routing](LEXICON.md#lexicon-routing)
 
 Reinforces
 [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Scalability](PRINCIPLES.md#architecture-scalability)
 
 Enables
-[Pub/Sub](LEXICON.md#lexicon-pub-sub), [Work Distribution](LEXICON.md#lexicon-work-distribution)
+[Publish/Subscribe Pattern](PRINCIPLES.md#architecture-publish-subscribe-pattern), [Work Distribution](LEXICON.md#lexicon-work-distribution)
 
 In tension with
 [Operational Dependency](LEXICON.md#lexicon-operational-dependency)
@@ -18577,7 +18597,7 @@ Tensions
 [Message Broker / Operational Dependency](SCHEMA.md#tension-message-broker-operational-dependency)
 
 Violated by
-broker bypass for async integration
+[Direct Point-to-Point Calls](LEXICON.md#lexicon-direct-point-to-point-calls)
 
 Detected by
 direct service calls in async workflows
@@ -18586,7 +18606,7 @@ Measured by
 broker usage coverage
 
 Refactored by
-Add Broker, Route Messages
+[Message Queue](PRINCIPLES.md#architecture-message-queue)
 
 Enforced by
 architecture policy
@@ -18638,7 +18658,7 @@ Authoritative side
 The published schema and the delivery guarantee, which every producer and consumer conforms to
 
 Depends on
-[Message Queue/Topics](LEXICON.md#lexicon-message-queue-topics), [Routing](LEXICON.md#lexicon-routing), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Scalability](PRINCIPLES.md#architecture-scalability), [Pub/Sub](LEXICON.md#lexicon-pub-sub), [Work Distribution](LEXICON.md#lexicon-work-distribution)
+[Message Queue](PRINCIPLES.md#architecture-message-queue), [Routing](LEXICON.md#lexicon-routing), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Scalability](PRINCIPLES.md#architecture-scalability), [Publish/Subscribe Pattern](PRINCIPLES.md#architecture-publish-subscribe-pattern), [Work Distribution](LEXICON.md#lexicon-work-distribution)
 
 Shape it refuses
 [Point-to-Point Coupling](LEXICON.md#lexicon-point-to-point-coupling)
@@ -18660,7 +18680,7 @@ Requires
 [Event Contract](LEXICON.md#lexicon-event-contract), [Subscriber Model](LEXICON.md#lexicon-subscriber-model)
 
 Reinforces
-[Pub/Sub](LEXICON.md#lexicon-pub-sub), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture)
+[Publish/Subscribe Pattern](PRINCIPLES.md#architecture-publish-subscribe-pattern), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture)
 
 Enables
 [Decoupled Event Distribution](LEXICON.md#lexicon-decoupled-event-distribution)
@@ -18675,7 +18695,7 @@ Tensions
 [Event Bus / Event Storm / Traceability](SCHEMA.md#tension-event-bus-event-storm-traceability)
 
 Violated by
-hidden implicit event dependencies
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Detected by
 undocumented subscribers
@@ -18684,7 +18704,7 @@ Measured by
 event dependency visibility
 
 Refactored by
-Introduce Event Bus, Register Handlers
+[Registry Pattern](PRINCIPLES.md#architecture-registry-pattern)
 
 Enforced by
 handler registry validation
@@ -18728,7 +18748,7 @@ Authoritative side
 The published schema and the delivery guarantee, which every producer and consumer conforms to
 
 Depends on
-[Event Contract](LEXICON.md#lexicon-event-contract), [Subscriber Model](LEXICON.md#lexicon-subscriber-model), [Pub/Sub](LEXICON.md#lexicon-pub-sub), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture), [Decoupled Event Distribution](LEXICON.md#lexicon-decoupled-event-distribution)
+[Event Contract](LEXICON.md#lexicon-event-contract), [Subscriber Model](LEXICON.md#lexicon-subscriber-model), [Publish/Subscribe Pattern](PRINCIPLES.md#architecture-publish-subscribe-pattern), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture), [Decoupled Event Distribution](LEXICON.md#lexicon-decoupled-event-distribution)
 
 Shape it refuses
 [Direct Event Handler Calls](LEXICON.md#lexicon-direct-event-handler-calls)
@@ -18768,7 +18788,7 @@ Tensions
 [Event Stream / Storage Volume](SCHEMA.md#tension-event-stream-storage-volume)
 
 Violated by
-non-replayable event processing
+[Non-Replayable Processing](LEXICON.md#lexicon-non-replayable-processing)
 
 Detected by
 missing offsets, missing event schema
@@ -18777,7 +18797,7 @@ Measured by
 replay success, lag
 
 Refactored by
-Add Stream, Add Offset Tracking
+[Offset Tracking](LEXICON.md#lexicon-offset-tracking)
 
 Enforced by
 stream contract tests
@@ -18853,13 +18873,13 @@ Conflicts with
 [CRUD-Only State Persistence](LEXICON.md#lexicon-crud-only-state-persistence)
 
 Referenced by
-[Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture), [CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Append-Only Log](PRINCIPLES.md#architecture-append-only-log)
+[Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture), [Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Append-Only Log](PRINCIPLES.md#architecture-append-only-log)
 
 Tensions
 [Event Sourcing / Query Complexity](SCHEMA.md#tension-event-sourcing-query-complexity)
 
 Distinct from
-[CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation): Event sourcing stores state as its events, while CQRS separates the command model from the query model whatever the storage.
+[Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation): Event sourcing stores state as its events, while CQRS separates the command model from the query model whatever the storage.
 
 Distinct from
 [Append-Only Log](PRINCIPLES.md#architecture-append-only-log): Event sourcing rebuilds state by replay, while an append-only log is the storage it replays from.
@@ -18868,10 +18888,10 @@ Distinct from
 [Domain Events](PRINCIPLES.md#architecture-domain-events): Event sourcing makes events the source of state, while domain events can be published with state stored some other way.
 
 Distinct from
-[Saga](LEXICON.md#lexicon-saga): Event sourcing is how state is stored, while a saga is how a distributed transaction is coordinated.
+[Saga Pattern](PRINCIPLES.md#architecture-saga-pattern): Event sourcing is how state is stored, while a saga is how a distributed transaction is coordinated.
 
 Violated by
-mutating state without event record
+[CRUD-Only State Persistence](LEXICON.md#lexicon-crud-only-state-persistence)
 
 Detected by
 state changes lacking events
@@ -18880,7 +18900,7 @@ Measured by
 event/state consistency
 
 Refactored by
-Persist Events, Build Projections
+[Query Projection](LEXICON.md#lexicon-query-projection)
 
 Enforced by
 event append rules
@@ -18929,7 +18949,7 @@ Depends on
 Shape it refuses
 [CRUD-Only State Persistence](LEXICON.md#lexicon-crud-only-state-persistence)
 
-### CQRS
+### Command Query Responsibility Segregation (CQRS)
 
 - Kind: [pattern](SCHEMA.md#kind-pattern)
 - Category: [Event / Messaging / Asynchronous Architecture](PRINCIPLES.md#architecture-category-event-messaging-asynchronous-architecture)
@@ -18962,13 +18982,13 @@ Referenced by
 [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture)
 
 Tensions
-[CQRS / Eventual Consistency](SCHEMA.md#tension-cqrs-eventual-consistency)
+[Command Query Responsibility Segregation (CQRS) / Eventual Consistency](SCHEMA.md#tension-command-query-responsibility-segregation-cqrs-eventual-consistency)
 
 Distinct from
-[Saga](LEXICON.md#lexicon-saga): CQRS splits the write model from the read model, while a saga sequences local transactions with compensations.
+[Saga Pattern](PRINCIPLES.md#architecture-saga-pattern): CQRS splits the write model from the read model, while a saga sequences local transactions with compensations.
 
 Violated by
-queries mutating state, commands returning complex read models
+[Unified CRUD Model](LEXICON.md#lexicon-unified-crud-model)
 
 Detected by
 command/query side-effect violations
@@ -18977,7 +18997,7 @@ Measured by
 read/write separation compliance
 
 Refactored by
-Split Command and Query Models
+none
 
 Enforced by
 handler conventions, [tests](LEXICON.md#lexicon-tests)
@@ -19074,7 +19094,7 @@ Tensions
 [Domain Events / Event Granularity](SCHEMA.md#tension-domain-events-event-granularity)
 
 Violated by
-events named after technical operations only
+[Infrastructure Events in Domain](LEXICON.md#lexicon-infrastructure-events-in-domain)
 
 Detected by
 CRUD-named domain events
@@ -19083,7 +19103,7 @@ Measured by
 semantic event quality
 
 Refactored by
-Rename Event, Emit from Aggregate
+[Name the Concept](LEXICON.md#lexicon-name-the-concept)
 
 Enforced by
 domain review
@@ -19171,7 +19191,7 @@ Tensions
 [Integration Events / Duplication with Domain Events](SCHEMA.md#tension-duplication-with-domain-events-integration-events)
 
 Violated by
-exposing internal domain events directly to external consumers
+[Internal Domain Event Leakage](LEXICON.md#lexicon-internal-domain-event-leakage)
 
 Detected by
 internal event schema published externally
@@ -19180,7 +19200,7 @@ Measured by
 boundary event contract coverage
 
 Refactored by
-Map Domain Event to Integration Event
+none
 
 Enforced by
 event schema review
@@ -19266,7 +19286,7 @@ Tensions
 [Asynchronous Communication / Immediate Consistency](SCHEMA.md#tension-asynchronous-communication-immediate-consistency)
 
 Violated by
-synchronous call chain for non-immediate work
+[Synchronous Chain Trap](PRINCIPLES.md#architecture-synchronous-chain-trap)
 
 Detected by
 long blocking chains
@@ -19275,7 +19295,7 @@ Measured by
 sync dependency depth
 
 Refactored by
-Introduce Queue/Event, Add Callback/Projection
+[Message Queue](PRINCIPLES.md#architecture-message-queue), [Query Projection](LEXICON.md#lexicon-query-projection)
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -19337,7 +19357,7 @@ Definition
 A conceptual representation of a consistency guarantee in which replicas and projections converge once updates stop arriving.
 
 Requires
-[Idempotency](PRINCIPLES.md#architecture-idempotency), [Retry](LEXICON.md#lexicon-retry), [Reconciliation](LEXICON.md#lexicon-reconciliation)
+[Idempotency](PRINCIPLES.md#architecture-idempotency), [Retry Pattern](PRINCIPLES.md#architecture-retry-pattern), [Reconciliation](LEXICON.md#lexicon-reconciliation)
 
 Reinforces
 [Availability](LEXICON.md#lexicon-availability), [Scalability](PRINCIPLES.md#architecture-scalability)
@@ -19352,7 +19372,7 @@ Conflicts with
 none
 
 Referenced by
-[CRDTs](PRINCIPLES.md#architecture-crdts), [CAP Theorem](PRINCIPLES.md#architecture-cap-theorem), [CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern), [Idempotent Consumer](PRINCIPLES.md#architecture-idempotent-consumer)
+[CRDTs](PRINCIPLES.md#architecture-crdts), [CAP Theorem](PRINCIPLES.md#architecture-cap-theorem), [Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern), [Idempotent Consumer](PRINCIPLES.md#architecture-idempotent-consumer)
 
 Tensions
 [Eventual Consistency / User Expectations](SCHEMA.md#tension-eventual-consistency-user-expectations), [Eventual Consistency / Strong Immediate Consistency](SCHEMA.md#tension-eventual-consistency-strong-immediate-consistency)
@@ -19361,7 +19381,7 @@ Distinct from
 [Causal Consistency](PRINCIPLES.md#architecture-causal-consistency): Eventual consistency promises only that replicas converge, while causal consistency also promises that no effect is read before its cause.
 
 Violated by
-assuming immediate cross-service consistency
+[Global ACID Transaction](LEXICON.md#lexicon-global-acid-transaction)
 
 Detected by
 synchronous compensation hacks
@@ -19370,7 +19390,7 @@ Measured by
 convergence time, inconsistency window
 
 Refactored by
-Add Projection, Add Reconciliation, Add Saga
+[Query Projection](LEXICON.md#lexicon-query-projection), [Reconciliation Job](LEXICON.md#lexicon-reconciliation-job), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
 
 Enforced by
 consistency tests
@@ -19417,7 +19437,7 @@ Authoritative side
 The published schema and the delivery guarantee, which every producer and consumer conforms to
 
 Depends on
-[Idempotency](PRINCIPLES.md#architecture-idempotency), [Retry](LEXICON.md#lexicon-retry), [Reconciliation](LEXICON.md#lexicon-reconciliation), [Availability](LEXICON.md#lexicon-availability), [Scalability](PRINCIPLES.md#architecture-scalability), [Distributed Autonomy](LEXICON.md#lexicon-distributed-autonomy)
+[Idempotency](PRINCIPLES.md#architecture-idempotency), [Retry Pattern](PRINCIPLES.md#architecture-retry-pattern), [Reconciliation](LEXICON.md#lexicon-reconciliation), [Availability](LEXICON.md#lexicon-availability), [Scalability](PRINCIPLES.md#architecture-scalability), [Distributed Autonomy](LEXICON.md#lexicon-distributed-autonomy)
 
 Shape it refuses
 Not answered
@@ -19428,6 +19448,7 @@ Not answered
 - Category: [Event / Messaging / Asynchronous Architecture](PRINCIPLES.md#architecture-category-event-messaging-asynchronous-architecture)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: service workflow, distributed system
+- Aliases: Saga
 - Layer: [Execution Core](SCHEMA.md#layer-execution-core)
 
 Details
@@ -19436,7 +19457,7 @@ Definition
 A design pattern that runs a cross-service transaction as a sequence of local steps, each paired with a compensating step.
 
 Requires
-[Compensating Transactions](LEXICON.md#lexicon-compensating-transactions), [Idempotency](PRINCIPLES.md#architecture-idempotency)
+[Compensating Transaction](PRINCIPLES.md#architecture-compensating-transaction), [Idempotency](PRINCIPLES.md#architecture-idempotency)
 
 Reinforces
 [Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency)
@@ -19451,13 +19472,13 @@ Conflicts with
 [Global ACID Transaction](LEXICON.md#lexicon-global-acid-transaction)
 
 Referenced by
-[Compensating Transaction](PRINCIPLES.md#architecture-compensating-transaction)
+[Orchestration](PRINCIPLES.md#architecture-orchestration), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture), [Compensating Transaction](PRINCIPLES.md#architecture-compensating-transaction)
 
 Tensions
 [Saga Pattern / Workflow Complexity](SCHEMA.md#tension-saga-pattern-workflow-complexity)
 
 Violated by
-cross-service transaction requiring atomic database commit
+[Global ACID Transaction](LEXICON.md#lexicon-global-acid-transaction), [Hidden Distributed Transaction](LEXICON.md#lexicon-hidden-distributed-transaction)
 
 Detected by
 distributed transaction attempts
@@ -19466,7 +19487,7 @@ Measured by
 compensation coverage
 
 Refactored by
-Introduce Saga, Add Compensation
+[Compensating Transaction](PRINCIPLES.md#architecture-compensating-transaction)
 
 Enforced by
 workflow tests
@@ -19524,7 +19545,7 @@ Authoritative side
 The published schema and the delivery guarantee, which every producer and consumer conforms to
 
 Depends on
-[Compensating Transactions](LEXICON.md#lexicon-compensating-transactions), [Idempotency](PRINCIPLES.md#architecture-idempotency), [Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency), [Long-Running Transactions](LEXICON.md#lexicon-long-running-transactions)
+[Compensating Transaction](PRINCIPLES.md#architecture-compensating-transaction), [Idempotency](PRINCIPLES.md#architecture-idempotency), [Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency), [Long-Running Transactions](LEXICON.md#lexicon-long-running-transactions)
 
 Shape it refuses
 [Global ACID Transaction](LEXICON.md#lexicon-global-acid-transaction)
@@ -19535,6 +19556,7 @@ Shape it refuses
 - Category: [Event / Messaging / Asynchronous Architecture](PRINCIPLES.md#architecture-category-event-messaging-asynchronous-architecture)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: persistence, messaging
+- Aliases: Transactional Outbox
 - Layer: [Execution Core](SCHEMA.md#layer-execution-core)
 
 Details
@@ -19561,7 +19583,7 @@ Tensions
 [Outbox Pattern / Relay Complexity](SCHEMA.md#tension-outbox-pattern-relay-complexity)
 
 Violated by
-database write followed by direct publish without atomicity
+[Dual Write](PRINCIPLES.md#architecture-dual-write)
 
 Detected by
 dual-write patterns
@@ -19570,7 +19592,7 @@ Measured by
 lost-message rate, outbox coverage
 
 Refactored by
-Add Outbox Table, Add Relay Worker
+[Message Relay](LEXICON.md#lexicon-message-relay)
 
 Enforced by
 persistence rules, integration tests
@@ -19627,6 +19649,7 @@ Shape it refuses
 - Category: [Event / Messaging / Asynchronous Architecture](PRINCIPLES.md#architecture-category-event-messaging-asynchronous-architecture)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: workflow, distributed transaction
+- Aliases: Compensating Action
 - Layer: [Execution Core](SCHEMA.md#layer-execution-core)
 
 Details
@@ -19649,11 +19672,14 @@ In tension with
 Conflicts with
 [Irreversible Side Effects](LEXICON.md#lexicon-irreversible-side-effects)
 
+Referenced by
+[Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
+
 Tensions
 [Compensating Transaction / Business Complexity](SCHEMA.md#tension-business-complexity-compensating-transaction)
 
 Violated by
-unrecoverable partial workflow failure
+[Irreversible Side Effects](LEXICON.md#lexicon-irreversible-side-effects)
 
 Detected by
 saga steps without compensation
@@ -19662,7 +19688,7 @@ Measured by
 compensation coverage
 
 Refactored by
-Add Compensation Action
+none
 
 Enforced by
 workflow tests
@@ -19753,7 +19779,7 @@ Distinct from
 [Domain Events](PRINCIPLES.md#architecture-domain-events): An append-only log is the storage shape that never rewrites an entry, while domain events are what gets recorded, named in the domain's language.
 
 Violated by
-updating historical records destructively
+[In-Place Mutation](LEXICON.md#lexicon-in-place-mutation)
 
 Detected by
 mutable event rows
@@ -19762,7 +19788,7 @@ Measured by
 append-only compliance
 
 Refactored by
-Append Events, Add Snapshot/Compaction
+[Snapshot Compaction](LEXICON.md#lexicon-snapshot-compaction)
 
 Enforced by
 database constraints
@@ -19818,6 +19844,7 @@ Shape it refuses
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Mandatory for: production systems
 - Scope: service, messaging, resilience
+- Aliases: DLQ
 - Layer: [Execution Core](SCHEMA.md#layer-execution-core)
 
 Details
@@ -19844,7 +19871,7 @@ Tensions
 [Dead-Letter Queue / Operational Overhead](SCHEMA.md#tension-dead-letter-queue-operational-overhead)
 
 Violated by
-unprocessable messages redelivered forever
+[Infinite Redelivery Loop](LEXICON.md#lexicon-infinite-redelivery-loop)
 
 Detected by
 retry storms on a single poison message
@@ -19853,7 +19880,7 @@ Measured by
 redelivery count per failed message
 
 Refactored by
-Route Failures to a Dead-Letter Queue
+none
 
 Enforced by
 messaging design review
@@ -19941,7 +19968,7 @@ Tensions
 [Idempotent Consumer / State Overhead](SCHEMA.md#tension-idempotent-consumer-state-overhead)
 
 Violated by
-a redelivered message applied twice
+[Duplicate Side Effects](LEXICON.md#lexicon-duplicate-side-effects)
 
 Detected by
 duplicate effects under at-least-once delivery
@@ -19950,7 +19977,7 @@ Measured by
 duplicate-processing incident rate
 
 Refactored by
-Make the Consumer Idempotent
+none
 
 Enforced by
 messaging design review
@@ -20032,7 +20059,7 @@ Tensions
 [Competing Consumers / Ordering](SCHEMA.md#tension-competing-consumers-ordering)
 
 Violated by
-one consumer serially draining a growing backlog
+[Single Serial Consumer](LEXICON.md#lexicon-single-serial-consumer)
 
 Detected by
 queue depth rising with a single processor
@@ -20041,7 +20068,7 @@ Measured by
 consumer utilization vs backlog growth
 
 Refactored by
-Scale Out Competing Consumers
+none
 
 Enforced by
 messaging design review
@@ -20099,37 +20126,37 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_defensive_programming["Defensive Programming"]
-n_fail_fast["Fail Fast"]
-n_fail_safe["Fail Safe"]
-n_fail_secure["Fail Secure"]
-n_graceful_degradation["Graceful Degradation"]
-n_fault_tolerance["Fault Tolerance"]
-n_resilience["Resilience"]
-n_robustness_principle["Robustness Principle"]
-n_error_handling["Error Handling"]
-n_error_boundaries["Error Boundaries"]
-n_fallback_pattern["Fallback Pattern"]
-n_retry_pattern["Retry Pattern"]
-n_timeout_pattern["Timeout Pattern"]
-n_circuit_breaker_pattern["Circuit Breaker Pattern"]
-n_bulkhead_pattern["Bulkhead Pattern"]
-n_backpressure["Backpressure"]
-n_defensive_programming --> n_error_handling
-n_defensive_programming --> n_fail_fast
-n_fail_fast -.-> n_graceful_degradation
-n_fail_safe --> n_resilience
-n_graceful_degradation --> n_fault_tolerance
-n_fault_tolerance --> n_error_handling
-n_fault_tolerance --> n_resilience
-n_resilience --> n_fault_tolerance
-n_error_handling --> n_resilience
-n_error_boundaries --> n_resilience
-n_fallback_pattern --> n_graceful_degradation
-n_retry_pattern --> n_fault_tolerance
-n_circuit_breaker_pattern --> n_fault_tolerance
-n_circuit_breaker_pattern --> n_backpressure
-n_backpressure --> n_resilience
+    n_defensive_programming["Defensive Programming"]
+    n_fail_fast["Fail Fast"]
+    n_fail_safe["Fail Safe"]
+    n_fail_secure["Fail Secure"]
+    n_graceful_degradation["Graceful Degradation"]
+    n_fault_tolerance["Fault Tolerance"]
+    n_resilience["Resilience"]
+    n_robustness_principle["Robustness Principle"]
+    n_error_handling["Error Handling"]
+    n_error_boundaries["Error Boundaries"]
+    n_fallback_pattern["Fallback Pattern"]
+    n_retry_pattern["Retry Pattern"]
+    n_timeout_pattern["Timeout Pattern"]
+    n_circuit_breaker_pattern["Circuit Breaker Pattern"]
+    n_bulkhead_pattern["Bulkhead Pattern"]
+    n_backpressure["Backpressure"]
+    n_defensive_programming --> n_error_handling
+    n_defensive_programming --> n_fail_fast
+    n_fail_fast -.-> n_graceful_degradation
+    n_fail_safe --> n_resilience
+    n_graceful_degradation --> n_fault_tolerance
+    n_fault_tolerance --> n_error_handling
+    n_fault_tolerance --> n_resilience
+    n_resilience --> n_fault_tolerance
+    n_error_handling --> n_resilience
+    n_error_boundaries --> n_resilience
+    n_fallback_pattern --> n_graceful_degradation
+    n_retry_pattern --> n_fault_tolerance
+    n_circuit_breaker_pattern --> n_fault_tolerance
+    n_circuit_breaker_pattern --> n_backpressure
+    n_backpressure --> n_resilience
 ```
 
 ### Defensive Programming
@@ -20167,7 +20194,7 @@ Distinct from
 [Error Handling](PRINCIPLES.md#architecture-error-handling): Defensive programming checks inputs and assumptions before acting, while error handling decides what happens to an error once raised.
 
 Violated by
-unchecked assumptions
+[Trusting Invalid Inputs](LEXICON.md#lexicon-trusting-invalid-inputs)
 
 Detected by
 null/empty/range unsafe access
@@ -20176,7 +20203,7 @@ Measured by
 guard coverage, runtime exception rate
 
 Refactored by
-Add Guards, Validate Inputs
+[Precondition Check](LEXICON.md#lexicon-precondition-check), [Input Validation](PRINCIPLES.md#architecture-input-validation)
 
 Enforced by
 linting, [tests](LEXICON.md#lexicon-tests)
@@ -20276,7 +20303,7 @@ Distinct from
 [Graceful Degradation](PRINCIPLES.md#architecture-graceful-degradation): Fail fast stops on invalid state, while graceful degradation keeps the rest running when an optional dependency fails.
 
 Violated by
-swallowing invalid state
+[Exception Swallowing](LEXICON.md#lexicon-exception-swallowing)
 
 Detected by
 ignored exceptions, default fallbacks masking errors
@@ -20285,7 +20312,7 @@ Measured by
 late failure rate
 
 Refactored by
-Add Guard Clause, Throw Explicit Error
+[Precondition Check](LEXICON.md#lexicon-precondition-check), [Fail Fast or Fall Back](LEXICON.md#lexicon-fail-fast-or-fall-back)
 
 Enforced by
 validation tests
@@ -20369,7 +20396,7 @@ Tensions
 [Fail Safe / Availability](SCHEMA.md#tension-availability-fail-safe)
 
 Violated by
-continuing in unsafe state
+[Unsafe Default Continuation](LEXICON.md#lexicon-unsafe-default-continuation)
 
 Detected by
 fallback to unsafe behavior
@@ -20378,7 +20405,7 @@ Measured by
 unsafe failure modes
 
 Refactored by
-Add Safe Fallback, Stop Unsafe Operation
+[Fallback Pattern](PRINCIPLES.md#architecture-fallback-pattern), [Fail Fast or Fall Back](LEXICON.md#lexicon-fail-fast-or-fall-back)
 
 Enforced by
 failure-mode tests
@@ -20468,7 +20495,7 @@ Tensions
 [Fail Secure / Availability](SCHEMA.md#tension-availability-fail-secure)
 
 Violated by
-allowing access after auth/policy failure
+[Fail Open](LEXICON.md#lexicon-fail-open)
 
 Detected by
 fail-open branches
@@ -20477,7 +20504,7 @@ Measured by
 fail-open count
 
 Refactored by
-Default Deny, Add Explicit Allow
+[Default Deny](LEXICON.md#lexicon-default-deny)
 
 Enforced by
 security tests, policy checks
@@ -20566,7 +20593,7 @@ Tensions
 [Graceful Degradation / Consistency / Feature Completeness](SCHEMA.md#tension-consistency-feature-completeness-graceful-degradation)
 
 Violated by
-total outage from noncritical dependency failure
+[All-Or-Nothing Failure](LEXICON.md#lexicon-all-or-nothing-failure)
 
 Detected by
 critical path dependency on optional service
@@ -20575,7 +20602,7 @@ Measured by
 partial availability under failure
 
 Refactored by
-Add Fallback, Isolate Optional Dependency
+[Fallback Pattern](PRINCIPLES.md#architecture-fallback-pattern)
 
 Enforced by
 chaos tests
@@ -20664,7 +20691,7 @@ Tensions
 [Fault Tolerance / Cost](SCHEMA.md#tension-cost-fault-tolerance)
 
 Violated by
-unrecoverable dependency failure
+[Single Point of Failure](LEXICON.md#lexicon-single-point-of-failure)
 
 Detected by
 no retry/failover/fallback for critical path
@@ -20673,7 +20700,7 @@ Measured by
 failure recovery rate, [availability](LEXICON.md#lexicon-availability)
 
 Refactored by
-Add Retry, [Failover](PRINCIPLES.md#architecture-failover), [Redundancy](PRINCIPLES.md#architecture-redundancy)
+[Bounded Retry](LEXICON.md#lexicon-bounded-retry), [Failover](PRINCIPLES.md#architecture-failover), [Redundancy](PRINCIPLES.md#architecture-redundancy)
 
 Enforced by
 resilience tests
@@ -20777,7 +20804,7 @@ Distinct from
 [Stability](LEXICON.md#lexicon-stability): Resilience includes recovery after failure, while stability is steady operation under load without collapse.
 
 Violated by
-cascading failures
+[Failure Propagation](LEXICON.md#lexicon-failure-propagation)
 
 Detected by
 [failure propagation](LEXICON.md#lexicon-failure-propagation), lack of isolation
@@ -20786,7 +20813,7 @@ Measured by
 MTTR, error budget, [availability](LEXICON.md#lexicon-availability)
 
 Refactored by
-Add Circuit Breaker, Bulkhead, [Retry](LEXICON.md#lexicon-retry), [Timeout](LEXICON.md#lexicon-timeout)
+[Circuit Breaker Pattern](PRINCIPLES.md#architecture-circuit-breaker-pattern), [Bulkhead Pattern](PRINCIPLES.md#architecture-bulkhead-pattern), [Retry Pattern](PRINCIPLES.md#architecture-retry-pattern), [Timeout Pattern](PRINCIPLES.md#architecture-timeout-pattern)
 
 Enforced by
 [chaos testing](REASONING.md#reasoning-technique-chaos-testing), SLO gates
@@ -20844,6 +20871,7 @@ Shape it refuses
 - Category: [Error Handling / Resilience](PRINCIPLES.md#architecture-category-error-handling-resilience)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: protocol, API, input processing
+- Aliases: Postel's Law
 - Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
 
 Details
@@ -20870,7 +20898,7 @@ Tensions
 [Robustness Principle / Strict Validation](SCHEMA.md#tension-robustness-principle-strict-validation)
 
 Violated by
-rejecting harmless compatible input variations
+[Fragile Parsing](LEXICON.md#lexicon-fragile-parsing)
 
 Detected by
 parser brittleness
@@ -20879,7 +20907,7 @@ Measured by
 compatibility failure rate
 
 Refactored by
-Normalize Input, Validate Semantics
+[Canonicalization](PRINCIPLES.md#architecture-canonicalization), [Invariant Check](LEXICON.md#lexicon-invariant-check)
 
 Enforced by
 compatibility test suite
@@ -20971,7 +20999,7 @@ Tensions
 [Error Handling / Simplicity](SCHEMA.md#tension-error-handling-simplicity)
 
 Violated by
-ignored errors, generic catches, lost context
+[Exception Swallowing](LEXICON.md#lexicon-exception-swallowing), [Silent Failure](LEXICON.md#lexicon-silent-failure)
 
 Detected by
 empty catch blocks, unchecked result errors
@@ -20980,7 +21008,7 @@ Measured by
 unhandled error count
 
 Refactored by
-Add Error Type, Propagate Context, Handle Explicitly
+[Introduce Typed Result](LEXICON.md#lexicon-introduce-typed-result), [Distributed Tracing](PRINCIPLES.md#architecture-distributed-tracing)
 
 Enforced by
 linting, [tests](LEXICON.md#lexicon-tests)
@@ -21072,7 +21100,7 @@ Tensions
 [Error Boundaries / Hidden Errors](SCHEMA.md#tension-error-boundaries-hidden-errors)
 
 Violated by
-uncontained failures crashing whole system
+[Failure Propagation](LEXICON.md#lexicon-failure-propagation)
 
 Detected by
 uncaught exceptions crossing boundary
@@ -21081,7 +21109,7 @@ Measured by
 blast radius
 
 Refactored by
-Add Boundary Handler, Isolate Component
+[Bulkhead Pattern](PRINCIPLES.md#architecture-bulkhead-pattern)
 
 Enforced by
 failure tests
@@ -21168,7 +21196,7 @@ Tensions
 [Fallback Pattern / Stale/Reduced Results](SCHEMA.md#tension-fallback-pattern-stale-reduced-results)
 
 Violated by
-no alternate path for noncritical dependency
+[Single Behavior Path](LEXICON.md#lexicon-single-behavior-path)
 
 Detected by
 hard dependency in optional path
@@ -21177,7 +21205,7 @@ Measured by
 fallback coverage
 
 Refactored by
-Add Fallback Response/Provider
+none
 
 Enforced by
 failure injection tests
@@ -21232,6 +21260,7 @@ Shape it refuses
 - Category: [Error Handling / Resilience](PRINCIPLES.md#architecture-category-error-handling-resilience)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: network, IO, message handling
+- Aliases: Retry
 - Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
 
 Details
@@ -21254,11 +21283,14 @@ In tension with
 Conflicts with
 [Non-Idempotent Operation](LEXICON.md#lexicon-non-idempotent-operation)
 
+Referenced by
+[Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency)
+
 Tensions
 [Retry Pattern / Load Amplification](SCHEMA.md#tension-load-amplification-retry-pattern)
 
 Violated by
-blind retry without backoff/idempotency
+[Unbounded Retry](LEXICON.md#lexicon-unbounded-retry), [Retry Storm](PRINCIPLES.md#architecture-retry-storm)
 
 Detected by
 retry loops without timeout/backoff
@@ -21267,7 +21299,7 @@ Measured by
 retry success rate, retry storm rate
 
 Refactored by
-Add Exponential Backoff, Idempotency Key
+[Backoff](LEXICON.md#lexicon-backoff), [Idempotency Key](LEXICON.md#lexicon-idempotency-key)
 
 Enforced by
 resilience libraries, policy checks
@@ -21349,7 +21381,7 @@ Tensions
 [Timeout Pattern / Slow Operation Tolerance](SCHEMA.md#tension-slow-operation-tolerance-timeout-pattern)
 
 Violated by
-external calls without timeout
+[Timeout Omission](PRINCIPLES.md#architecture-timeout-omission)
 
 Detected by
 missing timeout config
@@ -21358,7 +21390,7 @@ Measured by
 timeout coverage, latency tail
 
 Refactored by
-Add Timeout, Propagate Deadline
+[Deadline Propagation](LEXICON.md#lexicon-deadline-propagation)
 
 Enforced by
 lint/config checks
@@ -21414,6 +21446,7 @@ Shape it refuses
 - Category: [Error Handling / Resilience](PRINCIPLES.md#architecture-category-error-handling-resilience)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: dependency call, service
+- Aliases: Circuit Breaker
 - Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
 
 Details
@@ -21440,7 +21473,7 @@ Tensions
 [Circuit Breaker Pattern / Availability of Degraded Dependency](SCHEMA.md#tension-availability-of-degraded-dependency-circuit-breaker-pattern)
 
 Violated by
-continuing calls to failing dependency
+[Failure Propagation](LEXICON.md#lexicon-failure-propagation)
 
 Detected by
 high failure dependency calls without breaker
@@ -21449,7 +21482,7 @@ Measured by
 breaker trip rate, downstream error rate
 
 Refactored by
-Add Circuit Breaker
+none
 
 Enforced by
 [resilience policy](ALGORITHMS.md#algorithms-resilience-policy)
@@ -21535,7 +21568,7 @@ Tensions
 [Bulkhead Pattern / Resource Utilization](SCHEMA.md#tension-bulkhead-pattern-resource-utilization)
 
 Violated by
-one dependency consuming all threads/connections
+[Shared Resource Pool](LEXICON.md#lexicon-shared-resource-pool)
 
 Detected by
 shared pools across critical/noncritical workloads
@@ -21544,7 +21577,7 @@ Measured by
 resource saturation isolation
 
 Refactored by
-Split Resource Pools, Add Isolation
+none
 
 Enforced by
 resource policy
@@ -21640,7 +21673,7 @@ Distinct from
 [Rate Limiting](PRINCIPLES.md#architecture-rate-limiting): Backpressure slows a producer by the consumer's live capacity, while rate limiting caps a caller at a fixed rate and rejects the excess.
 
 Violated by
-unbounded queues, uncontrolled producers
+[Missing Backpressure](PRINCIPLES.md#architecture-missing-backpressure)
 
 Detected by
 queue growth without throttling
@@ -21649,7 +21682,7 @@ Measured by
 queue depth, rejection/throttle rate
 
 Refactored by
-Add Rate Limit, Bounded Queue, Demand Signal
+[Rate Limiting](PRINCIPLES.md#architecture-rate-limiting), [Bounded Queue](LEXICON.md#lexicon-bounded-queue), [Autoscaling Policy](LEXICON.md#lexicon-autoscaling-policy)
 
 Enforced by
 load tests, runtime policies
@@ -21708,32 +21741,32 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_assessment["Assessment"]
-n_architecture_review["Architecture Review"]
-n_design_review["Design Review"]
-n_code_review["Code Review"]
-n_impact_analysis["Impact Analysis"]
-n_gap_analysis["Gap Analysis"]
-n_fitness_functions["Fitness Functions"]
-n_quality_attributes["Quality Attributes"]
-n_architecture_decision_records["Architecture Decision Records (ADR)"]
-n_evolutionary_architecture["Evolutionary Architecture"]
-n_minimum_viable_architecture["Minimum Viable Architecture"]
-n_greenfield_development["Greenfield Development"]
-n_first_principles_design["First-Principles Design"]
-n_reference_architecture["Reference Architecture"]
-n_pattern_consistency["Pattern Consistency"]
-n_architectural_consistency["Architectural Consistency"]
-n_standardization["Standardization"]
-n_assessment --> n_quality_attributes
-n_architecture_review --> n_architecture_decision_records
-n_architecture_review --> n_architectural_consistency
-n_fitness_functions --> n_evolutionary_architecture
-n_quality_attributes --> n_architecture_review
-n_evolutionary_architecture --> n_fitness_functions
-n_greenfield_development --> n_first_principles_design
-n_reference_architecture --> n_standardization
-n_architectural_consistency --> n_pattern_consistency
+    n_assessment["Assessment"]
+    n_architecture_review["Architecture Review"]
+    n_design_review["Design Review"]
+    n_code_review["Code Review"]
+    n_impact_analysis["Impact Analysis"]
+    n_gap_analysis["Gap Analysis"]
+    n_fitness_functions["Fitness Functions"]
+    n_quality_attributes["Quality Attributes"]
+    n_architecture_decision_records["Architecture Decision Records (ADR)"]
+    n_evolutionary_architecture["Evolutionary Architecture"]
+    n_minimum_viable_architecture["Minimum Viable Architecture"]
+    n_greenfield_development["Greenfield Development"]
+    n_first_principles_design["First-Principles Design"]
+    n_reference_architecture["Reference Architecture"]
+    n_pattern_consistency["Pattern Consistency"]
+    n_architectural_consistency["Architectural Consistency"]
+    n_standardization["Standardization"]
+    n_assessment --> n_quality_attributes
+    n_architecture_review --> n_architecture_decision_records
+    n_architecture_review --> n_architectural_consistency
+    n_fitness_functions --> n_evolutionary_architecture
+    n_quality_attributes --> n_architecture_review
+    n_evolutionary_architecture --> n_fitness_functions
+    n_greenfield_development --> n_first_principles_design
+    n_reference_architecture --> n_standardization
+    n_architectural_consistency --> n_pattern_consistency
 ```
 
 ### Assessment
@@ -21768,7 +21801,7 @@ Tensions
 [Assessment / Time Cost](SCHEMA.md#tension-assessment-time-cost)
 
 Violated by
-decisions without assessment criteria
+[Assumption-Based Judgment](LEXICON.md#lexicon-assumption-based-judgment)
 
 Detected by
 missing evaluation artifacts
@@ -21777,7 +21810,7 @@ Measured by
 assessment coverage
 
 Refactored by
-Add Assessment Checklist/Report
+none
 
 Enforced by
 review process
@@ -21862,7 +21895,7 @@ Tensions
 [Architecture Review / Delivery Speed](SCHEMA.md#tension-architecture-review-delivery-speed)
 
 Violated by
-major architecture change without review
+[Unreviewed Structural Change](LEXICON.md#lexicon-unreviewed-structural-change)
 
 Detected by
 unapproved dependency/style changes
@@ -21871,7 +21904,7 @@ Measured by
 review coverage
 
 Refactored by
-Add Review, Resolve Findings
+[Code Review](PRINCIPLES.md#architecture-code-review), [Automated Enforcement](LEXICON.md#lexicon-automated-enforcement)
 
 Enforced by
 pull request gates
@@ -21955,7 +21988,7 @@ Tensions
 [Design Review / Iteration Speed](SCHEMA.md#tension-design-review-iteration-speed)
 
 Violated by
-complex feature without design check
+[Ad-Hoc Design](LEXICON.md#lexicon-ad-hoc-design)
 
 Detected by
 missing design record
@@ -21964,7 +21997,7 @@ Measured by
 design review finding rate
 
 Refactored by
-Revise Design, Add Boundary/Contract
+[Define Contract](LEXICON.md#lexicon-define-contract)
 
 Enforced by
 review checklist
@@ -22047,7 +22080,7 @@ Tensions
 [Code Review / Throughput](SCHEMA.md#tension-code-review-throughput)
 
 Violated by
-unreviewed production code changes
+[Direct-to-main Unreviewed Change](LEXICON.md#lexicon-direct-to-main-unreviewed-change)
 
 Detected by
 missing approval/review
@@ -22056,7 +22089,7 @@ Measured by
 review coverage, defect escape rate
 
 Refactored by
-Apply Review Feedback
+none
 
 Enforced by
 branch protection
@@ -22142,7 +22175,7 @@ Tensions
 [Impact Analysis / Analysis Overhead](SCHEMA.md#tension-analysis-overhead-impact-analysis)
 
 Violated by
-breaking dependent behavior without awareness
+[Blind Change](LEXICON.md#lexicon-blind-change)
 
 Detected by
 change touching dependencies without impact note
@@ -22151,7 +22184,7 @@ Measured by
 affected component count
 
 Refactored by
-Add Dependency Map, Add Regression Tests
+[Unit Tests](LEXICON.md#lexicon-unit-tests)
 
 Enforced by
 PR template, dependency tooling
@@ -22234,7 +22267,7 @@ Tensions
 [Gap Analysis / Time Cost](SCHEMA.md#tension-gap-analysis-time-cost)
 
 Violated by
-missing comparison against required controls/principles
+[Undefined Target](LEXICON.md#lexicon-undefined-target)
 
 Detected by
 unknown compliance/architecture status
@@ -22243,7 +22276,7 @@ Measured by
 gap count/severity
 
 Refactored by
-Add Remediation Plan
+[Mitigation Plan](LEXICON.md#lexicon-mitigation-plan)
 
 Enforced by
 governance process
@@ -22330,7 +22363,7 @@ Tensions
 [Fitness Functions / Rule Maintenance](SCHEMA.md#tension-fitness-functions-rule-maintenance)
 
 Violated by
-architecture rule not continuously checked
+[Manual-Only Governance](PRINCIPLES.md#architecture-manual-only-governance)
 
 Detected by
 missing executable architecture checks
@@ -22339,7 +22372,7 @@ Measured by
 fitness pass/fail trend
 
 Refactored by
-Add Fitness Test, Codify Rule
+none
 
 Enforced by
 CI architecture tests
@@ -22424,7 +22457,7 @@ Tensions
 [Quality Attributes / Competing Attributes](SCHEMA.md#tension-competing-attributes-quality-attributes)
 
 Violated by
-no explicit nonfunctional requirements
+[Feature-Only Design](PRINCIPLES.md#architecture-feature-only-design)
 
 Detected by
 missing quality scenarios/SLOs
@@ -22433,7 +22466,7 @@ Measured by
 quality attribute scenario pass rate
 
 Refactored by
-Define Scenarios, Add Fitness Functions
+[Quality Scenarios](LEXICON.md#lexicon-quality-scenarios), [Fitness Functions](PRINCIPLES.md#architecture-fitness-functions)
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -22527,7 +22560,7 @@ Distinct from
 [Decision](LEXICON.md#lexicon-decision): A decision record is the whole record, while the decision is the one part that states the choice made.
 
 Violated by
-major decision not recorded
+[Tribal Knowledge](LEXICON.md#lexicon-tribal-knowledge)
 
 Detected by
 architecture change without ADR
@@ -22536,7 +22569,7 @@ Measured by
 ADR coverage
 
 Refactored by
-Add ADR, Link to Change
+[Decision Record with Alternatives](LEXICON.md#lexicon-decision-record-with-alternatives), [Data Change Audit](LEXICON.md#lexicon-data-change-audit)
 
 Enforced by
 PR template, review policy
@@ -22627,7 +22660,7 @@ Tensions
 [Evolutionary Architecture / Governance Discipline](SCHEMA.md#tension-evolutionary-architecture-governance-discipline)
 
 Violated by
-architecture decay without feedback loops
+[Architecture Drift](LEXICON.md#lexicon-architecture-drift)
 
 Detected by
 accumulating unmeasured drift
@@ -22636,7 +22669,7 @@ Measured by
 fitness trend, architecture debt
 
 Refactored by
-Add Fitness Functions, Refactor Incrementally
+[Fitness Functions](PRINCIPLES.md#architecture-fitness-functions), [Small-Batch Release](LEXICON.md#lexicon-small-batch-release)
 
 Enforced by
 CI/CD architecture checks
@@ -22719,7 +22752,7 @@ Tensions
 [Minimum Viable Architecture / Future Scalability](SCHEMA.md#tension-future-scalability-minimum-viable-architecture)
 
 Violated by
-adding complex patterns before need
+[Speculative Generality](PRINCIPLES.md#architecture-speculative-generality)
 
 Detected by
 unused abstractions/infrastructure
@@ -22728,7 +22761,7 @@ Measured by
 architecture complexity vs need
 
 Refactored by
-Simplify, Defer Optional Mechanisms
+[Cleanup / Simplification](LEXICON.md#lexicon-cleanup-simplification), [Defer Generalization](LEXICON.md#lexicon-defer-generalization)
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -22813,7 +22846,7 @@ Tensions
 [Greenfield Development / Unknown Requirements](SCHEMA.md#tension-greenfield-development-unknown-requirements), [Greenfield Development / Legacy Constraints](SCHEMA.md#tension-greenfield-development-legacy-constraints)
 
 Violated by
-premature irreversible architecture choices
+[Big-Upfront Frozen Architecture](PRINCIPLES.md#architecture-big-upfront-frozen-architecture)
 
 Detected by
 heavy structure without validated need
@@ -22822,7 +22855,7 @@ Measured by
 [initial complexity](LEXICON.md#lexicon-initial-complexity), adaptability
 
 Refactored by
-Start Modular, Add ADRs, Define Boundaries
+[Define Module Boundaries](LEXICON.md#lexicon-define-module-boundaries), [Decision Record with Alternatives](LEXICON.md#lexicon-decision-record-with-alternatives)
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -22912,7 +22945,7 @@ Tensions
 [First-Principles Design / Reuse of Established Patterns](SCHEMA.md#tension-first-principles-design-reuse-of-established-patterns)
 
 Violated by
-applying patterns without problem fit
+[Golden Hammer](PRINCIPLES.md#architecture-golden-hammer)
 
 Detected by
 unjustified pattern selection
@@ -22921,7 +22954,7 @@ Measured by
 decision rationale quality
 
 Refactored by
-Re-evaluate Constraints, Remove Misfit Pattern
+[Decision Review](LEXICON.md#lexicon-decision-review), [Remove Pattern Shell](LEXICON.md#lexicon-remove-pattern-shell)
 
 Enforced by
 ADR review
@@ -23004,7 +23037,7 @@ Distinct from
 [Reusable Architecture Guidance](LEXICON.md#lexicon-reusable-architecture-guidance): A reference architecture defines the modules and dependencies a family of systems instantiates, while reusable guidance is the wider body of advice it packages.
 
 Violated by
-inconsistent implementations without rationale
+[Uncoordinated Divergence](LEXICON.md#lexicon-uncoordinated-divergence)
 
 Detected by
 deviation without ADR
@@ -23013,7 +23046,7 @@ Measured by
 conformance/deviation rate
 
 Refactored by
-Align to Reference or Document Exception
+[Gap Analysis](PRINCIPLES.md#architecture-gap-analysis)
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -23106,7 +23139,7 @@ Distinct from
 [Local Optimization](LEXICON.md#lexicon-local-optimization): Pattern consistency is the degree shared patterns are used, while local optimization is the one-off gain that using them gives up.
 
 Violated by
-same problem solved with incompatible patterns
+[Ad-Hoc Pattern Mixing](LEXICON.md#lexicon-ad-hoc-pattern-mixing)
 
 Detected by
 inconsistent implementations of same concern
@@ -23115,7 +23148,7 @@ Measured by
 pattern variance count
 
 Refactored by
-Normalize Pattern, Extract Shared Convention
+[Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface)
 
 Enforced by
 linting, [review](LEXICON.md#lexicon-review), scaffolding
@@ -23207,7 +23240,7 @@ Distinct from
 [Local Autonomy](LEXICON.md#lexicon-local-autonomy): Architectural consistency is the degree the code follows declared rules, while local autonomy is the team freedom that enforcing them costs.
 
 Violated by
-unapproved boundary/layer/dependency deviations
+[Architecture Drift](LEXICON.md#lexicon-architecture-drift)
 
 Detected by
 architecture fitness failures
@@ -23216,7 +23249,7 @@ Measured by
 violation trend
 
 Refactored by
-Align Dependency/Layer/Boundary
+[Architecture Test](LEXICON.md#lexicon-architecture-test)
 
 Enforced by
 architecture tests
@@ -23301,7 +23334,7 @@ Tensions
 [Standardization / Innovation/Autonomy](SCHEMA.md#tension-innovation-autonomy-standardization)
 
 Violated by
-inconsistent tooling/formats/patterns
+[Inconsistent Conventions](LEXICON.md#lexicon-inconsistent-conventions)
 
 Detected by
 standards deviation
@@ -23310,7 +23343,7 @@ Measured by
 conformance rate
 
 Refactored by
-Normalize Tooling/Format/Pattern
+[Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface)
 
 Enforced by
 CI policies, templates
@@ -23373,18 +23406,18 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_self_describing_architecture["Self-Describing Architecture"]
-n_self_describing_api["Self-Describing API"]
-n_self_describing_structures["Self-Describing Structures"]
-n_metadata_driven_design["Metadata-Driven Design"]
-n_declarative_configuration["Declarative Configuration"]
-n_convention_over_configuration["Convention over Configuration"]
-n_capability_declaration["Capability Declaration"]
-n_manifest_based_design["Manifest-Based Design"]
-n_self_describing_architecture --> n_capability_declaration
-n_metadata_driven_design --> n_declarative_configuration
-n_manifest_based_design --> n_self_describing_architecture
-n_manifest_based_design --> n_capability_declaration
+    n_self_describing_architecture["Self-Describing Architecture"]
+    n_self_describing_api["Self-Describing API"]
+    n_self_describing_structures["Self-Describing Structures"]
+    n_metadata_driven_design["Metadata-Driven Design"]
+    n_declarative_configuration["Declarative Configuration"]
+    n_convention_over_configuration["Convention over Configuration"]
+    n_capability_declaration["Capability Declaration"]
+    n_manifest_based_design["Manifest-Based Design"]
+    n_self_describing_architecture --> n_capability_declaration
+    n_metadata_driven_design --> n_declarative_configuration
+    n_manifest_based_design --> n_self_describing_architecture
+    n_manifest_based_design --> n_capability_declaration
 ```
 
 ### Self-Describing Architecture
@@ -23422,7 +23455,7 @@ Tensions
 [Self-Describing Architecture / Metadata Drift](SCHEMA.md#tension-metadata-drift-self-describing-architecture)
 
 Violated by
-behavior not represented in metadata/contracts
+[Hidden Runtime Behavior](LEXICON.md#lexicon-hidden-runtime-behavior)
 
 Detected by
 undocumented runtime capability
@@ -23431,7 +23464,7 @@ Measured by
 metadata coverage
 
 Refactored by
-Add Manifest, Add Metadata, Add Schema
+[Manifest-Based Design](PRINCIPLES.md#architecture-manifest-based-design), [Declare Capability](LEXICON.md#lexicon-declare-capability), [Schema Validation](PRINCIPLES.md#architecture-schema-validation)
 
 Enforced by
 manifest validation, metadata tests
@@ -23520,7 +23553,7 @@ Tensions
 [Self-Describing API / Payload Verbosity](SCHEMA.md#tension-payload-verbosity-self-describing-api)
 
 Violated by
-undocumented endpoints, opaque error responses
+[Opaque API](LEXICON.md#lexicon-opaque-api)
 
 Detected by
 missing OpenAPI/metadata
@@ -23529,7 +23562,7 @@ Measured by
 API documentation/contract coverage
 
 Refactored by
-Add OpenAPI, Add Metadata, Normalize Responses
+[Define Contract](LEXICON.md#lexicon-define-contract), [Declare Capability](LEXICON.md#lexicon-declare-capability), [Standard Error Contract](LEXICON.md#lexicon-standard-error-contract)
 
 Enforced by
 API linting, docs gates
@@ -23616,7 +23649,7 @@ Tensions
 [Self-Describing Structures / Size Overhead](SCHEMA.md#tension-self-describing-structures-size-overhead)
 
 Violated by
-data requiring external hidden assumptions
+[Opaque Binary/Untyped Structures](LEXICON.md#lexicon-opaque-binary-untyped-structures)
 
 Detected by
 missing type/schema markers
@@ -23625,7 +23658,7 @@ Measured by
 metadata completeness
 
 Refactored by
-Add Type Tags, Add Schema, Add Manifest
+[Introduce Discriminated Union](LEXICON.md#lexicon-introduce-discriminated-union), [Schema Validation](PRINCIPLES.md#architecture-schema-validation), [Manifest-Based Design](PRINCIPLES.md#architecture-manifest-based-design)
 
 Enforced by
 [schema validation](PRINCIPLES.md#architecture-schema-validation)
@@ -23706,7 +23739,7 @@ Tensions
 [Metadata-Driven Design / Debuggability](SCHEMA.md#tension-debuggability-metadata-driven-design)
 
 Violated by
-unvalidated metadata, hidden magic
+[Unvalidated Metadata](LEXICON.md#lexicon-unvalidated-metadata), [Hidden Runtime Behavior](LEXICON.md#lexicon-hidden-runtime-behavior)
 
 Detected by
 metadata/config drift
@@ -23715,7 +23748,7 @@ Measured by
 metadata coverage, config error rate
 
 Refactored by
-Extract Metadata, Add Schema, Validate Config
+[Declare Capability](LEXICON.md#lexicon-declare-capability), [Schema Validation](PRINCIPLES.md#architecture-schema-validation), [Configuration Schema](LEXICON.md#lexicon-configuration-schema)
 
 Enforced by
 metadata schema tests
@@ -23804,7 +23837,7 @@ Tensions
 [Declarative Configuration / Dynamic Complexity](SCHEMA.md#tension-declarative-configuration-dynamic-complexity)
 
 Violated by
-behavior hidden in code constants
+[Hardcoded Behavior](LEXICON.md#lexicon-hardcoded-behavior)
 
 Detected by
 hardcoded environment values
@@ -23813,7 +23846,7 @@ Measured by
 configuration externalization coverage
 
 Refactored by
-Extract Config, Add Config Schema
+[Externalize Configuration](LEXICON.md#lexicon-externalize-configuration), [Configuration Schema](LEXICON.md#lexicon-configuration-schema)
 
 Enforced by
 config linting, [validation](PRINCIPLES.md#architecture-validation)
@@ -23873,6 +23906,7 @@ Shape it refuses
 - Category: [Metadata / Self-Description / Declarative Systems](PRINCIPLES.md#architecture-category-metadata-self-description-declarative-systems)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: framework, application structure
+- Aliases: Coding by Convention
 - Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
 
 Details
@@ -23908,7 +23942,7 @@ Distinct from
 [Self-Describing Structures](PRINCIPLES.md#architecture-self-describing-structures): Convention over configuration infers settings from naming and placement, while self-describing structures carry their own type tags and field names.
 
 Violated by
-inconsistent project conventions
+[Inconsistent Conventions](LEXICON.md#lexicon-inconsistent-conventions)
 
 Detected by
 convention deviations
@@ -23917,7 +23951,7 @@ Measured by
 convention compliance score
 
 Refactored by
-Normalize Structure, Remove Redundant Config
+[Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface), [Centralize the Rule](LEXICON.md#lexicon-centralize-the-rule)
 
 Enforced by
 scaffolding, lint rules
@@ -23999,7 +24033,7 @@ Tensions
 [Capability Declaration / Declaration Drift](SCHEMA.md#tension-capability-declaration-declaration-drift)
 
 Violated by
-capability exists but is undocumented/unregistered
+[Implicit Capability](LEXICON.md#lexicon-implicit-capability)
 
 Detected by
 manifest-code mismatch
@@ -24008,7 +24042,7 @@ Measured by
 declared/actual capability match rate
 
 Refactored by
-Add Manifest Entry, Add Capability Interface
+[Manifest-Based Design](PRINCIPLES.md#architecture-manifest-based-design), [Extract Role Interface](LEXICON.md#lexicon-extract-role-interface)
 
 Enforced by
 manifest validation, conformance tests
@@ -24094,7 +24128,7 @@ Tensions
 [Manifest-Based Design / Manifest Drift](SCHEMA.md#tension-manifest-based-design-manifest-drift)
 
 Violated by
-undeclared dependencies/capabilities
+[Implicit Capability](LEXICON.md#lexicon-implicit-capability), [Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Detected by
 manifest mismatch, load failure
@@ -24103,7 +24137,7 @@ Measured by
 manifest validation pass rate
 
 Refactored by
-Add Manifest, Validate Manifest, Generate Manifest
+[Discovery Validation](LEXICON.md#lexicon-discovery-validation)
 
 Enforced by
 CI validation
@@ -24167,19 +24201,19 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_homoiconicity["Homoiconicity"]
-n_code_as_data["Code as Data"]
-n_metaprogramming["Metaprogramming"]
-n_reflection["Reflection"]
-n_introspection["Introspection"]
-n_compile_time_evaluation["Compile-Time Evaluation"]
-n_runtime_code_generation["Runtime Code Generation"]
-n_domain_specific_language["Domain-Specific Language (DSL)"]
-n_language_oriented_programming["Language-Oriented Programming"]
-n_model_driven_architecture["Model-Driven Architecture"]
-n_homoiconicity --> n_metaprogramming
-n_code_as_data --> n_homoiconicity
-n_reflection --> n_introspection
+    n_homoiconicity["Homoiconicity"]
+    n_code_as_data["Code as Data"]
+    n_metaprogramming["Metaprogramming"]
+    n_reflection["Reflection"]
+    n_introspection["Introspection"]
+    n_compile_time_evaluation["Compile-Time Evaluation"]
+    n_runtime_code_generation["Runtime Code Generation"]
+    n_domain_specific_language["Domain-Specific Language (DSL)"]
+    n_language_oriented_programming["Language-Oriented Programming"]
+    n_model_driven_architecture["Model-Driven Architecture"]
+    n_homoiconicity --> n_metaprogramming
+    n_code_as_data --> n_homoiconicity
+    n_reflection --> n_introspection
 ```
 
 ### Homoiconicity
@@ -24220,7 +24254,7 @@ Distinct from
 [Readability](LEXICON.md#lexicon-readability): Homoiconicity is programs held as data, while readability is how easily the developer reads the source that results.
 
 Violated by
-code transformed as strings where the language offers a code-as-data form
+[String-Based Code Generation](LEXICON.md#lexicon-string-based-code-generation)
 
 Detected by
 language capability check
@@ -24229,7 +24263,7 @@ Measured by
 macro/code-as-data usage
 
 Refactored by
-Use AST/DSL/Macro Representation
+[Syntax Tree Generation](LEXICON.md#lexicon-syntax-tree-generation)
 
 Enforced by
 language/tooling constraints
@@ -24322,7 +24356,7 @@ Tensions
 [Code as Data / Safety/Debuggability](SCHEMA.md#tension-code-as-data-safety-debuggability)
 
 Violated by
-unsafe string eval/generation
+[Unchecked Dynamic Code](LEXICON.md#lexicon-unchecked-dynamic-code)
 
 Detected by
 dynamic eval/string code construction
@@ -24331,7 +24365,7 @@ Measured by
 unsafe eval count
 
 Refactored by
-Use AST Builder, Typed DSL
+[Syntax Tree Generation](LEXICON.md#lexicon-syntax-tree-generation), [Domain-Specific Language (DSL)](PRINCIPLES.md#architecture-domain-specific-language)
 
 Enforced by
 banned API rules
@@ -24424,7 +24458,7 @@ Distinct from
 [DSLs](LEXICON.md#lexicon-dsls): Metaprogramming is code that writes or transforms code, while a domain-specific language is a notation for one domain, which metaprogramming can build.
 
 Violated by
-unsafe/opaque generated behavior
+[Unchecked Dynamic Code](LEXICON.md#lexicon-unchecked-dynamic-code)
 
 Detected by
 dynamic generation without tests/schema
@@ -24433,7 +24467,7 @@ Measured by
 generated code coverage, [complexity](REASONING.md#reasoning-lens-complexity)
 
 Refactored by
-Add Generator Tests, Make Metadata Explicit
+[Unit Tests](LEXICON.md#lexicon-unit-tests), [Declare Capability](LEXICON.md#lexicon-declare-capability)
 
 Enforced by
 generator validation
@@ -24529,7 +24563,7 @@ Distinct from
 [Static Analysis](PRINCIPLES.md#architecture-static-analysis): Reflection inspects structure while the program runs, while static analysis inspects source without running it.
 
 Violated by
-reflection used to bypass contracts/visibility
+[Reflective Contract Bypass](LEXICON.md#lexicon-reflective-contract-bypass)
 
 Detected by
 reflective access to internals
@@ -24538,7 +24572,7 @@ Measured by
 unsafe reflection count
 
 Refactored by
-Replace with Explicit Interface/Metadata
+[Declare Capability](LEXICON.md#lexicon-declare-capability)
 
 Enforced by
 lint/security rules
@@ -24622,7 +24656,7 @@ Tensions
 [Introspection / Encapsulation](SCHEMA.md#tension-encapsulation-introspection)
 
 Violated by
-relying on undocumented internal structure
+[Exposed Internals](LEXICON.md#lexicon-exposed-internals)
 
 Detected by
 introspection of private internals
@@ -24631,7 +24665,7 @@ Measured by
 introspection usage risk
 
 Refactored by
-Add Public Metadata API
+[Declare Capability](LEXICON.md#lexicon-declare-capability)
 
 Enforced by
 API boundaries
@@ -24718,7 +24752,7 @@ Tensions
 [Compile-Time Evaluation / Build Complexity](SCHEMA.md#tension-build-complexity-compile-time-evaluation), [Compile-Time Evaluation / Runtime Dynamic Evaluation](SCHEMA.md#tension-compile-time-evaluation-runtime-dynamic-evaluation)
 
 Violated by
-runtime work that could be validated/generated at compile time
+[Deferred Static Check](LEXICON.md#lexicon-deferred-static-check)
 
 Detected by
 repeated runtime reflection/validation
@@ -24727,7 +24761,7 @@ Measured by
 compile-time coverage
 
 Refactored by
-Move Check/Generation to Compile Time
+none
 
 Enforced by
 compiler plugins/build checks
@@ -24806,7 +24840,7 @@ Tensions
 [Runtime Code Generation / Security/Debugging](SCHEMA.md#tension-runtime-code-generation-security-debugging), [Runtime Code Generation / Static Safety](SCHEMA.md#tension-runtime-code-generation-static-safety)
 
 Violated by
-unsafe eval, untrusted code generation
+[Unchecked Dynamic Code](LEXICON.md#lexicon-unchecked-dynamic-code)
 
 Detected by
 dynamic eval with external input
@@ -24815,7 +24849,7 @@ Measured by
 unsafe generation paths
 
 Refactored by
-Use Safe Generator, Sandbox, Precompile
+[Syntax Tree Generation](LEXICON.md#lexicon-syntax-tree-generation), [Sandboxing](LEXICON.md#lexicon-sandboxing), [Compile-Time Evaluation](PRINCIPLES.md#architecture-compile-time-evaluation)
 
 Enforced by
 [security policy](ALGORITHMS.md#algorithms-security-policy)
@@ -24899,7 +24933,7 @@ Tensions
 [Domain-Specific Language (DSL) / Tooling/Maintenance](SCHEMA.md#tension-domain-specific-language-dsl-tooling-maintenance)
 
 Violated by
-ambiguous ad-hoc mini-language
+[Ad-Hoc Mini-Language](LEXICON.md#lexicon-ad-hoc-mini-language)
 
 Detected by
 stringly-typed rules without parser/schema
@@ -24908,7 +24942,7 @@ Measured by
 DSL validation coverage
 
 Refactored by
-Define Grammar, Add Parser/Validator
+[Validate at the Boundary](LEXICON.md#lexicon-validate-at-the-boundary)
 
 Enforced by
 DSL tests, schema/grammar checks
@@ -24995,7 +25029,7 @@ Distinct from
 [One-Size General-Purpose Code](LEXICON.md#lexicon-one-size-general-purpose-code): Language-oriented programming gives each domain its own language, while general-purpose code writes every domain in one language.
 
 Violated by
-proliferation of informal unvalidated DSLs
+[Ad-Hoc Mini-Language](LEXICON.md#lexicon-ad-hoc-mini-language)
 
 Detected by
 multiple inconsistent rule/config syntaxes
@@ -25004,7 +25038,7 @@ Measured by
 language consistency/tooling
 
 Refactored by
-Consolidate DSL, Add Tooling
+[Domain-Specific Language (DSL)](PRINCIPLES.md#architecture-domain-specific-language), [Automated Enforcement](LEXICON.md#lexicon-automated-enforcement)
 
 Enforced by
 grammar/schema validation
@@ -25063,6 +25097,7 @@ Not answered
 - Category: [Metaprogramming / Language-Oriented Architecture](PRINCIPLES.md#architecture-category-metaprogramming-language-oriented-architecture)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: system, code generation, domain model
+- Aliases: MDA
 - Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
 
 Details
@@ -25089,7 +25124,7 @@ Distinct from
 [Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design): Model-driven architecture generates the implementation from a formal model by transformation rules, while metadata-driven design drives forms, routes or plugins from validated metadata.
 
 Violated by
-generated code manually edited/diverged
+[Handwritten Divergence](LEXICON.md#lexicon-handwritten-divergence)
 
 Detected by
 model-code drift
@@ -25098,7 +25133,7 @@ Measured by
 generation conformance
 
 Refactored by
-Regenerate, Lock Generated Files, Update Model
+[Code Generation](LEXICON.md#lexicon-code-generation), [Model Evaluation](PRINCIPLES.md#architecture-model-evaluation)
 
 Enforced by
 generation CI
@@ -25162,38 +25197,38 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_artificial_intelligence_architecture["Artificial Intelligence Architecture"]
-n_machine_learning_architecture["Machine Learning Architecture"]
-n_model_governance["Model Governance"]
-n_model_evaluation["Model Evaluation"]
-n_model_inference["Model Inference"]
-n_retrieval_augmented_generation["Retrieval-Augmented Generation (RAG)"]
-n_vector_search["Vector Search"]
-n_knowledge_graphs["Knowledge Graphs"]
-n_explainability["Explainability"]
-n_model_safety["Model Safety"]
-n_prompt_engineering["Prompt Engineering"]
-n_model_drift_monitoring["Model Drift Monitoring"]
-n_agentic_architecture["Agentic Architecture"]
-n_artificial_intelligence_architecture --> n_model_governance
-n_artificial_intelligence_architecture --> n_model_evaluation
-n_artificial_intelligence_architecture --> n_model_safety
-n_artificial_intelligence_architecture -.-> n_explainability
-n_machine_learning_architecture --> n_model_governance
-n_model_governance --> n_model_safety
-n_model_evaluation --> n_model_safety
-n_model_inference --> n_artificial_intelligence_architecture
-n_retrieval_augmented_generation --> n_explainability
-n_vector_search --> n_retrieval_augmented_generation
-n_knowledge_graphs --> n_explainability
-n_model_safety --> n_model_governance
-n_prompt_engineering --> n_model_inference
-n_prompt_engineering --> n_model_evaluation
-n_model_drift_monitoring --> n_model_evaluation
-n_model_drift_monitoring --> n_model_governance
-n_agentic_architecture --> n_model_inference
-n_agentic_architecture --> n_explainability
-n_agentic_architecture --> n_model_safety
+    n_artificial_intelligence_architecture["Artificial Intelligence Architecture"]
+    n_machine_learning_architecture["Machine Learning Architecture"]
+    n_model_governance["Model Governance"]
+    n_model_evaluation["Model Evaluation"]
+    n_model_inference["Model Inference"]
+    n_retrieval_augmented_generation["Retrieval-Augmented Generation (RAG)"]
+    n_vector_search["Vector Search"]
+    n_knowledge_graphs["Knowledge Graphs"]
+    n_explainability["Explainability"]
+    n_model_safety["Model Safety"]
+    n_prompt_engineering["Prompt Engineering"]
+    n_model_drift_monitoring["Model Drift Monitoring"]
+    n_agentic_architecture["Agentic Architecture"]
+    n_artificial_intelligence_architecture --> n_model_governance
+    n_artificial_intelligence_architecture --> n_model_evaluation
+    n_artificial_intelligence_architecture --> n_model_safety
+    n_artificial_intelligence_architecture -.-> n_explainability
+    n_machine_learning_architecture --> n_model_governance
+    n_model_governance --> n_model_safety
+    n_model_evaluation --> n_model_safety
+    n_model_inference --> n_artificial_intelligence_architecture
+    n_retrieval_augmented_generation --> n_explainability
+    n_vector_search --> n_retrieval_augmented_generation
+    n_knowledge_graphs --> n_explainability
+    n_model_safety --> n_model_governance
+    n_prompt_engineering --> n_model_inference
+    n_prompt_engineering --> n_model_evaluation
+    n_model_drift_monitoring --> n_model_evaluation
+    n_model_drift_monitoring --> n_model_governance
+    n_agentic_architecture --> n_model_inference
+    n_agentic_architecture --> n_explainability
+    n_agentic_architecture --> n_model_safety
 ```
 
 ### Artificial Intelligence Architecture
@@ -25232,7 +25267,7 @@ Tensions
 [Artificial Intelligence Architecture / Determinism](SCHEMA.md#tension-artificial-intelligence-architecture-determinism), [Artificial Intelligence Architecture / Explainability](SCHEMA.md#tension-artificial-intelligence-architecture-explainability)
 
 Violated by
-model behavior integrated without evaluation/governance
+[Opaque Ungoverned Model Use](LEXICON.md#lexicon-opaque-ungoverned-model-use)
 
 Detected by
 model calls without tests, [logging](PRINCIPLES.md#architecture-logging), [fallback](LEXICON.md#lexicon-fallback), [policy](LEXICON.md#lexicon-policy)
@@ -25241,7 +25276,7 @@ Measured by
 model quality/safety/evaluation coverage
 
 Refactored by
-Add Evaluation Harness, Add Model Boundary, Add Guardrails
+[Evaluation Suite](LEXICON.md#lexicon-evaluation-suite), [Introduce Port](LEXICON.md#lexicon-introduce-port), [Guardrails](LEXICON.md#lexicon-guardrails)
 
 Enforced by
 model governance gates
@@ -25326,7 +25361,7 @@ Tensions
 [Machine Learning Architecture / Experimentation Speed](SCHEMA.md#tension-experimentation-speed-machine-learning-architecture)
 
 Violated by
-unversioned data/model/config
+[Model Version Ambiguity](PRINCIPLES.md#architecture-model-version-ambiguity)
 
 Detected by
 missing lineage, untracked training inputs
@@ -25335,7 +25370,7 @@ Measured by
 [reproducibility](PRINCIPLES.md#architecture-reproducibility), drift, evaluation metrics
 
 Refactored by
-Add ML Pipeline, Version Data/Model/Config
+[Data Pipeline](LEXICON.md#lexicon-data-pipeline), [Prompt Versioning](LEXICON.md#lexicon-prompt-versioning)
 
 Enforced by
 MLOps gates
@@ -25424,7 +25459,7 @@ Distinct from
 [Evaluation](LEXICON.md#lexicon-evaluation): Model governance registers and approves versions, while evaluation is the assessment it relies on.
 
 Violated by
-deploying unapproved/untracked models
+[Unapproved Model Deployment](LEXICON.md#lexicon-unapproved-model-deployment)
 
 Detected by
 model without lineage/approval/eval
@@ -25433,7 +25468,7 @@ Measured by
 governance coverage
 
 Refactored by
-Add Registry, Add Approval Workflow, Add Eval Gates
+[Registry Pattern](PRINCIPLES.md#architecture-registry-pattern), [Evaluation Suite](LEXICON.md#lexicon-evaluation-suite)
 
 Enforced by
 CI/CD model gates
@@ -25517,7 +25552,7 @@ Tensions
 [Model Evaluation / Metric Completeness](SCHEMA.md#tension-metric-completeness-model-evaluation)
 
 Violated by
-model change without evaluation
+[Untested Model Deployment](LEXICON.md#lexicon-untested-model-deployment)
 
 Detected by
 missing eval report/gate
@@ -25526,7 +25561,7 @@ Measured by
 task metrics, safety metrics, regression rate
 
 Refactored by
-Add Eval Suite, Add Regression Dataset
+[Evaluation Suite](LEXICON.md#lexicon-evaluation-suite)
 
 Enforced by
 model CI gates
@@ -25613,7 +25648,7 @@ Tensions
 [Model Inference / Latency/Cost](SCHEMA.md#tension-latency-cost-model-inference)
 
 Violated by
-inference without validation/observability/fallback
+[Opaque Ungoverned Model Use](LEXICON.md#lexicon-opaque-ungoverned-model-use)
 
 Detected by
 raw model calls in business logic
@@ -25622,7 +25657,7 @@ Measured by
 [latency](PRINCIPLES.md#architecture-latency), error rate, output quality
 
 Refactored by
-Add Inference Service, Add Adapter/Contract
+[Extract Module](LEXICON.md#lexicon-extract-module), [Extract Adapter](LEXICON.md#lexicon-extract-adapter)
 
 Enforced by
 serving standards
@@ -25709,7 +25744,7 @@ Tensions
 [Retrieval-Augmented Generation (RAG) / Retrieval Quality/Latency](SCHEMA.md#tension-retrieval-augmented-generation-rag-retrieval-quality-latency)
 
 Violated by
-answers generated without relevant retrieved context where required
+[Ungrounded Generation](LEXICON.md#lexicon-ungrounded-generation)
 
 Detected by
 missing citations/context in grounded tasks
@@ -25718,7 +25753,7 @@ Measured by
 retrieval precision/recall, groundedness
 
 Refactored by
-Add Retriever, Add Reranker, Add Citation Grounding
+[Retriever](LEXICON.md#lexicon-retriever), [Evidence Citation](LEXICON.md#lexicon-evidence-citation)
 
 Enforced by
 RAG evals
@@ -25800,7 +25835,7 @@ Tensions
 [Vector Search / Explainability/Recall](SCHEMA.md#tension-explainability-recall-vector-search)
 
 Violated by
-semantic retrieval requirement implemented with only brittle keyword matching
+[Exact Keyword Search Only](LEXICON.md#lexicon-exact-keyword-search-only)
 
 Detected by
 poor semantic recall
@@ -25809,7 +25844,7 @@ Measured by
 retrieval metrics, [latency](PRINCIPLES.md#architecture-latency)
 
 Refactored by
-Add Embeddings, Add Vector Index, Tune Retrieval
+[Evaluation Suite](LEXICON.md#lexicon-evaluation-suite)
 
 Enforced by
 retrieval evaluation
@@ -25891,7 +25926,7 @@ Tensions
 [Knowledge Graphs / Curation Cost](SCHEMA.md#tension-curation-cost-knowledge-graphs)
 
 Violated by
-relation-heavy domain modeled only as unstructured text
+[Flat Document-Only Knowledge](LEXICON.md#lexicon-flat-document-only-knowledge)
 
 Detected by
 repeated need for entity relationship traversal
@@ -25900,7 +25935,7 @@ Measured by
 graph coverage, query accuracy
 
 Refactored by
-Extract Entities/Relations, Build Graph
+none
 
 Enforced by
 schema/ontology validation
@@ -26005,7 +26040,7 @@ Distinct from
 [Semantic Consistency](PRINCIPLES.md#architecture-semantic-consistency): Explainability concerns a model's decisions, while semantic consistency concerns names keeping one meaning.
 
 Violated by
-consequential model decisions without explanation/evidence
+[Opaque Black-Box Decisions](LEXICON.md#lexicon-opaque-black-box-decisions)
 
 Detected by
 missing rationale/feature attribution/citations
@@ -26014,7 +26049,7 @@ Measured by
 explanation coverage/quality
 
 Refactored by
-Add Explanation Layer, Add Evidence Trace
+[Evidence Citation](LEXICON.md#lexicon-evidence-citation)
 
 Enforced by
 model governance gates
@@ -26105,7 +26140,7 @@ Distinct from
 [Capability/Utility](LEXICON.md#lexicon-capability-utility): Model safety is harm being prevented, while capability is the usefulness that strict limits can constrain.
 
 Violated by
-unsafe outputs/actions without guardrails
+[Unguarded Model Autonomy](LEXICON.md#lexicon-unguarded-model-autonomy)
 
 Detected by
 safety eval failures, missing policy filters
@@ -26114,7 +26149,7 @@ Measured by
 safety incident rate, eval pass rate
 
 Refactored by
-Add Guardrails, Add Human Review, Add Safety Evals
+[Guardrails](LEXICON.md#lexicon-guardrails), [Code Review](PRINCIPLES.md#architecture-code-review), [Evaluation Suite](LEXICON.md#lexicon-evaluation-suite)
 
 Enforced by
 safety gates, runtime monitors
@@ -26199,7 +26234,7 @@ Tensions
 [Prompt Engineering / Robustness](SCHEMA.md#tension-prompt-engineering-robustness)
 
 Violated by
-prompts inlined and duplicated across call sites
+[Prompt Sprawl](PRINCIPLES.md#architecture-prompt-sprawl)
 
 Detected by
 scattered prompt string literals
@@ -26208,7 +26243,7 @@ Measured by
 duplicated prompt count
 
 Refactored by
-Centralize and Version Prompts
+[Prompt Registry](LEXICON.md#lexicon-prompt-registry)
 
 Enforced by
 model design review
@@ -26299,7 +26334,7 @@ Distinct from
 [Model Governance](PRINCIPLES.md#architecture-model-governance): Drift monitoring runs after deployment, while governance approves each version before it is deployed.
 
 Violated by
-model quality assumed stable after deployment
+[Deploy-and-Forget Models](LEXICON.md#lexicon-deploy-and-forget-models)
 
 Detected by
 no ongoing evaluation of live model outputs
@@ -26308,7 +26343,7 @@ Measured by
 drift in accuracy/quality metrics over time
 
 Refactored by
-Instrument Drift Monitoring
+none
 
 Enforced by
 model governance review
@@ -26390,7 +26425,7 @@ Tensions
 [Agentic Architecture / Determinism](SCHEMA.md#tension-agentic-architecture-determinism)
 
 Violated by
-an unbounded model loop acting with no guardrails
+[Unbounded Autonomy](LEXICON.md#lexicon-unbounded-autonomy)
 
 Detected by
 agent actions without tool scoping or step limits
@@ -26399,7 +26434,7 @@ Measured by
 unguarded agent action rate
 
 Refactored by
-Bound the Agent with Tools, Limits, and Review
+[Guardrails](LEXICON.md#lexicon-guardrails), [Rate Limiting](PRINCIPLES.md#architecture-rate-limiting), [Code Review](PRINCIPLES.md#architecture-code-review)
 
 Enforced by
 model safety review
@@ -26459,34 +26494,34 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_observability["Observability"]
-n_logging["Logging"]
-n_monitoring["Monitoring"]
-n_alerting["Alerting"]
-n_auditability["Auditability"]
-n_audit_logging["Audit Logging"]
-n_traceability["Traceability"]
-n_correlation_id["Correlation ID"]
-n_causation_id["Causation ID"]
-n_distributed_tracing["Distributed Tracing"]
-n_slo_sli["SLO/SLI"]
-n_dashboards["Dashboards"]
-n_logging --> n_traceability
-n_alerting --> n_monitoring
-n_auditability --> n_audit_logging
-n_auditability --> n_traceability
-n_audit_logging --> n_auditability
-n_audit_logging --> n_traceability
-n_traceability --> n_correlation_id
-n_traceability --> n_auditability
-n_correlation_id --> n_distributed_tracing
-n_distributed_tracing --> n_observability
-n_slo_sli --> n_monitoring
-n_slo_sli --> n_observability
-n_slo_sli --> n_alerting
-n_dashboards --> n_monitoring
-n_dashboards --> n_observability
-n_dashboards --> n_traceability
+    n_observability["Observability"]
+    n_logging["Logging"]
+    n_monitoring["Monitoring"]
+    n_alerting["Alerting"]
+    n_auditability["Auditability"]
+    n_audit_logging["Audit Logging"]
+    n_traceability["Traceability"]
+    n_correlation_id["Correlation ID"]
+    n_causation_id["Causation ID"]
+    n_distributed_tracing["Distributed Tracing"]
+    n_slo_sli["SLO/SLI"]
+    n_dashboards["Dashboards"]
+    n_logging --> n_traceability
+    n_alerting --> n_monitoring
+    n_auditability --> n_audit_logging
+    n_auditability --> n_traceability
+    n_audit_logging --> n_auditability
+    n_audit_logging --> n_traceability
+    n_traceability --> n_correlation_id
+    n_traceability --> n_auditability
+    n_correlation_id --> n_distributed_tracing
+    n_distributed_tracing --> n_observability
+    n_slo_sli --> n_monitoring
+    n_slo_sli --> n_observability
+    n_slo_sli --> n_alerting
+    n_dashboards --> n_monitoring
+    n_dashboards --> n_observability
+    n_dashboards --> n_traceability
 ```
 
 ### Observability
@@ -26546,7 +26581,7 @@ Distinct from
 [Fault Isolation](LEXICON.md#lexicon-fault-isolation): Observability is seeing a failure, while fault isolation is keeping it from spreading.
 
 Violated by
-production behavior cannot be inferred
+[Blind Operation](LEXICON.md#lexicon-blind-operation)
 
 Detected by
 missing telemetry around critical paths
@@ -26555,7 +26590,7 @@ Measured by
 telemetry coverage, MTTR
 
 Refactored by
-Add Logs/Metrics/Traces
+[Structured Log](LEXICON.md#lexicon-structured-log), [Metrics](LEXICON.md#lexicon-metrics), [Distributed Tracing](PRINCIPLES.md#architecture-distributed-tracing)
 
 Enforced by
 observability standards
@@ -26641,7 +26676,7 @@ Tensions
 [Logging / Noise/Personal Data Leakage](SCHEMA.md#tension-logging-noise-personal-data-leakage)
 
 Violated by
-missing or unstructured critical logs
+[Unobservable Failure](PRINCIPLES.md#architecture-unobservable-failure)
 
 Detected by
 absence of logs on error/business events
@@ -26650,7 +26685,7 @@ Measured by
 log coverage, signal/noise ratio
 
 Refactored by
-Add Structured Logs, Add Context
+[Structured Log](LEXICON.md#lexicon-structured-log), [Pass Context Explicitly](LEXICON.md#lexicon-pass-context-explicitly)
 
 Enforced by
 logging policy, linting
@@ -26740,7 +26775,7 @@ Distinct from
 [Guardrails](LEXICON.md#lexicon-guardrails): Monitoring observes behavior after the fact, while guardrails bound what a model may output or do as it runs.
 
 Violated by
-no metrics for critical resources/SLIs
+[Blind Operation](LEXICON.md#lexicon-blind-operation)
 
 Detected by
 missing dashboards/SLI metrics
@@ -26749,7 +26784,7 @@ Measured by
 metric coverage, detection latency
 
 Refactored by
-Add Metrics, Define SLIs
+[Metrics](LEXICON.md#lexicon-metrics), [Service Level Objectives](LEXICON.md#lexicon-service-level-objectives)
 
 Enforced by
 production readiness checklist
@@ -26831,7 +26866,7 @@ Tensions
 [Alerting / Alert Fatigue](SCHEMA.md#tension-alert-fatigue-alerting)
 
 Violated by
-critical failures without alert
+[Unobservable Failure](PRINCIPLES.md#architecture-unobservable-failure)
 
 Detected by
 incident reported by customers before monitoring caught it
@@ -26840,7 +26875,7 @@ Measured by
 MTTD, alert precision
 
 Refactored by
-Add Alert, Tune Thresholds
+[Alert on Critical Failure](LEXICON.md#lexicon-alert-on-critical-failure), [Track Rule Metrics](LEXICON.md#lexicon-track-rule-metrics)
 
 Enforced by
 on-call policy
@@ -26938,7 +26973,7 @@ Distinct from
 [Reproducibility](PRINCIPLES.md#architecture-reproducibility): Auditability records what happened, while reproducibility reruns it and gets the same output.
 
 Violated by
-critical action without audit record
+[Untracked Mutation](LEXICON.md#lexicon-untracked-mutation)
 
 Detected by
 missing audit event for sensitive operation
@@ -26947,7 +26982,7 @@ Measured by
 audit event coverage
 
 Refactored by
-Add Audit Log, Add Actor/Reason Metadata
+[Audit Logging](PRINCIPLES.md#architecture-audit-logging), [Data Change Audit](LEXICON.md#lexicon-data-change-audit)
 
 Enforced by
 compliance gates
@@ -27041,7 +27076,7 @@ Tensions
 [Audit Logging / Privacy](SCHEMA.md#tension-audit-logging-privacy)
 
 Violated by
-sensitive operation without immutable record
+[Opaque Mutation](LEXICON.md#lexicon-opaque-mutation)
 
 Detected by
 missing audit instrumentation
@@ -27050,7 +27085,7 @@ Measured by
 audit coverage
 
 Refactored by
-Add Audit Event, Protect Audit Store
+[Append-Only Log](PRINCIPLES.md#architecture-append-only-log)
 
 Enforced by
 [policy-as-code](PRINCIPLES.md#architecture-policy-as-code), [tests](LEXICON.md#lexicon-tests)
@@ -27140,7 +27175,7 @@ Distinct from
 [Metadata Propagation Overhead](LEXICON.md#lexicon-metadata-propagation-overhead): Traceability is following a request end to end, while propagation overhead is the size and processing that carrying its metadata costs.
 
 Violated by
-uncorrelated logs/events
+[Uncorrelated Events](LEXICON.md#lexicon-uncorrelated-events)
 
 Detected by
 missing correlation propagation
@@ -27149,7 +27184,7 @@ Measured by
 trace completeness
 
 Refactored by
-Add Correlation ID, Propagate Context
+[Correlation ID](PRINCIPLES.md#architecture-correlation-id), [Distributed Tracing](PRINCIPLES.md#architecture-distributed-tracing)
 
 Enforced by
 middleware, tracing policy
@@ -27236,7 +27271,7 @@ Distinct from
 [Distributed Tracing](PRINCIPLES.md#architecture-distributed-tracing): A correlation id is one identifier carried through a request, while distributed tracing records each call as a timed span of one trace.
 
 Violated by
-logs/events without correlation identifier
+[Uncorrelated Events](LEXICON.md#lexicon-uncorrelated-events)
 
 Detected by
 missing correlation field
@@ -27245,7 +27280,7 @@ Measured by
 correlation coverage
 
 Refactored by
-Add Middleware, Propagate Header
+[Chain of Responsibility Pattern](PRINCIPLES.md#architecture-chain-of-responsibility-pattern)
 
 Enforced by
 logging/tracing standards
@@ -27329,7 +27364,7 @@ Tensions
 [Causation ID / Metadata Verbosity](SCHEMA.md#tension-causation-id-metadata-verbosity)
 
 Violated by
-event chains without parent cause
+[Unlinked Events](LEXICON.md#lexicon-unlinked-events)
 
 Detected by
 missing causation field in event metadata
@@ -27338,7 +27373,7 @@ Measured by
 causation coverage
 
 Refactored by
-Add Causation Metadata
+none
 
 Enforced by
 event schema rules
@@ -27426,7 +27461,7 @@ Tensions
 [Distributed Tracing / Overhead/Sampling](SCHEMA.md#tension-distributed-tracing-overhead-sampling)
 
 Violated by
-service calls without trace propagation
+[Opaque Distributed Calls](LEXICON.md#lexicon-opaque-distributed-calls)
 
 Detected by
 broken traces, missing spans
@@ -27435,7 +27470,7 @@ Measured by
 trace completeness, span coverage
 
 Refactored by
-Add Tracing Middleware, Propagate Context
+none
 
 Enforced by
 observability policy
@@ -27519,7 +27554,7 @@ Tensions
 [SLO/SLI / Feature Velocity](SCHEMA.md#tension-feature-velocity-slo-sli)
 
 Violated by
-reliability judged by subjective feel
+[Vague Reliability Goals](LEXICON.md#lexicon-vague-reliability-goals)
 
 Detected by
 no measured indicator behind reliability claims
@@ -27528,7 +27563,7 @@ Measured by
 SLO attainment vs error budget
 
 Refactored by
-Define SLIs and SLOs
+[Service Level Objectives](LEXICON.md#lexicon-service-level-objectives)
 
 Enforced by
 reliability review
@@ -27612,7 +27647,7 @@ Tensions
 [Dashboards / Dashboard Sprawl](SCHEMA.md#tension-dashboard-sprawl-dashboards)
 
 Violated by
-the developer grepping raw logs to judge health
+[Log-Grep-Only Diagnosis](LEXICON.md#lexicon-log-grep-only-diagnosis)
 
 Detected by
 no curated view of key signals
@@ -27621,7 +27656,7 @@ Measured by
 time-to-diagnose during incidents
 
 Refactored by
-Build Signal Dashboards
+[Monitoring](PRINCIPLES.md#architecture-monitoring)
 
 Enforced by
 operations review
@@ -27683,22 +27718,22 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_strategy_pattern["Strategy Pattern"]
-n_template_method_pattern["Template Method Pattern"]
-n_observer_pattern["Observer Pattern"]
-n_mediator_pattern["Mediator Pattern"]
-n_command_pattern["Command Pattern"]
-n_state_pattern["State Pattern"]
-n_chain_of_responsibility_pattern["Chain of Responsibility Pattern"]
-n_iterator_pattern["Iterator Pattern"]
-n_visitor_pattern["Visitor Pattern"]
-n_memento_pattern["Memento Pattern"]
-n_null_object_pattern["Null Object Pattern"]
-n_finite_state_machine["Finite State Machine"]
-n_statecharts["Statecharts"]
-n_finite_state_machine --> n_state_pattern
-n_statecharts --> n_finite_state_machine
-n_statecharts --> n_finite_state_machine
+    n_strategy_pattern["Strategy Pattern"]
+    n_template_method_pattern["Template Method Pattern"]
+    n_observer_pattern["Observer Pattern"]
+    n_mediator_pattern["Mediator Pattern"]
+    n_command_pattern["Command Pattern"]
+    n_state_pattern["State Pattern"]
+    n_chain_of_responsibility_pattern["Chain of Responsibility Pattern"]
+    n_iterator_pattern["Iterator Pattern"]
+    n_visitor_pattern["Visitor Pattern"]
+    n_memento_pattern["Memento Pattern"]
+    n_null_object_pattern["Null Object Pattern"]
+    n_finite_state_machine["Finite State Machine"]
+    n_statecharts["Statecharts"]
+    n_finite_state_machine --> n_state_pattern
+    n_statecharts --> n_finite_state_machine
+    n_statecharts --> n_finite_state_machine
 ```
 
 ### Strategy Pattern
@@ -27707,6 +27742,7 @@ n_statecharts --> n_finite_state_machine
 - Category: [Behavioral Patterns](PRINCIPLES.md#architecture-category-behavioral-patterns)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: algorithm, policy, behavior
+- Aliases: Policy Pattern
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -27739,7 +27775,7 @@ Distinct from
 [Decorator Pattern](PRINCIPLES.md#architecture-decorator-pattern): A strategy replaces behavior behind one interface, while a decorator adds behavior by wrapping an object in the same interface.
 
 Violated by
-switch over behavior modes
+[Large Conditional Logic](LEXICON.md#lexicon-large-conditional-logic)
 
 Detected by
 conditional strategy selection with duplicated behavior
@@ -27748,7 +27784,7 @@ Measured by
 conditional complexity
 
 Refactored by
-Extract Strategy
+none
 
 Enforced by
 complexity thresholds, [review](LEXICON.md#lexicon-review)
@@ -27837,7 +27873,7 @@ Tensions
 [Template Method Pattern / Inheritance Coupling](SCHEMA.md#tension-inheritance-coupling-template-method-pattern)
 
 Violated by
-copied workflows with small variations
+[Duplicated Workflow](LEXICON.md#lexicon-duplicated-workflow)
 
 Detected by
 duplicated method sequences
@@ -27846,7 +27882,7 @@ Measured by
 workflow duplication
 
 Refactored by
-Introduce Template Method
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -27938,7 +27974,7 @@ Tensions
 [Observer Pattern / Ordering](SCHEMA.md#tension-observer-pattern-ordering), [Observer Pattern / Debuggability](SCHEMA.md#tension-debuggability-observer-pattern)
 
 Violated by
-hardcoded notification targets
+[Direct Callback Coupling](LEXICON.md#lexicon-direct-callback-coupling)
 
 Detected by
 direct calls to multiple listeners
@@ -27947,7 +27983,7 @@ Measured by
 subscriber coupling count
 
 Refactored by
-Introduce Observer/Event Publisher
+none
 
 Enforced by
 event contract tests
@@ -28048,7 +28084,7 @@ Tensions
 [Mediator Pattern / Mediator God Object](SCHEMA.md#tension-mediator-god-object-mediator-pattern)
 
 Violated by
-many-to-many object dependencies
+[Mesh Dependencies](LEXICON.md#lexicon-mesh-dependencies)
 
 Detected by
 dense object dependency graph
@@ -28057,7 +28093,7 @@ Measured by
 interaction graph density
 
 Refactored by
-Introduce Mediator
+none
 
 Enforced by
 dependency graph checks
@@ -28119,6 +28155,7 @@ Shape it refuses
 - Category: [Behavioral Patterns](PRINCIPLES.md#architecture-category-behavioral-patterns)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: behavior, invocation, workflow
+- Aliases: Action Pattern
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -28145,7 +28182,7 @@ Tensions
 [Command Pattern / Simplicity](SCHEMA.md#tension-command-pattern-simplicity)
 
 Violated by
-inline conditional dispatch on an action name
+[Direct Method Invocation](LEXICON.md#lexicon-direct-method-invocation)
 
 Detected by
 switch/if chains selecting an operation to run
@@ -28154,7 +28191,7 @@ Measured by
 dispatch-branch count per action site
 
 Refactored by
-Encapsulate Invocation as a Command object
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -28251,7 +28288,7 @@ Tensions
 [State Pattern / Class Proliferation](SCHEMA.md#tension-class-proliferation-state-pattern)
 
 Violated by
-behavior branched on scattered status flags
+[Boolean Flag Soup](LEXICON.md#lexicon-boolean-flag-soup)
 
 Detected by
 repeated conditionals on a status field
@@ -28260,7 +28297,7 @@ Measured by
 status-conditional density
 
 Refactored by
-Replace State-Conditional with State objects
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -28359,7 +28396,7 @@ Tensions
 [Chain of Responsibility Pattern / Traceability](SCHEMA.md#tension-chain-of-responsibility-pattern-traceability)
 
 Violated by
-one handler with nested conditionals for every case
+[Monolithic Handler](LEXICON.md#lexicon-monolithic-handler)
 
 Detected by
 long if/else ladders handling heterogeneous requests
@@ -28368,7 +28405,7 @@ Measured by
 handler cyclomatic complexity
 
 Refactored by
-Extract Handler Chain
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -28434,6 +28471,7 @@ Shape it refuses
 - Category: [Behavioral Patterns](PRINCIPLES.md#architecture-category-behavioral-patterns)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: behavior, traversal, collection
+- Aliases: Cursor
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -28460,7 +28498,7 @@ Tensions
 [Iterator Pattern / Simplicity](SCHEMA.md#tension-iterator-pattern-simplicity)
 
 Violated by
-callers walking a structure's internal fields directly
+[Exposed Internal Representation](LEXICON.md#lexicon-exposed-internal-representation)
 
 Detected by
 index/pointer traversal of another type's internals
@@ -28469,7 +28507,7 @@ Measured by
 internal-structure access count
 
 Refactored by
-Introduce Iterator
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -28547,13 +28585,13 @@ In tension with
 [Element Stability](LEXICON.md#lexicon-element-stability)
 
 Conflicts with
-[Type-Switch Dispatch](LEXICON.md#lexicon-type-switch-dispatch)
+[Type Switching](LEXICON.md#lexicon-type-switching)
 
 Tensions
 [Visitor Pattern / Element Stability](SCHEMA.md#tension-element-stability-visitor-pattern)
 
 Violated by
-operations added by editing every element type
+[Type Switching](LEXICON.md#lexicon-type-switching)
 
 Detected by
 type-tag switches repeated per operation
@@ -28562,7 +28600,7 @@ Measured by
 type-switch duplication across operations
 
 Refactored by
-Introduce Visitor
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -28620,7 +28658,7 @@ Depends on
 [Stable Element Hierarchy](LEXICON.md#lexicon-stable-element-hierarchy), [Open/Closed Principle (OCP)](PRINCIPLES.md#architecture-open-closed), [Separation of Concerns](PRINCIPLES.md#architecture-separation-of-concerns), [Operation Extension Without Element Change](LEXICON.md#lexicon-operation-extension-without-element-change)
 
 Shape it refuses
-[Type-Switch Dispatch](LEXICON.md#lexicon-type-switch-dispatch)
+[Type Switching](LEXICON.md#lexicon-type-switching)
 
 ### Memento Pattern
 
@@ -28654,7 +28692,7 @@ Tensions
 [Memento Pattern / Memory Footprint](SCHEMA.md#tension-memento-pattern-memory-footprint)
 
 Violated by
-callers copying an object's private fields to save state
+[External State Reach-In](LEXICON.md#lexicon-external-state-reach-in)
 
 Detected by
 external code reconstructing internal state
@@ -28663,7 +28701,7 @@ Measured by
 private-field external access count
 
 Refactored by
-Capture State as a Memento
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -28726,6 +28764,7 @@ Shape it refuses
 - Category: [Behavioral Patterns](PRINCIPLES.md#architecture-category-behavioral-patterns)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: behavior, absence, default
+- Aliases: Null Object
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -28752,7 +28791,7 @@ Tensions
 [Null Object Pattern / Silent No-Op Risk](SCHEMA.md#tension-null-object-pattern-silent-no-op-risk)
 
 Violated by
-null-guards scattered across every call site
+[Scattered Null Guards](LEXICON.md#lexicon-scattered-null-guards)
 
 Detected by
 repeated null checks before the same operation
@@ -28761,7 +28800,7 @@ Measured by
 null-guard density
 
 Refactored by
-Introduce Null Object
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -28819,6 +28858,7 @@ Shape it refuses
 - Category: [Behavioral Patterns](PRINCIPLES.md#architecture-category-behavioral-patterns)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: behavior, state modeling, control flow
+- Aliases: FSM, State Machine
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -28851,7 +28891,7 @@ Tensions
 [Finite State Machine / State Explosion](SCHEMA.md#tension-finite-state-machine-state-explosion)
 
 Violated by
-behavior driven by ad-hoc combinations of scattered status booleans
+[Boolean Flag Soup](LEXICON.md#lexicon-boolean-flag-soup)
 
 Detected by
 impossible or contradictory state combinations reachable at runtime
@@ -28860,7 +28900,7 @@ Measured by
 count of representable-but-illegal states
 
 Refactored by
-Model states and transitions as an explicit FSM
+none
 
 Enforced by
 state model review
@@ -28959,7 +28999,7 @@ Distinct from
 [Finite State Machine](PRINCIPLES.md#architecture-finite-state-machine): A finite state machine is flat states and events, while statecharts add nested states and parallel regions to it.
 
 Violated by
-a flat FSM duplicating shared transitions across many near-identical states
+[Flat State Explosion](LEXICON.md#lexicon-flat-state-explosion)
 
 Detected by
 combinatorial state growth from independent concerns modeled in one flat machine
@@ -28968,7 +29008,7 @@ Measured by
 transition duplication across sibling states
 
 Refactored by
-Introduce nested and parallel statechart regions
+none
 
 Enforced by
 state model review
@@ -29028,12 +29068,12 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_factory_pattern["Factory Pattern"]
-n_factory_method_pattern["Factory Method Pattern"]
-n_abstract_factory_pattern["Abstract Factory Pattern"]
-n_builder_pattern["Builder Pattern"]
-n_prototype_pattern["Prototype Pattern"]
-n_singleton_pattern["Singleton Pattern"]
+    n_factory_pattern["Factory Pattern"]
+    n_factory_method_pattern["Factory Method Pattern"]
+    n_abstract_factory_pattern["Abstract Factory Pattern"]
+    n_builder_pattern["Builder Pattern"]
+    n_prototype_pattern["Prototype Pattern"]
+    n_singleton_pattern["Singleton Pattern"]
 ```
 
 ### Factory Pattern
@@ -29071,7 +29111,7 @@ Tensions
 [Factory Pattern / Simplicity](SCHEMA.md#tension-factory-pattern-simplicity)
 
 Violated by
-duplicated conditional construction
+[Scattered Construction Logic](LEXICON.md#lexicon-scattered-construction-logic)
 
 Detected by
 repeated constructors/switches
@@ -29080,7 +29120,7 @@ Measured by
 construction duplication count
 
 Refactored by
-Extract Factory
+none
 
 Enforced by
 creation policy review
@@ -29134,6 +29174,7 @@ Shape it refuses
 - Category: [Creational Patterns](PRINCIPLES.md#architecture-category-creational-patterns)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: class hierarchy, framework
+- Aliases: Virtual Constructor
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -29160,7 +29201,7 @@ Tensions
 [Factory Method Pattern / Inheritance Complexity](SCHEMA.md#tension-factory-method-pattern-inheritance-complexity)
 
 Violated by
-fixed construction in base workflow
+[Concrete Constructor Coupling](LEXICON.md#lexicon-concrete-constructor-coupling)
 
 Detected by
 base class directly instantiates variant
@@ -29169,7 +29210,7 @@ Measured by
 variant construction duplication
 
 Refactored by
-Introduce Factory Method
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -29261,7 +29302,7 @@ Tensions
 [Abstract Factory Pattern / Boilerplate](SCHEMA.md#tension-abstract-factory-pattern-boilerplate)
 
 Violated by
-incompatible product combinations
+[Mixed Product Families](LEXICON.md#lexicon-mixed-product-families)
 
 Detected by
 manual selection of related product classes
@@ -29270,7 +29311,7 @@ Measured by
 family mismatch defects
 
 Refactored by
-Introduce Abstract Factory
+none
 
 Enforced by
 factory conformance tests
@@ -29360,7 +29401,7 @@ Tensions
 [Builder Pattern / Boilerplate](SCHEMA.md#tension-boilerplate-builder-pattern)
 
 Violated by
-constructors with many optional params
+[Telescoping Constructor](LEXICON.md#lexicon-telescoping-constructor)
 
 Detected by
 high-arity constructors
@@ -29369,7 +29410,7 @@ Measured by
 constructor parameter count
 
 Refactored by
-Introduce Builder
+none
 
 Enforced by
 API review
@@ -29451,7 +29492,7 @@ Tensions
 [Prototype Pattern / Copy Semantics](SCHEMA.md#tension-copy-semantics-prototype-pattern)
 
 Violated by
-expensive repeated setup
+[Repeated Expensive Setup](LEXICON.md#lexicon-repeated-expensive-setup)
 
 Detected by
 duplicate initialization flows
@@ -29460,7 +29501,7 @@ Measured by
 initialization duplication/cost
 
 Refactored by
-Introduce Prototype, Add Clone Semantics
+none
 
 Enforced by
 clone tests
@@ -29527,6 +29568,7 @@ Shape it refuses
 - Category: [Creational Patterns](PRINCIPLES.md#architecture-category-creational-patterns)
 - Severity: [discouraged](SCHEMA.md#vocabulary-severity-discouraged)
 - Scope: [object_creation](SCHEMA.md#force-object-creation), lifetime, composition root
+- Aliases: Singleton
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -29553,7 +29595,7 @@ Tensions
 [Singleton Pattern / Testability](SCHEMA.md#tension-singleton-pattern-testability), [Singleton Pattern / Dependency Injection](SCHEMA.md#tension-dependency-injection-singleton-pattern)
 
 Violated by
-a global mutable instance reached from anywhere
+[Global Mutable State](LEXICON.md#lexicon-global-mutable-state)
 
 Detected by
 static global access to a shared service
@@ -29562,7 +29604,7 @@ Measured by
 global-instance reach-in count
 
 Refactored by
-Compose Single Instance at the Root, Inject It
+[Composition Root](LEXICON.md#lexicon-composition-root), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
 
 Enforced by
 composition-root review
@@ -29625,13 +29667,13 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_adapter_pattern["Adapter Pattern"]
-n_facade_pattern["Facade Pattern"]
-n_proxy_pattern["Proxy Pattern"]
-n_bridge_pattern["Bridge Pattern"]
-n_decorator_pattern["Decorator Pattern"]
-n_composite_pattern["Composite Pattern"]
-n_flyweight_pattern["Flyweight Pattern"]
+    n_adapter_pattern["Adapter Pattern"]
+    n_facade_pattern["Facade Pattern"]
+    n_proxy_pattern["Proxy Pattern"]
+    n_bridge_pattern["Bridge Pattern"]
+    n_decorator_pattern["Decorator Pattern"]
+    n_composite_pattern["Composite Pattern"]
+    n_flyweight_pattern["Flyweight Pattern"]
 ```
 
 ### Adapter Pattern
@@ -29672,7 +29714,7 @@ Distinct from
 [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer): An adapter fits one incompatible interface to the one expected, while an anti-corruption layer translates a whole external model into the local domain's terms.
 
 Violated by
-foreign model leaking into core
+[Direct External Coupling](LEXICON.md#lexicon-direct-external-coupling)
 
 Detected by
 external SDK types in domain/application
@@ -29681,7 +29723,7 @@ Measured by
 external leakage count
 
 Refactored by
-Add Adapter, Add Translator
+[Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer)
 
 Enforced by
 boundary import rules
@@ -29766,7 +29808,7 @@ Tensions
 [Facade Pattern / Over-Centralization](SCHEMA.md#tension-facade-pattern-over-centralization)
 
 Violated by
-consumers depending on many subsystem internals
+[Leaky Subsystem API](LEXICON.md#lexicon-leaky-subsystem-api)
 
 Detected by
 broad dependency surface to subsystem
@@ -29775,7 +29817,7 @@ Measured by
 consumer dependency count
 
 Refactored by
-Introduce Facade
+none
 
 Enforced by
 API boundary rules
@@ -29835,6 +29877,7 @@ Shape it refuses
 - Category: [Structural Patterns](PRINCIPLES.md#architecture-category-structural-patterns)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: access control, remote access, lazy loading
+- Aliases: Surrogate
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -29861,7 +29904,7 @@ Tensions
 [Proxy Pattern / Transparency / Debugging](SCHEMA.md#tension-proxy-pattern-transparency-debugging)
 
 Violated by
-uncontrolled direct resource access
+[Direct Access](LEXICON.md#lexicon-direct-access)
 
 Detected by
 bypassed access wrapper
@@ -29870,7 +29913,7 @@ Measured by
 proxy bypass count
 
 Refactored by
-Introduce Proxy
+none
 
 Enforced by
 access rules
@@ -29933,6 +29976,7 @@ Shape it refuses
 - Category: [Structural Patterns](PRINCIPLES.md#architecture-category-structural-patterns)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: abstraction, implementation variation
+- Aliases: Handle-Body
 - Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
 
 Details
@@ -29959,7 +30003,7 @@ Tensions
 [Bridge Pattern / Indirection](SCHEMA.md#tension-bridge-pattern-indirection)
 
 Violated by
-subclass explosion for combinations
+[Cartesian Inheritance Explosion](LEXICON.md#lexicon-cartesian-inheritance-explosion)
 
 Detected by
 parallel hierarchies / deep variant classes
@@ -29968,7 +30012,7 @@ Measured by
 variant class count
 
 Refactored by
-Introduce Bridge
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -30066,7 +30110,7 @@ Tensions
 [Decorator Pattern / Stack Debugging](SCHEMA.md#tension-decorator-pattern-stack-debugging)
 
 Violated by
-many subclasses for optional features
+[Subclass Explosion](LEXICON.md#lexicon-subclass-explosion)
 
 Detected by
 repeated wrapper-like subclasses
@@ -30075,7 +30119,7 @@ Measured by
 variant explosion count
 
 Refactored by
-Introduce Decorator
+none
 
 Enforced by
 interface conformance tests
@@ -30167,7 +30211,7 @@ Tensions
 [Composite Pattern / Type Safety](SCHEMA.md#tension-composite-pattern-type-safety)
 
 Violated by
-callers branching on leaf-vs-container at every node
+[Leaf-vs-Container Special-Casing](LEXICON.md#lexicon-leaf-vs-container-special-casing)
 
 Detected by
 isContainer/isLeaf conditionals during traversal
@@ -30176,7 +30220,7 @@ Measured by
 node-kind conditional count
 
 Refactored by
-Unify Leaf and Composite behind one interface
+none
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -30272,7 +30316,7 @@ Tensions
 [Flyweight Pattern / Complexity](SCHEMA.md#tension-complexity-flyweight-pattern)
 
 Violated by
-identical heavy state duplicated across many instances
+[Per-Instance Duplicate State](LEXICON.md#lexicon-per-instance-duplicate-state)
 
 Detected by
 repeated equal intrinsic state across objects
@@ -30281,7 +30325,7 @@ Measured by
 duplicate-state memory footprint
 
 Refactored by
-Extract Flyweight, Share Intrinsic State
+none
 
 Enforced by
 profiling review
@@ -30350,71 +30394,71 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_scalability["Scalability"]
-n_horizontal_scaling["Horizontal Scaling"]
-n_vertical_scaling["Vertical Scaling"]
-n_elasticity["Elasticity"]
-n_load_balancing["Load Balancing"]
-n_sharding["Sharding"]
-n_partitioning["Partitioning"]
-n_caching["Caching"]
-n_statelessness["Statelessness"]
-n_concurrency["Concurrency"]
-n_parallelism["Parallelism"]
-n_throughput["Throughput"]
-n_latency["Latency"]
-n_performance_engineering["Performance Engineering"]
-n_algorithmic_efficiency["Algorithmic Efficiency"]
-n_time_complexity["Time Complexity"]
-n_space_complexity["Space Complexity"]
-n_big_o_notation["Big O Notation"]
-n_optimization["Optimization"]
-n_profiling["Profiling"]
-n_benchmarking["Benchmarking"]
-n_bottleneck_analysis["Bottleneck Analysis"]
-n_resource_utilization["Resource Utilization"]
-n_rate_limiting["Rate Limiting"]
-n_memory_efficiency["Memory Efficiency"]
-n_cdn_edge_caching["CDN / Edge Caching"]
-n_read_replica["Read Replica"]
-n_queuing_theory["Queuing Theory"]
-n_scalability --> n_performance_engineering
-n_horizontal_scaling --> n_elasticity
-n_elasticity --> n_scalability
-n_load_balancing --> n_scalability
-n_sharding --> n_horizontal_scaling
-n_partitioning --> n_scalability
-n_partitioning --> n_parallelism
-n_caching --> n_scalability
-n_statelessness --> n_horizontal_scaling
-n_statelessness --> n_load_balancing
-n_concurrency --> n_throughput
-n_parallelism --> n_throughput
-n_throughput --> n_scalability
-n_throughput -.-> n_latency
-n_latency --> n_performance_engineering
-n_performance_engineering --> n_profiling
-n_performance_engineering --> n_benchmarking
-n_performance_engineering --> n_scalability
-n_algorithmic_efficiency --> n_scalability
-n_time_complexity --> n_algorithmic_efficiency
-n_time_complexity -.-> n_space_complexity
-n_space_complexity --> n_resource_utilization
-n_space_complexity -.-> n_time_complexity
-n_big_o_notation --> n_algorithmic_efficiency
-n_optimization --> n_profiling
-n_optimization --> n_performance_engineering
-n_profiling --> n_performance_engineering
-n_benchmarking --> n_performance_engineering
-n_bottleneck_analysis --> n_profiling
-n_bottleneck_analysis --> n_optimization
-n_resource_utilization --> n_performance_engineering
-n_memory_efficiency --> n_scalability
-n_cdn_edge_caching --> n_caching
-n_cdn_edge_caching --> n_latency
-n_read_replica --> n_horizontal_scaling
-n_read_replica --> n_load_balancing
-n_queuing_theory --> n_latency
+    n_scalability["Scalability"]
+    n_horizontal_scaling["Horizontal Scaling"]
+    n_vertical_scaling["Vertical Scaling"]
+    n_elasticity["Elasticity"]
+    n_load_balancing["Load Balancing"]
+    n_sharding["Sharding"]
+    n_partitioning["Partitioning"]
+    n_caching["Caching"]
+    n_statelessness["Statelessness"]
+    n_concurrency["Concurrency"]
+    n_parallelism["Parallelism"]
+    n_throughput["Throughput"]
+    n_latency["Latency"]
+    n_performance_engineering["Performance Engineering"]
+    n_algorithmic_efficiency["Algorithmic Efficiency"]
+    n_time_complexity["Time Complexity"]
+    n_space_complexity["Space Complexity"]
+    n_big_o_notation["Big O Notation"]
+    n_optimization["Optimization"]
+    n_profiling["Profiling"]
+    n_benchmarking["Benchmarking"]
+    n_bottleneck_analysis["Bottleneck Analysis"]
+    n_resource_utilization["Resource Utilization"]
+    n_rate_limiting["Rate Limiting"]
+    n_memory_efficiency["Memory Efficiency"]
+    n_cdn_edge_caching["CDN / Edge Caching"]
+    n_read_replica["Read Replica"]
+    n_queuing_theory["Queuing Theory"]
+    n_scalability --> n_performance_engineering
+    n_horizontal_scaling --> n_elasticity
+    n_elasticity --> n_scalability
+    n_load_balancing --> n_scalability
+    n_sharding --> n_horizontal_scaling
+    n_partitioning --> n_scalability
+    n_partitioning --> n_parallelism
+    n_caching --> n_scalability
+    n_statelessness --> n_horizontal_scaling
+    n_statelessness --> n_load_balancing
+    n_concurrency --> n_throughput
+    n_parallelism --> n_throughput
+    n_throughput --> n_scalability
+    n_throughput -.-> n_latency
+    n_latency --> n_performance_engineering
+    n_performance_engineering --> n_profiling
+    n_performance_engineering --> n_benchmarking
+    n_performance_engineering --> n_scalability
+    n_algorithmic_efficiency --> n_scalability
+    n_time_complexity --> n_algorithmic_efficiency
+    n_time_complexity -.-> n_space_complexity
+    n_space_complexity --> n_resource_utilization
+    n_space_complexity -.-> n_time_complexity
+    n_big_o_notation --> n_algorithmic_efficiency
+    n_optimization --> n_profiling
+    n_optimization --> n_performance_engineering
+    n_profiling --> n_performance_engineering
+    n_benchmarking --> n_performance_engineering
+    n_bottleneck_analysis --> n_profiling
+    n_bottleneck_analysis --> n_optimization
+    n_resource_utilization --> n_performance_engineering
+    n_memory_efficiency --> n_scalability
+    n_cdn_edge_caching --> n_caching
+    n_cdn_edge_caching --> n_latency
+    n_read_replica --> n_horizontal_scaling
+    n_read_replica --> n_load_balancing
+    n_queuing_theory --> n_latency
 ```
 
 ### Scalability
@@ -30446,7 +30490,7 @@ Conflicts with
 [Fixed-Capacity Design](LEXICON.md#lexicon-fixed-capacity-design)
 
 Referenced by
-[Service Discovery](PRINCIPLES.md#architecture-service-discovery), [Message Broker](PRINCIPLES.md#architecture-message-broker), [CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency), [Elasticity](PRINCIPLES.md#architecture-elasticity), [Load Balancing](PRINCIPLES.md#architecture-load-balancing), [Partitioning](PRINCIPLES.md#architecture-partitioning), [Caching](PRINCIPLES.md#architecture-caching), [Throughput](PRINCIPLES.md#architecture-throughput), [Performance Engineering](PRINCIPLES.md#architecture-performance-engineering), [Algorithmic Efficiency](PRINCIPLES.md#architecture-algorithmic-efficiency), [Memory Efficiency](PRINCIPLES.md#architecture-memory-efficiency), [Stateless Processing](PRINCIPLES.md#architecture-stateless-processing), [Replication](PRINCIPLES.md#architecture-replication), [Microservices](PRINCIPLES.md#architecture-microservices)
+[Service Discovery](PRINCIPLES.md#architecture-service-discovery), [Message Broker](PRINCIPLES.md#architecture-message-broker), [Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation), [Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency), [Elasticity](PRINCIPLES.md#architecture-elasticity), [Load Balancing](PRINCIPLES.md#architecture-load-balancing), [Partitioning](PRINCIPLES.md#architecture-partitioning), [Caching](PRINCIPLES.md#architecture-caching), [Throughput](PRINCIPLES.md#architecture-throughput), [Performance Engineering](PRINCIPLES.md#architecture-performance-engineering), [Algorithmic Efficiency](PRINCIPLES.md#architecture-algorithmic-efficiency), [Memory Efficiency](PRINCIPLES.md#architecture-memory-efficiency), [Stateless Processing](PRINCIPLES.md#architecture-stateless-processing), [Replication](PRINCIPLES.md#architecture-replication), [Microservices](PRINCIPLES.md#architecture-microservices)
 
 Tensions
 [Scalability / Simplicity](SCHEMA.md#tension-scalability-simplicity), [Scalability / Consistency](SCHEMA.md#tension-consistency-scalability)
@@ -30479,7 +30523,7 @@ Distinct from
 [Availability](LEXICON.md#lexicon-availability): Scalability is performance under growing load, while availability is the share of time the system serves at all.
 
 Violated by
-single bottleneck preventing growth
+[Bottlenecks](LEXICON.md#lexicon-bottlenecks)
 
 Detected by
 saturation under load test
@@ -30488,7 +30532,7 @@ Measured by
 throughput under increasing load
 
 Refactored by
-Add Caching, [Partitioning](PRINCIPLES.md#architecture-partitioning), Async Processing, Scaling
+[Caching](PRINCIPLES.md#architecture-caching), [Partitioning](PRINCIPLES.md#architecture-partitioning), [Introduce Async Event](LEXICON.md#lexicon-introduce-async-event), [Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling)
 
 Enforced by
 load tests, SLO gates
@@ -30579,7 +30623,7 @@ Tensions
 [Horizontal Scaling / Distributed Coordination](SCHEMA.md#tension-distributed-coordination-horizontal-scaling)
 
 Violated by
-sticky instance state required for correctness
+[Instance Affinity](LEXICON.md#lexicon-instance-affinity)
 
 Detected by
 local session/state coupling
@@ -30588,7 +30632,7 @@ Measured by
 scale-out efficiency
 
 Refactored by
-Externalize State, Add Load Balancer
+[Externalize Session State](LEXICON.md#lexicon-externalize-session-state), [Load Balancing](PRINCIPLES.md#architecture-load-balancing)
 
 Enforced by
 deployment tests
@@ -30666,7 +30710,7 @@ Tensions
 [Vertical Scaling / Cost/Limit](SCHEMA.md#tension-cost-limit-vertical-scaling)
 
 Violated by
-relying only on vertical scale past ceiling
+[Hard Resource Ceiling](LEXICON.md#lexicon-hard-resource-ceiling)
 
 Detected by
 resource saturation trends
@@ -30675,7 +30719,7 @@ Measured by
 utilization/headroom
 
 Refactored by
-Optimize Resources, Prepare Horizontal Scale
+[Profiling](PRINCIPLES.md#architecture-profiling), [Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling)
 
 Enforced by
 [capacity planning](LEXICON.md#lexicon-capacity-planning)
@@ -30767,7 +30811,7 @@ Distinct from
 [Warm-Up Latency](LEXICON.md#lexicon-warm-up-latency): Elasticity adds capacity when demand rises, while warm-up latency is the delay before that capacity can serve.
 
 Violated by
-capacity not adapting to demand
+[Fixed Provisioning](LEXICON.md#lexicon-fixed-provisioning)
 
 Detected by
 under/over-provisioning patterns
@@ -30776,7 +30820,7 @@ Measured by
 scale response time, utilization
 
 Refactored by
-Add Scaling Policy, Remove Stateful Constraint
+[Autoscaling Policy](LEXICON.md#lexicon-autoscaling-policy), [Externalize Session State](LEXICON.md#lexicon-externalize-session-state)
 
 Enforced by
 infrastructure policy
@@ -30861,7 +30905,7 @@ Tensions
 [Load Balancing / Session Affinity](SCHEMA.md#tension-load-balancing-session-affinity)
 
 Violated by
-uneven traffic causing hotspots
+[Single Target Routing](LEXICON.md#lexicon-single-target-routing)
 
 Detected by
 skewed instance utilization
@@ -30870,7 +30914,7 @@ Measured by
 request distribution, [latency](PRINCIPLES.md#architecture-latency)
 
 Refactored by
-Add Load Balancer, Externalize Session State
+[Externalize Session State](LEXICON.md#lexicon-externalize-session-state)
 
 Enforced by
 infrastructure config checks
@@ -30950,7 +30994,7 @@ Tensions
 [Sharding / Cross-Shard Queries](SCHEMA.md#tension-cross-shard-queries-sharding)
 
 Violated by
-unbounded single partition growth
+[Single Monolithic Store](LEXICON.md#lexicon-single-monolithic-store)
 
 Detected by
 hotspot partitions, storage bottleneck
@@ -30959,7 +31003,7 @@ Measured by
 shard balance, query fan-out
 
 Refactored by
-Introduce Shard Key, Split Data
+[Partitioning](PRINCIPLES.md#architecture-partitioning)
 
 Enforced by
 data architecture review
@@ -31041,7 +31085,7 @@ Distinct from
 [Parallelism](PRINCIPLES.md#architecture-parallelism): Partitioning divides data or work by a key, while parallelism runs the independent parts at the same time.
 
 Violated by
-no partitioning for unbounded workload
+[Single Monolithic Store](LEXICON.md#lexicon-single-monolithic-store)
 
 Detected by
 hotspot resource usage
@@ -31050,7 +31094,7 @@ Measured by
 partition balance
 
 Refactored by
-Add Partition Key, Split Workload
+none
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -31132,7 +31176,7 @@ Tensions
 [Caching / Consistency](SCHEMA.md#tension-caching-consistency), [Caching / Always-Fresh Reads](SCHEMA.md#tension-always-fresh-reads-caching)
 
 Violated by
-repeated expensive computation/query with stable result
+[Repeated Stable Computation](LEXICON.md#lexicon-repeated-stable-computation)
 
 Detected by
 hot repeated reads, high latency calls
@@ -31141,7 +31185,7 @@ Measured by
 hit ratio, stale read rate
 
 Refactored by
-Add Cache, Key by Input Fingerprint, Define Invalidation
+[Context-Keyed Cache](LEXICON.md#lexicon-context-keyed-cache), [Cache Invalidation on Write](LEXICON.md#lexicon-cache-invalidation-on-write)
 
 Enforced by
 performance tests
@@ -31228,7 +31272,7 @@ Tensions
 [Statelessness / State Access Latency](SCHEMA.md#tension-state-access-latency-statelessness)
 
 Violated by
-correctness depends on in-memory instance state
+[Instance-Local State](LEXICON.md#lexicon-instance-local-state)
 
 Detected by
 mutable static/session-local state
@@ -31237,7 +31281,7 @@ Measured by
 state externalization coverage
 
 Refactored by
-Move State to Store, Use Token/Session Store
+[Externalize Session State](LEXICON.md#lexicon-externalize-session-state), [Session Management](PRINCIPLES.md#architecture-session-management)
 
 Enforced by
 architecture tests
@@ -31325,7 +31369,7 @@ Tensions
 [Concurrency / Complexity](SCHEMA.md#tension-complexity-concurrency)
 
 Violated by
-unsafe shared mutation
+[Race Conditions](LEXICON.md#lexicon-race-conditions)
 
 Detected by
 data races, flaky concurrent tests
@@ -31334,7 +31378,7 @@ Measured by
 [throughput](PRINCIPLES.md#architecture-throughput), race count
 
 Refactored by
-Add Synchronization, Use Immutable State
+[Apply Concurrency Control](LEXICON.md#lexicon-apply-concurrency-control), [Make Immutable](LEXICON.md#lexicon-make-immutable)
 
 Enforced by
 race detectors, [tests](LEXICON.md#lexicon-tests)
@@ -31418,7 +31462,7 @@ Tensions
 [Parallelism / Coordination Overhead](SCHEMA.md#tension-coordination-overhead-parallelism)
 
 Violated by
-serial processing of independent heavy tasks
+[Sequential Bottleneck](LEXICON.md#lexicon-sequential-bottleneck)
 
 Detected by
 CPU bottlenecks with independent work
@@ -31427,7 +31471,7 @@ Measured by
 speedup, utilization
 
 Refactored by
-Split Work, Add Parallel Execution
+none
 
 Enforced by
 performance benchmarks
@@ -31511,7 +31555,7 @@ Distinct from
 [Latency](PRINCIPLES.md#architecture-latency): Throughput counts completions per unit of time, while latency measures the time of one request.
 
 Violated by
-processing rate below SLO
+[Bottlenecks](LEXICON.md#lexicon-bottlenecks)
 
 Detected by
 load test failures
@@ -31520,7 +31564,7 @@ Measured by
 requests/messages/items per second
 
 Refactored by
-Optimize Bottleneck, Add Parallelism, Add Scaling
+[Bottleneck Analysis](PRINCIPLES.md#architecture-bottleneck-analysis), [Parallelism](PRINCIPLES.md#architecture-parallelism), [Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling)
 
 Enforced by
 performance gates
@@ -31601,7 +31645,7 @@ Tensions
 [Latency / Throughput/Batching](SCHEMA.md#tension-latency-throughput-batching)
 
 Violated by
-response time above SLO
+[Long Blocking Work](LEXICON.md#lexicon-long-blocking-work)
 
 Detected by
 trace span delays
@@ -31610,7 +31654,7 @@ Measured by
 p50/p95/p99 latency
 
 Refactored by
-Cache, Async Offload, Optimize Query
+[Caching](PRINCIPLES.md#architecture-caching), [Introduce Async Event](LEXICON.md#lexicon-introduce-async-event), [Add Index](LEXICON.md#lexicon-add-index)
 
 Enforced by
 SLO gates
@@ -31710,7 +31754,7 @@ Distinct from
 [Benchmarking](PRINCIPLES.md#architecture-benchmarking): Performance engineering is the practice that sets budgets and acts on measurements, while benchmarking is the controlled timing it measures with.
 
 Violated by
-optimization without measurement
+[Guess-Based Optimization](LEXICON.md#lexicon-guess-based-optimization)
 
 Detected by
 performance changes lacking benchmark
@@ -31719,7 +31763,7 @@ Measured by
 benchmark trend, SLO compliance
 
 Refactored by
-Profile, Optimize Bottleneck, Add Benchmark
+[Profiling](PRINCIPLES.md#architecture-profiling), [Bottleneck Analysis](PRINCIPLES.md#architecture-bottleneck-analysis), [Benchmarking](PRINCIPLES.md#architecture-benchmarking)
 
 Enforced by
 performance CI
@@ -31803,7 +31847,7 @@ Tensions
 [Algorithmic Efficiency / Implementation Simplicity](SCHEMA.md#tension-algorithmic-efficiency-implementation-simplicity)
 
 Violated by
-avoidable quadratic/exponential behavior
+[Inefficient Algorithm Choice](LEXICON.md#lexicon-inefficient-algorithm-choice)
 
 Detected by
 complexity analysis, benchmark slope
@@ -31812,7 +31856,7 @@ Measured by
 time/space complexity
 
 Refactored by
-Replace Algorithm, Add Index, Change Data Structure
+[Replace Algorithm](LEXICON.md#lexicon-replace-algorithm), [Add Index](LEXICON.md#lexicon-add-index)
 
 Enforced by
 [review](LEXICON.md#lexicon-review), benchmarks
@@ -31898,7 +31942,7 @@ Tensions
 [Time Complexity / Space Complexity](SCHEMA.md#tension-space-complexity-time-complexity)
 
 Violated by
-unacceptable asymptotic runtime
+[Inefficient Algorithm Choice](LEXICON.md#lexicon-inefficient-algorithm-choice)
 
 Detected by
 nested loops over large inputs, benchmark slope
@@ -31907,7 +31951,7 @@ Measured by
 Big O, runtime scaling
 
 Refactored by
-Improve Algorithm, Add Index/Cache
+[Replace Algorithm](LEXICON.md#lexicon-replace-algorithm), [Add Index](LEXICON.md#lexicon-add-index), [Caching](PRINCIPLES.md#architecture-caching)
 
 Enforced by
 benchmark thresholds
@@ -32001,7 +32045,7 @@ Distinct from
 [Time Complexity](PRINCIPLES.md#architecture-time-complexity): Space complexity measures memory growth, while time complexity measures running-time growth.
 
 Violated by
-loading unbounded data into memory
+[Unbounded Memory Growth](LEXICON.md#lexicon-unbounded-memory-growth)
 
 Detected by
 memory profiling, [full materialization](LEXICON.md#lexicon-full-materialization)
@@ -32010,7 +32054,7 @@ Measured by
 Big O space, peak memory
 
 Refactored by
-Stream Data, Use Iterator, Chunk Processing
+[Sequential Access](PRINCIPLES.md#architecture-sequential-access), [Iterator Pattern](PRINCIPLES.md#architecture-iterator-pattern), [Chunked Processing](LEXICON.md#lexicon-chunked-processing)
 
 Enforced by
 memory benchmarks
@@ -32092,7 +32136,7 @@ Tensions
 [Big O Notation / Constant-Factor Practicality](SCHEMA.md#tension-big-o-notation-constant-factor-practicality)
 
 Violated by
-ignoring growth behavior for large inputs
+[Inefficient Algorithm Choice](LEXICON.md#lexicon-inefficient-algorithm-choice)
 
 Detected by
 missing complexity note for critical algorithm
@@ -32101,7 +32145,7 @@ Measured by
 asymptotic classification
 
 Refactored by
-Analyze Complexity, Replace Algorithm
+[Replace Algorithm](LEXICON.md#lexicon-replace-algorithm)
 
 Enforced by
 review checklist
@@ -32197,7 +32241,7 @@ Distinct from
 [Performance Engineering](PRINCIPLES.md#architecture-performance-engineering): Optimization is one change at a located bottleneck, while performance engineering is the whole practice of budgets, measurement and change.
 
 Violated by
-optimizing without measured bottleneck
+[Premature Optimization](LEXICON.md#lexicon-premature-optimization)
 
 Detected by
 complex code without performance evidence
@@ -32206,7 +32250,7 @@ Measured by
 benchmark delta, SLO improvement
 
 Refactored by
-Optimize Bottleneck, Simplify After Optimization
+[Bottleneck Analysis](PRINCIPLES.md#architecture-bottleneck-analysis), [Cleanup / Simplification](LEXICON.md#lexicon-cleanup-simplification)
 
 Enforced by
 benchmark review
@@ -32293,7 +32337,7 @@ Tensions
 [Profiling / Measurement Overhead](SCHEMA.md#tension-measurement-overhead-profiling)
 
 Violated by
-performance decisions without profiling
+[Guesswork](LEXICON.md#lexicon-guesswork)
 
 Detected by
 missing profile evidence
@@ -32302,7 +32346,7 @@ Measured by
 hotspot attribution
 
 Refactored by
-Profile Path, Target Hotspot
+none
 
 Enforced by
 performance review
@@ -32385,7 +32429,7 @@ Tensions
 [Benchmarking / Environment Drift](SCHEMA.md#tension-benchmarking-environment-drift)
 
 Violated by
-performance claim without benchmark
+[Anecdotal Performance Claims](LEXICON.md#lexicon-anecdotal-performance-claims)
 
 Detected by
 missing benchmark for perf-sensitive changes
@@ -32394,7 +32438,7 @@ Measured by
 benchmark score/trend
 
 Refactored by
-Add Benchmark, Stabilize Environment
+[Immutable Infrastructure](PRINCIPLES.md#architecture-immutable-infrastructure)
 
 Enforced by
 benchmark CI
@@ -32478,7 +32522,7 @@ Tensions
 [Bottleneck Analysis / Distributed Complexity](SCHEMA.md#tension-bottleneck-analysis-distributed-complexity)
 
 Violated by
-optimizing non-bottleneck code
+[Local Micro-Optimization](LEXICON.md#lexicon-local-micro-optimization)
 
 Detected by
 performance work without hotspot evidence
@@ -32487,7 +32531,7 @@ Measured by
 bottleneck contribution percentage
 
 Refactored by
-Remove Bottleneck, Parallelize, Cache
+[Parallelism](PRINCIPLES.md#architecture-parallelism), [Caching](PRINCIPLES.md#architecture-caching)
 
 Enforced by
 performance review
@@ -32570,7 +32614,7 @@ Tensions
 [Resource Utilization / Over-Provisioning](SCHEMA.md#tension-over-provisioning-resource-utilization)
 
 Violated by
-persistent saturation or idle waste
+[Resource Waste/Saturation](LEXICON.md#lexicon-resource-waste-saturation)
 
 Detected by
 monitoring metrics
@@ -32579,7 +32623,7 @@ Measured by
 CPU/memory/IO/network utilization
 
 Refactored by
-Optimize Resource Use, [Scale](REASONING.md#reasoning-dimension-scale), Tune Config
+[Profiling](PRINCIPLES.md#architecture-profiling), [Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling), [Externalize Configuration](LEXICON.md#lexicon-externalize-configuration)
 
 Enforced by
 SLO/capacity policy
@@ -32663,7 +32707,7 @@ Tensions
 [Rate Limiting / User Experience](SCHEMA.md#tension-rate-limiting-user-experience)
 
 Violated by
-unlimited calls to constrained resource
+[Unbounded Access](LEXICON.md#lexicon-unbounded-access)
 
 Detected by
 missing rate limiter on public/expensive endpoints
@@ -32672,7 +32716,7 @@ Measured by
 limit hit rate, overload incidents
 
 Refactored by
-Add Rate Limiter, Define Quotas
+none
 
 Enforced by
 API gateway/policy
@@ -32764,7 +32808,7 @@ Distinct from
 [CPU Cost](LEXICON.md#lexicon-cpu-cost): Memory efficiency bounds the memory a process uses, while CPU cost is the processor time that streaming or chunking may add.
 
 Violated by
-loading unbounded data into memory
+[Unbounded Memory Growth](LEXICON.md#lexicon-unbounded-memory-growth)
 
 Detected by
 memory profile spikes
@@ -32773,7 +32817,7 @@ Measured by
 peak memory, allocation rate
 
 Refactored by
-Stream, Chunk, Use Iterator
+[Event Stream](PRINCIPLES.md#architecture-event-stream), [Chunked Processing](LEXICON.md#lexicon-chunked-processing), [Iterator Pattern](PRINCIPLES.md#architecture-iterator-pattern)
 
 Enforced by
 memory benchmarks
@@ -32854,7 +32898,7 @@ Tensions
 [CDN / Edge Caching / Cache Invalidation](SCHEMA.md#tension-cache-invalidation-cdn-edge-caching)
 
 Violated by
-every request hitting the origin regardless of locality
+[Origin-Only Serving](LEXICON.md#lexicon-origin-only-serving)
 
 Detected by
 static assets served from origin per request
@@ -32863,7 +32907,7 @@ Measured by
 origin request rate / cache hit ratio
 
 Refactored by
-Serve via CDN / Edge Cache
+none
 
 Enforced by
 performance review
@@ -32951,7 +32995,7 @@ Distinct from
 [Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling): A read replica scales database reads by copying data, while horizontal scaling adds stateless service instances behind a load balancer.
 
 Violated by
-all reads and writes hitting one primary
+[Single-Primary Read Contention](LEXICON.md#lexicon-single-primary-read-contention)
 
 Detected by
 read load saturating the write primary
@@ -32960,7 +33004,7 @@ Measured by
 primary read/write contention ratio
 
 Refactored by
-Route Reads to Replicas
+none
 
 Enforced by
 database design review
@@ -33043,7 +33087,7 @@ Tensions
 [Queuing Theory / Model Assumptions](SCHEMA.md#tension-model-assumptions-queuing-theory)
 
 Violated by
-worker pool sized by guesswork with no arrival/service-rate model
+[Guess-Based Capacity](LEXICON.md#lexicon-guess-based-capacity)
 
 Detected by
 latency collapsing as utilization approaches saturation
@@ -33052,7 +33096,7 @@ Measured by
 predicted vs actual queue depth and wait time
 
 Refactored by
-Size the system from an M/M/1 (or M/M/c) queuing model
+none
 
 Enforced by
 capacity review
@@ -33110,21 +33154,21 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_streaming_architecture["Streaming Architecture"]
-n_single_pass_processing["Single-Pass Processing"]
-n_pipeline_architecture["Pipeline Architecture"]
-n_lazy_evaluation["Lazy Evaluation"]
-n_sequential_access["Sequential Access"]
-n_forward_only_processing["Forward-Only Processing"]
-n_dataflow_architecture["Dataflow Architecture"]
-n_stateless_processing["Stateless Processing"]
-n_windowing["Windowing"]
-n_fan_out_fan_in["Fan-out/Fan-in"]
-n_batch_vs_stream["Batch-vs-Stream"]
-n_streaming_architecture --> n_single_pass_processing
-n_forward_only_processing --> n_single_pass_processing
-n_dataflow_architecture --> n_pipeline_architecture
-n_windowing --> n_streaming_architecture
+    n_streaming_architecture["Streaming Architecture"]
+    n_single_pass_processing["Single-Pass Processing"]
+    n_pipeline_architecture["Pipeline Architecture"]
+    n_lazy_evaluation["Lazy Evaluation"]
+    n_sequential_access["Sequential Access"]
+    n_forward_only_processing["Forward-Only Processing"]
+    n_dataflow_architecture["Dataflow Architecture"]
+    n_stateless_processing["Stateless Processing"]
+    n_windowing["Windowing"]
+    n_fan_out_fan_in["Fan-out/Fan-in"]
+    n_batch_vs_stream["Batch-vs-Stream"]
+    n_streaming_architecture --> n_single_pass_processing
+    n_forward_only_processing --> n_single_pass_processing
+    n_dataflow_architecture --> n_pipeline_architecture
+    n_windowing --> n_streaming_architecture
 ```
 
 ### Streaming Architecture
@@ -33162,7 +33206,7 @@ Tensions
 [Streaming Architecture / Ordering/State](SCHEMA.md#tension-ordering-state-streaming-architecture), [Streaming Architecture / Batch-Only Processing](SCHEMA.md#tension-batch-only-processing-streaming-architecture)
 
 Violated by
-materializing unbounded streams
+[Full Materialization](LEXICON.md#lexicon-full-materialization)
 
 Detected by
 unbounded collection over stream source
@@ -33171,7 +33215,7 @@ Measured by
 lag, [throughput](PRINCIPLES.md#architecture-throughput), memory usage
 
 Refactored by
-Use Stream Processor, Add Backpressure
+[Backpressure](PRINCIPLES.md#architecture-backpressure)
 
 Enforced by
 load/memory tests
@@ -33256,7 +33300,7 @@ Tensions
 [Single-Pass Processing / Global Optimization](SCHEMA.md#tension-global-optimization-single-pass-processing), [Single-Pass Processing / Multi-Pass Full Materialization](SCHEMA.md#tension-multi-pass-full-materialization-single-pass-processing)
 
 Violated by
-repeated scans over large data where avoidable
+[Repeated Full Scan](LEXICON.md#lexicon-repeated-full-scan)
 
 Detected by
 multiple loops/materializations over same large input
@@ -33265,7 +33309,7 @@ Measured by
 pass count, memory use
 
 Refactored by
-Fuse Passes, Use Iterator/Accumulator
+[Fuse Passes](LEXICON.md#lexicon-fuse-passes), [Iterator Pattern](PRINCIPLES.md#architecture-iterator-pattern)
 
 Enforced by
 performance review
@@ -33355,7 +33399,7 @@ Tensions
 [Pipeline Architecture / Error Propagation/Debugging](SCHEMA.md#tension-error-propagation-debugging-pipeline-architecture)
 
 Violated by
-one large processor handling all stages
+[Monolithic Processing Function](LEXICON.md#lexicon-monolithic-processing-function)
 
 Detected by
 long procedural transformation chain
@@ -33364,7 +33408,7 @@ Measured by
 stage cohesion, stage contract coverage
 
 Refactored by
-Split into Stages, Define Stage Contracts
+[Define Contract](LEXICON.md#lexicon-define-contract)
 
 Enforced by
 pipeline tests
@@ -33453,7 +33497,7 @@ Tensions
 [Lazy Evaluation / Debuggability/Resource Lifetime](SCHEMA.md#tension-debuggability-resource-lifetime-lazy-evaluation), [Lazy Evaluation / Eager Full Materialization](SCHEMA.md#tension-eager-full-materialization-lazy-evaluation)
 
 Violated by
-computing/materializing unused results
+[Full Materialization](LEXICON.md#lexicon-full-materialization)
 
 Detected by
 eager loading of large unused data
@@ -33462,7 +33506,7 @@ Measured by
 avoided work, memory reduction
 
 Refactored by
-Use Iterator/Generator, Defer Computation
+[Iterator Pattern](PRINCIPLES.md#architecture-iterator-pattern)
 
 Enforced by
 performance tests
@@ -33546,7 +33590,7 @@ Tensions
 [Sequential Access / Lookup Performance](SCHEMA.md#tension-lookup-performance-sequential-access), [Sequential Access / Random Access Requirement](SCHEMA.md#tension-random-access-requirement-sequential-access)
 
 Violated by
-random access over stream-only source
+[Random Access over a Stream](LEXICON.md#lexicon-random-access-over-a-stream)
 
 Detected by
 seek/index assumptions on sequential source
@@ -33555,7 +33599,7 @@ Measured by
 access pattern cost
 
 Refactored by
-Use Buffer/Index or Stream Sequentially
+none
 
 Enforced by
 performance tests
@@ -33636,7 +33680,7 @@ Tensions
 [Forward-Only Processing / Complex Grammar/Global State](SCHEMA.md#tension-complex-grammar-global-state-forward-only-processing), [Forward-Only Processing / Backtracking Algorithm](SCHEMA.md#tension-backtracking-algorithm-forward-only-processing)
 
 Violated by
-requiring prior/future full data in stream path
+[Look-Back Buffering](LEXICON.md#lexicon-look-back-buffering)
 
 Detected by
 buffering full stream to look back
@@ -33645,7 +33689,7 @@ Measured by
 buffer size, pass count
 
 Refactored by
-Add Rolling State, Redesign Parser
+[Windowing](PRINCIPLES.md#architecture-windowing), [Tolerant Reader](LEXICON.md#lexicon-tolerant-reader)
 
 Enforced by
 memory tests
@@ -33728,7 +33772,7 @@ Tensions
 [Dataflow Architecture / State Coordination](SCHEMA.md#tension-dataflow-architecture-state-coordination)
 
 Violated by
-hidden data dependencies between stages
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Detected by
 implicit shared state in pipeline
@@ -33737,7 +33781,7 @@ Measured by
 data dependency clarity
 
 Refactored by
-Make Data Edges Explicit, Split Stages
+[Pipeline Architecture](PRINCIPLES.md#architecture-pipeline-architecture)
 
 Enforced by
 pipeline contracts
@@ -33822,7 +33866,7 @@ Tensions
 [Stateless Processing / Stateful Business Rules](SCHEMA.md#tension-stateful-business-rules-stateless-processing)
 
 Violated by
-hidden mutable state in processor
+[Stateful Hidden Accumulation](LEXICON.md#lexicon-stateful-hidden-accumulation)
 
 Detected by
 mutable state across records/requests
@@ -33831,7 +33875,7 @@ Measured by
 stateful operator count
 
 Refactored by
-Externalize State, Pass State Explicitly
+[Externalize Session State](LEXICON.md#lexicon-externalize-session-state), [Pass Context Explicitly](LEXICON.md#lexicon-pass-context-explicitly)
 
 Enforced by
 [code review](PRINCIPLES.md#architecture-code-review), [tests](LEXICON.md#lexicon-tests)
@@ -33918,7 +33962,7 @@ Tensions
 [Windowing / Late-Data Handling](SCHEMA.md#tension-late-data-handling-windowing)
 
 Violated by
-aggregating an unbounded stream into ever-growing state
+[Unbounded Accumulation](LEXICON.md#lexicon-unbounded-accumulation)
 
 Detected by
 unbounded accumulator over a stream
@@ -33927,7 +33971,7 @@ Measured by
 aggregation state growth rate
 
 Refactored by
-Aggregate over Windows
+none
 
 Enforced by
 streaming design review
@@ -34011,7 +34055,7 @@ Tensions
 [Fan-out/Fan-in / Coordination Overhead](SCHEMA.md#tension-coordination-overhead-fan-out-fan-in), [Fan-out/Fan-in / Serial Item Processing](SCHEMA.md#tension-fan-out-fan-in-serial-item-processing)
 
 Violated by
-independent items processed strictly one at a time
+[Sequential Bottleneck](LEXICON.md#lexicon-sequential-bottleneck)
 
 Detected by
 serial loop over parallelizable work
@@ -34020,7 +34064,7 @@ Measured by
 parallelism utilization
 
 Refactored by
-Fan Out Work, Fan In Results
+none
 
 Enforced by
 pipeline design review
@@ -34099,7 +34143,7 @@ Tensions
 [Batch-vs-Stream / Operational Duplication](SCHEMA.md#tension-batch-vs-stream-operational-duplication)
 
 Violated by
-low-latency needs served by periodic batch jobs
+[One-Size-Fits-All Processing](LEXICON.md#lexicon-one-size-fits-all-processing)
 
 Detected by
 batch cadence mismatched to freshness requirements
@@ -34108,7 +34152,7 @@ Measured by
 data-freshness lag vs requirement
 
 Refactored by
-Choose Batch or Stream by Latency Need
+none
 
 Enforced by
 data architecture review
@@ -34164,17 +34208,17 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_plugin_architecture["Plugin Architecture"]
-n_extension_points["Extension Points"]
-n_inversion_of_control["Inversion of Control (IoC)"]
-n_dependency_injection["Dependency Injection"]
-n_service_registry["Service Registry"]
-n_registry_pattern["Registry Pattern"]
-n_service_locator_pattern["Service Locator Pattern"]
-n_feature_toggle["Feature Toggle"]
-n_plugin_architecture --> n_extension_points
-n_extension_points --> n_plugin_architecture
-n_inversion_of_control --> n_dependency_injection
+    n_plugin_architecture["Plugin Architecture"]
+    n_extension_points["Extension Points"]
+    n_inversion_of_control["Inversion of Control (IoC)"]
+    n_dependency_injection["Dependency Injection"]
+    n_service_registry["Service Registry"]
+    n_registry_pattern["Registry Pattern"]
+    n_service_locator_pattern["Service Locator Pattern"]
+    n_feature_toggle["Feature Toggle"]
+    n_plugin_architecture --> n_extension_points
+    n_extension_points --> n_plugin_architecture
+    n_inversion_of_control --> n_dependency_injection
 ```
 
 ### Plugin Architecture
@@ -34212,7 +34256,7 @@ Tensions
 [Plugin Architecture / Static Analysis](SCHEMA.md#tension-plugin-architecture-static-analysis), [Plugin Architecture / Security](SCHEMA.md#tension-plugin-architecture-security)
 
 Violated by
-core importing plugin implementations
+[Hardcoded Extensions](LEXICON.md#lexicon-hardcoded-extensions)
 
 Detected by
 direct plugin imports, central switch for plugins
@@ -34221,7 +34265,7 @@ Measured by
 plugin isolation score
 
 Refactored by
-Introduce SPI, Add Registry, Extract Extension Point
+[Extension Points](PRINCIPLES.md#architecture-extension-points), [Registry Pattern](PRINCIPLES.md#architecture-registry-pattern)
 
 Enforced by
 plugin contract tests, dependency rules
@@ -34316,7 +34360,7 @@ Tensions
 [Extension Points / API Surface Growth](SCHEMA.md#tension-api-surface-growth-extension-points)
 
 Violated by
-modifying internals to add behavior
+[Closed Core](LEXICON.md#lexicon-closed-core)
 
 Detected by
 repeated core edits for variants
@@ -34325,7 +34369,7 @@ Measured by
 extension coverage
 
 Refactored by
-Add Hook, Add SPI, Extract Interface
+[Extract Interface](LEXICON.md#lexicon-extract-interface)
 
 Enforced by
 extension tests, API review
@@ -34415,7 +34459,7 @@ Tensions
 [Inversion of Control (IoC) / Traceability](SCHEMA.md#tension-inversion-of-control-ioc-traceability)
 
 Violated by
-application manually controlling framework-owned lifecycle
+[Direct Control Ownership](LEXICON.md#lexicon-direct-control-ownership)
 
 Detected by
 scattered object lifecycle construction
@@ -34424,7 +34468,7 @@ Measured by
 composition centralization
 
 Refactored by
-Introduce Container, Extract Composition Root
+[Dependency Injection](PRINCIPLES.md#architecture-dependency-injection), [Composition Root](LEXICON.md#lexicon-composition-root)
 
 Enforced by
 lifecycle rules
@@ -34490,6 +34534,7 @@ Shape it refuses
 - Category: [Plugin / Extensibility / IoC](PRINCIPLES.md#architecture-category-plugin-extensibility-ioc)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: class, module, component
+- Aliases: DI
 - Layer: [Extensibility Core](SCHEMA.md#layer-extensibility-core)
 
 Details
@@ -34525,13 +34570,13 @@ Distinct from
 [Composition Root](LEXICON.md#lexicon-composition-root): Dependency injection is passing dependencies in, while the composition root is the one place where they are wired.
 
 Distinct from
-[Ports and Adapters](LEXICON.md#lexicon-ports-and-adapters): Dependency injection is how one object receives its dependencies, while ports and adapters is how a whole core is isolated from its technologies.
+[Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture): Dependency injection is how one object receives its dependencies, while ports and adapters is how a whole core is isolated from its technologies.
 
 Distinct from
 [Singleton Pattern](PRINCIPLES.md#architecture-singleton-pattern): Dependency injection passes a dependency in, while a singleton is reached through a global access point.
 
 Violated by
-newing dependencies inside business logic
+[Hardcoded Instantiation](LEXICON.md#lexicon-hardcoded-instantiation)
 
 Detected by
 direct construction of external dependencies
@@ -34540,7 +34585,7 @@ Measured by
 injected dependency ratio
 
 Refactored by
-Inject Constructor Parameter, Add Factory
+[Factory Pattern](PRINCIPLES.md#architecture-factory-pattern)
 
 Enforced by
 lint rules, dependency review
@@ -34632,7 +34677,7 @@ Distinct from
 [Health Checks](PRINCIPLES.md#architecture-health-checks): A service registry resolves a key to a registered service, while health checks report whether an instance is ready to serve.
 
 Violated by
-manual endpoint/plugin lookup
+[Hardcoded Lookup](LEXICON.md#lexicon-hardcoded-lookup)
 
 Detected by
 static lookup tables
@@ -34641,7 +34686,7 @@ Measured by
 registry coverage
 
 Refactored by
-Register Service, Add Discovery Client
+[Service Discovery](PRINCIPLES.md#architecture-service-discovery)
 
 Enforced by
 startup checks, [health checks](PRINCIPLES.md#architecture-health-checks)
@@ -34725,7 +34770,7 @@ Distinct from
 [Factory Pattern](PRINCIPLES.md#architecture-factory-pattern): A registry replaces a conditional over kinds with a keyed table, while a factory owns how one object and its defaults are built.
 
 Violated by
-ungoverned global registry
+[Ungoverned Global Registry](LEXICON.md#lexicon-ungoverned-global-registry)
 
 Detected by
 mutable global maps without lifecycle
@@ -34734,7 +34779,7 @@ Measured by
 registry consistency
 
 Refactored by
-Encapsulate Registry, Add Typed Keys
+[Narrow Type](LEXICON.md#lexicon-narrow-type)
 
 Enforced by
 registry validation
@@ -34821,7 +34866,7 @@ Tensions
 [Service Locator Pattern / Testability](SCHEMA.md#tension-service-locator-pattern-testability), [Service Locator Pattern / Dependency Inversion Principle (DIP)](SCHEMA.md#tension-dependency-inversion-principle-dip-service-locator-pattern), [Service Locator Pattern / Explicit Dependencies](SCHEMA.md#tension-explicit-dependencies-service-locator-pattern)
 
 Violated by
-hidden dependencies through global locator
+[Hidden Dependency](LEXICON.md#lexicon-hidden-dependency)
 
 Detected by
 service locator calls inside domain logic
@@ -34830,7 +34875,7 @@ Measured by
 hidden dependency count
 
 Refactored by
-Replace with Dependency Injection
+[Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
 
 Enforced by
 banned API rules
@@ -34892,6 +34937,7 @@ Not answered
 - Category: [Plugin / Extensibility / IoC](PRINCIPLES.md#architecture-category-plugin-extensibility-ioc)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: application, release, runtime
+- Aliases: Feature Flag
 - Layer: [Extensibility Core](SCHEMA.md#layer-extensibility-core)
 
 Details
@@ -34918,7 +34964,7 @@ Tensions
 [Feature Toggle / Flag Debt](SCHEMA.md#tension-feature-toggle-flag-debt)
 
 Violated by
-release paths gated by a hardcoded boolean constant
+[Hardcoded Branch Constant](LEXICON.md#lexicon-hardcoded-branch-constant)
 
 Detected by
 compile-time flags requiring redeploy to flip
@@ -34927,7 +34973,7 @@ Measured by
 redeploys per behavior change
 
 Refactored by
-Introduce Runtime Feature Flags
+none
 
 Enforced by
 release review
@@ -34986,29 +35032,29 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_self_healing_architecture["Self-Healing Architecture"]
-n_health_checks["Health Checks"]
-n_failover["Failover"]
-n_redundancy["Redundancy"]
-n_replication["Replication"]
-n_auto_scaling["Auto-Scaling"]
-n_auto_remediation["Auto-Remediation"]
-n_rollback["Rollback"]
-n_blue_green_deployment["Blue-Green Deployment"]
-n_canary_deployment["Canary Deployment"]
-n_chaos_engineering["Chaos Engineering"]
-n_graceful_shutdown["Graceful Shutdown"]
-n_raid_redundancy["RAID Redundancy"]
-n_self_healing_architecture --> n_health_checks
-n_self_healing_architecture --> n_auto_remediation
-n_health_checks --> n_self_healing_architecture
-n_failover --> n_redundancy
-n_redundancy --> n_failover
-n_replication --> n_failover
-n_auto_remediation --> n_self_healing_architecture
-n_blue_green_deployment --> n_rollback
-n_chaos_engineering --> n_self_healing_architecture
-n_raid_redundancy --> n_redundancy
+    n_self_healing_architecture["Self-Healing Architecture"]
+    n_health_checks["Health Checks"]
+    n_failover["Failover"]
+    n_redundancy["Redundancy"]
+    n_replication["Replication"]
+    n_auto_scaling["Auto-Scaling"]
+    n_auto_remediation["Auto-Remediation"]
+    n_rollback["Rollback"]
+    n_blue_green_deployment["Blue-Green Deployment"]
+    n_canary_deployment["Canary Deployment"]
+    n_chaos_engineering["Chaos Engineering"]
+    n_graceful_shutdown["Graceful Shutdown"]
+    n_raid_redundancy["RAID Redundancy"]
+    n_self_healing_architecture --> n_health_checks
+    n_self_healing_architecture --> n_auto_remediation
+    n_health_checks --> n_self_healing_architecture
+    n_failover --> n_redundancy
+    n_redundancy --> n_failover
+    n_replication --> n_failover
+    n_auto_remediation --> n_self_healing_architecture
+    n_blue_green_deployment --> n_rollback
+    n_chaos_engineering --> n_self_healing_architecture
+    n_raid_redundancy --> n_redundancy
 ```
 
 ### Self-Healing Architecture
@@ -35056,7 +35102,7 @@ Distinct from
 [Recovery](LEXICON.md#lexicon-recovery): Self-healing is recovery that the system starts itself, while recovery is returning to correct operation by any means.
 
 Violated by
-detectable failure without automated remediation
+[Manual Runbook Dependency](PRINCIPLES.md#architecture-manual-runbook-dependency)
 
 Detected by
 recurring manual recovery steps
@@ -35065,7 +35111,7 @@ Measured by
 MTTR, auto-recovery success
 
 Refactored by
-Add Health Checks, Add Restart/Remediation Policy
+[Health Checks](PRINCIPLES.md#architecture-health-checks), [Recovery Policy](LEXICON.md#lexicon-recovery-policy)
 
 Enforced by
 orchestration policy, runbooks
@@ -35154,7 +35200,7 @@ Distinct from
 [Load Balancing](PRINCIPLES.md#architecture-load-balancing): Health checks report whether an instance can serve, while load balancing spreads requests across the instances that can.
 
 Violated by
-traffic routed to unhealthy instance
+[Blind Routing](LEXICON.md#lexicon-blind-routing)
 
 Detected by
 missing or shallow health endpoint
@@ -35163,7 +35209,7 @@ Measured by
 health-check accuracy
 
 Refactored by
-Add Liveness/Readiness/Dependency Checks
+none
 
 Enforced by
 deployment policy
@@ -35257,7 +35303,7 @@ Distinct from
 [Replication](PRINCIPLES.md#architecture-replication): Failover switches traffic to another instance, while replication keeps that instance's data current.
 
 Violated by
-no alternate instance/path for critical dependency
+[Single Instance Dependency](LEXICON.md#lexicon-single-instance-dependency)
 
 Detected by
 single active dependency with no failover
@@ -35266,7 +35312,7 @@ Measured by
 failover time, [availability](LEXICON.md#lexicon-availability)
 
 Refactored by
-Add Replica, Add Failover Routing
+[Read Replica](PRINCIPLES.md#architecture-read-replica)
 
 Enforced by
 disaster recovery tests
@@ -35349,7 +35395,7 @@ Tensions
 [Redundancy / Cost](SCHEMA.md#tension-cost-redundancy)
 
 Violated by
-critical singleton dependency
+[Single Point of Failure](LEXICON.md#lexicon-single-point-of-failure)
 
 Detected by
 SPOF analysis
@@ -35358,7 +35404,7 @@ Measured by
 redundancy factor
 
 Refactored by
-Add Replica, Add Backup Path
+[Read Replica](PRINCIPLES.md#architecture-read-replica), [Failover](PRINCIPLES.md#architecture-failover)
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -35442,7 +35488,7 @@ Tensions
 [Replication / Consistency Lag](SCHEMA.md#tension-consistency-lag-replication)
 
 Violated by
-unreplicated critical state
+[Single Copy State](LEXICON.md#lexicon-single-copy-state)
 
 Detected by
 SPOF data stores
@@ -35451,7 +35497,7 @@ Measured by
 replication lag, replica count
 
 Refactored by
-Add Replica, Define Consistency Model
+[Read Replica](PRINCIPLES.md#architecture-read-replica), [Consistency Contract](LEXICON.md#lexicon-consistency-contract)
 
 Enforced by
 infrastructure policy
@@ -35533,7 +35579,7 @@ Tensions
 [Auto-Scaling / Cost/Cold Start](SCHEMA.md#tension-auto-scaling-cost-cold-start), [Auto-Scaling / Fixed Capacity](SCHEMA.md#tension-auto-scaling-fixed-capacity)
 
 Violated by
-manual-only scaling for variable load
+[Fixed-Capacity Design](LEXICON.md#lexicon-fixed-capacity-design)
 
 Detected by
 saturation under load without scale policy
@@ -35542,7 +35588,7 @@ Measured by
 scaling latency, saturation rate
 
 Refactored by
-Add Scaling Policy, Make Service Stateless
+[Autoscaling Policy](LEXICON.md#lexicon-autoscaling-policy), [Externalize Session State](LEXICON.md#lexicon-externalize-session-state)
 
 Enforced by
 infrastructure-as-code policy
@@ -35635,7 +35681,7 @@ Distinct from
 [Reduced Mean Time to Recovery](LEXICON.md#lexicon-reduced-mean-time-to-recovery): Auto-remediation is running the known fix, while reduced mean time to recovery is the shorter outage that results.
 
 Violated by
-repeatable failure with no automated response
+[Manual Runbook Dependency](PRINCIPLES.md#architecture-manual-runbook-dependency)
 
 Detected by
 repeated manual runbook actions
@@ -35644,7 +35690,7 @@ Measured by
 remediation success, false action rate
 
 Refactored by
-Automate Runbook, Add Guardrails
+[Automate the Runbook](LEXICON.md#lexicon-automate-the-runbook), [Guardrails](LEXICON.md#lexicon-guardrails)
 
 Enforced by
 operations policy
@@ -35728,7 +35774,7 @@ Tensions
 [Rollback / Data Migration Compatibility](SCHEMA.md#tension-data-migration-compatibility-rollback)
 
 Violated by
-deployment cannot be reverted
+[Irreversible Deployment](LEXICON.md#lexicon-irreversible-deployment)
 
 Detected by
 no rollback path
@@ -35737,7 +35783,7 @@ Measured by
 rollback success time
 
 Refactored by
-Add Rollback Plan, Make Migration Backward-Compatible
+[Rollback Plan](LEXICON.md#lexicon-rollback-plan), [Expand-Contract Migration](LEXICON.md#lexicon-expand-contract-migration)
 
 Enforced by
 release gates
@@ -35790,6 +35836,7 @@ Shape it refuses
 - Category: [Self-Healing / Recovery / Deployment Safety](PRINCIPLES.md#architecture-category-self-healing-recovery-deployment-safety)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: deployment, release
+- Aliases: Red-Black Deployment
 - Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
 
 Details
@@ -35816,7 +35863,7 @@ Tensions
 [Blue-Green Deployment / Infrastructure Cost](SCHEMA.md#tension-blue-green-deployment-infrastructure-cost)
 
 Violated by
-high-risk in-place production deploys
+[In-Place Mutation Only](LEXICON.md#lexicon-in-place-mutation-only)
 
 Detected by
 no parallel release environment
@@ -35825,7 +35872,7 @@ Measured by
 cutover failure rate
 
 Refactored by
-Add Blue/Green Environments
+none
 
 Enforced by
 deployment pipeline
@@ -35879,6 +35926,7 @@ Shape it refuses
 - Category: [Self-Healing / Recovery / Deployment Safety](PRINCIPLES.md#architecture-category-self-healing-recovery-deployment-safety)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: deployment, release
+- Aliases: Canary Release
 - Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
 
 Details
@@ -35905,7 +35953,7 @@ Tensions
 [Canary Deployment / Rollout Complexity](SCHEMA.md#tension-canary-deployment-rollout-complexity)
 
 Violated by
-full rollout without health/error guard
+[Big-Bang Release](PRINCIPLES.md#architecture-big-bang-release)
 
 Detected by
 no staged traffic policy
@@ -35914,7 +35962,7 @@ Measured by
 canary error budget, rollback trigger rate
 
 Refactored by
-Add Canary Stage, Add Automated Guardrails
+[Guardrails](LEXICON.md#lexicon-guardrails)
 
 Enforced by
 deployment pipeline
@@ -35994,7 +36042,7 @@ Tensions
 [Chaos Engineering / Production Risk](SCHEMA.md#tension-chaos-engineering-production-risk)
 
 Violated by
-resilience assumed but never exercised
+[Untested Failure Assumptions](LEXICON.md#lexicon-untested-failure-assumptions)
 
 Detected by
 no fault-injection testing of recovery paths
@@ -36003,7 +36051,7 @@ Measured by
 unverified failure-mode count
 
 Refactored by
-Introduce Controlled Fault Injection
+none
 
 Enforced by
 resilience review
@@ -36085,7 +36133,7 @@ Tensions
 [Graceful Shutdown / Shutdown Latency](SCHEMA.md#tension-graceful-shutdown-shutdown-latency)
 
 Violated by
-processes terminated mid-request with no drain
+[Hard Process Kill](LEXICON.md#lexicon-hard-process-kill)
 
 Detected by
 dropped in-flight work on deploy/restart
@@ -36094,7 +36142,7 @@ Measured by
 requests lost per restart
 
 Refactored by
-Implement Graceful Drain on Shutdown
+none
 
 Enforced by
 operations review
@@ -36179,7 +36227,7 @@ Tensions
 [RAID Redundancy / Write Amplification](SCHEMA.md#tension-raid-redundancy-write-amplification)
 
 Violated by
-durable data written to a single disk with no physical redundancy
+[Single-Disk Point of Failure](LEXICON.md#lexicon-single-disk-point-of-failure)
 
 Detected by
 total data loss when one drive fails
@@ -36188,7 +36236,7 @@ Measured by
 tolerated simultaneous disk failures
 
 Refactored by
-Place data on a mirrored or parity RAID array (RAID 1/5/10)
+none
 
 Enforced by
 storage architecture review
@@ -36249,31 +36297,31 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_schema_validation["Schema Validation"]
-n_type_safety["Type Safety"]
-n_canonical_model["Canonical Model"]
-n_canonical_data_model["Canonical Data Model"]
-n_canonical_schema["Canonical Schema"]
-n_canonicalization["Canonicalization"]
-n_single_source_of_truth["Single Source of Truth"]
-n_normalization["Normalization"]
-n_semantic_consistency["Semantic Consistency"]
-n_ubiquitous_language["Ubiquitous Language"]
-n_intent_revealing_interface["Intent-Revealing Interface"]
-n_principle_of_least_surprise["Principle of Least Surprise"]
-n_database_normalization["Database Normalization"]
-n_canonical_model --> n_semantic_consistency
-n_canonical_model --> n_ubiquitous_language
-n_canonical_model --> n_single_source_of_truth
-n_canonical_data_model --> n_canonical_model
-n_canonical_data_model --> n_normalization
-n_canonical_schema --> n_canonical_data_model
-n_canonical_schema --> n_schema_validation
-n_semantic_consistency --> n_ubiquitous_language
-n_ubiquitous_language --> n_intent_revealing_interface
-n_intent_revealing_interface --> n_principle_of_least_surprise
-n_principle_of_least_surprise --> n_intent_revealing_interface
-n_database_normalization --> n_single_source_of_truth
+    n_schema_validation["Schema Validation"]
+    n_type_safety["Type Safety"]
+    n_canonical_model["Canonical Model"]
+    n_canonical_data_model["Canonical Data Model"]
+    n_canonical_schema["Canonical Schema"]
+    n_canonicalization["Canonicalization"]
+    n_single_source_of_truth["Single Source of Truth"]
+    n_normalization["Normalization"]
+    n_semantic_consistency["Semantic Consistency"]
+    n_ubiquitous_language["Ubiquitous Language"]
+    n_intent_revealing_interface["Intent-Revealing Interface"]
+    n_principle_of_least_surprise["Principle of Least Surprise"]
+    n_database_normalization["Database Normalization"]
+    n_canonical_model --> n_semantic_consistency
+    n_canonical_model --> n_ubiquitous_language
+    n_canonical_model --> n_single_source_of_truth
+    n_canonical_data_model --> n_canonical_model
+    n_canonical_data_model --> n_normalization
+    n_canonical_schema --> n_canonical_data_model
+    n_canonical_schema --> n_schema_validation
+    n_semantic_consistency --> n_ubiquitous_language
+    n_ubiquitous_language --> n_intent_revealing_interface
+    n_intent_revealing_interface --> n_principle_of_least_surprise
+    n_principle_of_least_surprise --> n_intent_revealing_interface
+    n_database_normalization --> n_single_source_of_truth
 ```
 
 ### Schema Validation
@@ -36311,7 +36359,7 @@ Tensions
 [Schema Validation / Flexible Input](SCHEMA.md#tension-flexible-input-schema-validation)
 
 Violated by
-accepting unvalidated payloads
+[Trusting External Input](LEXICON.md#lexicon-trusting-external-input)
 
 Detected by
 missing validator at boundary
@@ -36320,7 +36368,7 @@ Measured by
 validation coverage
 
 Refactored by
-Add Schema Validator, Add DTO
+[Introduce Boundary DTO](LEXICON.md#lexicon-introduce-boundary-dto)
 
 Enforced by
 [runtime validation](REASONING.md#reasoning-technique-runtime-validation), CI schema checks
@@ -36409,7 +36457,7 @@ Distinct from
 [Compile-Time Evaluation](PRINCIPLES.md#architecture-compile-time-evaluation): Type safety rejects wrongly typed operations at compile time, while compile-time evaluation runs computations and checks during the build.
 
 Violated by
-any/unknown maps crossing boundaries
+[Dynamic Untyped Boundaries](LEXICON.md#lexicon-dynamic-untyped-boundaries)
 
 Detected by
 weak type usage, unsafe casts
@@ -36418,7 +36466,7 @@ Measured by
 type coverage, unsafe cast count
 
 Refactored by
-Add Types, Replace Map with DTO, Narrow Types
+[Narrow Type](LEXICON.md#lexicon-narrow-type), [Introduce Boundary DTO](LEXICON.md#lexicon-introduce-boundary-dto)
 
 Enforced by
 compiler flags, type checker
@@ -36509,7 +36557,7 @@ Tensions
 [Canonical Model / Bounded Context Autonomy](SCHEMA.md#tension-bounded-context-autonomy-canonical-model)
 
 Violated by
-duplicate conflicting representations
+[Multiple Competing Models](LEXICON.md#lexicon-multiple-competing-models)
 
 Detected by
 same concept modeled inconsistently
@@ -36518,7 +36566,7 @@ Measured by
 model duplication count
 
 Refactored by
-Introduce Canonical Model, Add Translator
+[Canonical Data Model](PRINCIPLES.md#architecture-canonical-data-model), [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer)
 
 Enforced by
 schema governance, domain review
@@ -36606,7 +36654,7 @@ Tensions
 [Canonical Data Model / Bounded Context Purity](SCHEMA.md#tension-bounded-context-purity-canonical-data-model), [Canonical Data Model / Local Model Autonomy](SCHEMA.md#tension-canonical-data-model-local-model-autonomy)
 
 Violated by
-point-to-point inconsistent mappings
+[Multiple Competing Models](LEXICON.md#lexicon-multiple-competing-models)
 
 Detected by
 duplicated transformation logic
@@ -36615,7 +36663,7 @@ Measured by
 transformation duplication
 
 Refactored by
-Centralize Data Mapping, Add Anti-Corruption Layer
+[Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer)
 
 Enforced by
 data contract review
@@ -36699,7 +36747,7 @@ Tensions
 [Canonical Schema / Service-Specific Schemas](SCHEMA.md#tension-canonical-schema-service-specific-schemas)
 
 Violated by
-divergent schemas for same concept
+[Schema Drift](PRINCIPLES.md#architecture-schema-drift)
 
 Detected by
 schema diff conflict
@@ -36708,10 +36756,10 @@ Measured by
 schema reuse/conformance rate
 
 Refactored by
-Align Schema, Add Versioned Schema
+[Canonical Data Model](PRINCIPLES.md#architecture-canonical-data-model), [Versioning](PRINCIPLES.md#architecture-versioning)
 
 Enforced by
-schema registry
+[schema registry](LEXICON.md#lexicon-schema-registry)
 
 Before
 
@@ -36792,7 +36840,7 @@ Tensions
 [Canonicalization / Lossless Preservation](SCHEMA.md#tension-canonicalization-lossless-preservation)
 
 Violated by
-comparing non-normalized forms
+[Ambiguous Encoding](LEXICON.md#lexicon-ambiguous-encoding)
 
 Detected by
 duplicate semantically equivalent values
@@ -36801,7 +36849,7 @@ Measured by
 normalization defect count
 
 Refactored by
-Normalize Input, Canonicalize Before Compare
+none
 
 Enforced by
 validation pipeline
@@ -36859,6 +36907,7 @@ Shape it refuses
 - Category: [Schema / Canonical Data / Semantics](PRINCIPLES.md#architecture-category-schema-canonical-data-semantics)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: configuration, data, rule, schema
+- Aliases: SSOT
 - Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
 
 Details
@@ -36906,7 +36955,7 @@ Distinct from
 [Do Not Repeat Yourself (DRY)](PRINCIPLES.md#architecture-duplicate-code): A single source of truth owns facts, rules and configuration values, while DRY keeps one source for logic and constants in code.
 
 Distinct from
-[Decentralization](PRINCIPLES.md#architecture-decentralization): A single source of truth centralises ownership of a fact, while decentralization spreads decisions and control to the owning teams.
+[Decentralization](PRINCIPLES.md#architecture-decentralization): A single source of truth centralizes ownership of a fact, while decentralization spreads decisions and control to the owning teams.
 
 Distinct from
 [Determinism](PRINCIPLES.md#architecture-determinism): A single source of truth fixes where a fact lives, while determinism fixes that the same inputs give the same result.
@@ -36915,7 +36964,7 @@ Distinct from
 [Governance](PRINCIPLES.md#architecture-governance): A single source of truth owns facts, while governance holds decisions to policy.
 
 Violated by
-duplicate configs/rules/schemas
+[Duplicated Authority](LEXICON.md#lexicon-duplicated-authority)
 
 Detected by
 conflicting definitions
@@ -36924,10 +36973,10 @@ Measured by
 duplicate authority count
 
 Refactored by
-Centralize Definition, Reference Shared Source
+[Centralize the Rule](LEXICON.md#lexicon-centralize-the-rule)
 
 Enforced by
-config governance, schema registry
+config governance, [schema registry](LEXICON.md#lexicon-schema-registry)
 
 Before
 
@@ -37016,7 +37065,7 @@ Tensions
 [Normalization / Query Performance](SCHEMA.md#tension-normalization-query-performance), [Normalization / Denormalized Read Models](SCHEMA.md#tension-denormalized-read-models-normalization)
 
 Violated by
-uncontrolled duplicated data
+[Duplicated Denormalized Columns](LEXICON.md#lexicon-duplicated-denormalized-columns)
 
 Detected by
 update anomalies, duplicated facts
@@ -37025,7 +37074,7 @@ Measured by
 redundancy/anomaly count
 
 Refactored by
-Extract Entity, Normalize Table, Add Reference
+[Entity](PRINCIPLES.md#architecture-entity), [Database Normalization](PRINCIPLES.md#architecture-database-normalization), [Name the Concept](LEXICON.md#lexicon-name-the-concept)
 
 Enforced by
 schema review, database constraints
@@ -37113,7 +37162,7 @@ Distinct from
 [Polysemy Across Contexts](LEXICON.md#lexicon-polysemy-across-contexts): Semantic consistency is one name keeping one meaning, while polysemy across contexts is a term legitimately meaning different things in different bounded contexts.
 
 Violated by
-same name with different meanings
+[Ambiguous Naming](LEXICON.md#lexicon-ambiguous-naming)
 
 Detected by
 conflicting glossary/schema definitions
@@ -37122,7 +37171,7 @@ Measured by
 semantic conflict count
 
 Refactored by
-Rename, Split Context, Add Translator
+[Name the Concept](LEXICON.md#lexicon-name-the-concept), [Split Bounded Context](LEXICON.md#lexicon-split-bounded-context), [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer)
 
 Enforced by
 glossary review, schema review
@@ -37208,7 +37257,7 @@ Tensions
 [Ubiquitous Language / Cross-Context Terminology](SCHEMA.md#tension-cross-context-terminology-ubiquitous-language)
 
 Violated by
-inconsistent domain terms
+[Technical/Domain Mismatch](LEXICON.md#lexicon-technical-domain-mismatch)
 
 Detected by
 synonym drift, ambiguous names
@@ -37217,7 +37266,7 @@ Measured by
 naming consistency score
 
 Refactored by
-Rename Class/Method/Field, Update Glossary
+[Name the Concept](LEXICON.md#lexicon-name-the-concept)
 
 Enforced by
 naming rules, domain review
@@ -37274,7 +37323,7 @@ Shape it refuses
 - Category: [Schema / Canonical Data / Semantics](PRINCIPLES.md#architecture-category-schema-canonical-data-semantics)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: API, method, class, module
-- Aliases: Intent-Revealing Interfaces, Intent-Revealing API
+- Aliases: Intent-Revealing API
 - Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
 
 Details
@@ -37307,7 +37356,7 @@ Distinct from
 [Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise): An intent-revealing interface states what an operation does in its name and parameters, while least surprise requires the behavior to match what they lead a caller to expect.
 
 Violated by
-vague method names, boolean traps
+[Ambiguous API](LEXICON.md#lexicon-ambiguous-api), [Boolean Trap](PRINCIPLES.md#architecture-boolean-trap)
 
 Detected by
 generic names, unclear parameters
@@ -37316,7 +37365,7 @@ Measured by
 API clarity review findings
 
 Refactored by
-Rename Method, Replace Boolean with Enum, Add Value Object
+[Name the Concept](LEXICON.md#lexicon-name-the-concept), [Replace Boolean with Enum](LEXICON.md#lexicon-replace-boolean-with-enum), [Value Object](PRINCIPLES.md#architecture-value-object)
 
 Enforced by
 naming lint, API review
@@ -37370,6 +37419,7 @@ Shape it refuses
 - Category: [Schema / Canonical Data / Semantics](PRINCIPLES.md#architecture-category-schema-canonical-data-semantics)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: API, UX, module behavior
+- Aliases: Principle of Least Astonishment, POLA
 - Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
 
 Details
@@ -37402,7 +37452,7 @@ Tensions
 [Principle of Least Surprise / Clever Abstractions](SCHEMA.md#tension-clever-abstractions-principle-of-least-surprise)
 
 Violated by
-unexpected mutation, nonstandard behavior
+[Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect)
 
 Detected by
 misleading names, [hidden behavior](LEXICON.md#lexicon-hidden-behavior)
@@ -37411,7 +37461,7 @@ Measured by
 surprise defects, misuse reports
 
 Refactored by
-Rename, Make Side Effects Explicit, Normalize Behavior
+[Name the Concept](LEXICON.md#lexicon-name-the-concept), [Make Effects Explicit](LEXICON.md#lexicon-make-effects-explicit), [Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface)
 
 Enforced by
 API review, [tests](LEXICON.md#lexicon-tests)
@@ -37497,7 +37547,7 @@ Tensions
 [Database Normalization / Read Performance](SCHEMA.md#tension-database-normalization-read-performance)
 
 Violated by
-repeating groups and transitively-dependent columns duplicated across rows
+[Duplicated Denormalized Columns](LEXICON.md#lexicon-duplicated-denormalized-columns)
 
 Detected by
 the same fact stored in multiple places drifting out of sync
@@ -37506,7 +37556,7 @@ Measured by
 update-anomaly incidents and redundant-column count
 
 Refactored by
-Normalize to 3NF, extracting dependent attributes into their own relations
+none
 
 Enforced by
 schema review
@@ -37569,64 +37619,65 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_security_by_design["Security by Design"]
-n_defense_in_depth["Defense in Depth"]
-n_least_privilege["Least Privilege"]
-n_zero_trust_architecture["Zero Trust Architecture"]
-n_secure_by_default["Secure by Default"]
-n_attack_surface_reduction["Attack Surface Reduction"]
-n_threat_modeling["Threat Modeling"]
-n_authentication["Authentication"]
-n_authorization["Authorization"]
-n_access_control["Access Control"]
-n_role_based_access_control["RBAC"]
-n_attribute_based_access_control["ABAC"]
-n_input_validation["Input Validation"]
-n_output_encoding["Output Encoding"]
-n_encryption_at_rest["Encryption at Rest"]
-n_encryption_in_transit["Encryption in Transit"]
-n_secrets_management["Secrets Management"]
-n_privacy_by_design["Privacy by Design"]
-n_compliance["Compliance"]
-n_governance["Governance"]
-n_policy_enforcement["Policy Enforcement"]
-n_policy_as_code["Policy as Code"]
-n_risk_management["Risk Management"]
-n_continuous_compliance["Continuous Compliance"]
-n_csrf_protection["CSRF Protection"]
-n_parameterized_queries["Parameterized Queries"]
-n_session_management["Session Management"]
-n_security_by_design --> n_threat_modeling
-n_security_by_design --> n_secure_by_default
-n_security_by_design --> n_defense_in_depth
-n_security_by_design --> n_compliance
-n_defense_in_depth --> n_security_by_design
-n_least_privilege --> n_access_control
-n_zero_trust_architecture --> n_least_privilege
-n_attack_surface_reduction --> n_security_by_design
-n_threat_modeling --> n_security_by_design
-n_threat_modeling --> n_risk_management
-n_authentication --> n_access_control
-n_authorization --> n_least_privilege
-n_access_control --> n_least_privilege
-n_role_based_access_control --> n_access_control
-n_privacy_by_design --> n_compliance
-n_compliance --> n_governance
-n_compliance --> n_risk_management
-n_governance --> n_compliance
-n_policy_enforcement --> n_compliance
-n_policy_as_code --> n_continuous_compliance
-n_risk_management --> n_compliance
-n_risk_management --> n_security_by_design
-n_continuous_compliance --> n_policy_as_code
-n_continuous_compliance --> n_compliance
-n_csrf_protection --> n_authentication
-n_csrf_protection --> n_defense_in_depth
-n_parameterized_queries --> n_input_validation
-n_parameterized_queries --> n_secure_by_default
-n_session_management --> n_authentication
-n_session_management --> n_access_control
-n_session_management --> n_least_privilege
+    n_security_by_design["Security by Design"]
+    n_defense_in_depth["Defense in Depth"]
+    n_least_privilege["Least Privilege"]
+    n_zero_trust_architecture["Zero Trust Architecture"]
+    n_secure_by_default["Secure by Default"]
+    n_attack_surface_reduction["Attack Surface Reduction"]
+    n_threat_modeling["Threat Modeling"]
+    n_authentication["Authentication"]
+    n_authorization["Authorization"]
+    n_access_control["Access Control"]
+    n_role_based_access_control["Role-Based Access Control (RBAC)"]
+    n_attribute_based_access_control["Attribute-Based Access Control (ABAC)"]
+    n_input_validation["Input Validation"]
+    n_output_encoding["Output Encoding"]
+    n_encryption_at_rest["Encryption at Rest"]
+    n_encryption_in_transit["Encryption in Transit"]
+    n_secrets_management["Secrets Management"]
+    n_privacy_by_design["Privacy by Design"]
+    n_compliance["Compliance"]
+    n_governance["Governance"]
+    n_policy_enforcement["Policy Enforcement"]
+    n_policy_as_code["Policy as Code"]
+    n_risk_management["Risk Management"]
+    n_continuous_compliance["Continuous Compliance"]
+    n_csrf_protection["CSRF Protection"]
+    n_parameterized_queries["Parameterized Queries"]
+    n_session_management["Session Management"]
+    n_security_by_design --> n_threat_modeling
+    n_security_by_design --> n_secure_by_default
+    n_security_by_design --> n_defense_in_depth
+    n_security_by_design --> n_compliance
+    n_defense_in_depth --> n_security_by_design
+    n_least_privilege --> n_access_control
+    n_least_privilege --> n_zero_trust_architecture
+    n_zero_trust_architecture --> n_least_privilege
+    n_attack_surface_reduction --> n_security_by_design
+    n_threat_modeling --> n_security_by_design
+    n_threat_modeling --> n_risk_management
+    n_authentication --> n_access_control
+    n_authorization --> n_least_privilege
+    n_access_control --> n_least_privilege
+    n_role_based_access_control --> n_access_control
+    n_privacy_by_design --> n_compliance
+    n_compliance --> n_governance
+    n_compliance --> n_risk_management
+    n_governance --> n_compliance
+    n_policy_enforcement --> n_compliance
+    n_policy_as_code --> n_continuous_compliance
+    n_risk_management --> n_compliance
+    n_risk_management --> n_security_by_design
+    n_continuous_compliance --> n_policy_as_code
+    n_continuous_compliance --> n_compliance
+    n_csrf_protection --> n_authentication
+    n_csrf_protection --> n_defense_in_depth
+    n_parameterized_queries --> n_input_validation
+    n_parameterized_queries --> n_secure_by_default
+    n_session_management --> n_authentication
+    n_session_management --> n_access_control
+    n_session_management --> n_least_privilege
 ```
 
 ### Security by Design
@@ -37679,7 +37730,7 @@ Distinct from
 [Secure by Default](PRINCIPLES.md#architecture-secure-by-default): Security by design shapes the whole design, while secure by default fixes the state its settings ship in.
 
 Violated by
-security controls added only at perimeter
+[Security as Afterthought](LEXICON.md#lexicon-security-as-afterthought)
 
 Detected by
 missing authz/input validation/threat model
@@ -37688,7 +37739,7 @@ Measured by
 security control coverage
 
 Refactored by
-Add Security Boundary, Validate Input, Enforce Access
+[Trust Boundaries](LEXICON.md#lexicon-trust-boundaries), [Input Validation](PRINCIPLES.md#architecture-input-validation), [Access Control](PRINCIPLES.md#architecture-access-control)
 
 Enforced by
 security gates, [policy-as-code](PRINCIPLES.md#architecture-policy-as-code)
@@ -37775,7 +37826,7 @@ Tensions
 [Defense in Depth / Complexity](SCHEMA.md#tension-complexity-defense-in-depth)
 
 Violated by
-relying on only one security layer
+[Single Control Reliance](LEXICON.md#lexicon-single-control-reliance)
 
 Detected by
 missing secondary control
@@ -37784,7 +37835,7 @@ Measured by
 control depth
 
 Refactored by
-Add Layered Controls
+[Controls](LEXICON.md#lexicon-controls)
 
 Enforced by
 threat model review
@@ -37844,6 +37895,7 @@ Shape it refuses
 - Category: [Security / Privacy / Compliance / Governance](PRINCIPLES.md#architecture-category-security-privacy-compliance-governance)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: user, service, process, data
+- Aliases: Principle of Least Privilege, PoLP
 - Layer: [Security Core](SCHEMA.md#layer-security-core)
 
 Details
@@ -37855,7 +37907,7 @@ Requires
 [Access Control](PRINCIPLES.md#architecture-access-control), [Minimal Permissions](LEXICON.md#lexicon-minimal-permissions)
 
 Reinforces
-[Zero Trust](LEXICON.md#lexicon-zero-trust), [Damage Limitation](LEXICON.md#lexicon-damage-limitation)
+[Zero Trust Architecture](PRINCIPLES.md#architecture-zero-trust-architecture), [Damage Limitation](LEXICON.md#lexicon-damage-limitation)
 
 Enables
 [Reduced Blast Radius](LEXICON.md#lexicon-reduced-blast-radius)
@@ -37876,7 +37928,7 @@ Tensions
 [Least Privilege / Operational Convenience](SCHEMA.md#tension-least-privilege-operational-convenience)
 
 Violated by
-excessive permissions
+[Broad Admin Access](LEXICON.md#lexicon-broad-admin-access)
 
 Detected by
 overbroad roles/scopes
@@ -37885,7 +37937,7 @@ Measured by
 privilege excess count
 
 Refactored by
-Narrow Role, Split Permission
+[Least-Privilege Credential](LEXICON.md#lexicon-least-privilege-credential)
 
 Enforced by
 IAM policy checks
@@ -37939,7 +37991,7 @@ Authoritative side
 The policy and the threat model, which code, configuration and requests conform to
 
 Depends on
-[Access Control](PRINCIPLES.md#architecture-access-control), [Minimal Permissions](LEXICON.md#lexicon-minimal-permissions), [Zero Trust](LEXICON.md#lexicon-zero-trust), [Damage Limitation](LEXICON.md#lexicon-damage-limitation), [Reduced Blast Radius](LEXICON.md#lexicon-reduced-blast-radius)
+[Access Control](PRINCIPLES.md#architecture-access-control), [Minimal Permissions](LEXICON.md#lexicon-minimal-permissions), [Zero Trust Architecture](PRINCIPLES.md#architecture-zero-trust-architecture), [Damage Limitation](LEXICON.md#lexicon-damage-limitation), [Reduced Blast Radius](LEXICON.md#lexicon-reduced-blast-radius)
 
 Shape it refuses
 [Broad Admin Access](LEXICON.md#lexicon-broad-admin-access)
@@ -37950,6 +38002,7 @@ Shape it refuses
 - Category: [Security / Privacy / Compliance / Governance](PRINCIPLES.md#architecture-category-security-privacy-compliance-governance)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: system, network, identity
+- Aliases: Zero Trust
 - Layer: [Security Core](SCHEMA.md#layer-security-core)
 
 Details
@@ -37972,11 +38025,17 @@ In tension with
 Conflicts with
 [Trusted Internal Network Assumption](LEXICON.md#lexicon-trusted-internal-network-assumption)
 
+Referenced by
+[Least Privilege](PRINCIPLES.md#architecture-least-privilege)
+
+Term
+[Zero Trust](LEXICON.md#lexicon-zero-trust)
+
 Tensions
 [Zero Trust Architecture / Latency/Complexity](SCHEMA.md#tension-latency-complexity-zero-trust-architecture)
 
 Violated by
-implicit trust based on network location
+[Trusted Internal Network Assumption](LEXICON.md#lexicon-trusted-internal-network-assumption)
 
 Detected by
 internal endpoints without authz/authn
@@ -37985,7 +38044,7 @@ Measured by
 trustless control coverage
 
 Refactored by
-Add AuthN/AuthZ, Segment Network
+[Authentication](PRINCIPLES.md#architecture-authentication), [Authorization](PRINCIPLES.md#architecture-authorization), [Network Segmentation](LEXICON.md#lexicon-network-segmentation)
 
 Enforced by
 [policy-as-code](PRINCIPLES.md#architecture-policy-as-code), gateway rules
@@ -38076,7 +38135,7 @@ Distinct from
 [Safe Defaults](LEXICON.md#lexicon-safe-defaults): Secure by default restricts access in the shipped settings, while safe defaults avoid harm in the shipped behavior.
 
 Violated by
-default open access, default weak settings
+[Insecure Defaults](LEXICON.md#lexicon-insecure-defaults)
 
 Detected by
 insecure default config
@@ -38085,7 +38144,7 @@ Measured by
 insecure default count
 
 Refactored by
-Change Default to Secure, Require Explicit Opt-In
+[Default Deny](LEXICON.md#lexicon-default-deny)
 
 Enforced by
 config policy
@@ -38168,7 +38227,7 @@ Tensions
 [Attack Surface Reduction / Feature Exposure](SCHEMA.md#tension-attack-surface-reduction-feature-exposure)
 
 Violated by
-unused open ports/endpoints/permissions
+[Unnecessary Public Surface](LEXICON.md#lexicon-unnecessary-public-surface)
 
 Detected by
 exposed unused routes/services
@@ -38177,7 +38236,7 @@ Measured by
 exposed surface count
 
 Refactored by
-Remove Endpoint, Restrict Access, Disable Feature
+[Restrict Exports](LEXICON.md#lexicon-restrict-exports), [Access Control](PRINCIPLES.md#architecture-access-control), [Feature Toggle](PRINCIPLES.md#architecture-feature-toggle)
 
 Enforced by
 attack surface scanning
@@ -38267,7 +38326,7 @@ Distinct from
 [Control Selection](LEXICON.md#lexicon-control-selection): Threat modeling lists the assets, boundaries and threats, while control selection chooses the controls that answer them.
 
 Violated by
-security-sensitive change without threat review
+[Assumption-Driven Security](LEXICON.md#lexicon-assumption-driven-security)
 
 Detected by
 missing threat model for sensitive flow
@@ -38276,7 +38335,7 @@ Measured by
 threat model coverage
 
 Refactored by
-Add Threat Model, Add Mitigation
+[Mitigation Plan](LEXICON.md#lexicon-mitigation-plan)
 
 Enforced by
 security review gates
@@ -38376,7 +38435,7 @@ Distinct from
 [Session Management](PRINCIPLES.md#architecture-session-management): Authentication verifies a credential once, while session management keeps the result across requests.
 
 Violated by
-sensitive action without identity verification
+[Anonymous Sensitive Access](LEXICON.md#lexicon-anonymous-sensitive-access)
 
 Detected by
 unauthenticated protected endpoints
@@ -38385,7 +38444,7 @@ Measured by
 auth coverage
 
 Refactored by
-Add AuthN Middleware/Provider
+none
 
 Enforced by
 route policies, [tests](LEXICON.md#lexicon-tests)
@@ -38473,7 +38532,7 @@ Distinct from
 [Remote Stub](LEXICON.md#lexicon-remote-stub): Authorization decides whether a principal may act, while a remote stub forwards calls to an object in another process.
 
 Violated by
-missing permission check
+[Unrestricted Access](LEXICON.md#lexicon-unrestricted-access)
 
 Detected by
 protected operation without authz guard
@@ -38482,7 +38541,7 @@ Measured by
 authorization coverage
 
 Refactored by
-Add Policy Check, Centralize Authorization
+[Policy Enforcement](PRINCIPLES.md#architecture-policy-enforcement), [Centralize Policy](LEXICON.md#lexicon-centralize-policy)
 
 Enforced by
 security tests, [policy-as-code](PRINCIPLES.md#architecture-policy-as-code)
@@ -38560,7 +38619,7 @@ Conflicts with
 [Unrestricted Access](LEXICON.md#lexicon-unrestricted-access)
 
 Referenced by
-[Centralized Configuration](PRINCIPLES.md#architecture-centralized-configuration), [Least Privilege](PRINCIPLES.md#architecture-least-privilege), [Authentication](PRINCIPLES.md#architecture-authentication), [RBAC](PRINCIPLES.md#architecture-role-based-access-control), [Session Management](PRINCIPLES.md#architecture-session-management)
+[Centralized Configuration](PRINCIPLES.md#architecture-centralized-configuration), [Least Privilege](PRINCIPLES.md#architecture-least-privilege), [Authentication](PRINCIPLES.md#architecture-authentication), [Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control), [Session Management](PRINCIPLES.md#architecture-session-management)
 
 Tensions
 [Access Control / Usability](SCHEMA.md#tension-access-control-usability)
@@ -38572,7 +38631,7 @@ Distinct from
 [Config Store](LEXICON.md#lexicon-config-store): Access control decides who may reach a resource, while a config store is one such resource, holding configuration for many services.
 
 Violated by
-broad or missing access controls
+[Unrestricted Access](LEXICON.md#lexicon-unrestricted-access)
 
 Detected by
 resource endpoint lacking policy
@@ -38581,7 +38640,7 @@ Measured by
 access control coverage
 
 Refactored by
-Add ACL/RBAC/ABAC Policy
+none
 
 Enforced by
 policy tests
@@ -38636,13 +38695,13 @@ Depends on
 Shape it refuses
 [Unrestricted Access](LEXICON.md#lexicon-unrestricted-access)
 
-### RBAC
+### Role-Based Access Control (RBAC)
 
 - Kind: [model](SCHEMA.md#kind-model)
 - Category: [Security / Privacy / Compliance / Governance](PRINCIPLES.md#architecture-category-security-privacy-compliance-governance)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: user, role, resource
-- Aliases: Role-Based Access Control
+- Aliases: RBAC
 - Layer: [Security Core](SCHEMA.md#layer-security-core)
 
 Details
@@ -38666,10 +38725,10 @@ Conflicts with
 [Ad-Hoc Permission Checks](LEXICON.md#lexicon-ad-hoc-permission-checks)
 
 Tensions
-[RBAC / Role Explosion](SCHEMA.md#tension-rbac-role-explosion)
+[Role-Based Access Control (RBAC) / Role Explosion](SCHEMA.md#tension-role-based-access-control-rbac-role-explosion)
 
 Violated by
-hardcoded user-specific access logic
+[Hardcoded Rules](LEXICON.md#lexicon-hardcoded-rules)
 
 Detected by
 scattered role checks
@@ -38678,10 +38737,10 @@ Measured by
 role-policy consistency
 
 Refactored by
-Centralize Role Policy
+[Centralize Policy](LEXICON.md#lexicon-centralize-policy)
 
 Enforced by
-authorization tests
+[authorization tests](LEXICON.md#lexicon-authorization-tests)
 
 Before
 
@@ -38729,13 +38788,13 @@ Depends on
 Shape it refuses
 [Ad-Hoc Permission Checks](LEXICON.md#lexicon-ad-hoc-permission-checks)
 
-### ABAC
+### Attribute-Based Access Control (ABAC)
 
 - Kind: [model](SCHEMA.md#kind-model)
 - Category: [Security / Privacy / Compliance / Governance](PRINCIPLES.md#architecture-category-security-privacy-compliance-governance)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: user, resource, context
-- Aliases: Attribute-Based Access Control
+- Aliases: ABAC
 - Layer: [Security Core](SCHEMA.md#layer-security-core)
 
 Details
@@ -38759,10 +38818,10 @@ Conflicts with
 [Hardcoded Rules](LEXICON.md#lexicon-hardcoded-rules)
 
 Tensions
-[ABAC / Policy Complexity](SCHEMA.md#tension-abac-policy-complexity)
+[Attribute-Based Access Control (ABAC) / Policy Complexity](SCHEMA.md#tension-attribute-based-access-control-abac-policy-complexity)
 
 Violated by
-complex access logic embedded in code
+[Hardcoded Rules](LEXICON.md#lexicon-hardcoded-rules)
 
 Detected by
 duplicated attribute checks in handlers
@@ -38771,7 +38830,7 @@ Measured by
 policy centralization
 
 Refactored by
-Extract Policy, Add Policy Engine
+[Policy as Code](PRINCIPLES.md#architecture-policy-as-code), [Policy Engine](LEXICON.md#lexicon-policy-engine)
 
 Enforced by
 [policy-as-code](PRINCIPLES.md#architecture-policy-as-code)
@@ -38861,7 +38920,7 @@ Tensions
 [Input Validation / Input Flexibility](SCHEMA.md#tension-input-flexibility-input-validation)
 
 Violated by
-raw external data entering core logic
+[Trusting External Input](LEXICON.md#lexicon-trusting-external-input)
 
 Detected by
 missing boundary validators
@@ -38870,7 +38929,7 @@ Measured by
 validation coverage
 
 Refactored by
-Add Validator, Add Schema
+[Schema Validation](PRINCIPLES.md#architecture-schema-validation)
 
 Enforced by
 validation middleware, [tests](LEXICON.md#lexicon-tests)
@@ -38953,7 +39012,7 @@ Tensions
 [Output Encoding / Formatting Flexibility](SCHEMA.md#tension-formatting-flexibility-output-encoding)
 
 Violated by
-unescaped user-controlled output
+[Raw Output Rendering](LEXICON.md#lexicon-raw-output-rendering)
 
 Detected by
 raw HTML/SQL/shell output paths
@@ -38962,7 +39021,7 @@ Measured by
 unsafe sink count
 
 Refactored by
-Encode Output, Use Safe Templates
+[Context-Aware Encoding](LEXICON.md#lexicon-context-aware-encoding)
 
 Enforced by
 security linting
@@ -39041,7 +39100,7 @@ Tensions
 [Encryption at Rest / Key Operations](SCHEMA.md#tension-encryption-at-rest-key-operations)
 
 Violated by
-sensitive data stored unencrypted
+[Plaintext Sensitive Storage](LEXICON.md#lexicon-plaintext-sensitive-storage)
 
 Detected by
 storage config scan
@@ -39050,7 +39109,7 @@ Measured by
 encrypted storage coverage
 
 Refactored by
-Enable Encryption, Add KMS
+[Key Management](LEXICON.md#lexicon-key-management)
 
 Enforced by
 infrastructure policy
@@ -39138,7 +39197,7 @@ Distinct from
 [TLS/mTLS](LEXICON.md#lexicon-tls-mtls): Encryption in transit is the practice of encrypting traffic and verifying peers, while TLS and mutual TLS are the protocols that do it.
 
 Violated by
-sensitive traffic over plaintext
+[Plaintext Transport](LEXICON.md#lexicon-plaintext-transport)
 
 Detected by
 HTTP/plain socket usage
@@ -39147,7 +39206,7 @@ Measured by
 encrypted transport coverage
 
 Refactored by
-Enable TLS/mTLS
+[TLS/mTLS](LEXICON.md#lexicon-tls-mtls)
 
 Enforced by
 gateway/network policy
@@ -39233,7 +39292,7 @@ Tensions
 [Secrets Management / Operational Complexity](SCHEMA.md#tension-operational-complexity-secrets-management)
 
 Violated by
-secrets in code/config files/logs
+[Secret Sprawl](PRINCIPLES.md#architecture-secret-sprawl), [Hardcoded Secrets](LEXICON.md#lexicon-hardcoded-secrets)
 
 Detected by
 secret scanning
@@ -39242,7 +39301,7 @@ Measured by
 secret exposure count
 
 Refactored by
-Move to Secret Manager, Rotate Secret
+[Secret Rotation](LEXICON.md#lexicon-secret-rotation)
 
 Enforced by
 secret scans, CI gates
@@ -39326,7 +39385,7 @@ Distinct from
 [Data Minimization](LEXICON.md#lexicon-data-minimization): Privacy by design covers collection, retention, visibility and defaults from the first version, while data minimization is its collection and retention part.
 
 Violated by
-collecting or retaining unnecessary personal data
+[Personal Data Oversharing](PRINCIPLES.md#architecture-personal-data-oversharing)
 
 Detected by
 personal-data flow without policy
@@ -39335,7 +39394,7 @@ Measured by
 personal-data surface, retention compliance
 
 Refactored by
-Minimize Data, Add Retention/Delete Controls
+[Purpose Binding](LEXICON.md#lexicon-purpose-binding), [Retention Policy](LEXICON.md#lexicon-retention-policy)
 
 Enforced by
 privacy review, [policy-as-code](PRINCIPLES.md#architecture-policy-as-code)
@@ -39422,7 +39481,7 @@ Tensions
 [Compliance / Delivery Speed](SCHEMA.md#tension-compliance-delivery-speed)
 
 Violated by
-missing controls/evidence for required regulation
+[Point-in-Time Audit Only](LEXICON.md#lexicon-point-in-time-audit-only)
 
 Detected by
 compliance gap assessment
@@ -39431,7 +39490,7 @@ Measured by
 control pass rate
 
 Refactored by
-Add Control, Add Evidence Capture
+[Controls](LEXICON.md#lexicon-controls), [Evidence Citation](LEXICON.md#lexicon-evidence-citation)
 
 Enforced by
 compliance gates
@@ -39521,7 +39580,7 @@ Distinct from
 [Standardization](PRINCIPLES.md#architecture-standardization): Governance reviews and gates decisions against policy, while standardization is one policy it can enforce, one choice per concern.
 
 Violated by
-unmanaged architecture divergence
+[Uncontrolled Change](LEXICON.md#lexicon-uncontrolled-change)
 
 Detected by
 standard violations, undocumented decisions
@@ -39530,7 +39589,7 @@ Measured by
 policy compliance
 
 Refactored by
-Add Standards, Add Review Process
+[Standardize the Interface](LEXICON.md#lexicon-standardize-the-interface), [Design Review](PRINCIPLES.md#architecture-design-review)
 
 Enforced by
 architecture board, [policy-as-code](PRINCIPLES.md#architecture-policy-as-code)
@@ -39613,7 +39672,7 @@ Tensions
 [Policy Enforcement / False Positives](SCHEMA.md#tension-false-positives-policy-enforcement)
 
 Violated by
-unenforced policy
+[Manual-Only Governance](PRINCIPLES.md#architecture-manual-only-governance)
 
 Detected by
 policy drift
@@ -39622,7 +39681,7 @@ Measured by
 policy violation count
 
 Refactored by
-Codify Policy, Add Gate
+[Policy as Code](PRINCIPLES.md#architecture-policy-as-code), [Fitness Functions](PRINCIPLES.md#architecture-fitness-functions)
 
 Enforced by
 CI/CD, runtime policy engine
@@ -39705,7 +39764,7 @@ Tensions
 [Policy as Code / Policy Maintenance](SCHEMA.md#tension-policy-as-code-policy-maintenance)
 
 Violated by
-manual policy checks not represented in code
+[Manual-Only Review](LEXICON.md#lexicon-manual-only-review)
 
 Detected by
 missing policy rule for known control
@@ -39714,7 +39773,7 @@ Measured by
 automated policy coverage
 
 Refactored by
-Encode Policy, Add CI Gate
+[Fitness Functions](PRINCIPLES.md#architecture-fitness-functions)
 
 Enforced by
 [policy engine](LEXICON.md#lexicon-policy-engine)
@@ -39808,7 +39867,7 @@ Distinct from
 [Threat Modeling](PRINCIPLES.md#architecture-threat-modeling): Risk management covers every kind of risk, while threat modeling covers the security threats to one flow.
 
 Violated by
-critical risk without owner/mitigation
+[Unowned Risk](PRINCIPLES.md#architecture-unowned-risk)
 
 Detected by
 risk register gaps
@@ -39817,7 +39876,7 @@ Measured by
 residual risk score
 
 Refactored by
-Add Mitigation, Reduce Exposure
+[Mitigation Plan](LEXICON.md#lexicon-mitigation-plan), [Restrict Exports](LEXICON.md#lexicon-restrict-exports)
 
 Enforced by
 review gates
@@ -39910,7 +39969,7 @@ Distinct from
 [Ongoing Assurance](LEXICON.md#lexicon-ongoing-assurance): Continuous compliance is checking on every change, while ongoing assurance is being able to show at any time that controls still work.
 
 Violated by
-compliance verified only manually/reactively
+[Point-in-Time Audit Only](LEXICON.md#lexicon-point-in-time-audit-only)
 
 Detected by
 missing automated compliance checks
@@ -39919,7 +39978,7 @@ Measured by
 continuous control pass rate
 
 Refactored by
-Add Automated Evidence, Add Policy Gates
+[Automated Enforcement](LEXICON.md#lexicon-automated-enforcement), [Policy as Code](PRINCIPLES.md#architecture-policy-as-code)
 
 Enforced by
 CI/CD controls
@@ -40002,7 +40061,7 @@ Tensions
 [CSRF Protection / Client Complexity](SCHEMA.md#tension-client-complexity-csrf-protection)
 
 Violated by
-state-changing requests trusted on cookie presence alone
+[Ambient-Credential Trust](LEXICON.md#lexicon-ambient-credential-trust)
 
 Detected by
 no anti-forgery token on mutating endpoints
@@ -40011,7 +40070,7 @@ Measured by
 unprotected state-changing endpoint count
 
 Refactored by
-Add CSRF Tokens / SameSite Enforcement
+none
 
 Enforced by
 security review
@@ -40092,7 +40151,7 @@ Distinct from
 [Input Validation](PRINCIPLES.md#architecture-input-validation): Parameterized queries keep values out of query syntax whatever they contain, while input validation checks what values contain before use.
 
 Violated by
-SQL assembled by concatenating user input
+[String-Concatenated SQL](LEXICON.md#lexicon-string-concatenated-sql)
 
 Detected by
 string interpolation into query text
@@ -40101,7 +40160,7 @@ Measured by
 concatenated-query count
 
 Refactored by
-Use Parameterized Queries
+none
 
 Enforced by
 security review
@@ -40180,7 +40239,7 @@ Tensions
 [Session Management / User Convenience](SCHEMA.md#tension-session-management-user-convenience)
 
 Violated by
-client-supplied identity trusted without server-side session
+[Immortal Client-Trusted Session](LEXICON.md#lexicon-immortal-client-trusted-session)
 
 Detected by
 no expiry/rotation/revocation on sessions
@@ -40189,7 +40248,7 @@ Measured by
 unbounded-session count
 
 Refactored by
-Introduce Server-Side Session Management
+none
 
 Enforced by
 security review
@@ -40253,18 +40312,17 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_ports_and_adapters_architecture["Ports and Adapters Architecture"]
-n_hexagonal_architecture["Hexagonal Architecture"]
-n_clean_architecture["Clean Architecture"]
-n_layered_architecture["Layered Architecture"]
-n_component_based_architecture["Component-Based Architecture"]
-n_package_by_feature["Package by Feature"]
-n_microservices["Microservices"]
-n_monolith_architecture["Monolith Architecture"]
-n_pipes_and_filters["Pipes and Filters"]
-n_service_oriented_architecture["Service-Oriented Architecture"]
-n_space_based_architecture["Space-Based Architecture"]
-n_hexagonal_architecture --> n_clean_architecture
+    n_ports_and_adapters_architecture["Ports and Adapters Architecture"]
+    n_clean_architecture["Clean Architecture"]
+    n_layered_architecture["Layered Architecture"]
+    n_component_based_architecture["Component-Based Architecture"]
+    n_package_by_feature["Package by Feature"]
+    n_microservices["Microservices"]
+    n_monolith_architecture["Monolith Architecture"]
+    n_pipes_and_filters["Pipes and Filters"]
+    n_service_oriented_architecture["Service-Oriented Architecture"]
+    n_space_based_architecture["Space-Based Architecture"]
+    n_ports_and_adapters_architecture --> n_clean_architecture
 ```
 
 ### Ports and Adapters Architecture
@@ -40273,45 +40331,52 @@ n_hexagonal_architecture --> n_clean_architecture
 - Category: [Codebase / System Architecture Styles](PRINCIPLES.md#architecture-category-codebase-system-architecture-styles)
 - Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
 - Scope: application, service, component
+- Aliases: Hexagonal Architecture, Ports and Adapters
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
 
 Definition
-A convention of placing every external dependency behind a port the application owns, implemented by an adapter outside it.
+A convention of keeping a domain core free of framework and data types, with every external dependency behind a port the application owns and implemented by an adapter outside it.
 
 Requires
-[Ports](LEXICON.md#lexicon-ports), [Adapters](LEXICON.md#lexicon-adapters), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion)
+[Ports](LEXICON.md#lexicon-ports), [Adapters](LEXICON.md#lexicon-adapters), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Domain Core](LEXICON.md#lexicon-domain-core)
 
 Reinforces
-[Replaceability](PRINCIPLES.md#architecture-replaceability), [Testability](PRINCIPLES.md#architecture-testability)
+[Replaceability](PRINCIPLES.md#architecture-replaceability), [Testability](PRINCIPLES.md#architecture-testability), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture)
 
 Enables
-[Infrastructure Independence](LEXICON.md#lexicon-infrastructure-independence)
+[Infrastructure Independence](LEXICON.md#lexicon-infrastructure-independence), [External System Isolation](LEXICON.md#lexicon-external-system-isolation)
 
 In tension with
-[Boilerplate](LEXICON.md#lexicon-boilerplate)
+[Boilerplate](LEXICON.md#lexicon-boilerplate), [Initial Complexity](LEXICON.md#lexicon-initial-complexity)
 
 Conflicts with
 [Framework Leakage](PRINCIPLES.md#architecture-framework-leakage)
 
+Referenced by
+[Replaceability](PRINCIPLES.md#architecture-replaceability), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion)
+
 Tensions
-[Ports and Adapters Architecture / Boilerplate](SCHEMA.md#tension-boilerplate-ports-and-adapters-architecture)
+[Ports and Adapters Architecture / Boilerplate](SCHEMA.md#tension-boilerplate-ports-and-adapters-architecture), [Ports and Adapters Architecture / Initial Complexity](SCHEMA.md#tension-initial-complexity-ports-and-adapters-architecture)
+
+Distinct from
+[Clean Architecture](PRINCIPLES.md#architecture-clean-architecture): Ports and adapters isolates the core behind ports, while clean architecture arranges concentric layers whose dependencies point inward.
 
 Violated by
-domain/application importing infrastructure
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling), [Framework Leakage](PRINCIPLES.md#architecture-framework-leakage)
 
 Detected by
-inward/outward dependency violations
+inward/outward dependency violations, dependency direction violations
 
 Measured by
-adapter coverage, boundary purity
+adapter coverage, boundary purity, core purity score
 
 Refactored by
-Introduce Port, Extract Adapter
+[Introduce Port](LEXICON.md#lexicon-introduce-port), [Extract Adapter](LEXICON.md#lexicon-extract-adapter), [Move Framework Outward](LEXICON.md#lexicon-move-framework-outward)
 
 Enforced by
-layer dependency rules
+layer dependency rules, architecture tests
 
 Before
 
@@ -40345,7 +40410,7 @@ class SqlFooAdapter implements SaveFooPort {
 How it is checked
 
 Checked by
-layer dependency rules
+layer dependency rules, architecture tests
 
 Population
 Every import, package and service boundary the style's dependency rules range over
@@ -40366,109 +40431,10 @@ Authoritative side
 The style's declared dependency rules, which every import and deployment edge conforms to
 
 Depends on
-[Ports](LEXICON.md#lexicon-ports), [Adapters](LEXICON.md#lexicon-adapters), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Replaceability](PRINCIPLES.md#architecture-replaceability), [Testability](PRINCIPLES.md#architecture-testability), [Infrastructure Independence](LEXICON.md#lexicon-infrastructure-independence)
+[Ports](LEXICON.md#lexicon-ports), [Adapters](LEXICON.md#lexicon-adapters), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Domain Core](LEXICON.md#lexicon-domain-core), [Replaceability](PRINCIPLES.md#architecture-replaceability), [Testability](PRINCIPLES.md#architecture-testability), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture), [Infrastructure Independence](LEXICON.md#lexicon-infrastructure-independence), [External System Isolation](LEXICON.md#lexicon-external-system-isolation)
 
 Shape it refuses
-[Framework Leakage](PRINCIPLES.md#architecture-framework-leakage), [Framework Leakage](PRINCIPLES.md#architecture-framework-leakage)
-
-### Hexagonal Architecture
-
-- Kind: [style](SCHEMA.md#kind-style)
-- Category: [Codebase / System Architecture Styles](PRINCIPLES.md#architecture-category-codebase-system-architecture-styles)
-- Severity: [recommended](SCHEMA.md#vocabulary-severity-recommended)
-- Scope: application, service
-- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
-
-Details
-
-Definition
-A convention of keeping a domain core free of framework and data types, with every input and output reached through ports.
-
-Requires
-[Ports and Adapters](LEXICON.md#lexicon-ports-and-adapters), [Domain Core](LEXICON.md#lexicon-domain-core)
-
-Reinforces
-[Clean Architecture](PRINCIPLES.md#architecture-clean-architecture), [Testability](PRINCIPLES.md#architecture-testability)
-
-Enables
-[External System Isolation](LEXICON.md#lexicon-external-system-isolation)
-
-In tension with
-[Initial Complexity](LEXICON.md#lexicon-initial-complexity)
-
-Conflicts with
-[Framework-Centric Core](LEXICON.md#lexicon-framework-centric-core)
-
-Tensions
-[Hexagonal Architecture / Initial Complexity](SCHEMA.md#tension-hexagonal-architecture-initial-complexity)
-
-Distinct from
-[Clean Architecture](PRINCIPLES.md#architecture-clean-architecture): Hexagonal architecture isolates the core behind ports, while clean architecture arranges concentric layers whose dependencies point inward.
-
-Violated by
-framework/data types in core
-
-Detected by
-dependency direction violations
-
-Measured by
-core purity score
-
-Refactored by
-Move Framework Outward, Add Ports
-
-Enforced by
-architecture tests
-
-Before
-
-```typescript
-app.post("/foo", async (request) => sqlFooStore.save(await request.json()));
-```
-
-After
-
-```typescript
-class CreateFooUseCase {
-  constructor(
-    private readonly foos: FooRepository,
-    private readonly events: EventPublisher,
-  ) {}
-  execute(input: CreateFoo) {
-    return createFooCore(input, this.foos, this.events);
-  }
-}
-httpAdapter.bind("POST", "/foo", (input) => useCase.execute(input));
-```
-
-How it is checked
-
-Checked by
-architecture tests
-
-Population
-Every import, package and service boundary the style's dependency rules range over
-
-Freshness
-A verdict stands until an import, a package boundary or a deployment unit changes
-
-Refusal
-The layer or dependency rule fails the build on an edge the style forbids
-
-Observation
-The import graph and the deployment topology, read from source and configuration
-
-Evidence
-None, because the catalog states this check as a class, so a watched run belongs to each system that adopts it
-
-Authoritative side
-The style's declared dependency rules, which every import and deployment edge conforms to
-
-Depends on
-[Ports and Adapters](LEXICON.md#lexicon-ports-and-adapters), [Domain Core](LEXICON.md#lexicon-domain-core), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture), [Testability](PRINCIPLES.md#architecture-testability), [External System Isolation](LEXICON.md#lexicon-external-system-isolation)
-
-Shape it refuses
-[Framework-Centric Core](LEXICON.md#lexicon-framework-centric-core)
+[Framework Leakage](PRINCIPLES.md#architecture-framework-leakage)
 
 ### Clean Architecture
 
@@ -40499,13 +40465,13 @@ Conflicts with
 [Layer Leakage](LEXICON.md#lexicon-layer-leakage)
 
 Referenced by
-[Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
+[Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
 Tensions
 [Clean Architecture / Boilerplate](SCHEMA.md#tension-boilerplate-clean-architecture)
 
 Violated by
-outer layers imported by inner layers
+[Layer Leakage](LEXICON.md#lexicon-layer-leakage)
 
 Detected by
 dependency rule violations
@@ -40514,7 +40480,7 @@ Measured by
 inward dependency compliance
 
 Refactored by
-Move Logic Inward, Extract Interface, Add Adapter
+[Move Logic to the Domain](LEXICON.md#lexicon-move-logic-to-the-domain), [Extract Interface](LEXICON.md#lexicon-extract-interface), [Extract Adapter](LEXICON.md#lexicon-extract-adapter)
 
 Enforced by
 dependency graph rules
@@ -40581,6 +40547,7 @@ Shape it refuses
 - Category: [Codebase / System Architecture Styles](PRINCIPLES.md#architecture-category-codebase-system-architecture-styles)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: application, system
+- Aliases: N-Tier Architecture
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -40610,7 +40577,7 @@ Tensions
 [Layered Architecture / Anemic Layers](SCHEMA.md#tension-anemic-layers-layered-architecture)
 
 Violated by
-presentation accessing persistence directly
+[Layer Skipping](LEXICON.md#lexicon-layer-skipping)
 
 Detected by
 forbidden layer imports
@@ -40619,7 +40586,7 @@ Measured by
 layer violation count
 
 Refactored by
-Move Logic, Introduce Service/Repository Boundary
+[Move Behavior to Its Owner](LEXICON.md#lexicon-move-behavior-to-its-owner), [Introduce Port](LEXICON.md#lexicon-introduce-port)
 
 Enforced by
 layer rules
@@ -40709,7 +40676,7 @@ Tensions
 [Component-Based Architecture / Integration Overhead](SCHEMA.md#tension-component-based-architecture-integration-overhead)
 
 Violated by
-component internals accessed externally
+[Exposed Internals](LEXICON.md#lexicon-exposed-internals)
 
 Detected by
 boundary import violations
@@ -40718,7 +40685,7 @@ Measured by
 component cohesion/coupling
 
 Refactored by
-Extract Component, Define Contract
+[Extract Module](LEXICON.md#lexicon-extract-module), [Define Contract](LEXICON.md#lexicon-define-contract)
 
 Enforced by
 component ownership rules
@@ -40806,7 +40773,7 @@ Tensions
 [Package by Feature / Shared Technical Concerns](SCHEMA.md#tension-package-by-feature-shared-technical-concerns)
 
 Violated by
-feature logic scattered across technical folders
+[Package by Technical Layer Only](LEXICON.md#lexicon-package-by-technical-layer-only)
 
 Detected by
 change sets spanning many layer packages
@@ -40815,7 +40782,7 @@ Measured by
 change locality
 
 Refactored by
-Repackage by Feature, Move Classes
+[Repackage by Feature](LEXICON.md#lexicon-repackage-by-feature), [Extract Module](LEXICON.md#lexicon-extract-module)
 
 Enforced by
 package conventions
@@ -40877,6 +40844,7 @@ Shape it refuses
 - Category: [Codebase / System Architecture Styles](PRINCIPLES.md#architecture-category-codebase-system-architecture-styles)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: system, service, deployment
+- Aliases: Microservice Architecture
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -40906,7 +40874,7 @@ Tensions
 [Microservices / Operational Complexity](SCHEMA.md#tension-microservices-operational-complexity), [Microservices / Consistency](SCHEMA.md#tension-consistency-microservices)
 
 Violated by
-shared databases, synchronous service chains
+[Shared Database](LEXICON.md#lexicon-shared-database), [Synchronous Chain Trap](PRINCIPLES.md#architecture-synchronous-chain-trap)
 
 Detected by
 deployment coupling, cross-service transactions
@@ -40915,7 +40883,7 @@ Measured by
 deploy independence, coupling metrics
 
 Refactored by
-Split Service, [Own Data](LEXICON.md#lexicon-own-data), Add Events
+[Split Bounded Context](LEXICON.md#lexicon-split-bounded-context), [Own Data per Service](LEXICON.md#lexicon-own-data-per-service), [Domain Events](PRINCIPLES.md#architecture-domain-events)
 
 Enforced by
 service ownership, API contracts
@@ -40988,6 +40956,7 @@ Shape it refuses
 - Category: [Codebase / System Architecture Styles](PRINCIPLES.md#architecture-category-codebase-system-architecture-styles)
 - Severity: [contextual](SCHEMA.md#vocabulary-severity-contextual)
 - Scope: application, deployment
+- Aliases: Monolith
 - Layer: [Structural Core](SCHEMA.md#layer-structural-core)
 
 Details
@@ -41008,13 +40977,13 @@ In tension with
 [Team Autonomy](LEXICON.md#lexicon-team-autonomy), [Independent Scaling](LEXICON.md#lexicon-independent-scaling)
 
 Conflicts with
-[Unbounded Big Ball of Mud](LEXICON.md#lexicon-unbounded-big-ball-of-mud)
+[Big Ball of Mud](PRINCIPLES.md#architecture-big-ball-of-mud)
 
 Tensions
 [Monolith Architecture / Team Autonomy](SCHEMA.md#tension-monolith-architecture-team-autonomy), [Monolith Architecture / Independent Scaling](SCHEMA.md#tension-independent-scaling-monolith-architecture)
 
 Violated by
-unclear internal boundaries
+[Big Ball of Mud](PRINCIPLES.md#architecture-big-ball-of-mud)
 
 Detected by
 cyclic packages, high global coupling
@@ -41023,7 +40992,7 @@ Measured by
 module boundary health
 
 Refactored by
-Modularize Internally, Add Boundaries
+[Define Module Boundaries](LEXICON.md#lexicon-define-module-boundaries)
 
 Enforced by
 modular monolith rules
@@ -41077,7 +41046,7 @@ Depends on
 [Unified Deployment Boundary](LEXICON.md#lexicon-unified-deployment-boundary), [Operational Simplicity](LEXICON.md#lexicon-operational-simplicity), [Transactional Simplicity](LEXICON.md#lexicon-transactional-simplicity)
 
 Shape it refuses
-[Unbounded Big Ball of Mud](LEXICON.md#lexicon-unbounded-big-ball-of-mud)
+[Big Ball of Mud](PRINCIPLES.md#architecture-big-ball-of-mud)
 
 ### Pipes and Filters
 
@@ -41111,7 +41080,7 @@ Tensions
 [Pipes and Filters / End-to-End Traceability](SCHEMA.md#tension-end-to-end-traceability-pipes-and-filters)
 
 Violated by
-one function performing every transform step inline
+[Monolithic Transform Function](LEXICON.md#lexicon-monolithic-transform-function)
 
 Detected by
 long sequential transform bodies
@@ -41120,7 +41089,7 @@ Measured by
 transform-step count per function
 
 Refactored by
-Extract Filters, Connect via Pipeline
+[Pipeline Architecture](PRINCIPLES.md#architecture-pipeline-architecture)
 
 Enforced by
 [design review](PRINCIPLES.md#architecture-design-review)
@@ -41205,7 +41174,7 @@ Tensions
 [Service-Oriented Architecture / Operational Overhead](SCHEMA.md#tension-operational-overhead-service-oriented-architecture)
 
 Violated by
-capabilities bundled in one application object
+[Shared Monolithic Application](LEXICON.md#lexicon-shared-monolithic-application)
 
 Detected by
 unrelated operations sharing one class/module
@@ -41214,7 +41183,7 @@ Measured by
 capability cohesion per module
 
 Refactored by
-Expose Capabilities as Contracted Services
+none
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -41301,7 +41270,7 @@ Tensions
 [Space-Based Architecture / Consistency](SCHEMA.md#tension-consistency-space-based-architecture)
 
 Violated by
-all reads/writes funneled through one central database
+[Central Database Bottleneck](LEXICON.md#lexicon-central-database-bottleneck)
 
 Detected by
 single datastore as the scaling limit
@@ -41310,7 +41279,7 @@ Measured by
 central-datastore contention rate
 
 Refactored by
-Adopt a Replicated Data Space
+none
 
 Enforced by
 [architecture review](PRINCIPLES.md#architecture-architecture-review)
@@ -41367,47 +41336,47 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_stated_invariant["Stated Invariant"]
-n_derived_record_state["Derived Record State"]
-n_declared_subject["Declared Subject"]
-n_write_barrier["Write Barrier"]
-n_operand_free_outcome_surface["Operand-Free Outcome Surface"]
-n_projection_channel["Projection Channel"]
-n_two_direction_index["Two-Direction Index"]
-n_independent_lifetime_axes["Independent Lifetime Axes"]
-n_section_lifetime_divergence["Section Lifetime Divergence"]
-n_write_scope_and_read_population["Write Scope and Read Population"]
-n_read_time_join["Read-Time Join"]
-n_one_sided_liveness["One-Sided Liveness"]
-n_reversible_channel_encoding["Reversible Channel Encoding"]
-n_declare_before_read_order["Declare-Before-Read Order"]
-n_period_decided_disposition["Period-Decided Disposition"]
-n_derived_party_count["Derived Party Count"]
-n_fan_in_ceiling["Fan-In Ceiling"]
-n_state_arity_limit["State-Arity Limit"]
-n_carrier_and_payload_split["Carrier and Payload Split"]
-n_joinable_mandated_field["Joinable Mandated Field"]
-n_single_aggregate["Single Aggregate"]
-n_contradicted_invariant["Contradicted Invariant"]
-n_written_status_marker["Written Status Marker"]
-n_invocation_keyed_report["Invocation-Keyed Report"]
-n_narrowed_aggregate["Narrowed Aggregate"]
-n_cyclic_tiebreak["Cyclic Tiebreak"]
-n_destructive_closure["Destructive Closure"]
-n_hand_kept_index["Hand-Kept Index"]
-n_stated_invariant --x n_contradicted_invariant
-n_derived_record_state --x n_written_status_marker
-n_operand_free_outcome_surface --> n_stated_invariant
-n_operand_free_outcome_surface --x n_contradicted_invariant
-n_two_direction_index --x n_hand_kept_index
-n_independent_lifetime_axes --x n_destructive_closure
-n_section_lifetime_divergence --> n_independent_lifetime_axes
-n_read_time_join --> n_write_scope_and_read_population
-n_period_decided_disposition --x n_cyclic_tiebreak
-n_fan_in_ceiling --> n_derived_party_count
-n_joinable_mandated_field --> n_carrier_and_payload_split
-n_single_aggregate --x n_invocation_keyed_report
-n_single_aggregate --x n_narrowed_aggregate
+    n_stated_invariant["Stated Invariant"]
+    n_derived_record_state["Derived Record State"]
+    n_declared_subject["Declared Subject"]
+    n_write_barrier["Write Barrier"]
+    n_operand_free_outcome_surface["Operand-Free Outcome Surface"]
+    n_projection_channel["Projection Channel"]
+    n_two_direction_index["Two-Direction Index"]
+    n_independent_lifetime_axes["Independent Lifetime Axes"]
+    n_section_lifetime_divergence["Section Lifetime Divergence"]
+    n_write_scope_and_read_population["Write Scope and Read Population"]
+    n_read_time_join["Read-Time Join"]
+    n_one_sided_liveness["One-Sided Liveness"]
+    n_reversible_channel_encoding["Reversible Channel Encoding"]
+    n_declare_before_read_order["Declare-Before-Read Order"]
+    n_period_decided_disposition["Period-Decided Disposition"]
+    n_derived_party_count["Derived Party Count"]
+    n_fan_in_ceiling["Fan-In Ceiling"]
+    n_state_arity_limit["State-Arity Limit"]
+    n_carrier_and_payload_split["Carrier and Payload Split"]
+    n_joinable_mandated_field["Joinable Mandated Field"]
+    n_single_aggregate["Single Aggregate"]
+    n_contradicted_invariant["Contradicted Invariant"]
+    n_written_status_marker["Written Status Marker"]
+    n_invocation_keyed_report["Invocation-Keyed Report"]
+    n_narrowed_aggregate["Narrowed Aggregate"]
+    n_cyclic_tiebreak["Cyclic Tiebreak"]
+    n_destructive_closure["Destructive Closure"]
+    n_hand_kept_index["Hand-Kept Index"]
+    n_stated_invariant --x n_contradicted_invariant
+    n_derived_record_state --x n_written_status_marker
+    n_operand_free_outcome_surface --> n_stated_invariant
+    n_operand_free_outcome_surface --x n_contradicted_invariant
+    n_two_direction_index --x n_hand_kept_index
+    n_independent_lifetime_axes --x n_destructive_closure
+    n_section_lifetime_divergence --> n_independent_lifetime_axes
+    n_read_time_join --> n_write_scope_and_read_population
+    n_period_decided_disposition --x n_cyclic_tiebreak
+    n_fan_in_ceiling --> n_derived_party_count
+    n_joinable_mandated_field --> n_carrier_and_payload_split
+    n_single_aggregate --x n_invocation_keyed_report
+    n_single_aggregate --x n_narrowed_aggregate
 ```
 
 ### Stated Invariant
@@ -41442,10 +41411,10 @@ Referenced by
 [Operand-Free Outcome Surface](PRINCIPLES.md#architecture-operand-free-outcome-surface)
 
 Expressed in the grammar by
-[invariant:INVARIANT](GRAMMAR.md#pag-keyword-invariant-invariant), [invariant_record](GRAMMAR.md#pag-production-invariant-record), [invariant_block](GRAMMAR.md#pag-production-invariant-block)
+[INVARIANT](GRAMMAR.md#pag-keyword-invariant), [invariant_record](GRAMMAR.md#pag-production-invariant-record), [invariant_block](GRAMMAR.md#pag-production-invariant-block)
 
 Violated by
-relying on a property that nothing would notice losing, or stating it in a surface the bound parties never receive
+[Unobjected Invariant](LEXICON.md#lexicon-unobjected-invariant), [Unreceived Invariant](LEXICON.md#lexicon-unreceived-invariant)
 
 Detected by
 an invariant with no objector, or one that names no set or no bound party
@@ -41454,7 +41423,7 @@ Measured by
 invariants stated without an objector and not marked unheld
 
 Refactored by
-Name the Objector, or Mark the Invariant Unheld and Every Derivation Resting on It
+[Name the Objector](LEXICON.md#lexicon-name-the-objector), [Mark the Invariant Unheld](LEXICON.md#lexicon-mark-the-invariant-unheld)
 
 Enforced by
 coordination review
@@ -41532,7 +41501,7 @@ Distinct from
 [Single Source of Truth](PRINCIPLES.md#architecture-single-source-of-truth): Derived record state applies one owning source to a record's status, while a single source of truth covers any fact, rule or configuration value.
 
 Violated by
-writing a status field on a record instead of deriving it from the record's edges
+[Written Status Marker](PRINCIPLES.md#architecture-written-status-marker)
 
 Detected by
 a record carrying a state that its edges no longer support
@@ -41541,10 +41510,10 @@ Measured by
 records whose written state differs from the derived one
 
 Refactored by
-Remove the Status Field, Derive the State From the Edges
+[Derive State from Edges](LEXICON.md#lexicon-derive-state-from-edges)
 
 Enforced by
-the coordination closure check, which refuses a judgement closure that cites an artifact and an artifact closure that cites none
+the coordination closure check, which refuses a judgment closure that cites an artifact and an artifact closure that cites none
 
 Before
 
@@ -41561,7 +41530,7 @@ the record cites satisfied-by: <artifact> → the artifact resolves: absorbed �
 How it is checked
 
 Checked by
-the coordination closure check, which refuses a judgement closure that cites an artifact and an artifact closure that cites none
+the coordination closure check, which refuses a judgment closure that cites an artifact and an artifact closure that cites none
 
 Population
 Every coordination surface, record, run declaration and shared measurement a governed tree carries
@@ -41619,7 +41588,7 @@ Distinct from
 [Stable Identity](LEXICON.md#lexicon-stable-identity): A declared subject keeps a record's id and its subject as two fields that survive different renames, while stable identity requires only that one identifier last the entity's lifetime.
 
 Violated by
-deriving a record's identity from its location or from its subject, so one of the two renames breaks it
+[Location-Derived Identity](LEXICON.md#lexicon-location-derived-identity)
 
 Detected by
 a record whose id changes when its surface moves, or two records about one subject
@@ -41628,7 +41597,7 @@ Measured by
 records sharing a subject key
 
 Refactored by
-Allocate the Id Once, Declare the Subject Beside It
+[Allocate Identity Once](LEXICON.md#lexicon-allocate-identity-once), [Declare the Subject Beside the Id](LEXICON.md#lexicon-declare-the-subject-beside-the-id)
 
 Enforced by
 coordination review
@@ -41706,7 +41675,7 @@ Expressed in the grammar by
 [refusal_line](GRAMMAR.md#pag-production-refusal-line)
 
 Violated by
-rewriting a shared surface whole while a peer is still active on it
+[Whole-Surface Rewrite](LEXICON.md#lexicon-whole-surface-rewrite)
 
 Detected by
 content a peer wrote missing after an exclusive write that reported success
@@ -41715,7 +41684,7 @@ Measured by
 exclusive writes taken without every peer observed parked
 
 Refactored by
-Hold the Barrier for Planned Writes, Compare-and-Swap for Every Other Write
+[Hold the Barrier for Planned Writes](LEXICON.md#lexicon-hold-the-barrier-for-planned-writes), [Optimistic Locking](PRINCIPLES.md#architecture-optimistic-locking)
 
 Enforced by
 coordination review
@@ -41793,7 +41762,7 @@ Distinct from
 [Stated Invariant](PRINCIPLES.md#architecture-stated-invariant): An operand-free outcome surface declares where one invariant cannot apply, while a stated invariant is the form every invariant is written in.
 
 Violated by
-assuming the one-writer invariant covers a jointly authored surface, or fencing such a surface into per-party spans
+[Assumed Single Writer](LEXICON.md#lexicon-assumed-single-writer), [Fenced Joint Surface](LEXICON.md#lexicon-fenced-joint-surface)
 
 Detected by
 an outcome surface with no declaration that the invariant has no operand there
@@ -41802,7 +41771,7 @@ Measured by
 outcome surfaces missing the declaration
 
 Refactored by
-Declare the Missing Operand, Settle Collisions by Announcement
+[Declare the Missing Operand](LEXICON.md#lexicon-declare-the-missing-operand), [Settle Collisions by Announcement](LEXICON.md#lexicon-settle-collisions-by-announcement)
 
 Enforced by
 coordination review
@@ -41877,7 +41846,7 @@ Conflicts with
 none
 
 Violated by
-updating a surface and leaving its projection for a later change, or letting the projection grow past the shape its name claims
+[Deferred Projection](LEXICON.md#lexicon-deferred-projection), [Overgrown Projection](LEXICON.md#lexicon-overgrown-projection)
 
 Detected by
 a projection line that disagrees with the surface it summarizes
@@ -41886,7 +41855,7 @@ Measured by
 changes that moved a projected fact without the projection
 
 Refactored by
-Refresh the Projection in the Same Change, Check Its Shape
+[Refresh the Projection in the Same Change](LEXICON.md#lexicon-refresh-the-projection-in-the-same-change), [Check the Projection's Shape](LEXICON.md#lexicon-check-the-projection-s-shape)
 
 Enforced by
 coordination review
@@ -41961,7 +41930,7 @@ Conflicts with
 [Hand-Kept Index](PRINCIPLES.md#architecture-hand-kept-index)
 
 Violated by
-writing an index by hand, or checking it in one direction only
+[Hand-Kept Index](PRINCIPLES.md#architecture-hand-kept-index), [One-Way Index Check](LEXICON.md#lexicon-one-way-index-check)
 
 Detected by
 an index entry that resolves to no file, or a file no entry names
@@ -41970,7 +41939,7 @@ Measured by
 index entries and files missing their counterpart
 
 Refactored by
-Generate the Index, Check Both Directions
+[Generate the Index from the Directory](LEXICON.md#lexicon-generate-the-index-from-the-directory), [Check Both Directions](LEXICON.md#lexicon-check-both-directions)
 
 Enforced by
 coordination review
@@ -42054,7 +42023,7 @@ Distinct from
 [Immutability](PRINCIPLES.md#architecture-immutability): Independent lifetime axes declare mutability as one of three questions about a surface, while immutability is the single rule that a value never changes after it is created.
 
 Violated by
-declaring a lifetime as one word, so a reader infers the other two axes
+[Single-Word Lifetime](LEXICON.md#lexicon-single-word-lifetime)
 
 Detected by
 a surface whose lifetime names retention alone
@@ -42063,7 +42032,7 @@ Measured by
 surfaces missing a value on any axis
 
 Refactored by
-Declare All Three Axes From the Closed Sets
+[Declare All Three Lifetime Axes](LEXICON.md#lexicon-declare-all-three-lifetime-axes)
 
 Enforced by
 the coordination declaration check, which reports a mechanism named for a lifetime axis that never reads that axis
@@ -42138,7 +42107,7 @@ Conflicts with
 none
 
 Violated by
-stating one lifetime for a file whose sections live differently, so the file's word authorizes operations on the part that forbids them
+[File-Wide Lifetime](LEXICON.md#lexicon-file-wide-lifetime)
 
 Detected by
 an operation permitted by the file's lifetime acting on a section whose own lifetime forbids it
@@ -42147,7 +42116,7 @@ Measured by
 divergent sections carrying no declaration
 
 Refactored by
-Declare the File Default, Declare Each Divergent Section
+[Declare the File Default](LEXICON.md#lexicon-declare-the-file-default), [Declare Each Divergent Section](LEXICON.md#lexicon-declare-each-divergent-section)
 
 Enforced by
 coordination review
@@ -42231,7 +42200,7 @@ Distinct from
 [Determinism](PRINCIPLES.md#architecture-determinism): Write scope and read population separate what a run touches from what it read, while determinism requires that the same inputs produce the same result.
 
 Violated by
-declaring one scope and using it both to detect collisions and to decide whether a result answers a later question
+[Conflated Scope](LEXICON.md#lexicon-conflated-scope)
 
 Detected by
 a run that reads more than it writes and publishes only its write scope
@@ -42240,7 +42209,7 @@ Measured by
 runs publishing no read population
 
 Refactored by
-Declare the Write Scope, Publish the Read Population
+[Declare the Write Scope](LEXICON.md#lexicon-declare-the-write-scope), [Publish the Read Population](LEXICON.md#lexicon-publish-the-read-population)
 
 Enforced by
 the coordination writer check, which fails a writer a run reaches outside the sanctioned set
@@ -42321,7 +42290,7 @@ Distinct from
 [Joiner](LEXICON.md#lexicon-joiner): A read-time join is the mechanism that serves a covered question from a published result, while a joiner is the caller that uses it.
 
 Violated by
-attaching a second caller to a running process, or starting a duplicate run a live scope already covers
+[Attached Second Caller](LEXICON.md#lexicon-attached-second-caller), [Duplicate Covered Run](LEXICON.md#lexicon-duplicate-covered-run)
 
 Detected by
 two runs over one covered question, or a caller waiting on another run's handle
@@ -42330,7 +42299,7 @@ Measured by
 duplicate runs a live scope covered
 
 Refactored by
-Test Coverage First, Join by Reading the Published Result
+[Test Coverage First](LEXICON.md#lexicon-test-coverage-first), [Join by Reading the Published Result](LEXICON.md#lexicon-join-by-reading-the-published-result)
 
 Enforced by
 coordination review
@@ -42408,7 +42377,7 @@ Distinct from
 [Determinism](PRINCIPLES.md#architecture-determinism): One-sided liveness decides what a process's presence can prove, while determinism requires that the same inputs produce the same result.
 
 Violated by
-treating a present process as alive, or computing liveness separately in each consumer
+[Presence as Liveness](LEXICON.md#lexicon-presence-as-liveness), [Per-Consumer Liveness](LEXICON.md#lexicon-per-consumer-liveness)
 
 Detected by
 two consumers of one liveness question reaching different answers
@@ -42417,7 +42386,7 @@ Measured by
 liveness derivations outside the single one
 
 Refactored by
-Derive Liveness Once, Witness First, Window Second
+[Derive Liveness Once](LEXICON.md#lexicon-derive-liveness-once), [Witness First](LEXICON.md#lexicon-witness-first), [Window Second](LEXICON.md#lexicon-window-second)
 
 Enforced by
 coordination review
@@ -42495,7 +42464,7 @@ Distinct from
 [Stable Identity](LEXICON.md#lexicon-stable-identity): A reversible channel encoding lets the owning scope be read back out of a name, while stable identity requires only that the name not change.
 
 Violated by
-naming a channel by a digest of its scope, which separates channels but cannot be decoded
+[Digest-Named Channel](LEXICON.md#lexicon-digest-named-channel)
 
 Detected by
 a channel whose name decodes to no scope
@@ -42504,7 +42473,7 @@ Measured by
 channels no remover can attribute to a scope
 
 Refactored by
-Encode the Scope Reversibly, Declare the Remover
+[Encode the Scope Reversibly](LEXICON.md#lexicon-encode-the-scope-reversibly), [Declare the Remover](LEXICON.md#lexicon-declare-the-remover)
 
 Enforced by
 the coordination channel check, which reports a channel whose decoded scope resolves to nothing
@@ -42579,7 +42548,7 @@ Conflicts with
 none
 
 Violated by
-reading the set of live runs before writing one's own entry, so two starters each see an empty set
+[Read Before Declare](LEXICON.md#lexicon-read-before-declare)
 
 Detected by
 two runs over one scope that both proceeded
@@ -42588,7 +42557,7 @@ Measured by
 simultaneous starters that both proceeded
 
 Refactored by
-Write the Entry, Then Read the Set
+[Write the Entry Before Reading the Set](LEXICON.md#lexicon-write-the-entry-before-reading-the-set)
 
 Enforced by
 coordination review
@@ -42669,7 +42638,7 @@ Distinct from
 [Single Source of Truth](PRINCIPLES.md#architecture-single-source-of-truth): Period-decided disposition decides what to do with the copies a fact already has, while a single source of truth is the state it restores.
 
 Violated by
-collapsing every copy toward the source without asking whether any edge ever runs again
+[Blanket Collapse](LEXICON.md#lexicon-blanket-collapse)
 
 Detected by
 a collapse that removed a copy written once against an earlier state of its source
@@ -42678,7 +42647,7 @@ Measured by
 copies collapsed across one-shot edges
 
 Refactored by
-Count Distinguished Copies, Read Each Period, Repair the Source
+[Count Distinguished Copies](LEXICON.md#lexicon-count-distinguished-copies), [Read Each Period](LEXICON.md#lexicon-read-each-period), [Repair the Source](LEXICON.md#lexicon-repair-the-source)
 
 Enforced by
 coordination review
@@ -42759,7 +42728,7 @@ Distinct from
 [Determinism](PRINCIPLES.md#architecture-determinism): A derived party count ties allocation to a partition of the work, while determinism requires that the same inputs produce the same result.
 
 Violated by
-choosing a party count as a preference and allocating work to fit it
+[Preferred Party Count](LEXICON.md#lexicon-preferred-party-count)
 
 Detected by
 a count that moved while no partition moved
@@ -42768,7 +42737,7 @@ Measured by
 counts proposed with no partition behind them
 
 Refactored by
-Derive the Partition, Count Its Concerns
+[Derive the Partition](LEXICON.md#lexicon-derive-the-partition), [Count the Partition's Concerns](LEXICON.md#lexicon-count-the-partition-s-concerns)
 
 Enforced by
 none: no mechanism derives the partition, so the count rests on review
@@ -42843,7 +42812,7 @@ Conflicts with
 none
 
 Violated by
-adding parties who all reason about the same surface
+[Crowded Surface](LEXICON.md#lexicon-crowded-surface)
 
 Detected by
 a surface whose claims are answered more often than they are used
@@ -42852,7 +42821,7 @@ Measured by
 stale claims published per surface
 
 Refactored by
-Mark Claims With the Moment Their Surface Was Read, or Partition the Surface
+[Mark Claims with Their Read Moment](LEXICON.md#lexicon-mark-claims-with-their-read-moment), [Partition the Surface](LEXICON.md#lexicon-partition-the-surface)
 
 Enforced by
 none: no mechanism counts fan-in, so the bound rests on review
@@ -42927,7 +42896,7 @@ Conflicts with
 none
 
 Violated by
-enforcing a rule about how content changes with a check that reads one state, or making a checker remember its prior output
+[Single-State Change Check](LEXICON.md#lexicon-single-state-change-check), [Remembering Checker](LEXICON.md#lexicon-remembering-checker)
 
 Detected by
 content removed from a required section while every single-state check passes
@@ -42936,7 +42905,7 @@ Measured by
 change rules held only by single-state checks
 
 Refactored by
-Retain the Prior State in the Spanning Layer, Compare the Two Readings
+[Retain the Prior State in the Spanning Layer](LEXICON.md#lexicon-retain-the-prior-state-in-the-spanning-layer), [Compare the Two Readings](LEXICON.md#lexicon-compare-the-two-readings)
 
 Enforced by
 coordination review
@@ -43017,7 +42986,7 @@ Distinct from
 [Closed Vocabulary](PRINCIPLES.md#architecture-closed-vocabulary): The carrier and payload split decides which fields are typed at all, while a closed vocabulary governs the words a typed name slot may take.
 
 Violated by
-making a mechanism interpret prose to compute a fact, or letting a payload restate a question its carrier already answers
+[Prose-Parsing Mechanism](LEXICON.md#lexicon-prose-parsing-mechanism), [Restating Payload](LEXICON.md#lexicon-restating-payload)
 
 Detected by
 a mechanism parsing a prose field, or a carrier and a payload that answer one question differently
@@ -43026,10 +42995,10 @@ Measured by
 fields no declaration assigns to either side
 
 Refactored by
-Type the Carrier, Leave the Payload Prose, Remove the Restating Payload
+[Type the Carrier](LEXICON.md#lexicon-type-the-carrier), [Leave the Payload Prose](LEXICON.md#lexicon-leave-the-payload-prose), [Remove the Restating Payload](LEXICON.md#lexicon-remove-the-restating-payload)
 
 Enforced by
-none: whether a value is resolvable is a judgement at authoring, so the split rests on review
+none: whether a value is resolvable is a judgment at authoring, so the split rests on review
 
 Before
 
@@ -43046,7 +43015,7 @@ state: <closed value> as the carrier → reason: <prose> as the payload → the 
 How it is checked
 
 Checked by
-none: whether a value is resolvable is a judgement at authoring, so the split rests on review
+none: whether a value is resolvable is a judgment at authoring, so the split rests on review
 
 Population
 Every coordination surface, record, run declaration and shared measurement a governed tree carries
@@ -43101,7 +43070,7 @@ Conflicts with
 none
 
 Violated by
-mandating a field as free prose while assuming a consumer will read it
+[Unread Prose Mandate](LEXICON.md#lexicon-unread-prose-mandate)
 
 Detected by
 a mandated prose field that no declaration marks as written for readers
@@ -43110,7 +43079,7 @@ Measured by
 mandated fields in neither a resolvable form nor declared for readers
 
 Refactored by
-Draw the Value From a Closed Set, or Declare the Field for Readers
+[Draw the Value from a Closed Set](LEXICON.md#lexicon-draw-the-value-from-a-closed-set), [Declare the Field for Readers](LEXICON.md#lexicon-declare-the-field-for-readers)
 
 Enforced by
 coordination review
@@ -43185,7 +43154,7 @@ Conflicts with
 [Invocation-Keyed Report](PRINCIPLES.md#architecture-invocation-keyed-report), [Narrowed Aggregate](PRINCIPLES.md#architecture-narrowed-aggregate)
 
 Violated by
-writing a report named for the scope or caller of a run beside the aggregate, or overwriting the aggregate from a narrowed run
+[Invocation-Keyed Report](PRINCIPLES.md#architecture-invocation-keyed-report), [Narrowed Aggregate](PRINCIPLES.md#architecture-narrowed-aggregate)
 
 Detected by
 a second report describing the aggregate's subject
@@ -43194,7 +43163,7 @@ Measured by
 reports beside the aggregate
 
 Refactored by
-Overwrite the Aggregate From Full Runs, Stream Narrowed Verdicts
+[Write the Aggregate Only from a Full Run](LEXICON.md#lexicon-write-the-aggregate-only-from-a-full-run), [Stream Narrowed Verdicts](LEXICON.md#lexicon-stream-narrowed-verdicts)
 
 Enforced by
 coordination review
@@ -43271,7 +43240,7 @@ none
 Referenced by
 [Stated Invariant](PRINCIPLES.md#architecture-stated-invariant), [Operand-Free Outcome Surface](PRINCIPLES.md#architecture-operand-free-outcome-surface)
 
-Violated by
+Formed by
 restating an invariant in a second surface and changing only one of the copies
 
 Detected by
@@ -43281,7 +43250,7 @@ Measured by
 invariants whose copies disagree
 
 Refactored by
-Treat the Set of Statements as the Unit, Re-Derive Every Copy on Change
+[Treat the Statements as One Unit](LEXICON.md#lexicon-treat-the-statements-as-one-unit), [Re-Derive Every Copy on Change](LEXICON.md#lexicon-re-derive-every-copy-on-change)
 
 Enforced by
 coordination review
@@ -43358,7 +43327,7 @@ none
 Referenced by
 [Derived Record State](PRINCIPLES.md#architecture-derived-record-state)
 
-Violated by
+Formed by
 adding a status field that parties are trusted to keep current
 
 Detected by
@@ -43368,7 +43337,7 @@ Measured by
 records carrying a written state
 
 Refactored by
-Derive the State From the Edges
+[Derive State from Edges](LEXICON.md#lexicon-derive-state-from-edges)
 
 Enforced by
 coordination review
@@ -43445,7 +43414,7 @@ none
 Referenced by
 [Single Aggregate](PRINCIPLES.md#architecture-single-aggregate)
 
-Violated by
+Formed by
 keying a report's filename on the scope, the caller or the flags of a run
 
 Detected by
@@ -43455,7 +43424,7 @@ Measured by
 keyed reports beside the aggregate
 
 Refactored by
-Stream the Narrowed Verdict, Keep One Aggregate
+[Stream Narrowed Verdicts](LEXICON.md#lexicon-stream-narrowed-verdicts), [Keep One Aggregate](LEXICON.md#lexicon-keep-one-aggregate)
 
 Enforced by
 coordination review
@@ -43535,7 +43504,7 @@ Referenced by
 Distinct from
 [Invocation-Keyed Report](PRINCIPLES.md#architecture-invocation-keyed-report): A narrowed aggregate overwrites the one aggregate with a partial result, while an invocation-keyed report writes a second document beside it.
 
-Violated by
+Formed by
 writing the aggregate from a run that measured part of its population
 
 Detected by
@@ -43545,7 +43514,7 @@ Measured by
 aggregate writes from narrowed runs
 
 Refactored by
-Write the Aggregate Only From a Full Run
+[Write the Aggregate Only from a Full Run](LEXICON.md#lexicon-write-the-aggregate-only-from-a-full-run)
 
 Enforced by
 coordination review
@@ -43622,7 +43591,7 @@ none
 Referenced by
 [Period-Decided Disposition](PRINCIPLES.md#architecture-period-decided-disposition)
 
-Violated by
+Formed by
 breaking a tie by recency, path order or authorship when no copy derives from another and none is resolved
 
 Detected by
@@ -43632,7 +43601,7 @@ Measured by
 collapses directed by a tiebreak
 
 Refactored by
-Refuse and Name the Cycle
+[Refuse and Name the Cycle](LEXICON.md#lexicon-refuse-and-name-the-cycle)
 
 Enforced by
 coordination review
@@ -43709,7 +43678,7 @@ none
 Referenced by
 [Independent Lifetime Axes](PRINCIPLES.md#architecture-independent-lifetime-axes)
 
-Violated by
+Formed by
 implementing a lifetime stated as deleted by removing the venue from the repository
 
 Detected by
@@ -43719,7 +43688,7 @@ Measured by
 venues closed by deletion
 
 Refactored by
-Move the Venue to the Archive Once Its Outcome Is Absorbed
+[Archive the Absorbed Venue](LEXICON.md#lexicon-archive-the-absorbed-venue)
 
 Enforced by
 coordination review
@@ -43796,7 +43765,7 @@ none
 Referenced by
 [Two-Direction Index](PRINCIPLES.md#architecture-two-direction-index)
 
-Violated by
+Formed by
 adding and removing index entries by hand
 
 Detected by
@@ -43806,7 +43775,7 @@ Measured by
 entries and files missing their counterpart
 
 Refactored by
-Generate the Index From the Directory
+[Generate the Index from the Directory](LEXICON.md#lexicon-generate-the-index-from-the-directory)
 
 Enforced by
 coordination review
@@ -43862,52 +43831,52 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_closed_vocabulary["Closed Vocabulary"]
-n_positional_slot_resolution["Positional Slot Resolution"]
-n_concern_folder_correspondence["Concern-Folder Correspondence"]
-n_glob_resolvable_tree["Glob-Resolvable Tree"]
-n_declared_jurisdiction["Declared Jurisdiction"]
-n_bounded_nesting_depth["Bounded Nesting Depth"]
-n_sideways_overflow["Sideways Overflow"]
-n_one_concern_per_file["One Concern Per File"]
-n_narrowest_concern["Narrowest Concern"]
-n_layer_spine_precedence["Layer Spine Precedence"]
-n_agnostic_first_vocabulary["Agnostic-First Vocabulary"]
-n_guided_vocabulary_refusal["Guided Vocabulary Refusal"]
-n_derived_naming_registry["Derived Naming Registry"]
-n_set_relative_member_name["Set-Relative Member Name"]
-n_manual_identity_migration["Manual Identity Migration"]
-n_collision_consolidation["Collision Consolidation"]
-n_mirrored_test_placement["Mirrored Test Placement"]
-n_sanctioned_generic_subject["Sanctioned Generic Subject"]
-n_conformance_at_creation["Conformance at Creation"]
-n_registry_held_order["Registry-Held Order"]
-n_externally_resolved_slot["Externally Resolved Slot"]
-n_case_dialect["Case Dialect"]
-n_root_spine_files["Root Spine Files"]
-n_closed_vocabulary --> n_concern_folder_correspondence
-n_positional_slot_resolution --> n_closed_vocabulary
-n_positional_slot_resolution --> n_concern_folder_correspondence
-n_concern_folder_correspondence --> n_glob_resolvable_tree
-n_glob_resolvable_tree --> n_concern_folder_correspondence
-n_declared_jurisdiction --> n_bounded_nesting_depth
-n_declared_jurisdiction --> n_glob_resolvable_tree
-n_bounded_nesting_depth --> n_sideways_overflow
-n_sideways_overflow --> n_bounded_nesting_depth
-n_one_concern_per_file --> n_narrowest_concern
-n_narrowest_concern --> n_layer_spine_precedence
-n_layer_spine_precedence --> n_narrowest_concern
-n_agnostic_first_vocabulary --> n_closed_vocabulary
-n_guided_vocabulary_refusal --> n_closed_vocabulary
-n_guided_vocabulary_refusal --> n_agnostic_first_vocabulary
-n_derived_naming_registry --> n_declared_jurisdiction
-n_collision_consolidation --> n_one_concern_per_file
-n_sanctioned_generic_subject --> n_closed_vocabulary
-n_conformance_at_creation --> n_glob_resolvable_tree
-n_registry_held_order --> n_positional_slot_resolution
-n_externally_resolved_slot --> n_closed_vocabulary
-n_case_dialect --> n_positional_slot_resolution
-n_case_dialect --> n_closed_vocabulary
+    n_closed_vocabulary["Closed Vocabulary"]
+    n_positional_slot_resolution["Positional Slot Resolution"]
+    n_concern_folder_correspondence["Concern-Folder Correspondence"]
+    n_glob_resolvable_tree["Glob-Resolvable Tree"]
+    n_declared_jurisdiction["Declared Jurisdiction"]
+    n_bounded_nesting_depth["Bounded Nesting Depth"]
+    n_sideways_overflow["Sideways Overflow"]
+    n_one_concern_per_file["One Concern Per File"]
+    n_narrowest_concern["Narrowest Concern"]
+    n_layer_spine_precedence["Layer Spine Precedence"]
+    n_agnostic_first_vocabulary["Agnostic-First Vocabulary"]
+    n_guided_vocabulary_refusal["Guided Vocabulary Refusal"]
+    n_derived_naming_registry["Derived Naming Registry"]
+    n_set_relative_member_name["Set-Relative Member Name"]
+    n_manual_identity_migration["Manual Identity Migration"]
+    n_collision_consolidation["Collision Consolidation"]
+    n_mirrored_test_placement["Mirrored Test Placement"]
+    n_sanctioned_generic_subject["Sanctioned Generic Subject"]
+    n_conformance_at_creation["Conformance at Creation"]
+    n_registry_held_order["Registry-Held Order"]
+    n_externally_resolved_slot["Externally Resolved Slot"]
+    n_case_dialect["Case Dialect"]
+    n_root_spine_files["Root Spine Files"]
+    n_closed_vocabulary --> n_concern_folder_correspondence
+    n_positional_slot_resolution --> n_closed_vocabulary
+    n_positional_slot_resolution --> n_concern_folder_correspondence
+    n_concern_folder_correspondence --> n_glob_resolvable_tree
+    n_glob_resolvable_tree --> n_concern_folder_correspondence
+    n_declared_jurisdiction --> n_bounded_nesting_depth
+    n_declared_jurisdiction --> n_glob_resolvable_tree
+    n_bounded_nesting_depth --> n_sideways_overflow
+    n_sideways_overflow --> n_bounded_nesting_depth
+    n_one_concern_per_file --> n_narrowest_concern
+    n_narrowest_concern --> n_layer_spine_precedence
+    n_layer_spine_precedence --> n_narrowest_concern
+    n_agnostic_first_vocabulary --> n_closed_vocabulary
+    n_guided_vocabulary_refusal --> n_closed_vocabulary
+    n_guided_vocabulary_refusal --> n_agnostic_first_vocabulary
+    n_derived_naming_registry --> n_declared_jurisdiction
+    n_collision_consolidation --> n_one_concern_per_file
+    n_sanctioned_generic_subject --> n_closed_vocabulary
+    n_conformance_at_creation --> n_glob_resolvable_tree
+    n_registry_held_order --> n_positional_slot_resolution
+    n_externally_resolved_slot --> n_closed_vocabulary
+    n_case_dialect --> n_positional_slot_resolution
+    n_case_dialect --> n_closed_vocabulary
 ```
 
 ### Closed Vocabulary
@@ -43951,7 +43920,7 @@ Distinct from
 [Agnostic-First Vocabulary](PRINCIPLES.md#architecture-agnostic-first-vocabulary): A closed vocabulary admits a word only by approved edit, while agnostic-first decides which words to admit, domain-neutral roles before domain ones.
 
 Violated by
-adding a word so a check passes
+[Vocabulary Inflation](LEXICON.md#lexicon-vocabulary-inflation)
 
 Detected by
 a name slot holding a word absent from its declared array
@@ -43960,7 +43929,7 @@ Measured by
 undeclared-word count per governed root
 
 Refactored by
-Rename to a Declared Word, Propose by Reasoning
+[Rename to a Declared Word](LEXICON.md#lexicon-rename-to-a-declared-word), [Vocabulary Admission](LEXICON.md#lexicon-vocabulary-admission)
 
 Enforced by
 registry-backed naming gate, developer approval
@@ -44050,7 +44019,7 @@ Distinct from
 [Variant Slot](LEXICON.md#lexicon-variant-slot): Positional slot resolution is the reading rule, while the variant slot is one position it reads.
 
 Violated by
-reading a word by which vocabulary declares it rather than by the slot it lands in
+[Vocabulary-Bound Reading](LEXICON.md#lexicon-vocabulary-bound-reading)
 
 Detected by
 a filename whose last segment before the extension is not a declared concern tag, or a folder carrying a concern tag's label that the resolver places in the subject role
@@ -44059,7 +44028,7 @@ Measured by
 unparseable filename count, and folders whose resolved role differs from the latest legal role for their word
 
 Refactored by
-Split the Compound, Move the Tag to the Concern Slot, Correct the Resolver
+[Split the Compound](LEXICON.md#lexicon-split-the-compound), [Move the Tag to the Concern Slot](LEXICON.md#lexicon-move-the-tag-to-the-concern-slot), [Correct the Resolver](LEXICON.md#lexicon-correct-the-resolver)
 
 Enforced by
 filename parser, naming gate, placement gate
@@ -44140,7 +44109,7 @@ Contracts
 [Taxonomy Completion](ALGORITHMS.md#algorithms-taxonomy-completion)
 
 Violated by
-a file whose concern tag differs from its parent folder's label
+[Tag-Folder Mismatch](LEXICON.md#lexicon-tag-folder-mismatch)
 
 Detected by
 tag/folder mismatch on a filesystem walk
@@ -44149,7 +44118,7 @@ Measured by
 mismatched file count
 
 Refactored by
-Move to the Matching Concern Folder, Reclassify the File
+[Move to the Matching Concern Folder](LEXICON.md#lexicon-move-to-the-matching-concern-folder), [Reclassify the File](LEXICON.md#lexicon-reclassify-the-file)
 
 Enforced by
 placement gate, naming gate
@@ -44233,7 +44202,7 @@ Distinct from
 [Shape-Discovered Surface](LEXICON.md#lexicon-shape-discovered-surface): A glob-resolvable tree is the property that one pattern collects a concern at any depth, while a shape-discovered surface is a consumer that collects by such a pattern.
 
 Violated by
-anchoring discovery to a depth, so a grouped set falls out of the pattern
+[Depth-Anchored Discovery](LEXICON.md#lexicon-depth-anchored-discovery)
 
 Detected by
 a pattern that must enumerate depths to collect one concern
@@ -44242,7 +44211,7 @@ Measured by
 depth-anchored pattern count
 
 Refactored by
-Unanchor the Pattern, Restore the Terminating Tag
+[Unanchor the Pattern](LEXICON.md#lexicon-unanchor-the-pattern), [Restore the Terminating Tag](LEXICON.md#lexicon-restore-the-terminating-tag)
 
 Enforced by
 aggregator review, placement gate
@@ -44323,7 +44292,7 @@ Contracts
 [Taxonomy Jurisdiction](ALGORITHMS.md#algorithms-taxonomy-jurisdiction), [Container Ladder](ALGORITHMS.md#algorithms-container-ladder)
 
 Violated by
-inferring jurisdiction from folder shape, exempting a file by adding its name to silence a finding, or keeping one exemption list per check for the same upstream tree
+[Shape-Inferred Jurisdiction](LEXICON.md#lexicon-shape-inferred-jurisdiction), [Ignore-List Silencing](LEXICON.md#lexicon-ignore-list-silencing), [Per-Check Exemption List](LEXICON.md#lexicon-per-check-exemption-list)
 
 Detected by
 a folder at a governed root that is in neither the container nor the bucket declaration, an ignore entry naming authored source that belongs to no exempt class, or a declared root that holds another system's ownership marker
@@ -44332,7 +44301,7 @@ Measured by
 undeclared root-level folder count, ignore entries outside the exempt classes, and exemptions held outside the one upstream declaration
 
 Refactored by
-Declare the Root, Place the Folder Inside an Existing Container, Remove the Ignore Entry, Collapse the Exemption Lists into One Declaration
+[Declare the Root](LEXICON.md#lexicon-declare-the-root), [Place the Folder in an Existing Container](LEXICON.md#lexicon-place-the-folder-in-an-existing-container), [Remove the Ignore Entry](LEXICON.md#lexicon-remove-the-ignore-entry), [Collapse the Exemption Lists](LEXICON.md#lexicon-collapse-the-exemption-lists)
 
 Enforced by
 jurisdiction gate, the taxonomy validator, which refuses an ignore entry of wildcards or of a whole extension, and the coordination member's declaration check, which resolves every declared upstream root against the disk and refuses a root carrying a foreign ownership marker
@@ -44425,7 +44394,7 @@ Distinct from
 [Ordered Role Sequence](LEXICON.md#lexicon-ordered-role-sequence): Bounded nesting depth joins two conditions on a path, while the ordered role sequence is the second, the order of roles.
 
 Violated by
-adding a level to relieve collision or breadth pressure
+[Downward Nesting](LEXICON.md#lexicon-downward-nesting)
 
 Detected by
 a path over the cap, or a role repeated or revisited along it
@@ -44434,7 +44403,7 @@ Measured by
 over-cap path count
 
 Refactored by
-Take the Variant Slot, Add a Sibling Subject Folder
+[Take the Variant Slot](LEXICON.md#lexicon-take-the-variant-slot), [Add a Sibling Subject Folder](LEXICON.md#lexicon-add-a-sibling-subject-folder)
 
 Enforced by
 placement gate
@@ -44512,7 +44481,7 @@ Referenced by
 [Bounded Nesting Depth](PRINCIPLES.md#architecture-bounded-nesting-depth)
 
 Violated by
-relieving pressure downward, by nesting, instead of sideways
+[Downward Nesting](LEXICON.md#lexicon-downward-nesting)
 
 Detected by
 a folder level introduced where a variant or a sibling subject folder resolves the collision
@@ -44521,7 +44490,7 @@ Measured by
 nesting-relief count
 
 Refactored by
-Insert a Declared Variant, Split into Sibling Subject Folders
+[Take the Variant Slot](LEXICON.md#lexicon-take-the-variant-slot), [Add a Sibling Subject Folder](LEXICON.md#lexicon-add-a-sibling-subject-folder)
 
 Enforced by
 placement gate, reshape review
@@ -44605,7 +44574,7 @@ Distinct from
 [Narrowest Concern](PRINCIPLES.md#architecture-narrowest-concern): One concern per file requires a single role, while narrowest concern chooses which declared role names it.
 
 Violated by
-forcing a two-role file under an arbitrary tag instead of splitting it
+[Multi-Role File](LEXICON.md#lexicon-multi-role-file)
 
 Detected by
 a file that classifies equally well under two declared concerns
@@ -44614,7 +44583,7 @@ Measured by
 split-candidate count
 
 Refactored by
-Split by Responsibility
+[Split by Responsibility](LEXICON.md#lexicon-split-by-responsibility)
 
 Enforced by
 classification review
@@ -44695,7 +44664,7 @@ Contracts
 [Concern Classification](ALGORITHMS.md#algorithms-concern-classification)
 
 Violated by
-classifying to a saturated high-level label where a narrower accurate one fits
+[Saturated Role Tag](LEXICON.md#lexicon-saturated-role-tag)
 
 Detected by
 one tag carrying files of several distinct roles
@@ -44704,7 +44673,7 @@ Measured by
 files per tag, skew toward the broadest tags
 
 Refactored by
-Reclassify to the Narrower Role
+[Reclassify to the Narrower Role](LEXICON.md#lexicon-reclassify-to-the-narrower-role)
 
 Enforced by
 classification review
@@ -44782,7 +44751,7 @@ Referenced by
 [Narrowest Concern](PRINCIPLES.md#architecture-narrowest-concern)
 
 Violated by
-reading the spine as a dependency-direction rule rather than a classification tie-break
+[Spine Read as a Dependency Rule](LEXICON.md#lexicon-spine-read-as-a-dependency-rule)
 
 Detected by
 an irreducible two-concern overlap resolved by preference rather than by layer
@@ -44791,7 +44760,7 @@ Measured by
 unresolved overlap count
 
 Refactored by
-Apply the Domain-Ward Tie-Break
+[Apply the Domain-Ward Tie-Break](LEXICON.md#lexicon-apply-the-domain-ward-tie-break)
 
 Enforced by
 classification review
@@ -44869,7 +44838,7 @@ Referenced by
 [Guided Vocabulary Refusal](PRINCIPLES.md#architecture-guided-vocabulary-refusal)
 
 Violated by
-restating an agnostic role in local domain dialect
+[Domain-Dialect Role](LEXICON.md#lexicon-domain-dialect-role)
 
 Detected by
 a domain tag whose role a declared agnostic concern already covers
@@ -44878,7 +44847,7 @@ Measured by
 domain-tag share of the vocabulary
 
 Refactored by
-Classify to the Meta Concern
+[Classify to the Meta Concern](LEXICON.md#lexicon-classify-to-the-meta-concern)
 
 Enforced by
 [rejection table](LEXICON.md#lexicon-rejection-table), developer approval
@@ -44953,7 +44922,7 @@ Conflicts with
 [Unguided Refusal](LEXICON.md#lexicon-unguided-refusal), [Borrowed Synonymy](LEXICON.md#lexicon-borrowed-synonymy)
 
 Violated by
-reporting that a word is undeclared without resolving the declared word that covers it
+[Unguided Refusal](LEXICON.md#lexicon-unguided-refusal)
 
 Detected by
 a refusal message naming only the rejected word, and a rejection table readable by the developer but not by the gate
@@ -44962,7 +44931,7 @@ Measured by
 share of refusals carrying a resolved replacement
 
 Refactored by
-Index the Rejection Table by Refused Word, Name the Covering Concern in the Refusal
+[Index the Rejection Table by Refused Word](LEXICON.md#lexicon-index-the-rejection-table-by-refused-word), [Name the Covering Concern in the Refusal](LEXICON.md#lexicon-name-the-covering-concern-in-the-refusal)
 
 Enforced by
 registry-backed naming gate, rejection-table index drift-check
@@ -45040,7 +45009,7 @@ Contracts
 [Taxonomy Ledger](ALGORITHMS.md#algorithms-taxonomy-ledger)
 
 Violated by
-keeping the vocabulary in prose the gate cannot read, or the reasoning in the file the gate does read
+[Prose-Only Vocabulary](LEXICON.md#lexicon-prose-only-vocabulary), [Reasoning in the Registry](LEXICON.md#lexicon-reasoning-in-the-registry)
 
 Detected by
 a tag in the document and absent from the registry, or either way round
@@ -45049,7 +45018,7 @@ Measured by
 document/registry drift count
 
 Refactored by
-Derive the Registry from the Document, Move Reasoning Back to the Document
+[Derive the Registry from the Document](LEXICON.md#lexicon-derive-the-registry-from-the-document), [Move Reasoning Back to the Document](LEXICON.md#lexicon-move-reasoning-back-to-the-document)
 
 Enforced by
 registry/document cross-check
@@ -45124,7 +45093,7 @@ Conflicts with
 [Restated Set Member](LEXICON.md#lexicon-restated-set-member)
 
 Violated by
-repeating the grouping folder's subject in the filename
+[Restated Set Member](LEXICON.md#lexicon-restated-set-member)
 
 Detected by
 a file subject equal to the subject folder above it
@@ -45133,7 +45102,7 @@ Measured by
 restated-member count
 
 Refactored by
-Drop the Redundant Head
+[Drop the Redundant Head](LEXICON.md#lexicon-drop-the-redundant-head)
 
 Enforced by
 naming gate
@@ -45211,7 +45180,7 @@ Contracts
 [Reshape Risk Priority](ALGORITHMS.md#algorithms-reshape-risk-priority), [Container Reshape](ALGORITHMS.md#algorithms-container-reshape), [Export Triage Ladder](ALGORITHMS.md#algorithms-export-triage-ladder), [Alignment Cadence](ALGORITHMS.md#algorithms-alignment-cadence)
 
 Violated by
-renaming by tool across a tree whose aggregators resolve by pattern
+[Automated Reshape](LEXICON.md#lexicon-automated-reshape)
 
 Detected by
 a shape-discovered surface whose collected count changed across a rename
@@ -45220,7 +45189,7 @@ Measured by
 collected-member delta per aggregator
 
 Refactored by
-Re-point the Pattern, Verify the Collected Count
+[Re-Point the Pattern](LEXICON.md#lexicon-re-point-the-pattern), [Verify the Collected Count](LEXICON.md#lexicon-verify-the-collected-count)
 
 Enforced by
 per-container reshape review, gate green between containers
@@ -45295,7 +45264,7 @@ Conflicts with
 [Variant-Masked Duplicate](LEXICON.md#lexicon-variant-masked-duplicate)
 
 Violated by
-adding a variant to a colliding file without comparing its responsibilities with the file that holds the name
+[Variant-Masked Duplicate](LEXICON.md#lexicon-variant-masked-duplicate)
 
 Detected by
 a variant whose sibling in the same folder shares its concern and one of its responsibilities
@@ -45304,7 +45273,7 @@ Measured by
 variants admitted without a consolidation verdict
 
 Refactored by
-Compare Both Files, Merge One Job or Name the Facet That Differs
+[Compare Both Files](LEXICON.md#lexicon-compare-both-files), [Merge One Job or Name the Facet](LEXICON.md#lexicon-merge-one-job-or-name-the-facet)
 
 Enforced by
 the duplicates verdict each conversion record carries, reviewed per file
@@ -45379,7 +45348,7 @@ Conflicts with
 [Stranded Test](LEXICON.md#lexicon-stranded-test)
 
 Violated by
-leaving a test in its old folder after its subject moves, or keeping one test for several subjects
+[Stranded Test](LEXICON.md#lexicon-stranded-test), [Shared-Subject Test](LEXICON.md#lexicon-shared-subject-test)
 
 Detected by
 a test whose path does not mirror the concern folder of the file it names
@@ -45388,7 +45357,7 @@ Measured by
 tests off their mirrored path
 
 Refactored by
-Move the Test With Its Subject, Split One Test per Subject
+[Move the Test with Its Subject](LEXICON.md#lexicon-move-the-test-with-its-subject), [Split One Test per Subject](LEXICON.md#lexicon-split-one-test-per-subject)
 
 Enforced by
 the centralized-test and subjectless-test checks, and the taxonomy step's mirror check
@@ -45463,7 +45432,7 @@ Conflicts with
 [Grouping Label](LEXICON.md#lexicon-grouping-label)
 
 Violated by
-naming a file with the generic subject while its source mentions the domain it serves
+[Generic Subject over a Domain File](LEXICON.md#lexicon-generic-subject-over-a-domain-file)
 
 Detected by
 a file carrying the generic subject whose source names a domain noun
@@ -45472,7 +45441,7 @@ Measured by
 generic-subject files that fail either test
 
 Refactored by
-Take the Domain Noun as the Subject
+[Take the Domain Noun as the Subject](LEXICON.md#lexicon-take-the-domain-noun-as-the-subject)
 
 Enforced by
 classification review
@@ -45547,7 +45516,7 @@ Conflicts with
 [Automated Reshape](LEXICON.md#lexicon-automated-reshape)
 
 Violated by
-writing a file under a provisional name and leaving its correct name for a later sweep
+[Provisional Name](LEXICON.md#lexicon-provisional-name)
 
 Detected by
 a newly created file that the naming or placement gate refuses
@@ -45556,7 +45525,7 @@ Measured by
 new files refused on their first run
 
 Refactored by
-Classify Before the First Write
+[Classify Before the First Write](LEXICON.md#lexicon-classify-before-the-first-write)
 
 Enforced by
 naming gate, placement gate
@@ -45634,7 +45603,7 @@ Distinct from
 [Declarative Configuration](PRINCIPLES.md#architecture-declarative-configuration): Registry-held order keeps sequence out of filenames, while declarative configuration keeps settings in validated data.
 
 Violated by
-encoding the position of a file in a sequence into its name
+[Numeric Order Prefix](LEXICON.md#lexicon-numeric-order-prefix)
 
 Detected by
 a filename whose first segment is a number
@@ -45643,7 +45612,7 @@ Measured by
 numerically prefixed filenames
 
 Refactored by
-Move the Order into the Registry, Drop the Prefix
+[Move the Order into the Registry](LEXICON.md#lexicon-move-the-order-into-the-registry), [Drop the Prefix](LEXICON.md#lexicon-drop-the-prefix)
 
 Enforced by
 naming gate
@@ -45718,7 +45687,7 @@ Conflicts with
 [Vocabulary Inflation](LEXICON.md#lexicon-vocabulary-inflation), [Duplicated Authority](LEXICON.md#lexicon-duplicated-authority)
 
 Violated by
-copying each word the source owns into the declared vocabulary, one entry per allocated identity or upstream key
+[Copied Slot Word](LEXICON.md#lexicon-copied-slot-word)
 
 Detected by
 a vocabulary entry that mirrors a row of an allocating index, or a corpus file whose facet segment differs from the facet its own field declares
@@ -45727,7 +45696,7 @@ Measured by
 slot words held both in the vocabulary and in the source that owns them
 
 Refactored by
-Resolve the Slot Against Its Source, Remove the Copies
+[Resolve the Slot Against Its Source](LEXICON.md#lexicon-resolve-the-slot-against-its-source), [Remove the Copies](LEXICON.md#lexicon-remove-the-copies)
 
 Enforced by
 the coordination member's slot check, which resolves a seat letter against the index that allocates it
@@ -45805,7 +45774,7 @@ Contracts
 [Dialect Resolution](ALGORITHMS.md#algorithms-dialect-resolution)
 
 Violated by
-declaring a separate vocabulary per language instead of one set of slots read through each language's case
+[Per-Language Vocabulary](LEXICON.md#lexicon-per-language-vocabulary)
 
 Detected by
 a dialect file whose trailing words are not a declared concern tag, or a dialect naming a case no splitter reads
@@ -45814,7 +45783,7 @@ Measured by
 dialect files that do not resolve to three declared slots
 
 Refactored by
-Declare the Dialect, Rename to the Case's Word Run
+[Declare the Dialect](LEXICON.md#lexicon-declare-the-dialect), [Rename to the Case's Word Run](LEXICON.md#lexicon-rename-to-the-case-s-word-run)
 
 Enforced by
 naming gate, which parses a dialect's word run, and the taxonomy validator, which refuses a case no splitter reads
@@ -45892,7 +45861,7 @@ Distinct from
 [Governed Root](LEXICON.md#lexicon-governed-root): Root spine files limit which files may sit at a governed root, while the governed root is the declaration that brings a tree under the taxonomy.
 
 Violated by
-leaving a file at a root that is neither the entry document nor an accumulator
+[Loose Root File](LEXICON.md#lexicon-loose-root-file)
 
 Detected by
 a loose file at a governed root
@@ -45901,7 +45870,7 @@ Measured by
 loose root files
 
 Refactored by
-Move the File into Its Concern Folder
+[Move the File into Its Concern Folder](LEXICON.md#lexicon-move-the-file-into-its-concern-folder)
 
 Enforced by
 placement gate
@@ -45957,33 +45926,33 @@ The relations inside this category.
 
 ```mermaid
 flowchart LR
-n_idempotency["Idempotency"]
-n_atomicity["Atomicity"]
-n_acid["ACID"]
-n_transaction_boundary["Transaction Boundary"]
-n_unit_of_work_pattern["Unit of Work Pattern"]
-n_consistency["Consistency"]
-n_isolation["Isolation"]
-n_concurrency_control["Concurrency Control"]
-n_optimistic_locking["Optimistic Locking"]
-n_pessimistic_locking["Pessimistic Locking"]
-n_state_isolation["State Isolation"]
-n_controlled_side_effects["Controlled Side Effects"]
-n_petri_nets["Petri Nets"]
-n_atomicity --> n_transaction_boundary
-n_atomicity --> n_consistency
-n_acid --> n_atomicity
-n_acid --> n_consistency
-n_acid --> n_isolation
-n_transaction_boundary --> n_atomicity
-n_transaction_boundary --> n_unit_of_work_pattern
-n_unit_of_work_pattern --> n_transaction_boundary
-n_unit_of_work_pattern --> n_atomicity
-n_unit_of_work_pattern --> n_consistency
-n_isolation --> n_concurrency_control
-n_concurrency_control --> n_isolation
-n_optimistic_locking --> n_concurrency_control
-n_pessimistic_locking --> n_isolation
+    n_idempotency["Idempotency"]
+    n_atomicity["Atomicity"]
+    n_acid["ACID"]
+    n_transaction_boundary["Transaction Boundary"]
+    n_unit_of_work_pattern["Unit of Work Pattern"]
+    n_consistency["Consistency"]
+    n_isolation["Isolation"]
+    n_concurrency_control["Concurrency Control"]
+    n_optimistic_locking["Optimistic Locking"]
+    n_pessimistic_locking["Pessimistic Locking"]
+    n_state_isolation["State Isolation"]
+    n_controlled_side_effects["Controlled Side Effects"]
+    n_petri_nets["Petri Nets"]
+    n_atomicity --> n_transaction_boundary
+    n_atomicity --> n_consistency
+    n_acid --> n_atomicity
+    n_acid --> n_consistency
+    n_acid --> n_isolation
+    n_transaction_boundary --> n_atomicity
+    n_transaction_boundary --> n_unit_of_work_pattern
+    n_unit_of_work_pattern --> n_transaction_boundary
+    n_unit_of_work_pattern --> n_atomicity
+    n_unit_of_work_pattern --> n_consistency
+    n_isolation --> n_concurrency_control
+    n_concurrency_control --> n_isolation
+    n_optimistic_locking --> n_concurrency_control
+    n_pessimistic_locking --> n_isolation
 ```
 
 ### Idempotency
@@ -45992,6 +45961,7 @@ n_pessimistic_locking --> n_isolation
 - Category: [Transactions / State / Concurrency](PRINCIPLES.md#architecture-category-transactions-state-concurrency)
 - Severity: [mandatory](SCHEMA.md#vocabulary-severity-mandatory)
 - Scope: API, command, message handler
+- Aliases: Idempotence
 - Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
 
 Details
@@ -46021,7 +45991,7 @@ Tensions
 [Idempotency / State Tracking](SCHEMA.md#tension-idempotency-state-tracking)
 
 Violated by
-duplicate charges/orders/messages on retry
+[Non-Idempotent Operation](LEXICON.md#lexicon-non-idempotent-operation), [Duplicate Side Effects](LEXICON.md#lexicon-duplicate-side-effects)
 
 Detected by
 side-effectful handlers without deduplication
@@ -46030,7 +46000,7 @@ Measured by
 duplicate-effect defect rate
 
 Refactored by
-Add Idempotency Key, Add Dedup Store
+[Idempotency Key](LEXICON.md#lexicon-idempotency-key), [Idempotent Consumer](PRINCIPLES.md#architecture-idempotent-consumer)
 
 Enforced by
 retry tests, API policy
@@ -46118,7 +46088,7 @@ Tensions
 [Atomicity / Distributed Scalability](SCHEMA.md#tension-atomicity-distributed-scalability)
 
 Violated by
-partial updates after failure
+[Partial Commit](LEXICON.md#lexicon-partial-commit)
 
 Detected by
 multi-step writes without transaction/compensation
@@ -46127,7 +46097,7 @@ Measured by
 partial failure rate
 
 Refactored by
-Add Transaction, Add Saga/Compensation
+[Introduce Transaction Boundary](LEXICON.md#lexicon-introduce-transaction-boundary), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern), [Compensating Transaction](PRINCIPLES.md#architecture-compensating-transaction)
 
 Enforced by
 transaction tests
@@ -46213,7 +46183,7 @@ Distinct from
 [BASE/Eventual Consistency](LEXICON.md#lexicon-base-eventual-consistency): ACID keeps each transaction atomic, consistent, isolated and durable, while BASE favors availability and lets replicas converge later.
 
 Violated by
-inconsistent transactional boundaries
+[Partial Commit](LEXICON.md#lexicon-partial-commit)
 
 Detected by
 non-transactional multi-write invariants
@@ -46222,7 +46192,7 @@ Measured by
 transactional invariant defects
 
 Refactored by
-Define Transaction Boundary, Add Constraints
+[Introduce Transaction Boundary](LEXICON.md#lexicon-introduce-transaction-boundary), [Invariant Check](LEXICON.md#lexicon-invariant-check)
 
 Enforced by
 DB transactions, isolation tests
@@ -46314,7 +46284,7 @@ Distinct from
 [Consistency Rules](LEXICON.md#lexicon-consistency-rules): A transaction boundary fixes which writes one transaction covers, while consistency rules are the invariants it must keep inside that scope.
 
 Violated by
-spanning transactions across service boundaries
+[Hidden Distributed Transaction](LEXICON.md#lexicon-hidden-distributed-transaction)
 
 Detected by
 transaction scope leakage
@@ -46323,7 +46293,7 @@ Measured by
 transaction size/duration
 
 Refactored by
-Shrink Boundary, Add Saga
+[Restrict Exports](LEXICON.md#lexicon-restrict-exports), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
 
 Enforced by
 transaction policy
@@ -46412,7 +46382,7 @@ Tensions
 [Unit of Work Pattern / Repository Complexity](SCHEMA.md#tension-repository-complexity-unit-of-work-pattern)
 
 Violated by
-unmanaged partial persistence
+[Scattered Save Calls](LEXICON.md#lexicon-scattered-save-calls)
 
 Detected by
 multiple independent saves in one use case
@@ -46421,7 +46391,7 @@ Measured by
 save coordination defects
 
 Refactored by
-Introduce Unit of Work
+none
 
 Enforced by
 persistence conventions
@@ -46544,7 +46514,7 @@ Distinct from
 [Simplicity](LEXICON.md#lexicon-simplicity): Consistency is invariants holding, while simplicity is the absence of unneeded structure.
 
 Violated by
-invariant-breaking writes
+[Reachable Invalid State](LEXICON.md#lexicon-reachable-invalid-state)
 
 Detected by
 data anomalies, failed invariant checks
@@ -46553,7 +46523,7 @@ Measured by
 consistency violation count
 
 Refactored by
-Add Constraints, Add Transaction, Add Reconciliation
+[Invariant Check](LEXICON.md#lexicon-invariant-check), [Introduce Transaction Boundary](LEXICON.md#lexicon-introduce-transaction-boundary), [Reconciliation Job](LEXICON.md#lexicon-reconciliation-job)
 
 Enforced by
 database constraints, invariant tests
@@ -46638,7 +46608,7 @@ Tensions
 [Isolation / Throughput](SCHEMA.md#tension-isolation-throughput)
 
 Violated by
-race-condition state corruption
+[Dirty Reads/Writes](LEXICON.md#lexicon-dirty-reads-writes)
 
 Detected by
 concurrency tests, isolation anomalies
@@ -46647,7 +46617,7 @@ Measured by
 anomaly rate, lock contention
 
 Refactored by
-Add Locking, Set Isolation Level
+[Pessimistic Locking](PRINCIPLES.md#architecture-pessimistic-locking), [Transaction Isolation Level](LEXICON.md#lexicon-transaction-isolation-level)
 
 Enforced by
 DB isolation, concurrency tests
@@ -46733,7 +46703,7 @@ Tensions
 [Concurrency Control / Performance](SCHEMA.md#tension-concurrency-control-performance)
 
 Violated by
-unsynchronized shared mutation
+[Race Conditions](LEXICON.md#lexicon-race-conditions)
 
 Detected by
 race detectors, flaky concurrent tests
@@ -46742,7 +46712,7 @@ Measured by
 race count, contention
 
 Refactored by
-Add Locking, Use Immutable State, Add CAS
+[Pessimistic Locking](PRINCIPLES.md#architecture-pessimistic-locking), [Make Immutable](LEXICON.md#lexicon-make-immutable), [Optimistic Locking](PRINCIPLES.md#architecture-optimistic-locking)
 
 Enforced by
 thread-safety analysis, [tests](LEXICON.md#lexicon-tests)
@@ -46832,7 +46802,7 @@ Tensions
 [Optimistic Locking / Retry Complexity](SCHEMA.md#tension-optimistic-locking-retry-complexity)
 
 Violated by
-[lost update](PRINCIPLES.md#architecture-lost-update)
+[Lost Update](PRINCIPLES.md#architecture-lost-update)
 
 Detected by
 updates without version check
@@ -46841,7 +46811,7 @@ Measured by
 conflict/retry rate
 
 Refactored by
-Add Version Column, Add Compare-And-Swap
+none
 
 Enforced by
 repository rules, integration tests
@@ -46924,7 +46894,7 @@ Tensions
 [Pessimistic Locking / Deadlock Freedom](SCHEMA.md#tension-deadlock-freedom-pessimistic-locking), [Pessimistic Locking / Latency](SCHEMA.md#tension-latency-pessimistic-locking), [Pessimistic Locking / Lock-Free Throughput](SCHEMA.md#tension-lock-free-throughput-pessimistic-locking)
 
 Violated by
-missing lock around critical mutation
+[Blind Overwrite](LEXICON.md#lexicon-blind-overwrite)
 
 Detected by
 concurrent update conflicts
@@ -46933,7 +46903,7 @@ Measured by
 lock wait/deadlock rate
 
 Refactored by
-Add Lock, Narrow Lock Scope
+[Apply Concurrency Control](LEXICON.md#lexicon-apply-concurrency-control)
 
 Enforced by
 transactional tests
@@ -47018,7 +46988,7 @@ Tensions
 [State Isolation / Data Sharing](SCHEMA.md#tension-data-sharing-state-isolation)
 
 Violated by
-[global mutable state](LEXICON.md#lexicon-global-mutable-state)
+[Global Mutable State](LEXICON.md#lexicon-global-mutable-state)
 
 Detected by
 static mutable fields, shared caches without ownership
@@ -47027,7 +46997,7 @@ Measured by
 global state count
 
 Refactored by
-Encapsulate State, Pass Explicit State, Use Immutable Data
+[Encapsulate State](LEXICON.md#lexicon-encapsulate-state), [Pass Context Explicitly](LEXICON.md#lexicon-pass-context-explicitly), [Make Immutable](LEXICON.md#lexicon-make-immutable)
 
 Enforced by
 lint rules, architecture tests
@@ -47110,7 +47080,7 @@ In tension with
 [Performance Optimization](LEXICON.md#lexicon-performance-optimization)
 
 Conflicts with
-[Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect), [Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance)
+[Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance), [Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect)
 
 Contracts
 [Execution Core](ALGORITHMS.md#algorithms-execution-core)
@@ -47119,7 +47089,7 @@ Tensions
 [Controlled Side Effects / Performance Optimization](SCHEMA.md#tension-controlled-side-effects-performance-optimization)
 
 Violated by
-mutation/network/persistence hidden in pure-looking code
+[Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect)
 
 Detected by
 side effects in domain/pure functions
@@ -47128,7 +47098,7 @@ Measured by
 side-effect boundary violations
 
 Refactored by
-Move Side Effect to Boundary, Return Command/Event
+[Make Effects Explicit](LEXICON.md#lexicon-make-effects-explicit), [Separate Query from Command](LEXICON.md#lexicon-separate-query-from-command)
 
 Enforced by
 effect linting, layer rules
@@ -47185,7 +47155,7 @@ Depends on
 [Effect Boundaries](LEXICON.md#lexicon-effect-boundaries), [Predictability](PRINCIPLES.md#architecture-predictability), [Testability](PRINCIPLES.md#architecture-testability), [Pure Core / Imperative Shell](LEXICON.md#lexicon-pure-core-imperative-shell)
 
 Shape it refuses
-[Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect), [Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance), [Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect)
+[Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance), [Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect)
 
 ### Petri Nets
 
@@ -47222,7 +47192,7 @@ Tensions
 [Petri Nets / Modeling Overhead](SCHEMA.md#tension-modeling-overhead-petri-nets)
 
 Violated by
-concurrent resource flows coordinated by hand-reasoned lock ordering
+[Ad-Hoc Lock Ordering](LEXICON.md#lexicon-ad-hoc-lock-ordering)
 
 Detected by
 deadlocks or lost tokens found only at runtime
@@ -47231,7 +47201,7 @@ Measured by
 unreachable or deadlock-prone markings
 
 Refactored by
-Model concurrent flow as a Petri net and analyze reachability
+none
 
 Enforced by
 concurrency model review

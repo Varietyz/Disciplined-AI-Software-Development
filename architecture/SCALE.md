@@ -22,7 +22,7 @@ Concerns are drawn as areas of a work list, so a seat owns a region rather than 
 
 For this reason a concern is bounded by coupling rather than by topic, so every edit that forces another stays inside one owner. The work is cut along what forces what rather than along what the work list happened to group. In practice, the surfaces a body of work touches are enumerated, and the pairs that force each other are recorded with evidence, where a change to one cannot land without a change to the other. The connected components of that relation are the concerns, each gets one owner, and the number of components is the floor. The fan-in on each [shared surface](../pag/ORCHESTRATION.md#shared-surfaces) is measured from the claims already recorded against it, and the worst fan-in sets the ceiling. A count is chosen inside that range, and the partition is written down beside the choice.
 
-To check this, take any two concerns and find one change that forces edits in both. If one exists, the partition put a forcing edge across a boundary, and the two concerns are one component. The relation is chosen once, and that choice is the one place judgement enters. Two defensible readings of what forces what yield component counts far apart, so the claim is a derivation with a choice at the bottom. The choice is answerable to evidence, and where no mechanism yet computes the partition or the fan-in, that absence is written down as debt with its operands rather than left to read as a measurement.
+To check this, take any two concerns and find one change that forces edits in both. If one exists, the partition put a forcing edge across a boundary, and the two concerns are one component. The relation is chosen once, and that choice is the one place judgment enters. Two defensible readings of what forces what yield component counts far apart, so the claim is a derivation with a choice at the bottom. The choice is answerable to evidence, and where no mechanism yet computes the partition or the fan-in, that absence is written down as debt with its operands rather than left to read as a measurement.
 
 ### A concern is a bounded context for people
 
@@ -40,38 +40,38 @@ A1·a floor and ceiling
 
 ```mermaid
 flowchart TB
-surfaces["The surfaces a body of work touches"]
-relation["Join two surfaces when a change to one forces a change to the other"]
-components["The connected components · one per concern"]
-floor["Floor · the number of components"]
-fanin["Fan-in · how many parties' claims rest on one surface, measured from traffic"]
-ceiling["Ceiling · where claims on one surface stop surviving composition"]
-count["A count inside the range · with the partition written down"]
-surfaces --> relation --> components --> floor --> count
-surfaces --> fanin --> ceiling --> count
-choice["The one choice · which reading of forces"]
-choice -. answerable to evidence, never taste .-> relation
+    surfaces["The surfaces a body of work touches"]
+    relation["Join two surfaces when a change to one forces a change to the other"]
+    components["The connected components · one per concern"]
+    floor["Floor · the number of components"]
+    fanin["Fan-in · how many parties' claims rest on one surface, measured from traffic"]
+    ceiling["Ceiling · where claims on one surface stop surviving composition"]
+    count["A count inside the range · with the partition written down"]
+    surfaces --> relation --> components --> floor --> count
+    surfaces --> fanin --> ceiling --> count
+    choice["The one choice · which reading of forces"]
+    choice -. answerable to evidence, never taste .-> relation
 ```
 
 A1·b three components
 
 ```mermaid
 flowchart LR
-subgraph one["concern · one seat"]
-schema["schema"] --- loader["loader"]
-loader --- validator["validator"]
-end
-subgraph two["concern · one seat"]
-view["view"] --- renderer["renderer"]
-renderer --- styles["styles"]
-end
-subgraph three["concern · one seat"]
-pipeline["pipeline"] --- reporter["reporter"]
-end
-shared["shared surface · fan-in from every seat"]
-validator -.-> shared
-renderer -.-> shared
-reporter -.-> shared
+    subgraph one["concern · one seat"]
+        schema["schema"] --- loader["loader"]
+        loader --- validator["validator"]
+    end
+    subgraph two["concern · one seat"]
+        view["view"] --- renderer["renderer"]
+        renderer --- styles["styles"]
+    end
+    subgraph three["concern · one seat"]
+        pipeline["pipeline"] --- reporter["reporter"]
+    end
+    shared["shared surface · fan-in from every seat"]
+    validator -.-> shared
+    renderer -.-> shared
+    reporter -.-> shared
 ```
 
 A1·c the derivation's records
@@ -131,25 +131,25 @@ B1·a rate and cost
 
 ```mermaid
 flowchart LR
-rate["The rate a claim goes stale · set by one writer and one composer"]
-cost["The cost of a stale claim · multiplied by every reader"]
-marker["A claim marked with the surface state it rested on"]
-glance["A glance instead of an argument"]
-ceiling["The ceiling rises"]
-rate -. unchanged by headcount .-> ceiling
-cost --> marker --> glance --> ceiling
+    rate["The rate a claim goes stale · set by one writer and one composer"]
+    cost["The cost of a stale claim · multiplied by every reader"]
+    marker["A claim marked with the surface state it rested on"]
+    glance["A glance instead of an argument"]
+    ceiling["The ceiling rises"]
+    rate -. unchanged by headcount .-> ceiling
+    cost --> marker --> glance --> ceiling
 ```
 
 B1·b the two terms
 
 ```mermaid
 xychart-beta
-title "A stale claim: the rate has one writer, the cost has every reader"
-x-axis "parties" [1, 2, 3, 4, 5, 6, 7, 8]
-y-axis "cost of one stale claim" 0 --> 16
-line "unmarked claim · argued by every reader" [1, 2, 4, 6, 8, 10, 12, 14]
-line "marked claim · a glance per reader" [1, 1, 2, 2, 3, 3, 4, 4]
-line "rate of going stale · one writer" [1, 1, 1, 1, 1, 1, 1, 1]
+    title "A stale claim: the rate has one writer, the cost has every reader"
+    x-axis "parties" [1, 2, 3, 4, 5, 6, 7, 8]
+    y-axis "cost of one stale claim" 0 --> 16
+    line "unmarked claim · argued by every reader" [1, 2, 4, 6, 8, 10, 12, 14]
+    line "marked claim · a glance per reader" [1, 1, 2, 2, 3, 3, 4, 4]
+    line "rate of going stale · one writer" [1, 1, 1, 1, 1, 1, 1, 1]
 ```
 
 ## Above one tier, reduction
@@ -180,14 +180,14 @@ C1·a reduction
 
 ```mermaid
 flowchart TB
-w1["worker"] --> o1["orchestrator · publishes the fused result of its workers"]
-w2["worker"] --> o1
-w3["worker"] --> o2["orchestrator"]
-w4["worker"] --> o2
-o1 --> composer["composer · one writer, one reduction"]
-o2 --> composer
-raw["Raw records passed upward · fan-in without reduction, accumulation by construction"]
-o1 -. never .-> raw
+    w1["worker"] --> o1["orchestrator · publishes the fused result of its workers"]
+    w2["worker"] --> o1
+    w3["worker"] --> o2["orchestrator"]
+    w4["worker"] --> o2
+    o1 --> composer["composer · one writer, one reduction"]
+    o2 --> composer
+    raw["Raw records passed upward · fan-in without reduction, accumulation by construction"]
+    o1 -. never .-> raw
 ```
 
 ## The author is probabilistic
@@ -218,17 +218,17 @@ D1·a three authors
 
 ```mermaid
 flowchart TB
-intent["An architectural intent"]
-author{"Who writes against it?"}
-person["The developer · complies by attention · drifts slowly"]
-model["A model · complies probabilistically · produces locally reasonable changes at speed"]
-gate["A gate · the only party in the loop that refuses"]
-holds["The intent holds by construction"]
-decays["The intent decays at the author's speed"]
-intent --> author
-author -- developer --> person -. eventually .-> decays
-author -- model --> model --> decays
-model -- every intent as a predicate --> gate --> holds
+    intent["An architectural intent"]
+    author{"Who writes against it?"}
+    person["The developer · complies by attention · drifts slowly"]
+    model["A model · complies probabilistically · produces locally reasonable changes at speed"]
+    gate["A gate · the only party in the loop that refuses"]
+    holds["The intent holds by construction"]
+    decays["The intent decays at the author's speed"]
+    intent --> author
+    author -- developer --> person -. eventually .-> decays
+    author -- model --> model --> decays
+    model -- every intent as a predicate --> gate --> holds
 ```
 
 D1·b a finding record
@@ -257,7 +257,7 @@ This section covers how scale relates to [determinism](../ontology/PRINCIPLES.md
 
 Enforcement that rests on care costs more for every author added, and a model is an author whose output rate makes the multiplication expensive. A review process that worked for two developers is applied to a model that produces a hundred changes a day, and the reviewers become the bottleneck the model was meant to remove. A verdict that depends on who is looking has to be produced once per author, while a verdict that depends only on the tree is produced once, so the cost of care scales with the population and the cost of a check does not.
 
-For this reason a deterministic subject is checkable, healable, predictable and scalable at once, and scale follows from determinism rather than from headcount. Judgement moves out of the check and into the choice of which checks to hold. In practice, the subject that has one correct answer is found for every concern and made the thing a check decides. Authors can then be counted freely, because a deterministic verdict is the same for one author or ten, and the model's non-determinism is confined to the one place it belongs, the choice among admissible changes.
+For this reason a deterministic subject is checkable, healable, predictable and scalable at once, and scale follows from determinism rather than from headcount. Judgment moves out of the check and into the choice of which checks to hold. In practice, the subject that has one correct answer is found for every concern and made the thing a check decides. Authors can then be counted freely, because a deterministic verdict is the same for one author or ten, and the model's non-determinism is confined to the one place it belongs, the choice among admissible changes.
 
 To check this, take any rule you enforce by review and ask whether two reviewers would return the same verdict on the same tree. If not, the subject is not yet deterministic, and every author you add costs another review. Determinism is claimed for the check, never for the author. A model stays a distribution however deterministic the gate around it is, and the gate's job is to make that fact cost nothing rather than to pretend it away.
 
@@ -277,23 +277,23 @@ E1·a check against care
 
 ```mermaid
 flowchart LR
-subject["A subject with one correct answer"]
-check["A deterministic check · same cost, same verdict, any author"]
-authors["One author, ten, a model · enforcement cost stays flat"]
-care["A protocol resting on care · cost multiplied by every author"]
-subject --> check --> authors
-subject -. left to attention .-> care
+    subject["A subject with one correct answer"]
+    check["A deterministic check · same cost, same verdict, any author"]
+    authors["One author, ten, a model · enforcement cost stays flat"]
+    care["A protocol resting on care · cost multiplied by every author"]
+    subject --> check --> authors
+    subject -. left to attention .-> care
 ```
 
 E1·b cost per change
 
 ```mermaid
 xychart-beta
-title "Enforcement cost against the number of authors"
-x-axis "authors" [1, 2, 4, 8, 16, 32]
-y-axis "cost per change" 0 --> 32
-line "a protocol resting on care" [1, 2, 4, 8, 16, 32]
-line "a deterministic check" [1, 1, 1, 1, 1, 1]
+    title "Enforcement cost against the number of authors"
+    x-axis "authors" [1, 2, 4, 8, 16, 32]
+    y-axis "cost per change" 0 --> 32
+    line "a protocol resting on care" [1, 2, 4, 8, 16, 32]
+    line "a deterministic check" [1, 1, 1, 1, 1, 1]
 ```
 
 ## Systems built around a model
@@ -324,16 +324,16 @@ F1·a one category
 
 ```mermaid
 flowchart TB
-model["A model in the system"]
-governed["versioned, gated, evaluated · like any dependency"]
-grounded["generation grounded in retrieved evidence that cites its source"]
-structured["knowledge structured so the output can be explained"]
-bounded["authority bounded · output validated before any sink, capabilities declared"]
-canon["The same canon · contracts, schema and security applied to an author whose output is a distribution"]
-model --> governed --> canon
-model --> grounded --> canon
-model --> structured --> canon
-model --> bounded --> canon
+    model["A model in the system"]
+    governed["versioned, gated, evaluated · like any dependency"]
+    grounded["generation grounded in retrieved evidence that cites its source"]
+    structured["knowledge structured so the output can be explained"]
+    bounded["authority bounded · output validated before any sink, capabilities declared"]
+    canon["The same canon · contracts, schema and security applied to an author whose output is a distribution"]
+    model --> governed --> canon
+    model --> grounded --> canon
+    model --> structured --> canon
+    model --> bounded --> canon
 ```
 
 ---

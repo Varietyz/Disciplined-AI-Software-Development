@@ -1,0 +1,452 @@
+{
+    "category": "core-vocabulary",
+    "records": [
+        {
+            "name": "Metrics",
+            "kind": "mechanism",
+            "definition": "Quantitative measurements a system emits about its state and behavior for monitoring and analysis."
+        },
+        {
+            "name": "Contracts",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:component-boundaries",
+                    "reason": "Contracts state the inputs, outputs and guarantees between components, while component boundaries are the edges those contracts sit on."
+                },
+                {
+                    "id": "lexicon:standards",
+                    "reason": "Contracts are agreements between particular components, while standards are conventions that many components conform to."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "Explicit, enforceable agreements specifying the inputs, outputs, and guarantees between components."
+        },
+        {
+            "name": "Independent Deployment",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:bounded-context-ownership",
+                    "reason": "Independent deployment is releasing without coordinating others, while bounded context ownership is one team controlling one part of the system."
+                },
+                {
+                    "id": "lexicon:independent-testing",
+                    "reason": "Independent deployment is releasing a component alone, while independent testing is exercising it alone."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to release a component to production without coordinating the deployment of others."
+        },
+        {
+            "name": "Delivery Speed",
+            "kind": "metric",
+            "definition": "The rate at which changes are delivered to production."
+        },
+        {
+            "name": "Boilerplate",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:initial-complexity",
+                    "reason": "Boilerplate is scaffolding written again in every use, while initial complexity is the structure of ports and adapters paid once before the first feature."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "Repetitive, mandatory scaffolding code that adds ceremony without domain value."
+        },
+        {
+            "name": "Schema",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:schemas-tag",
+                    "reason": "A schema is the formal definition of data, while the schemas tag names the file concern that holds such definitions."
+                },
+                {
+                    "id": "lexicon:type-metadata",
+                    "reason": "A schema defines the structure data must take, while type metadata describes the field types a structure has at runtime."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the structure, types, and constraints of data."
+        },
+        {
+            "name": "Compatibility",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a component interoperates with other versions or systems without modification."
+        },
+        {
+            "name": "Cost",
+            "kind": "metric",
+            "definition": "The resource or financial expenditure required to build, run, or change a system."
+        },
+        {
+            "name": "Metadata",
+            "kind": "artifact",
+            "definition": "Descriptive data about a system's structure, capabilities, or content, consumed to drive behavior."
+        },
+        {
+            "name": "Discovery",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:diagnostics",
+                    "reason": "Discovery locates which components are available, while diagnostics inspects a running system's structure and state to find what is wrong."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to locate available components, services, or capabilities at runtime."
+        },
+        {
+            "name": "Iteration Speed",
+            "kind": "metric",
+            "definition": "The rate at which cycles of change and feedback can be completed."
+        },
+        {
+            "name": "Race Conditions",
+            "distinctFrom": [
+                {
+                    "id": "architecture:lost-update",
+                    "reason": "A race condition is any outcome that depends on interleaving, while a lost update is the particular case of one writer overwriting another."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "A defect where the outcome depends on the uncontrolled interleaving of concurrent operations."
+        },
+        {
+            "name": "Operational Complexity",
+            "kind": "quality-attribute",
+            "definition": "The effort and intricacy required to deploy, run, and maintain a system in production."
+        },
+        {
+            "name": "Standards",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:policy",
+                    "reason": "Standards are conventions components conform to, while a policy is rules on which actions are permitted or denied."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "Agreed conventions and specifications that components conform to for interoperability and consistency."
+        },
+        {
+            "name": "Single Point of Failure",
+            "kind": "anti-pattern",
+            "definition": "A component whose failure alone halts the entire system because it has no redundancy."
+        },
+        {
+            "name": "Debugging",
+            "kind": "activity",
+            "definition": "The activity of locating and diagnosing the cause of a defect."
+        },
+        {
+            "name": "Specification",
+            "kind": "artifact",
+            "definition": "A precise, authoritative description of required behavior, structure, or interface."
+        },
+        {
+            "name": "False Positives",
+            "kind": "metric",
+            "definition": "Incorrect positive results reported when the detected condition is not present."
+        },
+        {
+            "name": "Ownership",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:canonical-definition",
+                    "reason": "Ownership assigns responsibility for a component to a team, while a canonical definition gives a fact one authoritative definition."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "A clear assignment of responsibility for a component to a person or team."
+        },
+        {
+            "name": "Silent Failure",
+            "distinctFrom": [
+                {
+                    "id": "architecture:log-as-control-flow",
+                    "reason": "A silent failure leaves no signal at all, while log-as-control-flow leaves a log line and carries on as if it were handled."
+                },
+                {
+                    "id": "architecture:observability-noise",
+                    "reason": "A silent failure emits nothing, while observability noise emits too much to act on."
+                },
+                {
+                    "id": "architecture:silent-data-corruption",
+                    "reason": "A silent failure is any unsurfaced failure, while silent data corruption is invalid data accepted and stored unchecked."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "A failure that occurs without surfacing any error, log, or signal, leaving it undetected."
+        },
+        {
+            "name": "Message Contract",
+            "kind": "constraint",
+            "definition": "The agreed schema and semantics of messages exchanged between components."
+        },
+        {
+            "name": "Replay",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:temporal-queries",
+                    "reason": "Replay reprocesses recorded events to rebuild state, while a temporal query asks what the state was at a given point."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to re-process a recorded sequence of events to reconstruct or recover state, including the state at a past point.",
+            "aliases": ["Historical Reconstruction"]
+        },
+        {
+            "name": "DSLs",
+            "kind": "technique",
+            "definition": "Domain-specific languages, small notations tailored to express solutions within one problem domain."
+        },
+        {
+            "name": "Acceptance Criteria",
+            "kind": "constraint",
+            "definition": "Predefined conditions a deliverable must satisfy to be accepted as complete and correct."
+        },
+        {
+            "name": "Ambiguous Naming",
+            "distinctFrom": [
+                {
+                    "id": "architecture:inconsistent-error-model",
+                    "reason": "Ambiguous naming is one identifier open to several readings, while an inconsistent error model is one failure reported in several shapes."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Identifiers whose meaning is unclear or open to multiple interpretations, obscuring intent."
+        },
+        {
+            "name": "Automated Enforcement",
+            "distinctFrom": [
+                {
+                    "id": "architecture:policy-as-code",
+                    "reason": "Automated enforcement is any machine check that rules hold, while policy as code is writing the policies as the rules such a check evaluates."
+                }
+            ],
+            "kind": "mechanism",
+            "definition": "Machine-applied checking that rules and policies hold, catching violations without manual review."
+        },
+        {
+            "name": "Automation",
+            "kind": "capability",
+            "definition": "The execution of tasks by software or machinery without manual intervention."
+        },
+        {
+            "name": "Boolean Flag Soup",
+            "kind": "anti-pattern",
+            "definition": "Representing state through many interdependent boolean flags, producing tangled and invalid combinations."
+        },
+        {
+            "name": "Capacity Planning",
+            "kind": "activity",
+            "definition": "Forecasting resource demand and provisioning capacity to meet it without waste or shortfall."
+        },
+        {
+            "name": "Code Generation",
+            "kind": "technique",
+            "definition": "Producing source code automatically from a higher-level model, schema, or specification."
+        },
+        {
+            "name": "Composition Root",
+            "kind": "pattern",
+            "definition": "The single startup location where an application's object graph is assembled and its dependencies wired."
+        },
+        {
+            "name": "Context",
+            "distinctFrom": [
+                {
+                    "id": "architecture:architecture-decision-records",
+                    "reason": "Context is the surrounding information that makes a record interpretable, while a decision record is one record that carries it."
+                },
+                {
+                    "id": "lexicon:consequences",
+                    "reason": "Context is what surrounded a decision, while consequences are what follow from it."
+                },
+                {
+                    "id": "lexicon:decision",
+                    "reason": "Context is the circumstances a choice was made in, while the decision is the choice."
+                },
+                {
+                    "id": "lexicon:structured-events",
+                    "reason": "Context is the information attached to an entry, while structured events are entries written as machine-parsable records."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "The surrounding information and circumstances captured to make a decision, event, or log entry interpretable."
+        },
+        {
+            "name": "Continuous Processing",
+            "kind": "approach",
+            "definition": "Handling data incrementally as it arrives, rather than in discrete scheduled batches."
+        },
+        {
+            "name": "Controlled Access",
+            "kind": "capability",
+            "definition": "Mediated, restricted access to a resource so that only permitted operations reach it."
+        },
+        {
+            "name": "Controlled Evolution",
+            "kind": "capability",
+            "definition": "The managed, deliberate change of a system over time without breaking existing consumers."
+        },
+        {
+            "name": "Cross-Cutting Concerns",
+            "kind": "constraint",
+            "definition": "Concerns such as logging, security, or transactions whose implementation spans many modules rather than localizing to one."
+        },
+        {
+            "name": "Damage Limitation",
+            "kind": "capability",
+            "definition": "Containing the blast radius of a failure or breach so its impact stays bounded."
+        },
+        {
+            "name": "Evaluation",
+            "kind": "activity",
+            "definition": "The systematic assessment of a model or system's behavior and quality against defined criteria."
+        },
+        {
+            "name": "Evidence",
+            "kind": "artifact",
+            "definition": "Recorded proof that substantiates a claim, decision, or compliance requirement."
+        },
+        {
+            "name": "Explicit Inputs",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:no-hidden-state",
+                    "reason": "Explicit inputs forbid reading ambient state during a call, while no hidden state forbids keeping state between calls."
+                },
+                {
+                    "id": "lexicon:no-side-effects",
+                    "reason": "Explicit inputs govern what a computation reads, while no side effects governs what it writes."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "All data a computation needs supplied through its parameters rather than read from ambient or hidden state."
+        },
+        {
+            "name": "Fallback",
+            "kind": "mechanism",
+            "definition": "An alternative path or default invoked automatically when the primary operation fails or is unavailable."
+        },
+        {
+            "name": "Independent Work Units",
+            "kind": "constraint",
+            "definition": "Work partitioned into discrete units that execute in isolation, without shared mutable state or ordering dependencies."
+        },
+        {
+            "name": "Large Input Handling",
+            "kind": "capability",
+            "definition": "The ability to process inputs too large to fit in memory, through streaming or chunking."
+        },
+        {
+            "name": "Legal-Transition Enforcement",
+            "kind": "mechanism",
+            "definition": "Rejecting any state change that is not a permitted transition."
+        },
+        {
+            "name": "Plugins",
+            "kind": "mechanism",
+            "definition": "Independently-developed components that attach to a host at defined extension points to add capabilities."
+        },
+        {
+            "name": "Policy",
+            "kind": "constraint",
+            "definition": "A declared set of rules governing what actions are permitted or denied within a system."
+        },
+        {
+            "name": "Recovery",
+            "kind": "capability",
+            "definition": "Restoring a system to correct operation or a consistent state after a failure."
+        },
+        {
+            "name": "Reuse",
+            "kind": "capability",
+            "definition": "Using an existing component, module, or solution in a new context rather than rebuilding it."
+        },
+        {
+            "name": "Runtime Indirection",
+            "kind": "mechanism",
+            "definition": "Resolving a binding or call target at runtime through an intermediary layer rather than a direct, static reference."
+        },
+        {
+            "name": "Safe Defaults",
+            "distinctFrom": [
+                {
+                    "id": "architecture:fail-safe",
+                    "reason": "Safe defaults are the state shipped when nothing is changed, while fail safe is the state left behind when an operation fails."
+                }
+            ],
+            "kind": "principle",
+            "definition": "Choosing default configurations and behaviors that are safe when left unchanged."
+        },
+        {
+            "name": "Safe Refactoring",
+            "kind": "capability",
+            "definition": "Changing a system's internal structure with confidence that its observable behavior is preserved."
+        },
+        {
+            "name": "Safe Substitution",
+            "kind": "capability",
+            "definition": "Replacing a component or expression with an equivalent one without altering program correctness."
+        },
+        {
+            "name": "Model Drift",
+            "kind": "anti-pattern",
+            "definition": "The gradual loss of a model's fidelity to the reality it represents, as data or conditions change over time."
+        },
+        {
+            "name": "Stable Contracts",
+            "kind": "constraint",
+            "definition": "Interfaces and agreements that remain unchanged over time so that consumers can depend on them safely."
+        },
+        {
+            "name": "Thresholds",
+            "kind": "constraint",
+            "definition": "Configured boundary values that trigger an alert or action when a measured metric crosses them."
+        },
+        {
+            "name": "Time Budget",
+            "kind": "constraint",
+            "definition": "A bounded maximum amount of time allotted for an operation to complete."
+        },
+        {
+            "name": "Time Cost",
+            "kind": "metric",
+            "definition": "The amount of time an activity requires, weighed as a cost against its benefit."
+        },
+        {
+            "name": "Type Metadata",
+            "kind": "artifact",
+            "definition": "Descriptive data about the types of a structure's fields, available for inspection at runtime."
+        },
+        {
+            "name": "Undo/Redo",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:deferred-execution",
+                    "reason": "Undo and redo reverse and reapply an operation, while deferred execution runs a captured request later."
+                },
+                {
+                    "id": "lexicon:snapshot-restore",
+                    "reason": "Undo reverses one operation, while snapshot and restore returns an object to a whole captured state."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to reverse a previously applied operation and to reapply it."
+        },
+        {
+            "name": "Name the Concept",
+            "kind": "technique",
+            "definition": "A technique for giving a recurring group of values or steps a name in the domain language and one home in the code."
+        },
+        {
+            "name": "Name Constant",
+            "kind": "technique",
+            "definition": "A technique for replacing an unexplained literal with a named constant that states its meaning."
+        },
+        {
+            "name": "Replace Boolean with Enum",
+            "kind": "technique",
+            "definition": "A technique for replacing a boolean parameter or flag with a closed set of named values."
+        }
+    ]
+}

@@ -49,46 +49,46 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_evidence_before_generation["Evidence-Before-Generation"]
-n_semantic_operation_boundary["Semantic Operation Boundary"]
-n_capability_profile["Capability Profile"]
-n_creation_history_collision["Creation History Collision"]
-n_domain_cache_validation["Domain Cache Validation"]
-n_scope_extraction["Scope Extraction"]
-n_non_destructive_domain_investigation["Non-Destructive Domain Investigation"]
-n_domain_knowledge_base["Domain Knowledge Base"]
-n_risk_complexity_reversibility["Risk Complexity Reversibility"]
-n_existing_pattern_extraction["Existing Pattern Extraction"]
-n_knowledge_documentation_relevance["Knowledge Documentation Relevance"]
-n_principle_extraction["Principle Extraction"]
-n_adaptive_phase_boundary["Adaptive Phase Boundary"]
-n_phase_validation_requirement["Phase Validation Requirement"]
-n_portable_contract_composition["Portable Contract Composition"]
-n_validation_strategy_composition["Validation Strategy Composition"]
-n_replacement_safety["Replacement Safety"]
-n_adapter_rendering["Adapter Rendering"]
-n_audit_artifact["Audit Artifact"]
-n_semantic_compliance_validation["Semantic Compliance Validation"]
-n_evidence_grounding_validation["Evidence Grounding Validation"]
-n_algorithmic_embodiment_validation["Algorithmic Embodiment Validation"]
-n_final_generation_report["Final Generation Report"]
-n_agent_generation_completion["Agent Generation Completion"]
-n_agent_creator_kernel["Agent Creator Kernel"]
-n_agent_generation_concern["<Agent Generation Concern>"]
-n_audit_artifact --> n_capability_profile
-n_agent_creator_kernel --> n_capability_profile
-n_agent_creator_kernel --> n_scope_extraction
-n_agent_creator_kernel --> n_domain_knowledge_base
-n_agent_creator_kernel --> n_principle_extraction
-n_agent_creator_kernel --> n_adapter_rendering
-n_agent_creator_kernel --> n_final_generation_report
-n_agent_creator_kernel --> n_agent_generation_completion
-n_agent_creator_kernel --> n_evidence_before_generation
-n_agent_creator_kernel --> n_risk_complexity_reversibility
-n_agent_creator_kernel --> n_adaptive_phase_boundary
-n_agent_creator_kernel --> n_creation_history_collision
-n_agent_creator_kernel --> n_phase_validation_requirement
-n_agent_creator_kernel --> n_evidence_grounding_validation
+    n_evidence_before_generation["Evidence-Before-Generation"]
+    n_semantic_operation_boundary["Semantic Operation Boundary"]
+    n_capability_profile["Capability Profile"]
+    n_creation_history_collision["Creation History Collision"]
+    n_domain_cache_validation["Domain Cache Validation"]
+    n_scope_extraction["Scope Extraction"]
+    n_non_destructive_domain_investigation["Non-Destructive Domain Investigation"]
+    n_domain_knowledge_base["Domain Knowledge Base"]
+    n_risk_complexity_reversibility["Risk Complexity Reversibility"]
+    n_existing_pattern_extraction["Existing Pattern Extraction"]
+    n_knowledge_documentation_relevance["Knowledge Documentation Relevance"]
+    n_principle_extraction["Principle Extraction"]
+    n_adaptive_phase_boundary["Adaptive Phase Boundary"]
+    n_phase_validation_requirement["Phase Validation Requirement"]
+    n_portable_contract_composition["Portable Contract Composition"]
+    n_validation_strategy_composition["Validation Strategy Composition"]
+    n_replacement_safety["Replacement Safety"]
+    n_adapter_rendering["Adapter Rendering"]
+    n_audit_artifact["Audit Artifact"]
+    n_semantic_compliance_validation["Semantic Compliance Validation"]
+    n_evidence_grounding_validation["Evidence Grounding Validation"]
+    n_algorithmic_embodiment_validation["Algorithmic Embodiment Validation"]
+    n_final_generation_report["Final Generation Report"]
+    n_agent_generation_completion["Agent Generation Completion"]
+    n_agent_creator_kernel["Agent Creator Kernel"]
+    n_agent_generation_concern["<Agent Generation Concern>"]
+    n_audit_artifact --> n_capability_profile
+    n_agent_creator_kernel --> n_capability_profile
+    n_agent_creator_kernel --> n_scope_extraction
+    n_agent_creator_kernel --> n_domain_knowledge_base
+    n_agent_creator_kernel --> n_principle_extraction
+    n_agent_creator_kernel --> n_adapter_rendering
+    n_agent_creator_kernel --> n_final_generation_report
+    n_agent_creator_kernel --> n_agent_generation_completion
+    n_agent_creator_kernel --> n_evidence_before_generation
+    n_agent_creator_kernel --> n_risk_complexity_reversibility
+    n_agent_creator_kernel --> n_adaptive_phase_boundary
+    n_agent_creator_kernel --> n_creation_history_collision
+    n_agent_creator_kernel --> n_phase_validation_requirement
+    n_agent_creator_kernel --> n_evidence_grounding_validation
 ```
 
 ### Evidence-Before-Generation
@@ -2264,51 +2264,51 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_hybrid_workflow_orchestration["Hybrid Workflow Orchestration"]
-n_dsl_compliance_loading["DSL Compliance Loading"]
-n_agent_workflow_file_modification_recovery["File Modification Recovery"]
-n_context_forking_configuration["Context Forking Configuration"]
-n_verb_based_execution_classification["Verb-Based Execution Classification"]
-n_workspace_configuration_discovery["Workspace Configuration Discovery"]
-n_shared_document_workspace["Shared Document Workspace"]
-n_workflow_type_document_selection["Workflow Type Document Selection"]
-n_agent_sequence_definition["Agent Sequence Definition"]
-n_agent_document_responsibility["Agent Document Responsibility"]
-n_agent_activation_invocation["Agent Activation Invocation"]
-n_parallel_batch_execution["Parallel Batch Execution"]
-n_sequential_agent_execution["Sequential Agent Execution"]
-n_four_dimensional_agent_graph["Four-Dimensional Agent Graph"]
-n_handoff_signal["Handoff Signal"]
-n_orchestrator_action["Orchestrator Action"]
-n_workflow_coordination_sequence["Workflow Coordination Sequence"]
-n_workflow_recovery_loop["Workflow Recovery Loop"]
-n_checklist_integration["Checklist Integration"]
-n_phase_documentation_template["Phase Documentation Template"]
-n_workflow_principles_mapping["Workflow Principles Mapping"]
-n_capability_invocation_protocol["Capability Invocation Protocol"]
-n_template_assembly["Template Assembly"]
-n_first_time_initiation["First-Time Initiation"]
-n_workflow_validation_gate["Workflow Validation Gate"]
-n_workflow_creation_kernel["Workflow Creation Kernel"]
-n_workflow_orchestration_concern["<Workflow Orchestration Concern>"]
-n_handoff_signal --> n_orchestrator_action
-n_orchestrator_action --> n_handoff_signal
-n_workflow_creation_kernel --> n_dsl_compliance_loading
-n_workflow_creation_kernel --> n_agent_workflow_file_modification_recovery
-n_workflow_creation_kernel --> n_context_forking_configuration
-n_workflow_creation_kernel --> n_workspace_configuration_discovery
-n_workflow_creation_kernel --> n_shared_document_workspace
-n_workflow_creation_kernel --> n_agent_sequence_definition
-n_workflow_creation_kernel --> n_handoff_signal
-n_workflow_creation_kernel --> n_workflow_coordination_sequence
-n_workflow_creation_kernel --> n_checklist_integration
-n_workflow_creation_kernel --> n_phase_documentation_template
-n_workflow_creation_kernel --> n_capability_invocation_protocol
-n_workflow_creation_kernel --> n_template_assembly
-n_workflow_creation_kernel --> n_workflow_validation_gate
-n_workflow_creation_kernel --> n_workflow_type_document_selection
-n_workflow_creation_kernel --> n_agent_activation_invocation
-n_workflow_creation_kernel --> n_first_time_initiation
+    n_hybrid_workflow_orchestration["Hybrid Workflow Orchestration"]
+    n_dsl_compliance_loading["DSL Compliance Loading"]
+    n_agent_workflow_file_modification_recovery["Agent Workflow File Modification Recovery"]
+    n_context_forking_configuration["Context Forking Configuration"]
+    n_verb_based_execution_classification["Verb-Based Execution Classification"]
+    n_workspace_configuration_discovery["Workspace Configuration Discovery"]
+    n_shared_document_workspace["Shared Document Workspace"]
+    n_workflow_type_document_selection["Workflow Type Document Selection"]
+    n_agent_sequence_definition["Agent Sequence Definition"]
+    n_agent_document_responsibility["Agent Document Responsibility"]
+    n_agent_activation_invocation["Agent Activation Invocation"]
+    n_parallel_batch_execution["Parallel Batch Execution"]
+    n_sequential_agent_execution["Sequential Agent Execution"]
+    n_four_dimensional_agent_graph["Four-Dimensional Agent Graph"]
+    n_handoff_signal["Handoff Signal"]
+    n_orchestrator_action["Orchestrator Action"]
+    n_workflow_coordination_sequence["Workflow Coordination Sequence"]
+    n_workflow_recovery_loop["Workflow Recovery Loop"]
+    n_checklist_integration["Checklist Integration"]
+    n_phase_documentation_template["Phase Documentation Template"]
+    n_workflow_principles_mapping["Workflow Principles Mapping"]
+    n_capability_invocation_protocol["Capability Invocation Protocol"]
+    n_template_assembly["Template Assembly"]
+    n_first_time_initiation["First-Time Initiation"]
+    n_workflow_validation_gate["Workflow Validation Gate"]
+    n_workflow_creation_kernel["Workflow Creation Kernel"]
+    n_workflow_orchestration_concern["<Workflow Orchestration Concern>"]
+    n_handoff_signal --> n_orchestrator_action
+    n_orchestrator_action --> n_handoff_signal
+    n_workflow_creation_kernel --> n_dsl_compliance_loading
+    n_workflow_creation_kernel --> n_agent_workflow_file_modification_recovery
+    n_workflow_creation_kernel --> n_context_forking_configuration
+    n_workflow_creation_kernel --> n_workspace_configuration_discovery
+    n_workflow_creation_kernel --> n_shared_document_workspace
+    n_workflow_creation_kernel --> n_agent_sequence_definition
+    n_workflow_creation_kernel --> n_handoff_signal
+    n_workflow_creation_kernel --> n_workflow_coordination_sequence
+    n_workflow_creation_kernel --> n_checklist_integration
+    n_workflow_creation_kernel --> n_phase_documentation_template
+    n_workflow_creation_kernel --> n_capability_invocation_protocol
+    n_workflow_creation_kernel --> n_template_assembly
+    n_workflow_creation_kernel --> n_workflow_validation_gate
+    n_workflow_creation_kernel --> n_workflow_type_document_selection
+    n_workflow_creation_kernel --> n_agent_activation_invocation
+    n_workflow_creation_kernel --> n_first_time_initiation
 ```
 
 ### Hybrid Workflow Orchestration
@@ -2479,7 +2479,7 @@ Not answered
 Shape it refuses
 Not answered
 
-### File Modification Recovery
+### Agent Workflow File Modification Recovery
 
 - Domain: [agent-workflow](ALGORITHMS.md#algorithms-domain-agent-workflow)
 - Tier: [process](SCHEMA.md#vocabulary-domain-tier-process)
@@ -4415,7 +4415,7 @@ WorkflowCreationKernel ::= <DSLComplianceLoading> "→" <FileModificationRecover
 ```
 
 Composes
-[DSL Compliance Loading](ALGORITHMS.md#algorithms-dsl-compliance-loading), [File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Context Forking Configuration](ALGORITHMS.md#algorithms-context-forking-configuration), [Workspace Configuration Discovery](ALGORITHMS.md#algorithms-workspace-configuration-discovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Sequence Definition](ALGORITHMS.md#algorithms-agent-sequence-definition), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Template Assembly](ALGORITHMS.md#algorithms-template-assembly), [Workflow Validation Gate](ALGORITHMS.md#algorithms-workflow-validation-gate)
+[DSL Compliance Loading](ALGORITHMS.md#algorithms-dsl-compliance-loading), [Agent Workflow File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Context Forking Configuration](ALGORITHMS.md#algorithms-context-forking-configuration), [Workspace Configuration Discovery](ALGORITHMS.md#algorithms-workspace-configuration-discovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Sequence Definition](ALGORITHMS.md#algorithms-agent-sequence-definition), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Template Assembly](ALGORITHMS.md#algorithms-template-assembly), [Workflow Validation Gate](ALGORITHMS.md#algorithms-workflow-validation-gate)
 
 Forces
 [contract_compatibility](SCHEMA.md#force-contract-compatibility), [runtime_extensibility](SCHEMA.md#force-runtime-extensibility), [state_transaction](SCHEMA.md#force-state-transaction), [correctness_verification](SCHEMA.md#force-correctness-verification), [resilience_recovery](SCHEMA.md#force-resilience-recovery), [model_governance](SCHEMA.md#force-model-governance), [event_messaging](SCHEMA.md#force-event-messaging), [metaprogramming_modeling](SCHEMA.md#force-metaprogramming-modeling), [control_coordination](SCHEMA.md#force-control-coordination), [architecture_evolution](SCHEMA.md#force-architecture-evolution)
@@ -4485,7 +4485,7 @@ Authoritative side
 The workflow template's contracts, which each run's coordination record is compared against
 
 Depends on
-[DSL Compliance Loading](ALGORITHMS.md#algorithms-dsl-compliance-loading), [File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Context Forking Configuration](ALGORITHMS.md#algorithms-context-forking-configuration), [Workspace Configuration Discovery](ALGORITHMS.md#algorithms-workspace-configuration-discovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Sequence Definition](ALGORITHMS.md#algorithms-agent-sequence-definition), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Template Assembly](ALGORITHMS.md#algorithms-template-assembly), [Workflow Validation Gate](ALGORITHMS.md#algorithms-workflow-validation-gate)
+[DSL Compliance Loading](ALGORITHMS.md#algorithms-dsl-compliance-loading), [Agent Workflow File Modification Recovery](ALGORITHMS.md#algorithms-agent-workflow-file-modification-recovery), [Context Forking Configuration](ALGORITHMS.md#algorithms-context-forking-configuration), [Workspace Configuration Discovery](ALGORITHMS.md#algorithms-workspace-configuration-discovery), [Shared Document Workspace](ALGORITHMS.md#algorithms-shared-document-workspace), [Agent Sequence Definition](ALGORITHMS.md#algorithms-agent-sequence-definition), [Handoff Signal](ALGORITHMS.md#algorithms-handoff-signal), [Workflow Coordination Sequence](ALGORITHMS.md#algorithms-workflow-coordination-sequence), [Checklist Integration](ALGORITHMS.md#algorithms-checklist-integration), [Phase Documentation Template](ALGORITHMS.md#algorithms-phase-documentation-template), [Capability Invocation Protocol](ALGORITHMS.md#algorithms-capability-invocation-protocol), [Template Assembly](ALGORITHMS.md#algorithms-template-assembly), [Workflow Validation Gate](ALGORITHMS.md#algorithms-workflow-validation-gate)
 
 Shape it refuses
 Not answered
@@ -4565,14 +4565,14 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_anti_pattern_inversion["Anti-Pattern Inversion"]
-n_anti_pattern_propagation_kernel["Anti-Pattern Propagation Kernel"]
-n_anti_pattern_remediation_algebra["Anti-Pattern Remediation Algebra"]
-n_architecture_smell_record["Architecture Smell Record"]
-n_anti_pattern_rule_compiler["Anti-Pattern Rule Compiler"]
-n_smell_taxonomy["Smell Taxonomy"]
-n_anti_pattern_relationship_record["Anti-Pattern Relationship Record"]
-n_architecture_anti_pattern["<Architecture Anti-Pattern>"]
+    n_anti_pattern_inversion["Anti-Pattern Inversion"]
+    n_anti_pattern_propagation_kernel["Anti-Pattern Propagation Kernel"]
+    n_anti_pattern_remediation_algebra["Anti-Pattern Remediation Algebra"]
+    n_architecture_smell_record["Architecture Smell Record"]
+    n_anti_pattern_rule_compiler["Anti-Pattern Rule Compiler"]
+    n_smell_taxonomy["Smell Taxonomy"]
+    n_anti_pattern_relationship_record["Anti-Pattern Relationship Record"]
+    n_architecture_anti_pattern["<Architecture Anti-Pattern>"]
 ```
 
 ### Anti-Pattern Inversion
@@ -5193,58 +5193,58 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_document_truth_alignment["Document Truth Alignment"]
-n_architectural_contract_kernel["Architectural Contract Kernel"]
-n_responsibility_boundary["Responsibility Boundary"]
-n_coupling_control["Coupling Control"]
-n_interface_contract["Interface Contract"]
-n_substitutability["Substitutability"]
-n_canonical_data["Canonical Data"]
-n_domain_boundary["Domain Boundary"]
-n_self_description_manifest["Self-Description Manifest"]
-n_runtime_discovery["Runtime Discovery"]
-n_extension_point["Extension Point"]
-n_construction_boundary["Construction Boundary"]
-n_structural_mediation["Structural Mediation"]
-n_behavioral_dispatch["Behavioral Dispatch"]
-n_architectural_style_boundary["Architectural Style Boundary"]
-n_port_adapter["Port Adapter"]
-n_event_messaging["Event Messaging"]
-n_saga_compensation["Saga Compensation"]
-n_transaction_boundary["Transaction Boundary"]
-n_idempotent_side_effect["Idempotent Side Effect"]
-n_deterministic_core["Deterministic Core"]
-n_verification_fitness["Verification Fitness"]
-n_error_boundary["Error Boundary"]
-n_resilience_control["Resilience Control"]
-n_recovery_deployment["Recovery Deployment"]
-n_observability_trace["Observability Trace"]
-n_causality_ordering["Causality Ordering"]
-n_performance_scaling["Performance Scaling"]
-n_cache_correctness["Cache Correctness"]
-n_portability_environment["Portability Environment"]
-n_security_policy["Security Policy"]
-n_control_plane["Control Plane"]
-n_declarative_metaprogramming["Declarative Metaprogramming"]
-n_streaming_dataflow["Streaming Dataflow"]
-n_rag_knowledge_boundary["RAG Knowledge Boundary"]
-n_architecture_selection_meta_algorithm["Architecture Selection Meta-Algorithm"]
-n_universal_architectural_concern_template["Universal Architectural Concern Template"]
-n_architectural_contract_algebra["Architectural Contract Algebra"]
-n_manifest_driven_documentation["Manifest-Driven Documentation"]
-n_consumer_config_ssot["Consumer Config SSOT"]
-n_finite_state_machine["Finite State Machine"]
-n_statecharts["Statecharts"]
-n_petri_nets["Petri Nets"]
-n_queuing_theory["Queuing Theory"]
-n_architectural_contract_algebra --> n_domain_boundary
-n_architectural_contract_algebra --> n_transaction_boundary
-n_manifest_driven_documentation --> n_document_truth_alignment
-n_manifest_driven_documentation --> n_self_description_manifest
-n_manifest_driven_documentation --> n_extension_point
-n_consumer_config_ssot --> n_architectural_contract_kernel
-n_consumer_config_ssot --> n_responsibility_boundary
-n_statecharts --> n_finite_state_machine
+    n_document_truth_alignment["Document Truth Alignment"]
+    n_architectural_contract_kernel["Architectural Contract Kernel"]
+    n_responsibility_boundary["Responsibility Boundary"]
+    n_coupling_control["Coupling Control"]
+    n_interface_contract["Interface Contract"]
+    n_substitutability["Substitutability"]
+    n_canonical_data["Canonical Data"]
+    n_domain_boundary["Domain Boundary"]
+    n_self_description_manifest["Self-Description Manifest"]
+    n_runtime_discovery["Runtime Discovery"]
+    n_extension_point["Extension Point"]
+    n_construction_boundary["Construction Boundary"]
+    n_structural_mediation["Structural Mediation"]
+    n_behavioral_dispatch["Behavioral Dispatch"]
+    n_architectural_style_boundary["Architectural Style Boundary"]
+    n_port_adapter["Port Adapter"]
+    n_event_messaging["Event Messaging"]
+    n_saga_compensation["Saga Compensation"]
+    n_transaction_boundary["Transaction Boundary"]
+    n_idempotent_side_effect["Idempotent Side Effect"]
+    n_deterministic_core["Deterministic Core"]
+    n_verification_fitness["Verification Fitness"]
+    n_error_boundary["Error Boundary"]
+    n_resilience_control["Resilience Control"]
+    n_recovery_deployment["Recovery Deployment"]
+    n_observability_trace["Observability Trace"]
+    n_causality_ordering["Causality Ordering"]
+    n_performance_scaling["Performance Scaling"]
+    n_cache_correctness["Cache Correctness"]
+    n_portability_environment["Portability Environment"]
+    n_security_policy["Security Policy"]
+    n_control_plane["Control Plane"]
+    n_declarative_metaprogramming["Declarative Metaprogramming"]
+    n_streaming_dataflow["Streaming Dataflow"]
+    n_rag_knowledge_boundary["RAG Knowledge Boundary"]
+    n_architecture_selection_meta_algorithm["Architecture Selection Meta-Algorithm"]
+    n_universal_architectural_concern_template["Universal Architectural Concern Template"]
+    n_architectural_contract_algebra["Architectural Contract Algebra"]
+    n_manifest_driven_documentation["Manifest-Driven Documentation"]
+    n_consumer_config_ssot["Consumer Config SSOT"]
+    n_finite_state_machine["Finite State Machine"]
+    n_statecharts["Statecharts"]
+    n_petri_nets["Petri Nets"]
+    n_queuing_theory["Queuing Theory"]
+    n_architectural_contract_algebra --> n_domain_boundary
+    n_architectural_contract_algebra --> n_transaction_boundary
+    n_manifest_driven_documentation --> n_document_truth_alignment
+    n_manifest_driven_documentation --> n_self_description_manifest
+    n_manifest_driven_documentation --> n_extension_point
+    n_consumer_config_ssot --> n_architectural_contract_kernel
+    n_consumer_config_ssot --> n_responsibility_boundary
+    n_statecharts --> n_finite_state_machine
 ```
 
 ### Document Truth Alignment
@@ -8983,66 +8983,66 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_architectural_relationship_record["Architectural Relationship Record"]
-n_architecture_knowledge_graph["Architecture Knowledge Graph"]
-n_architectural_force_classification["Architectural Force Classification"]
-n_dependency_closure["Dependency Closure"]
-n_reinforcement_propagation["Reinforcement Propagation"]
-n_conflict_and_tension_resolution["Conflict and Tension Resolution"]
-n_severity_policy["Severity Policy"]
-n_violation_detection["Violation Detection"]
-n_measurement_normalization["Measurement Normalization"]
-n_refactor_selection["Refactor Selection"]
-n_enforcement_gate["Enforcement Gate"]
-n_architecture_assessment["Architecture Assessment"]
-n_modular_boundary_compliance["Modular Boundary Compliance"]
-n_contract_compatibility["Contract Compatibility"]
-n_canonical_semantics["Canonical Semantics"]
-n_self_description_and_discovery["Self-Description and Discovery"]
-n_runtime_extensibility["Runtime Extensibility"]
-n_pattern_selection["Pattern Selection"]
-n_event_and_messaging_consistency["Event and Messaging Consistency"]
-n_state_and_transaction_safety["State and Transaction Safety"]
-n_correctness_verification["Correctness Verification"]
-n_resilience_policy["Resilience Policy"]
-n_observability_and_auditability["Observability and Auditability"]
-n_performance_and_scalability["Performance and Scalability"]
-n_security_governance["Security Governance"]
-n_architecture_evolution_governance["Architecture Evolution Governance"]
-n_control_plane_coordination["Control Plane Coordination"]
-n_metaprogramming_safety["Metaprogramming Safety"]
-n_model_lifecycle_governance["Model Lifecycle Governance"]
-n_architectural_recommendation["Architectural Recommendation"]
-n_architecture_fitness_function_generation["Architecture Fitness Function Generation"]
-n_architecture_refactoring_roadmap["Architecture Refactoring Roadmap"]
-n_concept_cluster_extraction["Concept Cluster Extraction"]
-n_architecture_decision_support["Architecture Decision Support"]
-n_relationship_schema_validation["Relationship Schema Validation"]
-n_architecture_catalog_compiler["Architecture Catalog Compiler"]
-n_master_architecture_governance_kernel["Master Architecture Governance Kernel"]
-n_architectural_relationship_algebra["Architectural Relationship Algebra"]
-n_architecture_assessment --> n_dependency_closure
-n_architecture_assessment --> n_violation_detection
-n_architecture_assessment --> n_measurement_normalization
-n_architecture_evolution_governance --> n_architecture_assessment
-n_architectural_recommendation --> n_dependency_closure
-n_architecture_fitness_function_generation --> n_architectural_relationship_record
-n_architecture_fitness_function_generation --> n_enforcement_gate
-n_architecture_fitness_function_generation --> n_severity_policy
-n_master_architecture_governance_kernel --> n_relationship_schema_validation
-n_master_architecture_governance_kernel --> n_concept_cluster_extraction
-n_master_architecture_governance_kernel --> n_dependency_closure
-n_master_architecture_governance_kernel --> n_violation_detection
-n_master_architecture_governance_kernel --> n_measurement_normalization
-n_master_architecture_governance_kernel --> n_refactor_selection
-n_master_architecture_governance_kernel --> n_enforcement_gate
-n_master_architecture_governance_kernel --> n_architecture_decision_support
-n_architectural_relationship_algebra --> n_dependency_closure
-n_architectural_relationship_algebra --> n_violation_detection
-n_architectural_relationship_algebra --> n_measurement_normalization
-n_architectural_relationship_algebra --> n_refactor_selection
-n_architectural_relationship_algebra --> n_enforcement_gate
-n_architectural_relationship_algebra --> n_architecture_evolution_governance
+    n_architectural_relationship_record["Architectural Relationship Record"]
+    n_architecture_knowledge_graph["Architecture Knowledge Graph"]
+    n_architectural_force_classification["Architectural Force Classification"]
+    n_dependency_closure["Dependency Closure"]
+    n_reinforcement_propagation["Reinforcement Propagation"]
+    n_conflict_and_tension_resolution["Conflict and Tension Resolution"]
+    n_severity_policy["Severity Policy"]
+    n_violation_detection["Violation Detection"]
+    n_measurement_normalization["Measurement Normalization"]
+    n_refactor_selection["Refactor Selection"]
+    n_enforcement_gate["Enforcement Gate"]
+    n_architecture_assessment["Architecture Assessment"]
+    n_modular_boundary_compliance["Modular Boundary Compliance"]
+    n_contract_compatibility["Contract Compatibility"]
+    n_canonical_semantics["Canonical Semantics"]
+    n_self_description_and_discovery["Self-Description and Discovery"]
+    n_runtime_extensibility["Runtime Extensibility"]
+    n_pattern_selection["Pattern Selection"]
+    n_event_and_messaging_consistency["Event and Messaging Consistency"]
+    n_state_and_transaction_safety["State and Transaction Safety"]
+    n_correctness_verification["Correctness Verification"]
+    n_resilience_policy["Resilience Policy"]
+    n_observability_and_auditability["Observability and Auditability"]
+    n_performance_and_scalability["Performance and Scalability"]
+    n_security_governance["Security Governance"]
+    n_architecture_evolution_governance["Architecture Evolution Governance"]
+    n_control_plane_coordination["Control Plane Coordination"]
+    n_metaprogramming_safety["Metaprogramming Safety"]
+    n_model_lifecycle_governance["Model Lifecycle Governance"]
+    n_architectural_recommendation["Architectural Recommendation"]
+    n_architecture_fitness_function_generation["Architecture Fitness Function Generation"]
+    n_architecture_refactoring_roadmap["Architecture Refactoring Roadmap"]
+    n_concept_cluster_extraction["Concept Cluster Extraction"]
+    n_architecture_decision_support["Architecture Decision Support"]
+    n_relationship_schema_validation["Relationship Schema Validation"]
+    n_architecture_catalog_compiler["Architecture Catalog Compiler"]
+    n_master_architecture_governance_kernel["Master Architecture Governance Kernel"]
+    n_architectural_relationship_algebra["Architectural Relationship Algebra"]
+    n_architecture_assessment --> n_dependency_closure
+    n_architecture_assessment --> n_violation_detection
+    n_architecture_assessment --> n_measurement_normalization
+    n_architecture_evolution_governance --> n_architecture_assessment
+    n_architectural_recommendation --> n_dependency_closure
+    n_architecture_fitness_function_generation --> n_architectural_relationship_record
+    n_architecture_fitness_function_generation --> n_enforcement_gate
+    n_architecture_fitness_function_generation --> n_severity_policy
+    n_master_architecture_governance_kernel --> n_relationship_schema_validation
+    n_master_architecture_governance_kernel --> n_concept_cluster_extraction
+    n_master_architecture_governance_kernel --> n_dependency_closure
+    n_master_architecture_governance_kernel --> n_violation_detection
+    n_master_architecture_governance_kernel --> n_measurement_normalization
+    n_master_architecture_governance_kernel --> n_refactor_selection
+    n_master_architecture_governance_kernel --> n_enforcement_gate
+    n_master_architecture_governance_kernel --> n_architecture_decision_support
+    n_architectural_relationship_algebra --> n_dependency_closure
+    n_architectural_relationship_algebra --> n_violation_detection
+    n_architectural_relationship_algebra --> n_measurement_normalization
+    n_architectural_relationship_algebra --> n_refactor_selection
+    n_architectural_relationship_algebra --> n_enforcement_gate
+    n_architectural_relationship_algebra --> n_architecture_evolution_governance
 ```
 
 ### Architectural Relationship Record
@@ -12077,28 +12077,28 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_structural_core["Structural Core"]
-n_correctness_core["Correctness Core"]
-n_evolution_principles["Evolution Principles"]
-n_resource_core["Resource Core"]
-n_execution_core["Execution Core"]
-n_computation_core["Computation Core"]
-n_security_core["Security Core"]
-n_performance_core["Performance Core"]
-n_contracts_core["Contracts Core"]
-n_causality_core["Causality Core"]
-n_declarative_core["Declarative Core"]
-n_extensibility_core["Extensibility Core"]
-n_observability["Observability"]
-n_enforcement_core["Enforcement Core"]
-n_atomic_boundary["Atomic Boundary"]
-n_human_factors["Human Factors"]
-n_domain_modeling["Domain Modeling"]
-n_design_patterns_core["Design Patterns Core"]
-n_state_pattern["State Pattern"]
-n_separation_of_concerns["Separation of Concerns"]
-n_concurrency_correctness["Concurrency Correctness"]
-n_capacity_planning["Capacity Planning"]
+    n_structural_core["Structural Core"]
+    n_correctness_core["Correctness Core"]
+    n_evolution_principles["Evolution Principles"]
+    n_resource_core["Resource Core"]
+    n_execution_core["Execution Core"]
+    n_computation_core["Computation Core"]
+    n_security_core["Security Core"]
+    n_performance_core["Performance Core"]
+    n_contracts_core["Contracts Core"]
+    n_causality_core["Causality Core"]
+    n_declarative_core["Declarative Core"]
+    n_extensibility_core["Extensibility Core"]
+    n_observability["Observability"]
+    n_enforcement_core["Enforcement Core"]
+    n_atomic_boundary["Atomic Boundary"]
+    n_human_factors["Human Factors"]
+    n_domain_modeling["Domain Modeling"]
+    n_design_patterns_core["Design Patterns Core"]
+    n_state_pattern["State Pattern"]
+    n_separation_of_concerns["Separation of Concerns"]
+    n_concurrency_correctness["Concurrency Correctness"]
+    n_capacity_planning["Capacity Planning"]
 ```
 
 ### Structural Core
@@ -13578,53 +13578,53 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_no_shortcuts["Constraints Over Shortcuts"]
-n_no_backward_compat["Forward Compatibility Over Backward Compatibility"]
-n_no_fallback["Fail-Fast Over Fallback"]
-n_no_deprecation["Explicit Removal Over Deprecation"]
-n_no_legacy["Greenfield Over Legacy"]
-n_no_dual_path["Single-Path Determinism Over Dual-Path"]
-n_no_deferring["Immediacy Over Deferring"]
-n_no_optional["Mandatory Over Optional"]
-n_no_for_now["Now Over For-Now"]
-n_no_unobserved["Observed Execution Over Unobserved"]
-n_no_uncompressed["Compression Over Repetition"]
-n_no_unapproved["Approved Evolution Over Unapproved"]
-n_no_ignored_feedback["Enforced Feedback Over Ignored"]
-n_no_shared_ownership["Single Owner Over Shared Ownership"]
-n_no_unbounded["Bounded Lifetime Over Unbounded"]
-n_no_asymmetric["Enforced Symmetry Over Asymmetric Lifecycle"]
-n_no_implicit_retention["Explicit Retention Over Implicit"]
-n_no_discipline_release["Structural Release Over Discipline"]
-n_no_mutable["Immutable Data Over Mutable State"]
-n_no_silent["Errors As Language Over Silent Errors"]
-n_no_hidden_invalidity["Explicit Invalidity Over Hidden"]
-n_no_callbacks["Event Emission Over Parent Callbacks"]
-n_no_retraction["Monotonic Growth Over Retraction"]
-n_no_location["Semantic Addressing Over Location Addressing"]
-n_no_timestamps["Ordinal Time Over Timestamps"]
-n_no_separation["Homoiconicity Over Separation"]
-n_no_unlimited["Bounded Complexity Over Unlimited"]
-n_no_metrics["Computed Health Over Metric Health"]
-n_no_hardcoded_secrets["Secret Store Over Hardcoded Secrets"]
-n_no_unvalidated_input["Boundary Validation Over Unvalidated Input"]
-n_no_broad_privilege["Least Privilege Over Broad Privilege"]
-n_no_env_fallback["Config Externalization Over Env Fallback"]
-n_no_unmeasured_optimization["Profile-First Over Unmeasured Optimization"]
-n_no_convention_enforcement["Rule As Code Over Convention"]
-n_no_implicit_contract["Design By Contract Over Implicit Contract"]
-n_no_breaking_change["Versioned Evolution Over Breaking Change"]
-n_no_untyped_boundary["Schema-Validated Boundary Over Untyped"]
-n_no_partial_commit["Atomic Boundary Over Partial Commit"]
-n_no_distributed_2pc["Saga Compensation Over Distributed 2PC"]
-n_no_sync_cross_boundary["Async Events Over Synchronous Cross-Boundary"]
-n_no_opaque_runtime["Observable Signals Over Opaque Runtime"]
-n_no_hidden_dependency["Injected Dependency Over Hidden"]
-n_no_hardcoded_wiring["Convention Discovery Over Hardcoded Wiring"]
-n_no_imperative_config["Declarative Config Over Imperative"]
-n_no_leaky_context["Anti-Corruption Layer Over Cross-Context Leak"]
-n_no_hidden_nondeterminism["Injected Nondeterminism Over Hidden"]
-n_no_speculative_pattern["Pattern By Fit Over Speculative Pattern"]
+    n_no_shortcuts["Constraints Over Shortcuts"]
+    n_no_backward_compat["Forward Compatibility Over Backward Compatibility"]
+    n_no_fallback["Fail-Fast Over Fallback"]
+    n_no_deprecation["Explicit Removal Over Deprecation"]
+    n_no_legacy["Greenfield Over Legacy"]
+    n_no_dual_path["Single-Path Determinism Over Dual-Path"]
+    n_no_deferring["Immediacy Over Deferring"]
+    n_no_optional["Mandatory Over Optional"]
+    n_no_for_now["Now Over For-Now"]
+    n_no_unobserved["Observed Execution Over Unobserved"]
+    n_no_uncompressed["Compression Over Repetition"]
+    n_no_unapproved["Approved Evolution Over Unapproved"]
+    n_no_ignored_feedback["Enforced Feedback Over Ignored"]
+    n_no_shared_ownership["Single Owner Over Shared Ownership"]
+    n_no_unbounded["Bounded Lifetime Over Unbounded"]
+    n_no_asymmetric["Enforced Symmetry Over Asymmetric Lifecycle"]
+    n_no_implicit_retention["Explicit Retention Over Implicit"]
+    n_no_discipline_release["Structural Release Over Discipline"]
+    n_no_mutable["Immutable Data Over Mutable State"]
+    n_no_silent["Errors As Language Over Silent Errors"]
+    n_no_hidden_invalidity["Explicit Invalidity Over Hidden"]
+    n_no_callbacks["Event Emission Over Parent Callbacks"]
+    n_no_retraction["Monotonic Growth Over Retraction"]
+    n_no_location["Semantic Addressing Over Location Addressing"]
+    n_no_timestamps["Ordinal Time Over Timestamps"]
+    n_no_separation["Homoiconicity Over Separation"]
+    n_no_unlimited["Bounded Complexity Over Unlimited"]
+    n_no_metrics["Computed Health Over Metric Health"]
+    n_no_hardcoded_secrets["Secret Store Over Hardcoded Secrets"]
+    n_no_unvalidated_input["Boundary Validation Over Unvalidated Input"]
+    n_no_broad_privilege["Least Privilege Over Broad Privilege"]
+    n_no_env_fallback["Config Externalization Over Env Fallback"]
+    n_no_unmeasured_optimization["Profile-First Over Unmeasured Optimization"]
+    n_no_convention_enforcement["Rule As Code Over Convention"]
+    n_no_implicit_contract["Design By Contract Over Implicit Contract"]
+    n_no_breaking_change["Versioned Evolution Over Breaking Change"]
+    n_no_untyped_boundary["Schema-Validated Boundary Over Untyped"]
+    n_no_partial_commit["Atomic Boundary Over Partial Commit"]
+    n_no_distributed_2pc["Saga Compensation Over Distributed 2PC"]
+    n_no_sync_cross_boundary["Async Events Over Synchronous Cross-Boundary"]
+    n_no_opaque_runtime["Observable Signals Over Opaque Runtime"]
+    n_no_hidden_dependency["Injected Dependency Over Hidden"]
+    n_no_hardcoded_wiring["Convention Discovery Over Hardcoded Wiring"]
+    n_no_imperative_config["Declarative Config Over Imperative"]
+    n_no_leaky_context["Anti-Corruption Layer Over Cross-Context Leak"]
+    n_no_hidden_nondeterminism["Injected Nondeterminism Over Hidden"]
+    n_no_speculative_pattern["Pattern By Fit Over Speculative Pattern"]
 ```
 
 ### Constraints Over Shortcuts
@@ -17869,44 +17869,44 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_static_to_dynamic_readiness["Static-to-Dynamic Readiness"]
-n_runtime_neutral_automation_boundary["Runtime-Neutral Automation Boundary"]
-n_automation_operation_mode["Automation Operation Mode"]
-n_capability_degradation["Capability Degradation"]
-n_automation_opportunity_detection["Automation Opportunity Detection"]
-n_intentional_static_separation["Intentional Static Separation"]
-n_breaking_point_calculation["Breaking Point Calculation"]
-n_automation_priority_ordering["Automation Priority Ordering"]
-n_convention_strength_analysis["Convention Strength Analysis"]
-n_extension_interface_discovery["Extension Interface Discovery"]
-n_scalability_projection["Scalability Projection"]
-n_performance_aware_discovery_design["Performance-Aware Discovery Design"]
-n_dynamic_extension_architecture["Dynamic Extension Architecture"]
-n_centralized_reference_resolver["Centralized Reference Resolver"]
-n_cache_invalidation_strategy["Cache Invalidation Strategy"]
-n_manual_fallback_preservation["Manual Fallback Preservation"]
-n_dynamic_failure_isolation["Dynamic Failure Isolation"]
-n_entry_point_migration["Entry Point Migration"]
-n_measured_vs_estimated_validation["Measured-vs-Estimated Validation"]
-n_architecture_validation_before_persistence["Architecture Validation Before Persistence"]
-n_knowledge_capture["Knowledge Capture"]
-n_automation_session_report["Automation Session Report"]
-n_automation_completion_status["Automation Completion Status"]
-n_automation_kernel["Automation Kernel"]
-n_automation_concern["<Automation Concern>"]
-n_automation_kernel --> n_capability_degradation
-n_automation_kernel --> n_scalability_projection
-n_automation_kernel --> n_dynamic_extension_architecture
-n_automation_kernel --> n_knowledge_capture
-n_automation_kernel --> n_entry_point_migration
-n_automation_kernel --> n_automation_completion_status
-n_automation_kernel --> n_automation_opportunity_detection
-n_automation_kernel --> n_convention_strength_analysis
-n_automation_kernel --> n_intentional_static_separation
-n_automation_kernel --> n_automation_priority_ordering
-n_automation_kernel --> n_automation_operation_mode
-n_automation_kernel --> n_architecture_validation_before_persistence
-n_automation_kernel --> n_automation_session_report
+    n_static_to_dynamic_readiness["Static-to-Dynamic Readiness"]
+    n_runtime_neutral_automation_boundary["Runtime-Neutral Automation Boundary"]
+    n_automation_operation_mode["Automation Operation Mode"]
+    n_capability_degradation["Capability Degradation"]
+    n_automation_opportunity_detection["Automation Opportunity Detection"]
+    n_intentional_static_separation["Intentional Static Separation"]
+    n_breaking_point_calculation["Breaking Point Calculation"]
+    n_automation_priority_ordering["Automation Priority Ordering"]
+    n_convention_strength_analysis["Convention Strength Analysis"]
+    n_extension_interface_discovery["Extension Interface Discovery"]
+    n_scalability_projection["Scalability Projection"]
+    n_performance_aware_discovery_design["Performance-Aware Discovery Design"]
+    n_dynamic_extension_architecture["Dynamic Extension Architecture"]
+    n_centralized_reference_resolver["Centralized Reference Resolver"]
+    n_cache_invalidation_strategy["Cache Invalidation Strategy"]
+    n_manual_fallback_preservation["Manual Fallback Preservation"]
+    n_dynamic_failure_isolation["Dynamic Failure Isolation"]
+    n_entry_point_migration["Entry Point Migration"]
+    n_measured_vs_estimated_validation["Measured-vs-Estimated Validation"]
+    n_architecture_validation_before_persistence["Architecture Validation Before Persistence"]
+    n_knowledge_capture["Knowledge Capture"]
+    n_automation_session_report["Automation Session Report"]
+    n_automation_completion_status["Automation Completion Status"]
+    n_automation_kernel["Automation Kernel"]
+    n_automation_concern["<Automation Concern>"]
+    n_automation_kernel --> n_capability_degradation
+    n_automation_kernel --> n_scalability_projection
+    n_automation_kernel --> n_dynamic_extension_architecture
+    n_automation_kernel --> n_knowledge_capture
+    n_automation_kernel --> n_entry_point_migration
+    n_automation_kernel --> n_automation_completion_status
+    n_automation_kernel --> n_automation_opportunity_detection
+    n_automation_kernel --> n_convention_strength_analysis
+    n_automation_kernel --> n_intentional_static_separation
+    n_automation_kernel --> n_automation_priority_ordering
+    n_automation_kernel --> n_automation_operation_mode
+    n_automation_kernel --> n_architecture_validation_before_persistence
+    n_automation_kernel --> n_automation_session_report
 ```
 
 ### Static-to-Dynamic Readiness
@@ -20000,42 +20000,42 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_runtime_agnostic_adapter_boundary["Runtime-Agnostic Adapter Boundary"]
-n_operation_mode_gating["Operation Mode Gating"]
-n_capability_disclosure["Capability Disclosure"]
-n_pattern_classification["Pattern Classification"]
-n_refactor_intent_classification["Refactor Intent Classification"]
-n_research_guidance["Research Guidance"]
-n_iterative_variation_discovery["Iterative Variation Discovery"]
-n_detection_registry["Detection Registry"]
-n_canonical_variation_selection["Canonical Variation Selection"]
-n_architecture_compliance_targeting["Architecture Compliance Targeting"]
-n_existing_solution_conflict["Existing Solution Conflict"]
-n_migration_action_mapping["Migration Action Mapping"]
-n_atomic_refactor_phase["Atomic Refactor Phase"]
-n_replacement_refactor["Replacement Refactor"]
-n_additive_debt_gate["Additive Debt Gate"]
-n_rollback_centered_execution["Rollback-Centered Execution"]
-n_pattern_specific_validation["Pattern-Specific Validation"]
-n_zero_duplication_verification["Zero-Duplication Verification"]
-n_validation_score["Validation Score"]
-n_developer_decision_gate["Developer Decision Gate"]
-n_completion_truthfulness["Completion Truthfulness"]
-n_centralization_report["Centralization Report"]
-n_centralization_kernel["Centralization Kernel"]
-n_centralization_concern["<Centralization Concern>"]
-n_canonical_variation_selection --> n_detection_registry
-n_migration_action_mapping --> n_detection_registry
-n_centralization_kernel --> n_pattern_classification
-n_centralization_kernel --> n_research_guidance
-n_centralization_kernel --> n_runtime_agnostic_adapter_boundary
-n_centralization_kernel --> n_canonical_variation_selection
-n_centralization_kernel --> n_operation_mode_gating
-n_centralization_kernel --> n_migration_action_mapping
-n_centralization_kernel --> n_replacement_refactor
-n_centralization_kernel --> n_zero_duplication_verification
-n_centralization_kernel --> n_centralization_report
-n_centralization_kernel --> n_completion_truthfulness
+    n_runtime_agnostic_adapter_boundary["Runtime-Agnostic Adapter Boundary"]
+    n_operation_mode_gating["Operation Mode Gating"]
+    n_capability_disclosure["Capability Disclosure"]
+    n_pattern_classification["Pattern Classification"]
+    n_refactor_intent_classification["Refactor Intent Classification"]
+    n_research_guidance["Research Guidance"]
+    n_iterative_variation_discovery["Iterative Variation Discovery"]
+    n_detection_registry["Detection Registry"]
+    n_canonical_variation_selection["Canonical Variation Selection"]
+    n_architecture_compliance_targeting["Architecture Compliance Targeting"]
+    n_existing_solution_conflict["Existing Solution Conflict"]
+    n_migration_action_mapping["Migration Action Mapping"]
+    n_atomic_refactor_phase["Atomic Refactor Phase"]
+    n_replacement_refactor["Replacement Refactor"]
+    n_additive_debt_gate["Additive Debt Gate"]
+    n_rollback_centered_execution["Rollback-Centered Execution"]
+    n_pattern_specific_validation["Pattern-Specific Validation"]
+    n_zero_duplication_verification["Zero-Duplication Verification"]
+    n_validation_score["Validation Score"]
+    n_developer_decision_gate["Developer Decision Gate"]
+    n_completion_truthfulness["Completion Truthfulness"]
+    n_centralization_report["Centralization Report"]
+    n_centralization_kernel["Centralization Kernel"]
+    n_centralization_concern["<Centralization Concern>"]
+    n_canonical_variation_selection --> n_detection_registry
+    n_migration_action_mapping --> n_detection_registry
+    n_centralization_kernel --> n_pattern_classification
+    n_centralization_kernel --> n_research_guidance
+    n_centralization_kernel --> n_runtime_agnostic_adapter_boundary
+    n_centralization_kernel --> n_canonical_variation_selection
+    n_centralization_kernel --> n_operation_mode_gating
+    n_centralization_kernel --> n_migration_action_mapping
+    n_centralization_kernel --> n_replacement_refactor
+    n_centralization_kernel --> n_zero_duplication_verification
+    n_centralization_kernel --> n_centralization_report
+    n_centralization_kernel --> n_completion_truthfulness
 ```
 
 ### Runtime-Agnostic Adapter Boundary
@@ -22049,89 +22049,89 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_orientation_stage["Orientation Stage"]
-n_authoritative_source_loading["Authoritative Source Loading"]
-n_trust_anchor["Trust Anchor"]
-n_intent_directionality_normalization["Intent & Directionality Normalization"]
-n_skeptical_context_acquisition["Skeptical Context Acquisition"]
-n_dynamic_discovery_pattern_generation["Dynamic Discovery Pattern Generation"]
-n_teleological_intent_gate["Teleological Intent Gate"]
-n_planning_stage["Planning Stage"]
-n_principle_activation["Principle Activation"]
-n_protocol_semantic_selection["Protocol Semantic Selection"]
-n_phase_decomposition["Phase Decomposition"]
-n_four_dimensional_phase_graph["Four-Dimensional Phase Graph"]
-n_dependency_linearization["Dependency Linearization"]
-n_severity_assignment["Severity Assignment"]
-n_loop_class_labeling["Loop Class Labeling"]
-n_compilation_stage["Compilation Stage"]
-n_codebase_pattern_enforcement["Codebase Pattern Enforcement"]
-n_verb_template_binding["Verb Template Binding"]
-n_task_atomization["Task Atomization"]
-n_ripple_chain_analysis["Ripple Chain Analysis"]
-n_validator_coverage["Validator Coverage"]
-n_structured_observability_context["Structured Observability Context"]
-n_cross_cutting_surface_coverage["Cross-Cutting Surface Coverage"]
-n_legacy_elimination["Legacy Elimination"]
-n_hierarchical_numbering["Hierarchical Numbering"]
-n_admissibility_constraint_stage["Admissibility Constraint Gate"]
-n_validation_stage["Validation Stage"]
-n_semantic_debt_policy["Semantic Debt Policy"]
-n_evidence_based_claim_verification["Evidence-Based Claim Verification"]
-n_validation_suite_battery["Validation Suite Battery"]
-n_repair_stage["Repair Stage"]
-n_bounded_repair_loop["Bounded Repair Loop"]
-n_severity_failure_routing["Severity Failure Routing"]
-n_rendering_stage["Rendering Stage"]
-n_checklist_output_rendering["Checklist Output Rendering"]
-n_explicit_termination["Explicit Termination"]
-n_cross_stage_invariants["Cross-Stage Invariants"]
-n_checklist_creation_kernel["Checklist Creation Kernel"]
-n_checklist_governance_concern["<Checklist Governance Concern>"]
-n_orientation_stage --> n_authoritative_source_loading
-n_orientation_stage --> n_trust_anchor
-n_orientation_stage --> n_intent_directionality_normalization
-n_orientation_stage --> n_skeptical_context_acquisition
-n_orientation_stage --> n_dynamic_discovery_pattern_generation
-n_skeptical_context_acquisition --> n_dynamic_discovery_pattern_generation
-n_planning_stage --> n_principle_activation
-n_planning_stage --> n_protocol_semantic_selection
-n_planning_stage --> n_phase_decomposition
-n_planning_stage --> n_four_dimensional_phase_graph
-n_planning_stage --> n_dependency_linearization
-n_planning_stage --> n_severity_assignment
-n_planning_stage --> n_loop_class_labeling
-n_phase_decomposition --> n_four_dimensional_phase_graph
-n_phase_decomposition --> n_severity_assignment
-n_phase_decomposition --> n_loop_class_labeling
-n_compilation_stage --> n_verb_template_binding
-n_compilation_stage --> n_codebase_pattern_enforcement
-n_compilation_stage --> n_task_atomization
-n_compilation_stage --> n_ripple_chain_analysis
-n_compilation_stage --> n_validator_coverage
-n_compilation_stage --> n_structured_observability_context
-n_compilation_stage --> n_cross_cutting_surface_coverage
-n_compilation_stage --> n_legacy_elimination
-n_compilation_stage --> n_hierarchical_numbering
-n_task_atomization --> n_codebase_pattern_enforcement
-n_validation_stage --> n_validation_suite_battery
-n_validation_stage --> n_evidence_based_claim_verification
-n_validation_stage --> n_semantic_debt_policy
-n_repair_stage --> n_severity_failure_routing
-n_repair_stage --> n_bounded_repair_loop
-n_rendering_stage --> n_checklist_output_rendering
-n_rendering_stage --> n_explicit_termination
-n_checklist_creation_kernel --> n_orientation_stage
-n_checklist_creation_kernel --> n_teleological_intent_gate
-n_checklist_creation_kernel --> n_planning_stage
-n_checklist_creation_kernel --> n_compilation_stage
-n_checklist_creation_kernel --> n_admissibility_constraint_stage
-n_checklist_creation_kernel --> n_validation_stage
-n_checklist_creation_kernel --> n_repair_stage
-n_checklist_creation_kernel --> n_rendering_stage
-n_checklist_creation_kernel --> n_cross_stage_invariants
-n_checklist_creation_kernel --> n_phase_decomposition
-n_checklist_creation_kernel --> n_explicit_termination
+    n_orientation_stage["Orientation Stage"]
+    n_authoritative_source_loading["Authoritative Source Loading"]
+    n_trust_anchor["Trust Anchor"]
+    n_intent_directionality_normalization["Intent & Directionality Normalization"]
+    n_skeptical_context_acquisition["Skeptical Context Acquisition"]
+    n_dynamic_discovery_pattern_generation["Dynamic Discovery Pattern Generation"]
+    n_teleological_intent_gate["Teleological Intent Gate"]
+    n_planning_stage["Planning Stage"]
+    n_principle_activation["Principle Activation"]
+    n_protocol_semantic_selection["Protocol Semantic Selection"]
+    n_phase_decomposition["Phase Decomposition"]
+    n_four_dimensional_phase_graph["Four-Dimensional Phase Graph"]
+    n_dependency_linearization["Dependency Linearization"]
+    n_severity_assignment["Severity Assignment"]
+    n_loop_class_labeling["Loop Class Labeling"]
+    n_compilation_stage["Compilation Stage"]
+    n_codebase_pattern_enforcement["Codebase Pattern Enforcement"]
+    n_verb_template_binding["Verb Template Binding"]
+    n_task_atomization["Task Atomization"]
+    n_ripple_chain_analysis["Ripple Chain Analysis"]
+    n_validator_coverage["Validator Coverage"]
+    n_structured_observability_context["Structured Observability Context"]
+    n_cross_cutting_surface_coverage["Cross-Cutting Surface Coverage"]
+    n_legacy_elimination["Legacy Elimination"]
+    n_hierarchical_numbering["Hierarchical Numbering"]
+    n_admissibility_constraint_stage["Admissibility Constraint Gate"]
+    n_validation_stage["Validation Stage"]
+    n_semantic_debt_policy["Semantic Debt Policy"]
+    n_evidence_based_claim_verification["Evidence-Based Claim Verification"]
+    n_validation_suite_battery["Validation Suite Battery"]
+    n_repair_stage["Repair Stage"]
+    n_bounded_repair_loop["Bounded Repair Loop"]
+    n_severity_failure_routing["Severity Failure Routing"]
+    n_rendering_stage["Rendering Stage"]
+    n_checklist_output_rendering["Checklist Output Rendering"]
+    n_explicit_termination["Explicit Termination"]
+    n_cross_stage_invariants["Cross-Stage Invariants"]
+    n_checklist_creation_kernel["Checklist Creation Kernel"]
+    n_checklist_governance_concern["<Checklist Governance Concern>"]
+    n_orientation_stage --> n_authoritative_source_loading
+    n_orientation_stage --> n_trust_anchor
+    n_orientation_stage --> n_intent_directionality_normalization
+    n_orientation_stage --> n_skeptical_context_acquisition
+    n_orientation_stage --> n_dynamic_discovery_pattern_generation
+    n_skeptical_context_acquisition --> n_dynamic_discovery_pattern_generation
+    n_planning_stage --> n_principle_activation
+    n_planning_stage --> n_protocol_semantic_selection
+    n_planning_stage --> n_phase_decomposition
+    n_planning_stage --> n_four_dimensional_phase_graph
+    n_planning_stage --> n_dependency_linearization
+    n_planning_stage --> n_severity_assignment
+    n_planning_stage --> n_loop_class_labeling
+    n_phase_decomposition --> n_four_dimensional_phase_graph
+    n_phase_decomposition --> n_severity_assignment
+    n_phase_decomposition --> n_loop_class_labeling
+    n_compilation_stage --> n_verb_template_binding
+    n_compilation_stage --> n_codebase_pattern_enforcement
+    n_compilation_stage --> n_task_atomization
+    n_compilation_stage --> n_ripple_chain_analysis
+    n_compilation_stage --> n_validator_coverage
+    n_compilation_stage --> n_structured_observability_context
+    n_compilation_stage --> n_cross_cutting_surface_coverage
+    n_compilation_stage --> n_legacy_elimination
+    n_compilation_stage --> n_hierarchical_numbering
+    n_task_atomization --> n_codebase_pattern_enforcement
+    n_validation_stage --> n_validation_suite_battery
+    n_validation_stage --> n_evidence_based_claim_verification
+    n_validation_stage --> n_semantic_debt_policy
+    n_repair_stage --> n_severity_failure_routing
+    n_repair_stage --> n_bounded_repair_loop
+    n_rendering_stage --> n_checklist_output_rendering
+    n_rendering_stage --> n_explicit_termination
+    n_checklist_creation_kernel --> n_orientation_stage
+    n_checklist_creation_kernel --> n_teleological_intent_gate
+    n_checklist_creation_kernel --> n_planning_stage
+    n_checklist_creation_kernel --> n_compilation_stage
+    n_checklist_creation_kernel --> n_admissibility_constraint_stage
+    n_checklist_creation_kernel --> n_validation_stage
+    n_checklist_creation_kernel --> n_repair_stage
+    n_checklist_creation_kernel --> n_rendering_stage
+    n_checklist_creation_kernel --> n_cross_stage_invariants
+    n_checklist_creation_kernel --> n_phase_decomposition
+    n_checklist_creation_kernel --> n_explicit_termination
 ```
 
 ### Orientation Stage
@@ -24252,13 +24252,13 @@ Teleology is mandatory-always: a plan is verified only after realized cost is wi
 Flow
 
 ```text
-TaskRecords + PhaseRecords + SelectedBranch → RealisedCostSum → BudgetAndLimitCheck → Admissible|RouteBack
+TaskRecords + PhaseRecords + SelectedBranch → RealizedCostSum → BudgetAndLimitCheck → Admissible|RouteBack
 ```
 
 Productions
 
 ```bnf
-AdmissibilityConstraintGate ::= <TaskRecordSet> "," <PhaseRecordSet> "," <SelectedBranch> "→" <RealisedCostSum> "→" <BudgetAndLimitCheck> "→" <AdmissibilityVerdict>
+AdmissibilityConstraintGate ::= <TaskRecordSet> "," <PhaseRecordSet> "," <SelectedBranch> "→" <RealizedCostSum> "→" <BudgetAndLimitCheck> "→" <AdmissibilityVerdict>
 AdmissibilityVerdict ::= "admissible_within_budget_and_limits" | "inadmissible_route_to_intent" | "limit_breach_route_to_act"
 ```
 
@@ -25426,39 +25426,39 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_verification_loop["Verification Loop"]
-n_context_initialization["Context Initialization"]
-n_verification_execution["Verification Execution"]
-n_early_success_exit["Early Success Exit"]
-n_violation_classification["Violation Classification"]
-n_severity_ordered_remediation["Severity-Ordered Remediation"]
-n_iteration_bound["Iteration Bound"]
-n_file_scoped_fix["File-Scoped Fix"]
-n_file_limit_remediation["File Limit Remediation"]
-n_import_boundary_remediation["Import Boundary Remediation"]
-n_naming_convention_remediation["Naming Convention Remediation"]
-n_base_class_compliance_remediation["Base-Class Compliance Remediation"]
-n_css_token_remediation["CSS Token Remediation"]
-n_dom_factory_remediation["DOM Factory Remediation"]
-n_console_usage_remediation["Console Usage Remediation"]
-n_lifecycle_symmetry_remediation["Lifecycle Symmetry Remediation"]
-n_stylelint_post_fix["Stylelint Post-Fix"]
-n_reverification_gate["Reverification Gate"]
-n_partial_success_reporting["Partial Success Reporting"]
-n_completion_report["Completion Report"]
-n_codebase_verification_kernel["Codebase Verification Kernel"]
-n_compliance_verification_concern["<Compliance Verification Concern>"]
-n_verification_loop --> n_violation_classification
-n_context_initialization --> n_iteration_bound
-n_reverification_gate --> n_verification_execution
-n_codebase_verification_kernel --> n_context_initialization
-n_codebase_verification_kernel --> n_verification_execution
-n_codebase_verification_kernel --> n_violation_classification
-n_codebase_verification_kernel --> n_iteration_bound
-n_codebase_verification_kernel --> n_file_scoped_fix
-n_codebase_verification_kernel --> n_reverification_gate
-n_codebase_verification_kernel --> n_completion_report
-n_codebase_verification_kernel --> n_severity_ordered_remediation
+    n_verification_loop["Verification Loop"]
+    n_context_initialization["Context Initialization"]
+    n_verification_execution["Verification Execution"]
+    n_early_success_exit["Early Success Exit"]
+    n_violation_classification["Violation Classification"]
+    n_severity_ordered_remediation["Severity-Ordered Remediation"]
+    n_iteration_bound["Iteration Bound"]
+    n_file_scoped_fix["File-Scoped Fix"]
+    n_file_limit_remediation["File Limit Remediation"]
+    n_import_boundary_remediation["Import Boundary Remediation"]
+    n_naming_convention_remediation["Naming Convention Remediation"]
+    n_base_class_compliance_remediation["Base-Class Compliance Remediation"]
+    n_css_token_remediation["CSS Token Remediation"]
+    n_dom_factory_remediation["DOM Factory Remediation"]
+    n_console_usage_remediation["Console Usage Remediation"]
+    n_lifecycle_symmetry_remediation["Lifecycle Symmetry Remediation"]
+    n_stylelint_post_fix["Stylelint Post-Fix"]
+    n_reverification_gate["Reverification Gate"]
+    n_partial_success_reporting["Partial Success Reporting"]
+    n_completion_report["Completion Report"]
+    n_codebase_verification_kernel["Codebase Verification Kernel"]
+    n_compliance_verification_concern["<Compliance Verification Concern>"]
+    n_verification_loop --> n_violation_classification
+    n_context_initialization --> n_iteration_bound
+    n_reverification_gate --> n_verification_execution
+    n_codebase_verification_kernel --> n_context_initialization
+    n_codebase_verification_kernel --> n_verification_execution
+    n_codebase_verification_kernel --> n_violation_classification
+    n_codebase_verification_kernel --> n_iteration_bound
+    n_codebase_verification_kernel --> n_file_scoped_fix
+    n_codebase_verification_kernel --> n_reverification_gate
+    n_codebase_verification_kernel --> n_completion_report
+    n_codebase_verification_kernel --> n_severity_ordered_remediation
 ```
 
 ### Verification Loop
@@ -27284,33 +27284,33 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_phase_separated_execution["Phase-Separated Execution"]
-n_evidence_gated_claim_verification["Evidence-Gated Claim Verification"]
-n_validation_gate["Validation Gate"]
-n_file_modification_recovery["File Modification Recovery"]
-n_trust_anchor_declaration["Trust Anchor Declaration"]
-n_environment_capability_verification["Environment Capability Verification"]
-n_tool_calibration["Tool Calibration"]
-n_behavioral_self_test["Behavioral Self-Test"]
-n_adversarial_input_testing["Adversarial Input Testing"]
-n_defensive_string_normalization["Defensive String Normalization"]
-n_safe_arithmetic_contract["Safe Arithmetic Contract"]
-n_recursion_control["Recursion Control"]
-n_recursive_self_verification["Recursive Self-Verification"]
-n_advanced_tool_escalation["Advanced Tool Escalation"]
-n_investigation_report["Investigation Report"]
-n_action_log["Action Log"]
-n_contract_based_verification_kernel["Contract-Based Verification Kernel"]
-n_context_verification_concern["<Context Verification Concern>"]
-n_contract_based_verification_kernel --> n_tool_calibration
-n_contract_based_verification_kernel --> n_behavioral_self_test
-n_contract_based_verification_kernel --> n_validation_gate
-n_contract_based_verification_kernel --> n_trust_anchor_declaration
-n_contract_based_verification_kernel --> n_advanced_tool_escalation
-n_contract_based_verification_kernel --> n_phase_separated_execution
-n_contract_based_verification_kernel --> n_evidence_gated_claim_verification
-n_contract_based_verification_kernel --> n_investigation_report
-n_context_verification_concern --> n_validation_gate
+    n_phase_separated_execution["Phase-Separated Execution"]
+    n_evidence_gated_claim_verification["Evidence-Gated Claim Verification"]
+    n_validation_gate["Validation Gate"]
+    n_file_modification_recovery["File Modification Recovery"]
+    n_trust_anchor_declaration["Trust Anchor Declaration"]
+    n_environment_capability_verification["Environment Capability Verification"]
+    n_tool_calibration["Tool Calibration"]
+    n_behavioral_self_test["Behavioral Self-Test"]
+    n_adversarial_input_testing["Adversarial Input Testing"]
+    n_defensive_string_normalization["Defensive String Normalization"]
+    n_safe_arithmetic_contract["Safe Arithmetic Contract"]
+    n_recursion_control["Recursion Control"]
+    n_recursive_self_verification["Recursive Self-Verification"]
+    n_advanced_tool_escalation["Advanced Tool Escalation"]
+    n_investigation_report["Investigation Report"]
+    n_action_log["Action Log"]
+    n_contract_based_verification_kernel["Contract-Based Verification Kernel"]
+    n_context_verification_concern["<Context Verification Concern>"]
+    n_contract_based_verification_kernel --> n_tool_calibration
+    n_contract_based_verification_kernel --> n_behavioral_self_test
+    n_contract_based_verification_kernel --> n_validation_gate
+    n_contract_based_verification_kernel --> n_trust_anchor_declaration
+    n_contract_based_verification_kernel --> n_advanced_tool_escalation
+    n_contract_based_verification_kernel --> n_phase_separated_execution
+    n_contract_based_verification_kernel --> n_evidence_gated_claim_verification
+    n_contract_based_verification_kernel --> n_investigation_report
+    n_context_verification_concern --> n_validation_gate
 ```
 
 ### Phase-Separated Execution
@@ -28837,10 +28837,10 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_convergence_walk["Convergence Walk"]
-n_invocation_join["Invocation Join"]
-n_duplicate_disposition_walk["Duplicate Disposition Walk"]
-n_lifetime_resolution["Lifetime Resolution"]
+    n_convergence_walk["Convergence Walk"]
+    n_invocation_join["Invocation Join"]
+    n_duplicate_disposition_walk["Duplicate Disposition Walk"]
+    n_lifetime_resolution["Lifetime Resolution"]
 ```
 
 ### Convergence Walk
@@ -29186,26 +29186,26 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_coverage_workspace["Coverage Workspace"]
-n_surface_grid_walk["Surface Grid Walk"]
-n_uncovered_gap_derivation["Uncovered Gap Derivation"]
-n_coverage_risk_prioritization["Coverage Risk Prioritization"]
-n_technique_invariant_selection["Technique and Invariant Selection"]
-n_test_authoring["Test Authoring"]
-n_evidence_verdict["Evidence Verdict"]
-n_coverage_ledger["Coverage Ledger"]
-n_coverage_completion["Coverage Completion"]
-n_test_coverage_kernel["Test Coverage Kernel"]
-n_test_coverage_concern["<Test Coverage Concern>"]
-n_test_coverage_kernel --> n_coverage_workspace
-n_test_coverage_kernel --> n_surface_grid_walk
-n_test_coverage_kernel --> n_uncovered_gap_derivation
-n_test_coverage_kernel --> n_coverage_risk_prioritization
-n_test_coverage_kernel --> n_technique_invariant_selection
-n_test_coverage_kernel --> n_test_authoring
-n_test_coverage_kernel --> n_evidence_verdict
-n_test_coverage_kernel --> n_coverage_ledger
-n_test_coverage_kernel --> n_coverage_completion
+    n_coverage_workspace["Coverage Workspace"]
+    n_surface_grid_walk["Surface Grid Walk"]
+    n_uncovered_gap_derivation["Uncovered Gap Derivation"]
+    n_coverage_risk_prioritization["Coverage Risk Prioritization"]
+    n_technique_invariant_selection["Technique and Invariant Selection"]
+    n_test_authoring["Test Authoring"]
+    n_evidence_verdict["Evidence Verdict"]
+    n_coverage_ledger["Coverage Ledger"]
+    n_coverage_completion["Coverage Completion"]
+    n_test_coverage_kernel["Test Coverage Kernel"]
+    n_test_coverage_concern["<Test Coverage Concern>"]
+    n_test_coverage_kernel --> n_coverage_workspace
+    n_test_coverage_kernel --> n_surface_grid_walk
+    n_test_coverage_kernel --> n_uncovered_gap_derivation
+    n_test_coverage_kernel --> n_coverage_risk_prioritization
+    n_test_coverage_kernel --> n_technique_invariant_selection
+    n_test_coverage_kernel --> n_test_authoring
+    n_test_coverage_kernel --> n_evidence_verdict
+    n_test_coverage_kernel --> n_coverage_ledger
+    n_test_coverage_kernel --> n_coverage_completion
 ```
 
 ### Coverage Workspace
@@ -29484,13 +29484,13 @@ The highest-risk uncovered surface is tested first.
 Flow
 
 ```text
-RequiredUncoveredSet → RiskScore → PrioritisedSurfaceQueue
+RequiredUncoveredSet → RiskScore → PrioritizedSurfaceQueue
 ```
 
 Productions
 
 ```bnf
-CoverageRiskPrioritisation ::= <RequiredUncoveredSet> "→" <RiskScoreSet> "→" <PrioritisedSurfaceQueue>
+CoverageRiskPrioritization ::= <RequiredUncoveredSet> "→" <RiskScoreSet> "→" <PrioritizedSurfaceQueue>
 RiskScore ::= <FailureImpact> "*" <Reachability>
 ```
 
@@ -30001,7 +30001,7 @@ Workspace → GridWalk → GapDerivation → RiskPriority → TechniqueInvariant
 Productions
 
 ```bnf
-TestCoverageKernel ::= <CoverageWorkspace> "→" <SurfaceGridWalk> "→" <UncoveredGapDerivation> "→" <CoverageRiskPrioritisation> "→" <TechniqueInvariantSelection> "→" <TestAuthoring> "→" <EvidenceVerdict> "→" <CoverageLedger> "→" <CoverageCompletion>
+TestCoverageKernel ::= <CoverageWorkspace> "→" <SurfaceGridWalk> "→" <UncoveredGapDerivation> "→" <CoverageRiskPrioritization> "→" <TechniqueInvariantSelection> "→" <TestAuthoring> "→" <EvidenceVerdict> "→" <CoverageLedger> "→" <CoverageCompletion>
 ```
 
 Composes
@@ -30109,7 +30109,7 @@ SurfaceSpace → GridWalk → RequiredGaps → Priority → TechniqueInvariant �
 Productions
 
 ```bnf
-TestCoverageConcern ::= <SurfaceCatalog> "→" <DimensionLensGrid> "→" <RequiredUncoveredSet> "→" <PrioritisedSurfaceQueue> "→" <SurfacePlanSet> "→" <RunnableTestSet> "→" <VerdictSet> "→" <CoverageLedger>
+TestCoverageConcern ::= <SurfaceCatalog> "→" <DimensionLensGrid> "→" <RequiredUncoveredSet> "→" <PrioritizedSurfaceQueue> "→" <SurfacePlanSet> "→" <RunnableTestSet> "→" <VerdictSet> "→" <CoverageLedger>
 ```
 
 Composes
@@ -30160,29 +30160,29 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_pag_document_declaration["PAG Document Declaration"]
-n_pag_keyword_ontology["PAG Keyword Ontology"]
-n_pag_node_decomposition["PAG Node Decomposition"]
-n_pag_validation_gate["PAG Handoff Gate"]
-n_pag_explicit_control_flow["PAG Explicit Control Flow"]
-n_pag_constraint_boundary["PAG Invariant Record"]
-n_pag_tool_invocation["PAG Semantic Operation"]
-n_pag_coordination_construct["PAG Structure Declaration"]
-n_pag_ambiguity_reduction["PAG Ambiguity Reduction"]
-n_pag_authoring_kernel["PAG Authoring Kernel"]
-n_pag_well_formedness_validation["PAG Well-Formedness Validation"]
-n_pag_instruction_concern["<PAG Instruction Concern>"]
-n_pag_authoring_kernel --> n_pag_document_declaration
-n_pag_authoring_kernel --> n_pag_keyword_ontology
-n_pag_authoring_kernel --> n_pag_node_decomposition
-n_pag_authoring_kernel --> n_pag_validation_gate
-n_pag_authoring_kernel --> n_pag_explicit_control_flow
-n_pag_authoring_kernel --> n_pag_tool_invocation
-n_pag_authoring_kernel --> n_pag_coordination_construct
-n_pag_authoring_kernel --> n_pag_constraint_boundary
-n_pag_authoring_kernel --> n_pag_well_formedness_validation
-n_pag_well_formedness_validation --> n_pag_validation_gate
-n_pag_well_formedness_validation --> n_pag_explicit_control_flow
+    n_pag_document_declaration["PAG Document Declaration"]
+    n_pag_keyword_ontology["PAG Keyword Ontology"]
+    n_pag_node_decomposition["PAG Node Decomposition"]
+    n_pag_validation_gate["PAG Handoff Gate"]
+    n_pag_explicit_control_flow["PAG Explicit Control Flow"]
+    n_pag_constraint_boundary["PAG Invariant Record"]
+    n_pag_tool_invocation["PAG Semantic Operation"]
+    n_pag_coordination_construct["PAG Structure Declaration"]
+    n_pag_ambiguity_reduction["PAG Ambiguity Reduction"]
+    n_pag_authoring_kernel["PAG Authoring Kernel"]
+    n_pag_well_formedness_validation["PAG Well-Formedness Validation"]
+    n_pag_instruction_concern["<PAG Instruction Concern>"]
+    n_pag_authoring_kernel --> n_pag_document_declaration
+    n_pag_authoring_kernel --> n_pag_keyword_ontology
+    n_pag_authoring_kernel --> n_pag_node_decomposition
+    n_pag_authoring_kernel --> n_pag_validation_gate
+    n_pag_authoring_kernel --> n_pag_explicit_control_flow
+    n_pag_authoring_kernel --> n_pag_tool_invocation
+    n_pag_authoring_kernel --> n_pag_coordination_construct
+    n_pag_authoring_kernel --> n_pag_constraint_boundary
+    n_pag_authoring_kernel --> n_pag_well_formedness_validation
+    n_pag_well_formedness_validation --> n_pag_validation_gate
+    n_pag_well_formedness_validation --> n_pag_explicit_control_flow
 ```
 
 ### PAG Document Declaration
@@ -31221,54 +31221,54 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_analysis_workspace["Analysis Workspace"]
-n_registry_baseline["Registry Baseline"]
-n_compliance_gap["Compliance Gap"]
-n_semantic_domain_partitioning["Semantic Domain Partitioning"]
-n_behavioral_signature_extraction["Behavioral Signature Extraction"]
-n_cross_class_pattern_detection["Cross-Class Pattern Detection"]
-n_behavioral_inconsistency["Behavioral Inconsistency"]
-n_sequential_chain_duplication["Sequential Chain Duplication"]
-n_temporal_coupling_detection["Temporal Coupling Detection"]
-n_relational_graph_duplication["Relational Graph Duplication"]
-n_causal_wiring_duplication["Causal Wiring Duplication"]
-n_anomaly_outlier_detection["Anomaly Outlier Detection"]
-n_conceptual_duplication_detection["Conceptual Duplication Detection"]
-n_fractal_scale_duplication["Fractal Scale Duplication"]
-n_anti_pattern_classification["Anti-Pattern Classification"]
-n_anti_pattern_priority_matrix["Anti-Pattern Priority Matrix"]
-n_abstraction_boundary_principle["Abstraction Boundary Principle"]
-n_base_class_candidate_selection["Base-Class Candidate Selection"]
-n_concrete_vs_abstract_responsibility_split["Concrete-vs-Abstract Responsibility Split"]
-n_template_method_lifecycle["Template Method Lifecycle"]
-n_base_schematic_composition["Base Schematic Composition"]
-n_migration_ordering["Migration Ordering"]
-n_backup_verified_migration["Backup-Verified Migration"]
-n_anti_pattern_elimination_verification["Anti-Pattern Elimination Verification"]
-n_registry_regeneration["Registry Regeneration"]
-n_anti_reintroduction_gate["Anti-Reintroduction Gate"]
-n_distillation_metrics["Distillation Metrics"]
-n_pattern_distillation_history["Pattern Distillation History"]
-n_pattern_distillation_completion_truthfulness["Completion Truthfulness"]
-n_pattern_distiller_kernel["Pattern Distiller Kernel"]
-n_pattern_distillation_concern["<Pattern Distillation Concern>"]
-n_pattern_distiller_kernel --> n_analysis_workspace
-n_pattern_distiller_kernel --> n_registry_baseline
-n_pattern_distiller_kernel --> n_compliance_gap
-n_pattern_distiller_kernel --> n_semantic_domain_partitioning
-n_pattern_distiller_kernel --> n_cross_class_pattern_detection
-n_pattern_distiller_kernel --> n_anti_pattern_classification
-n_pattern_distiller_kernel --> n_base_class_candidate_selection
-n_pattern_distiller_kernel --> n_base_schematic_composition
-n_pattern_distiller_kernel --> n_registry_regeneration
-n_pattern_distiller_kernel --> n_distillation_metrics
-n_pattern_distiller_kernel --> n_behavioral_signature_extraction
-n_pattern_distiller_kernel --> n_anti_pattern_priority_matrix
-n_pattern_distiller_kernel --> n_migration_ordering
-n_pattern_distiller_kernel --> n_backup_verified_migration
-n_pattern_distiller_kernel --> n_anti_pattern_elimination_verification
-n_pattern_distiller_kernel --> n_pattern_distillation_history
-n_pattern_distiller_kernel --> n_pattern_distillation_completion_truthfulness
+    n_analysis_workspace["Analysis Workspace"]
+    n_registry_baseline["Registry Baseline"]
+    n_compliance_gap["Compliance Gap"]
+    n_semantic_domain_partitioning["Semantic Domain Partitioning"]
+    n_behavioral_signature_extraction["Behavioral Signature Extraction"]
+    n_cross_class_pattern_detection["Cross-Class Pattern Detection"]
+    n_behavioral_inconsistency["Behavioral Inconsistency"]
+    n_sequential_chain_duplication["Sequential Chain Duplication"]
+    n_temporal_coupling_detection["Temporal Coupling Detection"]
+    n_relational_graph_duplication["Relational Graph Duplication"]
+    n_causal_wiring_duplication["Causal Wiring Duplication"]
+    n_anomaly_outlier_detection["Anomaly Outlier Detection"]
+    n_conceptual_duplication_detection["Conceptual Duplication Detection"]
+    n_fractal_scale_duplication["Fractal Scale Duplication"]
+    n_anti_pattern_classification["Anti-Pattern Classification"]
+    n_anti_pattern_priority_matrix["Anti-Pattern Priority Matrix"]
+    n_abstraction_boundary_principle["Abstraction Boundary Principle"]
+    n_base_class_candidate_selection["Base-Class Candidate Selection"]
+    n_concrete_vs_abstract_responsibility_split["Concrete-vs-Abstract Responsibility Split"]
+    n_template_method_lifecycle["Template Method Lifecycle"]
+    n_base_schematic_composition["Base Schematic Composition"]
+    n_migration_ordering["Migration Ordering"]
+    n_backup_verified_migration["Backup-Verified Migration"]
+    n_anti_pattern_elimination_verification["Anti-Pattern Elimination Verification"]
+    n_registry_regeneration["Registry Regeneration"]
+    n_anti_reintroduction_gate["Anti-Reintroduction Gate"]
+    n_distillation_metrics["Distillation Metrics"]
+    n_pattern_distillation_history["Pattern Distillation History"]
+    n_pattern_distillation_completion_truthfulness["Pattern Distillation Completion Truthfulness"]
+    n_pattern_distiller_kernel["Pattern Distiller Kernel"]
+    n_pattern_distillation_concern["<Pattern Distillation Concern>"]
+    n_pattern_distiller_kernel --> n_analysis_workspace
+    n_pattern_distiller_kernel --> n_registry_baseline
+    n_pattern_distiller_kernel --> n_compliance_gap
+    n_pattern_distiller_kernel --> n_semantic_domain_partitioning
+    n_pattern_distiller_kernel --> n_cross_class_pattern_detection
+    n_pattern_distiller_kernel --> n_anti_pattern_classification
+    n_pattern_distiller_kernel --> n_base_class_candidate_selection
+    n_pattern_distiller_kernel --> n_base_schematic_composition
+    n_pattern_distiller_kernel --> n_registry_regeneration
+    n_pattern_distiller_kernel --> n_distillation_metrics
+    n_pattern_distiller_kernel --> n_behavioral_signature_extraction
+    n_pattern_distiller_kernel --> n_anti_pattern_priority_matrix
+    n_pattern_distiller_kernel --> n_migration_ordering
+    n_pattern_distiller_kernel --> n_backup_verified_migration
+    n_pattern_distiller_kernel --> n_anti_pattern_elimination_verification
+    n_pattern_distiller_kernel --> n_pattern_distillation_history
+    n_pattern_distiller_kernel --> n_pattern_distillation_completion_truthfulness
 ```
 
 ### Analysis Workspace
@@ -33613,7 +33613,7 @@ Not answered
 Shape it refuses
 Not answered
 
-### Completion Truthfulness
+### Pattern Distillation Completion Truthfulness
 
 - Domain: [pattern-distillation](ALGORITHMS.md#algorithms-domain-pattern-distillation)
 - Tier: [process](SCHEMA.md#vocabulary-domain-tier-process)
@@ -33765,7 +33765,7 @@ commit
 [Pattern Distillation History](ALGORITHMS.md#algorithms-pattern-distillation-history)
 
 terminate
-[Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness)
+[Pattern Distillation Completion Truthfulness](ALGORITHMS.md#algorithms-pattern-distillation-completion-truthfulness)
 
 Before
 
@@ -33883,23 +33883,23 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_profile_compose["Profile Compose"]
-n_delta_capture["Delta Capture"]
-n_idempotent_merge["Idempotent Merge"]
-n_version_provenance["Version Provenance"]
-n_deterministic_merge_core["Deterministic Merge Core"]
-n_persistence_fork["Persistence Fork"]
-n_seed_composition["Seed Composition"]
-n_living_profile_kernel["Living Profile Kernel"]
-n_living_accumulation_concern["<Living Accumulation Concern>"]
-n_living_profile_kernel --> n_seed_composition
-n_living_profile_kernel --> n_delta_capture
-n_living_profile_kernel --> n_idempotent_merge
-n_living_profile_kernel --> n_version_provenance
-n_living_profile_kernel --> n_persistence_fork
-n_living_profile_kernel --> n_profile_compose
-n_living_accumulation_concern --> n_version_provenance
-n_living_accumulation_concern --> n_persistence_fork
+    n_profile_compose["Profile Compose"]
+    n_delta_capture["Delta Capture"]
+    n_idempotent_merge["Idempotent Merge"]
+    n_version_provenance["Version Provenance"]
+    n_deterministic_merge_core["Deterministic Merge Core"]
+    n_persistence_fork["Persistence Fork"]
+    n_seed_composition["Seed Composition"]
+    n_living_profile_kernel["Living Profile Kernel"]
+    n_living_accumulation_concern["<Living Accumulation Concern>"]
+    n_living_profile_kernel --> n_seed_composition
+    n_living_profile_kernel --> n_delta_capture
+    n_living_profile_kernel --> n_idempotent_merge
+    n_living_profile_kernel --> n_version_provenance
+    n_living_profile_kernel --> n_persistence_fork
+    n_living_profile_kernel --> n_profile_compose
+    n_living_accumulation_concern --> n_version_provenance
+    n_living_accumulation_concern --> n_persistence_fork
 ```
 
 ### Profile Compose
@@ -34671,20 +34671,20 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_living_plan_state["Living Plan State"]
-n_boundary_reconciliation["Boundary Reconciliation"]
-n_phase_close_gate["Phase Close Gate"]
-n_plan_phase_verification["Plan Phase Verification"]
-n_governed_autonomous_plan_loop["Governed Autonomous Plan Loop"]
-n_governed_plan_concern["<Governed Plan Concern>"]
-n_phase_close_gate --> n_boundary_reconciliation
-n_plan_phase_verification --> n_boundary_reconciliation
-n_governed_autonomous_plan_loop --> n_living_plan_state
-n_governed_autonomous_plan_loop --> n_boundary_reconciliation
-n_governed_autonomous_plan_loop --> n_phase_close_gate
-n_governed_autonomous_plan_loop --> n_plan_phase_verification
-n_governed_plan_concern --> n_living_plan_state
-n_governed_plan_concern --> n_phase_close_gate
+    n_living_plan_state["Living Plan State"]
+    n_boundary_reconciliation["Boundary Reconciliation"]
+    n_phase_close_gate["Phase Close Gate"]
+    n_plan_phase_verification["Plan Phase Verification"]
+    n_governed_autonomous_plan_loop["Governed Autonomous Plan Loop"]
+    n_governed_plan_concern["<Governed Plan Concern>"]
+    n_phase_close_gate --> n_boundary_reconciliation
+    n_plan_phase_verification --> n_boundary_reconciliation
+    n_governed_autonomous_plan_loop --> n_living_plan_state
+    n_governed_autonomous_plan_loop --> n_boundary_reconciliation
+    n_governed_autonomous_plan_loop --> n_phase_close_gate
+    n_governed_autonomous_plan_loop --> n_plan_phase_verification
+    n_governed_plan_concern --> n_living_plan_state
+    n_governed_plan_concern --> n_phase_close_gate
 ```
 
 ### Living Plan State
@@ -35213,22 +35213,22 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_quality_governance_loop["Quality Governance Loop"]
-n_canonical_config_resolution["Canonical Config Resolution"]
-n_stage_ordering["Stage Ordering"]
-n_comment_normalization_remediation["Comment Normalization Remediation"]
-n_custom_rule_derivation["Custom-Rule Derivation"]
-n_machine_verdict_derivation["Machine Verdict Derivation"]
-n_bounded_cascade_termination["Bounded Cascade Termination"]
-n_quality_engine_concern["Quality-Engine Kernel"]
-n_quality_governance_loop --> n_canonical_config_resolution
-n_quality_governance_loop --> n_stage_ordering
-n_quality_governance_loop --> n_comment_normalization_remediation
-n_quality_governance_loop --> n_machine_verdict_derivation
-n_quality_governance_loop --> n_bounded_cascade_termination
-n_quality_engine_concern --> n_canonical_config_resolution
-n_quality_engine_concern --> n_stage_ordering
-n_quality_engine_concern --> n_quality_governance_loop
+    n_quality_governance_loop["Quality Governance Loop"]
+    n_canonical_config_resolution["Canonical Config Resolution"]
+    n_stage_ordering["Stage Ordering"]
+    n_comment_normalization_remediation["Comment Normalization Remediation"]
+    n_custom_rule_derivation["Custom-Rule Derivation"]
+    n_machine_verdict_derivation["Machine Verdict Derivation"]
+    n_bounded_cascade_termination["Bounded Cascade Termination"]
+    n_quality_engine_concern["Quality-Engine Kernel"]
+    n_quality_governance_loop --> n_canonical_config_resolution
+    n_quality_governance_loop --> n_stage_ordering
+    n_quality_governance_loop --> n_comment_normalization_remediation
+    n_quality_governance_loop --> n_machine_verdict_derivation
+    n_quality_governance_loop --> n_bounded_cascade_termination
+    n_quality_engine_concern --> n_canonical_config_resolution
+    n_quality_engine_concern --> n_stage_ordering
+    n_quality_engine_concern --> n_quality_governance_loop
 ```
 
 ### Quality Governance Loop
@@ -35686,7 +35686,7 @@ Intent
 Derive the verify-stage verdict from the toolchain's machine output — exit codes and parsed findings — never from the model's reading, so a clean verdict is an observed machine fact.
 
 Invariant
-The verify verdict is machine-derived from exit codes and parsed findings; a model's judgement is never the completion signal.
+The verify verdict is machine-derived from exit codes and parsed findings; a model's judgment is never the completion signal.
 
 Flow
 
@@ -35914,17 +35914,17 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_composed_turn_contract["Composed Turn Contract"]
-n_loop_owned_mode_selection["Loop-Owned Mode Selection"]
-n_versioned_turn_provenance["Versioned Turn Provenance"]
-n_mode_contract_validation["Mode Contract Validation"]
-n_mode_driven_response_schema["<Mode-Driven Response Schema>"]
-n_loop_owned_mode_selection --> n_composed_turn_contract
-n_loop_owned_mode_selection --> n_mode_contract_validation
-n_loop_owned_mode_selection --> n_versioned_turn_provenance
-n_mode_driven_response_schema --> n_composed_turn_contract
-n_mode_driven_response_schema --> n_loop_owned_mode_selection
-n_mode_driven_response_schema --> n_versioned_turn_provenance
+    n_composed_turn_contract["Composed Turn Contract"]
+    n_loop_owned_mode_selection["Loop-Owned Mode Selection"]
+    n_versioned_turn_provenance["Versioned Turn Provenance"]
+    n_mode_contract_validation["Mode Contract Validation"]
+    n_mode_driven_response_schema["<Mode-Driven Response Schema>"]
+    n_loop_owned_mode_selection --> n_composed_turn_contract
+    n_loop_owned_mode_selection --> n_mode_contract_validation
+    n_loop_owned_mode_selection --> n_versioned_turn_provenance
+    n_mode_driven_response_schema --> n_composed_turn_contract
+    n_mode_driven_response_schema --> n_loop_owned_mode_selection
+    n_mode_driven_response_schema --> n_versioned_turn_provenance
 ```
 
 ### Composed Turn Contract
@@ -36354,23 +36354,23 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_cascade_layer_partition["Cascade Layer Partition"]
-n_token_source_of_truth["Token Source-of-Truth"]
-n_type_keyed_appearance["Type-Keyed Appearance"]
-n_custom_type_registration["Custom Type Registration"]
-n_governed_construction_boundary["Governed Construction Boundary"]
-n_placement_isolation["Placement Isolation"]
-n_assembly_composition["Assembly Composition"]
-n_layer_fitness_enforcement["Layer Fitness Enforcement"]
-n_type_migration_centralization["Type-Migration Centralization"]
-n_css_type_cascade_concern["CSS Type-Cascade Kernel"]
-n_css_type_cascade_concern --> n_cascade_layer_partition
-n_css_type_cascade_concern --> n_token_source_of_truth
-n_css_type_cascade_concern --> n_type_keyed_appearance
-n_css_type_cascade_concern --> n_custom_type_registration
-n_css_type_cascade_concern --> n_placement_isolation
-n_css_type_cascade_concern --> n_assembly_composition
-n_css_type_cascade_concern --> n_layer_fitness_enforcement
+    n_cascade_layer_partition["Cascade Layer Partition"]
+    n_token_source_of_truth["Token Source-of-Truth"]
+    n_type_keyed_appearance["Type-Keyed Appearance"]
+    n_custom_type_registration["Custom Type Registration"]
+    n_governed_construction_boundary["Governed Construction Boundary"]
+    n_placement_isolation["Placement Isolation"]
+    n_assembly_composition["Assembly Composition"]
+    n_layer_fitness_enforcement["Layer Fitness Enforcement"]
+    n_type_migration_centralization["Type-Migration Centralization"]
+    n_css_type_cascade_concern["CSS Type-Cascade Kernel"]
+    n_css_type_cascade_concern --> n_cascade_layer_partition
+    n_css_type_cascade_concern --> n_token_source_of_truth
+    n_css_type_cascade_concern --> n_type_keyed_appearance
+    n_css_type_cascade_concern --> n_custom_type_registration
+    n_css_type_cascade_concern --> n_placement_isolation
+    n_css_type_cascade_concern --> n_assembly_composition
+    n_css_type_cascade_concern --> n_layer_fitness_enforcement
 ```
 
 ### Cascade Layer Partition
@@ -37205,32 +37205,32 @@ What composes what inside this domain.
 
 ```mermaid
 flowchart LR
-n_taxonomy_jurisdiction["Taxonomy Jurisdiction"]
-n_reshape_risk_priority["Reshape Risk Priority"]
-n_path_role_walk["Path Role Walk"]
-n_concern_classification["Concern Classification"]
-n_name_projection["Name Projection"]
-n_container_reshape["Container Reshape"]
-n_vocabulary_admission_gate["Vocabulary Admission Gate"]
-n_discovery_verification["Discovery Verification"]
-n_taxonomy_ledger["Taxonomy Ledger"]
-n_taxonomy_completion["Taxonomy Completion"]
-n_container_ladder["Container Ladder"]
-n_export_triage_ladder["Export Triage Ladder"]
-n_dialect_resolution["Dialect Resolution"]
-n_alignment_cadence["Alignment Cadence"]
-n_taxonomy_kernel["Taxonomy Kernel"]
-n_taxonomy_concern["<Taxonomy Concern>"]
-n_taxonomy_kernel --> n_taxonomy_jurisdiction
-n_taxonomy_kernel --> n_reshape_risk_priority
-n_taxonomy_kernel --> n_path_role_walk
-n_taxonomy_kernel --> n_concern_classification
-n_taxonomy_kernel --> n_name_projection
-n_taxonomy_kernel --> n_container_reshape
-n_taxonomy_kernel --> n_vocabulary_admission_gate
-n_taxonomy_kernel --> n_discovery_verification
-n_taxonomy_kernel --> n_taxonomy_ledger
-n_taxonomy_kernel --> n_taxonomy_completion
+    n_taxonomy_jurisdiction["Taxonomy Jurisdiction"]
+    n_reshape_risk_priority["Reshape Risk Priority"]
+    n_path_role_walk["Path Role Walk"]
+    n_concern_classification["Concern Classification"]
+    n_name_projection["Name Projection"]
+    n_container_reshape["Container Reshape"]
+    n_vocabulary_admission_gate["Vocabulary Admission Gate"]
+    n_discovery_verification["Discovery Verification"]
+    n_taxonomy_ledger["Taxonomy Ledger"]
+    n_taxonomy_completion["Taxonomy Completion"]
+    n_container_ladder["Container Ladder"]
+    n_export_triage_ladder["Export Triage Ladder"]
+    n_dialect_resolution["Dialect Resolution"]
+    n_alignment_cadence["Alignment Cadence"]
+    n_taxonomy_kernel["Taxonomy Kernel"]
+    n_taxonomy_concern["<Taxonomy Concern>"]
+    n_taxonomy_kernel --> n_taxonomy_jurisdiction
+    n_taxonomy_kernel --> n_reshape_risk_priority
+    n_taxonomy_kernel --> n_path_role_walk
+    n_taxonomy_kernel --> n_concern_classification
+    n_taxonomy_kernel --> n_name_projection
+    n_taxonomy_kernel --> n_container_reshape
+    n_taxonomy_kernel --> n_vocabulary_admission_gate
+    n_taxonomy_kernel --> n_discovery_verification
+    n_taxonomy_kernel --> n_taxonomy_ledger
+    n_taxonomy_kernel --> n_taxonomy_completion
 ```
 
 ### Taxonomy Jurisdiction
@@ -37514,7 +37514,7 @@ Not answered
 Details
 
 Intent
-Read each governed file, assign the narrowest accurate concern from the declared vocabulary by its primary responsibility, record a file that fits two concerns as a split candidate, and break an irreducible overlap by the domain-ward layer, so classification is judgement against the file rather than pattern-matching against its path.
+Read each governed file, assign the narrowest accurate concern from the declared vocabulary by its primary responsibility, record a file that fits two concerns as a split candidate, and break an irreducible overlap by the domain-ward layer, so classification is judgment against the file rather than pattern-matching against its path.
 
 Invariant
 A concern is assigned by reading the file, never by its current location; a file that fits two concerns is a split candidate, not a tie to be broken arbitrarily.

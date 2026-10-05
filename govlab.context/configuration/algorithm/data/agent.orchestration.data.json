@@ -1,0 +1,1127 @@
+{
+    "category": "agent-workflow",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the workflow validation gate, which checks the orchestration, artifact, context and validation contracts",
+            "the structured-document validator over the workflow template"
+        ],
+        "population": "every workflow template and every agent it sequences",
+        "freshness": "a verdict stands until the template, an agent it sequences or the workspace configuration changes",
+        "refusal": "the gate refuses to mark a template complete while any of its contracts fails",
+        "observation": "the coordination record each run writes, which locates a failed handoff",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the workflow template's contracts, which each run's coordination record is compared against"
+    },
+    "records": [
+        {
+            "id": "hybrid-workflow-orchestration",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Hybrid Workflow Orchestration",
+            "exemplar": {
+                "before": "Every agent runs sequentially, even independent discovery — the workflow crawls.",
+                "after": "objective → agent sequence → classify by verb → parallel discovery (forked context) + sequential action (normal context) → handoff",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Classify workflow phases by execution verb, run discovery and investigation agents in parallel forked contexts, run action and mutation agents sequentially, and coordinate all agents through shared artifacts and handoff signals.",
+            "invariant": "Multi-agent workflows should parallelize independent knowledge gathering while serializing state-changing work.",
+            "flow": [
+                "WorkflowObjective",
+                "AgentPhases",
+                "ExecutionClassification",
+                "ParallelDiscovery",
+                "SequentialAction",
+                "Handoff"
+            ],
+            "productions": [
+                {
+                    "lhs": "HybridWorkflowOrchestration",
+                    "rhs": "<WorkflowObjective> \"→\" <AgentSequence> \"→\" <ExecutionModeClassification> \"→\" <ParallelBatchSet> \"→\" <SequentialActionSet> \"→\" <WorkflowCompletion>"
+                },
+                {"lhs": "ExecutionMode",
+                    "rhs": "\"PARALLEL\" | \"SEQUENTIAL\""},
+                {
+                    "lhs": "ParallelPhase",
+                    "rhs": "\"DISCOVERY\" | \"INVESTIGATION\" | \"RESEARCH\" | \"ANALYSIS\" | \"EXPLORATION\""
+                },
+                {
+                    "lhs": "SequentialPhase",
+                    "rhs": "\"CREATE\" | \"WRITE\" | \"EXECUTE\" | \"VERIFY\" | \"IMPLEMENT\" | \"REFACTOR\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "state_transaction",
+                "model_governance",
+                "event_messaging",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "dsl-compliance-loading",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "DSL Compliance Loading",
+            "exemplar": {
+                "before": "Workflow generated free-form, ignoring the DSL and handoff contracts.",
+                "after": "load DSL + keyword + workflow + checklist specs → require{agent-DSL syntax, handoff protocol, hybrid execution, context isolation, agent spawn} → compliance gate",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load grammar, keyword, operator, workflow, and checklist references before workflow generation, then require generated content to follow the declared DSL, naming, handoff, execution, forking, spawning, and capability rules.",
+            "invariant": "Workflow generation must begin by loading the language and orchestration contracts that constrain output.",
+            "flow": [
+                "DSLSources",
+                "Requirements",
+                "ComplianceGate",
+                "Proceed|Block"
+            ],
+            "productions": [
+                {
+                    "lhs": "DSLComplianceLoading",
+                    "rhs": "<DSLSpecSet> \"→\" <WorkflowRequirementSet> \"→\" <ComplianceValidationGate>"
+                },
+                {
+                    "lhs": "WorkflowRequirementSet",
+                    "rhs": "\"agent_dsl_syntax\" \",\" \"agent_oriented_content\" \",\" \"stable_filename_convention\" \",\" \"handoff_protocol\" \",\" \"hybrid_parallel_sequential\" \",\" \"context_isolation\" \",\" \"agent_spawn_mechanism\" \",\" \"capability_invocation\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "model_governance",
+                "event_messaging",
+                "metaprogramming_modeling",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "agent-workflow-file-modification-recovery",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Agent Workflow File Modification Recovery",
+            "exemplar": {
+                "before": "A stale-write conflict re-reads the file and retries the same edit, or stops to ask the developer.",
+                "after": "modification error → re-read current → merge the delta into full state → write complete version → verify → log; never retry-without-recovery, never ask for a tool error",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "When a file modification conflict occurs, detect the error, re-read the current file, merge the intended delta into the current content, write the complete new version, verify persistence, and log recovery automatically without asking the developer.",
+            "invariant": "State-mutation conflicts are synchronization failures and should trigger deterministic recovery, not a prompt to the developer.",
+            "flow": [
+                "ModificationError",
+                "RereadMerge",
+                "CompleteRewrite",
+                "Verify"
+            ],
+            "productions": [
+                {
+                    "lhs": "FileModificationRecovery",
+                    "rhs": "<FileModificationError> \"→\" <RecoveryProtocolSelection> \"→\" <RereadAndMerge> \"→\" <CompleteRewrite> \"→\" <RecoveryLog>"
+                },
+                {
+                    "lhs": "RecoveryProtocol",
+                    "rhs": "\"reread-merge-complete-rewrite\" | \"snapshot-restore-on-failure\""
+                },
+                {
+                    "lhs": "ForbiddenRecovery",
+                    "rhs": "\"retry_edit_without_recovery\" | \"ask_user_for_tool_error_recovery\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "correctness_verification",
+                "resilience_recovery"
+            ]
+        },
+        {
+            "id": "context-forking-configuration",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Context Forking Configuration",
+            "exemplar": {
+                "before": "Every agent shares one context — discovery pollutes the action agent's state.",
+                "after": "agent class → discovery/investigation/documentation → fork ; action/validation → normal → per-class parallel eligibility preserved",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Assign forked context to discovery, investigation, and documentation agents; assign normal context to action and validation agents; preserve model and parallel eligibility metadata per agent class.",
+            "invariant": "Context isolation improves independent analysis, while normal context preserves continuity for mutation and validation.",
+            "flow": [
+                "AgentClass",
+                "ContextMode",
+                "ParallelEligibility",
+                "ExecutionPolicy"
+            ],
+            "productions": [
+                {
+                    "lhs": "ContextForkingConfiguration",
+                    "rhs": "<AgentClass> \"→\" <ContextMode> \"→\" <ParallelPolicy> \"→\" <ExecutionConfiguration>"
+                },
+                {
+                    "lhs": "AgentClass",
+                    "rhs": "\"discovery\" | \"investigation\" | \"documentation\" | \"action\" | \"validation\""
+                },
+                {"lhs": "ContextMode",
+                    "rhs": "\"fork\" | \"normal\""},
+                {"lhs": "ParallelPolicy",
+                    "rhs": "\"parallel_true\" | \"parallel_false\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "state_transaction",
+                "correctness_verification",
+                "model_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "verb-based-execution-classification",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Verb-Based Execution Classification",
+            "exemplar": {
+                "before": "Execution mode assigned by phase number, not by what the agent does.",
+                "after": "agent purpose → primary verb → {ANALYZE/FIND/DISCOVER → PARALLEL(fork)} | {CREATE/WRITE/VERIFY → SEQUENTIAL(normal)}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Extract the primary verb from each agent purpose, classify it against parallel or sequential verb sets, and bind execution mode, context, and parallel eligibility.",
+            "invariant": "Execution mode should be derived from action semantics, not arbitrary phase numbering.",
+            "flow": [
+                "AgentPurpose",
+                "PrimaryVerb",
+                "VerbClass",
+                "ExecutionMode"
+            ],
+            "productions": [
+                {
+                    "lhs": "VerbExecutionClassification",
+                    "rhs": "<AgentPurpose> \"→\" <PrimaryVerb> \"→\" <VerbSetMatch> \"→\" <AgentExecutionMode>"
+                },
+                {
+                    "lhs": "ParallelVerb",
+                    "rhs": "\"ANALYZE\" | \"FIND\" | \"EXTRACT\" | \"READ\" | \"DISCOVER\" | \"INVESTIGATE\" | \"RESEARCH\" | \"EXPLORE\" | \"TRACE\""
+                },
+                {
+                    "lhs": "SequentialVerb",
+                    "rhs": "\"CREATE\" | \"WRITE\" | \"EXECUTE\" | \"VERIFY\" | \"IMPLEMENT\" | \"LINK\" | \"ITERATE\" | \"REFACTOR\" | \"DEPLOY\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "workspace-configuration-discovery",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Workspace Configuration Discovery",
+            "exemplar": {
+                "before": "Artifact paths hardcoded — the workflow only runs in one layout.",
+                "after": "workspace-config → zones + root + agent defs → artifact base = shared_zone/workflow_name; no hardcoded paths",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Read workspace configuration, extract zones, semantic extensions, root path, agent definitions, shared zone, workflow zone, and task zone before generating any workflow artifacts.",
+            "invariant": "Workflow artifacts must be placed by discovered workspace configuration, not hardcoded paths.",
+            "flow": [
+                "WorkspaceConfig",
+                "Zones",
+                "AgentDefinitions",
+                "ArtifactBasePath"
+            ],
+            "productions": [
+                {
+                    "lhs": "WorkspaceConfigurationDiscovery",
+                    "rhs": "<WorkspaceConfigFile> \"→\" <WorkspaceConfig> \"→\" <ZoneConfig> \"→\" <AgentDefinitionSet> \"→\" <ArtifactPathPolicy>"
+                },
+                {
+                    "lhs": "ArtifactPathPolicy",
+                    "rhs": "\"shared_zone/workflow_name\" \",\" \"workflow_zone\" \",\" \"task_zone\" \",\" \"no_hardcoded_paths\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "runtime_extensibility",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "shared-document-workspace",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Shared Document Workspace",
+            "exemplar": {
+                "before": "Each agent writes its own output file; findings diverge across N versions.",
+                "after": "pre-create core documents once → every agent reads + edits the same set → no duplicate versions → single source of truth",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Pre-create workflow documents once, require every agent to read and edit the same documents, prohibit duplicate versions, and enforce single source of truth across phases.",
+            "invariant": "Multi-agent coordination should refine shared artifacts rather than create divergent outputs.",
+            "flow": [
+                "CoreDocuments",
+                "PreCreate",
+                "AgentReadEdit",
+                "SingleSourceValidation"
+            ],
+            "productions": [
+                {
+                    "lhs": "SharedDocumentWorkspace",
+                    "rhs": "<CoreDocumentSet> \"→\" <PreCreation> \"→\" <SharedAccessProtocol> \"→\" <IterativeRefinement> \"→\" <SingleSourceOfTruthGate>"
+                },
+                {
+                    "lhs": "SharedAccessProtocol",
+                    "rhs": "\"all_agents_same_documents\" \",\" \"orchestrator_creates\" \",\" \"agents_refine\" \",\" \"append_mode_false\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "model_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "workflow-type-document-selection",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Workflow Type Document Selection",
+            "exemplar": {
+                "before": "Generic output.md / results.md documents with overlapping purpose.",
+                "after": "objective → workflow_type{cleanup|analysis|refactoring|security|migration} → 5-8 distinct-purpose documents → one non-overlapping purpose each",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Analyze workflow objective, classify workflow type, select five to eight semantically distinct core documents, and map each document to a non-overlapping purpose.",
+            "invariant": "Workflow coordination needs the right shared document set for the work type.",
+            "flow": [
+                "WorkflowObjective",
+                "WorkflowType",
+                "CoreDocuments",
+                "PurposeMap"
+            ],
+            "productions": [
+                {
+                    "lhs": "WorkflowDocumentSelection",
+                    "rhs": "<WorkflowObjective> \"→\" <WorkflowType> \"→\" <CoreDocumentSet> \"→\" <DocumentPurposeMap>"
+                },
+                {
+                    "lhs": "WorkflowType",
+                    "rhs": "\"cleanup\" | \"analysis\" | \"refactoring\" | \"documentation\" | \"implementation\" | \"security\" | \"performance\" | \"infrastructure\" | \"migration\""
+                },
+                {
+                    "lhs": "CoreDocumentConstraint",
+                    "rhs": "\"document_count_between_5_and_8\" \",\" \"distinct_logical_purpose\" \",\" \"semantic_names_only\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "agent-sequence-definition",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Agent Sequence Definition",
+            "exemplar": {
+                "before": "A plan that is just a list of agent names, no executable metadata.",
+                "after": "agent_count → agent objects{name, type, phase, purpose, inputs, outputs, validation gates, doc responsibilities, execution mode, 4D graph}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each agent slot, create an agent object with name, type, phase, purpose, methodology, inputs, outputs, validation gates, document responsibilities, focus areas, edit protocol, agent activation, and 4D graph.",
+            "invariant": "An orchestration plan requires agent objects with executable metadata, not just agent names.",
+            "flow": [
+                "AgentCount",
+                "AgentObjectSet",
+                "AgentSequence"
+            ],
+            "productions": [
+                {
+                    "lhs": "AgentSequenceDefinition",
+                    "rhs": "<AgentCount> \"→\" <AgentObjectSet> \"→\" <AgentSequence>"
+                },
+                {
+                    "lhs": "AgentObject",
+                    "rhs": "<AgentName> \",\" <AgentType> \",\" <PhaseNumber> \",\" <Purpose> \",\" <Methodology> \",\" <InputArtifacts> \",\" <OutputArtifacts> \",\" <ValidationGates> \",\" <DocumentResponsibilities> \",\" <ExecutionMode> \",\" <Graph4D>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification",
+                "model_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "agent-document-responsibility",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Agent Document Responsibility",
+            "exemplar": {
+                "before": "Agents append findings, accumulating duplicates and contradictions.",
+                "after": "document → read current state → detect contradictions → remove stale → replace with new → single source of truth (never append, never a new version file)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each core document, require every agent to read current state, identify outdated or incorrect content, remove stale sections, replace with new discoveries, avoid duplicate findings, and maintain single source of truth.",
+            "invariant": "Shared-document workflows should use surgical refinement rather than additive accumulation.",
+            "flow": [
+                "Document",
+                "Read",
+                "DetectStale",
+                "Remove",
+                "Replace",
+                "Deduplicate"
+            ],
+            "productions": [
+                {
+                    "lhs": "AgentDocumentResponsibility",
+                    "rhs": "<CoreDocument> \"→\" <ReadCurrentState> \"→\" <ContradictionDetection> \"→\" <StaleContentRemoval> \"→\" <AccurateReplacement> \"→\" <SingleSourceValidation>"
+                },
+                {
+                    "lhs": "ProhibitedDocumentOperation",
+                    "rhs": "\"append_only\" | \"duplicate_findings\" | \"new_version_file\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "agent-activation-invocation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Agent Activation Invocation",
+            "exemplar": {
+                "before": "The orchestrator simulates the agent's work in its own session.",
+                "after": "agent object → spawn primitive{agent_type, prompt, model, context-if-parallel} → real activation; never simulate in the orchestrator",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For every agent activation, construct a spawn invocation with agent type, prompt, description, model, and context; use forked context for parallel agents and normal context for sequential agents.",
+            "invariant": "Orchestrators must execute agents through the runtime spawn primitive, not simulate agent behavior in the main session.",
+            "flow": [
+                "AgentObject",
+                "SpawnInvocation",
+                "AgentExecution"
+            ],
+            "productions": [
+                {
+                    "lhs": "AgentActivationInvocation",
+                    "rhs": "<AgentObject> \"→\" <SpawnCall> \"→\" <ExecutionResult>"
+                },
+                {
+                    "lhs": "SpawnCall",
+                    "rhs": "\"agent_type\" \",\" \"prompt\" \",\" \"description\" \",\" \"model\" \",\" \"context_if_parallel\""
+                },
+                {"lhs": "ForbiddenOrchestration",
+                    "rhs": "\"simulate_agent_execution_in_orchestrator\""}
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "parallel-batch-execution",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Parallel Batch Execution",
+            "exemplar": {
+                "before": "Parallel agents launched in separate messages, so they run one after another anyway.",
+                "after": "adjacent parallel agents → one concurrent batch of forked-context spawns → wait for all → merge via shared documents",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Accumulate adjacent parallel agents into a batch, invoke all spawns in a single concurrent batch, wait for all completions, and merge findings through shared documents.",
+            "invariant": "Parallel agents should execute concurrently only when their work is investigation-safe and state-isolated.",
+            "flow": [
+                "ParallelAgents",
+                "ConcurrentSpawnBatch",
+                "WaitAll",
+                "MergeFindings"
+            ],
+            "productions": [
+                {
+                    "lhs": "ParallelBatchExecution",
+                    "rhs": "<ParallelAgentSet> \"→\" <ConcurrentSpawnBatch> \"→\" <CompletionWait> \"→\" <SharedDocumentMerge>"
+                },
+                {"lhs": "ConcurrentSpawnBatch",
+                    "rhs": "\"single_batch_concurrent_spawn\""},
+                {
+                    "lhs": "ParallelSafety",
+                    "rhs": "\"context_fork\" \",\" \"discovery_or_investigation_only\" \",\" \"shared_artifact_refinement\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "event_messaging",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "sequential-agent-execution",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Sequential Agent Execution",
+            "exemplar": {
+                "before": "Two mutating agents launched at once, producing conflicting edits.",
+                "after": "prior handoff → one normal-context spawn at a time → wait for completion → activate the next",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Execute state-changing or validation agents one at a time in normal context, pass handoff context from the previous phase, wait for completion signal, then activate the next agent.",
+            "invariant": "Mutating workflow phases must serialize to prevent conflicting edits and ambiguous state.",
+            "flow": [
+                "PreviousHandoff",
+                "SpawnCall",
+                "WaitCompletion",
+                "NextHandoff"
+            ],
+            "productions": [
+                {
+                    "lhs": "SequentialAgentExecution",
+                    "rhs": "<HandoffContext> \"→\" <SequentialSpawnInvocation> \"→\" <CompletionSignal> \"→\" <NextAgentActivation>"
+                },
+                {
+                    "lhs": "SequentialConstraint",
+                    "rhs": "\"one_spawn_at_a_time\" \",\" \"wait_for_completion\" \",\" \"context_normal\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "correctness_verification",
+                "model_governance",
+                "event_messaging",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "four-dimensional-agent-graph",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Four-Dimensional Agent Graph",
+            "exemplar": {
+                "before": "An agent records only its order, not its cross-phase data or downstream ripple.",
+                "after": "agent → Z{prior required agents} + X{peer parallel} + Y{cross-phase artifact deps} + W{superseded state, propagated contracts, breaks-if-changed}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each agent, build sequential dependencies, lateral parallel peers, diagonal artifact/data dependencies, and propagation effects including superseded state, propagated contracts, and breakage risks.",
+            "invariant": "Multi-agent workflows need topology, not only order.",
+            "flow": [
+                "Agent",
+                "Z + X + Y + W Graph"
+            ],
+            "productions": [
+                {
+                    "lhs": "FourDAgentGraph",
+                    "rhs": "<AgentObject> \"→\" <SequentialAxis> \",\" <LateralAxis> \",\" <DiagonalAxis> \",\" <PropagationAxis>"
+                },
+                {"lhs": "SequentialAxis",
+                    "rhs": "\"Z: prior_required_agents\""},
+                {"lhs": "LateralAxis",
+                    "rhs": "\"X: peer_parallel_agents\""},
+                {"lhs": "DiagonalAxis",
+                    "rhs": "\"Y: cross_phase_artifact_dependencies\""},
+                {"lhs": "PropagationAxis",
+                    "rhs": "\"W: superseded_state, propagated_contracts, breaks_if_changed\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "model_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "handoff-signal",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Handoff Signal",
+            "exemplar": {
+                "before": "An agent finishes with a prose summary the orchestrator cannot route on.",
+                "after": "agent completion → handoff{completed, phase status, artifacts, next agent, execution mode, context, findings, validation, 4D graph, orchestrator_action}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Require every agent to end with a structured handoff signal containing completed agent, phase status, artifact location, next agent, execution mode, context used, findings, files, validation status, parallel results, 4D graph, and orchestrator action.",
+            "invariant": "Handoffs are control messages that preserve workflow state across agent boundaries.",
+            "flow": [
+                "AgentCompletion",
+                "HandoffContext",
+                "OrchestratorAction"
+            ],
+            "productions": [
+                {
+                    "lhs": "HandoffSignal",
+                    "rhs": "<AgentCompleted> \",\" <PhaseStatus> \",\" <ArtifactsLocation> \",\" <NextAgent> \",\" <ExecutionMode> \",\" <ContextUsed> \",\" <KeyFindings> \",\" <CriticalFiles> \",\" <ValidationGatesPassed> \",\" <ParallelResults> \",\" <Graph4D> \",\" <OrchestratorAction>"
+                },
+                {
+                    "lhs": "OrchestratorAction",
+                    "rhs": "\"ACTIVATE_NEXT_AGENT\" | \"PAUSE_FOR_USER\" | \"WORKFLOW_COMPLETE\""
+                }
+            ],
+            "composes": ["orchestrator-action"],
+            "force": [
+                "modularity",
+                "correctness_verification",
+                "model_governance",
+                "event_messaging",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "orchestrator-action",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Orchestrator Action",
+            "exemplar": {
+                "before": "The orchestrator asks the developer 'should I continue?' after every agent.",
+                "after": "handoff → orchestrator_action{ACTIVATE_NEXT_AGENT | PAUSE_FOR_USER | WORKFLOW_COMPLETE} → auto-continue unless a critical decision or repeated recovery failure",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Interpret handoff action as activate next agent, pause for the developer, or complete workflow; automatically continue unless a critical decision or repeated recovery failure requires the developer's involvement.",
+            "invariant": "The orchestrator is a control loop driven by structured handoff actions.",
+            "flow": [
+                "HandoffSignal",
+                "ActionType",
+                "Execute|Pause|Complete"
+            ],
+            "productions": [
+                {
+                    "lhs": "OrchestratorActionHandling",
+                    "rhs": "<HandoffSignal> \"→\" <ActionType> \"→\" <OrchestrationDecision>"
+                },
+                {"lhs": "ActionType",
+                    "rhs": "\"ACTIVATE_NEXT_AGENT\" | \"PAUSE_FOR_USER\" | \"WORKFLOW_COMPLETE\""},
+                {
+                    "lhs": "ContinuationRule",
+                    "rhs": "\"never_ask_should_I_continue\" \",\" \"use_orchestrator_action\""
+                }
+            ],
+            "composes": ["handoff-signal"],
+            "force": [
+                "state_transaction",
+                "resilience_recovery",
+                "model_governance",
+                "event_messaging",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "workflow-coordination-sequence",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Workflow Coordination Sequence",
+            "exemplar": {
+                "before": "Coordination left implicit — no record states the spawn order.",
+                "after": "pre-create docs → parallel batches where eligible + sequential tasks one at a time → handoffs → checkpoint updates → 100% complete",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Pre-create documents, execute parallel batches where eligible, execute sequential agents one at a time, update checkpoints, validate single source of truth, and mark workflow completion.",
+            "invariant": "Coordination is the explicit execution trace for the whole workflow.",
+            "flow": [
+                "PreCreateDocs",
+                "ParallelBatch|SequentialTask",
+                "Handoff",
+                "Checkpoint",
+                "Complete"
+            ],
+            "productions": [
+                {
+                    "lhs": "WorkflowCoordinationSequence",
+                    "rhs": "<DocumentPreCreation> \"→\" <AgentExecutionStepSet> \"→\" <CheckpointUpdateSet> \"→\" <WorkflowCompletionState>"
+                },
+                {
+                    "lhs": "WorkflowCompletionState",
+                    "rhs": "\"WORKFLOW_PROGRESS_100_percent\" \",\" \"core_documents_refined\" \",\" \"final_output_ready\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification",
+                "observability_traceability",
+                "model_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "workflow-recovery-loop",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Workflow Recovery Loop",
+            "exemplar": {
+                "before": "A failed agent is silently skipped and the workflow continues.",
+                "after": "validation fail → read shared docs → diagnose unmet expectation → research the error → relaunch with adapted context → pause for the developer after the bound",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "If an agent fails validation, read shared documents, identify unmet expectation, research the error pattern, relaunch the agent with adapted context, and pause for the developer after bounded recovery attempts.",
+            "invariant": "Agent failure should trigger bounded evidence-based recovery, not silent continuation.",
+            "flow": [
+                "ValidationFail",
+                "Diagnose",
+                "Research",
+                "Relaunch",
+                "RetryLimit|Recover"
+            ],
+            "productions": [
+                {
+                    "lhs": "WorkflowRecoveryLoop",
+                    "rhs": "<FailedAgentResult> \"→\" <SharedDocumentRead> \"→\" <UnmetExpectationAnalysis> \"→\" <ResolutionResearch> \"→\" <AgentRelaunch> \"→\" <RecoveryDecision>"
+                },
+                {"lhs": "RecoveryDecision",
+                    "rhs": "\"continue_after_recovery\" | \"pause_for_user_after_limit\""}
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "correctness_verification",
+                "resilience_recovery",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "checklist-integration",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Checklist Integration",
+            "exemplar": {
+                "before": "Workflow state lives only in the orchestrator context; a restart loses it.",
+                "after": "workflow → progress checklist{execution model, linear phases + severity metadata, task checkboxes, success criteria} → any agent resumes by reading it",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Create a workflow progress checklist in the artifact workspace, include execution model metadata, phases in linear dependency order with severity metadata, task checkboxes, progress bars, success criteria, and agent-edit coordination rules.",
+            "invariant": "Workflow state must persist independently of any one agent context.",
+            "flow": [
+                "Workflow",
+                "Checklist",
+                "AgentUpdates",
+                "ResumableProgress"
+            ],
+            "productions": [
+                {
+                    "lhs": "ChecklistIntegration",
+                    "rhs": "<WorkflowName> \"→\" <ChecklistFrontmatter> \"→\" <PhaseStructure> \"→\" <TaskBreakdown> \"→\" <ProgressTracking> \"→\" <SuccessCriteria>"
+                },
+                {
+                    "lhs": "ChecklistCoordinationRule",
+                    "rhs": "\"orchestrator_precreates\" \",\" \"all_agents_edit_same_checklist\" \",\" \"phase_complete_before_handoff\" \",\" \"resume_by_reading_checklist\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "phase-documentation-template",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Phase Documentation Template",
+            "exemplar": {
+                "before": "A phase documented with no execution mode, graph, or invocation example.",
+                "after": "agent phase → header + execution mode + context + methodology + 4D graph + artifacts + focus + deliverable + agent activation example",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each agent phase, render phase header, execution mode, context mode, methodology, 4D graph, artifact flow, focus areas, deliverable, and agent activation example.",
+            "invariant": "Workflow templates must document how each agent is activated and what it contributes.",
+            "flow": [
+                "AgentPhase",
+                "DocumentationSection",
+                "InvocationExample"
+            ],
+            "productions": [
+                {
+                    "lhs": "PhaseDocumentationTemplate",
+                    "rhs": "<AgentObject> \"→\" <PhaseHeader> \"→\" <ExecutionModeDescription> \"→\" <MethodologySummary> \"→\" <Graph4DRendering> \"→\" <ArtifactSection> \"→\" <FocusSection> \"→\" <OutputSection> \"→\" <AgentActivationExample>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "metaprogramming_modeling",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "workflow-principles-mapping",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Workflow Principles Mapping",
+            "exemplar": {
+                "before": "A workflow that never states what its structure guarantees.",
+                "after": "agent sequence → per-agent contribution{first grounds, final guarantees quality} → principles{grounded, automated, context-aware, self-recovering, scalable}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Derive workflow principles from the agent sequence, first agent grounding role, final agent quality guarantee, intermediate agent contributions, automation, context awareness, recovery, scalability, hybrid execution, context forking, and workspace integration.",
+            "invariant": "A workflow should state the qualities guaranteed by its orchestration structure.",
+            "flow": [
+                "AgentSequence",
+                "PrincipleSet",
+                "WorkflowValueStatement"
+            ],
+            "productions": [
+                {
+                    "lhs": "WorkflowPrinciplesMapping",
+                    "rhs": "<AgentSequence> \"→\" <AgentContributionSet> \"→\" <WorkflowPrincipleSet>"
+                },
+                {
+                    "lhs": "WorkflowPrinciple",
+                    "rhs": "\"grounded_in_codebase_reality\" | \"fully_automated\" | \"context_aware\" | \"self_recovering\" | \"dynamically_scalable\" | \"hybrid_execution\" | \"context_forking\" | \"workspace_integrated\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "resilience_recovery",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "capability-invocation-protocol",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Capability Invocation Protocol",
+            "exemplar": {
+                "before": "Every capability baked into every agent instead of a shared, invocable one.",
+                "after": "capability need → select → invoke(capability, args){discovery → forked, validation → normal} → integrate result",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Define specialized capability invocation patterns, classify which capabilities run forked or normal, include examples, and allow workflows to call capabilities for research, validation, calculation, and specialized subroutines.",
+            "invariant": "Workflows should support specialized capabilities without embedding every capability into every agent.",
+            "flow": [
+                "CapabilityNeed",
+                "CapabilityPattern",
+                "ContextMode",
+                "Invocation"
+            ],
+            "productions": [
+                {
+                    "lhs": "CapabilityInvocationProtocol",
+                    "rhs": "<CapabilityNeed> \"→\" <CapabilitySelection> \"→\" <CapabilityInvocation> \"→\" <CapabilityResultIntegration>"
+                },
+                {"lhs": "CapabilityInvocation",
+                    "rhs": "\"invoke(capability=name, args=args)\""},
+                {
+                    "lhs": "CapabilityContextRule",
+                    "rhs": "\"discovery_capability_context_fork\" | \"validation_capability_context_normal\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "template-assembly",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Template Assembly",
+            "exemplar": {
+                "before": "Workflow sections written ad hoc, missing the handoff format or coordination.",
+                "after": "assemble{frontmatter, workspace config, overview, phase docs, checklist, orchestration protocol, handoff format, coordination, capabilities, principles} → {name}-WORKFLOW file",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Assemble frontmatter, workspace config, overview, phase documentation, checklist requirements, orchestration protocol, handoff format, coordination sequence, capability integration, workflow principles, and domain notes into one workflow artifact.",
+            "invariant": "The workflow template is a compiled orchestration contract.",
+            "flow": [
+                "Sections",
+                "FinalTemplate",
+                "OutputPath",
+                "Write"
+            ],
+            "productions": [
+                {
+                    "lhs": "TemplateAssembly",
+                    "rhs": "<WorkflowFrontmatter> \"→\" <WorkspaceConfigSection> \"→\" <WorkflowOverview> \"→\" <PhaseDocumentationSet> \"→\" <ChecklistRequirements> \"→\" <AgentOrchestrationProtocol> \"→\" <HandoffSignalFormat> \"→\" <WorkflowCoordination> \"→\" <CapabilityIntegrationProtocol> \"→\" <WorkflowPrinciples> \"→\" <OutputArtifact>"
+                },
+                {"lhs": "OutputArtifact",
+                    "rhs": "\"{workflow_output_dir}/{workflow_name}-WORKFLOW.{workflow_ext}\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "model_governance",
+                "event_messaging",
+                "metaprogramming_modeling",
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "first-time-initiation",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "First-Time Initiation",
+            "exemplar": {
+                "before": "The generated workflow auto-executes without the developer's go-ahead.",
+                "after": "generated workflow → summary → developer choice{Execute | Edit Template | Cancel} → generation and first execution are separate approvals",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "After generating the workflow template, present a summary and request explicit first-run action: execute workflow, edit template, or cancel.",
+            "invariant": "Generation and first execution are separate approval states.",
+            "flow": [
+                "GeneratedWorkflow",
+                "UserChoice",
+                "Execute|Edit|Cancel"
+            ],
+            "productions": [
+                {
+                    "lhs": "FirstTimeInitiation",
+                    "rhs": "<GeneratedWorkflow> \"→\" <WorkflowSummary> \"→\" <UserChoice> \"→\" <InitialAction>"
+                },
+                {"lhs": "UserChoice",
+                    "rhs": "\"Execute Workflow\" | \"Edit Template\" | \"Cancel\""}
+            ],
+            "composes": [],
+            "force": [
+                "model_governance",
+                "metaprogramming_modeling"
+            ]
+        },
+        {
+            "id": "workflow-validation-gate",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Workflow Validation Gate",
+            "exemplar": {
+                "before": "A workflow shipped without checking its handoff, 4D graphs, or dynamic paths.",
+                "after": "template → checks{DSL, workspace, agent sequence, execution mode, 4D graph, handoff, checklist, capabilities, artifact paths} → valid | invalid",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Validate DSL compliance, workspace discovery, dynamic agent count, execution classification, context configuration, 4D graphs, handoff protocol, hybrid execution, checklist integration, capability integration, template assembly, dynamic paths, uppercase filenames, and agent-oriented content.",
+            "invariant": "A workflow template is complete only when orchestration, artifact, context, and validation contracts all pass.",
+            "flow": [
+                "WorkflowTemplate",
+                "GateSet",
+                "Valid|Invalid"
+            ],
+            "productions": [
+                {
+                    "lhs": "WorkflowValidationGate",
+                    "rhs": "<GeneratedWorkflow> \"→\" <DSLComplianceCheck> \"→\" <WorkspaceConfigCheck> \"→\" <AgentSequenceCheck> \"→\" <ExecutionModeCheck> \"→\" <Graph4DCheck> \"→\" <HandoffProtocolCheck> \"→\" <ChecklistIntegrationCheck> \"→\" <CapabilityIntegrationCheck> \"→\" <ArtifactPathCheck> \"→\" <CompletionVerdict>"
+                },
+                {"lhs": "CompletionVerdict",
+                    "rhs": "\"workflow_template_valid\" | \"workflow_template_invalid\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "model_governance",
+                "event_messaging",
+                "metaprogramming_modeling",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "workflow-creation-kernel",
+            "principleRef": "orchestration",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "dsl-compliance-loading"},
+                {"stage": "derive",
+                    "record": "workflow-type-document-selection"},
+                {"stage": "project",
+                    "record": "agent-sequence-definition"},
+                {"stage": "act",
+                    "record": "agent-activation-invocation"},
+                {"stage": "verify",
+                    "record": "workflow-validation-gate"},
+                {"stage": "commit",
+                    "record": "template-assembly"},
+                {"stage": "terminate",
+                    "record": "first-time-initiation"}
+            ],
+            "title": "Workflow Creation Kernel",
+            "exemplar": {
+                "before": "An objective turned straight into a hardcoded, single-threaded agent script.",
+                "after": "load specs → discover workspace → select docs → define agents → classify execution → 4D graphs → handoffs → coordinate → checklist + capabilities → assemble → validate",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load DSL and orchestration references, configure file recovery and context forking, discover workspace zones and agents, select shared documents, define dynamic agent sequence, classify execution mode, build 4D graphs, define handoff protocol, assemble coordination sequence, integrate checklist and capabilities, generate phase documentation, assemble template, and validate success criteria.",
+            "invariant": "Workflow creation is a compiler from objective and workspace configuration into an executable multi-agent orchestration contract.",
+            "flow": [
+                "Specs",
+                "Workspace",
+                "Documents",
+                "Agents",
+                "Graphs",
+                "Handoffs",
+                "Coordination",
+                "Checklist",
+                "Capabilities",
+                "Template",
+                "Validation"
+            ],
+            "productions": [
+                {
+                    "lhs": "WorkflowCreationKernel",
+                    "rhs": "<DSLComplianceLoading> \"→\" <FileModificationRecovery> \"→\" <ContextForkingConfiguration> \"→\" <WorkspaceConfigurationDiscovery> \"→\" <WorkflowDocumentSelection> \"→\" <SharedDocumentWorkspace> \"→\" <AgentSequenceDefinition> \"→\" <VerbExecutionClassification> \"→\" <FourDAgentGraph> \"→\" <HandoffSignal> \"→\" <WorkflowCoordinationSequence> \"→\" <ChecklistIntegration> \"→\" <PhaseDocumentationTemplate> \"→\" <CapabilityInvocationProtocol> \"→\" <TemplateAssembly> \"→\" <WorkflowValidationGate>"
+                }
+            ],
+            "composes": [
+                "dsl-compliance-loading",
+                "agent-workflow-file-modification-recovery",
+                "context-forking-configuration",
+                "workspace-configuration-discovery",
+                "shared-document-workspace",
+                "agent-sequence-definition",
+                "handoff-signal",
+                "workflow-coordination-sequence",
+                "checklist-integration",
+                "phase-documentation-template",
+                "capability-invocation-protocol",
+                "template-assembly",
+                "workflow-validation-gate"
+            ],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "state_transaction",
+                "correctness_verification",
+                "resilience_recovery",
+                "model_governance",
+                "event_messaging",
+                "metaprogramming_modeling",
+                "control_coordination",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "workflow-orchestration-concern",
+            "title": "<Workflow Orchestration Concern>",
+            "intent": "<Load orchestration grammar> → <Discover workspace config> → <Select shared documents> → <Define agents> → <Classify parallel vs sequential> → <Fork discovery contexts> → <Serialize action phases> → <Build 4D graphs> → <Create handoff protocol> → <Coordinate shared-document refinement> → <Integrate checklist and capabilities> → <Validate template>",
+            "invariant": "Any multi-agent workflow should be generated as an executable orchestration contract where discovery is parallel, mutation is sequential, state is shared through documents, and handoffs preserve graph-aware context.",
+            "flow": [
+                "Grammar",
+                "Workspace",
+                "Documents",
+                "Agents",
+                "ExecutionMode",
+                "Context",
+                "Graph",
+                "Handoff",
+                "Coordination",
+                "Validation"
+            ],
+            "productions": [
+                {
+                    "lhs": "WorkflowOrchestrationConcern",
+                    "rhs": "<GrammarContract> \"→\" <WorkspaceContract> \"→\" <SharedArtifactContract> \"→\" <AgentSequenceContract> \"→\" <HybridExecutionContract> \"→\" <ContextForkingContract> \"→\" <Graph4DContract> \"→\" <HandoffContract> \"→\" <ChecklistContract> \"→\" <CapabilityContract> \"→\" <ValidationGate>"
+                },
+                {
+                    "lhs": "HybridExecutionContract",
+                    "rhs": "\"parallel_discovery\" \",\" \"sequential_actions\" \",\" \"spawn_primitive_required\" \",\" \"no_orchestrator_simulation\" \",\" \"single_source_of_truth_documents\""
+                }
+            ],
+            "composes": ["validation-gate"],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "state_transaction",
+                "correctness_verification",
+                "model_governance",
+                "event_messaging",
+                "metaprogramming_modeling",
+                "control_coordination",
+                "architecture_evolution"
+            ],
+            "meta": true
+        }
+    ]
+}

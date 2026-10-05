@@ -13,17 +13,17 @@ export const UPSTREAM_ROOTS: readonly string[] = [
 
 export const NO_FIX_FLAG = "--rehearse";
 
-export const BEHAVIOUR_DOCUMENT = surfacePath("axis_document");
+export const BEHAVIOR_DOCUMENT = surfacePath("axis_document");
 
 export const BOOTSTRAP_DOCUMENT = surfacePath("bootstrap");
 
-export const BEHAVIOUR_TREE_PLACEHOLDER = ".{provider}";
+export const BEHAVIOR_TREE_PLACEHOLDER = ".{provider}";
 
 export const PACKAGE_MANIFEST = "package.json";
 
 export const AXIS_DOCUMENTS: readonly string[] = isResolved("project", "architecture_rules")
-    ? [BEHAVIOUR_DOCUMENT, slotText("project", "architecture_rules")]
-    : [BEHAVIOUR_DOCUMENT];
+    ? [BEHAVIOR_DOCUMENT, slotText("project", "architecture_rules")]
+    : [BEHAVIOR_DOCUMENT];
 
 export const PRINCIPLE_CATALOG: string | null = isResolved("project", "principle_ontology")
     ? slotText("project", "principle_ontology")

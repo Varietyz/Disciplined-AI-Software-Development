@@ -12,7 +12,7 @@ export const unresolvedSlot = function unresolvedSlot(path: string, line: number
         path,
         remediation: {
             action: "declare",
-            decide: `an abstract slot resolves against the adapter binding or resolves ABSENT, and an ABSENT slot means the branch using it does not run — which is declared rather than faked. Two artifacts can carry the repair and only one of them is this finding's subject: either ${path} stops naming ${slot}, or ${BINDING_PATH} binds it to its project value or declares it ABSENT. Deciding which is the judgement, so neither is offered as the target`,
+            decide: `an abstract slot resolves against the adapter binding or resolves ABSENT, and an ABSENT slot means the branch using it does not run — which is declared rather than faked. Two artifacts can carry the repair and only one of them is this finding's subject: either ${path} stops naming ${slot}, or ${BINDING_PATH} binds it to its project value or declares it ABSENT. Deciding which is the judgment, so neither is offered as the target`,
             deterministic: false,
             from: slot,
             target: path,
@@ -44,7 +44,7 @@ export const misSectioned = function misSectioned(path: string, line: number, sl
     };
 };
 
-export const unhonoured = function unhonoured(path: string, line: number, slot: string, state: Resolution): Finding {
+export const unhonored = function unhonored(path: string, line: number, slot: string, state: Resolution): Finding {
     return {
         actual: `${slot} is consumed as though it resolved, and the adapter resolves it ${state}`,
         expected: `the consuming line names ${state}, so the branch reading ${slot} does not run`,
@@ -54,13 +54,13 @@ export const unhonoured = function unhonoured(path: string, line: number, slot: 
         path,
         remediation: {
             action: "declare",
-            decide: `a slot has three resolution states and only one of them lets its branch run. The adapter is checked for whether a slot is DECLARED; nothing checks whether the CONSUMER honors what it declares, so a spec reading a non-resolving slot as though it resolved passes every existing check — which makes a gate satisfiable only by fabricating the evidence it demands. Two repairs are available and choosing between them is the judgement: ${path} states the ${state} resolution at the consuming line and does not run that branch, or it stops naming ${slot} at all. ABSENT means this deployment has no analogue and the branch is skipped; DEFERRED means the branch is BLOCKED rather than skipped, and collapsing the second into the first answers a different question in the right shape`,
+            decide: `a slot has three resolution states and only one of them lets its branch run. The adapter is checked for whether a slot is DECLARED; nothing checks whether the CONSUMER honors what it declares, so a spec reading a non-resolving slot as though it resolved passes every existing check — which makes a gate satisfiable only by fabricating the evidence it demands. Two repairs are available and choosing between them is the judgment: ${path} states the ${state} resolution at the consuming line and does not run that branch, or it stops naming ${slot} at all. ABSENT means this deployment has no analogue and the branch is skipped; DEFERRED means the branch is BLOCKED rather than skipped, and collapsing the second into the first answers a different question in the right shape`,
             deterministic: false,
             from: slot,
             target: path,
             to: state,
         },
-        rule: "binding/stateNotHonoured",
+        rule: "binding/stateNotHonored",
         stack: [
             { check: "slot", resolved: slot },
             { check: "binding", resolved: BINDING_PATH },

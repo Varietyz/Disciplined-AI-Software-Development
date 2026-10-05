@@ -28,7 +28,7 @@ export const COMMENT_OPENERS: readonly (readonly string[])[] = [
     ["this", "difference"],
 ];
 
-export const LABELLING_OPENERS: readonly (readonly string[])[] = [
+export const LABELING_OPENERS: readonly (readonly string[])[] = [
     ["that", "is"],
     ["this", "is"],
     ["that", "was"],

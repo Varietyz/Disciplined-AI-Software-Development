@@ -1,0 +1,605 @@
+{
+    "category": "Architecture Review / Evolution / Governance Artifacts",
+    "check": {
+        "population": "every architecture change, decision and deviation the review or gate is asked to pass",
+        "freshness": "a verdict stands for the change it reviewed and goes stale when the architecture, the criteria or the decision record changes",
+        "refusal": "the gate or the reviewer withholds approval, so the change does not merge",
+        "observation": "the recorded review, decision record or fitness run attached to the change",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the decision record and the review criteria, which a change is compared against"
+    },
+    "records": [
+        {
+            "id": "assessment",
+            "name": "Assessment",
+            "definition": "The activity of evaluating a codebase or architecture against stated criteria, using collected evidence.",
+            "type": "activity",
+            "scope": [
+                "codebase",
+                "architecture",
+                "risk"
+            ],
+            "requires": [
+                "Criteria",
+                "Evidence"
+            ],
+            "reinforces": [
+                "Governance",
+                "Quality Attributes"
+            ],
+            "enables": ["Prioritized Refactoring"],
+            "conflicts_with": ["Assumption-Based Judgment"],
+            "tensions_with": ["Time Cost"],
+            "violated_by": ["lexicon:assumption-based-judgment"],
+            "detected_by": ["missing evaluation artifacts"],
+            "measured_by": ["assessment coverage"],
+            "refactored_by": [],
+            "enforced_by": ["review process"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "approveFooArchitecture();",
+                "after": "const assessment = assess(fooArchitecture, {\n  dimensions: [\"modularity\", \"reliability\", \"security\", \"operability\"],\n  evidence: collectArchitectureEvidence(fooSystem),\n});\nrequirePassingAssessment(assessment);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "architecture-review",
+            "name": "Architecture Review",
+            "definition": "The activity of examining a structural change against the architecture's criteria and recorded decisions before it is accepted.",
+            "type": "activity",
+            "scope": [
+                "system",
+                "component",
+                "design change"
+            ],
+            "requires": [
+                "Architecture Criteria",
+                "ADRs"
+            ],
+            "reinforces": ["Architectural Consistency"],
+            "enables": ["Risk Detection"],
+            "conflicts_with": ["Unreviewed Structural Change"],
+            "tensions_with": ["Delivery Speed"],
+            "violated_by": ["lexicon:unreviewed-structural-change"],
+            "detected_by": ["unapproved dependency/style changes"],
+            "measured_by": ["review coverage"],
+            "refactored_by": [
+                "architecture:code-review",
+                "lexicon:automated-enforcement"
+            ],
+            "enforced_by": ["pull request gates"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "mergeFooDesign();",
+                "after": "const review = architectureReview({\n  context: fooContext,\n  decisions: fooDecisions,\n  risks: fooRisks,\n  qualityAttributes: fooQualityAttributes,\n});\nreview.requireApproval([\"architecture-owner\", \"security-owner\"]);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "design-review",
+            "name": "Design Review",
+            "definition": "The activity of checking a component or feature design for contracts, failure modes and testability before it is built.",
+            "type": "activity",
+            "scope": [
+                "component",
+                "module",
+                "feature"
+            ],
+            "requires": ["Design Criteria"],
+            "reinforces": [
+                "Correctness",
+                "Maintainability"
+            ],
+            "enables": ["Early Defect Prevention"],
+            "conflicts_with": ["Ad-Hoc Design"],
+            "tensions_with": ["Iteration Speed"],
+            "violated_by": ["lexicon:ad-hoc-design"],
+            "detected_by": ["missing design record"],
+            "measured_by": ["design review finding rate"],
+            "refactored_by": ["lexicon:define-contract"],
+            "enforced_by": ["review checklist"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "implementFooDesign(fooDesign);",
+                "after": "const review = designReview(fooDesign, {\n  contracts: validateContracts,\n  failureModes: analyzeFailureModes,\n  testability: assessTestability,\n});\nif (!review.approved) throw new Error(\"design rejected\");",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "code-review",
+            "name": "Code Review",
+            "definition": "The activity of having a second party read a code change against review standards before it merges.",
+            "type": "activity",
+            "scope": ["code change"],
+            "requires": ["Review Standards"],
+            "reinforces": [
+                "Quality",
+                "Security",
+                "Consistency"
+            ],
+            "enables": ["Defect Detection"],
+            "conflicts_with": ["Direct-to-main Unreviewed Change"],
+            "tensions_with": ["Throughput"],
+            "violated_by": ["lexicon:direct-to-main-unreviewed-change"],
+            "detected_by": ["missing approval/review"],
+            "measured_by": [
+                "review coverage",
+                "defect escape rate"
+            ],
+            "refactored_by": [],
+            "enforced_by": ["branch protection"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "git.merge(fooChange);",
+                "after": "const review = codeReview(fooChange);\nreview.require({ approvals: 2, passingChecks: [\"tests\", \"types\", \"security\", \"architecture\"] });\ngit.merge(review.approvedCommit);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "impact-analysis",
+            "name": "Impact Analysis",
+            "definition": "The activity of tracing a change through the dependency graph to find every consumer it affects.",
+            "type": "activity",
+            "scope": [
+                "change",
+                "dependency graph",
+                "API"
+            ],
+            "requires": [
+                "Dependency Graph",
+                "Contracts"
+            ],
+            "reinforces": ["Change Safety"],
+            "enables": ["Regression Scope Selection"],
+            "conflicts_with": ["Blind Change"],
+            "tensions_with": ["Analysis Overhead"],
+            "violated_by": ["lexicon:blind-change"],
+            "detected_by": ["change touching dependencies without impact note"],
+            "measured_by": ["affected component count"],
+            "refactored_by": ["lexicon:unit-tests"],
+            "enforced_by": [
+                "PR template",
+                "dependency tooling"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "renameFooField(\"name\", \"label\");",
+                "after": "const impact = dependencyGraph.impactOf({\n  contract: \"FooV1.name\",\n  change: \"rename-to-label\",\n});\nfor (const consumer of impact.consumers) requireMigration(consumer);\nrenameFooField(\"name\", \"label\");",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "gap-analysis",
+            "name": "Gap Analysis",
+            "definition": "The activity of comparing the current state of a system with its target state and listing each difference.",
+            "type": "activity",
+            "scope": [
+                "compliance",
+                "architecture",
+                "capability"
+            ],
+            "requires": [
+                "Target State",
+                "Current State"
+            ],
+            "reinforces": ["Governance"],
+            "enables": ["Remediation Planning"],
+            "conflicts_with": ["Undefined Target"],
+            "tensions_with": ["Time Cost"],
+            "violated_by": ["lexicon:undefined-target"],
+            "detected_by": ["unknown compliance/architecture status"],
+            "measured_by": ["gap count/severity"],
+            "refactored_by": ["lexicon:mitigation-plan"],
+            "enforced_by": ["governance process"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "declareFooSystemReady();",
+                "after": "const target = fooTargetArchitecture();\nconst current = inspectFooArchitecture();\nconst gaps = compareArchitecture(current, target);\nfor (const gap of gaps) assignRemediation(gap);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "fitness-functions",
+            "name": "Fitness Functions",
+            "definition": "A mechanism that turns an architecture rule into an executable check the pipeline runs on every change.",
+            "type": "mechanism",
+            "scope": [
+                "codebase",
+                "pipeline",
+                "architecture"
+            ],
+            "requires": ["Measurable Architecture Rule"],
+            "reinforces": ["Evolutionary Architecture"],
+            "enables": ["Automated Architecture Compliance"],
+            "conflicts_with": ["Manual Architecture Review Only"],
+            "tensions_with": ["Rule Maintenance"],
+            "violated_by": ["architecture:manual-only-governance"],
+            "detected_by": ["missing executable architecture checks"],
+            "measured_by": ["fitness pass/fail trend"],
+            "refactored_by": [],
+            "enforced_by": ["CI architecture tests"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "architectureGuidelines.write(\"Foo domain must not import infrastructure\");",
+                "after": "const fitness = forbidImports({ from: \"src/foo/domain/**\", to: \"src/foo/infrastructure/**\" });\npipeline.enforce(fitness);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "quality-attributes",
+            "name": "Quality Attributes",
+            "definition": "A conceptual representation of the non-functional properties a system must meet, each stated as a measurable scenario.",
+            "type": "model",
+            "scope": [
+                "system",
+                "service",
+                "codebase"
+            ],
+            "requires": ["Attribute Scenarios"],
+            "reinforces": ["Architecture Review"],
+            "enables": ["Trade-Off Analysis"],
+            "conflicts_with": ["Feature-Only Design"],
+            "tensions_with": ["Competing Attributes"],
+            "violated_by": ["architecture:feature-only-design"],
+            "detected_by": ["missing quality scenarios/SLOs"],
+            "measured_by": ["quality attribute scenario pass rate"],
+            "refactored_by": [
+                "lexicon:quality-scenarios",
+                "architecture:fitness-functions"
+            ],
+            "enforced_by": ["architecture review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "designFooService();",
+                "after": "const attributes = defineQualityAttributes({\n  availability: \"99.95%\",\n  p95LatencyMs: 200,\n  recoveryTimeMinutes: 5,\n  dataLossSeconds: 0,\n});\ndesignFooService(attributes);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "architecture-decision-records",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:consequences",
+                    "reason": "A decision record is the whole record, while its consequences are the one part that states the trade-offs and effects."
+                },
+                {
+                    "id": "lexicon:decision",
+                    "reason": "A decision record is the whole record, while the decision is the one part that states the choice made."
+                }
+            ],
+            "name": "Architecture Decision Records (ADR)",
+            "definition": "A formal definition of one architecture decision, recording its context, the choice made and its consequences.",
+            "type": "artifact",
+            "aliases": ["ADRs"],
+            "scope": ["architecture decision"],
+            "requires": [
+                "Context",
+                "Decision",
+                "Consequences"
+            ],
+            "reinforces": [
+                "Traceability",
+                "Governance"
+            ],
+            "enables": ["Decision History"],
+            "conflicts_with": ["Tribal Knowledge"],
+            "tensions_with": ["Documentation Maintenance"],
+            "violated_by": ["lexicon:tribal-knowledge"],
+            "detected_by": ["architecture change without ADR"],
+            "measured_by": ["ADR coverage"],
+            "refactored_by": [
+                "lexicon:decision-record-with-alternatives",
+                "lexicon:data-change-audit"
+            ],
+            "enforced_by": [
+                "PR template",
+                "review policy"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "chooseFooDatabase(\"postgres\");",
+                "after": "const adr = recordDecision({\n  id: \"ADR-0042\",\n  title: \"Use PostgreSQL for Foo persistence\",\n  status: \"accepted\",\n  context: fooPersistenceForces,\n  decision: \"postgres\",\n  consequences: fooPersistenceConsequences,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "evolutionary-architecture",
+            "name": "Evolutionary Architecture",
+            "definition": "An approach in which the architecture changes in small increments, each guarded by fitness functions.",
+            "type": "approach",
+            "scope": [
+                "system",
+                "codebase"
+            ],
+            "requires": [
+                "Fitness Functions",
+                "Incremental Change"
+            ],
+            "reinforces": ["Continuous Improvement"],
+            "enables": ["Controlled Architecture Evolution"],
+            "conflicts_with": [
+                "Big-Upfront Frozen Architecture",
+                "Lava Flow",
+                "Premature Abstraction",
+                "Zombie Code"
+            ],
+            "tensions_with": ["Governance Discipline"],
+            "violated_by": ["lexicon:architecture-drift"],
+            "detected_by": ["accumulating unmeasured drift"],
+            "measured_by": [
+                "fitness trend",
+                "architecture debt"
+            ],
+            "refactored_by": [
+                "architecture:fitness-functions",
+                "lexicon:small-batch-release"
+            ],
+            "enforced_by": ["CI/CD architecture checks"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "designFinalFooArchitecture();\nfreezeArchitectureForever();",
+                "after": "const fooArchitecture = evolveArchitecture({\n  current: minimumFooArchitecture,\n  fitnessFunctions: fooFitnessFunctions,\n  nextChange: highestValueArchitectureChange,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "minimum-viable-architecture",
+            "name": "Minimum Viable Architecture",
+            "definition": "An approach in which a system starts with only the structure its current quality attributes require, and defers the rest until a force demands it.",
+            "type": "approach",
+            "scope": [
+                "greenfield",
+                "early product"
+            ],
+            "requires": ["Essential Quality Attributes"],
+            "reinforces": ["Simplicity"],
+            "enables": ["Early Delivery with Guardrails"],
+            "conflicts_with": [
+                "Over-Architecture",
+                "Architecture Astronaut",
+                "Over-Abstraction",
+                "Speculative Generality"
+            ],
+            "tensions_with": ["Future Scalability"],
+            "violated_by": ["architecture:speculative-generality"],
+            "detected_by": ["unused abstractions/infrastructure"],
+            "measured_by": ["architecture complexity vs need"],
+            "refactored_by": [
+                "lexicon:cleanup-simplification",
+                "lexicon:defer-generalization"
+            ],
+            "enforced_by": ["design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "buildServiceMesh();\nbuildGlobalEventBus();\nbuildPluginPlatform();\ncreateFooEndpoint();",
+                "after": "const architecture = defineMinimumArchitecture({\n  useCase: \"create-and-read-foo\",\n  components: [\"foo-api\", \"foo-store\"],\n  deferredUntilForced: [\"service-mesh\", \"plugin-platform\"],\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "greenfield-development",
+            "name": "Greenfield Development",
+            "definition": "An abstraction of building a new system with no inherited code, so its boundaries are designed from the current forces.",
+            "type": "model",
+            "scope": [
+                "new codebase",
+                "system"
+            ],
+            "requires": ["First-Principles Design"],
+            "reinforces": ["Architecture Foundation"],
+            "enables": ["Clean Boundary Design"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Unknown Requirements",
+                "Legacy Constraints"
+            ],
+            "violated_by": ["architecture:big-upfront-frozen-architecture"],
+            "detected_by": ["heavy structure without validated need"],
+            "measured_by": [
+                "initial complexity",
+                "adaptability"
+            ],
+            "refactored_by": [
+                "lexicon:define-module-boundaries",
+                "lexicon:decision-record-with-alternatives"
+            ],
+            "enforced_by": ["architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "copyLegacyFooModule();\nretainLegacyFooFlags();\nretainLegacyFooSchema();",
+                "after": "const fooSystem = designFromCurrentForces({\n  domain: fooDomain,\n  constraints: currentConstraints,\n  contracts: currentContracts,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "first-principles-design",
+            "name": "First-Principles Design",
+            "definition": "An approach in which a design is derived from the problem's forces and invariants before any known pattern is chosen.",
+            "type": "approach",
+            "scope": [
+                "architecture",
+                "domain",
+                "component"
+            ],
+            "requires": ["Problem Decomposition"],
+            "reinforces": [
+                "Correctness",
+                "Simplicity"
+            ],
+            "enables": ["Fit-for-Purpose Architecture"],
+            "conflicts_with": [
+                "Cargo-Cult Pattern Use",
+                "Golden Hammer",
+                "Pattern Cargo Cult"
+            ],
+            "tensions_with": ["Reuse of Established Patterns"],
+            "violated_by": ["architecture:golden-hammer"],
+            "detected_by": ["unjustified pattern selection"],
+            "measured_by": ["decision rationale quality"],
+            "refactored_by": [
+                "lexicon:decision-review",
+                "lexicon:remove-pattern-shell"
+            ],
+            "enforced_by": ["ADR review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "useMicroservicesBecauseIndustryUsesMicroservices();",
+                "after": "const forces = identifyForces(fooProblem);\nconst invariants = deriveInvariants(forces);\nconst design = synthesizeArchitecture({ forces, invariants });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "reference-architecture",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:reusable-architecture-guidance",
+                    "reason": "A reference architecture defines the modules and dependencies a family of systems instantiates, while reusable guidance is the wider body of advice it packages."
+                }
+            ],
+            "name": "Reference Architecture",
+            "definition": "A formal definition of the modules, patterns and allowed dependencies that a family of systems instantiates.",
+            "type": "artifact",
+            "scope": [
+                "platform",
+                "organization",
+                "system family"
+            ],
+            "requires": [
+                "Standard Patterns",
+                "Quality Goals"
+            ],
+            "reinforces": [
+                "Standardization",
+                "Consistency"
+            ],
+            "enables": ["Reusable Architecture Guidance"],
+            "conflicts_with": ["Uncoordinated Divergence"],
+            "tensions_with": ["Team Autonomy"],
+            "violated_by": ["lexicon:uncoordinated-divergence"],
+            "detected_by": ["deviation without ADR"],
+            "measured_by": ["conformance/deviation rate"],
+            "refactored_by": ["architecture:gap-analysis"],
+            "enforced_by": ["architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "teamA.buildFooOneWay();\nteamB.buildFooAnotherWay();",
+                "after": "const fooReference = defineReferenceArchitecture({\n  modules: [\"api\", \"application\", \"domain\", \"adapters\"],\n  allowedDependencies: fooDependencyRules,\n});\nteamA.instantiate(fooReference);\nteamB.instantiate(fooReference);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "pattern-consistency",
+            "distinctFrom": [
+                {
+                    "id": "architecture:architectural-consistency",
+                    "reason": "Pattern consistency is one problem solved one way everywhere, while architectural consistency is code following the declared boundaries and layers."
+                },
+                {
+                    "id": "lexicon:local-optimization",
+                    "reason": "Pattern consistency is the degree shared patterns are used, while local optimization is the one-off gain that using them gives up."
+                }
+            ],
+            "name": "Pattern Consistency",
+            "definition": "The degree to which one kind of problem is solved with the same pattern throughout a codebase.",
+            "type": "quality-attribute",
+            "scope": [
+                "codebase",
+                "system"
+            ],
+            "requires": ["Naming/Structure Conventions"],
+            "reinforces": [
+                "Predictability",
+                "Maintainability"
+            ],
+            "enables": ["Easier Refactoring"],
+            "conflicts_with": ["Ad-Hoc Pattern Mixing"],
+            "tensions_with": ["Local Optimization"],
+            "violated_by": ["lexicon:ad-hoc-pattern-mixing"],
+            "detected_by": ["inconsistent implementations of same concern"],
+            "measured_by": ["pattern variance count"],
+            "refactored_by": ["lexicon:standardize-the-interface"],
+            "enforced_by": [
+                "linting",
+                "review",
+                "scaffolding"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "fooModule.useRepository();\nbarModule.queryDatabaseDirectly();\nbazModule.useActiveRecord();",
+                "after": "const persistencePattern = \"repository\" as const;\nfooModule.use(persistencePattern);\nbarModule.use(persistencePattern);\nbazModule.use(persistencePattern);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "architectural-consistency",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:local-autonomy",
+                    "reason": "Architectural consistency is the degree the code follows declared rules, while local autonomy is the team freedom that enforcing them costs."
+                }
+            ],
+            "name": "Architectural Consistency",
+            "definition": "The degree to which the code follows the system's declared boundaries, layers and dependency rules.",
+            "type": "quality-attribute",
+            "scope": [
+                "system",
+                "codebase"
+            ],
+            "requires": [
+                "Architecture Rules",
+                "Governance"
+            ],
+            "reinforces": ["Pattern Consistency"],
+            "enables": ["Predictable Evolution"],
+            "conflicts_with": ["Architecture Drift"],
+            "tensions_with": ["Local Autonomy"],
+            "violated_by": ["lexicon:architecture-drift"],
+            "detected_by": ["architecture fitness failures"],
+            "measured_by": ["violation trend"],
+            "refactored_by": ["lexicon:architecture-test"],
+            "enforced_by": ["architecture tests"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "fooDomain.imports(sqlClient);\nbarDomain.imports(httpClient);",
+                "after": "architectureRules.enforce([\n  forbid(\"domain\", \"infrastructure\"),\n  requirePortFor(\"external-io\"),\n]);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "standardization",
+            "name": "Standardization",
+            "definition": "A design rule that one format, tool or pattern is chosen for each recurring concern and applied everywhere it occurs.",
+            "type": "principle",
+            "scope": [
+                "codebase",
+                "platform",
+                "organization"
+            ],
+            "requires": ["Standards Definition"],
+            "reinforces": [
+                "Consistency",
+                "Interoperability"
+            ],
+            "enables": [
+                "Reuse",
+                "Operability"
+            ],
+            "conflicts_with": ["Unbounded Variation"],
+            "tensions_with": ["Innovation/Autonomy"],
+            "violated_by": ["lexicon:inconsistent-conventions"],
+            "detected_by": ["standards deviation"],
+            "measured_by": ["conformance rate"],
+            "refactored_by": ["lexicon:standardize-the-interface"],
+            "enforced_by": [
+                "CI policies",
+                "templates"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "teamA.emit({ foo_id: foo.id });\nteamB.emit({ id: foo.id, type: \"foo\" });",
+                "after": "const FooCreatedV1 = standardEvent({\n  type: \"FooCreated\",\n  version: 1,\n  fields: { fooId: FooIdSchema },\n});\nteamA.emit(FooCreatedV1.create(foo));\nteamB.emit(FooCreatedV1.create(foo));",
+                "lang": "ts"
+            }
+        }
+    ]
+}

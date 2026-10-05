@@ -10,9 +10,9 @@ export const AGENT_FIELDS = ["Owns", "Status", "Flags", "Refs"];
 
 export const GATE_FIELDS = ["State", "Owner", "Blocker"];
 
-export const JUDGEMENT_KIND = "judgement";
+export const JUDGMENT_KIND = "judgment";
 
-export const ITEM_KINDS = ["artifact", JUDGEMENT_KIND];
+export const ITEM_KINDS = ["artifact", JUDGMENT_KIND];
 
 export const ANSWER_PREFIX = "Answer-";
 

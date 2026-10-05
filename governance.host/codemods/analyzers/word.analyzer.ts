@@ -1,7 +1,7 @@
-import { AMERICAN_WORDS, IZE_STEMS, IZE_SUFFIXES } from "@govlab/constants";
 import type { LiteralFinding, WordScope } from "../../types/analyzer.types.ts";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { ROOT } from "@ssot/paths";
+import { americanOf } from "@govlab/constants";
 import path from "node:path";
 import { relPath } from "../selectors/program.selector.ts";
 
@@ -9,19 +9,6 @@ const MARKDOWN_EXTENSION = ".md";
 const FENCE = "```";
 const TICK = "`";
 const NEWLINE = "\n";
-
-const americanOf = function americanOf(lower: string): string | null {
-    if (Object.hasOwn(AMERICAN_WORDS, lower)) {
-        return AMERICAN_WORDS[lower] ?? null;
-    }
-    for (const stem of IZE_STEMS) {
-        const tail = lower.slice(stem.length);
-        if (lower.startsWith(stem) && Object.hasOwn(IZE_SUFFIXES, tail)) {
-            return stem + (IZE_SUFFIXES[tail] ?? "");
-        }
-    }
-    return null;
-};
 
 const inCase = function inCase(original: string, american: string): string {
     if (original === original.toUpperCase()) {
@@ -35,10 +22,19 @@ const isLetter = function isLetter(char: string): boolean {
     return (char >= "a" && char <= "z") || (char >= "A" && char <= "Z");
 };
 
-const WORD_JOINERS: ReadonlySet<string> = new Set(["_", "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]);
+const isUpper = function isUpper(char: string): boolean {
+    return char >= "A" && char <= "Z";
+};
 
-const isWordPart = function isWordPart(char: string): boolean {
-    return isLetter(char) || WORD_JOINERS.has(char);
+const isLower = function isLower(char: string): boolean {
+    return char >= "a" && char <= "z";
+};
+
+const startsPart = function startsPart(run: string, at: number): boolean {
+    const here = run.charAt(at);
+    const before = run.charAt(at - 1);
+    const after = run.charAt(at + 1);
+    return isUpper(here) && (isLower(before) || (isUpper(before) && isLower(after)));
 };
 
 const codeSpans = function codeSpans(line: string): [number, number][] {
@@ -64,11 +60,23 @@ interface WordSite {
     readonly word: string;
 }
 
+const partsOf = function partsOf(run: string, offset: number): WordSite[] {
+    const sites: WordSite[] = [];
+    let start = 0;
+    for (let at = 1; at <= run.length; at += 1) {
+        if (at === run.length || startsPart(run, at)) {
+            sites.push({ start: offset + start, word: run.slice(start, at) });
+            start = at;
+        }
+    }
+    return sites;
+};
+
 const wordsOf = function wordsOf(line: string): WordSite[] {
     const sites: WordSite[] = [];
     let index = 0;
     while (index < line.length) {
-        if (!isLetter(line.charAt(index)) || (index > 0 && isWordPart(line.charAt(index - 1)))) {
+        if (!isLetter(line.charAt(index))) {
             index += 1;
             continue;
         }
@@ -76,9 +84,7 @@ const wordsOf = function wordsOf(line: string): WordSite[] {
         while (end < line.length && isLetter(line.charAt(end))) {
             end += 1;
         }
-        if (end >= line.length || !isWordPart(line.charAt(end))) {
-            sites.push({ start: index, word: line.slice(index, end) });
-        }
+        sites.push(...partsOf(line.slice(index, end), index));
         index = end;
     }
     return sites;
@@ -94,8 +100,9 @@ interface LineSite {
 const lineFindings = function lineFindings(site: LineSite): LiteralFinding[] {
     const spans = path.extname(site.fileName) === MARKDOWN_EXTENSION ? codeSpans(site.line) : [];
     return wordsOf(site.line).flatMap((word) => {
-        const american = americanOf(word.word.toLowerCase());
-        if (american === null || insideSpan(spans, word.start)) {
+        const lower = word.word.toLowerCase();
+        const american = americanOf(lower);
+        if (american === lower || insideSpan(spans, word.start)) {
             return [];
         }
         return [

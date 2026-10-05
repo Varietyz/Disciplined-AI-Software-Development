@@ -25,7 +25,7 @@ Rename `.{provider}` to the folder the runtime reads, such as `.claude` for Clau
 
 Then replace the literal `.{provider}` with the new name everywhere outside this file:
 
-- `config/surface.config.ts` (`BEHAVIOUR_TREE`)
+- `config/surface.config.ts` (`BEHAVIOR_TREE`)
 - `config/taxonomy.config.ts` (the governed-root keys)
 - `package.json` (`files`)
 - every document path, including the digest list at the end of `AGENTS.md`

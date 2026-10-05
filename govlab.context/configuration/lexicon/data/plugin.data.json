@@ -1,0 +1,163 @@
+{
+    "category": "plugin-extensibility-ioc",
+    "records": [
+        {
+            "name": "Closed Core",
+            "kind": "anti-pattern",
+            "definition": "A core that cannot be extended without modifying its own source, so every addition edits the core."
+        },
+        {
+            "name": "Direct Control Ownership",
+            "kind": "anti-pattern",
+            "definition": "Application code driving the overall control flow itself instead of ceding it to a framework or container."
+        },
+        {
+            "name": "Direct Reference",
+            "kind": "anti-pattern",
+            "definition": "Referring to a specific implementation directly instead of looking it up through a registry."
+        },
+        {
+            "name": "Hardcoded Branch Constant",
+            "kind": "anti-pattern",
+            "definition": "Controlling a feature with a hardcoded constant in the code instead of an externally-managed flag."
+        },
+        {
+            "name": "Hardcoded Extensions",
+            "kind": "anti-pattern",
+            "definition": "Wiring extensions directly into the core so adding one requires editing and rebuilding the core."
+        },
+        {
+            "name": "Hardcoded Instantiation",
+            "distinctFrom": [
+                {
+                    "id": "architecture:ambient-context",
+                    "reason": "Hardcoded instantiation constructs a dependency inside the class, while ambient context reads request or user state from an implicit global."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Creating dependencies with hardcoded constructors inside a class instead of injecting them."
+        },
+        {
+            "name": "Hardcoded Lookup",
+            "kind": "anti-pattern",
+            "definition": "Hardcoding a service's address or instance instead of resolving it through a registry."
+        },
+        {
+            "name": "Continuous Delivery",
+            "kind": "capability",
+            "definition": "The ability to release changes to production continuously through an automated pipeline."
+        },
+        {
+            "name": "Decoupled Deploy and Release",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:gradual-rollout",
+                    "reason": "Decoupling deploy from release separates shipping code from switching it on, while gradual rollout switches it on for a growing share of users."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to deploy code and separately decide when to activate it for users."
+        },
+        {
+            "name": "Dynamic Lookup",
+            "kind": "capability",
+            "definition": "The ability to find a registered component by key at runtime."
+        },
+        {
+            "name": "Dynamic Resolution",
+            "kind": "capability",
+            "definition": "The ability to resolve a service's current location or instance at runtime."
+        },
+        {
+            "name": "Framework Control Flow",
+            "kind": "capability",
+            "definition": "The ability to let a framework drive the overall control flow and call into application code."
+        },
+        {
+            "name": "Gradual Rollout",
+            "kind": "capability",
+            "definition": "The ability to enable a feature for a growing subset of users over time."
+        },
+        {
+            "name": "Late Resolution",
+            "kind": "capability",
+            "definition": "The ability to defer resolving which implementation to use until the moment it is needed."
+        },
+        {
+            "name": "Mocking",
+            "kind": "capability",
+            "definition": "The ability to substitute test doubles for real dependencies by injecting them."
+        },
+        {
+            "name": "Runtime Lookup",
+            "kind": "capability",
+            "definition": "The ability to look up a needed service by name at runtime."
+        },
+        {
+            "name": "Third-Party Extension",
+            "kind": "capability",
+            "definition": "The ability for outside developers to extend the system through published extension points."
+        },
+        {
+            "name": "Registry",
+            "kind": "mechanism",
+            "definition": "A central store that maps keys to registered components for later lookup."
+        },
+        {
+            "name": "Externalized Flag State",
+            "kind": "constraint",
+            "definition": "The requirement that feature-flag values live in external configuration, not hardcoded in the code."
+        },
+        {
+            "name": "Keyed Registration",
+            "kind": "constraint",
+            "definition": "The requirement that each component register under a unique key by which it can be retrieved."
+        },
+        {
+            "name": "Registration Protocol",
+            "kind": "constraint",
+            "definition": "The requirement of a defined protocol by which services register and deregister themselves."
+        },
+        {
+            "name": "API Surface Growth",
+            "kind": "quality-attribute",
+            "definition": "The degree to which adding extension points enlarges the public API that must be kept stable."
+        },
+        {
+            "name": "Constructor Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which injecting many dependencies through constructors makes them long and unwieldy."
+        },
+        {
+            "name": "Explicit Dependencies",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:explicit-dependency",
+                    "reason": "Explicit dependencies is the degree to which a component's needs are visible, while explicit dependency is the technique that makes them visible."
+                }
+            ],
+            "kind": "quality-attribute",
+            "definition": "The degree to which a component's dependencies are visible in its signature rather than acquired through hidden lookups."
+        },
+        {
+            "name": "Flag Debt",
+            "kind": "quality-attribute",
+            "definition": "The degree to which stale, unremoved feature flags accumulate and clutter the code over time."
+        },
+        {
+            "name": "Global State",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a global registry behaves as shared global state that any code can reach."
+        },
+        {
+            "name": "Registry Availability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which the whole system's operation depends on the service registry staying available."
+        },
+        {
+            "name": "Ungoverned Global Registry",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a global registry is changed from anywhere, with no owner, lifecycle or validation of its entries."
+        }
+    ]
+}

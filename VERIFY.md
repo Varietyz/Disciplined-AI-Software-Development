@@ -20,7 +20,7 @@ The most expensive failures I have had were the ones that looked right: the code
 
 A model judges its own edit as clean by reading it, and reading is not running. The model claims [compliance](ontology/PRINCIPLES.md#architecture-compliance) after one edit and never checks it again, and the next run of the tools finds the same fault plus a new one. A model produces text that resembles a finished result, because that is what finished results look like in its training.
 
-For this reason the verdict comes from a machine, and the model's judgement is never the signal that the work is done. The report on disk decides when the work is done, rather than the reply that describes it. In practice, the exit code is the answer and the parsed findings are the answer, while the model's summary is treated as a story about the answer.
+For this reason the verdict comes from a machine, and the model's judgment is never the signal that the work is done. The report on disk decides when the work is done, rather than the reply that describes it. In practice, the exit code is the answer and the parsed findings are the answer, while the model's summary is treated as a story about the answer.
 
 To check this, find the verifier output behind every claim of done in a session. Each claim without one is still unverified. A mechanism's output is evidence about the mechanism itself and only prose about anything else. The sentence most likely to stop a reader looking further is one whose subject is not the thing that printed it, because it reads as if the looking has already been done.
 
@@ -32,28 +32,28 @@ A1·a a claim's source
 
 ```mermaid
 flowchart TB
-edit["An edit lands"]
-read["The model reads it back"]
-story["A story about the result"]
-run["The verifier runs"]
-exit["An exit code and parsed findings"]
-done{"Done?"}
-edit --> read --> story
-edit --> run --> exit --> done
-story -. never the signal .-> done
+    edit["An edit lands"]
+    read["The model reads it back"]
+    story["A story about the result"]
+    run["The verifier runs"]
+    exit["An exit code and parsed findings"]
+    done{"Done?"}
+    edit --> read --> story
+    edit --> run --> exit --> done
+    story -. never the signal .-> done
 ```
 
 A1·b report and prose
 
 ```mermaid
 flowchart TB
-output["A message printed by a run"]
-subject{"Is its subject the mechanism that printed it?"}
-report["A report · the authority of an execution"]
-prose["Prose · opened at the mechanism it names, never trusted for arriving as output"]
-output --> subject
-subject -- yes --> report
-subject -- no --> prose
+    output["A message printed by a run"]
+    subject{"Is its subject the mechanism that printed it?"}
+    report["A report · the authority of an execution"]
+    prose["Prose · opened at the mechanism it names, never trusted for arriving as output"]
+    output --> subject
+    subject -- yes --> report
+    subject -- no --> prose
 ```
 
 ## Verify the verifier
@@ -105,41 +105,41 @@ B1·b earning trust
 
 ```mermaid
 flowchart TB
-written["A check is written"]
-real["A conforming member it passes"]
-planted["A planted violation it fails"]
-adversarial["Adversarial inputs it rejects"]
-self["The tooling passes through its own gate"]
-recorded["The first firing and the first clearing are recorded"]
-trusted["Trusted, above a disclosed anchor"]
-written --> real --> planted --> adversarial --> self --> recorded --> trusted
+    written["A check is written"]
+    real["A conforming member it passes"]
+    planted["A planted violation it fails"]
+    adversarial["Adversarial inputs it rejects"]
+    self["The tooling passes through its own gate"]
+    recorded["The first firing and the first clearing are recorded"]
+    trusted["Trusted, above a disclosed anchor"]
+    written --> real --> planted --> adversarial --> self --> recorded --> trusted
 ```
 
 B1·c lost standing
 
 ```mermaid
 flowchart TB
-run["A run reads its surfaces and stamps each"]
-restamp["It re-stamps them at the end"]
-moved{"Did any surface move beneath it?"}
-authoritative["The verdict stands and may be quoted"]
-withdrawn["The verdict keeps its value and loses its standing · the moved set is named"]
-run --> restamp --> moved
-moved -- no --> authoritative
-moved -- yes --> withdrawn
+    run["A run reads its surfaces and stamps each"]
+    restamp["It re-stamps them at the end"]
+    moved{"Did any surface move beneath it?"}
+    authoritative["The verdict stands and may be quoted"]
+    withdrawn["The verdict keeps its value and loses its standing · the moved set is named"]
+    run --> restamp --> moved
+    moved -- no --> authoritative
+    moved -- yes --> withdrawn
 ```
 
 ## A report, not a checkbox
 
-A [verification](ontology/PRINCIPLES.md#architecture-verification) runs once per state of the tree, and its first output is the answer. [Reproducibility](ontology/PRINCIPLES.md#architecture-reproducibility) is what a second run would test, so a second run that differs is a finding rather than a retry. The output is read whole and never searched for the line you hoped to see. The run writes its report on every exit, so a report being present is never mistaken for a pass. On the grammar page, [validation gates](pag/VALIDATION.md#validation-gates) hold an instruction's claims to the same standard: checkable, and backed by evidence.
+A [verification](ontology/PRINCIPLES.md#architecture-verification) runs once per state of the tree, and its first output is the answer. [Reproducibility](ontology/PRINCIPLES.md#architecture-reproducibility) is what a second run would test, so a second run that differs is a finding rather than a [retry](ontology/PRINCIPLES.md#architecture-retry-pattern). The output is read whole and never searched for the line you hoped to see. The run writes its report on every exit, so a report being present is never mistaken for a pass. On the grammar page, [validation gates](pag/VALIDATION.md#validation-gates) hold an instruction's claims to the same standard: checkable, and backed by evidence.
 
 ### One run, read whole
 
 Re-running a check until it passes turns a verifier into a slot machine. The check fails, is run twice more and passes on the third try, and the flake ships with the change, which is [flaky test normalization](ontology/PRINCIPLES.md#architecture-flaky-test-normalization) in miniature. A second run of the same state either repeats the answer or reveals non-determinism, and both are already findings from the first run.
 
-For this reason each state of the tree gets one run, its output is read whole, and its report is written on every exit path. The tree is changed between runs, rather than the filter between reads. In practice, the gate runs once and its full output is written to a file. The file is read whole, what it names is fixed, and the tree changes; only then does the gate run again, and never merely to see whether the answer changes. A report's scope is read before its verdict, because a clearance from a check that cannot see the whole surface is worse than a visible gap.
+For this reason each state of the tree gets one run, its output is read whole, and its report is written on every exit path. The tree is changed between runs, rather than the filter between reads. In practice, the gate runs once and its full output is written to a file. The file is read whole, what it names is fixed, and the tree changes. Only then does the gate run again. A report's scope is read before its verdict, because a clearance from a check that cannot see the whole surface is worse than a visible gap.
 
-To check this, count the runs per tree state in a session. Anything above one is either a flake that should have been filed or an answer you did not like. A new run is warranted once the tree has changed; the earlier report is then history, and the new run is the measurement. The sign of misuse is a second run whose only difference is the filter.
+To check this, count the runs per tree state in a session. Anything above one is either a flake that should have been filed or an answer you did not like. A new run is warranted once the tree has changed, and the new run is the measurement. The sign of misuse is a second run whose only difference is the filter.
 
 Reading whole is a rule about structure, not about diligence. A slice of a report answers only the question the reader already thought to ask, while the reason a check writes a finding is to raise something the reader had not thought of. A search is worse than an offset, because an offset shows what was skipped, and a search silently leaves out everything that did not match. The same holds for a file and for a coordination surface. When a read fails because the output is too large, that is the cue to read it in parts until the whole has been read, never the cue to sample it.
 
@@ -161,17 +161,17 @@ D1·a three verdicts
 
 ```mermaid
 flowchart TB
-surface["A surface a unit can fail in"]
-tested{"Does a test touch it?"}
-passed{"Did it pass?"}
-pass["Pass"]
-fail["Fail"]
-unknown["Unknown · never rounds up to pass"]
-surface --> tested
-tested -- no --> unknown
-tested -- yes --> passed
-passed -- yes --> pass
-passed -- no --> fail
+    surface["A surface a unit can fail in"]
+    tested{"Does a test touch it?"}
+    passed{"Did it pass?"}
+    pass["Pass"]
+    fail["Fail"]
+    unknown["Unknown · never rounds up to pass"]
+    surface --> tested
+    tested -- no --> unknown
+    tested -- yes --> passed
+    passed -- yes --> pass
+    passed -- no --> fail
 ```
 
 ## One correct answer
@@ -186,7 +186,7 @@ For this reason I reach for determinism first, because the other four properties
 
 To check this, run the mechanism twice on the same input and compare the bytes. A difference is a finding, whatever the tool says about itself. The model's output is not deterministic, and no instruction format makes it so; as the architecture page puts it, [the author is probabilistic](architecture/SCALE.md#the-author-is-probabilistic). The input is therefore structured and the output verified. A rule often has one deterministic half and one that is not, and the honest form of the rule names which half is which.
 
-Each of the four derived properties fails in a recognizable way when determinism is missing. A healer working on a judgement call guesses. A check over a non-deterministic subject either fires on everything or flakes. A verdict that depends on who ran it cannot be quoted. A protocol that rests on care multiplies its cost by the number of parties while its enforcement stays flat. All four are the same defect, and naming determinism as the source is what lets one question test them all.
+Each of the four derived properties fails in a recognizable way when determinism is missing. A healer working on a judgment call guesses. A check over a non-deterministic subject either fires on everything or flakes. A verdict that depends on who ran it cannot be quoted. A protocol that rests on care multiplies its cost by the number of parties while its enforcement stays flat. All four are the same defect, and naming determinism as the source is what lets one question test them all.
 
 Changing the subject is the move most often missed. An act that nothing records cannot be checked, but the same act performed through a tool that records it can, which is the purpose described in [tools live in the tree](BUILD.md#tools-live-in-the-tree). A rule that a reader has to remember cannot be checked, but the same rule written as a declaration a mechanism resolves can. The rule's wording does not change in either case. What changes is the subject, from something that happens in a turn to something that leaves an artifact, and once it leaves an artifact, the check, the healer and the verdict all follow.
 
@@ -194,32 +194,32 @@ E1·a the four properties
 
 ```mermaid
 flowchart TB
-det["Deterministic · one correct answer exists"]
-heal["Healable · a fixer can restore it"]
-enforce["Enforceable · a check can hold it"]
-predict["Predictable · a reader can predict it"]
-scale["Scalable · a hundred consumers agree on it"]
-det --> heal
-det --> enforce
-det --> predict
-det --> scale
+    det["Deterministic · one correct answer exists"]
+    heal["Healable · a fixer can restore it"]
+    enforce["Enforceable · a check can hold it"]
+    predict["Predictable · a reader can predict it"]
+    scale["Scalable · a hundred consumers agree on it"]
+    det --> heal
+    det --> enforce
+    det --> predict
+    det --> scale
 ```
 
 E1·b the first question
 
 ```mermaid
 flowchart TB
-mechanism["A mechanism is proposed"]
-subject{"Is the subject deterministic?"}
-build["Build the check and its healer"]
-change{"Can the subject be made deterministic?"}
-work["Change the subject · an act nothing records becomes an act a writer records"]
-conduct["Declare it unobservable, with the evidence a check would need"]
-mechanism --> subject
-subject -- yes --> build
-subject -- no --> change
-change -- yes --> work --> build
-change -- no --> conduct
+    mechanism["A mechanism is proposed"]
+    subject{"Is the subject deterministic?"}
+    build["Build the check and its healer"]
+    change{"Can the subject be made deterministic?"}
+    work["Change the subject · an act nothing records becomes an act a writer records"]
+    conduct["Declare it unobservable, with the evidence a check would need"]
+    mechanism --> subject
+    subject -- yes --> build
+    subject -- no --> change
+    change -- yes --> work --> build
+    change -- no --> conduct
 ```
 
 ## Derived state
@@ -242,14 +242,14 @@ F1·a two routes
 
 ```mermaid
 flowchart TB
-tree["The tree on disk"]
-traverse["A traversal, every time"]
-state["The current state"]
-written["A status written last week"]
-reader["The reader"]
-tree --> traverse --> state --> reader
-written -. read as the present .-> reader
-tree -. changed since .- written
+    tree["The tree on disk"]
+    traverse["A traversal, every time"]
+    state["The current state"]
+    written["A status written last week"]
+    reader["The reader"]
+    tree --> traverse --> state --> reader
+    written -. read as the present .-> reader
+    tree -. changed since .- written
 ```
 
 ## Counting copies
@@ -272,28 +272,28 @@ G1·a the walk
 
 ```mermaid
 flowchart TB
-dup["Two copies of one fact"]
-collapse{"Is either derivable from the other?"}
-reduce["One declaration, one derivation · the divergence becomes unrepresentable"]
-count{"How many claim to be the source?"}
-one["One · a source exists"]
-zero["Zero · a cycle, each points at another"]
-many["Many · an undecided choice"]
-derive["Make every other copy a derivation"]
-declare["Declare one home and break the cycle"]
-decide["Decide, then derive"]
-period{"How often does the derivation run?"}
-record["A record"]
-stale["Drift"]
-dup --> collapse
-collapse -- yes --> reduce
-collapse -- no --> count
-count -- one --> one --> derive
-count -- zero --> zero --> declare
-count -- many --> many --> decide
-derive --> period
-period -- often --> record
-period -- never --> stale
+    dup["Two copies of one fact"]
+    collapse{"Is either derivable from the other?"}
+    reduce["One declaration, one derivation · the divergence becomes unrepresentable"]
+    count{"How many claim to be the source?"}
+    one["One · a source exists"]
+    zero["Zero · a cycle, each points at another"]
+    many["Many · an undecided choice"]
+    derive["Make every other copy a derivation"]
+    declare["Declare one home and break the cycle"]
+    decide["Decide, then derive"]
+    period{"How often does the derivation run?"}
+    record["A record"]
+    stale["Drift"]
+    dup --> collapse
+    collapse -- yes --> reduce
+    collapse -- no --> count
+    count -- one --> one --> derive
+    count -- zero --> zero --> declare
+    count -- many --> many --> decide
+    derive --> period
+    period -- often --> record
+    period -- never --> stale
 ```
 
 ## Documentation is code
@@ -328,13 +328,13 @@ H1·a every run
 
 ```mermaid
 flowchart TB
-typed["Typed · the form selects the schema, the rules and the legal place"]
-placed["Placed · one computed location from form, owner and name"]
-parsed["Parsed · references are constructs with a verb, an identifier and a path"]
-validated["Validated · every reference resolves, no count, no past tense"]
-repaired["Repaired · bare paths healed, generated documents regenerated"]
-typed --> placed --> parsed --> validated --> repaired
-repaired -. on every run .-> typed
+    typed["Typed · the form selects the schema, the rules and the legal place"]
+    placed["Placed · one computed location from form, owner and name"]
+    parsed["Parsed · references are constructs with a verb, an identifier and a path"]
+    validated["Validated · every reference resolves, no count, no past tense"]
+    repaired["Repaired · bare paths healed, generated documents regenerated"]
+    typed --> placed --> parsed --> validated --> repaired
+    repaired -. on every run .-> typed
 ```
 
 H1·b a resolved reference
@@ -388,16 +388,16 @@ H1·d compiled from four
 
 ```mermaid
 flowchart TB
-manifest["The manifest · the authored surface"]
-surface["The public surface · derived from the code"]
-deps["The dependencies · derived from the descriptor"]
-principles["The principles · resolved by identity against the canon"]
-readme["The module document · generated, drift-checked, never edited"]
-manifest --> readme
-surface --> readme
-deps --> readme
-principles --> readme
-readme -. a hand edit is reverted on the next run .-> manifest
+    manifest["The manifest · the authored surface"]
+    surface["The public surface · derived from the code"]
+    deps["The dependencies · derived from the descriptor"]
+    principles["The principles · resolved by identity against the canon"]
+    readme["The module document · generated, drift-checked, never edited"]
+    manifest --> readme
+    surface --> readme
+    deps --> readme
+    principles --> readme
+    readme -. a hand edit is reverted on the next run .-> manifest
 ```
 
 ## Moves and renames
@@ -418,18 +418,18 @@ I1·a a surviving move
 
 ```mermaid
 flowchart TB
-enumerate["Enumerate every reference, the pattern-resolved ones included"]
-before["Record what each collector gathers"]
-move["Move and rename by hand, one container at a time"]
-update["Update every importer as a literal edit"]
-verify["Verify every reference with a search"]
-after["Record what each collector gathers now"]
-same{"Same sets?"}
-clean["The gate is green · next container"]
-broken["A collector went empty · the move is broken"]
-enumerate --> before --> move --> update --> verify --> after --> same
-same -- yes --> clean
-same -- no --> broken
+    enumerate["Enumerate every reference, the pattern-resolved ones included"]
+    before["Record what each collector gathers"]
+    move["Move and rename by hand, one container at a time"]
+    update["Update every importer as a literal edit"]
+    verify["Verify every reference with a search"]
+    after["Record what each collector gathers now"]
+    same{"Same sets?"}
+    clean["The gate is green · next container"]
+    broken["A collector went empty · the move is broken"]
+    enumerate --> before --> move --> update --> verify --> after --> same
+    same -- yes --> clean
+    same -- no --> broken
 ```
 
 ## Coverage is derived
@@ -446,7 +446,7 @@ To check this, take any rule and name its dimension and its lens; a rule that fi
 
 Conduct is a closed question, not a softer state. A rule declares conduct when no construct in any artifact observes it, and the declaration stays falsifiable because each entry names what would have to become observable for the rule to gain a check. Many such rules have a half that is decidable, such as whether a surface conforms to its template, whether a set of readers resolves, or whether a report states the boundary of its own negative result. That half is recorded in a cell with a [closed vocabulary](ontology/PRINCIPLES.md#architecture-closed-vocabulary) of four values: observed, naming its gates; unbuilt, which counts as debt rather than a paragraph of explanation; none, with a reason taken from a closed set; and null, which means unassessed and is also a declared state. There are three reasons a half can be none: the subject is an act, no declared surface holds it, or the property cannot be evaluated on a member. The coverage report is then derived over the whole set: the gated rules with their gates, the conduct entries, the unassessed rows, which are exactly the entries whose cell is null, and the debt, which is exactly the unbuilt halves. No count is written by hand. Every number a reader wants is the length of one of those lists on the run that produced it.
 
-The cell is filled by walking through questions, never by reading the entry. Does the half name a declared surface, or an imagined one? Is its subject an artifact or an act? Is the population non-empty, given that a check over an empty set is a green result that measures nothing? Can the property be evaluated on a member? Three of these questions take one search each, and only the fourth needs judgement. That changes how the roster reads: every entry looks like a judgement, yet most of them turn on a fact. The cell also holds the value while the entry holds the range, because an observing check is often narrower than the rule whose half it answers, and a bare id would claim more than the check covers.
+The cell is filled by walking through questions, never by reading the entry. Does the half name a declared surface, or an imagined one? Is its subject an artifact or an act? Is the population non-empty, given that a check over an empty set is a green result that measures nothing? Can the property be evaluated on a member? Three of these questions take one search each, and only the fourth needs judgment. That changes how the roster reads: every entry looks like a judgment, yet most of them turn on a fact. The cell also holds the value while the entry holds the range, because an observing check is often narrower than the rule whose half it answers, and a bare id would claim more than the check covers.
 
 Projected onto [correctness](ontology/PRINCIPLES.md#architecture-correctness), the same grid becomes the catalog of test surfaces described in what can drift, seen through how it drifts, and the unknown verdict that an unmeasured surface receives, described in [unknown is not pass](VERIFY.md#unknown-is-not-pass), rests on it. A fresh walk of the roster compares against the kinds of finding the checks emit rather than against the list of checks, because a half gains an observer far more often as a new kind than as a new rule.
 
@@ -480,38 +480,38 @@ J1·b one cell per rule
 
 ```mermaid
 flowchart TB
-dimensions["What can drift · identity, structure, relation, state, behavior, and the rest"]
-lenses["How it drifts · structural, causal, temporal, invariant, and the rest"]
-cell["One cell · an invariant that must hold"]
-watched["A predicate enforces it"]
-unwatched["Declared unwatched, with the reason"]
-empty["An empty cell · a drift class nothing watches"]
-dimensions --> cell
-lenses --> cell
-cell --> watched
-cell --> unwatched
-cell -. never walked .-> empty
+    dimensions["What can drift · identity, structure, relation, state, behavior, and the rest"]
+    lenses["How it drifts · structural, causal, temporal, invariant, and the rest"]
+    cell["One cell · an invariant that must hold"]
+    watched["A predicate enforces it"]
+    unwatched["Declared unwatched, with the reason"]
+    empty["An empty cell · a drift class nothing watches"]
+    dimensions --> cell
+    lenses --> cell
+    cell --> watched
+    cell --> unwatched
+    cell -. never walked .-> empty
 ```
 
 J1·c gate or conduct
 
 ```mermaid
 flowchart TB
-rule["A rule"]
-gate{"Does an artifact observe it?"}
-check["Names its check"]
-conduct["Declared conduct · with the evidence a check would need"]
-half{"Is a half of it decidable?"}
-built["The half is gated, and the entry names its range"]
-debt["The half is unbuilt · counted as debt"]
-none["No checkable half · an act, not an artifact"]
-rule --> gate
-gate -- yes --> check
-gate -- no --> conduct --> half
-half -- built --> built
-half -- unbuilt --> debt
-half -- no --> none
-debt -. worked to zero .-> built
+    rule["A rule"]
+    gate{"Does an artifact observe it?"}
+    check["Names its check"]
+    conduct["Declared conduct · with the evidence a check would need"]
+    half{"Is a half of it decidable?"}
+    built["The half is gated, and the entry names its range"]
+    debt["The half is unbuilt · counted as debt"]
+    none["No checkable half · an act, not an artifact"]
+    rule --> gate
+    gate -- yes --> check
+    gate -- no --> conduct --> half
+    half -- built --> built
+    half -- unbuilt --> debt
+    half -- no --> none
+    debt -. worked to zero .-> built
 ```
 
 ---

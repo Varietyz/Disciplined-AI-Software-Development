@@ -4,7 +4,7 @@ import {
     FILLER_PHRASES,
     FUNCTION_WORDS,
     INDEFINITE_PARTIES,
-    LABELLING_OPENERS,
+    LABELING_OPENERS,
     LABEL_MAX_WORDS,
     PLURAL_MARK,
     QUOTE_CLOSE,
@@ -43,7 +43,7 @@ const holds = function holds(words: readonly string[], phrase: readonly string[]
 };
 
 const labelsOnly = function labelsOnly(words: readonly string[], phrase: readonly string[]): boolean {
-    const labeling = LABELLING_OPENERS.some((opener) => opener.length === phrase.length && opensWith(phrase, opener));
+    const labeling = LABELING_OPENERS.some((opener) => opener.length === phrase.length && opensWith(phrase, opener));
     return !labeling || words.length - phrase.length <= LABEL_MAX_WORDS;
 };
 

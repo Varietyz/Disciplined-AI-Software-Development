@@ -1,0 +1,31 @@
+{
+    "name": "@banes-lab/deploy",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "Ships the built site to the droplet over SSH, keeps rolling backups, syncs the nginx configuration and reports every run to Discord.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#runtime/*": "./runtime/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./runtime/entrypoints/deployment.entrypoint.ts",
+    "exports": {
+        ".": "./runtime/entrypoints/deployment.entrypoint.ts",
+        "./*": "./*"
+    },
+    "scripts": {
+        "deploy": "node runtime/entrypoints/deployment.entrypoint.ts",
+        "nginx": "node runtime/entrypoints/nginx.entrypoint.ts",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@banes-lab/build-scripts": "*",
+        "@banes-lab/web": "*",
+        "@govlab/content-fingerprint": "*",
+        "@ssot/paths": "*",
+        "@ssot/secrets": "*"
+    }
+}

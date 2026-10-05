@@ -1,0 +1,970 @@
+{
+    "category": "Contracts / Interfaces / Compatibility",
+    "check": {
+        "population": "every public boundary: operations, endpoints, messages, schemas and protocol frames",
+        "freshness": "a verdict stands for one version of the contract and goes stale when the contract or its implementation changes",
+        "refusal": "the contract test, schema validation or API diff gate fails the change that breaks the contract",
+        "observation": "the contract or schema compared with the implementation and with each consumer's recorded expectation",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the contract, which the implementation and each consumer's recorded expectation are compared against"
+    },
+    "records": [
+        {
+            "id": "design-by-contract",
+            "distinctFrom": [
+                {
+                    "id": "architecture:liskov-substitution",
+                    "reason": "Design by contract states each operation's conditions, while Liskov substitution requires a subtype to keep the conditions of its base type."
+                }
+            ],
+            "name": "Design by Contract",
+            "aliases": ["DbC"],
+            "definition": "A design rule that every operation states the preconditions it needs, the postconditions it guarantees and the invariants it keeps.",
+            "canon": ["design-by-contract"],
+            "type": "principle",
+            "scope": [
+                "API",
+                "function",
+                "class",
+                "service"
+            ],
+            "requires": [
+                "Preconditions",
+                "Postconditions",
+                "Invariant"
+            ],
+            "reinforces": [
+                "Correctness",
+                "Predictability"
+            ],
+            "enables": [
+                "Contract Testing",
+                "LSP"
+            ],
+            "conflicts_with": ["Implicit Behavior"],
+            "tensions_with": ["Development Speed"],
+            "violated_by": [
+                "lexicon:implicit-assumptions",
+                "lexicon:trusting-invalid-inputs"
+            ],
+            "detected_by": [
+                "missing assertions",
+                "missing validation",
+                "vague public APIs"
+            ],
+            "measured_by": ["contract coverage"],
+            "refactored_by": [
+                "lexicon:precondition-check",
+                "lexicon:postcondition-check",
+                "lexicon:invariant-check"
+            ],
+            "enforced_by": [
+                "assertions",
+                "contract tests",
+                "static analysis"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function divideFoo(total: number, count: number) {\n  return total / count;\n}",
+                "after": "function divideFoo(total: number, count: number): number {\n  if (!Number.isFinite(total)) throw new Error(\"pre: total must be finite\");\n  if (!Number.isInteger(count) || count <= 0) throw new Error(\"pre: count must be positive\");\n  const result = total / count;\n  if (!Number.isFinite(result)) throw new Error(\"post: result must be finite\");\n  return result;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "explicit-contracts",
+            "distinctFrom": [
+                {
+                    "id": "architecture:determinism",
+                    "reason": "Explicit contracts declare what crosses a boundary, while determinism makes the same inputs give the same result."
+                },
+                {
+                    "id": "architecture:contract-first-design",
+                    "reason": "Explicit contracts require a declared contract, while contract-first design fixes when it is written, before the implementation."
+                },
+                {
+                    "id": "architecture:independence",
+                    "reason": "Explicit contracts declare boundaries, while independence lets a module be tested and deployed without its neighbors."
+                }
+            ],
+            "name": "Explicit Contracts",
+            "definition": "A design rule that every boundary declares the shape and meaning of what crosses it in a typed contract.",
+            "type": "principle",
+            "scope": [
+                "API",
+                "service",
+                "data",
+                "protocol"
+            ],
+            "requires": [
+                "Stable Interfaces",
+                "Type Safety"
+            ],
+            "reinforces": [
+                "Predictability",
+                "Interoperability"
+            ],
+            "enables": ["Contract-First Design"],
+            "conflicts_with": [
+                "Implicit Payloads",
+                "Implicit Contract"
+            ],
+            "tensions_with": ["Rapid Prototyping"],
+            "violated_by": [
+                "lexicon:dynamic-untyped-boundaries",
+                "lexicon:untyped-payloads"
+            ],
+            "detected_by": [
+                "public methods without DTO/schema",
+                "dynamic maps at boundaries"
+            ],
+            "measured_by": ["boundary contract coverage"],
+            "refactored_by": [
+                "lexicon:introduce-boundary-dto",
+                "architecture:schema-validation",
+                "lexicon:extract-interface"
+            ],
+            "enforced_by": [
+                "schema validation",
+                "API linting"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function saveFoo(foo: any): any { return fooStore.save(foo); }",
+                "after": "interface SaveFoo {\n  execute(input: Readonly<{ id: FooId; name: string }>): Promise<{ saved: true; version: number }>;\n}\nconst saveFoo: SaveFoo = { execute: input => fooStore.save(input) };",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "stable-interfaces",
+            "name": "Stable Interfaces",
+            "definition": "The degree to which a public interface keeps its signatures and meaning across releases.",
+            "type": "quality-attribute",
+            "scope": [
+                "API",
+                "module",
+                "service"
+            ],
+            "requires": [
+                "Versioning",
+                "Backward Compatibility"
+            ],
+            "reinforces": [
+                "Low Coupling",
+                "Replaceability"
+            ],
+            "enables": ["Independent Consumers"],
+            "conflicts_with": ["Breaking Change"],
+            "tensions_with": ["Evolution Speed"],
+            "violated_by": [
+                "architecture:unversioned-breaking-change",
+                "architecture:schema-drift"
+            ],
+            "detected_by": ["incompatible API diffs"],
+            "measured_by": ["breaking-change frequency"],
+            "refactored_by": [
+                "architecture:versioning",
+                "lexicon:extract-adapter",
+                "lexicon:gradual-deprecation"
+            ],
+            "enforced_by": [
+                "API diff checks",
+                "contract tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooService {\n  createFoo(name: string, tags: string[], notify: boolean, source: string) {}\n}",
+                "after": "type CreateFooRequest = Readonly<{\n  name: string;\n  tags: readonly string[];\n  extensions: Readonly<Record<string, unknown>>;\n}>;\ninterface FooService { create(request: CreateFooRequest): Promise<FooId>; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "interface-based-design",
+            "distinctFrom": [
+                {
+                    "id": "architecture:composition-over-inheritance",
+                    "reason": "Interface-based design depends on interfaces, while composition over inheritance reuses behavior by holding objects rather than extending classes."
+                },
+                {
+                    "id": "architecture:dependency-inversion",
+                    "reason": "Interface-based design depends on interfaces supplied from outside, while dependency inversion also fixes that the policy side owns the interface."
+                }
+            ],
+            "name": "Interface-Based Design",
+            "definition": "A design rule that a module depends on interfaces, and the implementation behind each one is supplied from outside.",
+            "type": "principle",
+            "scope": [
+                "class",
+                "module",
+                "service"
+            ],
+            "requires": [
+                "Abstraction",
+                "Stable Interfaces"
+            ],
+            "reinforces": [
+                "DIP",
+                "Testability"
+            ],
+            "enables": [
+                "Dependency Injection",
+                "Adapter Pattern"
+            ],
+            "conflicts_with": ["Concrete Coupling"],
+            "tensions_with": ["Interface Overuse"],
+            "violated_by": ["architecture:concrete-coupling"],
+            "detected_by": ["concrete constructor dependencies"],
+            "measured_by": ["interface-to-implementation boundary ratio"],
+            "refactored_by": [
+                "lexicon:extract-interface",
+                "architecture:dependency-injection"
+            ],
+            "enforced_by": ["dependency rules"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function processFoo(store: SqlFooStore, foo: Foo) { return store.insert(foo); }",
+                "after": "interface FooWriter { save(foo: Foo): Promise<void>; }\nfunction processFoo(store: FooWriter, foo: Foo) { return store.save(foo); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "contract-first-design",
+            "name": "Contract-First Design",
+            "definition": "A design rule that a boundary's contract is written and agreed before the implementation behind it.",
+            "type": "principle",
+            "scope": [
+                "API",
+                "service",
+                "integration"
+            ],
+            "requires": [
+                "Explicit Contracts",
+                "Schema Contract"
+            ],
+            "reinforces": [
+                "Interoperability",
+                "Backward Compatibility"
+            ],
+            "enables": ["Consumer-Driven Development"],
+            "conflicts_with": ["Implementation-First Integration"],
+            "tensions_with": ["Iteration Speed"],
+            "violated_by": ["lexicon:implementation-first-integration"],
+            "detected_by": ["absent contract before implementation"],
+            "measured_by": ["contract-first coverage"],
+            "refactored_by": [
+                "lexicon:define-contract",
+                "lexicon:code-generation",
+                "lexicon:contract-testing"
+            ],
+            "enforced_by": ["CI contract gates"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "app.post(\"/foo\", async request => fooStore.save(await request.json()));",
+                "after": "type CreateFooRequest = { name: string };\ntype CreateFooResponse = { id: FooId; version: 1 };\ninterface CreateFooContract {\n  request: CreateFooRequest;\n  response: CreateFooResponse;\n}\napp.post(\"/foo\", implement<CreateFooContract>(createFoo));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "api-contract",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:semantic-contract",
+                    "reason": "An API contract declares the shapes of requests, responses and errors, while a semantic contract declares what the operations mean."
+                }
+            ],
+            "name": "API Contract",
+            "definition": "A rule or precondition that each endpoint declares its request, response and error shapes in a versioned schema.",
+            "type": "constraint",
+            "scope": [
+                "API",
+                "service boundary"
+            ],
+            "requires": [
+                "Schema",
+                "Versioning",
+                "Stable Interfaces"
+            ],
+            "reinforces": [
+                "Interoperability",
+                "Predictability"
+            ],
+            "enables": ["Client Compatibility"],
+            "conflicts_with": ["Breaking API Change"],
+            "tensions_with": ["Evolution"],
+            "violated_by": [
+                "lexicon:ad-hoc-endpoints",
+                "architecture:inconsistent-error-model"
+            ],
+            "detected_by": [
+                "OpenAPI drift",
+                "missing endpoint schemas"
+            ],
+            "measured_by": [
+                "contract coverage",
+                "breaking diff count"
+            ],
+            "refactored_by": [
+                "lexicon:define-contract",
+                "lexicon:standard-error-contract",
+                "architecture:versioning"
+            ],
+            "enforced_by": [
+                "OpenAPI linting",
+                "contract tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "app.get(\"/foo/:id\", async request => fooStore.find(request.params.id));",
+                "after": "const getFooApi = endpoint({\n  method: \"GET\",\n  path: \"/v1/foo/{id}\",\n  request: FooIdSchema,\n  response: FooResponseSchema,\n  errors: [\"FOO_NOT_FOUND\"] as const,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "service-contract",
+            "distinctFrom": [
+                {
+                    "id": "architecture:api-contract",
+                    "reason": "A service contract declares a service's operations, results and side effects, while an API contract declares the shapes at each endpoint."
+                },
+                {
+                    "id": "lexicon:semantic-contract",
+                    "reason": "A service contract covers one service's whole surface, while a semantic contract is the meaning part of any interface's contract."
+                }
+            ],
+            "name": "Service Contract",
+            "definition": "A rule or precondition that a service declares its operations, their results and their side effects to every consumer.",
+            "type": "constraint",
+            "scope": [
+                "service",
+                "integration"
+            ],
+            "requires": [
+                "API Contract",
+                "Semantic Contract"
+            ],
+            "reinforces": [
+                "Service Autonomy",
+                "Compatibility"
+            ],
+            "enables": ["Independent Deployment"],
+            "conflicts_with": ["Hidden Service Coupling"],
+            "tensions_with": ["Distributed Evolution"],
+            "violated_by": [
+                "lexicon:hidden-service-coupling",
+                "lexicon:silent-breaking-changes"
+            ],
+            "detected_by": ["consumer failures after service changes"],
+            "measured_by": ["consumer contract pass rate"],
+            "refactored_by": [
+                "lexicon:consumer-driven-contract-tests",
+                "lexicon:service-level-objectives",
+                "architecture:versioning"
+            ],
+            "enforced_by": [
+                "contract tests",
+                "deployment gates"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooClient {\n  create(body: any) { return http.post(\"/foo\", body); }\n}",
+                "after": "interface FooServiceContract {\n  create(input: CreateFoo): Promise<Result<FooCreated, FooError>>;\n}\nclass FooClient implements FooServiceContract {\n  create(input: CreateFoo) { return transport.call(\"Foo.Create\", input); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "data-contract",
+            "name": "Data Contract",
+            "definition": "A rule or precondition that data exchanged between parties has declared fields, types, nullability and meaning.",
+            "type": "constraint",
+            "scope": [
+                "data",
+                "message",
+                "persistence",
+                "integration"
+            ],
+            "requires": [
+                "Schema",
+                "Type Safety",
+                "Semantic Consistency"
+            ],
+            "reinforces": [
+                "Interoperability",
+                "Data Quality"
+            ],
+            "enables": ["Schema Evolution"],
+            "conflicts_with": ["Schema Drift"],
+            "tensions_with": ["Flexible Ingestion"],
+            "violated_by": [
+                "lexicon:untyped-payloads",
+                "architecture:null-semantics-drift"
+            ],
+            "detected_by": [
+                "data validation failures",
+                "schema mismatch"
+            ],
+            "measured_by": ["schema conformance rate"],
+            "refactored_by": [
+                "lexicon:introduce-boundary-dto",
+                "architecture:schema-validation",
+                "architecture:canonical-data-model"
+            ],
+            "enforced_by": [
+                "schema registry",
+                "validation gates"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "type FooMessage = Record<string, unknown>;\nqueue.publish(\"foo\", payload);",
+                "after": "type FooMessageV1 = Readonly<{\n  type: \"FooCreated\";\n  version: 1;\n  fooId: FooId;\n  name: string;\n}>;\nqueue.publish<FooMessageV1>(\"foo.created.v1\", message);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "schema-contract",
+            "distinctFrom": [
+                {
+                    "id": "architecture:data-contract",
+                    "reason": "A data contract declares the fields, types and meaning of exchanged data, while a schema contract validates each payload against a schema at the boundary."
+                }
+            ],
+            "name": "Schema Contract",
+            "definition": "A rule or precondition that every payload is validated against a machine-readable schema at the boundary it crosses.",
+            "type": "constraint",
+            "scope": [
+                "data",
+                "API",
+                "message"
+            ],
+            "requires": [
+                "Canonical Schema",
+                "Schema Validation"
+            ],
+            "reinforces": [
+                "Data Contract",
+                "Compatibility"
+            ],
+            "enables": ["Automated Validation"],
+            "conflicts_with": ["Ad-Hoc Payloads"],
+            "tensions_with": ["Schema Flexibility"],
+            "violated_by": [
+                "lexicon:ad-hoc-payloads",
+                "architecture:schema-drift"
+            ],
+            "detected_by": ["schema diff failures"],
+            "measured_by": ["schema validation coverage"],
+            "refactored_by": [
+                "architecture:schema-validation",
+                "lexicon:binary-schema-encoding",
+                "lexicon:define-contract"
+            ],
+            "enforced_by": [
+                "schema registry",
+                "CI schema checks"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const foo = JSON.parse(raw) as Foo;",
+                "after": "const FooSchema = object({ id: string(), count: integer() });\nconst foo: Foo = FooSchema.parse(JSON.parse(raw));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "semantic-contracts",
+            "name": "Semantic Contracts",
+            "definition": "A rule or precondition that each term and value at a boundary has one agreed meaning, beyond its type.",
+            "type": "constraint",
+            "scope": [
+                "domain",
+                "API",
+                "data"
+            ],
+            "requires": [
+                "Ubiquitous Language",
+                "Domain Model"
+            ],
+            "reinforces": [
+                "Semantic Consistency",
+                "Correctness"
+            ],
+            "enables": ["Reliable Integration"],
+            "conflicts_with": ["Ambiguous Naming"],
+            "tensions_with": ["Cross-Domain Translation"],
+            "violated_by": ["lexicon:ambiguous-naming"],
+            "detected_by": [
+                "conflicting field meanings",
+                "overloaded names"
+            ],
+            "measured_by": ["semantic conflict count"],
+            "refactored_by": [
+                "lexicon:name-the-concept",
+                "lexicon:split-bounded-context",
+                "architecture:anti-corruption-layer"
+            ],
+            "enforced_by": [
+                "domain glossary",
+                "contract review"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function reserveFoo(count: number) { return fooStore.decrement(count); }",
+                "after": "type PositiveCount = number & { readonly __brand: \"PositiveCount\" };\nfunction reserveFoo(count: PositiveCount): Promise<{ reserved: true }> {\n  return fooInventory.reserveExactly(count);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "preconditions",
+            "distinctFrom": [
+                {
+                    "id": "architecture:invariant",
+                    "reason": "A precondition holds before one operation runs, while an invariant holds in every reachable state."
+                },
+                {
+                    "id": "architecture:postconditions",
+                    "reason": "A precondition is checked before an operation runs, while a postcondition is guaranteed when it returns."
+                }
+            ],
+            "name": "Preconditions",
+            "definition": "A rule or precondition that must hold on an operation's input and state before the operation runs.",
+            "type": "constraint",
+            "scope": [
+                "function",
+                "method",
+                "API"
+            ],
+            "requires": ["Input Validation"],
+            "reinforces": [
+                "Design by Contract",
+                "Fail Fast"
+            ],
+            "enables": ["Correctness"],
+            "conflicts_with": ["Implicit Assumptions"],
+            "tensions_with": ["Permissive APIs"],
+            "violated_by": ["lexicon:trusting-invalid-inputs"],
+            "detected_by": ["missing validation before state transition"],
+            "measured_by": ["invalid-input handling coverage"],
+            "refactored_by": [
+                "lexicon:precondition-check",
+                "architecture:schema-validation"
+            ],
+            "enforced_by": [
+                "validation rules",
+                "static analysis"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function renameFoo(foo: Foo, name: string) { foo.name = name; }",
+                "after": "function renameFoo(foo: Foo, name: string) {\n  if (foo.status !== \"active\") throw new Error(\"pre: Foo must be active\");\n  if (name.trim().length === 0) throw new Error(\"pre: name required\");\n  foo.rename(name.trim());\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "postconditions",
+            "distinctFrom": [
+                {
+                    "id": "architecture:invariant",
+                    "reason": "A postcondition holds when one operation returns, while an invariant holds in every state an entity can reach."
+                }
+            ],
+            "name": "Postconditions",
+            "definition": "A rule or precondition that an operation's result and resulting state must satisfy when it returns.",
+            "type": "constraint",
+            "scope": [
+                "function",
+                "method",
+                "transaction"
+            ],
+            "requires": [
+                "Result Validation",
+                "Invariant"
+            ],
+            "reinforces": [
+                "Correctness",
+                "Predictability"
+            ],
+            "enables": ["Testability"],
+            "conflicts_with": ["Undefined Results"],
+            "tensions_with": ["Runtime Cost"],
+            "violated_by": ["lexicon:undefined-results"],
+            "detected_by": ["missing assertions on results"],
+            "measured_by": ["property test coverage"],
+            "refactored_by": [
+                "lexicon:invariant-check",
+                "lexicon:introduce-typed-result",
+                "lexicon:contract-testing"
+            ],
+            "enforced_by": [
+                "property tests",
+                "invariant checks"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "async function createFoo(foo: Foo) { return fooStore.save(foo); }",
+                "after": "async function createFoo(foo: Foo): Promise<FooId> {\n  await fooStore.save(foo);\n  const saved = await fooStore.find(foo.id);\n  if (!saved) throw new Error(\"post: Foo must be persisted\");\n  return saved.id;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "invariant",
+            "name": "Invariant",
+            "definition": "A rule or precondition that holds for an entity or aggregate in every state it can reach.",
+            "type": "constraint",
+            "scope": [
+                "entity",
+                "aggregate",
+                "module",
+                "system"
+            ],
+            "requires": [
+                "Encapsulation",
+                "Validation"
+            ],
+            "reinforces": [
+                "Correctness",
+                "Consistency"
+            ],
+            "enables": ["Safe Refactoring"],
+            "conflicts_with": ["External State Mutation"],
+            "tensions_with": ["Flexibility"],
+            "violated_by": ["lexicon:reachable-invalid-state"],
+            "detected_by": [
+                "mutable public state",
+                "missing invariant checks"
+            ],
+            "measured_by": ["invariant test coverage"],
+            "refactored_by": [
+                "lexicon:encapsulate-state",
+                "architecture:factory-pattern",
+                "lexicon:validate-at-the-boundary"
+            ],
+            "enforced_by": [
+                "domain tests",
+                "constructors",
+                "type system"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "class FooAccount {\n  balance = 0;\n  withdraw(amount: number) { this.balance -= amount; }\n}",
+                "after": "class FooAccount {\n  #balance = 0;\n  withdraw(amount: number) {\n    if (amount <= 0 || amount > this.#balance) throw new Error(\"invariant: balance >= 0\");\n    this.#balance -= amount;\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "backward-compatibility",
+            "distinctFrom": [
+                {
+                    "id": "architecture:consumer-driven-contracts",
+                    "reason": "Backward compatibility is the property a new version keeps, while consumer-driven contracts are how a provider verifies it against recorded expectations."
+                }
+            ],
+            "name": "Backward Compatibility",
+            "definition": "A rule or precondition that a new version keeps working for consumers written against an older one.",
+            "type": "constraint",
+            "scope": [
+                "API",
+                "schema",
+                "protocol"
+            ],
+            "requires": [
+                "Versioning",
+                "Stable Interfaces"
+            ],
+            "reinforces": ["Consumer Safety"],
+            "enables": ["Incremental Deployment"],
+            "conflicts_with": ["Breaking Change"],
+            "tensions_with": ["Cleanup / Simplification"],
+            "violated_by": ["lexicon:breaking-change"],
+            "detected_by": ["API/schema diff"],
+            "measured_by": ["breaking-change count"],
+            "refactored_by": [
+                "architecture:versioning",
+                "lexicon:gradual-deprecation",
+                "lexicon:extract-adapter"
+            ],
+            "enforced_by": [
+                "compatibility tests",
+                "API diff gates"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "app.get(\"/foo\", () => ({ label: \"Foo\", tags: [] }));",
+                "after": "app.get(\"/v1/foo\", () => ({ name: \"Foo\" }));\napp.get(\"/v2/foo\", () => ({ label: \"Foo\", tags: [] }));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "forward-compatibility",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:extensible-schema",
+                    "reason": "Forward compatibility is the reader tolerating unknown fields, while an extensible schema is the writer's shape that lets fields be added."
+                }
+            ],
+            "name": "Forward Compatibility",
+            "definition": "A rule or precondition that an older reader accepts data from a newer writer by ignoring the fields it does not know rather than failing on them.",
+            "aliases": ["Unknown Field Handling"],
+            "canon": ["forward-compatibility"],
+            "type": "constraint",
+            "scope": [
+                "API",
+                "schema",
+                "protocol"
+            ],
+            "requires": ["Extensible Schema"],
+            "reinforces": ["Evolutionary Architecture"],
+            "enables": ["Rolling Upgrades"],
+            "conflicts_with": ["Strict Fragile Parsers"],
+            "tensions_with": ["Strong Validation"],
+            "violated_by": ["lexicon:strict-fragile-parsers"],
+            "detected_by": ["parser failures on additive changes"],
+            "measured_by": ["forward-compatibility test pass rate"],
+            "refactored_by": [
+                "architecture:extension-points",
+                "lexicon:tolerant-reader"
+            ],
+            "enforced_by": ["compatibility test matrix"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function readFoo(input: { name: string }) {\n  if (Object.keys(input).length !== 1) throw new Error(\"unknown field\");\n  return input.name;\n}",
+                "after": "type FooEnvelope = { name: string; extensions?: Record<string, unknown> };\nfunction readFoo(input: FooEnvelope) {\n  return { name: input.name, extensions: input.extensions ?? {} };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "versioning",
+            "name": "Versioning",
+            "definition": "A mechanism that labels each release of an interface or schema, so consumers can tell compatible changes from breaking ones.",
+            "type": "mechanism",
+            "scope": [
+                "API",
+                "schema",
+                "package",
+                "service"
+            ],
+            "requires": [
+                "Stable Interfaces",
+                "Compatibility Policy"
+            ],
+            "reinforces": [
+                "Backward Compatibility",
+                "Governance"
+            ],
+            "enables": ["Controlled Evolution"],
+            "conflicts_with": ["Silent Breaking Changes"],
+            "tensions_with": ["Version Sprawl"],
+            "violated_by": ["architecture:unversioned-breaking-change"],
+            "detected_by": ["incompatible diff without version bump"],
+            "measured_by": [
+                "version compliance",
+                "deprecation window"
+            ],
+            "refactored_by": [],
+            "enforced_by": [
+                "release gates",
+                "API checks"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "queue.publish(\"foo.created\", { id: foo.id, name: foo.name });",
+                "after": "queue.publish(\"foo.created.v2\", {\n  schemaVersion: 2,\n  id: foo.id,\n  label: foo.name,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "protocol-compatibility",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:protocol-contract",
+                    "reason": "Protocol compatibility is both ends agreeing on a supported version, while the protocol contract is the set of messages and sequences that version defines."
+                }
+            ],
+            "name": "Protocol Compatibility",
+            "definition": "A rule or precondition that both ends of a connection speak a declared protocol version they both support.",
+            "type": "constraint",
+            "scope": [
+                "integration",
+                "network",
+                "message"
+            ],
+            "requires": [
+                "Protocol Contract",
+                "Versioning"
+            ],
+            "reinforces": ["Interoperability"],
+            "enables": ["Multi-Client Integration"],
+            "conflicts_with": ["Proprietary Drift"],
+            "tensions_with": ["Protocol Optimization"],
+            "violated_by": ["lexicon:proprietary-drift"],
+            "detected_by": ["protocol conformance failure"],
+            "measured_by": ["conformance test pass rate"],
+            "refactored_by": [
+                "lexicon:extract-adapter",
+                "lexicon:standardize-the-interface"
+            ],
+            "enforced_by": ["conformance tests"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "socket.send(JSON.stringify({ action: \"save\", foo }));",
+                "after": "type FooFrameV1 = { protocol: \"foo/1\"; type: \"save\"; payload: Foo };\nsocket.send(encodeFrame<FooFrameV1>({ protocol: \"foo/1\", type: \"save\", payload: foo }));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "interoperability",
+            "distinctFrom": [
+                {
+                    "id": "architecture:portability",
+                    "reason": "Interoperability is systems exchanging data correctly, while portability is software running on another platform unchanged."
+                },
+                {
+                    "id": "lexicon:compatibility",
+                    "reason": "Interoperability is exchange through shared formats and contracts, while compatibility is working across versions without modification."
+                },
+                {
+                    "id": "lexicon:data-quality",
+                    "reason": "Interoperability is exchange between systems, while data quality is the accuracy and completeness of the data exchanged."
+                },
+                {
+                    "id": "lexicon:domain-specific-optimization",
+                    "reason": "Interoperability is broad exchange, while domain-specific optimization is the tuning for one domain it trades against."
+                },
+                {
+                    "id": "lexicon:integration",
+                    "reason": "Interoperability is the ability to exchange data correctly, while integration is the degree systems are actually connected into one whole."
+                },
+                {
+                    "id": "architecture:semantic-consistency",
+                    "reason": "Interoperability spans separate systems, while semantic consistency is one name keeping one meaning inside a system."
+                },
+                {
+                    "id": "lexicon:discoverability",
+                    "reason": "Interoperability is exchanging data correctly, while discoverability is how easily a component's capabilities are found."
+                }
+            ],
+            "name": "Interoperability",
+            "definition": "The degree to which separate systems exchange data and use it correctly through shared formats and contracts.",
+            "type": "quality-attribute",
+            "scope": [
+                "API",
+                "data",
+                "protocol",
+                "system"
+            ],
+            "requires": [
+                "Contracts",
+                "Standards",
+                "Compatibility"
+            ],
+            "reinforces": [
+                "Portability",
+                "Integration"
+            ],
+            "enables": ["Cross-System Communication"],
+            "conflicts_with": ["Proprietary Coupling"],
+            "tensions_with": ["Domain-Specific Optimization"],
+            "violated_by": [
+                "lexicon:proprietary-coupling",
+                "lexicon:implicit-assumptions"
+            ],
+            "detected_by": ["integration test failures"],
+            "measured_by": ["interoperability test coverage"],
+            "refactored_by": [
+                "lexicon:standardize-the-interface",
+                "lexicon:extract-adapter",
+                "architecture:schema-validation"
+            ],
+            "enforced_by": [
+                "contract tests",
+                "standards checks"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "fooClient.send(serializeWithPrivateFormat(foo));",
+                "after": "const payload: JsonFooV1 = toJsonFooV1(foo);\nfooClient.send(JSON.stringify(payload), { contentType: \"application/json\" });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "uniform-interface",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:consistent-semantics",
+                    "reason": "A uniform interface fixes the same verbs, shapes and error format across resources, while consistent semantics fixes that an operation means the same thing everywhere."
+                },
+                {
+                    "id": "lexicon:stable-contracts",
+                    "reason": "A uniform interface is sameness across resources, while stable contracts are sameness over time."
+                }
+            ],
+            "name": "Uniform Interface",
+            "definition": "A rule or precondition that every resource in an API uses the same verbs, response shapes and error format.",
+            "type": "constraint",
+            "scope": [
+                "API",
+                "resource boundary"
+            ],
+            "requires": [
+                "Consistent Semantics",
+                "Stable Contracts"
+            ],
+            "reinforces": ["Principle of Least Surprise"],
+            "enables": ["API Usability"],
+            "conflicts_with": [
+                "Ad-Hoc Endpoints",
+                "Chatty Interface"
+            ],
+            "tensions_with": ["Specialized Endpoints"],
+            "violated_by": [
+                "lexicon:ambiguous-api",
+                "architecture:inconsistent-error-model"
+            ],
+            "detected_by": ["API lint violations"],
+            "measured_by": ["endpoint consistency score"],
+            "refactored_by": [
+                "lexicon:standardize-the-interface",
+                "lexicon:standard-error-contract"
+            ],
+            "enforced_by": [
+                "API style guide",
+                "OpenAPI linting"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "fooApi.createFoo(foo);\nbarApi.post(\"/bar\", bar);\nbazApi.execute(\"DELETE_BAZ\", baz.id);",
+                "after": "resourceClient.post(\"/foos\", foo);\nresourceClient.post(\"/bars\", bar);\nresourceClient.delete(`/bazes/${baz.id}`);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "consumer-driven-contracts",
+            "name": "Consumer-Driven Contracts",
+            "definition": "A rule or precondition that a provider verifies each change against the expectations its consumers have recorded.",
+            "type": "constraint",
+            "scope": [
+                "API",
+                "service",
+                "integration"
+            ],
+            "requires": ["Explicit Contracts"],
+            "reinforces": [
+                "Backward Compatibility",
+                "Contract-First Design"
+            ],
+            "enables": [
+                "Provider Change Safety",
+                "Consumer-Verified Compatibility"
+            ],
+            "conflicts_with": ["Unversioned Breaking Change"],
+            "tensions_with": ["Provider Autonomy"],
+            "violated_by": ["lexicon:silent-breaking-changes"],
+            "detected_by": ["integration breaks discovered only in production"],
+            "measured_by": ["consumer-break incident rate"],
+            "refactored_by": ["lexicon:consumer-driven-contract-tests"],
+            "enforced_by": ["contract test gate"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "fooProvider.deploy(newFooApi);",
+                "after": "const expectations = collectContractsFrom([\"bar-service\", \"baz-service\"]);\nconst result = verifyProvider(newFooApi, expectations);\nif (!result.satisfied) throw new BrokenConsumerContractError(result.violations);\nfooProvider.deploy(newFooApi);",
+                "lang": "ts"
+            }
+        }
+    ]
+}

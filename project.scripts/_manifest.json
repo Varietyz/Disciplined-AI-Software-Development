@@ -1,0 +1,113 @@
+{
+    "label": "Project Scripts",
+    "summary": "The standalone checks, probes and generators that nothing under the application imports. The gate runs the closure-graph generator and the whole-tree checks, and the developer runs the page snapshot, the route capture, the phone viewport audit and the day-rate report through root package scripts.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "code-generation"},
+        {"meta": "developer-tooling",
+            "sub": "build-tooling"},
+        {"meta": "developer-tooling",
+            "sub": "linting-quality"}
+    ],
+    "capabilities": [
+        "closure-graph-derivation",
+        "glob-edge-collection",
+        "external-consumer-collection",
+        "non-typescript-line-cap",
+        "dead-css-detection",
+        "passing-test-floor",
+        "encrypted-transport-check",
+        "server-configuration-check",
+        "install-script-decision-check",
+        "page-snapshot",
+        "route-capture",
+        "phone-viewport-audit",
+        "day-rate-report"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "type-safety",
+        "separation-of-concerns",
+        "duplicate-code"
+    ],
+    "visibility": {"private": true,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "entries": ["runtime/entrypoints/*.entrypoint.ts"],
+    "docs": {
+        "overview": "Every standalone script lives here, in one governed root instead of inside the members it inspects. The root has the containers `configuration`, `core` and `runtime` plus the flat `types` bucket. Each script is a thin `runtime/entrypoints/<subject>.entrypoint.ts` that drives the loaders, analyzers, validators and adapters under `core/` and writes the lines in `configuration/strings/`.\n\n`closure.entrypoint.ts` is the generator the rest of the stack depends on. It walks the application member with the TypeScript AST through `buildClosureGraph` in `core/coordinators/closure.coordinator.ts` and writes the closure graph, which every graph-aware lint rule reads at module-eval time. The graph holds registers, consumers, emits, subscribes, exports, imports and interfaces, plus the ids, strings and icons export sets. Its keys are relative to the member, so a rule keying them from the application root matches nothing.\n\nThe other gate steps are checks that need a whole-tree walk a per-file AST rule cannot do:\n\n- `source.entrypoint.ts`: a line cap over the stylesheets and markup the TypeScript line rule does not parse\n- `style.entrypoint.ts`: dead-CSS detection\n- `coverage.entrypoint.ts`: a floor on the passing-test count\n- `server.entrypoint.ts`: every build config serves over encrypted transport\n- `nginx.entrypoint.ts`: the server configuration carries no comment and selects the njs engine it is tested against\n- `dependency.entrypoint.ts`: every dependency install script has an `allowScripts` decision\n\nThe developer runs the rest through root package scripts: `snapshot` (`snapshot.entrypoint.ts`), `capture` (`route.entrypoint.ts`), `viewport` (`viewport.entrypoint.ts`) and `rates` (`rate.entrypoint.ts`).\n\n`viewport` serves the built site over HTTPS on a free local port and opens each route in a headless browser that emulates a phone: a narrow viewport, a touch screen and a phone user agent. It evaluates `auditPage` from `core/probes/viewport.probe.ts` in every page and reports elements past the screen edge, form fields under the size that stops the browser zooming on focus, text under the legible size, controls under the touch minimum, and content cut off by its container. It writes one screenshot per route and a JSON report into the output folder. The run exits non-zero on any finding except cut-off content, which it only reports, because a container that scrolls on purpose looks the same.",
+        "whenToUse": [
+            "Adding a generated artifact the gate refreshes before a later stage reads it.",
+            "Adding a check that sees the whole tree at once, such as a cross-file count, a reachability question or a whole-corpus scan.",
+            "Adding a check over a file type the lint stack does not parse, such as raw markup, an asset manifest or a server configuration.",
+            "Adding a probe the developer runs by hand against the dev server or the live site."
+        ],
+        "whenNotToUse": [
+            "A check expressible as a single-file AST predicate. That check is a lint rule under `.govlab/rules/eslint/`, where it reports at the offending line.",
+            "A script the application imports or a build step runs. That script lives in the build member.",
+            "A one-off investigation. That work belongs in the scratchpad, because this root holds the steps that run every time."
+        ],
+        "quickStart": [
+            {
+                "intent": "Rebuild the closure graph the graph-aware lint rules read",
+                "lang": "sh",
+                "code": "node project.scripts/runtime/entrypoints/closure.entrypoint.ts\n# closure-graph: registers, consumers, exports, imports and interfaces, counted as it walks"
+            },
+            {
+                "intent": "Run the standalone checks the way the gate does",
+                "lang": "sh",
+                "code": "node project.scripts/runtime/entrypoints/source.entrypoint.ts     # every CSS and HTML file under the cap\nnode project.scripts/runtime/entrypoints/style.entrypoint.ts      # no unused selectors\nnode project.scripts/runtime/entrypoints/nginx.entrypoint.ts      # no comment, and the njs engine selected\nnode project.scripts/runtime/entrypoints/coverage.entrypoint.ts   # reads the vitest json report"
+            },
+            {
+                "intent": "Audit the built site as a phone renders it",
+                "lang": "sh",
+                "code": "npm run verify -- --member app --only \"Build site\"\nnpm run viewport -- --out-dir <folder>\nnpm run viewport -- --out-dir <folder> --route / --route /pag/keywords --width 360"
+            }
+        ],
+        "configuration": "No config file. Every location resolves through `@ssot/paths`, with `absolutePath(\"app.member\")` for the tree under inspection. The thresholds are constants of this root: `MIN_PASSING_TESTS` in `configuration/constants/coverage.constants.ts`, and the line cap, which is the quality config's `file-length` value read from the generated thresholds. The argv contracts of the developer's scripts are in `configuration/configs/`. Reports are written under the lint reports folder, which is also where `coverage.entrypoint.ts` expects the vitest json report to exist already.",
+        "install": "A private workspace member resolved through the root `package.json` workspaces list. One `npm install` at the repo root is the whole setup. It declares only its `@govlab/*`, `@banes-lab/*` and `@ssot/*` siblings, and the third-party packages it uses, such as `purgecss`, `vite` and `typescript`, are hoisted at the root. There is no build step. The gate invokes each entrypoint directly as `node project.scripts/runtime/entrypoints/<subject>.entrypoint.ts`, never through an npm script name.",
+        "disposal": [
+            "Remove the steps that invoke this root's entrypoints from the stage planner: the closure graph in the auto-fix stage, the line cap and dead CSS in the linting stage, the test floor in the testing stage, and the install-script, transport and server-configuration checks.",
+            "Delete the graph-aware rules under `.govlab/rules/eslint/`. Without the graph they fail closed, which is worse than absent.",
+            "Remove the `snapshot`, `capture`, `viewport` and `rates` scripts from the root `package.json`.",
+            "Remove the `project.scripts` entries from `containers` and `specialContainers` in `.govlab/shared/configs/taxonomy.config.ts`, the `scripts` key under `project` in `project.paths/paths.yaml`, and the root with its workspace entry."
+        ],
+        "aiContext": [
+            "The auto-fix stage runs before linting. `closure.entrypoint.ts` writes the graph every graph-aware rule reads at module-eval time, so a lint pass ahead of it reads a stale graph. The ordering exists only as position in the stage array, and no predicate asserts it.",
+            "A graph-aware rule fails closed when the graph is missing. A crash here does not degrade to a skipped check. It turns into a wall of violations in the next stage, so read the auto-fix output before diagnosing a lint explosion.",
+            "Never derive a root from `import.meta.url` here. These scripts live in one root and inspect another, and file-relative arithmetic resolves inside `project.scripts/` and finds nothing. A discovery walk would return an empty set, and every downstream check would pass vacuously.",
+            "The gate runs each entrypoint from the repo root, so a relative path in a glob or a `process.cwd()` call resolves against the workspace root, not the inspected tree. Build globs from `relativePath(\"app.member\")` instead of assuming the cwd.",
+            "`coverage.entrypoint.ts` reads a report it does not produce. If the vitest step was skipped, it exits non-zero instead of passing vacuously."
+        ],
+        "apiNotes": [
+            {
+                "name": "buildClosureGraph",
+                "note": "composes the closure graph from the AST walk in `closure.analyzer.ts`, the glob barrel edges in `barrel.analyzer.ts` and the consumers outside the member in `export.analyzer.ts`. Its keys are relative to the application member."
+            },
+            {
+                "name": "collectGlobEdges",
+                "note": "collects the side-effect edges an `import.meta.glob` barrel creates, which a plain import walk cannot see, and throws when a pattern matches no file, because a barrel that collects nothing registers nothing."
+            },
+            {
+                "name": "collectExternalConsumers",
+                "note": "collects the imports of the member from the centralized tests, the member's build config and the build's runner registry (`RUNNER_MODULES`), so an export only they use is not reported dead. A registry entry that reads a whole module takes that file's exports as its names."
+            },
+            {
+                "name": "floorVerdict",
+                "note": "holds the passing-test count against `MIN_PASSING_TESTS`. The value is a floor, not a target, raised as the suite grows."
+            },
+            {
+                "name": "capturePage",
+                "note": "opens one page in a headless Chrome or Edge and writes its screenshot, its console log, or both. `captureRoutes` starts the dev server, runs it once per route and stops only the server it started."
+            },
+            {
+                "name": "auditRoutes",
+                "note": "serves the built site, emulates a phone, runs `auditPage` in each route and writes the screenshots and the report. It reports the run as passing only when no route has a finding. `auditPage` runs inside the page, so it imports nothing and reads its thresholds from its argument."
+            }
+        ]
+    }
+}

@@ -48,70 +48,70 @@ A1·a ten slots
 
 ```mermaid
 flowchart TB
-principle["A principle · one canonical id, one kind, one category, a severity"]
-requires["requires · cannot hold without"]
-reinforces["reinforces · holds more easily beside"]
-enables["enables · makes possible"]
-tensions["in tension with · a record it pulls against, resolved by mechanism"]
-conflicts["conflicts with · the anti-patterns that negate it"]
-violated["violated by · what a violation looks like"]
-detected["detected by · the signals that see it"]
-measured["measured by · the numbers that size it"]
-refactored["refactored by · the repairs that reverse it"]
-enforced["enforced by · the gates that hold it"]
-principle --> requires
-principle --> reinforces
-principle --> enables
-principle --> tensions
-principle --> conflicts
-principle --> violated
-principle --> detected
-principle --> measured
-principle --> refactored
-principle --> enforced
-gate["A resolution gate · every edge resolves to a record or a defined term, every kind is in range, or the gate refuses"]
-requires -.-> gate
-tensions -.-> gate
-conflicts -.-> gate
+    principle["A principle · one canonical id, one kind, one category, a severity"]
+    requires["requires · cannot hold without"]
+    reinforces["reinforces · holds more easily beside"]
+    enables["enables · makes possible"]
+    tensions["in tension with · a record it pulls against, resolved by mechanism"]
+    conflicts["conflicts with · the anti-patterns that negate it"]
+    violated["violated by · what a violation looks like"]
+    detected["detected by · the signals that see it"]
+    measured["measured by · the numbers that size it"]
+    refactored["refactored by · the repairs that reverse it"]
+    enforced["enforced by · the gates that hold it"]
+    principle --> requires
+    principle --> reinforces
+    principle --> enables
+    principle --> tensions
+    principle --> conflicts
+    principle --> violated
+    principle --> detected
+    principle --> measured
+    principle --> refactored
+    principle --> enforced
+    gate["A resolution gate · every edge resolves to a record or a defined term, every kind is in range, or the gate refuses"]
+    requires -.-> gate
+    tensions -.-> gate
+    conflicts -.-> gate
 ```
 
 A1·b the five edges
 
 ```mermaid
 classDiagram
-class Principle {
-id
-name
-kind
-category
-severity
-violatedBy
-detectedBy
-measuredBy
-refactoredBy
-enforcedBy
-}
-class Term {
-id
-name
-kind
-definition
-}
-class AntiPattern {
-id
-absentControl
-}
-class Layer {
-id
-observes
-feeds
-}
-Principle --> Principle : requires
-Principle --> Principle : reinforces
-Principle --> Principle : enables
-Principle --> Term : tensions with
-Principle --> AntiPattern : conflicts with
-Principle --> Layer : member of
+    class Principle {
+        id
+        name
+        kind
+        category
+        severity
+        violatedBy
+        detectedBy
+        measuredBy
+        refactoredBy
+        enforcedBy
+    }
+    class Term {
+        id
+        name
+        kind
+        definition
+    }
+    class AntiPattern {
+        id
+        absentControl
+    }
+    class Layer {
+        id
+        observes
+        feeds
+    }
+    Principle --> Principle : requires
+    Principle --> Principle : reinforces
+    Principle --> Principle : enables
+    Principle --> Term : tensions with
+    Principle --> AntiPattern : conflicts with
+    Principle --> Layer : member of
 ```
 
 A1·c a principle record
@@ -201,7 +201,7 @@ This section covers the kind every record carries, drawn from a [closed taxonomy
 
 Everything on a reading list is called a principle, so a quality, a mechanism and a technique are argued as though they were rules. A quality that a system exhibits to a degree is filed as a principle, a check is written to enforce it as a rule, and the check has nothing to return because a degree has no violation to report. Names are chosen for recognition and definitions are written for precision, so the name of a record tends to overclaim its kind, and the overclaim is only visible once the definition is read against the taxonomy.
 
-For this reason a record's kind follows from its definition, and the taxonomy of kinds is closed. Each kind's discriminator is held as data the gate reads, rather than as a reviewer's judgement, so a record whose definition disagrees with its kind is refused rather than shipped. In practice, the definition is read and asked what it describes, whether a degree a system exhibits, a number, a rule that prescribes, a rule that must hold, a facility, a method, an arrangement, a representation, a produced thing, a convention of expression, or a condition to avoid. The kind is assigned from that reading and never from the name.
+For this reason a record's kind follows from its definition, and the taxonomy of kinds is closed. Each kind's discriminator is held as data the gate reads, rather than as a reviewer's judgment, so a record whose definition disagrees with its kind is refused rather than shipped. In practice, the definition is read and asked what it describes, whether a degree a system exhibits, a number, a rule that prescribes, a rule that must hold, a facility, a method, an arrangement, a representation, a produced thing, a convention of expression, or a condition to avoid. The kind is assigned from that reading and never from the name.
 
 To check this, take any record and cover its name. Read the definition and name the kind from the definition alone. If it differs from the kind the record carries, the record is mis-filed, and every edge that points at it has been reasoning about the wrong thing. A kind classifies what a record is, never how important it is. Two records of the same kind can differ in severity, and a quality that a whole system depends on is still a quality rather than a rule, because the taxonomy answers one question and severity answers another.
 
@@ -219,45 +219,45 @@ B1·a kind from definition
 
 ```mermaid
 flowchart TB
-record["A record"]
-question{"What does the definition say it is?"}
-property["a property held to a degree · quality attribute"]
-number["a measurement · metric"]
-rule["a rule that prescribes · principle"]
-bound["a rule that must hold · constraint"]
-facility["a facility that does it · mechanism"]
-method["a method a developer applies · technique"]
-arrangement["a design-level arrangement · pattern"]
-avoided["a condition to avoid · anti-pattern"]
-record --> question
-question --> property
-question --> number
-question --> rule
-question --> bound
-question --> facility
-question --> method
-question --> arrangement
-question --> avoided
-polarity["The polarity law · only conflicts-with may point at an anti-pattern"]
-avoided -.-> polarity
+    record["A record"]
+    question{"What does the definition say it is?"}
+    property["a property held to a degree · quality attribute"]
+    number["a measurement · metric"]
+    rule["a rule that prescribes · principle"]
+    bound["a rule that must hold · constraint"]
+    facility["a facility that does it · mechanism"]
+    method["a method a developer applies · technique"]
+    arrangement["a design-level arrangement · pattern"]
+    avoided["a condition to avoid · anti-pattern"]
+    record --> question
+    question --> property
+    question --> number
+    question --> rule
+    question --> bound
+    question --> facility
+    question --> method
+    question --> arrangement
+    question --> avoided
+    polarity["The polarity law · only conflicts-with may point at an anti-pattern"]
+    avoided -.-> polarity
 ```
 
 B1·b the fourteen kinds
 
 ```mermaid
 flowchart TB
-kind(("kind"))
-rule["a rule"]
-measure["a measure"]
-doing["a doing"]
-shape["a shape"]
-avoid["a condition to avoid"]
-kind --> rule & measure & doing & shape & avoid
-rule --> principle["principle · prescribes"] & constraint["constraint · must hold"]
-measure --> metric["metric · a number"] & quality["quality attribute · a degree"]
-doing --> capability["capability · what can be done"] & mechanism["mechanism · the facility"] & technique["technique · the method"] & approach["approach · the strategy"]
-shape --> pattern["pattern · an arrangement"] & model["model · a representation"] & convention["style · a convention"] & artifact["artifact · a produced thing"]
-avoid --> anti["anti-pattern"]
+    kind(("kind"))
+    rule["a rule"]
+    measure["a measure"]
+    doing["a doing"]
+    shape["a shape"]
+    avoid["a condition to avoid"]
+    kind --> rule & measure & doing & shape & avoid
+    rule --> principle["principle · prescribes"] & constraint["constraint · must hold"]
+    measure --> metric["metric · a number"] & quality["quality attribute · a degree"]
+    doing --> capability["capability · what can be done"] & mechanism["mechanism · the facility"] & technique["technique · the method"] & approach["approach · the strategy"]
+    shape --> pattern["pattern · an arrangement"] & model["model · a representation"] & convention["style · a convention"] & artifact["artifact · a produced thing"]
+    avoid --> anti["anti-pattern"]
 ```
 
 B1·c a kind record
@@ -312,37 +312,37 @@ C1·a the layers
 
 ```mermaid
 flowchart TB
-subgraph core["The four core layers"]
-computation["computation · stateless"]
-resource["resource · stateful"]
-execution["execution · control flow and events"]
-structural["structural · applies to all, observes itself"]
-end
-human["human factors · what a developer can hold"]
-evolution["evolution · how the whole changes"]
-subgraph crosscut["Cross-cutting layers · each cuts across the structural core"]
-correctness["correctness"]
-security["security"]
-performance["performance"]
-contracts["contracts"]
-causality["causality"]
-declarative["declarative"]
-extensibility["extensibility"]
-observability["observability"]
-enforcement["enforcement"]
-atomic["atomic boundary"]
-domain["domain modeling"]
-patterns["design patterns"]
-end
-resource -- observe --> computation
-computation --> execution
-resource --> execution
-execution --> structural
-structural -- feedback --> execution
-structural --> human
-structural --> evolution
-evolution --> human
-crosscut -. cross-cuts .-> structural
+    subgraph core["The four core layers"]
+        computation["computation · stateless"]
+        resource["resource · stateful"]
+        execution["execution · control flow and events"]
+        structural["structural · applies to all, observes itself"]
+    end
+    human["human factors · what a developer can hold"]
+    evolution["evolution · how the whole changes"]
+    subgraph crosscut["Cross-cutting layers · each cuts across the structural core"]
+        correctness["correctness"]
+        security["security"]
+        performance["performance"]
+        contracts["contracts"]
+        causality["causality"]
+        declarative["declarative"]
+        extensibility["extensibility"]
+        observability["observability"]
+        enforcement["enforcement"]
+        atomic["atomic boundary"]
+        domain["domain modeling"]
+        patterns["design patterns"]
+    end
+    resource -- observe --> computation
+    computation --> execution
+    resource --> execution
+    execution --> structural
+    structural -- feedback --> execution
+    structural --> human
+    structural --> evolution
+    evolution --> human
+    crosscut -. cross-cuts .-> structural
 ```
 
 ## Computation and resource
@@ -355,19 +355,19 @@ Most code mixes the two, so data that should have been frozen is mutated and han
 
 For this reason a unit either transforms data or holds it, and each kind follows its own rules. Release is by structure rather than by discipline, and a unit is frozen rather than managed wherever it can be a computation. In practice, every unit is sorted into computation or resource before it is designed. What computation produces is frozen, each variable is assigned once, and a computation carries no persistent state, so it can be replayed and its [rollback](../ontology/PRINCIPLES.md#architecture-rollback) restores meaning rather than bytes. Every resource has one owner and a lifetime bound to that owner's, every open is paired with a close and every start with a stop, and release happens by scope or by an explicit destroy rather than by the developer or the model remembering. Every cache and pool is bounded by a declared capacity and an eviction policy, and registered where it can be seen.
 
-To check this, take any resource and name its owner and the structure that releases it. A resource with two owners, or with a release that depends on a developer, will leak, and the only open question is when. The split does not let one rule stand in for the other. A computation is stateless while a resource is snapshotted before mutation, computed data is immutable while resource state is mutable but managed, and a broken resource invariant halts while a computation's uncertainty is marked and carried on.
+To check this, take any resource and name its owner and the structure that releases it. A resource with two owners, or with a release that depends on a developer, will leak. The split does not let one rule stand in for the other. A computation is stateless while a resource is snapshotted before mutation, computed data is immutable while resource state is mutable but managed, and a broken resource invariant halts while a computation's uncertainty is marked and carried on.
 
 ### The computation half
 
 The computation half is the canon's [computation core](../ontology/SCHEMA.md#layer-computation-core) read as one rule. [Immutability](../ontology/PRINCIPLES.md#architecture-immutability) freezes what a computation produces. [Pure functions](../ontology/PRINCIPLES.md#architecture-pure-functions) give it no effect but its return value, and [referential transparency](../ontology/PRINCIPLES.md#architecture-referential-transparency) lets any call be replaced by its result. [Determinism](../ontology/PRINCIPLES.md#architecture-determinism) makes the same input give the same output, which is what makes [repeatability](../ontology/PRINCIPLES.md#architecture-repeatability) and [reproducibility](../ontology/PRINCIPLES.md#architecture-reproducibility) properties rather than hopes, and [testability](../ontology/PRINCIPLES.md#architecture-testability) follows from all of them at once.
 
-[Statelessness](../ontology/PRINCIPLES.md#architecture-statelessness) is the same rule seen from the outside. Nothing is retained between calls, so a computation can run anywhere and be replayed. [Idempotency](../ontology/PRINCIPLES.md#architecture-idempotency) is its consequence at the edge, because a retry of a stateless step has one effect however many times it lands. Validation and [verification](../ontology/PRINCIPLES.md#architecture-verification) are then cheap, since a frozen output can be compared against an expected one without a running system around it.
+[Statelessness](../ontology/PRINCIPLES.md#architecture-statelessness) is the same rule seen from the outside. Nothing is retained between calls, so a computation can run anywhere and be replayed. [Idempotency](../ontology/PRINCIPLES.md#architecture-idempotency) is its consequence at the edge, because a [retry](../ontology/PRINCIPLES.md#architecture-retry-pattern) of a stateless step has one effect however many times it lands. Validation and [verification](../ontology/PRINCIPLES.md#architecture-verification) are then cheap, since a frozen output can be compared against an expected one without a running system around it.
 
 ### The resource half
 
 Being reachable is not the same as being useful. A collector frees what nothing reaches and keeps what something still points at, so an architectural leak survives collection because it is reachable, as with a cache entry that will never be read, an observer on a dead subject, or a handle held by an injection container.
 
-For this reason every non-owning reference is weak or ephemeral, hidden retention in injection, mapping and observer machinery is made observable and bounded, and anything that outlives a single call carries an initialize, a run and a shutdown. [Graceful shutdown](../ontology/PRINCIPLES.md#architecture-graceful-shutdown) is the resource rule at the scale of a process. A long-lived component with no shutdown is a leak by construction, and the leak is a hole in the contract rather than a bug in the code.
+For this reason every non-owning reference is weak or ephemeral, hidden retention in injection, mapping and observer machinery is made observable and bounded, and anything that outlives a single call carries an initialize, a run and a shutdown. [Graceful shutdown](../ontology/PRINCIPLES.md#architecture-graceful-shutdown) is the resource rule at the scale of a process. A long-lived component with no shutdown is a leak by construction.
 
 ### Where the halves meet
 
@@ -379,31 +379,31 @@ D1·a who releases
 
 ```mermaid
 flowchart TB
-resource["A resource is acquired"]
-who{"Who releases it?"}
-discipline["The developer remembering · it leaks"]
-structure["The structure · scope, a finally, an explicit destroy"]
-owner{"Exactly one owner?"}
-weak["Every other reference is weak or ephemeral"]
-shared["Shared ownership · ambiguity, then a leak"]
-resource --> who
-who -- discipline --> discipline
-who -- structure --> structure --> owner
-owner -- yes --> weak
-owner -- no --> shared
+    resource["A resource is acquired"]
+    who{"Who releases it?"}
+    discipline["The developer remembering · it leaks"]
+    structure["The structure · scope, a finally, an explicit destroy"]
+    owner{"Exactly one owner?"}
+    weak["Every other reference is weak or ephemeral"]
+    shared["Shared ownership · ambiguity, then a leak"]
+    resource --> who
+    who -- discipline --> discipline
+    who -- structure --> structure --> owner
+    owner -- yes --> weak
+    owner -- no --> shared
 ```
 
 D1·b a lifetime
 
 ```mermaid
 stateDiagram-v2
-[*] --> Acquired : the owner opens it
-Acquired --> InUse : initialize
-InUse --> InUse : use · one owner writes
-InUse --> Released : shutdown · by scope or explicit destroy
-InUse --> Halted : invariant broken · fail fast
-Halted --> Released : the owner still releases
-Released --> [*]
+    [*] --> Acquired : the owner opens it
+    Acquired --> InUse : initialize
+    InUse --> InUse : use · one owner writes
+    InUse --> Released : shutdown · by scope or explicit destroy
+    InUse --> Halted : invariant broken · fail fast
+    Halted --> Released : the owner still releases
+    Released --> [*]
 ```
 
 D1·c ownership as types
@@ -469,42 +469,42 @@ E1·a the core split
 
 ```mermaid
 flowchart TB
-subgraph computation["Computation · what happens to data"]
-pure["pure functions · immutable · idempotent"]
-marked["uncertainty marked, never hidden"]
-end
-subgraph resource["Resource · where data lives"]
-owner["one owner · bounded lifetime"]
-symmetric["open then close · start then stop · guaranteed"]
-halt["invariant broken · halt"]
-end
-subgraph execution["Execution · control flow"]
-events["children emit · parents subscribe"]
-monotonic["append only · never retract"]
-snapshot["backtrack by reinstantiation"]
-end
-structural["Structural · applies to all three · observes itself"]
-resource -- observe --> computation
-computation --> execution
-resource --> execution
-execution -- feeds --> structural
-structural -- feedback --> execution
+    subgraph computation["Computation · what happens to data"]
+        pure["pure functions · immutable · idempotent"]
+        marked["uncertainty marked, never hidden"]
+    end
+    subgraph resource["Resource · where data lives"]
+        owner["one owner · bounded lifetime"]
+        symmetric["open then close · start then stop · guaranteed"]
+        halt["invariant broken · halt"]
+    end
+    subgraph execution["Execution · control flow"]
+        events["children emit · parents subscribe"]
+        monotonic["append only · never retract"]
+        snapshot["backtrack by reinstantiation"]
+    end
+    structural["Structural · applies to all three · observes itself"]
+    resource -- observe --> computation
+    computation --> execution
+    resource --> execution
+    execution -- feeds --> structural
+    structural -- feedback --> execution
 ```
 
 E1·b one exchange
 
 ```mermaid
 sequenceDiagram
-participant Child
-participant Bus as Event bus
-participant Parent
-Child->>Bus: emit intent · ordinal 41
-Bus->>Parent: deliver
-Parent-->>Bus: accept
-Child->>Bus: emit intent · ordinal 42
-Bus->>Parent: deliver
-Parent-->>Bus: refuse · typed error, halts: false
-Note over Child,Parent: the child never calls the parent · the log only grows
+    participant Child
+    participant Bus as Event bus
+    participant Parent
+    Child->>Bus: emit intent · ordinal 41
+    Bus->>Parent: deliver
+    Parent-->>Bus: accept
+    Child->>Bus: emit intent · ordinal 42
+    Bus->>Parent: deliver
+    Parent-->>Bus: refuse · typed error, halts: false
+    Note over Child,Parent: the child never calls the parent · the log only grows
 ```
 
 E1·c execution as types
@@ -560,15 +560,15 @@ F1·a principle and practice
 
 ```mermaid
 flowchart TB
-classical["A classical principle · separation of concerns, simplicity, one responsibility"]
-sharpened["The practice that sharpens it · the whole system in view, compression, an invariant"]
-pair["One pair · the principle holds, the practice says how"]
-human["Human factors · bounded by what a developer can hold"]
-evolution["Evolution · state protected, room left, nothing built unneeded"]
-classical --> pair
-sharpened --> pair
-pair --> human
-pair --> evolution
+    classical["A classical principle · separation of concerns, simplicity, one responsibility"]
+    sharpened["The practice that sharpens it · the whole system in view, compression, an invariant"]
+    pair["One pair · the principle holds, the practice says how"]
+    human["Human factors · bounded by what a developer can hold"]
+    evolution["Evolution · state protected, room left, nothing built unneeded"]
+    classical --> pair
+    sharpened --> pair
+    pair --> human
+    pair --> evolution
 ```
 
 ## A tension has a mechanism
@@ -587,7 +587,7 @@ To check this, take any construct where two things seemed to collide and name th
 
 The resolution is typed for the same reason a principle is. It names its two records by identity, the mechanism from the closed set of three, the scope each side holds in, and the rule in one sentence. The derivation has the shape of every default that must be safe when the case has not been thought about.
 
-A recorded resolution wins outright, since a developer has already decided. Failing that, two principles that hold in different scopes separate, because each can hold whole on its own side. Everything else, a quality on either side or two principles that share one scope, falls to a trade-off, because the only thing that can be said about an undecided pair is that it has to be measured. Mitigation is never derived, because a discriminator is a judgement, and a judgement the data does not carry explicitly does not exist.
+A recorded resolution wins outright, since a developer has already decided. Failing that, two principles that hold in different scopes separate, because each can hold whole on its own side. Everything else, a quality on either side or two principles that share one scope, falls to a trade-off, because the only thing that can be said about an undecided pair is that it has to be measured. Mitigation is never derived, because a discriminator is a judgment, and a judgment the data does not carry explicitly does not exist.
 
 ### What a check does with it
 
@@ -603,38 +603,38 @@ G1·a recorded or derived
 
 ```mermaid
 flowchart TB
-pair["Two records pull against each other on one construct"]
-exemption["An exemption · one wins here, for a reason never written down"]
-recorded{"Is a resolution recorded for the pair?"}
-kinds{"What kind of thing is on each side, and in which scope?"}
-separate["Two principles in different scopes · each holds whole in its own"]
-trade["Anything else · a quality on either side, or two principles in one scope · measure, choose an operating point, write it down"]
-mitigate["Recorded with a discriminator · a rule names what tells the two apart"]
-pair -. the tempting answer .-> exemption
-pair --> recorded
-recorded -- yes --> mitigate
-recorded -- no --> kinds
-kinds -- principle and principle, scopes differ --> separate
-kinds -- otherwise --> trade
+    pair["Two records pull against each other on one construct"]
+    exemption["An exemption · one wins here, for a reason never written down"]
+    recorded{"Is a resolution recorded for the pair?"}
+    kinds{"What kind of thing is on each side, and in which scope?"}
+    separate["Two principles in different scopes · each holds whole in its own"]
+    trade["Anything else · a quality on either side, or two principles in one scope · measure, choose an operating point, write it down"]
+    mitigate["Recorded with a discriminator · a rule names what tells the two apart"]
+    pair -. the tempting answer .-> exemption
+    pair --> recorded
+    recorded -- yes --> mitigate
+    recorded -- no --> kinds
+    kinds -- principle and principle, scopes differ --> separate
+    kinds -- otherwise --> trade
 ```
 
 G1·b kinds against scopes
 
 ```mermaid
 quadrantChart
-title Where a pair lands decides its mechanism
-x-axis one scope --> two scopes
-y-axis a quality on one side --> two principles
-quadrant-1 separate by scope
-quadrant-2 trade at a measured point
-quadrant-3 trade at a measured point
-quadrant-4 trade at a measured point
-statelessness against state before mutation: [0.85, 0.85]
-single source of truth against decentralization: [0.75, 0.9]
-fail fast against graceful degradation: [0.15, 0.8]
-consistency against availability: [0.8, 0.2]
-encapsulation against debuggability: [0.3, 0.15]
-backpressure against throughput: [0.2, 0.3]
+    title Where a pair lands decides its mechanism
+    x-axis one scope --> two scopes
+    y-axis a quality on one side --> two principles
+    quadrant-1 separate by scope
+    quadrant-2 trade at a measured point
+    quadrant-3 trade at a measured point
+    quadrant-4 trade at a measured point
+    statelessness against state before mutation: [0.85, 0.85]
+    single source of truth against decentralization: [0.75, 0.9]
+    fail fast against graceful degradation: [0.15, 0.8]
+    consistency against availability: [0.8, 0.2]
+    encapsulation against debuggability: [0.3, 0.15]
+    backpressure against throughput: [0.2, 0.3]
 ```
 
 G1·c a resolution record
@@ -677,7 +677,7 @@ One mechanism is applied to every tension, so a trade-off is argued as a violati
 
 For this reason scope separation, a measured trade-off and a mitigating rule are the three mechanisms, and which one applies follows from what is on each side and where it holds. The mechanism the pair's kinds and scopes select is applied, rather than the one the reviewer prefers. In practice, where two principles hold in different scopes, the scope each holds in and what holding means there are named, and the construct under review is classified to one scope before either is applied. Where a principle meets a quality, or two principles share one scope, the thing in tension is measured where the construct lives, and an operating point is chosen and recorded with its owner, so it is a decision rather than a mood. Where two things share a scope and differ in meaning, the rule that names the discriminator is written. Where a construct genuinely sits on both sides of a scope boundary, it is split along the boundary rather than either rule being weakened for it.
 
-To check this, take any resolved tension and ask which mechanism resolved it. If both sides are principles and their scopes differ, the boundary settles it and both sides survive whole. If one side is a quality, or both sides share one scope, ask where the operating point sits and who measured it. If the pair claims a discriminator, ask where it is written. None of the three mechanisms is an exemption. A resolution where one principle is weakened inside its own scope was not a boundary, an unmeasured operating point is a mood, a discriminator held only in a reviewer's judgement is not yet a rule, and an override that names no scope and no reason is not a resolution at all.
+To check this, take any resolved tension and ask which mechanism resolved it. If both sides are principles and their scopes differ, the boundary settles it and both sides survive whole. If one side is a quality, or both sides share one scope, ask where the operating point sits and who measured it. If the pair claims a discriminator, ask where it is written. None of the three mechanisms is an exemption. A resolution where one principle is weakened inside its own scope was not a boundary, an unmeasured operating point is a mood, a discriminator held only in a reviewer's judgment is not yet a rule, and an override that names no scope and no reason is not a resolution at all.
 
 ### Separated by scope
 
@@ -685,7 +685,7 @@ Scope separation is the mechanism the core layers were built to produce, and its
 
 In [fail fast](../ontology/PRINCIPLES.md#architecture-fail-fast) against explicit invalidity, a broken resource invariant halts and a computation uncertainty is marked and carried. In not building the hypothetical against under-specifying deliberately, no code is written for a feature that was never requested, and no constraint is placed on an interface that would block one later. Each pair is the derivation at work, two principles on two layers.
 
-The canon holds the same derivation as records where it has been consulted. [Single source of truth](../ontology/PRINCIPLES.md#architecture-single-source-of-truth) against [decentralization](../ontology/PRINCIPLES.md#architecture-decentralization), and [autonomy](../ontology/PRINCIPLES.md#architecture-autonomy) against [standardization](../ontology/PRINCIPLES.md#architecture-standardization), separate because each side governs a different layer. [Normalization](../ontology/PRINCIPLES.md#architecture-normalization) against [query performance](../ontology/LEXICON.md#lexicon-query-performance) is [recorded explicitly](../ontology/SCHEMA.md#tension-normalization-query-performance), with the [canonical model](../ontology/PRINCIPLES.md#architecture-canonical-model) normalized and only derived read models denormalised, never the store. The test of a boundary is that both sides survive it whole.
+The canon holds the same derivation as records where it has been consulted. [Single source of truth](../ontology/PRINCIPLES.md#architecture-single-source-of-truth) against [decentralization](../ontology/PRINCIPLES.md#architecture-decentralization), and [autonomy](../ontology/PRINCIPLES.md#architecture-autonomy) against [standardization](../ontology/PRINCIPLES.md#architecture-standardization), separate because each side governs a different layer. [Normalization](../ontology/PRINCIPLES.md#architecture-normalization) against [query performance](../ontology/LEXICON.md#lexicon-query-performance) is [recorded explicitly](../ontology/SCHEMA.md#tension-normalization-query-performance), with the [canonical model](../ontology/PRINCIPLES.md#architecture-canonical-model) normalized and only derived read models denormalized, never the store. The test of a boundary is that both sides survive it whole.
 
 ### Traded at a measured point
 
@@ -697,31 +697,31 @@ Fail fast against [graceful degradation](../ontology/PRINCIPLES.md#architecture-
 
 ### Mitigated by a rule
 
-Mitigation is the mechanism for two things in one scope told apart by meaning. [Do not repeat yourself](../ontology/PRINCIPLES.md#architecture-duplicate-code) against [locality of behavior](../ontology/LEXICON.md#lexicon-locality-of-behavior) is the recurring case. Semantics are centralised, the rules, the schemas and the one place a fact lives, and incidental co-occurrence stays local, because two passages that happen to read alike are not one fact.
+Mitigation is the mechanism for two things in one scope told apart by meaning. [Do not repeat yourself](../ontology/PRINCIPLES.md#architecture-duplicate-code) against [locality of behavior](../ontology/LEXICON.md#lexicon-locality-of-behavior) is the recurring case. Semantics are centralized, the rules, the schemas and the one place a fact lives, and incidental co-occurrence stays local, because two passages that happen to read alike are not one fact.
 
-No boundary separates them, since both live in the [structural](../ontology/SCHEMA.md#layer-structural-core) scope, and no measurement decides them, since neither is a quality. What resolves them is a [rule that names the discriminator](../ontology/SCHEMA.md#tension-do-not-repeat-yourself-dry-locality-of-behavior), which asks whether the sameness is semantic or textual. A discriminator written down is consultable before the collision. One held only in a reviewer's judgement is rediscovered at every clone report, and abstracted wrongly half the time.
+No boundary separates them, since both live in the [structural](../ontology/SCHEMA.md#layer-structural-core) scope, and no measurement decides them, since neither is a quality. What resolves them is a [rule that names the discriminator](../ontology/SCHEMA.md#tension-do-not-repeat-yourself-dry-locality-of-behavior), which asks whether the sameness is semantic or textual. A discriminator written down is consultable before the collision. One held only in a reviewer's judgment is rediscovered at every clone report.
 
 H1·a the recurring pairs
 
 ```mermaid
 flowchart TB
-subgraph scope["Scope separation · both hold whole"]
-a1["stateless"] -- computation · resource --- a2["state before mutation"]
-b1["immutability"] -- computed data · resource state --- b2["state over code"]
-c1["fail fast"] -- resource halts · computation marks --- c2["explicit invalidity"]
-d1["do not build what is not needed"] -- implementation · interfaces --- d2["deliberate under-specification"]
-e1["single owner"] -- runtime resources · definitions --- e2["code as data"]
-g1["normalization"] -- the canonical store · derived read models --- g2["query performance"]
-end
-subgraph trade["Irreducible trade-off · measured to an operating point"]
-i1["consistency"] -- inside a boundary · across autonomy boundaries --- i2["availability"]
-j1["fail fast"] -- where a halt is cheaper than a wrong answer --- j2["graceful degradation"]
-k1["encapsulation"] -- hidden internals · a live inspector --- k2["debuggability"]
-l1["backpressure"] -- bounded producers · sustained rate --- l2["throughput"]
-end
-subgraph mitigate["Mitigation · a rule names the discriminator"]
-m1["one source of truth"] -- semantic sameness · incidental likeness --- m2["locality of behavior"]
-end
+    subgraph scope["Scope separation · both hold whole"]
+        a1["stateless"] -- computation · resource --- a2["state before mutation"]
+        b1["immutability"] -- computed data · resource state --- b2["state over code"]
+        c1["fail fast"] -- resource halts · computation marks --- c2["explicit invalidity"]
+        d1["do not build what is not needed"] -- implementation · interfaces --- d2["deliberate under-specification"]
+        e1["single owner"] -- runtime resources · definitions --- e2["code as data"]
+        g1["normalization"] -- the canonical store · derived read models --- g2["query performance"]
+    end
+    subgraph trade["Irreducible trade-off · measured to an operating point"]
+        i1["consistency"] -- inside a boundary · across autonomy boundaries --- i2["availability"]
+        j1["fail fast"] -- where a halt is cheaper than a wrong answer --- j2["graceful degradation"]
+        k1["encapsulation"] -- hidden internals · a live inspector --- k2["debuggability"]
+        l1["backpressure"] -- bounded producers · sustained rate --- l2["throughput"]
+    end
+    subgraph mitigate["Mitigation · a rule names the discriminator"]
+        m1["one source of truth"] -- semantic sameness · incidental likeness --- m2["locality of behavior"]
+    end
 ```
 
 ---

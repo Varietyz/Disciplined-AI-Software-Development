@@ -1,0 +1,825 @@
+{
+    "category": "taxonomy-classification-naming",
+    "records": [
+        {
+            "name": "Concern Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:collection-concern",
+                    "reason": "A concern tag is any role word in the concern slot, while a collection concern is the plural form of one."
+                },
+                {
+                    "id": "lexicon:mass-concern",
+                    "reason": "A concern tag is any role word, while a mass concern is the uncountable, singular form of one."
+                },
+                {
+                    "id": "lexicon:single-unit-concern",
+                    "reason": "A concern tag is any role word, while a single-unit concern is the form with one instance per file."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the role a file plays, drawn from the closed concern vocabulary and carried as the last dot-segment before the extension."
+        },
+        {
+            "name": "Subject Slot",
+            "kind": "mechanism",
+            "definition": "A facility that names who or what a file serves, occupying the first dot-segment of the filename."
+        },
+        {
+            "name": "Variant Slot",
+            "distinctFrom": [
+                {
+                    "id": "architecture:externally-resolved-slot",
+                    "reason": "The variant slot is a position in the filename, while an externally resolved slot is a way of resolving a slot's words against their owning source."
+                },
+                {
+                    "id": "lexicon:subject-folder",
+                    "reason": "The variant slot relieves a collision inside the filename, while a subject folder relieves breadth with a sibling folder."
+                }
+            ],
+            "kind": "mechanism",
+            "definition": "A facility that narrows a subject to one facet, occupying the segment between subject and concern and present only on collision or facet ambiguity."
+        },
+        {
+            "name": "Container Level",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:flat-bucket",
+                    "reason": "A container level partitions a root and holds folders, while a flat bucket holds files of one concern and no folders."
+                }
+            ],
+            "kind": "mechanism",
+            "definition": "A facility that partitions a governed root by grouping axis, declared as a closed set and anchoring the depth count at level one."
+        },
+        {
+            "name": "Concern Folder",
+            "kind": "mechanism",
+            "definition": "A facility that holds every file of one concern and whose label the file's concern tag must equal."
+        },
+        {
+            "name": "Subject Folder",
+            "kind": "mechanism",
+            "definition": "A facility that separates two sets of one concern under a container, present if and only if the sets must not merge."
+        },
+        {
+            "name": "Governed Root",
+            "kind": "constraint",
+            "definition": "A rule or precondition that a path falls under the taxonomy only where its root is declared, so an undeclared tree is ungoverned and a declared one is governed in full."
+        },
+        {
+            "name": "Flat Bucket",
+            "kind": "mechanism",
+            "definition": "A facility that holds one collection concern as files with no folders beneath it, declared rather than inferred from shape."
+        },
+        {
+            "name": "Ignore Declaration",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:ecosystem-fixed-name",
+                    "reason": "The ignore declaration is the list of skipped names, while an ecosystem-fixed name is one class of name it may list."
+                },
+                {
+                    "id": "lexicon:structurally-exempt-file",
+                    "reason": "The ignore declaration removes names from the taxonomy, while a structurally exempt file stays placed and is exempt only from naming."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "Descriptive data about the names skipped wherever they appear under a governed root, covering build output, vendored sources, tool caches and ecosystem-fixed names."
+        },
+        {
+            "name": "Depth Cap",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:ordered-role-sequence",
+                    "reason": "The depth cap limits how many folders a path has, while the ordered role sequence limits the order of their roles."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "A rule or precondition that every governed file resolve within a fixed number of folders from its governed root, the container included and the file excluded."
+        },
+        {
+            "name": "Ordered Role Sequence",
+            "kind": "constraint",
+            "definition": "A rule or precondition that each folder depth consume a role strictly later than the depth before it, so container, subject and concern may be skipped but never repeated and never revisited."
+        },
+        {
+            "name": "Layer Spine",
+            "kind": "model",
+            "definition": "A conceptual representation of the system-decomposition spectrum that totally orders every concern from domain through product and supplies the tie-break direction."
+        },
+        {
+            "name": "Collection Concern",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:single-unit-concern",
+                    "reason": "A collection concern's file defines many members and its tag is plural, while a single-unit concern's file defines one and its tag is singular."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of a concern whose file defines many members at once, plural in both the folder label and the file tag."
+        },
+        {
+            "name": "Single-Unit Concern",
+            "kind": "artifact",
+            "definition": "A formal definition of a concern with one instance per file, pairing a plural folder label with a singular file tag."
+        },
+        {
+            "name": "Glob Resolvability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which one depth-unanchored pattern resolves every file or every folder of a concern across the whole tree."
+        },
+        {
+            "name": "Placement Predictability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a file's correct location is derivable from its role alone, with exactly one legal answer."
+        },
+        {
+            "name": "Naming Expressiveness",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a closed vocabulary limits how precisely the developer can name a file that its declared words do not yet cover."
+        },
+        {
+            "name": "Tree Compactness",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a small module can stay in few files and folders rather than expanding into one concern folder per role."
+        },
+        {
+            "name": "Classification Judgment",
+            "kind": "activity",
+            "definition": "The activity of reading a file and assigning its concern by its primary responsibility, which no pattern-match can perform on its behalf."
+        },
+        {
+            "name": "Vocabulary Admission",
+            "kind": "activity",
+            "definition": "The act of reasoning a proposed word against the declared categories and admitting it only by developer-approved registry edit."
+        },
+        {
+            "name": "Identity Migration",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:unreferenced-export-triage",
+                    "reason": "Identity migration renames and updates every reference, while export triage decides what to do with an export nothing references."
+                }
+            ],
+            "kind": "activity",
+            "definition": "The activity of renaming an artifact and updating every reference to it in the same pass, so no reference is left dangling."
+        },
+        {
+            "name": "Shape-Discovered Surface",
+            "kind": "mechanism",
+            "definition": "A facility that collects its members by matching a pattern rather than by literal path, so a rename silently changes what it collects."
+        },
+        {
+            "name": "Container-by-Container Reshape",
+            "kind": "activity",
+            "definition": "The practice of converting one container at a time to the taxonomy, updating every reference in the same pass and holding the gate green between each."
+        },
+        {
+            "name": "Is-A Test",
+            "kind": "technique",
+            "definition": "A technique for deciding concern membership by asking whether a file is-a the proposed word, admitting it as a role when it is and as a domain noun when the system merely has-a it."
+        },
+        {
+            "name": "Rejection Table",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:covering-concern",
+                    "reason": "The rejection table lists refused words, while the covering concern is the declared word each refusal points to."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of each near-miss word already considered and refused, recording the meta concern that covers it so the same word is not proposed twice."
+        },
+        {
+            "name": "Covering Concern",
+            "kind": "artifact",
+            "definition": "A formal definition of the declared word that already fills a proposed word's role, resolved from the rejection table so a refusal carries its own replacement."
+        },
+        {
+            "name": "Reverse Coverage Resolution",
+            "kind": "technique",
+            "definition": "A technique for answering which declared words cover a candidate, by indexing the rejection table on its refused words rather than on the concerns they map to."
+        },
+        {
+            "name": "Free-Form Folder Level",
+            "kind": "anti-pattern",
+            "definition": "A folder level resolving to no declared word, so the path is conventional rather than checkable and classification has more than one right answer."
+        },
+        {
+            "name": "Unguided Refusal",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:borrowed-synonymy",
+                    "reason": "An unguided refusal names no covering word, while borrowed synonymy judges overlap from everyday senses instead of roles."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Reporting an undeclared word without naming the declared word that covers it, so the developer's or the model's next attempt is another guess and the closed set reads as an obstacle rather than a map."
+        },
+        {
+            "name": "Borrowed Synonymy",
+            "kind": "anti-pattern",
+            "definition": "Deciding whether two declared words overlap from a general-language corpus rather than from the roles they name, so distinct concerns collide on their everyday senses and domain overlaps go unseen."
+        },
+        {
+            "name": "Vocabulary Inflation",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:index-as-a-tag",
+                    "reason": "Vocabulary inflation is the class of admitting an overlapping word, while index as a tag is one refused word of it."
+                },
+                {
+                    "id": "lexicon:adjective-slot-word",
+                    "reason": "Vocabulary inflation admits a word whose role is already covered, while an adjective slot word admits a word that names no role."
+                },
+                {
+                    "id": "lexicon:duplicated-authority",
+                    "reason": "Vocabulary inflation is two words for one role, while duplicated authority is two owners for one fact."
+                },
+                {
+                    "id": "lexicon:instance-identifier-word",
+                    "reason": "Vocabulary inflation adds a second word for a kind, while an instance identifier adds an entry instead of a kind."
+                },
+                {
+                    "id": "lexicon:measurement-word",
+                    "reason": "Vocabulary inflation adds a synonym of a role, while a measurement word adds a quantity."
+                },
+                {
+                    "id": "lexicon:nominalized-process-word",
+                    "reason": "Vocabulary inflation adds a synonym of a declared role, while a nominalized process word adds an activity."
+                },
+                {
+                    "id": "lexicon:plural-subject",
+                    "reason": "Vocabulary inflation adds a synonym, while a plural subject uses a real noun in the wrong number."
+                },
+                {
+                    "id": "lexicon:saturated-role-tag",
+                    "reason": "Vocabulary inflation adds a second word for one role, while a saturated role tag uses one word for every role."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Admitting a word whose role a declared word already covers, such as a synonym or an abbreviation of it, so one role gets two words and classification gets two right answers.",
+            "aliases": ["Overlapping Word"]
+        },
+        {
+            "name": "Ignore-List Silencing",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:claimed-foreign-tree",
+                    "reason": "Ignore-list silencing takes authored source out of the taxonomy, while a claimed foreign tree puts another system's tree into it."
+                },
+                {
+                    "id": "lexicon:depth-relief-container",
+                    "reason": "Ignore-list silencing escapes a finding by removal, while a depth-relief container escapes it by declaring a new level."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Answering a finding by adding the path to the ignore declaration, removing authored source from the taxonomy entirely and hiding every future violation under the same name."
+        },
+        {
+            "name": "Depth-Relief Container",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:claimed-foreign-tree",
+                    "reason": "A depth-relief container declares a new container inside the grammar, while a claimed foreign tree brings another runtime's tree under it."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Declaring a container to shorten a path or to house files that resist placement, turning the level that anchors the depth count into an escape from it."
+        },
+        {
+            "name": "Restated Set Member",
+            "kind": "anti-pattern",
+            "definition": "Naming a file with the subject its folder already declares, so the member repeats the set and the name carries no information."
+        },
+        {
+            "name": "Saturated Role Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:handler-as-a-tag",
+                    "reason": "A saturated role tag is the class of labels that fit every role, while handler as a tag is one refused word of that class with its covering tags."
+                },
+                {
+                    "id": "lexicon:manager-as-a-tag",
+                    "reason": "A saturated role tag is the class, while manager as a tag is one refused word of it with its covering tags."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Classifying a file under a label that names a stature or fits every role, such as util or helper, so it attaches to lifecycle owners, caches, registries and coordinators alike and excludes nothing.",
+            "aliases": ["Catch-All Tag"]
+        },
+        {
+            "name": "Concern-Swallowing Compound",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:free-form-folder-level",
+                    "reason": "A concern-swallowing compound hides a filename's tag inside one word, while a free-form folder level is a folder whose word resolves to nothing."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Fusing a subject and a concern into one word, so the tag that should terminate the name is buried inside it and no glob resolves the file.",
+            "aliases": ["Compound That Swallowed a Concern"]
+        },
+        {
+            "name": "Downward Nesting",
+            "kind": "anti-pattern",
+            "definition": "Relieving collision or breadth pressure by adding a folder level, breaking the depth cap that both overflow slots exist to protect."
+        },
+        {
+            "name": "Automated Reshape",
+            "kind": "anti-pattern",
+            "definition": "Renaming by tool across a tree holding shape-discovered surfaces, so the rewrite reports clean while an aggregator that collected by suffix now collects nothing."
+        },
+        {
+            "name": "Nominalized Process Word",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:adjective-slot-word",
+                    "reason": "A nominalized process word names an activity, while an adjective names a quality."
+                },
+                {
+                    "id": "lexicon:instance-identifier-word",
+                    "reason": "A nominalized process word names what the system does, while an instance identifier names one registered entry."
+                },
+                {
+                    "id": "lexicon:measurement-word",
+                    "reason": "A nominalized process word names an activity, while a measurement word names a quantity."
+                },
+                {
+                    "id": "lexicon:plural-subject",
+                    "reason": "A nominalized process word is an activity in a noun's clothing, while a plural subject is a real noun in the wrong number."
+                },
+                {
+                    "id": "lexicon:saturated-role-tag",
+                    "reason": "A nominalized process word names an activity, while a saturated role tag names a stature that fits every role."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Admitting a word naming what the system does rather than what it has, so the vocabulary accumulates activities that classify nothing."
+        },
+        {
+            "name": "Multi-Role File",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:sentence-shaped-name",
+                    "reason": "A multi-role file keeps two concerns under one arbitrary tag, while a sentence-shaped name dodges the tag with a phrase."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Keeping a file whose primary responsibility is two concerns, forcing an arbitrary tag instead of surfacing the split the ambiguity reports."
+        },
+        {
+            "name": "Reasoning in the Registry",
+            "kind": "anti-pattern",
+            "definition": "Writing the rules about a declaration into the declaration file itself, producing a document in a schema's format that no code reads."
+        },
+        {
+            "name": "Mass Concern",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:collection-concern",
+                    "reason": "A mass concern is uncountable and singular in folder and tag, while a collection concern is plural in both."
+                },
+                {
+                    "id": "lexicon:single-unit-concern",
+                    "reason": "A mass concern is singular in folder and tag, while a single-unit concern pairs a plural folder with a singular tag."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of a concern named for an uncountable role, singular in both the folder label and the file tag, as a configuration or a state is.",
+            "seeAlso": [
+                "collection-concern",
+                "single-unit-concern"
+            ]
+        },
+        {
+            "name": "Compound Marker",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:ecosystem-fixed-name",
+                    "reason": "A compound marker exempts a filename by a declared word before its extension, while an ecosystem-fixed name is exempt because a tool finds it by exact name."
+                },
+                {
+                    "id": "lexicon:ignore-declaration",
+                    "reason": "A compound marker exempts the name and keeps the placement governed, while the ignore declaration removes a name from the taxonomy entirely."
+                },
+                {
+                    "id": "lexicon:structurally-exempt-file",
+                    "reason": "A compound marker is a word in the filename, while a structurally exempt file is exempt because of how it is resolved."
+                },
+                {
+                    "id": "lexicon:test-tag",
+                    "reason": "A compound marker is the class of exempting words, while the test marker is one of them."
+                },
+                {
+                    "id": "lexicon:tests",
+                    "reason": "A compound marker is a filename word, while tests are the executable checks a test file holds."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the declared words, such as test, generated or rule, that exempt a filename from the naming grammar when they sit just before the extension, while the file's placement stays governed."
+        },
+        {
+            "name": "Ecosystem-Fixed Name",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:structurally-exempt-file",
+                    "reason": "An ecosystem-fixed name is found by an external tool by exact name, while a structurally exempt file is resolved by the project's own shape, entry map or generator."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "Descriptive data about the filenames an external tool finds by exact name, such as package manifests, lockfiles and compiler configurations, which are never renamed to the grammar."
+        },
+        {
+            "name": "Structurally Exempt File",
+            "kind": "artifact",
+            "definition": "Descriptive data about the files that carry their own resolution contract, such as an aggregator collected by shape, a build entry named in an entry map, and a generated file rewritten on every run."
+        },
+        {
+            "name": "Conversion Record",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:alignment-entry",
+                    "reason": "A conversion record is written per converted file, while an alignment entry is written per reading of the protocol, and the records cite it."
+                },
+                {
+                    "id": "lexicon:frozen-baseline",
+                    "reason": "A conversion record is owed by each file converted, while the frozen baseline lists the files that owe none."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the record written for each file a conversion names, holding its responsibilities with the symbols behind them, its chosen concern and subject, the candidates refused, and the verdict on any file that shares its job."
+        },
+        {
+            "name": "Alignment Entry",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:frozen-baseline",
+                    "reason": "An alignment entry records one reading of the protocol, while the frozen baseline records which files already conformed when the gate shipped."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "Descriptive data about one whole reading of a conversion protocol, carrying the content hash of the revision read and the scope it covers, which every conversion record written after it cites."
+        },
+        {
+            "name": "Re-Alignment Cadence",
+            "kind": "constraint",
+            "definition": "A rule or precondition that only a bounded run of conversion records may cite one alignment entry, so a long conversion re-reads its protocol before the rules it applies fade from working context."
+        },
+        {
+            "name": "Frozen Baseline",
+            "kind": "artifact",
+            "definition": "Descriptive data about the files already conformant when a conversion's record gate shipped, pinned once into a generated set that never grows, so only a file renamed or moved afterwards owes a record."
+        },
+        {
+            "name": "Word-Boundary Case",
+            "kind": "artifact",
+            "definition": "A formal definition of a naming case by where one word ends and the next begins, whether at a capital letter as in camel and pascal case or at a joiner as in snake and kebab case."
+        },
+        {
+            "name": "Unreferenced Export Triage",
+            "kind": "activity",
+            "definition": "The activity of deciding, for each export nothing imports, whether a call site should use it, whether it is capability waiting for a consumer, whether it is superseded, or whether it went with a merged duplicate."
+        },
+        {
+            "name": "Variant-Masked Duplicate",
+            "kind": "anti-pattern",
+            "definition": "Resolving a naming collision by giving the second file a variant, so two files doing one job keep two names and the duplication becomes permanent."
+        },
+        {
+            "name": "Stranded Test",
+            "kind": "anti-pattern",
+            "definition": "Leaving a test where its subject used to sit after the subject moves or splits, so the test tree no longer shows which tests cover which file."
+        },
+        {
+            "name": "Adjective Slot Word",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:instance-identifier-word",
+                    "reason": "An adjective describes a file without naming a kind, while an instance identifier names one entry instead of a kind."
+                },
+                {
+                    "id": "lexicon:measurement-word",
+                    "reason": "An adjective is a quality of a file, while a measurement word is data a file holds."
+                },
+                {
+                    "id": "lexicon:plural-subject",
+                    "reason": "An adjective is the wrong part of speech for any slot, while a plural subject is the right part of speech in the wrong number."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Admitting an adjective such as lazy, bounded or shallow into a name slot, where no category can take it, so it describes a file without classifying it."
+        },
+        {
+            "name": "Plural Subject",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:instance-identifier-word",
+                    "reason": "A plural subject is a kind named in the plural, while an instance identifier names one entry rather than a kind."
+                },
+                {
+                    "id": "lexicon:measurement-word",
+                    "reason": "A plural subject names things the system has, while a measurement word names a quantity a file holds."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Using a plural noun such as stats or fields as a subject, where a subject names one thing the system has."
+        },
+        {
+            "name": "Grouping Label",
+            "kind": "anti-pattern",
+            "definition": "Using a bucket word such as misc, common, shared or core as a subject, which excludes no file and so classifies none, although grouping is exactly what a container is for."
+        },
+        {
+            "name": "Measurement Word",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:instance-identifier-word",
+                    "reason": "A measurement word names a quantity a file holds, while an instance identifier names one entry of a registry."
+                }
+            ],
+            "kind": "anti-pattern",
+            "definition": "Admitting a measurement or property such as duration, interval or budget as a vocabulary word, where it names data held in a file rather than a role or a thing."
+        },
+        {
+            "name": "Instance Identifier Word",
+            "kind": "anti-pattern",
+            "definition": "Admitting the id of one registry entry, such as primary or dark-mode, into a vocabulary, so content enters a list that should hold only kinds of thing."
+        },
+        {
+            "name": "Sentence-Shaped Name",
+            "kind": "anti-pattern",
+            "definition": "Naming a file after an activity or a sentence because its role would not resolve, when the name's resistance shows that the file needs a split, a move or a merge."
+        },
+        {
+            "name": "Numeric Order Prefix",
+            "kind": "anti-pattern",
+            "definition": "Encoding a file's place in a sequence as a numeric prefix, so inserting one step renames every file after it and the grammar must parse a number it cannot classify."
+        },
+        {
+            "name": "Claimed Foreign Tree",
+            "kind": "anti-pattern",
+            "definition": "Declaring a tree that another runtime resolves by name a governed root and renaming it to the grammar, which breaks that runtime at its next start without reorganizing anything."
+        },
+        {
+            "name": "Rename to a Declared Word",
+            "kind": "technique",
+            "definition": "A technique for replacing an undeclared word in a name with the declared word that covers its role."
+        },
+        {
+            "name": "Split the Compound",
+            "kind": "technique",
+            "definition": "A technique for separating a word that fused a subject and a concern into its two slots."
+        },
+        {
+            "name": "Move the Tag to the Concern Slot",
+            "kind": "technique",
+            "definition": "A technique for placing a concern tag as the last segment of a filename, where the parser reads the concern."
+        },
+        {
+            "name": "Correct the Resolver",
+            "kind": "technique",
+            "definition": "A technique for fixing a slot resolver that reads a word by its vocabulary instead of by its position."
+        },
+        {
+            "name": "Move to the Matching Concern Folder",
+            "kind": "technique",
+            "definition": "A technique for moving a file into the folder whose label equals its concern tag."
+        },
+        {
+            "name": "Reclassify the File",
+            "kind": "technique",
+            "definition": "A technique for reading a file again and giving it the concern tag its code supports."
+        },
+        {
+            "name": "Unanchor the Pattern",
+            "kind": "technique",
+            "definition": "A technique for writing a discovery pattern that matches a concern at any depth instead of at one."
+        },
+        {
+            "name": "Restore the Terminating Tag",
+            "kind": "technique",
+            "definition": "A technique for ending a filename with its concern tag again, so a glob on the tag finds it."
+        },
+        {
+            "name": "Declare the Root",
+            "kind": "technique",
+            "definition": "A technique for adding a folder to the jurisdiction declaration instead of inferring that it is governed."
+        },
+        {
+            "name": "Place the Folder in an Existing Container",
+            "kind": "technique",
+            "definition": "A technique for moving a folder under the container that already groups its kind of content."
+        },
+        {
+            "name": "Remove the Ignore Entry",
+            "kind": "technique",
+            "definition": "A technique for deleting an ignore entry that hid authored source and fixing the finding it silenced."
+        },
+        {
+            "name": "Collapse the Exemption Lists",
+            "kind": "technique",
+            "definition": "A technique for replacing per-check exemption lists for one upstream tree with a single declaration every check reads."
+        },
+        {
+            "name": "Take the Variant Slot",
+            "kind": "technique",
+            "definition": "A technique for resolving a name collision with a declared variant instead of a new folder level."
+        },
+        {
+            "name": "Add a Sibling Subject Folder",
+            "kind": "technique",
+            "definition": "A technique for relieving breadth with a subject folder beside the existing one instead of below it."
+        },
+        {
+            "name": "Split by Responsibility",
+            "kind": "technique",
+            "definition": "A technique for dividing a file that holds two concerns into one file per concern."
+        },
+        {
+            "name": "Reclassify to the Narrower Role",
+            "kind": "technique",
+            "definition": "A technique for moving a file from a broad concern tag to the narrowest tag that still fits it."
+        },
+        {
+            "name": "Apply the Domain-Ward Tie-Break",
+            "kind": "technique",
+            "definition": "A technique for resolving an irreducible two-concern overlap toward the concern nearer the domain on the layer spine."
+        },
+        {
+            "name": "Classify to the Meta Concern",
+            "kind": "technique",
+            "definition": "A technique for tagging a file with the agnostic concern that covers its role instead of a domain word."
+        },
+        {
+            "name": "Index the Rejection Table by Refused Word",
+            "kind": "technique",
+            "definition": "A technique for keying the table of rejected words by the refused word, so the gate can look up its replacement."
+        },
+        {
+            "name": "Name the Covering Concern in the Refusal",
+            "kind": "technique",
+            "definition": "A technique for having a vocabulary refusal name the declared word that covers the refused one."
+        },
+        {
+            "name": "Derive the Registry from the Document",
+            "kind": "technique",
+            "definition": "A technique for generating the machine-read vocabulary from the document that reasons about it, so the two cannot drift."
+        },
+        {
+            "name": "Move Reasoning Back to the Document",
+            "kind": "technique",
+            "definition": "A technique for moving rules written into a declaration file back into the document that people read."
+        },
+        {
+            "name": "Drop the Redundant Head",
+            "kind": "technique",
+            "definition": "A technique for removing from a filename the subject its folder already declares."
+        },
+        {
+            "name": "Re-Point the Pattern",
+            "kind": "technique",
+            "definition": "A technique for updating every shape-discovered surface whose pattern encoded a renamed form."
+        },
+        {
+            "name": "Verify the Collected Count",
+            "kind": "technique",
+            "definition": "A technique for comparing what each aggregator collects before and after a rename, treating a drop to zero as a failure."
+        },
+        {
+            "name": "Compare Both Files",
+            "kind": "technique",
+            "definition": "A technique for comparing the responsibilities of two colliding files before giving either a variant."
+        },
+        {
+            "name": "Merge One Job or Name the Facet",
+            "kind": "technique",
+            "definition": "A technique for merging two files that do one job, or giving the variant the facet that truly differs."
+        },
+        {
+            "name": "Move the Test with Its Subject",
+            "kind": "technique",
+            "definition": "A technique for moving a test to the mirrored path of its subject whenever the subject moves."
+        },
+        {
+            "name": "Split One Test per Subject",
+            "kind": "technique",
+            "definition": "A technique for dividing a test that covers several subjects into one test file per subject."
+        },
+        {
+            "name": "Take the Domain Noun as the Subject",
+            "kind": "technique",
+            "definition": "A technique for replacing the generic subject with the domain noun the file's source names."
+        },
+        {
+            "name": "Classify Before the First Write",
+            "kind": "technique",
+            "definition": "A technique for deciding a file's concern and subject before writing it, so it is created under its final name."
+        },
+        {
+            "name": "Move the Order into the Registry",
+            "kind": "technique",
+            "definition": "A technique for recording a sequence in a registry instead of in numeric filename prefixes."
+        },
+        {
+            "name": "Drop the Prefix",
+            "kind": "technique",
+            "definition": "A technique for removing a numeric order prefix from filenames once a registry holds the order."
+        },
+        {
+            "name": "Resolve the Slot Against Its Source",
+            "kind": "technique",
+            "definition": "A technique for checking a slot word against the source that allocates it instead of against a copied vocabulary."
+        },
+        {
+            "name": "Remove the Copies",
+            "kind": "technique",
+            "definition": "A technique for deleting vocabulary entries that copy words another source already owns."
+        },
+        {
+            "name": "Declare the Dialect",
+            "kind": "technique",
+            "definition": "A technique for binding a file extension to the case splitter its language uses."
+        },
+        {
+            "name": "Rename to the Case's Word Run",
+            "kind": "technique",
+            "definition": "A technique for renaming a dialect file so its case splitter yields the three declared slots."
+        },
+        {
+            "name": "Move the File into Its Concern Folder",
+            "kind": "technique",
+            "definition": "A technique for moving a loose root file into the concern folder its tag names."
+        },
+        {
+            "name": "Vocabulary-Bound Reading",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a word is read by the vocabulary that declares it rather than by the slot it lands in."
+        },
+        {
+            "name": "Tag-Folder Mismatch",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a file's concern tag differs from the label of its parent folder."
+        },
+        {
+            "name": "Depth-Anchored Discovery",
+            "kind": "anti-pattern",
+            "definition": "A defect in which discovery is anchored to a depth, so a grouped set falls out of the pattern."
+        },
+        {
+            "name": "Shape-Inferred Jurisdiction",
+            "kind": "anti-pattern",
+            "definition": "A defect in which jurisdiction is inferred from folder shape instead of declared."
+        },
+        {
+            "name": "Per-Check Exemption List",
+            "kind": "anti-pattern",
+            "definition": "A defect in which each check keeps its own exemption list for the same upstream tree."
+        },
+        {
+            "name": "Spine Read as a Dependency Rule",
+            "kind": "anti-pattern",
+            "definition": "A defect in which the layer spine is read as a dependency-direction rule rather than a classification tie-break."
+        },
+        {
+            "name": "Domain-Dialect Role",
+            "kind": "anti-pattern",
+            "definition": "A defect in which an agnostic role is restated in a local domain dialect."
+        },
+        {
+            "name": "Prose-Only Vocabulary",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a vocabulary is kept in prose the gate cannot read."
+        },
+        {
+            "name": "Shared-Subject Test",
+            "kind": "anti-pattern",
+            "definition": "A defect in which one test file covers several subjects."
+        },
+        {
+            "name": "Generic Subject over a Domain File",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a file carries the generic subject while its source names the domain it serves."
+        },
+        {
+            "name": "Provisional Name",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a file is written under a provisional name and its correct name is left for a later sweep."
+        },
+        {
+            "name": "Copied Slot Word",
+            "kind": "anti-pattern",
+            "definition": "A defect in which each word a source owns is copied into the declared vocabulary, one entry per allocated identity or upstream key."
+        },
+        {
+            "name": "Per-Language Vocabulary",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a separate vocabulary is declared for each language instead of one set of slots read through each language's case."
+        },
+        {
+            "name": "Loose Root File",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a file sits at a governed root while it is neither the entry document nor an accumulator."
+        }
+    ]
+}

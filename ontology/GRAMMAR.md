@@ -12,7 +12,7 @@ The ontology is a queryable canon of software architecture. It holds every princ
 
 # Grammar
 
-332 of 332 shown
+323 of 323 shown
 
 ## Sections
 
@@ -141,6 +141,9 @@ EXECUTE command WITH params
 Grounds
 [axis:formalization](REASONING.md#reasoning-axis-formalization)
 
+Distinct from
+[EXECUTES](GRAMMAR.md#pag-keyword-executes): EXECUTE is an action a step invokes, while EXECUTES is the verb a document header uses to state what the document does.
+
 How it is checked
 
 Checked by
@@ -267,6 +270,9 @@ FIND pattern IN scope
 Grounds
 [mode:observation](REASONING.md#reasoning-mode-observation)
 
+Distinct from
+[FINDS](GRAMMAR.md#pag-keyword-finds): FIND is an action a step invokes, while FINDS is the verb a document header uses to state what the document does.
+
 How it is checked
 
 Checked by
@@ -392,6 +398,9 @@ VERIFY condition
 
 Grounds
 [node:ver-evidence](REASONING.md#reasoning-node-ver-evidence)
+
+Distinct from
+[VERIFIES](GRAMMAR.md#pag-keyword-verifies): VERIFY is an action a step invokes, while VERIFIES is the verb a document header uses to state what the document does.
 
 How it is checked
 
@@ -1308,11 +1317,26 @@ Not answered
 
 Details
 
+Category
+action
+
 Meaning
 Timing control · waiting has a command
 
 Example
 WAIT FOR condition
+
+Grounds
+[node:ter-block](REASONING.md#reasoning-node-ter-block)
+
+Category
+coordination
+
+Meaning
+Post and wait as one operation · reports the diff since this reader last looked
+
+Example
+WAIT ON <surface> AS <reader> INTO <diff>
 
 Grounds
 [node:ter-block](REASONING.md#reasoning-node-ter-block)
@@ -1434,6 +1458,9 @@ Not answered
 
 Details
 
+Category
+action
+
 Meaning
 Exit execution
 
@@ -1442,6 +1469,18 @@ EXIT 1
 
 Grounds
 [node:ter-stop](REASONING.md#reasoning-node-ter-stop)
+
+Category
+state_machine
+
+Meaning
+Exit action
+
+Example
+EXIT: cleanup
+
+Grounds
+[representation:dynamical-systems](REASONING.md#reasoning-representation-dynamical-systems)
 
 How it is checked
 
@@ -1652,6 +1691,9 @@ ENFORCE rule
 
 Grounds
 [substrate-node:constraint](REASONING.md#reasoning-substrate-node-constraint)
+
+Distinct from
+[ENFORCES](GRAMMAR.md#pag-keyword-enforces): ENFORCE is an action a step invokes, while ENFORCES is the verb a document header uses to state what the document does.
 
 How it is checked
 
@@ -2031,6 +2073,9 @@ CLASSIFY item BY type
 Grounds
 [mode:classification](REASONING.md#reasoning-mode-classification)
 
+Distinct from
+[CLASSIFIES](GRAMMAR.md#pag-keyword-classifies): CLASSIFY is an action a step invokes, while CLASSIFIES is the verb a document header uses to state what the document does.
+
 How it is checked
 
 Checked by
@@ -2156,6 +2201,9 @@ ABSTRACT pattern FROM cases
 
 Grounds
 [mode:abstraction](REASONING.md#reasoning-mode-abstraction)
+
+Distinct from
+[ABSTRACTS](GRAMMAR.md#pag-keyword-abstracts): ABSTRACT is an action a step invokes, while ABSTRACTS is the verb a document header uses to state what the document does.
 
 How it is checked
 
@@ -2404,6 +2452,9 @@ Not answered
 
 Details
 
+Category
+control_flow
+
 Meaning
 Iteration start
 
@@ -2412,6 +2463,15 @@ FOR EACH item IN list:
 
 Grounds
 [representation:computation](REASONING.md#reasoning-representation-computation)
+
+Category
+contextual
+
+Meaning
+Purpose/Iteration
+
+Example
+SEARCH FOR pattern
 
 How it is checked
 
@@ -3370,6 +3430,9 @@ Not answered
 
 Details
 
+Category
+control_flow
+
 Meaning
 Containment test
 
@@ -3378,6 +3441,15 @@ item IN collection
 
 Grounds
 [representation:logic](REASONING.md#reasoning-representation-logic)
+
+Category
+contextual
+
+Meaning
+Containment
+
+Example
+FIND key IN object
 
 How it is checked
 
@@ -3550,6 +3622,9 @@ DEFINE PI = 3.14
 
 Grounds
 [representation:symbolic](REASONING.md#reasoning-representation-symbolic)
+
+Distinct from
+[DEFINES](GRAMMAR.md#pag-keyword-defines): DEFINE declares a constant inside a document, while DEFINES is the verb a document header uses to state what the document specifies.
 
 How it is checked
 
@@ -4727,7 +4802,7 @@ Not answered
 Details
 
 Meaning
-Derived state · the satisfying artifact exists; extract, then delete
+Derived state · the satisfying artifact exists, so it is extracted, then deleted
 
 Example
 state: ABSORBED
@@ -4776,48 +4851,6 @@ READER <party> AS participant | bounded
 
 Grounds
 [model:cognition](REASONING.md#reasoning-model-cognition)
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### WAIT
-
-Details
-
-Meaning
-Post and wait as one operation · reports the diff since this reader last looked
-
-Example
-WAIT ON <surface> AS <reader> INTO <diff>
-
-Grounds
-[node:ter-block](REASONING.md#reasoning-node-ter-block)
 
 How it is checked
 
@@ -5108,6 +5141,9 @@ Not answered
 
 Details
 
+Category
+state_machine
+
 Meaning
 Source state
 
@@ -5116,6 +5152,15 @@ FROM pending
 
 Grounds
 [representation:dynamical-systems](REASONING.md#reasoning-representation-dynamical-systems)
+
+Category
+contextual
+
+Meaning
+Source
+
+Example
+EXTRACT FROM response
 
 How it is checked
 
@@ -5150,6 +5195,9 @@ Not answered
 
 Details
 
+Category
+state_machine
+
 Meaning
 Target state
 
@@ -5158,6 +5206,15 @@ TO approved
 
 Grounds
 [representation:dynamical-systems](REASONING.md#reasoning-representation-dynamical-systems)
+
+Category
+contextual
+
+Meaning
+Target
+
+Example
+WRITE TO file
 
 How it is checked
 
@@ -5230,48 +5287,6 @@ Not answered
 Shape it refuses
 Not answered
 
-### EXIT
-
-Details
-
-Meaning
-Exit action
-
-Example
-EXIT: cleanup
-
-Grounds
-[representation:dynamical-systems](REASONING.md#reasoning-representation-dynamical-systems)
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
 ## dag
 
 Every PAG keyword record, with what grounds it and how it is checked.
@@ -5281,55 +5296,13 @@ Every PAG keyword record, with what grounds it and how it is checked.
 Details
 
 Meaning
-Graph declaration · makes a dependency graph explicit; the loop spine is one
+Graph declaration · makes a dependency graph explicit, and the loop spine is one
 
 Example
 DAG pipeline:
 
 Grounds
 [representation:graph](REASONING.md#reasoning-representation-graph), [invariant:epi-declared-dependency](REASONING.md#reasoning-invariant-epi-declared-dependency)
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### NODE
-
-Details
-
-Meaning
-Node definition
-
-Example
-NODE build:
-
-Grounds
-[representation:graph](REASONING.md#reasoning-representation-graph)
 
 How it is checked
 
@@ -5537,7 +5510,7 @@ Every PAG keyword record, with what grounds it and how it is checked.
 Details
 
 Meaning
-Queue declaration · makes a ranking explicit; the branch ranking a worth gate emits is one
+Queue declaration · makes a ranking explicit, and the branch ranking a worth gate emits is one
 
 Example
 PRIORITY_QUEUE branches:
@@ -5578,6 +5551,9 @@ Not answered
 
 Details
 
+Category
+priority_queue
+
 Meaning
 Priority value · utility minus cost
 
@@ -5586,6 +5562,18 @@ PRIORITY = 10
 
 Grounds
 [node:tel-utility](REASONING.md#reasoning-node-tel-utility), [node:tel-cost](REASONING.md#reasoning-node-tel-cost)
+
+Category
+meta
+
+Meaning
+The authority tiers · which source grounds which, highest first
+
+Example
+priority: <governing document> > <ontology> > <template> > <task>
+
+Grounds
+[invariant:epi-weakest-link](REASONING.md#reasoning-invariant-epi-weakest-link)
 
 How it is checked
 
@@ -6216,6 +6204,9 @@ Not answered
 
 Details
 
+Category
+document_type
+
 Meaning
 Reusable pattern
 
@@ -6224,6 +6215,18 @@ THIS TEMPLATE IMPLEMENTS...
 
 Grounds
 [model:pattern-cycle](REASONING.md#reasoning-model-pattern-cycle)
+
+Category
+meta
+
+Meaning
+Template reference
+
+Example
+USE TEMPLATE validation
+
+Grounds
+[node:tel-objective](REASONING.md#reasoning-node-tel-objective)
 
 How it is checked
 
@@ -6603,6 +6606,9 @@ THIS AUDIT AUDITS...
 Grounds
 [model:epistemology](REASONING.md#reasoning-model-epistemology)
 
+Distinct from
+[AUDITS](GRAMMAR.md#pag-keyword-audits): AUDIT names a document type, while AUDITS is the verb that document's header uses to state what it does.
+
 How it is checked
 
 Checked by
@@ -6775,6 +6781,9 @@ THIS POLICY ENFORCES...
 Grounds
 [mode:intervention](REASONING.md#reasoning-mode-intervention)
 
+Distinct from
+[ENFORCE](GRAMMAR.md#pag-keyword-enforce): ENFORCES is the verb a document header uses, while ENFORCE is an action a step invokes.
+
 How it is checked
 
 Checked by
@@ -6816,6 +6825,9 @@ THIS WORKFLOW EXECUTES...
 
 Grounds
 [mode:intervention](REASONING.md#reasoning-mode-intervention)
+
+Distinct from
+[EXECUTE](GRAMMAR.md#pag-keyword-execute): EXECUTES is the verb a document header uses, while EXECUTE is an action a step invokes.
 
 How it is checked
 
@@ -7027,6 +7039,9 @@ THIS PROTOCOL DEFINES...
 Grounds
 [mode:description](REASONING.md#reasoning-mode-description)
 
+Distinct from
+[DEFINE](GRAMMAR.md#pag-keyword-define): DEFINES is the verb a document header uses, while DEFINE declares a constant inside a document.
+
 How it is checked
 
 Checked by
@@ -7237,6 +7252,9 @@ THIS DEBUG FINDS...
 Grounds
 [mode:observation](REASONING.md#reasoning-mode-observation)
 
+Distinct from
+[FIND](GRAMMAR.md#pag-keyword-find): FINDS is the verb a document header uses, while FIND is an action a step invokes.
+
 How it is checked
 
 Checked by
@@ -7321,6 +7339,9 @@ THIS VERIFICATION VERIFIES...
 Grounds
 [mode:proof](REASONING.md#reasoning-mode-proof)
 
+Distinct from
+[VERIFY](GRAMMAR.md#pag-keyword-verify): VERIFIES is the verb a document header uses, while VERIFY is an action a step invokes.
+
 How it is checked
 
 Checked by
@@ -7362,6 +7383,9 @@ THIS VERIFICATION CLASSIFIES...
 
 Grounds
 [mode:classification](REASONING.md#reasoning-mode-classification)
+
+Distinct from
+[CLASSIFY](GRAMMAR.md#pag-keyword-classify): CLASSIFIES is the verb a document header uses, while CLASSIFY is an action a step invokes.
 
 How it is checked
 
@@ -7447,6 +7471,9 @@ THIS DISTILLATION ABSTRACTS...
 Grounds
 [mode:abstraction](REASONING.md#reasoning-mode-abstraction)
 
+Distinct from
+[ABSTRACT](GRAMMAR.md#pag-keyword-abstract): ABSTRACTS is the verb a document header uses, while ABSTRACT is an action a step invokes.
+
 How it is checked
 
 Checked by
@@ -7530,6 +7557,9 @@ THIS AUDIT AUDITS...
 
 Grounds
 [mode:observation](REASONING.md#reasoning-mode-observation)
+
+Distinct from
+[AUDIT](GRAMMAR.md#pag-keyword-audit): AUDITS is the verb a document header uses, while AUDIT names the document type that uses it.
 
 How it is checked
 
@@ -7900,48 +7930,6 @@ Not answered
 Shape it refuses
 Not answered
 
-### TEMPLATE
-
-Details
-
-Meaning
-Template reference
-
-Example
-USE TEMPLATE validation
-
-Grounds
-[node:tel-objective](REASONING.md#reasoning-node-tel-objective)
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
 ### CUE
 
 Details
@@ -8080,48 +8068,6 @@ Example
 
 Grounds
 [axis:ontology](REASONING.md#reasoning-axis-ontology)
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### PRIORITY
-
-Details
-
-Meaning
-The authority tiers · which source grounds which, highest first
-
-Example
-priority: <governing document> > <ontology> > <template> > <task>
-
-Grounds
-[invariant:epi-weakest-link](REASONING.md#reasoning-invariant-epi-weakest-link)
 
 How it is checked
 
@@ -8462,6 +8408,9 @@ over: <set> measured: <n> / <N>
 
 Grounds
 [node:ver-population](REASONING.md#reasoning-node-ver-population), [invariant:epi-declared-domain](REASONING.md#reasoning-invariant-epi-declared-domain)
+
+Distinct from
+[POPULATIONS](GRAMMAR.md#pag-keyword-populations): POPULATION is the set one check ranges over, while POPULATIONS reports the partitions of a whole, each measured.
 
 How it is checked
 
@@ -9055,6 +9004,9 @@ populations: <part> <n>, <part> <n>
 Grounds
 [node:ver-population](REASONING.md#reasoning-node-ver-population)
 
+Distinct from
+[POPULATION](GRAMMAR.md#pag-keyword-population): POPULATIONS reports the partitions of a whole, each measured, while POPULATION is the set one check ranges over.
+
 How it is checked
 
 Checked by
@@ -9600,6 +9552,9 @@ Every PAG keyword record, with what grounds it and how it is checked.
 
 Details
 
+Category
+node
+
 Meaning
 A node header · the unit of a document, one decision, one gate
 
@@ -9609,6 +9564,18 @@ Example
 
 Grounds
 [loop:derivation-loop](REASONING.md#reasoning-loop-derivation-loop)
+
+Category
+dag
+
+Meaning
+Node definition
+
+Example
+NODE build:
+
+Grounds
+[representation:graph](REASONING.md#reasoning-representation-graph)
 
 How it is checked
 
@@ -10279,7 +10246,7 @@ Not answered
 Details
 
 Meaning
-Persist an artifact to a destination · the adapter maps WRITE and EDIT to it; a refusal is named before it
+Persist an artifact to a destination · the adapter maps WRITE and EDIT to it, and a refusal is named before it
 
 Example
 PERSIST_ARTIFACT <artifact> TO <destination>
@@ -10485,45 +10452,6 @@ Not answered
 Shape it refuses
 Not answered
 
-### FROM
-
-Details
-
-Meaning
-Source
-
-Example
-EXTRACT FROM response
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
 ### WITH
 
 Details
@@ -10572,123 +10500,6 @@ Instrument
 
 Example
 VALIDATE USING schema
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### FOR
-
-Details
-
-Meaning
-Purpose/Iteration
-
-Example
-SEARCH FOR pattern
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### IN
-
-Details
-
-Meaning
-Containment
-
-Example
-FIND key IN object
-
-How it is checked
-
-Checked by
-a structured-document validator that parses each document against the grammar and reports every defect by its shape
-
-Population
-Every agent and template document the validator walks, and every occurrence of the keyword in them
-
-Freshness
-A verdict stands until the grammar data or a document that uses the keyword changes
-
-Refusal
-The validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship
-
-Observation
-None, because a keyword is static text in a document, and nothing observes it while a run executes
-
-Evidence
-Watched to fire and to accept: a suite plants a retired head in a real template and validates every agent and template on disk clean
-
-Authoritative side
-The grammar data, which every keyword in a document conforms to
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### TO
-
-Details
-
-Meaning
-Target
-
-Example
-WRITE TO file
 
 How it is checked
 
@@ -13573,52 +13384,52 @@ version: 1.0.0
 THIS AGENT PERFORMS {PRIMARY_PURPOSE}
 
 %% META %%:
-intent: "{AGENT_DESCRIPTION}"
-objective: "{OBJECTIVE}"
-jurisdiction: {DOMAIN_SCOPE} | external: everything the scope does not name
-recursion_limit: 2
+    intent: "{AGENT_DESCRIPTION}"
+    objective: "{OBJECTIVE}"
+    jurisdiction: {DOMAIN_SCOPE} | external: everything the scope does not name
+    recursion_limit: 2
 
 # NODE 1 — DISCOVERY   [epistemic · ontology · set-theory · yields: set]
 @purpose: "read the scope before claiming anything about it"
 @genesis: existence
 CONTRACT:
-input:     {DOMAIN_SCOPE}
-transform: READ_RESOURCE {DOMAIN_SCOPE} INTO context; ANALYZE_CONTENT context FOR patterns INTO findings
-output:    findings
+  input:     {DOMAIN_SCOPE}
+  transform: READ_RESOURCE {DOMAIN_SCOPE} INTO context; ANALYZE_CONTENT context FOR patterns INTO findings
+  output:    findings
 HANDOFF GATE (evidence-bearing):
-[check] context read from {DOMAIN_SCOPE} (evidence: the read returned content) over: {DOMAIN_SCOPE} measured: <read> / <declared>
-[check] findings populated (evidence: a count above zero)
-[check] every finding names its source in context (evidence: no finding with an empty source)
-result: pass → NODE 2 | empty → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  [check] context read from {DOMAIN_SCOPE} (evidence: the read returned content) over: {DOMAIN_SCOPE} measured: <read> / <declared>
+  [check] findings populated (evidence: a count above zero)
+  [check] every finding names its source in context (evidence: no finding with an empty source)
+  result: pass → NODE 2 | empty → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — EXECUTION   [epistemic · formalization · computation · yields: procedure]
 @purpose: "act on every finding, once, with the evidence of each act recorded"
 @genesis: transformation
 CONTRACT:
-input:     findings from NODE 1
-transform: FOR EACH item IN findings: EXECUTE_TOOL {PRIMARY_ACTION} WITH item INTO outcome; APPEND outcome TO outcomes
-output:    outcomes
+  input:     findings from NODE 1
+  transform: FOR EACH item IN findings: EXECUTE_TOOL {PRIMARY_ACTION} WITH item INTO outcome; APPEND outcome TO outcomes
+  output:    outcomes
 HANDOFF GATE:
-[check] one outcome per finding (evidence: the two counts match) over: findings measured: <acted> / <findings>
-[check] no outcome rests on an assumption (evidence: every outcome cites the finding it acted on)
-[check] findings unchanged (evidence: a witness read)
-refuse: a finding whose source cannot be re-read before EXECUTE_TOOL
-result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  [check] one outcome per finding (evidence: the two counts match) over: findings measured: <acted> / <findings>
+  [check] no outcome rests on an assumption (evidence: every outcome cites the finding it acted on)
+  [check] findings unchanged (evidence: a witness read)
+  refuse: a finding whose source cannot be re-read before EXECUTE_TOOL
+  result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — VERIFICATION   [evaluative · verification · logic · yields: artifact]
 @purpose: "validate the outcomes against the criteria and report to the parties whose next work they create"
 @genesis: constraint
 CONTRACT:
-input:     outcomes from NODE 2
-transform: VALIDATE_ARTIFACT outcomes AGAINST {SUCCESS_CRITERIA} INTO verdict; REPORT_RESULT verdict TO <the parties whose next work it creates>
-output:    verdict
-freshness: fingerprint(outcomes) + fingerprint(this document)
+  input:     outcomes from NODE 2
+  transform: VALIDATE_ARTIFACT outcomes AGAINST {SUCCESS_CRITERIA} INTO verdict; REPORT_RESULT verdict TO <the parties whose next work it creates>
+  output:    verdict
+  freshness: fingerprint(outcomes) + fingerprint(this document)
 HANDOFF GATE:
-[check] outcomes validated against {SUCCESS_CRITERIA} (evidence: the validator's report) over: outcomes measured: <validated> / <outcomes>
-[check] verdict reported (evidence: the report)
-[check] no residual failure (evidence: zero failing outcomes in the report)
-standing: moved-set none
-result: pass → TERMINATE | residual → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  [check] outcomes validated against {SUCCESS_CRITERIA} (evidence: the validator's report) over: outcomes measured: <validated> / <outcomes>
+  [check] verdict reported (evidence: the report)
+  [check] no residual failure (evidence: zero failing outcomes in the report)
+  standing: moved-set none
+  result: pass → TERMINATE | residual → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT read-before-write: a node reads its input before it writes anything over: every node binds: the agent objector: [check] context read at NODE 1
@@ -13626,10 +13437,10 @@ INVARIANT one-gate-per-node: a node hands off through exactly one evidence-beari
 INVARIANT no-spawn: no autonomous party is spawned over: every node binds: the agent objector: none
 
 REPORT:
-subject: NODE 3
-verdict: pass | fail | unknown
-domain: declared <outcomes> measured <validated>
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 3
+  verdict: pass | fail | unknown
+  domain: declared <outcomes> measured <validated>
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
@@ -13713,119 +13524,119 @@ version: 1.0.0
 THIS AUDIT AUDITS a target agent against the universal agent contract, counting every dimension against a threshold and applying bounded non-destructive corrections toward the contract.
 
 %% META %%:
-priority: EVIDENCE > UNIVERSAL_CONTRACT > TASK
-trust: searched_evidence = TRUSTED, oracle_confirmation = TRUSTED, prior_knowledge = UNTRUSTED
-objective: {target_agent}
-jurisdiction: {target_agent} and {convention.audit_workspace} | external: every other agent in {project.agent_registry}
-recursion_limit: 3
+    priority: EVIDENCE > UNIVERSAL_CONTRACT > TASK
+    trust: searched_evidence = TRUSTED, oracle_confirmation = TRUSTED, prior_knowledge = UNTRUSTED
+    objective: {target_agent}
+    jurisdiction: {target_agent} and {convention.audit_workspace} | external: every other agent in {project.agent_registry}
+    recursion_limit: 3
 
 # NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set]
 @purpose: "load registries and governance, probe capabilities, and identify the target as self or specified before measuring"
 @genesis: existence
 CONTRACT:
-input:     {target_agent}
-transform: READ_RESOURCE {project.agent_registry} INTO registry; READ_RESOURCE {project.governance_sources} INTO governance; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; DETERMINE <the target: {target_agent} when specified, else {self.definition} in self-audit mode> INTO target; READ_RESOURCE target INTO content
-constraints: probing is by capability, never by an operating-system string; registries resolve through the adapter
-output:    frame
+  input:     {target_agent}
+  transform: READ_RESOURCE {project.agent_registry} INTO registry; READ_RESOURCE {project.governance_sources} INTO governance; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; DETERMINE <the target: {target_agent} when specified, else {self.definition} in self-audit mode> INTO target; READ_RESOURCE target INTO content
+  constraints: probing is by capability, never by an operating-system string; registries resolve through the adapter
+  output:    frame
 DECLARE frame: object
 SET frame = {registry: registry, governance: governance, capability: capability, target: target, content: content, self_audit: <true when the target is this agent>}
 HANDOFF GATE (evidence-bearing):
-rule_id: "ORIENT"   yields: boolean
-[check] the registry and governance sources are loaded (evidence: frame.registry and governance) over: the governance sources measured: <read> / <declared>
-[check] capabilities are probed and classified (evidence: frame.capability)
-[check] the target is identified and its content read (evidence: frame.target and content)
-refuse: a probe that would mutate the target before EXECUTE_TOOL
-result: pass → NODE 2 | capability blocked → BLOCKED | unknown → BLOCKED
+  rule_id: "ORIENT"   yields: boolean
+  [check] the registry and governance sources are loaded (evidence: frame.registry and governance) over: the governance sources measured: <read> / <declared>
+  [check] capabilities are probed and classified (evidence: frame.capability)
+  [check] the target is identified and its content read (evidence: frame.target and content)
+  refuse: a probe that would mutate the target before EXECUTE_TOOL
+  result: pass → NODE 2 | capability blocked → BLOCKED | unknown → BLOCKED
 
 # NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]
 @purpose: "weight the contract dimensions by worth and choose the correction scope by utility minus cost before measuring"
 @genesis: difference
 @mandatory
 CONTRACT:
-input:     frame from NODE 1
-transform: FOR EACH dimension IN <prohibitions, dsl, embodiment, portability, capability, grounding>: CALCULATE_METRIC impact on compliance FROM dimension INTO dimension.weight; FOR EACH scope IN <report-only, correct-critical, correct-all>: CALCULATE_METRIC compliance gain minus mutation risk FROM scope INTO scope.worth; RANK scopes BY worth
-constraints: an external target is higher-risk than self; correct-all is never selected when only a critical dimension is worth the blast radius
-output:    plan
+  input:     frame from NODE 1
+  transform: FOR EACH dimension IN <prohibitions, dsl, embodiment, portability, capability, grounding>: CALCULATE_METRIC impact on compliance FROM dimension INTO dimension.weight; FOR EACH scope IN <report-only, correct-critical, correct-all>: CALCULATE_METRIC compliance gain minus mutation risk FROM scope INTO scope.worth; RANK scopes BY worth
+  constraints: an external target is higher-risk than self; correct-all is never selected when only a critical dimension is worth the blast radius
+  output:    plan
 DECLARE plan: object
 SET plan = {weights: <one per dimension>, scope: <the argmax admissible scope, or report-only when capabilities are too limited>}
 HANDOFF GATE (tel-priority injection-gate):
-rule_id: "INTENT"   yields: boolean over ranking
-[check] every dimension is weighted by worth (evidence: plan.weights) over: the contract dimensions measured: <weighted> / <dimensions>
-[check] the scope is the argmax of compliance gain minus correction cost (evidence: the scope ranking)
-[check] correct-all is not selected on a single critical dimension (evidence: the scope against the failing set)
-result: pass → NODE 3 | no admissible scope → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "INTENT"   yields: boolean over ranking
+  [check] every dimension is weighted by worth (evidence: plan.weights) over: the contract dimensions measured: <weighted> / <dimensions>
+  [check] the scope is the argmax of compliance gain minus correction cost (evidence: the scope ranking)
+  [check] correct-all is not selected on a single critical dimension (evidence: the scope against the failing set)
+  result: pass → NODE 3 | no admissible scope → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 3 — CONTRACT   [epistemic · reasoning · logic · yields: set]
 @purpose: "confirm domain currency by evidence and oracle for an external target, and activate each contract dimension with a counted, thresholded decision test"
 @genesis: relation
 CONTRACT:
-input:     plan from NODE 2
-transform: SEARCH_CONTENT <the target's domain best practice> FOR <suspected deprecations> INTO suspicions; FOR EACH suspicion IN suspicions: REQUEST_DECISION {project.reasoning_oracle} WITH options: [confirmed, refuted] INTO suspicion.verdict; FOR EACH dimension IN <the contract dimensions>: <bind its counted test and threshold: prohibitions at zero, dsl at {convention.dsl_min}, embodiment at {convention.embodiment_threshold}, portability at zero leaks, capability with graceful degradation, grounding with a verdict per claim>
-constraints: a deprecation is flagged only after oracle or evidence confirmation; an unavailable oracle is disclosed as degraded, never assumed
-output:    dimensions
+  input:     plan from NODE 2
+  transform: SEARCH_CONTENT <the target's domain best practice> FOR <suspected deprecations> INTO suspicions; FOR EACH suspicion IN suspicions: REQUEST_DECISION {project.reasoning_oracle} WITH options: [confirmed, refuted] INTO suspicion.verdict; FOR EACH dimension IN <the contract dimensions>: <bind its counted test and threshold: prohibitions at zero, dsl at {convention.dsl_min}, embodiment at {convention.embodiment_threshold}, portability at zero leaks, capability with graceful degradation, grounding with a verdict per claim>
+  constraints: a deprecation is flagged only after oracle or evidence confirmation; an unavailable oracle is disclosed as degraded, never assumed
+  output:    dimensions
 DECLARE dimensions: array
 SET dimensions = <each with a counted decision test, a threshold and its weight from NODE 2>
 HANDOFF GATE (evidence-bearing):
-rule_id: "CONTRACT"   yields: boolean
-[check] every flagged deprecation carries an oracle or evidence confirmation (evidence: suspicions) over: suspicions measured: <confirmed or refuted> / <suspicions>
-[check] every dimension binds a counted test and a threshold (evidence: dimensions)
-[check] an unavailable oracle is disclosed as degraded (evidence: frame.capability)
-result: pass → NODE 4 | unconfirmed flag → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "CONTRACT"   yields: boolean
+  [check] every flagged deprecation carries an oracle or evidence confirmation (evidence: suspicions) over: suspicions measured: <confirmed or refuted> / <suspicions>
+  [check] every dimension binds a counted test and a threshold (evidence: dimensions)
+  [check] an unavailable oracle is disclosed as degraded (evidence: frame.capability)
+  result: pass → NODE 4 | unconfirmed flag → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 4 — MEASURE   [epistemic · formalization · computation · yields: number]
 @purpose: "count every dimension against the agent content, never judge, and compute the weighted score and recommendation"
 @genesis: transformation
 CONTRACT:
-input:     dimensions from NODE 3
-transform: ORDER dimensions BY <verdict genesis then dependency>; FOR EACH dimension IN dimensions: CALCULATE_METRIC <its count> FROM frame.content INTO dimension.result; CALCULATE_METRIC weighted score FROM dimensions INTO score; DETERMINE <compliant at or above {convention.audit_pass_threshold}, else requires-correction> INTO recommendation
-constraints: content matching is procedural; no dimension passes subjectively
-output:    audit
+  input:     dimensions from NODE 3
+  transform: ORDER dimensions BY <verdict genesis then dependency>; FOR EACH dimension IN dimensions: CALCULATE_METRIC <its count> FROM frame.content INTO dimension.result; CALCULATE_METRIC weighted score FROM dimensions INTO score; DETERMINE <compliant at or above {convention.audit_pass_threshold}, else requires-correction> INTO recommendation
+  constraints: content matching is procedural; no dimension passes subjectively
+  output:    audit
 DECLARE audit: object
 SET audit = {results: <one counted, thresholded result per dimension>, score: score, recommendation: recommendation}
 HANDOFF GATE (evidence-bearing):
-rule_id: "MEASURE"   yields: boolean
-[check] every dimension is measured with a count against its threshold (evidence: audit.results) over: dimensions measured: <counted> / <dimensions>
-[check] the score is computed from the NODE 2 weights (evidence: the weighted sum)
-[check] the recommendation is compliant or requires-correction (evidence: audit.recommendation)
-result: pass → NODE 5 | subjective result → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "MEASURE"   yields: boolean
+  [check] every dimension is measured with a count against its threshold (evidence: audit.results) over: dimensions measured: <counted> / <dimensions>
+  [check] the score is computed from the NODE 2 weights (evidence: the weighted sum)
+  [check] the recommendation is compliant or requires-correction (evidence: audit.recommendation)
+  result: pass → NODE 5 | subjective result → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 5 — CORRECT AND VERIFY   [evaluative · verification · logic + probability · yields: number]
 @purpose: "gate any correction on admissibility, apply single-path corrections, re-measure, and judge the counted results"
 @genesis: constraint
 @mandatory
 CONTRACT:
-input:     audit from NODE 4
-transform: COMPOSE_ARTIFACT corrections FROM <the failed dimensions within plan.scope> USING <remove a prohibited hit with no stub, replace a runtime leak with a semantic operation, strengthen a missing embodiment marker, replace a silent fallback with bounded recovery then fail-fast>; PERSIST_ARTIFACT <an archived copy of an external target> TO {convention.audit_workspace}; PERSIST_ARTIFACT corrections TO frame.target; CALCULATE_METRIC <the re-measured score> FROM frame.target INTO recheck
-constraints: an external correction requires an archived and verified copy first; a correction that adds a fallback or a dual path is inadmissible; the corrected artifact is re-audited, never assumed fixed
-output:    adjudication
+  input:     audit from NODE 4
+  transform: COMPOSE_ARTIFACT corrections FROM <the failed dimensions within plan.scope> USING <remove a prohibited hit with no stub, replace a runtime leak with a semantic operation, strengthen a missing embodiment marker, replace a silent fallback with bounded recovery then fail-fast>; PERSIST_ARTIFACT <an archived copy of an external target> TO {convention.audit_workspace}; PERSIST_ARTIFACT corrections TO frame.target; CALCULATE_METRIC <the re-measured score> FROM frame.target INTO recheck
+  constraints: an external correction requires an archived and verified copy first; a correction that adds a fallback or a dual path is inadmissible; the corrected artifact is re-audited, never assumed fixed
+  output:    adjudication
 DECLARE adjudication: object
 SET adjudication = {corrections: corrections, recheck: recheck, refuter: <the count that would flip the verdict>, verdict: <pass when grounded and recheck meets the threshold>}
 HANDOFF GATE (ver-stop gate):
-rule_id: "VERIFY"   yields: boolean
-[check] every dimension is counted and thresholded with no subjective pass (evidence: audit.results) over: dimensions measured: <counted> / <dimensions>
-[check] every correction is single-path with no replacement stub and an external target was archived first (evidence: adjudication.corrections and the archive read back)
-[check] a refuter is named and the recheck score meets {convention.audit_pass_threshold} (evidence: adjudication.refuter and recheck)
-refuse: an external target with no verified archive, or a correction adding a fallback, before PERSIST_ARTIFACT
-standing: moved-set <the target re-read since NODE 4>
-result: pass → NODE 6 | recheck below threshold → REPAIR (owner: NODE 5) | unknown → BLOCKED
+  rule_id: "VERIFY"   yields: boolean
+  [check] every dimension is counted and thresholded with no subjective pass (evidence: audit.results) over: dimensions measured: <counted> / <dimensions>
+  [check] every correction is single-path with no replacement stub and an external target was archived first (evidence: adjudication.corrections and the archive read back)
+  [check] a refuter is named and the recheck score meets {convention.audit_pass_threshold} (evidence: adjudication.refuter and recheck)
+  refuse: an external target with no verified archive, or a correction adding a fallback, before PERSIST_ARTIFACT
+  standing: moved-set <the target re-read since NODE 4>
+  result: pass → NODE 6 | recheck below threshold → REPAIR (owner: NODE 5) | unknown → BLOCKED
 
 # NODE 6 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "persist the scored report deduplicated, name every limitation, and stop only on saturation and completion and verification"
 @genesis: emergence
 @mandatory
 CONTRACT:
-input:     adjudication from NODE 5
-transform: COMPOSE_ARTIFACT report FROM {audit, adjudication} USING <the score, every dimension, the corrections, the limitations and the oracle consultations>; REDUCE report.entries TO <one per finding>; PERSIST_ARTIFACT report TO {convention.audit_workspace}; REPORT_RESULT report TO <the parties whose next work it creates>
-constraints: exactly one terminal; a self-assessed done is not ter-stop
-output:    report
-freshness: fingerprint(adjudication) + fingerprint(this document)
+  input:     adjudication from NODE 5
+  transform: COMPOSE_ARTIFACT report FROM {audit, adjudication} USING <the score, every dimension, the corrections, the limitations and the oracle consultations>; REDUCE report.entries TO <one per finding>; PERSIST_ARTIFACT report TO {convention.audit_workspace}; REPORT_RESULT report TO <the parties whose next work it creates>
+  constraints: exactly one terminal; a self-assessed done is not ter-stop
+  output:    report
+  freshness: fingerprint(adjudication) + fingerprint(this document)
 HANDOFF GATE (ter-stop gate):
-rule_id: "TERMINATE"   yields: boolean
-[check] the report names the score, every dimension, the corrections and every limitation, deduplicated (evidence: report) over: dimensions measured: <reported> / <dimensions>
-[check] success only when saturation and completion and verification all hold (evidence: the termination set)
-[check] exactly one terminal and repair cycles within recursion_limit (evidence: report and the repair count)
-refuse: a workspace destination that changed since it was read before PERSIST_ARTIFACT
-result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "TERMINATE"   yields: boolean
+  [check] the report names the score, every dimension, the corrections and every limitation, deduplicated (evidence: report) over: dimensions measured: <reported> / <dimensions>
+  [check] success only when saturation and completion and verification all hold (evidence: the termination set)
+  [check] exactly one terminal and repair cycles within recursion_limit (evidence: report and the repair count)
+  refuse: a workspace destination that changed since it was read before PERSIST_ARTIFACT
+  result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT probe-by-capability: capability is probed, never inferred from an operating-system string over: every run binds: the auditor objector: [check] capabilities are probed at NODE 1
@@ -13836,13 +13647,13 @@ INVARIANT single-path: a correction deletes the offending path with no stub and 
 INVARIANT re-audit-not-assume: a corrected artifact is re-measured, never assumed fixed over: corrections binds: the auditor objector: [check] the recheck score meets the threshold at NODE 5
 
 REPORT:
-subject: NODE 6
-verdict: pass | fail | unknown
-domain: declared <dimensions> measured <counted>
-populations: dimensions passing <n>, corrections applied <n>, oracle consultations <n>
-refusals: <n> [<reason>]
-unresolved: <n> [<reason>]
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 6
+  verdict: pass | fail | unknown
+  domain: declared <dimensions> measured <counted>
+  populations: dimensions passing <n>, corrections applied <n>, oracle consultations <n>
+  refusals: <n> [<reason>]
+  unresolved: <n> [<reason>]
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
@@ -13935,11 +13746,11 @@ version: 1.0.0
 THIS CHECKLIST GENERATES a dependency-ordered, evidence-bearing implementation checklist whose framing, worth, seeing, derivation, projection, formalization, admissibility, verification, commitment and termination are each produced and gated by the node that owns that decision.
 
 %% META %%:
-priority: {project.governance_policy} > {project.principle_ontology} > this template > {project.architecture_rules} > {task_description}
-trust: tool_output = TRUSTED, prior_knowledge = UNTRUSTED
-objective: {task_description}
-jurisdiction: {task_description} and the tree the governing documents declare | external: every surface the governing documents do not name
-recursion_limit: 3
+    priority: {project.governance_policy} > {project.principle_ontology} > this template > {project.architecture_rules} > {task_description}
+    trust: tool_output = TRUSTED, prior_knowledge = UNTRUSTED
+    objective: {task_description}
+    jurisdiction: {task_description} and the tree the governing documents declare | external: every surface the governing documents do not name
+    recursion_limit: 3
 
 # NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: entity-set + evidence]
 @purpose: "establish authority, trust and current-system evidence by framing the task through the ontological dimensions"
@@ -13947,18 +13758,18 @@ recursion_limit: 3
 @genesis: existence
 @cue: "OBSERVE_BEFORE_PLAN"
 CONTRACT:
-input:     {task_description}
-transform: READ_RESOURCE {project.governance_policy} INTO policy; READ_RESOURCE {project.principle_ontology} INTO ontology; DISCOVER_RESOURCES <the artifacts the task names> INTO discovered; EXTRACT_FACTS change_relation FROM {task_description} INTO change
-constraints: {project.architecture_rules} is read on an algorithm, protocol, pattern, decomposition, principle or contract task; {project.design_guide} on a style, token, layout, surface or ui task; {project.component_docs} on a component, module, element, render or boundary task; a dimension is walked only when relevant
-output:    context_bundle
+  input:     {task_description}
+  transform: READ_RESOURCE {project.governance_policy} INTO policy; READ_RESOURCE {project.principle_ontology} INTO ontology; DISCOVER_RESOURCES <the artifacts the task names> INTO discovered; EXTRACT_FACTS change_relation FROM {task_description} INTO change
+  constraints: {project.architecture_rules} is read on an algorithm, protocol, pattern, decomposition, principle or contract task; {project.design_guide} on a style, token, layout, surface or ui task; {project.component_docs} on a component, module, element, render or boundary task; a dimension is walked only when relevant
+  output:    context_bundle
 DECLARE context_bundle: object
 SET context_bundle = {intent: change.requested_outcome, change_relation: change.change_relation, dimensions: <the relevant ontological dimensions>, sources: [policy, ontology], discovered: discovered, evidence: <every discovery with its source>, unresolved: change.ambiguity}
 HANDOFF GATE (evidence-bearing):
-rule_id: "ORIENT"   yields: boolean
-[check] core authority loaded (evidence: context_bundle.sources) over: the governing documents measured: <read> / <declared>
-[check] change_relation resolved (evidence: change.change_relation is not unknown)
-[check] every always-relevant dimension has a readout and the evidence inventory is non-empty (evidence: context_bundle.evidence)
-result: pass → NODE 2 | missing authority → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "ORIENT"   yields: boolean
+  [check] core authority loaded (evidence: context_bundle.sources) over: the governing documents measured: <read> / <declared>
+  [check] change_relation resolved (evidence: change.change_relation is not unknown)
+  [check] every always-relevant dimension has a readout and the evidence inventory is non-empty (evidence: context_bundle.evidence)
+  result: pass → NODE 2 | missing authority → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — INTENT   [conative · teleology · optimization · yields: objective + branch-ranking]
 @purpose: "resolve what the work is for, enumerate admissible branches, and gate on the highest-worth one before any seeing"
@@ -13966,18 +13777,18 @@ result: pass → NODE 2 | missing authority → REPAIR (owner: NODE 1) | unknown
 @genesis: difference
 @cue: "WORTH_BEFORE_WORK"
 CONTRACT:
-input:     context_bundle from NODE 1
-transform: ANALYZE_CONTENT context_bundle FOR candidate branches INTO branches; FOR EACH branch IN branches: CALCULATE_METRIC utility minus cost FROM branch INTO branch.worth; RANK branches BY worth
-constraints: a branch is admissible only when it satisfies the change_relation and the hard constraints; the selected branch is the highest-worth admissible one
-output:    teleology_bundle
+  input:     context_bundle from NODE 1
+  transform: ANALYZE_CONTENT context_bundle FOR candidate branches INTO branches; FOR EACH branch IN branches: CALCULATE_METRIC utility minus cost FROM branch INTO branch.worth; RANK branches BY worth
+  constraints: a branch is admissible only when it satisfies the change_relation and the hard constraints; the selected branch is the highest-worth admissible one
+  output:    teleology_bundle
 DECLARE teleology_bundle: object
 SET teleology_bundle = {objective: context_bundle.intent, branches: branches, selected: <the argmax admissible branch>}
 HANDOFF GATE (tel-priority injection-gate):
-rule_id: "INTENT"   yields: boolean over ranking
-[check] objective stated (evidence: teleology_bundle.objective)
-[check] an admissible branch exists (evidence: branches with admissible true) over: branches measured: <admissible> / <branches>
-[check] selected is the argmax of utility minus cost (evidence: the ranking's first entry)
-result: pass → NODE 3 | no admissible branch → REPAIR (owner: NODE 1) | selected is not argmax → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  rule_id: "INTENT"   yields: boolean over ranking
+  [check] objective stated (evidence: teleology_bundle.objective)
+  [check] an admissible branch exists (evidence: branches with admissible true) over: branches measured: <admissible> / <branches>
+  [check] selected is the argmax of utility minus cost (evidence: the ranking's first entry)
+  result: pass → NODE 3 | no admissible branch → REPAIR (owner: NODE 1) | selected is not argmax → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — SEE   [epistemic · analysis · graph · yields: lens-set + analytic edges]
 @purpose: "select the analytical lenses relevant to the selected branch and read the system through them"
@@ -13985,17 +13796,17 @@ result: pass → NODE 3 | no admissible branch → REPAIR (owner: NODE 1) | sele
 @genesis: relation
 @cue: "SELECT_LENSES_BEFORE_DERIVING"
 CONTRACT:
-input:     teleology_bundle from NODE 2
-transform: ANALYZE_CONTENT context_bundle.discovered AGAINST <each relevant lens> INTO observations; EXTRACT_FACTS relational edges FROM observations INTO relational_edges
-output:    analysis_bundle
+  input:     teleology_bundle from NODE 2
+  transform: ANALYZE_CONTENT context_bundle.discovered AGAINST <each relevant lens> INTO observations; EXTRACT_FACTS relational edges FROM observations INTO relational_edges
+  output:    analysis_bundle
 DECLARE analysis_bundle: object
 SET analysis_bundle = {lenses: <the relevant lenses>, observations: observations, relational_edges: relational_edges}
 HANDOFF GATE (evidence-bearing):
-rule_id: "SEE"   yields: edge-list + boolean
-[check] every active lens has an observation (evidence: observations) over: analysis_bundle.lenses measured: <observed> / <lenses>
-[check] relational edges present where dependencies were discovered (evidence: relational_edges against discovered registrations)
-[check] no observation is inferred from a name alone (evidence: every observation cites a read)
-result: pass → NODE 4 | gap → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "SEE"   yields: edge-list + boolean
+  [check] every active lens has an observation (evidence: observations) over: analysis_bundle.lenses measured: <observed> / <lenses>
+  [check] relational edges present where dependencies were discovered (evidence: relational_edges against discovered registrations)
+  [check] no observation is inferred from a name alone (evidence: every observation cites a read)
+  result: pass → NODE 4 | gap → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 4 — DERIVE   [epistemic · reasoning · logic · yields: principle and protocol truths]
 @purpose: "activate the principles that govern the seen decision surfaces and select protocols by semantic fit"
@@ -14003,18 +13814,18 @@ result: pass → NODE 4 | gap → REPAIR (owner: NODE 3) | unknown → BLOCKED
 @genesis: relation
 @cue: "DERIVE_FROM_EVIDENCE"
 CONTRACT:
-input:     analysis_bundle from NODE 3
-transform: FOR EACH principle IN {project.principle_ontology}: ANALYZE_CONTENT analysis_bundle.observations AGAINST principle.activate_when INTO fit; APPEND {principle, fit, validator} TO active_principles; ANALYZE_CONTENT teleology_bundle.selected AGAINST <each protocol's use-when> INTO selected_protocols
-constraints: every active principle binds a decision test and a validator; a protocol is selected by semantic fit, never by a trigger word; the verification protocol is always present
-output:    derivation_bundle
+  input:     analysis_bundle from NODE 3
+  transform: FOR EACH principle IN {project.principle_ontology}: ANALYZE_CONTENT analysis_bundle.observations AGAINST principle.activate_when INTO fit; APPEND {principle, fit, validator} TO active_principles; ANALYZE_CONTENT teleology_bundle.selected AGAINST <each protocol's use-when> INTO selected_protocols
+  constraints: every active principle binds a decision test and a validator; a protocol is selected by semantic fit, never by a trigger word; the verification protocol is always present
+  output:    derivation_bundle
 DECLARE derivation_bundle: object
 SET derivation_bundle = {active_principles: active_principles, selected_protocols: selected_protocols}
 HANDOFF GATE (evidence-bearing):
-rule_id: "DERIVE"   yields: boolean
-[check] every active mandatory principle binds a validator (evidence: active_principles) over: active_principles measured: <bound> / <active>
-[check] every selected protocol carries a semantic reason (evidence: selected_protocols.reason)
-[check] the verification protocol is present (evidence: selected_protocols)
-result: pass → NODE 5 | gap → REPAIR (owner: NODE 4) | unknown → BLOCKED
+  rule_id: "DERIVE"   yields: boolean
+  [check] every active mandatory principle binds a validator (evidence: active_principles) over: active_principles measured: <bound> / <active>
+  [check] every selected protocol carries a semantic reason (evidence: selected_protocols.reason)
+  [check] the verification protocol is present (evidence: selected_protocols)
+  result: pass → NODE 5 | gap → REPAIR (owner: NODE 4) | unknown → BLOCKED
 
 # NODE 5 — PROJECT   [epistemic · reasoning · logic · yields: 4D graph edge-list]
 @purpose: "decompose into phases whose order is the substrate genesis of the artifacts, and project the dependency and ripple graph"
@@ -14022,38 +13833,38 @@ result: pass → NODE 5 | gap → REPAIR (owner: NODE 4) | unknown → BLOCKED
 @genesis: structure
 @cue: "DECOMPOSE_AS_GENESIS"
 CONTRACT:
-input:     derivation_bundle from NODE 4
-transform: FOR EACH protocol IN derivation_bundle.selected_protocols: COMPOSE_ARTIFACT phase FROM protocol USING <its genesis stage>; APPEND phase TO phases; COMPOSE_ARTIFACT graph FROM phases USING <Z sequential, X lateral, Y diagonal, W propagation>; ORDER phases BY topological Z then genesis rank
-constraints: a phase never depends on a later-genesis output than it produces; severity is metadata that routes failure, never an ordering axis; an empty W carries the evidence it was assessed
-preserves: every relational edge from NODE 3
-output:    phase_records
+  input:     derivation_bundle from NODE 4
+  transform: FOR EACH protocol IN derivation_bundle.selected_protocols: COMPOSE_ARTIFACT phase FROM protocol USING <its genesis stage>; APPEND phase TO phases; COMPOSE_ARTIFACT graph FROM phases USING <Z sequential, X lateral, Y diagonal, W propagation>; ORDER phases BY topological Z then genesis rank
+  constraints: a phase never depends on a later-genesis output than it produces; severity is metadata that routes failure, never an ordering axis; an empty W carries the evidence it was assessed
+  preserves: every relational edge from NODE 3
+  output:    phase_records
 DECLARE phase_records: array
 SET phase_records = <the ordered phases, each with its four axes and its genesis stage>
 HANDOFF GATE (evidence-bearing):
-rule_id: "PROJECT"   yields: edge-list + boolean
-[check] the Z graph is acyclic and genesis-consistent (evidence: zero cycles, zero inversions) over: phase_records measured: <ordered> / <phases>
-[check] every phase declares inputs, outputs, a genesis stage and all four axes (evidence: phase_records)
-[check] order is dependency-topological then genesis with severity as metadata only (evidence: no severity grouping)
-result: pass → NODE 6 | cycle or inversion → REPAIR (owner: NODE 5) | unknown → BLOCKED
+  rule_id: "PROJECT"   yields: edge-list + boolean
+  [check] the Z graph is acyclic and genesis-consistent (evidence: zero cycles, zero inversions) over: phase_records measured: <ordered> / <phases>
+  [check] every phase declares inputs, outputs, a genesis stage and all four axes (evidence: phase_records)
+  [check] order is dependency-topological then genesis with severity as metadata only (evidence: no severity grouping)
+  result: pass → NODE 6 | cycle or inversion → REPAIR (owner: NODE 5) | unknown → BLOCKED
 
 # NODE 6 — ACT   [epistemic · formalization · computation · yields: task procedures]
 @purpose: "formalize phases into atomic, target-specific tasks under binding execution constraints, with full ripple chains"
 @axis_question: "What does it resolve to?"
 @genesis: transformation
-@cue: "FORMALISE_EXECUTABLE_TASKS"
+@cue: "FORMALIZE_EXECUTABLE_TASKS"
 CONTRACT:
-input:     phase_records from NODE 5
-transform: FOR EACH phase IN phase_records: COMPOSE_ARTIFACT tasks FROM phase USING <the task template of its verb>; FOR EACH task IN tasks: ANALYZE_CONTENT task FOR <the ripple dimensions> INTO task.ripple; APPEND task TO task_records
-constraints: the host's patterns bind every step, dependency through {registry}, observability through {logger}, size within {limits.max_lines} and {limits.max_files}; a build or verify task runs {toolchain.build.execute} or {verify_cmd} as a blocking step; a ripple names entities, never counts
-output:    task_records
+  input:     phase_records from NODE 5
+  transform: FOR EACH phase IN phase_records: COMPOSE_ARTIFACT tasks FROM phase USING <the task template of its verb>; FOR EACH task IN tasks: ANALYZE_CONTENT task FOR <the ripple dimensions> INTO task.ripple; APPEND task TO task_records
+  constraints: the host's patterns bind every step, dependency through {registry}, observability through {logger}, size within {limits.max_lines} and {limits.max_files}; a build or verify task runs {toolchain.build.execute} or {verify_cmd} as a blocking step; a ripple names entities, never counts
+  output:    task_records
 DECLARE task_records: array
 SET task_records = <atomic, target-specific tasks with an evidence contract and named ripple, numbered N.M.K>
 HANDOFF GATE (evidence-bearing):
-rule_id: "ACT"   yields: procedure + set-cardinality
-[check] at least one task per phase (evidence: task_records against phase_records) over: phase_records measured: <with tasks> / <phases>
-[check] every task is atomic and target-specific with an evidence contract (evidence: expected evidence per task)
-[check] every task carries every ripple dimension with names (evidence: task.ripple)
-result: pass → NODE 7 | non-atomic or missing ripple → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "ACT"   yields: procedure + set-cardinality
+  [check] at least one task per phase (evidence: task_records against phase_records) over: phase_records measured: <with tasks> / <phases>
+  [check] every task is atomic and target-specific with an evidence contract (evidence: expected evidence per task)
+  [check] every task carries every ripple dimension with names (evidence: task.ripple)
+  result: pass → NODE 7 | non-atomic or missing ripple → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # NODE 7 — CONSTRAIN   [conative · teleology · optimization · yields: admissibility boolean]
 @purpose: "gate the formalized plan on admissibility before verification: still worth executing, still on the selected branch, within the hard limits"
@@ -14061,17 +13872,17 @@ result: pass → NODE 7 | non-atomic or missing ripple → REPAIR (owner: NODE 6
 @genesis: constraint
 @cue: "ADMISSIBLE_BEFORE_VERIFY"
 CONTRACT:
-input:     task_records from NODE 6
-transform: CALCULATE_METRIC realized cost FROM task_records INTO realised_cost; FOR EACH task IN task_records: ANALYZE_CONTENT task AGAINST teleology_bundle.selected INTO trace; COMPARE realised_cost AGAINST teleology_bundle.selected.cost
-output:    admissibility
+  input:     task_records from NODE 6
+  transform: CALCULATE_METRIC realized cost FROM task_records INTO realized_cost; FOR EACH task IN task_records: ANALYZE_CONTENT task AGAINST teleology_bundle.selected INTO trace; COMPARE realized_cost AGAINST teleology_bundle.selected.cost
+  output:    admissibility
 DECLARE admissibility: object
-SET admissibility = {ok: <cost within budget and nothing off branch and no limit breached>, realised_cost: realised_cost, off_branch: <tasks that do not trace>, limit_breaches: <phases over a hard limit>}
+SET admissibility = {ok: <cost within budget and nothing off branch and no limit breached>, realized_cost: realized_cost, off_branch: <tasks that do not trace>, limit_breaches: <phases over a hard limit>}
 HANDOFF GATE (teleology admissibility gate):
-rule_id: "CONSTRAIN"   yields: boolean
-[check] realized cost within the branch budget (evidence: realised_cost against the budget)
-[check] every task traces to the selected branch (evidence: admissibility.off_branch empty) over: task_records measured: <on branch> / <tasks>
-[check] no hard limit breached (evidence: admissibility.limit_breaches empty)
-result: pass → NODE 8 | cost over budget or off branch → REPAIR (owner: NODE 2) | limit breach → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "CONSTRAIN"   yields: boolean
+  [check] realized cost within the branch budget (evidence: realized_cost against the budget)
+  [check] every task traces to the selected branch (evidence: admissibility.off_branch empty) over: task_records measured: <on branch> / <tasks>
+  [check] no hard limit breached (evidence: admissibility.limit_breaches empty)
+  result: pass → NODE 8 | cost over budget or off branch → REPAIR (owner: NODE 2) | limit breach → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # NODE 8 — VERIFY   [evaluative · verification · logic + probability · yields: validation report]
 @purpose: "judge the generated reasoning against evidence, falsification, confidence and semantic policy before commitment"
@@ -14079,27 +13890,27 @@ result: pass → NODE 8 | cost over budget or off branch → REPAIR (owner: NODE
 @genesis: constraint
 @cue: "VERIFY_REASONING_NOT_IMPLEMENTATION"
 CONTRACT:
-input:     admissibility from NODE 7
-transform: EXTRACT_FACTS material claims FROM {phase_records, task_records} INTO claims; FOR EACH claim IN claims: SEARCH_CONTENT context_bundle.evidence FOR claim.support INTO support; VALIDATE_ARTIFACT {phase_records, task_records} AGAINST <the validation suites> INTO findings
-constraints: a claim is supported only with evidence, never by the absence of a contradiction; confidence is a number tested against a threshold; policy is semantic, never a substring ban; an unmeasured claim is unknown, and unknown is not pass
-output:    validation_report
+  input:     admissibility from NODE 7
+  transform: EXTRACT_FACTS material claims FROM {phase_records, task_records} INTO claims; FOR EACH claim IN claims: SEARCH_CONTENT context_bundle.evidence FOR claim.support INTO support; VALIDATE_ARTIFACT {phase_records, task_records} AGAINST <the validation suites> INTO findings
+  constraints: a claim is supported only with evidence, never by the absence of a contradiction; confidence is a number tested against a threshold; policy is semantic, never a substring ban; an unmeasured claim is unknown, and unknown is not pass
+  output:    validation_report
 DECLARE validation_report: object
 SET validation_report = {status: <pass, repair_required or blocked>, findings: findings, confidence: <the minimum claim confidence>, examined: context_bundle.evidence, unresolved: context_bundle.unresolved}
 HANDOFF GATE (ver-stop gate):
-rule_id: "VERIFY"   yields: boolean
-[check] every finding names what it examined (evidence: findings carry evidence and a rule id)
-[check] every material claim has non-empty evidence and a named refuter (evidence: claims) over: claims measured: <supported> / <claims>
-[check] confidence is at or above the threshold (evidence: validation_report.confidence)
-[check] status is pass with zero blocking findings (evidence: validation_report.findings)
-standing: moved-set <the surfaces re-read since NODE 1>
-result: pass → NODE 9 | repair_required → REPAIR (owner: <the earliest node named by a finding>) | unknown → BLOCKED
+  rule_id: "VERIFY"   yields: boolean
+  [check] every finding names what it examined (evidence: findings carry evidence and a rule id)
+  [check] every material claim has non-empty evidence and a named refuter (evidence: claims) over: claims measured: <supported> / <claims>
+  [check] confidence is at or above the threshold (evidence: validation_report.confidence)
+  [check] status is pass with zero blocking findings (evidence: validation_report.findings)
+  standing: moved-set <the surfaces re-read since NODE 1>
+  result: pass → NODE 9 | repair_required → REPAIR (owner: <the earliest node named by a finding>) | unknown → BLOCKED
 
 # REPAIR EDGE  (verify refutes back to the earliest invalid node, bounded by the recursion limit)
 CONTRACT:
-input:     validation_report.findings, or a failed admissibility
-transform: FOR EACH finding IN findings: ORDER finding BY <the node order>; <re-run from the earliest owning node forward, invalidating every dependent record>
-constraints: bounded by recursion_limit; severity orders the repairs among failures and never softens a verdict; a downstream record is never restored after an upstream repair
-output:    repaired records at pass, or a blocked terminal with the remaining findings
+  input:     validation_report.findings, or a failed admissibility
+  transform: FOR EACH finding IN findings: ORDER finding BY <the node order>; <re-run from the earliest owning node forward, invalidating every dependent record>
+  constraints: bounded by recursion_limit; severity orders the repairs among failures and never softens a verdict; a downstream record is never restored after an upstream repair
+  output:    repaired records at pass, or a blocked terminal with the remaining findings
 
 # NODE 9 — COMMIT   [evaluative · representation · information-theory · yields: rendered artifact]
 @purpose: "serialize only validated records into the one canonical representation, deduplicated, adding no new decision"
@@ -14107,18 +13918,18 @@ output:    repaired records at pass, or a blocked terminal with the remaining fi
 @genesis: emergence
 @cue: "COMMIT_WITHOUT_NEW_DECISIONS"
 CONTRACT:
-input:     validation_report from NODE 8
-transform: COMPOSE_ARTIFACT rendered FROM {context_bundle, teleology_bundle, phase_records, task_records, validation_report} USING <the checklist shape>; REDUCE rendered TO <one entry per phase and task>
-constraints: rendering adds no architecture decision; identical content collapses to one representation; a future execution checkbox stays unchecked; every phase carries its genesis stage and its four axes
-preserves: every ripple impact by name
-output:    rendered
-freshness: fingerprint(validation_report) + fingerprint(this document)
+  input:     validation_report from NODE 8
+  transform: COMPOSE_ARTIFACT rendered FROM {context_bundle, teleology_bundle, phase_records, task_records, validation_report} USING <the checklist shape>; REDUCE rendered TO <one entry per phase and task>
+  constraints: rendering adds no architecture decision; identical content collapses to one representation; a future execution checkbox stays unchecked; every phase carries its genesis stage and its four axes
+  preserves: every ripple impact by name
+  output:    rendered
+  freshness: fingerprint(validation_report) + fingerprint(this document)
 HANDOFF GATE (evidence-bearing):
-rule_id: "COMMIT"   yields: hash + boolean
-[check] no phase or task encoded twice (evidence: the deduplication pass) over: phase_records and task_records measured: <encoded once> / <records>
-[check] no future execution checkbox pre-checked (evidence: a render scan)
-[check] no architecture decision introduced at render (evidence: the rendering rules)
-result: pass → NODE 10 | integrity defect → REPAIR (owner: NODE 9) | unknown → BLOCKED
+  rule_id: "COMMIT"   yields: hash + boolean
+  [check] no phase or task encoded twice (evidence: the deduplication pass) over: phase_records and task_records measured: <encoded once> / <records>
+  [check] no future execution checkbox pre-checked (evidence: a render scan)
+  [check] no architecture decision introduced at render (evidence: the rendering rules)
+  result: pass → NODE 10 | integrity defect → REPAIR (owner: NODE 9) | unknown → BLOCKED
 
 # NODE 10 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "stop only on saturation and completion and verification; otherwise block on external input, never a self-assessed stop"
@@ -14126,20 +13937,20 @@ result: pass → NODE 10 | integrity defect → REPAIR (owner: NODE 9) | unknown
 @genesis: emergence
 @cue: "TERMINATE_EXPLICITLY"
 CONTRACT:
-input:     rendered from NODE 9
-transform: VALIDATE_ARTIFACT rendered AGAINST <every phase and task once, contiguous numbering, no pre-checked execution box> INTO render_check; PERSIST_ARTIFACT rendered TO <{task_name} checklist>; REPORT_RESULT generation_result TO <the parties whose next work it creates>
-constraints: exactly one terminal, success or blocked; ter-block routes to REQUEST_DECISION; a self-assessed done is not ter-stop
-output:    generation_result
-freshness: fingerprint(rendered) + fingerprint(this document)
+  input:     rendered from NODE 9
+  transform: VALIDATE_ARTIFACT rendered AGAINST <every phase and task once, contiguous numbering, no pre-checked execution box> INTO render_check; PERSIST_ARTIFACT rendered TO <{task_name} checklist>; REPORT_RESULT generation_result TO <the parties whose next work it creates>
+  constraints: exactly one terminal, success or blocked; ter-block routes to REQUEST_DECISION; a self-assessed done is not ter-stop
+  output:    generation_result
+  freshness: fingerprint(rendered) + fingerprint(this document)
 HANDOFF GATE (ter-stop gate):
-rule_id: "TERMINATE"   yields: boolean
-[check] status is success or blocked and an output file is named (evidence: generation_result)
-[check] success only when saturation and completion and verification all hold (evidence: the termination set) over: the termination set measured: <holding> / <three>
-[check] repair cycles within recursion_limit (evidence: the repair count)
-[check] no future execution checkbox pre-checked (evidence: render_check)
-refuse: the destination changed since it was read before PERSIST_ARTIFACT
-standing: moved-set <the surfaces re-read since NODE 8>
-result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 9) | unknown → BLOCKED
+  rule_id: "TERMINATE"   yields: boolean
+  [check] status is success or blocked and an output file is named (evidence: generation_result)
+  [check] success only when saturation and completion and verification all hold (evidence: the termination set) over: the termination set measured: <holding> / <three>
+  [check] repair cycles within recursion_limit (evidence: the repair count)
+  [check] no future execution checkbox pre-checked (evidence: render_check)
+  refuse: the destination changed since it was read before PERSIST_ARTIFACT
+  standing: moved-set <the surfaces re-read since NODE 8>
+  result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 9) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT ontology-before-teleology: authority, trust and the ontology of the change are resolved before its teleology, and both before any seeing over: every generation binds: the generator objector: [check] core authority loaded at NODE 1
@@ -14152,16 +13963,16 @@ INVARIANT repair-from-earliest: a failed gate repairs from the earliest owning n
 INVARIANT generation-not-execution: a gate resolved while generating is separate from a gate that runs when the checklist is executed, and the latter ships unchecked over: every rendered gate binds: the generator objector: [check] no future execution checkbox pre-checked at NODE 10
 
 REPORT:
-subject: NODE 10
-verdict: pass | fail | unknown
-domain: declared <phase and task records> measured <encoded once>
-populations: phases <n>, tasks <n>, claims supported <n>, claims unknown <n>
-inputs: {task_description} <fingerprint>, {project.governance_policy} <fingerprint>, {project.principle_ontology} <fingerprint>
-code: this document <fingerprint>
-output: {task_name} checklist <fingerprint>
-refusals: <n> [<reason>]
-unresolved: <n> [<reason>]
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 10
+  verdict: pass | fail | unknown
+  domain: declared <phase and task records> measured <encoded once>
+  populations: phases <n>, tasks <n>, claims supported <n>, claims unknown <n>
+  inputs: {task_description} <fingerprint>, {project.governance_policy} <fingerprint>, {project.principle_ontology} <fingerprint>
+  code: this document <fingerprint>
+  output: {task_name} checklist <fingerprint>
+  refusals: <n> [<reason>]
+  unresolved: <n> [<reason>]
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
@@ -14224,119 +14035,119 @@ version: 1.0.0
 THIS COMPOSITION RENDERS a writing style's token-sequence structure from a faceted coordinate, folding one anchor skeleton with ordered modifier transforms over a primitive grammatical alphabet.
 
 %% META %%:
-priority: the requested coordinate for intent, the SPACE for legal values, nothing else
-trust: the_coordinate = SOLE_AUTHORITY_FOR_INTENT, the_space = SOLE_AUTHORITY_FOR_VALUES, prior_knowledge = UNTRUSTED
-objective: {style_request}
-jurisdiction: {style_request} against the SPACE in {convention.space_schema} | external: every style the SPACE does not name
-recursion_limit: 1
+    priority: the requested coordinate for intent, the SPACE for legal values, nothing else
+    trust: the_coordinate = SOLE_AUTHORITY_FOR_INTENT, the_space = SOLE_AUTHORITY_FOR_VALUES, prior_knowledge = UNTRUSTED
+    objective: {style_request}
+    jurisdiction: {style_request} against the SPACE in {convention.space_schema} | external: every style the SPACE does not name
+    recursion_limit: 1
 
 # NODE 1 — RESOLVE   [epistemic · ontology · set-theory · yields: set]
 @purpose: "parse the style request into a validated coordinate and fix what is authoritative"
 @genesis: existence
 CONTRACT:
-input:     {style_request}
-transform: READ_RESOURCE {convention.space_schema} INTO space; EXTRACT_FACTS <one value per facet, a bundle-label expanded through the SPACE label map> FROM {style_request} INTO coordinate; FOR EACH facet IN <unstated modifier facets>: SET facet = identity
-constraints: every named value resolves in the SPACE; exactly one anchor facet is assigned; an unstated modifier is identity, never guessed
-output:    coordinate
+  input:     {style_request}
+  transform: READ_RESOURCE {convention.space_schema} INTO space; EXTRACT_FACTS <one value per facet, a bundle-label expanded through the SPACE label map> FROM {style_request} INTO coordinate; FOR EACH facet IN <unstated modifier facets>: SET facet = identity
+  constraints: every named value resolves in the SPACE; exactly one anchor facet is assigned; an unstated modifier is identity, never guessed
+  output:    coordinate
 DECLARE coordinate: object
 SET coordinate = {anchor: <the one anchor value>, modifiers: <one value per modifier facet>, space: space}
 HANDOFF GATE (evidence-bearing):
-rule_id: "RESOLVE"   yields: boolean
-[check] every assigned value is a member of its facet's values (evidence: the SPACE lookup) over: facets measured: <resolved> / <facets>
-[check] exactly one facet carries the anchor role (evidence: coordinate.anchor)
-[check] unstated modifiers are identity, not guessed (evidence: coordinate.modifiers)
-result: pass → NODE 2 | value outside the SPACE → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "RESOLVE"   yields: boolean
+  [check] every assigned value is a member of its facet's values (evidence: the SPACE lookup) over: facets measured: <resolved> / <facets>
+  [check] exactly one facet carries the anchor role (evidence: coordinate.anchor)
+  [check] unstated modifiers are identity, not guessed (evidence: coordinate.modifiers)
+  result: pass → NODE 2 | value outside the SPACE → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — REALIZABILITY   [conative · teleology · optimization · yields: boolean]
 @purpose: "judge the coordinate realizable, with no conflicting facet values, before sequencing"
 @genesis: difference
 @mandatory
 CONTRACT:
-input:     coordinate from NODE 1
-transform: FOR EACH axis IN <the facet axes>: COMPARE coordinate.modifiers AGAINST <the axis's incompatible pairs> INTO conflicts; DETERMINE <composition correctness over coverage> INTO objective
-constraints: two conflicting values on one axis make the coordinate unrealizable and it is rejected, never merged; a faithful partial render beats a conflicted full one
-output:    teleology
+  input:     coordinate from NODE 1
+  transform: FOR EACH axis IN <the facet axes>: COMPARE coordinate.modifiers AGAINST <the axis's incompatible pairs> INTO conflicts; DETERMINE <composition correctness over coverage> INTO objective
+  constraints: two conflicting values on one axis make the coordinate unrealizable and it is rejected, never merged; a faithful partial render beats a conflicted full one
+  output:    teleology
 DECLARE teleology: object
 SET teleology = {realizable: <conflicts empty>, conflicts: conflicts, objective: objective}
 HANDOFF GATE (tel-priority injection-gate):
-rule_id: "REALIZABILITY"   yields: boolean
-[check] no axis carries two conflicting values (evidence: teleology.conflicts) over: axes measured: <conflict-free> / <axes>
-[check] composition correctness is the objective over coverage (evidence: teleology.objective)
-[check] an unrealizable coordinate is routed to rejection, never merged (evidence: the result arm taken)
-result: pass → NODE 3 | unrealizable → BLOCKED | unknown → BLOCKED
+  rule_id: "REALIZABILITY"   yields: boolean
+  [check] no axis carries two conflicting values (evidence: teleology.conflicts) over: axes measured: <conflict-free> / <axes>
+  [check] composition correctness is the objective over coverage (evidence: teleology.objective)
+  [check] an unrealizable coordinate is routed to rejection, never merged (evidence: the result arm taken)
+  result: pass → NODE 3 | unrealizable → BLOCKED | unknown → BLOCKED
 
 # NODE 3 — PLAN   [epistemic · reasoning · algebra · yields: ordered-structure]
 @purpose: "order the modifier transforms by the non-commuting precedence, seed the skeleton from the anchor, and assemble the render plan"
 @genesis: structure
 CONTRACT:
-input:     teleology from NODE 2
-transform: SORT <the modifier op-lists> BY <lexicon, world, valence, density, register, wrap>; EXTRACT_FACTS <the anchor skeleton over the primitive alphabet> FROM coordinate.space INTO seed; COMPOSE_ARTIFACT plan FROM {seed, <the ordered steps>} USING <seed before steps>
-constraints: request order is irrelevant because ops do not commute; an identity facet contributes nothing; the anchor alone owns clause order
-preserves: the anchor's clause order
-output:    plan
+  input:     teleology from NODE 2
+  transform: SORT <the modifier op-lists> BY <lexicon, world, valence, density, register, wrap>; EXTRACT_FACTS <the anchor skeleton over the primitive alphabet> FROM coordinate.space INTO seed; COMPOSE_ARTIFACT plan FROM {seed, <the ordered steps>} USING <seed before steps>
+  constraints: request order is irrelevant because ops do not commute; an identity facet contributes nothing; the anchor alone owns clause order
+  preserves: the anchor's clause order
+  output:    plan
 DECLARE plan: object
 SET plan = {seed: seed, steps: <the totally ordered ops>}
 HANDOFF GATE (evidence-bearing):
-rule_id: "PLAN"   yields: boolean
-[check] the steps are totally ordered by precedence with no cross-facet tie (evidence: plan.steps) over: modifier facets measured: <ordered> / <modifiers>
-[check] the seed skeleton is non-empty (evidence: plan.seed)
-[check] the plan orders the seed before the steps (evidence: plan)
-result: pass → NODE 4 | tie → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "PLAN"   yields: boolean
+  [check] the steps are totally ordered by precedence with no cross-facet tie (evidence: plan.steps) over: modifier facets measured: <ordered> / <modifiers>
+  [check] the seed skeleton is non-empty (evidence: plan.seed)
+  [check] the plan orders the seed before the steps (evidence: plan)
+  result: pass → NODE 4 | tie → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 4 — RENDER   [epistemic · formalization · computation · yields: procedure]
 @purpose: "instantiate the skeleton, fold each op in order, and gate the folded structure on admissibility before the signature check"
 @genesis: transformation
 CONTRACT:
-input:     plan from NODE 3
-transform: FOR EACH step IN plan.steps: CONVERT structure TO <the op applied> INTO structure; VALIDATE_ARTIFACT structure AGAINST <closure over the primitive alphabet, non-emptiness, the anchor predicate> INTO admissibility
-constraints: substitute-lexicon changes fillers only, never primitive tags; a primitive escaping the alphabet, an emptied sequence or a voided anchor predicate without an explicit reorder is refused at the step
-preserves: every primitive tag
-output:    structure
+  input:     plan from NODE 3
+  transform: FOR EACH step IN plan.steps: CONVERT structure TO <the op applied> INTO structure; VALIDATE_ARTIFACT structure AGAINST <closure over the primitive alphabet, non-emptiness, the anchor predicate> INTO admissibility
+  constraints: substitute-lexicon changes fillers only, never primitive tags; a primitive escaping the alphabet, an emptied sequence or a voided anchor predicate without an explicit reorder is refused at the step
+  preserves: every primitive tag
+  output:    structure
 DECLARE structure: object
 SET structure = {tokens: <a sequence over the alphabet>, applied: <every applied op>, admissible: admissibility}
 HANDOFF GATE (evidence-bearing):
-rule_id: "RENDER"   yields: boolean
-[check] the applied ops equal the planned steps (evidence: structure.applied against plan.steps) over: plan.steps measured: <applied> / <steps>
-[check] every token's primitive is in the alphabet (evidence: the closure check)
-[check] the sequence is non-empty and the anchor predicate is not voided (evidence: structure.admissible)
-result: pass → NODE 5 | escape or void → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "RENDER"   yields: boolean
+  [check] the applied ops equal the planned steps (evidence: structure.applied against plan.steps) over: plan.steps measured: <applied> / <steps>
+  [check] every token's primitive is in the alphabet (evidence: the closure check)
+  [check] the sequence is non-empty and the anchor predicate is not voided (evidence: structure.admissible)
+  result: pass → NODE 5 | escape or void → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 5 — VERIFY   [evaluative · verification · logic + probability · yields: number]
 @purpose: "prove the rendered structure realizes the coordinate by checking that each facet left its named signature, repairing at most once"
 @genesis: constraint
 @mandatory
 CONTRACT:
-input:     structure from NODE 4
-transform: FOR EACH modifier IN coordinate.modifiers: SEARCH_CONTENT structure.tokens FOR modifier.signature INTO evidence; VALIDATE_ARTIFACT structure AGAINST <the anchor's clause order, unless an explicit reorder was applied> INTO order; ANALYZE_CONTENT evidence FOR <the missing signature that would refute conformance> INTO refuter
-constraints: a checkmark with no named token is void; a single bad op is reverted or reordered and re-rendered once; a repair that fails escalates to rejection, never a loop
-output:    verdict
+  input:     structure from NODE 4
+  transform: FOR EACH modifier IN coordinate.modifiers: SEARCH_CONTENT structure.tokens FOR modifier.signature INTO evidence; VALIDATE_ARTIFACT structure AGAINST <the anchor's clause order, unless an explicit reorder was applied> INTO order; ANALYZE_CONTENT evidence FOR <the missing signature that would refute conformance> INTO refuter
+  constraints: a checkmark with no named token is void; a single bad op is reverted or reordered and re-rendered once; a repair that fails escalates to rejection, never a loop
+  output:    verdict
 DECLARE verdict: object
 SET verdict = {conforms: <every signature present and order intact>, evidence: evidence, refuter: refuter, repairs: <zero or one>}
 HANDOFF GATE (ver-stop gate):
-rule_id: "VERIFY"   yields: boolean
-[check] every modifier's signature is present with its token or position named (evidence: verdict.evidence) over: coordinate.modifiers measured: <signed> / <modifiers>
-[check] the anchor order is intact or an explicit reorder is in the applied ops, and a refuter is named (evidence: order and verdict.refuter)
-[check] at most one repair re-render occurred (evidence: verdict.repairs)
-standing: moved-set none
-result: pass → NODE 6 | missing signature → REPAIR (owner: NODE 4) | unknown → BLOCKED
+  rule_id: "VERIFY"   yields: boolean
+  [check] every modifier's signature is present with its token or position named (evidence: verdict.evidence) over: coordinate.modifiers measured: <signed> / <modifiers>
+  [check] the anchor order is intact or an explicit reorder is in the applied ops, and a refuter is named (evidence: order and verdict.refuter)
+  [check] at most one repair re-render occurred (evidence: verdict.repairs)
+  standing: moved-set none
+  result: pass → NODE 6 | missing signature → REPAIR (owner: NODE 4) | unknown → BLOCKED
 
 # NODE 6 — EMIT   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "emit the validated structure with its facet evidence, and declare the render complete or the coordinate unrealizable"
 @genesis: emergence
 @mandatory
 CONTRACT:
-input:     verdict from NODE 5
-transform: COMPOSE_ARTIFACT emission FROM {structure, verdict} USING <every facet's evidence token named>; REDUCE emission.tokens TO <collapsed only where an op declared collapse>; PERSIST_ARTIFACT emission TO <{task_name} emission>; REPORT_RESULT emission TO <the parties whose next work it creates>
-constraints: render adds no new transform; a rejection is a valid terminal, never a retry; a self-assessed done is not ter-stop
-output:    emission
-freshness: fingerprint(verdict) + fingerprint(this document)
+  input:     verdict from NODE 5
+  transform: COMPOSE_ARTIFACT emission FROM {structure, verdict} USING <every facet's evidence token named>; REDUCE emission.tokens TO <collapsed only where an op declared collapse>; PERSIST_ARTIFACT emission TO <{task_name} emission>; REPORT_RESULT emission TO <the parties whose next work it creates>
+  constraints: render adds no new transform; a rejection is a valid terminal, never a retry; a self-assessed done is not ter-stop
+  output:    emission
+  freshness: fingerprint(verdict) + fingerprint(this document)
 HANDOFF GATE (ter-stop gate):
-rule_id: "TERMINATE"   yields: boolean
-[check] the structure is emitted with per-facet evidence tokens (evidence: emission) over: facets measured: <evidenced> / <facets>
-[check] the verdict conforms for a stop, or the coordinate was rejected as unrealizable (evidence: the termination set)
-[check] exactly one validated render per coordinate (evidence: verdict.repairs and the emission count)
-refuse: an emission destination that changed since it was read before PERSIST_ARTIFACT
-result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "TERMINATE"   yields: boolean
+  [check] the structure is emitted with per-facet evidence tokens (evidence: emission) over: facets measured: <evidenced> / <facets>
+  [check] the verdict conforms for a stop, or the coordinate was rejected as unrealizable (evidence: the termination set)
+  [check] exactly one validated render per coordinate (evidence: verdict.repairs and the emission count)
+  refuse: an emission destination that changed since it was read before PERSIST_ARTIFACT
+  result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT space-is-data: the SPACE is injected data and the core knows no style by name over: every render binds: the composer objector: [check] every assigned value is a member of its facet's values at NODE 1
@@ -14348,13 +14159,13 @@ INVARIANT signature-not-checkmark: a gate names the token that is its evidence, 
 INVARIANT one-repair: at most one repair re-render precedes rejection over: every coordinate binds: the composer objector: [check] at most one repair re-render occurred at NODE 5
 
 REPORT:
-subject: NODE 6
-verdict: pass | fail | unknown
-domain: declared <facets> measured <evidenced>
-populations: modifiers signed <n>, ops applied <n>, repairs <n>
-refusals: <n> [<reason>]
-unresolved: <n> [<reason>]
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 6
+  verdict: pass | fail | unknown
+  domain: declared <facets> measured <evidenced>
+  populations: modifiers signed <n>, ops applied <n>, repairs <n>
+  refusals: <n> [<reason>]
+  unresolved: <n> [<reason>]
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
@@ -14444,129 +14255,129 @@ version: 1.0.0
 THIS DEBUG RESOLVES a bug to an evidence-scored root cause and one surgical fix by walking the derivation loop, where every decision is typed to a math shape, the fix is grounded in the substrate genesis cycle, and the mandatory gates are enforced.
 
 %% META %%:
-priority: EVIDENCE > ROOT_CAUSE > SPEED
-trust: procedural_trace = TRUSTED, test_result = TRUSTED, prior_knowledge = UNTRUSTED, a_hypothesis = UNTRUSTED_UNTIL_SCORED
-objective: {bug_report}
-jurisdiction: {bug_report} and the code the trace reaches | external: the platform intrinsics in {convention.known_unknowables}
-recursion_limit: {limits.max_fix_attempts}
+    priority: EVIDENCE > ROOT_CAUSE > SPEED
+    trust: procedural_trace = TRUSTED, test_result = TRUSTED, prior_knowledge = UNTRUSTED, a_hypothesis = UNTRUSTED_UNTIL_SCORED
+    objective: {bug_report}
+    jurisdiction: {bug_report} and the code the trace reaches | external: the platform intrinsics in {convention.known_unknowables}
+    recursion_limit: {limits.max_fix_attempts}
 
 # NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set + evidence]
 @purpose: "load the protocols, probe capabilities, take a reversible baseline and frame the bug by ontological dimension before touching anything"
 @genesis: existence
 CONTRACT:
-input:     {bug_report}
-transform: READ_RESOURCE {project.debug_protocols} INTO protocols; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; PERSIST_ARTIFACT <a reversible baseline checkpoint> TO <the checkpoint store>; ANALYZE_CONTENT {bug_report} AGAINST <identity, behavior, change, cause, and when relevant time, space, state> INTO readout
-constraints: a hypothesis is untrusted until scored; nothing is changed before the baseline exists
-output:    session
+  input:     {bug_report}
+  transform: READ_RESOURCE {project.debug_protocols} INTO protocols; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; PERSIST_ARTIFACT <a reversible baseline checkpoint> TO <the checkpoint store>; ANALYZE_CONTENT {bug_report} AGAINST <identity, behavior, change, cause, and when relevant time, space, state> INTO readout
+  constraints: a hypothesis is untrusted until scored; nothing is changed before the baseline exists
+  output:    session
 DECLARE session: object
 SET session = {protocols: protocols, capability: capability, baseline: <the checkpoint>, readout: readout, attempts: 0}
 HANDOFF GATE (evidence-bearing):
-rule_id: "ORIENT"   yields: boolean
-[check] protocols discovered and capabilities probed (evidence: session.capability is full, degraded or blocked)
-[check] a reversible baseline exists before any change (evidence: session.baseline)
-[check] the bug is framed by dimension (evidence: session.readout) over: the always-relevant dimensions measured: <framed> / <dimensions>
-refuse: a checkpoint store that cannot be read back before PERSIST_ARTIFACT
-result: pass → NODE 2 | capability blocked → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "ORIENT"   yields: boolean
+  [check] protocols discovered and capabilities probed (evidence: session.capability is full, degraded or blocked)
+  [check] a reversible baseline exists before any change (evidence: session.baseline)
+  [check] the bug is framed by dimension (evidence: session.readout) over: the always-relevant dimensions measured: <framed> / <dimensions>
+  refuse: a checkpoint store that cannot be read back before PERSIST_ARTIFACT
+  result: pass → NODE 2 | capability blocked → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]
 @purpose: "extract the differential, rank candidate bug-lines by worth and set the risk bar before tracing"
 @genesis: difference
 @mandatory
 CONTRACT:
-input:     session from NODE 1
-transform: EXTRACT_FACTS <the works-versus-breaks differential> FROM session.readout INTO differential; ANALYZE_CONTENT differential AGAINST {convention.clue_taxonomy} INTO clues; FOR EACH line IN <candidate bug-lines>: CALCULATE_METRIC probability times severity minus tracing cost FROM line INTO line.worth; RANK <candidate bug-lines> BY worth
-constraints: a data-loss or crash risk raises the confidence bar and a cosmetic risk lowers it; an absent differential or an all-unknown line set is a decision the developer owns
-output:    ranked_lines
+  input:     session from NODE 1
+  transform: EXTRACT_FACTS <the works-versus-breaks differential> FROM session.readout INTO differential; ANALYZE_CONTENT differential AGAINST {convention.clue_taxonomy} INTO clues; FOR EACH line IN <candidate bug-lines>: CALCULATE_METRIC probability times severity minus tracing cost FROM line INTO line.worth; RANK <candidate bug-lines> BY worth
+  constraints: a data-loss or crash risk raises the confidence bar and a cosmetic risk lowers it; an absent differential or an all-unknown line set is a decision the developer owns
+  output:    ranked_lines
 DECLARE ranked_lines: array
 SET ranked_lines = <the candidate lines ordered by worth, with the risk bar>
 HANDOFF GATE (tel-priority injection-gate):
-rule_id: "INTENT"   yields: boolean over ranking
-[check] the differential is stated (evidence: differential)
-[check] every candidate line carries a worth (evidence: ranked_lines) over: <candidate bug-lines> measured: <scored> / <candidates>
-[check] the selected line is the argmax of worth (evidence: the ranking's first entry)
-result: pass → NODE 3 | no differential → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "INTENT"   yields: boolean over ranking
+  [check] the differential is stated (evidence: differential)
+  [check] every candidate line carries a worth (evidence: ranked_lines) over: <candidate bug-lines> measured: <scored> / <candidates>
+  [check] the selected line is the argmax of worth (evidence: the ranking's first entry)
+  result: pass → NODE 3 | no differential → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
-# NODE 3 — TRACE AND HYPOTHESISE   [epistemic · analysis · graph · yields: edge-list + number]
+# NODE 3 — TRACE AND HYPOTHESIZE   [epistemic · analysis · graph · yields: edge-list + number]
 @purpose: "trace the highest-worth line until confident, then score a hypothesis against the risk-times-complexity bar"
 @genesis: relation
 CONTRACT:
-input:     ranked_lines from NODE 2
-transform: SEARCH_CONTENT <the code> FOR <the selected line's entry points> INTO trace; FILTER trace WHERE <not in {convention.known_unknowables}>; CALCULATE_METRIC trace-confidence index FROM trace INTO tci; CALCULATE_METRIC information debt FROM trace INTO debt; FOR EACH hypothesis IN <candidates at the failure location>: CALCULATE_METRIC evidence score FROM hypothesis INTO hypothesis.confidence
-constraints: no hypothesis before tci clears {limits.min_tci} and debt clears {limits.info_debt}; the required confidence is the risk bar times the complexity tier
-output:    hypothesis
+  input:     ranked_lines from NODE 2
+  transform: SEARCH_CONTENT <the code> FOR <the selected line's entry points> INTO trace; FILTER trace WHERE <not in {convention.known_unknowables}>; CALCULATE_METRIC trace-confidence index FROM trace INTO tci; CALCULATE_METRIC information debt FROM trace INTO debt; FOR EACH hypothesis IN <candidates at the failure location>: CALCULATE_METRIC evidence score FROM hypothesis INTO hypothesis.confidence
+  constraints: no hypothesis before tci clears {limits.min_tci} and debt clears {limits.info_debt}; the required confidence is the risk bar times the complexity tier
+  output:    hypothesis
 DECLARE hypothesis: object
 SET hypothesis = {statement: <one sentence with a concrete failure location>, confidence: <a number in zero to one>, trace: trace}
 HANDOFF GATE (evidence-bearing):
-rule_id: "TRACE"   yields: boolean
-[check] tci and information debt cleared their thresholds before any hypothesis (evidence: tci and debt against the limits) over: trace paths measured: <fully traced> / <paths>
-[check] the hypothesis clears the risk-times-complexity bar (evidence: hypothesis.confidence against the bar)
-[check] the hypothesis names a concrete failure location in one sentence (evidence: hypothesis.statement)
-result: pass → NODE 4 | trace stagnated → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  rule_id: "TRACE"   yields: boolean
+  [check] tci and information debt cleared their thresholds before any hypothesis (evidence: tci and debt against the limits) over: trace paths measured: <fully traced> / <paths>
+  [check] the hypothesis clears the risk-times-complexity bar (evidence: hypothesis.confidence against the bar)
+  [check] the hypothesis names a concrete failure location in one sentence (evidence: hypothesis.statement)
+  result: pass → NODE 4 | trace stagnated → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 4 — FIX   [epistemic · formalization · analysis · yields: operation]
 @purpose: "design the minimal root-cause fix at the failure location, project its ripple, and apply it while refusing symptom treatments"
 @genesis: transformation
 CONTRACT:
-input:     hypothesis from NODE 3
-transform: COMPOSE_ARTIFACT fix FROM hypothesis USING <the minimal edit at the failure location>; ANALYZE_CONTENT fix FOR <call sites, tests, invariants> INTO ripple; VALIDATE_ARTIFACT fix AGAINST {convention.symptom_patterns} INTO symptom_check; PERSIST_ARTIFACT fix TO <the failure location>
-constraints: a design over {limits.max_fix_lines} signals a wrong or architectural hypothesis and returns to NODE 3; a symptom-pattern match is refused, never applied; the attempt count increments on apply
-preserves: the baseline checkpoint
-output:    applied_fix
+  input:     hypothesis from NODE 3
+  transform: COMPOSE_ARTIFACT fix FROM hypothesis USING <the minimal edit at the failure location>; ANALYZE_CONTENT fix FOR <call sites, tests, invariants> INTO ripple; VALIDATE_ARTIFACT fix AGAINST {convention.symptom_patterns} INTO symptom_check; PERSIST_ARTIFACT fix TO <the failure location>
+  constraints: a design over {limits.max_fix_lines} signals a wrong or architectural hypothesis and returns to NODE 3; a symptom-pattern match is refused, never applied; the attempt count increments on apply
+  preserves: the baseline checkpoint
+  output:    applied_fix
 DECLARE applied_fix: object
 SET applied_fix = {edit: fix, location: <the failure location>, ripple: ripple, attempts: session.attempts + 1}
 HANDOFF GATE (evidence-bearing):
-rule_id: "FIX"   yields: boolean
-[check] the fix is minimal and at the failure location (evidence: the change and its location) over: changed files measured: <at the location> / <changed>
-[check] the fix is within {limits.max_fix_lines} (evidence: the line count)
-[check] no symptom-pattern treatment applied (evidence: symptom_check)
-refuse: a symptom-pattern match, or a design over {limits.max_fix_lines}, before PERSIST_ARTIFACT
-result: pass → NODE 5 | oversized → REPAIR (owner: NODE 3) | symptom → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "FIX"   yields: boolean
+  [check] the fix is minimal and at the failure location (evidence: the change and its location) over: changed files measured: <at the location> / <changed>
+  [check] the fix is within {limits.max_fix_lines} (evidence: the line count)
+  [check] no symptom-pattern treatment applied (evidence: symptom_check)
+  refuse: a symptom-pattern match, or a design over {limits.max_fix_lines}, before PERSIST_ARTIFACT
+  result: pass → NODE 5 | oversized → REPAIR (owner: NODE 3) | symptom → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 5 — VERIFY   [evaluative · verification · logic + probability · yields: number]
 @purpose: "gate the applied fix on admissibility, then prove broken-fixed and no-regression from real test execution, reverting on failure"
 @genesis: constraint
 @mandatory
 CONTRACT:
-input:     applied_fix from NODE 4
-transform: EXECUTE_TOOL {toolchain.test.execute} WITH timeout: <bound> INTO results; CALCULATE_METRIC success score FROM results INTO score; ANALYZE_CONTENT results FOR <a regression in the working scenario> INTO refuter
-constraints: admissible only when root-cause not symptom, within {limits.max_fix_lines}, and attempts within {limits.max_fix_attempts}; a score below {limits.min_success} restores the checkpoint and never leaves the fix in place
-output:    validation
+  input:     applied_fix from NODE 4
+  transform: EXECUTE_TOOL {toolchain.test.execute} WITH timeout: <bound> INTO results; CALCULATE_METRIC success score FROM results INTO score; ANALYZE_CONTENT results FOR <a regression in the working scenario> INTO refuter
+  constraints: admissible only when root-cause not symptom, within {limits.max_fix_lines}, and attempts within {limits.max_fix_attempts}; a score below {limits.min_success} restores the checkpoint and never leaves the fix in place
+  output:    validation
 DECLARE validation: object
 SET validation = {status: <fixed or reverted>, score: score, refuter: refuter, results: results}
 HANDOFF GATE (ver-stop gate):
-rule_id: "VERIFY"   yields: boolean
-[check] the broken scenario now passes and the working scenario did not regress (evidence: results from the real run) over: scenarios measured: <passing> / <scenarios>
-[check] the success score meets {limits.min_success} (evidence: score against the limit)
-[check] a regression refuter is named (evidence: validation.refuter)
-[check] a failing fix restored the checkpoint (evidence: the restore, or no failure)
-refuse: a test command that cannot run before EXECUTE_TOOL
-standing: moved-set <the files changed since NODE 1>
-result: pass → NODE 6 | reverted → REPAIR (owner: NODE 3) | attempts exhausted → BLOCKED | unknown → BLOCKED
+  rule_id: "VERIFY"   yields: boolean
+  [check] the broken scenario now passes and the working scenario did not regress (evidence: results from the real run) over: scenarios measured: <passing> / <scenarios>
+  [check] the success score meets {limits.min_success} (evidence: score against the limit)
+  [check] a regression refuter is named (evidence: validation.refuter)
+  [check] a failing fix restored the checkpoint (evidence: the restore, or no failure)
+  refuse: a test command that cannot run before EXECUTE_TOOL
+  standing: moved-set <the files changed since NODE 1>
+  result: pass → NODE 6 | reverted → REPAIR (owner: NODE 3) | attempts exhausted → BLOCKED | unknown → BLOCKED
 
 # REPAIR EDGE  (verify refutes back to the earliest node that can supply the missing evidence; at the attempt limit reflect, never iterate)
 CONTRACT:
-input:     a reverted validation or a failed admissibility
-transform: <restore the checkpoint; pivot to the next hypothesis at NODE 3 when one clears the bar, else to fresh evidence at NODE 2>; <at {limits.max_fix_attempts} record which assumption failed and REQUEST_DECISION the developer for reproduction context>
-constraints: bounded by recursion_limit; every changed file reverts through the checkpoint
-output:    a viable pivot, or a recorded reflection and a request for reproduction context
+  input:     a reverted validation or a failed admissibility
+  transform: <restore the checkpoint; pivot to the next hypothesis at NODE 3 when one clears the bar, else to fresh evidence at NODE 2>; <at {limits.max_fix_attempts} record which assumption failed and REQUEST_DECISION the developer for reproduction context>
+  constraints: bounded by recursion_limit; every changed file reverts through the checkpoint
+  output:    a viable pivot, or a recorded reflection and a request for reproduction context
 
 # NODE 6 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "persist the outcome deduplicated and emit exactly one terminal, fixed or blocked, stopping only on saturation and completion and verification"
 @genesis: emergence
 @mandatory
 CONTRACT:
-input:     validation from NODE 5
-transform: COMPOSE_ARTIFACT report FROM {hypothesis, applied_fix, validation} USING <the fixed or blocked shape>; REDUCE <history entries> TO <one per bug, class, root cause and fix>; PERSIST_ARTIFACT report TO <{task_name} report>; REPORT_RESULT report TO <the parties whose next work it creates>
-constraints: exactly one terminal; a self-assessed done is not ter-stop
-output:    report
-freshness: fingerprint(validation) + fingerprint(this document)
+  input:     validation from NODE 5
+  transform: COMPOSE_ARTIFACT report FROM {hypothesis, applied_fix, validation} USING <the fixed or blocked shape>; REDUCE <history entries> TO <one per bug, class, root cause and fix>; PERSIST_ARTIFACT report TO <{task_name} report>; REPORT_RESULT report TO <the parties whose next work it creates>
+  constraints: exactly one terminal; a self-assessed done is not ter-stop
+  output:    report
+  freshness: fingerprint(validation) + fingerprint(this document)
 HANDOFF GATE (ter-stop gate):
-rule_id: "TERMINATE"   yields: boolean
-[check] the outcome is persisted and history is deduplicated (evidence: the history read back) over: history entries measured: <distinct> / <entries>
-[check] fixed holds only when saturation and completion and verification all hold (evidence: the termination set)
-[check] exactly one terminal names the root cause or the blocking reason and reflection (evidence: report)
-refuse: a report destination that changed since it was read before PERSIST_ARTIFACT
-result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "TERMINATE"   yields: boolean
+  [check] the outcome is persisted and history is deduplicated (evidence: the history read back) over: history entries measured: <distinct> / <entries>
+  [check] fixed holds only when saturation and completion and verification all hold (evidence: the termination set)
+  [check] exactly one terminal names the root cause or the blocking reason and reflection (evidence: report)
+  refuse: a report destination that changed since it was read before PERSIST_ARTIFACT
+  result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT baseline-first: a reversible checkpoint exists before any change over: every debug binds: the debugger objector: [check] a reversible baseline exists at NODE 1
@@ -14578,13 +14389,13 @@ INVARIANT reflect-not-iterate: at the attempt limit the debugger reflects and bl
 INVARIANT no-regex-no-hardcode: matching is procedural and every taxonomy, threshold and command resolves from a slot over: every node binds: the debugger objector: none
 
 REPORT:
-subject: NODE 6
-verdict: pass | fail | unknown
-domain: declared <scenarios> measured <passing>
-populations: fix attempts <n>, hypotheses scored <n>, files changed <n>
-refusals: <n> [<reason>]
-unresolved: <n> [<reason>]
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 6
+  verdict: pass | fail | unknown
+  domain: declared <scenarios> measured <passing>
+  populations: fix attempts <n>, hypotheses scored <n>, files changed <n>
+  refusals: <n> [<reason>]
+  unresolved: <n> [<reason>]
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
@@ -14662,121 +14473,121 @@ version: 1.0.0
 THIS DISTILLATION DISTILLS repeated behavioral evidence into one justified shared abstraction, and is incomplete until the old pattern is proven gone.
 
 %% META %%:
-priority: BEHAVIORAL_EVIDENCE > BOUNDARY_PRINCIPLES > TASK
-trust: procedural_scan = TRUSTED, naming_similarity = UNTRUSTED, prior_knowledge = UNTRUSTED
-objective: {task_description}
-jurisdiction: {task_description} across the role families {convention.role_taxonomy} names | external: every family the scope does not name
-recursion_limit: 3
+    priority: BEHAVIORAL_EVIDENCE > BOUNDARY_PRINCIPLES > TASK
+    trust: procedural_scan = TRUSTED, naming_similarity = UNTRUSTED, prior_knowledge = UNTRUSTED
+    objective: {task_description}
+    jurisdiction: {task_description} across the role families {convention.role_taxonomy} names | external: every family the scope does not name
+    recursion_limit: 3
 
 # NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set]
 @purpose: "load the registry and rule sources, probe capabilities, and measure the existing baseline before proposing any base"
 @genesis: existence
 CONTRACT:
-input:     {task_description}
-transform: READ_RESOURCE {project.architecture_registry} INTO registry; READ_RESOURCE {project.rule_sources} INTO rules; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; EXTRACT_FACTS <existing bases, implementation counts, hierarchy depth> FROM registry INTO baseline; FOR EACH role IN {convention.role_taxonomy}: ANALYZE_CONTENT <its classes> AGAINST <the expected base> INTO gap
-constraints: compare against existing bases before proposing a new one; a missing adoption is not a missing abstraction
-output:    baseline_bundle
+  input:     {task_description}
+  transform: READ_RESOURCE {project.architecture_registry} INTO registry; READ_RESOURCE {project.rule_sources} INTO rules; EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; EXTRACT_FACTS <existing bases, implementation counts, hierarchy depth> FROM registry INTO baseline; FOR EACH role IN {convention.role_taxonomy}: ANALYZE_CONTENT <its classes> AGAINST <the expected base> INTO gap
+  constraints: compare against existing bases before proposing a new one; a missing adoption is not a missing abstraction
+  output:    baseline_bundle
 DECLARE baseline_bundle: object
 SET baseline_bundle = {registry: registry, rules: rules, capability: capability, baseline: baseline, gap: <adoption versus abstraction per role>}
 HANDOFF GATE (evidence-bearing):
-rule_id: "ORIENT"   yields: boolean
-[check] the registry and rule sources are loaded with provenance (evidence: baseline_bundle.registry and rules)
-[check] the existing architecture is measured (evidence: baseline_bundle.baseline) over: existing bases measured: <measured> / <bases>
-[check] the compliance gap distinguishes adoption from abstraction (evidence: baseline_bundle.gap)
-refuse: a probe that would mutate the tree before EXECUTE_TOOL
-result: pass → NODE 2 | context unavailable → BLOCKED | unknown → BLOCKED
+  rule_id: "ORIENT"   yields: boolean
+  [check] the registry and rule sources are loaded with provenance (evidence: baseline_bundle.registry and rules)
+  [check] the existing architecture is measured (evidence: baseline_bundle.baseline) over: existing bases measured: <measured> / <bases>
+  [check] the compliance gap distinguishes adoption from abstraction (evidence: baseline_bundle.gap)
+  refuse: a probe that would mutate the tree before EXECUTE_TOOL
+  result: pass → NODE 2 | context unavailable → BLOCKED | unknown → BLOCKED
 
 # NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]
 @purpose: "score every candidate anti-pattern by worth and gate on the highest-worth one and its highest-worth remediation before any composition"
 @genesis: difference
 @mandatory
 CONTRACT:
-input:     baseline_bundle from NODE 1
-transform: EXTRACT_FACTS candidate anti-patterns FROM baseline_bundle.gap INTO candidates; FOR EACH candidate IN candidates: CALCULATE_METRIC impact minus effort FROM candidate INTO candidate.worth; FILTER candidates WHERE <not already covered by an existing base>; RANK candidates BY worth
-constraints: the verdict create-base, prefer-composition, prefer-utility or reject-abstraction is a worth decision, never a reflex
-output:    selected
+  input:     baseline_bundle from NODE 1
+  transform: EXTRACT_FACTS candidate anti-patterns FROM baseline_bundle.gap INTO candidates; FOR EACH candidate IN candidates: CALCULATE_METRIC impact minus effort FROM candidate INTO candidate.worth; FILTER candidates WHERE <not already covered by an existing base>; RANK candidates BY worth
+  constraints: the verdict create-base, prefer-composition, prefer-utility or reject-abstraction is a worth decision, never a reflex
+  output:    selected
 DECLARE selected: object
 SET selected = <the argmax admissible candidate with its remediation verdict, or a redirect to adopting an existing base>
 HANDOFF GATE (tel-priority injection-gate):
-rule_id: "INTENT"   yields: boolean over ranking
-[check] every candidate carries impact, effort and an admissibility verdict (evidence: candidates) over: candidates measured: <scored> / <candidates>
-[check] the selected candidate is the argmax of impact minus effort among admissible ones (evidence: the ranking's first entry)
-[check] no candidate already covered by an existing base is selected (evidence: the coverage filter)
-result: pass → NODE 3 | none admissible → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "INTENT"   yields: boolean over ranking
+  [check] every candidate carries impact, effort and an admissibility verdict (evidence: candidates) over: candidates measured: <scored> / <candidates>
+  [check] the selected candidate is the argmax of impact minus effort among admissible ones (evidence: the ranking's first entry)
+  [check] no candidate already covered by an existing base is selected (evidence: the coverage filter)
+  result: pass → NODE 3 | none admissible → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 3 — SIGN   [epistemic · analysis · graph · yields: edge-list + boolean]
 @purpose: "sign each class's behavior from evidence, surface repeated structure and inconsistency, and reason to the boundary verdict"
 @genesis: relation
 CONTRACT:
-input:     selected from NODE 2
-transform: FOR EACH class IN <the selected role family>: EXTRACT_FACTS <initialization, lifecycle, error handling, state, dependencies, orchestration> FROM class INTO signature; ANALYZE_CONTENT signatures FOR <repeated structure with occurrence counts and competing implementations> INTO patterns; ANALYZE_CONTENT patterns AGAINST <universal, invariant, foundational, enforcing, load-reducing, and domain coverage> INTO verdict
-constraints: a base needs behavioral evidence, never naming similarity; without sufficient boundary principles the verdict is composition, utility or a local refactor
-output:    boundary_verdict
+  input:     selected from NODE 2
+  transform: FOR EACH class IN <the selected role family>: EXTRACT_FACTS <initialization, lifecycle, error handling, state, dependencies, orchestration> FROM class INTO signature; ANALYZE_CONTENT signatures FOR <repeated structure with occurrence counts and competing implementations> INTO patterns; ANALYZE_CONTENT patterns AGAINST <universal, invariant, foundational, enforcing, load-reducing, and domain coverage> INTO verdict
+  constraints: a base needs behavioral evidence, never naming similarity; without sufficient boundary principles the verdict is composition, utility or a local refactor
+  output:    boundary_verdict
 DECLARE boundary_verdict: object
 SET boundary_verdict = {signatures: signatures, patterns: patterns, verdict: verdict}
 HANDOFF GATE (evidence-bearing):
-rule_id: "SIGN"   yields: boolean
-[check] every class in the family is signed from evidence, not names (evidence: signatures) over: the family measured: <signed> / <classes>
-[check] repeated structure and inconsistency are surfaced with counts (evidence: patterns)
-[check] a base verdict rests on sufficient boundary principles and coverage (evidence: boundary_verdict.verdict)
-result: pass → NODE 4 | insufficient boundary → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  rule_id: "SIGN"   yields: boolean
+  [check] every class in the family is signed from evidence, not names (evidence: signatures) over: the family measured: <signed> / <classes>
+  [check] repeated structure and inconsistency are surfaced with counts (evidence: patterns)
+  [check] a base verdict rests on sufficient boundary principles and coverage (evidence: boundary_verdict.verdict)
+  result: pass → NODE 4 | insufficient boundary → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 4 — COMPOSE AND MIGRATE   [epistemic · formalization · computation · yields: procedure]
 @purpose: "split concrete from abstract, design the template-method lifecycle, compose the base within limits, and migrate targets simple-first and reversibly"
 @genesis: structure
 CONTRACT:
-input:     boundary_verdict from NODE 3
-transform: COMPOSE_ARTIFACT base FROM boundary_verdict USING <concrete constructor, initialize, destroy, handle-error and dependency setup; abstract on-initialize, on-destroy, on-error, configure and execute-core; guard then shared then hook then error policy>; ORDER targets BY ascending complexity then dependency; FOR EACH target IN targets: PERSIST_ARTIFACT <a checkpoint> TO <the checkpoint store>; PERSIST_ARTIFACT <the migrated target> TO target; EXECUTE_TOOL {toolchain.verify.execute} WITH timeout: <bound> INTO removal
-constraints: a base over {limits.max_lines} is split; a failed migration restores its checkpoint; a base whose boundary collapsed or that blew the effort budget is inadmissible
-preserves: every behavior signed at NODE 3
-output:    migration
+  input:     boundary_verdict from NODE 3
+  transform: COMPOSE_ARTIFACT base FROM boundary_verdict USING <concrete constructor, initialize, destroy, handle-error and dependency setup; abstract on-initialize, on-destroy, on-error, configure and execute-core; guard then shared then hook then error policy>; ORDER targets BY ascending complexity then dependency; FOR EACH target IN targets: PERSIST_ARTIFACT <a checkpoint> TO <the checkpoint store>; PERSIST_ARTIFACT <the migrated target> TO target; EXECUTE_TOOL {toolchain.verify.execute} WITH timeout: <bound> INTO removal
+  constraints: a base over {limits.max_lines} is split; a failed migration restores its checkpoint; a base whose boundary collapsed or that blew the effort budget is inadmissible
+  preserves: every behavior signed at NODE 3
+  output:    migration
 DECLARE migration: object
 SET migration = {base: base, targets: <each with checkpoint, outcome and removal verdict>, admissible: <boundary still sufficient, size within limit, effort within budget, every target reversible>}
 HANDOFF GATE (evidence-bearing):
-rule_id: "COMPOSE"   yields: boolean
-[check] concrete and abstract responsibilities are split and the lifecycle is defined (evidence: base)
-[check] the base is within {limits.max_lines} with a compliant name and location (evidence: the base's size and path)
-[check] every target migrated or restored from its checkpoint (evidence: migration.targets) over: targets measured: <migrated> / <targets>
-[check] the base is admissible (evidence: migration.admissible)
-refuse: a target whose checkpoint cannot be read back before PERSIST_ARTIFACT
-result: pass → NODE 5 | inadmissible → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "COMPOSE"   yields: boolean
+  [check] concrete and abstract responsibilities are split and the lifecycle is defined (evidence: base)
+  [check] the base is within {limits.max_lines} with a compliant name and location (evidence: the base's size and path)
+  [check] every target migrated or restored from its checkpoint (evidence: migration.targets) over: targets measured: <migrated> / <targets>
+  [check] the base is admissible (evidence: migration.admissible)
+  refuse: a target whose checkpoint cannot be read back before PERSIST_ARTIFACT
+  result: pass → NODE 5 | inadmissible → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 5 — ELIMINATE   [evaluative · verification · logic + probability · yields: number]
 @purpose: "prove the old pattern is eliminated across the whole scope from real source, and migrate any straggler reversibly"
 @genesis: constraint
 @mandatory
 CONTRACT:
-input:     migration from NODE 4
-transform: SEARCH_CONTENT <the whole scope> FOR <the old pattern> INTO occurrences; FILTER occurrences WHERE <outside the approved base locations>; CALCULATE_METRIC completeness FROM occurrences INTO completeness; ANALYZE_CONTENT occurrences FOR <a stray occurrence that would refute elimination> INTO refuter
-constraints: the scan reads real source, never the migration log; a stray occurrence refutes back to NODE 4, bounded by recursion_limit
-output:    elimination
+  input:     migration from NODE 4
+  transform: SEARCH_CONTENT <the whole scope> FOR <the old pattern> INTO occurrences; FILTER occurrences WHERE <outside the approved base locations>; CALCULATE_METRIC completeness FROM occurrences INTO completeness; ANALYZE_CONTENT occurrences FOR <a stray occurrence that would refute elimination> INTO refuter
+  constraints: the scan reads real source, never the migration log; a stray occurrence refutes back to NODE 4, bounded by recursion_limit
+  output:    elimination
 DECLARE elimination: object
 SET elimination = {occurrences: occurrences, completeness: completeness, refuter: refuter}
 HANDOFF GATE (ver-stop gate):
-rule_id: "ELIMINATE"   yields: boolean
-[check] the scan ran over the whole scope from real source (evidence: the scanned file set) over: the scope measured: <scanned> / <files>
-[check] only approved base-location occurrences remain (evidence: elimination.occurrences)
-[check] a refuter is named and completeness meets its threshold (evidence: elimination.refuter and completeness)
-standing: moved-set <the files changed since NODE 4>
-result: pass → NODE 6 | stray occurrence → REPAIR (owner: NODE 4) | unknown → BLOCKED
+  rule_id: "ELIMINATE"   yields: boolean
+  [check] the scan ran over the whole scope from real source (evidence: the scanned file set) over: the scope measured: <scanned> / <files>
+  [check] only approved base-location occurrences remain (evidence: elimination.occurrences)
+  [check] a refuter is named and completeness meets its threshold (evidence: elimination.refuter and completeness)
+  standing: moved-set <the files changed since NODE 4>
+  result: pass → NODE 6 | stray occurrence → REPAIR (owner: NODE 4) | unknown → BLOCKED
 
 # NODE 6 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "regenerate the registry to the new truth, persist measured ROI deduplicated, and stop only on saturation and completion and verification"
 @genesis: emergence
 @mandatory
 CONTRACT:
-input:     elimination from NODE 5
-transform: EXECUTE_TOOL {project.registry_regenerate} WITH timeout: <bound> INTO regenerated; READ_RESOURCE {project.architecture_registry} INTO registry_after; CALCULATE_METRIC <duplication, code, adoption, lines saved, load> FROM {baseline_bundle, migration, registry_after} INTO roi; COMPOSE_ARTIFACT report FROM {migration, elimination, roi} USING <the success or blocked shape>; PERSIST_ARTIFACT report TO <{task_name} report>; REPORT_RESULT report TO <the parties whose next work it creates>
-constraints: ROI is measured, never asserted; the registry reflects the new base and the migrated implementations; a self-assessed done is not ter-stop
-output:    report
-freshness: fingerprint(registry_after) + fingerprint(this document)
+  input:     elimination from NODE 5
+  transform: EXECUTE_TOOL {project.registry_regenerate} WITH timeout: <bound> INTO regenerated; READ_RESOURCE {project.architecture_registry} INTO registry_after; CALCULATE_METRIC <duplication, code, adoption, lines saved, load> FROM {baseline_bundle, migration, registry_after} INTO roi; COMPOSE_ARTIFACT report FROM {migration, elimination, roi} USING <the success or blocked shape>; PERSIST_ARTIFACT report TO <{task_name} report>; REPORT_RESULT report TO <the parties whose next work it creates>
+  constraints: ROI is measured, never asserted; the registry reflects the new base and the migrated implementations; a self-assessed done is not ter-stop
+  output:    report
+  freshness: fingerprint(registry_after) + fingerprint(this document)
 HANDOFF GATE (ter-stop gate):
-rule_id: "TERMINATE"   yields: boolean
-[check] the registry is regenerated and reflects the new truth (evidence: registry_after names the base and the migrated implementations) over: migrated implementations measured: <represented> / <migrated>
-[check] ROI is computed from measurements and history is persisted deduplicated (evidence: roi and the history read back)
-[check] success only when saturation and completion and verification all hold (evidence: the termination set)
-refuse: a report destination that changed since it was read before PERSIST_ARTIFACT
-result: pass → TERMINATE | registry stale → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "TERMINATE"   yields: boolean
+  [check] the registry is regenerated and reflects the new truth (evidence: registry_after names the base and the migrated implementations) over: migrated implementations measured: <represented> / <migrated>
+  [check] ROI is computed from measurements and history is persisted deduplicated (evidence: roi and the history read back)
+  [check] success only when saturation and completion and verification all hold (evidence: the termination set)
+  refuse: a report destination that changed since it was read before PERSIST_ARTIFACT
+  result: pass → TERMINATE | registry stale → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT measure-before-propose: the existing baseline is measured before any base is proposed over: every distillation binds: the distiller objector: [check] the existing architecture is measured at NODE 1
@@ -14787,13 +14598,13 @@ INVARIANT gone-means-scanned: elimination is proven over the whole scope from re
 INVARIANT roi-measured: ROI is a measurement over the regenerated registry, never an assertion over: every report binds: the distiller objector: [check] ROI is computed from measurements at NODE 6
 
 REPORT:
-subject: NODE 6
-verdict: pass | fail | unknown
-domain: declared <files in scope> measured <scanned>
-populations: targets migrated <n>, targets restored <n>, occurrences remaining <n>
-refusals: <n> [<reason>]
-unresolved: <n> [<reason>]
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 6
+  verdict: pass | fail | unknown
+  domain: declared <files in scope> measured <scanned>
+  populations: targets migrated <n>, targets restored <n>, occurrences remaining <n>
+  refusals: <n> [<reason>]
+  unresolved: <n> [<reason>]
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
@@ -14874,120 +14685,120 @@ version: 1.0.0
 THIS TRANSLATION AUDITS each translated string in a locale dictionary against its fixed source through four gates, authoring corrections in place; a translation is presumed flawed until verification proves it sound.
 
 %% META %%:
-priority: SOURCE_STRING > TARGET_VALUE > TASK
-trust: source_string = FIXED, referenced_grammar = TRUSTED, fluent_appearance = UNTRUSTED, a_translation = FLAWED_UNTIL_PROVEN
-objective: {locale}
-jurisdiction: the {locale} dictionary under {project.dictionaries} | external: the source catalog, which is never altered
-recursion_limit: 3
+    priority: SOURCE_STRING > TARGET_VALUE > TASK
+    trust: source_string = FIXED, referenced_grammar = TRUSTED, fluent_appearance = UNTRUSTED, a_translation = FLAWED_UNTIL_PROVEN
+    objective: {locale}
+    jurisdiction: the {locale} dictionary under {project.dictionaries} | external: the source catalog, which is never altered
+    recursion_limit: 3
 
 # NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set]
 @purpose: "load the dictionary, config and manifest, probe research, hold the linguistic reference, and kind every entry"
 @genesis: existence
 CONTRACT:
-input:     the {locale} dictionary
-transform: READ_RESOURCE {project.dictionaries} INTO dictionary; READ_RESOURCE {project.i18n_config} INTO config; READ_RESOURCE {project.audit_manifest} INTO manifest; EXECUTE_TOOL <a research probe> WITH timeout: <bound> INTO research; FOR EACH entry IN dictionary: CLASSIFY entry BY <translated when the value differs from the source key, untranslated when it equals it>
-constraints: the source key is fixed; the file is audited and authored in place; research availability is disclosed
-output:    scope
+  input:     the {locale} dictionary
+  transform: READ_RESOURCE {project.dictionaries} INTO dictionary; READ_RESOURCE {project.i18n_config} INTO config; READ_RESOURCE {project.audit_manifest} INTO manifest; EXECUTE_TOOL <a research probe> WITH timeout: <bound> INTO research; FOR EACH entry IN dictionary: CLASSIFY entry BY <translated when the value differs from the source key, untranslated when it equals it>
+  constraints: the source key is fixed; the file is audited and authored in place; research availability is disclosed
+  output:    scope
 DECLARE scope: object
 SET scope = {dictionary: dictionary, protected: {convention.protected_terms}, rtl: <true when {locale} is in {convention.rtl_locales}>, manifest: manifest, research: research, reference: <the target language's morphology, syntax, register and terminology>, entries: <every entry with its kind>}
 HANDOFF GATE (evidence-bearing):
-rule_id: "ORIENT"   yields: boolean
-[check] the dictionary, config and manifest are loaded (evidence: scope.dictionary, protected and manifest)
-[check] research availability is probed and disclosed (evidence: scope.research)
-[check] every entry is kinded (evidence: scope.entries) over: dictionary entries measured: <kinded> / <entries>
-refuse: a probe that would write the dictionary before EXECUTE_TOOL
-result: pass → NODE 2 | dictionary unreadable → BLOCKED | unknown → BLOCKED
+  rule_id: "ORIENT"   yields: boolean
+  [check] the dictionary, config and manifest are loaded (evidence: scope.dictionary, protected and manifest)
+  [check] research availability is probed and disclosed (evidence: scope.research)
+  [check] every entry is kinded (evidence: scope.entries) over: dictionary entries measured: <kinded> / <entries>
+  refuse: a probe that would write the dictionary before EXECUTE_TOOL
+  result: pass → NODE 2 | dictionary unreadable → BLOCKED | unknown → BLOCKED
 
 # NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]
 @purpose: "choose per entry the audit method, research or first principles, by worth, and order flawed and untranslated entries first"
 @genesis: difference
 @mandatory
 CONTRACT:
-input:     scope from NODE 1
-transform: FOR EACH entry IN scope.entries: CALCULATE_METRIC uncertainty times visibility FROM entry INTO entry.worth; FOR EACH entry IN scope.entries: DETERMINE <research when worth is high and research is available, else first principles> INTO entry.method; ORDER scope.entries BY <flawed and untranslated first, then worth>
-constraints: every entry is in scope, untranslated entries are gaps to fill; a high-visibility uncertain entry is never left to a cheap guess
-output:    ordered
+  input:     scope from NODE 1
+  transform: FOR EACH entry IN scope.entries: CALCULATE_METRIC uncertainty times visibility FROM entry INTO entry.worth; FOR EACH entry IN scope.entries: DETERMINE <research when worth is high and research is available, else first principles> INTO entry.method; ORDER scope.entries BY <flawed and untranslated first, then worth>
+  constraints: every entry is in scope, untranslated entries are gaps to fill; a high-visibility uncertain entry is never left to a cheap guess
+  output:    ordered
 DECLARE ordered: array
 SET ordered = <every entry with its worth, method and position>
 HANDOFF GATE (tel-priority injection-gate):
-rule_id: "INTENT"   yields: boolean over ranking
-[check] every entry carries a chosen method (evidence: ordered) over: scope.entries measured: <with method> / <entries>
-[check] each method is the argmax of assurance times visibility minus research cost (evidence: the per-entry choice)
-[check] no high-visibility uncertain entry is left to a cheap guess (evidence: the worth order against the methods)
-result: pass → NODE 3 | guess on a high-worth entry → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  rule_id: "INTENT"   yields: boolean over ranking
+  [check] every entry carries a chosen method (evidence: ordered) over: scope.entries measured: <with method> / <entries>
+  [check] each method is the argmax of assurance times visibility minus research cost (evidence: the per-entry choice)
+  [check] no high-visibility uncertain entry is left to a cheap guess (evidence: the worth order against the methods)
+  result: pass → NODE 3 | guess on a high-worth entry → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — GATES   [epistemic · reasoning · logic · yields: set]
 @purpose: "select the target language's linguistic lenses and derive the four gate requirements every entry must satisfy"
 @genesis: relation
 CONTRACT:
-input:     ordered from NODE 2
-transform: DETERMINE <the lenses the target language exhibits: structural, semantic, relational, sequential, spatial only for an RTL locale, anomaly> INTO lenses; COMPOSE_ARTIFACT gates FROM lenses USING <A structural integrity, B adequacy, C fluency, D consistency>
-constraints: the RTL lens is active if and only if {locale} is in {convention.rtl_locales}; a single failed gate means flawed
-output:    gates
+  input:     ordered from NODE 2
+  transform: DETERMINE <the lenses the target language exhibits: structural, semantic, relational, sequential, spatial only for an RTL locale, anomaly> INTO lenses; COMPOSE_ARTIFACT gates FROM lenses USING <A structural integrity, B adequacy, C fluency, D consistency>
+  constraints: the RTL lens is active if and only if {locale} is in {convention.rtl_locales}; a single failed gate means flawed
+  output:    gates
 DECLARE gates: object
 SET gates = {lenses: lenses, A: <placeholders verbatim once, protected terms verbatim, no leftover fragment or artifact>, B: <the same proposition, no dropped or added meaning>, C: <agreement, order, definiteness, particles, verb forms, script, RTL>, D: <one rendering per source term, conventional affordances, uniform tone>}
 HANDOFF GATE (evidence-bearing):
-rule_id: "GATES"   yields: boolean
-[check] the applicable lenses are selected (evidence: gates.lenses) over: the language's lenses measured: <selected> / <lenses>
-[check] the RTL lens is active if and only if the locale is RTL (evidence: gates.lenses against scope.rtl)
-[check] the four gates are bound to the lenses (evidence: gates.A through gates.D)
-result: pass → NODE 4 | lens mismatch → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "GATES"   yields: boolean
+  [check] the applicable lenses are selected (evidence: gates.lenses) over: the language's lenses measured: <selected> / <lenses>
+  [check] the RTL lens is active if and only if the locale is RTL (evidence: gates.lenses against scope.rtl)
+  [check] the four gates are bound to the lenses (evidence: gates.A through gates.D)
+  result: pass → NODE 4 | lens mismatch → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 4 — AUDIT   [epistemic · formalization · analysis · yields: operation]
 @purpose: "process every entry through the four gates in genesis order and author corrections and translations in place"
 @genesis: transformation
 CONTRACT:
-input:     gates from NODE 3
-transform: ORDER ordered BY <genesis rank, consistency after the entries it depends on>; FOR EACH entry IN ordered: VALIDATE_ARTIFACT entry AGAINST gates INTO entry.finding; FOR EACH entry IN <flawed or untranslated>: COMPOSE_ARTIFACT value FROM entry USING <its method, protected terms and placeholders verbatim>; PERSIST_ARTIFACT value TO dictionary
-constraints: the source key and the source catalog are never altered; a grammar claim carries a reference or a first-principles justification
-preserves: every placeholder and every protected term, verbatim
-output:    findings
+  input:     gates from NODE 3
+  transform: ORDER ordered BY <genesis rank, consistency after the entries it depends on>; FOR EACH entry IN ordered: VALIDATE_ARTIFACT entry AGAINST gates INTO entry.finding; FOR EACH entry IN <flawed or untranslated>: COMPOSE_ARTIFACT value FROM entry USING <its method, protected terms and placeholders verbatim>; PERSIST_ARTIFACT value TO dictionary
+  constraints: the source key and the source catalog are never altered; a grammar claim carries a reference or a first-principles justification
+  preserves: every placeholder and every protected term, verbatim
+  output:    findings
 DECLARE findings: array
 SET findings = <one per entry: verdict, failing gates, justification with a reference when researched, correction>
 HANDOFF GATE (evidence-bearing):
-rule_id: "AUDIT"   yields: boolean
-[check] every entry ran all four gates (evidence: findings) over: ordered measured: <audited> / <entries>
-[check] no grammar claim lacks a reference or a first-principles justification (evidence: findings.justification)
-[check] flawed and untranslated values are authored in place with the source key untouched (evidence: the dictionary read back against the source catalog)
-refuse: a value that would alter a source key, a placeholder or a protected term before PERSIST_ARTIFACT
-result: pass → NODE 5 | source touched → REPAIR (owner: NODE 4) | unknown → BLOCKED
+  rule_id: "AUDIT"   yields: boolean
+  [check] every entry ran all four gates (evidence: findings) over: ordered measured: <audited> / <entries>
+  [check] no grammar claim lacks a reference or a first-principles justification (evidence: findings.justification)
+  [check] flawed and untranslated values are authored in place with the source key untouched (evidence: the dictionary read back against the source catalog)
+  refuse: a value that would alter a source key, a placeholder or a protected term before PERSIST_ARTIFACT
+  result: pass → NODE 5 | source touched → REPAIR (owner: NODE 4) | unknown → BLOCKED
 
 # NODE 5 — RE-VERIFY   [evaluative · verification · logic + probability · yields: number]
 @purpose: "gate the corrections on integrity, then re-verify every correction against its own four gates until zero flawed remain"
 @genesis: constraint
 @mandatory
 CONTRACT:
-input:     findings from NODE 4
-transform: FOR EACH correction IN <corrected or authored entries>: VALIDATE_ARTIFACT correction AGAINST <placeholders and protected terms exactly, source untouched> INTO integrity; FOR EACH correction IN <corrected or authored entries>: VALIDATE_ARTIFACT correction AGAINST gates INTO recheck; ANALYZE_CONTENT recheck FOR <the native error that would refute soundness> INTO refuter
-constraints: a correction is flawed until proven by its own gates; fluency is not adequacy, so B and C both run; a claim that cannot be researched or first-principled leaves the entry flagged; repair is bounded by recursion_limit
-output:    adjudication
+  input:     findings from NODE 4
+  transform: FOR EACH correction IN <corrected or authored entries>: VALIDATE_ARTIFACT correction AGAINST <placeholders and protected terms exactly, source untouched> INTO integrity; FOR EACH correction IN <corrected or authored entries>: VALIDATE_ARTIFACT correction AGAINST gates INTO recheck; ANALYZE_CONTENT recheck FOR <the native error that would refute soundness> INTO refuter
+  constraints: a correction is flawed until proven by its own gates; fluency is not adequacy, so B and C both run; a claim that cannot be researched or first-principled leaves the entry flagged; repair is bounded by recursion_limit
+  output:    adjudication
 DECLARE adjudication: object
 SET adjudication = {integrity: integrity, recheck: recheck, remaining_flawed: <entries still flawed>, refuter: refuter}
 HANDOFF GATE (ver-stop gate):
-rule_id: "VERIFY"   yields: boolean
-[check] every correction preserves its placeholders and protected terms and the source is untouched (evidence: adjudication.integrity) over: corrections measured: <intact> / <corrections>
-[check] gates B and C both ran on every correction and a refuter is named (evidence: adjudication.recheck and refuter)
-[check] zero flawed remain (evidence: adjudication.remaining_flawed)
-standing: moved-set <the dictionary re-read since NODE 4>
-result: pass → NODE 6 | still flawed → REPAIR (owner: NODE 4) | unverifiable claim → BLOCKED | unknown → BLOCKED
+  rule_id: "VERIFY"   yields: boolean
+  [check] every correction preserves its placeholders and protected terms and the source is untouched (evidence: adjudication.integrity) over: corrections measured: <intact> / <corrections>
+  [check] gates B and C both ran on every correction and a refuter is named (evidence: adjudication.recheck and refuter)
+  [check] zero flawed remain (evidence: adjudication.remaining_flawed)
+  standing: moved-set <the dictionary re-read since NODE 4>
+  result: pass → NODE 6 | still flawed → REPAIR (owner: NODE 4) | unverifiable claim → BLOCKED | unknown → BLOCKED
 
 # NODE 6 — SIGN OFF   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "compose the report deduplicated, and sign off only on saturation and completion and verification, otherwise leave the locale blocked"
 @genesis: emergence
 @mandatory
 CONTRACT:
-input:     adjudication from NODE 5
-transform: COMPOSE_ARTIFACT report FROM {findings, adjudication} USING <the counts and the full flawed table with justifications>; REDUCE report.rows TO <one per entry>; EXECUTE_TOOL {project.i18n_audit_ok_command} WITH timeout: <bound> INTO signed; EXECUTE_TOOL {project.i18n_audit_command} WITH timeout: <bound> INTO status; PERSIST_ARTIFACT report TO <{task_name} report>
-constraints: sign-off runs only at zero flawed with every correction re-verified; the source is fixed and the translation bends; a self-assessed done is not ter-stop
-output:    report
-freshness: fingerprint(dictionary) + fingerprint(this document)
+  input:     adjudication from NODE 5
+  transform: COMPOSE_ARTIFACT report FROM {findings, adjudication} USING <the counts and the full flawed table with justifications>; REDUCE report.rows TO <one per entry>; EXECUTE_TOOL {project.i18n_audit_ok_command} WITH timeout: <bound> INTO signed; EXECUTE_TOOL {project.i18n_audit_command} WITH timeout: <bound> INTO status; PERSIST_ARTIFACT report TO <{task_name} report>
+  constraints: sign-off runs only at zero flawed with every correction re-verified; the source is fixed and the translation bends; a self-assessed done is not ter-stop
+  output:    report
+  freshness: fingerprint(dictionary) + fingerprint(this document)
 HANDOFF GATE (ter-stop gate):
-rule_id: "TERMINATE"   yields: boolean
-[check] the report names the counts and the full flawed table, deduplicated (evidence: report) over: dictionary entries measured: <reported> / <entries>
-[check] sign-off ran only at zero flawed and the audit command reports the locale clean (evidence: signed and status)
-[check] exactly one terminal, signed off or blocked, within recursion_limit (evidence: report and the repair count)
-refuse: a non-zero flawed count before EXECUTE_TOOL of the sign-off command
-result: pass → TERMINATE | locale still blocked → BLOCKED | unknown → BLOCKED
+  rule_id: "TERMINATE"   yields: boolean
+  [check] the report names the counts and the full flawed table, deduplicated (evidence: report) over: dictionary entries measured: <reported> / <entries>
+  [check] sign-off ran only at zero flawed and the audit command reports the locale clean (evidence: signed and status)
+  [check] exactly one terminal, signed off or blocked, within recursion_limit (evidence: report and the repair count)
+  refuse: a non-zero flawed count before EXECUTE_TOOL of the sign-off command
+  result: pass → TERMINATE | locale still blocked → BLOCKED | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT source-fixed: the source key and the source catalog are never altered over: every entry binds: the auditor objector: [check] the source key untouched at NODE 4
@@ -14998,13 +14809,13 @@ INVARIANT referenced-grammar: a grammar claim carries a reference or a first-pri
 INVARIANT sign-off-at-zero: a locale is signed off only at zero flawed over: every locale binds: the auditor objector: [check] sign-off ran only at zero flawed at NODE 6
 
 REPORT:
-subject: NODE 6
-verdict: pass | fail | unknown
-domain: declared <entries> measured <audited>
-populations: sound <n>, flawed <n>, corrected <n>, untranslated filled <n>
-refusals: <n> [<reason>]
-unresolved: <n> [<reason>]
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 6
+  verdict: pass | fail | unknown
+  domain: declared <entries> measured <audited>
+  populations: sound <n>, flawed <n>, corrected <n>, untranslated filled <n>
+  refusals: <n> [<reason>]
+  unresolved: <n> [<reason>]
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
@@ -15073,121 +14884,121 @@ version: 1.0.0
 THIS VERIFICATION PERFORMS a forensic adjudication that classifies every context claim verified, contradicted or unverified against observable implementation evidence, with detectors calibrated and adversarially tested before any claim is trusted.
 
 %% META %%:
-priority: EVIDENCE > TRUST_ANCHOR > TASK
-trust: implementation_observation = TRUSTED, prior_knowledge = UNTRUSTED, a_claim = UNTRUSTED_UNTIL_MAPPED
-objective: {context_claims}
-jurisdiction: {context_claims} about {target} | external: the runtime, filesystem, command execution and tool io the trust anchor discloses
-recursion_limit: {convention.max_recursion_depth}
+    priority: EVIDENCE > TRUST_ANCHOR > TASK
+    trust: implementation_observation = TRUSTED, prior_knowledge = UNTRUSTED, a_claim = UNTRUSTED_UNTIL_MAPPED
+    objective: {context_claims}
+    jurisdiction: {context_claims} about {target} | external: the runtime, filesystem, command execution and tool io the trust anchor discloses
+    recursion_limit: {convention.max_recursion_depth}
 
 # NODE 1 — ORIENT   [epistemic · ontology · set-theory · yields: set]
 @purpose: "disclose the trust anchor, bind one op-set, and kind every claim by its ontological dimension before touching any claim"
 @genesis: existence
 CONTRACT:
-input:     {context_claims} about {target}
-transform: EXTRACT_FACTS <the minimal assumptions and the cannot-verify-the-verifier boundary> FROM <this document> INTO anchor; DETERMINE <INVESTIGATE or ACTION> INTO op_set; FOR EACH claim IN {context_claims}: CLASSIFY claim BY <its ontological dimension and evidence shape>
-constraints: the anchor is disclosed, never verified; INVESTIGATE allows gap discovery, testing and documentation and forbids mutation; ACTION allows a bounded fix and forbids discovery; the two are disjoint
-output:    run_context
+  input:     {context_claims} about {target}
+  transform: EXTRACT_FACTS <the minimal assumptions and the cannot-verify-the-verifier boundary> FROM <this document> INTO anchor; DETERMINE <INVESTIGATE or ACTION> INTO op_set; FOR EACH claim IN {context_claims}: CLASSIFY claim BY <its ontological dimension and evidence shape>
+  constraints: the anchor is disclosed, never verified; INVESTIGATE allows gap discovery, testing and documentation and forbids mutation; ACTION allows a bounded fix and forbids discovery; the two are disjoint
+  output:    run_context
 DECLARE run_context: object
 SET run_context = {anchor: anchor, op_set: op_set, claims: <every claim with its kind, evidence shape and math type>}
 HANDOFF GATE (evidence-bearing):
-rule_id: "ORIENT"   yields: boolean
-[check] the trust anchor is disclosed with its assumptions and boundary (evidence: run_context.anchor)
-[check] exactly one op-set is bound and its allowed and forbidden operations are disjoint (evidence: run_context.op_set)
-[check] every claim carries a kind and an evidence shape (evidence: run_context.claims) over: {context_claims} measured: <kinded> / <claims>
-result: pass → NODE 2 | unkinded claim → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "ORIENT"   yields: boolean
+  [check] the trust anchor is disclosed with its assumptions and boundary (evidence: run_context.anchor)
+  [check] exactly one op-set is bound and its allowed and forbidden operations are disjoint (evidence: run_context.op_set)
+  [check] every claim carries a kind and an evidence shape (evidence: run_context.claims) over: {context_claims} measured: <kinded> / <claims>
+  result: pass → NODE 2 | unkinded claim → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — INTENT   [conative · teleology · optimization · yields: ranking]
 @purpose: "rank claims by verification worth and choose the method per claim by utility minus cost before probing anything"
 @genesis: difference
 @mandatory
 CONTRACT:
-input:     run_context from NODE 1
-transform: FOR EACH claim IN run_context.claims: CALCULATE_METRIC risk times uncertainty FROM claim INTO claim.worth; FOR EACH claim IN run_context.claims: RANK <its admissible methods> BY risk-weighted coverage minus cost
-constraints: a method is admissible only when its capability is available; a high-worth claim with no admissible method is marked will-be-unverified, never inverted below a low-worth escalation
-output:    methods
+  input:     run_context from NODE 1
+  transform: FOR EACH claim IN run_context.claims: CALCULATE_METRIC risk times uncertainty FROM claim INTO claim.worth; FOR EACH claim IN run_context.claims: RANK <its admissible methods> BY risk-weighted coverage minus cost
+  constraints: a method is admissible only when its capability is available; a high-worth claim with no admissible method is marked will-be-unverified, never inverted below a low-worth escalation
+  output:    methods
 DECLARE methods: array
 SET methods = <one chosen method per claim, the argmax admissible one>
 HANDOFF GATE (tel-priority injection-gate):
-rule_id: "INTENT"   yields: boolean over ranking
-[check] every claim carries a worth and a chosen method (evidence: methods) over: run_context.claims measured: <with method> / <claims>
-[check] each chosen method is the argmax of risk-weighted coverage minus cost (evidence: the per-claim ranking)
-[check] no high-worth claim is left unmapped while a low-worth claim escalates (evidence: the worth order against the escalations)
-result: pass → NODE 3 | priority inversion → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  rule_id: "INTENT"   yields: boolean over ranking
+  [check] every claim carries a worth and a chosen method (evidence: methods) over: run_context.claims measured: <with method> / <claims>
+  [check] each chosen method is the argmax of risk-weighted coverage minus cost (evidence: the per-claim ranking)
+  [check] no high-worth claim is left unmapped while a low-worth claim escalates (evidence: the worth order against the escalations)
+  result: pass → NODE 3 | priority inversion → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — CALIBRATE   [epistemic · analysis · graph · yields: set + boolean]
 @purpose: "probe the runtime, calibrate every detector the chosen methods use against both controls, and arm the defenses before trusting any tool"
 @genesis: relation
 CONTRACT:
-input:     methods from NODE 2
-transform: EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; FOR EACH detector IN <the detectors the methods need>: EXECUTE_TOOL detector WITH <a known-good and a known-bad fixture> INTO detector.reliability; <arm sanitize, safe arithmetic and recursion control to {convention.max_recursion_depth}>
-constraints: a detector is untrusted until it passes both controls; probing is by capability, never by an operating-system string
-output:    capability_plan
+  input:     methods from NODE 2
+  transform: EXECUTE_TOOL <capability probes> WITH timeout: <bound> INTO capability; FOR EACH detector IN <the detectors the methods need>: EXECUTE_TOOL detector WITH <a known-good and a known-bad fixture> INTO detector.reliability; <arm sanitize, safe arithmetic and recursion control to {convention.max_recursion_depth}>
+  constraints: a detector is untrusted until it passes both controls; probing is by capability, never by an operating-system string
+  output:    capability_plan
 DECLARE capability_plan: object
 SET capability_plan = {mode: <full, degraded or blocked>, detectors: <each with its reliability>, defenses: <armed>}
 HANDOFF GATE (evidence-bearing):
-rule_id: "CALIBRATE"   yields: boolean
-[check] capabilities probed and classified (evidence: capability_plan.mode)
-[check] every needed detector ran both the false-positive and the false-negative control (evidence: detector.reliability) over: needed detectors measured: <calibrated> / <detectors>
-[check] the defenses are armed (evidence: capability_plan.defenses)
-refuse: a probe that would mutate the target before EXECUTE_TOOL
-result: pass → NODE 4 | unreliable detector → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  rule_id: "CALIBRATE"   yields: boolean
+  [check] capabilities probed and classified (evidence: capability_plan.mode)
+  [check] every needed detector ran both the false-positive and the false-negative control (evidence: detector.reliability) over: needed detectors measured: <calibrated> / <detectors>
+  [check] the defenses are armed (evidence: capability_plan.defenses)
+  refuse: a probe that would mutate the target before EXECUTE_TOOL
+  result: pass → NODE 4 | unreliable detector → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 4 — GATHER   [epistemic · formalization · computation · yields: set]
 @purpose: "resolve each claim to an observable evidence requirement, order by verdict genesis, gather observations from the implementation, and hold the op-set"
 @genesis: transformation
 CONTRACT:
-input:     capability_plan from NODE 3
-transform: FOR EACH claim IN run_context.claims: EXTRACT_FACTS <the observation that would settle it> FROM claim INTO requirement; ORDER requirements BY genesis rank then dependency; FOR EACH requirement IN requirements: READ_RESOURCE <the implementation it names> INTO observation
-constraints: a requirement names the settling observation, never a presumed verdict; an observation is gathered, never inferred; a string crosses a boundary only after sanitize; a mutation under INVESTIGATE or a discovery under ACTION is inadmissible
-preserves: the distinction between observed, pending escalation and absent
-output:    observations
+  input:     capability_plan from NODE 3
+  transform: FOR EACH claim IN run_context.claims: EXTRACT_FACTS <the observation that would settle it> FROM claim INTO requirement; ORDER requirements BY genesis rank then dependency; FOR EACH requirement IN requirements: READ_RESOURCE <the implementation it names> INTO observation
+  constraints: a requirement names the settling observation, never a presumed verdict; an observation is gathered, never inferred; a string crosses a boundary only after sanitize; a mutation under INVESTIGATE or a discovery under ACTION is inadmissible
+  preserves: the distinction between observed, pending escalation and absent
+  output:    observations
 DECLARE observations: array
 SET observations = <one per direct requirement, each bound to real implementation, escalations flagged pending>
 HANDOFF GATE (evidence-bearing):
-rule_id: "GATHER"   yields: boolean
-[check] every claim resolves to an observable requirement naming the settling observation (evidence: requirements) over: run_context.claims measured: <mapped> / <claims>
-[check] every direct requirement produced an observation from the implementation and none was inferred (evidence: observations)
-[check] the op-set was honored, every boundary cross was sanitized and recursion stayed bounded (evidence: the admissibility record)
-result: pass → NODE 5 | inadmissible act → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "GATHER"   yields: boolean
+  [check] every claim resolves to an observable requirement naming the settling observation (evidence: requirements) over: run_context.claims measured: <mapped> / <claims>
+  [check] every direct requirement produced an observation from the implementation and none was inferred (evidence: observations)
+  [check] the op-set was honored, every boundary cross was sanitized and recursion stayed bounded (evidence: the admissibility record)
+  result: pass → NODE 5 | inadmissible act → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 5 — ADJUDICATE   [evaluative · verification · logic + probability · yields: set + number]
 @purpose: "judge each observation against evidence, behavioral contract and hostile inputs, judge this agent's own claims, and resolve escalations without inference"
 @genesis: constraint
 @mandatory
 CONTRACT:
-input:     observations from NODE 4
-transform: FOR EACH observation IN observations: CLASSIFY observation BY <verified, contradicted or unverified>; EXECUTE_TOOL <the detectors> WITH <traversal, null-byte, homoglyph, comment and spoof inputs> INTO adversarial; ANALYZE_CONTENT {self.definition} AGAINST <its own must and always claims> INTO self_audit; FOR EACH escalation IN <pending escalations>: <build a bounded tool or mark the claim unverified>
-constraints: a match is not evidence until the calibration and adversarial verdicts hold; an overclaim downgrades confidence below threshold; an escalation is never resolved by inference; a stale write is rewritten as complete state
-output:    adjudication
+  input:     observations from NODE 4
+  transform: FOR EACH observation IN observations: CLASSIFY observation BY <verified, contradicted or unverified>; EXECUTE_TOOL <the detectors> WITH <traversal, null-byte, homoglyph, comment and spoof inputs> INTO adversarial; ANALYZE_CONTENT {self.definition} AGAINST <its own must and always claims> INTO self_audit; FOR EACH escalation IN <pending escalations>: <build a bounded tool or mark the claim unverified>
+  constraints: a match is not evidence until the calibration and adversarial verdicts hold; an overclaim downgrades confidence below threshold; an escalation is never resolved by inference; a stale write is rewritten as complete state
+  output:    adjudication
 DECLARE adjudication: object
 SET adjudication = {verdicts: <one per claim>, adversarial: adversarial, self_audit: self_audit, confidence: <a number in zero to one>, refuter: <what would flip a verdict>}
 HANDOFF GATE (ver-stop gate):
-rule_id: "ADJUDICATE"   yields: boolean
-[check] every claim is classified with its evidence and a refuter is named (evidence: adjudication.verdicts) over: run_context.claims measured: <classified> / <claims>
-[check] every detector survived the adversarial inputs with the expected outcome (evidence: adjudication.adversarial)
-[check] the recursive self-audit ran and an overclaim downgraded confidence (evidence: adjudication.self_audit)
-[check] no pending escalation remains unresolved by tool or by an unverified mark (evidence: the escalation record)
-refuse: an adversarial input that would escape the intended root before EXECUTE_TOOL
-standing: moved-set <the implementation files re-read since NODE 4>
-result: pass → NODE 6 | untested match → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  rule_id: "ADJUDICATE"   yields: boolean
+  [check] every claim is classified with its evidence and a refuter is named (evidence: adjudication.verdicts) over: run_context.claims measured: <classified> / <claims>
+  [check] every detector survived the adversarial inputs with the expected outcome (evidence: adjudication.adversarial)
+  [check] the recursive self-audit ran and an overclaim downgraded confidence (evidence: adjudication.self_audit)
+  [check] no pending escalation remains unresolved by tool or by an unverified mark (evidence: the escalation record)
+  refuse: an adversarial input that would escape the intended root before EXECUTE_TOOL
+  standing: moved-set <the implementation files re-read since NODE 4>
+  result: pass → NODE 6 | untested match → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # NODE 6 — TERMINATE   [evaluative · termination · set-theory · yields: artifact]
 @purpose: "emit exactly one typed artifact, deduplicated, naming every limitation, and stop only on saturation and completion and verification"
 @genesis: emergence
 @mandatory
 CONTRACT:
-input:     adjudication from NODE 5
-transform: COMPOSE_ARTIFACT artifact FROM {run_context, adjudication} USING <the investigation report, the action log, or the blocked report>; REDUCE artifact.findings TO <one per claim and verdict>; PERSIST_ARTIFACT artifact TO <{task_name} report>; REPORT_RESULT artifact TO <the parties whose next work it creates>
-constraints: exactly one artifact, bound at orientation; a self-assessed done is not ter-stop
-output:    artifact
-freshness: fingerprint(adjudication) + fingerprint(this document)
+  input:     adjudication from NODE 5
+  transform: COMPOSE_ARTIFACT artifact FROM {run_context, adjudication} USING <the investigation report, the action log, or the blocked report>; REDUCE artifact.findings TO <one per claim and verdict>; PERSIST_ARTIFACT artifact TO <{task_name} report>; REPORT_RESULT artifact TO <the parties whose next work it creates>
+  constraints: exactly one artifact, bound at orientation; a self-assessed done is not ter-stop
+  output:    artifact
+  freshness: fingerprint(adjudication) + fingerprint(this document)
 HANDOFF GATE (ter-stop gate):
-rule_id: "TERMINATE"   yields: boolean
-[check] exactly one typed artifact names every limitation, warning and vulnerability (evidence: artifact)
-[check] success only when saturation and completion and verification all hold (evidence: the termination set) over: the termination set measured: <holding> / <three>
-[check] findings are deduplicated by claim and verdict (evidence: the reduction pass)
-refuse: a report destination that changed since it was read before PERSIST_ARTIFACT
-result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "TERMINATE"   yields: boolean
+  [check] exactly one typed artifact names every limitation, warning and vulnerability (evidence: artifact)
+  [check] success only when saturation and completion and verification all hold (evidence: the termination set) over: the termination set measured: <holding> / <three>
+  [check] findings are deduplicated by claim and verdict (evidence: the reduction pass)
+  refuse: a report destination that changed since it was read before PERSIST_ARTIFACT
+  result: pass → TERMINATE | integrity defect → REPAIR (owner: NODE 6) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT anchor-disclosed: the trust anchor is disclosed, never verified, and everything above it is verified over: every run binds: the verifier objector: [check] the trust anchor is disclosed at NODE 1
@@ -15199,13 +15010,13 @@ INVARIANT self-not-exempt: this agent's own claims are audited by the same rules
 INVARIANT escalate-never-infer: a missing capability builds a tool or marks the claim unverified over: every escalation binds: the verifier objector: [check] no pending escalation remains at NODE 5
 
 REPORT:
-subject: NODE 6
-verdict: pass | fail | unknown
-domain: declared <claims> measured <classified>
-populations: verified <n>, contradicted <n>, unverified <n>
-refusals: <n> [<reason>]
-unresolved: <n> [<reason>]
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 6
+  verdict: pass | fail | unknown
+  domain: declared <claims> measured <classified>
+  populations: verified <n>, contradicted <n>, unverified <n>
+  refusals: <n> [<reason>]
+  unresolved: <n> [<reason>]
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 
@@ -15289,53 +15100,53 @@ version: 1.0.0
 THIS WORKFLOW EXECUTES {WORKFLOW_PURPOSE}
 
 %% META %%:
-intent: "{WORKFLOW_INTENT}"
-objective: "{OBJECTIVE}"
-jurisdiction: {INPUT_SOURCE} and {OUTPUT_TARGET} | external: every other surface
-recursion_limit: 2
+    intent: "{WORKFLOW_INTENT}"
+    objective: "{OBJECTIVE}"
+    jurisdiction: {INPUT_SOURCE} and {OUTPUT_TARGET} | external: every other surface
+    recursion_limit: 2
 
 # NODE 1 — {NODE_ONE_TITLE}   [epistemic · analysis · set-theory · yields: set]
 @purpose: "read the input and see it through the analysis the workflow is for"
 @genesis: existence
 CONTRACT:
-input:     {INPUT_SOURCE}
-transform: READ_RESOURCE {INPUT_SOURCE} INTO input; ANALYZE_CONTENT input AGAINST {ANALYSIS_TARGET} INTO analysis
-output:    analysis
+  input:     {INPUT_SOURCE}
+  transform: READ_RESOURCE {INPUT_SOURCE} INTO input; ANALYZE_CONTENT input AGAINST {ANALYSIS_TARGET} INTO analysis
+  output:    analysis
 HANDOFF GATE (evidence-bearing):
-[check] input read from {INPUT_SOURCE} (evidence: the read returned content) over: {INPUT_SOURCE} measured: <read> / <declared>
-[check] analysis produced (evidence: a count above zero)
-[check] every entry of analysis names its source in input (evidence: no entry with an empty source)
-result: pass → NODE 2 | empty → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  [check] input read from {INPUT_SOURCE} (evidence: the read returned content) over: {INPUT_SOURCE} measured: <read> / <declared>
+  [check] analysis produced (evidence: a count above zero)
+  [check] every entry of analysis names its source in input (evidence: no entry with an empty source)
+  result: pass → NODE 2 | empty → REPAIR (owner: NODE 1) | unknown → BLOCKED
 
 # NODE 2 — {NODE_TWO_TITLE}   [epistemic · formalization · computation · yields: procedure]
 @purpose: "transform every item by one rule, preserving what the next node needs"
 @genesis: transformation
 CONTRACT:
-input:     analysis from NODE 1
-transform: FOR EACH item IN analysis: COMPOSE_ARTIFACT result FROM item USING {TRANSFORM_RULE}; APPEND result TO results
-preserves: the source of every item
-output:    results
+  input:     analysis from NODE 1
+  transform: FOR EACH item IN analysis: COMPOSE_ARTIFACT result FROM item USING {TRANSFORM_RULE}; APPEND result TO results
+  preserves: the source of every item
+  output:    results
 HANDOFF GATE:
-[check] one result per item (evidence: the two counts match) over: analysis measured: <transformed> / <items>
-[check] every result conforms to {TRANSFORM_RULE} (evidence: VALIDATE_ARTIFACT passed on each)
-[check] analysis unchanged (evidence: a witness read)
-result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
+  [check] one result per item (evidence: the two counts match) over: analysis measured: <transformed> / <items>
+  [check] every result conforms to {TRANSFORM_RULE} (evidence: VALIDATE_ARTIFACT passed on each)
+  [check] analysis unchanged (evidence: a witness read)
+  result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED
 
 # NODE 3 — FINALIZATION   [evaluative · representation · information-theory · yields: artifact]
 @purpose: "persist the results once, refuse a stale destination, and report to the parties whose next work they create"
 @genesis: constraint
 CONTRACT:
-input:     results from NODE 2
-transform: PERSIST_ARTIFACT results TO {OUTPUT_TARGET}; REPORT_RESULT completion TO <the parties whose next work it creates>
-output:    {OUTPUT_TARGET}
-freshness: fingerprint(results) + fingerprint(this document)
+  input:     results from NODE 2
+  transform: PERSIST_ARTIFACT results TO {OUTPUT_TARGET}; REPORT_RESULT completion TO <the parties whose next work it creates>
+  output:    {OUTPUT_TARGET}
+  freshness: fingerprint(results) + fingerprint(this document)
 HANDOFF GATE:
-[check] {OUTPUT_TARGET} persisted (evidence: a read returns it) over: results measured: <persisted> / <results>
-[check] completion reported (evidence: the report)
-[check] entry count of {OUTPUT_TARGET} matches results (evidence: the two numbers)
-refuse: {OUTPUT_TARGET} changed since it was read before PERSIST_ARTIFACT
-standing: moved-set none
-result: pass → TERMINATE | loss → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  [check] {OUTPUT_TARGET} persisted (evidence: a read returns it) over: results measured: <persisted> / <results>
+  [check] completion reported (evidence: the report)
+  [check] entry count of {OUTPUT_TARGET} matches results (evidence: the two numbers)
+  refuse: {OUTPUT_TARGET} changed since it was read before PERSIST_ARTIFACT
+  standing: moved-set none
+  result: pass → TERMINATE | loss → REPAIR (owner: NODE 3) | unknown → BLOCKED
 
 # CROSS-NODE INVARIANTS
 INVARIANT prior-output-only: a node reads only the prior node's output over: every node binds: the workflow objector: [check] input names NODE n-1 or a slot
@@ -15343,10 +15154,10 @@ INVARIANT one-truth: one fact has one home across the nodes over: every artifact
 INVARIANT no-spawn: no autonomous party is spawned over: every node binds: the workflow objector: none
 
 REPORT:
-subject: NODE 3
-verdict: pass | fail | unknown
-domain: declared <results> measured <persisted>
-completion: saturated <bool> complete <bool> verified <bool>
+  subject: NODE 3
+  verdict: pass | fail | unknown
+  domain: declared <results> measured <persisted>
+  completion: saturated <bool> complete <bool> verified <bool>
 
 ```
 

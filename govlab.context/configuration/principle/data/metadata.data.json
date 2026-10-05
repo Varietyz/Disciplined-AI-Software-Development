@@ -1,0 +1,340 @@
+{
+    "category": "Metadata / Self-Description / Declarative Systems",
+    "check": {
+        "population": "every manifest, schema, configuration file and declared capability, and the code each one describes",
+        "freshness": "a verdict stands until the metadata or the code it describes changes",
+        "refusal": "manifest or schema validation fails when a declaration and the code disagree",
+        "observation": "each declaration compared with the capability, endpoint or structure found in the code",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "none: the declaration and the code both declare the capability, so a green comparison shows that they agree and not that either is right"
+    },
+    "records": [
+        {
+            "id": "self-describing-architecture",
+            "name": "Self-Describing Architecture",
+            "definition": "A design rule that each module declares its name, version, capabilities and requirements in metadata that tools and the runtime can read.",
+            "type": "principle",
+            "scope": [
+                "system",
+                "runtime",
+                "integration"
+            ],
+            "requires": [
+                "Metadata",
+                "Capability Declaration"
+            ],
+            "reinforces": [
+                "Discoverability",
+                "Runtime Discovery"
+            ],
+            "enables": [
+                "Plugin Architecture",
+                "Automation"
+            ],
+            "conflicts_with": ["Hidden Runtime Behavior"],
+            "tensions_with": ["Metadata Drift"],
+            "violated_by": ["lexicon:hidden-runtime-behavior"],
+            "detected_by": ["undocumented runtime capability"],
+            "measured_by": ["metadata coverage"],
+            "refactored_by": [
+                "architecture:manifest-based-design",
+                "lexicon:declare-capability",
+                "architecture:schema-validation"
+            ],
+            "enforced_by": [
+                "manifest validation",
+                "metadata tests"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const modules = [new FooModule(), new BarModule()];",
+                "after": "type ModuleDescriptor = { name: string; version: string; provides: readonly string[]; requires: readonly string[] };\nconst fooModule = defineModule({ name: \"foo\", version: \"1.0.0\", provides: [\"FooStore\"], requires: [\"EventBus\"] });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "self-describing-api",
+            "name": "Self-Describing API",
+            "definition": "A design rule that an API publishes machine-readable descriptions of its operations, payloads and errors.",
+            "type": "principle",
+            "scope": [
+                "API",
+                "integration"
+            ],
+            "requires": [
+                "API Contract",
+                "Metadata"
+            ],
+            "reinforces": [
+                "Discoverability",
+                "Interoperability"
+            ],
+            "enables": [
+                "Client Generation",
+                "HATEOAS-style Navigation"
+            ],
+            "conflicts_with": ["Opaque API"],
+            "tensions_with": ["Payload Verbosity"],
+            "violated_by": ["lexicon:opaque-api"],
+            "detected_by": ["missing OpenAPI/metadata"],
+            "measured_by": ["API documentation/contract coverage"],
+            "refactored_by": [
+                "lexicon:define-contract",
+                "lexicon:declare-capability",
+                "lexicon:standard-error-contract"
+            ],
+            "enforced_by": [
+                "API linting",
+                "docs gates"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "app.post(\"/foo\", createFoo);",
+                "after": "const createFooApi = defineEndpoint({\n  method: \"POST\",\n  path: \"/foos\",\n  request: CreateFooSchema,\n  response: FooCreatedSchema,\n  errors: FooErrorSchema,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "self-describing-structures",
+            "name": "Self-Describing Structures",
+            "definition": "A design rule that a data structure carries its own type tags and field names, so a reader can interpret it without outside knowledge.",
+            "type": "principle",
+            "scope": [
+                "data",
+                "runtime",
+                "metadata"
+            ],
+            "requires": [
+                "Type Metadata",
+                "Schema"
+            ],
+            "reinforces": [
+                "Introspection",
+                "Validation"
+            ],
+            "enables": ["Dynamic Processing"],
+            "conflicts_with": ["Opaque Binary/Untyped Structures"],
+            "tensions_with": ["Size Overhead"],
+            "violated_by": ["lexicon:opaque-binary-untyped-structures"],
+            "detected_by": ["missing type/schema markers"],
+            "measured_by": ["metadata completeness"],
+            "refactored_by": [
+                "lexicon:introduce-discriminated-union",
+                "architecture:schema-validation",
+                "architecture:manifest-based-design"
+            ],
+            "enforced_by": ["schema validation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const node = [\"foo\", \"foo_1\", 3, true];",
+                "after": "const node = { kind: \"foo\", id: \"foo_1\", count: 3, active: true } as const;",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "metadata-driven-design",
+            "name": "Metadata-Driven Design",
+            "definition": "An approach in which behavior such as forms, routes or plugins is generated from validated metadata instead of written case by case.",
+            "type": "approach",
+            "scope": [
+                "runtime",
+                "configuration",
+                "framework"
+            ],
+            "requires": [
+                "Metadata Schema",
+                "Validation"
+            ],
+            "reinforces": [
+                "Declarative Configuration",
+                "Runtime Discovery"
+            ],
+            "enables": [
+                "Code Generation",
+                "Plugins"
+            ],
+            "conflicts_with": ["Hardcoded Behavior"],
+            "tensions_with": ["Debuggability"],
+            "violated_by": [
+                "lexicon:unvalidated-metadata",
+                "lexicon:hidden-runtime-behavior"
+            ],
+            "detected_by": ["metadata/config drift"],
+            "measured_by": [
+                "metadata coverage",
+                "config error rate"
+            ],
+            "refactored_by": [
+                "lexicon:declare-capability",
+                "architecture:schema-validation",
+                "lexicon:configuration-schema"
+            ],
+            "enforced_by": ["metadata schema tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "if (field === \"name\") renderText();\nif (field === \"count\") renderNumber();",
+                "after": "const fooFields = {\n  name: { kind: \"text\", required: true },\n  count: { kind: \"integer\", min: 0 },\n} as const;\nrenderForm(fooFields);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "declarative-configuration",
+            "name": "Declarative Configuration",
+            "definition": "A design rule that a system's settings are declared as validated data, and the system configures itself from that data.",
+            "type": "principle",
+            "scope": [
+                "configuration",
+                "infrastructure",
+                "runtime"
+            ],
+            "requires": [
+                "Schema Validation",
+                "Explicit Semantics"
+            ],
+            "reinforces": [
+                "Predictability",
+                "Infrastructure as Code"
+            ],
+            "enables": ["Runtime Configuration without Code Change"],
+            "conflicts_with": ["Hardcoded Configuration"],
+            "tensions_with": ["Dynamic Complexity"],
+            "violated_by": ["lexicon:hardcoded-behavior"],
+            "detected_by": ["hardcoded environment values"],
+            "measured_by": ["configuration externalization coverage"],
+            "refactored_by": [
+                "lexicon:externalize-configuration",
+                "lexicon:configuration-schema"
+            ],
+            "enforced_by": [
+                "config linting",
+                "validation"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const app = new FooApp();\napp.enableCache();\napp.setRetries(3);\napp.register(new BarPlugin());",
+                "after": "const config = defineFooConfig({\n  cache: { enabled: true },\n  retries: 3,\n  plugins: [\"bar\"],\n});\nconst app = FooApp.fromConfig(config);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "convention-over-configuration",
+            "distinctFrom": [
+                {
+                    "id": "architecture:self-describing-structures",
+                    "reason": "Convention over configuration infers settings from naming and placement, while self-describing structures carry their own type tags and field names."
+                }
+            ],
+            "name": "Convention over Configuration",
+            "aliases": ["Coding by Convention"],
+            "definition": "A design rule that a framework infers settings from stable naming and placement conventions, and explicit configuration covers only the exceptions.",
+            "type": "principle",
+            "scope": [
+                "framework",
+                "application structure"
+            ],
+            "requires": ["Stable Conventions"],
+            "reinforces": [
+                "Pattern Consistency",
+                "Predictability"
+            ],
+            "enables": ["Reduced Boilerplate"],
+            "conflicts_with": ["Excessive Configuration"],
+            "tensions_with": ["Explicitness"],
+            "violated_by": ["lexicon:inconsistent-conventions"],
+            "detected_by": ["convention deviations"],
+            "measured_by": ["convention compliance score"],
+            "refactored_by": [
+                "lexicon:standardize-the-interface",
+                "lexicon:centralize-the-rule"
+            ],
+            "enforced_by": [
+                "scaffolding",
+                "lint rules"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "registerHandler(\"foo\", \"./handlers/foo-handler\", \"FooHandler\");\nregisterHandler(\"bar\", \"./handlers/bar-handler\", \"BarHandler\");",
+                "after": "const handlers = discoverHandlers(\"./handlers/*.handler.ts\");",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "capability-declaration",
+            "name": "Capability Declaration",
+            "definition": "A mechanism by which a plugin or service lists the operations it supports, so callers test the list instead of probing for methods.",
+            "type": "mechanism",
+            "scope": [
+                "plugin",
+                "service",
+                "runtime"
+            ],
+            "requires": [
+                "Manifest",
+                "Contracts"
+            ],
+            "reinforces": [
+                "Runtime Discovery",
+                "Self-Description"
+            ],
+            "enables": ["Dynamic Binding"],
+            "conflicts_with": ["Implicit Capability"],
+            "tensions_with": ["Declaration Drift"],
+            "violated_by": ["lexicon:implicit-capability"],
+            "detected_by": ["manifest-code mismatch"],
+            "measured_by": ["declared/actual capability match rate"],
+            "refactored_by": [
+                "architecture:manifest-based-design",
+                "lexicon:extract-role-interface"
+            ],
+            "enforced_by": [
+                "manifest validation",
+                "conformance tests"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "try { await plugin.exportFoo(foo); } catch (error) { if (isMissingMethod(error)) return; }",
+                "after": "type FooPlugin = {\n  capabilities: readonly (\"read\" | \"write\" | \"export\")[];\n  exportFoo?: (foo: Foo) => Promise<void>;\n};\nif (plugin.capabilities.includes(\"export\")) await plugin.exportFoo!(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "manifest-based-design",
+            "name": "Manifest-Based Design",
+            "definition": "A design pattern that loads modules or plugins from a validated manifest listing each entry, version and dependency.",
+            "type": "pattern",
+            "scope": [
+                "plugin",
+                "module",
+                "deployment"
+            ],
+            "requires": ["Manifest Schema"],
+            "reinforces": [
+                "Self-Describing Architecture",
+                "Runtime Discovery"
+            ],
+            "enables": [
+                "Plugin Loading",
+                "Capability Declaration"
+            ],
+            "conflicts_with": ["Hardcoded Registration"],
+            "tensions_with": ["Manifest Drift"],
+            "violated_by": [
+                "lexicon:implicit-capability",
+                "lexicon:hidden-dependency"
+            ],
+            "detected_by": [
+                "manifest mismatch",
+                "load failure"
+            ],
+            "measured_by": ["manifest validation pass rate"],
+            "refactored_by": ["lexicon:discovery-validation"],
+            "enforced_by": ["CI validation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "loadPlugin(\"./foo.js\");\nloadPlugin(\"./bar.js\");",
+                "after": "const manifest = {\n  name: \"foo-suite\",\n  plugins: [\n    { name: \"foo\", entry: \"./foo.js\", version: \"1.0.0\" },\n    { name: \"bar\", entry: \"./bar.js\", version: \"1.0.0\" },\n  ],\n} as const;\nloadManifest(manifest);",
+                "lang": "ts"
+            }
+        }
+    ]
+}

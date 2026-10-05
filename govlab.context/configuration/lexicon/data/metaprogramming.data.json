@@ -1,0 +1,195 @@
+{
+    "category": "metaprogramming-language-oriented-architecture",
+    "records": [
+        {
+            "name": "Code-as-Data Representation",
+            "kind": "constraint",
+            "definition": "The requirement that a program's code be representable in the same data structures the language manipulates."
+        },
+        {
+            "name": "Macro Systems",
+            "kind": "mechanism",
+            "definition": "A facility that lets code transform other code at compile time by operating on its data representation."
+        },
+        {
+            "name": "Opaque Syntax Trees",
+            "kind": "anti-pattern",
+            "definition": "Syntax trees a program cannot inspect or manipulate as data, so code cannot be transformed programmatically."
+        },
+        {
+            "name": "AST or Data Representation",
+            "kind": "constraint",
+            "definition": "The requirement that code be represented as a structured syntax tree or data rather than as raw text."
+        },
+        {
+            "name": "Program Transformation",
+            "kind": "capability",
+            "definition": "The ability to analyze and rewrite a program by manipulating its structured representation."
+        },
+        {
+            "name": "Safety/Debuggability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which treating code as manipulable data can obscure what runs and make it harder to debug."
+        },
+        {
+            "name": "String-Based Code Generation",
+            "kind": "anti-pattern",
+            "definition": "Building code by concatenating strings, so the result is unchecked, injection-prone, and hard to analyze."
+        },
+        {
+            "name": "Boilerplate Elimination",
+            "kind": "capability",
+            "definition": "The ability to remove repetitive boilerplate by generating it from a single declaration."
+        },
+        {
+            "name": "Explicit Handwritten Code",
+            "kind": "approach",
+            "definition": "Writing code out by hand explicitly rather than generating it, favoring directness and debuggability over reuse."
+        },
+        {
+            "name": "Reflection/AST/Code Generation",
+            "kind": "constraint",
+            "definition": "The requirement that a language expose reflection, syntax trees, or code generation for programs to manipulate themselves."
+        },
+        {
+            "name": "Performance/Safety",
+            "kind": "quality-attribute",
+            "definition": "The degree to which inspecting and dispatching on types at runtime costs performance and bypasses static safety."
+        },
+        {
+            "name": "Runtime Type Metadata",
+            "kind": "artifact",
+            "definition": "Type information retained at runtime so a program can inspect the shape of its own values."
+        },
+        {
+            "name": "Diagnostics",
+            "kind": "capability",
+            "definition": "The ability to inspect a running system's own structure and state to diagnose it."
+        },
+        {
+            "name": "Self-Describing Systems",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system carries enough metadata to describe its own structure and capabilities at runtime."
+        },
+        {
+            "name": "Build Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which moving work into the build to run at compile time makes the build harder to set up and reason about."
+        },
+        {
+            "name": "Compile-Time Inputs",
+            "kind": "constraint",
+            "definition": "The requirement that the inputs a computation needs be known at compile time so it can run then."
+        },
+        {
+            "name": "Early Error Detection",
+            "kind": "capability",
+            "definition": "The ability to catch errors at compile time rather than letting them surface at runtime."
+        },
+        {
+            "name": "Runtime Dynamic Evaluation",
+            "kind": "technique",
+            "definition": "Evaluating code or expressions dynamically at runtime, trading compile-time checking for runtime flexibility."
+        },
+        {
+            "name": "Dynamic Optimization/Adaptation",
+            "kind": "capability",
+            "definition": "The ability to generate specialized code at runtime to optimize or adapt to observed conditions."
+        },
+        {
+            "name": "Safe Generation Boundary",
+            "kind": "constraint",
+            "definition": "The requirement that runtime code generation be confined to a safe, sandboxed boundary away from untrusted input."
+        },
+        {
+            "name": "Security/Debugging",
+            "kind": "quality-attribute",
+            "definition": "The degree to which generating and running code at runtime widens the attack surface and complicates debugging."
+        },
+        {
+            "name": "Domain Expressiveness",
+            "kind": "capability",
+            "definition": "The ability to express domain rules directly in terms a domain expert recognizes."
+        },
+        {
+            "name": "Formal Grammar/Semantics",
+            "kind": "constraint",
+            "definition": "The requirement that a domain language have a defined grammar and semantics rather than an ad-hoc syntax."
+        },
+        {
+            "name": "General-Purpose Boilerplate",
+            "kind": "anti-pattern",
+            "definition": "Expressing domain logic through verbose general-purpose code and its boilerplate instead of a concise domain notation."
+        },
+        {
+            "name": "Tooling/Maintenance",
+            "kind": "quality-attribute",
+            "definition": "The degree to which owning a custom language burdens a team with building and maintaining its tooling."
+        },
+        {
+            "name": "Code Generation or Interpreters",
+            "kind": "constraint",
+            "definition": "The requirement that a domain language be backed by a generator or interpreter that executes it."
+        },
+        {
+            "name": "Domain Modeling",
+            "kind": "activity",
+            "definition": "Expressing a problem domain as a first-class language of its own concepts and rules."
+        },
+        {
+            "name": "High-Level Domain Expression",
+            "kind": "capability",
+            "definition": "The ability to express solutions in high-level domain terms rather than low-level general-purpose code."
+        },
+        {
+            "name": "One-Size General-Purpose Code",
+            "kind": "approach",
+            "definition": "Expressing every domain in a single general-purpose language, rather than in domain-specific notations."
+        },
+        {
+            "name": "Toolchain Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which building custom languages adds compilers, parsers, and editors to a project's toolchain."
+        },
+        {
+            "name": "Formal Model",
+            "kind": "model",
+            "definition": "A precise, machine-processable model of a system from which implementations are generated."
+        },
+        {
+            "name": "Generated Implementations",
+            "kind": "artifact",
+            "definition": "Implementation code produced automatically from a model rather than written by hand."
+        },
+        {
+            "name": "Handwritten Divergence",
+            "kind": "anti-pattern",
+            "definition": "Hand-editing generated code so it drifts from the model it came from, breaking regeneration."
+        },
+        {
+            "name": "Transformation Rules",
+            "kind": "constraint",
+            "definition": "The requirement that explicit rules define how a model maps to generated implementation code."
+        },
+        {
+            "name": "Syntax Tree Generation",
+            "kind": "technique",
+            "definition": "A technique for generating code by building and printing a syntax tree instead of concatenating strings."
+        },
+        {
+            "name": "Reflective Contract Bypass",
+            "kind": "anti-pattern",
+            "definition": "A defect in which reflection is used to reach members that a type's contract or visibility hides."
+        },
+        {
+            "name": "Deferred Static Check",
+            "kind": "anti-pattern",
+            "definition": "A defect in which a check or generation that could run at compile time is repeated at runtime."
+        },
+        {
+            "name": "Ad-Hoc Mini-Language",
+            "kind": "anti-pattern",
+            "definition": "A defect in which rules are written in an informal mini-language that has no grammar and no validator."
+        }
+    ]
+}

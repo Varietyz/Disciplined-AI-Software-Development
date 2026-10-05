@@ -1,0 +1,329 @@
+{
+    "category": "Control / Coordination / Centralization",
+    "check": {
+        "population": "every node, service and workflow step that shares configuration, identity, logs, leadership or agreement",
+        "freshness": "a verdict stands until membership, topology or the coordinating policy changes",
+        "refusal": "the workflow test or the platform policy rejects a participant that bypasses the coordinator or the agreed value",
+        "observation": "the control plane's recorded state compared with each participant's reported state",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the control plane's recorded state, which each participant's reported state is compared against"
+    },
+    "records": [
+        {
+            "id": "control-plane",
+            "name": "Control Plane",
+            "definition": "Descriptive data about the desired state of a distributed runtime, held in one place and applied to every node through a management interface.",
+            "type": "artifact",
+            "scope": [
+                "platform",
+                "infrastructure",
+                "distributed system"
+            ],
+            "requires": [
+                "Management API",
+                "Policy"
+            ],
+            "reinforces": [
+                "Governance",
+                "Orchestration"
+            ],
+            "enables": ["Centralized Control of Distributed Runtime"],
+            "conflicts_with": ["Fully Decentralized Control"],
+            "tensions_with": ["Availability"],
+            "violated_by": ["lexicon:scattered-configuration"],
+            "detected_by": ["manual node/service control"],
+            "measured_by": [
+                "control coverage",
+                "control-plane availability"
+            ],
+            "refactored_by": [
+                "lexicon:management-api",
+                "architecture:policy-as-code"
+            ],
+            "enforced_by": ["platform architecture"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "for (const node of fooNodes) {\n  node.configure({ retries: 3, timeoutMs: 500 });\n}",
+                "after": "controlPlane.apply(\"foo-service\", {\n  retries: 3,\n  timeoutMs: 500,\n  rollout: \"progressive\",\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "orchestration",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:coordinator",
+                    "reason": "Orchestration is the mechanism of driving a workflow from one place, while the coordinator is the component that plays that role."
+                }
+            ],
+            "name": "Orchestration",
+            "definition": "A mechanism that runs a multi-step workflow from one coordinator, which calls each step in order and tracks its outcome.",
+            "type": "mechanism",
+            "scope": [
+                "workflow",
+                "deployment",
+                "services"
+            ],
+            "requires": ["Coordinator"],
+            "reinforces": [
+                "Control Plane",
+                "Saga"
+            ],
+            "enables": ["Ordered Multi-Step Execution"],
+            "conflicts_with": ["Pure Choreography"],
+            "tensions_with": ["Centralized Coordinator Coupling"],
+            "violated_by": ["lexicon:pure-choreography"],
+            "detected_by": ["unclear workflow ownership"],
+            "measured_by": ["workflow observability/completion"],
+            "refactored_by": [],
+            "enforced_by": ["workflow tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await fooService.create(foo);\nawait barService.create(bar);\nawait bazService.create(baz);",
+                "after": "await orchestrator.run(\"CreateFooFlow\", {\n  steps: [\n    step(\"foo\", () => fooService.create(foo)),\n    step(\"bar\", () => barService.create(bar)),\n    step(\"baz\", () => bazService.create(baz)),\n  ],\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "centralized-configuration",
+            "name": "Centralized Configuration",
+            "definition": "A design pattern that keeps every service's configuration in one versioned store the services read from.",
+            "type": "pattern",
+            "scope": [
+                "service",
+                "platform",
+                "runtime"
+            ],
+            "requires": [
+                "Config Store",
+                "Access Control"
+            ],
+            "reinforces": [
+                "Governance",
+                "Consistency"
+            ],
+            "enables": ["Unified Config Management"],
+            "conflicts_with": ["Scattered Configuration"],
+            "tensions_with": ["Central Dependency Risk"],
+            "violated_by": ["lexicon:scattered-configuration"],
+            "detected_by": ["config drift"],
+            "measured_by": ["config drift count"],
+            "refactored_by": ["architecture:schema-validation"],
+            "enforced_by": ["config policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const fooConfig = loadLocalFooConfig();\nconst barConfig = loadLocalBarConfig();\nconst bazConfig = loadLocalBazConfig();",
+                "after": "const config = await configService.readVersioned(\"platform/v3\");\nfooApp.apply(config.foo);\nbarApp.apply(config.bar);\nbazApp.apply(config.baz);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "centralized-authentication",
+            "name": "Centralized Authentication",
+            "definition": "A design pattern that verifies identity once, at a shared identity provider, and passes the result to each service.",
+            "type": "pattern",
+            "scope": [
+                "identity",
+                "system"
+            ],
+            "requires": ["Identity Provider"],
+            "reinforces": [
+                "Security",
+                "Governance"
+            ],
+            "enables": ["Unified Identity"],
+            "conflicts_with": ["Scattered Auth Implementations"],
+            "tensions_with": ["Identity Provider Availability"],
+            "violated_by": ["lexicon:scattered-auth-implementations"],
+            "detected_by": ["duplicated credential stores"],
+            "measured_by": ["auth centralization coverage"],
+            "refactored_by": ["lexicon:identity-provider"],
+            "enforced_by": ["security policy"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "fooService.verifyToken(token);\nbarService.verifyToken(token);\nbazService.verifyToken(token);",
+                "after": "const identity = await identityProvider.authenticate(token);\nawait fooService.handle({ identity });\nawait barService.handle({ identity });\nawait bazService.handle({ identity });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "centralized-logging",
+            "name": "Centralized Logging",
+            "definition": "A design pattern that ships structured logs from every instance to one aggregated store.",
+            "type": "pattern",
+            "scope": [
+                "services",
+                "platform"
+            ],
+            "requires": ["Log Aggregation"],
+            "reinforces": [
+                "Observability",
+                "Auditability"
+            ],
+            "enables": ["Cross-Service Analysis"],
+            "conflicts_with": ["Local-Only Logs"],
+            "tensions_with": ["Cost/Personal Data Exposure"],
+            "violated_by": ["lexicon:local-only-logs"],
+            "detected_by": ["missing log shipping"],
+            "measured_by": ["log ingestion coverage"],
+            "refactored_by": [
+                "lexicon:log-aggregation",
+                "architecture:canonical-data-model"
+            ],
+            "enforced_by": ["observability policy"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "fooService.writeLocalLog(event);\nbarService.writeLocalLog(event);\nbazService.writeLocalLog(event);",
+                "after": "const sink = new CentralLogSink();\nfooService.useLogger(structuredLogger(sink));\nbarService.useLogger(structuredLogger(sink));\nbazService.useLogger(structuredLogger(sink));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "decentralization",
+            "name": "Decentralization",
+            "definition": "A design rule that decisions and runtime control sit with the teams and services that own them, joined by contracts.",
+            "type": "principle",
+            "scope": [
+                "system",
+                "team",
+                "service"
+            ],
+            "requires": [
+                "Autonomy",
+                "Contracts"
+            ],
+            "reinforces": [
+                "Microservices",
+                "Resilience"
+            ],
+            "enables": ["Independent Ownership"],
+            "conflicts_with": ["Centralized Control"],
+            "tensions_with": [
+                "Governance",
+                "Consistency"
+            ],
+            "violated_by": ["lexicon:centralized-control"],
+            "detected_by": ["centralized team/service dependency"],
+            "measured_by": ["decision/deployment dependency count"],
+            "refactored_by": [
+                "lexicon:assign-owner",
+                "lexicon:management-api"
+            ],
+            "enforced_by": ["ownership model"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const coordinator = new GlobalFooCoordinator();\nawait coordinator.approveEveryFoo(foo);",
+                "after": "await fooNode.validate(foo);\nawait fooNode.commit(foo);\nawait fooNode.publish({ type: \"FooCommitted\", fooId: foo.id });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "leader-election",
+            "name": "Leader Election",
+            "definition": "A mechanism that lets a group of nodes agree on one coordinator and replace it when it fails.",
+            "type": "mechanism",
+            "scope": [
+                "distributed system",
+                "coordination",
+                "availability"
+            ],
+            "requires": ["Consensus"],
+            "reinforces": [
+                "Control Plane",
+                "Fault Tolerance"
+            ],
+            "enables": [
+                "Single-Writer Coordination",
+                "Automatic Failover of Leadership"
+            ],
+            "conflicts_with": ["Split-Brain Coordination"],
+            "tensions_with": ["Availability"],
+            "violated_by": ["lexicon:split-brain-coordination"],
+            "detected_by": ["concurrent leader actions / split-brain"],
+            "measured_by": ["split-brain incident rate"],
+            "refactored_by": [],
+            "enforced_by": ["distributed-systems review"],
+            "severity": "contextual",
+            "mandatoryFor": "distributed systems",
+            "exemplar": {
+                "before": "if (process.env.IS_LEADER === \"true\") runFooScheduler();",
+                "after": "const lease = await fooCoordinator.acquireLeadership(\"foo-scheduler\", { ttlMs: 10_000 });\nlease.onAcquired(() => runFooScheduler());\nlease.onLost(() => stopFooScheduler());",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "consensus",
+            "distinctFrom": [
+                {
+                    "id": "architecture:leader-election",
+                    "reason": "Consensus commits one value across a quorum, while leader election uses it to agree on one coordinator and replace it when it fails."
+                },
+                {
+                    "id": "architecture:total-order-broadcast",
+                    "reason": "Consensus agrees on one value, while total-order broadcast agrees on the order of every message."
+                }
+            ],
+            "name": "Consensus",
+            "definition": "A mechanism that lets a quorum of nodes commit one value, so every correct node ends up with the same value.",
+            "type": "mechanism",
+            "scope": [
+                "distributed system",
+                "agreement",
+                "consistency"
+            ],
+            "requires": ["Quorum"],
+            "reinforces": [
+                "Consistency",
+                "Fault Tolerance"
+            ],
+            "enables": ["Agreed Single Value Across Nodes"],
+            "conflicts_with": ["Independent Node Decisions"],
+            "tensions_with": [
+                "Latency",
+                "Availability"
+            ],
+            "violated_by": ["lexicon:independent-node-decisions"],
+            "detected_by": ["divergent committed state across replicas"],
+            "measured_by": ["agreement-violation rate"],
+            "refactored_by": [],
+            "enforced_by": ["distributed-systems review"],
+            "severity": "contextual",
+            "mandatoryFor": "distributed systems",
+            "exemplar": {
+                "before": "fooNodeA.setValue(value);",
+                "after": "const committed = await fooCluster.propose(value, { quorum: majority(fooNodes) });\nif (!committed.accepted) throw new NoQuorumError();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "choreography",
+            "name": "Choreography",
+            "definition": "A mechanism that coordinates a cross-service flow through events, with each service reacting to the previous one's event.",
+            "type": "mechanism",
+            "scope": [
+                "distributed system",
+                "coordination",
+                "event"
+            ],
+            "requires": ["Event-Driven Architecture"],
+            "reinforces": [
+                "Decentralization",
+                "Service Autonomy"
+            ],
+            "enables": ["Central-Orchestrator-Free Coordination"],
+            "conflicts_with": ["Central Orchestrator Bottleneck"],
+            "tensions_with": ["Traceability"],
+            "violated_by": ["lexicon:central-orchestrator-bottleneck"],
+            "detected_by": ["a central coordinator coupled to all participants"],
+            "measured_by": ["orchestrator fan-out coupling"],
+            "refactored_by": [],
+            "enforced_by": ["architecture review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await orchestrator.run(\"CreateFoo\", [\n  () => createFoo(foo),\n  () => reserveBar(foo),\n  () => notifyBaz(foo),\n]);",
+                "after": "fooEvents.on(\"FooCreated\", event => barService.reserve(event.fooId));\nbarEvents.on(\"BarReserved\", event => bazService.notify(event.fooId));",
+                "lang": "ts"
+            }
+        }
+    ]
+}

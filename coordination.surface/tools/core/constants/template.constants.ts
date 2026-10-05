@@ -1,7 +1,7 @@
 import { slotList, surfacePath } from "../../../config/surface.config.ts";
 
 const within = function within(folder: string): string {
-    return `${surfacePath("behaviour_tree")}/${folder}/`;
+    return `${surfacePath("behavior_tree")}/${folder}/`;
 };
 
 export const TEMPLATE_ROOT = within("templates");

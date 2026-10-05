@@ -1,0 +1,657 @@
+{
+    "category": "Error Handling / Resilience",
+    "check": {
+        "population": "every failure path: catch blocks, dependency calls, input boundaries and fallbacks",
+        "freshness": "a verdict stands until a dependency, a failure path or the resilience policy changes",
+        "refusal": "the lint rule, failure-injection test or policy check fails the change that leaves a failure path unhandled or unsafe",
+        "observation": "catch blocks and dependency calls read from source, plus outcomes recorded by failure-injection runs",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the resilience policy, which every failure path conforms to"
+    },
+    "records": [
+        {
+            "id": "defensive-programming",
+            "distinctFrom": [
+                {
+                    "id": "architecture:error-handling",
+                    "reason": "Defensive programming checks inputs and assumptions before acting, while error handling decides what happens to an error once raised."
+                }
+            ],
+            "name": "Defensive Programming",
+            "definition": "A design rule that code checks its inputs and assumptions before acting on them, and reports a violation as an explicit error.",
+            "type": "principle",
+            "scope": [
+                "function",
+                "module",
+                "boundary"
+            ],
+            "requires": [
+                "Input Validation",
+                "Error Handling"
+            ],
+            "reinforces": [
+                "Robustness",
+                "Fail Fast"
+            ],
+            "enables": ["Safe Failure"],
+            "conflicts_with": ["Trusting Invalid Inputs"],
+            "tensions_with": ["Verbosity"],
+            "violated_by": ["lexicon:trusting-invalid-inputs"],
+            "detected_by": ["null/empty/range unsafe access"],
+            "measured_by": [
+                "guard coverage",
+                "runtime exception rate"
+            ],
+            "refactored_by": [
+                "lexicon:precondition-check",
+                "architecture:input-validation"
+            ],
+            "enforced_by": [
+                "linting",
+                "tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function renameFoo(foo: Foo, name: string) {\n  foo.name = name.trim();\n}",
+                "after": "function renameFoo(foo: Foo | undefined, name: unknown) {\n  if (!foo) throw new Error(\"Foo required\");\n  if (typeof name !== \"string\" || name.trim().length === 0) throw new Error(\"valid name required\");\n  return { ...foo, name: name.trim() };\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "fail-fast",
+            "distinctFrom": [
+                {
+                    "id": "architecture:defensive-programming",
+                    "reason": "Fail fast stops the operation where invalid state is found, while defensive programming is the checking that finds it."
+                },
+                {
+                    "id": "architecture:design-by-contract",
+                    "reason": "Fail fast is how a violation is handled, by stopping, while design by contract is where the conditions are stated."
+                },
+                {
+                    "id": "architecture:graceful-degradation",
+                    "reason": "Fail fast stops on invalid state, while graceful degradation keeps the rest running when an optional dependency fails."
+                }
+            ],
+            "name": "Fail Fast",
+            "definition": "A design rule that invalid input or state stops the operation at the point it is detected, with an explicit error.",
+            "canon": ["fail-fast"],
+            "type": "principle",
+            "scope": [
+                "input",
+                "startup",
+                "invariant boundary"
+            ],
+            "requires": [
+                "Preconditions",
+                "Validation"
+            ],
+            "reinforces": [
+                "Correctness",
+                "Observability"
+            ],
+            "enables": ["Early Defect Detection"],
+            "conflicts_with": [
+                "Silent Failure",
+                "Silent Data Corruption"
+            ],
+            "tensions_with": ["Graceful Degradation"],
+            "violated_by": ["lexicon:exception-swallowing"],
+            "detected_by": [
+                "ignored exceptions",
+                "default fallbacks masking errors"
+            ],
+            "measured_by": ["late failure rate"],
+            "refactored_by": [
+                "lexicon:precondition-check",
+                "lexicon:fail-fast-or-fall-back"
+            ],
+            "enforced_by": ["validation tests"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const fooUrl = process.env.FOO_URL ?? \"http://localhost:3000\";\nstartFooApp(fooUrl);",
+                "after": "const fooUrl = process.env.FOO_URL;\nif (!fooUrl) throw new Error(\"FOO_URL is required\");\nstartFooApp(new URL(fooUrl));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "fail-safe",
+            "name": "Fail Safe",
+            "definition": "A design rule that a failing operation leaves the system in the state that causes the least harm.",
+            "type": "principle",
+            "scope": [
+                "runtime",
+                "operation",
+                "security"
+            ],
+            "requires": ["Safe Defaults"],
+            "reinforces": ["Resilience"],
+            "enables": ["Damage Limitation"],
+            "conflicts_with": ["Unsafe Default Continuation"],
+            "tensions_with": ["Availability"],
+            "violated_by": ["lexicon:unsafe-default-continuation"],
+            "detected_by": ["fallback to unsafe behavior"],
+            "measured_by": ["unsafe failure modes"],
+            "refactored_by": [
+                "architecture:fallback-pattern",
+                "lexicon:fail-fast-or-fall-back"
+            ],
+            "enforced_by": ["failure-mode tests"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "try {\n  await openFooGate();\n} catch {\n  fooGate.unlock();\n}",
+                "after": "try {\n  await openFooGate();\n} catch {\n  fooGate.lock();\n  throw new Error(\"Foo gate remains locked\");\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "fail-secure",
+            "name": "Fail Secure",
+            "definition": "A design rule that an authentication or policy failure denies access.",
+            "type": "principle",
+            "scope": [
+                "auth",
+                "access",
+                "infrastructure"
+            ],
+            "requires": ["Secure Defaults"],
+            "reinforces": ["Security by Design"],
+            "enables": ["Deny-by-Default Behavior"],
+            "conflicts_with": ["Fail Open"],
+            "tensions_with": ["Availability"],
+            "violated_by": ["lexicon:fail-open"],
+            "detected_by": ["fail-open branches"],
+            "measured_by": ["fail-open count"],
+            "refactored_by": ["lexicon:default-deny"],
+            "enforced_by": [
+                "security tests",
+                "policy checks"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function authorizeFoo(token?: string) {\n  if (!token) return { role: \"admin\" };\n  return decodeToken(token);\n}",
+                "after": "function authorizeFoo(token?: string): FooIdentity {\n  if (!token) throw new UnauthorizedError();\n  const identity = verifyToken(token);\n  if (!identity) throw new UnauthorizedError();\n  return identity;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "graceful-degradation",
+            "name": "Graceful Degradation",
+            "definition": "A design rule that the failure of an optional dependency removes only the feature it serves, and the rest of the system keeps working.",
+            "type": "principle",
+            "scope": [
+                "service",
+                "UX",
+                "system"
+            ],
+            "requires": [
+                "Fallback",
+                "Feature Isolation"
+            ],
+            "reinforces": ["Fault Tolerance"],
+            "enables": ["Partial Availability"],
+            "conflicts_with": ["All-Or-Nothing Failure"],
+            "tensions_with": ["Consistency / Feature Completeness"],
+            "violated_by": ["lexicon:all-or-nothing-failure"],
+            "detected_by": ["critical path dependency on optional service"],
+            "measured_by": ["partial availability under failure"],
+            "refactored_by": ["architecture:fallback-pattern"],
+            "enforced_by": ["chaos tests"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "async function renderFooPage() {\n  const foo = await fooService.get();\n  const bar = await barRecommendations.get();\n  return render(foo, bar);\n}",
+                "after": "async function renderFooPage() {\n  const foo = await fooService.get();\n  const bar = await barRecommendations.get().catch(() => [] as Bar[]);\n  return render(foo, bar);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "fault-tolerance",
+            "name": "Fault Tolerance",
+            "definition": "The degree to which a system keeps operating correctly when some of its components fail.",
+            "type": "quality-attribute",
+            "scope": [
+                "service",
+                "system",
+                "infrastructure"
+            ],
+            "requires": [
+                "Redundancy",
+                "Error Handling"
+            ],
+            "reinforces": ["Resilience"],
+            "enables": ["Continued Operation Under Failure"],
+            "conflicts_with": ["Single Point of Failure"],
+            "tensions_with": ["Cost"],
+            "violated_by": ["lexicon:single-point-of-failure"],
+            "detected_by": ["no retry/failover/fallback for critical path"],
+            "measured_by": [
+                "failure recovery rate",
+                "availability"
+            ],
+            "refactored_by": [
+                "lexicon:bounded-retry",
+                "architecture:failover",
+                "architecture:redundancy"
+            ],
+            "enforced_by": ["resilience tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await fooReplicaA.read(id);",
+                "after": "const foo = await firstSuccessful([\n  () => fooReplicaA.read(id),\n  () => fooReplicaB.read(id),\n  () => fooReplicaC.read(id),\n]);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "resilience",
+            "distinctFrom": [
+                {
+                    "id": "architecture:fault-tolerance",
+                    "reason": "Resilience contains failures and recovers from them, while fault tolerance keeps operating correctly while components are failing."
+                },
+                {
+                    "id": "architecture:low-coupling",
+                    "reason": "Resilience is surviving failure, while low coupling is surviving change."
+                },
+                {
+                    "id": "architecture:observability",
+                    "reason": "Resilience is containing and recovering from failure, while observability is seeing what the system does."
+                },
+                {
+                    "id": "lexicon:complexity",
+                    "reason": "Resilience is surviving failure, while complexity is the intricacy that its mechanisms add."
+                },
+                {
+                    "id": "lexicon:debuggability",
+                    "reason": "Resilience is recovering without help, while debuggability is how easily the developer can locate a fault."
+                },
+                {
+                    "id": "lexicon:stability",
+                    "reason": "Resilience includes recovery after failure, while stability is steady operation under load without collapse."
+                }
+            ],
+            "name": "Resilience",
+            "definition": "The degree to which a system contains failures, stays stable under stress and recovers.",
+            "type": "quality-attribute",
+            "scope": [
+                "service",
+                "system",
+                "infrastructure"
+            ],
+            "requires": [
+                "Fault Tolerance",
+                "Observability"
+            ],
+            "reinforces": [
+                "Self-Healing",
+                "Recovery"
+            ],
+            "enables": ["Stability Under Stress"],
+            "conflicts_with": ["Brittle Architecture"],
+            "tensions_with": ["Complexity"],
+            "violated_by": ["lexicon:failure-propagation"],
+            "detected_by": [
+                "failure propagation",
+                "lack of isolation"
+            ],
+            "measured_by": [
+                "MTTR",
+                "error budget",
+                "availability"
+            ],
+            "refactored_by": [
+                "architecture:circuit-breaker-pattern",
+                "architecture:bulkhead-pattern",
+                "architecture:retry-pattern",
+                "architecture:timeout-pattern"
+            ],
+            "enforced_by": [
+                "chaos testing",
+                "SLO gates"
+            ],
+            "severity": "contextual",
+            "mandatoryFor": "production systems",
+            "exemplar": {
+                "before": "async function loadFoo(id: FooId) { return remoteFoo.get(id); }",
+                "after": "async function loadFoo(id: FooId) {\n  return circuitBreaker.execute(() => retry.withBackoff(() => remoteFoo.get(id), { attempts: 3 }));\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "robustness-principle",
+            "name": "Robustness Principle",
+            "aliases": ["Postel's Law"],
+            "definition": "A design rule that a component is strict in what it sends and tolerant of harmless variation in what it receives.",
+            "type": "principle",
+            "scope": [
+                "protocol",
+                "API",
+                "input processing"
+            ],
+            "requires": [
+                "Strict Output",
+                "Tolerant Input"
+            ],
+            "reinforces": ["Compatibility"],
+            "enables": ["Interoperability"],
+            "conflicts_with": ["Fragile Parsing"],
+            "tensions_with": ["Strict Validation"],
+            "violated_by": ["lexicon:fragile-parsing"],
+            "detected_by": ["parser brittleness"],
+            "measured_by": ["compatibility failure rate"],
+            "refactored_by": [
+                "architecture:canonicalization",
+                "lexicon:invariant-check"
+            ],
+            "enforced_by": ["compatibility test suite"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function readFoo(message: any) { return { id: message.id, name: message.name }; }\nfunction writeFoo(foo: Foo) { return { ...foo, debug: globalThis }; }",
+                "after": "function readFoo(message: unknown) {\n  const value = FooEnvelopeSchema.parse(message);\n  return { id: value.id, name: value.name };\n}\nfunction writeFoo(foo: Foo): FooEnvelopeV1 { return { version: 1, id: foo.id, name: foo.name }; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "error-handling",
+            "name": "Error Handling",
+            "definition": "A design rule that every error is either handled with its context kept, or propagated as a typed error the caller must handle.",
+            "canon": ["error-handling"],
+            "type": "principle",
+            "scope": [
+                "function",
+                "module",
+                "service"
+            ],
+            "requires": [
+                "Error Model",
+                "Observability"
+            ],
+            "reinforces": [
+                "Resilience",
+                "Correctness"
+            ],
+            "enables": ["Controlled Failure"],
+            "conflicts_with": [
+                "Exception Swallowing",
+                "Exception Control Flow"
+            ],
+            "tensions_with": ["Simplicity"],
+            "violated_by": [
+                "lexicon:exception-swallowing",
+                "lexicon:silent-failure"
+            ],
+            "detected_by": [
+                "empty catch blocks",
+                "unchecked result errors"
+            ],
+            "measured_by": ["unhandled error count"],
+            "refactored_by": [
+                "lexicon:introduce-typed-result",
+                "architecture:distributed-tracing"
+            ],
+            "enforced_by": [
+                "linting",
+                "tests"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "async function loadFoo(id: FooId) {\n  try { return await fooStore.find(id); } catch { return null; }\n}",
+                "after": "type LoadFooResult =\n  | { ok: true; value: Foo }\n  | { ok: false; error: \"NOT_FOUND\" | \"STORE_UNAVAILABLE\" };\nasync function loadFoo(id: FooId): Promise<LoadFooResult> {\n  return fooStore.findResult(id);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "error-boundaries",
+            "name": "Error Boundaries",
+            "definition": "A design pattern that catches failures at a component boundary, so a failing part renders or returns an error while the rest keeps running.",
+            "type": "pattern",
+            "scope": [
+                "component",
+                "UI",
+                "service boundary"
+            ],
+            "requires": ["Failure Isolation"],
+            "reinforces": ["Resilience"],
+            "enables": ["Localized Recovery"],
+            "conflicts_with": ["Failure Propagation"],
+            "tensions_with": ["Hidden Errors"],
+            "violated_by": ["lexicon:failure-propagation"],
+            "detected_by": ["uncaught exceptions crossing boundary"],
+            "measured_by": ["blast radius"],
+            "refactored_by": ["architecture:bulkhead-pattern"],
+            "enforced_by": ["failure tests"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function renderApp() { return renderFooPanel(loadFoo()); }",
+                "after": "function FooBoundary({ render }: { render(): View }) {\n  try { return render(); }\n  catch (error) { return renderFooError(toFooError(error)); }\n}\nconst app = FooBoundary({ render: () => renderFooPanel(loadFoo()) });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "fallback-pattern",
+            "name": "Fallback Pattern",
+            "definition": "A design pattern that routes a failed call to an alternate provider or response declared in advance.",
+            "type": "pattern",
+            "scope": [
+                "service",
+                "dependency call"
+            ],
+            "requires": ["Alternate Behavior"],
+            "reinforces": ["Graceful Degradation"],
+            "enables": ["Partial Availability"],
+            "conflicts_with": ["Single Behavior Path"],
+            "tensions_with": ["Stale/Reduced Results"],
+            "violated_by": ["lexicon:single-behavior-path"],
+            "detected_by": ["hard dependency in optional path"],
+            "measured_by": ["fallback coverage"],
+            "refactored_by": [],
+            "enforced_by": ["failure injection tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const foo = await primaryFooStore.find(id);",
+                "after": "const foo = await primaryFooStore.find(id).catch(() => replicaFooStore.find(id));\nif (!foo) throw new FooUnavailableError(id);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "retry-pattern",
+            "name": "Retry Pattern",
+            "aliases": ["Retry"],
+            "definition": "A design pattern that repeats an idempotent call after a transient failure, a bounded number of times with backoff.",
+            "type": "pattern",
+            "scope": [
+                "network",
+                "IO",
+                "message handling"
+            ],
+            "requires": [
+                "Idempotency",
+                "Timeout",
+                "Backoff"
+            ],
+            "reinforces": ["Fault Tolerance"],
+            "enables": ["Transient Failure Recovery"],
+            "conflicts_with": ["Non-Idempotent Operation"],
+            "tensions_with": ["Load Amplification"],
+            "violated_by": [
+                "lexicon:unbounded-retry",
+                "architecture:retry-storm"
+            ],
+            "detected_by": ["retry loops without timeout/backoff"],
+            "measured_by": [
+                "retry success rate",
+                "retry storm rate"
+            ],
+            "refactored_by": [
+                "lexicon:backoff",
+                "lexicon:idempotency-key"
+            ],
+            "enforced_by": [
+                "resilience libraries",
+                "policy checks"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "await remoteFoo.save(foo);",
+                "after": "await retry.withBackoff(\n  () => remoteFoo.save(foo),\n  { attempts: 3, retryIf: isTransientError, jitter: true },\n);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "timeout-pattern",
+            "name": "Timeout Pattern",
+            "definition": "A design pattern that gives every external call a time budget and fails the call when the budget runs out.",
+            "type": "pattern",
+            "scope": [
+                "network",
+                "IO",
+                "dependency call"
+            ],
+            "requires": ["Time Budget"],
+            "reinforces": ["Fault Isolation"],
+            "enables": ["Bounded Waiting"],
+            "conflicts_with": [
+                "Infinite Wait",
+                "Timeout Omission"
+            ],
+            "tensions_with": ["Slow Operation Tolerance"],
+            "violated_by": ["architecture:timeout-omission"],
+            "detected_by": ["missing timeout config"],
+            "measured_by": [
+                "timeout coverage",
+                "latency tail"
+            ],
+            "refactored_by": ["lexicon:deadline-propagation"],
+            "enforced_by": ["lint/config checks"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const foo = await remoteFoo.find(id);",
+                "after": "const foo = await withTimeout(remoteFoo.find(id), 500, () => new FooTimeoutError(id));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "circuit-breaker-pattern",
+            "name": "Circuit Breaker Pattern",
+            "aliases": ["Circuit Breaker"],
+            "definition": "A design pattern that stops calling a dependency after repeated failures and probes it again after a wait.",
+            "type": "pattern",
+            "scope": [
+                "dependency call",
+                "service"
+            ],
+            "requires": [
+                "Failure Threshold",
+                "Fallback"
+            ],
+            "reinforces": [
+                "Fault Tolerance",
+                "Backpressure"
+            ],
+            "enables": ["Cascading Failure Prevention"],
+            "conflicts_with": [
+                "Unbounded Retry",
+                "Retry Storm"
+            ],
+            "tensions_with": ["Availability of Degraded Dependency"],
+            "violated_by": ["lexicon:failure-propagation"],
+            "detected_by": ["high failure dependency calls without breaker"],
+            "measured_by": [
+                "breaker trip rate",
+                "downstream error rate"
+            ],
+            "refactored_by": [],
+            "enforced_by": ["resilience policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "async function loadFoo(id: FooId) { return remoteFoo.find(id); }",
+                "after": "const fooBreaker = new CircuitBreaker({ failureThreshold: 5, resetAfterMs: 30_000 });\nasync function loadFoo(id: FooId) {\n  return fooBreaker.execute(() => remoteFoo.find(id));\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "bulkhead-pattern",
+            "name": "Bulkhead Pattern",
+            "definition": "A design pattern that gives each workload its own pool of threads or connections, so one workload cannot exhaust the others.",
+            "type": "pattern",
+            "scope": [
+                "resource pool",
+                "service",
+                "runtime"
+            ],
+            "requires": ["Resource Isolation"],
+            "reinforces": ["Fault Isolation"],
+            "enables": ["Blast-Radius Reduction"],
+            "conflicts_with": ["Shared Resource Pool"],
+            "tensions_with": ["Resource Utilization"],
+            "violated_by": ["lexicon:shared-resource-pool"],
+            "detected_by": ["shared pools across critical/noncritical workloads"],
+            "measured_by": ["resource saturation isolation"],
+            "refactored_by": [],
+            "enforced_by": ["resource policy"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const pool = new WorkerPool(100);\npool.submit(fooTask);\npool.submit(barTask);",
+                "after": "const fooPool = new WorkerPool(20);\nconst barPool = new WorkerPool(20);\nfooPool.submit(fooTask);\nbarPool.submit(barTask);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "backpressure",
+            "distinctFrom": [
+                {
+                    "id": "architecture:event-stream",
+                    "reason": "Backpressure is a consumer slowing its producer, while an event stream is the replayable log consumers read from their own offset."
+                },
+                {
+                    "id": "architecture:message-queue",
+                    "reason": "Backpressure signals capacity back to the producer, while a message queue holds messages until a consumer takes them."
+                },
+                {
+                    "id": "architecture:rate-limiting",
+                    "reason": "Backpressure slows a producer by the consumer's live capacity, while rate limiting caps a caller at a fixed rate and rejects the excess."
+                }
+            ],
+            "name": "Backpressure",
+            "definition": "A mechanism that lets a consumer signal its capacity, so a producer slows down when the consumer falls behind.",
+            "type": "mechanism",
+            "scope": [
+                "stream",
+                "queue",
+                "service"
+            ],
+            "requires": ["Capacity Signaling"],
+            "reinforces": [
+                "Resilience",
+                "Stability"
+            ],
+            "enables": ["Overload Protection"],
+            "conflicts_with": [
+                "Unbounded Ingestion",
+                "Missing Backpressure"
+            ],
+            "tensions_with": ["Throughput"],
+            "violated_by": ["architecture:missing-backpressure"],
+            "detected_by": ["queue growth without throttling"],
+            "measured_by": [
+                "queue depth",
+                "rejection/throttle rate"
+            ],
+            "refactored_by": [
+                "architecture:rate-limiting",
+                "lexicon:bounded-queue",
+                "lexicon:autoscaling-policy"
+            ],
+            "enforced_by": [
+                "load tests",
+                "runtime policies"
+            ],
+            "severity": "contextual",
+            "mandatoryFor": "high-load systems",
+            "exemplar": {
+                "before": "stream.on(\"data\", foo => processFoo(foo));",
+                "after": "for await (const foo of stream) {\n  await capacity.acquire();\n  void processFoo(foo).finally(() => capacity.release());\n}",
+                "lang": "ts"
+            }
+        }
+    ]
+}

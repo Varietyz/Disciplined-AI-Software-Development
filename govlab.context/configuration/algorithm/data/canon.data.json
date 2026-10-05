@@ -1,0 +1,972 @@
+{
+    "category": "centralization",
+    "tier": "process",
+    "check": {
+        "by": [
+            "the zero-duplication verification, which proves no unapproved copy of the centralized pattern remains",
+            "the pattern-specific validation of each migrated occurrence"
+        ],
+        "population": "every occurrence in the detection registry",
+        "freshness": "a verdict stands until the code or the registry changes",
+        "refusal": "completion is refused while any occurrence is neither migrated nor justified, or any old source remains",
+        "observation": "none: centralization is verified on source",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the centralized pattern, which every occurrence migrates to or carries a justification against"
+    },
+    "records": [
+        {
+            "id": "runtime-agnostic-adapter-boundary",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Runtime-Agnostic Adapter Boundary",
+            "exemplar": {
+                "before": "Centralization logic hardcodes a repo path and shell command, so it runs on one setup only.",
+                "after": "semantic op{DISCOVER/READ/SEARCH/APPLY_MIGRATION/VALIDATE} → adapter maps to the runtime → core carries no repo/shell/path/model",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Express all workflow operations as semantic verbs, delegate runtime-specific mechanics to adapters, and prohibit repository-, shell-, framework-, model-, or path-specific logic from entering the core contract.",
+            "invariant": "Portable architecture separates intent from execution substrate.",
+            "flow": [
+                "SemanticOperation",
+                "AdapterMapping",
+                "ConcreteExecution",
+                "EvidenceResult"
+            ],
+            "productions": [
+                {
+                    "lhs": "AdapterBoundary",
+                    "rhs": "<SemanticOperation> \"→\" <AdapterMapping> \"→\" <RuntimeAction> \"→\" <Result>"
+                },
+                {
+                    "lhs": "SemanticOperation",
+                    "rhs": "\"DISCOVER_RESOURCES\" | \"READ_RESOURCE\" | \"SEARCH_CONTENT\" | \"APPLY_MIGRATION\" | \"VALIDATE_ARTIFACT\" | \"REPORT_RESULT\""
+                },
+                {
+                    "lhs": "AdapterMapping",
+                    "rhs": "<CapabilityStatus> \",\" <RuntimeConstraint> \",\" <FallbackPolicy>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "semantic_consistency",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "operation-mode-gating",
+            "stage": "constrain",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Operation Mode Gating",
+            "exemplar": {
+                "before": "An analysis run silently migrates source; a plan run also executes.",
+                "after": "detect mode{analysis | plan | execute-migration | validation} → bind permissions → source mutation only in execute mode → mode-legal artifact",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect the requested operation mode, bind permitted capabilities, reject source mutation outside execution mode, and emit only artifacts valid for the current mode.",
+            "invariant": "Analysis, planning, execution, and validation are distinct contracts.",
+            "flow": [
+                "DetectMode",
+                "BindPermissions",
+                "EnforceMutationPolicy",
+                "ExecuteModeScope",
+                "EmitModeArtifact"
+            ],
+            "productions": [
+                {
+                    "lhs": "MutationMode",
+                    "rhs": "\"analysis_only\" | \"analysis_and_plan\" | \"execute_migration\" | \"validation_only\""
+                },
+                {
+                    "lhs": "ModeGate",
+                    "rhs": "<MutationMode> \"→\" <PermissionSet> \"→\" <ForbiddenActionSet> \"→\" <AllowedOutput>"
+                },
+                {"lhs": "ForbiddenActionSet",
+                    "rhs": "\"NoSourceMutationUnlessExecuteMigration\""}
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "state_transaction",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "capability-disclosure",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Capability Disclosure",
+            "exemplar": {
+                "before": "Centralization assumes it can search and write, failing silently when it can't.",
+                "after": "required capabilities → probe/emulate → {available | unavailable | emulated} → confidence downgraded on a gap",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Declare required capabilities, probe or emulate each capability, mark unavailable capabilities explicitly, and downgrade confidence where capability gaps affect evidence quality.",
+            "invariant": "A workflow cannot silently rely on unavailable infrastructure.",
+            "flow": [
+                "RequiredCapability",
+                "Probe",
+                "Available|Unavailable|Emulated",
+                "ConfidenceImpact"
+            ],
+            "productions": [
+                {
+                    "lhs": "CapabilityModel",
+                    "rhs": "<CapabilitySet> \"→\" <CapabilityStatusSet> \"→\" <CapabilityVerdict>"
+                },
+                {"lhs": "CapabilityStatus",
+                    "rhs": "\"available\" | \"unavailable\" | \"emulated\""},
+                {"lhs": "CapabilityVerdict",
+                    "rhs": "\"full\" | \"degraded\" | \"blocked\""}
+            ],
+            "composes": [],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "pattern-classification",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Pattern Classification",
+            "exemplar": {
+                "before": "Broad discovery launched before knowing what kind of pattern it is.",
+                "after": "pattern description → type{style | utility | constant | config | structural | cross-resource} → search strategy + validation strategy",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Extract the target pattern description, classify it into a known centralization category, select a search strategy, select a validation strategy, and request the developer's decision only when classification remains ambiguous.",
+            "invariant": "Search must be shaped by pattern type before broad discovery begins.",
+            "flow": [
+                "PatternDescription",
+                "ClassificationEvidence",
+                "PatternType",
+                "StrategySet"
+            ],
+            "productions": [
+                {
+                    "lhs": "PatternClassification",
+                    "rhs": "<PatternDescription> \"→\" <PatternType> \"→\" <SearchStrategy> \"→\" <ValidationStrategy>"
+                },
+                {
+                    "lhs": "PatternType",
+                    "rhs": "\"STYLE_PATTERN\" | \"UTILITY\" | \"CONSTANT\" | \"CONFIGURATION\" | \"STRUCTURAL_CODE\" | \"CROSS_RESOURCE_DEPENDENCY\" | \"UNKNOWN\""
+                },
+                {"lhs": "StrategySet",
+                    "rhs": "<SearchStrategy> \",\" <RefactorApproach> \",\" <ValidationStrategy>"}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "refactor-intent-classification",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Refactor Intent Classification",
+            "exemplar": {
+                "before": "A scattered pattern 'centralized' by adding an abstraction beside the old copies.",
+                "after": "occurrences + intent → refactor type{replacement | additive | config | doc} → replacement default; additive needs explicit debt justification",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Determine whether the scattered pattern represents a duplication problem, default multiple-occurrence problems to replacement refactor, and require explicit debt justification for additive enhancement.",
+            "invariant": "Centralization is replacement, not merely abstraction creation.",
+            "flow": [
+                "OccurrenceCount + PatternIntent",
+                "RefactorType",
+                "DebtPolicy"
+            ],
+            "productions": [
+                {"lhs": "RefactorIntent",
+                    "rhs": "<DuplicationEvidence> \"→\" <RefactorType> \"→\" <DebtPolicy>"},
+                {
+                    "lhs": "RefactorType",
+                    "rhs": "\"REPLACEMENT_REFACTOR\" | \"ADDITIVE_ENHANCEMENT\" | \"CONFIGURATION_UPDATE\" | \"DOCUMENTATION_ONLY\" | \"REQUIRES_ANALYSIS\""
+                },
+                {
+                    "lhs": "DebtPolicy",
+                    "rhs": "\"zero_duplication_required\" | \"explicit_retained_debt_required\" | \"documentation_sufficient\""
+                }
+            ],
+            "composes": [],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "research-guidance",
+            "stage": "see",
+            "axis": "analysis",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Research Guidance",
+            "exemplar": {
+                "before": "A plan built on local inference presented as best practice.",
+                "after": "guidance need → external or local research → best practices + anti-patterns → confidence score → disclose local-only limitation",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Query available external or local guidance, extract best practices and anti-patterns, score research quality, and disclose reduced confidence when current external research is unavailable.",
+            "invariant": "Architectural plans must distinguish evidence-backed guidance from local-only inference.",
+            "flow": [
+                "GuidanceNeed",
+                "ExternalOrLocalResearch",
+                "ExtractPrinciples",
+                "ScoreConfidence",
+                "ReportLimitations"
+            ],
+            "productions": [
+                {
+                    "lhs": "ResearchGuidance",
+                    "rhs": "<ResearchQuerySet> \"→\" <SourceSet> \"→\" <BestPracticeSet> \"→\" <AntiPatternSet> \"→\" <ConfidenceScore>"
+                },
+                {"lhs": "SourceSet",
+                    "rhs": "<ExternalCurrentSources> | <LocalKnowledgeSources> | <Unavailable>"},
+                {
+                    "lhs": "ConfidenceScore",
+                    "rhs": "<SourceCount> \"+\" <SourceQuality> \"+\" <Recency> \"+\" <ArchitectureAlignment>"
+                }
+            ],
+            "composes": [],
+            "force": ["model_governance"]
+        },
+        {
+            "id": "iterative-variation-discovery",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "dynamical-systems",
+            "yields": "boolean | counter",
+            "title": "Iterative Variation Discovery",
+            "exemplar": {
+                "before": "One exact form of the duplicate found; its variants missed.",
+                "after": "primary pattern → search → read context → infer variants → expand the search set → repeat until no new variations (or cap)",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Search for the primary pattern, inspect match context, infer variants, add new variants to the search set, and repeat until no new variations appear or the iteration cap is reached.",
+            "invariant": "Duplicates rarely appear in one exact form; centralization must discover variation families.",
+            "flow": [
+                "PrimaryPattern",
+                "Search",
+                "ContextRead",
+                "VariationExtract",
+                "ExpandedSearch",
+                "FixedPoint"
+            ],
+            "productions": [
+                {
+                    "lhs": "VariationDiscovery",
+                    "rhs": "<SearchPatternSet> \"→\" <MatchSet> \"→\" <ContextSet> \"→\" <VariationSet> \"→\" <SearchPatternSet>"
+                },
+                {
+                    "lhs": "SearchLoop",
+                    "rhs": "<VariationDiscovery> \"until\" (\"NoNewVariations\" | \"IterationCapReached\")"
+                },
+                {"lhs": "VariationSet",
+                    "rhs": "<PrimaryVariation> | <PrimaryVariation> \",\" <DerivedVariationSet>"}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "detection-registry",
+            "stage": "orient",
+            "axis": "ontology",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Detection Registry",
+            "exemplar": {
+                "before": "Occurrences half-tracked, so migration misses sites.",
+                "after": "each match + context → occurrence record{resource, location, matched pattern, value, role, variation type, iteration} → complete ledger",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For every discovered occurrence, record resource, location, local context, matched pattern, extracted value, occurrence role, variation type, and discovery iteration.",
+            "invariant": "Migration correctness depends on a complete occurrence ledger.",
+            "flow": [
+                "Match",
+                "Context",
+                "OccurrenceRecord",
+                "Registry"
+            ],
+            "productions": [
+                {
+                    "lhs": "DetectionRegistry",
+                    "rhs": "<OccurrenceRecord> | <OccurrenceRecord> \",\" <DetectionRegistry>"
+                },
+                {
+                    "lhs": "OccurrenceRecord",
+                    "rhs": "<Resource> \",\" <Location> \",\" <Pattern> \",\" <Snippet> \",\" <ContextBefore> \",\" <ContextAfter> \",\" <Value> \",\" <OccurrenceRole> \",\" <VariationType> \",\" <Iteration>"
+                },
+                {"lhs": "VariationType",
+                    "rhs": "\"primary\" | \"variant\""}
+            ],
+            "composes": [],
+            "force": [
+                "runtime_extensibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "canonical-variation-selection",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Canonical Variation Selection",
+            "exemplar": {
+                "before": "The centralized form chosen by preference, not by observed project semantics.",
+                "after": "detection registry → metrics{frequency, completeness, semantic coverage, architecture fit} → canonical form derived from evidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compare all detected variations by frequency, completeness, architectural fitness, and semantic coverage, then select the canonical implementation from evidence rather than preference.",
+            "invariant": "The centralized form must be derived from observed project semantics.",
+            "flow": [
+                "DetectionRegistry",
+                "VariationMetrics",
+                "CanonicalCandidate",
+                "CanonicalVariation"
+            ],
+            "productions": [
+                {
+                    "lhs": "CanonicalSelection",
+                    "rhs": "<DetectionRegistry> \"→\" <VariationMetricSet> \"→\" <CanonicalVariation>"
+                },
+                {
+                    "lhs": "VariationMetricSet",
+                    "rhs": "\"frequency\" \",\" \"structural_completeness\" \",\" \"semantic_coverage\" \",\" \"architecture_fit\""
+                },
+                {"lhs": "CanonicalVariation",
+                    "rhs": "<EvidenceDerivedImplementationForm>"}
+            ],
+            "composes": ["detection-registry"],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "architecture-compliance-targeting",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Architecture Compliance Targeting",
+            "exemplar": {
+                "before": "A single source of truth placed in the wrong architectural boundary.",
+                "after": "pattern type → guidance → existing centralized patterns → checks{naming, size, capacity, dependency direction, SRP} → justified target",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Load relevant architecture and validation guidance, inspect existing centralized patterns, check naming and capacity constraints, detect conflicts, and select a justified centralization target.",
+            "invariant": "A single source of truth must live in the correct architectural boundary.",
+            "flow": [
+                "PatternType",
+                "ArchitectureRules",
+                "ExistingPatternScan",
+                "ConflictCheck",
+                "TargetSelection"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureTargeting",
+                    "rhs": "<PatternType> \"→\" <GuidanceSet> \"→\" <ExistingCentralizationSet> \"→\" <ComplianceCheckSet> \"→\" <CentralizationTarget>"
+                },
+                {
+                    "lhs": "ComplianceCheckSet",
+                    "rhs": "\"naming\" \",\" \"artifact_size\" \",\" \"folder_capacity\" \",\" \"dependency_direction\" \",\" \"single_responsibility\""
+                },
+                {
+                    "lhs": "CentralizationTarget",
+                    "rhs": "<Category> \",\" <LocationPolicy> \",\" <NamingConvention> \",\" <ReferenceMethod>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "existing-solution-conflict",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Existing Solution Conflict",
+            "exemplar": {
+                "before": "A second source of truth created because an existing one was never searched.",
+                "after": "search existing centralized locations → conflict{none | overlap | duplicate | ambiguous} → {reuse | extend | distinct | cancel}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Search existing centralized locations for the same or overlapping pattern, classify whether to reuse, extend, create a distinct target, or cancel, and require the developer's decision when conflict resolution is not mechanically safe.",
+            "invariant": "Avoid creating a second source of truth while attempting centralization.",
+            "flow": [
+                "ExistingPatternSearch",
+                "ConflictDetected",
+                "ResolutionOptions",
+                "Decision"
+            ],
+            "productions": [
+                {"lhs": "ConflictResolution",
+                    "rhs": "<DuplicateCheck> \"→\" <ConflictState> \"→\" <Resolution>"},
+                {"lhs": "ConflictState",
+                    "rhs": "\"none\" | \"overlap\" | \"duplicate\" | \"ambiguous\""},
+                {
+                    "lhs": "Resolution",
+                    "rhs": "\"reuse_existing\" | \"extend_existing\" | \"create_distinct_target\" | \"cancel\""
+                }
+            ],
+            "composes": [],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "migration-action-mapping",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Migration Action Mapping",
+            "exemplar": {
+                "before": "Some occurrences migrated, others silently left behind.",
+                "after": "detection registry → a migration action per occurrence{old content, replacement strategy, skip policy + justification} → every occurrence migrated or justified",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Convert every detection-registry occurrence into an explicit migration action, including old content, replacement strategy, skip policy, and justification requirement.",
+            "invariant": "Every occurrence must be migrated or explicitly justified.",
+            "flow": [
+                "DetectionRegistry",
+                "MigrationActionSet",
+                "CoverageCheck"
+            ],
+            "productions": [
+                {"lhs": "MigrationMapping",
+                    "rhs": "<DetectionRegistry> \"→\" <MigrationActionSet>"},
+                {
+                    "lhs": "MigrationAction",
+                    "rhs": "<Resource> \",\" <Location> \",\" <OccurrenceRole> \",\" <OldContent> \",\" <NewContentStrategy> \",\" <MigrationStatus> \",\" <SkipJustificationPolicy>"
+                },
+                {"lhs": "MigrationStatus",
+                    "rhs": "\"pending\" | \"migrated\" | \"skipped_with_justification\""}
+            ],
+            "composes": ["detection-registry"],
+            "force": [
+                "runtime_extensibility",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "atomic-refactor-phase",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Atomic Refactor Phase",
+            "exemplar": {
+                "before": "A broad unverified edit across all sites at once.",
+                "after": "phases → actions + verification + rollback per phase → no progression until the phase verification passes",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Divide the refactor into ordered phases, attach actions, attach verification criteria, attach rollback behavior, and prevent progression until the phase verification passes.",
+            "invariant": "Refactoring should advance through verified checkpoints, not broad unverified edits.",
+            "flow": [
+                "Phase",
+                "Actions",
+                "Verification",
+                "Pass|Rollback",
+                "NextPhase"
+            ],
+            "productions": [
+                {
+                    "lhs": "RefactorPhase",
+                    "rhs": "<PhaseNumber> \",\" <PhaseName> \",\" <ActionSet> \",\" <VerificationSet> \",\" <RollbackStrategy>"
+                },
+                {"lhs": "PhaseTransition",
+                    "rhs": "<RefactorPhase> \"→\" (\"NextPhase\" | \"RollbackAndStop\")"},
+                {"lhs": "VerificationSet",
+                    "rhs": "<Check> | <Check> \",\" <VerificationSet>"}
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "replacement-refactor",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Replacement Refactor",
+            "exemplar": {
+                "before": "An abstraction created but the old copies remain — two sources of truth.",
+                "after": "centralize → reference infra → migrate all → delete old definitions → verify zero duplication → final validation",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Create the centralized implementation, establish reference infrastructure, migrate all occurrences, delete old definitions, verify zero duplication, and run final validation.",
+            "invariant": "Zero-debt centralization requires replacement plus deletion plus verification.",
+            "flow": [
+                "Centralize",
+                "Reference",
+                "Migrate",
+                "DeleteOld",
+                "VerifyZeroDuplication",
+                "Validate"
+            ],
+            "productions": [
+                {
+                    "lhs": "ReplacementRefactor",
+                    "rhs": "<CreateCentralImplementation> \"→\" <UpdateReferenceInfrastructure> \"→\" <MigrateOccurrences> \"→\" <DeleteOldDefinitions> \"→\" <ZeroDuplicationCheck> \"→\" <FinalValidation>"
+                },
+                {
+                    "lhs": "CompletionCondition",
+                    "rhs": "\"all_occurrences_migrated_or_justified\" \",\" \"no_unapproved_old_patterns\" \",\" \"validation_passed\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "additive-debt-gate",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Additive Debt Gate",
+            "exemplar": {
+                "before": "'Centralized' declared while the old patterns are still live and unowned.",
+                "after": "additive enhancement → disclose retained debt → approval → deprecation plan → never called complete centralization",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "When a proposed abstraction leaves old patterns in place, require explicit approval, document retained debt, define deprecation conditions, and prohibit calling the result complete centralization.",
+            "invariant": "Additive enhancement is not centralization unless debt is acknowledged and bounded.",
+            "flow": [
+                "AdditivePlan",
+                "DebtDisclosure",
+                "Approval",
+                "DeprecationPlan",
+                "IncompleteOrDebtAcceptedStatus"
+            ],
+            "productions": [
+                {
+                    "lhs": "AdditiveDebtGate",
+                    "rhs": "<AdditiveEnhancement> \"→\" <DebtRecord> \"→\" <UserApproval> \"→\" <DeprecationPlan>"
+                },
+                {
+                    "lhs": "DebtRecord",
+                    "rhs": "<RetainedPatternSet> \",\" <Reason> \",\" <OwnerOrTrigger> \",\" <ExpirationOrReviewCondition>"
+                },
+                {"lhs": "CentralizationStatus",
+                    "rhs": "\"not_zero_debt\" | \"approved_debt\" | \"canceled\""}
+            ],
+            "composes": [],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "rollback-centered-execution",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Rollback-Centered Execution",
+            "exemplar": {
+                "before": "A destructive migration phase runs with no recovery path.",
+                "after": "before each risky phase → checkpoint → execute → verify → commit | rollback on{action | verification | critical-invariant} failure",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Before each destructive or high-risk phase, create a checkpoint, execute actions, verify results, and roll back immediately on critical action or verification failure.",
+            "invariant": "Migration safety requires a recovery path at every phase boundary.",
+            "flow": [
+                "Checkpoint",
+                "ExecutePhase",
+                "VerifyPhase",
+                "Commit|Rollback"
+            ],
+            "productions": [
+                {
+                    "lhs": "RollbackExecution",
+                    "rhs": "<Checkpoint> \"→\" <ActionExecution> \"→\" <Verification> \"→\" <PhaseOutcome>"
+                },
+                {"lhs": "PhaseOutcome",
+                    "rhs": "\"commit_phase\" | \"rollback_and_halt\""},
+                {
+                    "lhs": "RollbackTrigger",
+                    "rhs": "\"action_failure\" | \"verification_failure\" | \"critical_invariant_failure\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "state_transaction",
+                "correctness_verification",
+                "resilience_recovery",
+                "streaming_dataflow",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "pattern-specific-validation",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Pattern-Specific Validation",
+            "exemplar": {
+                "before": "Validation runs generic checks unrelated to what was centralized.",
+                "after": "pattern type → matched validation set → execute → scan every known variation for orphans → validation score",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Select validation checks by pattern type, execute or mark each unavailable, verify architecture compliance, check all known variations for orphaned duplicates, and compute validation score.",
+            "invariant": "Validation must match what was centralized.",
+            "flow": [
+                "PatternType",
+                "ValidationSet",
+                "ExecuteChecks",
+                "DuplicationScan",
+                "Score",
+                "Status"
+            ],
+            "productions": [
+                {
+                    "lhs": "PatternValidation",
+                    "rhs": "<PatternType> \"→\" <ValidationCheckSet> \"→\" <ValidationResultSet> \"→\" <RemainingIssueSet> \"→\" <FinalStatus>"
+                },
+                {
+                    "lhs": "ValidationCheckSet",
+                    "rhs": "<PrimaryValidation> \",\" <SecondaryValidationSet> \",\" <ArchitectureCompliance> \",\" <ZeroDuplicationCheck>"
+                },
+                {"lhs": "FinalStatus",
+                    "rhs": "\"complete\" | \"incomplete\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "zero-duplication-verification",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Zero-Duplication Verification",
+            "exemplar": {
+                "before": "A single source of truth declared while old sources still exist elsewhere.",
+                "after": "known primary + variant patterns → search all modules except the approved central location → zero unapproved matches required",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Search every known primary and variant pattern outside the approved centralized location, classify remaining matches as approved or orphaned, and require zero unapproved matches for replacement refactors.",
+            "invariant": "A single source of truth is invalid if old sources still exist.",
+            "flow": [
+                "SearchPatterns",
+                "ExcludeCentralTarget",
+                "RemainingMatches",
+                "Approved?|Issue"
+            ],
+            "productions": [
+                {
+                    "lhs": "ZeroDuplication",
+                    "rhs": "<KnownVariationSet> \"→\" <ProjectSearch> \"→\" <RemainingMatchSet> \"→\" <DuplicationVerdict>"
+                },
+                {"lhs": "ProjectSearch",
+                    "rhs": "\"search_all_modules_except_approved_central_location\""},
+                {
+                    "lhs": "DuplicationVerdict",
+                    "rhs": "\"zero_unapproved_duplication\" | \"remaining_duplicate_or_orphan\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "validation-score",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "probability",
+            "yields": "number[0,1]",
+            "title": "Validation Score",
+            "exemplar": {
+                "before": "A 90% score reported as complete while issues remain.",
+                "after": "total checks + passed → safe divide → score; complete only when score == 100 AND remaining issues == 0",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Count total validation checks, count passed checks, divide safely, and mark complete only when the score is perfect and no remaining issues exist.",
+            "invariant": "Numerical validation is useful only when combined with issue absence.",
+            "flow": [
+                "Checks",
+                "PassedChecks",
+                "SafeDivide",
+                "Score",
+                "Complete|Incomplete"
+            ],
+            "productions": [
+                {
+                    "lhs": "ValidationScore",
+                    "rhs": "<TotalChecks> \",\" <PassedChecks> \"→\" <SafeDivide> \"→\" <ScorePercent>"
+                },
+                {"lhs": "CompletionRule",
+                    "rhs": "\"ScorePercent == 100\" \"AND\" \"RemainingIssues == 0\""},
+                {"lhs": "Status",
+                    "rhs": "\"complete\" | \"incomplete\""}
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "developer-decision-gate",
+            "stage": "intent",
+            "axis": "teleology",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:tel-priority"],
+            "title": "Developer Decision Gate",
+            "exemplar": {
+                "before": "A destructive or ambiguous action taken without governance.",
+                "after": "risk{ambiguous | conflict | additive-debt | destructive | high-risk} → options → developer decision → bound into plan state",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Request the developer's decision before destructive, ambiguous, conflict-prone, additive-with-debt, or high-risk actions, then bind the selected decision into subsequent plan state.",
+            "invariant": "Ambiguity and risk require explicit governance.",
+            "flow": [
+                "RiskCondition",
+                "DecisionOptions",
+                "DeveloperDecision",
+                "BoundPlanState"
+            ],
+            "productions": [
+                {
+                    "lhs": "DeveloperDecisionGate",
+                    "rhs": "<DecisionTrigger> \"→\" <OptionSet> \"→\" <SelectedOption> \"→\" <PlanUpdate>"
+                },
+                {
+                    "lhs": "DecisionTrigger",
+                    "rhs": "\"ambiguous_classification\" | \"existing_solution_conflict\" | \"additive_debt\" | \"destructive_action\" | \"high_risk_refactor\""
+                },
+                {"lhs": "OptionSet",
+                    "rhs": "<Option> | <Option> \",\" <OptionSet>"}
+            ],
+            "composes": [],
+            "force": ["security_governance"]
+        },
+        {
+            "id": "completion-truthfulness",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Completion Truthfulness",
+            "exemplar": {
+                "before": "'Done' asserted while duplication and validation evidence are missing.",
+                "after": "critical criteria + old patterns removed/justified + zero duplication + validation evidence + no remaining issues → complete; else planned/incomplete/blocked",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Mark centralization complete only if all critical criteria pass, all old patterns are removed or justified, zero duplication is verified, validation evidence is recorded, and remaining issues are empty.",
+            "invariant": "Completion is a verified state, not a narrative claim.",
+            "flow": [
+                "CriteriaSet",
+                "EvidenceSet",
+                "RemainingIssuesCheck",
+                "Complete|Incomplete"
+            ],
+            "productions": [
+                {
+                    "lhs": "CompletionContract",
+                    "rhs": "<CriticalCriteriaSet> \"→\" <EvidenceSet> \"→\" <RemainingIssueSet> \"→\" <CompletionVerdict>"
+                },
+                {
+                    "lhs": "CompletionVerdict",
+                    "rhs": "\"centralization_complete\" | \"planned_only\" | \"incomplete\" | \"blocked\""
+                },
+                {
+                    "lhs": "CentralizationComplete",
+                    "rhs": "\"single_source_of_truth_verified\" \",\" \"zero_unapproved_duplication\" \",\" \"validation_passed\" \",\" \"limitations_disclosed\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "centralization-report",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Centralization Report",
+            "exemplar": {
+                "before": "A report that conflates planned work with executed work.",
+                "after": "artifacts → {classification, research confidence, detection metrics, architecture decision, plan, execution status, validation score, limitations} → planned vs executed distinguished",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compose a final report containing classification, research confidence, detection metrics, architecture decision, plan, execution status, validation score, remaining issues, artifact references, and unavailable capabilities.",
+            "invariant": "Reporting must preserve the evidence trail and distinguish planned work from executed work.",
+            "flow": [
+                "WorkflowArtifacts",
+                "Metrics",
+                "Limitations",
+                "Status",
+                "UserReport"
+            ],
+            "productions": [
+                {
+                    "lhs": "UserReport",
+                    "rhs": "<ClassificationSummary> \",\" <ResearchSummary> \",\" <DetectionSummary> \",\" <ArchitectureSummary> \",\" <PlanSummary> \",\" <ExecutionSummary> \",\" <ValidationSummary> \",\" <ArtifactReferences> \",\" <Limitations>"
+                },
+                {"lhs": "ExecutionSummary",
+                    "rhs": "\"executed\" | \"not_executed_planned_only\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "centralization-kernel",
+            "principleRef": "single-source-of-truth",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "orient",
+                    "record": "runtime-agnostic-adapter-boundary"},
+                {"stage": "see",
+                    "record": "research-guidance"},
+                {"stage": "derive",
+                    "record": "pattern-classification"},
+                {"stage": "intent",
+                    "record": "canonical-variation-selection"},
+                {"stage": "constrain",
+                    "record": "operation-mode-gating"},
+                {"stage": "project",
+                    "record": "migration-action-mapping"},
+                {"stage": "act",
+                    "record": "replacement-refactor"},
+                {"stage": "verify",
+                    "record": "zero-duplication-verification"},
+                {"stage": "commit",
+                    "record": "centralization-report"},
+                {"stage": "terminate",
+                    "record": "completion-truthfulness"}
+            ],
+            "title": "Centralization Kernel",
+            "exemplar": {
+                "before": "Scattered code merged by intuition, old copies left, never verified.",
+                "after": "init → classify → research → discover variations → analyze architecture → plan → optional execute → validate zero duplication → report",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Initialize runtime context, classify the target pattern, gather research, discover all variations, analyze architecture, build a refactor plan, optionally execute migration, validate zero duplication, and report status.",
+            "invariant": "Centralization is a gated evidence machine that transforms scattered implementation into verified single-source-of-truth architecture.",
+            "flow": [
+                "Init",
+                "Classify",
+                "Research",
+                "DetectVariations",
+                "AnalyzeArchitecture",
+                "Plan",
+                "Execute?",
+                "Validate",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "CentralizationKernel",
+                    "rhs": "<Initialization> \"→\" <PatternClassification> \"→\" <ResearchGuidance> \"→\" <VariationDiscovery> \"→\" <ArchitectureTargeting> \"→\" <MigrationMapping> \"→\" <RefactorPlan> \"→\" <OptionalExecution> \"→\" <PatternValidation> \"→\" <UserReport>"
+                },
+                {"lhs": "OptionalExecution",
+                    "rhs": "\"skip_unless_execute_migration\" | <RollbackExecution>"},
+                {
+                    "lhs": "RefactorPlan",
+                    "rhs": "<RefactorPhaseSet> \",\" <MigrationActionSet> \",\" <VerificationChecklist> \",\" <RollbackStrategy>"
+                }
+            ],
+            "composes": [
+                "pattern-classification",
+                "research-guidance"
+            ],
+            "force": [
+                "semantic_consistency",
+                "runtime_extensibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "centralization-concern",
+            "title": "<Centralization Concern>",
+            "intent": "<Detect context> → <Classify pattern> → <Discover all occurrences and variants> → <Choose canonical source> → <Map migration> → <Gate execution> → <Validate zero debt> → <Report evidence>",
+            "invariant": "Any scattered implementation pattern can be centralized only by converting every occurrence into an accounted-for migration unit and proving no unapproved duplicate remains.",
+            "flow": [
+                "Context",
+                "Pattern",
+                "Registry",
+                "Canonical",
+                "Plan",
+                "ExecutionGate",
+                "Validation",
+                "Report"
+            ],
+            "productions": [
+                {
+                    "lhs": "CentralizationConcern",
+                    "rhs": "<ContextContract> \"→\" <PatternContract> \"→\" <OccurrenceRegistry> \"→\" <CanonicalSource> \"→\" <MigrationPlan> \"→\" <ExecutionPolicy> \"→\" <ZeroDebtValidation> \"→\" <EvidenceReport>"
+                },
+                {
+                    "lhs": "ZeroDebtValidation",
+                    "rhs": "\"all_variants_checked\" \",\" \"old_patterns_removed_or_justified\" \",\" \"single_source_of_truth_verified\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "runtime_extensibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ],
+            "meta": true
+        }
+    ]
+}

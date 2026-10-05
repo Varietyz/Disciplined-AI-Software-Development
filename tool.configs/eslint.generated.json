@@ -8,6 +8,7 @@
       "**/coverage/**",
       "**/_code.info.generated/**",
       "**/*.generated.*",
+      "**/*.backup.*",
       "**/__fixtures__/**",
       "**/fixtures/**",
       "**/testdata/**",
@@ -1901,6 +1902,7 @@
       "dot-notation": "off",
       "govlab/no-concrete-dependency": "off",
       "govlab/no-bitwise-outside-flags": "off",
+      "govlab/no-hardcoded-secrets": "off",
       "govlab/require-central-config": "off",
       "govlab-deps/no-redundant-type-shim": "error",
       "govlab-deps/no-undeclared-dependency": "error",
@@ -2008,8 +2010,11 @@
           ]
         }
       ],
+      "local/no-runtime-absent-member": "error",
+      "local/no-secret-value": "error",
       "local/no-string-literal-ids": "error",
       "local/no-swallowed-failure": "error",
+      "local/no-unsafe-switch": "error",
       "local/require-cache-coverage": "error",
       "local/require-component": ["error", { "factories": ["createElement"] }],
       "local/require-pool-registration": "error",

@@ -38,27 +38,27 @@ A1·a dependency graph
 @cue: "DECLARE_THE_EDGES"
 
 CONTRACT:
-input:        <the units of work>
-transform:    for each unit → name what it depends on → refuse a cycle → name the groups that are independent
-constraints:  a successor is declared by name, never derived from a position; at most one unit that holds the others is open at a time
-output:       DAG <units>
-handoff:      acyclic AND every unit names its dependencies (yields: edge-list + boolean)
+  input:        <the units of work>
+  transform:    for each unit → name what it depends on → refuse a cycle → name the groups that are independent
+  constraints:  a successor is declared by name, never derived from a position; at most one unit that holds the others is open at a time
+  output:       DAG <units>
+  handoff:      acyclic AND every unit names its dependencies (yields: edge-list + boolean)
 
 DAG <units>:
-NODE <unit-a>:
-<what settles it>
-NODE <unit-b> AFTER <unit-a>:
-<what settles it>
-NODE <unit-c> DEPENDS_ON [<unit-a>]:
-<what settles it>
-PARALLEL_GROUP: <unit-b>, <unit-c>
+    NODE <unit-a>:
+        <what settles it>
+    NODE <unit-b> AFTER <unit-a>:
+        <what settles it>
+    NODE <unit-c> DEPENDS_ON [<unit-a>]:
+        <what settles it>
+    PARALLEL_GROUP: <unit-b>, <unit-c>
 
 HANDOFF GATE (evidence-bearing):
-rule_id: "PROJECT"   yields: edge-list + boolean
-[check] no unit depends on itself through any path (evidence: the walk over DAG <units>) over: <units> measured: <acyclic> / <units>
-[check] every successor is named, none is a number (evidence: the AFTER and DEPENDS_ON clauses)
-[check] at most one holding unit is open (evidence: count of open holds)
-result: pass → NODE 6 | a cycle → REPAIR (owner: NODE 5) | unknown → BLOCKED
+  rule_id: "PROJECT"   yields: edge-list + boolean
+  [check] no unit depends on itself through any path (evidence: the walk over DAG <units>) over: <units> measured: <acyclic> / <units>
+  [check] every successor is named, none is a number (evidence: the AFTER and DEPENDS_ON clauses)
+  [check] at most one holding unit is open (evidence: count of open holds)
+  result: pass → NODE 6 | a cycle → REPAIR (owner: NODE 5) | unknown → BLOCKED
 ```
 
 A1·b state machine
@@ -66,29 +66,29 @@ A1·b state machine
 ```pag
 # a lifecycle as a closed set of states · a transition names its trigger and its guard
 STATE_MACHINE <unit>:
-STATE <planned>:
-ENTRY: <no artifact exists yet>
-STATE <open>:
-ENTRY: <a party has begun>
-STATE <settled>:
-ENTRY: <every condition of the exit holds>
-STATE <retired>:
-ENTRY: <what the settlement implies has landed>
+    STATE <planned>:
+        ENTRY: <no artifact exists yet>
+    STATE <open>:
+        ENTRY: <a party has begun>
+    STATE <settled>:
+        ENTRY: <every condition of the exit holds>
+    STATE <retired>:
+        ENTRY: <what the settlement implies has landed>
 
-TRANSITION FROM <planned> TO <open> ON <first-reading>
-TRANSITION FROM <open> TO <settled> ON <exit-condition>
-GUARD: <every party that must agree has agreed>
-TRANSITION FROM <settled> TO <retired> ON <implied-work-landed>
-GUARD: <nothing the settlement distributed is still open>
-TRANSITION FROM <open> TO <planned> ON <artifact-removed>
-GUARD: <no argument has landed yet>
+    TRANSITION FROM <planned> TO <open> ON <first-reading>
+    TRANSITION FROM <open> TO <settled> ON <exit-condition>
+        GUARD: <every party that must agree has agreed>
+    TRANSITION FROM <settled> TO <retired> ON <implied-work-landed>
+        GUARD: <nothing the settlement distributed is still open>
+    TRANSITION FROM <open> TO <planned> ON <artifact-removed>
+        GUARD: <no argument has landed yet>
 
 FUNCTION state_of(unit):
-# derived from the tree on every read · never written by a party
-IF NOT EXISTS(unit.artifact): RETURN <planned>
-IF every_exit_condition_holds(unit) AND implied_work_landed(unit): RETURN <retired>
-IF every_exit_condition_holds(unit): RETURN <settled>
-RETURN <open>
+  # derived from the tree on every read · never written by a party
+  IF NOT EXISTS(unit.artifact): RETURN <planned>
+  IF every_exit_condition_holds(unit) AND implied_work_landed(unit): RETURN <retired>
+  IF every_exit_condition_holds(unit): RETURN <settled>
+  RETURN <open>
 ```
 
 A1·c join and wait
@@ -96,46 +96,46 @@ A1·c join and wait
 ```pag
 # NODE 6 — ACT   [epistemic · formalization · computation · yields: procedures]
 CONTRACT:
-input:        DAG <units>
-transform:    run each independent group as bounded readers → join their artifacts → a participant waits rather than returns
-constraints:  a bounded reader receives a task and nothing shared; whether a group runs together is the harness's fact, declared independence is the document's
-output:       artifacts[] per group
-handoff:      every group joined or explicitly still open (yields: procedure)
+  input:        DAG <units>
+  transform:    run each independent group as bounded readers → join their artifacts → a participant waits rather than returns
+  constraints:  a bounded reader receives a task and nothing shared; whether a group runs together is the harness's fact, declared independence is the document's
+  output:       artifacts[] per group
+  handoff:      every group joined or explicitly still open (yields: procedure)
 
 PARALLEL:
-TASK "<investigate unit b · mutate nothing>" WITH agent: <role-b> → <artifact-b>
-TASK "<investigate unit c · mutate nothing>" WITH agent: <role-c> → <artifact-c>
+    TASK "<investigate unit b · mutate nothing>" WITH agent: <role-b> → <artifact-b>
+    TASK "<investigate unit c · mutate nothing>" WITH agent: <role-c> → <artifact-c>
 END
 AWAIT <artifact-b>, <artifact-c> INTO <artifacts>
 
 # a participant does not join · it waits, and a wait is a call rather than a halt
 WAIT ON <the shared surface> AS <party> INTO <change>
 IF <change> == <changed>:
-READ_RESOURCE <the shared surface> whole INTO <current>
+    READ_RESOURCE <the shared surface> whole INTO <current>
 ```
 
 A1·d prose or construct
 
 ```mermaid
 flowchart TB
-prose["Prose · 'first do this, then that, meanwhile the other'"]
-implied["Ordering implied by sentence order · the model reconstructs it"]
-declared["A construct · DAG, STATE_MACHINE, PARALLEL, AWAIT, WAIT"]
-explicit["Edges, states and groups every reader shares"]
-prose --> implied
-declared --> explicit
+    prose["Prose · 'first do this, then that, meanwhile the other'"]
+    implied["Ordering implied by sentence order · the model reconstructs it"]
+    declared["A construct · DAG, STATE_MACHINE, PARALLEL, AWAIT, WAIT"]
+    explicit["Edges, states and groups every reader shares"]
+    prose --> implied
+    declared --> explicit
 ```
 
 A1·e name, never number
 
 ```mermaid
 flowchart LR
-ordinal["An ordinal · a position in a total order"]
-hidden["A unit raised before its predecessor settles · every number still intact"]
-name["A declared successor · an edge in a partial order"]
-caught["A successor nobody created, or a unit no predecessor declared · both decidable"]
-ordinal -. preserves the violation .-> hidden
-name --> caught
+    ordinal["An ordinal · a position in a total order"]
+    hidden["A unit raised before its predecessor settles · every number still intact"]
+    name["A declared successor · an edge in a partial order"]
+    caught["A successor nobody created, or a unit no predecessor declared · both decidable"]
+    ordinal -. preserves the violation .-> hidden
+    name --> caught
 ```
 
 ## Composing a collaboration
@@ -164,20 +164,20 @@ B1·a two terminal nodes
 # NODE 10 — TERMINATE   [evaluative · termination · set-theory · yields: ter-stop boolean]
 # a participant · receives what it owns and what is addressed to it, and never returns
 CONTRACT:
-input:        <items addressed to me> + <open units of my own concern>
-transform:    handle what is addressed to me → perform my own clear work → WAIT on the shared surface → re-enter
-constraints:  ter-stop is the developer's call; a quiet wait is a fact about the peers, never about the queue
-output:       nothing terminal · the loop re-enters at NODE 1
-handoff:      <changed> → NODE 1 ORIENT (read the surface whole, then act) | <quiet> → my own work, then WAIT again
+  input:        <items addressed to me> + <open units of my own concern>
+  transform:    handle what is addressed to me → perform my own clear work → WAIT on the shared surface → re-enter
+  constraints:  ter-stop is the developer's call; a quiet wait is a fact about the peers, never about the queue
+  output:       nothing terminal · the loop re-enters at NODE 1
+  handoff:      <changed> → NODE 1 ORIENT (read the surface whole, then act) | <quiet> → my own work, then WAIT again
 
 # NODE 10 — TERMINATE   [evaluative · termination · set-theory · yields: ter-stop boolean]
 # a bounded reader · receives a task and nothing shared, and returns exactly once
 CONTRACT:
-input:        <the task it received>
-transform:    evaluate saturation AND completion AND verification → emit one typed artifact
-constraints:  no shared surface is read, so no surface rule binds; an unresolved question is a finding with what would settle it, never a held turn
-output:       one typed artifact | a blocked report naming what would settle it
-handoff:      TERMINATE
+  input:        <the task it received>
+  transform:    evaluate saturation AND completion AND verification → emit one typed artifact
+  constraints:  no shared surface is read, so no surface rule binds; an unresolved question is a finding with what would settle it, never a held turn
+  output:       one typed artifact | a blocked report naming what would settle it
+  handoff:      TERMINATE
 ```
 
 B1·b change across ownership
@@ -186,25 +186,25 @@ B1·b change across ownership
 # a finding on a surface I do not own becomes an item, never an edit · the op-set forbids it, not restraint
 
 FUNCTION emit_repair(finding):
-IF owner_of(finding.surface) == <me>: RETURN {route: "act", change: finding.change}
-SET item = {kind: artifact, to: [owner_of(finding.surface)], surface: finding.surface, locus: finding.locus, observed: finding.observed, expected: finding.expected, change: finding.change}
-PERSIST_ARTIFACT item TO <the shared surface> AS <me>
-RETURN {route: "sent", item: item}
+  IF owner_of(finding.surface) == <me>: RETURN {route: "act", change: finding.change}
+  SET item = {kind: artifact, to: [owner_of(finding.surface)], surface: finding.surface, locus: finding.locus, observed: finding.observed, expected: finding.expected, change: finding.change}
+  PERSIST_ARTIFACT item TO <the shared surface> AS <me>
+  RETURN {route: "sent", item: item}
 
 # NODE 6 — ACT   [epistemic · formalization · computation · yields: procedures]
 CONTRACT:
-input:        findings
-transform:    for each finding → emit_repair → apply only what routes to "act"
-constraints:  an INVESTIGATE op-set performs no mutation; a mutation on another's surface is a breach whatever its correctness
-output:       applied[] + sent[]
-handoff:      every finding either applied on my own surface or sent to its owner (yields: boolean)
+  input:        findings
+  transform:    for each finding → emit_repair → apply only what routes to "act"
+  constraints:  an INVESTIGATE op-set performs no mutation; a mutation on another's surface is a breach whatever its correctness
+  output:       applied[] + sent[]
+  handoff:      every finding either applied on my own surface or sent to its owner (yields: boolean)
 
 HANDOFF GATE (evidence-bearing):
-rule_id: "ACT"   yields: boolean
-[check] no applied change touched a surface I do not own (evidence: applied[].surface)
-[check] every sent item names its owner, its locus and the one change (evidence: sent[])
-[check] every finding routed exactly once (evidence: applied[] and sent[] partition findings)
-result: pass → NODE 7 | a foreign write → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "ACT"   yields: boolean
+  [check] no applied change touched a surface I do not own (evidence: applied[].surface)
+  [check] every sent item names its owner, its locus and the one change (evidence: sent[])
+  [check] every finding routed exactly once (evidence: applied[] and sent[] partition findings)
+  result: pass → NODE 7 | a foreign write → REPAIR (owner: NODE 6) | unknown → BLOCKED
 ```
 
 B1·c party count
@@ -213,25 +213,25 @@ B1·c party count
 # the party count is an output of the structure, never an input to it
 
 FUNCTION derive_count(work):
-ANALYZE_CONTENT work FOR <pairs of surfaces where a change to one forces a change to the other> INTO coupling   # yields: edge-list
-EXTRACT_FACTS connected_components FROM coupling INTO concerns                                                 # yields: set
-CALCULATE_METRIC floor = count(concerns)                                                                        # one party per concern
-ANALYZE_CONTENT claims FOR <how many rest on one surface> INTO fan_in                                          # yields: number
-CALCULATE_METRIC ceiling = <the population past which a claim is stale more often than it is useful>
-RETURN {concerns: concerns, floor: floor, ceiling: ceiling}
+  ANALYZE_CONTENT work FOR <pairs of surfaces where a change to one forces a change to the other> INTO coupling   # yields: edge-list
+  EXTRACT_FACTS connected_components FROM coupling INTO concerns                                                 # yields: set
+  CALCULATE_METRIC floor = count(concerns)                                                                        # one party per concern
+  ANALYZE_CONTENT claims FOR <how many rest on one surface> INTO fan_in                                          # yields: number
+  CALCULATE_METRIC ceiling = <the population past which a claim is stale more often than it is useful>
+  RETURN {concerns: concerns, floor: floor, ceiling: ceiling}
 ```
 
 B1·d parties over a partition
 
 ```mermaid
 flowchart TB
-work["A body of work"]
-concerns["Concerns that must be able to contradict each other"]
-parties["One party per concern · each a document, none above the others"]
-surfaces["Shared surfaces · what each owns, what is addressed to whom"]
-owner["A change to another's surface travels as an item · the owner makes it"]
-work --> concerns --> parties --> surfaces --> owner
-parties -. nothing here .-> controller["A controller"]
+    work["A body of work"]
+    concerns["Concerns that must be able to contradict each other"]
+    parties["One party per concern · each a document, none above the others"]
+    surfaces["Shared surfaces · what each owns, what is addressed to whom"]
+    owner["A change to another's surface travels as an item · the owner makes it"]
+    work --> concerns --> parties --> surfaces --> owner
+    parties -. nothing here .-> controller["A controller"]
 ```
 
 ## Shared surfaces
@@ -257,13 +257,13 @@ C1·a surface declared
 ```pag
 # the four things a document declares about a shared surface · a structure declaration, never prose
 SURFACE <key>:                                   # declared in the header, never derived from the path
-RECORD <key>-1 subject: <what it is about>   # one writer, named on the record · the fence an edit anchors on
-ITEM <key>-1-1 TO <reader>: <a claim>    # an addressed span · its id allocated once, never reused
-SATISFIED_BY <artifact>              # an edge · an id in a field · resolves or does not
-BLOCKS <key>-2-1
-RECORD <key>-2 subject: <what it is about>
-ITEM <key>-2-1 TO <reader>: <a claim>
-ANSWERS <key>-1-1
+    RECORD <key>-1 subject: <what it is about>   # one writer, named on the record · the fence an edit anchors on
+        ITEM <key>-1-1 TO <reader>: <a claim>    # an addressed span · its id allocated once, never reused
+            SATISFIED_BY <artifact>              # an edge · an id in a field · resolves or does not
+            BLOCKS <key>-2-1
+    RECORD <key>-2 subject: <what it is about>
+        ITEM <key>-2-1 TO <reader>: <a claim>
+            ANSWERS <key>-1-1
 
 # the states are derived from the edges, never written
 state: OPEN | BLOCKED | ABSORBED
@@ -278,27 +278,27 @@ C1·b state as function
 ```pag
 # no party writes a state · every state is a function over the edges, evaluated on every read
 FUNCTION state_of(item):
-IF resolves(item.edges.satisfied_by): RETURN <absorbed>       # a transition · extract, then delete in the same change
-FOR EACH edge IN inbound(item, <blocks>):
-IF state_of(edge.from) == <open>: RETURN <blocked>
-RETURN <open>
+  IF resolves(item.edges.satisfied_by): RETURN <absorbed>       # a transition · extract, then delete in the same change
+  FOR EACH edge IN inbound(item, <blocks>):
+    IF state_of(edge.from) == <open>: RETURN <blocked>
+  RETURN <open>
 
 # NODE 6 — ACT   [epistemic · formalization · computation · yields: procedures]
 CONTRACT:
-input:        <my record> + <the surface as it stands>
-transform:    read the surface whole → anchor on my own fence → land the edit inside it
-constraints:  a write to a path not read this turn is an edit to unknown contents; a whole-file write reports success to the one who overwrote and nothing to the one overwritten
-output:       <my record, revised>
-handoff:      the edit landed inside my fence and the surface had not moved, or the edit was refused with the diff (yields: boolean)
+  input:        <my record> + <the surface as it stands>
+  transform:    read the surface whole → anchor on my own fence → land the edit inside it
+  constraints:  a write to a path not read this turn is an edit to unknown contents; a whole-file write reports success to the one who overwrote and nothing to the one overwritten
+  output:       <my record, revised>
+  handoff:      the edit landed inside my fence and the surface had not moved, or the edit was refused with the diff (yields: boolean)
 
 HANDOFF GATE (evidence-bearing):
-rule_id: "ACT"   yields: boolean
-[check] nothing outside my fence changed (evidence: the diff of the surface) over: the surface's records measured: <untouched> / <records>
-[check] the surface was read whole immediately before the write (evidence: the witness read)
-[check] a moved surface refused the write, or the write commuted and replayed (evidence: the compare against my own span)
-refuse: the surface moved inside my span since the witness read before PERSIST_ARTIFACT
-standing: moved-set <the records that moved outside my span>
-result: pass → NODE 7 | a write outside my fence → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "ACT"   yields: boolean
+  [check] nothing outside my fence changed (evidence: the diff of the surface) over: the surface's records measured: <untouched> / <records>
+  [check] the surface was read whole immediately before the write (evidence: the witness read)
+  [check] a moved surface refused the write, or the write commuted and replayed (evidence: the compare against my own span)
+  refuse: the surface moved inside my span since the witness read before PERSIST_ARTIFACT
+  standing: moved-set <the records that moved outside my span>
+  result: pass → NODE 7 | a write outside my fence → REPAIR (owner: NODE 6) | unknown → BLOCKED
 ```
 
 C1·c lifetime axes
@@ -307,49 +307,49 @@ C1·c lifetime axes
 # a lifetime is three independent axes · one word for it drops the axis a reader assumes follows
 DECLARE lifetimes: array
 SET lifetimes = [
-{surface: <a coordination surface>, retention: <current-truth>,  mutability: <owner-rewritable>, removal: <the handler of an item>},
-{surface: <an argument>,            retention: <accumulating>,   mutability: <append-only>,      removal: <none while open · moved whole when settled>},
-{surface: <an archive>,             retention: <accumulating>,   mutability: <frozen>,           removal: <none>}
+  {surface: <a coordination surface>, retention: <current-truth>,  mutability: <owner-rewritable>, removal: <the handler of an item>},
+  {surface: <an argument>,            retention: <accumulating>,   mutability: <append-only>,      removal: <none while open · moved whole when settled>},
+  {surface: <an archive>,             retention: <accumulating>,   mutability: <frozen>,           removal: <none>}
 ]
 
 FUNCTION may_remove(party, content, surface):
-# decided from the declaration, never from the shape of the path
-SET lifetime = lifetimes[surface]
-RETURN lifetime.removal == party.role_on(content)
+  # decided from the declaration, never from the shape of the path
+  SET lifetime = lifetimes[surface]
+  RETURN lifetime.removal == party.role_on(content)
 ```
 
 C1·d surface to state
 
 ```mermaid
 flowchart TB
-surface["A surface · a file the parties read and write"]
-r1["Record · one writer, declared on the record"]
-r2["Record · one writer"]
-item["Item · an allocated id, a kind, its readers"]
-ref["An edge · an id in a field · resolves or does not"]
-state["State · a function over the edges, written by no party"]
-surface --> r1
-surface --> r2
-r1 --> item --> ref --> state
+    surface["A surface · a file the parties read and write"]
+    r1["Record · one writer, declared on the record"]
+    r2["Record · one writer"]
+    item["Item · an allocated id, a kind, its readers"]
+    ref["An edge · an id in a field · resolves or does not"]
+    state["State · a function over the edges, written by no party"]
+    surface --> r1
+    surface --> r2
+    r1 --> item --> ref --> state
 ```
 
 C1·e a write lands
 
 ```mermaid
 flowchart TB
-intent["A party intends a write"]
-read["Read the surface whole"]
-span["Anchor on its own fence"]
-moved{"Surface moved since the read?"}
-land["Land inside the span"]
-overlap{"Overlap with its own span?"}
-replay["Replay · the writes commute"]
-refuse["Refuse · with the diff of the span"]
-intent --> read --> span --> moved
-moved -- no --> land
-moved -- yes --> overlap
-overlap -- no --> replay --> land
-overlap -- yes --> refuse
+    intent["A party intends a write"]
+    read["Read the surface whole"]
+    span["Anchor on its own fence"]
+    moved{"Surface moved since the read?"}
+    land["Land inside the span"]
+    overlap{"Overlap with its own span?"}
+    replay["Replay · the writes commute"]
+    refuse["Refuse · with the diff of the span"]
+    intent --> read --> span --> moved
+    moved -- no --> land
+    moved -- yes --> overlap
+    overlap -- no --> replay --> land
+    overlap -- yes --> refuse
 ```
 
 ## Phase binding
@@ -378,25 +378,25 @@ D1·a binding the kind
 @cue: "DISCLOSE_THEN_BIND"
 
 CONTRACT:
-input:        <the invocation>
-transform:    detect the phase kind → bind its allowed and forbidden operations → bind the one artifact it emits
-constraints:  INVESTIGATE and ACTION are mutually exclusive; the checks that heal rewrite the tree, so they belong to ACTION
-output:       run_context { phase, allowed_ops, forbidden_ops, artifact }
-handoff:      phase bound to exactly one AND the two op-sets disjoint (yields: boolean)
+  input:        <the invocation>
+  transform:    detect the phase kind → bind its allowed and forbidden operations → bind the one artifact it emits
+  constraints:  INVESTIGATE and ACTION are mutually exclusive; the checks that heal rewrite the tree, so they belong to ACTION
+  output:       run_context { phase, allowed_ops, forbidden_ops, artifact }
+  handoff:      phase bound to exactly one AND the two op-sets disjoint (yields: boolean)
 
 FUNCTION bind_phase(invocation):
-DETERMINE kind FROM invocation   # INVESTIGATE | ACTION
-IF kind == "INVESTIGATE":
-RETURN {phase: "INVESTIGATE", allowed_ops: [DISCOVER_RESOURCES, READ_RESOURCE, SEARCH_CONTENT, ANALYZE_CONTENT], forbidden_ops: [<mutation>, <gap fixing>], artifact: <investigation report>}
-IF kind == "ACTION":
-RETURN {phase: "ACTION", allowed_ops: [<bounded fix>, PERSIST_ARTIFACT, EXECUTE_TOOL], forbidden_ops: [<gap discovery>], artifact: <action log>}
+  DETERMINE kind FROM invocation   # INVESTIGATE | ACTION
+  IF kind == "INVESTIGATE":
+    RETURN {phase: "INVESTIGATE", allowed_ops: [DISCOVER_RESOURCES, READ_RESOURCE, SEARCH_CONTENT, ANALYZE_CONTENT], forbidden_ops: [<mutation>, <gap fixing>], artifact: <investigation report>}
+  IF kind == "ACTION":
+    RETURN {phase: "ACTION", allowed_ops: [<bounded fix>, PERSIST_ARTIFACT, EXECUTE_TOOL], forbidden_ops: [<gap discovery>], artifact: <action log>}
 
 HANDOFF GATE (evidence-bearing):
-rule_id: "ORIENT"   yields: boolean
-[check] phase bound to exactly one of INVESTIGATE | ACTION (evidence: run_context.phase)
-[check] allowed and forbidden op-sets are disjoint (evidence: run_context.allowed_ops, forbidden_ops)
-[check] the artifact the phase emits is the one its kind emits (evidence: run_context.artifact)
-result: pass → NODE 2 | undetectable kind → REPAIR (owner: NODE 1) | unknown → BLOCKED
+  rule_id: "ORIENT"   yields: boolean
+  [check] phase bound to exactly one of INVESTIGATE | ACTION (evidence: run_context.phase)
+  [check] allowed and forbidden op-sets are disjoint (evidence: run_context.allowed_ops, forbidden_ops)
+  [check] the artifact the phase emits is the one its kind emits (evidence: run_context.artifact)
+  result: pass → NODE 2 | undetectable kind → REPAIR (owner: NODE 1) | unknown → BLOCKED
 ```
 
 D1·b admissibility
@@ -407,26 +407,26 @@ D1·b admissibility
 @cue: "ADMISSIBLE_BEFORE_VERIFY"
 
 CONTRACT:
-input:        observations + run_context
-transform:    for each observation → did it mutate under INVESTIGATE, did it discover under ACTION
-constraints:  a breach routes to the node that owns the fix, never a repair in place, because repairing in place is the same breach in the node that found it
-output:       admissibility { ok, op_violations[] }
-handoff:      GATE — op-sets honored (yields: boolean)
+  input:        observations + run_context
+  transform:    for each observation → did it mutate under INVESTIGATE, did it discover under ACTION
+  constraints:  a breach routes to the node that owns the fix, never a repair in place, because repairing in place is the same breach in the node that found it
+  output:       admissibility { ok, op_violations[] }
+  handoff:      GATE — op-sets honored (yields: boolean)
 
 FUNCTION assess_admissibility(observations, run_context):
-DECLARE op_violations: array
-SET op_violations = []
-FOR EACH o IN observations:
-IF run_context.phase == "INVESTIGATE" AND o CAUSED <mutation>: APPEND {claim: o.claim, violation: "mutation under INVESTIGATE"} TO op_violations
-IF run_context.phase == "ACTION" AND o DISCOVERED <new scope>: APPEND {claim: o.claim, violation: "discovery under ACTION"} TO op_violations
-RETURN {ok: op_violations.length == 0, op_violations: op_violations}
+  DECLARE op_violations: array
+  SET op_violations = []
+  FOR EACH o IN observations:
+    IF run_context.phase == "INVESTIGATE" AND o CAUSED <mutation>: APPEND {claim: o.claim, violation: "mutation under INVESTIGATE"} TO op_violations
+    IF run_context.phase == "ACTION" AND o DISCOVERED <new scope>: APPEND {claim: o.claim, violation: "discovery under ACTION"} TO op_violations
+  RETURN {ok: op_violations.length == 0, op_violations: op_violations}
 
 HANDOFF GATE (teleology admissibility gate):
-rule_id: "CONSTRAIN"   yields: boolean
-[check] admissibility.op_violations.length == 0 (evidence: INVESTIGATE no mutation / ACTION no discovery)
-[check] every observation was classified against the phase (evidence: one verdict per observation) over: observations measured: <classified> / <observations>
-[check] every breach names the node that owns the fix (evidence: op_violations[].owner)
-result: pass → NODE 8 | a breach → REPAIR (owner: NODE 6) | unknown → BLOCKED
+  rule_id: "CONSTRAIN"   yields: boolean
+  [check] admissibility.op_violations.length == 0 (evidence: INVESTIGATE no mutation / ACTION no discovery)
+  [check] every observation was classified against the phase (evidence: one verdict per observation) over: observations measured: <classified> / <observations>
+  [check] every breach names the node that owns the fix (evidence: op_violations[].owner)
+  result: pass → NODE 8 | a breach → REPAIR (owner: NODE 6) | unknown → BLOCKED
 ```
 
 D1·c the cycle
@@ -443,43 +443,43 @@ D1·d two kinds
 
 ```mermaid
 flowchart TB
-phase["A run"]
-kind{"Bound to which?"}
-inv["INVESTIGATE · discovers, never fixes · emits a report"]
-act["ACTION · fixes against known evidence, never discovers · emits a log"]
-mixed["Both · mutated under a read-only contract, findings describe a tree that moved"]
-phase --> kind
-kind -- one --> inv
-kind -- the other --> act
-kind -. neither, or both .-> mixed
+    phase["A run"]
+    kind{"Bound to which?"}
+    inv["INVESTIGATE · discovers, never fixes · emits a report"]
+    act["ACTION · fixes against known evidence, never discovers · emits a log"]
+    mixed["Both · mutated under a read-only contract, findings describe a tree that moved"]
+    phase --> kind
+    kind -- one --> inv
+    kind -- the other --> act
+    kind -. neither, or both .-> mixed
 ```
 
 D1·e cycle, not line
 
 ```mermaid
 flowchart LR
-i1["Investigate"]
-a1["Act"]
-i2["Investigate · verify"]
-stop["Stop · every gap resolved or carried with a reason"]
-i1 --> a1 --> i2
-i2 -- gaps remain --> a1
-i2 -- none --> stop
+    i1["Investigate"]
+    a1["Act"]
+    i2["Investigate · verify"]
+    stop["Stop · every gap resolved or carried with a reason"]
+    i1 --> a1 --> i2
+    i2 -- gaps remain --> a1
+    i2 -- none --> stop
 ```
 
 ## Handoff signals
 
-A handoff is an item addressed to the parties that need it, with an allocated id, a declared kind and a closure the kind selects, as written in [E1·a an item](#handoff-signals-panel-a) and shown in [E1·d kind selects closure](#handoff-signals-panel-d). An artifact item asks for something that can exist, and it closes when a typed reference to that thing resolves. A judgement item asks for a reading, and it closes when its acknowledger marks it; [E1·c closing an item](#handoff-signals-panel-c) shows the closure in either case. A failure is a finding rather than a halt, and it follows the route shown in [E1·b failure routes](#handoff-signals-panel-b) and [E1·e failure to finding](#handoff-signals-panel-e). A report goes to the parties whose next work it creates, never to the developer as a closing summary.
+A handoff is an item addressed to the parties that need it, with an allocated id, a declared kind and a closure the kind selects, as written in [E1·a an item](#handoff-signals-panel-a) and shown in [E1·d kind selects closure](#handoff-signals-panel-d). An artifact item asks for something that can exist, and it closes when a typed reference to that thing resolves. A judgment item asks for a reading, and it closes when its acknowledger marks it; [E1·c closing an item](#handoff-signals-panel-c) shows the closure in either case. A failure is a finding rather than a halt, and it follows the route shown in [E1·b failure routes](#handoff-signals-panel-b) and [E1·e failure to finding](#handoff-signals-panel-e). A report goes to the parties whose next work it creates, never to the developer as a closing summary.
 
 ### Typed items, falsifiable closures
 
 A handoff closed by the party that wrote it closes whether or not the work exists. A party declares an item handled, nothing points at the thing it asked for, the item is removed, and the work it named was never done. A closure that a reference decides can be checked by any party, while a closure that a party declares can be checked only by that party.
 
-For this reason a handoff is a typed item whose closure can be checked by a party other than its author. The kind decides the closure, either a reference that has to resolve or an acknowledger named on the item, rather than a [written status marker](../ontology/PRINCIPLES.md#architecture-written-status-marker) from its author. In practice, a handoff is posted as an item with an id the surface allocates, a kind, the parties it is addressed to, and a body carrying the finding's surface, location, and observed and expected values. An artifact item closes through a reference that has to resolve and stay true while the work is done, and a judgement item closes through its acknowledger. A failure is routed by what it binds: a decision goes to the party whose surface it binds, a question about the purpose of the work goes to the developer with a recommendation first, and everything else goes to the next open item.
+For this reason a handoff is a typed item whose closure can be checked by a party other than its author. The kind decides the closure, either a reference that has to resolve or an acknowledger named on the item, rather than a [written status marker](../ontology/PRINCIPLES.md#architecture-written-status-marker) from its author. In practice, a handoff is posted as an item with an id the surface allocates, a kind, the parties it is addressed to, and a body carrying the finding's surface, location, and observed and expected values. An artifact item closes through a reference that has to resolve and stay true while the work is done, and a judgment item closes through its acknowledger. A failure is routed by what it binds: a decision goes to the party whose surface it binds, a question about the purpose of the work goes to the developer with a recommendation first, and everything else goes to the next open item.
 
 To check this, name for each closed item the reference that closed it or the party that acknowledged it. An item that its own author closed with no reference was declared done, not shown to be done. The handoff protocol is for parties that share a surface; what a bounded reader does instead is described in [composing a collaboration](ORCHESTRATION.md#composing-a-workflow).
 
-The kind is on the item, and it selects the closure. An artifact item names something that can exist, such as a file, a gate or a record, so it closes with a typed reference that has to resolve. The reference names a condition that can turn out wrong rather than a path, because a path resolves as soon as the file exists, and the item would read as closed while the defect is still open. The reference also moves with the work: it is true when the work is done and false when it is not, so a citation that points at the findings themselves is refused, since a broken tree would satisfy it. A judgement item closes when its declared acknowledger signs it off, with no reference, and why one kind requires an acknowledger and the other forbids one is explained in [the board and the venue](../COLLABORATE.md#the-board-and-the-venue).
+The kind is on the item, and it selects the closure. An artifact item names something that can exist, such as a file, a gate or a record, so it closes with a typed reference that has to resolve. The reference names a condition that can turn out wrong rather than a path, because a path resolves as soon as the file exists, and the item would read as closed while the defect is still open. The reference also moves with the work: it is true when the work is done and false when it is not, so a citation that points at the findings themselves is refused, since a broken tree would satisfy it. A judgment item closes when its declared acknowledger signs it off, with no reference, and why one kind requires an acknowledger and the other forbids one is explained in [the board and the venue](../COLLABORATE.md#the-board-and-the-venue).
 
 A failure travels through the same channel as any other item and is routed along the same three paths, as derived in [a turn never ends to wait](../COLLABORATE.md#a-turn-never-ends-to-wait). A gate's result line is the same routing in miniature, with a third arm that the item channel also needs. An unknown, meaning a claim the run could not measure, is blocked rather than passed, and blocked is a state that names the party who owes the answer. The commit node carries the rule that a report goes to the parties whose next work it creates.
 
@@ -491,21 +491,21 @@ E1·a an item
 # an item is a typed span · its kind selects how it closes, and the closure is checked by a party other than its author
 DECLARE item: object
 SET item = {
-id:    <allocated by the surface, never by hand>,
-kind:  <artifact | judgement>,
-from:  <this party>,
-to:    [<the parties that need it>],
-body:  {surface: <where>, locus: <what part>, observed: <what was seen>, expected: <what should hold>}
+  id:    <allocated by the surface, never by hand>,
+  kind:  <artifact | judgment>,
+  from:  <this party>,
+  to:    [<the parties that need it>],
+  body:  {surface: <where>, locus: <what part>, observed: <what was seen>, expected: <what should hold>}
 }
 
 FUNCTION closes(item):
-# an artifact item asks for something that can exist · it closes when a typed reference resolves
-IF item.kind == artifact: RETURN resolves(item.satisfied_by) AND monotone_with_the_work(item.satisfied_by)
-# a judgement item asks for a reading · it closes by its declared acknowledger, with nothing to point at
-IF item.kind == judgement: RETURN acknowledged_by(item.acknowledger)
+  # an artifact item asks for something that can exist · it closes when a typed reference resolves
+  IF item.kind == artifact: RETURN resolves(item.satisfied_by) AND monotone_with_the_work(item.satisfied_by)
+  # a judgment item asks for a reading · it closes by its declared acknowledger, with nothing to point at
+  IF item.kind == judgment: RETURN acknowledged_by(item.acknowledger)
 
 FUNCTION may_close(party, item):
-RETURN party IN item.to   # a reader, never the author
+  RETURN party IN item.to   # a reader, never the author
 ```
 
 E1·b failure routes
@@ -513,28 +513,28 @@ E1·b failure routes
 ```pag
 # a failure is a finding, not a halt · it flows through the same channel and routes by what it binds
 FUNCTION route(failure):
-SET finding = {surface: failure.surface, locus: failure.locus, observed: failure.observed, expected: failure.expected}
-IF failure.blocks_a_decision:
-RETURN SEND finding TO <the party whose surface the decision binds>
-IF failure.asks_what_the_work_is_for:
-RETURN SEND finding TO <the developer> AS <a question with a recommendation first>
-RETURN <the next open item>
+  SET finding = {surface: failure.surface, locus: failure.locus, observed: failure.observed, expected: failure.expected}
+  IF failure.blocks_a_decision:
+    RETURN SEND finding TO <the party whose surface the decision binds>
+  IF failure.asks_what_the_work_is_for:
+    RETURN SEND finding TO <the developer> AS <a question with a recommendation first>
+  RETURN <the next open item>
 
 # NODE 9 — COMMIT   [evaluative · representation · information-theory · yields: one typed artifact]
 CONTRACT:
-input:        findings + run_context
-transform:    emit exactly one artifact of the kind bound at orientation, deduplicated, naming every limitation
-constraints:  a report goes to the parties whose next work it creates, never to the developer as a closing summary
-output:       committed { artifact_type, output }
-handoff:      one typed artifact emitted (yields: hash + boolean)
+  input:        findings + run_context
+  transform:    emit exactly one artifact of the kind bound at orientation, deduplicated, naming every limitation
+  constraints:  a report goes to the parties whose next work it creates, never to the developer as a closing summary
+  output:       committed { artifact_type, output }
+  handoff:      one typed artifact emitted (yields: hash + boolean)
 
 HANDOFF GATE (evidence-bearing):
-rule_id: "COMMIT"   yields: hash + boolean
-[check] exactly one artifact emitted, of the kind bound at orientation (evidence: committed.artifact_type)
-[check] every finding addressed to a party that needs it (evidence: findings[].to) over: findings measured: <addressed> / <findings>
-[check] no finding recorded twice (evidence: dedup)
-refuse: the artifact's destination changed since it was read before PERSIST_ARTIFACT
-result: pass → NODE 10 | duplicate or unaddressed → REPAIR (owner: NODE 9) | unknown → BLOCKED
+  rule_id: "COMMIT"   yields: hash + boolean
+  [check] exactly one artifact emitted, of the kind bound at orientation (evidence: committed.artifact_type)
+  [check] every finding addressed to a party that needs it (evidence: findings[].to) over: findings measured: <addressed> / <findings>
+  [check] no finding recorded twice (evidence: dedup)
+  refuse: the artifact's destination changed since it was read before PERSIST_ARTIFACT
+  result: pass → NODE 10 | duplicate or unaddressed → REPAIR (owner: NODE 9) | unknown → BLOCKED
 ```
 
 E1·c closing an item
@@ -542,43 +542,43 @@ E1·c closing an item
 ```pag
 # closing an item · the handler removes it, never the author, and extraction comes first
 WHEN <party> handles <item>:
-VALIDATE <party> IN <item>.<to>
-VALIDATE closes(<item>)
-EXTRACT_FACTS <item>.<durable half> INTO <the one home history has>
-PERSIST_ARTIFACT <the extraction> TO <that home>
-REMOVE <item> BY <item>.<id>       # the span, never a matched line
+    VALIDATE <party> IN <item>.<to>
+    VALIDATE closes(<item>)
+    EXTRACT_FACTS <item>.<durable half> INTO <the one home history has>
+    PERSIST_ARTIFACT <the extraction> TO <that home>
+    REMOVE <item> BY <item>.<id>       # the span, never a matched line
 ```
 
 E1·d kind selects closure
 
 ```mermaid
 flowchart TB
-posted["An item is posted · id allocated, kind set, readers named"]
-kind{"Which kind?"}
-artifact["Artifact · closes when its reference resolves"]
-judgement["Judgement · closes when its acknowledger marks it"]
-handler["Removed by a party in its reader set · never its author"]
-extract["Its durable half extracted first"]
-posted --> kind
-kind -- artifact --> artifact --> handler
-kind -- judgement --> judgement --> handler
-handler --> extract
+    posted["An item is posted · id allocated, kind set, readers named"]
+    kind{"Which kind?"}
+    artifact["Artifact · closes when its reference resolves"]
+    judgment["Judgment · closes when its acknowledger marks it"]
+    handler["Removed by a party in its reader set · never its author"]
+    extract["Its durable half extracted first"]
+    posted --> kind
+    kind -- artifact --> artifact --> handler
+    kind -- judgment --> judgment --> handler
+    handler --> extract
 ```
 
 E1·e failure to finding
 
 ```mermaid
 flowchart LR
-fails["A gate fails"]
-finding["A finding · surface, locus, observed, expected"]
-binds{"What does it bind?"}
-owner["The party whose surface the decision binds"]
-person["The developer · what the work is for, a recommendation first"]
-next["The next open item"]
-fails --> finding --> binds
-binds -- a decision --> owner
-binds -- the purpose --> person
-binds -- nothing --> next
+    fails["A gate fails"]
+    finding["A finding · surface, locus, observed, expected"]
+    binds{"What does it bind?"}
+    owner["The party whose surface the decision binds"]
+    person["The developer · what the work is for, a recommendation first"]
+    next["The next open item"]
+    fails --> finding --> binds
+    binds -- a decision --> owner
+    binds -- the purpose --> person
+    binds -- nothing --> next
 ```
 
 ## Orchestration invariants
@@ -612,23 +612,23 @@ F1·b gate cites records
 ```pag
 # a node's gate cites the invariant it holds rather than restating it
 HANDOFF GATE:
-[check] the write landed inside the caller's span (evidence: the anchored edit's report)     # <one-writer-per-record>
-[check] no marker written (evidence: the marker scan)                                          # <no-written-state>
-[check] the removed item named this party in its reader set (evidence: the item's fence)     # <handler-removes> · objector none, so this check is the only watcher
-result: pass → NODE 4 | span breached → REPAIR (owner: NODE 3) | unknown → BLOCKED
+  [check] the write landed inside the caller's span (evidence: the anchored edit's report)     # <one-writer-per-record>
+  [check] no marker written (evidence: the marker scan)                                          # <no-written-state>
+  [check] the removed item named this party in its reader set (evidence: the item's fence)     # <handler-removes> · objector none, so this check is the only watcher
+  result: pass → NODE 4 | span breached → REPAIR (owner: NODE 3) | unknown → BLOCKED
 ```
 
 F1·c three homes
 
 ```mermaid
 flowchart LR
-stated["One record per invariant · property, set, parties, objector"]
-closing["The document's invariant block · holds it"]
-role["The role · the invariants this party protects, by name"]
-check["A gate check · the half an artifact can observe"]
-closing --> stated
-role --> stated
-check --> stated
+    stated["One record per invariant · property, set, parties, objector"]
+    closing["The document's invariant block · holds it"]
+    role["The role · the invariants this party protects, by name"]
+    check["A gate check · the half an artifact can observe"]
+    closing --> stated
+    role --> stated
+    check --> stated
 ```
 
 ---

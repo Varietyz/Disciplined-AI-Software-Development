@@ -1,0 +1,239 @@
+{
+    "category": "codebase-system-architecture-styles",
+    "records": [
+        {
+            "name": "Central Database Bottleneck",
+            "kind": "anti-pattern",
+            "definition": "Funneling all state through one shared database that becomes the system's scaling bottleneck."
+        },
+        {
+            "name": "Layer Leakage",
+            "kind": "anti-pattern",
+            "definition": "Letting an inner layer depend on an outer one, violating the direction of the dependency rule."
+        },
+        {
+            "name": "Layer Skipping",
+            "kind": "anti-pattern",
+            "definition": "Bypassing intermediate layers to call a distant layer directly, undermining the layering."
+        },
+        {
+            "name": "Monolithic Transform Function",
+            "kind": "anti-pattern",
+            "definition": "Doing all processing in one large transform instead of a series of composable filter stages."
+        },
+        {
+            "name": "Package by Technical Layer Only",
+            "kind": "anti-pattern",
+            "definition": "Organizing code by technical layer alone, scattering each feature across many packages."
+        },
+        {
+            "name": "Shared Monolithic Application",
+            "kind": "anti-pattern",
+            "definition": "Building one large shared application instead of composing independently-governed services."
+        },
+        {
+            "name": "Contract-Governed Service Reuse",
+            "kind": "capability",
+            "definition": "The ability to reuse services across an enterprise through well-defined contracts."
+        },
+        {
+            "name": "Database-Bottleneck Removal",
+            "kind": "capability",
+            "definition": "The ability to eliminate the shared-database bottleneck by holding state in distributed memory."
+        },
+        {
+            "name": "Decentralized Ownership",
+            "kind": "capability",
+            "definition": "The ability for separate teams to own, deploy and evolve their services independently."
+        },
+        {
+            "name": "External System Isolation",
+            "kind": "capability",
+            "definition": "The ability to isolate the core from external systems behind adapter boundaries."
+        },
+        {
+            "name": "Framework Independence",
+            "kind": "capability",
+            "definition": "The ability to keep business rules independent of any particular framework."
+        },
+        {
+            "name": "Independent Stage Testing",
+            "kind": "capability",
+            "definition": "The ability to test each filter stage in isolation from the rest of the pipeline."
+        },
+        {
+            "name": "Infrastructure Independence",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:external-system-isolation",
+                    "reason": "Infrastructure independence keeps the core free of the platform it runs on, while external system isolation keeps the systems it calls behind adapters."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to keep the core independent of the infrastructure it runs on."
+        },
+        {
+            "name": "Locality of Change",
+            "kind": "capability",
+            "definition": "The ability to make a feature's changes in one place because its code is grouped together."
+        },
+        {
+            "name": "Reorderable Stages",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:independent-stage-testing",
+                    "reason": "Reorderable stages can be rearranged or recombined, while independent stage testing exercises each stage alone."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to reorder or recombine independent processing stages."
+        },
+        {
+            "name": "Structured Code Organization",
+            "kind": "capability",
+            "definition": "The ability to organize code predictably by assigning each responsibility to a layer."
+        },
+        {
+            "name": "Transactional Simplicity",
+            "kind": "capability",
+            "definition": "The ability to use straightforward local transactions when all state lives in one process."
+        },
+        {
+            "name": "Adapters",
+            "kind": "mechanism",
+            "definition": "Components that translate between a core's ports and the specific external technologies behind them."
+        },
+        {
+            "name": "Boundaries",
+            "kind": "constraint",
+            "definition": "The requirement that clear boundaries separate the concentric layers of the system."
+        },
+        {
+            "name": "Component Boundaries",
+            "kind": "constraint",
+            "definition": "The requirement that each component expose a well-defined boundary and interface."
+        },
+        {
+            "name": "Dependency Rule",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:boundaries",
+                    "reason": "The dependency rule fixes the direction dependencies point, while boundaries are the lines between the layers they cross."
+                },
+                {
+                    "id": "lexicon:use-cases",
+                    "reason": "The dependency rule governs direction, while use cases are the application operations held in their own layer."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that source-code dependencies point only inward, toward higher-level policy."
+        },
+        {
+            "name": "Domain Core",
+            "kind": "constraint",
+            "definition": "The requirement that pure domain logic occupy the core, isolated from external concerns."
+        },
+        {
+            "name": "Layer Separation",
+            "kind": "constraint",
+            "definition": "The requirement that responsibilities be divided into distinct, ordered layers."
+        },
+        {
+            "name": "Ports",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:domain-core",
+                    "reason": "Ports are the interfaces at the edge of the core, while the domain core is the logic those interfaces enclose."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that the core define abstract interface points through which all external interaction passes."
+        },
+        {
+            "name": "Replicated In-Memory State",
+            "kind": "constraint",
+            "definition": "The requirement that application state be kept in replicated in-memory grids rather than a central store."
+        },
+        {
+            "name": "Unified Deployment Boundary",
+            "kind": "constraint",
+            "definition": "The requirement that the whole application build and deploy as one unit."
+        },
+        {
+            "name": "Uniform Stage Interface",
+            "kind": "constraint",
+            "definition": "The requirement that every stage share one interface so stages can be composed freely."
+        },
+        {
+            "name": "Use Cases",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:boundaries",
+                    "reason": "Use cases are the operations in the application layer, while boundaries are the lines separating that layer from the others."
+                }
+            ],
+            "kind": "constraint",
+            "definition": "The requirement that application operations be captured as explicit use cases in their own layer."
+        },
+        {
+            "name": "Anemic Layers",
+            "kind": "quality-attribute",
+            "definition": "The degree to which strict layering produces thin pass-through layers that add indirection without logic."
+        },
+        {
+            "name": "End-to-End Traceability",
+            "kind": "quality-attribute",
+            "definition": "The degree to which decomposing flow into independent filters makes tracing a request end to end harder."
+        },
+        {
+            "name": "Feature Cohesion",
+            "kind": "quality-attribute",
+            "definition": "The degree to which all code serving one feature is grouped together rather than scattered by layer."
+        },
+        {
+            "name": "Independent Scaling",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a single deployable unit prevents scaling parts of the system independently."
+        },
+        {
+            "name": "Initial Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of upfront structural complexity introduced by defining ports and adapters."
+        },
+        {
+            "name": "Integration Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree of effort required to wire independently-developed components together."
+        },
+        {
+            "name": "Operational Simplicity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a single deployable unit keeps building, deploying, and operating simple."
+        },
+        {
+            "name": "Shared Technical Concerns",
+            "kind": "quality-attribute",
+            "definition": "The degree to which grouping by feature complicates sharing cross-cutting technical code."
+        },
+        {
+            "name": "Introduce Port",
+            "kind": "technique",
+            "definition": "A technique for declaring an interface owned by the core that names what it needs from the outside world."
+        },
+        {
+            "name": "Extract Adapter",
+            "kind": "technique",
+            "definition": "A technique for moving the code that talks to a framework, vendor or protocol into an adapter behind a port."
+        },
+        {
+            "name": "Move Framework Outward",
+            "kind": "technique",
+            "definition": "A technique for removing framework types and annotations from the core and confining them to adapters."
+        },
+        {
+            "name": "Repackage by Feature",
+            "kind": "technique",
+            "definition": "A technique for moving the code of one feature from technical-layer folders into one folder of its own."
+        }
+    ]
+}

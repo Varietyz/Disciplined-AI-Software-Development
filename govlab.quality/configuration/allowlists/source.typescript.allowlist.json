@@ -1,0 +1,4 @@
+{
+    "note": "Sanctioned exceptions to the TS-only source discipline. The project references TypeScript everywhere internally; a workspace package.json main/exports must resolve to .ts source (the package check in source.entrypoint.ts). Each entry states why the target genuinely cannot be TS source. A new exception is added only with the maintainer's approval per gate_every_pattern, never unilaterally.",
+    "exceptions": []
+}

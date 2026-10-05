@@ -1,0 +1,595 @@
+{
+    "meta": {
+        "note": "Hand-authored knob overlay for the tunable concepts, taken from each tool's own schema or source. A default is null where the source inlines none or measures a different metric, and `fixed: true` marks a tool with no configurable threshold for the concept. The catalog pipeline merges this overlay with the rule catalog.",
+        "verified": "doc-only"
+    },
+    "concepts": {
+        "cyclomatic-complexity": {
+            "valueType": "int-threshold",
+            "tools": {
+                "eslint": {
+                    "knob": "max",
+                    "default": 20,
+                    "variant": "classic|modified",
+                    "fidelity": "exact",
+                    "provenance": "eslint rule meta.schema + defaultOptions"
+                },
+                "eslint-sonarjs": {
+                    "knob": "threshold",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "sonarjs rule meta.schema"
+                },
+                "ruff": {
+                    "knob": "lint.mccabe.max-complexity",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "ruff.schema.json (McCabe; opt-in via C901)"
+                },
+                "golangci-lint": {
+                    "knob": "gocyclo.min-complexity",
+                    "default": 30,
+                    "fidelity": "exact",
+                    "provenance": "golangci jsonschema (min-complexity = ceiling; cyclop.max-complexity=10)"
+                },
+                "checkstyle": {
+                    "knob": "max",
+                    "default": 10,
+                    "fidelity": "exact",
+                    "provenance": "CyclomaticComplexityCheck DEFAULT_COMPLEXITY_VALUE"
+                },
+                "pmd": {
+                    "knob": "methodReportLevel",
+                    "default": 10,
+                    "fidelity": "exact",
+                    "provenance": "CyclomaticComplexityRule PropertyFactory (classReportLevel=40)"
+                },
+                "phpmd": {
+                    "knob": "reportLevel",
+                    "default": 10,
+                    "fidelity": "exact",
+                    "provenance": "rulesets/codesize.xml"
+                },
+                "rubocop": {
+                    "knob": "Max",
+                    "default": 7,
+                    "fidelity": "exact",
+                    "provenance": "config/default.yml Metrics/CyclomaticComplexity"
+                },
+                "swiftlint": {
+                    "knob": "warning|error",
+                    "default": "10|20",
+                    "fidelity": "exact",
+                    "provenance": "CyclomaticComplexityConfiguration.swift (two-threshold)"
+                },
+                "lintr": {
+                    "knob": "complexity_limit",
+                    "default": 15,
+                    "fidelity": "exact",
+                    "provenance": "cyclocomp_linter roxygen @param"
+                },
+                "luacheck": {
+                    "knob": "max-cyclomatic-complexity",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "docsrc/cli.rst (opt-in)"
+                },
+                "revive": {
+                    "knob": "(positional arg)",
+                    "default": 10,
+                    "fidelity": "exact",
+                    "provenance": "rule/cyclomatic.go defaultMaxCyclomaticComplexity"
+                },
+                "sonar": {
+                    "knob": "Threshold",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "SonarSource rspec S1541 (per-language; superseded by cognitive S3776)"
+                },
+                "slither": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "detectors/functions/cyclomatic_complexity.py (cc>11 hardcoded)"
+                },
+                "codeql": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "cyclomatic-complexity-per-function metric query"
+                }
+            }
+        },
+        "cognitive-complexity": {
+            "valueType": "int-threshold",
+            "tools": {
+                "eslint-sonarjs": {
+                    "knob": "(threshold)",
+                    "default": 15,
+                    "fidelity": "exact",
+                    "provenance": "sonarjs cognitive-complexity"
+                },
+                "sonar": {
+                    "knob": "Threshold",
+                    "default": 15,
+                    "fidelity": "exact",
+                    "provenance": "SonarSource rspec S3776"
+                },
+                "rubocop": {
+                    "knob": "Max",
+                    "default": 8,
+                    "fidelity": "approximate",
+                    "provenance": "Metrics/PerceivedComplexity (perceived ~ cognitive)"
+                },
+                "golangci-lint": {
+                    "knob": "gocognit.min-complexity",
+                    "default": 30,
+                    "fidelity": "exact",
+                    "provenance": "golangci jsonschema"
+                },
+                "pmd": {
+                    "knob": "methodReportLevel",
+                    "default": 15,
+                    "fidelity": "exact",
+                    "provenance": "CognitiveComplexityRule (classReportLevel=50)"
+                }
+            }
+        },
+        "long-function": {
+            "valueType": "int-threshold",
+            "tools": {
+                "eslint": {
+                    "knob": "max",
+                    "default": 50,
+                    "fidelity": "exact",
+                    "provenance": "max-lines-per-function meta.schema (max-lines file=300, max-statements=10)"
+                },
+                "eslint-sonarjs": {
+                    "knob": "maximum",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "sonarjs max-lines-per-function meta.schema"
+                },
+                "rubocop": {
+                    "knob": "Max",
+                    "default": 10,
+                    "fidelity": "exact",
+                    "provenance": "Metrics/MethodLength (ClassLength=100)"
+                },
+                "ruff": {
+                    "knob": "lint.pylint.max-statements",
+                    "default": null,
+                    "fidelity": "approximate",
+                    "provenance": "ruff.schema.json (statements, not lines)"
+                },
+                "pylint": {
+                    "knob": "max-statements",
+                    "default": 50,
+                    "fidelity": "approximate",
+                    "provenance": "pylint design_analysis.py (statements)"
+                },
+                "clippy": {
+                    "knob": "too_many_lines_threshold",
+                    "default": 100,
+                    "fidelity": "exact",
+                    "provenance": "clippy_config conf.rs"
+                },
+                "golangci-lint": {
+                    "knob": "funlen.lines",
+                    "default": 60,
+                    "fidelity": "exact",
+                    "provenance": "golangci funlen (statements=40)"
+                },
+                "checkstyle": {
+                    "knob": "max",
+                    "default": 150,
+                    "fidelity": "exact",
+                    "provenance": "MethodLengthCheck DEFAULT_MAX_LINES"
+                },
+                "swiftlint": {
+                    "knob": "warning|error",
+                    "default": "50|100",
+                    "fidelity": "exact",
+                    "provenance": "FunctionBodyLengthRule"
+                },
+                "codeql": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "lines-of-code metric query"
+                }
+            }
+        },
+        "too-many-params": {
+            "valueType": "int-threshold",
+            "tools": {
+                "eslint": {"knob": "max",
+                    "default": 3,
+                    "fidelity": "exact",
+                    "provenance": "max-params meta.schema"},
+                "eslint-ts": {
+                    "knob": "max",
+                    "default": 3,
+                    "fidelity": "exact",
+                    "provenance": "@typescript-eslint/max-params meta.schema"
+                },
+                "rubocop": {"knob": "Max",
+                    "default": 5,
+                    "fidelity": "exact",
+                    "provenance": "Metrics/ParameterLists"},
+                "ruff": {
+                    "knob": "lint.pylint.max-args",
+                    "default": 5,
+                    "fidelity": "exact",
+                    "provenance": "ruff.schema.json (PLR0913)"
+                },
+                "pylint": {
+                    "knob": "max-args",
+                    "default": 5,
+                    "fidelity": "exact",
+                    "provenance": "pylint design_analysis.py"
+                },
+                "clippy": {
+                    "knob": "too_many_arguments_threshold",
+                    "default": 7,
+                    "fidelity": "exact",
+                    "provenance": "clippy_config conf.rs"
+                },
+                "checkstyle": {
+                    "knob": "max",
+                    "default": 7,
+                    "fidelity": "exact",
+                    "provenance": "ParameterNumberCheck DEFAULT_MAX_PARAMETERS"
+                },
+                "swiftlint": {
+                    "knob": "warning|error",
+                    "default": "5|8",
+                    "fidelity": "exact",
+                    "provenance": "FunctionParameterCountConfiguration"
+                },
+                "phpmd": {
+                    "knob": "minimum",
+                    "default": 10,
+                    "fidelity": "exact",
+                    "provenance": "rulesets/codesize.xml ExcessiveParameterList"
+                },
+                "perlcritic": {
+                    "knob": "max_arguments",
+                    "default": 5,
+                    "fidelity": "exact",
+                    "provenance": "ProhibitManyArgs.pm"
+                },
+                "revive": {
+                    "knob": "argument-limit (arg)",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "revive argument-limit rule"
+                },
+                "codeql": {"knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "metric query"}
+            }
+        },
+        "deep-nesting": {
+            "valueType": "int-threshold",
+            "tools": {
+                "eslint": {
+                    "knob": "max",
+                    "default": 4,
+                    "fidelity": "exact",
+                    "provenance": "max-depth meta.schema (max-nested-callbacks=10)"
+                },
+                "eslint-sonarjs": {
+                    "knob": "maximumNestingLevel",
+                    "default": 3,
+                    "fidelity": "exact",
+                    "provenance": "sonarjs nested-control-flow"
+                },
+                "rubocop": {"knob": "Max",
+                    "default": 3,
+                    "fidelity": "exact",
+                    "provenance": "Metrics/BlockNesting"},
+                "ruff": {
+                    "knob": "lint.pylint.max-nested-blocks",
+                    "default": 5,
+                    "fidelity": "exact",
+                    "provenance": "ruff.schema.json"
+                },
+                "checkstyle": {
+                    "knob": "max",
+                    "default": 1,
+                    "fidelity": "exact",
+                    "provenance": "NestedForDepth/NestedIfDepthCheck"
+                },
+                "golangci-lint": {
+                    "knob": "nestif.min-complexity",
+                    "default": 5,
+                    "fidelity": "exact",
+                    "provenance": "golangci nestif"
+                },
+                "codeql": {"knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "metric query"},
+                "error-prone": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "bug-pattern checker, no threshold"
+                }
+            }
+        },
+        "line-length": {
+            "valueType": "value-setting",
+            "tools": {
+                "eslint": {
+                    "knob": "code",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "max-len meta.schema (opt-in)"
+                },
+                "eslint-stylistic": {
+                    "knob": "code",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "@stylistic/max-len meta.schema"
+                },
+                "rubocop": {"knob": "Max",
+                    "default": 120,
+                    "fidelity": "exact",
+                    "provenance": "Layout/LineLength"},
+                "ruff": {"knob": "line-length",
+                    "default": 88,
+                    "fidelity": "exact",
+                    "provenance": "ruff.schema.json"},
+                "pylint": {
+                    "knob": "max-line-length",
+                    "default": 100,
+                    "fidelity": "exact",
+                    "provenance": "pylint format.py"
+                },
+                "checkstyle": {
+                    "knob": "max",
+                    "default": 80,
+                    "fidelity": "exact",
+                    "provenance": "LineLengthCheck DEFAULT_MAX_COLUMNS"
+                },
+                "swiftlint": {
+                    "knob": "warning|error",
+                    "default": "120|200",
+                    "fidelity": "exact",
+                    "provenance": "LineLengthConfiguration"
+                },
+                "prettier": {
+                    "knob": "printWidth",
+                    "default": 80,
+                    "fidelity": "approximate",
+                    "provenance": "prettier options (soft wrap target)"
+                },
+                "lintr": {"knob": "length",
+                    "default": 80,
+                    "fidelity": "exact",
+                    "provenance": "line_length_linter"}
+            }
+        },
+        "indentation": {
+            "valueType": "value-setting",
+            "tools": {
+                "eslint": {
+                    "knob": "indent",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "indent meta.schema (tab | integer size)"
+                },
+                "eslint-stylistic": {
+                    "knob": "indent",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "@stylistic/indent meta.schema"
+                },
+                "eslint-yml": {
+                    "knob": "indent",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "yml/indent meta.schema"
+                },
+                "rubocop": {
+                    "knob": "Width",
+                    "default": 2,
+                    "fidelity": "exact",
+                    "provenance": "Layout/IndentationWidth"
+                },
+                "ruff": {"knob": "indent-width",
+                    "default": 4,
+                    "fidelity": "exact",
+                    "provenance": "ruff.schema.json"},
+                "checkstyle": {
+                    "knob": "basicOffset",
+                    "default": 4,
+                    "fidelity": "exact",
+                    "provenance": "IndentationCheck DEFAULT_INDENTATION"
+                },
+                "prettier": {"knob": "tabWidth",
+                    "default": 2,
+                    "fidelity": "exact",
+                    "provenance": "prettier options"},
+                "pylint": {
+                    "knob": "indent-string",
+                    "default": "4 spaces",
+                    "fidelity": "exact",
+                    "provenance": "pylint format.py"
+                },
+                "lintr": {"knob": "indent",
+                    "default": 2,
+                    "fidelity": "exact",
+                    "provenance": "indentation_linter"},
+                "yamllint": {
+                    "knob": "spaces",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "rules/indentation.py"
+                },
+                "sqlfluff": {
+                    "knob": "tab_space_size",
+                    "default": 4,
+                    "fidelity": "exact",
+                    "provenance": "default_config.cfg"
+                },
+                "codeql": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "query, no indent-size config"
+                },
+                "semgrep": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "pattern rule, no config"
+                },
+                "shellcheck": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "SC check, no indent config"
+                },
+                "clang-tidy": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "indent size is clang-format's, not clang-tidy"
+                },
+                "luacheck": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "linter, no indent-size knob"
+                },
+                "revive": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "gofmt owns Go indentation"
+                },
+                "swiftlint": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "consistency check, no size knob"
+                },
+                "eslint-react": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "jsx layout-consistency; size via core/stylistic indent"
+                },
+                "eslint-unicorn": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "no indent-size knob"
+                },
+                "eslint-jsdoc": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "no indent-size knob"
+                },
+                "eslint-sonarjs": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "no indent-size knob"
+                }
+            }
+        },
+        "quote-style": {
+            "valueType": "enum",
+            "enum": [
+                "single",
+                "double"
+            ],
+            "tools": {
+                "eslint": {
+                    "knob": "quotes",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "quotes meta.schema (single|double|backtick)"
+                },
+                "eslint-stylistic": {
+                    "knob": "quotes",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "@stylistic/quotes meta.schema"
+                },
+                "eslint-yml": {
+                    "knob": "quotes",
+                    "default": null,
+                    "fidelity": "exact",
+                    "provenance": "yml/quotes meta.schema"
+                },
+                "rubocop": {
+                    "knob": "EnforcedStyle",
+                    "default": "single_quotes",
+                    "fidelity": "exact",
+                    "provenance": "Style/StringLiterals"
+                },
+                "ruff": {
+                    "knob": "format.quote-style",
+                    "default": "double",
+                    "fidelity": "exact",
+                    "provenance": "ruff.schema.json"
+                },
+                "prettier": {
+                    "knob": "singleQuote",
+                    "default": false,
+                    "fidelity": "exact",
+                    "provenance": "prettier options"
+                },
+                "shellcheck": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "SC quoting-safety check, not style"
+                },
+                "perlcritic": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "policy, no single/double enforce knob"
+                },
+                "codeql": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "pattern query, no config"
+                },
+                "hadolint": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "Dockerfile check, no quote-style knob"
+                },
+                "brakeman": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "security scanner, not a style linter"
+                },
+                "semgrep": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "pattern rule, no config"
+                },
+                "jsonc": {
+                    "knob": null,
+                    "fixed": true,
+                    "fidelity": "advisory",
+                    "provenance": "JSON is double-quote by spec; jsonc/quote-props is a different axis"
+                }
+            }
+        }
+    }
+}

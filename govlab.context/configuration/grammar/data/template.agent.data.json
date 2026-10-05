@@ -1,0 +1,66 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../../LICENSE.",
+    "check": {
+        "by": [
+            "the template round-trip check, which fills the template and validates the result against the grammar",
+            "the slot check, which requires every declared slot to appear in the body and every slot in the body to be declared"
+        ],
+        "population": "this template's body and slots, and every document created from it",
+        "freshness": "a verdict stands until the template, its document type or the grammar changes",
+        "refusal": "the gate fails on a dangling slot, an unregistered type, or a filled template that does not validate",
+        "observation": "none: a template is static text, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a slot the body never carries and a template of an unregistered type, another plants a retired head in a real template, and every filled template validates clean",
+        "authority": "the template's document type and the grammar, which every document created from the template conforms to"
+    },
+    "type": "AGENT",
+    "title": "Agent Meta-Template",
+    "slots": [
+        {"name": "AGENT_NAME",
+            "description": "kebab-case agent name",
+            "required": true,
+            "kind": "string"},
+        {
+            "name": "PRIMARY_PURPOSE",
+            "description": "one-line statement of what the agent does",
+            "required": true,
+            "kind": "string"
+        },
+        {"name": "AGENT_DESCRIPTION",
+            "description": "the agent's intent",
+            "required": true,
+            "kind": "string"},
+        {"name": "OBJECTIVE",
+            "description": "measurable success criteria",
+            "required": true,
+            "kind": "string"},
+        {
+            "name": "DOMAIN_SCOPE",
+            "description": "the target the agent reads/investigates",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "PRIMARY_ACTION",
+            "description": "the per-item action verb phrase",
+            "required": true,
+            "kind": "string"
+        },
+        {
+            "name": "SUCCESS_CRITERIA",
+            "description": "what the result is validated against",
+            "required": true,
+            "kind": "string"
+        }
+    ],
+    "constraints": [
+        "declaration_required",
+        "gate_per_node",
+        "contract_reads_prior_output",
+        "population_declared",
+        "refusal_before_write",
+        "invariant_has_objector",
+        "evidence_grounded",
+        "no_autonomous_spawn"
+    ],
+    "body": "---\nname: {AGENT_NAME}\ntype: AGENT\nversion: 1.0.0\n---\n\nTHIS AGENT PERFORMS {PRIMARY_PURPOSE}\n\n%% META %%:\n    intent: \"{AGENT_DESCRIPTION}\"\n    objective: \"{OBJECTIVE}\"\n    jurisdiction: {DOMAIN_SCOPE} | external: everything the scope does not name\n    recursion_limit: 2\n\n# NODE 1 — DISCOVERY   [epistemic · ontology · set-theory · yields: set]\n@purpose: \"read the scope before claiming anything about it\"\n@genesis: existence\nCONTRACT:\n  input:     {DOMAIN_SCOPE}\n  transform: READ_RESOURCE {DOMAIN_SCOPE} INTO context; ANALYZE_CONTENT context FOR patterns INTO findings\n  output:    findings\nHANDOFF GATE (evidence-bearing):\n  [check] context read from {DOMAIN_SCOPE} (evidence: the read returned content) over: {DOMAIN_SCOPE} measured: <read> / <declared>\n  [check] findings populated (evidence: a count above zero)\n  [check] every finding names its source in context (evidence: no finding with an empty source)\n  result: pass → NODE 2 | empty → REPAIR (owner: NODE 1) | unknown → BLOCKED\n\n# NODE 2 — EXECUTION   [epistemic · formalization · computation · yields: procedure]\n@purpose: \"act on every finding, once, with the evidence of each act recorded\"\n@genesis: transformation\nCONTRACT:\n  input:     findings from NODE 1\n  transform: FOR EACH item IN findings: EXECUTE_TOOL {PRIMARY_ACTION} WITH item INTO outcome; APPEND outcome TO outcomes\n  output:    outcomes\nHANDOFF GATE:\n  [check] one outcome per finding (evidence: the two counts match) over: findings measured: <acted> / <findings>\n  [check] no outcome rests on an assumption (evidence: every outcome cites the finding it acted on)\n  [check] findings unchanged (evidence: a witness read)\n  refuse: a finding whose source cannot be re-read before EXECUTE_TOOL\n  result: pass → NODE 3 | mismatch → REPAIR (owner: NODE 2) | unknown → BLOCKED\n\n# NODE 3 — VERIFICATION   [evaluative · verification · logic · yields: artifact]\n@purpose: \"validate the outcomes against the criteria and report to the parties whose next work they create\"\n@genesis: constraint\nCONTRACT:\n  input:     outcomes from NODE 2\n  transform: VALIDATE_ARTIFACT outcomes AGAINST {SUCCESS_CRITERIA} INTO verdict; REPORT_RESULT verdict TO <the parties whose next work it creates>\n  output:    verdict\n  freshness: fingerprint(outcomes) + fingerprint(this document)\nHANDOFF GATE:\n  [check] outcomes validated against {SUCCESS_CRITERIA} (evidence: the validator's report) over: outcomes measured: <validated> / <outcomes>\n  [check] verdict reported (evidence: the report)\n  [check] no residual failure (evidence: zero failing outcomes in the report)\n  standing: moved-set none\n  result: pass → TERMINATE | residual → REPAIR (owner: NODE 2) | unknown → BLOCKED\n\n# CROSS-NODE INVARIANTS\nINVARIANT read-before-write: a node reads its input before it writes anything over: every node binds: the agent objector: [check] context read at NODE 1\nINVARIANT one-gate-per-node: a node hands off through exactly one evidence-bearing gate over: every node binds: the agent objector: [check] result line present\nINVARIANT no-spawn: no autonomous party is spawned over: every node binds: the agent objector: none\n\nREPORT:\n  subject: NODE 3\n  verdict: pass | fail | unknown\n  domain: declared <outcomes> measured <validated>\n  completion: saturated <bool> complete <bool> verified <bool>\n"
+}

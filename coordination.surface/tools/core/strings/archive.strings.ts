@@ -99,9 +99,9 @@ export const extendContended = function extendContended(archive: string): string
 
 export const CLOSES_NEEDS_AGENT = "REFUSED  --closes needs --agent <LETTER>.\n";
 
-export const judgementWithRef = function judgementWithRef(closes: string): string {
+export const judgmentWithRef = function judgmentWithRef(closes: string): string {
     return (
-        `REFUSED  ${closes} is a judgement item, which is closed by acknowledging it, with no reference. Run the ` +
+        `REFUSED  ${closes} is a judgment item, which is closed by acknowledging it, with no reference. Run the ` +
         "command again without --ref.\n"
     );
 };
@@ -111,7 +111,7 @@ export const artifactNeedsRef = function artifactNeedsRef(closes: string, empty:
         `REFUSED  ${closes} is an artifact item, so closing it needs --ref, naming the history entry its content ` +
         `was extracted to (\`changelog:<heading>\`). If the item carries nothing worth keeping, pass --ref ${empty}; ` +
         "the closure line records that, so a peer can dispute it. If the item only asks for a reading, its marker " +
-        "should say kind:judgement.\n"
+        "should say kind:judgment.\n"
     );
 };
 

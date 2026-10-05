@@ -1,0 +1,585 @@
+{
+    "category": "Schema / Canonical Data / Semantics",
+    "check": {
+        "population": "every schema, type, name and stored fact that represents one concept",
+        "freshness": "a verdict stands until a schema, a type or a stored representation changes",
+        "refusal": "the type checker, schema registry or validation pipeline fails a representation that diverges from the canonical one",
+        "observation": "schemas and types compared across producers, stores and consumers of the same concept",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the canonical representation, which every producer, store and consumer conforms to"
+    },
+    "records": [
+        {
+            "id": "schema-validation",
+            "name": "Schema Validation",
+            "definition": "A mechanism that parses incoming data against a schema at the boundary and rejects any payload that does not conform.",
+            "type": "mechanism",
+            "scope": [
+                "data",
+                "API",
+                "message"
+            ],
+            "requires": ["Schema Contract"],
+            "reinforces": [
+                "Correctness",
+                "Data Contract"
+            ],
+            "enables": [
+                "Fail Fast",
+                "Interoperability"
+            ],
+            "conflicts_with": ["Untyped Payloads"],
+            "tensions_with": ["Flexible Input"],
+            "violated_by": ["lexicon:trusting-external-input"],
+            "detected_by": ["missing validator at boundary"],
+            "measured_by": ["validation coverage"],
+            "refactored_by": ["lexicon:introduce-boundary-dto"],
+            "enforced_by": [
+                "runtime validation",
+                "CI schema checks"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const foo = JSON.parse(raw) as Foo;",
+                "after": "const FooSchema = object({ id: string(), name: string().min(1), count: integer().min(0) });\nconst foo = FooSchema.parse(JSON.parse(raw));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "type-safety",
+            "distinctFrom": [
+                {
+                    "id": "architecture:compile-time-evaluation",
+                    "reason": "Type safety rejects wrongly typed operations at compile time, while compile-time evaluation runs computations and checks during the build."
+                }
+            ],
+            "name": "Type Safety",
+            "definition": "A mechanism that has the compiler reject operations on values of the wrong type before the code runs.",
+            "canon": ["type-safety"],
+            "type": "mechanism",
+            "scope": [
+                "function",
+                "module",
+                "API",
+                "data"
+            ],
+            "requires": ["Explicit Types"],
+            "reinforces": [
+                "Correctness",
+                "Contracts"
+            ],
+            "enables": ["Static Analysis"],
+            "conflicts_with": [
+                "Dynamic Untyped Boundaries",
+                "Stringly Typed Programming"
+            ],
+            "tensions_with": ["Rapid Scripting"],
+            "violated_by": ["lexicon:dynamic-untyped-boundaries"],
+            "detected_by": [
+                "weak type usage",
+                "unsafe casts"
+            ],
+            "measured_by": [
+                "type coverage",
+                "unsafe cast count"
+            ],
+            "refactored_by": [
+                "lexicon:narrow-type",
+                "lexicon:introduce-boundary-dto"
+            ],
+            "enforced_by": [
+                "compiler flags",
+                "type checker"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function loadFoo(id: string): any { return fooStore.get(id); }\nconst count = loadFoo(\"x\").coutn + 1;",
+                "after": "type FooId = string & { readonly __brand: \"FooId\" };\ntype Foo = Readonly<{ id: FooId; count: number }>;\nfunction loadFoo(id: FooId): Foo | undefined { return fooStore.get(id); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "canonical-model",
+            "name": "Canonical Model",
+            "definition": "A design rule that a concept has one authoritative representation, and every other representation is translated to and from it.",
+            "type": "principle",
+            "scope": [
+                "domain",
+                "integration",
+                "data"
+            ],
+            "requires": [
+                "Semantic Consistency",
+                "Ubiquitous Language"
+            ],
+            "reinforces": ["Single Source of Truth"],
+            "enables": ["Normalized Translation"],
+            "conflicts_with": ["Multiple Competing Models"],
+            "tensions_with": ["Bounded Context Autonomy"],
+            "violated_by": ["lexicon:multiple-competing-models"],
+            "detected_by": ["same concept modeled inconsistently"],
+            "measured_by": ["model duplication count"],
+            "refactored_by": [
+                "architecture:canonical-data-model",
+                "architecture:anti-corruption-layer"
+            ],
+            "enforced_by": [
+                "schema governance",
+                "domain review"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "type ApiFoo = { foo_id: string; label: string };\ntype DbFoo = { id: string; name: string };\ntype UiFoo = { key: string; title: string };",
+                "after": "type Foo = Readonly<{ id: FooId; name: string }>;\nconst fromApi = (value: ApiFoo): Foo => ({ id: fooId(value.foo_id), name: value.label });\nconst toUi = (foo: Foo): UiFoo => ({ key: foo.id, title: foo.name });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "canonical-data-model",
+            "name": "Canonical Data Model",
+            "definition": "A design pattern in which integrated systems exchange data through one shared model, with a mapping per system.",
+            "type": "pattern",
+            "scope": [
+                "integration",
+                "enterprise data"
+            ],
+            "requires": [
+                "Canonical Model",
+                "Data Contract"
+            ],
+            "reinforces": [
+                "Interoperability",
+                "Normalization"
+            ],
+            "enables": ["Cross-System Mapping"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Bounded Context Purity",
+                "Local Model Autonomy"
+            ],
+            "violated_by": ["lexicon:multiple-competing-models"],
+            "detected_by": ["duplicated transformation logic"],
+            "measured_by": ["transformation duplication"],
+            "refactored_by": ["architecture:anti-corruption-layer"],
+            "enforced_by": ["data contract review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "fooTable.insert({ foo_id: foo.id, foo_name: foo.name });\nbarTable.insert({ id: foo.id, label: foo.name });",
+                "after": "type CanonicalFoo = Readonly<{ id: FooId; name: string }>;\nfooRepository.save(canonicalFoo);\nbarProjection.apply(canonicalFoo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "canonical-schema",
+            "name": "Canonical Schema",
+            "definition": "A formal definition of one concept's shape, published once and used by every API, message and store that carries the concept.",
+            "type": "artifact",
+            "scope": [
+                "data",
+                "message",
+                "API"
+            ],
+            "requires": ["Canonical Data Model"],
+            "reinforces": ["Schema Contract"],
+            "enables": ["Schema Validation"],
+            "conflicts_with": ["Schema Drift"],
+            "tensions_with": ["Service-Specific Schemas"],
+            "violated_by": ["architecture:schema-drift"],
+            "detected_by": ["schema diff conflict"],
+            "measured_by": ["schema reuse/conformance rate"],
+            "refactored_by": [
+                "architecture:canonical-data-model",
+                "architecture:versioning"
+            ],
+            "enforced_by": ["schema registry"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const fooSchema = { id: \"string\", name: \"string\" };\nconst barFooSchema = { fooId: \"text\", label: \"text\" };",
+                "after": "export const CanonicalFooSchema = schema({ id: fooIdSchema, name: nonEmptyString });\nfooApi.use(CanonicalFooSchema);\nbarProjection.use(CanonicalFooSchema);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "canonicalization",
+            "name": "Canonicalization",
+            "definition": "A technique for converting equivalent values to one normal form before they are compared, stored or checked.",
+            "type": "technique",
+            "scope": [
+                "input",
+                "data",
+                "security"
+            ],
+            "requires": ["Canonical Format"],
+            "reinforces": [
+                "Validation",
+                "Deduplication"
+            ],
+            "enables": [
+                "Idempotency",
+                "Security Checks"
+            ],
+            "conflicts_with": ["Ambiguous Encoding"],
+            "tensions_with": ["Lossless Preservation"],
+            "violated_by": ["lexicon:ambiguous-encoding"],
+            "detected_by": ["duplicate semantically equivalent values"],
+            "measured_by": ["normalization defect count"],
+            "refactored_by": [],
+            "enforced_by": ["validation pipeline"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "const keys = [\"Foo\", \" foo \", \"FOO\"];\nconst map = new Map(keys.map(key => [key, loadFoo(key)]));",
+                "after": "function canonicalFooKey(value: string) { return value.trim().normalize(\"NFKC\").toLowerCase(); }\nconst map = new Map(keys.map(key => [canonicalFooKey(key), loadFoo(canonicalFooKey(key))]));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "single-source-of-truth",
+            "distinctFrom": [
+                {
+                    "id": "architecture:canonical-model",
+                    "reason": "A single source of truth gives each fact one owner, while a canonical model gives a concept one representation that others translate to and from."
+                },
+                {
+                    "id": "architecture:closed-vocabulary",
+                    "reason": "A single source of truth owns each fact once, while a closed vocabulary limits the words a name slot may hold."
+                },
+                {
+                    "id": "architecture:collision-consolidation",
+                    "reason": "A single source of truth is one owner per fact, while collision consolidation reads a taken filename as evidence of two files doing one job."
+                },
+                {
+                    "id": "architecture:declared-jurisdiction",
+                    "reason": "A single source of truth is one owner per fact, while declared jurisdiction is the declaration a naming gate reads its scope from."
+                },
+                {
+                    "id": "architecture:duplicate-code",
+                    "reason": "A single source of truth owns facts, rules and configuration values, while DRY keeps one source for logic and constants in code."
+                },
+                {
+                    "id": "architecture:decentralization",
+                    "reason": "A single source of truth centralizes ownership of a fact, while decentralization spreads decisions and control to the owning teams."
+                },
+                {
+                    "id": "architecture:determinism",
+                    "reason": "A single source of truth fixes where a fact lives, while determinism fixes that the same inputs give the same result."
+                },
+                {
+                    "id": "architecture:governance",
+                    "reason": "A single source of truth owns facts, while governance holds decisions to policy."
+                }
+            ],
+            "name": "Single Source of Truth",
+            "aliases": ["SSOT"],
+            "definition": "A design rule that each fact, rule or configuration value has one owning definition, and every other value is derived from it.",
+            "type": "principle",
+            "scope": [
+                "configuration",
+                "data",
+                "rule",
+                "schema"
+            ],
+            "requires": [
+                "Ownership",
+                "Canonical Definition"
+            ],
+            "reinforces": [
+                "DRY",
+                "Consistency"
+            ],
+            "enables": [
+                "Governance",
+                "Correctness"
+            ],
+            "conflicts_with": [
+                "Duplicated Authority",
+                "Magic Value"
+            ],
+            "tensions_with": [
+                "Availability",
+                "Decentralization"
+            ],
+            "violated_by": ["lexicon:duplicated-authority"],
+            "detected_by": ["conflicting definitions"],
+            "measured_by": ["duplicate authority count"],
+            "refactored_by": ["lexicon:centralize-the-rule"],
+            "enforced_by": [
+                "config governance",
+                "schema registry"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "let fooCount = 0;\nconst foos: Foo[] = [];\nfunction addFoo(foo: Foo) { foos.push(foo); fooCount += 1; }",
+                "after": "const foos: Foo[] = [];\nfunction addFoo(foo: Foo) { foos.push(foo); }\nfunction fooCount() { return foos.length; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "normalization",
+            "name": "Normalization",
+            "definition": "A technique for storing each fact once and referring to it by key wherever it is needed.",
+            "type": "technique",
+            "scope": [
+                "database",
+                "schema",
+                "data model"
+            ],
+            "requires": ["Data Semantics"],
+            "reinforces": [
+                "Consistency",
+                "DRY"
+            ],
+            "enables": ["Reduced Redundancy"],
+            "conflicts_with": [],
+            "tensions_with": [
+                "Query Performance",
+                "Denormalized Read Models"
+            ],
+            "violated_by": ["lexicon:duplicated-denormalized-columns"],
+            "detected_by": [
+                "update anomalies",
+                "duplicated facts"
+            ],
+            "measured_by": ["redundancy/anomaly count"],
+            "refactored_by": [
+                "architecture:entity",
+                "architecture:database-normalization",
+                "lexicon:name-the-concept"
+            ],
+            "enforced_by": [
+                "schema review",
+                "database constraints"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "type Foo = { id: FooId; barName: string; barEmail: string };\nconst foos: Foo[] = duplicateBarAcrossFoos();",
+                "after": "type Foo = { id: FooId; barId: BarId };\ntype Bar = { id: BarId; name: string; email: string };\nconst foos = new Map<FooId, Foo>();\nconst bars = new Map<BarId, Bar>();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "semantic-consistency",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:polysemy-across-contexts",
+                    "reason": "Semantic consistency is one name keeping one meaning, while polysemy across contexts is a term legitimately meaning different things in different bounded contexts."
+                }
+            ],
+            "name": "Semantic Consistency",
+            "definition": "The degree to which one name carries one meaning across the code, the schemas and the documentation.",
+            "type": "quality-attribute",
+            "scope": [
+                "domain",
+                "API",
+                "data"
+            ],
+            "requires": [
+                "Ubiquitous Language",
+                "Semantic Contracts"
+            ],
+            "reinforces": [
+                "Correctness",
+                "Interoperability"
+            ],
+            "enables": ["Disambiguation"],
+            "conflicts_with": [
+                "Ambiguous Naming",
+                "Inconsistent Error Model"
+            ],
+            "tensions_with": ["Polysemy Across Contexts"],
+            "violated_by": ["lexicon:ambiguous-naming"],
+            "detected_by": ["conflicting glossary/schema definitions"],
+            "measured_by": ["semantic conflict count"],
+            "refactored_by": [
+                "lexicon:name-the-concept",
+                "lexicon:split-bounded-context",
+                "architecture:anti-corruption-layer"
+            ],
+            "enforced_by": [
+                "glossary review",
+                "schema review"
+            ],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "function createFoo(name: string) {}\nfunction renameFoo(label: string) {}\nfunction findFoo(title: string) {}",
+                "after": "type FooName = string & { readonly __brand: \"FooName\" };\nfunction createFoo(name: FooName) {}\nfunction renameFoo(name: FooName) {}\nfunction findFoo(name: FooName) {}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "ubiquitous-language",
+            "name": "Ubiquitous Language",
+            "definition": "The practice of using the domain's own terms, agreed with its experts, in conversation, documentation and code alike.",
+            "type": "activity",
+            "scope": [
+                "bounded context",
+                "domain",
+                "codebase"
+            ],
+            "requires": ["Domain Collaboration"],
+            "reinforces": [
+                "DDD",
+                "Semantic Contracts"
+            ],
+            "enables": ["Intent-Revealing Interface"],
+            "conflicts_with": ["Technical/Domain Mismatch"],
+            "tensions_with": ["Cross-Context Terminology"],
+            "violated_by": ["lexicon:technical-domain-mismatch"],
+            "detected_by": [
+                "synonym drift",
+                "ambiguous names"
+            ],
+            "measured_by": ["naming consistency score"],
+            "refactored_by": ["lexicon:name-the-concept"],
+            "enforced_by": [
+                "naming rules",
+                "domain review"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function changeThingState(record: any, code: string) {\n  record.s = code;\n}",
+                "after": "function activateFoo(foo: Foo) {\n  foo.activate();\n  fooEvents.emit({ type: \"FooActivated\", fooId: foo.id });\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "intent-revealing-interface",
+            "distinctFrom": [
+                {
+                    "id": "architecture:principle-of-least-surprise",
+                    "reason": "An intent-revealing interface states what an operation does in its name and parameters, while least surprise requires the behavior to match what they lead a caller to expect."
+                }
+            ],
+            "name": "Intent-Revealing Interface",
+            "definition": "A design rule that an operation's name and parameters state what it does for the caller.",
+            "type": "principle",
+            "aliases": ["Intent-Revealing API"],
+            "scope": [
+                "API",
+                "method",
+                "class",
+                "module"
+            ],
+            "requires": [
+                "Clear Semantics",
+                "Naming Consistency"
+            ],
+            "reinforces": ["Principle of Least Surprise"],
+            "enables": [
+                "Readability",
+                "Correct Usage"
+            ],
+            "conflicts_with": [
+                "Ambiguous API",
+                "Boolean Trap"
+            ],
+            "tensions_with": ["Concise Naming"],
+            "violated_by": [
+                "lexicon:ambiguous-api",
+                "architecture:boolean-trap"
+            ],
+            "detected_by": [
+                "generic names",
+                "unclear parameters"
+            ],
+            "measured_by": ["API clarity review findings"],
+            "refactored_by": [
+                "lexicon:name-the-concept",
+                "lexicon:replace-boolean-with-enum",
+                "architecture:value-object"
+            ],
+            "enforced_by": [
+                "naming lint",
+                "API review"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "foo.update(\"s\", \"A\");\nfoo.apply(3, true);",
+                "after": "foo.activate();\nfoo.reserve({ quantity: 3, notify: true });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "principle-of-least-surprise",
+            "name": "Principle of Least Surprise",
+            "aliases": [
+                "Principle of Least Astonishment",
+                "POLA"
+            ],
+            "definition": "A design rule that an operation behaves the way its name and its conventions lead a caller to expect.",
+            "type": "principle",
+            "scope": [
+                "API",
+                "UX",
+                "module behavior"
+            ],
+            "requires": [
+                "Predictability",
+                "Convention"
+            ],
+            "reinforces": [
+                "Stable Interfaces",
+                "Intent-Revealing API"
+            ],
+            "enables": ["Safe Use"],
+            "conflicts_with": ["Hidden Side Effect"],
+            "tensions_with": ["Clever Abstractions"],
+            "violated_by": ["architecture:hidden-side-effect"],
+            "detected_by": [
+                "misleading names",
+                "hidden behavior"
+            ],
+            "measured_by": [
+                "surprise defects",
+                "misuse reports"
+            ],
+            "refactored_by": [
+                "lexicon:name-the-concept",
+                "lexicon:make-effects-explicit",
+                "lexicon:standardize-the-interface"
+            ],
+            "enforced_by": [
+                "API review",
+                "tests"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function getFoo(id: FooId) {\n  fooStore.delete(id);\n  return undefined;\n}",
+                "after": "function getFoo(id: FooId) { return fooStore.find(id); }\nfunction deleteFoo(id: FooId) { return fooStore.delete(id); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "database-normalization",
+            "name": "Database Normalization",
+            "definition": "A technique for decomposing tables by their functional dependencies into normal forms, so no column depends on anything but its key.",
+            "type": "technique",
+            "scope": [
+                "schema",
+                "data modeling",
+                "integrity"
+            ],
+            "requires": ["Functional Dependencies"],
+            "reinforces": [
+                "Single Source of Truth",
+                "Data Integrity"
+            ],
+            "enables": [
+                "Update-Anomaly Elimination",
+                "Non-Redundant Storage"
+            ],
+            "conflicts_with": ["Duplicated Denormalized Columns"],
+            "tensions_with": ["Read Performance"],
+            "violated_by": ["lexicon:duplicated-denormalized-columns"],
+            "detected_by": ["the same fact stored in multiple places drifting out of sync"],
+            "measured_by": ["update-anomaly incidents and redundant-column count"],
+            "refactored_by": [],
+            "enforced_by": ["schema review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "type FooRow = { id: string; customerName: string; customerCity: string; customerCityZip: string };",
+                "after": "type Foo = { id: FooId; customerId: CustomerId };\ntype Customer = { id: CustomerId; name: string; cityId: CityId };\ntype City = { id: CityId; name: string; zip: string };",
+                "lang": "ts"
+            }
+        }
+    ]
+}

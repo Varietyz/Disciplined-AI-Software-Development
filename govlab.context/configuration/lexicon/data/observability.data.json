@@ -1,0 +1,342 @@
+{
+    "category": "observability-auditability-traceability",
+    "records": [
+        {
+            "name": "Cost/Noise",
+            "kind": "quality-attribute",
+            "definition": "The degree to which collecting more telemetry adds cost and noise that can obscure the signals that matter."
+        },
+        {
+            "name": "Incident Diagnosis",
+            "kind": "capability",
+            "definition": "The ability to diagnose the cause of an incident from a system's observable signals."
+        },
+        {
+            "name": "Logs",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:traces",
+                    "reason": "Logs record discrete events, while traces record the path and timing of one request across components."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A record of discrete, timestamped events a system emits about what it did."
+        },
+        {
+            "name": "Traces",
+            "kind": "artifact",
+            "definition": "A record of the path and timing of a request as it moves through a system's components."
+        },
+        {
+            "name": "Incident Analysis",
+            "kind": "capability",
+            "definition": "The ability to reconstruct and analyze an incident from the events a system logged."
+        },
+        {
+            "name": "Noise/Personal Data Leakage",
+            "kind": "quality-attribute",
+            "definition": "The degree to which verbose logging adds noise and risks leaking personal or sensitive data."
+        },
+        {
+            "name": "Structured Events",
+            "kind": "artifact",
+            "definition": "Log entries emitted as structured, machine-parsable records rather than free-form text."
+        },
+        {
+            "name": "Alert Noise",
+            "kind": "quality-attribute",
+            "definition": "The degree to which monitoring many signals generates alerts that drown out the meaningful ones."
+        },
+        {
+            "name": "Blind Operation",
+            "kind": "anti-pattern",
+            "definition": "Running a system in production with no monitoring, so problems are noticed only when users report them."
+        },
+        {
+            "name": "Failure Detection",
+            "kind": "capability",
+            "definition": "The ability to detect that a system has failed or degraded by watching its monitored signals."
+        },
+        {
+            "name": "Alert Fatigue",
+            "kind": "quality-attribute",
+            "definition": "The degree to which too many alerts desensitize responders, so the ones that matter are ignored."
+        },
+        {
+            "name": "Incident Response",
+            "kind": "activity",
+            "definition": "Detecting, triaging, and resolving an operational incident once an alert fires."
+        },
+        {
+            "name": "Timely Intervention",
+            "kind": "capability",
+            "definition": "The ability to intervene on a problem quickly by being alerted the moment it arises."
+        },
+        {
+            "name": "Accountability",
+            "kind": "capability",
+            "definition": "The ability to attribute every consequential action to the actor responsible for it."
+        },
+        {
+            "name": "Opaque Mutation",
+            "kind": "anti-pattern",
+            "definition": "Changing state with no record of who changed what or when, so the change cannot be audited."
+        },
+        {
+            "name": "Storage/Privacy",
+            "kind": "quality-attribute",
+            "definition": "The degree to which retaining a full audit history grows storage and raises privacy concerns."
+        },
+        {
+            "name": "Action",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:target",
+                    "reason": "The action field names the operation, while the target field names the resource it was performed on."
+                },
+                {
+                    "id": "lexicon:timestamp",
+                    "reason": "The action field names the operation, while the timestamp field marks when it happened."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A field of an audit record identifying the operation that was performed."
+        },
+        {
+            "name": "Actor",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:action",
+                    "reason": "The actor field names who acted, while the action field names what was done."
+                },
+                {
+                    "id": "lexicon:target",
+                    "reason": "The actor field names who acted, while the target field names what was acted on."
+                },
+                {
+                    "id": "lexicon:timestamp",
+                    "reason": "The actor field names who acted, while the timestamp field marks when."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A field of an audit record identifying who or what performed an action."
+        },
+        {
+            "name": "Forensics",
+            "kind": "capability",
+            "definition": "The ability to reconstruct after the fact what happened from an immutable audit record."
+        },
+        {
+            "name": "Privacy",
+            "kind": "quality-attribute",
+            "definition": "The degree to which a system limits the collection and exposure of personal or sensitive information."
+        },
+        {
+            "name": "Target",
+            "kind": "artifact",
+            "definition": "A field of an audit record identifying the resource an action was performed on."
+        },
+        {
+            "name": "Timestamp",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:target",
+                    "reason": "The timestamp field marks when an action happened, while the target field names what it was performed on."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A field of an audit record marking when an action occurred."
+        },
+        {
+            "name": "Untracked Mutation",
+            "kind": "anti-pattern",
+            "definition": "Mutating state without writing an audit entry, so the change leaves no trace."
+        },
+        {
+            "name": "Anonymous Flow",
+            "kind": "anti-pattern",
+            "definition": "Data or requests flowing through a system with no identifiers, so their path cannot be reconstructed."
+        },
+        {
+            "name": "End-to-End Causality",
+            "kind": "capability",
+            "definition": "The ability to follow a request's cause-and-effect chain across every component it touches."
+        },
+        {
+            "name": "Logs/Traces",
+            "kind": "artifact",
+            "definition": "The combined log and trace records that let a request be followed from end to end."
+        },
+        {
+            "name": "Metadata Propagation Overhead",
+            "kind": "quality-attribute",
+            "definition": "The degree to which carrying trace metadata through every call adds size and processing cost."
+        },
+        {
+            "name": "Context Propagation",
+            "kind": "constraint",
+            "definition": "The requirement that request context be carried across service boundaries so related calls can be correlated."
+        },
+        {
+            "name": "Header/Metadata Management",
+            "kind": "quality-attribute",
+            "definition": "The degree to which threading correlation identifiers through headers adds handling to every call."
+        },
+        {
+            "name": "Request-Level Traceability",
+            "kind": "capability",
+            "definition": "The ability to trace all work belonging to one request by a shared correlation identifier."
+        },
+        {
+            "name": "Uncorrelated Events",
+            "kind": "anti-pattern",
+            "definition": "Emitting events with no shared identifier, so those belonging to one request cannot be tied together."
+        },
+        {
+            "name": "Audit Trail",
+            "kind": "artifact",
+            "definition": "A chronological record linking each event to the one that caused it."
+        },
+        {
+            "name": "Cause-Effect Reconstruction",
+            "kind": "capability",
+            "definition": "The ability to reconstruct which event triggered which by following causation identifiers."
+        },
+        {
+            "name": "Event Metadata",
+            "kind": "artifact",
+            "definition": "Descriptive fields attached to an event, such as its identifiers, timestamps, and causation links."
+        },
+        {
+            "name": "Metadata Verbosity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which stamping every event with causation metadata makes the event payload verbose."
+        },
+        {
+            "name": "Unlinked Events",
+            "kind": "anti-pattern",
+            "definition": "Recording events with no link to their cause, so cause-and-effect chains cannot be rebuilt."
+        },
+        {
+            "name": "Latency/Failure Root Cause Analysis",
+            "kind": "capability",
+            "definition": "The ability to pinpoint which service caused a request's latency or failure by tracing it across hops."
+        },
+        {
+            "name": "Opaque Distributed Calls",
+            "kind": "anti-pattern",
+            "definition": "Calls crossing service boundaries with no tracing, so a request's path and bottlenecks are invisible."
+        },
+        {
+            "name": "Overhead/Sampling",
+            "kind": "quality-attribute",
+            "definition": "The degree to which tracing every request adds overhead, forcing sampling that can miss rare cases."
+        },
+        {
+            "name": "Trace Context Propagation",
+            "kind": "constraint",
+            "definition": "The requirement that trace identifiers be propagated across every hop of a distributed request."
+        },
+        {
+            "name": "Error-Budget Decisions",
+            "kind": "capability",
+            "definition": "The ability to decide how much risk to take by spending against a defined reliability error budget."
+        },
+        {
+            "name": "Feature Velocity",
+            "kind": "quality-attribute",
+            "definition": "The degree to which holding to strict reliability targets limits how fast new features can ship."
+        },
+        {
+            "name": "Vague Reliability Goals",
+            "kind": "anti-pattern",
+            "definition": "Stating reliability aims in vague, unmeasurable terms, so no check can tell whether they are met."
+        },
+        {
+            "name": "At-a-Glance System Health",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:trend-visibility",
+                    "reason": "At-a-glance health shows the state now, while trend visibility shows how a metric has moved over time."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to see a system's overall health at a glance from a consolidated visual display."
+        },
+        {
+            "name": "Dashboard Sprawl",
+            "kind": "quality-attribute",
+            "definition": "The degree to which unchecked creation of dashboards scatters attention across too many redundant views."
+        },
+        {
+            "name": "Log-Grep-Only Diagnosis",
+            "kind": "anti-pattern",
+            "definition": "Diagnosing problems solely by grepping raw logs, with no aggregated view of system health."
+        },
+        {
+            "name": "Trend Visibility",
+            "kind": "capability",
+            "definition": "The ability to see how a metric is trending over time from a visualized history."
+        },
+        {
+            "name": "Structured Log",
+            "kind": "technique",
+            "definition": "A technique for writing log entries as typed fields, so they are queried by field instead of by text."
+        },
+        {
+            "name": "Trace Span",
+            "kind": "technique",
+            "definition": "A technique for recording the start, end and context of an operation as a span within a request's trace."
+        },
+        {
+            "name": "Alert on Critical Failure",
+            "kind": "technique",
+            "definition": "A technique for raising an alert with an owner and a severity when a critical path fails."
+        },
+        {
+            "name": "Cardinality Reduction",
+            "kind": "technique",
+            "definition": "A technique for limiting the distinct label values a metric carries, so its storage and queries stay bounded."
+        },
+        {
+            "name": "Sampling and Aggregation",
+            "kind": "technique",
+            "definition": "A technique for keeping a representative share of telemetry or a summary of it instead of every event."
+        },
+        {
+            "name": "Runbook Owner",
+            "kind": "technique",
+            "definition": "A technique for naming the person or team responsible for each alert and its response steps."
+        },
+        {
+            "name": "Causation Tracing",
+            "kind": "technique",
+            "definition": "A technique for carrying the id of the event or request that caused each effect, so a chain can be followed back."
+        },
+        {
+            "name": "Usage Instrumentation",
+            "kind": "technique",
+            "definition": "A technique for counting calls to a code path in production, so its use is measured before it is removed."
+        },
+        {
+            "name": "Data Change Audit",
+            "kind": "technique",
+            "definition": "A technique for recording who changed which data, when, and from what value to what value."
+        },
+        {
+            "name": "Execution Log",
+            "kind": "technique",
+            "definition": "A technique for recording each step an automated or manual procedure performed and its result."
+        },
+        {
+            "name": "Define Signal Quality",
+            "kind": "technique",
+            "definition": "A technique for stating what makes a log, metric or alert useful before it is emitted."
+        },
+        {
+            "name": "Service Level Objectives",
+            "kind": "technique",
+            "definition": "A technique for choosing measured indicators of reliability and setting the targets a service must meet on them."
+        }
+    ]
+}

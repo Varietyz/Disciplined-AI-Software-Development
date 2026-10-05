@@ -12,7 +12,7 @@ The ontology is a queryable canon of software architecture. It holds every princ
 
 # Lexicon
 
-1700 of 1700 shown
+2012 of 2012 shown
 
 ## Sections
 
@@ -1833,6 +1833,46 @@ Not answered
 
 Every term in this category is listed as one record, with its kind, its definition and its aliases, the principles whose relations name it, the principle or contract that carries the same name where one exists, and the layer its category belongs to. A tag category also gives each term an example, which is the file the tag places or the rename from a refused word onto a covering tag.
 
+### Accepted Risk Record
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for recording a decision to accept a risk with who accepted it and when it is reviewed again.
+
+How it is checked
+
+Checked by
+[Unowned Risk](PRINCIPLES.md#architecture-unowned-risk)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Ad-Hoc Design
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -1962,6 +2002,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Anchor to Use Cases
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for justifying each component by a concrete use case it serves.
+
+How it is checked
+
+Checked by
+[Architecture Astronaut](PRINCIPLES.md#architecture-architecture-astronaut)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Architecture Criteria
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -2022,7 +2102,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Architectural Consistency](PRINCIPLES.md#architecture-architectural-consistency)
+[Evolutionary Architecture](PRINCIPLES.md#architecture-evolutionary-architecture), [Architectural Consistency](PRINCIPLES.md#architecture-architectural-consistency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -2109,6 +2189,126 @@ How it is checked
 
 Checked by
 [Architectural Consistency](PRINCIPLES.md#architecture-architectural-consistency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Architecture Test
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for expressing a structural rule, such as a dependency direction, as a test that runs in the build.
+
+How it is checked
+
+Checked by
+[Big Ball of Mud](PRINCIPLES.md#architecture-big-ball-of-mud), [Boundary Leakage](PRINCIPLES.md#architecture-boundary-leakage), [Manual-Only Governance](PRINCIPLES.md#architecture-manual-only-governance), [Architectural Consistency](PRINCIPLES.md#architecture-architectural-consistency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Archive Reference
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for keeping removed code reachable in history or an archive instead of in the live tree.
+
+How it is checked
+
+Checked by
+[Zombie Code](PRINCIPLES.md#architecture-zombie-code)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Assign Owner
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for recording a named owner for each module, risk or rule, who decides on its changes.
+
+How it is checked
+
+Checked by
+[Big Ball of Mud](PRINCIPLES.md#architecture-big-ball-of-mud), [Shared Mutable State](PRINCIPLES.md#architecture-shared-mutable-state), [Unowned Risk](PRINCIPLES.md#architecture-unowned-risk), [Lava Flow](PRINCIPLES.md#architecture-lava-flow), [Decentralization](PRINCIPLES.md#architecture-decentralization)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -2478,6 +2678,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Contextual Pattern Selection
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for choosing a pattern by the forces of the problem at hand instead of by familiarity.
+
+How it is checked
+
+Checked by
+[Golden Hammer](PRINCIPLES.md#architecture-golden-hammer)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Continuous Improvement
 
 - Kind: [activity](SCHEMA.md#kind-activity)
@@ -2650,6 +2890,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Dead Code Check
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for failing the build on exports and branches that nothing reaches.
+
+How it is checked
+
+Checked by
+[Zombie Code](PRINCIPLES.md#architecture-zombie-code)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Decision
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -2739,6 +3019,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Decision Record with Alternatives
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for recording a decision together with the options rejected and the forces that decided it.
+
+How it is checked
+
+Checked by
+[Golden Hammer](PRINCIPLES.md#architecture-golden-hammer), [Architecture Decision Records (ADR)](PRINCIPLES.md#architecture-architecture-decision-records), [Greenfield Development](PRINCIPLES.md#architecture-greenfield-development)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Decision Review
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for re-examining recorded decisions when the evidence behind them changes.
+
+How it is checked
+
+Checked by
+[Big-Upfront Frozen Architecture](PRINCIPLES.md#architecture-big-upfront-frozen-architecture), [First-Principles Design](PRINCIPLES.md#architecture-first-principles-design)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Defect Detection
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -2757,6 +3117,126 @@ How it is checked
 
 Checked by
 [Code Review](PRINCIPLES.md#architecture-code-review)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Defer Generalization
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for keeping concrete code until a second real variation shows what the abstraction must cover.
+
+How it is checked
+
+Checked by
+[Speculative Generality](PRINCIPLES.md#architecture-speculative-generality), [Premature Abstraction](PRINCIPLES.md#architecture-premature-abstraction), [Minimum Viable Architecture](PRINCIPLES.md#architecture-minimum-viable-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Delete After Evidence
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for removing code once measurement shows nothing calls it.
+
+How it is checked
+
+Checked by
+[Lava Flow](PRINCIPLES.md#architecture-lava-flow), [Zombie Code](PRINCIPLES.md#architecture-zombie-code)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Deprecation Plan
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for recording for each obsolete path its owner, its replacement and its removal date.
+
+How it is checked
+
+Checked by
+[Lava Flow](PRINCIPLES.md#architecture-lava-flow)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -2886,6 +3366,46 @@ How it is checked
 
 Checked by
 the tension resolution with architecture-decision-records
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Duplicate Until the Pattern Stabilizes
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for tolerating a small duplication until enough cases exist to show the shared shape.
+
+How it is checked
+
+Checked by
+[Premature Abstraction](PRINCIPLES.md#architecture-premature-abstraction)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -3126,6 +3646,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Force Analysis
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for listing the pressures a design must balance before choosing a pattern for it.
+
+How it is checked
+
+Checked by
+[Golden Hammer](PRINCIPLES.md#architecture-golden-hammer)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Future Scalability
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -3187,6 +3747,46 @@ How it is checked
 
 Checked by
 the tension resolution with evolutionary-architecture
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Inconsistent Conventions
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A defect in which parts of one project use different structures, formats, tools or patterns for the same kind of thing.
+
+How it is checked
+
+Checked by
+[Standardization](PRINCIPLES.md#architecture-standardization), [Convention over Configuration](PRINCIPLES.md#architecture-convention-over-configuration)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -3513,6 +4113,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Measure Delivery Cost
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for measuring the time and effort an abstraction adds to delivering a change.
+
+How it is checked
+
+Checked by
+[Architecture Astronaut](PRINCIPLES.md#architecture-architecture-astronaut)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Mitigation Plan
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for recording the actions that reduce a risk, with an owner and a date for each.
+
+How it is checked
+
+Checked by
+[Unowned Risk](PRINCIPLES.md#architecture-unowned-risk), [Gap Analysis](PRINCIPLES.md#architecture-gap-analysis), [Threat Modeling](PRINCIPLES.md#architecture-threat-modeling), [Risk Management](PRINCIPLES.md#architecture-risk-management)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Naming/Structure Conventions
 
 - Kind: [style](SCHEMA.md#kind-style)
@@ -3814,6 +4494,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Quality Scenarios
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for stating each quality attribute as a stimulus, a response and a measure the design must meet.
+
+How it is checked
+
+Checked by
+[Feature-Only Design](PRINCIPLES.md#architecture-feature-only-design), [Quality Attributes](PRINCIPLES.md#architecture-quality-attributes)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Regression Scope Selection
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -3875,6 +4595,46 @@ How it is checked
 
 Checked by
 [Gap Analysis](PRINCIPLES.md#architecture-gap-analysis)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Remove Pattern Shell
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for deleting the structure of a pattern whose forces are absent, leaving the plain code it wrapped.
+
+How it is checked
+
+Checked by
+[Pattern Cargo Cult](PRINCIPLES.md#architecture-pattern-cargo-cult), [First-Principles Design](PRINCIPLES.md#architecture-first-principles-design)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -4072,6 +4832,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Risk Register
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for keeping every known risk in one list with its owner, severity, mitigation and review date.
+
+How it is checked
+
+Checked by
+[Feature-Only Design](PRINCIPLES.md#architecture-feature-only-design)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Rule Maintenance
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -4090,6 +4890,86 @@ How it is checked
 
 Checked by
 the tension resolution with fitness-functions
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Scheduled Review
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for setting a date on which a decision, risk or exception is examined again.
+
+How it is checked
+
+Checked by
+[Unowned Risk](PRINCIPLES.md#architecture-unowned-risk)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Severity Classification
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for ranking each finding or risk on a declared scale that sets how soon it is handled.
+
+How it is checked
+
+Checked by
+[Unowned Risk](PRINCIPLES.md#architecture-unowned-risk)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -4247,6 +5127,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Track Rule Metrics
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for counting violations of each architecture rule over time, so recurrence is visible.
+
+How it is checked
+
+Checked by
+[Manual-Only Governance](PRINCIPLES.md#architecture-manual-only-governance), [Static Analysis](PRINCIPLES.md#architecture-static-analysis), [Alerting](PRINCIPLES.md#architecture-alerting)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Trade-Off Analysis
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -4265,6 +5185,46 @@ How it is checked
 
 Checked by
 [Quality Attributes](PRINCIPLES.md#architecture-quality-attributes)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Trade-Off Matrix
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for scoring candidate designs against the quality attributes that matter for the decision.
+
+How it is checked
+
+Checked by
+[Golden Hammer](PRINCIPLES.md#architecture-golden-hammer)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -4523,6 +5483,86 @@ How it is checked
 
 Checked by
 [Architecture Review](PRINCIPLES.md#architecture-architecture-review)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Validate Required Forces
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for checking that a pattern in use has the boundary rules and contracts the pattern requires.
+
+How it is checked
+
+Checked by
+[Pattern Cargo Cult](PRINCIPLES.md#architecture-pattern-cargo-cult)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Vertical Slice Proof
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Architecture Review Evolution Governance](LEXICON.md#lexicon-category-architecture-review-evolution-governance)
+- Layer: [Evolution Principles](SCHEMA.md#layer-evolution-principles)
+
+Details
+
+Definition
+A technique for proving a design by building one end-to-end path through every layer before generalizing it.
+
+How it is checked
+
+Checked by
+[Architecture Astronaut](PRINCIPLES.md#architecture-architecture-astronaut)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -5003,6 +6043,46 @@ How it is checked
 
 Checked by
 the tension resolution with visitor-pattern
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Encode State Machine
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Behavioral Patterns](LEXICON.md#lexicon-category-behavioral-patterns)
+- Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
+
+Details
+
+Definition
+A technique for declaring the states and legal transitions of a lifecycle, so an operation called in the wrong state is refused.
+
+How it is checked
+
+Checked by
+[Temporal Coupling](PRINCIPLES.md#architecture-temporal-coupling)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -5636,6 +6716,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Make Order Explicit
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Behavioral Patterns](LEXICON.md#lexicon-category-behavioral-patterns)
+- Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
+
+Details
+
+Definition
+A technique for expressing a required call order in types or a state machine instead of in documentation.
+
+How it is checked
+
+Checked by
+[Temporal Coupling](PRINCIPLES.md#architecture-temporal-coupling), [Causality](PRINCIPLES.md#architecture-causality), [Happens-Before Relationship](PRINCIPLES.md#architecture-happens-before-relationship)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Mediator God Object
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -6072,6 +7192,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Scattered Null Guards
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Behavioral Patterns](LEXICON.md#lexicon-category-behavioral-patterns)
+- Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
+
+Details
+
+Definition
+A defect in which every call site repeats a null check before the same operation.
+
+How it is checked
+
+Checked by
+[Null Object Pattern](PRINCIPLES.md#architecture-null-object-pattern)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Shared Behavioral Interface
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -6437,49 +7597,6 @@ How it is checked
 
 Checked by
 [Observer Pattern](PRINCIPLES.md#architecture-observer-pattern)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### Type-Switch Dispatch
-
-- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
-- Category: [Behavioral Patterns](LEXICON.md#lexicon-category-behavioral-patterns)
-- Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
-
-Details
-
-Definition
-Dispatching behavior with a switch on an object's type instead of double dispatch through a visitor.
-
-Referenced by
-[Dynamic Dispatch](PRINCIPLES.md#architecture-dynamic-dispatch), [Visitor Pattern](PRINCIPLES.md#architecture-visitor-pattern)
-
-How it is checked
-
-Checked by
-[Dynamic Dispatch](PRINCIPLES.md#architecture-dynamic-dispatch), [Visitor Pattern](PRINCIPLES.md#architecture-visitor-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -7553,15 +8670,18 @@ Not answered
 Details
 
 Definition
-An unstated dependency between operations, so order-sensitive code breaks when the hidden ordering is not preserved.
+A dependency a component or an operation relies on without declaring it, so it surfaces only at runtime or when an unstated order is broken.
 
 Referenced by
-[Causal Dependency](PRINCIPLES.md#architecture-causal-dependency)
+[Causal Dependency](PRINCIPLES.md#architecture-causal-dependency), [Dependency Graph](PRINCIPLES.md#architecture-dependency-graph), [Testability](PRINCIPLES.md#architecture-testability)
+
+Distinct from
+[Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion): A hidden dependency is an undeclared requirement of a component or an operation, while test pyramid inversion is a suite weighted toward slow end-to-end tests.
 
 How it is checked
 
 Checked by
-[Causal Dependency](PRINCIPLES.md#architecture-causal-dependency)
+[Causal Dependency](PRINCIPLES.md#architecture-causal-dependency), [Dependency Graph](PRINCIPLES.md#architecture-dependency-graph), [Testability](PRINCIPLES.md#architecture-testability), [Event Bus](PRINCIPLES.md#architecture-event-bus), [Manifest-Based Design](PRINCIPLES.md#architecture-manifest-based-design), [Dataflow Architecture](PRINCIPLES.md#architecture-dataflow-architecture), [Service Locator Pattern](PRINCIPLES.md#architecture-service-locator-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -7819,7 +8939,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Lamport Clocks](PRINCIPLES.md#architecture-lamport-clocks)
+[Event Ordering](PRINCIPLES.md#architecture-event-ordering), [Lamport Clocks](PRINCIPLES.md#architecture-lamport-clocks)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -8336,6 +9456,46 @@ How it is checked
 
 Checked by
 [Happens-Before Relationship](PRINCIPLES.md#architecture-happens-before-relationship)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Reorder Buffer
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Causality / Ordering / Distributed Time](LEXICON.md#lexicon-category-causality-ordering-distributed-time)
+- Layer: [Causality Core](SCHEMA.md#layer-causality-core)
+
+Details
+
+Definition
+A technique for holding events that arrive early until the events before them arrive, then releasing them in order.
+
+How it is checked
+
+Checked by
+[Event Ordering](PRINCIPLES.md#architecture-event-ordering)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -9114,12 +10274,12 @@ Definition
 The requirement that pure domain logic occupy the core, isolated from external concerns.
 
 Referenced by
-[Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
+[Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
 How it is checked
 
 Checked by
-[Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
+[Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -9200,12 +10360,52 @@ Definition
 The ability to isolate the core from external systems behind adapter boundaries.
 
 Referenced by
-[Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
+[Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
 How it is checked
 
 Checked by
-[Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
+[Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Extract Adapter
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Codebase / System Architecture Styles](LEXICON.md#lexicon-category-codebase-system-architecture-styles)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving the code that talks to a framework, vendor or protocol into an adapter behind a port.
+
+How it is checked
+
+Checked by
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling), [Boundary Leakage](PRINCIPLES.md#architecture-boundary-leakage), [Framework Leakage](PRINCIPLES.md#architecture-framework-leakage), [Vendor Lock-In Leakage](PRINCIPLES.md#architecture-vendor-lock-in-leakage), [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer), [Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Backward Compatibility](PRINCIPLES.md#architecture-backward-compatibility), [Protocol Compatibility](PRINCIPLES.md#architecture-protocol-compatibility), [Interoperability](PRINCIPLES.md#architecture-interoperability), [Portability](PRINCIPLES.md#architecture-portability), [Protocol Independence](PRINCIPLES.md#architecture-protocol-independence), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Replaceability](PRINCIPLES.md#architecture-replaceability), [Interchangeability](PRINCIPLES.md#architecture-interchangeability), [Model Inference](PRINCIPLES.md#architecture-model-inference), [Adapter Pattern](PRINCIPLES.md#architecture-adapter-pattern), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -9292,49 +10492,6 @@ How it is checked
 
 Checked by
 [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### Framework-Centric Core
-
-- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
-- Category: [Codebase / System Architecture Styles](LEXICON.md#lexicon-category-codebase-system-architecture-styles)
-- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
-
-Details
-
-Definition
-Building the core around a specific framework, so the framework's concerns permeate the domain.
-
-Referenced by
-[Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
-
-How it is checked
-
-Checked by
-[Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -9460,6 +10617,9 @@ The ability to keep the core independent of the infrastructure it runs on.
 Referenced by
 [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
+Distinct from
+[External System Isolation](LEXICON.md#lexicon-external-system-isolation): Infrastructure independence keeps the core free of the platform it runs on, while external system isolation keeps the systems it calls behind adapters.
+
 How it is checked
 
 Checked by
@@ -9501,12 +10661,12 @@ Definition
 The degree of upfront structural complexity introduced by defining ports and adapters.
 
 Referenced by
-[Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
+[Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
 How it is checked
 
 Checked by
-the tension resolution with hexagonal-architecture
+the tension resolution with ports-and-adapters-architecture
 
 Population
 The term's definition and every architecture edge that names the term
@@ -9550,6 +10710,46 @@ How it is checked
 
 Checked by
 the tension resolution with component-based-architecture
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Introduce Port
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Codebase / System Architecture Styles](LEXICON.md#lexicon-category-codebase-system-architecture-styles)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for declaring an interface owned by the core that names what it needs from the outside world.
+
+How it is checked
+
+Checked by
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling), [Transaction Script Sprawl](PRINCIPLES.md#architecture-transaction-script-sprawl), [Repository Dump](PRINCIPLES.md#architecture-repository-dump), [Framework Leakage](PRINCIPLES.md#architecture-framework-leakage), [Vendor Lock-In Leakage](PRINCIPLES.md#architecture-vendor-lock-in-leakage), [Portability](PRINCIPLES.md#architecture-portability), [Platform Independence](PRINCIPLES.md#architecture-platform-independence), [Protocol Independence](PRINCIPLES.md#architecture-protocol-independence), [Abstraction](PRINCIPLES.md#architecture-abstraction), [Replaceability](PRINCIPLES.md#architecture-replaceability), [Independence](PRINCIPLES.md#architecture-independence), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Artificial Intelligence Architecture](PRINCIPLES.md#architecture-artificial-intelligence-architecture), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture), [Layered Architecture](PRINCIPLES.md#architecture-layered-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -9790,6 +10990,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Move Framework Outward
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Codebase / System Architecture Styles](LEXICON.md#lexicon-category-codebase-system-architecture-styles)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for removing framework types and annotations from the core and confining them to adapters.
+
+How it is checked
+
+Checked by
+[Framework Leakage](PRINCIPLES.md#architecture-framework-leakage), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Operational Simplicity
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -9890,6 +11130,9 @@ The requirement that the core define abstract interface points through which all
 Referenced by
 [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture)
 
+Distinct from
+[Domain Core](LEXICON.md#lexicon-domain-core): Ports are the interfaces at the edge of the core, while the domain core is the logic those interfaces enclose.
+
 How it is checked
 
 Checked by
@@ -9940,6 +11183,46 @@ How it is checked
 
 Checked by
 [Pipes and Filters](PRINCIPLES.md#architecture-pipes-and-filters)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Repackage by Feature
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Codebase / System Architecture Styles](LEXICON.md#lexicon-category-codebase-system-architecture-styles)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving the code of one feature from technical-layer folders into one folder of its own.
+
+How it is checked
+
+Checked by
+[Package by Feature](PRINCIPLES.md#architecture-package-by-feature)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -10180,49 +11463,6 @@ Not answered
 Shape it refuses
 Not answered
 
-### Unbounded Big Ball of Mud
-
-- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
-- Category: [Codebase / System Architecture Styles](LEXICON.md#lexicon-category-codebase-system-architecture-styles)
-- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
-
-Details
-
-Definition
-Letting a system grow without structure into a tangled mass with no clear boundaries.
-
-Referenced by
-[Monolith Architecture](PRINCIPLES.md#architecture-monolith-architecture)
-
-How it is checked
-
-Checked by
-[Monolith Architecture](PRINCIPLES.md#architecture-monolith-architecture)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
 ### Unified Deployment Boundary
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -10379,7 +11619,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Uniform Interface](PRINCIPLES.md#architecture-uniform-interface)
+[API Contract](PRINCIPLES.md#architecture-api-contract), [Uniform Interface](PRINCIPLES.md#architecture-uniform-interface)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -10422,7 +11662,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Schema Contract](PRINCIPLES.md#architecture-schema-contract)
+[Schema Contract](PRINCIPLES.md#architecture-schema-contract), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -10534,6 +11774,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Backward-Compatible Change
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for changing a contract only by additions that existing consumers can ignore.
+
+How it is checked
+
+Checked by
+[Distributed Monolith](PRINCIPLES.md#architecture-distributed-monolith), [Cyclic Deployment Dependency](PRINCIPLES.md#architecture-cyclic-deployment-dependency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Breaking API Change
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -10589,55 +11869,12 @@ Definition
 A change that violates a component's contract, forcing consumers to update to keep working.
 
 Referenced by
-[Backward Compatibility](PRINCIPLES.md#architecture-backward-compatibility)
+[Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Backward Compatibility](PRINCIPLES.md#architecture-backward-compatibility)
 
 How it is checked
 
 Checked by
-[Backward Compatibility](PRINCIPLES.md#architecture-backward-compatibility)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### Breaking Changes
-
-- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
-- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
-- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
-
-Details
-
-Definition
-Changes that break existing consumers by altering behavior or shape they depend on.
-
-Referenced by
-[Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces)
-
-How it is checked
-
-Checked by
-[Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces)
+[Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Backward Compatibility](PRINCIPLES.md#architecture-backward-compatibility)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -10680,7 +11917,7 @@ Referenced by
 How it is checked
 
 Checked by
-the tension resolution with backward-compatibility
+the tension resolution with backward-compatibility, [Minimum Viable Architecture](PRINCIPLES.md#architecture-minimum-viable-architecture), [Optimization](PRINCIPLES.md#architecture-optimization)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -10724,6 +11961,86 @@ How it is checked
 
 Checked by
 [API Contract](PRINCIPLES.md#architecture-api-contract)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Coarse-Grained Endpoint
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for serving one client operation with one call that returns everything the operation needs.
+
+How it is checked
+
+Checked by
+[Synchronous Chain Trap](PRINCIPLES.md#architecture-synchronous-chain-trap), [Chatty Interface](PRINCIPLES.md#architecture-chatty-interface)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Compatibility Adapter
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for serving an old contract through an adapter over the new one while consumers migrate.
+
+How it is checked
+
+Checked by
+[Unversioned Breaking Change](PRINCIPLES.md#architecture-unversioned-breaking-change), [Cyclic Deployment Dependency](PRINCIPLES.md#architecture-cyclic-deployment-dependency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -10881,6 +12198,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Consumer-Driven Contract Tests
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for having each consumer publish the responses it relies on and testing the provider against all of them before it releases.
+
+How it is checked
+
+Checked by
+[Cyclic Deployment Dependency](PRINCIPLES.md#architecture-cyclic-deployment-dependency), [Service Contract](PRINCIPLES.md#architecture-service-contract), [Consumer-Driven Contracts](PRINCIPLES.md#architecture-consumer-driven-contracts), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Consumer-Driven Development
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -10984,7 +12341,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Design by Contract](PRINCIPLES.md#architecture-design-by-contract)
+[Schema Drift](PRINCIPLES.md#architecture-schema-drift), [Implicit Contract](PRINCIPLES.md#architecture-implicit-contract), [Unversioned Breaking Change](PRINCIPLES.md#architecture-unversioned-breaking-change), [Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion), [Mock Mirage](PRINCIPLES.md#architecture-mock-mirage), [Design by Contract](PRINCIPLES.md#architecture-design-by-contract), [Contract-First Design](PRINCIPLES.md#architecture-contract-first-design), [Postconditions](PRINCIPLES.md#architecture-postconditions), [Standards Compliance](PRINCIPLES.md#architecture-standards-compliance), [Interchangeability](PRINCIPLES.md#architecture-interchangeability)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -11114,6 +12471,46 @@ How it is checked
 
 Checked by
 [Data Contract](PRINCIPLES.md#architecture-data-contract)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Define Contract
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for publishing the operations, shapes and guarantees of a boundary before implementing either side of it.
+
+How it is checked
+
+Checked by
+[Schema Drift](PRINCIPLES.md#architecture-schema-drift), [Implicit Contract](PRINCIPLES.md#architecture-implicit-contract), [Distributed Monolith](PRINCIPLES.md#architecture-distributed-monolith), [Inappropriate Intimacy](PRINCIPLES.md#architecture-inappropriate-intimacy), [Pattern Cargo Cult](PRINCIPLES.md#architecture-pattern-cargo-cult), [Explicit Boundaries](PRINCIPLES.md#architecture-explicit-boundaries), [Contract-First Design](PRINCIPLES.md#architecture-contract-first-design), [API Contract](PRINCIPLES.md#architecture-api-contract), [Schema Contract](PRINCIPLES.md#architecture-schema-contract), [Predictability](PRINCIPLES.md#architecture-predictability), [Correctness](PRINCIPLES.md#architecture-correctness), [Design Review](PRINCIPLES.md#architecture-design-review), [Self-Describing API](PRINCIPLES.md#architecture-self-describing-api), [Pipeline Architecture](PRINCIPLES.md#architecture-pipeline-architecture), [Component-Based Architecture](PRINCIPLES.md#architecture-component-based-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -11526,6 +12923,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Gradual Deprecation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for announcing a removal with a date, warning the consumers still using it, and removing it after the date.
+
+How it is checked
+
+Checked by
+[Unversioned Breaking Change](PRINCIPLES.md#architecture-unversioned-breaking-change), [Stable Interfaces](PRINCIPLES.md#architecture-stable-interfaces), [Backward Compatibility](PRINCIPLES.md#architecture-backward-compatibility)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Hidden Service Coupling
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -11629,7 +13066,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Preconditions](PRINCIPLES.md#architecture-preconditions)
+[Design by Contract](PRINCIPLES.md#architecture-design-by-contract), [Preconditions](PRINCIPLES.md#architecture-preconditions), [Interoperability](PRINCIPLES.md#architecture-interoperability)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -11845,6 +13282,86 @@ How it is checked
 
 Checked by
 the tension resolution with interface-based-design
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Introduce Boundary DTO
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for carrying data across a boundary in a transfer object, so internal models stay inside.
+
+How it is checked
+
+Checked by
+[Boundary Leakage](PRINCIPLES.md#architecture-boundary-leakage), [Data Clumps](PRINCIPLES.md#architecture-data-clumps), [Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer), [Explicit Contracts](PRINCIPLES.md#architecture-explicit-contracts), [Data Contract](PRINCIPLES.md#architecture-data-contract), [Schema Validation](PRINCIPLES.md#architecture-schema-validation), [Type Safety](PRINCIPLES.md#architecture-type-safety)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Migration Guide
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for publishing the steps a consumer takes to move from one version of a contract to the next.
+
+How it is checked
+
+Checked by
+[Unversioned Breaking Change](PRINCIPLES.md#architecture-unversioned-breaking-change)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -12575,7 +14092,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Versioning](PRINCIPLES.md#architecture-versioning)
+[Service Contract](PRINCIPLES.md#architecture-service-contract), [Versioning](PRINCIPLES.md#architecture-versioning), [Consumer-Driven Contracts](PRINCIPLES.md#architecture-consumer-driven-contracts)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -12619,6 +14136,86 @@ How it is checked
 
 Checked by
 the tension resolution with uniform-interface
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Standard Error Contract
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for giving every error one published shape with a code, a message and its context.
+
+How it is checked
+
+Checked by
+[Inconsistent Error Model](PRINCIPLES.md#architecture-inconsistent-error-model), [API Contract](PRINCIPLES.md#architecture-api-contract), [Uniform Interface](PRINCIPLES.md#architecture-uniform-interface), [Self-Describing API](PRINCIPLES.md#architecture-self-describing-api)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Standardize the Interface
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for giving operations of one kind the same naming, shapes and conventions across a system.
+
+How it is checked
+
+Checked by
+[Protocol Compatibility](PRINCIPLES.md#architecture-protocol-compatibility), [Interoperability](PRINCIPLES.md#architecture-interoperability), [Uniform Interface](PRINCIPLES.md#architecture-uniform-interface), [Composability](PRINCIPLES.md#architecture-composability), [Interchangeability](PRINCIPLES.md#architecture-interchangeability), [Pattern Consistency](PRINCIPLES.md#architecture-pattern-consistency), [Standardization](PRINCIPLES.md#architecture-standardization), [Convention over Configuration](PRINCIPLES.md#architecture-convention-over-configuration), [Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise), [Governance](PRINCIPLES.md#architecture-governance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -12730,6 +14327,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Tolerant Reader
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for reading only the fields a consumer needs and ignoring unknown ones, so additive changes do not break it.
+
+How it is checked
+
+Checked by
+[Forward Compatibility](PRINCIPLES.md#architecture-forward-compatibility), [Forward-Only Processing](PRINCIPLES.md#architecture-forward-only-processing)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Undefined Results
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -12748,6 +14385,46 @@ How it is checked
 
 Checked by
 [Postconditions](PRINCIPLES.md#architecture-postconditions)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Version Bump
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Contracts / Interfaces / Compatibility](LEXICON.md#lexicon-category-contracts-interfaces-compatibility)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for raising a contract's version number by the rule that says which kind of change it carries.
+
+How it is checked
+
+Checked by
+[Unversioned Breaking Change](PRINCIPLES.md#architecture-unversioned-breaking-change)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -13207,6 +14884,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Configuration Schema
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Control / Coordination / Centralization](LEXICON.md#lexicon-category-control-coordination-centralization)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for validating configuration against a declared schema before the system starts.
+
+How it is checked
+
+Checked by
+[Hardcoded Configuration](PRINCIPLES.md#architecture-hardcoded-configuration), [Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design), [Declarative Configuration](PRINCIPLES.md#architecture-declarative-configuration)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Coordinator
 
 - Kind: [mechanism](SCHEMA.md#kind-mechanism)
@@ -13311,6 +15028,46 @@ How it is checked
 
 Checked by
 [Centralized Logging](PRINCIPLES.md#architecture-centralized-logging)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Externalize Configuration
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Control / Coordination / Centralization](LEXICON.md#lexicon-category-control-coordination-centralization)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for moving values that vary by environment out of code into configuration read at startup.
+
+How it is checked
+
+Checked by
+[Hardcoded Configuration](PRINCIPLES.md#architecture-hardcoded-configuration), [Magic Value](PRINCIPLES.md#architecture-magic-value), [Environment Parity](PRINCIPLES.md#architecture-environment-parity), [Containerization](PRINCIPLES.md#architecture-containerization), [Configuration Externalization](PRINCIPLES.md#architecture-configuration-externalization), [Declarative Configuration](PRINCIPLES.md#architecture-declarative-configuration), [Resource Utilization](PRINCIPLES.md#architecture-resource-utilization)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -13654,7 +15411,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Control Plane](PRINCIPLES.md#architecture-control-plane)
+[Control Plane](PRINCIPLES.md#architecture-control-plane), [Decentralization](PRINCIPLES.md#architecture-decentralization)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -13869,7 +15626,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Centralized Configuration](PRINCIPLES.md#architecture-centralized-configuration)
+[Control Plane](PRINCIPLES.md#architecture-control-plane), [Centralized Configuration](PRINCIPLES.md#architecture-centralized-configuration)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -14123,7 +15880,7 @@ Not answered
 Details
 
 Definition
-A formal definition of the party a record names to close it when its satisfaction is a judgement, required where no artifact resolves the record and forbidden where one does.
+A formal definition of the party a record names to close it when its satisfaction is a judgment, required where no artifact resolves the record and forbidden where one does.
 
 Referenced by
 [Derived Record State](PRINCIPLES.md#architecture-derived-record-state)
@@ -14132,6 +15889,206 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [Derived Record State](PRINCIPLES.md#architecture-derived-record-state)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Allocate Identity Once
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for assigning a record its id when it is created and never deriving it again from its location or subject.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Declared Subject](PRINCIPLES.md#architecture-declared-subject)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Archive the Absorbed Venue
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for moving a closed venue to the archive once its outcome is absorbed, instead of deleting it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Destructive Closure](PRINCIPLES.md#architecture-destructive-closure)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Assumed Single Writer
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which the one-writer invariant is assumed to cover a jointly authored surface.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Operand-Free Outcome Surface](PRINCIPLES.md#architecture-operand-free-outcome-surface)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Attached Second Caller
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a second caller attaches to a running process instead of reading the result that process publishes.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Read-Time Join](PRINCIPLES.md#architecture-read-time-join)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Blanket Collapse
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which every copy is collapsed toward its source without asking whether any edge ever runs again.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Period-Decided Disposition](PRINCIPLES.md#architecture-period-decided-disposition)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -14249,6 +16206,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Check Both Directions
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for checking that every index entry resolves to a file and that every file has an entry.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Two-Direction Index](PRINCIPLES.md#architecture-two-direction-index)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Check the Projection's Shape
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for checking that a projection holds only the shape its name claims.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Projection Channel](PRINCIPLES.md#architecture-projection-channel)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Compare the Two Readings
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for enforcing a change rule by comparing the content before and after the change.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [State-Arity Limit](PRINCIPLES.md#architecture-state-arity-limit)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Concern Partition
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -14267,6 +16344,46 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [Derived Party Count](PRINCIPLES.md#architecture-derived-party-count)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Conflated Scope
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which one declared scope is used both to detect collisions and to decide whether a result answers a later question.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Write Scope and Read Population](PRINCIPLES.md#architecture-write-scope-and-read-population)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -14381,6 +16498,486 @@ Not answered
 Shape it refuses
 Not answered
 
+### Count Distinguished Copies
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for counting the copies that differ from their source before deciding which way to collapse them.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Period-Decided Disposition](PRINCIPLES.md#architecture-period-decided-disposition)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Count the Partition's Concerns
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for setting the party count to the number of concerns the derived partition holds.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Derived Party Count](PRINCIPLES.md#architecture-derived-party-count)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Crowded Surface
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which parties are added who all reason about the same surface.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Fan-In Ceiling](PRINCIPLES.md#architecture-fan-in-ceiling)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare All Three Lifetime Axes
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for declaring each surface's lifetime with a value from the closed set of every axis, so no axis is inferred.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Independent Lifetime Axes](PRINCIPLES.md#architecture-independent-lifetime-axes)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare Each Divergent Section
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for declaring the lifetime of every section that lives differently from its file's default.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Section Lifetime Divergence](PRINCIPLES.md#architecture-section-lifetime-divergence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare the Field for Readers
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for declaring that a mandated prose field is written for people, so no consumer is assumed to read it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Joinable Mandated Field](PRINCIPLES.md#architecture-joinable-mandated-field)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare the File Default
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for stating the lifetime a file's sections take unless a section declares its own.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Section Lifetime Divergence](PRINCIPLES.md#architecture-section-lifetime-divergence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare the Missing Operand
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for declaring on a jointly authored surface that the one-writer invariant has no operand there.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Operand-Free Outcome Surface](PRINCIPLES.md#architecture-operand-free-outcome-surface)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare the Remover
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for recording which party removes a channel, so every channel has a party that can attribute it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Reversible Channel Encoding](PRINCIPLES.md#architecture-reversible-channel-encoding)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare the Subject Beside the Id
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for recording a record's subject as a declared field next to its id, so either can change without breaking the other.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Declared Subject](PRINCIPLES.md#architecture-declared-subject)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare the Write Scope
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for publishing the part of a surface a run writes, so overlapping runs are detected.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Write Scope and Read Population](PRINCIPLES.md#architecture-write-scope-and-read-population)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Deferred Projection
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a surface is updated and its projection is left for a later change.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Projection Channel](PRINCIPLES.md#architecture-projection-channel)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Deferred Setting
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -14464,6 +17061,166 @@ Not answered
 Shape it refuses
 Not answered
 
+### Derive Liveness Once
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for computing liveness in one place that every consumer reads.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [One-Sided Liveness](PRINCIPLES.md#architecture-one-sided-liveness)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Derive State from Edges
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for removing a written status field and computing a record's state from the edges that connect it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Derived Record State](PRINCIPLES.md#architecture-derived-record-state), [Written Status Marker](PRINCIPLES.md#architecture-written-status-marker)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Derive the Partition
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for deriving the partition of work from the surfaces involved before choosing how many parties take part.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Derived Party Count](PRINCIPLES.md#architecture-derived-party-count)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Digest-Named Channel
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a channel is named by a digest of its scope, which separates channels but cannot be decoded.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Reversible Channel Encoding](PRINCIPLES.md#architecture-reversible-channel-encoding)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Distinguished Copy
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -14485,6 +17242,126 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [Period-Decided Disposition](PRINCIPLES.md#architecture-period-decided-disposition)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Draw the Value from a Closed Set
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for making a mandated field take a value from a declared closed set that a consumer can join on.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Joinable Mandated Field](PRINCIPLES.md#architecture-joinable-mandated-field)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Duplicate Covered Run
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a run is started for a question a live run's scope already covers.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Read-Time Join](PRINCIPLES.md#architecture-read-time-join)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Encode the Scope Reversibly
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for naming a channel by an encoding of its scope that can be decoded back to the scope.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Reversible Channel Encoding](PRINCIPLES.md#architecture-reversible-channel-encoding)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -14553,6 +17430,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Fenced Joint Surface
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a jointly authored surface is fenced into per-party spans.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Operand-Free Outcome Surface](PRINCIPLES.md#architecture-operand-free-outcome-surface)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### File-Wide Lifetime
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which one lifetime is stated for a file whose sections live differently, so the file's word authorizes operations on a part that forbids them.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Section Lifetime Divergence](PRINCIPLES.md#architecture-section-lifetime-divergence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Generate the Index from the Directory
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for producing an index by reading the directory it describes instead of editing entries by hand.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Two-Direction Index](PRINCIPLES.md#architecture-two-direction-index), [Hand-Kept Index](PRINCIPLES.md#architecture-hand-kept-index)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Governed Removal
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -14571,6 +17568,46 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [Independent Lifetime Axes](PRINCIPLES.md#architecture-independent-lifetime-axes), [Section Lifetime Divergence](PRINCIPLES.md#architecture-section-lifetime-divergence), [Reversible Channel Encoding](PRINCIPLES.md#architecture-reversible-channel-encoding)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Hold the Barrier for Planned Writes
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for taking an exclusive write on a shared surface only after every peer is observed parked.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Write Barrier](PRINCIPLES.md#architecture-write-barrier)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -14639,6 +17676,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Join by Reading the Published Result
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for waiting on another run by reading the result it publishes instead of attaching to its process.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Read-Time Join](PRINCIPLES.md#architecture-read-time-join)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Joiner
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -14682,6 +17759,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Keep One Aggregate
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for holding one aggregate report per subject, with no report named for a scope or caller beside it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Invocation-Keyed Report](PRINCIPLES.md#architecture-invocation-keyed-report)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Leave the Payload Prose
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for keeping the fields only people read as prose that no mechanism parses.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Carrier and Payload Split](PRINCIPLES.md#architecture-carrier-and-payload-split)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Liveness Witness
 
 - Kind: [mechanism](SCHEMA.md#kind-mechanism)
@@ -14700,6 +17857,126 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [One-Sided Liveness](PRINCIPLES.md#architecture-one-sided-liveness)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Location-Derived Identity
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a record's identity is derived from its location or its subject, so renaming either one breaks it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Declared Subject](PRINCIPLES.md#architecture-declared-subject)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Mark Claims with Their Read Moment
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for stamping each claim with the moment its surface was read, so a stale claim is recognized.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Fan-In Ceiling](PRINCIPLES.md#architecture-fan-in-ceiling)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Mark the Invariant Unheld
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for marking an invariant that nothing enforces as unheld, together with every derivation that rests on it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Stated Invariant](PRINCIPLES.md#architecture-stated-invariant)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -14771,6 +18048,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Name the Objector
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for naming, for each stated invariant, the party or check that objects when it stops holding.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Stated Invariant](PRINCIPLES.md#architecture-stated-invariant)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### One-Way Index Check
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which an index is checked in one direction only, so an entry with no file or a file with no entry goes unnoticed.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Two-Direction Index](PRINCIPLES.md#architecture-two-direction-index)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Outcome Surface
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -14789,6 +18146,46 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [Operand-Free Outcome Surface](PRINCIPLES.md#architecture-operand-free-outcome-surface)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Overgrown Projection
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a projection grows past the shape its name claims.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Projection Channel](PRINCIPLES.md#architecture-projection-channel)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -14857,6 +18254,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Partition the Surface
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for dividing a surface that too many parties reason about into surfaces with fewer readers each.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Fan-In Ceiling](PRINCIPLES.md#architecture-fan-in-ceiling)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Payload Field
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -14875,6 +18312,326 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [Carrier and Payload Split](PRINCIPLES.md#architecture-carrier-and-payload-split)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Per-Consumer Liveness
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which each consumer computes liveness separately, so two consumers of one question reach different answers.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [One-Sided Liveness](PRINCIPLES.md#architecture-one-sided-liveness)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Preferred Party Count
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a party count is chosen as a preference and work is allocated to fit it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Derived Party Count](PRINCIPLES.md#architecture-derived-party-count)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Presence as Liveness
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a process that is present is treated as alive.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [One-Sided Liveness](PRINCIPLES.md#architecture-one-sided-liveness)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Prose-Parsing Mechanism
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a mechanism interprets prose to compute a fact.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Carrier and Payload Split](PRINCIPLES.md#architecture-carrier-and-payload-split)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Publish the Read Population
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for publishing what a run read, so a later question can tell whether the run's result answers it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Write Scope and Read Population](PRINCIPLES.md#architecture-write-scope-and-read-population)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Re-Derive Every Copy on Change
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for regenerating every copy of an invariant from its source whenever the source changes.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Contradicted Invariant](PRINCIPLES.md#architecture-contradicted-invariant)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Read Before Declare
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a run reads the set of live runs before writing its own entry, so two starters each see an empty set.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Declare-Before-Read Order](PRINCIPLES.md#architecture-declare-before-read-order)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Read Each Period
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for checking, for each copy, whether the edge that produced it runs again or ran once against an earlier state.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Period-Decided Disposition](PRINCIPLES.md#architecture-period-decided-disposition)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -14989,6 +18746,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Refresh the Projection in the Same Change
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for updating a projection in the same change that moves the fact it summarizes.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Projection Channel](PRINCIPLES.md#architecture-projection-channel)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Refuse and Name the Cycle
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for refusing to collapse a set of copies with no distinguished member and reporting the cycle by name.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Cyclic Tiebreak](PRINCIPLES.md#architecture-cyclic-tiebreak)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Remembering Checker
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a checker keeps its own prior output to judge a change.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [State-Arity Limit](PRINCIPLES.md#architecture-state-arity-limit)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Removal Authority
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -15007,6 +18884,166 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [Independent Lifetime Axes](PRINCIPLES.md#architecture-independent-lifetime-axes)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Remove the Restating Payload
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for deleting payload text that restates what its carrier already answers.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Carrier and Payload Split](PRINCIPLES.md#architecture-carrier-and-payload-split)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Repair the Source
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for fixing a defect at the source every copy derives from instead of in the copies.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Period-Decided Disposition](PRINCIPLES.md#architecture-period-decided-disposition)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Restating Payload
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a payload restates a question its carrier already answers.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Carrier and Payload Split](PRINCIPLES.md#architecture-carrier-and-payload-split)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Retain the Prior State in the Spanning Layer
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for keeping the earlier state of content in the layer that spans both states, so a change rule can compare them.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [State-Arity Limit](PRINCIPLES.md#architecture-state-arity-limit)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -15081,6 +19118,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Settle Collisions by Announcement
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for resolving concurrent work on a jointly authored surface by each party announcing its claim before acting.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Operand-Free Outcome Surface](PRINCIPLES.md#architecture-operand-free-outcome-surface)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Shared Invocation
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -15124,6 +19201,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Single-State Change Check
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a rule about how content changes is enforced by a check that reads one state.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [State-Arity Limit](PRINCIPLES.md#architecture-state-arity-limit)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Single-Word Lifetime
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a lifetime is declared as one word, so a reader infers its other two axes.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Independent Lifetime Axes](PRINCIPLES.md#architecture-independent-lifetime-axes)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Stall Bound
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -15133,12 +19290,92 @@ Not answered
 Details
 
 Definition
-A rule or precondition that a record satisfied by judgement and left unacknowledged past a declared number of rounds is a finding, a bound on its lifetime rather than its size.
+A rule or precondition that a record satisfied by judgment and left unacknowledged past a declared number of rounds is a finding, a bound on its lifetime rather than its size.
 
 How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Stream Narrowed Verdicts
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for returning the verdicts of a narrowed run to its caller instead of writing them as a report.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Single Aggregate](PRINCIPLES.md#architecture-single-aggregate), [Invocation-Keyed Report](PRINCIPLES.md#architecture-invocation-keyed-report)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Test Coverage First
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for checking whether a live run's scope already covers a question before starting a new run.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Read-Time Join](PRINCIPLES.md#architecture-read-time-join)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -15207,6 +19444,206 @@ Not answered
 Shape it refuses
 Not answered
 
+### Treat the Statements as One Unit
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for treating every statement of one invariant as a single unit that one query ranges over.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Contradicted Invariant](PRINCIPLES.md#architecture-contradicted-invariant)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Type the Carrier
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for giving the fields a mechanism reads a resolvable typed form.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Carrier and Payload Split](PRINCIPLES.md#architecture-carrier-and-payload-split)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Unobjected Invariant
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a system relies on a property that nothing would notice losing.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Stated Invariant](PRINCIPLES.md#architecture-stated-invariant)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Unread Prose Mandate
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a field is mandated as free prose while a consumer is assumed to read it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Joinable Mandated Field](PRINCIPLES.md#architecture-joinable-mandated-field)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Unreceived Invariant
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which an invariant is stated in a surface its bound parties never receive.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Stated Invariant](PRINCIPLES.md#architecture-stated-invariant)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Venue
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -15225,6 +19662,126 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Whole-Surface Rewrite
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a shared surface is rewritten whole while a peer is still active on it.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Write Barrier](PRINCIPLES.md#architecture-write-barrier)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Window Second
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for applying a time window to a liveness witness only after the witness is read.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [One-Sided Liveness](PRINCIPLES.md#architecture-one-sided-liveness)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Witness First
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for deciding liveness from a witness the process writes, never from the process being present.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [One-Sided Liveness](PRINCIPLES.md#architecture-one-sided-liveness)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -15271,6 +19828,86 @@ How it is checked
 
 Checked by
 the coordination member's surface, record and declaration rules, [Write Scope and Read Population](PRINCIPLES.md#architecture-write-scope-and-read-population), [Reversible Channel Encoding](PRINCIPLES.md#architecture-reversible-channel-encoding), [Declare-Before-Read Order](PRINCIPLES.md#architecture-declare-before-read-order)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Write the Aggregate Only from a Full Run
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for overwriting an aggregate report only from a run that measured its whole population.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Single Aggregate](PRINCIPLES.md#architecture-single-aggregate), [Narrowed Aggregate](PRINCIPLES.md#architecture-narrowed-aggregate)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Write the Entry Before Reading the Set
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Coordination Surfaces](LEXICON.md#lexicon-category-coordination-surfaces)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for writing a run's own entry before reading the set of live runs, so two starters see each other.
+
+How it is checked
+
+Checked by
+the coordination member's surface, record and declaration rules, [Declare-Before-Read Order](PRINCIPLES.md#architecture-declare-before-read-order)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -15386,6 +20023,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Centralize the Rule
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for gathering every copy of one rule into a single definition that the copies are replaced by.
+
+How it is checked
+
+Checked by
+[Shotgun Surgery](PRINCIPLES.md#architecture-shotgun-surgery), [Stringly Typed Programming](PRINCIPLES.md#architecture-stringly-typed-programming), [Magic Value](PRINCIPLES.md#architecture-magic-value), [Do Not Repeat Yourself (DRY)](PRINCIPLES.md#architecture-duplicate-code), [Convention over Configuration](PRINCIPLES.md#architecture-convention-over-configuration), [Single Source of Truth](PRINCIPLES.md#architecture-single-source-of-truth)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Centralized Runtime Control
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -15456,6 +20133,46 @@ How it is checked
 
 Checked by
 [Encapsulation](PRINCIPLES.md#architecture-encapsulation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Collapse Layers
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for merging layers that only pass calls through, so a simple operation crosses fewer boundaries.
+
+How it is checked
+
+Checked by
+[Middle Man](PRINCIPLES.md#architecture-middle-man), [Over-Abstraction](PRINCIPLES.md#architecture-over-abstraction)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -15791,6 +20508,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Define Module Boundaries
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for declaring which module owns each piece of code and which entry points other modules may use.
+
+How it is checked
+
+Checked by
+[Big Ball of Mud](PRINCIPLES.md#architecture-big-ball-of-mud), [Separation of Concerns](PRINCIPLES.md#architecture-separation-of-concerns), [Modularity](PRINCIPLES.md#architecture-modularity), [Greenfield Development](PRINCIPLES.md#architecture-greenfield-development), [Monolith Architecture](PRINCIPLES.md#architecture-monolith-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Delegation
 
 - Kind: [technique](SCHEMA.md#kind-technique)
@@ -15834,6 +20591,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Encapsulate State
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for making a module's state private and exposing only operations that keep its rules.
+
+How it is checked
+
+Checked by
+[Shared Mutable State](PRINCIPLES.md#architecture-shared-mutable-state), [Feature Envy](PRINCIPLES.md#architecture-feature-envy), [Anemic Domain Model](PRINCIPLES.md#architecture-anemic-domain-model), [Invariant](PRINCIPLES.md#architecture-invariant), [Determinism](PRINCIPLES.md#architecture-determinism), [Encapsulation](PRINCIPLES.md#architecture-encapsulation), [State Isolation](PRINCIPLES.md#architecture-state-isolation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Excessive Fragmentation
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -15852,6 +20649,49 @@ How it is checked
 
 Checked by
 the tension resolution with single-responsibility
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Explicit Dependency
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for declaring what a module needs as parameters or imports instead of reaching it through global state.
+
+Distinct from
+[Explicit Dependencies](LEXICON.md#lexicon-explicit-dependencies): Explicit dependency is the technique of declaring what a module needs, while explicit dependencies is the degree to which a component's needs are visible.
+
+How it is checked
+
+Checked by
+[Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance), [Causal Dependency](PRINCIPLES.md#architecture-causal-dependency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -15943,7 +20783,167 @@ Distinct from
 How it is checked
 
 Checked by
-[Encapsulation](PRINCIPLES.md#architecture-encapsulation)
+[Immutability](PRINCIPLES.md#architecture-immutability), [Encapsulation](PRINCIPLES.md#architecture-encapsulation), [Information Hiding](PRINCIPLES.md#architecture-information-hiding), [Introspection](PRINCIPLES.md#architecture-introspection), [Component-Based Architecture](PRINCIPLES.md#architecture-component-based-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Extract Class
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving a cohesive group of fields and methods out of a class into a new class of their own.
+
+How it is checked
+
+Checked by
+[God Object](PRINCIPLES.md#architecture-god-object), [Divergent Change](PRINCIPLES.md#architecture-divergent-change), [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility), [High Cohesion](PRINCIPLES.md#architecture-high-cohesion)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Extract Function
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving a fragment of a long function into a named function of its own.
+
+How it is checked
+
+Checked by
+[Do Not Repeat Yourself (DRY)](PRINCIPLES.md#architecture-duplicate-code), [Encapsulation](PRINCIPLES.md#architecture-encapsulation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Extract Module
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving one responsibility out of a module into a new module with its own entry point.
+
+How it is checked
+
+Checked by
+[Shotgun Surgery](PRINCIPLES.md#architecture-shotgun-surgery), [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility), [Separation of Concerns](PRINCIPLES.md#architecture-separation-of-concerns), [Do Not Repeat Yourself (DRY)](PRINCIPLES.md#architecture-duplicate-code), [Composability](PRINCIPLES.md#architecture-composability), [Reusability](PRINCIPLES.md#architecture-reusability), [Model Inference](PRINCIPLES.md#architecture-model-inference), [Component-Based Architecture](PRINCIPLES.md#architecture-component-based-architecture), [Package by Feature](PRINCIPLES.md#architecture-package-by-feature)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Hide Delegate
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for adding a method on an object that forwards to the object behind it, so clients stop navigating the chain.
+
+How it is checked
+
+Checked by
+[Message Chain](PRINCIPLES.md#architecture-message-chain)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -15986,7 +20986,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Interchangeability](PRINCIPLES.md#architecture-interchangeability)
+[Composability](PRINCIPLES.md#architecture-composability), [Interchangeability](PRINCIPLES.md#architecture-interchangeability)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -16033,6 +21033,46 @@ How it is checked
 
 Checked by
 [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Independence](PRINCIPLES.md#architecture-independence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Inline Abstraction
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for removing an interface, layer or wrapper that adds no policy and calling its single implementation directly.
+
+How it is checked
+
+Checked by
+[Middle Man](PRINCIPLES.md#architecture-middle-man), [Speculative Generality](PRINCIPLES.md#architecture-speculative-generality), [Over-Abstraction](PRINCIPLES.md#architecture-over-abstraction), [Architecture Astronaut](PRINCIPLES.md#architecture-architecture-astronaut)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -16144,6 +21184,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Introduce Parameter Object
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for replacing a group of parameters that travel together with one named object.
+
+How it is checked
+
+Checked by
+[Boolean Trap](PRINCIPLES.md#architecture-boolean-trap), [Long Parameter List](PRINCIPLES.md#architecture-long-parameter-list), [Do Not Repeat Yourself (DRY)](PRINCIPLES.md#architecture-duplicate-code), [Reusability](PRINCIPLES.md#architecture-reusability)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Invariant Protection
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -16204,7 +21284,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Information Hiding](PRINCIPLES.md#architecture-information-hiding)
+[Information Hiding](PRINCIPLES.md#architecture-information-hiding), [Abstraction](PRINCIPLES.md#architecture-abstraction)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -16248,6 +21328,46 @@ How it is checked
 
 Checked by
 the tension resolution with duplicate-code
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Localize Effect
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for confining a change of global behavior to the scope that needs it.
+
+How it is checked
+
+Checked by
+[Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -16334,6 +21454,46 @@ How it is checked
 
 Checked by
 [Composability](PRINCIPLES.md#architecture-composability)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Move Behavior to Its Owner
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving a method or function to the module that owns the data it reads and writes.
+
+How it is checked
+
+Checked by
+[God Object](PRINCIPLES.md#architecture-god-object), [Shotgun Surgery](PRINCIPLES.md#architecture-shotgun-surgery), [Divergent Change](PRINCIPLES.md#architecture-divergent-change), [Feature Envy](PRINCIPLES.md#architecture-feature-envy), [Message Chain](PRINCIPLES.md#architecture-message-chain), [Utility Dump](PRINCIPLES.md#architecture-utility-dump), [Explicit Boundaries](PRINCIPLES.md#architecture-explicit-boundaries), [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility), [Separation of Concerns](PRINCIPLES.md#architecture-separation-of-concerns), [High Cohesion](PRINCIPLES.md#architecture-high-cohesion), [Layered Architecture](PRINCIPLES.md#architecture-layered-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -16531,6 +21691,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Preserve Only Real Boundaries
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for keeping an abstraction only where it separates parts that change for different reasons.
+
+How it is checked
+
+Checked by
+[Over-Abstraction](PRINCIPLES.md#architecture-over-abstraction)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Product Lines
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -16549,6 +21749,126 @@ How it is checked
 
 Checked by
 [Reusability](PRINCIPLES.md#architecture-reusability)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Restrict Exports
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for narrowing a module's public surface to the operations its consumers need.
+
+How it is checked
+
+Checked by
+[Boundary Leakage](PRINCIPLES.md#architecture-boundary-leakage), [Inappropriate Intimacy](PRINCIPLES.md#architecture-inappropriate-intimacy), [Zombie Code](PRINCIPLES.md#architecture-zombie-code), [Explicit Boundaries](PRINCIPLES.md#architecture-explicit-boundaries), [Encapsulation](PRINCIPLES.md#architecture-encapsulation), [Information Hiding](PRINCIPLES.md#architecture-information-hiding), [Attack Surface Reduction](PRINCIPLES.md#architecture-attack-surface-reduction), [Risk Management](PRINCIPLES.md#architecture-risk-management), [Transaction Boundary](PRINCIPLES.md#architecture-transaction-boundary)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Restrict Global Mutation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for forbidding writes to global objects outside one owning module.
+
+How it is checked
+
+Checked by
+[Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Separate Query from Command
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for splitting an operation that both returns data and changes state into a query and a command.
+
+How it is checked
+
+Checked by
+[Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect), [Controlled Side Effects](PRINCIPLES.md#architecture-controlled-side-effects)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -16724,6 +22044,166 @@ How it is checked
 
 Checked by
 the tension resolution with interchangeability
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split Abstraction
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for dividing an abstraction that grew flags for each caller into abstractions that fit one use each.
+
+How it is checked
+
+Checked by
+[Premature Abstraction](PRINCIPLES.md#architecture-premature-abstraction)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split by Domain
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for dividing a catch-all module into modules named for the domain concepts they serve.
+
+How it is checked
+
+Checked by
+[Utility Dump](PRINCIPLES.md#architecture-utility-dump)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split Method
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for dividing a method that branches on a flag into one method per behavior.
+
+How it is checked
+
+Checked by
+[Boolean Trap](PRINCIPLES.md#architecture-boolean-trap)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split Module
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Modular Design](LEXICON.md#lexicon-category-core-modular-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for dividing a module into modules that each hold one reason to change.
+
+How it is checked
+
+Checked by
+[Big Ball of Mud](PRINCIPLES.md#architecture-big-ball-of-mud), [Divergent Change](PRINCIPLES.md#architecture-divergent-change), [Directed Acyclic Graph (DAG)](PRINCIPLES.md#architecture-directed-acyclic-graph), [High Cohesion](PRINCIPLES.md#architecture-high-cohesion), [Modularity](PRINCIPLES.md#architecture-modularity)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -17098,7 +22578,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Static Analysis](PRINCIPLES.md#architecture-static-analysis), [Policy as Code](PRINCIPLES.md#architecture-policy-as-code)
+[Static Analysis](PRINCIPLES.md#architecture-static-analysis), [Architecture Review](PRINCIPLES.md#architecture-architecture-review), [Language-Oriented Programming](PRINCIPLES.md#architecture-language-oriented-programming), [Policy as Code](PRINCIPLES.md#architecture-policy-as-code), [Continuous Compliance](PRINCIPLES.md#architecture-continuous-compliance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -17180,6 +22660,9 @@ Repetitive, mandatory scaffolding code that adds ceremony without domain value.
 
 Referenced by
 [Abstract Factory Pattern](PRINCIPLES.md#architecture-abstract-factory-pattern), [Builder Pattern](PRINCIPLES.md#architecture-builder-pattern), [Ports and Adapters Architecture](PRINCIPLES.md#architecture-ports-and-adapters-architecture), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture)
+
+Distinct from
+[Initial Complexity](LEXICON.md#lexicon-initial-complexity): Boilerplate is scaffolding written again in every use, while initial complexity is the structure of ports and adapters paid once before the first feature.
 
 How it is checked
 
@@ -17316,7 +22799,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design), [Code as Data](PRINCIPLES.md#architecture-code-as-data)
+[Contract-First Design](PRINCIPLES.md#architecture-contract-first-design), [Property-Based Testing](PRINCIPLES.md#architecture-property-based-testing), [Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design), [Code as Data](PRINCIPLES.md#architecture-code-as-data), [Model-Driven Architecture](PRINCIPLES.md#architecture-model-driven-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -17402,7 +22885,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Inversion of Control (IoC)](PRINCIPLES.md#architecture-inversion-of-control), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
+[Singleton Pattern](PRINCIPLES.md#architecture-singleton-pattern), [Inversion of Control (IoC)](PRINCIPLES.md#architecture-inversion-of-control), [Dependency Injection](PRINCIPLES.md#architecture-dependency-injection)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -17536,9 +23019,6 @@ Details
 
 Definition
 Explicit, enforceable agreements specifying the inputs, outputs, and guarantees between components.
-
-Aliases
-Contract
 
 Referenced by
 [Interoperability](PRINCIPLES.md#architecture-interoperability), [Decentralization](PRINCIPLES.md#architecture-decentralization), [Specification-Based Testing](PRINCIPLES.md#architecture-specification-based-testing), [Impact Analysis](PRINCIPLES.md#architecture-impact-analysis), [Capability Declaration](PRINCIPLES.md#architecture-capability-declaration), [Extension Points](PRINCIPLES.md#architecture-extension-points), [Type Safety](PRINCIPLES.md#architecture-type-safety), [Component-Based Architecture](PRINCIPLES.md#architecture-component-based-architecture)
@@ -18189,52 +23669,6 @@ Not answered
 Shape it refuses
 Not answered
 
-### Hidden Dependencies
-
-- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
-- Category: [Core Vocabulary](LEXICON.md#lexicon-category-core-vocabulary)
-- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
-
-Details
-
-Definition
-Dependencies a component relies on but does not declare in its interface, surfacing only at runtime.
-
-Referenced by
-[Dependency Graph](PRINCIPLES.md#architecture-dependency-graph), [Testability](PRINCIPLES.md#architecture-testability)
-
-Distinct from
-[Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion): Hidden dependencies are undeclared requirements of one component, while test pyramid inversion is a suite weighted toward slow end-to-end tests.
-
-How it is checked
-
-Checked by
-[Dependency Graph](PRINCIPLES.md#architecture-dependency-graph), [Testability](PRINCIPLES.md#architecture-testability)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
 ### Independent Deployment
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -18467,9 +23901,6 @@ Details
 Definition
 The agreed schema and semantics of messages exchanged between components.
 
-Aliases
-Message Contracts
-
 Referenced by
 [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture), [Message Queue](PRINCIPLES.md#architecture-message-queue), [Integration Events](PRINCIPLES.md#architecture-integration-events), [Asynchronous Communication](PRINCIPLES.md#architecture-asynchronous-communication)
 
@@ -18562,7 +23993,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Model Evaluation](PRINCIPLES.md#architecture-model-evaluation), [Observability](PRINCIPLES.md#architecture-observability), [Monitoring](PRINCIPLES.md#architecture-monitoring), [Elasticity](PRINCIPLES.md#architecture-elasticity), [Bottleneck Analysis](PRINCIPLES.md#architecture-bottleneck-analysis), [Auto-Scaling](PRINCIPLES.md#architecture-auto-scaling)
+[Unobservable Failure](PRINCIPLES.md#architecture-unobservable-failure), [Model Evaluation](PRINCIPLES.md#architecture-model-evaluation), [Observability](PRINCIPLES.md#architecture-observability), [Monitoring](PRINCIPLES.md#architecture-monitoring), [Elasticity](PRINCIPLES.md#architecture-elasticity), [Bottleneck Analysis](PRINCIPLES.md#architecture-bottleneck-analysis), [Auto-Scaling](PRINCIPLES.md#architecture-auto-scaling)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -18606,6 +24037,86 @@ How it is checked
 
 Checked by
 [Model Drift Monitoring](PRINCIPLES.md#architecture-model-drift-monitoring)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Name Constant
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Vocabulary](LEXICON.md#lexicon-category-core-vocabulary)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for replacing an unexplained literal with a named constant that states its meaning.
+
+How it is checked
+
+Checked by
+[Magic Value](PRINCIPLES.md#architecture-magic-value)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Name the Concept
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Vocabulary](LEXICON.md#lexicon-category-core-vocabulary)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for giving a recurring group of values or steps a name in the domain language and one home in the code.
+
+How it is checked
+
+Checked by
+[Data Clumps](PRINCIPLES.md#architecture-data-clumps), [Boolean Trap](PRINCIPLES.md#architecture-boolean-trap), [Magic Value](PRINCIPLES.md#architecture-magic-value), [Pattern Cargo Cult](PRINCIPLES.md#architecture-pattern-cargo-cult), [Utility Dump](PRINCIPLES.md#architecture-utility-dump), [Semantic Contracts](PRINCIPLES.md#architecture-semantic-contracts), [Domain Events](PRINCIPLES.md#architecture-domain-events), [Normalization](PRINCIPLES.md#architecture-normalization), [Semantic Consistency](PRINCIPLES.md#architecture-semantic-consistency), [Ubiquitous Language](PRINCIPLES.md#architecture-ubiquitous-language), [Intent-Revealing Interface](PRINCIPLES.md#architecture-intent-revealing-interface), [Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -18774,9 +24285,6 @@ Details
 Definition
 A declared set of rules governing what actions are permitted or denied within a system.
 
-Aliases
-Policies
-
 Referenced by
 [Control Plane](PRINCIPLES.md#architecture-control-plane), [Authorization](PRINCIPLES.md#architecture-authorization), [Governance](PRINCIPLES.md#architecture-governance)
 
@@ -18784,92 +24292,6 @@ How it is checked
 
 Checked by
 [Control Plane](PRINCIPLES.md#architecture-control-plane), [Authorization](PRINCIPLES.md#architecture-authorization), [Governance](PRINCIPLES.md#architecture-governance)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### Ports and Adapters
-
-- Kind: [pattern](SCHEMA.md#kind-pattern)
-- Category: [Core Vocabulary](LEXICON.md#lexicon-category-core-vocabulary)
-- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
-
-Details
-
-Definition
-An architecture isolating core logic behind ports, with adapters binding it to external technologies.
-
-Referenced by
-[Replaceability](PRINCIPLES.md#architecture-replaceability), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
-
-How it is checked
-
-Checked by
-[Replaceability](PRINCIPLES.md#architecture-replaceability), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Hexagonal Architecture](PRINCIPLES.md#architecture-hexagonal-architecture)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### Pub/Sub
-
-- Kind: [pattern](SCHEMA.md#kind-pattern)
-- Category: [Core Vocabulary](LEXICON.md#lexicon-category-core-vocabulary)
-- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
-
-Details
-
-Definition
-A messaging pattern in which publishers emit messages to topics and subscribers receive them without direct coupling.
-
-Referenced by
-[Message Broker](PRINCIPLES.md#architecture-message-broker), [Event Bus](PRINCIPLES.md#architecture-event-bus)
-
-How it is checked
-
-Checked by
-[Message Broker](PRINCIPLES.md#architecture-message-broker), [Event Bus](PRINCIPLES.md#architecture-event-bus)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -18959,6 +24381,46 @@ How it is checked
 
 Checked by
 [Resilience](PRINCIPLES.md#architecture-resilience), [Rollback](PRINCIPLES.md#architecture-rollback)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Replace Boolean with Enum
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Core Vocabulary](LEXICON.md#lexicon-category-core-vocabulary)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for replacing a boolean parameter or flag with a closed set of named values.
+
+How it is checked
+
+Checked by
+[Primitive Obsession](PRINCIPLES.md#architecture-primitive-obsession), [Stringly Typed Programming](PRINCIPLES.md#architecture-stringly-typed-programming), [Boolean Trap](PRINCIPLES.md#architecture-boolean-trap), [Intent-Revealing Interface](PRINCIPLES.md#architecture-intent-revealing-interface)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -19251,49 +24713,6 @@ Not answered
 Shape it refuses
 Not answered
 
-### Saga
-
-- Kind: [pattern](SCHEMA.md#kind-pattern)
-- Category: [Core Vocabulary](LEXICON.md#lexicon-category-core-vocabulary)
-- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
-
-Details
-
-Definition
-A pattern that manages a distributed transaction as a sequence of local transactions, each with a compensating action for rollback.
-
-Referenced by
-[Orchestration](PRINCIPLES.md#architecture-orchestration), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture)
-
-How it is checked
-
-Checked by
-[Orchestration](PRINCIPLES.md#architecture-orchestration), [Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
 ### Schema
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -19369,7 +24788,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Fail Fast](PRINCIPLES.md#architecture-fail-fast), [Logging](PRINCIPLES.md#architecture-logging), [Alerting](PRINCIPLES.md#architecture-alerting)
+[Fail Fast](PRINCIPLES.md#architecture-fail-fast), [Error Handling](PRINCIPLES.md#architecture-error-handling), [Logging](PRINCIPLES.md#architecture-logging), [Alerting](PRINCIPLES.md#architecture-alerting)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -19967,6 +25386,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Component Tests
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for testing one deployable component through its public interface with its dependencies replaced.
+
+How it is checked
+
+Checked by
+[Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion), [Validation](PRINCIPLES.md#architecture-validation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Continuous Updates
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -20185,6 +25644,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Encapsulate Validation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for placing a value's validation in the type that holds it, so every instance is valid.
+
+How it is checked
+
+Checked by
+[Primitive Obsession](PRINCIPLES.md#architecture-primitive-obsession)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Encapsulation Extremes
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -20289,6 +25788,46 @@ How it is checked
 
 Checked by
 [Property-Based Testing](PRINCIPLES.md#architecture-property-based-testing)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Fake at the Boundary
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for replacing an external dependency in tests with a working in-memory implementation of its port.
+
+How it is checked
+
+Checked by
+[Mock Mirage](PRINCIPLES.md#architecture-mock-mirage), [Flaky Test Normalization](PRINCIPLES.md#architecture-flaky-test-normalization), [Repeatability](PRINCIPLES.md#architecture-repeatability)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -20549,7 +26088,47 @@ Referenced by
 How it is checked
 
 Checked by
-[Determinism](PRINCIPLES.md#architecture-determinism)
+[Determinism](PRINCIPLES.md#architecture-determinism), [Referential Transparency](PRINCIPLES.md#architecture-referential-transparency), [Testability](PRINCIPLES.md#architecture-testability)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Ignored Analyzer Findings
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A defect in which static analysis findings are left unresolved until the analyzer's output stops being read.
+
+How it is checked
+
+Checked by
+[Static Analysis](PRINCIPLES.md#architecture-static-analysis)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -20664,6 +26243,166 @@ Not answered
 Shape it refuses
 Not answered
 
+### Inject Clock and Randomness
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for supplying time and random values through parameters, so the code under test runs the same way every time.
+
+How it is checked
+
+Checked by
+[Flaky Test Normalization](PRINCIPLES.md#architecture-flaky-test-normalization), [Determinism](PRINCIPLES.md#architecture-determinism)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Invariant Check
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for checking after each change that the rules a state must always satisfy still hold.
+
+How it is checked
+
+Checked by
+[Silent Data Corruption](PRINCIPLES.md#architecture-silent-data-corruption), [Design by Contract](PRINCIPLES.md#architecture-design-by-contract), [Postconditions](PRINCIPLES.md#architecture-postconditions), [Robustness Principle](PRINCIPLES.md#architecture-robustness-principle), [ACID](PRINCIPLES.md#architecture-acid), [Consistency](PRINCIPLES.md#architecture-consistency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Isolate Test State
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for giving each test its own data and resources, so tests pass in any order.
+
+How it is checked
+
+Checked by
+[Flaky Test Normalization](PRINCIPLES.md#architecture-flaky-test-normalization)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Make Effects Explicit
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for moving input, output and mutation to named boundary operations, so the code between them stays pure.
+
+How it is checked
+
+Checked by
+[Hidden Side Effect](PRINCIPLES.md#architecture-hidden-side-effect), [Testability](PRINCIPLES.md#architecture-testability), [Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise), [Controlled Side Effects](PRINCIPLES.md#architecture-controlled-side-effects)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Mathematical Assurance
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -20725,6 +26464,166 @@ How it is checked
 
 Checked by
 [Pure Functions](PRINCIPLES.md#architecture-pure-functions)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Pass Context Explicitly
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for passing request, user or tenant context as a parameter or scoped object instead of reading it from global state.
+
+How it is checked
+
+Checked by
+[Ambient Context](PRINCIPLES.md#architecture-ambient-context), [Reusability](PRINCIPLES.md#architecture-reusability), [Logging](PRINCIPLES.md#architecture-logging), [Stateless Processing](PRINCIPLES.md#architecture-stateless-processing), [State Isolation](PRINCIPLES.md#architecture-state-isolation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Pin Versions
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for recording exact versions of dependencies and tools, so every build uses the same inputs.
+
+How it is checked
+
+Checked by
+[Reproducibility](PRINCIPLES.md#architecture-reproducibility)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Postcondition Check
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for checking at the end of an operation that the result and state it promises hold.
+
+How it is checked
+
+Checked by
+[Implicit Contract](PRINCIPLES.md#architecture-implicit-contract), [Design by Contract](PRINCIPLES.md#architecture-design-by-contract)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Precondition Check
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for checking at the start of an operation that the state and arguments it requires hold.
+
+How it is checked
+
+Checked by
+[Implicit Contract](PRINCIPLES.md#architecture-implicit-contract), [Temporal Coupling](PRINCIPLES.md#architecture-temporal-coupling), [Exception Control Flow](PRINCIPLES.md#architecture-exception-control-flow), [Manual Runbook Dependency](PRINCIPLES.md#architecture-manual-runbook-dependency), [Design by Contract](PRINCIPLES.md#architecture-design-by-contract), [Preconditions](PRINCIPLES.md#architecture-preconditions), [Defensive Programming](PRINCIPLES.md#architecture-defensive-programming), [Fail Fast](PRINCIPLES.md#architecture-fail-fast)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -21197,7 +27096,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Referential Transparency](PRINCIPLES.md#architecture-referential-transparency)
+[Referential Transparency](PRINCIPLES.md#architecture-referential-transparency), [Pure Functions](PRINCIPLES.md#architecture-pure-functions)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -21395,6 +27294,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Test Observable Behavior
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for asserting on a unit's outputs and effects instead of on the internal calls it makes.
+
+How it is checked
+
+Checked by
+[Mock Mirage](PRINCIPLES.md#architecture-mock-mirage)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Tests
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -21504,7 +27443,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Static Analysis](PRINCIPLES.md#architecture-static-analysis)
+[Static Analysis](PRINCIPLES.md#architecture-static-analysis), [Code as Data](PRINCIPLES.md#architecture-code-as-data), [Metaprogramming](PRINCIPLES.md#architecture-metaprogramming), [Runtime Code Generation](PRINCIPLES.md#architecture-runtime-code-generation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -21573,6 +27512,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Unit Tests
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for testing one unit of behavior in isolation, fast enough to run on every change.
+
+How it is checked
+
+Checked by
+[Test Pyramid Inversion](PRINCIPLES.md#architecture-test-pyramid-inversion), [Correctness](PRINCIPLES.md#architecture-correctness), [Verification](PRINCIPLES.md#architecture-verification), [Impact Analysis](PRINCIPLES.md#architecture-impact-analysis), [Metaprogramming](PRINCIPLES.md#architecture-metaprogramming)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Untested Implementation
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -21591,6 +27570,86 @@ How it is checked
 
 Checked by
 [Verification](PRINCIPLES.md#architecture-verification)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Validate as a Group
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for validating fields that depend on each other together, in the object that groups them.
+
+How it is checked
+
+Checked by
+[Data Clumps](PRINCIPLES.md#architecture-data-clumps)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Validate at the Boundary
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Correctness / Determinism / Verification](LEXICON.md#lexicon-category-correctness-determinism-verification)
+- Layer: [Computation Core](SCHEMA.md#layer-computation-core)
+
+Details
+
+Definition
+A technique for rejecting malformed input where it enters the system, so the core receives only valid values.
+
+How it is checked
+
+Checked by
+[Silent Data Corruption](PRINCIPLES.md#architecture-silent-data-corruption), [Invariant](PRINCIPLES.md#architecture-invariant), [Validation](PRINCIPLES.md#architecture-validation), [Configuration Externalization](PRINCIPLES.md#architecture-configuration-externalization), [Domain-Specific Language (DSL)](PRINCIPLES.md#architecture-domain-specific-language)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -21853,6 +27912,46 @@ How it is checked
 
 Checked by
 [Factory Method Pattern](PRINCIPLES.md#architecture-factory-method-pattern)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Constructor-Valid State
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Creational Patterns](LEXICON.md#lexicon-category-creational-patterns)
+- Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
+
+Details
+
+Definition
+A technique for having a constructor or factory accept only arguments that produce a valid object.
+
+How it is checked
+
+Checked by
+[Temporal Coupling](PRINCIPLES.md#architecture-temporal-coupling)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -22153,7 +28252,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Singleton Pattern](PRINCIPLES.md#architecture-singleton-pattern)
+[Singleton Pattern](PRINCIPLES.md#architecture-singleton-pattern), [State Isolation](PRINCIPLES.md#architecture-state-isolation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -22326,6 +28425,46 @@ How it is checked
 
 Checked by
 [Abstract Factory Pattern](PRINCIPLES.md#architecture-abstract-factory-pattern)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Repeated Expensive Setup
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Creational Patterns](LEXICON.md#lexicon-category-creational-patterns)
+- Layer: [Design Patterns Core](SCHEMA.md#layer-design-patterns-core)
+
+Details
+
+Definition
+A defect in which each new object repeats a costly setup that copying a prepared instance would avoid.
+
+How it is checked
+
+Checked by
+[Prototype Pattern](PRINCIPLES.md#architecture-prototype-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -22613,6 +28752,46 @@ Not answered
 
 Every term in this category is listed as one record, with its kind, its definition and its aliases, the principles whose relations name it, the principle or contract that carries the same name where one exists, and the layer its category belongs to. A tag category also gives each term an example, which is the file the tag places or the rename from a refused word onto a covering tag.
 
+### Add Aggregate Invariant
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A technique for enforcing a rule across related entities inside the aggregate that owns them.
+
+How it is checked
+
+Checked by
+[Anemic Domain Model](PRINCIPLES.md#architecture-anemic-domain-model), [Aggregate](PRINCIPLES.md#architecture-aggregate)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Aggregate Size
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -22656,7 +28835,7 @@ Not answered
 Shape it refuses
 Not answered
 
-### Anemic Model
+### Anemic Transaction Script
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
 - Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
@@ -22665,15 +28844,15 @@ Not answered
 Details
 
 Definition
-A domain model holding only data with no behavior, pushing all logic into separate procedures.
+Implementing business logic as procedural scripts over data-only objects, with no rich domain model.
 
 Referenced by
-[Domain Model](PRINCIPLES.md#architecture-domain-model)
+[Domain-Driven Design (DDD)](PRINCIPLES.md#architecture-domain-driven-design)
 
 How it is checked
 
 Checked by
-[Domain Model](PRINCIPLES.md#architecture-domain-model)
+[Domain-Driven Design (DDD)](PRINCIPLES.md#architecture-domain-driven-design)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -22699,7 +28878,7 @@ Not answered
 Shape it refuses
 Not answered
 
-### Anemic Transaction Script
+### Attribute-Compared Identity
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
 - Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
@@ -22708,15 +28887,12 @@ Not answered
 Details
 
 Definition
-Implementing business logic as procedural scripts over data-only objects, with no rich domain model.
-
-Referenced by
-[Domain-Driven Design (DDD)](PRINCIPLES.md#architecture-domain-driven-design)
+A defect in which two entities are judged to be the same by comparing their attributes instead of their identity.
 
 How it is checked
 
 Checked by
-[Domain-Driven Design (DDD)](PRINCIPLES.md#architecture-domain-driven-design)
+[Entity](PRINCIPLES.md#architecture-entity)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -23043,6 +29219,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Extract Domain Model
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A technique for turning procedural steps over data into domain types that hold their own rules.
+
+How it is checked
+
+Checked by
+[Transaction Script Sprawl](PRINCIPLES.md#architecture-transaction-script-sprawl), [Domain-Driven Design (DDD)](PRINCIPLES.md#architecture-domain-driven-design)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Extract Query Service
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A technique for moving read-only, use-case-specific queries out of a repository into a query service.
+
+How it is checked
+
+Checked by
+[Repository Dump](PRINCIPLES.md#architecture-repository-dump)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Extract Use Case
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A technique for moving one business operation into an application service that coordinates the domain and its ports.
+
+How it is checked
+
+Checked by
+[Feature Envy](PRINCIPLES.md#architecture-feature-envy), [Transaction Script Sprawl](PRINCIPLES.md#architecture-transaction-script-sprawl), [Fat Controller](PRINCIPLES.md#architecture-fat-controller)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Identity-Based Equality
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -23261,6 +29557,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Map to Domain Model
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A technique for translating external or persistence data into domain types at the boundary.
+
+How it is checked
+
+Checked by
+[Fat Controller](PRINCIPLES.md#architecture-fat-controller), [Framework Leakage](PRINCIPLES.md#architecture-framework-leakage)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Move Logic to the Domain
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A technique for moving business rules out of controllers, services and scripts into the domain objects they govern.
+
+How it is checked
+
+Checked by
+[Feature Envy](PRINCIPLES.md#architecture-feature-envy), [Anemic Domain Model](PRINCIPLES.md#architecture-anemic-domain-model), [Transaction Script Sprawl](PRINCIPLES.md#architecture-transaction-script-sprawl), [Fat Controller](PRINCIPLES.md#architecture-fat-controller), [Repository Dump](PRINCIPLES.md#architecture-repository-dump), [Domain Model](PRINCIPLES.md#architecture-domain-model), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Object Count
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -23322,6 +29698,46 @@ How it is checked
 
 Checked by
 the tension resolution with domain-model
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Reachable Invalid State
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A defect in which a domain object can be put into a state that breaks its own rules.
+
+How it is checked
+
+Checked by
+[Invariant](PRINCIPLES.md#architecture-invariant), [Consistency](PRINCIPLES.md#architecture-consistency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -23583,6 +29999,86 @@ How it is checked
 
 Checked by
 the tension resolution with domain-driven-design
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split Bounded Context
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A technique for dividing a model that serves several meanings into contexts that each own one meaning of their terms.
+
+How it is checked
+
+Checked by
+[Distributed Monolith](PRINCIPLES.md#architecture-distributed-monolith), [Domain-Driven Design (DDD)](PRINCIPLES.md#architecture-domain-driven-design), [Bounded Context](PRINCIPLES.md#architecture-bounded-context), [Semantic Contracts](PRINCIPLES.md#architecture-semantic-contracts), [Single Responsibility Principle (SRP)](PRINCIPLES.md#architecture-single-responsibility), [Independence](PRINCIPLES.md#architecture-independence), [Autonomy](PRINCIPLES.md#architecture-autonomy), [Semantic Consistency](PRINCIPLES.md#architecture-semantic-consistency), [Microservices](PRINCIPLES.md#architecture-microservices)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split Repository
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Domain Architecture](LEXICON.md#lexicon-category-domain-architecture)
+- Layer: [Domain Modeling](SCHEMA.md#layer-domain-modeling)
+
+Details
+
+Definition
+A technique for reducing a repository to persistence of one aggregate and moving everything else out of it.
+
+How it is checked
+
+Checked by
+[Repository Dump](PRINCIPLES.md#architecture-repository-dump)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -25411,7 +31907,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Retry Pattern](PRINCIPLES.md#architecture-retry-pattern)
+[Retry Storm](PRINCIPLES.md#architecture-retry-storm), [Retry Pattern](PRINCIPLES.md#architecture-retry-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -25455,6 +31951,86 @@ How it is checked
 
 Checked by
 [Bulkhead Pattern](PRINCIPLES.md#architecture-bulkhead-pattern)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Bounded Queue
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for giving a queue a fixed capacity, so producers are slowed or refused instead of exhausting memory.
+
+How it is checked
+
+Checked by
+[Missing Backpressure](PRINCIPLES.md#architecture-missing-backpressure), [Backpressure](PRINCIPLES.md#architecture-backpressure)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Bounded Retry
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for retrying a failed call a limited number of times with growing delays before giving up.
+
+How it is checked
+
+Checked by
+[Retry Storm](PRINCIPLES.md#architecture-retry-storm), [Fault Tolerance](PRINCIPLES.md#architecture-fault-tolerance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -25541,6 +32117,46 @@ How it is checked
 
 Checked by
 [Resilience](PRINCIPLES.md#architecture-resilience)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Cancellation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for letting a caller stop work it no longer needs, releasing the resources that work holds.
+
+How it is checked
+
+Checked by
+[Timeout Omission](PRINCIPLES.md#architecture-timeout-omission)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -25781,6 +32397,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Deadline Propagation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for passing the time left for a request to every call it makes, so downstream work stops when the caller has given up.
+
+How it is checked
+
+Checked by
+[Timeout Omission](PRINCIPLES.md#architecture-timeout-omission), [Timeout Pattern](PRINCIPLES.md#architecture-timeout-pattern)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Deny-by-Default Behavior
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -25930,7 +32586,47 @@ Distinct from
 How it is checked
 
 Checked by
-[Error Handling](PRINCIPLES.md#architecture-error-handling)
+[Fail Fast](PRINCIPLES.md#architecture-fail-fast), [Error Handling](PRINCIPLES.md#architecture-error-handling)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Fail Fast or Fall Back
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for deciding per failure whether to stop with an error at once or to continue on a declared fallback.
+
+How it is checked
+
+Checked by
+[Timeout Omission](PRINCIPLES.md#architecture-timeout-omission), [Log-as-Control-Flow](PRINCIPLES.md#architecture-log-as-control-flow), [Fail Fast](PRINCIPLES.md#architecture-fail-fast), [Fail Safe](PRINCIPLES.md#architecture-fail-safe)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -26059,7 +32755,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Error Boundaries](PRINCIPLES.md#architecture-error-boundaries)
+[Resilience](PRINCIPLES.md#architecture-resilience), [Error Boundaries](PRINCIPLES.md#architecture-error-boundaries), [Circuit Breaker Pattern](PRINCIPLES.md#architecture-circuit-breaker-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -26257,6 +32953,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Idempotency Key
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for tagging each request with a unique key, so a repeated request is recognized and applied once.
+
+How it is checked
+
+Checked by
+[Retry Storm](PRINCIPLES.md#architecture-retry-storm), [Retry Pattern](PRINCIPLES.md#architecture-retry-pattern), [Idempotency](PRINCIPLES.md#architecture-idempotency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Introduce Typed Result
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for returning success or a typed error as a value, so callers handle failure through the type system.
+
+How it is checked
+
+Checked by
+[Inconsistent Error Model](PRINCIPLES.md#architecture-inconsistent-error-model), [Exception Control Flow](PRINCIPLES.md#architecture-exception-control-flow), [Null Semantics Drift](PRINCIPLES.md#architecture-null-semantics-drift), [Log-as-Control-Flow](PRINCIPLES.md#architecture-log-as-control-flow), [Postconditions](PRINCIPLES.md#architecture-postconditions), [Error Handling](PRINCIPLES.md#architecture-error-handling)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Jitter
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for adding a random offset to retry delays, so clients that failed together do not retry together.
+
+How it is checked
+
+Checked by
+[Retry Storm](PRINCIPLES.md#architecture-retry-storm)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Load Amplification
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -26275,6 +33091,46 @@ How it is checked
 
 Checked by
 the tension resolution with retry-pattern
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Load Shedding
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for refusing part of the incoming work when load passes capacity, so the work already accepted completes.
+
+How it is checked
+
+Checked by
+[Missing Backpressure](PRINCIPLES.md#architecture-missing-backpressure)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -26360,7 +33216,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Retry Pattern](PRINCIPLES.md#architecture-retry-pattern)
+[Event-Driven Architecture](PRINCIPLES.md#architecture-event-driven-architecture), [Retry Pattern](PRINCIPLES.md#architecture-retry-pattern), [Idempotency](PRINCIPLES.md#architecture-idempotency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -26991,6 +33847,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Translate Errors at the Boundary
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Error Handling / Resilience](LEXICON.md#lexicon-category-error-handling-resilience)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for converting vendor and infrastructure errors into the core's own error types where they enter.
+
+How it is checked
+
+Checked by
+[Vendor Lock-In Leakage](PRINCIPLES.md#architecture-vendor-lock-in-leakage)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Trusting Invalid Inputs
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -27008,7 +33904,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Defensive Programming](PRINCIPLES.md#architecture-defensive-programming)
+[Design by Contract](PRINCIPLES.md#architecture-design-by-contract), [Preconditions](PRINCIPLES.md#architecture-preconditions), [Defensive Programming](PRINCIPLES.md#architecture-defensive-programming)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -27054,7 +33950,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Circuit Breaker Pattern](PRINCIPLES.md#architecture-circuit-breaker-pattern)
+[Retry Pattern](PRINCIPLES.md#architecture-retry-pattern), [Circuit Breaker Pattern](PRINCIPLES.md#architecture-circuit-breaker-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -27397,55 +34293,12 @@ Definition
 Separating operations that change state from those that return data, so each method has a single purpose.
 
 Referenced by
-[CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
+[Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
 
 How it is checked
 
 Checked by
-[CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### Compensating Transactions
-
-- Kind: [technique](SCHEMA.md#kind-technique)
-- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
-- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
-
-Details
-
-Definition
-Undoing a completed step's effects with an offsetting action when a later step in a distributed workflow fails.
-
-Referenced by
-[Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
-
-How it is checked
-
-Checked by
-[Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
+[Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -27875,7 +34728,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Publish/Subscribe Pattern](PRINCIPLES.md#architecture-publish-subscribe-pattern)
+[Publish/Subscribe Pattern](PRINCIPLES.md#architecture-publish-subscribe-pattern), [Message Broker](PRINCIPLES.md#architecture-message-broker)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -27961,7 +34814,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Idempotent Consumer](PRINCIPLES.md#architecture-idempotent-consumer)
+[Idempotent Consumer](PRINCIPLES.md#architecture-idempotent-consumer), [Idempotency](PRINCIPLES.md#architecture-idempotency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -28434,7 +35287,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
+[Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency), [Saga Pattern](PRINCIPLES.md#architecture-saga-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -28847,6 +35700,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Introduce Async Event
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for replacing a synchronous call that need not complete in the request with an event a consumer handles later.
+
+How it is checked
+
+Checked by
+[Synchronous Chain Trap](PRINCIPLES.md#architecture-synchronous-chain-trap), [Scalability](PRINCIPLES.md#architecture-scalability), [Latency](PRINCIPLES.md#architecture-latency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Irreversible Side Effects
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -28976,49 +35869,6 @@ Not answered
 Shape it refuses
 Not answered
 
-### Message Queue/Topics
-
-- Kind: [mechanism](SCHEMA.md#kind-mechanism)
-- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
-- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
-
-Details
-
-Definition
-The durable queues and topics through which a broker routes messages to consumers.
-
-Referenced by
-[Message Broker](PRINCIPLES.md#architecture-message-broker)
-
-How it is checked
-
-Checked by
-[Message Broker](PRINCIPLES.md#architecture-message-broker)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
 ### Message Relay
 
 - Kind: [mechanism](SCHEMA.md#kind-mechanism)
@@ -29075,6 +35925,86 @@ Keeping only mutable current state with no event record, so past states and chan
 
 Referenced by
 [Event Stream](PRINCIPLES.md#architecture-event-stream)
+
+How it is checked
+
+Checked by
+[Event Stream](PRINCIPLES.md#architecture-event-stream)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Non-Replayable Processing
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which consumed events cannot be read again, so a consumer cannot rebuild its state or recover from a fault.
+
+How it is checked
+
+Checked by
+[Event Stream](PRINCIPLES.md#architecture-event-stream)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Offset Tracking
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for recording how far each consumer has read in a stream, so it resumes there and can replay from earlier.
 
 How it is checked
 
@@ -29237,6 +36167,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Own Data per Service
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for giving each service its own store and letting others reach the data only through its contract.
+
+How it is checked
+
+Checked by
+[Distributed Monolith](PRINCIPLES.md#architecture-distributed-monolith), [Autonomy](PRINCIPLES.md#architecture-autonomy), [Microservices](PRINCIPLES.md#architecture-microservices)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Parallel Message Processing
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -29300,7 +36270,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Message Broker](PRINCIPLES.md#architecture-message-broker)
+[Publish/Subscribe Pattern](PRINCIPLES.md#architecture-publish-subscribe-pattern), [Message Broker](PRINCIPLES.md#architecture-message-broker)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -29464,6 +36434,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Query Projection
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for maintaining a read model shaped for one query, updated from the writes it depends on.
+
+How it is checked
+
+Checked by
+[Synchronous Chain Trap](PRINCIPLES.md#architecture-synchronous-chain-trap), [Chatty Interface](PRINCIPLES.md#architecture-chatty-interface), [N Plus One Query](PRINCIPLES.md#architecture-n-plus-one-query), [Event Sourcing](PRINCIPLES.md#architecture-event-sourcing), [Asynchronous Communication](PRINCIPLES.md#architecture-asynchronous-communication), [Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Read/Write Model Optimization
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -29476,12 +36486,12 @@ Definition
 The ability to shape read and write models independently for their differing access patterns.
 
 Referenced by
-[CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
+[Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
 
 How it is checked
 
 Checked by
-[CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
+[Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -29611,49 +36621,6 @@ How it is checked
 
 Checked by
 [Dead-Letter Queue](PRINCIPLES.md#architecture-dead-letter-queue)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### Retry
-
-- Kind: [technique](SCHEMA.md#kind-technique)
-- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
-- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
-
-Details
-
-Definition
-Re-attempting a failed operation, typically after a delay, to overcome a transient fault.
-
-Referenced by
-[Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency)
-
-How it is checked
-
-Checked by
-[Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -29828,7 +36795,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Autonomy](PRINCIPLES.md#architecture-autonomy)
+[Independence](PRINCIPLES.md#architecture-independence), [Autonomy](PRINCIPLES.md#architecture-autonomy), [Microservices](PRINCIPLES.md#architecture-microservices)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -29872,6 +36839,46 @@ How it is checked
 
 Checked by
 [Competing Consumers](PRINCIPLES.md#architecture-competing-consumers)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Snapshot Compaction
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Event Messaging Async](LEXICON.md#lexicon-category-event-messaging-async)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for periodically storing a snapshot of state derived from a log, so readers replay only the events after it.
+
+How it is checked
+
+Checked by
+[Append-Only Log](PRINCIPLES.md#architecture-append-only-log)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -30299,12 +37306,12 @@ Definition
 Using one shared model for both reads and writes, preventing each from being optimized for its purpose.
 
 Referenced by
-[CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
+[Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
 
 How it is checked
 
 Checked by
-[CQRS](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
+[Command Query Responsibility Segregation (CQRS)](PRINCIPLES.md#architecture-command-query-responsibility-segregation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -34266,6 +41273,46 @@ Not answered
 
 Every term in this category is listed as one record, with its kind, its definition and its aliases, the principles whose relations name it, the principle or contract that carries the same name where one exists, and the layer its category belongs to. A tag category also gives each term an example, which is the file the tag places or the rename from a refused word onto a covering tag.
 
+### Binding Decision Log
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Metadata / Self-Description / Declarative Systems](LEXICON.md#lexicon-category-metadata-self-description-declarative-systems)
+- Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
+
+Details
+
+Definition
+A technique for logging which implementation was bound to each extension point and why.
+
+How it is checked
+
+Checked by
+[Opaque Runtime Behavior](PRINCIPLES.md#architecture-opaque-runtime-behavior)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Client Generation
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -34330,6 +41377,46 @@ How it is checked
 
 Checked by
 the tension resolution with capability-declaration
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare Capability
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Metadata / Self-Description / Declarative Systems](LEXICON.md#lexicon-category-metadata-self-description-declarative-systems)
+- Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
+
+Details
+
+Definition
+A technique for having each component state in metadata what it provides and what it requires.
+
+How it is checked
+
+Checked by
+[Opaque Runtime Behavior](PRINCIPLES.md#architecture-opaque-runtime-behavior), [Predictability](PRINCIPLES.md#architecture-predictability), [Self-Describing Architecture](PRINCIPLES.md#architecture-self-describing-architecture), [Self-Describing API](PRINCIPLES.md#architecture-self-describing-api), [Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design), [Metaprogramming](PRINCIPLES.md#architecture-metaprogramming), [Reflection](PRINCIPLES.md#architecture-reflection), [Introspection](PRINCIPLES.md#architecture-introspection)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -34587,7 +41674,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design)
+[Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design), [Declarative Configuration](PRINCIPLES.md#architecture-declarative-configuration)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -34716,7 +41803,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Self-Describing Architecture](PRINCIPLES.md#architecture-self-describing-architecture)
+[Self-Describing Architecture](PRINCIPLES.md#architecture-self-describing-architecture), [Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -34759,7 +41846,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Capability Declaration](PRINCIPLES.md#architecture-capability-declaration)
+[Capability Declaration](PRINCIPLES.md#architecture-capability-declaration), [Manifest-Based Design](PRINCIPLES.md#architecture-manifest-based-design)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -35258,6 +42345,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Runtime Topology Report
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Metadata / Self-Description / Declarative Systems](LEXICON.md#lexicon-category-metadata-self-description-declarative-systems)
+- Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
+
+Details
+
+Definition
+A technique for having a system report its loaded components and their bindings at startup.
+
+How it is checked
+
+Checked by
+[Opaque Runtime Behavior](PRINCIPLES.md#architecture-opaque-runtime-behavior)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Self-Description
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -35387,9 +42514,89 @@ Not answered
 Shape it refuses
 Not answered
 
+### Unvalidated Metadata
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Metadata / Self-Description / Declarative Systems](LEXICON.md#lexicon-category-metadata-self-description-declarative-systems)
+- Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
+
+Details
+
+Definition
+A defect in which metadata that drives behavior is read without being validated against a schema.
+
+How it is checked
+
+Checked by
+[Metadata-Driven Design](PRINCIPLES.md#architecture-metadata-driven-design)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ## Metaprogramming / Language-Oriented Architecture
 
 Every term in this category is listed as one record, with its kind, its definition and its aliases, the principles whose relations name it, the principle or contract that carries the same name where one exists, and the layer its category belongs to. A tag category also gives each term an example, which is the file the tag places or the rename from a refused word onto a covering tag.
+
+### Ad-Hoc Mini-Language
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Metaprogramming / Language-Oriented Architecture](LEXICON.md#lexicon-category-metaprogramming-language-oriented-architecture)
+- Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
+
+Details
+
+Definition
+A defect in which rules are written in an informal mini-language that has no grammar and no validator.
+
+How it is checked
+
+Checked by
+[Domain-Specific Language (DSL)](PRINCIPLES.md#architecture-domain-specific-language), [Language-Oriented Programming](PRINCIPLES.md#architecture-language-oriented-programming)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
 
 ### AST or Data Representation
 
@@ -35619,6 +42826,46 @@ The requirement that the inputs a computation needs be known at compile time so 
 
 Referenced by
 [Compile-Time Evaluation](PRINCIPLES.md#architecture-compile-time-evaluation)
+
+How it is checked
+
+Checked by
+[Compile-Time Evaluation](PRINCIPLES.md#architecture-compile-time-evaluation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Deferred Static Check
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Metaprogramming / Language-Oriented Architecture](LEXICON.md#lexicon-category-metaprogramming-language-oriented-architecture)
+- Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
+
+Details
+
+Definition
+A defect in which a check or generation that could run at compile time is repeated at runtime.
 
 How it is checked
 
@@ -35970,7 +43217,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Model-Driven Architecture](PRINCIPLES.md#architecture-model-driven-architecture)
+[Formal Verification](PRINCIPLES.md#architecture-formal-verification), [Model-Driven Architecture](PRINCIPLES.md#architecture-model-driven-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -36426,6 +43673,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Reflective Contract Bypass
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Metaprogramming / Language-Oriented Architecture](LEXICON.md#lexicon-category-metaprogramming-language-oriented-architecture)
+- Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
+
+Details
+
+Definition
+A defect in which reflection is used to reach members that a type's contract or visibility hides.
+
+How it is checked
+
+Checked by
+[Reflection](PRINCIPLES.md#architecture-reflection)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Runtime Dynamic Evaluation
 
 - Kind: [technique](SCHEMA.md#kind-technique)
@@ -36701,7 +43988,47 @@ Referenced by
 How it is checked
 
 Checked by
-[Code as Data](PRINCIPLES.md#architecture-code-as-data)
+[Homoiconicity](PRINCIPLES.md#architecture-homoiconicity), [Code as Data](PRINCIPLES.md#architecture-code-as-data)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Syntax Tree Generation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Metaprogramming / Language-Oriented Architecture](LEXICON.md#lexicon-category-metaprogramming-language-oriented-architecture)
+- Layer: [Declarative Core](SCHEMA.md#layer-declarative-core)
+
+Details
+
+Definition
+A technique for generating code by building and printing a syntax tree instead of concatenating strings.
+
+How it is checked
+
+Checked by
+[Homoiconicity](PRINCIPLES.md#architecture-homoiconicity), [Code as Data](PRINCIPLES.md#architecture-code-as-data), [Runtime Code Generation](PRINCIPLES.md#architecture-runtime-code-generation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -36859,6 +44186,46 @@ Not answered
 ## Model Architecture
 
 Every term in this category is listed as one record, with its kind, its definition and its aliases, the principles whose relations name it, the principle or contract that carries the same name where one exists, and the layer its category belongs to. A tag category also gives each term an example, which is the file the tag places or the rename from a refused word onto a covering tag.
+
+### Abstain or Disclose Uncertainty
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for having a model decline or state its uncertainty when the evidence does not support an answer.
+
+How it is checked
+
+Checked by
+[Ungrounded Content](PRINCIPLES.md#architecture-ungrounded-content)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
 
 ### Ad-Hoc Notebook-to-Production
 
@@ -37053,6 +44420,86 @@ How it is checked
 
 Checked by
 the tension resolution with model-safety
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Centralized Model Configuration
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for holding model names, parameters and limits in one configuration read by every call site.
+
+How it is checked
+
+Checked by
+[Prompt Sprawl](PRINCIPLES.md#architecture-prompt-sprawl)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Claim Validation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for checking generated claims against their cited sources before they are returned.
+
+How it is checked
+
+Checked by
+[Ungrounded Content](PRINCIPLES.md#architecture-ungrounded-content)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -37563,6 +45010,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Evaluation Suite
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for scoring model output against a fixed set of cases on every change to the model, prompt or data.
+
+How it is checked
+
+Checked by
+[Prompt Sprawl](PRINCIPLES.md#architecture-prompt-sprawl), [Artificial Intelligence Architecture](PRINCIPLES.md#architecture-artificial-intelligence-architecture), [Model Governance](PRINCIPLES.md#architecture-model-governance), [Model Evaluation](PRINCIPLES.md#architecture-model-evaluation), [Vector Search](PRINCIPLES.md#architecture-vector-search), [Model Safety](PRINCIPLES.md#architecture-model-safety)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Evidence Citation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for attaching to each generated claim the retrieved source that supports it.
+
+How it is checked
+
+Checked by
+[Ungrounded Content](PRINCIPLES.md#architecture-ungrounded-content), [Retrieval-Augmented Generation (RAG)](PRINCIPLES.md#architecture-retrieval-augmented-generation), [Explainability](PRINCIPLES.md#architecture-explainability), [Compliance](PRINCIPLES.md#architecture-compliance)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Exact Keyword Search Only
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -37778,6 +45305,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Governance Log
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for recording each approval, deployment and retirement of a model with who decided it.
+
+How it is checked
+
+Checked by
+[Model Version Ambiguity](PRINCIPLES.md#architecture-model-version-ambiguity)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Governed Autonomy
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -37881,7 +45448,47 @@ Referenced by
 How it is checked
 
 Checked by
-[Model Safety](PRINCIPLES.md#architecture-model-safety)
+[Manual Runbook Dependency](PRINCIPLES.md#architecture-manual-runbook-dependency), [Artificial Intelligence Architecture](PRINCIPLES.md#architecture-artificial-intelligence-architecture), [Model Safety](PRINCIPLES.md#architecture-model-safety), [Agentic Architecture](PRINCIPLES.md#architecture-agentic-architecture), [Auto-Remediation](PRINCIPLES.md#architecture-auto-remediation), [Canary Deployment](PRINCIPLES.md#architecture-canary-deployment)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Inference Context Record
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for logging with each model output the model version, prompt version and inputs that produced it.
+
+How it is checked
+
+Checked by
+[Model Version Ambiguity](PRINCIPLES.md#architecture-model-version-ambiguity)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -38182,7 +45789,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Model Governance](PRINCIPLES.md#architecture-model-governance)
+[Model Version Ambiguity](PRINCIPLES.md#architecture-model-version-ambiguity), [Model Governance](PRINCIPLES.md#architecture-model-governance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -38397,7 +46004,87 @@ Referenced by
 How it is checked
 
 Checked by
-[Artificial Intelligence Architecture](PRINCIPLES.md#architecture-artificial-intelligence-architecture)
+[Artificial Intelligence Architecture](PRINCIPLES.md#architecture-artificial-intelligence-architecture), [Model Inference](PRINCIPLES.md#architecture-model-inference)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Prompt Registry
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for keeping prompts in one versioned registry instead of as literals across the code.
+
+How it is checked
+
+Checked by
+[Prompt Sprawl](PRINCIPLES.md#architecture-prompt-sprawl), [Prompt Engineering](PRINCIPLES.md#architecture-prompt-engineering)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Prompt Versioning
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Model Architecture](LEXICON.md#lexicon-category-model-architecture)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for giving each prompt, dataset and index a version that inference logs record.
+
+How it is checked
+
+Checked by
+[Prompt Sprawl](PRINCIPLES.md#architecture-prompt-sprawl), [Model Version Ambiguity](PRINCIPLES.md#architecture-model-version-ambiguity), [Machine Learning Architecture](PRINCIPLES.md#architecture-machine-learning-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -39566,6 +47253,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Alert on Critical Failure
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for raising an alert with an owner and a severity when a critical path fails.
+
+How it is checked
+
+Checked by
+[Unobservable Failure](PRINCIPLES.md#architecture-unobservable-failure), [Log-as-Control-Flow](PRINCIPLES.md#architecture-log-as-control-flow), [Alerting](PRINCIPLES.md#architecture-alerting)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Anonymous Flow
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -39715,7 +47442,87 @@ Referenced by
 How it is checked
 
 Checked by
-[Monitoring](PRINCIPLES.md#architecture-monitoring)
+[Observability](PRINCIPLES.md#architecture-observability), [Monitoring](PRINCIPLES.md#architecture-monitoring)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Cardinality Reduction
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for limiting the distinct label values a metric carries, so its storage and queries stay bounded.
+
+How it is checked
+
+Checked by
+[Observability Noise](PRINCIPLES.md#architecture-observability-noise)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Causation Tracing
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for carrying the id of the event or request that caused each effect, so a chain can be followed back.
+
+How it is checked
+
+Checked by
+[Action at a Distance](PRINCIPLES.md#architecture-action-at-a-distance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -39913,6 +47720,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Data Change Audit
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for recording who changed which data, when, and from what value to what value.
+
+How it is checked
+
+Checked by
+[Silent Data Corruption](PRINCIPLES.md#architecture-silent-data-corruption), [Architecture Decision Records (ADR)](PRINCIPLES.md#architecture-architecture-decision-records), [Auditability](PRINCIPLES.md#architecture-auditability)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Define Signal Quality
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for stating what makes a log, metric or alert useful before it is emitted.
+
+How it is checked
+
+Checked by
+[Observability Noise](PRINCIPLES.md#architecture-observability-noise)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### End-to-End Causality
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -40017,6 +47904,46 @@ How it is checked
 
 Checked by
 [Causation ID](PRINCIPLES.md#architecture-causation-id)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Execution Log
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for recording each step an automated or manual procedure performed and its result.
+
+How it is checked
+
+Checked by
+[Manual Runbook Dependency](PRINCIPLES.md#architecture-manual-runbook-dependency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -40707,7 +48634,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Auditability](PRINCIPLES.md#architecture-auditability)
+[Auditability](PRINCIPLES.md#architecture-auditability), [Audit Logging](PRINCIPLES.md#architecture-audit-logging)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -40862,6 +48789,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Runbook Owner
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for naming the person or team responsible for each alert and its response steps.
+
+How it is checked
+
+Checked by
+[Observability Noise](PRINCIPLES.md#architecture-observability-noise)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Sampling and Aggregation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for keeping a representative share of telemetry or a summary of it instead of every event.
+
+How it is checked
+
+Checked by
+[Observability Noise](PRINCIPLES.md#architecture-observability-noise)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Service Level Objectives
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for choosing measured indicators of reliability and setting the targets a service must meet on them.
+
+How it is checked
+
+Checked by
+[Service Contract](PRINCIPLES.md#architecture-service-contract), [Monitoring](PRINCIPLES.md#architecture-monitoring), [SLO/SLI](PRINCIPLES.md#architecture-slo-sli)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Storage/Privacy
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -40923,6 +48970,46 @@ How it is checked
 
 Checked by
 [Logging](PRINCIPLES.md#architecture-logging)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Structured Log
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for writing log entries as typed fields, so they are queried by field instead of by text.
+
+How it is checked
+
+Checked by
+[Unobservable Failure](PRINCIPLES.md#architecture-unobservable-failure), [Observability](PRINCIPLES.md#architecture-observability), [Logging](PRINCIPLES.md#architecture-logging)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -41123,6 +49210,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Trace Span
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for recording the start, end and context of an operation as a span within a request's trace.
+
+How it is checked
+
+Checked by
+[Unobservable Failure](PRINCIPLES.md#architecture-unobservable-failure)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Traces
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -41226,7 +49353,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Correlation ID](PRINCIPLES.md#architecture-correlation-id)
+[Traceability](PRINCIPLES.md#architecture-traceability), [Correlation ID](PRINCIPLES.md#architecture-correlation-id)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -41269,7 +49396,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Causation ID](PRINCIPLES.md#architecture-causation-id)
+[Causality](PRINCIPLES.md#architecture-causality), [Causation ID](PRINCIPLES.md#architecture-causation-id)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -41312,7 +49439,47 @@ Referenced by
 How it is checked
 
 Checked by
-[Audit Logging](PRINCIPLES.md#architecture-audit-logging)
+[Auditability](PRINCIPLES.md#architecture-auditability), [Audit Logging](PRINCIPLES.md#architecture-audit-logging)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Usage Instrumentation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Observability / Auditability / Traceability](LEXICON.md#lexicon-category-observability-auditability-traceability)
+- Layer: [Observability](SCHEMA.md#layer-observability)
+
+Details
+
+Definition
+A technique for counting calls to a code path in production, so its use is measured before it is removed.
+
+How it is checked
+
+Checked by
+[Lava Flow](PRINCIPLES.md#architecture-lava-flow)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -42355,7 +50522,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Extension Points](PRINCIPLES.md#architecture-extension-points)
+[Runtime Extensibility](PRINCIPLES.md#architecture-runtime-extensibility), [Extension Points](PRINCIPLES.md#architecture-extension-points)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -42698,6 +50865,9 @@ The degree to which a component's dependencies are visible in its signature rath
 
 Referenced by
 [Service Locator Pattern](PRINCIPLES.md#architecture-service-locator-pattern)
+
+Distinct from
+[Explicit Dependency](LEXICON.md#lexicon-explicit-dependency): Explicit dependencies is the degree to which a component's needs are visible, while explicit dependency is the technique that makes them visible.
 
 How it is checked
 
@@ -43307,7 +51477,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Service Locator Pattern](PRINCIPLES.md#architecture-service-locator-pattern)
+[Dynamic Binding](PRINCIPLES.md#architecture-dynamic-binding), [Service Locator Pattern](PRINCIPLES.md#architecture-service-locator-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -43437,6 +51607,46 @@ How it is checked
 
 Checked by
 [Extension Points](PRINCIPLES.md#architecture-extension-points)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Ungoverned Global Registry
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Plugin / Extensibility / IoC](LEXICON.md#lexicon-category-plugin-extensibility-ioc)
+- Layer: [Extensibility Core](SCHEMA.md#layer-extensibility-core)
+
+Details
+
+Definition
+A defect in which a global registry is changed from anywhere, with no owner, lifecycle or validation of its entries.
+
+How it is checked
+
+Checked by
+[Registry Pattern](PRINCIPLES.md#architecture-registry-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -49190,7 +57400,7 @@ Definition
 The difficulty of understanding, maintaining, and reasoning about a policy as its rules multiply.
 
 Referenced by
-[Authorization](PRINCIPLES.md#architecture-authorization), [ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Authorization](PRINCIPLES.md#architecture-authorization), [Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 How it is checked
 
@@ -53482,24 +61692,27 @@ Not answered
 Shape it refuses
 Not answered
 
-### Conventions
+### Deferred Implementation Choice
 
-- Kind: [constraint](SCHEMA.md#kind-constraint)
+- Kind: [capability](SCHEMA.md#kind-capability)
 - Category: [Runtime Discovery / Dynamic Binding](LEXICON.md#lexicon-category-runtime-discovery-dynamic-binding)
 - Layer: [Extensibility Core](SCHEMA.md#layer-extensibility-core)
 
 Details
 
 Definition
-The requirement that components follow shared naming or placement conventions so they can be found automatically.
+The ability to postpone choosing a concrete implementation until runtime, so each environment can assemble its own.
+
+Aliases
+Environment-Specific Composition
 
 Referenced by
-[Runtime Discovery](PRINCIPLES.md#architecture-runtime-discovery)
+[Dynamic Binding](PRINCIPLES.md#architecture-dynamic-binding)
 
 How it is checked
 
 Checked by
-[Runtime Discovery](PRINCIPLES.md#architecture-runtime-discovery)
+[Dynamic Binding](PRINCIPLES.md#architecture-dynamic-binding)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -53525,27 +61738,21 @@ Not answered
 Shape it refuses
 Not answered
 
-### Deferred Implementation Choice
+### Discovery Validation
 
-- Kind: [capability](SCHEMA.md#kind-capability)
+- Kind: [technique](SCHEMA.md#kind-technique)
 - Category: [Runtime Discovery / Dynamic Binding](LEXICON.md#lexicon-category-runtime-discovery-dynamic-binding)
 - Layer: [Extensibility Core](SCHEMA.md#layer-extensibility-core)
 
 Details
 
 Definition
-The ability to postpone choosing a concrete implementation until runtime, so each environment can assemble its own.
-
-Aliases
-Environment-Specific Composition
-
-Referenced by
-[Dynamic Binding](PRINCIPLES.md#architecture-dynamic-binding)
+A technique for checking at startup that every discovered component declares the contract it claims.
 
 How it is checked
 
 Checked by
-[Dynamic Binding](PRINCIPLES.md#architecture-dynamic-binding)
+[Opaque Runtime Behavior](PRINCIPLES.md#architecture-opaque-runtime-behavior), [Manifest-Based Design](PRINCIPLES.md#architecture-manifest-based-design)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -53760,7 +61967,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Dynamic Dispatch](PRINCIPLES.md#architecture-dynamic-dispatch)
+[Dynamic Dispatch](PRINCIPLES.md#architecture-dynamic-dispatch), [Polymorphism](PRINCIPLES.md#architecture-polymorphism)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -53965,6 +62172,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Add Index
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A technique for adding an index on the fields a slow query filters or sorts by.
+
+How it is checked
+
+Checked by
+[Latency](PRINCIPLES.md#architecture-latency), [Algorithmic Efficiency](PRINCIPLES.md#architecture-algorithmic-efficiency), [Time Complexity](PRINCIPLES.md#architecture-time-complexity)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Always-Fresh Reads
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -54025,7 +62272,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Big O Notation](PRINCIPLES.md#architecture-big-o-notation)
+[Big O Notation](PRINCIPLES.md#architecture-big-o-notation), [Benchmarking](PRINCIPLES.md#architecture-benchmarking)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -54112,6 +62359,46 @@ How it is checked
 
 Checked by
 [Queuing Theory](PRINCIPLES.md#architecture-queuing-theory)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Batch Fetch
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A technique for loading the related data for many items in one query or call instead of one per item.
+
+How it is checked
+
+Checked by
+[Chatty Interface](PRINCIPLES.md#architecture-chatty-interface), [N Plus One Query](PRINCIPLES.md#architecture-n-plus-one-query)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -54283,7 +62570,47 @@ Referenced by
 How it is checked
 
 Checked by
-[Throughput](PRINCIPLES.md#architecture-throughput)
+[Scalability](PRINCIPLES.md#architecture-scalability), [Throughput](PRINCIPLES.md#architecture-throughput)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Cache Contract
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A technique for declaring what a cache entry is keyed by, how long it lives and what invalidates it.
+
+How it is checked
+
+Checked by
+[Cache Poisoning by Design](PRINCIPLES.md#architecture-cache-poisoning-by-design)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -54327,6 +62654,46 @@ How it is checked
 
 Checked by
 the tension resolution with cdn-edge-caching
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Cache Invalidation on Write
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A technique for removing or refreshing cached entries in the same change that writes the data behind them.
+
+How it is checked
+
+Checked by
+[Cache Poisoning by Design](PRINCIPLES.md#architecture-cache-poisoning-by-design), [Read-Your-Writes Violation](PRINCIPLES.md#architecture-read-your-writes-violation), [Caching](PRINCIPLES.md#architecture-caching)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -54456,6 +62823,46 @@ How it is checked
 
 Checked by
 [Throughput](PRINCIPLES.md#architecture-throughput)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Chunked Processing
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A technique for processing large data in fixed-size pieces, so memory use stays bounded.
+
+How it is checked
+
+Checked by
+[Space Complexity](PRINCIPLES.md#architecture-space-complexity), [Memory Efficiency](PRINCIPLES.md#architecture-memory-efficiency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -54628,6 +63035,46 @@ How it is checked
 
 Checked by
 the tension resolution with big-o-notation
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Context-Keyed Cache
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A technique for including tenant, identity, version and every input that changes the result in a cache key.
+
+How it is checked
+
+Checked by
+[Cache Poisoning by Design](PRINCIPLES.md#architecture-cache-poisoning-by-design), [Caching](PRINCIPLES.md#architecture-caching)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -55040,6 +63487,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Externalize Session State
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A technique for moving per-user or per-request state out of instance memory into a shared store.
+
+How it is checked
+
+Checked by
+[Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling), [Elasticity](PRINCIPLES.md#architecture-elasticity), [Load Balancing](PRINCIPLES.md#architecture-load-balancing), [Statelessness](PRINCIPLES.md#architecture-statelessness), [Stateless Processing](PRINCIPLES.md#architecture-stateless-processing), [Auto-Scaling](PRINCIPLES.md#architecture-auto-scaling)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Externalized State
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -55143,7 +63630,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Scalability](PRINCIPLES.md#architecture-scalability)
+[Scalability](PRINCIPLES.md#architecture-scalability), [Auto-Scaling](PRINCIPLES.md#architecture-auto-scaling)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -55186,7 +63673,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Memory Efficiency](PRINCIPLES.md#architecture-memory-efficiency)
+[Memory Efficiency](PRINCIPLES.md#architecture-memory-efficiency), [Streaming Architecture](PRINCIPLES.md#architecture-streaming-architecture), [Lazy Evaluation](PRINCIPLES.md#architecture-lazy-evaluation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -55576,7 +64063,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Algorithmic Efficiency](PRINCIPLES.md#architecture-algorithmic-efficiency)
+[Algorithmic Efficiency](PRINCIPLES.md#architecture-algorithmic-efficiency), [Time Complexity](PRINCIPLES.md#architecture-time-complexity), [Big O Notation](PRINCIPLES.md#architecture-big-o-notation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -55665,7 +64152,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Statelessness](PRINCIPLES.md#architecture-statelessness)
+[Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling), [Statelessness](PRINCIPLES.md#architecture-statelessness)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -55708,7 +64195,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling)
+[Horizontal Scaling](PRINCIPLES.md#architecture-horizontal-scaling), [Statelessness](PRINCIPLES.md#architecture-statelessness)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -56941,6 +65428,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Repeated Stable Computation
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A defect in which a costly computation or query whose result does not change is repeated on every request.
+
+How it is checked
+
+Checked by
+[Caching](PRINCIPLES.md#architecture-caching)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Replace Algorithm
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Scalability / Performance / Optimization](LEXICON.md#lexicon-category-scalability-performance-optimization)
+- Layer: [Performance Core](SCHEMA.md#layer-performance-core)
+
+Details
+
+Definition
+A technique for swapping an algorithm or data structure for one with better complexity for the inputs at hand.
+
+How it is checked
+
+Checked by
+[Algorithmic Efficiency](PRINCIPLES.md#architecture-algorithmic-efficiency), [Time Complexity](PRINCIPLES.md#architecture-time-complexity), [Big O Notation](PRINCIPLES.md#architecture-big-o-notation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Representative Workload
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -57216,7 +65783,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Parallelism](PRINCIPLES.md#architecture-parallelism)
+[Parallelism](PRINCIPLES.md#architecture-parallelism), [Fan-out/Fan-in](PRINCIPLES.md#architecture-fan-out-fan-in)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -57302,7 +65869,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Sharding](PRINCIPLES.md#architecture-sharding)
+[Sharding](PRINCIPLES.md#architecture-sharding), [Partitioning](PRINCIPLES.md#architecture-partitioning)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -57732,7 +66299,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Space Complexity](PRINCIPLES.md#architecture-space-complexity)
+[Space Complexity](PRINCIPLES.md#architecture-space-complexity), [Memory Efficiency](PRINCIPLES.md#architecture-memory-efficiency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -57957,7 +66524,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Intent-Revealing Interface](PRINCIPLES.md#architecture-intent-revealing-interface)
+[Uniform Interface](PRINCIPLES.md#architecture-uniform-interface), [Intent-Revealing Interface](PRINCIPLES.md#architecture-intent-revealing-interface)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -58001,6 +66568,46 @@ How it is checked
 
 Checked by
 [Canonicalization](PRINCIPLES.md#architecture-canonicalization)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Binary Schema Encoding
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Schema / Canonical Data / Semantics](LEXICON.md#lexicon-category-schema-canonical-data-semantics)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for serializing messages in a compact binary format whose schema the reader and writer share.
+
+How it is checked
+
+Checked by
+[Schema Contract](PRINCIPLES.md#architecture-schema-contract)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -58339,15 +66946,15 @@ Not answered
 Details
 
 Definition
-The requirement that a design follow established conventions so its behavior matches expectations.
+The requirement that a design follow shared naming, placement and behavior conventions, so its parts can be found automatically and behave as expected.
 
 Referenced by
-[Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise)
+[Runtime Discovery](PRINCIPLES.md#architecture-runtime-discovery), [Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise)
 
 How it is checked
 
 Checked by
-[Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise)
+[Runtime Discovery](PRINCIPLES.md#architecture-runtime-discovery), [Principle of Least Surprise](PRINCIPLES.md#architecture-principle-of-least-surprise)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -58588,6 +67195,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Define Absence Semantics
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Schema / Canonical Data / Semantics](LEXICON.md#lexicon-category-schema-canonical-data-semantics)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for choosing one representation for a missing value and stating what it means at the boundary.
+
+How it is checked
+
+Checked by
+[Null Semantics Drift](PRINCIPLES.md#architecture-null-semantics-drift)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Denormalized Read Models
 
 - Kind: [pattern](SCHEMA.md#kind-pattern)
@@ -58789,7 +67436,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Database Normalization](PRINCIPLES.md#architecture-database-normalization)
+[Normalization](PRINCIPLES.md#architecture-normalization), [Database Normalization](PRINCIPLES.md#architecture-database-normalization)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -58835,7 +67482,7 @@ Distinct from
 How it is checked
 
 Checked by
-[Type Safety](PRINCIPLES.md#architecture-type-safety)
+[Explicit Contracts](PRINCIPLES.md#architecture-explicit-contracts), [Type Safety](PRINCIPLES.md#architecture-type-safety)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -58990,6 +67637,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Introduce Discriminated Union
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Schema / Canonical Data / Semantics](LEXICON.md#lexicon-category-schema-canonical-data-semantics)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for modeling a value that takes one of several shapes as a union whose variants carry a tag the type checker reads.
+
+How it is checked
+
+Checked by
+[Stringly Typed Programming](PRINCIPLES.md#architecture-stringly-typed-programming), [Self-Describing Structures](PRINCIPLES.md#architecture-self-describing-structures)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Local Model Autonomy
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -59093,7 +67780,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Canonical Model](PRINCIPLES.md#architecture-canonical-model)
+[Canonical Model](PRINCIPLES.md#architecture-canonical-model), [Canonical Data Model](PRINCIPLES.md#architecture-canonical-data-model)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -59143,6 +67830,46 @@ How it is checked
 
 Checked by
 [Intent-Revealing Interface](PRINCIPLES.md#architecture-intent-revealing-interface), [Set-Relative Member Name](PRINCIPLES.md#architecture-set-relative-member-name)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Narrow Type
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Schema / Canonical Data / Semantics](LEXICON.md#lexicon-category-schema-canonical-data-semantics)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for replacing a broad type with one that admits only the values the domain allows.
+
+How it is checked
+
+Checked by
+[Primitive Obsession](PRINCIPLES.md#architecture-primitive-obsession), [Registry Pattern](PRINCIPLES.md#architecture-registry-pattern), [Type Safety](PRINCIPLES.md#architecture-type-safety)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -59515,6 +68242,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Schema Registry
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Schema / Canonical Data / Semantics](LEXICON.md#lexicon-category-schema-canonical-data-semantics)
+- Layer: [Contracts Core](SCHEMA.md#layer-contracts-core)
+
+Details
+
+Definition
+A technique for storing every published schema and its versions in one registry that producers and consumers check against.
+
+How it is checked
+
+Checked by
+[Schema Drift](PRINCIPLES.md#architecture-schema-drift)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Security Checks
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -59661,7 +68428,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Schema Validation](PRINCIPLES.md#architecture-schema-validation)
+[Explicit Contracts](PRINCIPLES.md#architecture-explicit-contracts), [Data Contract](PRINCIPLES.md#architecture-data-contract), [Schema Validation](PRINCIPLES.md#architecture-schema-validation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -59703,12 +68470,12 @@ Definition
 Authorization logic scattered inline throughout the codebase instead of centralized, leaving checks inconsistent and easy to omit.
 
 Referenced by
-[RBAC](PRINCIPLES.md#architecture-role-based-access-control)
+[Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control)
 
 How it is checked
 
 Checked by
-[RBAC](PRINCIPLES.md#architecture-role-based-access-control)
+[Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -59967,12 +68734,12 @@ Definition
 Declared descriptions of the subject, resource, action, and environment attributes that an access policy evaluates.
 
 Referenced by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 How it is checked
 
 Checked by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -60130,6 +68897,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Authorization Tests
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for testing each protected operation with permitted and refused identities.
+
+How it is checked
+
+Checked by
+[Authorization Scattering](PRINCIPLES.md#architecture-authorization-scattering)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Automated Control
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -60259,6 +69066,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Centralize Policy
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for evaluating every authorization decision through one policy model instead of scattered checks.
+
+How it is checked
+
+Checked by
+[Authorization Scattering](PRINCIPLES.md#architecture-authorization-scattering), [Authorization](PRINCIPLES.md#architecture-authorization), [Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Certificate Management
 
 - Kind: [activity](SCHEMA.md#kind-activity)
@@ -60357,12 +69204,12 @@ Definition
 The ability to manage access by assigning broad, role-level permission sets rather than per-individual grants.
 
 Referenced by
-[RBAC](PRINCIPLES.md#architecture-role-based-access-control)
+[Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control)
 
 How it is checked
 
 Checked by
-[RBAC](PRINCIPLES.md#architecture-role-based-access-control)
+[Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -60575,12 +69422,12 @@ Definition
 The ability to base access decisions on the runtime context of a request, such as its attributes, its environment and the resource's state.
 
 Referenced by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 How it is checked
 
 Checked by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -60752,7 +69599,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Compliance](PRINCIPLES.md#architecture-compliance)
+[Defense in Depth](PRINCIPLES.md#architecture-defense-in-depth), [Compliance](PRINCIPLES.md#architecture-compliance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -60839,6 +69686,46 @@ How it is checked
 
 Checked by
 [Encryption at Rest](PRINCIPLES.md#architecture-encryption-at-rest)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Default Deny
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for refusing every access that no rule explicitly allows.
+
+How it is checked
+
+Checked by
+[Fail Secure](PRINCIPLES.md#architecture-fail-secure), [Secure by Default](PRINCIPLES.md#architecture-secure-by-default)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -61122,6 +70009,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Field Redaction
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for removing or masking sensitive fields before data is logged, exported or displayed.
+
+How it is checked
+
+Checked by
+[Personal Data Oversharing](PRINCIPLES.md#architecture-personal-data-oversharing)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Fine-Grained Access Control
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -61134,12 +70061,12 @@ Definition
 The ability to grant or deny access at a precise level using specific attributes rather than broad roles.
 
 Referenced by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 How it is checked
 
 Checked by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -61263,12 +70190,12 @@ Definition
 Embedding access rules directly in code, so changing policy requires a code change and cannot respond to runtime attributes.
 
 Referenced by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 How it is checked
 
 Checked by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control), [Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -61856,6 +70783,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Least-Privilege Credential
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for issuing each caller a credential that grants only the operations it performs.
+
+How it is checked
+
+Checked by
+[Secret Sprawl](PRINCIPLES.md#architecture-secret-sprawl), [Least Privilege](PRINCIPLES.md#architecture-least-privilege)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Machine-Readable Policies
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -61916,7 +70883,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Policy Enforcement](PRINCIPLES.md#architecture-policy-enforcement)
+[Policy Enforcement](PRINCIPLES.md#architecture-policy-enforcement), [Policy as Code](PRINCIPLES.md#architecture-policy-as-code)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -62071,6 +71038,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Network Segmentation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for dividing a network into zones whose traffic between them passes declared controls.
+
+How it is checked
+
+Checked by
+[Zero Trust Architecture](PRINCIPLES.md#architecture-zero-trust-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Ongoing Assurance
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -62132,6 +71139,46 @@ How it is checked
 
 Checked by
 the tension resolution with least-privilege
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Penetration Testing
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for attacking a system under agreement to find the paths that bypass its controls.
+
+How it is checked
+
+Checked by
+[Security Theater](PRINCIPLES.md#architecture-security-theater)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -62346,7 +71393,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Continuous Compliance](PRINCIPLES.md#architecture-continuous-compliance)
+[Compliance](PRINCIPLES.md#architecture-compliance), [Continuous Compliance](PRINCIPLES.md#architecture-continuous-compliance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -62384,12 +71431,12 @@ Definition
 A runtime component that evaluates access requests against declared policies and returns permit or deny decisions.
 
 Referenced by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 How it is checked
 
 Checked by
-[ABAC](PRINCIPLES.md#architecture-attribute-based-access-control)
+[Attribute-Based Access Control (ABAC)](PRINCIPLES.md#architecture-attribute-based-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -62562,6 +71609,46 @@ How it is checked
 
 Checked by
 [Security by Design](PRINCIPLES.md#architecture-security-by-design)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Purpose Binding
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for tagging personal data with the purpose it was collected for and refusing uses outside it.
+
+How it is checked
+
+Checked by
+[Personal Data Oversharing](PRINCIPLES.md#architecture-personal-data-oversharing), [Privacy by Design](PRINCIPLES.md#architecture-privacy-by-design)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -62845,6 +71932,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Remove Secret from Code
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for deleting a credential from source and history and reading it from a secret store instead.
+
+How it is checked
+
+Checked by
+[Hardcoded Configuration](PRINCIPLES.md#architecture-hardcoded-configuration)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Repository Secret Scan
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for scanning source and history for credentials before a change is accepted.
+
+How it is checked
+
+Checked by
+[Secret Sprawl](PRINCIPLES.md#architecture-secret-sprawl)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Request Origin Verification
 
 - Kind: [technique](SCHEMA.md#kind-technique)
@@ -62906,6 +72073,46 @@ How it is checked
 
 Checked by
 [Access Control](PRINCIPLES.md#architecture-access-control)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Retention Policy
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for declaring how long each class of data is kept and deleting it when the period ends.
+
+How it is checked
+
+Checked by
+[Personal Data Oversharing](PRINCIPLES.md#architecture-personal-data-oversharing), [Privacy by Design](PRINCIPLES.md#architecture-privacy-by-design)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -63075,12 +72282,12 @@ Definition
 Declared sets of permissions grouped into named roles that are assigned to principals.
 
 Referenced by
-[RBAC](PRINCIPLES.md#architecture-role-based-access-control)
+[Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control)
 
 How it is checked
 
 Checked by
-[RBAC](PRINCIPLES.md#architecture-role-based-access-control)
+[Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -63118,7 +72325,7 @@ Definition
 The degree to which roles proliferate into many narrow definitions as access requirements grow.
 
 Referenced by
-[RBAC](PRINCIPLES.md#architecture-role-based-access-control)
+[Role-Based Access Control (RBAC)](PRINCIPLES.md#architecture-role-based-access-control)
 
 How it is checked
 
@@ -63253,6 +72460,86 @@ How it is checked
 
 Checked by
 [Output Encoding](PRINCIPLES.md#architecture-output-encoding)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Sandboxing
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for running untrusted code with only the resources and permissions it is granted.
+
+How it is checked
+
+Checked by
+[Runtime Code Generation](PRINCIPLES.md#architecture-runtime-code-generation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Secret Rotation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for replacing credentials on a schedule and after any exposure, so a leaked secret stops working.
+
+How it is checked
+
+Checked by
+[Secret Sprawl](PRINCIPLES.md#architecture-secret-sprawl), [Secrets Management](PRINCIPLES.md#architecture-secrets-management)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -63425,6 +72712,46 @@ How it is checked
 
 Checked by
 [Security by Design](PRINCIPLES.md#architecture-security-by-design)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Server-Side Enforcement
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Security Privacy Compliance](LEXICON.md#lexicon-category-security-privacy-compliance)
+- Layer: [Security Core](SCHEMA.md#layer-security-core)
+
+Details
+
+Definition
+A technique for enforcing every security rule on the server, whatever the client checks.
+
+How it is checked
+
+Checked by
+[Security Theater](PRINCIPLES.md#architecture-security-theater)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -63768,7 +73095,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Threat Modeling](PRINCIPLES.md#architecture-threat-modeling)
+[Security by Design](PRINCIPLES.md#architecture-security-by-design), [Threat Modeling](PRINCIPLES.md#architecture-threat-modeling)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -63854,7 +73181,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Input Validation](PRINCIPLES.md#architecture-input-validation)
+[Schema Validation](PRINCIPLES.md#architecture-schema-validation), [Input Validation](PRINCIPLES.md#architecture-input-validation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -63897,7 +73224,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Governance](PRINCIPLES.md#architecture-governance)
+[Agentic Architecture](PRINCIPLES.md#architecture-agentic-architecture), [Governance](PRINCIPLES.md#architecture-governance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -63940,7 +73267,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Compliance](PRINCIPLES.md#architecture-compliance)
+[Compliance](PRINCIPLES.md#architecture-compliance), [Governance](PRINCIPLES.md#architecture-governance)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -64026,7 +73353,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Access Control](PRINCIPLES.md#architecture-access-control)
+[Authorization](PRINCIPLES.md#architecture-authorization), [Access Control](PRINCIPLES.md#architecture-access-control)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -64192,8 +73519,8 @@ Details
 Definition
 A security stance that grants no implicit trust and continuously verifies every access request regardless of its source.
 
-Referenced by
-[Least Privilege](PRINCIPLES.md#architecture-least-privilege)
+Principle
+[Zero Trust Architecture](PRINCIPLES.md#architecture-zero-trust-architecture)
 
 How it is checked
 
@@ -64227,6 +73554,126 @@ Not answered
 ## Self-Healing / Recovery / Deployment Safety
 
 Every term in this category is listed as one record, with its kind, its definition and its aliases, the principles whose relations name it, the principle or contract that carries the same name where one exists, and the layer its category belongs to. A tag category also gives each term an example, which is the file the tag places or the rename from a refused word onto a covering tag.
+
+### Automate the Runbook
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Self-Healing / Recovery / Deployment Safety](LEXICON.md#lexicon-category-self-healing-recovery-deployment-safety)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for turning repeated manual operational steps into a script the system runs and logs.
+
+How it is checked
+
+Checked by
+[Manual Runbook Dependency](PRINCIPLES.md#architecture-manual-runbook-dependency), [Auto-Remediation](PRINCIPLES.md#architecture-auto-remediation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Autoscaling Policy
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Self-Healing / Recovery / Deployment Safety](LEXICON.md#lexicon-category-self-healing-recovery-deployment-safety)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for declaring the load signals and limits by which the number of instances grows and shrinks.
+
+How it is checked
+
+Checked by
+[Backpressure](PRINCIPLES.md#architecture-backpressure), [Elasticity](PRINCIPLES.md#architecture-elasticity), [Auto-Scaling](PRINCIPLES.md#architecture-auto-scaling)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Backup
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Self-Healing / Recovery / Deployment Safety](LEXICON.md#lexicon-category-self-healing-recovery-deployment-safety)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for copying data to separate storage on a schedule, so it can be restored after loss or corruption.
+
+How it is checked
+
+Checked by
+[Irreversible Migration](PRINCIPLES.md#architecture-irreversible-migration)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
 
 ### Blind Routing
 
@@ -64618,6 +74065,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Dual Read and Write
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Self-Healing / Recovery / Deployment Safety](LEXICON.md#lexicon-category-self-healing-recovery-deployment-safety)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for writing to both the old and the new store and comparing reads during a migration, until the new store is trusted.
+
+How it is checked
+
+Checked by
+[Irreversible Migration](PRINCIPLES.md#architecture-irreversible-migration)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Empirical Resilience Verification
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -64636,6 +74123,46 @@ How it is checked
 
 Checked by
 [Chaos Engineering](PRINCIPLES.md#architecture-chaos-engineering)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Expand-Contract Migration
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Self-Healing / Recovery / Deployment Safety](LEXICON.md#lexicon-category-self-healing-recovery-deployment-safety)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for changing a schema in steps, adding the new shape, moving every reader and writer, then removing the old shape.
+
+How it is checked
+
+Checked by
+[Irreversible Migration](PRINCIPLES.md#architecture-irreversible-migration), [Rollback](PRINCIPLES.md#architecture-rollback)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -65619,6 +75146,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Recovery Policy
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Self-Healing / Recovery / Deployment Safety](LEXICON.md#lexicon-category-self-healing-recovery-deployment-safety)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for declaring, per failure class, the action the system takes to restore service and who is told.
+
+How it is checked
+
+Checked by
+[Log-as-Control-Flow](PRINCIPLES.md#architecture-log-as-control-flow), [Self-Healing Architecture](PRINCIPLES.md#architecture-self-healing-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Reduced Mean Time to Recovery
 
 - Kind: [capability](SCHEMA.md#kind-capability)
@@ -65769,6 +75336,46 @@ How it is checked
 
 Checked by
 [Rollback](PRINCIPLES.md#architecture-rollback)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Rollback Plan
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Self-Healing / Recovery / Deployment Safety](LEXICON.md#lexicon-category-self-healing-recovery-deployment-safety)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for stating before a release how it is undone and testing that the undo works.
+
+How it is checked
+
+Checked by
+[Big-Bang Release](PRINCIPLES.md#architecture-big-bang-release), [Irreversible Migration](PRINCIPLES.md#architecture-irreversible-migration), [Rollback](PRINCIPLES.md#architecture-rollback)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -65984,6 +75591,46 @@ How it is checked
 
 Checked by
 [RAID Redundancy](PRINCIPLES.md#architecture-raid-redundancy)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Small-Batch Release
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Self-Healing / Recovery / Deployment Safety](LEXICON.md#lexicon-category-self-healing-recovery-deployment-safety)
+- Layer: [Correctness Core](SCHEMA.md#layer-correctness-core)
+
+Details
+
+Definition
+A technique for shipping changes in small increments, so each release has a small blast radius.
+
+How it is checked
+
+Checked by
+[Big-Bang Release](PRINCIPLES.md#architecture-big-bang-release), [Evolutionary Architecture](PRINCIPLES.md#architecture-evolutionary-architecture)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -66251,50 +75898,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Liskov Substitution Principle (LSP)](PRINCIPLES.md#architecture-liskov-substitution)
-
-Population
-The term's definition and every architecture edge that names the term
-
-Freshness
-A verdict stands until the definition, the term's kind or an edge that names it changes
-
-Refusal
-The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
-
-Observation
-The resolution validator's pass over every edge target and every definition opening
-
-Evidence
-Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
-
-Authoritative side
-The term record, which every edge that names the term cites
-
-Depends on
-Not answered
-
-Shape it refuses
-Not answered
-
-### Concrete Dependency
-
-- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
-- Category: [SOLID / Object-Oriented Design](LEXICON.md#lexicon-category-solid-object-oriented-design)
-- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
-
-Details
-
-Definition
-Depending directly on a concrete implementation instead of an abstraction, coupling high-level code to low-level detail.
-
-Referenced by
-[Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion)
-
-How it is checked
-
-Checked by
-[Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion)
+[Composition Over Inheritance](PRINCIPLES.md#architecture-composition-over-inheritance), [Liskov Substitution Principle (LSP)](PRINCIPLES.md#architecture-liskov-substitution)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -66390,6 +75994,86 @@ How it is checked
 
 Checked by
 [Liskov Substitution Principle (LSP)](PRINCIPLES.md#architecture-liskov-substitution)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Extract Interface
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [SOLID / Object-Oriented Design](LEXICON.md#lexicon-category-solid-object-oriented-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for declaring the operations clients use as an interface, so the clients depend on it instead of on the class.
+
+How it is checked
+
+Checked by
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling), [Circular Dependency](PRINCIPLES.md#architecture-circular-dependency), [Directed Acyclic Graph (DAG)](PRINCIPLES.md#architecture-directed-acyclic-graph), [Explicit Contracts](PRINCIPLES.md#architecture-explicit-contracts), [Interface-Based Design](PRINCIPLES.md#architecture-interface-based-design), [Low Coupling](PRINCIPLES.md#architecture-low-coupling), [Abstraction](PRINCIPLES.md#architecture-abstraction), [Dependency Inversion Principle (DIP)](PRINCIPLES.md#architecture-dependency-inversion), [Liskov Substitution Principle (LSP)](PRINCIPLES.md#architecture-liskov-substitution), [Extension Points](PRINCIPLES.md#architecture-extension-points), [Clean Architecture](PRINCIPLES.md#architecture-clean-architecture)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Extract Role Interface
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [SOLID / Object-Oriented Design](LEXICON.md#lexicon-category-solid-object-oriented-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for splitting the operations one client role uses into an interface of their own.
+
+How it is checked
+
+Checked by
+[Interface Segregation Principle (ISP)](PRINCIPLES.md#architecture-interface-segregation), [Capability Declaration](PRINCIPLES.md#architecture-capability-declaration)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -66547,6 +76231,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Invert Dependency
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [SOLID / Object-Oriented Design](LEXICON.md#lexicon-category-solid-object-oriented-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for making a high-level module own an abstraction that a low-level module implements.
+
+How it is checked
+
+Checked by
+[Concrete Coupling](PRINCIPLES.md#architecture-concrete-coupling), [Circular Dependency](PRINCIPLES.md#architecture-circular-dependency), [Dependency Graph](PRINCIPLES.md#architecture-dependency-graph), [Directed Acyclic Graph (DAG)](PRINCIPLES.md#architecture-directed-acyclic-graph), [Abstraction](PRINCIPLES.md#architecture-abstraction), [Modularity](PRINCIPLES.md#architecture-modularity), [Replaceability](PRINCIPLES.md#architecture-replaceability)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Narrow Specialized Behavior
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -66590,6 +76314,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Replace Inheritance with Delegation
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [SOLID / Object-Oriented Design](LEXICON.md#lexicon-category-solid-object-oriented-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for replacing a subclass with a class that holds the former base as a field and forwards to it.
+
+How it is checked
+
+Checked by
+[Composition Over Inheritance](PRINCIPLES.md#architecture-composition-over-inheritance), [Liskov Substitution Principle (LSP)](PRINCIPLES.md#architecture-liskov-substitution)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Role-Specific Interfaces
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -66608,6 +76372,86 @@ How it is checked
 
 Checked by
 [Interface Segregation Principle (ISP)](PRINCIPLES.md#architecture-interface-segregation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split Hierarchy
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [SOLID / Object-Oriented Design](LEXICON.md#lexicon-category-solid-object-oriented-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for dividing a class hierarchy whose subtypes do not honor one contract into hierarchies that each do.
+
+How it is checked
+
+Checked by
+[Liskov Substitution Principle (LSP)](PRINCIPLES.md#architecture-liskov-substitution)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split Interface
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [SOLID / Object-Oriented Design](LEXICON.md#lexicon-category-solid-object-oriented-design)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for dividing a broad interface into smaller ones, each holding operations that change together.
+
+How it is checked
+
+Checked by
+[Circular Dependency](PRINCIPLES.md#architecture-circular-dependency), [Interface Segregation Principle (ISP)](PRINCIPLES.md#architecture-interface-segregation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -66685,15 +76529,18 @@ Not answered
 Details
 
 Definition
-Branching on an object's concrete type instead of dispatching through a shared polymorphic interface.
+Branching on an object's concrete type instead of dispatching through a shared polymorphic interface or a visitor's double dispatch.
+
+Aliases
+Type-Switch Dispatch
 
 Referenced by
-[Polymorphism](PRINCIPLES.md#architecture-polymorphism)
+[Dynamic Dispatch](PRINCIPLES.md#architecture-dynamic-dispatch), [Polymorphism](PRINCIPLES.md#architecture-polymorphism), [Visitor Pattern](PRINCIPLES.md#architecture-visitor-pattern)
 
 How it is checked
 
 Checked by
-[Polymorphism](PRINCIPLES.md#architecture-polymorphism)
+[Dynamic Dispatch](PRINCIPLES.md#architecture-dynamic-dispatch), [Polymorphism](PRINCIPLES.md#architecture-polymorphism), [Visitor Pattern](PRINCIPLES.md#architecture-visitor-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -67371,6 +77218,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Fuse Passes
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Streaming / Pipeline / Dataflow Processing](LEXICON.md#lexicon-category-streaming-pipeline-dataflow-processing)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A technique for combining several passes over the same data into one.
+
+How it is checked
+
+Checked by
+[Single-Pass Processing](PRINCIPLES.md#architecture-single-pass-processing)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Global Optimization
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -67561,6 +77448,46 @@ How it is checked
 
 Checked by
 [Batch-vs-Stream](PRINCIPLES.md#architecture-batch-vs-stream)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Look-Back Buffering
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Streaming / Pipeline / Dataflow Processing](LEXICON.md#lexicon-category-streaming-pipeline-dataflow-processing)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which a whole stream is buffered so that one stage can look back or ahead.
+
+How it is checked
+
+Checked by
+[Forward-Only Processing](PRINCIPLES.md#architecture-forward-only-processing)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -68062,6 +77989,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Random Access over a Stream
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Streaming / Pipeline / Dataflow Processing](LEXICON.md#lexicon-category-streaming-pipeline-dataflow-processing)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which code seeks or indexes into a source that can only be read in sequence.
+
+How it is checked
+
+Checked by
+[Sequential Access](PRINCIPLES.md#architecture-sequential-access)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Random Access Requirement
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -68080,6 +78047,46 @@ How it is checked
 
 Checked by
 the tension resolution with sequential-access
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Repeated Full Scan
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Streaming / Pipeline / Dataflow Processing](LEXICON.md#lexicon-category-streaming-pipeline-dataflow-processing)
+- Layer: [Execution Core](SCHEMA.md#layer-execution-core)
+
+Details
+
+Definition
+A defect in which large data is scanned or materialized several times where one pass would do.
+
+How it is checked
+
+Checked by
+[Single-Pass Processing](PRINCIPLES.md#architecture-single-pass-processing)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -68728,7 +78735,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Adapter Pattern](PRINCIPLES.md#architecture-adapter-pattern)
+[Anti-Corruption Layer](PRINCIPLES.md#architecture-anti-corruption-layer), [Adapter Pattern](PRINCIPLES.md#architecture-adapter-pattern)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -69710,6 +79717,46 @@ Not answered
 
 Every term in this category is listed as one record, with its kind, its definition and its aliases, the principles whose relations name it, the principle or contract that carries the same name where one exists, and the layer its category belongs to. A tag category also gives each term an example, which is the file the tag places or the rename from a refused word onto a covering tag.
 
+### Add a Sibling Subject Folder
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for relieving breadth with a subject folder beside the existing one instead of below it.
+
+How it is checked
+
+Checked by
+[Bounded Nesting Depth](PRINCIPLES.md#architecture-bounded-nesting-depth), [Sideways Overflow](PRINCIPLES.md#architecture-sideways-overflow)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Adjective Slot Word
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -69783,6 +79830,46 @@ How it is checked
 
 Checked by
 [Manual Identity Migration](PRINCIPLES.md#architecture-manual-identity-migration)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Apply the Domain-Ward Tie-Break
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for resolving an irreducible two-concern overlap toward the concern nearer the domain on the layer spine.
+
+How it is checked
+
+Checked by
+[Layer Spine Precedence](PRINCIPLES.md#architecture-layer-spine-precedence)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -69903,7 +79990,7 @@ Not answered
 Details
 
 Definition
-Declaring a tree that another runtime resolves by name a governed root and renaming it to the grammar, which breaks that runtime at its next start without reorganising anything.
+Declaring a tree that another runtime resolves by name a governed root and renaming it to the grammar, which breaks that runtime at its next start without reorganizing anything.
 
 Referenced by
 [Declared Jurisdiction](PRINCIPLES.md#architecture-declared-jurisdiction)
@@ -69980,6 +80067,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Classify Before the First Write
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for deciding a file's concern and subject before writing it, so it is created under its final name.
+
+How it is checked
+
+Checked by
+[Conformance at Creation](PRINCIPLES.md#architecture-conformance-at-creation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Classify to the Meta Concern
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for tagging a file with the agnostic concern that covers its role instead of a domain word.
+
+How it is checked
+
+Checked by
+[Agnostic-First Vocabulary](PRINCIPLES.md#architecture-agnostic-first-vocabulary)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Collapse the Exemption Lists
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for replacing per-check exemption lists for one upstream tree with a single declaration every check reads.
+
+How it is checked
+
+Checked by
+[Declared Jurisdiction](PRINCIPLES.md#architecture-declared-jurisdiction)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Collection Concern
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -70001,6 +80208,46 @@ How it is checked
 
 Checked by
 [Concern-Folder Correspondence](PRINCIPLES.md#architecture-concern-folder-correspondence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Compare Both Files
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for comparing the responsibilities of two colliding files before giving either a variant.
+
+How it is checked
+
+Checked by
+[Collision Consolidation](PRINCIPLES.md#architecture-collision-consolidation)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -70366,6 +80613,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Copied Slot Word
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which each word a source owns is copied into the declared vocabulary, one entry per allocated identity or upstream key.
+
+How it is checked
+
+Checked by
+[Externally Resolved Slot](PRINCIPLES.md#architecture-externally-resolved-slot)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Correct the Resolver
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for fixing a slot resolver that reads a word by its vocabulary instead of by its position.
+
+How it is checked
+
+Checked by
+[Positional Slot Resolution](PRINCIPLES.md#architecture-positional-slot-resolution)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Covering Concern
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -70384,6 +80711,86 @@ How it is checked
 
 Checked by
 [Guided Vocabulary Refusal](PRINCIPLES.md#architecture-guided-vocabulary-refusal)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare the Dialect
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for binding a file extension to the case splitter its language uses.
+
+How it is checked
+
+Checked by
+[Case Dialect](PRINCIPLES.md#architecture-case-dialect)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Declare the Root
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for adding a folder to the jurisdiction declaration instead of inferring that it is governed.
+
+How it is checked
+
+Checked by
+[Declared Jurisdiction](PRINCIPLES.md#architecture-declared-jurisdiction)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -70455,6 +80862,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Depth-Anchored Discovery
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which discovery is anchored to a depth, so a grouped set falls out of the pattern.
+
+How it is checked
+
+Checked by
+[Glob-Resolvable Tree](PRINCIPLES.md#architecture-glob-resolvable-tree)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Depth-Relief Container
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -70501,6 +80948,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Derive the Registry from the Document
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for generating the machine-read vocabulary from the document that reasons about it, so the two cannot drift.
+
+How it is checked
+
+Checked by
+[Derived Naming Registry](PRINCIPLES.md#architecture-derived-naming-registry)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Domain-Dialect Role
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which an agnostic role is restated in a local domain dialect.
+
+How it is checked
+
+Checked by
+[Agnostic-First Vocabulary](PRINCIPLES.md#architecture-agnostic-first-vocabulary)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Downward Nesting
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -70519,6 +81046,86 @@ How it is checked
 
 Checked by
 [Bounded Nesting Depth](PRINCIPLES.md#architecture-bounded-nesting-depth), [Sideways Overflow](PRINCIPLES.md#architecture-sideways-overflow)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Drop the Prefix
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for removing a numeric order prefix from filenames once a registry holds the order.
+
+How it is checked
+
+Checked by
+[Registry-Held Order](PRINCIPLES.md#architecture-registry-held-order)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Drop the Redundant Head
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for removing from a filename the subject its folder already declares.
+
+How it is checked
+
+Checked by
+[Set-Relative Member Name](PRINCIPLES.md#architecture-set-relative-member-name)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -70694,6 +81301,46 @@ How it is checked
 
 Checked by
 [Manual Identity Migration](PRINCIPLES.md#architecture-manual-identity-migration)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Generic Subject over a Domain File
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which a file carries the generic subject while its source names the domain it serves.
+
+How it is checked
+
+Checked by
+[Sanctioned Generic Subject](PRINCIPLES.md#architecture-sanctioned-generic-subject)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -70992,6 +81639,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Index the Rejection Table by Refused Word
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for keying the table of rejected words by the refused word, so the gate can look up its replacement.
+
+How it is checked
+
+Checked by
+[Guided Vocabulary Refusal](PRINCIPLES.md#architecture-guided-vocabulary-refusal)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Instance Identifier Word
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -71121,6 +81808,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Loose Root File
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which a file sits at a governed root while it is neither the entry document nor an accumulator.
+
+How it is checked
+
+Checked by
+[Root Spine Files](PRINCIPLES.md#architecture-root-spine-files)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Mass Concern
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -71216,6 +81943,286 @@ Not answered
 Shape it refuses
 Not answered
 
+### Merge One Job or Name the Facet
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for merging two files that do one job, or giving the variant the facet that truly differs.
+
+How it is checked
+
+Checked by
+[Collision Consolidation](PRINCIPLES.md#architecture-collision-consolidation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Move Reasoning Back to the Document
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving rules written into a declaration file back into the document that people read.
+
+How it is checked
+
+Checked by
+[Derived Naming Registry](PRINCIPLES.md#architecture-derived-naming-registry)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Move the File into Its Concern Folder
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving a loose root file into the concern folder its tag names.
+
+How it is checked
+
+Checked by
+[Root Spine Files](PRINCIPLES.md#architecture-root-spine-files)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Move the Order into the Registry
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for recording a sequence in a registry instead of in numeric filename prefixes.
+
+How it is checked
+
+Checked by
+[Registry-Held Order](PRINCIPLES.md#architecture-registry-held-order)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Move the Tag to the Concern Slot
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for placing a concern tag as the last segment of a filename, where the parser reads the concern.
+
+How it is checked
+
+Checked by
+[Positional Slot Resolution](PRINCIPLES.md#architecture-positional-slot-resolution)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Move the Test with Its Subject
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving a test to the mirrored path of its subject whenever the subject moves.
+
+How it is checked
+
+Checked by
+[Mirrored Test Placement](PRINCIPLES.md#architecture-mirrored-test-placement)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Move to the Matching Concern Folder
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving a file into the folder whose label equals its concern tag.
+
+How it is checked
+
+Checked by
+[Concern-Folder Correspondence](PRINCIPLES.md#architecture-concern-folder-correspondence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Multi-Role File
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -71237,6 +82244,46 @@ How it is checked
 
 Checked by
 [One Concern Per File](PRINCIPLES.md#architecture-one-concern-per-file), [Layer Spine Precedence](PRINCIPLES.md#architecture-layer-spine-precedence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Name the Covering Concern in the Refusal
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for having a vocabulary refusal name the declared word that covers the refused one.
+
+How it is checked
+
+Checked by
+[Guided Vocabulary Refusal](PRINCIPLES.md#architecture-guided-vocabulary-refusal)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -71449,6 +82496,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Per-Check Exemption List
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which each check keeps its own exemption list for the same upstream tree.
+
+How it is checked
+
+Checked by
+[Declared Jurisdiction](PRINCIPLES.md#architecture-declared-jurisdiction)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Per-Language Vocabulary
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which a separate vocabulary is declared for each language instead of one set of slots read through each language's case.
+
+How it is checked
+
+Checked by
+[Case Dialect](PRINCIPLES.md#architecture-case-dialect)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Place the Folder in an Existing Container
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving a folder under the container that already groups its kind of content.
+
+How it is checked
+
+Checked by
+[Declared Jurisdiction](PRINCIPLES.md#architecture-declared-jurisdiction)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Placement Predictability
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -71541,6 +82708,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Prose-Only Vocabulary
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which a vocabulary is kept in prose the gate cannot read.
+
+How it is checked
+
+Checked by
+[Derived Naming Registry](PRINCIPLES.md#architecture-derived-naming-registry)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Provisional Name
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which a file is written under a provisional name and its correct name is left for a later sweep.
+
+How it is checked
+
+Checked by
+[Conformance at Creation](PRINCIPLES.md#architecture-conformance-at-creation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Re-Alignment Cadence
 
 - Kind: [constraint](SCHEMA.md#kind-constraint)
@@ -71554,6 +82801,46 @@ A rule or precondition that only a bounded run of conversion records may cite on
 
 Referenced by
 [Manual Identity Migration](PRINCIPLES.md#architecture-manual-identity-migration)
+
+How it is checked
+
+Checked by
+[Manual Identity Migration](PRINCIPLES.md#architecture-manual-identity-migration)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Re-Point the Pattern
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for updating every shape-discovered surface whose pattern encoded a renamed form.
 
 How it is checked
 
@@ -71627,6 +82914,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Reclassify the File
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for reading a file again and giving it the concern tag its code supports.
+
+How it is checked
+
+Checked by
+[Concern-Folder Correspondence](PRINCIPLES.md#architecture-concern-folder-correspondence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Reclassify to the Narrower Role
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for moving a file from a broad concern tag to the narrowest tag that still fits it.
+
+How it is checked
+
+Checked by
+[Narrowest Concern](PRINCIPLES.md#architecture-narrowest-concern)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Rejection Table
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -71673,6 +83040,206 @@ Not answered
 Shape it refuses
 Not answered
 
+### Remove the Copies
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for deleting vocabulary entries that copy words another source already owns.
+
+How it is checked
+
+Checked by
+[Externally Resolved Slot](PRINCIPLES.md#architecture-externally-resolved-slot)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Remove the Ignore Entry
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for deleting an ignore entry that hid authored source and fixing the finding it silenced.
+
+How it is checked
+
+Checked by
+[Declared Jurisdiction](PRINCIPLES.md#architecture-declared-jurisdiction)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Rename to a Declared Word
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for replacing an undeclared word in a name with the declared word that covers its role.
+
+How it is checked
+
+Checked by
+[Closed Vocabulary](PRINCIPLES.md#architecture-closed-vocabulary)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Rename to the Case's Word Run
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for renaming a dialect file so its case splitter yields the three declared slots.
+
+How it is checked
+
+Checked by
+[Case Dialect](PRINCIPLES.md#architecture-case-dialect)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Resolve the Slot Against Its Source
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for checking a slot word against the source that allocates it instead of against a copied vocabulary.
+
+How it is checked
+
+Checked by
+[Externally Resolved Slot](PRINCIPLES.md#architecture-externally-resolved-slot)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Restated Set Member
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -71691,6 +83258,46 @@ How it is checked
 
 Checked by
 [Set-Relative Member Name](PRINCIPLES.md#architecture-set-relative-member-name)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Restore the Terminating Tag
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for ending a filename with its concern tag again, so a glob on the tag finds it.
+
+How it is checked
+
+Checked by
+[Glob-Resolvable Tree](PRINCIPLES.md#architecture-glob-resolvable-tree)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -71897,6 +83504,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Shape-Inferred Jurisdiction
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which jurisdiction is inferred from folder shape instead of declared.
+
+How it is checked
+
+Checked by
+[Declared Jurisdiction](PRINCIPLES.md#architecture-declared-jurisdiction)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Shared-Subject Test
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which one test file covers several subjects.
+
+How it is checked
+
+Checked by
+[Mirrored Test Placement](PRINCIPLES.md#architecture-mirrored-test-placement)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Single-Unit Concern
 
 - Kind: [artifact](SCHEMA.md#kind-artifact)
@@ -71915,6 +83602,166 @@ How it is checked
 
 Checked by
 [Concern-Folder Correspondence](PRINCIPLES.md#architecture-concern-folder-correspondence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Spine Read as a Dependency Rule
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which the layer spine is read as a dependency-direction rule rather than a classification tie-break.
+
+How it is checked
+
+Checked by
+[Layer Spine Precedence](PRINCIPLES.md#architecture-layer-spine-precedence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split by Responsibility
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for dividing a file that holds two concerns into one file per concern.
+
+How it is checked
+
+Checked by
+[One Concern Per File](PRINCIPLES.md#architecture-one-concern-per-file)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split One Test per Subject
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for dividing a test that covers several subjects into one test file per subject.
+
+How it is checked
+
+Checked by
+[Mirrored Test Placement](PRINCIPLES.md#architecture-mirrored-test-placement)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Split the Compound
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for separating a word that fused a subject and a concern into its two slots.
+
+How it is checked
+
+Checked by
+[Positional Slot Resolution](PRINCIPLES.md#architecture-positional-slot-resolution)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -72112,6 +83959,126 @@ Not answered
 Shape it refuses
 Not answered
 
+### Tag-Folder Mismatch
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which a file's concern tag differs from the label of its parent folder.
+
+How it is checked
+
+Checked by
+[Concern-Folder Correspondence](PRINCIPLES.md#architecture-concern-folder-correspondence)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Take the Domain Noun as the Subject
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for replacing the generic subject with the domain noun the file's source names.
+
+How it is checked
+
+Checked by
+[Sanctioned Generic Subject](PRINCIPLES.md#architecture-sanctioned-generic-subject)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Take the Variant Slot
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for resolving a name collision with a declared variant instead of a new folder level.
+
+How it is checked
+
+Checked by
+[Bounded Nesting Depth](PRINCIPLES.md#architecture-bounded-nesting-depth), [Sideways Overflow](PRINCIPLES.md#architecture-sideways-overflow)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Tree Compactness
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -72130,6 +84097,46 @@ How it is checked
 
 Checked by
 the tension resolution with bounded-nesting-depth
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Unanchor the Pattern
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for writing a discovery pattern that matches a concern at any depth instead of at one.
+
+How it is checked
+
+Checked by
+[Glob-Resolvable Tree](PRINCIPLES.md#architecture-glob-resolvable-tree)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -72336,6 +84343,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Verify the Collected Count
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A technique for comparing what each aggregator collects before and after a rename, treating a drop to zero as a failure.
+
+How it is checked
+
+Checked by
+[Manual Identity Migration](PRINCIPLES.md#architecture-manual-identity-migration)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Vocabulary Admission
 
 - Kind: [activity](SCHEMA.md#kind-activity)
@@ -72424,6 +84471,46 @@ How it is checked
 
 Checked by
 [Closed Vocabulary](PRINCIPLES.md#architecture-closed-vocabulary), [Agnostic-First Vocabulary](PRINCIPLES.md#architecture-agnostic-first-vocabulary), [Externally Resolved Slot](PRINCIPLES.md#architecture-externally-resolved-slot)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Vocabulary-Bound Reading
+
+- Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
+- Category: [Taxonomy / Classification / Naming](LEXICON.md#lexicon-category-taxonomy-classification-naming)
+- Layer: [Structural Core](SCHEMA.md#layer-structural-core)
+
+Details
+
+Definition
+A defect in which a word is read by the vocabulary that declares it rather than by the slot it lands in.
+
+How it is checked
+
+Checked by
+[Positional Slot Resolution](PRINCIPLES.md#architecture-positional-slot-resolution)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -72582,6 +84669,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Apply Concurrency Control
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for coordinating concurrent writers with locks, versions or ownership, so no write is lost.
+
+How it is checked
+
+Checked by
+[Shared Mutable State](PRINCIPLES.md#architecture-shared-mutable-state), [Happens-Before Relationship](PRINCIPLES.md#architecture-happens-before-relationship), [Concurrency](PRINCIPLES.md#architecture-concurrency), [Pessimistic Locking](PRINCIPLES.md#architecture-pessimistic-locking)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### BASE/Eventual Consistency
 
 - Kind: [model](SCHEMA.md#kind-model)
@@ -72642,7 +84769,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Optimistic Locking](PRINCIPLES.md#architecture-optimistic-locking)
+[Optimistic Locking](PRINCIPLES.md#architecture-optimistic-locking), [Pessimistic Locking](PRINCIPLES.md#architecture-pessimistic-locking)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -72784,6 +84911,46 @@ How it is checked
 
 Checked by
 [Optimistic Locking](PRINCIPLES.md#architecture-optimistic-locking)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Consistency Contract
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for stating which reads may be stale, for how long, and how a client learns that its write is visible.
+
+How it is checked
+
+Checked by
+[Read-Your-Writes Violation](PRINCIPLES.md#architecture-read-your-writes-violation), [Replication](PRINCIPLES.md#architecture-replication)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -73202,6 +85369,46 @@ Not answered
 Shape it refuses
 Not answered
 
+### Fix the Race
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for removing a race by ordering, locking or making the shared state immutable, instead of retrying the test.
+
+How it is checked
+
+Checked by
+[Flaky Test Normalization](PRINCIPLES.md#architecture-flaky-test-normalization)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Hidden Distributed Transaction
 
 - Kind: [anti-pattern](SCHEMA.md#kind-anti-pattern)
@@ -73219,7 +85426,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Transaction Boundary](PRINCIPLES.md#architecture-transaction-boundary)
+[Saga Pattern](PRINCIPLES.md#architecture-saga-pattern), [Transaction Boundary](PRINCIPLES.md#architecture-transaction-boundary)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -73306,6 +85513,46 @@ How it is checked
 
 Checked by
 [Consistency](PRINCIPLES.md#architecture-consistency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Introduce Transaction Boundary
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for declaring which writes commit or fail together.
+
+How it is checked
+
+Checked by
+[Shared Mutable State](PRINCIPLES.md#architecture-shared-mutable-state), [Atomicity](PRINCIPLES.md#architecture-atomicity), [ACID](PRINCIPLES.md#architecture-acid), [Consistency](PRINCIPLES.md#architecture-consistency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -73460,6 +85707,86 @@ Not answered
 Shape it refuses
 Not answered
 
+### Make Immutable
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for replacing in-place mutation with new values, so state shared between readers cannot change under them.
+
+How it is checked
+
+Checked by
+[Shared Mutable State](PRINCIPLES.md#architecture-shared-mutable-state), [Immutability](PRINCIPLES.md#architecture-immutability), [Concurrency](PRINCIPLES.md#architecture-concurrency), [Concurrency Control](PRINCIPLES.md#architecture-concurrency-control), [State Isolation](PRINCIPLES.md#architecture-state-isolation)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Merge Policy
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for declaring how two concurrent changes to one value are combined.
+
+How it is checked
+
+Checked by
+[Lost Update](PRINCIPLES.md#architecture-lost-update)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
 ### Modeling Overhead
 
 - Kind: [quality-attribute](SCHEMA.md#kind-quality-attribute)
@@ -73563,7 +85890,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Atomicity](PRINCIPLES.md#architecture-atomicity)
+[Atomicity](PRINCIPLES.md#architecture-atomicity), [ACID](PRINCIPLES.md#architecture-acid)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -73692,7 +86019,7 @@ Referenced by
 How it is checked
 
 Checked by
-[Controlled Side Effects](PRINCIPLES.md#architecture-controlled-side-effects)
+[Pure Functions](PRINCIPLES.md#architecture-pure-functions), [Controlled Side Effects](PRINCIPLES.md#architecture-controlled-side-effects)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -73736,6 +86063,86 @@ How it is checked
 
 Checked by
 [Petri Nets](PRINCIPLES.md#architecture-petri-nets)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Read From Primary After Write
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for routing a client's reads to the primary for a short time after it writes, so it sees its own write.
+
+How it is checked
+
+Checked by
+[Read-Your-Writes Violation](PRINCIPLES.md#architecture-read-your-writes-violation), [Causal Consistency](PRINCIPLES.md#architecture-causal-consistency)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Reconciliation Job
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for periodically comparing two copies of related state and repairing the differences found.
+
+How it is checked
+
+Checked by
+[Silent Data Corruption](PRINCIPLES.md#architecture-silent-data-corruption), [Dual Write](PRINCIPLES.md#architecture-dual-write), [Eventual Consistency](PRINCIPLES.md#architecture-eventual-consistency), [Consistency](PRINCIPLES.md#architecture-consistency)
 
 Population
 The term's definition and every architecture edge that names the term
@@ -74252,6 +86659,46 @@ How it is checked
 
 Checked by
 [ACID](PRINCIPLES.md#architecture-acid)
+
+Population
+The term's definition and every architecture edge that names the term
+
+Freshness
+A verdict stands until the definition, the term's kind or an edge that names it changes
+
+Refusal
+The resolution gate fails an edge that resolves to no term, and a definition that opens as another kind
+
+Observation
+The resolution validator's pass over every edge target and every definition opening
+
+Evidence
+Watched to fire and to accept: a suite plants a term no edge names, a dangling dependency and a second check home, and the bundled terms pass
+
+Authoritative side
+The term record, which every edge that names the term cites
+
+Depends on
+Not answered
+
+Shape it refuses
+Not answered
+
+### Transaction Isolation Level
+
+- Kind: [technique](SCHEMA.md#kind-technique)
+- Category: [Transactions / State / Concurrency](LEXICON.md#lexicon-category-transactions-state-concurrency)
+- Layer: [Atomic Boundary](SCHEMA.md#layer-atomic-boundary)
+
+Details
+
+Definition
+A technique for choosing how much concurrent transactions see of each other's uncommitted and recent writes.
+
+How it is checked
+
+Checked by
+[Lost Update](PRINCIPLES.md#architecture-lost-update), [Isolation](PRINCIPLES.md#architecture-isolation)
 
 Population
 The term's definition and every architecture edge that names the term

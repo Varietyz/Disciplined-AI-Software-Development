@@ -1,0 +1,147 @@
+{
+    "category": "structural-patterns",
+    "records": [
+        {
+            "name": "Cartesian Inheritance Explosion",
+            "kind": "anti-pattern",
+            "definition": "Modeling every combination of two independent dimensions as its own subclass, so the class count grows multiplicatively."
+        },
+        {
+            "name": "Direct Access",
+            "kind": "anti-pattern",
+            "definition": "Reaching a resource directly with no intermediary, bypassing the access control, caching, or laziness a proxy would add."
+        },
+        {
+            "name": "Direct External Coupling",
+            "kind": "anti-pattern",
+            "definition": "Coupling code directly to an incompatible external interface, spreading its idiosyncrasies through the codebase."
+        },
+        {
+            "name": "Leaf-vs-Container Special-Casing",
+            "kind": "anti-pattern",
+            "definition": "Branching client code on whether an element is a leaf or a container instead of treating them through one interface."
+        },
+        {
+            "name": "Leaky Subsystem API",
+            "kind": "anti-pattern",
+            "definition": "Exposing a subsystem's internal complexity directly to clients instead of hiding it behind a simplifying interface."
+        },
+        {
+            "name": "Per-Instance Duplicate State",
+            "kind": "anti-pattern",
+            "definition": "Storing identical shared state separately in every object instance, wasting memory at high object counts."
+        },
+        {
+            "name": "Subclass Explosion",
+            "kind": "anti-pattern",
+            "definition": "Creating a distinct subclass for every combination of optional features instead of composing them at runtime."
+        },
+        {
+            "name": "High-Cardinality Object Reuse",
+            "kind": "capability",
+            "definition": "The ability to represent large numbers of similar objects economically by sharing their common intrinsic state."
+        },
+        {
+            "name": "Implementation Swap",
+            "kind": "capability",
+            "definition": "The ability to change an abstraction's underlying implementation without altering the abstraction itself."
+        },
+        {
+            "name": "Lazy Load",
+            "kind": "capability",
+            "definition": "The ability to defer creating or loading a costly resource until it is first used."
+        },
+        {
+            "name": "Leaf/Composite Transparency",
+            "kind": "capability",
+            "definition": "The ability to treat individual objects and compositions of objects through one uniform interface."
+        },
+        {
+            "name": "Recursive Composition",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:leaf-composite-transparency",
+                    "reason": "Recursive composition nests composites to any depth, while leaf and composite transparency lets callers treat both through one interface."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to build tree structures in which composites contain other composites to arbitrary depth."
+        },
+        {
+            "name": "Runtime Behavior Extension",
+            "kind": "capability",
+            "definition": "The ability to add responsibilities to an object dynamically at runtime by wrapping it."
+        },
+        {
+            "name": "Shared Immutable State",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:high-cardinality-object-reuse",
+                    "reason": "Shared immutable state is one object safely used in many contexts, while high-cardinality reuse represents many similar objects cheaply through that sharing."
+                }
+            ],
+            "kind": "capability",
+            "definition": "The ability to safely share one immutable state object across many contexts at once."
+        },
+        {
+            "name": "Simplified Access",
+            "kind": "capability",
+            "definition": "The ability to use a complex subsystem through a small, convenient interface."
+        },
+        {
+            "name": "Remote Stub",
+            "kind": "mechanism",
+            "definition": "A local stand-in object that forwards calls to an object living in another process or machine."
+        },
+        {
+            "name": "Common Interface",
+            "kind": "constraint",
+            "definition": "The requirement that a wrapper and the object it wraps share one interface so they remain interchangeable."
+        },
+        {
+            "name": "Incompatible Interfaces",
+            "kind": "constraint",
+            "definition": "A precondition of two interfaces that must cooperate yet expose mismatched signatures."
+        },
+        {
+            "name": "Independent Variation Axes",
+            "kind": "constraint",
+            "definition": "The requirement that an abstraction and its implementation vary along separate axes so they can be decoupled."
+        },
+        {
+            "name": "Separable Intrinsic State",
+            "kind": "constraint",
+            "definition": "The requirement that an object's shared, context-independent state be separable from its per-use state."
+        },
+        {
+            "name": "Uniform Component Interface",
+            "kind": "constraint",
+            "definition": "The requirement that leaves and composites implement one shared interface so clients treat them alike."
+        },
+        {
+            "name": "Indirection",
+            "kind": "quality-attribute",
+            "definition": "The degree of extra indirection introduced by separating an abstraction from its implementation."
+        },
+        {
+            "name": "Over-Centralization",
+            "kind": "quality-attribute",
+            "definition": "The degree to which routing all access through one facade concentrates responsibility and can bottleneck change."
+        },
+        {
+            "name": "Stack Debugging",
+            "kind": "quality-attribute",
+            "definition": "The degree to which layers of wrapping deepen the call stack and complicate debugging."
+        },
+        {
+            "name": "Subsystem Complexity",
+            "kind": "quality-attribute",
+            "definition": "The degree of internal complexity in a subsystem that motivates hiding it behind a facade."
+        },
+        {
+            "name": "Transparency / Debugging",
+            "kind": "quality-attribute",
+            "definition": "The degree to which interposing a proxy hides the real object and complicates tracing calls to it."
+        }
+    ]
+}

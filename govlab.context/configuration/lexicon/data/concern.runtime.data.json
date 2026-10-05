@@ -1,0 +1,280 @@
+{
+    "category": "runtime-concerns",
+    "exampleShape": "placed-file",
+    "enforcedBy": ["the naming gate, which refuses a filename whose last segment before the extension is an undeclared tag or differs from its folder's tag"],
+    "check": {
+        "population": "every filename whose concern slot holds the tag, and the folder holding each such file",
+        "freshness": "a verdict stands until a file carrying the tag is created, moved or renamed, or the declared vocabulary changes",
+        "refusal": "the lint run fails a file whose tag is undeclared or disagrees with its folder",
+        "observation": "each filename parsed by position against the declared concern vocabulary",
+        "evidence": "fires-and-accepts: a suite lints a file whose tag is undeclared and one whose tag differs from its folder, and passes a conforming file",
+        "authority": "the declared concern vocabulary, which a filename's tag and its folder conform to"
+    },
+    "records": [
+        {
+            "name": "Entrypoint Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file a runtime starts from, which reads its arguments and hands control to the code behind it, filed in an entrypoints folder.",
+            "example": "entrypoints/cli.entrypoint.ts"
+        },
+        {
+            "name": "Bootstrapper Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that assembles the system's parts in order before it serves anything, filed in a bootstrappers folder.",
+            "example": "bootstrappers/api-server.bootstrapper.ts"
+        },
+        {
+            "name": "Initializer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that prepares one component's starting state, filed in an initializers folder.",
+            "example": "initializers/audio-engine.initializer.ts"
+        },
+        {
+            "name": "Activator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that switches a prepared component into its active state when its trigger arrives, filed in an activators folder.",
+            "example": "activators/voice-command.activator.ts"
+        },
+        {
+            "name": "Lifecycle Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that governs how a component starts, pauses, resumes and stops, filed in a lifecycle folder.",
+            "example": "lifecycle/game-session.lifecycle.ts"
+        },
+        {
+            "name": "Lifecycle-Hook Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that runs at one named point of a component's lifecycle, filed in a lifecycle-hooks folder.",
+            "example": "lifecycle-hooks/editor-mount.lifecycle-hook.ts"
+        },
+        {
+            "name": "Startup Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that runs the work a process must finish before it accepts any, filed in a startup folder.",
+            "example": "startup/license-check.startup.ts"
+        },
+        {
+            "name": "Warmup Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that primes caches and connections so the first real request runs at normal speed, filed in a warmup folder.",
+            "example": "warmup/price-cache.warmup.ts"
+        },
+        {
+            "name": "Draining Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that lets in-flight work finish while refusing new work before a stop, filed in a draining folder.",
+            "example": "draining/websocket.draining.ts"
+        },
+        {
+            "name": "Shutdown Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that stops a process in an order that loses no committed work, filed in a shutdown folder.",
+            "example": "shutdown/order-worker.shutdown.ts"
+        },
+        {
+            "name": "Teardown Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that removes what a setup created, such as fixtures or temporary resources, filed in a teardown folder.",
+            "example": "teardown/test-database.teardown.ts"
+        },
+        {
+            "name": "Disposal Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that releases the resources an object holds when the object is no longer used, filed in a disposal folder.",
+            "example": "disposal/gpu-texture.disposal.ts"
+        },
+        {
+            "name": "Cleanup Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that removes leftover state a finished operation leaves behind, filed in a cleanup folder.",
+            "example": "cleanup/temp-upload.cleanup.ts"
+        },
+        {
+            "name": "Finalizer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that runs last work on an object as the runtime reclaims it, filed in a finalizers folder.",
+            "example": "finalizers/file-handle.finalizer.ts"
+        },
+        {
+            "name": "Runtime Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that provides the environment other code executes inside, filed in a runtimes folder.",
+            "example": "runtimes/sandbox.runtime.ts"
+        },
+        {
+            "name": "Engine Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:step-tag",
+                    "reason": "An engine runs the loop that advances a system, while a step is one advance within it."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that runs the central loop advancing a system's state, filed in an engines folder.",
+            "example": "engines/physics.engine.ts"
+        },
+        {
+            "name": "Executor Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that runs submitted work on the resources it manages, filed in an executors folder.",
+            "example": "executors/thread-pool.executor.ts"
+        },
+        {
+            "name": "Evaluator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that computes the value of an expression or a rule against given inputs, filed in an evaluators folder.",
+            "example": "evaluators/pricing-rule.evaluator.ts"
+        },
+        {
+            "name": "Interpreter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that executes a program by walking its representation directly, filed in an interpreters folder.",
+            "example": "interpreters/bytecode.interpreter.ts"
+        },
+        {
+            "name": "Scheduler Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that decides when each piece of work runs, filed in a schedulers folder.",
+            "example": "schedulers/report.scheduler.ts"
+        },
+        {
+            "name": "Worker Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that runs work on its own thread or process apart from the caller, filed in a workers folder.",
+            "example": "workers/video-encode.worker.ts"
+        },
+        {
+            "name": "Future Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a handle to a result that is not computed yet, filed in a futures folder.",
+            "example": "futures/quote.future.ts"
+        },
+        {
+            "name": "Promise Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that settles an asynchronous result once, as fulfilled or rejected, filed in a promises folder.",
+            "example": "promises/geolocation.promise.ts"
+        },
+        {
+            "name": "Queue Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds items in arrival order until a consumer takes them, filed in a queues folder.",
+            "example": "queues/email.queue.ts"
+        },
+        {
+            "name": "Channel Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that carries messages between two parties of a concurrent program, filed in a channels folder.",
+            "example": "channels/progress.channel.ts"
+        },
+        {
+            "name": "Pipe Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that connects one stage's output directly to the next stage's input as a byte or item stream, filed in a pipes folder.",
+            "example": "pipes/gzip.pipe.ts"
+        },
+        {
+            "name": "Mailbox Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds the messages addressed to one actor until it processes them, filed in a mailboxes folder.",
+            "example": "mailboxes/chat-room.mailbox.ts"
+        },
+        {
+            "name": "Pool Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that keeps reusable instances and lends them out instead of creating new ones, filed in a pools folder.",
+            "example": "pools/bullet.pool.ts"
+        },
+        {
+            "name": "Memory Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds what an agent or a process remembers between steps, filed in a memory folder.",
+            "example": "memory/conversation.memory.ts"
+        },
+        {
+            "name": "Heap Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that keeps items ordered so the highest-priority one is always taken first, filed in a heaps folder.",
+            "example": "heaps/job-priority.heap.ts"
+        },
+        {
+            "name": "Handle Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines an opaque reference to a resource another part of the system owns, filed in a handles folder.",
+            "example": "handles/window.handle.ts"
+        },
+        {
+            "name": "Clock Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that supplies the current time through one replaceable source, filed in a clocks folder.",
+            "example": "clocks/system.clock.ts"
+        },
+        {
+            "name": "Timer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that runs work after a delay or at a fixed rate, filed in a timers folder.",
+            "example": "timers/autosave.timer.ts"
+        },
+        {
+            "name": "Timeout Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that abandons an operation that runs past its allowed time, filed in a timeouts folder.",
+            "example": "timeouts/checkout-request.timeout.ts",
+            "seeAlso": ["timeout"]
+        },
+        {
+            "name": "Deadline Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that carries the absolute time by which a piece of work must finish, filed in a deadlines folder.",
+            "example": "deadlines/render-frame.deadline.ts"
+        },
+        {
+            "name": "Delay Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defers an action by a computed amount of time, filed in a delays folder.",
+            "example": "delays/retry-backoff.delay.ts"
+        },
+        {
+            "name": "Period Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a named span of calendar time such as a billing month, filed in a periods folder.",
+            "example": "periods/fiscal-quarter.period.ts"
+        },
+        {
+            "name": "Window Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that groups events into bounded spans of time for aggregation, filed in a windows folder.",
+            "example": "windows/five-minute.window.ts"
+        },
+        {
+            "name": "Recurrence Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a rule for repeating an event in time, filed in a recurrences folder.",
+            "example": "recurrences/weekly-standup.recurrence.ts"
+        },
+        {
+            "name": "Cron Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds a schedule written as a cron expression, filed in a crons folder.",
+            "example": "crons/backup-rotation.cron.ts"
+        },
+        {
+            "name": "Calendar Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that answers which days count, such as working days and holidays, filed in a calendars folder.",
+            "example": "calendars/business-day.calendar.ts"
+        },
+        {
+            "name": "Timezone Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that converts times between zones and their offsets, filed in a timezones folder.",
+            "example": "timezones/meeting.timezone.ts"
+        },
+        {
+            "name": "Timestamp Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that creates, parses or compares recorded instants in time, filed in a timestamps folder.",
+            "example": "timestamps/audit-entry.timestamp.ts"
+        }
+    ]
+}

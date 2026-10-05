@@ -1,0 +1,1444 @@
+{
+    "category": "arch-relationships",
+    "tier": "leaf",
+    "check": {
+        "by": ["the ontology resolution gate, which validates every relationship record's fields, relations and references"],
+        "population": "every architecture record in the catalog",
+        "freshness": "a verdict stands until a record or the relation ranges change",
+        "refusal": "the gate fails on a dangling edge, an out-of-range relation, an unknown severity or an empty required field",
+        "observation": "none: the catalog is data; the checks its records name observe the systems",
+        "evidence": "fires-and-accepts: a suite plants an unchecked principle, a blank required field, a severity outside the closed levels and a definition that opens as another kind, and the bundled records pass",
+        "authority": "the relation ranges and the closed field vocabularies, which every record conforms to"
+    },
+    "records": [
+        {
+            "id": "architectural-relationship-record",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Architectural Relationship Record",
+            "exemplar": {
+                "before": "'Low Coupling' as a bare name in a list — not measurable, not enforceable.",
+                "after": "Low Coupling : Quality-Attribute, scope{module}, requires{Abstraction}, conflicts_with{Tight Coupling}, detected_by{cycle scan}, measured_by{coupling metric}, refactored_by{invert dependency}, enforced_by{dependency rule}, severity{mandatory}",
+                "lang": "record",
+                "medium": "composite"
+            },
+            "intent": "Represent every architectural concept as a typed relationship record containing scope, dependencies, reinforcing effects, enabled capabilities, conflicts, tensions, violations, detection signals, metrics, refactor actions, enforcement mechanisms, and severity.",
+            "invariant": "An architecture principle becomes operational when it is converted from a name into a measurable, enforceable relationship contract.",
+            "flow": [
+                "Concept",
+                "Type",
+                "Scope",
+                "Requires",
+                "Violations",
+                "Detection",
+                "Measurement",
+                "Refactor",
+                "Enforcement",
+                "Severity"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitecturalRelationshipRecord",
+                    "rhs": "<ConceptName> \":\" <RecordType> \",\" <ScopeSet> \",\" <RequiresSet> \",\" <ReinforcesSet> \",\" <EnablesSet> \",\" <ConflictSet> \",\" <TensionSet> \",\" <ViolationSet> \",\" <DetectionSet> \",\" <MetricSet> \",\" <RefactorSet> \",\" <EnforcementSet> \",\" <EnforcementSeverity>"
+                },
+                {
+                    "lhs": "RecordType",
+                    "rhs": "\"Principle\" | \"Quality Attribute\" | \"Contract\" | \"Architecture Style\" | \"Pattern\" | \"Mechanism\" | \"Metric\" | \"Practice\""
+                },
+                {
+                    "lhs": "EnforcementSeverity",
+                    "rhs": "\"mandatory\" | \"recommended\" | \"contextual\" | \"discouraged\""
+                },
+                {"lhs": "MandatoryFor",
+                    "rhs": "\"contextual\" \"+\" <SystemCondition>"}
+            ],
+            "composes": [],
+            "force": ["contract_compatibility"]
+        },
+        {
+            "id": "architecture-knowledge-graph",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Architecture Knowledge Graph",
+            "exemplar": {
+                "before": "A flat list of relationship records — no way to ask 'what does Foo require, transitively?'",
+                "after": "records → nodes{concepts} + typed-edges{requires, reinforces, enables, conflicts_with} → traversable graph",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Parse all relationship records into a directed multigraph where concepts are nodes and fields such as requires, reinforces, enables, conflicts, tensions, detects, measures, refactors, and enforces are typed edges.",
+            "invariant": "The architecture catalog becomes reusable when its relationships can be traversed as a graph.",
+            "flow": [
+                "Records",
+                "Nodes",
+                "TypedEdges",
+                "Graph",
+                "QueryableArchitectureModel"
+            ],
+            "productions": [
+                {"lhs": "ArchitectureGraph",
+                    "rhs": "<ConceptNodeSet> \",\" <RelationshipEdgeSet>"},
+                {
+                    "lhs": "ConceptNode",
+                    "rhs": "<ConceptName> \",\" <RecordType> \",\" <ScopeSet> \",\" <EnforcementSeverity>"
+                },
+                {
+                    "lhs": "RelationshipEdge",
+                    "rhs": "<SourceConcept> \"→\" <RelationType> \"→\" <TargetConceptOrSignal>"
+                },
+                {
+                    "lhs": "RelationType",
+                    "rhs": "\"requires\" | \"reinforces\" | \"enables\" | \"conflicts_with\" | \"tensions_with\" | \"violated_by\" | \"detected_by\" | \"measured_by\" | \"refactored_by\" | \"enforced_by\""
+                }
+            ],
+            "composes": [],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "architectural-force-classification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Architectural Force Classification",
+            "exemplar": {
+                "before": "A design issue answered by pattern-name recall ('use a Factory').",
+                "after": "issue{concrete constructor everywhere} → force{object_creation} → concept-query → applicable{Construction Boundary}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Given a design issue or desired quality, classify it into a force family, then select all concepts whose scope, type, violation signals, and enabled capabilities match that force.",
+            "invariant": "Architectural decisions should be selected by force and evidence, not by pattern name recognition.",
+            "flow": [
+                "Issue",
+                "ForceFamily",
+                "CandidateConcepts",
+                "ApplicableContracts"
+            ],
+            "productions": [
+                {
+                    "lhs": "ForceClassification",
+                    "rhs": "<DesignIssue> \"→\" <ForceFamily> \"→\" <ConceptQuery> \"→\" <ApplicableConceptSet>"
+                },
+                {
+                    "lhs": "ForceFamily",
+                    "rhs": "\"modularity\" | \"contract_compatibility\" | \"semantic_consistency\" | \"domain_boundary\" | \"runtime_extensibility\" | \"object_creation\" | \"structural_mediation\" | \"behavioral_variation\" | \"event_messaging\" | \"state_transaction\" | \"correctness_verification\" | \"resilience_recovery\" | \"observability_traceability\" | \"causality_ordering\" | \"performance_scaling\" | \"security_governance\" | \"architecture_evolution\" | \"control_coordination\" | \"metaprogramming_modeling\" | \"streaming_dataflow\" | \"model_governance\""
+                }
+            ],
+            "composes": [],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "dependency-closure",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Dependency Closure",
+            "exemplar": {
+                "before": "Adopt Foo without checking what Foo needs — its prerequisites are silently unmet.",
+                "after": "target{Foo} → follow requires-edges to fixed point → {Bar, Baz} → topological order{Baz, Bar, Foo}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For any target architectural concept, recursively collect its required concepts until no new requirements remain, then order the closure by dependency depth before implementation.",
+            "invariant": "A principle cannot be adopted safely unless its prerequisites are also satisfied.",
+            "flow": [
+                "TargetConcept",
+                "RequiresEdges",
+                "TransitiveClosure",
+                "DependencyOrder"
+            ],
+            "productions": [
+                {
+                    "lhs": "DependencyClosure",
+                    "rhs": "<TargetConcept> \"→\" <RequiresTraversal> \"→\" <RequiredConceptSet> \"→\" <TopologicalOrder>"
+                },
+                {"lhs": "RequiresTraversal",
+                    "rhs": "\"follow requires edges until fixed point\""},
+                {"lhs": "TopologicalOrder",
+                    "rhs": "\"prerequisites_before_dependents\""}
+            ],
+            "composes": [],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "reinforcement-propagation",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Reinforcement Propagation",
+            "exemplar": {
+                "before": "Foo implemented; its second-order gains go unnoticed and unclaimed.",
+                "after": "satisfied{Foo} → reinforces → {Bar quality} → enables → {Baz capability} → impact set with confidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "When a concept is implemented or strengthened, traverse its reinforces and enables edges to identify secondary quality gains and architecture capabilities unlocked.",
+            "invariant": "Architecture improvements produce second-order effects through reinforcing relationships.",
+            "flow": [
+                "ImplementedConcept",
+                "Reinforces + Enables",
+                "CapabilityImpact"
+            ],
+            "productions": [
+                {
+                    "lhs": "ReinforcementPropagation",
+                    "rhs": "<SatisfiedConcept> \"→\" <ReinforcesTraversal> \"→\" <EnablesTraversal> \"→\" <ImpactSet>"
+                },
+                {"lhs": "ImpactSet",
+                    "rhs": "<QualityGainSet> \",\" <CapabilityGainSet>"},
+                {"lhs": "QualityGain",
+                    "rhs": "<ReinforcedConcept> \",\" <Confidence> \",\" <EvidenceRequired>"}
+            ],
+            "composes": [],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "conflict-and-tension-resolution",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Conflict and Tension Resolution",
+            "exemplar": {
+                "before": "Two chosen concepts silently conflict at runtime; the developer never decided the trade-off.",
+                "after": "candidates{Foo, Bar} → conflict{prohibitive} → tension{trade-off} → policy{require architecture decision}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each selected concept, collect conflicts and tensions, classify conflicts as prohibitive or resolvable, classify tensions as trade-offs, and require an explicit decision when severity or impact is high.",
+            "invariant": "Architecture is not only principle application; it is trade-off governance.",
+            "flow": [
+                "CandidateConcept",
+                "Conflicts + Tensions",
+                "TradeoffAnalysis",
+                "Decision"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConflictTensionResolution",
+                    "rhs": "<CandidateConceptSet> \"→\" <ConflictSet> \"→\" <TensionSet> \"→\" <ResolutionPolicy>"
+                },
+                {
+                    "lhs": "ResolutionPolicy",
+                    "rhs": "\"reject_combination\" | \"accept_with_mitigation\" | \"document_tradeoff\" | \"require_architecture_decision\" | \"contextual_override\""
+                }
+            ],
+            "composes": [],
+            "force": ["security_governance"]
+        },
+        {
+            "id": "severity-policy",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Severity Policy",
+            "exemplar": {
+                "before": "Every finding treated the same — a style nit blocks like a critical flaw.",
+                "after": "severity{mandatory} → blocking-gate ; severity{recommended} → review-warning ; severity{contextual} → context-required",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Interpret severity as an enforcement policy: mandatory concepts become gates, recommended concepts become review findings, contextual concepts require scope justification, and discouraged concepts require explicit exception approval.",
+            "invariant": "Severity converts architecture knowledge into governance behavior.",
+            "flow": [
+                "Severity",
+                "EnforcementMode",
+                "GateBehavior"
+            ],
+            "productions": [
+                {"lhs": "SeverityPolicy",
+                    "rhs": "<EnforcementSeverity> \"→\" <EnforcementMode>"},
+                {
+                    "lhs": "EnforcementMode",
+                    "rhs": "\"blocking_gate\" | \"review_warning\" | \"context_required\" | \"exception_required\" | \"informational\""
+                },
+                {
+                    "lhs": "SeverityMapping",
+                    "rhs": "\"mandatory → blocking_gate\" | \"recommended → review_warning\" | \"contextual → context_required\" | \"discouraged → exception_required\""
+                }
+            ],
+            "composes": [],
+            "force": ["security_governance"]
+        },
+        {
+            "id": "violation-detection",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Violation Detection",
+            "exemplar": {
+                "before": "'Foo is violated' asserted from opinion, with no observable signal.",
+                "after": "concept{Foo} → detected_by signals run on code → observations → violation-record{concept, pattern, evidence, severity}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each concept applicable to the current scope, execute its detected_by signals against the implementation, map observations to violated_by patterns, and produce evidence-backed violation records.",
+            "invariant": "A principle violation must be grounded in observable implementation signals.",
+            "flow": [
+                "ApplicableConcept",
+                "DetectionSignals",
+                "Observations",
+                "ViolationRecords"
+            ],
+            "productions": [
+                {
+                    "lhs": "ViolationDetection",
+                    "rhs": "<ApplicableConceptSet> \"→\" <DetectionSignalSet> \"→\" <ObservedEvidenceSet> \"→\" <ViolationRecordSet>"
+                },
+                {
+                    "lhs": "ViolationRecord",
+                    "rhs": "<Concept> \",\" <ViolationPattern> \",\" <EvidenceLocationSet> \",\" <MetricValueSet> \",\" <EnforcementSeverity> \",\" <RecommendedRefactorSet>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "observability_traceability",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "measurement-normalization",
+            "mathType": "analysis",
+            "yields": "operation",
+            "title": "Measurement Normalization",
+            "exemplar": {
+                "before": "Architecture judged by free-form opinion, no comparable numbers.",
+                "after": "measured_by{coupling} → metric-definition{scope, method, threshold} → values → normalized score + confidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Convert each concept’s measured_by field into executable or reviewable metrics, collect metric values, normalize them to comparable scores, and attach confidence based on measurement quality.",
+            "invariant": "Architectural assessment requires metrics with provenance, not free-form judgment.",
+            "flow": [
+                "MeasuredBy",
+                "MetricDefinition",
+                "Measurement",
+                "NormalizedScore",
+                "Confidence"
+            ],
+            "productions": [
+                {
+                    "lhs": "MeasurementNormalization",
+                    "rhs": "<MetricDescriptorSet> \"→\" <MetricDefinitionSet> \"→\" <MetricValueSet> \"→\" <NormalizedScoreSet>"
+                },
+                {
+                    "lhs": "MetricDefinition",
+                    "rhs": "<MetricName> \",\" <Scope> \",\" <CollectionMethod> \",\" <ThresholdPolicy> \",\" <ConfidencePolicy>"
+                }
+            ],
+            "composes": [],
+            "force": ["semantic_consistency"]
+        },
+        {
+            "id": "refactor-selection",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Refactor Selection",
+            "exemplar": {
+                "before": "A fix chosen ad hoc, unrelated to the violated concept's remediation contract.",
+                "after": "violation{Foo} → refactored_by candidates → rank{severity, blast-radius, reinforcement-gain} → refactor plan",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Given a violation record, select refactor actions from the concept’s refactored_by field, rank actions by severity, dependency closure, blast radius, and expected reinforcement gain.",
+            "invariant": "Refactoring should be selected from the violated concept’s remediation contract.",
+            "flow": [
+                "Violation",
+                "RefactorCandidates",
+                "RiskRank",
+                "SelectedPlan"
+            ],
+            "productions": [
+                {
+                    "lhs": "RefactorSelection",
+                    "rhs": "<ViolationRecord> \"→\" <RefactorActionSet> \"→\" <RefactorRanking> \"→\" <RefactorPlan>"
+                },
+                {
+                    "lhs": "RefactorRanking",
+                    "rhs": "\"severity\" \",\" \"required_dependency_count\" \",\" \"blast_radius\" \",\" \"reinforcement_gain\" \",\" \"rollback_feasibility\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "enforcement-gate",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Enforcement Gate",
+            "exemplar": {
+                "before": "'enforced_by: review' — a reviewer's promise that erodes under deadline.",
+                "after": "enforced_by{Foo} → gate-type{static-analysis | contract-test | fitness-function} → pass/fail in CI",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Translate each concept’s enforced_by field into static checks, contract tests, schema validation, CI gates, policy rules, runtime monitors, review gates, or architecture fitness functions.",
+            "invariant": "Enforcement converts architectural intent into repeatable control.",
+            "flow": [
+                "EnforcementDescriptor",
+                "GateType",
+                "ValidationProcedure",
+                "Pass|Fail"
+            ],
+            "productions": [
+                {
+                    "lhs": "EnforcementGate",
+                    "rhs": "<Concept> \"→\" <EnforcementDescriptorSet> \"→\" <GateSet> \"→\" <GateResultSet>"
+                },
+                {
+                    "lhs": "GateType",
+                    "rhs": "\"static_analysis\" | \"architecture_test\" | \"schema_validation\" | \"contract_test\" | \"lint_rule\" | \"fitness_function\" | \"runtime_monitor\" | \"policy_as_code\" | \"review_gate\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "architecture-assessment",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Architecture Assessment",
+            "exemplar": {
+                "before": "'The architecture is fine' — an unscoped, evidence-free claim.",
+                "after": "scope → relevant concepts → dependency-closure → violation-detection → measurement → prioritized findings",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Select concepts relevant to a target scope, compute dependency closure, detect violations, measure evidence, rank findings by severity, and emit a prioritized architecture assessment.",
+            "invariant": "Assessment is graph query plus evidence collection plus severity policy.",
+            "flow": [
+                "Scope",
+                "RelevantConcepts",
+                "DependencyClosure",
+                "Detection",
+                "Measurement",
+                "Findings"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureAssessment",
+                    "rhs": "<TargetScope> \"→\" <RelevantConceptSelection> \"→\" <DependencyClosure> \"→\" <ViolationDetection> \"→\" <MeasurementNormalization> \"→\" <FindingPrioritization> \"→\" <AssessmentReport>"
+                },
+                {
+                    "lhs": "FindingPrioritization",
+                    "rhs": "\"mandatory_first\" \",\" \"high_blast_radius\" \",\" \"high_reinforcement_gain\" \",\" \"low_refactor_cost\""
+                }
+            ],
+            "composes": [
+                "dependency-closure",
+                "violation-detection",
+                "measurement-normalization"
+            ],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "modular-boundary-compliance",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Modular Boundary Compliance",
+            "exemplar": {
+                "before": "Modularity judged as one vague impression.",
+                "after": "modules → responsibility + cohesion + coupling + visibility-leak → boundary score{per-dimension}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Evaluate SRP, separation of concerns, cohesion, coupling, encapsulation, information hiding, abstraction, modularity, composability, replaceability, and autonomy as a connected boundary cluster.",
+            "invariant": "Modular design is not one principle; it is a mutually reinforcing cluster around responsibility, dependency, and visibility.",
+            "flow": [
+                "Module",
+                "Responsibility",
+                "Cohesion",
+                "Coupling",
+                "Visibility",
+                "BoundaryHealth"
+            ],
+            "productions": [
+                {
+                    "lhs": "ModularBoundaryCompliance",
+                    "rhs": "<ModuleSet> \"→\" <ResponsibilityAnalysis> \"→\" <CohesionMetric> \"→\" <CouplingMetric> \"→\" <VisibilityLeakCheck> \"→\" <BoundaryScore>"
+                },
+                {
+                    "lhs": "BoundaryScore",
+                    "rhs": "<ResponsibilityScore> \",\" <CohesionScore> \",\" <CouplingScore> \",\" <EncapsulationScore> \",\" <ReplaceabilityScore>"
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "contract-compatibility",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Contract Compatibility",
+            "exemplar": {
+                "before": "A schema changed and downstreams broke — compatibility was never checked.",
+                "after": "boundary-contract → schema/semantic validation → version-policy → compatibility-matrix{new-producer/old-consumer} → verdict",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For APIs, services, data, schemas, and protocols, validate explicit contracts, preconditions, postconditions, invariants, versioning, backward compatibility, forward compatibility, and interoperability.",
+            "invariant": "Compatibility is the contract cluster that allows independent evolution.",
+            "flow": [
+                "Boundary",
+                "Contract",
+                "Version",
+                "CompatibilityMatrix",
+                "Gate"
+            ],
+            "productions": [
+                {
+                    "lhs": "ContractCompatibility",
+                    "rhs": "<BoundaryContract> \"→\" <SchemaOrInterfaceValidation> \"→\" <SemanticValidation> \"→\" <VersionPolicy> \"→\" <CompatibilityMatrix> \"→\" <CompatibilityVerdict>"
+                },
+                {
+                    "lhs": "CompatibilityMatrix",
+                    "rhs": "\"producer_current_consumer_current\" | \"producer_new_consumer_old\" | \"producer_old_consumer_new\" | \"unknown_field_handling\" | \"breaking_diff_check\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "canonical-semantics",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Canonical Semantics",
+            "exemplar": {
+                "before": "Three models of 'Foo' drift apart; no single authority.",
+                "after": "artifacts{Foo-a, Foo-b} → conflict-detection → canonical authority → normalize variants → SSOT gate",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect duplicated or conflicting models, schemas, terms, rules, and data definitions; select or create canonical authority; normalize variants; enforce single source of truth.",
+            "invariant": "Semantic consistency requires canonical authority and explicit translation where contexts differ.",
+            "flow": [
+                "Concepts",
+                "Conflicts",
+                "CanonicalAuthority",
+                "Normalization",
+                "Enforcement"
+            ],
+            "productions": [
+                {
+                    "lhs": "CanonicalSemantics",
+                    "rhs": "<SemanticArtifactSet> \"→\" <ConflictDetection> \"→\" <CanonicalAuthoritySelection> \"→\" <NormalizationPolicy> \"→\" <TranslationBoundary> \"→\" <GovernanceGate>"
+                },
+                {
+                    "lhs": "SemanticArtifact",
+                    "rhs": "\"schema\" | \"domain_model\" | \"field\" | \"term\" | \"rule\" | \"configuration\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "self-description-and-discovery",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Self-Description and Discovery",
+            "exemplar": {
+                "before": "A runtime component's capabilities are unknowable without reading its source.",
+                "after": "entity → manifest{identity, capabilities, contracts} → discovery → conformance-validation → bind only if it matches",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Require components, services, APIs, plugins, and runtime structures to declare metadata, capabilities, contracts, dependencies, configuration, and health so they can be discovered and validated.",
+            "invariant": "Dynamic architecture requires self-description before runtime binding.",
+            "flow": [
+                "Component",
+                "Manifest",
+                "CapabilityDeclaration",
+                "Discovery",
+                "ContractValidation",
+                "Binding"
+            ],
+            "productions": [
+                {
+                    "lhs": "SelfDescribingDiscovery",
+                    "rhs": "<RuntimeEntity> \"→\" <Manifest> \"→\" <CapabilityDeclaration> \"→\" <DiscoveryMechanism> \"→\" <ConformanceValidation> \"→\" <BindingDecision>"
+                },
+                {
+                    "lhs": "Manifest",
+                    "rhs": "\"identity\" \",\" \"version\" \",\" \"capabilities\" \",\" \"dependencies\" \",\" \"contracts\" \",\" \"configuration\" \",\" \"health\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "runtime-extensibility",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Runtime Extensibility",
+            "exemplar": {
+                "before": "Every new variant edits the core switch statement.",
+                "after": "variant-pressure → extension-point → plugin-contract → registry → runtime-discovery → failure-isolation",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Detect repeated core modification for variants, define extension points, create plugin contracts, register implementations, discover them dynamically, and isolate failures.",
+            "invariant": "Extensibility is controlled variation behind stable runtime contracts.",
+            "flow": [
+                "VariantPressure",
+                "ExtensionPoint",
+                "PluginContract",
+                "Registry",
+                "Discovery",
+                "Isolation"
+            ],
+            "productions": [
+                {
+                    "lhs": "RuntimeExtensibility",
+                    "rhs": "<VariantPressure> \"→\" <ExtensionPointDesign> \"→\" <PluginContract> \"→\" <RegistrationPolicy> \"→\" <RuntimeDiscovery> \"→\" <FailureIsolation>"
+                },
+                {
+                    "lhs": "RegistrationPolicy",
+                    "rhs": "\"manual_registration\" | \"manifest_based\" | \"service_registry\" | \"convention_based\" | \"configuration_based\""
+                }
+            ],
+            "composes": ["runtime-discovery"],
+            "force": [
+                "contract_compatibility",
+                "runtime_extensibility"
+            ],
+            "principleRef": "runtime-extensibility"
+        },
+        {
+            "id": "pattern-selection",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Pattern Selection",
+            "exemplar": {
+                "before": "A pattern applied as decoration ('let's add a Facade') with no force to justify it.",
+                "after": "force{interface mismatch} → family{structural} → candidate{Adapter} → applicability verdict",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Select creational, structural, or behavioral patterns based on the problem force: creation variation, interface mismatch, access control, behavior variation, notification, workflow reuse, or coordination complexity.",
+            "invariant": "Design patterns are remedies for specific force shapes, not generic decorations.",
+            "flow": [
+                "ProblemForce",
+                "PatternFamily",
+                "CandidatePattern",
+                "ApplicabilityCheck"
+            ],
+            "productions": [
+                {
+                    "lhs": "PatternSelection",
+                    "rhs": "<ProblemForce> \"→\" <PatternFamily> \"→\" <CandidatePatternSet> \"→\" <ApplicabilityVerdict>"
+                },
+                {"lhs": "PatternFamily",
+                    "rhs": "\"creational\" | \"structural\" | \"behavioral\""},
+                {
+                    "lhs": "CandidatePattern",
+                    "rhs": "\"factory\" | \"factory_method\" | \"abstract_factory\" | \"builder\" | \"prototype\" | \"adapter\" | \"facade\" | \"proxy\" | \"bridge\" | \"decorator\" | \"strategy\" | \"template_method\" | \"observer\" | \"mediator\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "event-and-messaging-consistency",
+            "distinctFrom": [
+                {
+                    "id": "event-messaging",
+                    "reason": "Event messaging describes how state changes are published and consumed; this record validates that the published messages are contracts and that consumers are safe to replay."
+                }
+            ],
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Event and Messaging Consistency",
+            "exemplar": {
+                "before": "Events published ad hoc; a consumer replays and double-applies.",
+                "after": "state-change → event-contract → transactional-outbox → broker → idempotent-consumer → ordering + trace",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For asynchronous systems, validate event contracts, message schemas, idempotent consumers, outbox publication, correlation metadata, ordering guarantees, retry behavior, and dead-letter handling.",
+            "invariant": "Event-driven architecture is safe only when messages are contracts and consumers are replay-safe.",
+            "flow": [
+                "StateChange",
+                "EventContract",
+                "Outbox",
+                "Broker",
+                "IdempotentConsumer",
+                "Trace"
+            ],
+            "productions": [
+                {
+                    "lhs": "EventMessagingConsistency",
+                    "rhs": "<StateChange> \"→\" <EventClassification> \"→\" <MessageContract> \"→\" <PublicationReliability> \"→\" <ConsumerIdempotency> \"→\" <OrderingPolicy> \"→\" <ObservabilityTrace>"
+                },
+                {"lhs": "EventClassification",
+                    "rhs": "\"domain_event\" | \"integration_event\" | \"stream_event\""},
+                {
+                    "lhs": "PublicationReliability",
+                    "rhs": "\"transactional_outbox\" | \"append_only_log\" | \"broker_acknowledgement\""
+                }
+            ],
+            "composes": ["observability-trace"],
+            "force": [
+                "contract_compatibility",
+                "state_transaction",
+                "correctness_verification",
+                "resilience_recovery",
+                "observability_traceability",
+                "event_messaging",
+                "causality_ordering"
+            ]
+        },
+        {
+            "id": "state-and-transaction-safety",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "State and Transaction Safety",
+            "exemplar": {
+                "before": "Two mutations with no boundary; a crash between them corrupts state.",
+                "after": "command → transaction-boundary → invariant-check → concurrency-control → commit/rollback → idempotent side-effect",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Identify state mutation boundaries, enforce unit-of-work scope, validate invariants, apply concurrency control, guarantee idempotency where retries exist, and isolate side effects.",
+            "invariant": "State correctness depends on explicit mutation boundaries and repeat-safe effects.",
+            "flow": [
+                "Command",
+                "TransactionBoundary",
+                "Invariant",
+                "Concurrency",
+                "Commit|Rollback",
+                "Idempotency"
+            ],
+            "productions": [
+                {
+                    "lhs": "StateTransactionSafety",
+                    "rhs": "<Command> \"→\" <TransactionBoundary> \"→\" <InvariantCheck> \"→\" <ConcurrencyControl> \"→\" <CommitDecision> \"→\" <SideEffectPolicy>"
+                },
+                {
+                    "lhs": "ConcurrencyControl",
+                    "rhs": "\"optimistic_locking\" | \"pessimistic_locking\" | \"serial_execution\" | \"state_isolation\""
+                },
+                {
+                    "lhs": "SideEffectPolicy",
+                    "rhs": "\"idempotent\" | \"outbox_published\" | \"compensatable\" | \"controlled_side_effect\""
+                }
+            ],
+            "composes": ["transaction-boundary"],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "state_transaction",
+                "correctness_verification",
+                "resilience_recovery"
+            ]
+        },
+        {
+            "id": "correctness-verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Correctness Verification",
+            "exemplar": {
+                "before": "Correctness asserted by 'it worked on my machine'.",
+                "after": "input → canonicalize → deterministic-core → spec → {type-check, property-test, contract-test} → evidence",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Push nondeterminism to boundaries, prefer pure deterministic core logic, validate specifications with static analysis, type checks, property tests, contract tests, formal methods where useful, and reproducible test environments.",
+            "invariant": "Correctness is achieved by deterministic design plus evidence-based verification.",
+            "flow": [
+                "Input",
+                "Canonicalize",
+                "DeterministicCore",
+                "Spec",
+                "Verification",
+                "Evidence"
+            ],
+            "productions": [
+                {
+                    "lhs": "CorrectnessVerification",
+                    "rhs": "<InputSet> \"→\" <Canonicalization> \"→\" <DeterministicCore> \"→\" <SpecificationSet> \"→\" <VerificationMethodSet> \"→\" <CorrectnessEvidence>"
+                },
+                {
+                    "lhs": "VerificationMethod",
+                    "rhs": "\"type_check\" | \"static_analysis\" | \"schema_validation\" | \"contract_test\" | \"property_based_test\" | \"specification_test\" | \"formal_verification\" | \"runtime_validation\""
+                }
+            ],
+            "composes": ["deterministic-core"],
+            "force": [
+                "modularity",
+                "contract_compatibility",
+                "runtime_extensibility",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "resilience-policy",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Resilience Policy",
+            "exemplar": {
+                "before": "A remote call with no failure policy takes the whole system down.",
+                "after": "failure-modes → criticality → {timeout, retry, circuit-breaker, bulkhead} → runtime-guard → recovery",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Classify failure modes, apply fail-fast, fail-safe, fail-secure, retry, timeout, circuit breaker, fallback, bulkhead, backpressure, health check, failover, and rollback policies according to dependency criticality.",
+            "invariant": "Resilience is controlled degradation under known failure modes.",
+            "flow": [
+                "FailureMode",
+                "Criticality",
+                "PolicySet",
+                "RuntimeGuard",
+                "Recovery"
+            ],
+            "productions": [
+                {
+                    "lhs": "ResiliencePolicy",
+                    "rhs": "<FailureModeSet> \"→\" <CriticalityClassification> \"→\" <ResiliencePatternSet> \"→\" <RuntimeGuardSet> \"→\" <RecoveryActionSet>"
+                },
+                {
+                    "lhs": "ResiliencePattern",
+                    "rhs": "\"timeout\" | \"retry\" | \"circuit_breaker\" | \"fallback\" | \"bulkhead\" | \"backpressure\" | \"health_check\" | \"failover\" | \"rollback\" | \"auto_remediation\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "state_transaction",
+                "resilience_recovery"
+            ]
+        },
+        {
+            "id": "observability-and-auditability",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Observability and Auditability",
+            "exemplar": {
+                "before": "An incident with no correlation ids — behavior can't be reconstructed.",
+                "after": "operation → correlation-id + causation-id → {logs, metrics, traces, audit} → trace-graph → diagnosis",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Attach correlation and causation identifiers, emit logs, metrics, traces, alerts, audit records, and runtime health signals, then reconstruct behavior as a causal execution graph.",
+            "invariant": "Operability requires reconstructable evidence across runtime boundaries.",
+            "flow": [
+                "Operation",
+                "Correlation",
+                "Telemetry",
+                "Audit",
+                "TraceGraph",
+                "Diagnosis"
+            ],
+            "productions": [
+                {
+                    "lhs": "ObservabilityAuditability",
+                    "rhs": "<Operation> \"→\" <CorrelationId> \"→\" <CausationId> \"→\" <TelemetryEventSet> \"→\" <AuditRecordSet> \"→\" <TraceGraph>"
+                },
+                {
+                    "lhs": "TelemetryEvent",
+                    "rhs": "\"structured_log\" | \"metric\" | \"trace_span\" | \"alert\" | \"audit_log\" | \"health_signal\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "observability_traceability",
+                "causality_ordering"
+            ]
+        },
+        {
+            "id": "performance-and-scalability",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Performance and Scalability",
+            "exemplar": {
+                "before": "Optimize by guesswork; add capacity and hope.",
+                "after": "workload → profile → benchmark → bottleneck → complexity → scale/optimize the measured bottleneck → SLO gate",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Establish workload model, profile runtime behavior, benchmark repeatably, identify bottlenecks, analyze time and space complexity, select scaling strategy, optimize only measured bottlenecks, and enforce SLO gates.",
+            "invariant": "Performance engineering is evidence-driven bottleneck control, not speculative optimization.",
+            "flow": [
+                "Workload",
+                "Profile",
+                "Benchmark",
+                "Bottleneck",
+                "Complexity",
+                "Scale|Optimize",
+                "SLO"
+            ],
+            "productions": [
+                {
+                    "lhs": "PerformanceScalability",
+                    "rhs": "<WorkloadModel> \"→\" <ProfilingEvidence> \"→\" <BenchmarkResultSet> \"→\" <BottleneckAnalysis> \"→\" <ComplexityAnalysis> \"→\" <ScalingOrOptimizationPlan> \"→\" <PerformanceGate>"
+                },
+                {
+                    "lhs": "ScalingOrOptimizationPlan",
+                    "rhs": "\"vertical_scale\" | \"horizontal_scale\" | \"load_balance\" | \"shard\" | \"partition\" | \"cache\" | \"stream\" | \"rate_limit\" | \"algorithm_replacement\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "performance_scaling",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "security-governance",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Security Governance",
+            "exemplar": {
+                "before": "Security added as a late checklist, not a policy graph.",
+                "after": "threat-model → controls{authn, authz, validation, encryption, secrets} → policy-as-code → enforcement → continuous audit",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Threat-model the system, reduce attack surface, authenticate identity, authorize actions, validate input, encode output, encrypt data, manage secrets, enforce policy as code, and continuously audit compliance.",
+            "invariant": "Security is an enforced policy graph over identity, data, operations, and infrastructure.",
+            "flow": [
+                "ThreatModel",
+                "ControlSet",
+                "Policy",
+                "Enforcement",
+                "Audit"
+            ],
+            "productions": [
+                {
+                    "lhs": "SecurityGovernance",
+                    "rhs": "<ThreatModel> \"→\" <SecurityControlSet> \"→\" <PolicySet> \"→\" <PolicyEnforcement> \"→\" <ContinuousCompliance> \"→\" <RiskReview>"
+                },
+                {
+                    "lhs": "SecurityControl",
+                    "rhs": "\"authentication\" | \"authorization\" | \"least_privilege\" | \"zero_trust\" | \"input_validation\" | \"output_encoding\" | \"encryption_at_rest\" | \"encryption_in_transit\" | \"secrets_management\" | \"audit_logging\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "security_governance",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "architecture-evolution-governance",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Architecture Evolution Governance",
+            "exemplar": {
+                "before": "Architecture drifts; no decision memory, no fitness checks.",
+                "after": "assessment → gap-analysis → ADR → fitness-functions → change-plan → review gate",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Assess architecture against quality attributes, record decisions, analyze impact, track gaps, enforce standards with fitness functions, standardize patterns, and evolve through ADR-backed controlled change.",
+            "invariant": "Evolutionary architecture requires decision memory and continuous fitness validation.",
+            "flow": [
+                "Assessment",
+                "GapAnalysis",
+                "DecisionRecord",
+                "FitnessFunction",
+                "ChangePlan",
+                "Review"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureEvolutionGovernance",
+                    "rhs": "<Assessment> \"→\" <GapAnalysis> \"→\" <ImpactAnalysis> \"→\" <DecisionRecord> \"→\" <FitnessFunctionSet> \"→\" <EvolutionPlan> \"→\" <ReviewGate>"
+                },
+                {
+                    "lhs": "DecisionRecord",
+                    "rhs": "\"ADR\" \",\" \"context\" \",\" \"decision\" \",\" \"consequences\" \",\" \"status\""
+                }
+            ],
+            "composes": ["architecture-assessment"],
+            "force": [
+                "correctness_verification",
+                "security_governance",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "control-plane-coordination",
+            "distinctFrom": [
+                {
+                    "id": "control-plane",
+                    "reason": "The control plane is the mechanism that coordinates policy; this record composes it and decides which concerns are centralized and which stay local."
+                }
+            ],
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Control Plane Coordination",
+            "exemplar": {
+                "before": "Every service does its own config + auth; policy scatters and drifts.",
+                "after": "policy → control-plane{config, authn, orchestration} → data-planes execute → telemetry → governance adjustment",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Separate control-plane policy from data-plane execution, centralize configuration, authentication, logging, or orchestration only where shared governance is beneficial, and preserve local autonomy where decentralization is required.",
+            "invariant": "Control centralization should govern policy without collapsing execution autonomy.",
+            "flow": [
+                "Policy",
+                "ControlPlane",
+                "DataPlane",
+                "Telemetry",
+                "PolicyAdjustment"
+            ],
+            "productions": [
+                {
+                    "lhs": "ControlPlaneCoordination",
+                    "rhs": "<PolicySet> \"→\" <ControlPlane> \"→\" <DataPlaneSet> \"→\" <TelemetryFeedback> \"→\" <GovernanceAdjustment>"
+                },
+                {
+                    "lhs": "ControlConcern",
+                    "rhs": "\"configuration\" | \"authentication\" | \"authorization\" | \"logging\" | \"orchestration\" | \"service_registry\""
+                }
+            ],
+            "composes": ["control-plane"],
+            "force": [
+                "semantic_consistency",
+                "security_governance",
+                "control_coordination"
+            ]
+        },
+        {
+            "id": "metaprogramming-safety",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Metaprogramming Safety",
+            "exemplar": {
+                "before": "Code-as-string eval'd with no schema or bound.",
+                "after": "model → schema → transform{reflection | DSL} → generated artifact → safety-validation → bounded execution",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Treat code as data only through schemas, manifests, DSL grammars, reflection contracts, compile-time checks, runtime guards, and generated artifact validation.",
+            "invariant": "Metaprogramming is safe when generated behavior is bounded by a validated model.",
+            "flow": [
+                "Model",
+                "Schema",
+                "Transform",
+                "Generate|Interpret",
+                "Validate",
+                "Execute"
+            ],
+            "productions": [
+                {
+                    "lhs": "MetaprogrammingSafety",
+                    "rhs": "<ProgramModel> \"→\" <ModelSchema> \"→\" <TransformationEngine> \"→\" <GeneratedOrInterpretedArtifact> \"→\" <SafetyValidation> \"→\" <ExecutionBoundary>"
+                },
+                {
+                    "lhs": "TransformationEngine",
+                    "rhs": "\"reflection\" | \"introspection\" | \"compile_time_evaluation\" | \"runtime_code_generation\" | \"DSL_interpreter\" | \"model_driven_generator\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "model_governance",
+                "metaprogramming_modeling"
+            ]
+        },
+        {
+            "id": "model-lifecycle-governance",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Model Lifecycle Governance",
+            "exemplar": {
+                "before": "A model shipped with no registry, eval, trace, or safety gate.",
+                "after": "artifacts{model, prompt, index} → governance-registry → evaluation → inference-contract → explainability-trace → safety + monitoring",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Register and version models, prompts, datasets, embeddings, retrieval sources and knowledge graphs, evaluate behavior against benchmarks, validate safety constraints, trace inference inputs through an inference contract, and monitor drift after deployment.",
+            "invariant": "Model-backed architecture requires governance over evidence, model behavior, inference, evaluation, and safety.",
+            "flow": [
+                "ModelArtifact",
+                "Registry",
+                "Evaluation",
+                "Safety",
+                "InferenceTrace",
+                "Monitoring"
+            ],
+            "productions": [
+                {
+                    "lhs": "ModelLifecycleGovernance",
+                    "rhs": "<ModelArtifactSet> \"→\" <GovernanceRegistry> \"→\" <EvaluationSuite> \"→\" <InferenceContract> \"→\" <ExplainabilityTrace> \"→\" <SafetyPolicy> \"→\" <RuntimeMonitoring>"
+                },
+                {
+                    "lhs": "ModelArtifact",
+                    "rhs": "\"model\" | \"prompt\" | \"embedding_index\" | \"retrieval_source\" | \"knowledge_graph\" | \"dataset\" | \"evaluation\""
+                },
+                {
+                    "lhs": "InferenceContract",
+                    "rhs": "\"input_schema\" \",\" \"retrieval_context\" \",\" \"model_version\" \",\" \"output_schema\" \",\" \"explanation_or_trace\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "observability_traceability",
+                "security_governance",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "architectural-recommendation",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Architectural Recommendation",
+            "exemplar": {
+                "before": "Advice given from intuition, not from the graph or the evidence.",
+                "after": "problem-evidence → concept-match → dependency-closure → conflict-prune → severity rank → ordered roadmap",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Given a target problem, query the graph for matching violated_by and detected_by signals, collect candidate concepts, compute required dependencies, remove conflicting concepts, rank by severity and reinforcement gain, then recommend an ordered implementation path.",
+            "invariant": "Recommendations are graph-derived paths from evidence to enforceable architecture change.",
+            "flow": [
+                "ProblemEvidence",
+                "CandidateConcepts",
+                "DependencyClosure",
+                "ConflictPrune",
+                "Rank",
+                "Roadmap"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitecturalRecommendation",
+                    "rhs": "<ProblemEvidenceSet> \"→\" <ConceptMatchSet> \"→\" <DependencyClosure> \"→\" <ConflictTensionResolution> \"→\" <SeverityRanking> \"→\" <ImplementationRoadmap>"
+                },
+                {
+                    "lhs": "SeverityRanking",
+                    "rhs": "\"mandatory_before_recommended\" \",\" \"contextual_when_scope_matches\" \",\" \"discouraged_requires_exception\""
+                }
+            ],
+            "composes": ["dependency-closure"],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "architecture-fitness-function-generation",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Architecture Fitness Function Generation",
+            "exemplar": {
+                "before": "Mandatory records sit as prose no check executes.",
+                "after": "record → detection-check + metric-threshold + enforcement-gate → executable fitness function",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Convert mandatory and high-impact recommended records into executable fitness functions by binding detected_by signals to checks, measured_by fields to thresholds, and enforced_by fields to pipeline gates.",
+            "invariant": "The catalog becomes self-enforcing when records compile into fitness functions.",
+            "flow": [
+                "RelationshipRecord",
+                "DetectionCheck",
+                "MetricThreshold",
+                "EnforcementGate",
+                "FitnessFunction"
+            ],
+            "productions": [
+                {
+                    "lhs": "FitnessFunctionGeneration",
+                    "rhs": "<ArchitecturalRelationshipRecord> \"→\" <DetectionCheck> \"→\" <MetricThreshold> \"→\" <EnforcementGate> \"→\" <FitnessFunction>"
+                },
+                {
+                    "lhs": "FitnessFunction",
+                    "rhs": "<Name> \",\" <Scope> \",\" <CheckProcedure> \",\" <Threshold> \",\" <SeverityPolicy> \",\" <FailureMessage> \",\" <RefactorHintSet>"
+                }
+            ],
+            "composes": [
+                "architectural-relationship-record",
+                "enforcement-gate",
+                "severity-policy"
+            ],
+            "force": [
+                "streaming_dataflow",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "architecture-refactoring-roadmap",
+            "mathType": "algebra",
+            "yields": "ordered-structure",
+            "title": "Architecture Refactoring Roadmap",
+            "exemplar": {
+                "before": "Violations fixed one-by-one in random order; shared causes re-fixed repeatedly.",
+                "after": "violations → cluster by shared-cause{missing-boundary} → refactor-groups → dependency-ordered plan → enforce",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Group violations by shared refactor actions, order remediation by prerequisite concepts, apply low-risk structural fixes first, then enforce newly satisfied concepts through gates.",
+            "invariant": "Architecture repair is more efficient when refactors are grouped by shared conceptual cause.",
+            "flow": [
+                "Violations",
+                "SharedCause",
+                "RefactorGroup",
+                "DependencyOrder",
+                "Apply",
+                "Enforce"
+            ],
+            "productions": [
+                {
+                    "lhs": "RefactoringRoadmap",
+                    "rhs": "<ViolationRecordSet> \"→\" <SharedCauseClustering> \"→\" <RefactorGroupSet> \"→\" <DependencyOrderedPlan> \"→\" <ExecutionGateSet>"
+                },
+                {
+                    "lhs": "SharedCause",
+                    "rhs": "\"missing_boundary\" | \"missing_contract\" | \"semantic_drift\" | \"concrete_coupling\" | \"uncontrolled_state\" | \"missing_observability\" | \"manual_governance_only\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "concept-cluster-extraction",
+            "mathType": "set-theory",
+            "yields": "set | boolean",
+            "title": "Concept Cluster Extraction",
+            "exemplar": {
+                "before": "A flat catalog of hundreds of concepts, unusable at scale.",
+                "after": "graph → relationship-density analysis → clusters → concern-families{core + supporting + conflict concepts}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Group concepts into clusters by mutual requires, reinforces, enables, and shared scope; treat clusters as higher-order architectural concerns.",
+            "invariant": "Large principle catalogs become usable when concepts are clustered by relationship density.",
+            "flow": [
+                "Graph",
+                "EdgeDensity",
+                "Cluster",
+                "ConcernFamily"
+            ],
+            "productions": [
+                {
+                    "lhs": "ConceptClusterExtraction",
+                    "rhs": "<ArchitectureGraph> \"→\" <RelationshipDensityAnalysis> \"→\" <ClusterSet> \"→\" <ConcernFamilySet>"
+                },
+                {
+                    "lhs": "ConcernFamily",
+                    "rhs": "<ClusterName> \",\" <CoreConceptSet> \",\" <SupportingConceptSet> \",\" <ConflictConceptSet> \",\" <EnforcementPolicySet>"
+                }
+            ],
+            "composes": [],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "architecture-decision-support",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "title": "Architecture Decision Support",
+            "exemplar": {
+                "before": "A design decision judged by gut feel, not by its effect on the graph.",
+                "after": "decision → graph-delta{satisfied, violated, tensions, enabled} → enforcement-cost → approve / approve-with-ADR / revise / reject",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "For each proposed design decision, compute satisfied concepts, violated concepts, tensions introduced, conflicts triggered, enabled capabilities, and enforcement cost; require ADR when trade-offs are nontrivial.",
+            "invariant": "A design decision should be evaluated as a graph delta.",
+            "flow": [
+                "Decision",
+                "GraphDelta",
+                "BenefitSet + RiskSet",
+                "ADRRequired?"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureDecisionSupport",
+                    "rhs": "<ProposedDecision> \"→\" <SatisfiedConceptSet> \"→\" <ViolatedConceptSet> \"→\" <TensionSet> \"→\" <EnabledCapabilitySet> \"→\" <EnforcementCost> \"→\" <DecisionGovernance>"
+                },
+                {"lhs": "DecisionGovernance",
+                    "rhs": "\"approve\" | \"approve_with_ADR\" | \"revise\" | \"reject\""}
+            ],
+            "composes": [],
+            "force": ["architecture_evolution"]
+        },
+        {
+            "id": "relationship-schema-validation",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Relationship Schema Validation",
+            "exemplar": {
+                "before": "Catalog records with missing fields and dangling references ship unchecked.",
+                "after": "records → required-field validation → reference-resolution → severity validation → completeness score → catalog validity",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Validate every concept record for required fields, known relation names, parseable scope, valid severity, nonempty detection and enforcement metadata, and resolvable references where possible.",
+            "invariant": "The architectural catalog itself must be governed as a schema-bearing artifact.",
+            "flow": [
+                "Record",
+                "SchemaCheck",
+                "ReferenceCheck",
+                "CompletenessCheck",
+                "Valid|Invalid"
+            ],
+            "productions": [
+                {
+                    "lhs": "RelationshipSchemaValidation",
+                    "rhs": "<ArchitecturalRelationshipRecordSet> \"→\" <RequiredFieldValidation> \"→\" <ReferenceResolution> \"→\" <SeverityValidation> \"→\" <CompletenessScore> \"→\" <CatalogValidity>"
+                },
+                {
+                    "lhs": "RequiredFieldSet",
+                    "rhs": "\"type\" \",\" \"scope\" \",\" \"requires\" \",\" \"reinforces\" \",\" \"enables\" \",\" \"conflicts_with\" \",\" \"tensions_with\" \",\" \"violated_by\" \",\" \"detected_by\" \",\" \"measured_by\" \",\" \"refactored_by\" \",\" \"enforced_by\" \",\" \"severity\""
+                }
+            ],
+            "composes": [],
+            "force": ["correctness_verification"]
+        },
+        {
+            "id": "architecture-catalog-compiler",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Architecture Catalog Compiler",
+            "exemplar": {
+                "before": "The catalog read only by the developer — no operational output.",
+                "after": "graph → {assessment-rules, refactor-playbooks, decision-support-model, governance-gates}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compile the relationship catalog into four executable artifacts: assessment rules, refactor playbooks, decision-support graphs, and governance gates.",
+            "invariant": "A comprehensive architecture catalog should compile into operational tooling.",
+            "flow": [
+                "Catalog",
+                "Rules + Playbooks + DecisionGraph + Gates"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitectureCatalogCompiler",
+                    "rhs": "<ArchitectureGraph> \"→\" <AssessmentRuleSet> \"→\" <RefactorPlaybookSet> \"→\" <DecisionSupportModel> \"→\" <GovernanceGateSet>"
+                },
+                {
+                    "lhs": "AssessmentRule",
+                    "rhs": "<Concept> \",\" <DetectedBy> \",\" <MeasuredBy> \",\" <EnforcementSeverity>"
+                },
+                {"lhs": "RefactorPlaybook",
+                    "rhs": "<ViolationPattern> \",\" <RefactoredBy> \",\" <EnforcedBy>"}
+            ],
+            "composes": [],
+            "force": ["security_governance"]
+        },
+        {
+            "id": "master-architecture-governance-kernel",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Master Architecture Governance Kernel",
+            "exemplar": {
+                "before": "Assessment, remediation, and evolution done by disconnected manual steps.",
+                "after": "validate → graph → scope → clusters → closure → detect → measure → resolve → refactor → enforce → ADR → governance report",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Parse the catalog, validate records, build the graph, classify target scope, select relevant concept clusters, compute dependency closure, detect violations, measure evidence, resolve conflicts, generate refactor plans, enforce gates, and record decisions.",
+            "invariant": "The catalog can be executed as a governance kernel for architecture assessment, remediation, and evolution.",
+            "flow": [
+                "Catalog",
+                "Graph",
+                "Scope",
+                "Concepts",
+                "Detection",
+                "Metrics",
+                "Refactor",
+                "Enforcement",
+                "ADR"
+            ],
+            "productions": [
+                {
+                    "lhs": "MasterArchitectureGovernanceKernel",
+                    "rhs": "<RelationshipSchemaValidation> \"→\" <ArchitectureGraph> \"→\" <TargetScopeClassification> \"→\" <ConceptClusterExtraction> \"→\" <DependencyClosure> \"→\" <ViolationDetection> \"→\" <MeasurementNormalization> \"→\" <ConflictTensionResolution> \"→\" <RefactorSelection> \"→\" <EnforcementGate> \"→\" <ArchitectureDecisionSupport> \"→\" <GovernanceReport>"
+                },
+                {
+                    "lhs": "GovernanceReport",
+                    "rhs": "<SatisfiedConceptSet> \",\" <ViolationRecordSet> \",\" <MetricEvidenceSet> \",\" <ConflictTensionSet> \",\" <RefactorRoadmap> \",\" <EnforcementGateSet> \",\" <ADRRecommendationSet> \",\" <ResidualRiskSet>"
+                }
+            ],
+            "composes": [
+                "relationship-schema-validation",
+                "concept-cluster-extraction",
+                "dependency-closure",
+                "violation-detection",
+                "measurement-normalization",
+                "refactor-selection",
+                "enforcement-gate",
+                "architecture-decision-support"
+            ],
+            "force": [
+                "correctness_verification",
+                "security_governance",
+                "architecture_evolution"
+            ]
+        },
+        {
+            "id": "architectural-relationship-algebra",
+            "principleRef": "architectural-consistency",
+            "distinctFrom": [
+                {
+                    "id": "architectural-contract-algebra",
+                    "reason": "The contract algebra designs a system by reducing each force to a contract; the relationship algebra processes the concept records themselves as a graph to detect, measure, refactor and enforce."
+                }
+            ],
+            "title": "Architectural Relationship Algebra",
+            "intent": "<Parse concept records> → <Build relationship graph> → <Classify design force> → <Select applicable concepts> → <Resolve prerequisites> → <Detect violations> → <Measure evidence> → <Choose refactors> → <Enforce gates> → <Govern evolution>",
+            "invariant": "Every architectural principle, pattern, mechanism, metric, and quality attribute can be treated as a relationship contract whose operational lifecycle is detection, measurement, remediation, enforcement, and evolution.",
+            "flow": [
+                "Record",
+                "Graph",
+                "Force",
+                "Concept",
+                "Evidence",
+                "Refactor",
+                "Gate",
+                "Governance"
+            ],
+            "productions": [
+                {
+                    "lhs": "ArchitecturalRelationshipAlgebra",
+                    "rhs": "<ArchitecturalRelationshipRecordSet> \"→\" <ArchitectureGraph> \"→\" <ForceClassification> \"→\" <ApplicableConceptSet> \"→\" <DependencyClosure> \"→\" <ViolationDetection> \"→\" <MeasurementNormalization> \"→\" <RefactorSelection> \"→\" <EnforcementGate> \"→\" <ArchitectureEvolutionGovernance>"
+                },
+                {
+                    "lhs": "ArchitecturalRelationshipRecord",
+                    "rhs": "<ConceptName> \":\" <RecordType> \",\" <ScopeSet> \",\" <RequiresSet> \",\" <ReinforcesSet> \",\" <EnablesSet> \",\" <ConflictSet> \",\" <TensionSet> \",\" <ViolationSet> \",\" <DetectionSet> \",\" <MetricSet> \",\" <RefactorSet> \",\" <EnforcementSet> \",\" <EnforcementSeverity>"
+                },
+                {
+                    "lhs": "OperationalLifecycle",
+                    "rhs": "\"define\" | \"select\" | \"detect\" | \"measure\" | \"refactor\" | \"enforce\" | \"observe\" | \"evolve\""
+                },
+                {
+                    "lhs": "CompletionCondition",
+                    "rhs": "\"all_mandatory_concepts_satisfied\" \",\" \"contextual_concepts_justified\" \",\" \"recommended_concepts_reported\" \",\" \"discouraged_concepts_exception_reviewed\" \",\" \"residual_risk_recorded\""
+                }
+            ],
+            "composes": [
+                "dependency-closure",
+                "violation-detection",
+                "measurement-normalization",
+                "refactor-selection",
+                "enforcement-gate",
+                "architecture-evolution-governance"
+            ],
+            "force": [
+                "contract_compatibility",
+                "correctness_verification",
+                "architecture_evolution"
+            ],
+            "meta": true
+        }
+    ]
+}

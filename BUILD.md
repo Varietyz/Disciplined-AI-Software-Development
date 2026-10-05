@@ -24,7 +24,7 @@ For this reason I give the model specific findings rather than abstract principl
 
 To check this, compare a session driven by findings with one driven by explanation, and count the fixes that stuck. The findings session should keep more of them. If it does not, the findings are not specific enough. A finding whose only repair the toolchain refuses to perform is withdrawn or exempted, with that refusal given as the reason. A report that can never be emptied teaches you and the model to discount its color, and the findings beside it pay for that.
 
-Healing comes before reporting, and the ontology calls this [auto-remediation](ontology/PRINCIPLES.md#architecture-auto-remediation). A violation whose repair has exactly [one correct answer](VERIFY.md#one-correct-answer) is repaired in the same run that caught it, without the developer or the model asking: a missing type the grammar computes, a form the registry records, or a name whose only legal spelling can be derived. The fix flag can switch healing off but never on, because a fix that has to be opted into turns a computed repair into a queue of work. A fix is applied, validated again and converges, so it is idempotent: applying it twice changes nothing. A fix that fails its own check stays open as a finding. What reaches the model is what remains: the findings that need judgement, such as which concern a file belongs to, whether two roles should be split, or where a duplicated fact should live.
+Healing comes before reporting, and the ontology calls this [auto-remediation](ontology/PRINCIPLES.md#architecture-auto-remediation). A violation whose repair has exactly [one correct answer](VERIFY.md#one-correct-answer) is repaired in the same run that caught it, without the developer or the model asking: a missing type the grammar computes, a form the registry records, or a name whose only legal spelling can be derived. The fix flag can switch healing off but never on, because a fix that has to be opted into turns a computed repair into a queue of work. A fix is applied, validated again and converges, so it is idempotent: applying it twice changes nothing. A fix that fails its own check stays open as a finding. What reaches the model is what remains: the findings that need judgment, such as which concern a file belongs to, whether two roles should be split, or where a duplicated fact should live.
 
 The error log is how the tools talk to the model, so it is typed. A finding carries the id of the check that fired, the path and the position inside the file, and the steps the check took to reach its result. It also carries the value it found, the value it expected where one can be derived, a repair stated as an action with real operands, and whether the fixer already applied it. Prose in a finding counts as a defect, because the model reading it should not have to repeat the analysis the check already did. A sentence describing a rename is only a description, while the action and its two operands are a contract the model can carry out.
 
@@ -34,25 +34,25 @@ A1·a the loop from outside
 
 ```mermaid
 flowchart TB
-detect["Detect · the one command, fixers on"]
-heal["Heal · every finding with one correct answer, in the same run"]
-report["Report · the findings the fixers left, as data on disk"]
-fix["Fix · the model, one finding at a time, from the report"]
-detect --> heal --> report --> fix
-fix -- until the report is empty --> detect
+    detect["Detect · the one command, fixers on"]
+    heal["Heal · every finding with one correct answer, in the same run"]
+    report["Report · the findings the fixers left, as data on disk"]
+    fix["Fix · the model, one finding at a time, from the report"]
+    detect --> heal --> report --> fix
+    fix -- until the report is empty --> detect
 ```
 
 A1·b an actionable finding
 
 ```text
 engine/registries/route.registry.ts:41
-rule      literal-in-lookup
-locus     the first argument of the lookup call
-trail     resolved the callee verb, matched the lookup form, read the argument
-expected  an imported constant as the lookup key
-found     the string literal "home"
-fix       replace the argument with the id from the ids module: HOME_PAGE
-healed    no
+  rule      literal-in-lookup
+  locus     the first argument of the lookup call
+  trail     resolved the callee verb, matched the lookup form, read the argument
+  expected  an imported constant as the lookup key
+  found     the string literal "home"
+  fix       replace the argument with the id from the ids module: HOME_PAGE
+  healed    no
 ```
 
 ## The gate holds the line
@@ -75,25 +75,25 @@ B1·a a check's events
 
 ```mermaid
 flowchart TB
-pattern["A new pattern enters the tree"]
-ships["The check ships in the same change, with a planted violation"]
-slips["A violation slips past the check"]
-appended["The check is extended first, then the content is repaired"]
-inconvenient["A finding is inconvenient"]
-stays["It stays a finding · no warn tier, no exclusion"]
-disagree["Two checks disagree on one line"]
-derived["Both stay on · the form that satisfies both is derived"]
-uncheckable["A pattern no static check can catch"]
-surfaced["Surfaced as a question, never used as license"]
-pattern --> ships
-slips --> appended
-inconvenient --> stays
-disagree --> derived
-uncheckable --> surfaced
-ships ~~~ slips
-appended ~~~ inconvenient
-stays ~~~ disagree
-derived ~~~ uncheckable
+    pattern["A new pattern enters the tree"]
+    ships["The check ships in the same change, with a planted violation"]
+    slips["A violation slips past the check"]
+    appended["The check is extended first, then the content is repaired"]
+    inconvenient["A finding is inconvenient"]
+    stays["It stays a finding · no warn tier, no exclusion"]
+    disagree["Two checks disagree on one line"]
+    derived["Both stay on · the form that satisfies both is derived"]
+    uncheckable["A pattern no static check can catch"]
+    surfaced["Surfaced as a question, never used as license"]
+    pattern --> ships
+    slips --> appended
+    inconvenient --> stays
+    disagree --> derived
+    uncheckable --> surfaced
+    ships ~~~ slips
+    appended ~~~ inconvenient
+    stays ~~~ disagree
+    derived ~~~ uncheckable
 ```
 
 ## The check comes first
@@ -116,18 +116,18 @@ C1·a the order
 
 ```mermaid
 flowchart TB
-write["Write the check"]
-plant["Plant a violation"]
-fires{"Does it report the expected message?"}
-real["Run it over the real population"]
-passes{"Does at least one real member pass for the right reason?"}
-restore["Restore the planted file"]
-code["Write the code the check holds"]
-write --> plant --> fires
-fires -- no --> write
-fires -- yes --> real --> passes
-passes -- no, everything fails --> write
-passes -- yes --> restore --> code
+    write["Write the check"]
+    plant["Plant a violation"]
+    fires{"Does it report the expected message?"}
+    real["Run it over the real population"]
+    passes{"Does at least one real member pass for the right reason?"}
+    restore["Restore the planted file"]
+    code["Write the code the check holds"]
+    write --> plant --> fires
+    fires -- no --> write
+    fires -- yes --> real --> passes
+    passes -- no, everything fails --> write
+    passes -- yes --> restore --> code
 ```
 
 ## A check matches a shape
@@ -166,46 +166,46 @@ D1·a mechanism and registry
 
 ```mermaid
 flowchart TB
-subgraph mechanism["The mechanism · provider-agnostic"]
-detect["Detect the shape · a tree pattern, a token sequence, a structural relation"]
-message["State the shape and its one fix, naming no instance"]
-end
-subgraph registry["The registry · data"]
-instances["Verified instances of the shape, one line each"]
-end
-detect -- reads --> instances
-next["The next instance"]
-next -- one registry line, no new check --> instances
+    subgraph mechanism["The mechanism · provider-agnostic"]
+        detect["Detect the shape · a tree pattern, a token sequence, a structural relation"]
+        message["State the shape and its one fix, naming no instance"]
+    end
+    subgraph registry["The registry · data"]
+        instances["Verified instances of the shape, one line each"]
+    end
+    detect -- reads --> instances
+    next["The next instance"]
+    next -- one registry line, no new check --> instances
 ```
 
 D1·b placed by sight
 
 ```mermaid
 flowchart TB
-shape["A shape to gate"]
-where{"What does the check need to see?"}
-perfile["One file's syntax tree · a per-file rule dropped into the rule host"]
-closure["Relations across files · a rule that reads the graph a prior stage wrote"]
-folder["A folder rather than a file · a rule that walks from the root and anchors its finding"]
-pipeline["The whole tree, or a rewrite · a stage of its own"]
-shape --> where
-where --> perfile
-where --> closure
-where --> folder
-where --> pipeline
+    shape["A shape to gate"]
+    where{"What does the check need to see?"}
+    perfile["One file's syntax tree · a per-file rule dropped into the rule host"]
+    closure["Relations across files · a rule that reads the graph a prior stage wrote"]
+    folder["A folder rather than a file · a rule that walks from the root and anchors its finding"]
+    pipeline["The whole tree, or a rewrite · a stage of its own"]
+    shape --> where
+    where --> perfile
+    where --> closure
+    where --> folder
+    where --> pipeline
 ```
 
 D1·c dropped in
 
 ```mermaid
 flowchart TB
-file["A rule file dropped into the host"]
-discover["Discovered by shape · a text match on its contract"]
-index["The index is re-derived from disk"]
-active["Active at failure severity, no core file edited"]
-self["The rule host passes through the gate it enforces"]
-file --> discover --> index --> active --> self
-self -. a malformed rule fails at lint, never at load .-> file
+    file["A rule file dropped into the host"]
+    discover["Discovered by shape · a text match on its contract"]
+    index["The index is re-derived from disk"]
+    active["Active at failure severity, no core file edited"]
+    self["The rule host passes through the gate it enforces"]
+    file --> discover --> index --> active --> self
+    self -. a malformed rule fails at lint, never at load .-> file
 ```
 
 D1·d a rule contract
@@ -297,55 +297,55 @@ E1·a closing a gap
 
 ```mermaid
 flowchart TB
-gap["A capability gap appears"]
-owner{"Does something already own this concern?"}
-extend["Extend the owner, so the next consumer inherits it"]
-build["Author a tool with a command surface, in the tree"]
-loop["A manual loop"]
-workaround["A workaround"]
-gap --> owner
-owner -- yes --> extend
-owner -- no --> build
-gap -. the tempting moves .-> loop
-gap -. the tempting moves .-> workaround
+    gap["A capability gap appears"]
+    owner{"Does something already own this concern?"}
+    extend["Extend the owner, so the next consumer inherits it"]
+    build["Author a tool with a command surface, in the tree"]
+    loop["A manual loop"]
+    workaround["A workaround"]
+    gap --> owner
+    owner -- yes --> extend
+    owner -- no --> build
+    gap -. the tempting moves .-> loop
+    gap -. the tempting moves .-> workaround
 ```
 
 E1·b a look tool
 
 ```mermaid
 flowchart TB
-question["A visual question"]
-tool["The look tool · one capture per question"]
-shot["The screenshot · what the eye sees"]
-console["The console log · what the page said while rendering"]
-layout["The layout · what the engine computed"]
-dom["The markup · what was actually in the tree"]
-answer["An answer with a value you can read"]
-question --> tool
-tool --> shot
-tool --> console
-tool --> layout
-tool --> dom
-shot --> answer
-console --> answer
-layout --> answer
-dom --> answer
+    question["A visual question"]
+    tool["The look tool · one capture per question"]
+    shot["The screenshot · what the eye sees"]
+    console["The console log · what the page said while rendering"]
+    layout["The layout · what the engine computed"]
+    dom["The markup · what was actually in the tree"]
+    answer["An answer with a value you can read"]
+    question --> tool
+    tool --> shot
+    tool --> console
+    tool --> layout
+    tool --> dom
+    shot --> answer
+    console --> answer
+    layout --> answer
+    dom --> answer
 ```
 
 E1·c before an irreversible tool
 
 ```mermaid
 flowchart TB
-invoke["An irreversible operation is about to run"]
-preconditions["Enumerate the standing preconditions bearing on it"]
-code["Read the tool's code for each · not its help"]
-missing{"Does the tool implement every one?"}
-hand["Take the missing step by hand first, and declare it"]
-encode["Encode the step in the tool for the next invocation"]
-run["Run it"]
-invoke --> preconditions --> code --> missing
-missing -- yes --> run
-missing -- no --> hand --> encode --> run
+    invoke["An irreversible operation is about to run"]
+    preconditions["Enumerate the standing preconditions bearing on it"]
+    code["Read the tool's code for each · not its help"]
+    missing{"Does the tool implement every one?"}
+    hand["Take the missing step by hand first, and declare it"]
+    encode["Encode the step in the tool for the next invocation"]
+    run["Run it"]
+    invoke --> preconditions --> code --> missing
+    missing -- yes --> run
+    missing -- no --> hand --> encode --> run
 ```
 
 ## One home
@@ -370,16 +370,16 @@ F1·a a location declaration
 
 ```yaml
 app:
-root: <application-root>
-member: <application-member> # → <application-root>/<application-member>
-builds: <build-output> # → <application-root>/<build-output>
+  root: <application-root>
+  member: <application-member> # → <application-root>/<application-member>
+  builds: <build-output> # → <application-root>/<build-output>
 testing:
-root: <test-root>
-app: <application-suite> # → <test-root>/<application-suite>
+  root: <test-root>
+  app: <application-suite> # → <test-root>/<application-suite>
 governance:
-root: <governance-host>
-rules: <rule-host> # → <governance-host>/<rule-host>
-reports: <report-root> # → <governance-host>/<report-root>
+  root: <governance-host>
+  rules: <rule-host> # → <governance-host>/<rule-host>
+  reports: <report-root> # → <governance-host>/<report-root>
 ```
 
 F1·b the lookup
@@ -399,39 +399,39 @@ F1·c one limit
 
 ```mermaid
 flowchart TB
-subgraph copies["Three homes"]
-s1["settings · lines-per-file: 200"]
-c1["checker · MAX_LINES = 150"]
-r1["readme · files never exceed 150 lines"]
-end
-subgraph home["One home"]
-s2["settings · lines-per-file: 200"]
-c2["checker · reads lines-per-file from the settings"]
-r2["readme · states the shape, never the number"]
-s2 -- derived --> c2
-s2 -. no number to copy .-> r2
-end
-s1 -. drift .- c1
-c1 -. drift .- r1
+    subgraph copies["Three homes"]
+        s1["settings · lines-per-file: 200"]
+        c1["checker · MAX_LINES = 150"]
+        r1["readme · files never exceed 150 lines"]
+    end
+    subgraph home["One home"]
+        s2["settings · lines-per-file: 200"]
+        c2["checker · reads lines-per-file from the settings"]
+        r2["readme · states the shape, never the number"]
+        s2 -- derived --> c2
+        s2 -. no number to copy .-> r2
+    end
+    s1 -. drift .- c1
+    c1 -. drift .- r1
 ```
 
 F1·d one truth per concern
 
 ```mermaid
 flowchart TB
-subgraph truths["One truth per concern"]
-quality["Quality config · one file, every tool's config built in memory from it"]
-paths["Locations · one declaration, every location resolved by key"]
-vocabulary["Naming · one closed vocabulary"]
-end
-tools["Every tool"]
-scripts["Every script"]
-checks["Every check"]
-quality -- in memory --> tools
-paths -- by key --> scripts
-vocabulary -- parsed --> checks
-drift["A per-tool config on disk · a spelled path · an undeclared word"]
-drift -. refused .-> truths
+    subgraph truths["One truth per concern"]
+        quality["Quality config · one file, every tool's config built in memory from it"]
+        paths["Locations · one declaration, every location resolved by key"]
+        vocabulary["Naming · one closed vocabulary"]
+    end
+    tools["Every tool"]
+    scripts["Every script"]
+    checks["Every check"]
+    quality -- in memory --> tools
+    paths -- by key --> scripts
+    vocabulary -- parsed --> checks
+    drift["A per-tool config on disk · a spelled path · an undeclared word"]
+    drift -. refused .-> truths
 ```
 
 ## The filesystem is the architecture
@@ -480,19 +480,19 @@ G1·b wired then collected
 
 ```mermaid
 flowchart TB
-subgraph before["Before · the router learns every name"]
-router1["router · switch on the page name"]
-router1 --> home1["home page"]
-router1 --> terms1["terms page"]
-router1 --> faq1["faq page"]
-end
-subgraph after["After · the directory is the registry"]
-pages["pages folder · collected by pattern"]
-home2["home page · registers itself"] --> pages
-terms2["terms page · registers itself"] --> pages
-faq2["faq page · registers itself"] --> pages
-pages --> router2["router · never learns a name"]
-end
+    subgraph before["Before · the router learns every name"]
+        router1["router · switch on the page name"]
+        router1 --> home1["home page"]
+        router1 --> terms1["terms page"]
+        router1 --> faq1["faq page"]
+    end
+    subgraph after["After · the directory is the registry"]
+        pages["pages folder · collected by pattern"]
+        home2["home page · registers itself"] --> pages
+        terms2["terms page · registers itself"] --> pages
+        faq2["faq page · registers itself"] --> pages
+        pages --> router2["router · never learns a name"]
+    end
 ```
 
 ## Fail at the boundary
@@ -524,28 +524,28 @@ H1·b the debt shapes
 
 ```mermaid
 flowchart TB
-subgraph never["Never · debt"]
-shortcut["a shortcut"]
-fallback["a fallback"]
-dual["a dual path"]
-deprecation["a deprecation marker"]
-fornow["a for-now"]
-optional["an optional feature the system depends on"]
-end
-subgraph always["Always · leverage"]
-constraint["a constraint"]
-failfast["fail-fast"]
-single["a single path"]
-removal["explicit removal"]
-now["now"]
-mandatory["mandatory"]
-end
-shortcut --> constraint
-fallback --> failfast
-dual --> single
-deprecation --> removal
-fornow --> now
-optional --> mandatory
+    subgraph never["Never · debt"]
+        shortcut["a shortcut"]
+        fallback["a fallback"]
+        dual["a dual path"]
+        deprecation["a deprecation marker"]
+        fornow["a for-now"]
+        optional["an optional feature the system depends on"]
+    end
+    subgraph always["Always · leverage"]
+        constraint["a constraint"]
+        failfast["fail-fast"]
+        single["a single path"]
+        removal["explicit removal"]
+        now["now"]
+        mandatory["mandatory"]
+    end
+    shortcut --> constraint
+    fallback --> failfast
+    dual --> single
+    deprecation --> removal
+    fornow --> now
+    optional --> mandatory
 ```
 
 ## Placement is a grammar
@@ -568,9 +568,9 @@ Words are resolved by their position rather than by their spelling, which is [po
 
 [Declared jurisdiction](ontology/PRINCIPLES.md#architecture-declared-jurisdiction) decides what the grammar reaches. Each key in the configuration is a governed root, and without a declaration there is no enforcement, so a tree outside the jurisdiction keeps its own names. A declaration is a claim that is checked against the disk: a root declared before its folder exists governs nothing and fails nothing, yet it reads as coverage. Material written elsewhere is declared once as an upstream root, and that one declaration exempts it from the naming, tense and reference checks together, because all three fail on such a tree and none of those failures is a defect in it.
 
-### Judgement classifies, the check parses
+### Judgment classifies, the check parses
 
-Classification is a matter of judgement, while structure can be decided by a machine, and the tooling stops at the line between them. A check reports that a name does not parse or that a tag disagrees with its folder, but it never decides what a file is; the classification rule lives in the layer spine on the architecture page. Reshaping an existing tree is therefore a [manual identity migration](ontology/PRINCIPLES.md#architecture-manual-identity-migration), done one container at a time with the gate green between each, and the rest is described in [moves and renames](VERIFY.md#moves-and-renames).
+Classification is a matter of judgment, while structure can be decided by a machine, and the tooling stops at the line between them. A check reports that a name does not parse or that a tag disagrees with its folder, but it never decides what a file is; the classification rule lives in the layer spine on the architecture page. Reshaping an existing tree is therefore a [manual identity migration](ontology/PRINCIPLES.md#architecture-manual-identity-migration), done one container at a time with the gate green between each, and the rest is described in [moves and renames](VERIFY.md#moves-and-renames).
 
 ### A vocabulary that proves itself
 
@@ -583,72 +583,72 @@ I1·a the grammar
 ```text
 folder = <container> | <subject> | <concern>       one word, never a dot
 file   = <subject>.<concern>.<ext>
-| <subject>.<variant>.<concern>.<ext>        only when two files would collide
+       | <subject>.<variant>.<concern>.<ext>        only when two files would collide
 
 depth  = container(1) → subject(2, optional) → concern(3) → file
-a role may be skipped, never repeated, never revisited
-the file's parent is always the concern folder
-the file's concern tag equals its parent folder
+         a role may be skipped, never repeated, never revisited
+         the file's parent is always the concern folder
+         the file's concern tag equals its parent folder
 ```
 
 I1·b one tree
 
 ```mermaid
 flowchart TB
-engine["engine · a container, one grouping axis"]
-registries["registries · a concern folder, files of one role"]
-page["page.registry.ts"]
-route["route.registry.ts"]
-form["form · a subject folder"]
-panel["panel · a subject folder"]
-fv["validators"]
-pv["validators"]
-field["field.validator.ts"]
-layout["layout.validator.ts"]
-engine --> registries --> page
-registries --> route
-engine --> form --> fv --> field
-engine --> panel --> pv --> layout
-form -. two sets of validators must not merge .- panel
+    engine["engine · a container, one grouping axis"]
+    registries["registries · a concern folder, files of one role"]
+    page["page.registry.ts"]
+    route["route.registry.ts"]
+    form["form · a subject folder"]
+    panel["panel · a subject folder"]
+    fv["validators"]
+    pv["validators"]
+    field["field.validator.ts"]
+    layout["layout.validator.ts"]
+    engine --> registries --> page
+    registries --> route
+    engine --> form --> fv --> field
+    engine --> panel --> pv --> layout
+    form -. two sets of validators must not merge .- panel
 ```
 
 I1·c where a word goes
 
 ```mermaid
 flowchart LR
-word["A word at a slot"]
-role{"A role a file plays?"}
-thing{"A thing the system has?"}
-concern["The concern list · the file's tag"]
-subject["The subject list · the first slot of a name"]
-rejected["Rejected · a process, an adjective, a grouping label"]
-split["The file gets its real role, or splits"]
-word --> role
-role -- registry, validator, renderer --> concern
-role -- no --> thing
-thing -- form, panel, route --> subject
-thing -- timing, lazy, misc, helper --> rejected --> split
+    word["A word at a slot"]
+    role{"A role a file plays?"}
+    thing{"A thing the system has?"}
+    concern["The concern list · the file's tag"]
+    subject["The subject list · the first slot of a name"]
+    rejected["Rejected · a process, an adjective, a grouping label"]
+    split["The file gets its real role, or splits"]
+    word --> role
+    role -- registry, validator, renderer --> concern
+    role -- no --> thing
+    thing -- form, panel, route --> subject
+    thing -- timing, lazy, misc, helper --> rejected --> split
 ```
 
 I1·d jurisdiction
 
 ```mermaid
 flowchart TB
-tree["A tree"]
-declared{"Declared as a governed root?"}
-governed["Every file inside resolves to one legal path"]
-foreign{"Carries another system's ownership markers?"}
-upstream{"Authored elsewhere?"}
-left["Left alone · a grammar that does not claim a tree enforces nothing in it"]
-refused["Refused as a root · its names are identifiers another runtime resolves"]
-exempt["Declared once as upstream · exempt from naming, tense and reference checks together"]
-tree --> declared
-declared -- yes --> foreign
-foreign -- yes --> refused
-foreign -- no --> governed
-declared -- no --> upstream
-upstream -- yes --> exempt
-upstream -- no --> left
+    tree["A tree"]
+    declared{"Declared as a governed root?"}
+    governed["Every file inside resolves to one legal path"]
+    foreign{"Carries another system's ownership markers?"}
+    upstream{"Authored elsewhere?"}
+    left["Left alone · a grammar that does not claim a tree enforces nothing in it"]
+    refused["Refused as a root · its names are identifiers another runtime resolves"]
+    exempt["Declared once as upstream · exempt from naming, tense and reference checks together"]
+    tree --> declared
+    declared -- yes --> foreign
+    foreign -- yes --> refused
+    foreign -- no --> governed
+    declared -- no --> upstream
+    upstream -- yes --> exempt
+    upstream -- no --> left
 ```
 
 I1·e the vocabulary

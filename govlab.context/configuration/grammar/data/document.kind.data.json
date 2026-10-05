@@ -1,0 +1,187 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../LICENSE.",
+    "check": {
+        "by": ["the document-type recognition check, which matches each type and its verbs to the keyword vocabulary and resolves its model and axis"],
+        "population": "every document type the grammar declares, and every document that declares one",
+        "freshness": "a verdict stands until the type list, the keyword vocabulary or the reasoning models change",
+        "refusal": "the ontology resolution gate fails on an unrecognized type or verb, or a type with no resolvable model or axis",
+        "observation": "none: a document type is declared text, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: one suite plants a type and a verb absent from the keyword vocabulary, another plants a type with no model or axis, and both pass a covered type",
+        "authority": "the keyword vocabulary and the reasoning models, which a document type cites"
+    },
+    "records": [
+        {
+            "type": "AGENT",
+            "defaultVerb": "PERFORMS",
+            "purpose": "Agent behavior definition",
+            "verbs": [
+                "PERFORMS",
+                "HAS",
+                "MANAGES"
+            ],
+            "model": "cognition",
+            "axis": "reasoning"
+        },
+        {
+            "type": "WORKFLOW",
+            "defaultVerb": "EXECUTES",
+            "purpose": "Multi-phase process orchestration",
+            "verbs": [
+                "EXECUTES",
+                "COORDINATES"
+            ],
+            "model": "cognition",
+            "axis": "formalization"
+        },
+        {
+            "type": "PROTOCOL",
+            "defaultVerb": "DEFINES",
+            "purpose": "Standard operating procedures",
+            "verbs": ["DEFINES"],
+            "model": "pattern-cycle",
+            "axis": "formalization"
+        },
+        {
+            "type": "POLICY",
+            "defaultVerb": "ENFORCES",
+            "purpose": "Constraint and rule system",
+            "verbs": ["ENFORCES"],
+            "model": "pattern-cycle",
+            "axis": "teleology"
+        },
+        {
+            "type": "CHECKLIST",
+            "defaultVerb": "PROVIDES",
+            "purpose": "Task tracking with validation",
+            "verbs": [
+                "PROVIDES",
+                "GENERATES"
+            ],
+            "model": "pattern-cycle",
+            "axis": "formalization"
+        },
+        {
+            "type": "TEMPLATE",
+            "defaultVerb": "IMPLEMENTS",
+            "purpose": "Reusable document pattern",
+            "verbs": [
+                "IMPLEMENTS",
+                "GENERATES"
+            ],
+            "model": "pattern-cycle",
+            "axis": "representation"
+        },
+        {
+            "type": "TASK",
+            "defaultVerb": "EXECUTES",
+            "purpose": "Single-objective operation",
+            "verbs": ["EXECUTES"],
+            "model": "pattern-cycle",
+            "axis": "formalization"
+        },
+        {
+            "type": "INSTRUCTION",
+            "defaultVerb": "IS",
+            "purpose": "General guidance document",
+            "verbs": ["IS"],
+            "model": "pattern-cycle",
+            "axis": "formalization"
+        },
+        {
+            "type": "PROMPT",
+            "defaultVerb": "IS",
+            "purpose": "Model interaction template",
+            "verbs": ["IS"],
+            "model": "cognition",
+            "axis": "formalization"
+        },
+        {
+            "type": "COMMAND",
+            "defaultVerb": "EXECUTES",
+            "purpose": "Executable command",
+            "verbs": ["EXECUTES"],
+            "model": "cognition",
+            "axis": "formalization"
+        },
+        {
+            "type": "TEST",
+            "defaultVerb": "PERFORMS",
+            "purpose": "Test specification",
+            "verbs": ["PERFORMS"],
+            "model": "epistemology",
+            "axis": "verification"
+        },
+        {
+            "type": "DEBUG",
+            "defaultVerb": "RESOLVES",
+            "purpose": "Evidence-gated root-cause debugging process",
+            "verbs": [
+                "RESOLVES",
+                "FINDS",
+                "FIXES"
+            ],
+            "model": "epistemology",
+            "axis": "analysis"
+        },
+        {
+            "type": "VERIFICATION",
+            "defaultVerb": "PERFORMS",
+            "purpose": "Forensic claim-versus-evidence adjudication process",
+            "verbs": [
+                "PERFORMS",
+                "VERIFIES",
+                "CLASSIFIES"
+            ],
+            "model": "epistemology",
+            "axis": "verification"
+        },
+        {
+            "type": "DISTILLATION",
+            "defaultVerb": "DISTILLS",
+            "purpose": "Base abstraction drawn from behavioral evidence, with the duplicates proven gone",
+            "verbs": [
+                "DISTILLS",
+                "ABSTRACTS",
+                "ELIMINATES"
+            ],
+            "model": "epistemology",
+            "axis": "reasoning"
+        },
+        {
+            "type": "AUDIT",
+            "defaultVerb": "AUDITS",
+            "purpose": "Universal-contract agent audit with non-destructive correction",
+            "verbs": [
+                "AUDITS",
+                "MEASURES",
+                "SCORES"
+            ],
+            "model": "epistemology",
+            "axis": "verification"
+        },
+        {
+            "type": "TRANSLATION",
+            "defaultVerb": "AUDITS",
+            "purpose": "Line-by-line translation audit with four adversarial gates",
+            "verbs": [
+                "AUDITS",
+                "VERIFIES",
+                "CORRECTS"
+            ],
+            "model": "epistemology",
+            "axis": "representation"
+        },
+        {
+            "type": "COMPOSITION",
+            "defaultVerb": "RENDERS",
+            "purpose": "Writing-structure generator built from anchors, modifiers and transforms",
+            "verbs": [
+                "RENDERS",
+                "COMPOSES",
+                "FOLDS"
+            ],
+            "model": "pattern-cycle",
+            "axis": "formalization"
+        }
+    ]
+}

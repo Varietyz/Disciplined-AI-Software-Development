@@ -1,0 +1,232 @@
+{
+    "category": "mode-driven-response-schema",
+    "tier": "process",
+    "check": {
+        "by": ["the mode contract validation, which accepts a response only against the contract the loop selected"],
+        "population": "every model turn the loop grades",
+        "freshness": "a verdict stands until the field registry or the selected mode changes",
+        "refusal": "a response that fails its mode contract is rejected and retried with error-specific remediation, never against a relaxed contract",
+        "observation": "the append-only turn records, which locate a failed turn",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the selected mode contract, which every graded response conforms to"
+    },
+    "records": [
+        {
+            "id": "composed-turn-contract",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Composed Turn Contract",
+            "exemplar": {
+                "before": "The validation schema and the model's instruction hand-maintained twice, so they drift.",
+                "after": "field registry → project per (phase, activity) mode → schema + instruction from one source → same mode = byte-identical, changing a field changes both",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Compose a model turn's validation schema and its instruction from one self-registering field registry, projected per mode, so the schema the response is graded against and the instruction the model is given can never drift.",
+            "invariant": "The per-mode validation schema and the per-mode instruction are projections of a single field registry; there is no second hand-authored contract surface, and adding or changing a field changes both at once.",
+            "flow": [
+                "RegisterField",
+                "SelectByMode",
+                "ProjectSchema",
+                "ProjectInstruction",
+                "StampVersion"
+            ],
+            "productions": [
+                {
+                    "lhs": "ComposedTurnContract",
+                    "rhs": "<FieldRegistry> \"→\" <ModeProjection> \"→\" <SchemaAndInstruction>"
+                },
+                {"lhs": "ModeKey",
+                    "rhs": "\"(\" \"phase\" \",\" \"activity\" \")\""},
+                {"lhs": "SchemaVersion",
+                    "rhs": "\"content_hash\" \"(\" <FieldSet> \")\""},
+                {
+                    "lhs": "Determinism",
+                    "rhs": "\"same_mode\" \"→\" \"byte_identical\" \"(\" <Schema> \",\" <Instruction> \")\""
+                }
+            ],
+            "composes": [
+                "interface-contract",
+                "canonical-data",
+                "canonical-semantics",
+                "extension-point"
+            ],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency",
+                "runtime_extensibility"
+            ]
+        },
+        {
+            "id": "loop-owned-mode-selection",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "act",
+                    "record": "composed-turn-contract"},
+                {"stage": "verify",
+                    "record": "mode-contract-validation"},
+                {"stage": "commit",
+                    "record": "versioned-turn-provenance"}
+            ],
+            "title": "Loop-Owned Mode Selection",
+            "exemplar": {
+                "before": "The model's output carries the field that selects which contract it's graded against.",
+                "after": "loop assigns (phase, activity) mode → compose contract → validate; the model can never grade itself against a contract it chose",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "The loop assigns the (phase, activity) mode that selects which contract a response is validated against; the model's output carries no contract-selecting field, so a model can never grade itself against a contract it chose.",
+            "invariant": "The mode that selects the response contract is loop-assigned; the model has no field that selects the contract it is graded against.",
+            "flow": [
+                "LoopAssignMode",
+                "ComposeContract",
+                "ValidateAgainstContract"
+            ],
+            "productions": [
+                {
+                    "lhs": "LoopOwnedModeSelection",
+                    "rhs": "<LoopAssignedMode> \"→\" <ComposeContract> \"→\" <ValidateResponse>"
+                },
+                {"lhs": "ModeAuthority",
+                    "rhs": "\"loop_owned\" \"not_model_selected\""}
+            ],
+            "composes": ["contract-compatibility"],
+            "force": [
+                "security_governance",
+                "state_transaction",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "versioned-turn-provenance",
+            "stage": "commit",
+            "axis": "representation",
+            "mathType": "information-theory",
+            "yields": "hash | novelty-score",
+            "title": "Versioned Turn Provenance",
+            "exemplar": {
+                "before": "A turn graded against a schema version its stored state never saw.",
+                "after": "accepted turn → stamp version by content → single-writer causal order → append-only, mode-tagged record; a no-op appends nothing",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Persist each accepted model turn as an append-only, mode-tagged, schema-versioned, causally ordered record with change-only provenance, so the turn history is a queryable, auditable log and a turn is never graded against a schema version its stored state never saw.",
+            "invariant": "Turn records are append-only and single-writer causally ordered; a version is stamped by content and never mutated in place; a no-op change appends nothing.",
+            "flow": [
+                "StampVersion",
+                "AssignCausalOrder",
+                "AppendOnly",
+                "BumpOnChange",
+                "Query"
+            ],
+            "productions": [
+                {
+                    "lhs": "VersionedTurnProvenance",
+                    "rhs": "<SchemaVersion> \"→\" <CausalOrder> \"→\" <AppendOnlyRecord>"
+                },
+                {"lhs": "CausalOrder",
+                    "rhs": "\"single_writer_counter\" \"not\" \"disk_read_max\""},
+                {"lhs": "Provenance",
+                    "rhs": "\"bump_on_real_change\" \"no_op_appends_nothing\""}
+            ],
+            "composes": ["version-provenance"],
+            "force": [
+                "observability_traceability",
+                "state_transaction",
+                "causality_ordering"
+            ]
+        },
+        {
+            "id": "mode-contract-validation",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Mode Contract Validation",
+            "exemplar": {
+                "before": "A response accepted because it looked right, not because it satisfied the mode's schema.",
+                "after": "response + mode contract → validate → {valid | error-specific self-heal retry, bounded} → accepted | rejected",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Validate the model's response against the loop-selected mode contract and, on a validation miss, drive an error-specific self-healing retry bounded by the contract, so a response is accepted only when it satisfies the schema it is graded against.",
+            "invariant": "A response is accepted only against the mode contract the loop selected; a validation miss self-heals with error-specific remediation, never against a relaxed contract.",
+            "flow": [
+                "Response",
+                "ValidateAgainstContract",
+                "Valid|SelfHealRetry",
+                "Accepted|Rejected"
+            ],
+            "productions": [
+                {
+                    "lhs": "ModeContractValidation",
+                    "rhs": "<Response> \",\" <ModeContract> \"→\" <Validation> \"→\" (<Accepted> | <SelfHealRetry> \"→\" <ModeContractValidation>)"
+                },
+                {
+                    "lhs": "SelfHealRetry",
+                    "rhs": "\"error_specific_remediation\" \"(\" <ValidationIssues> \")\" \"bounded\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "contract_compatibility"
+            ]
+        },
+        {
+            "id": "mode-driven-response-schema",
+            "title": "<Mode-Driven Response Schema>",
+            "intent": "Make the model's structured output a mode-driven composed contract — the output mirror of composed input context: per loop-owned mode the schema and instruction are projected from one field registry, the response is validated and self-heals against it, the typed fields are governed, and every turn is persisted as a versioned queryable record — so the output has one source, cannot drift from its instruction, and can be audited.",
+            "invariant": "The response contract is composed per loop-owned mode from a single field registry; instruction and validation are the same source; a validation miss self-heals with error-specific remediation; output governance is advisory and never blocks the hard verify gate; and every accepted turn is a versioned, append-only record.",
+            "flow": [
+                "ComposeContract",
+                "ValidateByMode",
+                "SelfRemediate",
+                "GovernFields",
+                "PersistVersioned"
+            ],
+            "productions": [
+                {
+                    "lhs": "ModeDrivenResponseSchema",
+                    "rhs": "<ComposedTurnContract> \"→\" <LoopOwnedModeSelection> \"→\" <SelfRemediation> \"→\" <GroundingAdvisory> \"→\" <VersionedTurnProvenance>"
+                },
+                {
+                    "lhs": "SingleSource",
+                    "rhs": "\"instruction\" \"=\" \"validation\" \"=\" \"projection\" \"(\" <FieldRegistry> \")\""
+                },
+                {
+                    "lhs": "SelfRemediation",
+                    "rhs": "\"error_specific_retry\" \"(\" <ValidationIssues> \",\" <ModeContract> \")\""
+                },
+                {
+                    "lhs": "GroundingAdvisory",
+                    "rhs": "\"typed_field\" \"→\" \"validator\" \"(\" \"advisory_not_blocking\" \")\""
+                }
+            ],
+            "composes": [
+                "composed-turn-contract",
+                "loop-owned-mode-selection",
+                "versioned-turn-provenance",
+                "interface-contract",
+                "canonical-data",
+                "contract-compatibility",
+                "self-description-manifest",
+                "runtime-discovery",
+                "extension-point"
+            ],
+            "force": [
+                "contract_compatibility",
+                "semantic_consistency",
+                "runtime_extensibility",
+                "correctness_verification",
+                "security_governance"
+            ],
+            "meta": true
+        }
+    ]
+}

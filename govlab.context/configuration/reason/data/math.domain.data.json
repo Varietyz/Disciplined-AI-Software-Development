@@ -1,0 +1,55 @@
+{
+    "check": {
+        "by": ["the ontology resolution gate over the math types and foundations that name the domain"],
+        "population": "every math type and foundation layer that names the domain",
+        "freshness": "a verdict stands until the domain list or a record that names a domain changes",
+        "refusal": "the gate fails on a reference to a domain that does not exist",
+        "observation": "none: a math domain is a field of study, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: a suite plants a math type that names a missing domain, and the bundled references resolve",
+        "authority": "the domain list, which every math type and foundation that names a domain cites"
+    },
+    "records": [
+        {"id": "number",
+            "studies": "quantity",
+            "question": "What can be counted or measured?"},
+        {"id": "algebra",
+            "studies": "operations and structures",
+            "question": "What rules govern transformations?"},
+        {"id": "geometry",
+            "studies": "space and form",
+            "question": "What shapes and spaces exist?"},
+        {
+            "id": "topology",
+            "studies": "continuity and connectivity",
+            "question": "What remains invariant under deformation?"
+        },
+        {"id": "analysis",
+            "studies": "change and limits",
+            "question": "How do quantities vary?"},
+        {"id": "logic",
+            "studies": "truth and inference",
+            "question": "What statements follow from others?"},
+        {"id": "set-theory",
+            "studies": "collection and membership",
+            "question": "What objects can be constructed?"},
+        {"id": "combinatorics",
+            "studies": "discrete arrangements",
+            "question": "How many configurations exist?"},
+        {"id": "probability",
+            "studies": "uncertainty",
+            "question": "What outcomes are possible and likely?"},
+        {
+            "id": "information-theory",
+            "studies": "information and compression",
+            "question": "What patterns can be encoded?"
+        },
+        {"id": "computation",
+            "studies": "procedures and algorithms",
+            "question": "What can be generated or solved?"},
+        {
+            "id": "category-theory",
+            "studies": "relationships between structures",
+            "question": "How do mathematical worlds connect?"
+        }
+    ]
+}

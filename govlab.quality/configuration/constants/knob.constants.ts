@@ -1,0 +1,67 @@
+export const PRIMARY_KNOBS: readonly string[] = [
+    "value",
+    "threshold",
+    "complexity_limit",
+    "reportlevel",
+    "methodreportlevel",
+    "warning",
+    "complexity",
+    "cyclomatic",
+    "max",
+    "code",
+    "limit",
+    "depth",
+    "count",
+    "length",
+    "lines",
+    "args",
+    "parameter",
+    "statement",
+    "branch",
+    "minimum",
+    "maximum",
+    "size",
+];
+
+export const SECONDARY_KNOBS: ReadonlySet<string> = new Set([
+    "tabwidth",
+    "classreportlevel",
+    "objectreportlevel",
+    "comments",
+    "maxitemsperline",
+    "minitems",
+    "standardsizelimit",
+    "fileuploadsizelimit",
+    "warning|error",
+    "maxlinelength",
+]);
+
+export const THRESHOLD_PARTS: readonly string[] = [
+    "max",
+    "min",
+    "limit",
+    "length",
+    "complex",
+    "count",
+    "depth",
+    "size",
+    "width",
+    "threshold",
+    "lines",
+    "args",
+    "argument",
+    "parameter",
+    "statement",
+    "branch",
+    "nest",
+    "reportlevel",
+    "allowedcomplexity",
+    "code",
+    "warning",
+    "error",
+    "ncss",
+];
+
+export const UNRANKED = 999;
+
+export const INTEGER_TYPE = "integer";

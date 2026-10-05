@@ -1,0 +1,346 @@
+{
+    "category": "Portability / Infrastructure / Deployment",
+    "check": {
+        "population": "every platform call, environment, configuration value and infrastructure resource the deployment uses",
+        "freshness": "a verdict stands until the code, the image, the configuration or the live infrastructure changes",
+        "refusal": "the import rule, config scan or drift detection fails the change or the deploy",
+        "observation": "platform imports read from source, and the declared infrastructure compared with the live state",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the declared infrastructure, which the live state is compared against"
+    },
+    "records": [
+        {
+            "id": "portability",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:integration",
+                    "reason": "Portability is running on another platform, while integration is being connected to other systems."
+                },
+                {
+                    "id": "lexicon:platform-optimization",
+                    "reason": "Portability is running anywhere unchanged, while platform optimization is the tuning for one platform that it gives up."
+                }
+            ],
+            "name": "Portability",
+            "definition": "The degree to which software runs on another platform or environment without code changes.",
+            "type": "quality-attribute",
+            "scope": [
+                "application",
+                "infrastructure",
+                "runtime"
+            ],
+            "requires": [
+                "Abstraction",
+                "Standards"
+            ],
+            "reinforces": ["Replaceability"],
+            "enables": ["Platform Migration"],
+            "conflicts_with": ["Platform-Specific Coupling"],
+            "tensions_with": ["Platform Optimization"],
+            "violated_by": ["lexicon:platform-specific-coupling"],
+            "detected_by": ["platform-specific imports in core"],
+            "measured_by": ["portability violation count"],
+            "refactored_by": [
+                "lexicon:extract-adapter",
+                "lexicon:introduce-port"
+            ],
+            "enforced_by": ["dependency rules"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const path = \"C:\\\\foo\\\\data\\\\foos.json\";\nconst processId = windowsApi.currentProcessId();",
+                "after": "const path = join(config.dataDirectory, \"foos.json\");\nconst processId = runtime.processId();",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "platform-independence",
+            "name": "Platform Independence",
+            "definition": "A design rule that portable layers reach the operating system and vendor services only through abstractions.",
+            "type": "principle",
+            "scope": [
+                "application",
+                "runtime"
+            ],
+            "requires": ["Platform Abstraction"],
+            "reinforces": ["Portability"],
+            "enables": ["Cross-Platform Deployment"],
+            "conflicts_with": ["OS/Vendor Lock-In"],
+            "tensions_with": ["Native Optimization"],
+            "violated_by": ["lexicon:os-vendor-lock-in"],
+            "detected_by": ["OS-specific paths/APIs in portable layers"],
+            "measured_by": ["cross-platform test pass rate"],
+            "refactored_by": [
+                "lexicon:introduce-port",
+                "architecture:canonicalization"
+            ],
+            "enforced_by": ["cross-platform CI"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function saveFoo(foo: Foo) { return winRegistry.write(\"Foo\", foo); }",
+                "after": "interface FooPersistence { save(foo: Foo): Promise<void>; }\nfunction saveFoo(foo: Foo, persistence: FooPersistence) { return persistence.save(foo); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "environment-parity",
+            "distinctFrom": [
+                {
+                    "id": "architecture:configuration-externalization",
+                    "reason": "Environment parity runs the same build everywhere, while configuration externalization is how the differences are kept outside that build."
+                }
+            ],
+            "name": "Environment Parity",
+            "definition": "A design rule that development, test, staging and production run the same build, differing only in configuration.",
+            "type": "principle",
+            "scope": [
+                "dev",
+                "test",
+                "staging",
+                "production"
+            ],
+            "requires": [
+                "Configuration Externalization",
+                "IaC"
+            ],
+            "reinforces": ["Reproducibility"],
+            "enables": ["Reliable Deployment"],
+            "conflicts_with": ["Snowflake Environments"],
+            "tensions_with": ["Cost"],
+            "violated_by": ["lexicon:snowflake-environments"],
+            "detected_by": ["works-in-dev-only defects"],
+            "measured_by": ["environment drift"],
+            "refactored_by": [
+                "architecture:containerization",
+                "lexicon:externalize-configuration",
+                "architecture:infrastructure-as-code"
+            ],
+            "enforced_by": ["environment drift checks"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "if (env === \"dev\") useMemoryFooStore();\nif (env === \"prod\") useSqlFooStore();",
+                "after": "const container = buildFooImage(\"foo-app:1.0.0\");\nrunEnvironment(\"dev\", container, devConfig);\nrunEnvironment(\"prod\", container, prodConfig);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "containerization",
+            "name": "Containerization",
+            "definition": "A mechanism that packages an application with its runtime dependencies into an image that runs the same on any host.",
+            "type": "mechanism",
+            "scope": [
+                "application",
+                "runtime",
+                "deployment"
+            ],
+            "requires": [
+                "Image Definition",
+                "Externalized Config"
+            ],
+            "reinforces": [
+                "Portability",
+                "Environment Parity"
+            ],
+            "enables": ["Repeatable Runtime Packaging"],
+            "conflicts_with": ["Host-Coupled Deployment"],
+            "tensions_with": ["Image Complexity"],
+            "violated_by": ["lexicon:host-coupled-deployment"],
+            "detected_by": ["manual host setup requirements"],
+            "measured_by": ["image reproducibility"],
+            "refactored_by": ["lexicon:externalize-configuration"],
+            "enforced_by": [
+                "image scans",
+                "build pipeline"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "installFooDependenciesOnHost();\nstartFooWithHostRuntime();",
+                "after": "const image = containerImage({\n  base: \"node:22-alpine\",\n  copy: [\"dist\", \"package.json\"],\n  command: [\"node\", \"dist/main.js\"],\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "infrastructure-as-code",
+            "name": "Infrastructure as Code",
+            "aliases": ["IaC"],
+            "definition": "The practice of declaring infrastructure in versioned files and provisioning it from them.",
+            "type": "activity",
+            "scope": [
+                "infrastructure",
+                "deployment"
+            ],
+            "requires": [
+                "Declarative Configuration",
+                "Version Control"
+            ],
+            "reinforces": [
+                "Reproducibility",
+                "Governance"
+            ],
+            "enables": ["Automated Provisioning"],
+            "conflicts_with": ["Manual Infrastructure Changes"],
+            "tensions_with": ["Tooling Complexity"],
+            "violated_by": ["lexicon:manual-infrastructure-changes"],
+            "detected_by": ["drift between code and live infra"],
+            "measured_by": [
+                "drift count",
+                "IaC coverage"
+            ],
+            "refactored_by": [],
+            "enforced_by": [
+                "policy-as-code",
+                "drift detection"
+            ],
+            "severity": "contextual",
+            "mandatoryFor": "managed infrastructure",
+            "exemplar": {
+                "before": "cloudConsole.createDatabase(\"foo-prod\");\ncloudConsole.openPort(5432);",
+                "after": "const fooDatabase = databaseResource({\n  name: \"foo-prod\",\n  engine: \"postgres\",\n  encrypted: true,\n  networkPolicy: \"foo-only\",\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "standards-compliance",
+            "distinctFrom": [
+                {
+                    "id": "architecture:compliance",
+                    "reason": "Standards compliance is technical conformance to a published protocol or format, while compliance is implementing and evidencing the controls a regulation requires."
+                },
+                {
+                    "id": "lexicon:applicable-standard",
+                    "reason": "Standards compliance is conforming, while the applicable standard is the one standard identified to conform to."
+                }
+            ],
+            "name": "Standards Compliance",
+            "definition": "A rule or precondition that an implementation conforms to the published standard for its protocol, format or domain.",
+            "type": "constraint",
+            "scope": [
+                "protocol",
+                "security",
+                "data",
+                "infrastructure"
+            ],
+            "requires": ["Applicable Standard"],
+            "reinforces": [
+                "Interoperability",
+                "Compliance"
+            ],
+            "enables": ["Certification/Compatibility"],
+            "conflicts_with": ["Proprietary Deviation"],
+            "tensions_with": ["Innovation/Flexibility"],
+            "violated_by": ["lexicon:proprietary-deviation"],
+            "detected_by": ["conformance test failure"],
+            "measured_by": ["standard compliance score"],
+            "refactored_by": ["lexicon:contract-testing"],
+            "enforced_by": ["standards checks"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const payload = encodePrivateFooBinary(foo);",
+                "after": "const payload: JsonFooV1 = toJsonFoo(foo);\nhttp.send(JSON.stringify(payload), { contentType: \"application/json; charset=utf-8\" });",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "protocol-independence",
+            "name": "Protocol Independence",
+            "definition": "A design rule that domain logic is written against ports, and each transport protocol reaches it through its own adapter.",
+            "type": "principle",
+            "scope": [
+                "integration",
+                "service boundary"
+            ],
+            "requires": ["Adapter/Port Abstraction"],
+            "reinforces": [
+                "Portability",
+                "Replaceability"
+            ],
+            "enables": ["Protocol Swap"],
+            "conflicts_with": ["Protocol-Coupled Domain Logic"],
+            "tensions_with": ["Protocol-Specific Features"],
+            "violated_by": ["lexicon:protocol-coupled-domain-logic"],
+            "detected_by": ["protocol imports in core layer"],
+            "measured_by": ["protocol leakage count"],
+            "refactored_by": [
+                "lexicon:introduce-port",
+                "lexicon:extract-adapter"
+            ],
+            "enforced_by": ["import rules"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooService {\n  handleHttp(request: HttpRequest) { return fooStore.save(request.body); }\n}",
+                "after": "class CreateFoo {\n  constructor(private readonly store: FooStore) {}\n  execute(input: CreateFooInput) { return this.store.save(Foo.create(input)); }\n}\nhttpAdapter.bind(createFoo);\ngrpcAdapter.bind(createFoo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "configuration-externalization",
+            "name": "Configuration Externalization",
+            "aliases": ["Externalized Configuration"],
+            "definition": "A design rule that environment-specific values are read from validated external configuration at startup.",
+            "type": "principle",
+            "scope": [
+                "application",
+                "deployment",
+                "runtime"
+            ],
+            "requires": [
+                "Config Schema",
+                "Secure Config Handling"
+            ],
+            "reinforces": [
+                "Portability",
+                "Environment Parity"
+            ],
+            "enables": ["Environment-Specific Deployment"],
+            "conflicts_with": ["Hardcoded Configuration"],
+            "tensions_with": ["Config Sprawl"],
+            "violated_by": ["architecture:hardcoded-configuration"],
+            "detected_by": ["hardcoded URLs/secrets/paths"],
+            "measured_by": ["externalized config coverage"],
+            "refactored_by": [
+                "lexicon:externalize-configuration",
+                "lexicon:validate-at-the-boundary"
+            ],
+            "enforced_by": ["secret/config scans"],
+            "severity": "mandatory",
+            "exemplar": {
+                "before": "const config = {\n  fooUrl: \"https://foo.prod.example\",\n  retries: 3,\n};",
+                "after": "type FooConfig = Readonly<{ fooUrl: URL; retries: number }>;\nconst config = FooConfigSchema.parse({\n  fooUrl: process.env.FOO_URL,\n  retries: process.env.FOO_RETRIES,\n});",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "immutable-infrastructure",
+            "name": "Immutable Infrastructure",
+            "definition": "An approach in which servers are replaced from a new image for every change, instead of being patched in place.",
+            "type": "approach",
+            "scope": [
+                "infrastructure",
+                "deployment",
+                "reproducibility"
+            ],
+            "requires": ["Infrastructure as Code"],
+            "reinforces": [
+                "Environment Parity",
+                "Reproducibility"
+            ],
+            "enables": [
+                "Deterministic Redeploys",
+                "Instance Replacement over Mutation"
+            ],
+            "conflicts_with": ["In-Place Server Mutation"],
+            "tensions_with": ["Deploy Time"],
+            "violated_by": ["lexicon:in-place-server-mutation"],
+            "detected_by": ["SSH mutation of live instances"],
+            "measured_by": ["config drift across instances"],
+            "refactored_by": [],
+            "enforced_by": ["deployment review"],
+            "severity": "contextual",
+            "mandatoryFor": "managed infrastructure",
+            "exemplar": {
+                "before": "ssh(server, \"apt-get update && systemctl restart foo\");",
+                "after": "const image = buildFooImage(\"foo:1.4.0\");\nreplaceInstances(\"foo\", image);",
+                "lang": "ts"
+            }
+        }
+    ]
+}

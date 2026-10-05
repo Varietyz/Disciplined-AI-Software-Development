@@ -1,0 +1,1970 @@
+{
+    "copyright": "PAG (Pattern Abstract Grammar) © Bane's Lab, CC BY-SA 4.0. Used with the author's explicit permission; attribution must be preserved. See ../../LICENSE.",
+    "check": {
+        "by": ["a structured-document validator that parses each document against the grammar and reports every defect by its shape"],
+        "population": "every agent and template document the validator walks, and every occurrence of the keyword in them",
+        "freshness": "a verdict stands until the grammar data or a document that uses the keyword changes",
+        "refusal": "the validation stage fails the gate on any defect code, so a document with a malformed keyword does not ship",
+        "observation": "none: a keyword is static text in a document, and nothing observes it while a run executes",
+        "evidence": "fires-and-accepts: a suite plants a retired head in a real template and validates every agent and template on disk clean",
+        "authority": "the grammar data, which every keyword in a document conforms to"
+    },
+    "records": [
+        {
+            "keyword": "READ",
+            "category": "action",
+            "meaning": "Input acquisition · lowers to READ_RESOURCE",
+            "example": "READ file INTO data",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "WRITE",
+            "category": "action",
+            "meaning": "Output generation · lowers to PERSIST_ARTIFACT",
+            "example": "WRITE content TO file",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "keyword": "EXECUTE",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:EXECUTES",
+                    "reason": "EXECUTE is an action a step invokes, while EXECUTES is the verb a document header uses to state what the document does."
+                }
+            ],
+            "category": "action",
+            "meaning": "Action invocation · lowers to EXECUTE_TOOL",
+            "example": "EXECUTE command WITH params",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "keyword": "CREATE",
+            "category": "action",
+            "meaning": "Construction · lowers to COMPOSE_ARTIFACT",
+            "example": "CREATE artifact FROM template",
+            "grounds": ["reasoning:mode:construction"]
+        },
+        {
+            "keyword": "DELETE",
+            "category": "action",
+            "meaning": "Removal · an irreversible write, refused before it lands",
+            "example": "DELETE file_path",
+            "grounds": ["reasoning:node:ver-refusal"]
+        },
+        {
+            "keyword": "FIND",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:FINDS",
+                    "reason": "FIND is an action a step invokes, while FINDS is the verb a document header uses to state what the document does."
+                }
+            ],
+            "category": "action",
+            "meaning": "Discovery · lowers to DISCOVER_RESOURCES",
+            "example": "FIND pattern IN scope",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "ANALYZE",
+            "category": "action",
+            "meaning": "Inspection · lowers to ANALYZE_CONTENT",
+            "example": "ANALYZE target FOR condition",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "VALIDATE",
+            "category": "action",
+            "meaning": "Verification · lowers to VALIDATE_ARTIFACT",
+            "example": "VALIDATE state AGAINST schema",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "VERIFY",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:VERIFIES",
+                    "reason": "VERIFY is an action a step invokes, while VERIFIES is the verb a document header uses to state what the document does."
+                }
+            ],
+            "category": "action",
+            "meaning": "Confirmation against evidence",
+            "example": "VERIFY condition",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "EXTRACT",
+            "category": "action",
+            "meaning": "Isolation · lowers to EXTRACT_FACTS",
+            "example": "EXTRACT data FROM source",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "COLLECT",
+            "category": "action",
+            "meaning": "Aggregation",
+            "example": "COLLECT items INTO container",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "FILTER",
+            "category": "action",
+            "meaning": "Selection",
+            "example": "FILTER items WHERE condition",
+            "grounds": ["reasoning:mode:classification"]
+        },
+        {
+            "keyword": "COMPARE",
+            "category": "action",
+            "meaning": "Comparison",
+            "example": "COMPARE a AGAINST b",
+            "grounds": ["reasoning:mode:comparison"]
+        },
+        {
+            "keyword": "CONVERT",
+            "category": "action",
+            "meaning": "Transformation · a lowering that names what it preserves",
+            "example": "CONVERT data TO format",
+            "grounds": ["reasoning:invariant:epi-preserved-distinction"]
+        },
+        {
+            "keyword": "MERGE",
+            "category": "action",
+            "meaning": "Combination",
+            "example": "MERGE sources INTO target",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "SPLIT",
+            "category": "action",
+            "meaning": "Division",
+            "example": "SPLIT data BY delimiter",
+            "grounds": ["reasoning:substrate-node:difference"]
+        },
+        {
+            "keyword": "SORT",
+            "category": "action",
+            "meaning": "Ordering",
+            "example": "SORT items BY criteria",
+            "grounds": ["reasoning:lens:sequential"]
+        },
+        {
+            "keyword": "RANK",
+            "category": "action",
+            "meaning": "Prioritization · the ranking a worth gate reads",
+            "example": "RANK items BY score",
+            "grounds": ["reasoning:node:tel-priority"]
+        },
+        {
+            "keyword": "LINK",
+            "category": "action",
+            "meaning": "Association · a declared edge, never a name match",
+            "example": "LINK source TO target",
+            "grounds": [
+                "reasoning:lens:relation",
+                "reasoning:invariant:epi-declared-dependency"
+            ]
+        },
+        {
+            "keyword": "REPORT",
+            "category": "action",
+            "meaning": "Output · lowers to REPORT_RESULT",
+            "example": "REPORT findings",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "ADD",
+            "category": "action",
+            "meaning": "Add to collection",
+            "example": "ADD item TO list",
+            "grounds": ["reasoning:substrate-node:existence"]
+        },
+        {
+            "keyword": "APPEND",
+            "category": "action",
+            "meaning": "Append to end",
+            "example": "APPEND value TO array",
+            "grounds": ["reasoning:substrate-node:existence"]
+        },
+        {
+            "keyword": "INSERT",
+            "category": "action",
+            "meaning": "Insert at position",
+            "example": "INSERT item AT index",
+            "grounds": ["reasoning:substrate-node:structure"]
+        },
+        {
+            "keyword": "REMOVE",
+            "category": "action",
+            "meaning": "Remove from collection",
+            "example": "REMOVE item FROM list",
+            "grounds": ["reasoning:substrate-node:difference"]
+        },
+        {
+            "keyword": "MOVE",
+            "category": "action",
+            "meaning": "Relocation · a create at the destination, read before it lands",
+            "example": "MOVE file TO destination",
+            "grounds": ["reasoning:node:ver-refusal"]
+        },
+        {
+            "keyword": "COPY",
+            "category": "action",
+            "meaning": "Duplication · a second derivation of one fact, declared as such",
+            "example": "COPY file TO backup",
+            "grounds": ["reasoning:invariant:epi-one-derivation"]
+        },
+        {
+            "keyword": "BACKUP",
+            "category": "action",
+            "meaning": "Preservation of the last accepted state before a mutation",
+            "example": "BACKUP file TO location",
+            "grounds": ["reasoning:node:ter-promotion"]
+        },
+        {
+            "keyword": "RESTORE",
+            "category": "action",
+            "meaning": "Recovery of the last accepted state",
+            "example": "RESTORE FROM backup",
+            "grounds": ["reasoning:node:ter-promotion"]
+        },
+        {
+            "keyword": "LOAD",
+            "category": "action",
+            "meaning": "Resource acquisition · lowers to READ_RESOURCE",
+            "example": "LOAD config FROM file",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "SEND",
+            "category": "action",
+            "meaning": "Communication · lowers to REPORT_RESULT",
+            "example": "SEND message TO recipient",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "keyword": "WAIT",
+            "category": "action",
+            "meaning": "Timing control · waiting has a command",
+            "example": "WAIT FOR condition",
+            "grounds": ["reasoning:node:ter-block"],
+            "roles": [
+                {
+                    "category": "coordination",
+                    "meaning": "Post and wait as one operation · reports the diff since this reader last looked",
+                    "example": "WAIT ON <surface> AS <reader> INTO <diff>",
+                    "grounds": ["reasoning:node:ter-block"]
+                }
+            ]
+        },
+        {
+            "keyword": "ATTEMPT",
+            "category": "action",
+            "meaning": "Trial operation",
+            "example": "ATTEMPT operation",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "FAIL",
+            "category": "action",
+            "meaning": "Error termination · loud at the boundary",
+            "example": "FAIL WITH message",
+            "grounds": ["reasoning:node:ver-refusal"]
+        },
+        {
+            "keyword": "EXIT",
+            "category": "action",
+            "meaning": "Exit execution",
+            "example": "EXIT 1",
+            "grounds": ["reasoning:node:ter-stop"],
+            "roles": [
+                {
+                    "category": "state_machine",
+                    "meaning": "Exit action",
+                    "example": "EXIT: cleanup",
+                    "grounds": ["reasoning:representation:dynamical-systems"]
+                }
+            ]
+        },
+        {
+            "keyword": "RETURN",
+            "category": "action",
+            "meaning": "Return value · how a bounded reader ends",
+            "example": "RETURN result",
+            "grounds": ["reasoning:node:ter-completion"]
+        },
+        {
+            "keyword": "ITERATE",
+            "category": "action",
+            "meaning": "Repetition",
+            "example": "ITERATE operation",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "INVESTIGATE",
+            "category": "action",
+            "meaning": "Deep analysis",
+            "example": "INVESTIGATE issue",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "DETERMINE",
+            "category": "action",
+            "meaning": "Decision making",
+            "example": "DETERMINE outcome",
+            "grounds": ["reasoning:mode:classification"]
+        },
+        {
+            "keyword": "ENFORCE",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:ENFORCES",
+                    "reason": "ENFORCE is an action a step invokes, while ENFORCES is the verb a document header uses to state what the document does."
+                }
+            ],
+            "category": "action",
+            "meaning": "Constraint application",
+            "example": "ENFORCE rule",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "EVIDENCE",
+            "category": "action",
+            "meaning": "Proof provision",
+            "example": "EVIDENCE claim",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "PROPAGATE",
+            "category": "action",
+            "meaning": "Change distribution · the ripple through declared dependencies",
+            "example": "PROPAGATE updates",
+            "grounds": ["reasoning:invariant:epi-declared-dependency"]
+        },
+        {
+            "keyword": "FINALIZE",
+            "category": "action",
+            "meaning": "Completion",
+            "example": "FINALIZE operation",
+            "grounds": ["reasoning:node:ter-completion"]
+        },
+        {
+            "keyword": "REDUCE",
+            "category": "action",
+            "meaning": "Aggregation · a fusion that drops nothing live",
+            "example": "REDUCE items TO value",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "RENAME",
+            "category": "action",
+            "meaning": "Name modification · every referencing surface enumerated first",
+            "example": "RENAME file TO newname",
+            "grounds": ["reasoning:invariant:epi-declared-dependency"]
+        },
+        {
+            "keyword": "ORDER",
+            "category": "action",
+            "meaning": "Arrangement",
+            "example": "ORDER items BY key",
+            "grounds": ["reasoning:lens:sequential"]
+        },
+        {
+            "keyword": "MARK",
+            "category": "action",
+            "meaning": "Annotation",
+            "example": "MARK item AS complete",
+            "grounds": ["reasoning:axis:representation"]
+        },
+        {
+            "keyword": "PREDICT",
+            "category": "action",
+            "meaning": "Infer a future state",
+            "example": "PREDICT outcome FROM model",
+            "grounds": ["reasoning:mode:prediction"]
+        },
+        {
+            "keyword": "CLASSIFY",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:CLASSIFIES",
+                    "reason": "CLASSIFY is an action a step invokes, while CLASSIFIES is the verb a document header uses to state what the document does."
+                }
+            ],
+            "category": "action",
+            "meaning": "Group by kind",
+            "example": "CLASSIFY item BY type",
+            "grounds": ["reasoning:mode:classification"]
+        },
+        {
+            "keyword": "EXPLAIN",
+            "category": "action",
+            "meaning": "Identify the mechanism",
+            "example": "EXPLAIN behavior",
+            "grounds": ["reasoning:mode:explanation"]
+        },
+        {
+            "keyword": "REFLECT",
+            "category": "action",
+            "meaning": "Discover the principle behind the examples",
+            "example": "REFLECT ON outcome",
+            "grounds": ["reasoning:mode:reflection"]
+        },
+        {
+            "keyword": "ABSTRACT",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:ABSTRACTS",
+                    "reason": "ABSTRACT is an action a step invokes, while ABSTRACTS is the verb a document header uses to state what the document does."
+                }
+            ],
+            "category": "action",
+            "meaning": "Remove irrelevant detail",
+            "example": "ABSTRACT pattern FROM cases",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "GENERALIZE",
+            "category": "action",
+            "meaning": "Extend examples into a principle",
+            "example": "GENERALIZE FROM examples",
+            "grounds": ["reasoning:mode:generalization"]
+        },
+        {
+            "keyword": "DESCRIBE",
+            "category": "action",
+            "meaning": "Characterize an object",
+            "example": "DESCRIBE structure",
+            "grounds": ["reasoning:mode:description"]
+        },
+        {
+            "keyword": "FORMALIZE",
+            "category": "action",
+            "meaning": "Express symbolically",
+            "example": "FORMALIZE rule AS predicate",
+            "grounds": ["reasoning:mode:formalization"]
+        },
+        {
+            "keyword": "IF",
+            "category": "control_flow",
+            "meaning": "Conditional execution",
+            "example": "IF condition: action",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "ELSE",
+            "category": "control_flow",
+            "meaning": "Alternative branch",
+            "example": "ELSE: alternative",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "FOR",
+            "category": "control_flow",
+            "meaning": "Iteration start",
+            "example": "FOR EACH item IN list:",
+            "grounds": ["reasoning:representation:computation"],
+            "roles": [
+                {"category": "contextual",
+                    "meaning": "Purpose/Iteration",
+                    "example": "SEARCH FOR pattern"}
+            ]
+        },
+        {
+            "keyword": "EACH",
+            "category": "control_flow",
+            "meaning": "Iterator marker",
+            "example": "FOR EACH x IN items:",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "WHILE",
+            "category": "control_flow",
+            "meaning": "Conditional loop",
+            "example": "WHILE condition: action",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "TRY",
+            "category": "control_flow",
+            "meaning": "Exception handling start",
+            "example": "TRY: risky_op",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "CATCH",
+            "category": "control_flow",
+            "meaning": "Exception handler",
+            "example": "CATCH: handle_error",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "EXCEPT",
+            "category": "control_flow",
+            "meaning": "Exception alternative",
+            "example": "EXCEPT: recovery",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "FINALLY",
+            "category": "control_flow",
+            "meaning": "Cleanup block",
+            "example": "FINALLY: cleanup",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "MATCH",
+            "category": "control_flow",
+            "meaning": "Pattern matching",
+            "example": "MATCH value:",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "CASE",
+            "category": "control_flow",
+            "meaning": "Match branch",
+            "example": "CASE pattern: action",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "DEFAULT",
+            "category": "control_flow",
+            "meaning": "Fallback case · a declared default, never a masked failure",
+            "example": "DEFAULT: fallback",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "WHEN",
+            "category": "control_flow",
+            "meaning": "Event trigger",
+            "example": "WHEN event: action",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "UNLESS",
+            "category": "control_flow",
+            "meaning": "Negated conditional",
+            "example": "UNLESS condition: action",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "UNTIL",
+            "category": "control_flow",
+            "meaning": "Loop terminator",
+            "example": "UNTIL done",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "GUARD",
+            "category": "control_flow",
+            "meaning": "Early exit check",
+            "example": "GUARD cond ELSE: exit",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "BREAK",
+            "category": "control_flow",
+            "meaning": "Exit loop",
+            "example": "BREAK",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "CONTINUE",
+            "category": "control_flow",
+            "meaning": "Skip iteration",
+            "example": "CONTINUE",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "GOTO",
+            "category": "control_flow",
+            "meaning": "Jump to label",
+            "example": "GOTO label",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "START",
+            "category": "control_flow",
+            "meaning": "Flow start marker",
+            "example": "START process",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "END",
+            "category": "control_flow",
+            "meaning": "Flow end marker",
+            "example": "END",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "STOP",
+            "category": "control_flow",
+            "meaning": "Termination",
+            "example": "STOP",
+            "grounds": ["reasoning:node:ter-stop"]
+        },
+        {
+            "keyword": "LOOP",
+            "category": "control_flow",
+            "meaning": "Loop marker",
+            "example": "LOOP BACKTO step",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "STEP",
+            "category": "control_flow",
+            "meaning": "Step marker",
+            "example": "STEP 1: action",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "RULE",
+            "category": "control_flow",
+            "meaning": "Rule definition",
+            "example": "RULE name: body",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "IN",
+            "category": "control_flow",
+            "meaning": "Containment test",
+            "example": "item IN collection",
+            "grounds": ["reasoning:representation:logic"],
+            "roles": [
+                {"category": "contextual",
+                    "meaning": "Containment",
+                    "example": "FIND key IN object"}
+            ]
+        },
+        {
+            "keyword": "MATCHES",
+            "category": "control_flow",
+            "meaning": "Pattern test",
+            "example": "value MATCHES pattern",
+            "grounds": ["reasoning:representation:logic"]
+        },
+        {
+            "keyword": "SET",
+            "category": "declaration",
+            "meaning": "Variable assignment",
+            "example": "SET name = value",
+            "grounds": ["reasoning:representation:symbolic"]
+        },
+        {
+            "keyword": "DECLARE",
+            "category": "declaration",
+            "meaning": "Typed declaration",
+            "example": "DECLARE x: string",
+            "grounds": ["reasoning:representation:symbolic"]
+        },
+        {
+            "keyword": "DEFINE",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:DEFINES",
+                    "reason": "DEFINE declares a constant inside a document, while DEFINES is the verb a document header uses to state what the document specifies."
+                }
+            ],
+            "category": "declaration",
+            "meaning": "Constant definition",
+            "example": "DEFINE PI = 3.14",
+            "grounds": ["reasoning:representation:symbolic"]
+        },
+        {
+            "keyword": "LET",
+            "category": "declaration",
+            "meaning": "Local binding",
+            "example": "LET temp = expr",
+            "grounds": ["reasoning:representation:symbolic"]
+        },
+        {
+            "keyword": "CONST",
+            "category": "declaration",
+            "meaning": "Immutable value",
+            "example": "CONST MAX = 100",
+            "grounds": ["reasoning:representation:symbolic"]
+        },
+        {
+            "keyword": "MUST",
+            "category": "modifier",
+            "meaning": "Mandatory requirement · a modifier inside a property",
+            "example": "MUST validate first",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "NEVER",
+            "category": "modifier",
+            "meaning": "Prohibition · a modifier inside a property",
+            "example": "NEVER delete without backup",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "ALWAYS",
+            "category": "modifier",
+            "meaning": "Invariance · a modifier inside a property",
+            "example": "ALWAYS log changes",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "REQUIRED",
+            "category": "modifier",
+            "meaning": "Necessity marker",
+            "example": "REQUIRED field",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "MANDATORY",
+            "category": "modifier",
+            "meaning": "Obligation marker",
+            "example": "MANDATORY check",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "CRITICAL",
+            "category": "modifier",
+            "meaning": "Repair ordering among failures, never a softer verdict",
+            "example": "CRITICAL validation",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "ABSOLUTE",
+            "category": "modifier",
+            "meaning": "No exceptions",
+            "example": "ABSOLUTE rule",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "FORBIDDEN",
+            "category": "modifier",
+            "meaning": "Absolute prohibition",
+            "example": "FORBIDDEN: direct DB",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "AWAIT",
+            "category": "coordination",
+            "meaning": "Async wait · waiting has a command, a turn never ends to wait",
+            "example": "AWAIT op INTO result",
+            "grounds": ["reasoning:node:ter-block"]
+        },
+        {
+            "keyword": "PARALLEL",
+            "category": "coordination",
+            "meaning": "Concurrent execution",
+            "example": "PARALLEL: tasks END",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "keyword": "DELEGATE",
+            "category": "coordination",
+            "meaning": "Task handoff · a bounded reader receives a task and returns",
+            "example": "DELEGATE task TO reader",
+            "grounds": ["reasoning:model:cognition"]
+        },
+        {
+            "keyword": "QUEUE",
+            "category": "coordination",
+            "meaning": "Task queuing",
+            "example": "QUEUE operation",
+            "grounds": ["reasoning:representation:computation"]
+        },
+        {
+            "keyword": "RETRY",
+            "category": "coordination",
+            "meaning": "Retry on failure · bounded by a declared limit",
+            "example": "RETRY operation",
+            "grounds": ["reasoning:node:ter-diminishing-returns"]
+        },
+        {
+            "keyword": "LOCK",
+            "category": "coordination",
+            "meaning": "Resource lock · the barrier around an exclusive write",
+            "example": "LOCK resource",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "UNLOCK",
+            "category": "coordination",
+            "meaning": "Release lock",
+            "example": "UNLOCK resource",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "SURFACE",
+            "category": "coordination",
+            "meaning": "A file parties read and write · its key declared in the header, never derived from the path",
+            "example": "SURFACE <key>:",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "RECORD",
+            "category": "coordination",
+            "meaning": "One addressable claim inside a surface · exactly one writer",
+            "example": "RECORD <id> subject: <key>",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "ITEM",
+            "category": "coordination",
+            "meaning": "An addressed span inside a record · its id allocated by the tool",
+            "example": "ITEM <id> TO <reader>: <claim>",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "PARENT",
+            "category": "coordination",
+            "meaning": "Edge · the target reduces this surface upward",
+            "example": "PARENT <surface>",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "SATISFIED_BY",
+            "category": "coordination",
+            "meaning": "Edge · the record resolves when the artifact exists",
+            "example": "SATISFIED_BY <artifact>",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "BLOCKS",
+            "category": "coordination",
+            "meaning": "Edge · the target cannot close first",
+            "example": "BLOCKS <record>",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "ANSWERS",
+            "category": "coordination",
+            "meaning": "Edge · this record acts on the target",
+            "example": "ANSWERS <record>",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "REFUTES",
+            "category": "coordination",
+            "meaning": "Edge · this record contradicts the target with evidence",
+            "example": "REFUTES <record>",
+            "grounds": ["reasoning:node:ver-refutation"]
+        },
+        {
+            "keyword": "SUPERSEDES",
+            "category": "coordination",
+            "meaning": "Edge · this record replaces the target",
+            "example": "SUPERSEDES <record>",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "OPEN",
+            "category": "coordination",
+            "meaning": "Derived state · an unresolved outbound edge, never written",
+            "example": "state: OPEN",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "keyword": "ABSORBED",
+            "category": "coordination",
+            "meaning": "Derived state · the satisfying artifact exists, so it is extracted, then deleted",
+            "example": "state: ABSORBED",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "keyword": "READER",
+            "category": "coordination",
+            "meaning": "A party's class, derived from what it received · participant or bounded",
+            "example": "READER <party> AS participant | bounded",
+            "grounds": ["reasoning:model:cognition"]
+        },
+        {
+            "keyword": "BARRIER",
+            "category": "coordination",
+            "meaning": "Proceed with an exclusive write only once every peer is parked",
+            "example": "BARRIER ON <surface>",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "SWAP",
+            "category": "coordination",
+            "meaning": "Compare-and-swap on the writer's own span · refuses an overlap with its diff",
+            "example": "SWAP <span> AGAINST <read>",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "STATE_MACHINE",
+            "category": "state_machine",
+            "meaning": "Machine declaration · makes a lifetime or a derived-state set explicit",
+            "example": "STATE_MACHINE workflow:",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "keyword": "STATE",
+            "category": "state_machine",
+            "meaning": "State definition · a state is derived from the graph, never written",
+            "example": "STATE pending:",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "keyword": "TRANSITION",
+            "category": "state_machine",
+            "meaning": "State change rule",
+            "example": "TRANSITION FROM a TO b",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "keyword": "ON",
+            "category": "state_machine",
+            "meaning": "Event trigger",
+            "example": "ON approval",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "keyword": "FROM",
+            "category": "state_machine",
+            "meaning": "Source state",
+            "example": "FROM pending",
+            "grounds": ["reasoning:representation:dynamical-systems"],
+            "roles": [
+                {"category": "contextual",
+                    "meaning": "Source",
+                    "example": "EXTRACT FROM response"}
+            ]
+        },
+        {
+            "keyword": "TO",
+            "category": "state_machine",
+            "meaning": "Target state",
+            "example": "TO approved",
+            "grounds": ["reasoning:representation:dynamical-systems"],
+            "roles": [
+                {"category": "contextual",
+                    "meaning": "Target",
+                    "example": "WRITE TO file"}
+            ]
+        },
+        {
+            "keyword": "ENTRY",
+            "category": "state_machine",
+            "meaning": "Entry action",
+            "example": "ENTRY: notify",
+            "grounds": ["reasoning:representation:dynamical-systems"]
+        },
+        {
+            "keyword": "DAG",
+            "category": "dag",
+            "meaning": "Graph declaration · makes a dependency graph explicit, and the loop spine is one",
+            "example": "DAG pipeline:",
+            "grounds": [
+                "reasoning:representation:graph",
+                "reasoning:invariant:epi-declared-dependency"
+            ]
+        },
+        {
+            "keyword": "DEPENDS_ON",
+            "category": "dag",
+            "meaning": "Dependencies · declared by the referent, never inferred from a name",
+            "example": "DEPENDS_ON [a, b]",
+            "grounds": ["reasoning:invariant:epi-declared-dependency"]
+        },
+        {
+            "keyword": "AFTER",
+            "category": "dag",
+            "meaning": "Sequencing",
+            "example": "AFTER compile",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "BEFORE",
+            "category": "dag",
+            "meaning": "Reverse sequencing",
+            "example": "BEFORE deploy",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "PARALLEL_GROUP",
+            "category": "dag",
+            "meaning": "Parallel nodes · peers with no edge between them",
+            "example": "PARALLEL_GROUP: a, b",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "PRIORITY_QUEUE",
+            "category": "priority_queue",
+            "meaning": "Queue declaration · makes a ranking explicit, and the branch ranking a worth gate emits is one",
+            "example": "PRIORITY_QUEUE branches:",
+            "grounds": ["reasoning:node:tel-priority"]
+        },
+        {
+            "keyword": "PRIORITY",
+            "category": "priority_queue",
+            "meaning": "Priority value · utility minus cost",
+            "example": "PRIORITY = 10",
+            "grounds": [
+                "reasoning:node:tel-utility",
+                "reasoning:node:tel-cost"
+            ],
+            "roles": [
+                {
+                    "category": "meta",
+                    "meaning": "The authority tiers · which source grounds which, highest first",
+                    "example": "priority: <governing document> > <ontology> > <template> > <task>",
+                    "grounds": ["reasoning:invariant:epi-weakest-link"]
+                }
+            ]
+        },
+        {
+            "keyword": "ENQUEUE",
+            "category": "priority_queue",
+            "meaning": "Add to queue",
+            "example": "ENQUEUE task TO q",
+            "grounds": ["reasoning:pattern-type:combinatorics"]
+        },
+        {
+            "keyword": "DEQUEUE",
+            "category": "priority_queue",
+            "meaning": "Remove from queue",
+            "example": "DEQUEUE FROM q",
+            "grounds": ["reasoning:pattern-type:combinatorics"]
+        },
+        {
+            "keyword": "PEEK",
+            "category": "priority_queue",
+            "meaning": "View top item · the selected branch",
+            "example": "PEEK queue",
+            "grounds": ["reasoning:node:tel-priority"]
+        },
+        {
+            "keyword": "HEAPIFY",
+            "category": "priority_queue",
+            "meaning": "Reorder queue",
+            "example": "HEAPIFY queue",
+            "grounds": ["reasoning:pattern-type:combinatorics"]
+        },
+        {
+            "keyword": "COMPARE_BY",
+            "category": "priority_queue",
+            "meaning": "Comparison function",
+            "example": "COMPARE_BY priority",
+            "grounds": ["reasoning:pattern-type:combinatorics"]
+        },
+        {
+            "keyword": "FLOWCHART",
+            "category": "flowchart",
+            "meaning": "Flow declaration · the rendered projection of a declared structure",
+            "example": "FLOWCHART process:",
+            "grounds": [
+                "reasoning:representation:graph",
+                "reasoning:axis:representation"
+            ]
+        },
+        {
+            "keyword": "MERMAID",
+            "category": "flowchart",
+            "meaning": "Diagram syntax · a rendering, never the structure itself",
+            "example": "MERMAID flowchart:",
+            "grounds": ["reasoning:axis:representation"]
+        },
+        {
+            "keyword": "LAYOUT",
+            "category": "flowchart",
+            "meaning": "Flow direction",
+            "example": "LAYOUT vertical",
+            "grounds": ["reasoning:representation:geometry"]
+        },
+        {
+            "keyword": "SUBGRAPH",
+            "category": "flowchart",
+            "meaning": "Nested group",
+            "example": "SUBGRAPH auth:",
+            "grounds": ["reasoning:representation:graph"]
+        },
+        {
+            "keyword": "AGENT",
+            "category": "document_type",
+            "meaning": "Agent definition",
+            "example": "THIS AGENT PERFORMS...",
+            "grounds": ["reasoning:model:cognition"]
+        },
+        {
+            "keyword": "WORKFLOW",
+            "category": "document_type",
+            "meaning": "Multi-node process",
+            "example": "THIS WORKFLOW EXECUTES...",
+            "grounds": ["reasoning:model:cognition"]
+        },
+        {
+            "keyword": "PROTOCOL",
+            "category": "document_type",
+            "meaning": "Standard procedures",
+            "example": "THIS PROTOCOL DEFINES...",
+            "grounds": ["reasoning:model:pattern-cycle"]
+        },
+        {
+            "keyword": "POLICY",
+            "category": "document_type",
+            "meaning": "Constraint system",
+            "example": "THIS POLICY ENFORCES...",
+            "grounds": ["reasoning:model:pattern-cycle"]
+        },
+        {
+            "keyword": "CHECKLIST",
+            "category": "document_type",
+            "meaning": "Task tracking",
+            "example": "THIS CHECKLIST PROVIDES...",
+            "grounds": ["reasoning:model:pattern-cycle"]
+        },
+        {
+            "keyword": "TEMPLATE",
+            "category": "document_type",
+            "meaning": "Reusable pattern",
+            "example": "THIS TEMPLATE IMPLEMENTS...",
+            "grounds": ["reasoning:model:pattern-cycle"],
+            "roles": [
+                {
+                    "category": "meta",
+                    "meaning": "Template reference",
+                    "example": "USE TEMPLATE validation",
+                    "grounds": ["reasoning:node:tel-objective"]
+                }
+            ]
+        },
+        {
+            "keyword": "TASK",
+            "category": "document_type",
+            "meaning": "Single objective",
+            "example": "THIS TASK EXECUTES...",
+            "grounds": ["reasoning:model:pattern-cycle"]
+        },
+        {
+            "keyword": "INSTRUCTION",
+            "category": "document_type",
+            "meaning": "General guidance",
+            "example": "THIS INSTRUCTION IS...",
+            "grounds": ["reasoning:model:pattern-cycle"]
+        },
+        {
+            "keyword": "PROMPT",
+            "category": "document_type",
+            "meaning": "Model interaction",
+            "example": "THIS PROMPT IS...",
+            "grounds": ["reasoning:model:cognition"]
+        },
+        {
+            "keyword": "COMMAND",
+            "category": "document_type",
+            "meaning": "Executable command",
+            "example": "THIS COMMAND EXECUTES...",
+            "grounds": ["reasoning:model:cognition"]
+        },
+        {
+            "keyword": "TEST",
+            "category": "document_type",
+            "meaning": "Test specification",
+            "example": "THIS TEST PERFORMS...",
+            "grounds": ["reasoning:model:epistemology"]
+        },
+        {
+            "keyword": "DEBUG",
+            "category": "document_type",
+            "meaning": "Debugging session",
+            "example": "THIS DEBUG RESOLVES...",
+            "grounds": ["reasoning:model:epistemology"]
+        },
+        {
+            "keyword": "VERIFICATION",
+            "category": "document_type",
+            "meaning": "Compliance verification",
+            "example": "THIS VERIFICATION PERFORMS...",
+            "grounds": ["reasoning:model:epistemology"]
+        },
+        {
+            "keyword": "DISTILLATION",
+            "category": "document_type",
+            "meaning": "Pattern distillation",
+            "example": "THIS DISTILLATION DISTILLS...",
+            "grounds": ["reasoning:model:epistemology"]
+        },
+        {
+            "keyword": "AUDIT",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:AUDITS",
+                    "reason": "AUDIT names a document type, while AUDITS is the verb that document's header uses to state what it does."
+                }
+            ],
+            "category": "document_type",
+            "meaning": "Forensic audit",
+            "example": "THIS AUDIT AUDITS...",
+            "grounds": ["reasoning:model:epistemology"]
+        },
+        {
+            "keyword": "TRANSLATION",
+            "category": "document_type",
+            "meaning": "Translation audit",
+            "example": "THIS TRANSLATION AUDITS...",
+            "grounds": ["reasoning:model:epistemology"]
+        },
+        {
+            "keyword": "COMPOSITION",
+            "category": "document_type",
+            "meaning": "Document composition",
+            "example": "THIS COMPOSITION RENDERS...",
+            "grounds": ["reasoning:model:pattern-cycle"]
+        },
+        {
+            "keyword": "IS",
+            "category": "document_verb",
+            "meaning": "Identity",
+            "example": "THIS INSTRUCTION IS...",
+            "grounds": ["reasoning:mode:description"]
+        },
+        {
+            "keyword": "ENFORCES",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:ENFORCE",
+                    "reason": "ENFORCES is the verb a document header uses, while ENFORCE is an action a step invokes."
+                }
+            ],
+            "category": "document_verb",
+            "meaning": "Constraint",
+            "example": "THIS POLICY ENFORCES...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "EXECUTES",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:EXECUTE",
+                    "reason": "EXECUTES is the verb a document header uses, while EXECUTE is an action a step invokes."
+                }
+            ],
+            "category": "document_verb",
+            "meaning": "Action",
+            "example": "THIS WORKFLOW EXECUTES...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "HAS",
+            "category": "document_verb",
+            "meaning": "Possession",
+            "example": "THIS AGENT HAS...",
+            "grounds": ["reasoning:mode:description"]
+        },
+        {
+            "keyword": "PERFORMS",
+            "category": "document_verb",
+            "meaning": "Behavior",
+            "example": "THIS AGENT PERFORMS...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "PROVIDES",
+            "category": "document_verb",
+            "meaning": "Offering",
+            "example": "THIS CHECKLIST PROVIDES...",
+            "grounds": ["reasoning:mode:construction"]
+        },
+        {
+            "keyword": "IMPLEMENTS",
+            "category": "document_verb",
+            "meaning": "Realization",
+            "example": "THIS TEMPLATE IMPLEMENTS...",
+            "grounds": ["reasoning:mode:construction"]
+        },
+        {
+            "keyword": "DEFINES",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:DEFINE",
+                    "reason": "DEFINES is the verb a document header uses, while DEFINE declares a constant inside a document."
+                }
+            ],
+            "category": "document_verb",
+            "meaning": "Specification",
+            "example": "THIS PROTOCOL DEFINES...",
+            "grounds": ["reasoning:mode:description"]
+        },
+        {
+            "keyword": "MANAGES",
+            "category": "document_verb",
+            "meaning": "Control",
+            "example": "THIS AGENT MANAGES...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "COORDINATES",
+            "category": "document_verb",
+            "meaning": "Orchestration",
+            "example": "THIS WORKFLOW COORDINATES...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "GENERATES",
+            "category": "document_verb",
+            "meaning": "Creation",
+            "example": "THIS TEMPLATE GENERATES...",
+            "grounds": ["reasoning:mode:construction"]
+        },
+        {
+            "keyword": "RESOLVES",
+            "category": "document_verb",
+            "meaning": "Resolution",
+            "example": "THIS DEBUG RESOLVES...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "FINDS",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:FIND",
+                    "reason": "FINDS is the verb a document header uses, while FIND is an action a step invokes."
+                }
+            ],
+            "category": "document_verb",
+            "meaning": "Discovery",
+            "example": "THIS DEBUG FINDS...",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "FIXES",
+            "category": "document_verb",
+            "meaning": "Correction",
+            "example": "THIS DEBUG FIXES...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "VERIFIES",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:VERIFY",
+                    "reason": "VERIFIES is the verb a document header uses, while VERIFY is an action a step invokes."
+                }
+            ],
+            "category": "document_verb",
+            "meaning": "Verification",
+            "example": "THIS VERIFICATION VERIFIES...",
+            "grounds": ["reasoning:mode:proof"]
+        },
+        {
+            "keyword": "CLASSIFIES",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:CLASSIFY",
+                    "reason": "CLASSIFIES is the verb a document header uses, while CLASSIFY is an action a step invokes."
+                }
+            ],
+            "category": "document_verb",
+            "meaning": "Classification",
+            "example": "THIS VERIFICATION CLASSIFIES...",
+            "grounds": ["reasoning:mode:classification"]
+        },
+        {
+            "keyword": "DISTILLS",
+            "category": "document_verb",
+            "meaning": "Distillation",
+            "example": "THIS DISTILLATION DISTILLS...",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "ABSTRACTS",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:ABSTRACT",
+                    "reason": "ABSTRACTS is the verb a document header uses, while ABSTRACT is an action a step invokes."
+                }
+            ],
+            "category": "document_verb",
+            "meaning": "Abstraction",
+            "example": "THIS DISTILLATION ABSTRACTS...",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "ELIMINATES",
+            "category": "document_verb",
+            "meaning": "Elimination",
+            "example": "THIS DISTILLATION ELIMINATES...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "AUDITS",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:AUDIT",
+                    "reason": "AUDITS is the verb a document header uses, while AUDIT names the document type that uses it."
+                }
+            ],
+            "category": "document_verb",
+            "meaning": "Audit",
+            "example": "THIS AUDIT AUDITS...",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "MEASURES",
+            "category": "document_verb",
+            "meaning": "Measurement",
+            "example": "THIS AUDIT MEASURES...",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "SCORES",
+            "category": "document_verb",
+            "meaning": "Scoring",
+            "example": "THIS AUDIT SCORES...",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "CORRECTS",
+            "category": "document_verb",
+            "meaning": "Correction",
+            "example": "THIS TRANSLATION CORRECTS...",
+            "grounds": ["reasoning:mode:intervention"]
+        },
+        {
+            "keyword": "RENDERS",
+            "category": "document_verb",
+            "meaning": "Rendering",
+            "example": "THIS COMPOSITION RENDERS...",
+            "grounds": ["reasoning:mode:construction"]
+        },
+        {
+            "keyword": "COMPOSES",
+            "category": "document_verb",
+            "meaning": "Composition",
+            "example": "THIS COMPOSITION COMPOSES...",
+            "grounds": ["reasoning:mode:construction"]
+        },
+        {
+            "keyword": "FOLDS",
+            "category": "document_verb",
+            "meaning": "Folding",
+            "example": "THIS COMPOSITION FOLDS...",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "META",
+            "category": "meta",
+            "meaning": "Metadata block",
+            "example": "%% META %%:",
+            "grounds": ["reasoning:node:tel-objective"]
+        },
+        {
+            "keyword": "USE",
+            "category": "meta",
+            "meaning": "Template usage",
+            "example": "USE TEMPLATE name",
+            "grounds": ["reasoning:node:tel-objective"]
+        },
+        {
+            "keyword": "CUE",
+            "category": "meta",
+            "meaning": "The one-line reminder a reader executes at a node",
+            "example": "@cue: \"<reminder>\"",
+            "grounds": ["reasoning:node:tel-objective"]
+        },
+        {
+            "keyword": "RECURSION_LIMIT",
+            "category": "meta",
+            "meaning": "A bound on repair, declared in the meta block",
+            "example": "recursion_limit: <bound>",
+            "grounds": ["reasoning:node:ter-diminishing-returns"]
+        },
+        {
+            "keyword": "PURPOSE",
+            "category": "meta",
+            "meaning": "What a node decides, in one sentence",
+            "example": "@purpose: \"<what this node decides>\"",
+            "grounds": ["reasoning:node:tel-objective"]
+        },
+        {
+            "keyword": "AXIS_QUESTION",
+            "category": "meta",
+            "meaning": "The question a node's axis asks",
+            "example": "@axis_question: \"<the question>\"",
+            "grounds": ["reasoning:axis:ontology"]
+        },
+        {
+            "keyword": "TRUST",
+            "category": "meta",
+            "meaning": "What is trusted as evidence and what stays a claim",
+            "example": "trust: tool_output = TRUSTED, prior_knowledge = UNTRUSTED",
+            "grounds": ["reasoning:node:ver-ground-truth"]
+        },
+        {
+            "keyword": "JURISDICTION",
+            "category": "meta",
+            "meaning": "What the document may touch, and what is declared outside it",
+            "example": "jurisdiction: <in scope> | external: <declared outside>",
+            "grounds": [
+                "reasoning:axis:ontology",
+                "reasoning:invariant:epi-reachable-check"
+            ]
+        },
+        {
+            "keyword": "ASSERT",
+            "category": "validation",
+            "meaning": "Hard assertion",
+            "example": "ASSERT condition",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "REQUIRE",
+            "category": "validation",
+            "meaning": "Prerequisite check",
+            "example": "REQUIRE dependency",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "HANDOFF",
+            "category": "validation",
+            "meaning": "Gate marker · the evidence-bearing gate that closes a node",
+            "example": "HANDOFF GATE (evidence-bearing):",
+            "grounds": ["reasoning:node:ter-stop"]
+        },
+        {
+            "keyword": "GATE",
+            "category": "validation",
+            "meaning": "Checkpoint marker",
+            "example": "HANDOFF GATE:",
+            "grounds": ["reasoning:node:ter-stop"]
+        },
+        {
+            "keyword": "CHECK",
+            "category": "validation",
+            "meaning": "A check in a gate · a claim about the output with the evidence that settles it",
+            "example": "[check] <claim> (evidence: <what settles it>)",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "POPULATION",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:POPULATIONS",
+                    "reason": "POPULATION is the set one check ranges over, while POPULATIONS reports the partitions of a whole, each measured."
+                }
+            ],
+            "category": "validation",
+            "meaning": "The set a check ranges over, measured · zero of zero is not evidence",
+            "example": "over: <set> measured: <n> / <N>",
+            "grounds": [
+                "reasoning:node:ver-population",
+                "reasoning:invariant:epi-declared-domain"
+            ]
+        },
+        {
+            "keyword": "REFUSE",
+            "category": "validation",
+            "meaning": "Where a node refuses to continue · named before the irreversible write",
+            "example": "refuse: <condition> before <write>",
+            "grounds": ["reasoning:node:ver-refusal"]
+        },
+        {
+            "keyword": "FRESHNESS",
+            "category": "validation",
+            "meaning": "The fingerprints an artifact was derived from · a semantic property, never a timestamp",
+            "example": "freshness: <inputs fingerprint> + <code fingerprint>",
+            "grounds": [
+                "reasoning:node:ver-freshness",
+                "reasoning:invariant:epi-fresh-read"
+            ]
+        },
+        {
+            "keyword": "STANDING",
+            "category": "validation",
+            "meaning": "Whether the read set moved beneath the verdict · a non-empty moved set withdraws the standing, never the verdict",
+            "example": "standing: moved-set <set>",
+            "grounds": ["reasoning:node:ver-standing"]
+        },
+        {
+            "keyword": "UNKNOWN",
+            "category": "validation",
+            "meaning": "The third verdict · an unmeasured or unevidenced claim, never a pass",
+            "example": "unknown → BLOCKED",
+            "grounds": [
+                "reasoning:node:ver-confidence",
+                "reasoning:node:ter-block"
+            ]
+        },
+        {
+            "keyword": "BLOCKED",
+            "category": "validation",
+            "meaning": "The closure of an unknown or an unanswered decision · external input is owed",
+            "example": "result: ... | unknown → BLOCKED",
+            "grounds": ["reasoning:node:ter-block"]
+        },
+        {
+            "keyword": "PROMOTE",
+            "category": "validation",
+            "meaning": "Move a candidate into accepted state · only on a clean verdict, never on production",
+            "example": "promote: <candidate> ON clean verdict",
+            "grounds": ["reasoning:node:ter-promotion"]
+        },
+        {
+            "keyword": "PUBLISH",
+            "category": "validation",
+            "meaning": "Cross the boundary to the external system · the party that crosses it is named",
+            "example": "publish: <artifact> BY <party>",
+            "grounds": ["reasoning:node:ter-publication"]
+        },
+        {
+            "keyword": "RESULT",
+            "category": "validation",
+            "meaning": "The result line · the next node on pass, the repair owner on failure, blocked on unknown",
+            "example": "result: pass → NODE <n+1> | <failure> → REPAIR (owner: <node>) | unknown → BLOCKED",
+            "grounds": [
+                "reasoning:node:ver-refutation",
+                "reasoning:node:ter-block"
+            ]
+        },
+        {
+            "keyword": "REPAIR",
+            "category": "validation",
+            "meaning": "The repair edge · re-enters at the earliest node that can supply the missing evidence",
+            "example": "REPAIR (owner: NODE <n>)",
+            "grounds": ["reasoning:node:ver-refutation"]
+        },
+        {
+            "keyword": "RULE_ID",
+            "category": "validation",
+            "meaning": "The gate's identity, the node it closes",
+            "example": "rule_id: \"<NODE NAME>\"",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "SUBJECT",
+            "category": "report",
+            "meaning": "The node or stage the report is about",
+            "example": "subject: <node>",
+            "grounds": ["reasoning:axis:ontology"]
+        },
+        {
+            "keyword": "VERDICT",
+            "category": "report",
+            "meaning": "The value returned · pass, fail or unknown",
+            "example": "verdict: pass | fail | unknown",
+            "grounds": [
+                "reasoning:node:ver-evidence",
+                "reasoning:invariant:epi-verdict-is-representation"
+            ]
+        },
+        {
+            "keyword": "DOMAIN",
+            "category": "report",
+            "meaning": "The population declared and the population measured",
+            "example": "domain: declared <N> measured <n>",
+            "grounds": ["reasoning:node:ver-population"]
+        },
+        {
+            "keyword": "POPULATIONS",
+            "distinctFrom": [
+                {
+                    "id": "pag:keyword:POPULATION",
+                    "reason": "POPULATIONS reports the partitions of a whole, each measured, while POPULATION is the set one check ranges over."
+                }
+            ],
+            "category": "report",
+            "meaning": "The partitions, each measured · their sum is the whole",
+            "example": "populations: <part> <n>, <part> <n>",
+            "grounds": ["reasoning:node:ver-population"]
+        },
+        {
+            "keyword": "INPUTS",
+            "category": "report",
+            "meaning": "The inputs read, by identity and fingerprint",
+            "example": "inputs: <identity> <fingerprint>",
+            "grounds": ["reasoning:node:ver-freshness"]
+        },
+        {
+            "keyword": "CODE",
+            "category": "report",
+            "meaning": "The fingerprint of the code that produced the verdict",
+            "example": "code: <fingerprint>",
+            "grounds": ["reasoning:node:ver-freshness"]
+        },
+        {
+            "keyword": "OUTPUT",
+            "category": "report",
+            "meaning": "The artifact written, by identity and fingerprint",
+            "example": "output: <identity> <fingerprint>",
+            "grounds": ["reasoning:node:ver-freshness"]
+        },
+        {
+            "keyword": "REFUSALS",
+            "category": "report",
+            "meaning": "How many times the stage refused, and why",
+            "example": "refusals: <n> [<reason>]",
+            "grounds": ["reasoning:node:ver-refusal"]
+        },
+        {
+            "keyword": "OBSERVED",
+            "category": "report",
+            "meaning": "What runtime observation located, kept apart from the verdict",
+            "example": "observed: <n> [<location>]",
+            "grounds": [
+                "reasoning:node:ver-observation",
+                "reasoning:invariant:epi-observation-locates"
+            ]
+        },
+        {
+            "keyword": "UNRESOLVED",
+            "category": "report",
+            "meaning": "What stays open, and why",
+            "example": "unresolved: <n> [<reason>]",
+            "grounds": ["reasoning:node:ter-block"]
+        },
+        {
+            "keyword": "COMPLETION",
+            "category": "report",
+            "meaning": "Saturated, complete and verified · the three that must coincide",
+            "example": "completion: saturated <bool> complete <bool> verified <bool>",
+            "grounds": [
+                "reasoning:node:ter-stop",
+                "reasoning:node:ter-saturation",
+                "reasoning:node:ter-completion",
+                "reasoning:invariant:epi-terminate-on-three"
+            ]
+        },
+        {
+            "keyword": "INVARIANT",
+            "category": "invariant",
+            "meaning": "The record head · a property the topology relies on, with its set, its parties and its objector",
+            "example": "INVARIANT <name>: <property> over: <set> binds: <parties> objector: <check | none>",
+            "grounds": [
+                "reasoning:substrate-node:invariant",
+                "reasoning:invariant:epi-reachable-check"
+            ]
+        },
+        {
+            "keyword": "PROPERTY",
+            "category": "invariant",
+            "meaning": "The property, in a form that could be false",
+            "example": "INVARIANT one-writer: a record has exactly one writer ...",
+            "grounds": ["reasoning:substrate-node:invariant"]
+        },
+        {
+            "keyword": "OVER",
+            "category": "invariant",
+            "meaning": "The set the property quantifies over",
+            "example": "over: every record on the surface",
+            "grounds": ["reasoning:node:ver-population"]
+        },
+        {
+            "keyword": "BINDS",
+            "category": "invariant",
+            "meaning": "The parties the property constrains · who must receive it",
+            "example": "binds: every party writing there",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "OBJECTOR",
+            "category": "invariant",
+            "meaning": "What would disagree if the property stopped holding · a check, or none as declared debt",
+            "example": "objector: [check] one open fence per record | none",
+            "grounds": ["reasoning:node:ver-falsification"]
+        },
+        {
+            "keyword": "NODE",
+            "category": "node",
+            "meaning": "A node header · the unit of a document, one decision, one gate",
+            "example": "# NODE <n> — <NAME>   [<layer> · <axis> · <math type> · yields: <shape>]",
+            "grounds": ["reasoning:loop:derivation-loop"],
+            "roles": [
+                {
+                    "category": "dag",
+                    "meaning": "Node definition",
+                    "example": "NODE build:",
+                    "grounds": ["reasoning:representation:graph"]
+                }
+            ]
+        },
+        {
+            "keyword": "CONTRACT",
+            "category": "node",
+            "meaning": "A node's contract · input, transform, constraints, output, handoff",
+            "example": "CONTRACT:",
+            "grounds": ["reasoning:loop:derivation-loop"]
+        },
+        {
+            "keyword": "YIELDS",
+            "category": "node",
+            "meaning": "The shape a node's decision resolves to",
+            "example": "yields: <set | boolean | edge-list | ranking | procedure | artifact>",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "keyword": "GENESIS",
+            "category": "node",
+            "meaning": "The substrate stage the node's artifact comes to be at · phase order follows it",
+            "example": "@genesis: <existence | difference | relation | structure | transformation | constraint | emergence>",
+            "grounds": ["reasoning:substrate-node:existence"]
+        },
+        {
+            "keyword": "PRESERVES",
+            "category": "node",
+            "meaning": "The distinctions a transform keeps · a lowering names what a later check needs",
+            "example": "preserves: <distinction>, <distinction>",
+            "grounds": ["reasoning:invariant:epi-preserved-distinction"]
+        },
+        {
+            "keyword": "OUTPUT_CONTRACT",
+            "category": "node",
+            "meaning": "The one record the next node reads, as an assignment",
+            "example": "# OUTPUT CONTRACT",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "keyword": "LIMIT",
+            "category": "node",
+            "meaning": "A declared limit · stated where a reader would otherwise assume the opposite",
+            "example": "LIMIT <name>: \"<what the document cannot do>\"",
+            "grounds": ["reasoning:substrate-node:constraint"]
+        },
+        {
+            "keyword": "SLOT",
+            "category": "node",
+            "meaning": "A slot's state · resolved, absent or deferred, declared by the adapter",
+            "example": "SLOT {<namespace>.<name>}: RESOLVED | ABSENT | DEFERRED",
+            "grounds": ["reasoning:node:for-absence"]
+        },
+        {
+            "keyword": "DISCOVER_RESOURCES",
+            "category": "semantic_operation",
+            "meaning": "Find resources by pattern · the adapter maps GLOB to it",
+            "example": "DISCOVER_RESOURCES \"<pattern>\" INTO <resources>",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "READ_RESOURCE",
+            "category": "semantic_operation",
+            "meaning": "Read one resource · the adapter maps READ to it",
+            "example": "READ_RESOURCE <resource> INTO <content>",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "SEARCH_CONTENT",
+            "category": "semantic_operation",
+            "meaning": "Search content for a term · the adapter maps GREP to it",
+            "example": "SEARCH_CONTENT <content> FOR <term> INTO <matches>",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "ANALYZE_CONTENT",
+            "category": "semantic_operation",
+            "meaning": "Analyze content against criteria",
+            "example": "ANALYZE_CONTENT <content> AGAINST <criteria> INTO <findings>",
+            "grounds": ["reasoning:mode:observation"]
+        },
+        {
+            "keyword": "EXTRACT_FACTS",
+            "category": "semantic_operation",
+            "meaning": "Isolate fields from content, preserving its meaning",
+            "example": "EXTRACT_FACTS <fields> FROM <content> INTO <facts>",
+            "grounds": ["reasoning:mode:abstraction"]
+        },
+        {
+            "keyword": "CALCULATE_METRIC",
+            "category": "semantic_operation",
+            "meaning": "Derive a measure from facts",
+            "example": "CALCULATE_METRIC <measure> FROM <facts> INTO <value>",
+            "grounds": ["reasoning:mode:comparison"]
+        },
+        {
+            "keyword": "COMPOSE_ARTIFACT",
+            "category": "semantic_operation",
+            "meaning": "Compose an artifact from facts using a shape",
+            "example": "COMPOSE_ARTIFACT <artifact> FROM <facts> USING <shape>",
+            "grounds": ["reasoning:mode:construction"]
+        },
+        {
+            "keyword": "VALIDATE_ARTIFACT",
+            "category": "semantic_operation",
+            "meaning": "Validate an artifact against a schema",
+            "example": "VALIDATE_ARTIFACT <artifact> AGAINST <schema>",
+            "grounds": ["reasoning:node:ver-evidence"]
+        },
+        {
+            "keyword": "PERSIST_ARTIFACT",
+            "category": "semantic_operation",
+            "meaning": "Persist an artifact to a destination · the adapter maps WRITE and EDIT to it, and a refusal is named before it",
+            "example": "PERSIST_ARTIFACT <artifact> TO <destination>",
+            "grounds": [
+                "reasoning:axis:formalization",
+                "reasoning:node:ver-refusal"
+            ]
+        },
+        {
+            "keyword": "EXECUTE_TOOL",
+            "category": "semantic_operation",
+            "meaning": "Execute a command with a bound · the adapter maps BASH to it",
+            "example": "EXECUTE_TOOL <command> WITH timeout: <bound> INTO <result>",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {
+            "keyword": "REQUEST_DECISION",
+            "category": "semantic_operation",
+            "meaning": "Ask a party to decide · the adapter maps ASK_USER to it, and resolves it absent for a bounded reader",
+            "example": "REQUEST_DECISION <party> WITH options: [<a>, <b>] INTO <choice>",
+            "grounds": [
+                "reasoning:node:tel-priority",
+                "reasoning:node:ter-publication"
+            ]
+        },
+        {
+            "keyword": "REPORT_RESULT",
+            "category": "semantic_operation",
+            "meaning": "Report an artifact to the parties whose next work it creates",
+            "example": "REPORT_RESULT <artifact> TO <parties>",
+            "grounds": ["reasoning:axis:formalization"]
+        },
+        {"keyword": "INTO",
+            "category": "contextual",
+            "meaning": "Destination",
+            "example": "READ file INTO data"},
+        {"keyword": "WITH",
+            "category": "contextual",
+            "meaning": "Association",
+            "example": "EXECUTE WITH params"},
+        {"keyword": "USING",
+            "category": "contextual",
+            "meaning": "Instrument",
+            "example": "VALIDATE USING schema"},
+        {"keyword": "AS",
+            "category": "contextual",
+            "meaning": "Alias/Role",
+            "example": "BIND result AS alias"},
+        {"keyword": "BETWEEN",
+            "category": "contextual",
+            "meaning": "Range",
+            "example": "value BETWEEN 1 AND 10"},
+        {
+            "keyword": "AGAINST",
+            "category": "contextual",
+            "meaning": "Comparison target",
+            "example": "VALIDATE AGAINST schema"
+        },
+        {
+            "keyword": "BASED_ON",
+            "category": "contextual",
+            "meaning": "Foundation",
+            "example": "CREATE BASED_ON template"
+        },
+        {
+            "keyword": "WITHOUT",
+            "category": "contextual",
+            "meaning": "Exclusion",
+            "example": "EXECUTE WITHOUT logging"
+        },
+        {"keyword": "WHERE",
+            "category": "contextual",
+            "meaning": "Filter condition",
+            "example": "FIND WHERE x > 0"},
+        {"keyword": "CONTENT",
+            "category": "contextual",
+            "meaning": "Data marker",
+            "example": "WRITE CONTENT data"},
+        {"keyword": "NOT",
+            "category": "contextual",
+            "meaning": "Negation",
+            "example": "NOT condition"},
+        {"keyword": "STYLE",
+            "category": "contextual",
+            "meaning": "Formatting",
+            "example": "STYLE output"}
+    ]
+}

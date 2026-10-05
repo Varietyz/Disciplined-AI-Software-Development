@@ -1,0 +1,361 @@
+{
+    "category": "quality-engine",
+    "tier": "process",
+    "check": {
+        "by": ["the machine verdict, derived from the tools' exit codes and parsed findings"],
+        "population": "every file the configured tools reach",
+        "freshness": "a verdict stands until the code or the configuration changes",
+        "refusal": "the cascade stops on a violated progress bound and escalates, and reports clean only on a clean verdict",
+        "observation": "none: the verdict is derived from tool output",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the tools' exit codes and parsed findings, which the verdict is derived from"
+    },
+    "records": [
+        {
+            "id": "quality-governance-loop",
+            "principleRef": "manual-only-governance",
+            "grounds": ["reasoning:derivation-loop"],
+            "mathType": "computation",
+            "yields": "procedure",
+            "derivationMap": [
+                {"stage": "derive",
+                    "record": "canonical-config-resolution"},
+                {"stage": "project",
+                    "record": "stage-ordering"},
+                {"stage": "act",
+                    "record": "comment-normalization-remediation"},
+                {"stage": "verify",
+                    "record": "machine-verdict-derivation"},
+                {"stage": "terminate",
+                    "record": "bounded-cascade-termination"}
+            ],
+            "title": "Quality Governance Loop",
+            "exemplar": {
+                "before": "A code edit judged clean by the model's read, not the machine verdict.",
+                "after": "apply → normalize → resolve CheckPlan → verify → {clean | fix in-scope + reverify, bounded, findings strictly decrease} → clean | escalate",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "On each update (an apply), normalize the proposal, resolve a CheckPlan, verify it, and on failure fix-then-reverify the downstream set until the verdict is clean or the pass bound is reached, then escalate.",
+            "invariant": "Every code update is a bounded verify-remediate loop keyed to the apply event, not the turn; the machine verdict — never the model's read — is its only completion signal.",
+            "flow": [
+                "Update",
+                "Normalize",
+                "Resolve",
+                "Verify",
+                "Clean?",
+                "Fix",
+                "Reverify",
+                "Clean|Escalate"
+            ],
+            "productions": [
+                {
+                    "lhs": "QualityGovernanceLoop",
+                    "rhs": "<Update> \"→\" <NormalizationPrefix> \"→\" <CheckPlanResolution> \"→\" <Verification> \"→\" (<CleanVerdict> | <DownstreamFixCycle> \"→\" <QualityGovernanceLoop>)"
+                },
+                {
+                    "lhs": "DownstreamFixCycle",
+                    "rhs": "<InScopeFindings> \"→\" <ModelFixBurst> \"→\" <Reapply> \"→\" <BoundedReverify>"
+                },
+                {
+                    "lhs": "BoundedReverify",
+                    "rhs": "\"passCount <= MAX_CASCADE_PASSES\" \"AND\" \"in_scope_findings_strictly_decrease\" | \"escalate\""
+                }
+            ],
+            "composes": [
+                "recursion-control",
+                "resilience-control"
+            ],
+            "force": [
+                "semantic_consistency",
+                "correctness_verification",
+                "security_governance",
+                "model_governance",
+                "event_messaging"
+            ]
+        },
+        {
+            "id": "canonical-config-resolution",
+            "stage": "derive",
+            "axis": "reasoning",
+            "mathType": "logic",
+            "yields": "boolean",
+            "title": "Canonical Config Resolution",
+            "exemplar": {
+                "before": "One config expanded to many tools with contradictory, unowned rules.",
+                "after": "canonical config → per-tool expansion → one owner per contested surface → detect conflicts{ownership overlap, unsatisfiable, out-of-range, known-bad-pair} fail-closed → resolved plan | conflict report",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Expand one canonical config across selected profiles and native rules into per-tool config, resolve exactly one owner per contested surface, detect the four conflict kinds fail-closed, route loosening or self-certification to the developer's gate, and emit a resolved plan.",
+            "invariant": "A single canonical model expands to many tools without contradiction only when every contested surface has one owner and every conflict is caught before runtime.",
+            "flow": [
+                "CanonicalConfig",
+                "Expand",
+                "OwnershipResolution",
+                "ConflictDetection",
+                "HumanAuthorityRouting",
+                "ResolvedPlan|ConflictReport"
+            ],
+            "productions": [
+                {
+                    "lhs": "CanonicalConfigResolution",
+                    "rhs": "<CanonicalConfig> \"→\" <PerToolExpansion> \"→\" <SingleOwnerPerSurface> \"→\" <ConflictDetection> \"→\" (<ResolvedPlan> | <ConflictReport>)"
+                },
+                {
+                    "lhs": "ConflictKind",
+                    "rhs": "\"ownership_overlap\" | \"unsatisfiable_on_fixed\" | \"value_out_of_range\" | \"known_bad_pair\""
+                },
+                {"lhs": "Resolution",
+                    "rhs": "\"single_owner_enabled\" | \"route_to_human_authority_gate\""}
+            ],
+            "composes": [
+                "centralization-kernel",
+                "canonical-data"
+            ],
+            "force": [
+                "semantic_consistency",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "stage-ordering",
+            "stage": "project",
+            "axis": "reasoning",
+            "mathType": "graph",
+            "yields": "edge-list",
+            "title": "Stage Ordering",
+            "exemplar": {
+                "before": "Checks run in arbitrary order, so a fix re-dirties an already-passed stage forever.",
+                "after": "stages → runnability DAG (dependsOn) → topo-order by invalidates (fixes point forward) → bands{normalization prefix, structural, semantic suffix}; back-edges only in the suffix",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Build the runnability DAG from dependsOn, topologically order the cascade by the invalidates relation so fixes point forward, partition into normalization prefix, structural band, and semantic suffix, and permit back-edges only inside the suffix.",
+            "invariant": "The order determines the total work scope; a forward-pointing order makes each fix dirty only later stages, so the prefix converges once and the suffix is bounded.",
+            "flow": [
+                "Stages",
+                "RunnabilityDAG",
+                "InvalidatesTopoSort",
+                "BandPartition",
+                "OrderedStages"
+            ],
+            "productions": [
+                {
+                    "lhs": "StageOrdering",
+                    "rhs": "<StageSet> \"→\" <DependsOnDAG> \"→\" <InvalidatesOrder> \"→\" <BandPartition> \"→\" <OrderedStages>"
+                },
+                {
+                    "lhs": "BandPartition",
+                    "rhs": "\"normalization_prefix\" \",\" \"structural_band\" \",\" \"semantic_suffix\""
+                },
+                {"lhs": "BackEdgePolicy",
+                    "rhs": "\"allowed_only_in_semantic_suffix_resolved_at_runtime\""}
+            ],
+            "composes": [],
+            "force": [
+                "semantic_consistency",
+                "causality_ordering"
+            ]
+        },
+        {
+            "id": "comment-normalization-remediation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Comment Normalization Remediation",
+            "exemplar": {
+                "before": "A comment-strip auto-fix hardcoded per language, so adding a language means new code.",
+                "after": "canonical rule + comment-grammar descriptor → compile per language → token-scan (in-memory) | real-AST (sandbox) → preserve directive comments → trust only after calibration + adversarial test",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Express the comment-strip rule once as canonical behavior, bind it per language from a comment-grammar descriptor, run the toolchain-free token-scan backing on the in-memory proposal and the real-AST backing in the sandbox, preserve directive comments, and trust a backing only after calibration and adversarial testing.",
+            "invariant": "An agnostic auto-fix is behavior-as-data compiled per language behind a safety boundary — adding a language is adding a descriptor, not code.",
+            "flow": [
+                "CanonicalRule + GrammarDescriptor",
+                "Compile",
+                "TokenScan|ASTBacking",
+                "DirectivePreservingStrip",
+                "CalibratedFix"
+            ],
+            "productions": [
+                {
+                    "lhs": "CommentNormalization",
+                    "rhs": "<CanonicalCommentRule> \"→\" <PerLanguageDescriptor> \"→\" <CompiledBacking> \"→\" <DirectivePreservingStrip> \"→\" <SafetyBoundary>"
+                },
+                {
+                    "lhs": "CompiledBacking",
+                    "rhs": "\"ast_lite_token_scan_in_memory\" | \"real_ast_via_tier_p_sandbox\""
+                },
+                {"lhs": "SafetyBoundary",
+                    "rhs": "\"tool_calibration\" \",\" \"adversarial_input_testing\""}
+            ],
+            "composes": [],
+            "force": [
+                "modularity",
+                "semantic_consistency",
+                "correctness_verification"
+            ]
+        },
+        {
+            "id": "custom-rule-derivation",
+            "stage": "act",
+            "axis": "formalization",
+            "mathType": "computation",
+            "yields": "procedure",
+            "title": "Custom-Rule Derivation",
+            "exemplar": {
+                "before": "The model authors and loosens a rule that governs its own output.",
+                "after": "repeated evidence → anti-pattern classify → boundary principle → candidate → migrate with rollback → verify elimination → {tightening admitted | self-certify/loosen routes to the developer's gate}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Derive a candidate rule from repeated evidence through anti-pattern classification, boundary-principle evaluation, and candidate selection, migrate with rollback, verify elimination, and admit a tightening rule while routing a self-certifying or loosening rule through the developer's gate.",
+            "invariant": "A rule that governs the model's own output cannot be authored or loosened by the model; tightening is admitted, self-certification is gated.",
+            "flow": [
+                "Evidence",
+                "AntiPattern",
+                "BoundaryPrinciple",
+                "Candidate",
+                "Migrate",
+                "Verify",
+                "Admit|HumanGate"
+            ],
+            "productions": [
+                {
+                    "lhs": "CustomRuleDerivation",
+                    "rhs": "<RepeatedEvidence> \"→\" <AntiPatternClassification> \"→\" <BoundaryPrincipleEvaluation> \"→\" <CandidateSelection> \"→\" <BackupVerifiedMigration> \"→\" <SelfCertGate>"
+                },
+                {
+                    "lhs": "SelfCertGate",
+                    "rhs": "\"tightening_admitted\" | \"self_certifying_or_loosening_routes_to_human_authority\""
+                }
+            ],
+            "composes": [
+                "pattern-distiller-kernel",
+                "anti-pattern-classification",
+                "backup-verified-migration"
+            ],
+            "force": [
+                "modularity",
+                "state_transaction",
+                "correctness_verification",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "machine-verdict-derivation",
+            "stage": "verify",
+            "axis": "verification",
+            "mathType": "logic",
+            "yields": "boolean",
+            "grounds": ["reasoning:ver-evidence"],
+            "title": "Machine Verdict Derivation",
+            "exemplar": {
+                "before": "A pass declared from the model's reading of the diff, not the tool's exit.",
+                "after": "check results → exit codes + parsed findings → machine verdict{clean | violations}; the model's read is never the signal",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Derive the verify-stage verdict from the toolchain's machine output — exit codes and parsed findings — never from the model's reading, so a clean verdict is an observed machine fact.",
+            "invariant": "The verify verdict is machine-derived from exit codes and parsed findings; a model's judgment is never the completion signal.",
+            "flow": [
+                "CheckResults",
+                "ExitCodesAndFindings",
+                "MachineVerdict"
+            ],
+            "productions": [
+                {
+                    "lhs": "MachineVerdictDerivation",
+                    "rhs": "<CheckResults> \"→\" <ExitCodeAndFindingParse> \"→\" <MachineVerdict>"
+                },
+                {"lhs": "MachineVerdict",
+                    "rhs": "\"clean\" | \"violations\""}
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "model_governance"
+            ]
+        },
+        {
+            "id": "bounded-cascade-termination",
+            "stage": "terminate",
+            "axis": "termination",
+            "mathType": "optimization",
+            "yields": "boolean | ranking",
+            "grounds": ["reasoning:ter-stop"],
+            "title": "Bounded Cascade Termination",
+            "exemplar": {
+                "before": "A remediation cascade that loops until it happens to pass, or forever.",
+                "after": "each pass → {clean: stop | findings strictly decrease AND passCount <= MAX: continue | else: escalate}",
+                "lang": "flow",
+                "medium": "composite"
+            },
+            "intent": "Terminate the verify-remediate cascade on the completion AND-gate — a clean verdict, or bounded progress where findings strictly decrease within the pass bound — escalating when neither holds.",
+            "invariant": "The cascade terminates on a clean machine verdict or a violated progress bound; it never loops unbounded and never stops on an unclean state without escalating.",
+            "flow": [
+                "PassResult",
+                "CompletionGate",
+                "Stop|Continue|Escalate"
+            ],
+            "productions": [
+                {
+                    "lhs": "BoundedCascadeTermination",
+                    "rhs": "<PassResult> \"→\" <CompletionGate> \"→\" (<Clean> | <BoundedContinue> | <Escalate>)"
+                },
+                {
+                    "lhs": "CompletionGate",
+                    "rhs": "\"clean\" | \"findings_strictly_decrease\" \"AND\" \"passCount <= MAX_CASCADE_PASSES\" | \"escalate\""
+                }
+            ],
+            "composes": [],
+            "force": [
+                "correctness_verification",
+                "resilience_recovery"
+            ]
+        },
+        {
+            "id": "quality-engine-concern",
+            "title": "Quality-Engine Kernel",
+            "intent": "Resolve a canonical policy into a per-ecosystem CheckPlan, order its stages by the invalidates relation, normalize the proposal, run generation checks on the server and project tools via the relay, derive a machine verdict, and drive a bounded downstream cascade to clean — holding no runtime execution in the engine itself.",
+            "invariant": "Language-agnostic code governance is a pure planner-plus-judge behind a port; execution lives in the relay and the loop, the verdict is machine-derived, and the config gate has already removed every runtime contradiction.",
+            "flow": [
+                "Policy",
+                "Resolve",
+                "Order",
+                "Normalize",
+                "Execute(G+P)",
+                "Verdict",
+                "Cascade",
+                "Clean|Escalate"
+            ],
+            "productions": [
+                {
+                    "lhs": "QualityEngineKernel",
+                    "rhs": "<QualityPolicy> \"→\" <CanonicalConfigResolution> \"→\" <StageOrdering> \"→\" <CommentNormalization> \"→\" <CheckPlanExecution> \"→\" <VerdictDerivation> \"→\" <QualityGovernanceLoop>"
+                },
+                {
+                    "lhs": "CheckPlanExecution",
+                    "rhs": "\"generation_checks_server_side\" \",\" \"project_commands_via_relay\""
+                },
+                {"lhs": "VerdictDerivation",
+                    "rhs": "\"exit_code\" | \"parse_findings\""},
+                {"lhs": "EngineBoundary",
+                    "rhs": "\"pure_core_no_runtime_execution_behind_port_adapter\""}
+            ],
+            "composes": [
+                "canonical-config-resolution",
+                "stage-ordering",
+                "quality-governance-loop"
+            ],
+            "force": [
+                "semantic_consistency",
+                "security_governance"
+            ],
+            "meta": true
+        }
+    ]
+}

@@ -1,0 +1,1011 @@
+{
+    "records": [
+        {
+            "tool": "eslint",
+            "ecosystem": "javascript",
+            "npm": "eslint",
+            "isPlugin": false,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "govlab-eslint",
+            "ecosystem": "javascript",
+            "npm": "@govlab/quality/eslint-plugin",
+            "pluginNamespace": "govlab",
+            "ruleIdPrefix": "govlab",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "govlab-context",
+            "ecosystem": "javascript",
+            "npm": "@govlab/quality/context-lint",
+            "pluginNamespace": "govlab-context",
+            "ruleIdPrefix": "govlab-context",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "unused-imports",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-unused-imports",
+            "pluginNamespace": "unused-imports",
+            "ruleIdPrefix": "unused-imports",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "jsonc",
+            "ecosystem": "json",
+            "npm": "eslint-plugin-jsonc",
+            "pluginNamespace": "jsonc",
+            "ruleIdPrefix": "jsonc",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-boundaries",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-boundaries",
+            "pluginNamespace": "boundaries",
+            "ruleIdPrefix": "boundaries",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-eslint-plugin",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-eslint-plugin",
+            "pluginNamespace": "eslint-plugin",
+            "ruleIdPrefix": "eslint-plugin",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-i18next",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-i18next",
+            "pluginNamespace": "i18next",
+            "ruleIdPrefix": "i18next",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-import",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-import",
+            "pluginNamespace": "import",
+            "ruleIdPrefix": "import",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-jest",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-jest",
+            "pluginNamespace": "jest",
+            "ruleIdPrefix": "jest",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-jsdoc",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-jsdoc",
+            "pluginNamespace": "jsdoc",
+            "ruleIdPrefix": "jsdoc",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-jsx-a11y",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-jsx-a11y",
+            "pluginNamespace": "jsx-a11y",
+            "ruleIdPrefix": "jsx-a11y",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-lodash",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-lodash",
+            "pluginNamespace": "lodash",
+            "ruleIdPrefix": "lodash",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-n",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-n",
+            "pluginNamespace": "n",
+            "ruleIdPrefix": "n",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-no-unsanitized",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-no-unsanitized",
+            "pluginNamespace": "no-unsanitized",
+            "ruleIdPrefix": "no-unsanitized",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-perfectionist",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-perfectionist",
+            "pluginNamespace": "perfectionist",
+            "ruleIdPrefix": "perfectionist",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-promise",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-promise",
+            "pluginNamespace": "promise",
+            "ruleIdPrefix": "promise",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-react",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-react",
+            "pluginNamespace": "react",
+            "ruleIdPrefix": "react",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-react-hooks",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-react-hooks",
+            "pluginNamespace": "react-hooks",
+            "ruleIdPrefix": "react-hooks",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-regexp",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-regexp",
+            "pluginNamespace": "regexp",
+            "ruleIdPrefix": "regexp",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-sonarjs",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-sonarjs",
+            "pluginNamespace": "sonarjs",
+            "ruleIdPrefix": "sonarjs",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-stylistic",
+            "ecosystem": "javascript",
+            "npm": "@stylistic/eslint-plugin",
+            "pluginNamespace": "@stylistic",
+            "ruleIdPrefix": "@stylistic",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-tailwindcss",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-tailwindcss",
+            "pluginNamespace": "tailwindcss",
+            "ruleIdPrefix": "tailwindcss",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-testing-library",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-testing-library",
+            "pluginNamespace": "testing-library",
+            "ruleIdPrefix": "testing-library",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-unicorn",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-unicorn",
+            "pluginNamespace": "unicorn",
+            "ruleIdPrefix": "unicorn",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-vue",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-vue",
+            "pluginNamespace": "vue",
+            "ruleIdPrefix": "vue",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-angular",
+            "ecosystem": "typescript",
+            "npm": "@angular-eslint/eslint-plugin",
+            "pluginNamespace": "@angular-eslint",
+            "ruleIdPrefix": "@angular-eslint",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-functional",
+            "ecosystem": "typescript",
+            "npm": "eslint-plugin-functional",
+            "pluginNamespace": "functional",
+            "ruleIdPrefix": "functional",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-ts",
+            "ecosystem": "typescript",
+            "npm": "@typescript-eslint/eslint-plugin",
+            "pluginNamespace": "@typescript-eslint",
+            "ruleIdPrefix": "@typescript-eslint",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-yml",
+            "ecosystem": "yaml",
+            "npm": "eslint-plugin-yml",
+            "pluginNamespace": "yml",
+            "ruleIdPrefix": "yml",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "stylelint",
+            "ecosystem": "css",
+            "npm": "stylelint",
+            "isPlugin": false,
+            "configTarget": ".stylelintrc.js",
+            "emitter": "stylelint",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "govlab-stylelint",
+            "ecosystem": "css",
+            "npm": "@govlab/quality/stylelint-plugin",
+            "pluginNamespace": "govlab",
+            "ruleIdPrefix": "govlab",
+            "isPlugin": true,
+            "configTarget": ".stylelintrc.js",
+            "emitter": "stylelint"
+        },
+        {
+            "tool": "prettier",
+            "ecosystem": "javascript",
+            "npm": "prettier",
+            "isPlugin": false,
+            "configTarget": "prettier.config.mjs",
+            "emitter": "prettier",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "golangci-lint",
+            "ecosystem": "go",
+            "system": "golangci-lint",
+            "isPlugin": false,
+            "configTarget": ".golangci.yml",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "revive",
+            "ecosystem": "go",
+            "system": "revive",
+            "isPlugin": false,
+            "configTarget": "revive.toml",
+            "emitter": "native",
+            "disposition": "selectable",
+            "reason": "A consumer-selectable Go linter. In a public polyglot framework a tool that overlaps golangci-lint's surfaces is a CHOICE, not a redundancy: a consumer elects revive via govlab.config quality.owners (e.g. complexity.go = revive), at which point revive emits revive.toml and gates the surface while golangci-lint drops it. Unelected, revive runs advisory-only on its own config."
+        },
+        {
+            "tool": "checkstyle",
+            "ecosystem": "java",
+            "system": "checkstyle",
+            "isPlugin": false,
+            "configTarget": "checkstyle.xml",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "pmd",
+            "ecosystem": "java",
+            "system": "pmd",
+            "isPlugin": false,
+            "configTarget": "pmd-ruleset.xml",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "pylint",
+            "ecosystem": "python",
+            "system": "pylint",
+            "isPlugin": false,
+            "configTarget": ".pylintrc",
+            "emitter": "native",
+            "disposition": "selectable",
+            "reason": "A consumer-selectable Python linter. Overlapping ruff's surfaces is a CHOICE, not a redundancy: a consumer elects pylint via govlab.config quality.owners (e.g. complexity.python = pylint) and it gates the elected surfaces while ruff drops them; pylint also covers surfaces ruff does not (type-annotation, visibility). Unelected, pylint runs advisory-only on its own config."
+        },
+        {
+            "tool": "ruff",
+            "ecosystem": "python",
+            "system": "ruff",
+            "isPlugin": false,
+            "configTarget": "ruff.toml",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "clippy",
+            "ecosystem": "rust",
+            "system": "clippy",
+            "isPlugin": false,
+            "configTarget": "clippy.toml",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "rubocop",
+            "ecosystem": "ruby",
+            "system": "rubocop",
+            "isPlugin": false,
+            "configTarget": ".rubocop.yml",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "perlcritic",
+            "ecosystem": "perl",
+            "system": "perlcritic",
+            "isPlugin": false,
+            "configTarget": ".perlcriticrc",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "phpmd",
+            "ecosystem": "php",
+            "system": "phpmd",
+            "isPlugin": false,
+            "configTarget": "phpmd.xml",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "swiftlint",
+            "ecosystem": "swift",
+            "system": "swiftlint",
+            "isPlugin": false,
+            "configTarget": ".swiftlint.yml",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "yamllint",
+            "ecosystem": "yaml",
+            "system": "yamllint",
+            "isPlugin": false,
+            "configTarget": ".yamllint",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "clang-tidy",
+            "ecosystem": "cpp",
+            "system": "clang-tidy",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "credo",
+            "ecosystem": "elixir",
+            "system": "credo",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "go-critic",
+            "ecosystem": "go",
+            "system": "go-critic",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory",
+            "reason": "A consumer-choice Go linter (advisory, report-only). Overlapping golangci-lint's surface is a CHOICE in a public polyglot, never a redundancy: go-critic runs on its own defaults and reports without gating, since golangci-lint owns Go's gating surface by default. It carries mapping rows and can be upgraded to selectable by authoring its emit descriptor."
+        },
+        {
+            "tool": "sonar",
+            "ecosystem": "java",
+            "system": "sonar-scanner",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "server-based analysis platform (SonarQube), not a standalone configurable linter — no SSOT rule config"
+        },
+        {
+            "tool": "detekt",
+            "ecosystem": "kotlin",
+            "system": "detekt",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "luacheck",
+            "ecosystem": "lua",
+            "system": "luacheck",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "actionlint",
+            "ecosystem": "actions",
+            "system": "actionlint",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "advisory"
+        },
+        {
+            "tool": "tflint",
+            "ecosystem": "iac",
+            "system": "tflint",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "advisory"
+        },
+        {
+            "tool": "stylua",
+            "ecosystem": "lua",
+            "system": "stylua",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "phpcs",
+            "ecosystem": "php",
+            "system": "phpcs",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "lintr",
+            "ecosystem": "r",
+            "system": "lintr",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "scalastyle",
+            "ecosystem": "scala",
+            "system": "scalastyle",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "rubocop-capybara",
+            "ecosystem": "ruby",
+            "system": "rubocop-capybara",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rubocop-factory_bot",
+            "ecosystem": "ruby",
+            "system": "rubocop-factory_bot",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rubocop-graphql",
+            "ecosystem": "ruby",
+            "system": "rubocop-graphql",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rubocop-minitest",
+            "ecosystem": "ruby",
+            "system": "rubocop-minitest",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rubocop-performance",
+            "ecosystem": "ruby",
+            "system": "rubocop-performance",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rubocop-rails",
+            "ecosystem": "ruby",
+            "system": "rubocop-rails",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rubocop-rspec",
+            "ecosystem": "ruby",
+            "system": "rubocop-rspec",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rubocop-sequel",
+            "ecosystem": "ruby",
+            "system": "rubocop-sequel",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rubocop-thread_safety",
+            "ecosystem": "ruby",
+            "system": "rubocop-thread_safety",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "eslint-compat",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-compat",
+            "pluginNamespace": "compat",
+            "ruleIdPrefix": "compat",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "eslint-security",
+            "ecosystem": "javascript",
+            "npm": "eslint-plugin-security",
+            "pluginNamespace": "security",
+            "ruleIdPrefix": "security",
+            "isPlugin": true,
+            "configTarget": "eslint.config.js",
+            "emitter": "eslint"
+        },
+        {
+            "tool": "htmlhint",
+            "ecosystem": "html",
+            "npm": "htmlhint",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "sqlfluff",
+            "ecosystem": "sql",
+            "system": "sqlfluff",
+            "isPlugin": false,
+            "configTarget": ".sqlfluff",
+            "emitter": "native",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "bandit",
+            "ecosystem": "python",
+            "system": "bandit",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "brakeman",
+            "ecosystem": "ruby",
+            "system": "brakeman",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "checkov",
+            "ecosystem": "iac",
+            "system": "checkov",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "clj-kondo",
+            "ecosystem": "clojure",
+            "system": "clj-kondo",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "codeql",
+            "ecosystem": "actions",
+            "system": "codeql",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "GitHub CodeQL is a hosted/CI security-analysis service driven by query packs, not a locally-configurable linter with an in-memory config surface — out of the SSOT, like other server/service tools."
+        },
+        {
+            "tool": "error-prone",
+            "ecosystem": "java",
+            "system": "error-prone",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "javac compiler plugin (build-integrated), not a standalone configurable linter — no SSOT rule config"
+        },
+        {
+            "tool": "gosec",
+            "ecosystem": "go",
+            "system": "gosec",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "hadolint",
+            "ecosystem": "dockerfile",
+            "system": "hadolint",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "kics",
+            "ecosystem": "ansible",
+            "system": "kics",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "mypy",
+            "ecosystem": "python",
+            "system": "mypy",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "static type checker with per-project inference config, not a threshold ruleset — out of the SSOT like tsc"
+        },
+        {
+            "tool": "psalm",
+            "ecosystem": "php",
+            "system": "psalm",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "PHP static type checker with per-project inference config, not a threshold ruleset — out of the SSOT like tsc"
+        },
+        {
+            "tool": "rubocop-rake",
+            "ecosystem": "ruby",
+            "system": "rubocop-rake",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "A RuboCop extension gem (rule-pack) loaded into rubocop via `require:` — its cops run inside rubocop, which owns Ruby's lint surface (surface.data.json); not a standalone linter with its own SSOT config or gate."
+        },
+        {
+            "tool": "rustc",
+            "ecosystem": "rust",
+            "system": "rustc",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "the Rust compiler, not a configurable linter — no SSOT-serializable rule config (clippy is the rust linter)"
+        },
+        {
+            "tool": "semgrep",
+            "ecosystem": "csharp",
+            "system": "semgrep",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "shellcheck",
+            "ecosystem": "shell",
+            "system": "shellcheck",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "slither",
+            "ecosystem": "solidity",
+            "system": "slither",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "spotbugs",
+            "ecosystem": "java",
+            "system": "spotbugs",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "excluded",
+            "reason": "bytecode static analysis, build-integrated, not an SSOT-configurable threshold ruleset"
+        },
+        {
+            "tool": "staticcheck",
+            "ecosystem": "go",
+            "system": "staticcheck",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory",
+            "reason": "A consumer-choice Go linter (advisory, report-only). Overlapping golangci-lint's surface is a CHOICE, never a redundancy: staticcheck runs on its own defaults and reports without gating, since golangci-lint owns Go's gating surface by default. It carries mapping rows and can be upgraded to selectable by authoring its emit descriptor."
+        },
+        {
+            "tool": "trivy",
+            "ecosystem": "iac",
+            "system": "trivy",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "disposition": "advisory"
+        },
+        {
+            "tool": "govlab-native",
+            "ecosystem": "typescript",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "installable": false,
+            "disposition": "excluded",
+            "reason": "govlab's own native TypeScript quality checks, built from the monorepo — internal framework tooling, not a standalone installable linter with an SSOT config surface."
+        },
+        {
+            "tool": "knip",
+            "ecosystem": "javascript",
+            "npm": "knip",
+            "isPlugin": false,
+            "configTarget": "knip.config.js",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "jscpd",
+            "ecosystem": "javascript",
+            "npm": "jscpd",
+            "isPlugin": false,
+            "configTarget": ".jscpd.json",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "oxlint",
+            "ecosystem": "typescript",
+            "npm": "oxlint",
+            "isPlugin": false,
+            "configTarget": ".oxlintrc.json",
+            "emitter": "none",
+            "disposition": "full-gate"
+        },
+        {
+            "tool": "typescript",
+            "ecosystem": "typescript",
+            "npm": "typescript",
+            "isPlugin": false,
+            "configTarget": "tsconfig.json",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "excluded",
+            "reason": "The TypeScript compiler/type-checker (tsc), not a linter — it reads its per-project tsconfig.json from disk only (no in-memory config API), so tsconfig is compiler config out of the SSOT per config_single_truth, and it carries no quality rules (catalogRules:false)."
+        },
+        {
+            "tool": "depcheck",
+            "ecosystem": "javascript",
+            "npm": "depcheck",
+            "isPlugin": false,
+            "configTarget": ".depcheckrc",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "advisory",
+            "reason": "A consumer-choice unused-dependency finder (advisory, report-only). Overlapping knip's surface is a CHOICE, never a redundancy: depcheck runs on its own resolution and reports without gating, since knip owns the SSOT's unused-code + unused-dependency gating surface. Carries no SSOT-mapped rules (catalogRules:false)."
+        },
+        {
+            "tool": "ts-prune",
+            "ecosystem": "typescript",
+            "npm": "ts-prune",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "advisory",
+            "reason": "A consumer-choice dead-export finder (advisory, report-only). Overlapping knip's surface is a CHOICE, never a redundancy: ts-prune runs on its own tsconfig resolution and reports without gating, since knip owns the SSOT's unused-export gating surface. Carries no SSOT-mapped rules (catalogRules:false)."
+        },
+        {
+            "tool": "lockfile-lint",
+            "ecosystem": "javascript",
+            "npm": "lockfile-lint",
+            "isPlugin": false,
+            "configTarget": ".lockfile-lintrc.json",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "excluded",
+            "reason": "A lockfile-integrity validator (checks registry hosts / https), run standalone in the verify-codebase prepare stage — not a code linter with quality rules (catalogRules:false) or an SSOT-tunable config surface."
+        },
+        {
+            "tool": "madge",
+            "ecosystem": "javascript",
+            "npm": "madge",
+            "isPlugin": false,
+            "configTarget": "",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "advisory",
+            "reason": "A consumer-choice circular-dependency detector (advisory, report-only). Offering it alongside knip is a CHOICE, never a redundancy: madge reports import cycles without gating, since knip owns the SSOT's JS/TS structural gating surface. Carries no SSOT-mapped rules (catalogRules:false)."
+        },
+        {
+            "tool": "dependency-cruiser",
+            "ecosystem": "javascript",
+            "npm": "dependency-cruiser",
+            "isPlugin": false,
+            "configTarget": ".dependency-cruiser.js",
+            "emitter": "none",
+            "catalogRules": false,
+            "disposition": "advisory",
+            "reason": "A consumer-choice dependency-architecture validator (advisory, report-only). Its rules are executable JS config (config-as-code), so it runs against the consumer's own rule set and reports without gating; knip owns the SSOT's JS/TS structural gating surface. Carries no SSOT-mapped rules (catalogRules:false)."
+        }
+    ],
+    "coverage": {
+        "noEngineSetting": [
+            "annotation-style",
+            "async-await",
+            "boolean-expression",
+            "braces-style",
+            "comparison-style",
+            "declaration-grouping",
+            "destructuring",
+            "error-handling",
+            "identifier-length",
+            "integer-overflow",
+            "open-closed",
+            "operator-style",
+            "return-count",
+            "side-effects",
+            "sort-order",
+            "statements-per-line",
+            "string-literal",
+            "switch-default",
+            "ternary-conditional",
+            "visibility-modifier",
+            "wildcard-import"
+        ],
+        "noNativeDescriptor": [
+            "clang-tidy",
+            "credo",
+            "go-critic",
+            "sonar",
+            "detekt",
+            "luacheck",
+            "phpcs",
+            "lintr",
+            "scalastyle",
+            "rubocop-capybara",
+            "rubocop-factory_bot",
+            "rubocop-graphql",
+            "rubocop-minitest",
+            "rubocop-performance",
+            "rubocop-rails",
+            "rubocop-rspec",
+            "rubocop-sequel",
+            "rubocop-thread_safety"
+        ]
+    }
+}

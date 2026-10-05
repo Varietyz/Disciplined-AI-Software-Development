@@ -1,0 +1,29 @@
+{
+    "name": "@govlab/context",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "The queryable-ontology framework: ontology collections (architecture, algorithms, pag, lexicon, reasoning) over one shared kernel, folded by createGovlabContext with their cross-ontology joins pre-wired.",
+    "license": "CC-BY-SA-4.0",
+    "imports": {
+        "#configuration/*": "./configuration/*.ts",
+        "#core/*": "./core/*.ts",
+        "#runtime/*": "./runtime/*.ts",
+        "#types/*": "./types/*.ts"
+    },
+    "main": "./index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./check": "./core/factories/check.factory.ts",
+        "./*": "./*"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@govlab/argv": "*",
+        "@govlab/canonical-write": "*",
+        "@govlab/constants": "*",
+        "@ssot/paths": "*"
+    }
+}

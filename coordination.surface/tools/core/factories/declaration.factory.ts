@@ -1,5 +1,5 @@
 import type { ArtifactRoot } from "../types/artifact.types.ts";
-import { BEHAVIOUR_TREE_PLACEHOLDER } from "../constants/path.constants.ts";
+import { BEHAVIOR_TREE_PLACEHOLDER } from "../constants/path.constants.ts";
 import type { Finding } from "../types/segment.types.ts";
 import type { ForeignMarker } from "../types/taxonomy.types.ts";
 import type { axisConsumers } from "../validators/declaration.validator.ts";
@@ -115,17 +115,17 @@ export const axisFinding = function axisFinding(path: string, consumer: Consumer
 
 export const leftoverFinding = function leftoverFinding(path: string): Finding {
     return {
-        actual: `${path} names ${BEHAVIOUR_TREE_PLACEHOLDER}, and no folder by that name exists`,
-        expected: `${path} naming ${surfacePath("behaviour_tree")}, the folder the behavior tree was renamed to`,
+        actual: `${path} names ${BEHAVIOR_TREE_PLACEHOLDER}, and no folder by that name exists`,
+        expected: `${path} naming ${surfacePath("behavior_tree")}, the folder the behavior tree was renamed to`,
         healed: false,
         line: 0,
-        locus: BEHAVIOUR_TREE_PLACEHOLDER,
+        locus: BEHAVIOR_TREE_PLACEHOLDER,
         path,
         remediation: {
             action: "rename",
             decide: "adoption renames the behavior folder from its shipped placeholder and replaces the placeholder wherever the package names it; this file still names the placeholder, so a path in it points at a folder that no longer exists. Replace the placeholder with the folder's new name",
             deterministic: false,
-            from: BEHAVIOUR_TREE_PLACEHOLDER,
+            from: BEHAVIOR_TREE_PLACEHOLDER,
             target: path,
             to: null,
         },

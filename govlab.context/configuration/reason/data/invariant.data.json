@@ -1,0 +1,146 @@
+{
+    "check": {
+        "by": [
+            "the test surfaces that assert the invariant, through the techniques each surface lists",
+            "the structured-document validator, for each epistemic invariant the grammar's constructs ground"
+        ],
+        "population": "every test surface and document construct that names the invariant",
+        "freshness": "a verdict stands until the invariant, a surface that asserts it or a construct that grounds it changes",
+        "refusal": "the gate fails on a surface that names an unknown invariant, and the document validator fails a gate that omits a grounded clause",
+        "observation": "the runtime techniques among the surfaces that assert the invariant, which locate a violation without certifying its absence",
+        "evidence": "fires-and-accepts: one suite plants a surface that names an unknown invariant, another plants an invariant record with no clauses, and the bundled data validates clean",
+        "authority": "the invariant record, which every surface and document construct that asserts it cites"
+    },
+    "records": [
+        {"id": "correct-outputs",
+            "name": "Correct Outputs",
+            "statement": "Outputs are correct"},
+        {"id": "correct-state-evolution",
+            "name": "Correct State Evolution",
+            "statement": "State evolves correctly"},
+        {
+            "id": "valid-state-transitions",
+            "name": "Valid State Transitions",
+            "statement": "State transitions are valid"
+        },
+        {
+            "id": "correct-interactions",
+            "name": "Correct Interactions",
+            "statement": "Interactions between components are correct"
+        },
+        {
+            "id": "valid-interfaces-and-contracts",
+            "name": "Valid Interfaces and Contracts",
+            "statement": "Interfaces and contracts are valid"
+        },
+        {
+            "id": "acceptable-execution-time",
+            "name": "Acceptable Execution Time",
+            "statement": "Execution time is acceptable"
+        },
+        {
+            "id": "acceptable-resource-consumption",
+            "name": "Acceptable Resource Consumption",
+            "statement": "Resource consumption is acceptable"
+        },
+        {
+            "id": "safe-concurrent-behavior",
+            "name": "Safe Concurrent Behavior",
+            "statement": "Concurrent behavior is safe"
+        },
+        {
+            "id": "controlled-memory-usage",
+            "name": "Controlled Memory Usage",
+            "statement": "Memory usage is controlled"
+        },
+        {
+            "id": "reliability-under-faults",
+            "name": "Reliability Under Faults",
+            "statement": "The system stays reliable under faults"
+        },
+        {
+            "id": "availability-under-stress",
+            "name": "Availability Under Stress",
+            "statement": "The system stays available under stress"
+        },
+        {
+            "id": "consistency-across-components",
+            "name": "Consistency Across Components",
+            "statement": "Components stay consistent with each other"
+        },
+        {
+            "id": "deterministic-behavior-where-required",
+            "name": "Required Determinism",
+            "statement": "Behavior is deterministic where determinism is required"
+        },
+        {"id": "numerical-validity",
+            "name": "Numerical Validity",
+            "statement": "Numerical results are valid"},
+        {"id": "security-boundaries",
+            "name": "Security Boundaries",
+            "statement": "Security boundaries hold"},
+        {
+            "id": "protocol-compliance",
+            "name": "Protocol Compliance",
+            "statement": "Communication complies with its protocol"
+        },
+        {"id": "configuration-validity",
+            "name": "Configuration Validity",
+            "statement": "Configuration is valid"},
+        {
+            "id": "accurate-observability",
+            "name": "Accurate Observability",
+            "statement": "Logs, metrics and traces report the system accurately"
+        },
+        {
+            "id": "epi-reachable-check",
+            "name": "Reachable Check",
+            "statement": "Every representation in jurisdiction has a computable check"
+        },
+        {
+            "id": "epi-declared-domain",
+            "name": "Declared Domain",
+            "statement": "A check's domain is explicit and reported beside its verdict"
+        },
+        {
+            "id": "epi-declared-dependency",
+            "name": "Declared Dependency",
+            "statement": "A dependency is declared by the referent, never inferred from a name"
+        },
+        {
+            "id": "epi-verdict-is-representation",
+            "name": "Checked Verdict",
+            "statement": "A verdict is itself a representation and has a reachable check of its own"
+        },
+        {
+            "id": "epi-preserved-distinction",
+            "name": "Preserved Distinction",
+            "statement": "A lowering keeps every distinction a later check needs"
+        },
+        {
+            "id": "epi-fresh-read",
+            "name": "Fresh Read",
+            "statement": "A check reads a representation derived after the last relevant mutator"
+        },
+        {
+            "id": "epi-one-derivation",
+            "name": "One Derivation",
+            "statement": "One canonical question has one authoritative derivation"
+        },
+        {
+            "id": "epi-weakest-link",
+            "name": "Weakest Link",
+            "statement": "A chain is as certain as its least certain link, and a link below the floor is removed from the chain"
+        },
+        {
+            "id": "epi-observation-locates",
+            "name": "Observation Scope",
+            "statement": "Dynamic observation locates a failure and never certifies absence"
+        },
+        {
+            "id": "epi-terminate-on-three",
+            "name": "Three-Condition Stop",
+            "statement": "A run stops when saturation, completion and verification all hold, or when it is blocked on something outside it"
+        }
+    ]
+}

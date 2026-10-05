@@ -1,0 +1,437 @@
+{
+    "category": "Behavioral Patterns",
+    "check": {
+        "population": "every module whose behavior varies by mode, state, request kind or traversal",
+        "freshness": "a verdict stands until the module's branching or its state model changes",
+        "refusal": "the review or the complexity threshold rejects the change that reintroduces the branching the pattern removes",
+        "observation": "conditional complexity and dispatch counts read from source, and the recorded design review",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the pattern's dispatch structure, which a change to the module's branching is compared against"
+    },
+    "records": [
+        {
+            "id": "strategy-pattern",
+            "distinctFrom": [
+                {
+                    "id": "architecture:decorator-pattern",
+                    "reason": "A strategy replaces behavior behind one interface, while a decorator adds behavior by wrapping an object in the same interface."
+                }
+            ],
+            "name": "Strategy Pattern",
+            "aliases": ["Policy Pattern"],
+            "definition": "A design pattern that puts each interchangeable algorithm behind one interface, so the caller selects behavior by passing an object.",
+            "type": "pattern",
+            "scope": [
+                "algorithm",
+                "policy",
+                "behavior"
+            ],
+            "requires": ["Interchangeable Algorithms"],
+            "reinforces": [
+                "OCP",
+                "Polymorphism"
+            ],
+            "enables": ["Runtime Behavior Selection"],
+            "conflicts_with": ["Large Conditional Logic"],
+            "tensions_with": ["Class Count"],
+            "violated_by": ["lexicon:large-conditional-logic"],
+            "detected_by": ["conditional strategy selection with duplicated behavior"],
+            "measured_by": ["conditional complexity"],
+            "refactored_by": [],
+            "enforced_by": [
+                "complexity thresholds",
+                "review"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function priceFoo(kind: string, value: number) {\n  if (kind === \"standard\") return value;\n  if (kind === \"double\") return value * 2;\n  return 0;\n}",
+                "after": "interface FooPricing { price(value: number): number; }\nconst standard: FooPricing = { price: value => value };\nconst doubled: FooPricing = { price: value => value * 2 };\nfunction priceFoo(strategy: FooPricing, value: number) { return strategy.price(value); }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "template-method-pattern",
+            "name": "Template Method Pattern",
+            "definition": "A design pattern that fixes the steps of an algorithm in a base class and lets subclasses supply the steps that vary.",
+            "type": "pattern",
+            "scope": [
+                "workflow",
+                "framework"
+            ],
+            "requires": ["Stable Algorithm Skeleton"],
+            "reinforces": ["Framework Reuse"],
+            "enables": ["Controlled Variation"],
+            "conflicts_with": ["Duplicated Workflow"],
+            "tensions_with": ["Inheritance Coupling"],
+            "violated_by": ["lexicon:duplicated-workflow"],
+            "detected_by": ["duplicated method sequences"],
+            "measured_by": ["workflow duplication"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function importJsonFoo(raw: string) { validateJson(raw); return saveFoo(parseJson(raw)); }\nfunction importCsvFoo(raw: string) { validateCsv(raw); return saveFoo(parseCsv(raw)); }",
+                "after": "abstract class FooImporter {\n  import(raw: string) { this.validate(raw); return saveFoo(this.parse(raw)); }\n  protected abstract validate(raw: string): void;\n  protected abstract parse(raw: string): Foo;\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "observer-pattern",
+            "name": "Observer Pattern",
+            "definition": "A design pattern in which a subject publishes events to subscribers it does not know by name.",
+            "type": "pattern",
+            "scope": [
+                "event notification",
+                "runtime"
+            ],
+            "requires": ["Subject/Subscriber Contract"],
+            "reinforces": ["Event-Driven Architecture"],
+            "enables": ["Decoupled Notification"],
+            "conflicts_with": ["Direct Callback Coupling"],
+            "tensions_with": [
+                "Ordering",
+                "Debuggability"
+            ],
+            "violated_by": ["lexicon:direct-callback-coupling"],
+            "detected_by": ["direct calls to multiple listeners"],
+            "measured_by": ["subscriber coupling count"],
+            "refactored_by": [],
+            "enforced_by": ["event contract tests"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "class FooEditor {\n  save(foo: Foo) {\n    fooStore.save(foo);\n    refreshFooView(foo);\n    sendFooEmail(foo);\n  }\n}",
+                "after": "class FooEvents {\n  #listeners = new Set<(event: FooEvent) => void>();\n  subscribe(listener: (event: FooEvent) => void) { this.#listeners.add(listener); }\n  publish(event: FooEvent) { this.#listeners.forEach(listener => listener(event)); }\n}\nclass FooEditor {\n  constructor(private readonly events: FooEvents) {}\n  save(foo: Foo) {\n    fooStore.save(foo);\n    this.events.publish({ type: \"FooSaved\", foo });\n  }\n}\nfooEvents.subscribe(event => refreshFooView(event.foo));\nfooEvents.subscribe(event => sendFooEmail(event.foo));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "mediator-pattern",
+            "name": "Mediator Pattern",
+            "definition": "A design pattern that routes the interactions between a set of objects through one coordinating object.",
+            "type": "pattern",
+            "scope": [
+                "object coordination",
+                "module"
+            ],
+            "requires": ["Coordination Complexity"],
+            "reinforces": ["Low Coupling"],
+            "enables": ["Centralized Interaction Logic"],
+            "conflicts_with": ["Mesh Dependencies"],
+            "tensions_with": ["Mediator God Object"],
+            "violated_by": ["lexicon:mesh-dependencies"],
+            "detected_by": ["dense object dependency graph"],
+            "measured_by": ["interaction graph density"],
+            "refactored_by": [],
+            "enforced_by": ["dependency graph checks"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "fooEditor.notify(fooList, fooDetails, fooToolbar, foo);\nfooList.update(fooDetails, fooToolbar, foo);",
+                "after": "class FooMediator {\n  constructor(private readonly list: FooList, private readonly details: FooDetails) {}\n  handle(event: FooEvent) {\n    this.list.apply(event);\n    this.details.apply(event);\n  }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "command-pattern",
+            "name": "Command Pattern",
+            "aliases": ["Action Pattern"],
+            "definition": "A design pattern that wraps a request in an object, so it can be queued, deferred or undone.",
+            "type": "pattern",
+            "scope": [
+                "behavior",
+                "invocation",
+                "workflow"
+            ],
+            "requires": ["Encapsulation"],
+            "reinforces": [
+                "OCP",
+                "Single Responsibility Principle (SRP)"
+            ],
+            "enables": [
+                "Undo/Redo",
+                "Deferred Execution",
+                "Request Queuing"
+            ],
+            "conflicts_with": ["Direct Method Invocation"],
+            "tensions_with": ["Simplicity"],
+            "violated_by": ["lexicon:direct-method-invocation"],
+            "detected_by": ["switch/if chains selecting an operation to run"],
+            "measured_by": ["dispatch-branch count per action site"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "button.onClick = () => fooEditor.delete(foo.id);",
+                "after": "interface FooCommand { execute(): void; undo(): void; }\nclass DeleteFooCommand implements FooCommand {\n  constructor(private readonly id: FooId) {}\n  execute() { fooStore.delete(this.id); }\n  undo() { fooStore.restore(this.id); }\n}\nhistory.run(new DeleteFooCommand(foo.id));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "state-pattern",
+            "name": "State Pattern",
+            "definition": "A design pattern that gives each state of an object its own class, so behavior and legal transitions change with the state.",
+            "type": "pattern",
+            "scope": [
+                "behavior",
+                "state machine",
+                "lifecycle"
+            ],
+            "requires": ["Explicit State Model"],
+            "reinforces": [
+                "OCP",
+                "Polymorphism"
+            ],
+            "enables": [
+                "State-Local Behavior",
+                "Legal-Transition Enforcement"
+            ],
+            "conflicts_with": ["Boolean Flag Soup"],
+            "tensions_with": ["Class Proliferation"],
+            "violated_by": ["lexicon:boolean-flag-soup"],
+            "detected_by": ["repeated conditionals on a status field"],
+            "measured_by": ["status-conditional density"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function handleFoo(foo: Foo, event: string) {\n  if (foo.status === \"draft\" && event === \"submit\") foo.status = \"review\";\n  if (foo.status === \"review\" && event === \"approve\") foo.status = \"published\";\n}",
+                "after": "interface FooState { submit(): FooState; approve(): FooState; }\nconst published: FooState = { submit: () => published, approve: () => published };\nconst review: FooState = { submit: () => review, approve: () => published };\nconst draft: FooState = { submit: () => review, approve: () => draft };\nclass Foo {\n  constructor(private state: FooState = draft) {}\n  submit() { this.state = this.state.submit(); }\n  approve() { this.state = this.state.approve(); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "chain-of-responsibility-pattern",
+            "name": "Chain of Responsibility Pattern",
+            "definition": "A design pattern that passes a request along an ordered list of handlers until one of them handles it.",
+            "type": "pattern",
+            "scope": [
+                "behavior",
+                "request handling",
+                "pipeline"
+            ],
+            "requires": ["Uniform Handler Interface"],
+            "reinforces": [
+                "OCP",
+                "Single Responsibility Principle (SRP)"
+            ],
+            "enables": [
+                "Pluggable Handling",
+                "Ordered Fallthrough"
+            ],
+            "conflicts_with": ["Monolithic Handler"],
+            "tensions_with": ["Traceability"],
+            "violated_by": ["lexicon:monolithic-handler"],
+            "detected_by": ["long if/else ladders handling heterogeneous requests"],
+            "measured_by": ["handler cyclomatic complexity"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function handleFoo(request: FooRequest) {\n  if (request.size > MAX_SIZE) return reject(request);\n  if (!request.authorized) return deny(request);\n  return process(request);\n}",
+                "after": "type FooHandler = (request: FooRequest, next: () => FooResult) => FooResult;\nconst enforceSize: FooHandler = (request, next) => request.size > MAX_SIZE ? reject(request) : next();\nconst enforceAuth: FooHandler = (request, next) => request.authorized ? next() : deny(request);\nconst chain = composeHandlers([enforceSize, enforceAuth, () => process(request)]);\nchain(request);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "iterator-pattern",
+            "name": "Iterator Pattern",
+            "aliases": ["Cursor"],
+            "definition": "A design pattern that lets callers traverse a collection without seeing how it is stored.",
+            "type": "pattern",
+            "scope": [
+                "behavior",
+                "traversal",
+                "collection"
+            ],
+            "requires": ["Uniform Traversal Interface"],
+            "reinforces": [
+                "Encapsulation",
+                "Single Responsibility Principle (SRP)"
+            ],
+            "enables": [
+                "Structure-Agnostic Iteration",
+                "Lazy Traversal"
+            ],
+            "conflicts_with": ["Exposed Internal Representation"],
+            "tensions_with": ["Simplicity"],
+            "violated_by": ["lexicon:exposed-internal-representation"],
+            "detected_by": ["index/pointer traversal of another type's internals"],
+            "measured_by": ["internal-structure access count"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "for (let i = 0; i < fooTree.nodes.length; i += 1) visit(fooTree.nodes[i]);",
+                "after": "class FooTree {\n  #roots: FooNode[] = [];\n  *[Symbol.iterator](): Iterator<Foo> {\n    for (const node of this.#roots) yield* this.walk(node);\n  }\n}\nfor (const foo of fooTree) visit(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "visitor-pattern",
+            "name": "Visitor Pattern",
+            "definition": "A design pattern that places each operation over a type hierarchy in its own visitor, so an operation is added without editing the element types.",
+            "type": "pattern",
+            "scope": [
+                "behavior",
+                "operation",
+                "type hierarchy"
+            ],
+            "requires": ["Stable Element Hierarchy"],
+            "reinforces": [
+                "OCP",
+                "Separation of Concerns"
+            ],
+            "enables": ["Operation Extension Without Element Change"],
+            "conflicts_with": ["Type Switching"],
+            "tensions_with": ["Element Stability"],
+            "violated_by": ["lexicon:type-switching"],
+            "detected_by": ["type-tag switches repeated per operation"],
+            "measured_by": ["type-switch duplication across operations"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "function renderFoo(node: FooNode) {\n  if (node.kind === \"text\") return node.value;\n  if (node.kind === \"group\") return node.children.map(renderFoo).join(\"\");\n}",
+                "after": "interface FooVisitor<T> { text(node: TextNode): T; group(node: GroupNode): T; }\nclass RenderFooVisitor implements FooVisitor<string> {\n  text(node: TextNode) { return node.value; }\n  group(node: GroupNode) { return node.children.map(child => child.accept(this)).join(\"\"); }\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "memento-pattern",
+            "name": "Memento Pattern",
+            "definition": "A design pattern in which an object captures its own state in an opaque snapshot it can later restore.",
+            "type": "pattern",
+            "scope": [
+                "behavior",
+                "state capture",
+                "history"
+            ],
+            "requires": ["Encapsulation"],
+            "reinforces": ["Information Hiding"],
+            "enables": [
+                "Undo/Redo",
+                "Snapshot/Restore"
+            ],
+            "conflicts_with": ["External State Reach-In"],
+            "tensions_with": ["Memory Footprint"],
+            "violated_by": ["lexicon:external-state-reach-in"],
+            "detected_by": ["external code reconstructing internal state"],
+            "measured_by": ["private-field external access count"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const backupName = foo.name;\nconst backupTags = [...foo.tags];\nfoo.rename(newName);\nif (canceled) { foo.name = backupName; foo.tags = backupTags; }",
+                "after": "class FooMemento { constructor(readonly snapshot: Readonly<Foo>) {} }\nconst memento = foo.save();\nfoo.rename(newName);\nif (canceled) foo.restore(memento);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "null-object-pattern",
+            "name": "Null Object Pattern",
+            "aliases": ["Null Object"],
+            "definition": "A design pattern that represents absence with an object implementing the expected interface as a no-op.",
+            "type": "pattern",
+            "scope": [
+                "behavior",
+                "absence",
+                "default"
+            ],
+            "requires": ["Shared Behavioral Interface"],
+            "reinforces": [
+                "Polymorphism",
+                "Fail-Safe Defaults"
+            ],
+            "enables": ["Null-Check Elimination"],
+            "conflicts_with": ["Null Semantics Drift"],
+            "tensions_with": ["Silent No-Op Risk"],
+            "violated_by": ["lexicon:scattered-null-guards"],
+            "detected_by": ["repeated null checks before the same operation"],
+            "measured_by": ["null-guard density"],
+            "refactored_by": [],
+            "enforced_by": ["design review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const logger = config.logger;\nif (logger) logger.info(\"foo saved\");",
+                "after": "interface FooLogger { info(message: string): void; }\nconst NoopFooLogger: FooLogger = { info() {} };\nconst logger = config.logger ?? NoopFooLogger;\nlogger.info(\"foo saved\");",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "finite-state-machine",
+            "name": "Finite State Machine",
+            "aliases": [
+                "FSM",
+                "State Machine"
+            ],
+            "definition": "A conceptual representation of behavior as a closed set of states and the events that move between them.",
+            "type": "model",
+            "scope": [
+                "behavior",
+                "state modeling",
+                "control flow"
+            ],
+            "requires": ["Explicit State Set"],
+            "reinforces": [
+                "State Pattern",
+                "Correctness"
+            ],
+            "enables": [
+                "Legal-Transition Enforcement",
+                "Exhaustive State Reasoning"
+            ],
+            "conflicts_with": ["Boolean Flag Soup"],
+            "tensions_with": ["State Explosion"],
+            "violated_by": ["lexicon:boolean-flag-soup"],
+            "detected_by": ["impossible or contradictory state combinations reachable at runtime"],
+            "measured_by": ["count of representable-but-illegal states"],
+            "refactored_by": [],
+            "enforced_by": ["state model review"],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "let isOpen = false, isLoading = false, isError = false;\nfunction onClick() { isLoading = true; if (isOpen) isOpen = false; }",
+                "after": "type FooState = \"closed\" | \"loading\" | \"open\" | \"error\";\nconst transitions: Record<FooState, Partial<Record<FooEvent, FooState>>> = {\n  closed: { open: \"loading\" },\n  loading: { ready: \"open\", fail: \"error\" },\n  open: { close: \"closed\" },\n  error: { retry: \"loading\" },\n};\nfunction next(state: FooState, event: FooEvent): FooState { return transitions[state][event] ?? state; }",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "statecharts",
+            "distinctFrom": [
+                {
+                    "id": "architecture:finite-state-machine",
+                    "reason": "A finite state machine is flat states and events, while statecharts add nested states and parallel regions to it."
+                }
+            ],
+            "name": "Statecharts",
+            "definition": "A conceptual representation of a state machine extended with nested states and parallel regions.",
+            "type": "model",
+            "scope": [
+                "behavior",
+                "state modeling",
+                "hierarchy"
+            ],
+            "requires": ["Finite State Machine"],
+            "reinforces": [
+                "Finite State Machine",
+                "Separation of Concerns"
+            ],
+            "enables": [
+                "Hierarchical States",
+                "Parallel Regions",
+                "Guarded Transitions"
+            ],
+            "conflicts_with": ["Flat State Explosion"],
+            "tensions_with": ["Tooling Complexity"],
+            "violated_by": ["lexicon:flat-state-explosion"],
+            "detected_by": ["combinatorial state growth from independent concerns modeled in one flat machine"],
+            "measured_by": ["transition duplication across sibling states"],
+            "refactored_by": [],
+            "enforced_by": ["state model review"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "type S = \"idleMuted\" | \"idleLoud\" | \"playingMuted\" | \"playingLoud\";",
+                "after": "const fooChart = {\n  initial: \"idle\",\n  states: { idle: {}, playing: {} },\n  parallel: { volume: { states: { muted: {}, loud: {} } } },\n};",
+                "lang": "ts"
+            }
+        }
+    ]
+}

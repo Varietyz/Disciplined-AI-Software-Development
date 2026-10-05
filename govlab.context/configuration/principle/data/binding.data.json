@@ -1,0 +1,285 @@
+{
+    "category": "Runtime Discovery / Dynamic Binding",
+    "check": {
+        "population": "every binding the runtime resolves: handlers, plugins, services, formatters and policies",
+        "freshness": "a verdict stands until a registered module, a discovery pattern or the configuration changes",
+        "refusal": "startup validation or the composition-root test fails when a declared binding resolves to nothing",
+        "observation": "the resolved bindings reported at startup, compared with the modules on disk and the configuration",
+        "evidence": "none: the catalog states this check as a class, so a watched run belongs to each system that adopts it",
+        "authority": "the modules on disk and the configuration, which the bindings reported at startup are compared against"
+    },
+    "records": [
+        {
+            "id": "runtime-discovery",
+            "distinctFrom": [
+                {
+                    "id": "architecture:capability-declaration",
+                    "reason": "Runtime discovery finds which components exist, while a capability declaration states what each one supports."
+                },
+                {
+                    "id": "architecture:introspection",
+                    "reason": "Runtime discovery finds components by convention or pattern, while introspection reads one object's type and members."
+                },
+                {
+                    "id": "architecture:reflection",
+                    "reason": "Runtime discovery finds and registers components, while reflection reads and acts on type metadata, which discovery may use."
+                },
+                {
+                    "id": "architecture:service-discovery",
+                    "reason": "Runtime discovery finds in-process components at startup, while service discovery resolves a service name to a network endpoint at call time."
+                },
+                {
+                    "id": "architecture:static-analysis",
+                    "reason": "Runtime discovery decides the component set as the program starts, while static analysis reasons about source that has not run."
+                }
+            ],
+            "name": "Runtime Discovery",
+            "definition": "A mechanism that finds the available handlers, plugins or services at startup by matching a naming convention, a file pattern or metadata, and registers each one it finds in place of a hand-written list.",
+            "type": "mechanism",
+            "aliases": [
+                "Auto-Discovery",
+                "Registry/Discovery Mechanism"
+            ],
+            "scope": [
+                "runtime",
+                "plugin",
+                "module",
+                "service"
+            ],
+            "requires": [
+                "Metadata",
+                "Convention"
+            ],
+            "reinforces": ["Runtime Extensibility"],
+            "enables": [
+                "Plugin Architecture",
+                "Service Discovery",
+                "Self-Registration"
+            ],
+            "conflicts_with": [
+                "Compile-Time Binding",
+                "Manual Registration"
+            ],
+            "tensions_with": [
+                "Predictability",
+                "Static Analysis",
+                "Startup Cost"
+            ],
+            "violated_by": ["lexicon:manual-registration"],
+            "detected_by": ["manual class/service lists"],
+            "measured_by": ["discovery coverage"],
+            "refactored_by": [
+                "architecture:registry-pattern",
+                "architecture:static-analysis",
+                "architecture:manifest-based-design"
+            ],
+            "enforced_by": ["startup validation"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "import { FooHandler } from \"./foo-handler\";\nimport { BarHandler } from \"./bar-handler\";\nconst handlers = [new FooHandler(), new BarHandler()];",
+                "after": "const modules = await discover<HandlerModule>(\"./handlers/*.handler.js\");\nconst handlers = modules.map(module => module.create());",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "service-discovery",
+            "distinctFrom": [
+                {
+                    "id": "architecture:failover",
+                    "reason": "Service discovery resolves a name to a healthy endpoint, while failover switches traffic to a standby when the active one fails."
+                },
+                {
+                    "id": "architecture:health-checks",
+                    "reason": "Service discovery resolves endpoints, while health checks report whether each endpoint is ready."
+                },
+                {
+                    "id": "architecture:service-registry",
+                    "reason": "Service discovery is the lookup at call time, while the service registry is the table the lookup reads."
+                }
+            ],
+            "name": "Service Discovery",
+            "definition": "A mechanism that resolves a service name to a healthy network endpoint at call time through a registry.",
+            "type": "mechanism",
+            "scope": [
+                "service",
+                "network",
+                "runtime"
+            ],
+            "requires": [
+                "Service Registry",
+                "Health Checks"
+            ],
+            "reinforces": [
+                "Scalability",
+                "Resilience"
+            ],
+            "enables": [
+                "Dynamic Routing",
+                "Failover"
+            ],
+            "conflicts_with": ["Hardcoded Endpoints"],
+            "tensions_with": ["Operational Complexity"],
+            "violated_by": ["lexicon:hardcoded-endpoints"],
+            "detected_by": [
+                "hardcoded URLs",
+                "missing registry lookup"
+            ],
+            "measured_by": ["dynamic resolution coverage"],
+            "refactored_by": [],
+            "enforced_by": [
+                "config scans",
+                "deployment policy"
+            ],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const fooUrl = \"http://10.0.0.14:8080\";\nawait http.get(`${fooUrl}/foo/${id}`);",
+                "after": "const endpoint = await serviceDiscovery.resolve(\"foo-service\");\nawait http.get(new URL(`/foo/${id}`, endpoint));",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "dynamic-binding",
+            "distinctFrom": [
+                {
+                    "id": "architecture:capability-declaration",
+                    "reason": "Dynamic binding picks an implementation at runtime, while a capability declaration lists what an implementation supports so the pick can be checked."
+                },
+                {
+                    "id": "architecture:polymorphism",
+                    "reason": "Polymorphism lets the receiver choose the implementation per call, while dynamic binding chooses it from configuration or a registry."
+                },
+                {
+                    "id": "architecture:service-registry",
+                    "reason": "Dynamic binding is the choice made at runtime, while a service registry is the keyed table it can choose from."
+                }
+            ],
+            "name": "Dynamic Binding",
+            "definition": "A mechanism that selects the implementation behind an interface at runtime, from configuration or a registry, so the choice is made at bootstrap or first use rather than fixed in code.",
+            "type": "mechanism",
+            "aliases": [
+                "Late Binding",
+                "Runtime Binding"
+            ],
+            "scope": [
+                "runtime",
+                "interface",
+                "plugin",
+                "module",
+                "service"
+            ],
+            "requires": [
+                "Abstraction",
+                "Runtime Resolution"
+            ],
+            "reinforces": [
+                "Polymorphism",
+                "Extensibility",
+                "Runtime Extensibility"
+            ],
+            "enables": [
+                "Plugin Swap",
+                "Deferred Implementation Choice"
+            ],
+            "conflicts_with": ["Compile-Time Binding"],
+            "tensions_with": [
+                "Static Safety",
+                "Predictability",
+                "Debugging"
+            ],
+            "violated_by": ["lexicon:compile-time-binding"],
+            "detected_by": ["hardcoded implementation selection"],
+            "measured_by": ["runtime binding coverage"],
+            "refactored_by": [
+                "architecture:factory-pattern",
+                "lexicon:registry",
+                "architecture:strategy-pattern"
+            ],
+            "enforced_by": ["integration tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "const formatter = new JsonFooFormatter();\nformatter.format(foo);",
+                "after": "const formatter = formatterRegistry.get(config.format);\nif (!formatter) throw new Error(`unknown formatter: ${config.format}`);\nformatter.format(foo);",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "dynamic-dispatch",
+            "name": "Dynamic Dispatch",
+            "definition": "A mechanism that chooses which operation runs from the receiver or a keyed table at runtime, replacing a conditional over kinds.",
+            "type": "mechanism",
+            "scope": [
+                "method",
+                "interface",
+                "runtime"
+            ],
+            "requires": ["Polymorphism"],
+            "reinforces": ["OCP"],
+            "enables": ["Replace Conditional with Polymorphism"],
+            "conflicts_with": ["Type Switching"],
+            "tensions_with": ["Traceability"],
+            "violated_by": ["lexicon:type-switching"],
+            "detected_by": ["switch/if chains on type"],
+            "measured_by": ["conditional dispatch count"],
+            "refactored_by": [
+                "lexicon:replace-conditional-with-polymorphism",
+                "architecture:strategy-pattern"
+            ],
+            "enforced_by": [
+                "lint rules",
+                "review"
+            ],
+            "severity": "recommended",
+            "exemplar": {
+                "before": "function execute(kind: string, foo: Foo) {\n  if (kind === \"save\") return saveFoo(foo);\n  if (kind === \"publish\") return publishFoo(foo);\n}",
+                "after": "const commands: Record<string, (foo: Foo) => unknown> = {\n  save: saveFoo,\n  publish: publishFoo,\n};\nfunction execute(kind: string, foo: Foo) {\n  const command = commands[kind];\n  if (!command) throw new Error(`unknown command ${kind}`);\n  return command(foo);\n}",
+                "lang": "ts"
+            }
+        },
+        {
+            "id": "runtime-extensibility",
+            "distinctFrom": [
+                {
+                    "id": "architecture:stable-interfaces",
+                    "reason": "Runtime extensibility adds capability through extension points, while stable interfaces keep those points unchanged across releases."
+                },
+                {
+                    "id": "lexicon:extensibility",
+                    "reason": "Extensibility is adding behavior with little change to existing code, while runtime extensibility adds it to a system that is already running."
+                }
+            ],
+            "name": "Runtime Extensibility",
+            "definition": "The degree to which new capability can be added to a running system through extension points, without modifying its core.",
+            "type": "quality-attribute",
+            "scope": [
+                "runtime",
+                "plugin",
+                "system"
+            ],
+            "requires": [
+                "Extension Points",
+                "Stable Interfaces"
+            ],
+            "reinforces": [
+                "Plugin Architecture",
+                "OCP"
+            ],
+            "enables": ["Capability Addition without Core Modification"],
+            "conflicts_with": ["Closed Static Core"],
+            "tensions_with": [
+                "Predictability",
+                "Security"
+            ],
+            "violated_by": ["lexicon:closed-core"],
+            "detected_by": ["repeated core changes for variants"],
+            "measured_by": ["extension/core-change ratio"],
+            "refactored_by": ["architecture:extension-points"],
+            "enforced_by": ["extension conformance tests"],
+            "severity": "contextual",
+            "exemplar": {
+                "before": "switch (pluginName) {\n  case \"foo\": return new FooPlugin();\n  case \"bar\": return new BarPlugin();\n}",
+                "after": "export function registerPlugin(name: string, create: () => Plugin) {\n  pluginRegistry.set(name, create);\n}\nconst plugin = pluginRegistry.get(pluginName)?.();",
+                "lang": "ts"
+            }
+        }
+    ]
+}

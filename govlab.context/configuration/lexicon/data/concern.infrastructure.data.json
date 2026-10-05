@@ -1,0 +1,582 @@
+{
+    "category": "infrastructure-concerns",
+    "exampleShape": "placed-file",
+    "enforcedBy": ["the naming gate, which refuses a filename whose last segment before the extension is an undeclared tag or differs from its folder's tag"],
+    "check": {
+        "population": "every filename whose concern slot holds the tag, and the folder holding each such file",
+        "freshness": "a verdict stands until a file carrying the tag is created, moved or renamed, or the declared vocabulary changes",
+        "refusal": "the lint run fails a file whose tag is undeclared or disagrees with its folder",
+        "observation": "each filename parsed by position against the declared concern vocabulary",
+        "evidence": "fires-and-accepts: a suite lints a file whose tag is undeclared and one whose tag differs from its folder, and passes a conforming file",
+        "authority": "the declared concern vocabulary, which a filename's tag and its folder conform to"
+    },
+    "records": [
+        {
+            "name": "Action Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one named operation a caller can request, with its inputs, filed in an actions folder.",
+            "example": "actions/add-to-cart.action.ts"
+        },
+        {
+            "name": "Adapter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that translates between the system's interface and an outside one, filed in an adapters folder.",
+            "example": "adapters/payment-gateway.adapter.ts",
+            "seeAlso": ["adapters"]
+        },
+        {
+            "name": "Port Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares an interface the core needs from the outside, with no implementation, filed in a ports folder.",
+            "example": "ports/mailer.port.ts",
+            "seeAlso": ["ports"]
+        },
+        {
+            "name": "Boundary Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that marks where one module's responsibility ends and checks what crosses it, filed in a boundaries folder.",
+            "example": "boundaries/billing.boundary.ts"
+        },
+        {
+            "name": "Interface Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares the operations a type offers without implementing them, filed in an interfaces folder.",
+            "example": "interfaces/printer.interface.ts"
+        },
+        {
+            "name": "Abstraction Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a general base others specialize, filed in an abstractions folder.",
+            "example": "abstractions/shape.abstraction.ts"
+        },
+        {
+            "name": "Facade Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that offers one simple entry to a group of more complex parts, filed in a facades folder.",
+            "example": "facades/media-library.facade.ts"
+        },
+        {
+            "name": "Wrapper Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that encloses another object to change how it is called while keeping what it does, filed in a wrappers folder.",
+            "example": "wrappers/http-client.wrapper.ts"
+        },
+        {
+            "name": "Decorator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that adds behavior to an object behind the object's own interface, filed in a decorators folder.",
+            "example": "decorators/fetch-retry.decorator.ts"
+        },
+        {
+            "name": "Delegate Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that receives work another object hands on instead of doing it itself, filed in a delegates folder.",
+            "example": "delegates/table-view.delegate.ts"
+        },
+        {
+            "name": "Mixin Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that supplies reusable members many types can include, filed in a mixins folder.",
+            "example": "mixins/serialization.mixin.ts"
+        },
+        {
+            "name": "Trait Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares a named set of behaviors a type can implement, filed in a traits folder.",
+            "example": "traits/ordering.trait.ts"
+        },
+        {
+            "name": "Composite Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that treats a tree of parts and a single part through one interface, filed in a composites folder.",
+            "example": "composites/menu.composite.ts"
+        },
+        {
+            "name": "Primitive Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a smallest building block higher parts are composed from, filed in a primitives folder.",
+            "example": "primitives/point.primitive.ts"
+        },
+        {
+            "name": "Module Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares a self-contained unit with the surface it exports, filed in a modules folder.",
+            "example": "modules/auth.module.ts"
+        },
+        {
+            "name": "Package Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a distributable unit and what it contains, filed in a packages folder.",
+            "example": "packages/ui-kit.package.ts"
+        },
+        {
+            "name": "Namespace Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that groups names under one prefix so they cannot collide with others, filed in a namespaces folder.",
+            "example": "namespaces/geometry.namespace.ts"
+        },
+        {
+            "name": "Layer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one tier of a layered structure and what it may depend on, filed in a layers folder.",
+            "example": "layers/data-access.layer.ts"
+        },
+        {
+            "name": "Contract Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that states what one side of a boundary guarantees to the other, filed in a contracts folder.",
+            "example": "contracts/checkout-api.contract.ts",
+            "seeAlso": ["contracts"]
+        },
+        {
+            "name": "Schemas Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the collection tag for a file that defines the shapes data must take, plural in both folder and tag.",
+            "example": "schemas/order.schemas.ts",
+            "seeAlso": ["schema"]
+        },
+        {
+            "name": "Types Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the collection tag for a file that declares the types other code uses, plural in both folder and tag.",
+            "example": "types/invoice.types.ts"
+        },
+        {
+            "name": "Enums Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the collection tag for a file that declares closed sets of named values, plural in both folder and tag.",
+            "example": "enums/color.enums.ts"
+        },
+        {
+            "name": "Union Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a value that is exactly one of several declared shapes, filed in a unions folder.",
+            "example": "unions/shape.union.ts"
+        },
+        {
+            "name": "Alias Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that gives a second name to an existing type or value, filed in an aliases folder.",
+            "example": "aliases/user-id.alias.ts"
+        },
+        {
+            "name": "Guard Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that narrows a value's type after proving what it is, filed in a guards folder.",
+            "example": "guards/email.guard.ts"
+        },
+        {
+            "name": "Predicate Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:validator-tag",
+                    "reason": "A predicate answers yes or no, while a validator also reports why its input is not valid."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that answers yes or no about a value, filed in a predicates folder.",
+            "example": "predicates/weekend.predicate.ts"
+        },
+        {
+            "name": "Identifier Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that creates or validates the identifiers records are addressed by, filed in an identifiers folder.",
+            "example": "identifiers/order-number.identifier.ts"
+        },
+        {
+            "name": "Metadata Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:metadata",
+                    "reason": "Metadata is the descriptive data, while the metadata tag names the file concern that holds it."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds data describing other data or code, filed in a metadata folder.",
+            "example": "metadata/column.metadata.ts",
+            "seeAlso": ["metadata"]
+        },
+        {
+            "name": "Annotation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines markers attached to code for tools to read, filed in an annotations folder.",
+            "example": "annotations/serialization-hint.annotation.ts"
+        },
+        {
+            "name": "Constants Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the collection tag for a file that declares named values fixed at build time, plural in both folder and tag, which also holds id tables.",
+            "example": "constants/http-status.constants.ts"
+        },
+        {
+            "name": "Default Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that supplies the values used where a caller sets none, filed in a defaults folder.",
+            "example": "defaults/pagination.default.ts"
+        },
+        {
+            "name": "Extension Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:plugin-tag",
+                    "reason": "An extension plugs into a host's declared extension point, while a plugin is discovered and loaded by the host."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that adds a capability to a host through the host's declared extension point, filed in an extensions folder.",
+            "example": "extensions/markdown.extension.ts"
+        },
+        {
+            "name": "Plugin Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that is discovered and loaded by a host to add behavior without editing the host, filed in a plugins folder.",
+            "example": "plugins/spell-check.plugin.ts",
+            "seeAlso": ["plugins"]
+        },
+        {
+            "name": "Hook Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that runs when a host reaches one named point in its flow, filed in a hooks folder.",
+            "example": "hooks/upload.hook.ts"
+        },
+        {
+            "name": "Manifest Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:manifest",
+                    "reason": "A manifest is the declarative document, while the manifest tag names the file concern that holds one."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares what a unit contains or provides for a loader to read, filed in a manifests folder.",
+            "example": "manifests/theme.manifest.ts",
+            "seeAlso": ["manifest"]
+        },
+        {
+            "name": "Descriptor Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that describes one registrable thing in the shape its registry expects, filed in a descriptors folder.",
+            "example": "descriptors/widget.descriptor.ts"
+        },
+        {
+            "name": "Registrar Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that enters members into a registry, filed in a registrars folder.",
+            "example": "registrars/command.registrar.ts"
+        },
+        {
+            "name": "Registry Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds a named set of known members and answers lookups against it, filed in a registries folder.",
+            "example": "registries/codec.registry.ts",
+            "seeAlso": ["registry"]
+        },
+        {
+            "name": "Provider Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that supplies an instance or a value on request, filed in a providers folder.",
+            "example": "providers/clock.provider.ts"
+        },
+        {
+            "name": "Factory Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that constructs instances so callers never call a constructor directly, filed in a factories folder.",
+            "example": "factories/connection.factory.ts"
+        },
+        {
+            "name": "Builder Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that assembles a complex object or a build output step by step, filed in a builders folder.",
+            "example": "builders/query.builder.ts"
+        },
+        {
+            "name": "Injector Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that supplies a component's dependencies from outside it, filed in an injectors folder.",
+            "example": "injectors/app.injector.ts"
+        },
+        {
+            "name": "Binding Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that ties an abstract name to the concrete value or implementation it resolves to, filed in a bindings folder.",
+            "example": "bindings/logger.binding.ts"
+        },
+        {
+            "name": "Resolver Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that turns a reference into the thing it refers to, filed in a resolvers folder.",
+            "example": "resolvers/avatar-url.resolver.ts"
+        },
+        {
+            "name": "Locator Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that finds where a service or a resource lives, filed in a locators folder.",
+            "example": "locators/printer.locator.ts"
+        },
+        {
+            "name": "Loader Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that reads a resource from storage or the network into memory, filed in a loaders folder.",
+            "example": "loaders/texture.loader.ts"
+        },
+        {
+            "name": "Dependency-Management Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares and resolves the versions of the packages a unit depends on, filed in a dependency-management folder.",
+            "example": "dependency-management/workspace.dependency-management.ts"
+        },
+        {
+            "name": "Compatibility Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that decides whether two versions or environments can work together, filed in a compatibility folder.",
+            "example": "compatibility/api-version.compatibility.ts"
+        },
+        {
+            "name": "Compatibility-Layer Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that presents an old interface on top of a new implementation, filed in a compatibility-layers folder.",
+            "example": "compatibility-layers/legacy-auth.compatibility-layer.ts"
+        },
+        {
+            "name": "Compatibility-Shim Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that patches one small difference between environments so shared code runs on both, filed in a compatibility-shims folder.",
+            "example": "compatibility-shims/fetch.compatibility-shim.ts"
+        },
+        {
+            "name": "Polyfill Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that supplies a platform feature where the running platform lacks it, filed in a polyfills folder.",
+            "example": "polyfills/structured-clone.polyfill.ts"
+        },
+        {
+            "name": "Versioning Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that assigns, compares or migrates between versions, filed in a versioning folder.",
+            "example": "versioning/document.versioning.ts"
+        },
+        {
+            "name": "Deprecation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that marks a surface as scheduled for removal and reports its uses, filed in a deprecations folder.",
+            "example": "deprecations/v1-endpoint.deprecation.ts"
+        },
+        {
+            "name": "Cache Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that keeps computed or fetched values so a repeated request is answered without the original work, filed in a caches folder.",
+            "example": "caches/thumbnail.cache.ts"
+        },
+        {
+            "name": "Cache-Key Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that derives the key a cached value is stored and found under, filed in a cache-keys folder.",
+            "example": "cache-keys/product.cache-key.ts"
+        },
+        {
+            "name": "Invalidation Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that decides when a cached value no longer holds and removes it, filed in an invalidation folder.",
+            "example": "invalidation/price.invalidation.ts",
+            "seeAlso": ["cache-invalidation"]
+        },
+        {
+            "name": "Eviction Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that chooses which entries a full cache drops, filed in an eviction folder.",
+            "example": "eviction/session.eviction.ts"
+        },
+        {
+            "name": "Expiration Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that ends an entry's life after a stated condition or time, filed in an expiration folder.",
+            "example": "expiration/token.expiration.ts"
+        },
+        {
+            "name": "Memoization Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that remembers a function's results by its arguments, filed in a memoization folder.",
+            "example": "memoization/tax-rate.memoization.ts"
+        },
+        {
+            "name": "Prefetching Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that loads what is likely to be needed before it is asked for, filed in a prefetching folder.",
+            "example": "prefetching/next-page.prefetching.ts"
+        },
+        {
+            "name": "Pooling Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that decides how pooled resources are sized, lent and returned, filed in a pooling folder.",
+            "example": "pooling/database.pooling.ts"
+        },
+        {
+            "name": "Batching Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that groups many small operations into fewer larger ones, filed in a batching folder.",
+            "example": "batching/analytics.batching.ts"
+        },
+        {
+            "name": "Lazy-Loading Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defers loading a part until the first time it is used, filed in a lazy-loading folder.",
+            "example": "lazy-loading/image.lazy-loading.ts"
+        },
+        {
+            "name": "Compression Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that encodes data into fewer bytes and restores it, filed in a compression folder.",
+            "example": "compression/log.compression.ts"
+        },
+        {
+            "name": "Config Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the mass tag for a file that holds the settings a unit reads at start, singular in both folder and tag.",
+            "example": "config/app.config.ts"
+        },
+        {
+            "name": "Setting Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one configurable option with its type and default, filed in a settings folder.",
+            "example": "settings/theme.setting.ts"
+        },
+        {
+            "name": "Profile Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that bundles a named set of settings chosen together, filed in a profiles folder.",
+            "example": "profiles/staging.profile.ts"
+        },
+        {
+            "name": "Environment Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that reads and validates the values that differ between deployments, filed in an environments folder.",
+            "example": "environments/production.environment.ts"
+        },
+        {
+            "name": "Preference Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that holds a participant's own choices and how they persist, filed in a preferences folder.",
+            "example": "preferences/notification.preference.ts"
+        },
+        {
+            "name": "Override Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that replaces a default setting for a stated scope, filed in an overrides folder.",
+            "example": "overrides/region.override.ts"
+        },
+        {
+            "name": "Parameter Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares the parameters an operation accepts with their bounds, filed in a parameters folder.",
+            "example": "parameters/pagination.parameter.ts"
+        },
+        {
+            "name": "Precedence Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that decides which of several conflicting sources of a setting wins, filed in a precedence folder.",
+            "example": "precedence/setting-source.precedence.ts"
+        },
+        {
+            "name": "Flag Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a boolean switch read at run time, filed in a flags folder.",
+            "example": "flags/debug.flag.ts"
+        },
+        {
+            "name": "Feature-Flag Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that turns one feature on or off for a stated audience without a deploy, filed in a feature-flags folder.",
+            "example": "feature-flags/new-checkout.feature-flag.ts"
+        },
+        {
+            "name": "Toggle Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that switches between two behaviors from a control a participant sets, filed in a toggles folder.",
+            "example": "toggles/dark-mode.toggle.ts"
+        },
+        {
+            "name": "Kill-Switch Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that disables a capability immediately when it misbehaves, filed in a kill-switches folder.",
+            "example": "kill-switches/payments.kill-switch.ts"
+        },
+        {
+            "name": "Remote-Config Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that fetches settings from a service while the program runs, filed in a remote-config folder.",
+            "example": "remote-config/pricing.remote-config.ts"
+        },
+        {
+            "name": "Persistence Tag",
+            "distinctFrom": [
+                {
+                    "id": "lexicon:store-tag",
+                    "reason": "Persistence saves state so it survives the process, while a store holds state and controls how it is read and changed."
+                }
+            ],
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that saves state so it survives the process, filed in a persistence folder.",
+            "example": "persistence/draft.persistence.ts"
+        },
+        {
+            "name": "Storage Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that wraps a storage medium behind reads and writes of bytes or records, filed in a storage folder.",
+            "example": "storage/blob.storage.ts"
+        },
+        {
+            "name": "Repository Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that gives domain code a collection-like interface over stored records, filed in a repositories folder.",
+            "example": "repositories/customer.repository.ts"
+        },
+        {
+            "name": "Migration Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that moves stored data or a schema from one version to the next, filed in a migrations folder.",
+            "example": "migrations/email-index.migration.ts"
+        },
+        {
+            "name": "Bus Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that carries messages between publishers and subscribers who never refer to each other, filed in a buses folder.",
+            "example": "buses/message.bus.ts"
+        },
+        {
+            "name": "Topic Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines a named stream of messages and its schema, filed in a topics folder.",
+            "example": "topics/order-created.topic.ts"
+        },
+        {
+            "name": "Stream Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines an ordered, unbounded sequence of records processed as they arrive, filed in a streams folder.",
+            "example": "streams/clickstream.stream.ts"
+        },
+        {
+            "name": "Asset Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that locates and describes a static resource the product serves, filed in an assets folder.",
+            "example": "assets/logo.asset.ts"
+        },
+        {
+            "name": "Font Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that declares a typeface and how it loads, filed in a fonts folder.",
+            "example": "fonts/body-text.font.ts"
+        },
+        {
+            "name": "Icons Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the collection tag for a file that declares the icons a product uses, plural in both folder and tag.",
+            "example": "icons/toolbar.icons.ts"
+        },
+        {
+            "name": "Endpoint Tag",
+            "kind": "artifact",
+            "definition": "A formal definition of the tag for a file that defines one address a service answers and the request it accepts, filed in an endpoints folder.",
+            "example": "endpoints/order-creation.endpoint.ts"
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "label": "GovLab Quality",
+    "summary": "The one code-quality module and the single SSOT for every quality ecosystem. It holds the custom eslint and stylelint rules, the extraction and context lint plugins, and the ecosystem rule catalog with its concern emitters and install registry. It also holds the language-agnostic quality engine, the consumer-config framework and the tool installer. Its meta-linter runner detects a project's ecosystems, builds every tool's config in memory from one `govlab.config`, runs the tools themselves, and reports in one shape.",
+    "maturity": "stable",
+    "domains": [
+        {"meta": "developer-tooling",
+            "sub": "linting-quality"}
+    ],
+    "capabilities": [
+        "quality-rule-catalog",
+        "concern-config-emitter",
+        "install-registry",
+        "eslint-rule-plugin",
+        "stylelint-rule-plugin",
+        "context-lint-plugin",
+        "quality-engine",
+        "consumer-config-framework",
+        "tool-installer",
+        "meta-linter-runner"
+    ],
+    "overlaps": [],
+    "incompatibleWith": [],
+    "supersedes": [],
+    "governedBy": [
+        "separation-of-concerns",
+        "type-safety",
+        "duplicate-code"
+    ],
+    "visibility": {"private": false,
+        "hidden": false},
+    "ecosystem": "typescript",
+    "deliverAs": "source",
+    "docs": {
+        "overview": "The single code-quality module for the workspace, spanning every face of one concern. Rules: the custom `eslint` and `stylelint` plugins, and the `context-lint` gates. Catalog: the ecosystem quality-rule catalog, the concern emitters (`emitEslintConfig`, `emitStylelintConfig`, `emitPrettierConfig`) that resolve one `qualityMaster.concerns` map into every tool's rules, and the install registry that maps each tool to its package, plugin namespace, and config target. Engine: the language-agnostic engine that resolves a canonical policy into a per-ecosystem check plan and a machine-derived verdict. Config: the consumer-config framework that loads one `govlab.config` and adapts each section into its face. Install: the one-command installer for the hardened tool and plugin chain per ecosystem. Run: the meta-linter runner that detects a project's ecosystems, assembles each tool's config in memory, runs the tools themselves, and reports in one shape.",
+        "whenToUse": [
+            "You want one command that lints a whole codebase across every ecosystem it contains, with each tool's config built from one `govlab.config`.",
+            "You want a single source of truth for quality rules, thresholds, and tool wiring, with per-rule opt-out through a concern map.",
+            "You want to drop a governed quality baseline into a new codebase by copying one module and running one install command."
+        ],
+        "whenNotToUse": [
+            "As a general-purpose task runner. It detects, configures and runs quality tools, nothing more.",
+            "When a project wants each linter configured by hand in its own native config file instead of from one central source."
+        ],
+        "quickStart": [
+            {"intent": "Lint every detected ecosystem from one config",
+                "lang": "sh",
+                "code": "npx govlab lint"},
+            {
+                "intent": "Install the hardened tool chain for named ecosystems",
+                "lang": "sh",
+                "code": "npx govlab install typescript javascript go"
+            }
+        ],
+        "configuration": "Every value comes from one `govlab.config.{ts,js,mjs}`: `quality.concerns` is the cross-ecosystem concept-to-value map, and each tool's own section carries its single-rule config. The runner reads that config through the module's own config face, so no per-tool config file is required.",
+        "disposal": [
+            "Remove the package directory `govlab.root/govlab.quality/` and every `npx govlab` script from the root `package.json`.",
+            "Remove every import site in consumers and the config-file delegates that call the adapters.",
+            "Remove the pipeline wiring in the consumer's verification and pre-push gate that invokes the module's bins."
+        ],
+        "install": "A private workspace package resolved through the root `package.json` `workspaces` glob `govlab.root/govlab.*`. One `npm install` at the root hoists its dependencies into the single root `node_modules`. The `govlab` bin runs as `npx govlab <concern>` or through the root `lint`, `format` and `deps:check` scripts. Extend it without editing the package through `.govlab/rules/<name>.mjs` files.",
+        "aiContext": [
+            "The one code-quality module: rules, catalog, engine, config, installer, and runner for every quality ecosystem, all resolving from one `govlab.config`.",
+            "The meta-linter runner detects a project's ecosystems from its root files, builds each tool's config in memory through the module's config adapters, runs JavaScript tools through their Node APIs and other tools through subprocess, and normalizes every result into one finding shape.",
+            "A consolidated module shaped by the concern taxonomy: authored data and derived outputs under `configuration/`, the rules, producers, steps, emitters, adapters and the rest of the logic under `core/`, and every command under `runtime/entrypoints/`. The barrel plus subpath exports present one name for the whole quality domain.",
+            "Standing this package up takes one `npm install` at the workspace root and invokes its own bins, never a host script. There is no build step, and the `govlab` bin runs as `npx govlab <concern>`.",
+            "Detect and install the toolchain: run `govlab list` to detect the consumer's ecosystems, then `govlab install <ecosystem>` to add each ecosystem's hardened tool-and-plugin chain to the consumer root.",
+            "Author one `govlab.config.{ts,js,mjs}` wherever the consumer prefers. The runner detects it by its unique name in the project root, a `config` folder or a `.govlab` folder. `quality.concerns` carries the cross-ecosystem dimensions and each tool's own section carries single-rule config. Authoring is optional to run the linter but required to activate the scoped rules and the concern tuning.",
+            "Migrate an existing linter config by lookup, never by guessing. Resolve each rule in the consumer's current config against this package's bundled catalog (`@govlab/quality/relations` over `configuration/quality/generated/all-rules.generated.json`, whose rules carry their canonical concepts, and the per-source files under `configuration/catalog/`). A rule that maps to a concept becomes a `qualityMaster.concerns` entry, and a tool-specific rule goes in that tool's own section. A rule that resolves to no mapping goes to the developer for a decision and is never dropped without a word.",
+            "Extend without editing the package, with rule code kept apart from rule management.",
+            "Rule code: a consumer authors its own eslint or stylelint rule plugins, holding new rules that are not in the catalog, against the tool's plugin contract. They live in `.govlab/rules/<name>.mjs` files, either project-local or, when `extensions.global` is set, in the home directory for every project. Each file default-exports `{ tool, plugins }`, where an eslint `plugins` is a namespace-to-plugin map and a stylelint `plugins` is a plugin array. The runner discovers and registers them, so their rules become available. A namespace that shadows a core one is rejected, which avoids a plugin-redefinition crash.",
+            "Rule management: the consumer decides in `govlab.config`, through `eslint.rules` and `stylelint.rules`, whether any rule, custom or from the catalog, is enabled, tuned or disabled. Those sections merge last, so the consumer's config always wins. The consumer never edits vendored source, and the package's own catalog-driven rules stay intact unless the consumer tunes them.",
+            "Verify the migration behaviorally: run `govlab <concern> --reporter json` and reconcile the findings against the intent of the existing config, so a dropped rule surfaces before it ships.",
+            "Wiring the linter into the consumer's pre-push or CI gate is a deployment decision. Recommend it and surface it for the developer's approval, never wire it unilaterally."
+        ]
+    }
+}
